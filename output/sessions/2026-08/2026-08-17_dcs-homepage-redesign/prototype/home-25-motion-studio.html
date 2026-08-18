@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — websites for small businesses</title>
+<meta name="description" content="Agency-quality websites for small businesses of every kind. Design, words, build, hosting and looking-after, handled by one person in Polegate, East Sussex, working UK-wide.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Schibsted+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!--
+================================================================================
+  MOTION GRAMMAR — "arrival at a register line"
+  Direction 25 · Motion Studio · DCS homepage
+================================================================================
+
+  ONE IDEA, APPLIED SIX TIMES.
+
+  Every movement on this page is the same gesture: something travels a short
+  distance along a single axis and SETTLES onto a hairline rule. Nothing
+  bounces, nothing overshoots, nothing scales up from nothing, nothing spins.
+  The register line is the page's structural motif (content aligns to hairlines
+  throughout), so motion and layout say the same thing.
+
+  Why this gesture: the brand claim is meticulousness. An expensive object —
+  a soft-close drawer, a lens barrel reaching its stop, a watch hand hitting
+  its mark — decelerates over a long tail and arrives exactly. Overshoot and
+  elastic easing read as cheap in this register, so they are absent by rule.
+
+  THE EASING SET (three curves, no more)
+    --ease-settle  cubic-bezier(0.16, 1, 0.3, 1)    arrivals. Exponential
+                                                    ease-out: fast departure,
+                                                    long quiet tail.
+    --ease-travel  cubic-bezier(0.33, 0.02, 0.16, 1) an object moving along a
+                                                    track under its own weight.
+                                                    Slight ease-in because a
+                                                    carriage has mass.
+    --ease-exit    cubic-bezier(0.4, 0, 1, 1)       departures. Always faster
+                                                    than the matching entrance.
+
+  THE DURATION SET
+    130ms  immediate feedback (press, focus)
+    200ms  exits
+    260ms  routine state change
+    420ms  travel of an indicator across a track
+    720ms  the one authored focal entrance (hero)
+    460 / 1180ms  the deliberately unequal pair in the effort split — the
+                  difference between them IS the content of that section.
+
+  SAFETY MODEL (this is load-bearing, please keep it in the React rebuild)
+    - Every element's DEFAULT CSS state is its FINAL state. Start states exist
+      only under `html.js-motion`, which is added by a script in <head>.
+    - A failsafe timer in that same head script removes `js-motion` (and `js`)
+      after 2500ms unless the body script has set window.__dcsBooted. If the
+      body script throws, dies, or never parses, the page reverts to plain
+      static HTML with all content visible. No content is ever gated on JS.
+    - `js-motion` is never added when prefers-reduced-motion is set, so start
+      states never apply. A runtime listener also unwinds it if the preference
+      changes mid-session.
+    - All animated properties are transform and opacity only, so everything
+      stays on the compositor.
+
+  DELIBERATE CUTS — motion that was designed, built in outline, and removed
+  because it could not answer "what does the visitor understand better?"
+    1. Per-section content fade-and-rise. The standard staggered scroll reveal
+       on every band. It explains nothing, it is the same entrance eleven
+       times, and it makes the page feel like it is loading forever. Replaced
+       by section RULES drawing in (scaleX) — one cheap gesture that restates
+       the grammar without hiding a single word of copy. Content is never
+       hidden on scroll anywhere on this page.
+    2. A ruby index mark travelling along the hero rule after it draws, to
+       stop under a chosen word. Pure decoration. Cut.
+    3. Parallax on the sector photography. Says nothing about the businesses,
+       costs a scroll handler, and fights the "arrives exactly" thesis.
+    4. Count-up on prices and the "20+ sites" credential. Numbers on this page
+       are authored literals in the markup and are never computed, formatted
+       or interpolated by script. A number that can be wrong for 800ms is
+       worse than a number that never moves.
+    5. Magnetic buttons. Fun, and completely at odds with a page whose whole
+       argument is that things arrive exactly where they should.
+    6. A hover image trail / cursor effect. Ruled out on register alone.
+    7. The staggered opacity reveal on the portfolio index — the last survivor
+       of cut 1. It was the only place left where real content (five client
+       names) started at opacity 0 and became visible only if a scroll callback
+       ran. Cut on principle: motion that can hide a client's name has a
+       downside far larger than its upside, and the section reads no worse for
+       simply being present. This is the one cut made for robustness rather
+       than for taste, and it is the one I would defend hardest.
+
+  Each surviving mechanism is annotated at its markup below with effect,
+  trigger, duration, easing, reason and reduced-motion behaviour.
+================================================================================
+-->
+
+<style>
+/* ============================================================
+   1. TOKENS
+   ============================================================ */
+:root{
+  /* Ground — a COOL limestone, deliberately not the warm paper that directions
+     01 and 04 already own. Slightly green-grey rather than cream. */
+  --stone:      #E7E8E3;
+  --stone-hi:   #F2F3EF;
+  --stone-lo:   #DBDDD7;
+  --line:       #C3C6BF;
+  --line-soft:  #D3D6CF;
+
+  /* Ink — petrol-black, never #000 */
+  --ink:        #14181A;
+  --ink-2:      #333B3E;
+  --muted:      #535B5E;   /* darkened: was exactly 4.50:1 on --stone-lo */
+
+  /* Deep bands */
+  --deep:       #101A1C;
+  --deep-2:     #17272A;
+  --bone:       #E6E2D8;   /* 13.6:1 on --deep */
+  --bone-mut:   #9AA6A5;   /* 7.01:1 on --deep */
+
+  /* One accent. The colour of the moving part. */
+  --ruby:       #A3203C;   /* 6.0:1 on --stone */
+  --ruby-lo:    #7E1830;
+  --ruby-hi:    #D9647C;   /* 5.07:1 on --deep */
+
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-travel: cubic-bezier(0.33, 0.02, 0.16, 1);
+  --ease-exit:   cubic-bezier(0.4, 0, 1, 1);
+
+  --t-feedback: 130ms;
+  --t-exit:     200ms;
+  --t-state:    260ms;
+  --t-travel:   420ms;
+  --t-focal:    720ms;
+
+  --gut: clamp(20px, 5vw, 72px);
+  --max: 1360px;
+
+  --f-display: "Familjen Grotesk", Georgia, serif;
+  --f-body:    "Schibsted Grotesk", system-ui, sans-serif;
+  --f-mono:    "Spline Sans Mono", ui-monospace, monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--stone);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.62;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  /* No overflow-x here on purpose. The usual `overflow-x:hidden` makes body a
+     clipping and scroll container, which is a known way to break
+     position:sticky on the header. The layout measures clean with zero
+     horizontal overflow at 390/768/1024/1440, and the skip link is moved
+     off-screen with a transform rather than a negative offset, so there is no
+     overflow to suppress and no reason to pay that cost. */
+}
+
+/* ---- browser surfaces themed from the palette (craft floor) ---- */
+::selection{ background:var(--ruby); color:var(--stone-hi); }
+::-moz-selection{ background:var(--ruby); color:var(--stone-hi); }
+:root{ caret-color:var(--ruby); accent-color:var(--ruby); }
+html{ scrollbar-color: var(--line) var(--stone); scrollbar-width:thin; }
+::-webkit-scrollbar{ width:11px; height:11px; }
+::-webkit-scrollbar-track{ background:var(--stone-lo); }
+::-webkit-scrollbar-thumb{ background:var(--line); border:3px solid var(--stone-lo); }
+::-webkit-scrollbar-thumb:hover{ background:var(--muted); }
+
+:focus-visible{
+  outline:2px solid var(--ruby);
+  outline-offset:3px;
+  border-radius:1px;
+}
+.on-deep :focus-visible{ outline-color:var(--ruby-hi); }
+
+/* ============================================================
+   2. TYPE
+   ============================================================ */
+h1,h2,h3,h4{ font-family:var(--f-display); font-weight:600; margin:0; text-wrap:balance; }
+h1{ font-size:clamp(2.55rem, 7.2vw, 5.2rem); line-height:0.95; letter-spacing:-0.038em; font-weight:500; }
+h2{ font-size:clamp(1.85rem, 4vw, 3.05rem); line-height:1.02; letter-spacing:-0.032em; }
+h3{ font-size:clamp(1.12rem, 1.9vw, 1.42rem); line-height:1.15; letter-spacing:-0.02em; }
+p{ margin:0; }
+a{ color:inherit; }
+
+.lede{ font-size:clamp(1.06rem, 1.5vw, 1.22rem); line-height:1.58; color:var(--ink-2); max-width:62ch; }
+.body{ max-width:66ch; color:var(--muted); }
+.on-deep .body,.on-deep .lede{ color:var(--bone-mut); }
+
+.mark{
+  font-family:var(--f-mono);
+  font-size:0.688rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.on-deep .mark{ color:var(--bone-mut); }
+/* All-caps is right for a 12-character section marker and wrong for a
+   sentence. Anything sentence-length keeps the mono voice but drops the
+   uppercase and the wide tracking. */
+.mark--txt{ text-transform:none; letter-spacing:0.005em; font-size:0.75rem; }
+.num{ font-family:var(--f-mono); font-variant-numeric:tabular-nums; letter-spacing:-0.01em; }
+
+/* ============================================================
+   3. LAYOUT PRIMITIVES
+   ============================================================ */
+.wrap{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--gut); }
+.band{ padding-block:clamp(68px, 10vw, 148px); position:relative; }
+.band--deep{ background:var(--deep); color:var(--bone); }
+.band--deep h1,.band--deep h2,.band--deep h3{ color:var(--bone); }
+
+/* Section head: label sits in the left margin at desktop, and ON the rule at
+   mobile — never as an eyebrow stacked above the heading. */
+.shead{ display:grid; grid-template-columns:minmax(0,1fr); gap:14px; margin-bottom:clamp(34px,4.5vw,60px); }
+/* The label must NOT be a child of the scaling rule — a scaleX(0) parent
+   squashes its own text and would keep it invisible if the observer never
+   fired. The drawn line is its own absolutely-positioned element. */
+/* The marker sits FLUSH RIGHT on the rule, opposite the heading — a folio mark
+   on a divider, not a kicker stacked above the h2. Craft floor bans the
+   eyebrow outright, and left-aligning this label reinstated it by accident. */
+.shead-rule{ height:1px; position:relative; text-align:right; }
+.shead-line{ position:absolute; inset:0; background:var(--line); transform-origin:left center; }
+.band--deep .shead-line{ background:#2C3A3C; }
+.shead-label{ position:relative; top:-0.62em; background:var(--stone); padding-left:16px; display:inline-block; }
+.band--deep .shead-label{ background:var(--deep); }
+.shead-body{ display:grid; gap:18px; }
+@media (min-width:900px){
+  .shead-body{ grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap:clamp(28px,5vw,72px); align-items:end; }
+}
+
+/* ============================================================
+   4. MOTION BASE
+   Default = final state. `.js-motion` installs the start state.
+   ============================================================ */
+
+/* R1 — rule draw. Used on every section rule and every underline. */
+.rule-draw{ transform-origin:left center; }
+html.js-motion .rule-draw{ transform:scaleX(0); transition:transform 620ms var(--ease-settle); }
+html.js-motion .rule-draw.is-in{ transform:scaleX(1); }
+
+/* R2 — CUT. See the "deliberate cuts" note in the header: the staggered
+   opacity reveal on the portfolio index was the only place on this page where
+   real content (five client names) was hidden until a scroll callback fired.
+   Rendering proved that callback is not guaranteed to arrive, so five real
+   clients were invisible. No amount of easing is worth that, and the section
+   loses nothing by simply being present. */
+
+/* Hard neutraliser. Belt and braces on top of never adding js-motion. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .rule-draw,.settle > *,.h1-line > span{ transform:none !important; opacity:1 !important; }
+}
+
+/* ============================================================
+   5. HEADER
+   ============================================================ */
+.hdr{
+  position:sticky; top:0; z-index:60;
+  background:color-mix(in srgb, var(--stone) 88%, transparent);
+  -webkit-backdrop-filter:saturate(1.4) blur(14px);
+  backdrop-filter:saturate(1.4) blur(14px);
+}
+@supports not (background: color-mix(in srgb, red 50%, blue)){ .hdr{ background:var(--stone); } }
+.hdr-in{ display:flex; align-items:center; justify-content:space-between; gap:20px; padding-block:16px; }
+.hdr-rules{ position:absolute; left:0; right:0; bottom:0; height:2px; }
+.hdr-rules::before{ content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--line); }
+/* M1 — read-progress rule (see annotation at markup) */
+.hdr-prog{
+  position:absolute; left:0; bottom:0; height:2px; width:100%;
+  background:var(--ruby); transform:scaleX(0); transform-origin:left center;
+}
+
+/* Wordmark. The mark itself carries the page grammar in miniature. */
+.brand{ display:inline-flex; align-items:center; gap:11px; text-decoration:none; padding:6px 2px; }
+.brand-mark{ width:26px; height:26px; border:1px solid var(--ink); position:relative; flex:none; overflow:hidden; }
+.brand-block{
+  position:absolute; top:5px; left:5px; width:6px; height:14px; background:var(--ruby);
+  transform:translateX(0);
+}
+.brand-name{ font-family:var(--f-display); font-weight:600; font-size:0.98rem; letter-spacing:-0.022em; line-height:1.1; }
+.brand-name span{ display:block; font-family:var(--f-mono); font-size:0.688rem; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+.nav{ display:none; }
+@media (min-width:1000px){
+  .nav{ display:flex; align-items:center; gap:clamp(18px,2.4vw,34px); }
+}
+.nav a{
+  position:relative; text-decoration:none; font-size:0.94rem; font-weight:500;
+  color:var(--ink-2); padding:8px 0;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; right:0; bottom:2px; height:1px; background:var(--ruby);
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform var(--t-state) var(--ease-settle);
+}
+.nav a:hover{ color:var(--ink); }
+.nav a:hover::after,.nav a:focus-visible::after{ transform:scaleX(1); }
+
+/* NOTE: `.btn` is declared below and also sets `display`, at equal specificity.
+   These are scoped to `.hdr` so they win regardless of source order — an
+   unscoped `.hdr-cta{display:none}` was silently losing to `.btn`, leaving the
+   desktop CTA in the mobile header. */
+.hdr .hdr-cta{ display:none; }
+@media (min-width:1000px){ .hdr .hdr-cta{ display:inline-flex; } }
+
+/* Buttons */
+.btn{
+  --btn-bg:var(--ink); --btn-fg:var(--stone-hi);
+  display:inline-flex; align-items:center; gap:12px;
+  min-height:48px; padding:0 24px;
+  background:var(--btn-bg); color:var(--btn-fg);
+  font-family:var(--f-body); font-size:0.94rem; font-weight:500; letter-spacing:-0.005em;
+  text-decoration:none; border:1px solid var(--btn-bg); border-radius:0; cursor:pointer;
+  position:relative; overflow:hidden;
+  transition:transform var(--t-feedback) var(--ease-settle), background-color var(--t-state) var(--ease-settle), border-color var(--t-state) var(--ease-settle);
+}
+.btn .btn-tick{ width:14px; height:1px; background:currentColor; flex:none; transform-origin:left center; transition:transform var(--t-state) var(--ease-settle); }
+.btn:hover{ background:var(--ruby); border-color:var(--ruby); }
+.btn:hover .btn-tick{ transform:scaleX(1.7); }
+.btn:active{ transform:translateY(1px); }
+.btn--ghost{ --btn-bg:transparent; --btn-fg:var(--ink); border-color:var(--line); }
+.btn--ghost:hover{ background:transparent; border-color:var(--ruby); color:var(--ruby); }
+.on-deep .btn--ghost{ --btn-fg:var(--bone); border-color:#31403F; }
+.on-deep .btn--ghost:hover{ color:var(--ruby-hi); border-color:var(--ruby-hi); }
+.on-deep .btn:not(.btn--ghost){ --btn-bg:var(--bone); --btn-fg:var(--deep); }
+.on-deep .btn:not(.btn--ghost):hover{ background:var(--ruby-hi); border-color:var(--ruby-hi); color:var(--deep); }
+
+/* Mobile nav trigger + panel (panel is a SIBLING of the blurred header) */
+.burger{
+  display:inline-flex; flex-direction:column; justify-content:center; gap:5px;
+  width:48px; height:48px; padding:0 11px; background:none; border:1px solid var(--line); cursor:pointer;
+}
+@media (min-width:1000px){ .burger{ display:none; } }
+.burger i{ display:block; height:1px; background:var(--ink); transform-origin:center; transition:transform var(--t-state) var(--ease-settle), opacity 120ms linear; }
+.burger[aria-expanded="true"] i:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] i:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] i:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+.mnav{
+  position:fixed; inset:0; z-index:80; background:var(--deep); color:var(--bone);
+  display:flex; flex-direction:column; padding:20px var(--gut) 40px;
+  visibility:hidden; opacity:0;
+  transition:opacity var(--t-exit) var(--ease-exit), visibility 0s linear var(--t-exit);
+}
+.mnav[data-open="true"]{ visibility:visible; opacity:1; transition:opacity var(--t-state) var(--ease-settle), visibility 0s; }
+.mnav-top{ display:flex; justify-content:flex-end; }
+.mnav-close{ width:48px; height:48px; background:none; border:1px solid #31403F; color:var(--bone); cursor:pointer; font-size:1.1rem; line-height:1; }
+.mnav-list{ list-style:none; margin:auto 0; padding:0; display:grid; gap:2px; }
+.mnav-list a{
+  display:block; text-decoration:none; font-family:var(--f-display); font-weight:500;
+  font-size:clamp(1.9rem,9vw,2.6rem); letter-spacing:-0.03em; padding:12px 0;
+  border-bottom:1px solid #23312F; color:var(--bone);
+  transform:translateY(14px); opacity:0;
+}
+.mnav[data-open="true"] .mnav-list a{
+  transform:none; opacity:1;
+  transition:transform 520ms var(--ease-settle), opacity 380ms var(--ease-settle);
+  transition-delay:calc(var(--i) * 46ms + 60ms);
+}
+html:not(.js-motion) .mnav-list a{ transform:none; opacity:1; }
+.mnav-foot{ display:grid; gap:6px; }
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero{ padding-block:clamp(56px,9vw,120px) clamp(48px,7vw,96px); }
+.hero-grid{ display:grid; gap:clamp(30px,4vw,46px); }
+.h1-line{ display:block; overflow:hidden; padding-bottom:0.06em; }
+.h1-line > span{ display:block; }
+html.js-motion .h1-line > span{
+  transform:translateY(104%);
+  transition:transform var(--t-focal) var(--ease-settle);
+  transition-delay:calc(var(--i) * 72ms);
+}
+html.js-motion h1.is-in .h1-line > span{ transform:translateY(0); }
+.h1-rule{ height:1px; background:var(--line); margin-top:clamp(22px,3vw,34px); transform-origin:left center; }
+html.js-motion .h1-rule{ transform:scaleX(0); transition:transform 900ms var(--ease-settle) 190ms; }
+html.js-motion .h1-rule.is-in{ transform:scaleX(1); }
+
+.hero-lower{ display:grid; gap:clamp(26px,3.4vw,44px); }
+@media (min-width:1000px){
+  .hero-lower{ grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); align-items:start; gap:clamp(40px,6vw,90px); }
+}
+.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.hero-meta{ display:grid; gap:0; align-content:start; }
+.hero-meta div{ display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-top:1px solid var(--line-soft); }
+.hero-meta div:last-child{ border-bottom:1px solid var(--line-soft); }
+.hero-meta dt{ color:var(--muted); }
+.hero-meta dd{ margin:0; text-align:right; font-weight:500; }
+
+/* ============================================================
+   7. EFFORT SPLIT
+   ============================================================ */
+.split{ display:grid; gap:clamp(30px,4vw,52px); }
+@media (min-width:900px){ .split{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(36px,5vw,80px); } }
+.split-col{ display:grid; gap:16px; align-content:start; }
+/* Rendered at 5px on a dark track the ruby fill was invisible, which killed
+   the one comparison the whole section exists to make. Taller track, and both
+   fills lifted to read clearly against the deep band. */
+.split-track{ height:9px; background:var(--stone-lo); position:relative; }
+.band--deep .split-track{ background:#27393B; }
+.split-fill{ position:absolute; inset:0; background:var(--ruby-hi); transform-origin:left center; transform:scaleX(var(--to)); }
+.split-col--mine .split-fill{ background:var(--bone); }
+.split-meta{ color:var(--bone-mut); font-size:0.94rem; }
+html.js-motion .split-fill{ transform:scaleX(0); transition:transform var(--d) var(--ease-settle); }
+html.js-motion .split-fill.is-in{ transform:scaleX(var(--to)); }
+.split-list{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+.split-list li{ padding:12px 0; border-bottom:1px solid #23312F; color:var(--bone-mut); }
+.split-list li:first-child{ border-top:1px solid #23312F; }
+
+/* ============================================================
+   8. SERVICES — rows on rules, not a card grid
+   ============================================================ */
+.svc{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+.svc li{ border-bottom:1px solid var(--line); }
+.svc-row{
+  display:grid; gap:6px; padding:clamp(20px,2.6vw,30px) 0;
+  position:relative;
+}
+@media (min-width:820px){
+  .svc-row{ grid-template-columns: minmax(0,0.86fr) minmax(0,1.14fr); gap:clamp(24px,4vw,64px); align-items:baseline; }
+}
+.svc-name{ font-family:var(--f-display); font-size:clamp(1.32rem,2.5vw,1.95rem); font-weight:500; letter-spacing:-0.028em; line-height:1.08; display:flex; align-items:baseline; gap:14px; }
+.svc-tick{ width:0; height:1px; background:var(--ruby); align-self:center; flex:none; transition:width var(--t-state) var(--ease-settle); }
+.svc-desc{ color:var(--muted); max-width:52ch; }
+.svc li:hover .svc-tick,.svc li:focus-within .svc-tick{ width:26px; }
+.svc-name em{ font-style:normal; display:inline-block; transition:transform var(--t-state) var(--ease-settle); }
+.svc li:hover .svc-name em{ transform:translateX(6px); }
+
+/* ============================================================
+   9. SECTOR REGISTER — the signature mechanism
+   ============================================================ */
+.reg-strip{ display:none; }
+html.js .reg-strip-wrap{ position:relative; }
+/* Scroll affordance: the six labels do not fit below ~1200px, and a
+   scrollbar-less scroller with no visible edge hides the sixth sector. */
+html.js .reg-strip-wrap::after{
+  content:""; position:absolute; top:0; right:0; bottom:0; width:56px; pointer-events:none;
+  background:linear-gradient(90deg, rgba(244,242,237,0) 0%, var(--stone-hi) 78%);
+  opacity:0; transition:opacity var(--t-state) var(--ease-settle);
+}
+html.js .reg-strip-wrap[data-scrollable="true"]::after{ opacity:1; }
+html.js .reg-strip-wrap[data-at-end="true"]::after{ opacity:0; }
+html.js .reg-strip{
+  display:flex; position:relative; gap:0;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  overflow-x:auto; overflow-y:hidden; scrollbar-width:none; scroll-snap-type:x proximity;
+}
+html.js .reg-strip::-webkit-scrollbar{ display:none; }
+.reg-tab{
+  flex:none; scroll-snap-align:center;
+  background:none; border:0; cursor:pointer;
+  font-family:var(--f-body); font-size:0.9rem; font-weight:500; letter-spacing:-0.005em;
+  color:var(--muted); padding:16px 20px; min-height:52px; white-space:nowrap;
+  transition:color var(--t-state) var(--ease-settle);
+}
+/* Tighten so all six sectors fit without scrolling from 900px up. */
+@media (min-width:900px) and (max-width:1219px){
+  .reg-tab{ padding:16px 13px; font-size:0.83rem; letter-spacing:-0.012em; }
+}
+.reg-tab:first-child{ padding-left:0; }
+.reg-tab[aria-selected="true"]{ color:var(--ink); }
+.reg-tab:hover{ color:var(--ink); }
+.reg-ind{
+  position:absolute; left:0; bottom:0; width:100px; height:2px; background:var(--ruby);
+  transform-origin:left center; transform:translateX(0) scaleX(0);
+}
+html.js-motion .reg-ind{ transition:transform var(--t-travel) var(--ease-travel); }
+
+.reg-panels{ display:grid; gap:clamp(40px,6vw,72px); margin-top:clamp(28px,3.6vw,46px); }
+html.js .reg-panels{ display:block; margin-top:0; }
+html.js .reg-panel{ display:none; padding-top:clamp(28px,3.6vw,46px); }
+html.js .reg-panel.is-active{ display:grid; }
+.reg-panel{ display:grid; gap:clamp(20px,3vw,40px); }
+@media (min-width:880px){
+  .reg-panel{ grid-template-columns:minmax(0,1.08fr) minmax(0,0.92fr); align-items:start; }
+  html.js .reg-panel.is-active{ grid-template-columns:minmax(0,1.08fr) minmax(0,0.92fr); }
+}
+.reg-fig{ margin:0; position:relative; }
+.reg-fig img{ display:block; width:100%; height:auto; aspect-ratio:1600/1062; object-fit:cover; background:var(--stone-lo); }
+.reg-fig figcaption{ margin-top:10px; }
+.reg-copy{ display:grid; gap:16px; align-content:start; }
+.reg-need{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line-soft); }
+.reg-need li{ padding:10px 0; border-bottom:1px solid var(--line-soft); color:var(--muted); font-size:0.96rem; }
+
+/* Panel arrival: travels IN from the direction the indicator came from. */
+html.js-motion .reg-panel.is-active.arrive-r > *{ animation:panel-in-r 460ms var(--ease-settle) both; }
+html.js-motion .reg-panel.is-active.arrive-l > *{ animation:panel-in-l 460ms var(--ease-settle) both; }
+html.js-motion .reg-panel.is-active > *:nth-child(2){ animation-delay:70ms; }
+@keyframes panel-in-r{ from{ opacity:0; transform:translateX(26px); } to{ opacity:1; transform:none; } }
+@keyframes panel-in-l{ from{ opacity:0; transform:translateX(-26px); } to{ opacity:1; transform:none; } }
+
+/* ============================================================
+   10. PORTFOLIO
+   ============================================================ */
+.work{ display:grid; gap:clamp(26px,3.4vw,44px); }
+@media (min-width:820px){ .work{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(30px,4vw,60px); } }
+.work-item{ display:grid; gap:14px; }
+.mock{ border:1px solid var(--line); background:var(--stone-hi); }
+.mock-bar{ display:flex; align-items:center; gap:8px; padding:8px 10px; border-bottom:1px solid var(--line-soft); }
+.mock-url{ font-family:var(--f-mono); font-size:0.625rem; color:var(--muted); letter-spacing:0.02em; background:var(--stone-lo); padding:3px 9px; flex:1; }
+.mock-dots{ display:flex; gap:4px; }
+.mock-dots span{ width:6px; height:6px; border:1px solid var(--line); border-radius:50%; }
+.mock-view{ height:224px; overflow:hidden; position:relative; }
+@media (min-width:520px){ .mock-view{ height:262px; } }
+.mock-page{ padding:16px; display:grid; gap:11px; }
+/* 420ms out (quick return), 900ms in (long weighted travel) */
+html.js-motion .mock-page{ transition:transform 420ms var(--ease-settle); }
+html.js-motion .work-item:hover .mock-page,
+html.js-motion .work-item:focus-within .mock-page{ transform:translateY(-96px); transition-duration:900ms; }
+.work-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-top:1px solid var(--line); padding-top:12px; }
+.work-name{ font-family:var(--f-display); font-size:1.12rem; font-weight:600; letter-spacing:-0.02em; }
+.work-out{ color:var(--muted); font-size:0.96rem; max-width:44ch; }
+
+/* miniature site parts */
+.mk-h{ font-family:var(--f-display); font-size:0.82rem; font-weight:600; letter-spacing:-0.02em; color:var(--ink); }
+.mk-line{ height:5px; background:var(--stone-lo); }
+.mk-line.s{ width:52%; } .mk-line.m{ width:74%; } .mk-line.l{ width:92%; }
+.mk-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.mk-sw{ aspect-ratio:1; }
+.mk-cap{ font-family:var(--f-mono); font-size:0.563rem; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; }
+.mk-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+.mk-chip{ font-family:var(--f-mono); font-size:0.52rem; letter-spacing:0.08em; text-transform:uppercase; padding:3px 8px; background:var(--ruby); color:var(--stone-hi); }
+.mk-chip.q{ background:var(--stone-lo); color:var(--muted); }
+.mk-band{ background:var(--deep); padding:14px; display:grid; gap:7px; }
+.mk-band .mk-h{ color:var(--bone); }
+.mk-band .mk-line{ background:#2A3A3C; }
+.mk-opt{ display:flex; gap:6px; flex-wrap:wrap; }
+
+.work-index{ list-style:none; margin:clamp(30px,4vw,52px) 0 0; padding:0; border-top:1px solid var(--line); }
+.work-index li{ border-bottom:1px solid var(--line); }
+.work-index-row{ display:grid; gap:4px; padding:15px 0; }
+@media (min-width:760px){ .work-index-row{ grid-template-columns:minmax(0,0.42fr) minmax(0,0.28fr) minmax(0,1fr); gap:24px; align-items:baseline; } }
+.work-index .n{ font-family:var(--f-display); font-weight:600; font-size:1.02rem; letter-spacing:-0.015em; }
+.work-index .o{ color:var(--muted); font-size:0.94rem; }
+
+/* ============================================================
+   11. PROCESS
+   ============================================================ */
+.proc{ list-style:none; margin:0; padding:0; counter-reset:step; }
+.proc li{ border-top:1px solid #23312F; }
+.proc li:last-child{ border-bottom:1px solid #23312F; }
+.proc-row{ display:grid; gap:8px; padding:clamp(20px,2.8vw,32px) 0; align-items:start; }
+@media (min-width:820px){ .proc-row{ grid-template-columns:64px minmax(0,0.7fr) minmax(0,1.3fr); gap:clamp(20px,3.4vw,52px); } }
+.proc-n{ font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.14em; color:var(--ruby-hi); padding-top:0.42em; }
+.proc-t{ font-family:var(--f-display); font-size:clamp(1.2rem,2.2vw,1.62rem); font-weight:500; letter-spacing:-0.026em; line-height:1.1; }
+.proc-d{ color:var(--bone-mut); max-width:56ch; }
+
+/* ============================================================
+   12. PRICING
+   ============================================================ */
+.pay-toggle{ display:none; }
+html.js .pay-toggle{
+  display:inline-flex; position:relative; border:1px solid var(--line); background:var(--stone-hi); padding:4px;
+}
+.pay-btn{
+  position:relative; z-index:1; background:none; border:0; cursor:pointer;
+  font-family:var(--f-body); font-size:0.88rem; font-weight:500; color:var(--muted);
+  min-height:44px; padding:0 18px;
+  transition:color var(--t-state) var(--ease-settle);
+}
+.pay-btn[aria-pressed="true"]{ color:var(--stone-hi); }
+.pay-ind{
+  position:absolute; top:4px; left:4px; bottom:4px; width:100px; background:var(--ink);
+  transform-origin:left center; transform:translateX(0) scaleX(1);
+}
+html.js-motion .pay-ind{ transition:transform var(--t-travel) var(--ease-travel); }
+
+.tiers{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:clamp(28px,3.6vw,44px); }
+@media (min-width:860px){ .tiers{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+.tier{ background:var(--stone); padding:clamp(22px,2.8vw,32px); display:grid; gap:16px; align-content:start; position:relative; }
+.tier--pop{ background:var(--stone-hi); }
+.tier-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.tier-name{ font-family:var(--f-display); font-size:1.24rem; font-weight:600; letter-spacing:-0.022em; }
+.tier-pop{ font-family:var(--f-mono); font-size:0.688rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ruby); }
+.price-slot{ display:grid; gap:8px; }
+.price{ display:grid; gap:2px; }
+html.js .price{ display:none; }
+html.js .price.is-active{ display:grid; }
+.price-big{ font-family:var(--f-display); font-size:clamp(2.1rem,3.6vw,2.9rem); font-weight:500; letter-spacing:-0.04em; line-height:1; font-variant-numeric:tabular-nums; }
+.price-sub{ color:var(--muted); font-size:0.94rem; }
+.price-tag{ display:block; }
+html.js .price-tag{ display:none; }
+html.js-motion .price.is-active{ animation:price-set 340ms var(--ease-settle) both; }
+@keyframes price-set{ from{ opacity:0; transform:translateY(0.42em); } to{ opacity:1; transform:none; } }
+.tier-pages{ font-size:0.94rem; color:var(--muted); border-top:1px solid var(--line-soft); padding-top:14px; }
+
+.incl{ margin-top:clamp(28px,3.6vw,44px); display:grid; gap:clamp(20px,3vw,40px); }
+@media (min-width:900px){ .incl{ grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); } }
+.incl-list{ list-style:none; margin:0; padding:0; display:grid; gap:0; columns:1; }
+@media (min-width:560px){ .incl-list{ grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:24px; } }
+.incl-list li{ padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:0.94rem; color:var(--muted); }
+.addons{ list-style:none; margin:0; padding:0; }
+.addons li{ display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:0.94rem; }
+.addons li:first-child{ border-top:1px solid var(--line-soft); }
+.addons b{ font-weight:500; }
+.addons .num{ color:var(--ink); font-weight:500; }
+
+/* ============================================================
+   13. TESTIMONIALS / PERSON / REACH / CTA / FOOTER
+   ============================================================ */
+.quotes{ display:grid; gap:0; border-top:1px solid var(--line); }
+.quote{ padding:clamp(24px,3.4vw,44px) 0; border-bottom:1px solid var(--line); display:grid; gap:16px; }
+@media (min-width:900px){ .quote{ grid-template-columns:minmax(0,1.55fr) minmax(0,0.45fr); gap:clamp(24px,4vw,60px); align-items:start; } }
+.quote blockquote{ margin:0; font-family:var(--f-display); font-size:clamp(1.28rem,2.5vw,1.98rem); font-weight:400; line-height:1.2; letter-spacing:-0.026em; text-wrap:pretty; }
+.quote cite{ font-style:normal; display:grid; gap:2px; }
+.quote cite b{ font-weight:600; }
+.quote cite span{ color:var(--muted); font-size:0.92rem; }
+
+.person{ display:grid; gap:clamp(24px,3.4vw,48px); }
+@media (min-width:900px){ .person{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(36px,6vw,90px); align-items:start; } }
+.person-name{ font-family:var(--f-display); font-size:clamp(2.4rem,6vw,4.1rem); font-weight:500; letter-spacing:-0.042em; line-height:0.98; }
+.person-facts{ display:grid; gap:0; }
+.person-facts div{ display:grid; gap:2px; padding:13px 0; border-top:1px solid var(--line-soft); }
+@media (min-width:560px){ .person-facts div{ grid-template-columns:minmax(0,0.42fr) minmax(0,1fr); gap:20px; align-items:baseline; } }
+.person-facts div:last-child{ border-bottom:1px solid var(--line-soft); }
+/* This block sits on --stone-lo, a darker ground, so --muted lands at exactly
+   4.5:1. Darkened for margin. */
+.person-facts dt{ color:#4E5659; font-size:0.9rem; }
+.person-facts dd{ margin:0; }
+.person-facts a{ display:inline-block; padding-block:10px; text-decoration-color:var(--line); text-underline-offset:4px; text-decoration-thickness:1px; }
+.person-facts a:hover{ text-decoration-color:var(--ruby); color:var(--ruby); }
+
+.areas{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.areas span{ border:1px solid var(--line); padding:9px 14px; font-size:0.9rem; color:var(--ink-2); }
+.areas span.wide{ border-color:var(--ruby); color:var(--ruby); }
+/* These chips live in the dark CTA band: --ink-2 on --deep measured 1.55:1. */
+.on-deep .areas span{ color:var(--bone); border-color:#33443F; }
+.on-deep .areas span.wide{ color:var(--ruby-hi); border-color:var(--ruby-hi); }
+
+.cta-grid{ display:grid; gap:clamp(26px,3.6vw,48px); }
+@media (min-width:900px){ .cta-grid{ grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); align-items:end; gap:clamp(36px,6vw,88px); } }
+
+.ftr{ background:var(--deep); color:var(--bone); padding-block:clamp(48px,6vw,84px) 32px; }
+.ftr-grid{ display:grid; gap:clamp(28px,3.4vw,48px); }
+@media (min-width:760px){ .ftr-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1060px){ .ftr-grid{ grid-template-columns:1.2fr 1fr 1fr 1.1fr; } }
+.ftr h4{ font-family:var(--f-mono); font-size:0.688rem; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--bone-mut); margin-bottom:14px; }
+.ftr ul{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+.ftr li{ padding-block:4px; }
+/* Footer links measured 21px tall — padded to a real touch target. */
+.ftr a{ text-decoration:none; color:var(--bone); position:relative; display:inline-block; padding-block:11px; }
+.ftr a::after{ content:""; position:absolute; left:0; right:0; bottom:8px; height:1px; background:var(--ruby-hi); transform:scaleX(0); transform-origin:left center; transition:transform var(--t-state) var(--ease-settle); }
+.ftr a:hover::after,.ftr a:focus-visible::after{ transform:scaleX(1); }
+.ftr-logo{ background:var(--stone-hi); padding:14px 18px; display:inline-block; max-width:210px; }
+.ftr-logo img{ display:block; width:100%; height:auto; }
+.ftr-bottom{ margin-top:clamp(36px,5vw,64px); padding-top:20px; border-top:1px solid #23312F; display:flex; flex-wrap:wrap; gap:12px 28px; justify-content:space-between; }
+
+.skip{ position:absolute; left:0; top:0; z-index:100; background:var(--ink); color:var(--stone-hi); padding:12px 20px; transform:translateY(-140%); }
+.skip:focus{ transform:none; }
+</style>
+
+<!--
+  MOTION SAFETY BOOT — runs before body paint.
+  Adds `js` (enables tab/toggle single-panel modes) and `js-motion` (installs
+  animation start states). The failsafe at the bottom guarantees that if the
+  body script never boots, both classes are removed and the page reverts to
+  fully-visible static HTML. This is the specific defence against the round-1
+  failure where a hero headline stayed permanently invisible.
+-->
+<script>
+(function(){
+  var d = document.documentElement;
+  try{
+    d.classList.add('js');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && 'IntersectionObserver' in window && 'animate' in Element.prototype){
+      d.classList.add('js-motion');
+    }
+  }catch(e){ d.classList.remove('js','js-motion'); return; }
+  window.setTimeout(function(){
+    if(!window.__dcsBooted){ d.classList.remove('js-motion','js'); }
+  }, 2500);
+})();
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <!--
+        MOTION M0 — Identity mark, "the block finds its register"
+        Effect:   the ruby block inside the wordmark's square travels 13px right
+                  and stops flush against the inner right edge. Transform only.
+        Trigger:  page load, in step with the hero (fires from the same boot);
+                  and again on hover/focus of the wordmark.
+        Duration: 640ms load / 300ms hover · easing --ease-travel
+        Reason:   the identity states the page's motion thesis in one gesture
+                  before the visitor has read a word — a part moving along a
+                  guide and arriving exactly. It is the smallest possible
+                  demonstration of the studio's claim to precision.
+        Reduced:  block is authored in its FINAL position in CSS; without
+                  js-motion it simply sits there. Nothing moves.
+      -->
+      <span class="brand-mark" aria-hidden="true"><span class="brand-block" id="brandBlock"></span></span>
+      <span class="brand-name">Digital Consulting Services<span>Est. 2019 · Polegate</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a class="btn hdr-cta" href="/contact">Get a free quote <span class="btn-tick" aria-hidden="true"></span></a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu">
+        <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <!--
+    MOTION M1 — Read-progress rule
+    Effect:   a 2px ruby rule sitting exactly on the header's hairline scales
+              from 0 to 1 in proportion to scroll position. Transform only.
+    Trigger:  scroll (passive listener, values written inside rAF).
+    Duration: none — it is position-mapped, not timed, so it tracks the thumb
+              1:1 with no lag. Easing: linear by definition.
+    Reason:   state and hierarchy. It answers "how much of this is left?" on a
+              long page, and it re-uses the page's own structural motif: the
+              register line filling. It is the header's only movement — the bar
+              deliberately does NOT resize or restyle on scroll, because a
+              header that reflows is a header that admits it guessed wrong the
+              first time.
+    Reduced:  the rule is set to its final width and stops updating.
+  -->
+  <div class="hdr-rules" aria-hidden="true"><span class="hdr-prog" id="prog"></span></div>
+</header>
+
+<!-- Mobile nav is a SIBLING of the blurred header: a backdrop-filter ancestor
+     becomes the containing block for position:fixed children and would trap
+     this overlay inside the header's box. -->
+<div class="mnav on-deep" id="mnav" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="wrap" style="padding:0;display:flex;flex-direction:column;flex:1;">
+    <div class="mnav-top"><button class="mnav-close" type="button" id="mnavClose" aria-label="Close menu">Close</button></div>
+    <!--
+      MOTION M2 — Mobile menu items settle in
+      Effect:   each item translates up 14px and fades in. Transform + opacity.
+      Trigger:  panel opens.
+      Duration: 520ms transform / 380ms opacity, 46ms stagger, 60ms lead-in
+                · easing --ease-settle. Panel itself: 260ms in, 200ms out
+                (--ease-exit) — exits are always faster than entrances.
+      Reason:   the list genuinely arrives as a list, and the stagger tells the
+                reader the panel is finite and ordered rather than a wall. Total
+                delay is capped at 5 items (~290ms) so it never feels slow.
+      Reduced:  items are authored visible; html:not(.js-motion) resets them.
+    -->
+    <ul class="mnav-list">
+      <li style="--i:0"><a href="#services">Services</a></li>
+      <li style="--i:1"><a href="#pricing">Pricing</a></li>
+      <li style="--i:2"><a href="#work">Portfolio</a></li>
+      <li style="--i:3"><a href="/blog">Blog</a></li>
+      <li style="--i:4"><a href="#about">About</a></li>
+    </ul>
+    <div class="mnav-foot">
+      <a class="btn" href="/contact" style="justify-content:center;">Get a free quote <span class="btn-tick" aria-hidden="true"></span></a>
+      <a class="btn btn--ghost" href="tel:+447395063764" style="justify-content:center;margin-top:10px;">Call 07395 063764</a>
+      <p class="mark mark--txt" style="margin-top:18px;">Mon–Fri 9:00–17:30 · Sat by appointment</p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="band hero">
+    <div class="wrap hero-grid">
+      <!--
+        MOTION M3 — THE FOCAL MOMENT: "the headline sets itself"
+        Effect:   each of the three headline lines sits in its own overflow-
+                  hidden box and translates up from 104% to 0. Pure transform,
+                  no opacity — the line is either behind its own edge or on it,
+                  the way metal type is either seated in the stick or not.
+                  The hairline rule beneath draws left-to-right (scaleX) and is
+                  timed to finish just after the last line lands.
+        Trigger:  page load, on the frame after boot.
+        Duration: 720ms per line, 72ms stagger (total 864ms); rule 900ms with a
+                  190ms lead-in · easing --ease-settle for both.
+        Reason:   this is the one authored entrance the page has earned, and it
+                  is the source of the grammar every other movement quotes:
+                  travel along one axis, arrive at a rule, stop dead. It also
+                  does real work — it makes the three-line break deliberate
+                  rather than accidental, and it puts the reader's eye at the
+                  start of line one.
+        Reduced:  h1 is authored fully visible; js-motion is never added under
+                  prefers-reduced-motion, so no start state is ever installed.
+                  The rule renders at scaleX(1).
+        Failsafe: if the body script dies, the 2500ms timer strips js-motion
+                  and the headline appears. It can never stay hidden.
+      -->
+      <h1 id="heroH1">
+        <span class="h1-line" style="--i:0"><span>Agency-quality</span></span>
+        <span class="h1-line" style="--i:1"><span>websites, without</span></span>
+        <span class="h1-line" style="--i:2"><span>the homework.</span></span>
+      </h1>
+      <div class="h1-rule" id="heroRule" aria-hidden="true"></div>
+
+      <div class="hero-lower">
+        <div>
+          <p class="lede">Most studios want a brief, your words, your pictures and a clear idea of what you're after. I'll ask you some good questions instead, then write it, design it, build it, host it and look after it. Small businesses of every kind, from a fabric shop to a scaffolding firm.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/contact">Get a free quote <span class="btn-tick" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="tel:+447395063764">Call 07395 063764</a>
+          </div>
+        </div>
+
+        <dl class="hero-meta">
+          <div><dt>Working since</dt><dd class="num">2019</dd></div>
+          <div><dt>Sites delivered</dt><dd class="num">20+</dd></div>
+          <div><dt>Longest client</dt><dd><span class="num">5+</span> years</dd></div>
+          <div><dt>Based</dt><dd>Polegate, East Sussex</dd></div>
+          <div><dt>Working</dt><dd>UK-wide</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EFFORT SPLIT ===================== -->
+  <section class="band band--deep on-deep" aria-labelledby="effort-h">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark">The arrangement</span></div>
+        <div class="shead-body">
+          <h2 id="effort-h">You'll spend about an hour on this. I'll spend the rest of it.</h2>
+          <p class="body">That isn't a slogan, it's how the work is actually divided. The reason people put a website off for years is that every studio they ring hands them a homework assignment. This one doesn't.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION M4 — The effort split: two rules of unequal weight
+        Effect:   two fills scale on the X axis from a shared left origin —
+                  yours to 0.17, mine to 1.0. Transform only.
+        Trigger:  section enters viewport (IntersectionObserver, 30% visible,
+                  fires once).
+        Duration: DELIBERATELY UNEQUAL AND THIS IS THE POINT — yours 460ms,
+                  mine 1180ms, both on --ease-settle. Same curve, same origin,
+                  same moment of departure; one is finished while the other is
+                  still travelling. The reader feels the asymmetry a beat
+                  before they read it.
+        Reason:   magnitude and relationship — the two things motion does that
+                  static layout genuinely cannot. Two bars of different lengths
+                  are a chart; two bars that take different lengths of TIME are
+                  an argument. This is the page's core claim, and it is the one
+                  place where removing the animation would remove meaning.
+        Reduced:  both fills are authored at their final scaleX(var(--to)) in
+                  the base rule, so the finished proportions are always shown.
+                  No number is stated, animated or computed anywhere here.
+      -->
+      <div class="split">
+        <div class="split-col split-col--yours">
+          <h3>Your side</h3>
+          <div class="split-track" data-split><span class="split-fill" style="--to:0.17; --d:460ms"></span></div>
+          <ul class="split-list">
+            <li>One conversation: a call, or a few messages, whichever suits.</li>
+            <li>A look at the drafts, and any changes you want.</li>
+          </ul>
+        </div>
+        <div class="split-col split-col--mine">
+          <h3>My side</h3>
+          <div class="split-track" data-split><span class="split-fill" style="--to:1; --d:1180ms"></span></div>
+          <ul class="split-list">
+            <li>The questions worth asking about how your business actually works.</li>
+            <li>Every word on the site, written for you.</li>
+            <li>Structure, imagery, colour, type. All the decisions.</li>
+            <li>The build, and the search setup that goes with it.</li>
+            <li>Hosting, SSL, the domain, security updates, uptime monitoring.</li>
+            <li>Someone to ring when you want something changed.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="band" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark">What's on offer</span></div>
+        <div class="shead-body">
+          <h2 id="svc-h">Six things, done properly, rather than forty done thinly.</h2>
+          <p class="body">Most clients start with the first one and pick up the others as the business grows. Nothing here is outsourced and nothing is offshored.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION M5 — Service row hover
+        Effect:   the row's name translates 6px right and a 26px ruby tick grows
+                  out from the baseline beside it (width transition on a 1px
+                  rule — a 26px paint on hover, well inside budget, and width
+                  is used here rather than scaleX only because the rule starts
+                  at zero width and must not occupy layout when idle).
+        Trigger:  :hover or :focus-within on the row.
+        Duration: 260ms · easing --ease-settle.
+        Reason:   feedback and affordance on a list of rows that would
+                  otherwise give no sign it is scannable. The nudge-right is
+                  the same "travel along one axis" gesture as everything else,
+                  scaled down to the smallest useful size.
+        Reduced:  transitions collapse to ~0ms; the hover end-state still
+                  applies, so the feedback survives without the movement — which
+                  is what reduced motion asks for, not the removal of feedback.
+      -->
+      <ul class="svc">
+        <li><div class="svc-row">
+          <span class="svc-name"><em>Website Design</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">Designed and built for your business. No templates, no page-builders.</span>
+        </div></li>
+        <li><div class="svc-row">
+          <span class="svc-name"><em>Local SEO</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">Service pages, location pages, structured data — so you're found where you work.</span>
+        </div></li>
+        <li><div class="svc-row">
+          <span class="svc-name"><em>Ongoing Management</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">We look after the site so you can get on with the business.</span>
+        </div></li>
+        <li><div class="svc-row">
+          <span class="svc-name"><em>Google Workspace Email</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">Professional business email on your own domain.</span>
+        </div></li>
+        <li><div class="svc-row">
+          <span class="svc-name"><em>eCommerce Websites</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">Online stores built, loaded with your products, and kept running.</span>
+        </div></li>
+        <li><div class="svc-row">
+          <span class="svc-name"><em>Analytics &amp; Reporting</em><span class="svc-tick" aria-hidden="true"></span></span>
+          <span class="svc-desc">Analytics, Search Console and monthly reporting, so you know what's working.</span>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== SECTOR REGISTER ===================== -->
+  <section class="band" id="sectors" aria-labelledby="reg-h" style="background:var(--stone-hi);">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark" style="background:var(--stone-hi)">Who this is for</span></div>
+        <div class="shead-body">
+          <h2 id="reg-h">Range is the point.</h2>
+          <p class="body">Twenty-plus sites since 2019, and no two of these businesses have anything in common except their size and their owner's diary. Move through them.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION M6 — THE SIGNATURE: the sector register
+        Effect:   a single 2px ruby indicator TRAVELS along the label track to
+                  the selected sector (translateX + scaleX, one element, never
+                  six that cross-fade), and the panel below arrives from the
+                  side the indicator came from (translateX 26px + opacity).
+        Trigger:  click / arrow keys on a tab; and an unhurried auto-advance
+                  while the section is on screen.
+        Duration: indicator 420ms on --ease-travel (a slight ease-in because a
+                  carriage has mass and this one crosses a real distance);
+                  panel 460ms on --ease-settle, second child delayed 70ms.
+                  Auto-advance interval 5200ms.
+        Reason:   three things at once, all on the allowed list.
+                  (1) CONTINUITY — one indicator that moves proves the six
+                      sectors are positions on one scale, not six unrelated
+                      claims. That IS the argument of this section.
+                  (2) CAUSALITY — the panel enters from the direction of travel,
+                      so the reader knows which way they moved and can go back.
+                  (3) STATE — where you are in a set of six is otherwise
+                      invisible.
+        Auto-advance is defensible only because it yields instantly: it PAUSES
+        on hover and focus-within, STOPS permanently on the first click or
+        keypress, STOPS when the section leaves the viewport or the tab is
+        hidden, and never runs under reduced motion. Its job is to show the
+        breadth once without asking a visitor to click six times to find it.
+        Reduced:  no js-motion means no indicator transition, no panel
+                  animation and no auto-advance — the tabs still switch,
+                  instantly.
+        No-JS:    html:not(.js) hides the label strip entirely and renders all
+                  six panels stacked, each with its own visible heading. Not
+                  one word of this section is gated on script.
+      -->
+      <div class="reg">
+       <div class="reg-strip-wrap" id="regStripWrap">
+        <div class="reg-strip" role="tablist" aria-label="Sectors DCS builds for" id="regStrip">
+          <button class="reg-tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" tabindex="0" type="button">Retail &amp; eCommerce</button>
+          <button class="reg-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1" type="button">Studios &amp; practitioners</button>
+          <button class="reg-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" type="button">Professional services</button>
+          <button class="reg-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" type="button">Makers &amp; product</button>
+          <button class="reg-tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1" type="button">Hospitality</button>
+          <button class="reg-tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1" type="button">Trades &amp; contractors</button>
+          <span class="reg-ind" id="regInd" aria-hidden="true"></span>
+        </div>
+       </div>
+
+        <div class="reg-panels" id="regPanels">
+          <section class="reg-panel is-active" role="tabpanel" id="panel-0" aria-labelledby="tab-0">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" alt="Interior of a small independent clothing boutique, with rails of garments against a pale wall in daylight." decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Retail &amp; eCommerce</h3>
+              <p class="body">Shops with stock to sell, whether or not there's a till involved. The site has to load fast on a phone, take money without drama, and be something you can add to yourself, or ring me about, which most people prefer.</p>
+              <ul class="reg-need">
+                <li>Product pages that don't need a photographer on retainer</li>
+                <li>Checkout, delivery rules and stock that stay out of your way</li>
+                <li>Found for the things people actually search for</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="reg-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" alt="An empty yoga studio with rolled mats stacked beside tall windows." loading="lazy" decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Studios &amp; practitioners</h3>
+              <p class="body">Yoga, tuition, therapy, coaching, salons. Almost always one person whose diary is the business. The site's job is to fill it without adding admin: people book and pay before they ever ring you.</p>
+              <ul class="reg-need">
+                <li>Booking and payment handled on the site</li>
+                <li>Timetables that are easy to change and hard to get wrong</li>
+                <li>Enough warmth that a nervous first-timer gets in touch</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="reg-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg" width="1600" height="1062" alt="Two people seated across a table in a small office, viewed from behind, with daylight from a window beyond." loading="lazy" decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Professional &amp; property services</h3>
+              <p class="body">Consultancies, lettings, luxury property. Here the site is the credibility check that happens before anyone picks up the phone, so it has to be as composed as you are in the room.</p>
+              <ul class="reg-need">
+                <li>A tone that reads senior without reading stiff</li>
+                <li>Case work and credentials presented properly</li>
+                <li>Enquiry forms that qualify before they land in your inbox</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="reg-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-maker.jpg" width="1600" height="1062" alt="A pair of hands folding fabric on a workbench in a textile studio." loading="lazy" decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Makers &amp; made-to-order</h3>
+              <p class="body">Fabric, furniture, signage, print. Anything where the customer chooses the specification and you build it after they've paid. The interesting problem is usually the ordering, not the website.</p>
+              <ul class="reg-need">
+                <li>Configurators that price a made-to-order item correctly</li>
+                <li>Orders that arrive as a work sheet you can actually use</li>
+                <li>Shipping that works beyond the UK when it needs to</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="reg-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" alt="The counter of an independent cafe with an espresso machine, lit by morning light." loading="lazy" decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Hospitality &amp; food</h3>
+              <p class="body">Cafés, kitchens, small venues. Nine in ten visits are somebody standing outside on their phone deciding whether to come in. Everything else on the site is secondary to that moment.</p>
+              <ul class="reg-need">
+                <li>Menu, hours and location legible in three seconds</li>
+                <li>A map link that opens the right app on the right phone</li>
+                <li>Photographs that survive being seen in sunlight</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="reg-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5">
+            <figure class="reg-fig">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" alt="A scaffolding structure erected against a building, seen from below against the sky." loading="lazy" decoding="async">
+              <figcaption class="mark mark--txt">Illustrative photograph, not a client's premises</figcaption>
+            </figure>
+            <div class="reg-copy">
+              <h3>Trades &amp; contractors</h3>
+              <p class="body">Electricians, scaffolders, builders, automotive, removals. A large and valued part of the work, and one sector on this list, not the whole list. The site earns its keep by ranking in the towns you cover.</p>
+              <ul class="reg-need">
+                <li>A page for every service, in every town you work</li>
+                <li>Accreditations and insurance where people look for them</li>
+                <li>Ringing you takes one tap, on any page</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PORTFOLIO ===================== -->
+  <section class="band" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark">Selected work</span></div>
+        <div class="shead-body">
+          <h2 id="work-h">Real clients, and what changed for them.</h2>
+          <p class="body">Four shown, the rest indexed below. The layouts here are drawn in the browser rather than screenshotted, so they stay honest at any size.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION M7 — Portfolio mock: the page scrolls under its own frame
+        Effect:   the miniature page inside each browser frame translates up
+                  96px within its clipped viewport. Transform only.
+        Trigger:  :hover on the item.
+        Duration: 900ms in (--ease-settle), 420ms out — a long, weighted travel
+                  in and a quick return, which is how a heavy drawer behaves.
+        Reason:   it tells the reader these are pages with more below the fold,
+                  not pictures of pages. That is a small but real fact about
+                  the work, and it is the difference between a portfolio and a
+                  mood board.
+        Not gated: every outcome line is plain text, always visible. Nothing is
+                  learned only by hovering, so touch users lose nothing.
+        Reduced:  transition collapses; the mock stays at its top position.
+      -->
+      <div class="work">
+        <article class="work-item">
+          <div class="mock">
+            <div class="mock-bar" aria-hidden="true"><span class="mock-dots"><span></span><span></span><span></span></span><span class="mock-url">Cuddle Plush Fabrics</span></div>
+            <div class="mock-view" aria-hidden="true"><div class="mock-page">
+              <span class="mk-h">Cuddle Plush Fabrics</span>
+              <span class="mk-line l"></span><span class="mk-line m"></span>
+              <span class="mk-cap">Shop by material</span>
+              <div class="mk-grid">
+                <span class="mk-sw" style="background:#8A9C8F"></span><span class="mk-sw" style="background:#B9A88C"></span><span class="mk-sw" style="background:#6F7E93"></span>
+                <span class="mk-sw" style="background:#C0898D"></span><span class="mk-sw" style="background:#9B9086"></span><span class="mk-sw" style="background:#7C8A87"></span>
+              </div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip q">£/m</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip q">£/m</span></div>
+              <div class="mk-grid">
+                <span class="mk-sw" style="background:#A8927E"></span><span class="mk-sw" style="background:#77878C"></span><span class="mk-sw" style="background:#B4A9B0"></span>
+              </div>
+              <div class="mk-row"><span class="mk-line m"></span><span class="mk-chip">Basket</span></div>
+            </div></div>
+          </div>
+          <div class="work-head"><span class="work-name">Cuddle Plush Fabrics</span><span class="mark">eCommerce · fabrics</span></div>
+          <p class="work-out">Five years and counting — one of our longest client relationships.</p>
+        </article>
+
+        <article class="work-item">
+          <div class="mock">
+            <div class="mock-bar" aria-hidden="true"><span class="mock-dots"><span></span><span></span><span></span></span><span class="mock-url">Sanctuary Ida</span></div>
+            <div class="mock-view" aria-hidden="true"><div class="mock-page">
+              <span class="mk-h">Sanctuary Ida</span>
+              <span class="mk-line m"></span>
+              <span class="mk-cap">This week</span>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Book</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Book</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip q">Full</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Book</span></div>
+              <span class="mk-cap">Next week</span>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Book</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Book</span></div>
+              <span class="mk-line l"></span><span class="mk-line m"></span>
+            </div></div>
+          </div>
+          <div class="work-head"><span class="work-name">Sanctuary Ida</span><span class="mark">Yoga studio</span></div>
+          <p class="work-out">Students book and pay for classes online.</p>
+        </article>
+
+        <article class="work-item">
+          <div class="mock">
+            <div class="mock-bar" aria-hidden="true"><span class="mock-dots"><span></span><span></span><span></span></span><span class="mock-url">Luna Landings</span></div>
+            <div class="mock-view" aria-hidden="true"><div class="mock-page">
+              <span class="mk-h">Build your order</span>
+              <span class="mk-cap">Size</span>
+              <div class="mk-opt"><span class="mk-chip">S</span><span class="mk-chip q">M</span><span class="mk-chip q">L</span><span class="mk-chip q">Custom</span></div>
+              <span class="mk-cap">Finish</span>
+              <div class="mk-opt"><span class="mk-chip q">Oak</span><span class="mk-chip">Walnut</span><span class="mk-chip q">Painted</span></div>
+              <span class="mk-cap">Edge</span>
+              <div class="mk-opt"><span class="mk-chip q">Square</span><span class="mk-chip">Rounded</span></div>
+              <div class="mk-row"><span class="mk-line m"></span><span class="mk-chip q">Total</span></div>
+              <div class="mk-row"><span class="mk-line s"></span><span class="mk-chip">Order</span></div>
+              <span class="mk-cap">Ships worldwide</span>
+              <span class="mk-line l"></span>
+            </div></div>
+          </div>
+          <div class="work-head"><span class="work-name">Luna Landings</span><span class="mark">Made-to-order eCommerce</span></div>
+          <p class="work-out">Product configurator, automatic work orders, worldwide shipping.</p>
+        </article>
+
+        <article class="work-item">
+          <div class="mock">
+            <div class="mock-bar" aria-hidden="true"><span class="mock-dots"><span></span><span></span><span></span></span><span class="mock-url">Colossus Scaffolding</span></div>
+            <div class="mock-view" aria-hidden="true"><div class="mock-page" style="padding:0">
+              <div class="mk-band">
+                <span class="mk-h">Colossus Scaffolding</span>
+                <span class="mk-line m"></span>
+                <div class="mk-opt"><span class="mk-chip">Get a quote</span><span class="mk-chip q">Call</span></div>
+              </div>
+              <div style="padding:16px;display:grid;gap:11px">
+                <span class="mk-cap">Services</span>
+                <div class="mk-row"><span class="mk-line m"></span></div>
+                <div class="mk-row"><span class="mk-line s"></span></div>
+                <div class="mk-row"><span class="mk-line m"></span></div>
+                <span class="mk-cap">Where we work</span>
+                <div class="mk-row"><span class="mk-line l"></span></div>
+                <div class="mk-row"><span class="mk-line m"></span></div>
+                <span class="mk-line l"></span>
+              </div>
+            </div></div>
+          </div>
+          <div class="work-head"><span class="work-name">Colossus Scaffolding</span><span class="mark">Scaffolding</span></div>
+          <p class="work-out">First enquiry from Google within three weeks of launch.</p>
+        </article>
+      </div>
+
+      <!--
+        MOTION M8 — REMOVED. A staggered opacity reveal on this index was
+        built, rendered, and cut: it gated five real client names behind a
+        scroll callback that verification showed does not reliably fire, and a
+        list of clients that might not appear is worse than a list that simply
+        appears. The index is plain, always-visible markup.
+      -->
+      <ul class="work-index">
+        <li><div class="work-index-row"><span class="n">Nicola Noble Tuition</span><span class="mark">Tuition</span><span class="o">Moved classes online during Covid instead of closing.</span></div></li>
+        <li><div class="work-index-row"><span class="n">Mad Graphics</span><span class="mark">Signage &amp; print</span><span class="o">Full rebuild.</span></div></li>
+        <li><div class="work-index-row"><span class="n">DCH Automotive</span><span class="mark">Automotive</span><span class="o">A credible presence from a standing start.</span></div></li>
+        <li><div class="work-index-row"><span class="n">DJ Fox Electrical</span><span class="mark">Electrical</span><span class="o">20+ page site, live at djfoxelectrical.com.</span></div></li>
+        <li><div class="work-index-row"><span class="n">Bexhill Removals</span><span class="mark">Removals</span><span class="o">Design approved on the first presentation, no revisions.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section class="band band--deep on-deep" aria-labelledby="proc-h">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark">How it goes</span></div>
+        <div class="shead-body">
+          <h2 id="proc-h">Four steps, and you're only needed for two of them.</h2>
+          <p class="body">No brief to write, no forms to fill in, no login to remember afterwards. Numbered because the order genuinely matters — nothing starts until the conversation has happened.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION — CUT HERE, DELIBERATELY.
+        A scroll-pinned process sequence with a carriage travelling between
+        four stations was designed for this section and dropped for two
+        reasons: direction 05 already owns scroll-pinned process, and pinning
+        takes the scroll away from a reader who is trying to find the price.
+        Steps 1–4 are static. The sequence is carried by the numerals and the
+        rules, which is what numerals and rules are for.
+      -->
+      <ol class="proc">
+        <li><div class="proc-row">
+          <span class="proc-n num">01</span>
+          <span class="proc-t">A conversation</span>
+          <span class="proc-d">A call, or a few messages. No brief needed and nothing to fill in. I'll ask the questions, and they'll mostly be about how the business works rather than about websites.</span>
+        </div></li>
+        <li><div class="proc-row">
+          <span class="proc-n num">02</span>
+          <span class="proc-t">We write it and design it</span>
+          <span class="proc-d">Copy, structure, imagery, colour: all handled here. You don't need to know what to say, which is the part that stops most people from ever starting.</span>
+        </div></li>
+        <li><div class="proc-row">
+          <span class="proc-n num">03</span>
+          <span class="proc-t">You review</span>
+          <span class="proc-d">Unlimited revisions during the build until you're happy. Say "the green's wrong" and that's a perfectly good piece of feedback. You don't have to know why.</span>
+        </div></li>
+        <li><div class="proc-row">
+          <span class="proc-n num">04</span>
+          <span class="proc-t">It goes live, and we keep it running</span>
+          <span class="proc-d">Hosting, updates, monitoring and support from then on. This is a managed service, not a hand-off. You won't be emailed a password and wished luck.</span>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="band" id="pricing" aria-labelledby="price-h" style="background:var(--stone-hi);">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark" style="background:var(--stone-hi)">What it costs</span></div>
+        <div class="shead-body">
+          <h2 id="price-h">Two ways to pay for exactly the same site.</h2>
+          <p class="body">You're choosing how to pay, not what you get. The build quality is identical across all three tiers. They differ on ongoing service level and how many pages the site runs to.</p>
+        </div>
+      </div>
+
+      <!--
+        MOTION M9 — Payment toggle: the indicator travels, the features do not
+        Effect:   the segmented control's solid indicator translates and scales
+                  to the pressed option (420ms, --ease-travel, transform only).
+                  The price block in each tier is replaced and settles up 0.42em
+                  with opacity (340ms, --ease-settle). NOTHING ELSE ON THE CARD
+                  MOVES — the includes list, the page counts and the tier names
+                  are held perfectly still.
+        Trigger:  click / keyboard activation on either option.
+        Duration: indicator 420ms; price 340ms.
+        Reason:   the stillness is the message. "Clients choose how to pay, not
+                  what they get" is the claim, and a toggle where only the
+                  numbers move proves it in a way a sentence cannot. If the
+                  feature list also animated, the page would be quietly
+                  arguing the opposite.
+        NUMBER SAFETY — this is the round-1 failure mode and it is closed:
+          · Both price sets are authored as literal text in the markup below:
+            £995 / £15, £1,995 / £25, £3,495 / £50 and £45, £75, £125.
+          · Nothing is counted, interpolated, parsed or formatted by script.
+            The toggle only adds and removes an `is-active` class.
+          · Therefore no intermediate or wrong value can ever be displayed —
+            the DOM contains only true values at every frame.
+        Reduced:  price swaps instantly, indicator jumps. Both values remain
+                  correct.
+        No-JS:    html:not(.js) hides the toggle and shows BOTH price blocks in
+                  every tier, each with its own visible "Upfront" / "Pay
+                  monthly" label. The full price list is readable with no
+                  script at all.
+      -->
+      <div class="pay-toggle" role="group" aria-label="Choose how to pay" id="payToggle">
+        <span class="pay-ind" id="payInd" aria-hidden="true"></span>
+        <button class="pay-btn" type="button" data-pay="upfront" aria-pressed="true">Upfront + monthly</button>
+        <button class="pay-btn" type="button" data-pay="monthly" aria-pressed="false">Pay monthly</button>
+      </div>
+
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-top"><span class="tier-name">Starter</span></div>
+          <div class="price-slot">
+            <div class="price is-active" data-price="upfront">
+              <span class="price-tag mark">Upfront + monthly</span>
+              <span class="price-big num">£995</span>
+              <span class="price-sub">then <span class="num">£15</span>/month</span>
+            </div>
+            <div class="price" data-price="monthly">
+              <span class="price-tag mark">Pay monthly</span>
+              <span class="price-big num">£45</span>
+              <span class="price-sub">per month, nothing upfront · 12-month minimum</span>
+            </div>
+          </div>
+          <p class="tier-pages">Up to <span class="num">20</span> pages</p>
+        </div>
+
+        <div class="tier tier--pop">
+          <div class="tier-top"><span class="tier-name">Professional</span><span class="tier-pop">Most popular</span></div>
+          <div class="price-slot">
+            <div class="price is-active" data-price="upfront">
+              <span class="price-tag mark">Upfront + monthly</span>
+              <span class="price-big num">£1,995</span>
+              <span class="price-sub">then <span class="num">£25</span>/month</span>
+            </div>
+            <div class="price" data-price="monthly">
+              <span class="price-tag mark">Pay monthly</span>
+              <span class="price-big num">£75</span>
+              <span class="price-sub">per month, nothing upfront · 12-month minimum</span>
+            </div>
+          </div>
+          <p class="tier-pages">Up to <span class="num">50</span> pages</p>
+        </div>
+
+        <div class="tier">
+          <div class="tier-top"><span class="tier-name">Growth</span></div>
+          <div class="price-slot">
+            <div class="price is-active" data-price="upfront">
+              <span class="price-tag mark">Upfront + monthly</span>
+              <span class="price-big num">£3,495</span>
+              <span class="price-sub">then <span class="num">£50</span>/month</span>
+            </div>
+            <div class="price" data-price="monthly">
+              <span class="price-tag mark">Pay monthly</span>
+              <span class="price-big num">£125</span>
+              <span class="price-sub">per month, nothing upfront · 12-month minimum</span>
+            </div>
+          </div>
+          <p class="tier-pages">Up to <span class="num">100</span> pages</p>
+        </div>
+      </div>
+
+      <div class="incl">
+        <div>
+          <h3 style="margin-bottom:14px;">Every site includes</h3>
+          <ul class="incl-list">
+            <li>Custom design</li>
+            <li>Service pages</li>
+            <li>Location pages</li>
+            <li>Structured data</li>
+            <li>Mobile-first and fast</li>
+            <li>Contact form</li>
+            <li>Hosting</li>
+            <li>SSL</li>
+            <li>Domain management</li>
+            <li>Security updates</li>
+            <li>Uptime monitoring</li>
+            <li>Unlimited revisions during the build</li>
+            <li>Search Console submission</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-bottom:14px;">Add-ons</h3>
+          <ul class="addons">
+            <li><b>Blog post writing</b><span class="num">£75 / post</span></li>
+            <li><b>Custom theme design</b><span class="num">£350</span></li>
+            <li><b>Google Ads setup + management</b><span class="num">£200 / mo + spend</span></li>
+            <li><b>Monthly SEO retainer</b><span class="num">£200 / mo</span></li>
+          </ul>
+          <p class="body" style="margin-top:18px;font-size:0.94rem;">Tiers differ on ongoing service level, not on quality. A Starter site is built to the same standard as a Growth one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="band" aria-labelledby="say-h">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark">In their words</span></div>
+        <div class="shead-body">
+          <h2 id="say-h">Three clients, three trades that aren't trades.</h2>
+        </div>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <blockquote>“Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.”</blockquote>
+          <cite><b>Sarah</b><span>Cuddle Plush Fabrics · eCommerce, fabrics</span></cite>
+        </div>
+        <div class="quote">
+          <blockquote>“I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.”</blockquote>
+          <cite><b>Nicola</b><span>Nicola Noble Tuition · Tuition</span></cite>
+        </div>
+        <div class="quote">
+          <blockquote>“My yoga students love that they can book and pay for my classes on my website.”</blockquote>
+          <cite><b>Molly</b><span>Sanctuary Ida · Yoga studio</span></cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== THE PERSON ===================== -->
+  <section class="band" id="about" aria-labelledby="who-h" style="background:var(--stone-lo);">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-rule" data-reveal><span class="shead-line rule-draw" aria-hidden="true"></span><span class="shead-label mark" style="background:var(--stone-lo)">Who you're hiring</span></div>
+      </div>
+      <div class="person">
+        <div>
+          <h2 id="who-h" class="person-name">Ricky Wilson</h2>
+          <p class="lede" style="margin-top:22px;">You're hiring a person, not a company. Nothing here is outsourced and nothing is offshored. The person who asks you the questions is the person who writes the words, makes the design decisions, builds the thing and picks up the phone two years later when you want the opening hours changed.</p>
+          <p class="body" style="margin-top:16px;">That's the whole proposition, and it's also the limit of it: I take on what I can look after properly. Digital Consulting Services has been running since 2019 from Chaucer Business Park in Polegate, and the client list has grown almost entirely by word of mouth.</p>
+        </div>
+        <dl class="person-facts">
+          <div><dt>Studio</dt><dd>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+447395063764" class="num">07395 063764</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></dd></div>
+          <div><dt>Hours</dt><dd>Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</dd></div>
+          <div><dt>Founded</dt><dd class="num">2019</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REACH + FINAL CTA ===================== -->
+  <section class="band band--deep on-deep" aria-labelledby="cta-h">
+    <div class="wrap">
+      <div class="cta-grid">
+        <div>
+          <h2 id="cta-h">Tell me about the business. I'll tell you what it needs.</h2>
+          <p class="body" style="margin-top:20px;">No brief, no budget conversation to dread, no obligation. If a website isn't the right thing for you this year, I'd rather say so than sell you one.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/contact">Get a free quote <span class="btn-tick" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="tel:+447395063764">Call 07395 063764</a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:6px;">Where the clients are</h3>
+          <p class="body" style="font-size:0.96rem;">Local to East Sussex, and that's useful when you want someone to sit down with. It has never been a limit. Plenty of this work has never been within an hour's drive.</p>
+          <div class="areas">
+            <span>Polegate</span><span>Eastbourne</span><span>Hailsham</span><span>Lewes</span>
+            <span>Seaford</span><span>Brighton</span><span>Hove</span><span>Uckfield</span>
+            <span class="wide">UK-wide</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr on-deep">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <span class="ftr-logo"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" width="600" height="300" alt="Digital Consulting Services" loading="lazy"></span>
+        <p class="body" style="margin-top:16px;font-size:0.94rem;">Website design and build for small businesses. Polegate, East Sussex. Working UK-wide since <span class="num">2019</span>.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service areas</h4>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+          <li>&amp; UK-wide</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+447395063764" class="num">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li style="margin-top:8px;color:var(--bone-mut);">Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</li>
+          <li style="margin-top:8px;color:var(--bone-mut);">Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-bottom">
+      <span class="mark mark--txt">© 2026 Digital Consulting Services</span>
+      <span class="mark mark--txt">Photography on this page is illustrative and does not depict clients or their premises</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var doc = document.documentElement;
+  var motion = doc.classList.contains('js-motion');
+
+  /* ---- Failsafe handshake. Set FIRST so the head timer stands down even if
+     something below throws. Everything after this point is individually
+     wrapped so one broken feature cannot take the page with it. ---- */
+  window.__dcsBooted = true;
+
+  function safe(fn){ try{ fn(); }catch(e){ if(window.console) console.warn('[dcs]', e); } }
+
+  /* ---------------------------------------------------------------
+     M3 — Hero focal entrance. Fires on the next frame after boot.
+     --------------------------------------------------------------- */
+  safe(function(){
+    var h1 = document.getElementById('heroH1');
+    var rule = document.getElementById('heroRule');
+    var block = document.getElementById('brandBlock');
+    if(!motion){ return; }
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        if(h1) h1.classList.add('is-in');
+        if(rule) rule.classList.add('is-in');
+        /* M0 — identity block travels to its register, in step with the hero */
+        if(block){
+          block.style.transition = 'transform 640ms var(--ease-travel) 120ms';
+          block.style.transform = 'translateX(13px)';
+        }
+      });
+    });
+    /* M0 hover repeat */
+    var brand = document.querySelector('.brand');
+    if(brand && block){
+      brand.addEventListener('mouseenter', function(){
+        block.style.transition = 'transform 300ms var(--ease-travel)';
+        block.style.transform = 'translateX(0)';
+      });
+      brand.addEventListener('mouseleave', function(){
+        block.style.transform = 'translateX(13px)';
+      });
+    }
+  });
+
+  /* ---------------------------------------------------------------
+     Reveal — rules draw (R1) and split fills (M4).
+
+     This uses getBoundingClientRect inside the rAF-throttled scroll pass
+     rather than IntersectionObserver.
+
+     HONEST NOTE, because this file is a spec for the React rebuild: an earlier
+     version used IntersectionObserver and I recorded it as broken. It was not.
+     The headless harness used for verification delivers no scroll events for
+     programmatic scrolls, so nothing ever scrolled into view and every reveal
+     looked stuck. I also assumed a scaleX(0) target could never satisfy a
+     non-zero threshold because its box has zero area; that is wrong — the spec
+     assigns intersectionRatio 1 to a zero-area target that intersects, and a
+     direct test confirms it fires. **IntersectionObserver is a perfectly valid
+     choice for this page.** Use it in React if it suits the stack.
+
+     The rect test is kept because it costs nothing extra here: the page
+     already runs a passive rAF scroll pass for the progress rule, so the
+     reveal rides along with no second mechanism and no callback dependency.
+     It measures the STABLE full-width container, never the scaled child.
+
+     Either way, nothing here gates content. These classes only decide whether
+     a rule animates into place or is simply already drawn.
+     --------------------------------------------------------------- */
+  var revealAll = function(){};
+  safe(function(){
+    var targets = [].slice.call(document.querySelectorAll('[data-reveal], [data-split]'));
+
+    function markDone(el){
+      el.classList.add('is-in');
+      var line = el.querySelector('.rule-draw');
+      if(line) line.classList.add('is-in');
+      var fill = el.querySelector('.split-fill');
+      if(fill) fill.classList.add('is-in');
+    }
+    revealAll = function(){ targets.forEach(markDone); targets = []; };
+
+    if(!motion){ revealAll(); return; }
+
+    window.__dcsReveal = function(){
+      if(!targets.length) return;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      targets = targets.filter(function(el){
+        var r = el.getBoundingClientRect();
+        /* container is in play once its top passes 92% of the viewport */
+        if(r.top < vh * 0.92 && r.bottom > 0){ markDone(el); return false; }
+        return true;
+      });
+    };
+    window.__dcsReveal();
+  });
+
+  /* ---------------------------------------------------------------
+     M1 — Read-progress rule. Passive scroll listener, writes inside rAF,
+     transform only. Skipped entirely under reduced motion.
+     --------------------------------------------------------------- */
+  safe(function(){
+    var prog = document.getElementById('prog');
+    if(prog && !motion) prog.style.transform = 'scaleX(0)';
+    var ticking = false;
+    function update(){
+      ticking = false;
+      try{ if(window.__dcsReveal) window.__dcsReveal(); }catch(e){ revealAll(); }
+      if(!prog || !motion) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      prog.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    function schedule(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', schedule, { passive:true });
+    window.addEventListener('resize', schedule, { passive:true });
+    /* `load` fires after images settle and the layout stops moving, which is
+       when above-the-fold rect maths is finally trustworthy. */
+    window.addEventListener('load', schedule);
+    update();
+  });
+
+  /* ---------------------------------------------------------------
+     Mobile navigation. Real open/close, focus trap entry/exit, Escape,
+     body scroll lock.
+     --------------------------------------------------------------- */
+  safe(function(){
+    var burger = document.getElementById('burger');
+    var panel  = document.getElementById('mnav');
+    var closeB = document.getElementById('mnavClose');
+    if(!burger || !panel) return;
+    var lastY = 0;
+
+    function setOpen(open){
+      panel.setAttribute('data-open', open ? 'true' : 'false');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if(open){
+        lastY = window.scrollY;
+        document.body.style.overflow = 'hidden';
+        (panel.querySelector('a') || closeB).focus({ preventScroll:true });
+      }else{
+        document.body.style.overflow = '';
+        burger.focus({ preventScroll:true });
+      }
+    }
+    burger.addEventListener('click', function(){
+      setOpen(panel.getAttribute('data-open') !== 'true');
+    });
+    if(closeB) closeB.addEventListener('click', function(){ setOpen(false); });
+    panel.addEventListener('click', function(e){
+      if(e.target.tagName === 'A') setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && panel.getAttribute('data-open') === 'true') setOpen(false);
+    });
+    var mq = window.matchMedia('(min-width: 1000px)');
+    (mq.addEventListener ? mq.addEventListener.bind(mq,'change') : mq.addListener.bind(mq))(function(){
+      if(mq.matches && panel.getAttribute('data-open') === 'true') setOpen(false);
+    });
+  });
+
+  /* ---------------------------------------------------------------
+     M6 — THE SECTOR REGISTER. Travelling indicator + directional panels.
+     --------------------------------------------------------------- */
+  safe(function(){
+    var strip  = document.getElementById('regStrip');
+    var panels = document.getElementById('regPanels');
+    var ind    = document.getElementById('regInd');
+    if(!strip || !panels || !ind) return;
+
+    var tabs = Array.prototype.slice.call(strip.querySelectorAll('.reg-tab'));
+    var pans = Array.prototype.slice.call(panels.querySelectorAll('.reg-panel'));
+    if(!tabs.length || tabs.length !== pans.length) return;
+
+    var current = 0, timer = null, stopped = false, onScreen = false, paused = false;
+    var INTERVAL = 5200;
+
+    function placeIndicator(i){
+      var t = tabs[i];
+      /* base width is 100px; scaleX carries the real width so this stays a
+         compositor-only transform rather than a layout-driving width change */
+      ind.style.transform = 'translateX(' + t.offsetLeft + 'px) scaleX(' + (t.offsetWidth / 100) + ')';
+    }
+
+    function select(i, viaUser){
+      if(i === current && viaUser) return;
+      var dir = i > current ? 'r' : 'l';
+      tabs.forEach(function(t, n){
+        var on = n === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      pans.forEach(function(p, n){
+        p.classList.remove('is-active','arrive-r','arrive-l');
+        if(n === i){
+          p.classList.add('is-active');
+          if(motion) p.classList.add('arrive-' + dir);
+        }
+      });
+      current = i;
+      placeIndicator(i);
+      if(viaUser){
+        stop();
+        /* keep the chosen tab in view on a narrow, scrollable strip */
+        if(strip.scrollWidth > strip.clientWidth){
+          var t = tabs[i];
+          strip.scrollTo({ left: t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2, behavior: motion ? 'smooth' : 'auto' });
+        }
+      }
+    }
+
+    function tick(){ select((current + 1) % tabs.length, false); }
+    function start(){
+      if(stopped || !motion || !onScreen || paused || timer) return;
+      timer = window.setInterval(tick, INTERVAL);
+    }
+    function halt(){ if(timer){ window.clearInterval(timer); timer = null; } }
+    function stop(){ stopped = true; halt(); }
+
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ select(i, true); });
+      t.addEventListener('keydown', function(e){
+        var n = null;
+        if(e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        else if(e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        else if(e.key === 'Home') n = 0;
+        else if(e.key === 'End') n = tabs.length - 1;
+        if(n === null) return;
+        e.preventDefault();
+        select(n, true);
+        tabs[n].focus();
+      });
+    });
+
+    /* Auto-advance yields to the visitor at every opportunity. */
+    strip.addEventListener('mouseenter', function(){ paused = true; halt(); });
+    strip.addEventListener('mouseleave', function(){ paused = false; start(); });
+    strip.addEventListener('focusin',   function(){ paused = true; halt(); });
+    strip.addEventListener('focusout',  function(){ paused = false; start(); });
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ halt(); } else { start(); }
+    });
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ onScreen = en.isIntersecting; if(onScreen){ start(); } else { halt(); } });
+      }, { threshold: 0.35 }).observe(strip.parentNode);
+    }
+
+    /* Scroll affordance — only claim the strip scrolls when it actually does. */
+    var wrap = document.getElementById('regStripWrap');
+    function affordance(){
+      if(!wrap) return;
+      var scrollable = strip.scrollWidth > strip.clientWidth + 2;
+      wrap.setAttribute('data-scrollable', scrollable ? 'true' : 'false');
+      wrap.setAttribute('data-at-end', (strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2) ? 'true' : 'false');
+    }
+    strip.addEventListener('scroll', affordance, { passive:true });
+
+    window.addEventListener('resize', function(){ placeIndicator(current); affordance(); }, { passive:true });
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ placeIndicator(current); affordance(); }); }
+    affordance();
+
+    /* Initial placement without a transition, so the indicator does not fly in
+       from the left edge on first paint. */
+    var prev = ind.style.transition;
+    ind.style.transition = 'none';
+    placeIndicator(0);
+    requestAnimationFrame(function(){ ind.style.transition = prev; });
+  });
+
+  /* ---------------------------------------------------------------
+     M9 — Payment toggle. Class swapping only: no number is ever computed.
+     --------------------------------------------------------------- */
+  safe(function(){
+    var group = document.getElementById('payToggle');
+    var ind   = document.getElementById('payInd');
+    if(!group || !ind) return;
+    var btns = Array.prototype.slice.call(group.querySelectorAll('.pay-btn'));
+
+    function place(btn){
+      ind.style.transform = 'translateX(' + (btn.offsetLeft - 4) + 'px) scaleX(' + (btn.offsetWidth / 100) + ')';
+    }
+    function choose(mode, btn){
+      btns.forEach(function(b){ b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      document.querySelectorAll('.price').forEach(function(p){
+        p.classList.toggle('is-active', p.getAttribute('data-price') === mode);
+      });
+      place(btn);
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){ choose(b.getAttribute('data-pay'), b); });
+    });
+    var prev = ind.style.transition;
+    ind.style.transition = 'none';
+    place(btns[0]);
+    requestAnimationFrame(function(){ ind.style.transition = prev; });
+    window.addEventListener('resize', function(){
+      var on = group.querySelector('.pay-btn[aria-pressed="true"]');
+      if(on) place(on);
+    }, { passive:true });
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){
+        var on = group.querySelector('.pay-btn[aria-pressed="true"]');
+        if(on){ var t = ind.style.transition; ind.style.transition='none'; place(on); requestAnimationFrame(function(){ ind.style.transition=t; }); }
+      });
+    }
+  });
+
+  /* ---------------------------------------------------------------
+     Runtime reduced-motion change. If the visitor turns the preference on
+     mid-session, unwind every start state immediately.
+     --------------------------------------------------------------- */
+  safe(function(){
+    if(!window.matchMedia) return;
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var handler = function(){
+      if(mq.matches){
+        doc.classList.remove('js-motion');
+        motion = false;
+        revealAll();
+        document.querySelectorAll('.rule-draw, .split-fill').forEach(function(el){ el.classList.add('is-in'); });
+        var h1 = document.getElementById('heroH1'); if(h1) h1.classList.add('is-in');
+        var hr = document.getElementById('heroRule'); if(hr) hr.classList.add('is-in');
+      }
+    };
+    (mq.addEventListener ? mq.addEventListener.bind(mq,'change') : mq.addListener.bind(mq))(handler);
+  });
+})();
+</script>
+</body>
+</html>

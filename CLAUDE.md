@@ -104,6 +104,8 @@ The theme system exists so sites can be re-branded without touching component co
 
 - Never use Tailwind's `theme()` function in plain CSS files — it causes CSS parser panics. Use CSS custom properties: `var(--color-brand-primary)` not `theme('colors.brand.primary')`.
 - Never nest a `fixed inset-0` mobile-nav dialog inside a header (or any ancestor) that has `backdrop-blur-*`/`backdrop-filter`. Per spec, `backdrop-filter` (like `transform`) makes that ancestor the containing block for `position: fixed` descendants, so the "fullscreen" overlay gets confined to the header's own small box instead of the viewport, spilling its content over the page beneath it. Render the dialog as a sibling of the blurred header, or portal it to `document.body` with `createPortal` — see `sites/npracing-v1/components/site-nav-mobile.tsx`.
+- The `transform` half of that rule bites independently, and catches floating navs in particular: a centred floating nav built with `transform: translateX(-50%)` establishes a containing block even with no `backdrop-filter` present, so a nav that carries **both** has two separate triggers and fixing only the blur leaves the overlay trapped. Centre with `left`/`right`/`margin-inline` instead of a transform, and verify by measuring the opened panel — a trapped overlay reports the nav's own box (e.g. 277×58) where a correct one reports the viewport (390×844).
+- Never put `font-variant-numeric: tabular-nums` on a figure containing a thousands comma. Tabular figures give the comma a full digit advance, so **`£1,995` renders as `£1 , 995`** — invisible in markup, obvious on screen, and it corrupts a _price_. It inherits, so an ancestor carrying the property breaks a figure that looks clean itself: resolve `font-variant-numeric` up the ancestor chain when checking, and scope `tnum` to comma-free numerals rather than setting it on `body`. Confirmed in Schibsted Grotesk and Newsreader; assume it applies to any face with tabular figures.
 
 ### Tailwind Content Globs
 
@@ -238,6 +240,7 @@ Default to a single feature branch off `develop` — worktrees are only for 2+ c
 | [End-to-End Workflow](docs/guides/end-to-end-workflow.md)         | Full site creation workflow from intake to deploy |
 | [Component Versioning](docs/guides/component-versioning.md)       | Versioning shared components in core-components   |
 | [Debugging](docs/guides/debugging.md)                             | Diagnosing UI, runtime, build, and CSP issues     |
+| [Prototype Hosting](docs/guides/prototype-hosting.md)             | Prototype assets to R2, prototype HTML to Vercel  |
 | [Project History](docs/project-history.md)                        | Platform changelog and development phases         |
 
 ---
@@ -257,6 +260,15 @@ The `/output/` folder stores session context and working notes for complex tasks
 Use sessions for: research tasks, feature implementation notes, bug investigations, architecture decisions.
 
 **Naming:** `YYYY-MM/YYYY-MM-DD_topic-description`
+
+**Prototype assets never go in git.** Images and video under
+`output/sessions/**/prototype/assets/` are uploaded to R2 and the HTML rewritten to absolute
+URLs; the prototypes then deploy to Vercel so they are reviewable from a URL rather than a
+`file://` path. Two commands, in order — `tools/upload-prototype-assets.ts` then
+`tools/publish-prototype.ts`. `output/.gitignore`'s `!sessions/**` line had been overriding the
+root `.gitignore`'s image rules, which let 117MB of unreferenced PNGs become stageable in August
+2026; an explicit binary deny-list now sits below it. See
+[docs/guides/prototype-hosting.md](docs/guides/prototype-hosting.md).
 
 See [output/README.md](output/README.md) for details.
 

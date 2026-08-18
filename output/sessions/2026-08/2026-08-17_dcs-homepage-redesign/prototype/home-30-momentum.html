@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Websites for small businesses, built and looked after</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Agency-quality design, one person who knows your business, and you barely lift a finger. From £995 + £15/mo, or £45/mo with nothing upfront.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   DCS — Direction 30 "MOMENTUM"  ·  Round 3, motion-maximal
+   --------------------------------------------------------------------------
+   COLOUR STRATEGY: the page at rest is two-tone — ink and bone. Every
+   saturated colour in the system (vermilion, acid, cobalt) is attached to
+   something that MOVES: marquee bands, hover fills, the velocity bar, the
+   character-resolve, the section cut rules. Colour arrives through movement.
+
+   MOTION SPINE: a single rAF "velocity bus" writes --vel (0..1) and --dir
+   (-1|1) onto :root while the user is scrolling, and stops entirely 600ms
+   after scrolling ends. Everything reactive reads those two variables and
+   moves on transform/opacity only. Nothing in this file animates a layout
+   property. Nothing in this file is a counter — every number is authored.
+   ========================================================================== */
+
+/* ---------- TOKENS ---------- */
+:root{
+  /* grounds — still */
+  --ink:#0B0B0C;
+  --ink-2:#141416;
+  --bone:#F4F1EA;
+  --bone-2:#E8E3D8;
+
+  /* colour — moving */
+  --vermilion:#FF3B14;
+  --acid:#D8FF3E;
+  --cobalt:#1B34E8;
+
+  /* text pairs (all AA verified against their ground) */
+  --on-ink:#EDEAE3;
+  --on-ink-dim:#9C9890;
+  --on-bone:#141416;
+  --on-bone-dim:#57534B;
+
+  /* motion bus — written by JS, safe defaults for no-JS */
+  --vel:0;
+  --dir:1;
+
+  /* type */
+  --sans:'Archivo','Archivo Fallback','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --fs-hero:clamp(2.9rem,11.1vw,10rem);       /* 1440 → 159.8px */
+  --fs-mq:clamp(2.6rem,8.6vw,7.75rem);        /* 1440 → 123.8px */
+  --fs-display:clamp(2.25rem,7.4vw,6.6rem);   /* 1440 → 106.6px */
+  --fs-h2:clamp(1.85rem,4.6vw,4.1rem);
+  --fs-h3:clamp(1.25rem,2vw,1.75rem);
+  --fs-body:clamp(1rem,0.955rem + 0.19vw,1.125rem);
+  --fs-lede:clamp(1.125rem,1.02rem + 0.44vw,1.5rem);
+  --fs-micro:clamp(0.68rem,0.66rem + 0.08vw,0.76rem);
+
+  /* rhythm */
+  --gut:clamp(1.25rem,4.4vw,5.5rem);
+  --sec:clamp(4.5rem,10vw,10rem);
+  --maxw:1560px;
+
+  /* easings */
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-over:cubic-bezier(.22,1.4,.36,1);   /* overshoot + recover */
+  --ease-cut:cubic-bezier(.8,0,.2,1);        /* film cut */
+}
+
+/* The hero lines are set as unwrappable blocks behind a clipping line mask, so
+   the type must be sized to FIT the narrowest viewport rather than be trimmed
+   by that mask. Measured: this face at wdth 106 / wght 640 runs about 6.8em
+   wide for "THE WEBSITE", so at 390 (350px of usable width) the ceiling is
+   roughly 51px, and the shared desktop ramp was overrunning it. */
+@media (max-width:680px){
+  :root{--fs-hero:clamp(1.8rem,9.05vw,2.9rem)}
+}
+
+/* Archivo fallback metrics — keeps layout stable if the Google CDN fails */
+@font-face{
+  font-family:'Archivo Fallback';
+  src:local('Helvetica Neue'),local('Arial');
+  size-adjust:97%;
+  ascent-override:92%;
+  descent-override:24%;
+  line-gap-override:0%;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--on-ink);
+  font-family:var(--sans);
+  font-size:var(--fs-body);
+  line-height:1.62;
+  font-variation-settings:'wdth' 100,'wght' 400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  font-feature-settings:'tnum' 1,'lnum' 1;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* ---------- focus ---------- */
+:focus-visible{
+  outline:3px solid var(--acid);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.on-light :focus-visible,.pnl-bone :focus-visible{outline-color:var(--cobalt)}
+
+.vh{
+  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+.skip{
+  position:absolute;left:var(--gut);top:-100px;z-index:400;
+  background:var(--acid);color:var(--ink);padding:.85rem 1.4rem;
+  font-weight:600;letter-spacing:.02em;border-radius:999px;
+  transition:transform .2s var(--ease-out);
+}
+.skip:focus{top:1rem}
+
+/* ---------- shared type ---------- */
+.dsp{
+  font-size:var(--fs-display);
+  line-height:.88;
+  letter-spacing:-.035em;
+  font-variation-settings:'wdth' 104,'wght' 620;
+  text-wrap:balance;
+}
+.h2{
+  font-size:var(--fs-h2);
+  line-height:.94;
+  letter-spacing:-.032em;
+  font-variation-settings:'wdth' 104,'wght' 620;
+}
+.lede{font-size:var(--fs-lede);line-height:1.42;letter-spacing:-.012em;max-width:36ch}
+.micro{
+  font-size:var(--fs-micro);
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  font-variation-settings:'wdth' 96,'wght' 560;
+  line-height:1.3;
+}
+.dim{color:var(--on-ink-dim)}
+.pnl-bone .dim{color:var(--on-bone-dim)}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+
+/* ==========================================================================
+   REVEAL SYSTEM
+   Effect: section reveal · Trigger: IntersectionObserver (once, 12% visible)
+   Duration: 720ms · Easing: cubic-bezier(.22,1.4,.36,1) — overshoot + recover
+   Hidden state is armed ONLY when :root gets .mo, which JS adds after it has
+   confirmed IntersectionObserver + transform support. No .mo → nothing hides.
+   ========================================================================== */
+.mo .rv{opacity:0;transform:translate3d(0,34px,0)}
+.mo .rv-l{opacity:0;transform:translate3d(-40px,0,0)}
+.mo .rv-s{opacity:0;transform:translate3d(0,20px,0) scale(.965)}
+.mo .rv,.mo .rv-l,.mo .rv-s{
+  transition:opacity .62s var(--ease-out),transform .72s var(--ease-over);
+  transition-delay:var(--d,0ms);
+  will-change:transform,opacity;
+}
+.mo .is-in{opacity:1!important;transform:none!important;will-change:auto}
+/* BACKSTOP: if the observer never fires, JS removes .mo and every hidden
+   state above evaporates. This rule is the belt to that braces. */
+.mo-off .rv,.mo-off .rv-l,.mo-off .rv-s{opacity:1!important;transform:none!important}
+
+/* per-word stagger (used on every display heading) */
+.wsplit{display:inline}
+.wd{display:inline-block}
+.mo .wsplit .wd{opacity:0;transform:translate3d(0,.6em,0)}
+.mo .wsplit .wd{transition:opacity .5s var(--ease-out) var(--wd,0ms),transform .68s var(--ease-over) var(--wd,0ms)}
+.mo .is-in .wsplit .wd,.mo .wsplit.is-in .wd{opacity:1;transform:none}
+
+/* ==========================================================================
+   VELOCITY-REACTIVE TYPE
+   Effect: word lag/surge · Trigger: scroll velocity (--vel 0..1, --dir ±1)
+   Duration: continuous while scrolling · Easing: asymmetric lerp in JS
+   (fast attack 0.28, slow release 0.08) so type surges then settles.
+   Each word carries its own --lag so the line arrives out of register and
+   resolves back to flush when the page stops moving.
+   ========================================================================== */
+.vw{display:inline-block;transform:translate3d(0,calc(var(--vel) * var(--dir) * var(--lag,0px) * -1),0)}
+
+/* ==========================================================================
+   HEADER
+   Effect: tone inversion · Trigger: IntersectionObserver on [data-tone]
+   Duration: 260ms · Easing: cubic-bezier(.8,0,.2,1) — a cut, not a fade
+   ========================================================================== */
+.hdr{
+  position:fixed;inset:0 0 auto 0;z-index:120;
+  background:var(--ink);color:var(--on-ink);
+  border-bottom:1px solid rgba(237,234,227,.14);
+  transition:background .26s var(--ease-cut),color .26s var(--ease-cut),border-color .26s var(--ease-cut);
+}
+.hdr.on-light{background:var(--bone);color:var(--on-bone);border-bottom-color:rgba(20,20,22,.14)}
+.hdr-in{
+  max-width:var(--maxw);margin-inline:auto;padding:0 var(--gut);
+  min-height:70px;display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.6rem);
+}
+.brand{display:flex;align-items:baseline;gap:.6rem;text-decoration:none;flex:0 0 auto;padding:.4rem 0}
+.brand-mk{
+  font-size:1.5rem;line-height:1;letter-spacing:-.05em;
+  font-variation-settings:'wdth' 112,'wght' 760;
+}
+.brand-sub{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;opacity:.62;font-variation-settings:'wght' 560}
+@media (max-width:1100px){.brand-sub{display:none}}
+
+.nav{display:flex;align-items:center;gap:clamp(.5rem,1.5vw,1.7rem);margin-left:auto}
+@media (max-width:960px){.nav{display:none}}
+.nav a{
+  position:relative;text-decoration:none;padding:.75rem .1rem;
+  font-size:.9rem;letter-spacing:-.005em;font-variation-settings:'wght' 500;
+  overflow:hidden;display:inline-block;
+}
+/* Effect: nav underline wipe · Trigger: hover/focus · 340ms · ease-out */
+.nav a::after{
+  content:'';position:absolute;left:0;bottom:.45rem;width:100%;height:2px;
+  background:var(--vermilion);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .34s var(--ease-out);
+}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+
+.hdr-cta{display:flex;align-items:center;gap:.55rem;flex:0 0 auto}
+.tel{
+  display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;
+  padding:.62rem .95rem;border:1px solid currentColor;border-radius:999px;
+  font-size:.87rem;font-variation-settings:'wght' 560;letter-spacing:-.01em;
+  min-height:44px;white-space:nowrap;
+  transition:transform .3s var(--ease-over),background-color .22s linear,color .22s linear;
+}
+.tel:hover,.tel:focus-visible{transform:translate3d(0,-2px,0);background:var(--acid);color:var(--ink);border-color:var(--acid)}
+.tel:active{transform:translate3d(0,0,0) scale(.97)}
+.tel-dot{width:7px;height:7px;background:var(--acid);border-radius:50%;flex:0 0 auto}
+.on-light .tel-dot{background:var(--vermilion)}
+.tel:hover .tel-dot,.tel:focus-visible .tel-dot{background:var(--ink)}
+/* Below 600 the number no longer fits in the bar, and a bare dot is not a
+   recognisable "call" affordance. The header tel is dropped entirely because
+   the fixed bottom action bar carries the full number in the first viewport. */
+@media (max-width:600px){.hdr-cta .tel{display:none}}
+
+/* Effect: directional hover fill · Trigger: hover/focus · 420ms · ease-out
+   The fill is a pseudo-element scaled on X from the origin the cursor set. */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  padding:.95rem 1.6rem;min-height:48px;border-radius:999px;
+  background:var(--vermilion);color:var(--ink);text-decoration:none;overflow:hidden;
+  font-size:.95rem;font-variation-settings:'wght' 620;letter-spacing:-.012em;
+  transition:transform .34s var(--ease-over);
+  isolation:isolate;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;background:var(--acid);z-index:-1;
+  transform:scaleX(0);transform-origin:var(--ox,0) 50%;
+  transition:transform .42s var(--ease-out);
+}
+.btn span{position:relative;transition:color .28s linear}
+.btn:hover,.btn:focus-visible{transform:translate3d(0,-3px,0)}
+.btn:hover::before,.btn:focus-visible::before{transform:scaleX(1)}
+.btn:hover span,.btn:focus-visible span{color:var(--ink)}
+.btn:active{transform:translate3d(0,0,0) scale(.975)}
+.btn-sm{padding:.72rem 1.15rem;min-height:44px;font-size:.86rem}
+.btn-ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn-ghost::before{background:var(--acid)}
+.btn-ghost:hover span,.btn-ghost:focus-visible span{color:var(--ink)}
+
+/* ---------- burger + mobile nav (sibling of header — never nested in a
+     blurred/transformed ancestor, which would trap position:fixed) ---------- */
+.burger{
+  display:none;width:48px;height:48px;align-items:center;justify-content:center;
+  border:1px solid currentColor;border-radius:999px;flex:0 0 auto;
+}
+@media (max-width:960px){.burger{display:inline-flex}}
+.burger i{display:block;width:19px;height:1.7px;background:currentColor;position:relative;transition:transform .3s var(--ease-cut)}
+.burger i::before,.burger i::after{content:'';position:absolute;left:0;width:19px;height:1.7px;background:currentColor;transition:transform .3s var(--ease-cut)}
+.burger i::before{transform:translateY(-6px)}
+.burger i::after{transform:translateY(6px)}
+.burger[aria-expanded="true"] i{transform:rotate(45deg)}
+.burger[aria-expanded="true"] i::before{transform:translateY(0) rotate(90deg)}
+.burger[aria-expanded="true"] i::after{transform:translateY(0) scaleX(0)}
+
+.mnav{
+  position:fixed;inset:0;z-index:200;background:var(--ink);color:var(--on-ink);
+  padding:calc(70px + 1.5rem) var(--gut) 2rem;
+  display:flex;flex-direction:column;
+  transform:translate3d(0,-100%,0);
+  transition:transform .46s var(--ease-cut),visibility 0s linear .46s;
+  visibility:hidden;overflow-y:auto;
+}
+.mnav[data-open="true"]{transform:translate3d(0,0,0);visibility:visible;transition:transform .5s var(--ease-cut),visibility 0s}
+.mnav-close{position:absolute;top:11px;right:var(--gut);width:48px;height:48px;border:1px solid currentColor;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.mnav ul{display:flex;flex-direction:column;gap:.1rem;margin-bottom:2rem}
+.mnav ul a{
+  display:block;text-decoration:none;padding:.5rem 0;
+  font-size:clamp(2rem,10vw,3rem);line-height:1.06;letter-spacing:-.04em;
+  font-variation-settings:'wdth' 104,'wght' 620;
+  transform:translate3d(0,26px,0);opacity:0;
+  transition:transform .5s var(--ease-over),opacity .4s linear;
+}
+.mnav[data-open="true"] ul a{transform:none;opacity:1;transition-delay:calc(var(--i,0) * 55ms)}
+.mnav ul a:hover,.mnav ul a:focus-visible{color:var(--acid)}
+.mnav-foot{margin-top:auto;display:grid;gap:.9rem;padding-top:1.6rem;border-top:1px solid rgba(237,234,227,.18)}
+.mnav-foot a{text-decoration:none;font-size:1.05rem}
+
+/* ==========================================================================
+   SECTIONS + HARD CUTS
+   No gradient ever sits between two sections. Every boundary is a straight
+   tone change with a 3px colour rule that wipes in on reveal.
+   Effect: cut rule wipe · Trigger: IO · 620ms · ease-out
+   ========================================================================== */
+main{padding-top:70px}
+.sec{position:relative;padding-block:var(--sec)}
+/* WALLS ARE ALWAYS NEUTRAL. Every ground on this page is ink, ink-2 or bone.
+   No section is ever painted vermilion, acid or cobalt — those three belong to
+   the furniture: marquees, hover fills, velocity-reactive numerals, cut rules,
+   the character-resolve. Colour is what moves, never what it moves across. */
+.pnl-ink{background:var(--ink);color:var(--on-ink)}
+.pnl-ink2{background:var(--ink-2);color:var(--on-ink)}
+.pnl-bone{background:var(--bone);color:var(--on-bone)}
+/* Default state is DRAWN. The un-drawn state is armed only under .mo, i.e.
+   only once JS has confirmed motion support — so with JS off or broken every
+   cut rule is simply present, rather than sitting invisibly at scaleX(0). */
+.cut{position:absolute;top:0;left:0;right:0;height:3px;background:var(--vermilion);transform-origin:0 50%}
+.mo .cut{transform:scaleX(0);transition:transform .62s var(--ease-out)}
+.mo .cut.is-in,.mo-off .cut{transform:scaleX(1)}
+.cut-acid{background:var(--acid)}
+.cut-cobalt{background:var(--cobalt)}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{padding-block:clamp(3rem,7vw,6rem) clamp(2rem,4vw,3.5rem);position:relative;overflow:hidden}
+.hero-kick{display:flex;flex-wrap:wrap;gap:.55rem 1.4rem;align-items:center;margin-bottom:clamp(1.6rem,3.6vw,3rem)}
+.hero-kick .micro{color:var(--on-ink-dim)}
+.kick-sq{width:9px;height:9px;background:var(--vermilion);flex:0 0 auto}
+
+/* Effect: per-character assembly · Trigger: page load (rAF, forced reflow so
+   the transition always plays) · Duration: 900ms per glyph, 22ms stagger
+   Easing: cubic-bezier(.22,1.4,.36,1). Glyphs arrive from below at staggered
+   speeds AND resolve colour acid → bone, so the line develops rather than fades.
+   FAILURE MODE: the hidden state (.split) and the play state (.go) are added
+   in the same synchronous block inside try/finally — the headline can never
+   be left invisible. Without JS there is no .split at all. */
+.h1{
+  font-size:var(--fs-hero);
+  line-height:.85;
+  letter-spacing:-.045em;
+  font-variation-settings:'wdth' 106,'wght' 640;
+  text-transform:uppercase;
+  margin-bottom:clamp(1.6rem,3.4vw,2.6rem);
+  max-width:15ch;
+}
+.h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.h1 .ch{display:inline-block;white-space:pre}
+.h1.split .ch{opacity:0;transform:translate3d(0,.9em,0);color:var(--acid)}
+.h1.split.go .ch{
+  opacity:1;transform:none;color:inherit;
+  transition:transform .9s var(--ease-over) var(--cd,0ms),opacity .5s var(--ease-out) var(--cd,0ms),color .7s linear var(--cd,0ms);
+}
+.h1 em{font-style:normal;color:var(--vermilion)}
+.h1.split em .ch{color:var(--acid)}
+.h1.split.go em .ch{color:var(--vermilion)}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  gap:clamp(1.6rem,3.5vw,4rem);
+  align-items:end;
+}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.5rem}
+.hero-aside{border-left:1px solid rgba(237,234,227,.2);padding-left:clamp(1rem,2vw,2rem)}
+/* The persistent floating CTA lives in the bottom-right corner, which is
+   exactly where an `align-items:end` aside puts its last line. Reserve that
+   corner so the CTA can never sit on top of a price. */
+@media (min-width:701px){.hero-aside{padding-bottom:5.5rem}}
+@media (max-width:900px){.hero-aside{border-left:0;border-top:1px solid rgba(237,234,227,.2);padding-left:0;padding-top:1.4rem}}
+
+/* Price is never gated: it sits in the first viewport, in flat markup. */
+.price-flash{
+  display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .7rem;
+  padding:.85rem 1.2rem;border:1px solid rgba(237,234,227,.24);border-radius:14px;
+  margin-bottom:1.3rem;
+}
+.price-flash b{font-variation-settings:'wght' 720;letter-spacing:-.02em;font-size:1.15rem}
+.price-flash .or{color:var(--acid);font-variation-settings:'wght' 620}
+
+.creds{display:flex;flex-wrap:wrap;gap:.4rem .6rem;margin-top:1.2rem}
+.cred{
+  border:1px solid rgba(237,234,227,.26);border-radius:999px;
+  padding:.4rem .85rem;font-size:.78rem;letter-spacing:.01em;
+  font-variation-settings:'wght' 520;
+}
+.pnl-bone .cred{border-color:rgba(20,20,22,.22)}
+
+/* Effect: velocity bar · Trigger: scroll velocity · continuous
+   A physical readout of --vel. It is the page telling you it heard you. */
+.velbar{position:relative;height:3px;background:rgba(237,234,227,.16);margin-top:clamp(2rem,4vw,3.2rem);overflow:hidden}
+.velbar i{
+  position:absolute;inset:0;background:var(--acid);transform-origin:0 50%;
+  transform:scaleX(calc(.04 + var(--vel) * .96));
+}
+
+/* ==========================================================================
+   MARQUEES
+   Effect: continuous marquee · Trigger: always (pure CSS keyframes, so it
+   runs with JS off and stops dead under prefers-reduced-motion with no JS)
+   Duration: 26s / 34s / 52s linear infinite
+   Effect: velocity surge · Trigger: scroll velocity · continuous
+   The keyframe loop is the base; --vel adds a compositor-only offset on the
+   parent and --dir leans it with the scroll direction. Speed is never
+   rewritten mid-animation (that jumps); the surge is layered on top.
+   ========================================================================== */
+.mq{overflow:hidden;position:relative;width:100%}
+.mq-surge{transform:translate3d(calc(var(--vel) * var(--dir) * var(--surge,70px) * -1),0,0)}
+.mq-track{display:flex;width:max-content;animation:mq-run var(--mqd,30s) linear infinite;will-change:transform}
+.mq-rev .mq-track{animation-direction:reverse}
+@keyframes mq-run{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.mq-seg{display:flex;align-items:center;flex:0 0 auto}
+
+.mq-hero{border-block:1px solid rgba(237,234,227,.18);padding-block:.7rem}
+.mq-hero .mq-item{
+  display:inline-flex;align-items:center;gap:1.1rem;padding-inline:1.1rem;
+  font-size:.86rem;letter-spacing:.02em;font-variation-settings:'wght' 500;
+  white-space:nowrap;color:var(--on-ink-dim);
+}
+.mq-hero .mq-item b{color:var(--on-ink);font-variation-settings:'wght' 620}
+
+.band{background:var(--vermilion);color:#150301;padding-block:clamp(.5rem,1vw,.9rem);position:relative}
+.band-acid{background:var(--acid);color:var(--ink)}
+.band-cobalt{background:var(--cobalt);color:#F2F3FF}
+.band .mq-item{
+  display:inline-flex;align-items:center;gap:clamp(1rem,2.6vw,2.6rem);
+  padding-right:clamp(1rem,2.6vw,2.6rem);white-space:nowrap;
+  font-size:var(--fs-mq);line-height:1.06;letter-spacing:-.045em;
+  font-variation-settings:'wdth' 108,'wght' 680;text-transform:uppercase;
+}
+.mq-dia{width:.28em;height:.28em;background:currentColor;transform:rotate(45deg);flex:0 0 auto}
+
+/* ==========================================================================
+   PROMISE
+   ========================================================================== */
+.promise-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:clamp(1.8rem,4vw,5rem);align-items:start}
+@media (max-width:900px){.promise-grid{grid-template-columns:1fr}}
+.promise-list{display:grid;gap:1.35rem;margin-top:clamp(1.5rem,3vw,2.4rem)}
+.promise-list li{display:grid;grid-template-columns:2.7rem 1fr;gap:.9rem;align-items:start}
+.promise-list .n{
+  font-size:.8rem;letter-spacing:.06em;padding-top:.35rem;color:var(--vermilion);
+  font-variation-settings:'wght' 640;
+}
+.promise-list h3{font-size:var(--fs-h3);line-height:1.2;letter-spacing:-.024em;font-variation-settings:'wght' 640;margin-bottom:.25rem}
+.promise-list p{max-width:46ch;color:var(--on-bone-dim)}
+
+/* ==========================================================================
+   SERVICES — divided rows, not three equal cards
+   Effect: row hover sweep · Trigger: hover/focus-within · 520ms · ease-out
+   The vermilion plane wipes across from the left and the row nudges right.
+   ========================================================================== */
+.svc{border-top:1px solid rgba(237,234,227,.2)}
+.svc-row{
+  position:relative;display:grid;
+  grid-template-columns:5.5rem minmax(0,1fr) minmax(0,1.15fr) 2.5rem;
+  gap:clamp(.6rem,2vw,2rem);align-items:baseline;
+  padding-block:clamp(1.2rem,2.4vw,2rem);
+  border-bottom:1px solid rgba(237,234,227,.2);
+  isolation:isolate;
+}
+@media (max-width:820px){
+  .svc-row{grid-template-columns:3.2rem minmax(0,1fr);grid-template-areas:'n t' '. d';row-gap:.35rem}
+  .svc-row .s-n{grid-area:n}.svc-row .s-t{grid-area:t}.svc-row .s-d{grid-area:d}.svc-row .s-a{display:none}
+}
+.svc-row::before{
+  content:'';position:absolute;inset:0 -1.2rem;z-index:-1;background:var(--vermilion);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .52s var(--ease-out);
+}
+.svc-row:hover::before,.svc-row:focus-within::before{transform:scaleX(1)}
+.svc-row>*{transition:transform .45s var(--ease-over),color .3s linear}
+.svc-row:hover>*,.svc-row:focus-within>*{transform:translate3d(12px,0,0)}
+.svc-row:hover,.svc-row:focus-within{color:#fff}
+.svc-row:hover .s-n,.svc-row:focus-within .s-n,.svc-row:hover .s-d,.svc-row:focus-within .s-d{color:rgba(255,255,255,.86)}
+.s-n{font-size:.82rem;letter-spacing:.08em;color:var(--on-ink-dim);font-variation-settings:'wght' 560}
+.s-t{font-size:clamp(1.35rem,3vw,2.5rem);line-height:1.02;letter-spacing:-.032em;font-variation-settings:'wdth' 104,'wght' 620}
+.s-d{color:var(--on-ink-dim);max-width:44ch}
+.s-a{justify-self:end;font-size:1.4rem;line-height:1;color:var(--on-ink-dim)}
+
+/* ==========================================================================
+   SECTOR BAND — the only still-colour on the page, moving slowly.
+   Type marquees run fast; the photography band runs slow (72s). The tempo
+   difference is the composition.
+   ========================================================================== */
+.sect-band{padding-block:clamp(2rem,4vw,3.2rem) 0}
+.sect-band .mq-track{--mqd:72s}
+.sect-fig{width:clamp(230px,30vw,420px);margin-right:clamp(.6rem,1.4vw,1.2rem);flex:0 0 auto}
+.sect-fig img{width:100%;height:auto;aspect-ratio:1600/1062;object-fit:cover;border-radius:2px;filter:saturate(1.04) contrast(1.02)}
+.sect-fig figcaption{display:flex;justify-content:space-between;gap:1rem;padding-top:.55rem;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-ink-dim);font-variation-settings:'wght' 540}
+.sect-fig figcaption b{color:var(--acid);font-variation-settings:'wght' 620}
+
+/* ==========================================================================
+   PORTFOLIO — typographic. No browser mocks, no travelling panels.
+   Effect: row colour swipe + scale · Trigger: hover/focus · 480ms · ease-out
+   ========================================================================== */
+.pf-list{border-top:1px solid rgba(20,20,22,.18)}
+.pf-row{
+  position:relative;display:block;text-decoration:none;
+  border-bottom:1px solid rgba(20,20,22,.18);
+  padding-block:clamp(1rem,2.1vw,1.7rem);
+  isolation:isolate;
+}
+.pf-row::before{
+  content:'';position:absolute;inset:0 -1.2rem;z-index:-1;background:var(--cobalt);
+  transform:scaleY(0);transform-origin:50% 100%;transition:transform .48s var(--ease-out);
+}
+.pf-row:hover::before,.pf-row:focus-visible::before{transform:scaleY(1)}
+.pf-in{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) 8.5rem;
+  gap:clamp(.35rem,1.6vw,2rem);align-items:baseline;
+  transition:transform .48s var(--ease-over),color .3s linear;
+}
+@media (max-width:820px){.pf-in{grid-template-columns:1fr;gap:.2rem}.pf-sect{order:-1}}
+.pf-row:hover .pf-in,.pf-row:focus-visible .pf-in{transform:translate3d(10px,0,0);color:#F2F3FF}
+.pf-name{font-size:clamp(1.5rem,3.6vw,3.1rem);line-height:1;letter-spacing:-.038em;font-variation-settings:'wdth' 104,'wght' 620}
+.pf-out{color:var(--on-bone-dim);font-size:.98rem;line-height:1.45}
+.pf-row:hover .pf-out,.pf-row:focus-visible .pf-out{color:rgba(242,243,255,.82)}
+.pf-sect{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-bone-dim);justify-self:start;font-variation-settings:'wght' 560}
+@media (min-width:821px){.pf-sect{justify-self:end;text-align:right}}
+.pf-row:hover .pf-sect,.pf-row:focus-visible .pf-sect{color:var(--acid)}
+
+/* ==========================================================================
+   THE EMPTY VIEWPORT — one line, nothing else.
+   Effect: slow drift · Trigger: always (CSS) · 40s linear infinite
+   Effect: velocity surge · Trigger: scroll velocity
+   ========================================================================== */
+.empty{
+  min-height:min(88svh,760px);display:flex;flex-direction:column;justify-content:center;
+  padding-block:clamp(3rem,7vw,6rem);overflow:hidden;position:relative;
+}
+.empty .mq-track{--mqd:44s}
+.empty .mq-item{
+  display:inline-flex;align-items:center;gap:clamp(1.4rem,3vw,3rem);padding-right:clamp(1.4rem,3vw,3rem);
+  white-space:nowrap;font-size:var(--fs-mq);line-height:1;letter-spacing:-.045em;
+  font-variation-settings:'wdth' 106,'wght' 620;text-transform:uppercase;
+}
+.empty .mq-item .o{
+  -webkit-text-stroke:1.4px var(--on-ink-dim);color:transparent;
+  paint-order:stroke fill;
+}
+.empty-meta{display:flex;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:clamp(2rem,5vw,4rem)}
+
+/* ==========================================================================
+   PROCESS — a numbered ladder. Display-scale numerals carry it.
+   No pinning, no scrubbing, no horizontal track.
+   ========================================================================== */
+.proc-row{
+  display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1fr);
+  gap:clamp(.4rem,3vw,3.5rem);align-items:start;
+  padding-block:clamp(1.8rem,3.6vw,3.2rem);
+  border-bottom:1px solid rgba(237,234,227,.18);
+}
+.proc-row:first-of-type{border-top:1px solid rgba(237,234,227,.18)}
+@media (max-width:820px){.proc-row{grid-template-columns:1fr;gap:.4rem}}
+.proc-n{
+  font-size:clamp(3.2rem,10vw,9rem);line-height:.8;letter-spacing:-.06em;
+  font-variation-settings:'wdth' 110,'wght' 680;color:var(--vermilion);
+}
+/* The numerals are velocity-reactive, so they are legitimately "furniture" and
+   carry colour. Both hues clear AA for large text on the bone ground:
+   vermilion 3.16:1, cobalt 6.89:1. Acid is never used on bone — it is 1.02:1. */
+.pnl-bone .proc-row,.pnl-bone .proc-row:first-of-type{border-color:rgba(20,20,22,.18)}
+.pnl-bone .proc-row:nth-child(even) .proc-n{color:var(--cobalt)}
+.pnl-bone .proc-b p{color:var(--on-bone-dim)}
+.proc-b h3{font-size:clamp(1.4rem,3.2vw,2.6rem);line-height:1.02;letter-spacing:-.032em;font-variation-settings:'wdth' 104,'wght' 620;margin-bottom:.55rem}
+.proc-b p{color:var(--on-ink-dim);max-width:52ch}
+
+/* ==========================================================================
+   PRICING — stacking panels. Three panels slide up over one another like a
+   deck being dealt. Each is fully legible while it is on top, and every
+   number is authored in the markup — nothing here counts up.
+   Effect: panel stack · Trigger: scroll (position:sticky, CSS only)
+   Disabled below 900px, where they simply stack in flow.
+   ========================================================================== */
+.stack{position:relative}
+@media (min-width:901px){
+  .stack-item{position:sticky;top:70px}
+  .stack-item:nth-child(1){z-index:1}
+  .stack-item:nth-child(2){z-index:2}
+  .stack-item:nth-child(3){z-index:3}
+}
+.stack-item{border-radius:26px 26px 0 0;padding:clamp(1.8rem,4vw,3.6rem) var(--gut) clamp(2.4rem,5vw,4.4rem);box-shadow:0 -22px 60px -30px rgba(0,0,0,.55)}
+.stack-in{max-width:var(--maxw);margin-inline:auto}
+.stack-hd{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:baseline;margin-bottom:clamp(1.4rem,3vw,2.4rem)}
+.stack-hd .tag{
+  border:1px solid currentColor;border-radius:999px;padding:.3rem .8rem;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-variation-settings:'wght' 600;
+}
+
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.7rem,1.6vw,1.4rem)}
+@media (max-width:820px){.tiers{grid-template-columns:1fr}}
+.tier{
+  border:1px solid currentColor;border-radius:18px;padding:clamp(1.1rem,2vw,1.7rem);
+  display:flex;flex-direction:column;gap:.45rem;position:relative;
+  transition:transform .4s var(--ease-over);
+}
+.tier:hover{transform:translate3d(0,-5px,0)}
+.tier .t-nm{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-variation-settings:'wght' 620}
+.tier .t-pr{font-size:clamp(2rem,4.2vw,3.4rem);line-height:.95;letter-spacing:-.045em;font-variation-settings:'wdth' 106,'wght' 700}
+.tier .t-sub{font-size:1rem;opacity:.78}
+.tier .t-pg{font-size:.85rem;opacity:.7;margin-top:.3rem}
+.tier-pop{background:var(--bone);color:var(--on-bone);border-color:var(--bone)}
+.pnl-bone .tier-pop{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.tier-pop .flag{
+  position:absolute;top:-.75rem;left:clamp(1.1rem,2vw,1.7rem);
+  background:var(--vermilion);color:var(--ink);border-radius:999px;padding:.24rem .75rem;
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-variation-settings:'wght' 700;
+}
+.incl{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem 1.6rem;margin-top:.4rem}
+.incl li{display:flex;gap:.6rem;align-items:baseline;font-size:.95rem;line-height:1.4}
+.incl li::before{content:'';width:8px;height:8px;background:currentColor;flex:0 0 auto;transform:translateY(-1px) rotate(45deg)}
+.addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem;margin-top:clamp(1.4rem,3vw,2.2rem)}
+.addon{border-top:2px solid currentColor;padding-top:.6rem}
+.addon dt{font-size:.95rem;font-variation-settings:'wght' 600}
+.addon dd{margin:0;font-size:1.35rem;letter-spacing:-.03em;font-variation-settings:'wght' 700}
+
+/* ==========================================================================
+   TESTIMONIALS
+   ========================================================================== */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2.6rem)}
+@media (max-width:900px){.quotes{grid-template-columns:1fr}}
+.quote{display:flex;flex-direction:column;gap:1rem;border-top:3px solid var(--acid);padding-top:1.1rem}
+.quote:nth-child(2){border-top-color:var(--vermilion)}
+.quote:nth-child(3){border-top-color:var(--cobalt)}
+/* acid vanishes on bone (1.02:1) — swap it out wherever the ground is light */
+.pnl-bone .quote{border-top-color:var(--vermilion)}
+.pnl-bone .quote:nth-child(2){border-top-color:var(--cobalt)}
+.pnl-bone .quote:nth-child(3){border-top-color:var(--on-bone)}
+.quote blockquote{font-size:clamp(1.15rem,2.1vw,1.6rem);line-height:1.34;letter-spacing:-.022em;font-variation-settings:'wght' 520}
+.quote cite{font-style:normal;font-size:.88rem;color:var(--on-ink-dim);margin-top:auto}
+.quote cite b{display:block;color:var(--on-ink);font-variation-settings:'wght' 620;letter-spacing:.01em}
+.pnl-bone .quote cite{color:var(--on-bone-dim)}
+.pnl-bone .quote cite b{color:var(--on-bone)}
+
+/* ==========================================================================
+   PERSON / REACH / CTA / FOOTER
+   ========================================================================== */
+.person-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(1.6rem,4vw,4.5rem);align-items:end}
+@media (max-width:900px){.person-grid{grid-template-columns:1fr;align-items:start}}
+.sig{
+  font-size:clamp(2.4rem,7vw,5.4rem);line-height:.9;letter-spacing:-.05em;
+  font-variation-settings:'wdth' 108,'wght' 700;font-style:italic;
+}
+.person-facts{display:grid;gap:.9rem;border-left:3px solid var(--vermilion);padding-left:clamp(1rem,2vw,1.8rem)}
+@media (max-width:900px){.person-facts{border-left:0;border-top:3px solid var(--vermilion);padding-left:0;padding-top:1.2rem}}
+.person-facts dt{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-bone-dim);font-variation-settings:'wght' 580}
+.person-facts dd{margin:0;font-size:1.05rem;line-height:1.4}
+
+.cta-final{text-align:left;padding-block:clamp(4rem,9vw,8rem)}
+.cta-h{
+  font-size:var(--fs-hero);line-height:.84;letter-spacing:-.048em;text-transform:uppercase;
+  font-variation-settings:'wdth' 106,'wght' 660;margin-bottom:clamp(1.4rem,3vw,2.4rem);max-width:13ch;
+}
+.cta-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.4rem;margin-top:clamp(2rem,4vw,3.2rem);border-top:1px solid rgba(237,234,227,.2);padding-top:1.6rem}
+.cta-rows a{text-decoration:none;display:block}
+.cta-rows .k{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-ink-dim);margin-bottom:.35rem;font-variation-settings:'wght' 580}
+.cta-rows .v{font-size:clamp(1.05rem,2.1vw,1.5rem);letter-spacing:-.022em;font-variation-settings:'wght' 600;line-height:1.2;word-break:break-word}
+.cta-rows a .v{transition:color .25s linear,transform .4s var(--ease-over);display:inline-block}
+.cta-rows a:hover .v,.cta-rows a:focus-visible .v{color:var(--acid);transform:translate3d(5px,0,0)}
+
+.ft{background:var(--ink-2);color:var(--on-ink);padding-block:clamp(3rem,6vw,5rem) 2rem;border-top:3px solid var(--vermilion)}
+.ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:clamp(1.6rem,3vw,3rem)}
+@media (max-width:1000px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.ft-grid{grid-template-columns:1fr}}
+.ft h2,.ft h3{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--on-ink-dim);margin-bottom:.9rem;font-variation-settings:'wght' 580}
+.ft ul{display:grid;gap:.45rem}
+.ft a{text-decoration:none;font-size:.96rem;line-height:1.4}
+.ft a:hover,.ft a:focus-visible{color:var(--acid)}
+.ft address{font-style:normal;font-size:.96rem;line-height:1.6}
+.ft-brand{font-size:clamp(2.2rem,6vw,4.2rem);line-height:.9;letter-spacing:-.05em;font-variation-settings:'wdth' 110,'wght' 740;margin-bottom:.6rem}
+.ft-logo{width:150px;height:auto;margin-bottom:1rem;background:var(--bone);border-radius:8px;padding:.55rem .7rem}
+.ft-bot{
+  display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;justify-content:space-between;
+  margin-top:clamp(2.4rem,4vw,3.4rem);padding-top:1.2rem;
+  border-top:1px solid rgba(237,234,227,.16);font-size:.82rem;color:var(--on-ink-dim);
+}
+
+/* ==========================================================================
+   PERSISTENT FLOATING CTA
+   Effect: tone inversion · Trigger: IO on the section under the CTA
+   Duration: 260ms · Easing: cubic-bezier(.8,0,.2,1)
+   On phones it becomes a fixed action bar — call and quote always one tap away.
+   ========================================================================== */
+.fab{
+  position:fixed;right:clamp(.75rem,2vw,1.75rem);bottom:clamp(.75rem,2vw,1.75rem);
+  z-index:140;display:flex;gap:.55rem;align-items:center;
+}
+.fab a{
+  display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;
+  padding:.85rem 1.35rem;min-height:48px;border-radius:999px;
+  font-size:.9rem;font-variation-settings:'wght' 620;letter-spacing:-.012em;white-space:nowrap;
+  background:var(--fab-bg,var(--bone));color:var(--fab-fg,var(--ink));
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.6);
+  transition:background-color .26s var(--ease-cut),color .26s var(--ease-cut),transform .34s var(--ease-over);
+}
+.fab a.fab-call{background:var(--vermilion);color:var(--ink)}
+.fab a:hover,.fab a:focus-visible{transform:translate3d(0,-3px,0)}
+.fab a:active{transform:scale(.97)}
+@media (max-width:700px){
+  .fab{left:0;right:0;bottom:0;padding:.6rem clamp(.75rem,3vw,1rem);gap:.5rem;
+       background:rgba(11,11,12,.94);border-top:1px solid rgba(237,234,227,.18)}
+  .fab a{flex:1;justify-content:center;padding:.85rem .6rem}
+  body{padding-bottom:76px}
+}
+
+/* ==========================================================================
+   SCRAMBLE
+   Effect: per-character scramble → resolve · Trigger: IO (once) · ~640ms
+   The true word is ALWAYS in the DOM twice: once visually hidden for
+   assistive tech, once visible and aria-hidden for the scrambler to chew on.
+   A 4s timeout restores every scrambler unconditionally, so a mid-flight JS
+   failure can never leave a garbled word on screen.
+   ========================================================================== */
+.scr{display:inline-block}
+.scr-t{display:inline-block;font-variant-ligatures:none}
+.scr.busy .scr-t{color:var(--acid)}
+
+/* ==========================================================================
+   REDUCED MOTION — the page becomes COMPLETELY STILL.
+   Not "less motion": every animation and transition is removed, every
+   marquee is frozen at its start, the velocity bus is pinned to zero, Lenis
+   is never initialised, and every reveal is forced to its final state.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    animation-delay:0s!important;
+    animation-play-state:paused!important;
+    transition-duration:.001ms!important;
+    transition-delay:0s!important;
+    scroll-behavior:auto!important;
+  }
+  :root{--vel:0!important;--dir:1!important}
+  .mq-track{animation:none!important;transform:none!important;width:auto!important}
+  .mq-seg:nth-child(2){display:none}
+  .mq-surge{transform:none!important}
+  .vw{transform:none!important}
+  .velbar i{transform:scaleX(.04)!important}
+  .rv,.rv-l,.rv-s,.wsplit .wd{opacity:1!important;transform:none!important}
+  .h1 .ch{opacity:1!important;transform:none!important;color:inherit!important}
+  .h1 em .ch{color:var(--vermilion)!important}
+  .cut{transform:scaleX(1)!important}
+  .mq{overflow:hidden}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ======================= HEADER ======================= -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <span class="brand-mk">DCS</span>
+      <span class="brand-sub">Digital Consulting Services</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="tel" href="tel:+447395063764">
+        <span class="tel-dot" aria-hidden="true"></span>
+        <span class="tel-l">07395 063764</span>
+        <span class="vh">Call DCS on 07395 063764</span>
+      </a>
+      <a class="btn btn-sm" href="#contact" data-fill><span>Get a free quote</span></a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav">
+        <i aria-hidden="true"></i><span class="vh">Open menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav: a SIBLING of the header, never a descendant — a fixed overlay
+     inside a filtered/transformed ancestor gets trapped in that ancestor's box. -->
+<div class="mnav" id="mnav" data-open="false" aria-hidden="true">
+  <button class="mnav-close" type="button" id="mnavClose"><span aria-hidden="true">&#10005;</span><span class="vh">Close menu</span></button>
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#services" style="--i:0">Services</a></li>
+      <li><a href="#pricing" style="--i:1">Pricing</a></li>
+      <li><a href="#portfolio" style="--i:2">Portfolio</a></li>
+      <li><a href="#blog" style="--i:3">Blog</a></li>
+      <li><a href="#about" style="--i:4">About</a></li>
+    </ul>
+  </nav>
+  <div class="mnav-foot">
+    <a href="tel:+447395063764"><span class="micro dim">Call</span><br>07395 063764</a>
+    <a href="mailto:mail@digitalconsultingservices.co.uk"><span class="micro dim">Email</span><br>mail@digitalconsultingservices.co.uk</a>
+    <a class="btn" href="#contact" data-fill><span>Get a free quote</span></a>
+  </div>
+</div>
+
+<main id="main">
+<a id="top"></a>
+
+<!-- ======================= HERO ======================= -->
+<section class="sec hero pnl-ink" data-tone="dark" aria-labelledby="h1">
+  <div class="wrap">
+
+    <div class="hero-kick">
+      <span class="kick-sq" aria-hidden="true"></span>
+      <span class="micro">Polegate, East Sussex &middot; Working UK-wide</span>
+      <span class="micro">
+        <span class="scr" data-scr><span class="vh">Established</span><span class="scr-t" aria-hidden="true">Established</span></span> 2019
+      </span>
+      <span class="micro">20+ sites delivered</span>
+    </div>
+
+    <!-- Effect: per-character assembly · load · 900ms/glyph, 22ms stagger · ease-over
+         Colour resolve acid → bone runs on the same delay, so the line develops. -->
+    <h1 class="h1" id="h1" data-split>
+      <span class="ln">The website</span>
+      <span class="ln">you&rsquo;ve been</span>
+      <span class="ln"><em>putting off.</em></span>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <p class="lede" style="margin-bottom:1.6rem">
+          Work that stands next to what a London or New York studio would put out &mdash; for a
+          fraction of the cost, and a tiny fraction of the effort from you. I ask the
+          questions, write the words, make the design decisions, build it, host it and keep
+          it running.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#contact" data-fill><span>Get a free quote</span></a>
+          <a class="btn btn-ghost" href="tel:+447395063764" data-fill><span>Call 07395 063764</span></a>
+        </div>
+        <p class="dim" style="font-size:.92rem;max-width:44ch">
+          A call or a few messages is enough to start, and you won&rsquo;t be asked to write a brief or fill anything in.
+        </p>
+      </div>
+
+      <aside class="hero-aside">
+        <p class="micro dim" style="margin-bottom:.9rem">What it costs</p>
+        <p class="price-flash">
+          <b>&pound;995</b> setup <span class="dim">+</span> <b>&pound;15/mo</b>
+          <span class="or">or</span>
+          <b>&pound;45/mo</b> <span class="dim">with nothing upfront</span>
+        </p>
+        <p class="dim" style="font-size:.92rem">
+          That&rsquo;s the Starter tier, in full, both ways of paying. Professional and Growth
+          are priced further down &mdash; nothing is hidden behind a &ldquo;contact us&rdquo;.
+        </p>
+        <ul class="creds">
+          <li class="cred">Est. 2019</li>
+          <li class="cred">20+ sites delivered</li>
+          <li class="cred">5+ years with our longest client</li>
+          <li class="cred">Everything in-house</li>
+        </ul>
+      </aside>
+    </div>
+
+    <!-- Effect: velocity bar · scroll velocity · continuous -->
+    <div class="velbar" aria-hidden="true"><i></i></div>
+  </div>
+
+  <!-- Effect: hero credential marquee · always (CSS) · 42s linear · surge 40px -->
+  <div class="mq mq-hero" aria-hidden="true" style="margin-top:clamp(1.4rem,3vw,2.4rem)">
+    <div class="mq-surge" style="--surge:40px">
+      <div class="mq-track" style="--mqd:42s">
+        <div class="mq-seg">
+          <span class="mq-item"><b>Retail &amp; eCommerce</b> &mdash; fabrics, clothing, homeware, made-to-order</span>
+          <span class="mq-item"><b>Studios &amp; practitioners</b> &mdash; yoga, tuition, therapy, salons</span>
+          <span class="mq-item"><b>Professional &amp; property</b> &mdash; consultancies, lettings, luxury property</span>
+          <span class="mq-item"><b>Trades &amp; contractors</b> &mdash; electrical, scaffolding, automotive, removals</span>
+          <span class="mq-item"><b>Creative &amp; B2B</b> &mdash; signage, print, marketing</span>
+        </div>
+        <div class="mq-seg">
+          <span class="mq-item"><b>Retail &amp; eCommerce</b> &mdash; fabrics, clothing, homeware, made-to-order</span>
+          <span class="mq-item"><b>Studios &amp; practitioners</b> &mdash; yoga, tuition, therapy, salons</span>
+          <span class="mq-item"><b>Professional &amp; property</b> &mdash; consultancies, lettings, luxury property</span>
+          <span class="mq-item"><b>Trades &amp; contractors</b> &mdash; electrical, scaffolding, automotive, removals</span>
+          <span class="mq-item"><b>Creative &amp; B2B</b> &mdash; signage, print, marketing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BAND 1 — vermilion, display scale ======================= -->
+<!-- Effect: display marquee · always (CSS) · 26s linear · surge 110px, direction-leaning -->
+<div class="band mq" data-tone="light" aria-hidden="true">
+  <div class="mq-surge" style="--surge:110px">
+    <div class="mq-track" style="--mqd:26s">
+      <div class="mq-seg">
+        <span class="mq-item">Big-city craft<span class="mq-dia"></span></span>
+        <span class="mq-item">A fraction of the cost<span class="mq-dia"></span></span>
+        <span class="mq-item">A tiny fraction of the effort<span class="mq-dia"></span></span>
+      </div>
+      <div class="mq-seg">
+        <span class="mq-item">Big-city craft<span class="mq-dia"></span></span>
+        <span class="mq-item">A fraction of the cost<span class="mq-dia"></span></span>
+        <span class="mq-item">A tiny fraction of the effort<span class="mq-dia"></span></span>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="vh">Big-city craft, a fraction of the cost, a tiny fraction of the effort.</p>
+
+<!-- ======================= PROMISE ======================= -->
+<section class="sec pnl-bone" id="promise" data-tone="light" aria-labelledby="promise-h">
+  <span class="cut cut-cobalt" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <div class="promise-grid">
+      <div>
+        <p class="micro dim rv" data-rv style="margin-bottom:1.4rem">01 &mdash; The promise</p>
+        <h2 class="dsp rv" data-rv data-words id="promise-h">You don&rsquo;t need a brief. You don&rsquo;t need to know what to say.</h2>
+        <p class="lede rv" data-rv style="--d:120ms;margin-top:1.4rem;color:var(--on-bone-dim)">
+          Most studios expect you to arrive with copy, images and a clear idea of what you
+          want. If you had all that, you&rsquo;d probably have a website already. So we start
+          from a conversation instead.
+        </p>
+      </div>
+      <ol class="promise-list">
+        <li class="rv" data-rv style="--d:60ms"><span class="n">01</span><div><h3>You&rsquo;re hiring a person</h3><p>Not a company, not an account manager, not an offshore team. The person you speak to is the person who designs and builds it.</p></div></li>
+        <li class="rv" data-rv style="--d:130ms"><span class="n">02</span><div><h3>The content is handled</h3><p>The words get written for you, drawn out of a conversation about how the business actually works.</p></div></li>
+        <li class="rv" data-rv style="--d:200ms"><span class="n">03</span><div><h3>Nothing technical to learn</h3><p>No CMS, no login, no dashboard. You want something changed, you say so and it&rsquo;s changed.</p></div></li>
+        <li class="rv" data-rv style="--d:270ms"><span class="n">04</span><div><h3>It stays looked after</h3><p>Hosting, security, updates, monitoring and support are part of the monthly, not an extra invoice.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SERVICES ======================= -->
+<section class="sec pnl-ink" id="services" data-tone="dark" aria-labelledby="svc-h">
+  <span class="cut" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:end;justify-content:space-between;margin-bottom:clamp(1.8rem,4vw,3rem)">
+      <div>
+        <p class="micro dim rv" data-rv style="margin-bottom:1.1rem">02 &mdash;
+          <span class="scr" data-scr><span class="vh">Services</span><span class="scr-t" aria-hidden="true">Services</span></span>
+        </p>
+        <h2 class="dsp rv" data-rv data-words id="svc-h">Six things, done properly.</h2>
+      </div>
+      <p class="dim rv" data-rv style="--d:100ms;max-width:34ch">
+        Most clients take the first three. The rest are there when the business needs them.
+      </p>
+    </div>
+
+    <ul class="svc">
+      <li class="svc-row rv" data-rv style="--d:0ms">
+        <span class="s-n">S/01</span>
+        <span class="s-t vw" style="--lag:8px">Website Design</span>
+        <span class="s-d">Designed and built for your business. No templates, no page-builders.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+      <li class="svc-row rv" data-rv style="--d:70ms">
+        <span class="s-n">S/02</span>
+        <span class="s-t vw" style="--lag:14px">Local SEO</span>
+        <span class="s-d">Service pages, location pages, structured data &mdash; so you&rsquo;re found where you work.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+      <li class="svc-row rv" data-rv style="--d:140ms">
+        <span class="s-n">S/03</span>
+        <span class="s-t vw" style="--lag:20px">Ongoing Management</span>
+        <span class="s-d">We look after the site so you can get on with the business.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+      <li class="svc-row rv" data-rv style="--d:210ms">
+        <span class="s-n">S/04</span>
+        <span class="s-t vw" style="--lag:26px">Google Workspace Email</span>
+        <span class="s-d">Professional business email on your own domain.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+      <li class="svc-row rv" data-rv style="--d:280ms">
+        <span class="s-n">S/05</span>
+        <span class="s-t vw" style="--lag:32px">eCommerce Websites</span>
+        <span class="s-d">Online stores built, loaded with your products, and kept running.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+      <li class="svc-row rv" data-rv style="--d:350ms">
+        <span class="s-n">S/06</span>
+        <span class="s-t vw" style="--lag:38px">Analytics &amp; Reporting</span>
+        <span class="s-d">Analytics, Search Console and monthly reporting, so you know what&rsquo;s working.</span>
+        <span class="s-a" aria-hidden="true">&rarr;</span>
+      </li>
+    </ul>
+
+    <!-- ============ SECTOR BAND — slow-moving photography against fast type ============ -->
+    <div class="sect-band">
+      <p class="micro dim rv" data-rv style="margin-bottom:1.2rem">The kinds of business this is built for</p>
+    </div>
+  </div>
+
+  <div class="mq" style="padding-bottom:clamp(1rem,2vw,2rem)">
+    <div class="mq-surge" style="--surge:32px">
+      <div class="mq-track" style="--mqd:72s">
+        <div class="mq-seg">
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt="Interior of a small independent clothing boutique, rails and folded stock in natural light."><figcaption><span>Retail</span><b>01</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt="An empty yoga studio with rolled mats stacked beside tall windows."><figcaption><span>Studios &amp; practitioners</span><b>02</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/still-products.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt="Still life of a ceramic vase, folded linen and a candle on a plaster surface."><figcaption><span>eCommerce</span><b>03</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt="The counter of an independent cafe with an espresso machine in morning light."><figcaption><span>Hospitality</span><b>04</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt="Scaffolding tubes and boards erected against a building elevation."><figcaption><span>Trades &amp; contractors</span><b>05</b></figcaption></figure>
+        </div>
+        <div class="mq-seg" aria-hidden="true">
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt=""><figcaption><span>Retail</span><b>01</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt=""><figcaption><span>Studios &amp; practitioners</span><b>02</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/still-products.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt=""><figcaption><span>eCommerce</span><b>03</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt=""><figcaption><span>Hospitality</span><b>04</b></figcaption></figure>
+          <figure class="sect-fig"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" loading="lazy" decoding="async" alt=""><figcaption><span>Trades &amp; contractors</span><b>05</b></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BAND 2 — acid ======================= -->
+<div class="band band-acid mq mq-rev" data-tone="light" aria-hidden="true">
+  <div class="mq-surge" style="--surge:130px">
+    <div class="mq-track" style="--mqd:31s">
+      <div class="mq-seg">
+        <span class="mq-item">Real clients<span class="mq-dia"></span></span>
+        <span class="mq-item">Real outcomes<span class="mq-dia"></span></span>
+        <span class="mq-item">Since 2019<span class="mq-dia"></span></span>
+      </div>
+      <div class="mq-seg">
+        <span class="mq-item">Real clients<span class="mq-dia"></span></span>
+        <span class="mq-item">Real outcomes<span class="mq-dia"></span></span>
+        <span class="mq-item">Since 2019<span class="mq-dia"></span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PORTFOLIO ======================= -->
+<section class="sec pnl-bone" id="portfolio" data-tone="light" aria-labelledby="pf-h">
+  <span class="cut cut-cobalt" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:end;justify-content:space-between;margin-bottom:clamp(1.8rem,4vw,3rem)">
+      <div>
+        <p class="micro dim rv" data-rv style="margin-bottom:1.1rem">03 &mdash; The work</p>
+        <h2 class="dsp rv" data-rv data-words id="pf-h">Nine businesses that look nothing like each other.</h2>
+      </div>
+      <p class="dim rv" data-rv style="--d:100ms;max-width:32ch">
+        A fabric shop, a yoga studio, a scaffolder and a signwriter want very different things
+        from a website. That is the point.
+      </p>
+    </div>
+
+    <div class="pf-list">
+      <a class="pf-row rv" data-rv href="#contact" style="--d:0ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:9px">Cuddle Plush Fabrics</span>
+        <span class="pf-out">Five years and counting &mdash; one of our longest client relationships.</span>
+        <span class="pf-sect">eCommerce &middot; Fabrics</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:55ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:13px">Luna Landings</span>
+        <span class="pf-out">Product configurator, automatic work orders, worldwide shipping.</span>
+        <span class="pf-sect">Made-to-order</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:110ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:17px">Sanctuary Ida</span>
+        <span class="pf-out">Students book and pay for classes online.</span>
+        <span class="pf-sect">Yoga studio</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:165ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:21px">Nicola Noble Tuition</span>
+        <span class="pf-out">Moved classes online during Covid instead of closing.</span>
+        <span class="pf-sect">Tuition</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:220ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:25px">Mad Graphics</span>
+        <span class="pf-out">Full rebuild.</span>
+        <span class="pf-sect">Signage &amp; print</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:275ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:29px">DCH Automotive</span>
+        <span class="pf-out">A credible presence from a standing start.</span>
+        <span class="pf-sect">Automotive</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:330ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:33px">Colossus Scaffolding</span>
+        <span class="pf-out">First enquiry from Google within three weeks of launch.</span>
+        <span class="pf-sect">Scaffolding</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:385ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:37px">DJ Fox Electrical</span>
+        <span class="pf-out">A 20+ page site, live at djfoxelectrical.com.</span>
+        <span class="pf-sect">Electrical</span>
+      </span></a>
+      <a class="pf-row rv" data-rv href="#contact" style="--d:440ms"><span class="pf-in">
+        <span class="pf-name vw" style="--lag:41px">Bexhill Removals</span>
+        <span class="pf-out">Design approved on the first presentation, no revisions.</span>
+        <span class="pf-sect">Removals</span>
+      </span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THE EMPTY VIEWPORT ======================= -->
+<!-- One line, travelling. Nothing else on the screen. -->
+<section class="sec empty pnl-ink2" data-tone="dark" aria-labelledby="empty-h">
+  <span class="cut cut-acid" data-cut aria-hidden="true"></span>
+  <h2 class="vh" id="empty-h">Twenty-plus sites, built by one person</h2>
+  <div class="mq" aria-hidden="true">
+    <div class="mq-surge" style="--surge:150px">
+      <div class="mq-track" style="--mqd:44s">
+        <div class="mq-seg">
+          <span class="mq-item">Twenty-plus sites.<span class="o">One person.</span></span>
+          <span class="mq-item">Twenty-plus sites.<span class="o">One person.</span></span>
+        </div>
+        <div class="mq-seg">
+          <span class="mq-item">Twenty-plus sites.<span class="o">One person.</span></span>
+          <span class="mq-item">Twenty-plus sites.<span class="o">One person.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="empty-meta">
+      <p class="micro dim">Nothing outsourced. Nothing offshored.</p>
+      <p class="micro dim">Est. 2019</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROCESS ======================= -->
+<section class="sec pnl-bone" id="process" data-tone="light" aria-labelledby="proc-h">
+  <span class="cut" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="micro dim rv" data-rv style="margin-bottom:1.1rem">04 &mdash; How it goes</p>
+    <h2 class="dsp rv" data-rv data-words id="proc-h" style="margin-bottom:clamp(2rem,4vw,3.4rem);max-width:18ch">Four steps, and three of them are mine.</h2>
+
+    <div>
+      <div class="proc-row rv" data-rv>
+        <span class="proc-n vw" style="--lag:16px">01</span>
+        <div class="proc-b">
+          <h3>A conversation</h3>
+          <p>A call, or a few messages if that&rsquo;s easier. No brief to write, nothing to fill in. I ask about the business, who buys from you and what usually goes wrong. That is the brief.</p>
+        </div>
+      </div>
+      <div class="proc-row rv" data-rv style="--d:80ms">
+        <span class="proc-n vw" style="--lag:22px">02</span>
+        <div class="proc-b">
+          <h3>I write it and design it</h3>
+          <p>Copy, structure, imagery, colour, the lot. You see a real page, not a wireframe and not a mood board.</p>
+        </div>
+      </div>
+      <div class="proc-row rv" data-rv style="--d:160ms">
+        <span class="proc-n vw" style="--lag:28px">03</span>
+        <div class="proc-b">
+          <h3>You review</h3>
+          <p>Unlimited revisions during the build, until you&rsquo;re happy. Say &ldquo;I don&rsquo;t like the blue&rdquo; and that is a perfectly good piece of feedback.</p>
+        </div>
+      </div>
+      <div class="proc-row rv" data-rv style="--d:240ms">
+        <span class="proc-n vw" style="--lag:34px">04</span>
+        <div class="proc-b">
+          <h3>It goes live, and stays looked after</h3>
+          <p>Hosting, SSL, domain management, security updates, uptime monitoring and support. You have my number.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PRICING — stacking panels ======================= -->
+<section id="pricing" aria-labelledby="pr-h" data-nostack>
+  <h2 class="vh" id="pr-h">Pricing</h2>
+  <div class="stack">
+
+    <!-- PANEL 1 — Option A -->
+    <div class="stack-item pnl-ink" data-tone="dark">
+      <div class="stack-in">
+        <div class="stack-hd">
+          <p class="micro dim">05 &mdash; Pricing</p>
+          <span class="tag">Option A</span>
+          <h3 class="h2" style="flex:1 1 100%;margin-top:.4rem">Upfront, plus a low monthly.</h3>
+          <p class="dim" style="max-width:56ch">
+            Two ways to pay for the <b>same site</b>. You choose how to pay, not what you get &mdash;
+            the tiers differ on ongoing service level, never on quality.
+          </p>
+        </div>
+        <div class="tiers">
+          <div class="tier">
+            <span class="t-nm">Starter</span>
+            <span class="t-pr">&pound;995</span>
+            <span class="t-sub">setup, then &pound;15/mo</span>
+            <span class="t-pg">Up to 20 pages</span>
+          </div>
+          <div class="tier tier-pop">
+            <span class="flag">Most popular</span>
+            <span class="t-nm">Professional</span>
+            <span class="t-pr">&pound;1,995</span>
+            <span class="t-sub">setup, then &pound;25/mo</span>
+            <span class="t-pg">Up to 50 pages</span>
+          </div>
+          <div class="tier">
+            <span class="t-nm">Growth</span>
+            <span class="t-pr">&pound;3,495</span>
+            <span class="t-sub">setup, then &pound;50/mo</span>
+            <span class="t-pg">Up to 100 pages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2 — Option B -->
+    <div class="stack-item pnl-bone" data-tone="light">
+      <div class="stack-in">
+        <div class="stack-hd">
+          <span class="tag">Option B</span>
+          <h3 class="h2" style="flex:1 1 100%;margin-top:.4rem">Pay monthly. Nothing upfront.</h3>
+          <p class="dim" style="max-width:56ch">
+            Same site, same design, same care. A 12-month minimum term, and after that it
+            simply continues month to month.
+          </p>
+        </div>
+        <div class="tiers">
+          <div class="tier">
+            <span class="t-nm">Starter</span>
+            <span class="t-pr">&pound;45<span style="font-size:.9rem;letter-spacing:0;font-variation-settings:'wght' 560"> /mo</span></span>
+            <span class="t-sub">nothing upfront</span>
+            <span class="t-pg">Up to 20 pages</span>
+          </div>
+          <div class="tier">
+            <span class="t-nm">Professional</span>
+            <span class="t-pr">&pound;75<span style="font-size:.9rem;letter-spacing:0;font-variation-settings:'wght' 560"> /mo</span></span>
+            <span class="t-sub">nothing upfront</span>
+            <span class="t-pg">Up to 50 pages</span>
+          </div>
+          <div class="tier">
+            <span class="t-nm">Growth</span>
+            <span class="t-pr">&pound;125<span style="font-size:.9rem;letter-spacing:0;font-variation-settings:'wght' 560"> /mo</span></span>
+            <span class="t-sub">nothing upfront</span>
+            <span class="t-pg">Up to 100 pages</span>
+          </div>
+        </div>
+        <p class="dim" style="margin-top:1.4rem;font-size:.95rem">12-month minimum term on Option B.</p>
+      </div>
+    </div>
+
+    <!-- PANEL 3 — What's included -->
+    <div class="stack-item pnl-ink2" data-tone="dark" style="padding-bottom:clamp(3rem,6vw,5.5rem)">
+      <div class="stack-in">
+        <div class="stack-hd">
+          <span class="tag">Included on every tier</span>
+          <h3 class="h2" style="flex:1 1 100%;margin-top:.4rem">All of this, whichever you pick.</h3>
+        </div>
+        <ul class="incl">
+          <li>Custom design &mdash; no templates</li>
+          <li>Local SEO: service and location pages</li>
+          <li>Structured data</li>
+          <li>Mobile-first and fast</li>
+          <li>Contact form</li>
+          <li>Hosting</li>
+          <li>SSL certificate</li>
+          <li>Domain management</li>
+          <li>Security updates</li>
+          <li>Uptime monitoring</li>
+          <li>Unlimited revisions during the build</li>
+          <li>Search Console submission</li>
+        </ul>
+
+        <p class="micro dim" style="margin-top:clamp(2rem,4vw,3rem)">Add-ons, if you want them</p>
+        <dl class="addons">
+          <div class="addon"><dt>Blog post writing</dt><dd>&pound;75 <span style="font-size:.85rem;font-variation-settings:'wght' 500">/ post</span></dd></div>
+          <div class="addon"><dt>Custom theme design</dt><dd>&pound;350</dd></div>
+          <div class="addon"><dt>Google Ads setup &amp; management</dt><dd>&pound;200 <span style="font-size:.85rem;font-variation-settings:'wght' 500">/ mo + spend</span></dd></div>
+          <div class="addon"><dt>Monthly SEO retainer</dt><dd>&pound;200 <span style="font-size:.85rem;font-variation-settings:'wght' 500">/ mo</span></dd></div>
+        </dl>
+
+        <div style="margin-top:clamp(2rem,4vw,3rem);display:flex;flex-wrap:wrap;gap:.7rem">
+          <a class="btn" href="#contact" data-fill><span>Get a free quote</span></a>
+          <a class="btn btn-ghost" href="tel:+447395063764" data-fill><span>Call 07395 063764</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================= TESTIMONIALS ======================= -->
+<section class="sec pnl-bone" data-tone="light" aria-labelledby="tq-h">
+  <span class="cut" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="micro dim rv" data-rv style="margin-bottom:1.1rem">06 &mdash; In their words</p>
+    <h2 class="dsp rv" data-rv data-words id="tq-h" style="margin-bottom:clamp(2rem,4vw,3.2rem);max-width:16ch">Three clients, none of them a trade.</h2>
+    <div class="quotes">
+      <figure class="quote rv" data-rv>
+        <blockquote>&ldquo;Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be happier with his work.&rdquo;</blockquote>
+        <figcaption><cite><b>Sarah</b>Cuddle Plush Fabrics</cite></figcaption>
+      </figure>
+      <figure class="quote rv" data-rv style="--d:110ms">
+        <blockquote>&ldquo;I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.&rdquo;</blockquote>
+        <figcaption><cite><b>Nicola</b>Nicola Noble Tuition</cite></figcaption>
+      </figure>
+      <figure class="quote rv" data-rv style="--d:220ms">
+        <blockquote>&ldquo;My yoga students love that they can book and pay for my classes on my website.&rdquo;</blockquote>
+        <figcaption><cite><b>Molly</b>Sanctuary Ida</cite></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THE PERSON ======================= -->
+<section class="sec pnl-bone" id="about" data-tone="light" aria-labelledby="ab-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="person-grid">
+      <div>
+        <p class="micro dim rv" data-rv style="margin-bottom:1.1rem">07 &mdash; Who you&rsquo;re actually dealing with</p>
+        <h2 class="h2 rv" data-rv data-words id="ab-h" style="max-width:20ch">There is no team page, because there is no team.</h2>
+        <p class="lede rv" data-rv style="--d:100ms;margin-top:1.3rem;color:var(--on-bone-dim)">
+          I&rsquo;m Ricky Wilson. I started DCS in Polegate in 2019 and I have designed and built
+          every site that has left it since, to a standard I&rsquo;ll happily put beside
+          anything coming out of Shoreditch. That it also means you deal with one person, and
+          pay a fraction of what that work usually costs, is the part clients tend to
+          mention first.
+        </p>
+        <p class="sig rv" data-rv style="--d:180ms;margin-top:1.6rem;color:var(--cobalt)">Ricky Wilson</p>
+      </div>
+      <dl class="person-facts rv" data-rv style="--d:140ms">
+        <div><dt>Studio</dt><dd>Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26 6QH</dd></div>
+        <div><dt>Hours</dt><dd>Mon&ndash;Fri 9:00&ndash;17:30 &middot; Sat by appointment &middot; Sun closed</dd></div>
+        <div><dt>Founded</dt><dd>2019</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BAND 3 — locations, cobalt ======================= -->
+<div class="band band-cobalt mq" data-tone="dark" aria-hidden="true">
+  <div class="mq-surge" style="--surge:100px">
+    <div class="mq-track" style="--mqd:34s">
+      <div class="mq-seg">
+        <span class="mq-item">Polegate<span class="mq-dia"></span></span>
+        <span class="mq-item">Eastbourne<span class="mq-dia"></span></span>
+        <span class="mq-item">Hailsham<span class="mq-dia"></span></span>
+        <span class="mq-item">Lewes<span class="mq-dia"></span></span>
+        <span class="mq-item">Seaford<span class="mq-dia"></span></span>
+        <span class="mq-item">Brighton<span class="mq-dia"></span></span>
+        <span class="mq-item">Hove<span class="mq-dia"></span></span>
+        <span class="mq-item">Uckfield<span class="mq-dia"></span></span>
+        <span class="mq-item">UK-wide<span class="mq-dia"></span></span>
+      </div>
+      <div class="mq-seg">
+        <span class="mq-item">Polegate<span class="mq-dia"></span></span>
+        <span class="mq-item">Eastbourne<span class="mq-dia"></span></span>
+        <span class="mq-item">Hailsham<span class="mq-dia"></span></span>
+        <span class="mq-item">Lewes<span class="mq-dia"></span></span>
+        <span class="mq-item">Seaford<span class="mq-dia"></span></span>
+        <span class="mq-item">Brighton<span class="mq-dia"></span></span>
+        <span class="mq-item">Hove<span class="mq-dia"></span></span>
+        <span class="mq-item">Uckfield<span class="mq-dia"></span></span>
+        <span class="mq-item">UK-wide<span class="mq-dia"></span></span>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="vh">Service areas: Polegate, Eastbourne, Hailsham, Lewes, Seaford, Brighton, Hove, Uckfield &mdash; and UK-wide.</p>
+
+<!-- ======================= FINAL CTA ======================= -->
+<section class="sec cta-final pnl-ink" id="contact" data-tone="dark" aria-labelledby="cta-h">
+  <span class="cut cut-acid" data-cut aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="micro dim rv" data-rv style="margin-bottom:1.4rem">08 &mdash; Start</p>
+    <h2 class="cta-h rv" data-rv data-words id="cta-h">Stop putting it off.</h2>
+    <p class="lede rv" data-rv style="--d:120ms">
+      Tell me roughly what the business does. That&rsquo;s enough to give you a straight price
+      and a straight timescale, with no obligation and no sales call.
+    </p>
+    <div class="hero-actions rv" data-rv style="--d:200ms;margin-top:1.8rem">
+      <a class="btn" href="tel:+447395063764" data-fill><span>Call 07395 063764</span></a>
+      <a class="btn btn-ghost" href="mailto:mail@digitalconsultingservices.co.uk" data-fill><span>Email the studio</span></a>
+    </div>
+
+    <div class="cta-rows">
+      <a href="tel:+447395063764"><span class="k">Phone</span><span class="v">07395 063764</span></a>
+      <a href="mailto:mail@digitalconsultingservices.co.uk"><span class="k">Email</span><span class="v">mail@digitalconsultingservices.co.uk</span></a>
+      <div><span class="k">Studio</span><span class="v" style="font-size:1rem;font-variation-settings:'wght' 500">Unit H3, Chaucer Business Park, Dittons Road, Polegate, BN26 6QH</span></div>
+      <div><span class="k">Hours</span><span class="v" style="font-size:1rem;font-variation-settings:'wght' 500">Mon&ndash;Fri 9:00&ndash;17:30 &middot; Sat by appointment</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="ft" data-tone="dark">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <img class="ft-logo" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" width="600" height="300" loading="lazy" decoding="async" alt="Digital Consulting Services logo">
+        <p class="ft-brand">DCS</p>
+        <p class="dim" style="font-size:.95rem;max-width:30ch">
+          A website design and build studio in Polegate, East Sussex, working UK-wide since 2019.
+        </p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Service areas</h2>
+        <ul>
+          <li><a href="#contact">Polegate</a></li>
+          <li><a href="#contact">Eastbourne</a></li>
+          <li><a href="#contact">Hailsham</a></li>
+          <li><a href="#contact">Lewes</a></li>
+          <li><a href="#contact">Seaford</a></li>
+          <li><a href="#contact">Brighton &amp; Hove</a></li>
+          <li><a href="#contact">Uckfield</a></li>
+          <li class="dim" style="font-size:.95rem">&mdash; and UK-wide</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <address>
+          <a href="tel:+447395063764">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park<br>
+          Dittons Road, Polegate<br>
+          East Sussex, BN26 6QH
+        </address>
+        <p class="dim" style="font-size:.9rem;margin-top:1rem">Mon&ndash;Fri 9:00&ndash;17:30<br>Sat by appointment &middot; Sun closed</p>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Digital Consulting Services</p>
+      <p><a href="#blog" style="text-decoration:none">Blog</a> &middot; <a href="#about" style="text-decoration:none">About</a> &middot; <a href="#pricing" style="text-decoration:none">Pricing</a></p>
+      <p>Polegate, East Sussex &middot; UK-wide</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================= PERSISTENT FLOATING CTA ======================= -->
+<div class="fab" id="fab">
+  <a class="fab-call" href="tel:+447395063764">Call 07395 063764</a>
+  <a href="#contact">Get a free quote</a>
+</div>
+
+<!-- Lenis is optional. If the CDN fails, this tag is a no-op and the page uses
+     native scrolling — the velocity bus reads window.scrollY either way. -->
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+  var supported =
+    'IntersectionObserver' in window &&
+    'requestAnimationFrame' in window &&
+    typeof window.CSS !== 'undefined' &&
+    CSS.supports && CSS.supports('transform', 'translate3d(0,0,0)');
+
+  /* ---------------------------------------------------------------
+     ALWAYS-ON: nav, mobile menu, directional button fill.
+     None of this hides anything, so it runs regardless of motion prefs.
+     --------------------------------------------------------------- */
+
+  // Mobile nav — the overlay is a body-level sibling of the header.
+  var burger = document.getElementById('burger');
+  var mnav = document.getElementById('mnav');
+  var mnavClose = document.getElementById('mnavClose');
+  var lastFocus = null;
+
+  function setMenu(open) {
+    if (!mnav || !burger) return;
+    mnav.setAttribute('data-open', open ? 'true' : 'false');
+    mnav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      lastFocus = document.activeElement;
+      var f = mnav.querySelector('a, button');
+      if (f) f.focus();
+    } else if (lastFocus && lastFocus.focus) {
+      lastFocus.focus();
+    }
+  }
+  if (burger) burger.addEventListener('click', function () {
+    setMenu(mnav.getAttribute('data-open') !== 'true');
+  });
+  if (mnavClose) mnavClose.addEventListener('click', function () { setMenu(false); });
+  if (mnav) {
+    mnav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') setMenu(false);
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && mnav && mnav.getAttribute('data-open') === 'true') setMenu(false);
+  });
+
+  // Directional hover fill: the pseudo-element's transform-origin follows the
+  // side the pointer entered from. Transform only — no layout, no repaint cost.
+  var fills = document.querySelectorAll('[data-fill]');
+  for (var fi = 0; fi < fills.length; fi++) {
+    (function (el) {
+      el.addEventListener('pointerenter', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--ox', (e.clientX - r.left) < r.width / 2 ? '0%' : '100%');
+      });
+    })(fills[fi]);
+  }
+
+  /* ---------------------------------------------------------------
+     REDUCED MOTION: stop here. Nothing below runs, no hidden state is
+     ever armed, Lenis is never started, the velocity bus never ticks.
+     The page is completely still and completely readable.
+     --------------------------------------------------------------- */
+  if (reduce || !supported) return;
+
+  root.classList.add('mo');
+
+  /* BACKSTOP 1 — if the observer has not fired a single time within 2s,
+     assume something is wrong and strip every hidden state off the page. */
+  var ioEverFired = false;
+  window.setTimeout(function () {
+    if (!ioEverFired) root.classList.add('mo-off');
+  }, 2000);
+
+  try {
+
+    /* =============================================================
+       HERO — per-character assembly
+       Trigger: load · 900ms per glyph, 22ms stagger · ease-over
+       The hidden class and the play class are added in the same
+       synchronous block, inside try/finally, with a forced reflow
+       between them so the transition still plays. The headline
+       cannot be left invisible by a later failure.
+       ============================================================= */
+    var h1 = document.querySelector('[data-split]');
+    if (h1) {
+      var lines = h1.querySelectorAll('.ln');
+      var idx = 0;
+      for (var li = 0; li < lines.length; li++) {
+        var walkRoot = lines[li];
+        var textNodes = [];
+        (function collect(node) {
+          for (var c = node.firstChild; c; c = c.nextSibling) {
+            if (c.nodeType === 3) textNodes.push(c);
+            else if (c.nodeType === 1) collect(c);
+          }
+        })(walkRoot);
+        for (var t = 0; t < textNodes.length; t++) {
+          var tn = textNodes[t];
+          var frag = document.createDocumentFragment();
+          var str = tn.nodeValue;
+          for (var s = 0; s < str.length; s++) {
+            var sp = document.createElement('span');
+            sp.className = 'ch';
+            sp.textContent = str[s];
+            sp.style.setProperty('--cd', (idx * 22) + 'ms');
+            if (str[s] !== ' ') idx++;
+            frag.appendChild(sp);
+          }
+          tn.parentNode.replaceChild(frag, tn);
+        }
+      }
+      h1.setAttribute('aria-label', 'The website you have been putting off.');
+      try {
+        h1.classList.add('split');
+        void h1.offsetWidth;         // flush styles so 0 -> 1 transitions
+      } finally {
+        h1.classList.add('go');      // can never be skipped
+        /* BACKSTOP 0 — the strongest one, and the reason this headline cannot
+           repeat round 1's permanently-invisible hero. Visibility here must
+           never depend on a CSS transition actually COMPLETING: a stalled or
+           throttled animation clock (background tab, headless compositor,
+           an underpowered device dropping frames) can freeze a transition
+           mid-interpolation forever. So 1.8s after the assembly starts we
+           delete the .split class outright. With .split gone, both the hidden
+           rule and the visible rule stop matching and .ch reverts to a plain
+           inline span at its default opacity 1 — no clock involved. */
+        window.setTimeout(function () {
+          var chs = h1.querySelectorAll('.ch');
+          /* transition:none FIRST — a transition that is already running keeps
+             applying its interpolated value even after the rules behind it
+             change, so the class removal alone is not enough to unfreeze a
+             stalled one. Setting transition-property to none cancels it
+             outright; the glyph then snaps to the plain default. */
+          for (var k = 0; k < chs.length; k++) {
+            chs[k].style.transition = 'none';
+            chs[k].style.removeProperty('--cd');
+          }
+          h1.classList.remove('split');
+        }, 1800);
+      }
+    }
+
+    /* =============================================================
+       PER-WORD STAGGER on display headings
+       Trigger: IO · 500/680ms · 34ms per word · ease-over
+       ============================================================= */
+    var wordEls = document.querySelectorAll('[data-words]');
+    for (var wi = 0; wi < wordEls.length; wi++) {
+      (function (el) {
+        var parts = el.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        var w = 0;
+        for (var p = 0; p < parts.length; p++) {
+          if (/^\s+$/.test(parts[p])) { frag.appendChild(document.createTextNode(' ')); continue; }
+          var sp = document.createElement('span');
+          sp.className = 'wd';
+          sp.textContent = parts[p];
+          sp.style.setProperty('--wd', (w * 34) + 'ms');
+          w++;
+          frag.appendChild(sp);
+        }
+        var holder = document.createElement('span');
+        holder.className = 'wsplit';
+        holder.appendChild(frag);
+        el.textContent = '';
+        el.appendChild(holder);
+      })(wordEls[wi]);
+    }
+
+    /* =============================================================
+       REVEALS + CUT RULES
+       Trigger: IO, once, 12% visible · 620/720ms · ease-out / ease-over
+       ============================================================= */
+    /* Same rule as the headline: once an element has been asked to reveal, its
+       hidden state is DELETED 1.2s later rather than merely overridden. A
+       transition that stalls mid-interpolation therefore cannot strand any
+       content at partial opacity — the hidden rule simply stops existing. */
+    function settle(el) {
+      window.setTimeout(function () {
+        el.style.transition = 'none';                     // cancel, don't just override
+        var wds = el.querySelectorAll('.wd');
+        for (var k = 0; k < wds.length; k++) wds[k].style.transition = 'none';
+        el.classList.remove('rv', 'rv-l', 'rv-s', 'wsplit');
+        el.removeAttribute('data-rv');
+      }, 1200);
+    }
+
+    var revealables = document.querySelectorAll('[data-rv], [data-cut], .rv, .rv-l, .rv-s, .wsplit');
+    var pending = Array.prototype.slice.call(revealables);
+
+    function reveal(el) {
+      var at = pending.indexOf(el);
+      if (at === -1) return;
+      pending.splice(at, 1);
+      el.classList.add('is-in');
+      settle(el);
+      try { io.unobserve(el); } catch (e) {}
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      ioEverFired = true;
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) reveal(entries[i].target);
+      }
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    for (var r = 0; r < revealables.length; r++) io.observe(revealables[r]);
+
+    /* BACKSTOP 4 — the IntersectionObserver is an OPTIMISATION, not the
+       guarantee. It can silently fail to deliver: inside an offscreen iframe,
+       after a fragment jump that lands mid-document, under a hijacked scroll
+       container, or in an embedded/preview renderer. Observed live during
+       build: every element in the services section sat at opacity 0 with
+       isIntersecting never delivered. So a plain geometric sweep runs
+       alongside it and reveals anything that is actually on screen. It is
+       rAF-throttled and `pending` only ever shrinks, so the cost trends to
+       zero as the page is read. */
+    var sweepTimer = null;
+    function sweep() {
+      sweepTimer = null;
+      if (!pending.length) return;
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      for (var i = pending.length - 1; i >= 0; i--) {
+        var el = pending[i];
+        if (!el.parentNode) { pending.splice(i, 1); continue; }
+        var rect = el.getBoundingClientRect();
+        if (rect.top < vh * 0.94 && rect.bottom > -80) reveal(el);
+      }
+    }
+    /* Throttled with setTimeout, deliberately NOT requestAnimationFrame:
+       rAF is driven by the frame clock, and a stalled or throttled compositor
+       (background tab, headless, low-power mode) never delivers it. Content
+       visibility must not depend on frames being produced. */
+    function queueSweep() {
+      if (sweepTimer) return;
+      sweepTimer = window.setTimeout(sweep, 100);
+    }
+    window.addEventListener('scroll', queueSweep, { passive: true });
+    window.addEventListener('resize', queueSweep);
+    window.addEventListener('hashchange', queueSweep);
+    if (document.readyState !== 'complete') window.addEventListener('load', sweep);
+
+    /* And a slow heartbeat, so even a page whose scroll events are swallowed
+       entirely still fills in. It stops as soon as nothing is left pending. */
+    var beats = 0;
+    var beat = window.setInterval(function () {
+      sweep();
+      if (++beats > 24 || !pending.length) window.clearInterval(beat);
+    }, 500);
+    sweep();
+
+    /* =============================================================
+       SCRAMBLE
+       Trigger: IO once · ~640ms, 16 frames · resolves left to right
+       The accessible copy of every word is a separate .vh element, so
+       assistive tech never sees the scrambled characters. A 4s timer
+       restores every scrambler unconditionally.
+       ============================================================= */
+    var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%$&/\\<>*+=';
+    var scramblers = [];
+    var scrEls = document.querySelectorAll('[data-scr] .scr-t');
+    for (var si = 0; si < scrEls.length; si++) {
+      scramblers.push({ el: scrEls[si], txt: scrEls[si].textContent });
+    }
+    function restoreAll() {
+      for (var i = 0; i < scramblers.length; i++) {
+        scramblers[i].el.textContent = scramblers[i].txt;
+        if (scramblers[i].el.parentNode) scramblers[i].el.parentNode.classList.remove('busy');
+      }
+    }
+    window.setTimeout(restoreAll, 4000);   // BACKSTOP 2 — unconditional
+
+    function runScramble(item) {
+      var txt = item.txt, len = txt.length, frame = 0, TOTAL = 16;
+      item.el.parentNode.classList.add('busy');
+      var iv = window.setInterval(function () {
+        frame++;
+        var out = '', settled = Math.floor((frame / TOTAL) * len);
+        for (var c = 0; c < len; c++) {
+          if (c < settled || txt[c] === ' ') out += txt[c];
+          else out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        }
+        item.el.textContent = out;
+        if (frame >= TOTAL) {
+          window.clearInterval(iv);
+          item.el.textContent = txt;
+          item.el.parentNode.classList.remove('busy');
+        }
+      }, 40);
+    }
+    var scrIO = new IntersectionObserver(function (entries) {
+      ioEverFired = true;
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        for (var j = 0; j < scramblers.length; j++) {
+          if (scramblers[j].el === entries[i].target) runScramble(scramblers[j]);
+        }
+        scrIO.unobserve(entries[i].target);
+      }
+    }, { threshold: 0.9 });
+    for (var s2 = 0; s2 < scrEls.length; s2++) scrIO.observe(scrEls[s2]);
+
+    /* =============================================================
+       TONE INVERSION — header + floating CTA
+       Trigger: IO on [data-tone] · 260ms · ease-cut (a cut, not a fade)
+       Two observers with different rootMargins: the header cares about
+       what is under the top strip, the CTA about what is under the
+       bottom-right corner.
+       ============================================================= */
+    var hdr = document.getElementById('hdr');
+    var fab = document.getElementById('fab');
+    var toned = document.querySelectorAll('[data-tone]');
+
+    function toneObserver(margin, apply) {
+      var o = new IntersectionObserver(function (entries) {
+        ioEverFired = true;
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) apply(entries[i].target.getAttribute('data-tone'));
+        }
+      }, { rootMargin: margin, threshold: 0 });
+      for (var i = 0; i < toned.length; i++) o.observe(toned[i]);
+      return o;
+    }
+
+    toneObserver('-1px 0px -96% 0px', function (tone) {
+      if (!hdr) return;
+      hdr.classList.toggle('on-light', tone === 'light');
+    });
+
+    toneObserver('-88% 0px -6% 0px', function (tone) {
+      if (!fab) return;
+      if (tone === 'light') {
+        fab.style.setProperty('--fab-bg', '#0B0B0C');
+        fab.style.setProperty('--fab-fg', '#EDEAE3');
+      } else {
+        fab.style.setProperty('--fab-bg', '#F4F1EA');
+        fab.style.setProperty('--fab-fg', '#0B0B0C');
+      }
+    });
+
+    /* =============================================================
+       LENIS — optional smooth scroll
+       Loaded with `defer`, so it is checked after parse. If the CDN
+       failed, window.Lenis is undefined and we simply never call it.
+       Nothing else in this file depends on Lenis existing.
+       ============================================================= */
+    var lenis = null;
+    function initLenis() {
+      if (typeof window.Lenis !== 'function') return;
+      try {
+        lenis = new window.Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.6 });
+        var raf = function (time) { lenis.raf(time); requestAnimationFrame(raf); };
+        requestAnimationFrame(raf);
+      } catch (e) { lenis = null; }
+    }
+    if (document.readyState === 'complete') initLenis();
+    else window.addEventListener('load', initLenis);
+
+    /* =============================================================
+       THE VELOCITY BUS  ·  the spine of this direction
+       Writes --vel (0..1) and --dir (-1|1) onto :root while scrolling.
+       Asymmetric lerp: attack 0.28 (surge), release 0.08 (settle), so
+       type leaps with the scroll and drifts back into register.
+       The loop STOPS 600ms after scrolling ends, so a still page costs
+       nothing. Everything downstream is transform/opacity only.
+       ============================================================= */
+    var last = window.pageYOffset || 0;
+    var sm = 0, dir = 1, running = false, idleTimer = null, rafId = 0;
+
+    function tick() {
+      var y = window.pageYOffset || 0;
+      var d = y - last;
+      last = y;
+      if (Math.abs(d) > 0.5) dir = d > 0 ? 1 : -1;
+      var target = Math.min(Math.abs(d) / 48, 1);
+      sm += (target - sm) * (target > sm ? 0.28 : 0.08);
+      if (sm < 0.002) sm = 0;
+      root.style.setProperty('--vel', sm.toFixed(3));
+      root.style.setProperty('--dir', String(dir));
+      if (running) rafId = requestAnimationFrame(tick);
+    }
+
+    function wake() {
+      if (!running) { running = true; last = window.pageYOffset || 0; rafId = requestAnimationFrame(tick); }
+      if (idleTimer) window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(function () {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        sm = 0;
+        root.style.setProperty('--vel', '0');
+      }, 600);
+    }
+    window.addEventListener('scroll', wake, { passive: true });
+
+  } catch (err) {
+    /* BACKSTOP 3 — any failure anywhere above and the whole motion layer
+       is discarded. The page reverts to a plain, fully visible document. */
+    root.classList.remove('mo');
+    root.classList.add('mo-off');
+  }
+})();
+</script>
+</body>
+</html>

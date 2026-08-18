@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Agency work for small businesses</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Sites that stand next to what London and New York studios put out — for a fraction of the cost and a tiny fraction of the effort from you. From £995 plus £15/mo, or £45/mo with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================
+   DCS — Direction 42 "POSTER / TIDE / GLASS ISLAND"
+   Round 4 variation on direction 27 "Poster".
+
+   CHORD ...... Tide. Deep teal leads; crimson is the alarm note.
+   NAV ........ B — floating glass island (the ONE sanctioned blur).
+   LAYOUT ..... every section fits one viewport at >=1024px.
+
+   Poster DNA kept: neutral shell, chromatic contents. No gradients
+   anywhere. No blur and no shadow on any structural surface — the
+   glass island is the single exception and it owns both.
+   ============================================================ */
+
+:root{
+  /* ---- THE ROOM (neutral only) ---- */
+  --paper:    #F2F3F2;
+  --bone:     #E2E4E3;
+  --ink:      #0E1113;
+  --graphite: #171C1E;
+  --chalk:    #F2F3F2;
+  --ash:      #4E5658;   /* 6.75:1 on paper */
+  --smoke:    #A3AAAC;   /* 8.03:1 on ink, 7.30:1 on graphite */
+  --rule-light: rgba(14,17,19,.14);
+  --rule-dark:  rgba(242,243,242,.20);
+
+  /* ---- THE FURNITURE — TIDE ----------------------------------
+     Teal leads and carries the large areas. A properly deep teal
+     is nearly a neutral, which is why it can hold a whole tile.
+     Crimson appears five times on the page and means something
+     every time.
+     ------------------------------------------------------------ */
+  --teal-900: #04353B;   /* deepest. glass tint + darkest object   */
+  --teal-700: #05555E;   /* white on it: 8.99:1  — the workhorse   */
+  --teal-500: #0A7C86;   /* white on it: 4.97:1  — mid object      */
+  --teal-300: #10ADB4;   /* ink on it:   6.86:1  — light object    */
+  --teal-lit: #16B7BC;   /* ink 7.72:1 / on ink 7.72:1 — marks     */
+  --crimson:      #C0102F;  /* white on it: 6.25:1 — the alarm     */
+  --crimson-lit:  #E8354F;  /* 4.56:1 on ink — marks on dark only  */
+
+  /* ---- type ---- */
+  --font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs-display: clamp(2.5rem, min(10vw, 16svh), 9rem);   /* 144px @1440x900 */
+  --fs-h2:      clamp(1.6rem, min(5.9vw, 9.4svh), 5.25rem); /* 84px @1440x900 */
+  --fs-h3:      clamp(1.15rem, 1.55vw, 1.4rem);     /*  22px @1440 */
+  --fs-figure:  clamp(1.75rem, 3vw, 2.85rem);       /*  46px @1440 */
+  --fs-lead:    clamp(1rem, 1.3vw, 1.25rem);        /*  20px @1440 */
+  --fs-body:    1.0625rem;                          /*  17px       */
+  --fs-small:   0.9375rem;                          /*  15px       */
+  --fs-tiny:    0.875rem;                           /*  14px       */
+  --fs-label:   0.75rem;                            /*  12px       */
+
+  /* ---- system ---- */
+  --gut: clamp(1.25rem, 3.2vw, 3rem);
+  --max: 1440px;
+  --nav-clear: clamp(80px, 9svh, 108px);   /* room under the island  */
+  --pad-b:     clamp(1.75rem, 5svh, 4rem);
+  --float-clear: 68px;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --snap: cubic-bezier(.2,.8,.2,1);
+  --glassease: cubic-bezier(.32,.72,0,1);
+
+  /* z-scale */
+  --z-panel: 1;
+  --z-float: 60;
+  --z-header: 70;
+  --z-menu: 90;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  overflow-x:clip;                 /* clip, not hidden — keeps <html> the y scroller */
+  scroll-snap-type:y proximity;    /* proximity, never mandatory */
+}
+html:focus-within{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html:focus-within{scroll-behavior:auto}
+  html{scroll-snap-type:none}
+}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.5;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4,p,figure,blockquote,ul,ol,dl,dd,table{margin:0}
+ul,ol{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+table{border-collapse:collapse;width:100%}
+
+:focus-visible{outline:3px solid var(--crimson);outline-offset:3px}
+.on-dark :focus-visible{outline-color:var(--crimson-lit)}   /* 4.56:1 on ink */
+.island :focus-visible{outline-color:#fff;outline-offset:2px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--ink);color:var(--chalk);
+  padding:14px 20px;font-weight:700;text-decoration:none;
+}
+.skip:focus{left:8px;top:8px}
+
+.vh{
+  position:absolute!important;width:1px;height:1px;
+  margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ============================================================
+   TYPE PRIMITIVES
+   ============================================================ */
+.display{
+  font-size:var(--fs-display);line-height:.85;font-weight:800;
+  letter-spacing:-.038em;text-transform:uppercase;text-wrap:balance;
+}
+.h2{
+  font-size:var(--fs-h2);line-height:.88;font-weight:800;
+  letter-spacing:-.034em;text-transform:uppercase;text-wrap:balance;
+}
+.h3{font-size:var(--fs-h3);line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:var(--fs-lead);line-height:1.4;max-width:44ch}
+.label{
+  font-size:var(--fs-label);font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;line-height:1.2;
+}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+/* GUARD — measured in Schibsted Grotesk: under tabular-nums the comma is
+   promoted to a full digit slot (30.4px -> 63.5px at 100px/800), so "£1,995"
+   renders as "£1 , 995". Price figures therefore never take tnum. Do not add
+   .num to .tier__fig. */
+.tier__fig{font-variant-numeric:normal;font-feature-settings:normal}
+
+/* ============================================================
+   PANELS — one viewport each. Hard flat seams, no overlap,
+   no radius, no shadow. Measurement stays honest.
+   ============================================================ */
+.panel{
+  position:relative;z-index:var(--z-panel);
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--nav-clear) 0 var(--pad-b);
+  scroll-snap-align:start;
+}
+.panel--paper{background:var(--paper);color:var(--ink)}
+.panel--bone{background:var(--bone);color:var(--ink)}
+.panel--ink{background:var(--ink);color:var(--chalk)}
+.panel--graphite{background:var(--graphite);color:var(--chalk)}
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.on-dark a{color:var(--chalk)}
+
+/* two-column section frame: heading (and its furniture) beside the content */
+.split{
+  display:grid;gap:clamp(1.5rem,3vw,3.25rem);
+  grid-template-columns:minmax(0,1fr) minmax(0,2.05fr);
+  align-items:start;
+}
+.split--even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+
+/* section heading block */
+.sechead__bar{
+  display:block;height:11px;width:clamp(78px,12vw,164px);
+  background:var(--teal-500);transform-origin:left center;
+  margin-bottom:clamp(.9rem,1.8vw,1.4rem);
+}
+.sechead__bar--deep{background:var(--teal-700)}
+.sechead__bar--lit{background:var(--teal-300)}
+.sechead__bar--crimson{background:var(--crimson)}
+.sechead__kicker{color:var(--ash);margin-bottom:.7rem}
+.on-dark .sechead__kicker{color:var(--smoke)}
+.sechead .h2{color:inherit;transition:color .7s var(--ease)}
+.sechead__sub{margin-top:clamp(.9rem,1.6vw,1.4rem);color:var(--ash)}
+.on-dark .sechead__sub{color:var(--smoke)}
+.stack-head .sechead{margin-bottom:clamp(1.5rem,3svh,2.75rem)}
+
+/* ============================================================
+   BUTTONS — flat, hard. No blur, no soft shadow.
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  min-height:52px;padding:.8rem .85rem .8rem 1.4rem;
+  font-size:var(--fs-small);font-weight:700;letter-spacing:.02em;
+  text-decoration:none;border:2px solid transparent;
+  transition:transform .18s var(--snap), background-color .18s linear, color .18s linear, border-color .18s linear;
+}
+/* button-in-button: the arrow lives in its own ring, flush right */
+.btn__arrow{
+  display:grid;place-items:center;
+  width:30px;height:30px;flex:0 0 30px;border-radius:50%;
+  border:2px solid currentColor;
+  transition:transform .32s var(--glassease);
+}
+.btn__arrow svg{width:12px;height:12px;display:block}
+.btn:hover .btn__arrow,.btn:focus-visible .btn__arrow{transform:translate(3px,-3px) scale(1.06)}
+.btn:active{transform:scale(.98)}
+
+.btn--solid{background:var(--ink);color:var(--chalk)}
+.btn--solid:hover{background:var(--teal-700)}
+.on-dark .btn--solid{background:var(--chalk);color:var(--ink)}
+.on-dark .btn--solid:hover{background:var(--teal-300);color:var(--ink)}
+.btn--line{border-color:currentColor;color:inherit;background:transparent;padding-inline:1.4rem}
+.btn--line:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.on-dark .btn--line:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+/* specificity must beat `.on-dark a` or the label loses its contrast */
+.btn--teal,.on-dark .btn--teal{background:var(--teal-300);color:var(--ink);border-color:var(--teal-300);padding-inline:1.4rem}
+.btn--teal:hover,.on-dark .btn--teal:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+
+/* ============================================================
+   NAV B — FLOATING GLASS ISLAND
+   Detached, rounded, teal-tinted, genuinely blurred and
+   saturated. Bright top edge, dark bottom edge, and a shadow
+   thrown downward because the light is above.
+
+   TRAP: backdrop-filter (and the translateX centring) both make
+   this element a containing block for position:fixed children.
+   The mobile panel is therefore a SIBLING at body level — never
+   a descendant of .island. See #menu below.
+   ============================================================ */
+.island{
+  position:fixed;z-index:var(--z-header);
+  top:clamp(10px,1.3vw,18px);
+  left:50%;transform:translateX(-50%);
+  width:min(calc(100% - (2 * var(--gut))), var(--max));
+  display:flex;align-items:center;gap:clamp(.75rem,1.6vw,1.75rem);
+  padding:.5rem .5rem .5rem clamp(.9rem,1.6vw,1.4rem);
+  border-radius:999px;
+  color:#fff;
+  background:rgba(4,53,59,.80);
+  -webkit-backdrop-filter:blur(20px) saturate(190%);
+  backdrop-filter:blur(20px) saturate(190%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,.34),   /* bright top edge   */
+    inset 0 -1px 0 0 rgba(0,0,0,.42),        /* darker bottom edge */
+    0 0 0 1px rgba(255,255,255,.11),         /* hairline           */
+    0 20px 44px -22px rgba(0,0,0,.62),       /* light from above   */
+    0 4px 12px -8px rgba(0,0,0,.50);
+}
+/* if the browser cannot blur, go opaque rather than murky */
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))){
+  .island{background:rgba(4,53,59,.97)}
+}
+.brand{
+  display:flex;align-items:baseline;gap:.55rem;min-height:44px;
+  text-decoration:none;font-weight:900;letter-spacing:-.04em;
+  font-size:1.3rem;line-height:1;padding-block:.35rem;color:#fff;
+}
+.brand__mark{
+  background:var(--teal-300);color:var(--ink);
+  padding:.26em .32em .2em;letter-spacing:-.02em;
+}
+.brand__full{
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.82);
+}
+.island__nav{margin-left:auto;display:flex;align-items:center;gap:clamp(.85rem,1.7vw,1.7rem)}
+.island__nav a{
+  display:inline-flex;align-items:center;min-height:44px;
+  text-decoration:none;font-size:var(--fs-small);font-weight:500;
+  padding:.5rem 0;position:relative;color:#fff;
+}
+.island__nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;
+  background:var(--teal-lit);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--glassease);
+}
+.island__nav a:hover::after,.island__nav a:focus-visible::after{transform:scaleX(1)}
+.island__tel{
+  display:inline-flex;align-items:center;gap:.45rem;
+  text-decoration:none;font-weight:700;font-size:var(--fs-small);
+  min-height:44px;white-space:nowrap;color:#fff;
+  /* NOT crimson: measured, #E8354F reads only 1.80:1 against this glass.
+     Crimson only ever appears on an opaque field on this page. */
+  border-bottom:3px solid var(--teal-lit);
+}
+.island .btn{min-height:44px;padding:.4rem .4rem .4rem 1.05rem;border-radius:999px}
+.island .btn__arrow{width:28px;height:28px;flex:0 0 28px}
+.island .btn--solid{background:#fff;color:var(--teal-900)}
+.island .btn--solid:hover{background:var(--teal-300);color:var(--ink)}
+
+/* no-JS: the burger cannot open anything, so it is not shown at all.
+   .mobar (call + quote) and the full footer nav carry navigation instead. */
+html:not(.js) .burger{display:none!important}
+
+/* burger */
+.burger{
+  display:none;margin-left:auto;
+  width:46px;height:46px;place-items:center;border-radius:50%;
+  border:2px solid rgba(255,255,255,.55);
+}
+.burger__box{width:20px;height:14px;position:relative}
+.burger__box i{
+  position:absolute;left:0;right:0;height:2px;background:currentColor;
+  transition:transform .34s var(--glassease), opacity .2s linear;
+}
+.burger__box i:nth-child(1){top:0}
+.burger__box i:nth-child(2){top:6px}
+.burger__box i:nth-child(3){top:12px}
+[aria-expanded="true"] .burger__box i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+[aria-expanded="true"] .burger__box i:nth-child(2){opacity:0}
+[aria-expanded="true"] .burger__box i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ---- MOBILE PANEL — sibling of .island, direct child of <body>.
+       If this were nested inside .island the backdrop-filter would
+       make the island its containing block and this "fullscreen"
+       overlay would be trapped in a 46px-tall pill. ---- */
+.menu{
+  position:fixed;inset:0;z-index:var(--z-menu);
+  background:var(--ink);color:var(--chalk);
+  display:flex;flex-direction:column;
+  padding:calc(var(--nav-clear) + .5rem) var(--gut) 2rem;
+  overflow-y:auto;
+  border-top:6px solid var(--teal-500);
+}
+.menu[hidden]{display:none}
+.menu__list{display:flex;flex-direction:column;gap:.15rem;margin-bottom:1.75rem}
+.menu__list a{
+  display:block;text-decoration:none;
+  font-size:clamp(1.9rem,9.5vw,2.9rem);font-weight:800;
+  letter-spacing:-.03em;text-transform:uppercase;line-height:1.12;
+  padding:.3rem 0;border-bottom:1px solid var(--rule-dark);
+}
+.menu__foot{margin-top:auto;display:grid;gap:.7rem}
+.menu__close{
+  position:absolute;top:14px;right:var(--gut);
+  width:48px;height:48px;display:grid;place-items:center;border-radius:50%;
+  border:2px solid currentColor;
+}
+.js .menu__item{opacity:0;transform:translateY(22px)}
+.menu.is-open .menu__item{
+  opacity:1;transform:none;
+  transition:opacity .45s linear, transform .55s var(--glassease);
+}
+
+/* ============================================================
+   HERO — neutral off-white room; colour arrives as objects.
+   The marquee band is docked to the hero's own bottom edge so
+   it does not eat a viewport of its own.
+   ============================================================ */
+.hero{position:relative;overflow:hidden;padding-bottom:calc(var(--band-h) + var(--pad-b))}
+.hero__grid{display:grid;gap:clamp(.9rem,1.7vw,1.6rem)}
+.hero__eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;color:var(--ash)}
+.hero__eyebrow .dot{width:7px;height:7px;background:var(--teal-500);flex:0 0 7px}
+.hero__eyebrow .dot--crimson{background:var(--crimson)}  /* alarm note #2 */
+.hero h1{margin:0}
+
+/* per-character reveal: letters ARRIVE IN COLOUR and resolve to ink */
+.split-t .ch{display:inline-block;white-space:pre}
+.js .split-t.is-split .ch{opacity:0;transform:translateY(.32em);color:var(--tint,var(--teal-500))}
+.split-t.is-split.is-in .ch{
+  opacity:1;transform:none;color:inherit;
+  transition:opacity .5s linear, transform .66s var(--ease), color .95s ease-out;
+  transition-delay:var(--d,0ms);
+}
+/* the plate word — a hard-edged teal block sat inside the headline */
+.plate{display:inline-block;background:var(--teal-700);color:#fff;padding:0 .12em .06em;transform-origin:left center}
+.js .plate{transform:scaleX(0)}
+.js .hero.is-in .plate{transform:scaleX(1);transition:transform .7s var(--ease) .15s}
+
+.hero__cols{
+  display:grid;gap:clamp(1.25rem,2.4vw,2.5rem);
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:end;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.35rem}
+.pricechip{
+  background:var(--teal-300);color:var(--ink);
+  padding:clamp(.9rem,1.5vw,1.35rem) clamp(1rem,1.7vw,1.45rem);
+  display:grid;gap:.35rem;align-self:end;
+}
+.pricechip__big{font-size:clamp(1.25rem,2vw,1.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.pricechip__note{font-size:var(--fs-tiny);font-weight:500;line-height:1.4}
+.hero__tel{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:clamp(1rem,1.45vw,1.25rem);font-weight:800;letter-spacing:-.01em;
+  text-decoration:none;min-height:52px;padding:.8rem 1.4rem;border:2px solid var(--ink);
+  transition:background-color .18s linear,color .18s linear;
+}
+.hero__tel:hover{background:var(--ink);color:var(--chalk)}
+
+/* ---- marquee band, docked inside the hero viewport ---- */
+:root{--band-h:clamp(48px,6svh,62px)}
+.band{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  background:var(--teal-700);color:#fff;
+  height:var(--band-h);display:flex;align-items:center;overflow:hidden;
+}
+.band__track{display:flex;width:max-content}
+.band__run{
+  display:flex;align-items:center;flex:0 0 auto;padding-right:2rem;
+  font-size:clamp(.95rem,1.35vw,1.25rem);font-weight:800;
+  letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;
+}
+.band__run span{padding-inline:1rem;display:inline-flex;align-items:center;gap:1rem}
+.band__run span::after{content:"";width:8px;height:8px;background:var(--teal-lit);flex:0 0 8px}
+@media (prefers-reduced-motion: no-preference){
+  .band__track{animation:marquee 46s linear infinite}
+  .band:hover .band__track{animation-play-state:paused}
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   THE ARGUMENT — merged section.
+   Direction 27 ran "the claim" (3 objects) and "the promise"
+   (4 things you never do) as two consecutive panels making the
+   same case. Under one-section-per-viewport they are one room:
+   three loud objects, then the ruled list that proves the third.
+   ============================================================ */
+.claims{display:grid;gap:clamp(.6rem,1vw,.9rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.claim{
+  display:flex;flex-direction:column;gap:clamp(1rem,2svh,2rem);
+  padding:clamp(1.1rem,1.8vw,1.6rem);
+  min-height:clamp(175px,23svh,235px);
+}
+.claim--deep{background:var(--teal-700);color:#fff}
+.claim--mid{background:var(--teal-500);color:#fff}
+.claim--lit{background:var(--teal-300);color:var(--ink)}
+.claim__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em}
+.claim__h{
+  font-size:clamp(1.25rem,2vw,1.75rem);font-weight:800;letter-spacing:-.035em;
+  line-height:.98;text-transform:uppercase;margin-bottom:.6rem;margin-top:auto;
+}
+.claim__p{font-size:var(--fs-tiny);font-weight:500;line-height:1.42}
+
+.promise{
+  display:grid;gap:0;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--rule-dark);margin-top:clamp(1rem,2.5svh,2rem);
+}
+.promise li{
+  padding:clamp(.9rem,1.7vw,1.4rem) clamp(.8rem,1.4vw,1.3rem) clamp(1rem,2vw,1.6rem) 0;
+  border-bottom:1px solid var(--rule-dark);border-right:1px solid var(--rule-dark);
+}
+.promise li:last-child{border-right:0}
+.promise__n{
+  display:grid;place-items:center;width:38px;height:38px;
+  font-weight:900;font-size:1rem;margin-bottom:.85rem;
+}
+.promise li:nth-child(1) .promise__n{background:var(--teal-300);color:var(--ink)}
+.promise li:nth-child(2) .promise__n{background:var(--teal-500);color:#fff}
+.promise li:nth-child(3) .promise__n{background:var(--chalk);color:var(--ink)}
+.promise li:nth-child(4) .promise__n{background:var(--crimson);color:#fff}  /* alarm #3 */
+.promise h3{margin-bottom:.4rem}
+.promise p{color:var(--smoke);font-size:var(--fs-tiny);line-height:1.42}
+
+/* ============================================================
+   MEDIA OBJECTS — aspect-ratio + solid neutral fallback so a
+   failed load can never collapse the layout.
+   ============================================================ */
+.media{position:relative;background:var(--teal-900);overflow:hidden}
+/* ALL photographic media passes through the chord's duotone, exactly as the
+   sector tiles already do, so generated media cannot smuggle in a hue that is
+   not in the chord. vid-ink is natively pink and orange and would otherwise
+   have contradicted the entire point of a teal-and-crimson page. */
+.media--duo{background:var(--teal-700)}
+.media--duo--mid{background:var(--teal-500)}
+.media--duo video,.media--duo img{filter:grayscale(1) contrast(1.08);mix-blend-mode:luminosity}
+.media--169{aspect-ratio:16/9}
+.split .media--169{max-height:min(30svh,260px)}
+.media video,.media img{width:100%;height:100%;object-fit:cover;display:block}
+.media__cap{margin-top:.65rem;font-size:var(--fs-tiny);color:var(--ash);line-height:1.4;max-width:46ch}
+.on-dark .media__cap{color:var(--smoke)}
+.media__toggle{
+  position:absolute;left:10px;bottom:10px;z-index:2;
+  display:inline-flex;align-items:center;gap:.4rem;
+  min-height:38px;padding:.35rem .8rem;
+  background:var(--ink);color:var(--chalk);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.media__toggle:hover{background:var(--crimson);color:#fff}
+
+/* ============================================================
+   SERVICES — six rows, colour floods on interaction
+   ============================================================ */
+.svcs{border-top:2px solid var(--ink)}
+.svc{
+  position:relative;display:grid;
+  grid-template-columns:3.5rem minmax(0,1fr) minmax(0,1.15fr) 2rem;
+  gap:clamp(.75rem,1.6vw,1.5rem);align-items:baseline;
+  padding:clamp(.85rem,1.6svh,1.5rem) clamp(.6rem,1.2vw,1.1rem);
+  border-bottom:1px solid var(--rule-light);
+  text-decoration:none;color:inherit;isolation:isolate;
+}
+.svc::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--flood,var(--teal-700));
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .42s var(--glassease);
+}
+.svc:hover::before,.svc:focus-visible::before{transform:scaleY(1)}
+.svc>*{transition:color .2s linear}
+.svc:hover,.svc:focus-visible{color:var(--on-flood,#fff)}
+.svc:hover .svc__desc,.svc:focus-visible .svc__desc{color:var(--on-flood,#fff)}
+.svc__idx{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em}
+.svc__name{font-size:clamp(1.15rem,2.15vw,2rem);font-weight:800;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.svc__desc{color:var(--ash);font-size:var(--fs-tiny);line-height:1.4}
+.svc__go{justify-self:end;font-size:1.3rem;line-height:1;transition:transform .3s var(--snap)}
+.svc:hover .svc__go,.svc:focus-visible .svc__go{transform:translate(4px,-4px)}
+.svc:nth-child(2n){--flood:var(--teal-500);--on-flood:#fff}
+.svc:nth-child(3n){--flood:var(--teal-300);--on-flood:var(--ink)}
+
+/* ============================================================
+   WORK — nine clients, nine tiles, the biggest colour moment
+   ============================================================ */
+.work{display:grid;gap:clamp(.5rem,.8vw,.75rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;
+  gap:1.25rem;min-height:clamp(120px,19svh,205px);
+  padding:clamp(.85rem,1.35vw,1.2rem);
+  transition:background-color .14s linear, color .14s linear;
+}
+.tile--deep{background:var(--teal-700);color:#fff}
+.tile--mid{background:var(--teal-500);color:#fff}
+.tile--lit{background:var(--teal-300);color:var(--ink)}
+.tile--paper{background:var(--paper);color:var(--ink)}
+.tile--ink{background:var(--ink);color:var(--chalk);outline:1px solid var(--rule-dark);outline-offset:-1px}
+.tile--crimson{background:var(--crimson);color:#fff}       /* alarm #4 */
+.tile:hover,.tile:focus-within{background:var(--chalk);color:var(--ink)}
+.tile--paper:hover{background:var(--ink);color:var(--chalk)}
+.tile__sector{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.tile__name{font-size:clamp(1.05rem,1.5vw,1.35rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin-bottom:.45rem}
+.tile__line{font-size:var(--fs-tiny);font-weight:500;line-height:1.35}
+.workfoot{
+  margin-top:clamp(1rem,2.2svh,1.75rem);display:grid;gap:.55rem;
+  color:var(--smoke);font-size:var(--fs-tiny);
+}
+.workfoot span{display:block}
+
+/* ============================================================
+   SECTORS — duotone tiles: colour enters through the imagery
+   ============================================================ */
+.sectors{display:grid;gap:clamp(.6rem,1.1vw,1rem);grid-template-columns:repeat(4,minmax(0,1fr))}
+.duo figure{margin:0}
+.duo__frame{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--teal-700)}
+.duo:nth-child(2) .duo__frame{background:var(--teal-500)}
+.duo:nth-child(3) .duo__frame{background:var(--teal-300)}
+.duo:nth-child(4) .duo__frame{background:var(--crimson)}   /* alarm #5 */
+.duo__frame img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.08);mix-blend-mode:luminosity;
+  transition:transform .8s var(--ease);
+}
+.duo:hover .duo__frame img{transform:scale(1.04)}
+.duo figcaption{margin-top:.7rem;display:flex;flex-direction:column;gap:.15rem}
+.duo__sector{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.duo__what{font-size:var(--fs-tiny);color:var(--ash);line-height:1.4}
+
+/* ============================================================
+   PROCESS — four ruled steps beside a process image
+   ============================================================ */
+.steps{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.step{
+  display:grid;grid-template-columns:6.5rem minmax(0,1fr);
+  gap:.4rem clamp(1rem,2vw,2rem);align-items:baseline;
+  padding:clamp(.8rem,1.7svh,1.35rem) 0;border-bottom:1px solid var(--rule-dark);
+}
+.step__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;color:var(--smoke)}
+.step p{font-size:var(--fs-tiny);color:var(--smoke);grid-column:2;line-height:1.42;margin-top:.2rem}
+.step--last{background:var(--teal-500);color:#fff;border-bottom-color:var(--teal-500);padding-inline:clamp(.7rem,1.4vw,1.1rem)}
+.step--last .step__n,.step--last p{color:rgba(255,255,255,.92)}
+
+/* ============================================================
+   PRICING — legibility is the brief.
+   Heading, Option A and Option B side by side; the shared
+   inclusions run full width beneath. Everything on one screen.
+   ============================================================ */
+.pricecols{
+  display:grid;gap:clamp(1.25rem,2.4vw,2.5rem);
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,1fr);
+  align-items:start;
+}
+.priceblock__head{
+  display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline;
+  padding-bottom:.7rem;margin-bottom:.9rem;border-bottom:2px solid var(--ink);
+}
+.priceblock__head h3{font-size:var(--fs-h3);font-weight:800;letter-spacing:-.02em;text-transform:uppercase}
+.priceblock__head .label{color:var(--ash)}
+.tiers{display:grid;gap:.45rem}
+.tier{
+  display:grid;grid-template-columns:minmax(0,1fr) auto auto;
+  gap:.35rem clamp(.75rem,1.8vw,2rem);align-items:baseline;
+  padding:clamp(.65rem,1.3svh,1.05rem) clamp(.7rem,1.2vw,1.05rem);
+  background:var(--bone);
+}
+.tier--pop{background:var(--crimson);color:#fff}   /* the alarm on the decision */
+.tier__name{font-size:1rem;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;text-align:left}
+.tier__pages{display:block;font-size:var(--fs-label);font-weight:500;letter-spacing:.1em;text-transform:uppercase;opacity:.92;margin-top:.22rem}
+.tier__fig{font-size:var(--fs-figure);font-weight:800;letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.tier__sub{display:block;font-size:var(--fs-label);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem;opacity:.92}
+.tier__tag{
+  display:inline-block;background:var(--ink);color:var(--chalk);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.22rem .45rem;margin-left:.5rem;vertical-align:middle;
+}
+.tier--pop .tier__tag{background:#fff;color:var(--crimson)}
+.pricenote{margin-top:.8rem;font-size:var(--fs-tiny);color:var(--ash);line-height:1.42}
+.incl{margin-top:clamp(1rem,2.4svh,2rem);border-top:1px solid var(--rule-light);padding-top:clamp(.9rem,1.8svh,1.4rem)}
+.incl h4{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;color:var(--ash)}
+.incl ul{display:flex;flex-wrap:wrap;gap:.4rem}
+.incl li{font-size:var(--fs-tiny);font-weight:500;border:1px solid var(--rule-light);padding:.35rem .65rem}
+.addons{margin-top:.85rem;font-size:var(--fs-tiny);color:var(--ash);max-width:none;line-height:1.45}
+.addons strong{color:var(--ink);font-weight:700}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{display:grid;gap:clamp(.6rem,1.1vw,1rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.quote{
+  display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;
+  padding:clamp(1.1rem,1.9vw,1.7rem);min-height:clamp(200px,26svh,290px);
+}
+.quote--deep{background:var(--teal-700);color:#fff}
+.quote--mid{background:var(--teal-500);color:#fff}
+.quote--lit{background:var(--teal-300);color:var(--ink)}
+.quote blockquote p{font-size:clamp(1.05rem,1.6vw,1.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.3;text-wrap:pretty}
+.quote figcaption{font-size:var(--fs-tiny);font-weight:700}
+.quote figcaption span{display:block;font-weight:500;opacity:.92}
+
+/* ============================================================
+   PERSON
+   ============================================================ */
+.person{display:grid;gap:clamp(1.5rem,3vw,3.5rem);grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}
+.creds{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.creds div{display:flex;justify-content:space-between;gap:1.25rem;align-items:baseline;padding:.8rem 0;border-bottom:1px solid var(--rule-dark)}
+.creds dt{font-size:var(--fs-tiny);color:var(--smoke)}
+.creds dd{margin:0;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;text-align:right}
+.person__body p+p{margin-top:.85rem}
+.person__body{color:var(--smoke);font-size:var(--fs-lead);line-height:1.48;max-width:48ch}
+.person__body strong{color:var(--chalk);font-weight:700}
+
+/* ============================================================
+   THE QUIET ONE — a viewport carrying almost nothing, and the
+   one moving colour object on the page.
+   ============================================================ */
+.quiet .wrap{display:grid;gap:clamp(1.5rem,4vw,4rem);grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}
+.quiet__line{font-size:clamp(1.1rem,2vw,1.75rem);font-weight:500;letter-spacing:-.02em;max-width:24ch;line-height:1.3}
+.quiet__mark{display:block;width:clamp(44px,5vw,76px);height:clamp(44px,5vw,76px);background:var(--teal-500);margin-bottom:clamp(1.5rem,3.5vw,3rem)}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final__grid{display:grid;gap:clamp(1.5rem,3.5vw,3.5rem);grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end}
+.final__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}
+.contactlist{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.contactlist a,.contactlist p{
+  display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:.8rem 0;border-bottom:1px solid var(--rule-dark);
+  text-decoration:none;font-size:var(--fs-tiny);transition:color .18s linear;
+}
+.contactlist a:hover{color:var(--teal-lit)}
+.contactlist b{font-size:1rem;font-weight:800;letter-spacing:-.01em;text-align:right}
+
+/* ============================================================
+   FOOTER — the one block that is not a full viewport
+   ============================================================ */
+.footer{
+  background:var(--graphite);color:var(--chalk);position:relative;z-index:2;
+  padding:clamp(2.5rem,5vw,4.5rem) 0 calc(1.75rem + var(--mobile-bar,0px));
+  scroll-snap-align:end;
+}
+.footcols{
+  display:grid;gap:clamp(1.5rem,3vw,3rem);grid-template-columns:repeat(4,minmax(0,1fr));
+  padding-bottom:clamp(1.75rem,3vw,2.75rem);border-bottom:1px solid var(--rule-dark);
+}
+.footcols h2{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:.9rem}
+.footcols a{display:flex;align-items:center;min-height:40px;text-decoration:none;font-size:var(--fs-tiny)}
+.footcols a:hover{text-decoration:underline;text-underline-offset:4px}
+.footcols address{font-style:normal;font-size:var(--fs-tiny);color:var(--smoke);line-height:1.65}
+/* the email address is 36 unbreakable characters and will push the page
+   8px wide in a 4-up footer at 1024. Let it break. */
+.footcols address,.footcols a,.contactlist b{overflow-wrap:anywhere}
+.footcols address a{display:inline-flex;align-items:center;min-height:40px;color:var(--chalk);font-weight:700}
+.footbar{
+  padding-top:1.4rem;display:flex;flex-wrap:wrap;gap:.75rem 2rem;
+  justify-content:space-between;align-items:center;font-size:var(--fs-tiny);color:var(--smoke);
+}
+.footbrand{display:flex;align-items:baseline;gap:.55rem;font-weight:900;font-size:1.2rem;letter-spacing:-.04em;color:var(--chalk)}
+
+/* ============================================================
+   PERSISTENT FLOATING CTA — flat, no blur. The island owns the
+   glass; nothing else on the page is allowed any.
+   ============================================================ */
+.float{
+  position:fixed;right:clamp(1rem,2vw,1.75rem);bottom:clamp(1rem,2vw,1.75rem);
+  z-index:var(--z-float);display:inline-flex;align-items:center;gap:.6rem;
+  min-height:50px;padding:.8rem 1.25rem;
+  background:var(--ink);color:var(--chalk);border:2px solid var(--chalk);
+  font-size:var(--fs-tiny);font-weight:700;text-decoration:none;
+  transition:background-color .22s linear,color .22s linear,border-color .22s linear,transform .2s var(--snap);
+}
+.float[data-tone="dark"]{background:var(--chalk);color:var(--ink);border-color:var(--ink)}
+.float:hover{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+.float:active{transform:scale(.98)}
+/* The persistent CTA arrives only after the hero. In the first viewport it
+   would compete with the hero's own quote button and phone number, and it
+   collided with both the price chip and the docked marquee band. Without JS
+   it is not shown at all — the hero CTA, .mobar and the footer cover it. */
+html:not(.js) .float{display:none}
+.js .float{opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .32s var(--glassease),visibility .32s linear,
+             background-color .22s linear,color .22s linear,border-color .22s linear}
+.js .float.is-on{opacity:1;visibility:visible;pointer-events:auto}
+.float__dot{width:10px;height:10px;background:var(--teal-lit);flex:0 0 10px}
+.float[data-tone="dark"] .float__dot{background:var(--teal-700)}
+.float:hover .float__dot{background:#fff}
+
+/* mobile bottom action bar */
+.mobar{display:none;position:fixed;inset:auto 0 0 0;z-index:var(--z-float);background:var(--ink);border-top:1px solid var(--rule-dark)}
+.mobar a{
+  flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:58px;text-decoration:none;color:var(--chalk);font-size:var(--fs-tiny);font-weight:700;
+}
+.mobar a+a{background:var(--teal-300);color:var(--ink)}
+
+/* ============================================================
+   REVEALS
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px)}
+.js .reveal.is-in{opacity:1;transform:none;transition:opacity .6s linear var(--d,0ms), transform .8s var(--ease) var(--d,0ms)}
+.js .sechead__bar{transform:scaleX(0)}
+.js .sechead__bar.is-in{transform:scaleX(1);transition:transform .7s var(--ease)}
+.js .resolve{color:var(--ash)}
+.js .on-dark .resolve{color:var(--smoke)}
+.js .resolve.is-in{color:inherit}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .js .reveal,.js .split-t.is-split .ch,.js .menu__item{opacity:1!important;transform:none!important}
+  .js .split-t.is-split .ch{color:inherit!important}
+  .js .sechead__bar,.js .plate{transform:none!important}
+  .js .resolve{color:inherit!important}
+  .band__track{animation:none!important}
+}
+
+/* ============================================================
+   BREAKPOINTS
+   ============================================================ */
+/* SHORT DESKTOP VIEWPORTS.
+   1366x768 and 1440x700 (a browser with a bookmarks bar) are the real cases,
+   and they are shorter than the two sizes usually tested. Display type is
+   already capped by height as well as width via min(vw, svh); these tiers
+   trim the SHELL — padding, gaps, chrome — and never the content. */
+@media (min-width:1024px) and (max-height:840px){
+  :root{--nav-clear:clamp(72px,8.5svh,92px);--pad-b:clamp(1.5rem,4svh,2.5rem);--band-h:clamp(44px,5.6svh,54px)}
+  .sechead__sub{margin-top:.7rem}
+  .media__cap{margin-top:.45rem}
+  .split .media--169{max-height:min(26svh,210px)}
+}
+@media (min-width:1024px) and (max-height:740px){
+  :root{--nav-clear:clamp(60px,7.6svh,76px);--pad-b:clamp(.9rem,2.4svh,1.4rem);--band-h:clamp(38px,5svh,46px)}
+  .hero__grid{gap:clamp(.6rem,1.2svh,1rem)}
+  .hero__actions{margin-top:1rem}
+  .priceblock__head{padding-bottom:.45rem;margin-bottom:.55rem}
+  .tier{padding:clamp(.45rem,1svh,.75rem) clamp(.6rem,1vw,.9rem)}
+  .tiers{gap:.35rem}
+  .incl{margin-top:clamp(.55rem,1.3svh,.9rem);padding-top:clamp(.55rem,1.2svh,.9rem)}
+  .incl h4{margin-bottom:.45rem}
+  .incl li{padding:.25rem .55rem}
+  .incl ul{gap:.3rem}
+  .addons{margin-top:.55rem}
+  .pricenote{margin-top:.6rem}
+  .split .media--169{max-height:min(22svh,170px)}
+}
+
+/* THRESHOLD, stated deliberately: below 680px of viewport height the
+   one-section-per-viewport rule is relaxed and sections flow naturally, snap
+   off — the same answer used below 1024px wide. Forcing a 640px-tall window
+   would mean breaking the type floor or cutting real content, and neither is
+   an acceptable trade. 680px is the measured point at which pricing (the
+   densest section) still holds every figure at full size. */
+@media (min-width:1024px) and (max-height:679px){
+  html{scroll-snap-type:none}
+  .panel{min-height:0;padding:clamp(2.5rem,6svh,3.5rem) 0;scroll-snap-align:none}
+  .panel:first-of-type{min-height:100svh;padding-top:var(--nav-clear)}
+}
+
+/* below 1024 the one-viewport rule is relaxed: sections flow */
+@media (max-width:1023px){
+  .split,.split--even{grid-template-columns:1fr;gap:clamp(1rem,2.5svh,1.75rem)}
+  .hero__cols{grid-template-columns:1fr;align-items:start}
+  .pricechip{justify-self:start}
+  .person{grid-template-columns:1fr}
+  .final__grid{grid-template-columns:1fr}
+  .quiet .wrap{grid-template-columns:1fr}
+  .footcols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panel{min-height:0;padding:clamp(3rem,7vw,4.5rem) 0;scroll-snap-align:none}
+  .panel:first-of-type{min-height:100svh;padding-top:var(--nav-clear)}
+  html{scroll-snap-type:none}
+  .island__nav a[data-optional]{display:none}
+  .svc{grid-template-columns:3rem minmax(0,1fr) 2rem}
+  .svc__desc{grid-column:2 / -1;margin-top:.4rem}
+  .work{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quotes{grid-template-columns:1fr}
+  .quote{min-height:0}
+  .claims{grid-template-columns:1fr}
+  .claim{min-height:0}
+  .claim__h{margin-top:0}
+  .promise{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promise li:nth-child(2n){border-right:0}
+  .sectors{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pricecols{grid-template-columns:1fr}
+}
+
+@media (max-width:860px){
+  .island__nav,.island__cta{display:none}
+  .burger{display:grid}
+  .island__tel{margin-left:auto}
+  .float{display:none}
+  .mobar{display:flex}
+  body{--mobile-bar:58px}
+  .footer{padding-bottom:calc(1.75rem + 58px)}
+  .step{grid-template-columns:1fr}
+  .step p{grid-column:1}
+}
+
+@media (max-width:640px){
+  .brand__full{display:none}
+  .promise{grid-template-columns:1fr}
+  .promise li{border-right:0}
+  .sectors{grid-template-columns:1fr}
+  .work{grid-template-columns:1fr}
+  .footcols{grid-template-columns:1fr}
+  .svc{grid-template-columns:2.5rem minmax(0,1fr) 1.6rem;padding-inline:0}
+  .tier{grid-template-columns:1fr auto;gap:.35rem 1rem}
+  .tier__fig{font-size:clamp(1.5rem,7.5vw,2.1rem)}
+  .hero__tel{width:100%;justify-content:center}
+  .hero__actions .btn{width:100%;justify-content:space-between}
+  .creds dd{font-size:1.05rem}
+  .quiet .wrap{gap:2rem}
+}
+
+@media (max-width:400px){
+  :root{--fs-display:clamp(2.15rem,10.5vw,9rem)}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ==================== NAV B — FLOATING GLASS ISLAND ==================== -->
+<header class="island" id="island">
+  <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+    <span class="brand__mark">DCS</span>
+    <span class="brand__full">Digital Consulting<br>Services</span>
+  </a>
+
+  <nav class="island__nav" aria-label="Primary">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#work">Portfolio</a>
+    <a href="/blog" data-optional>Blog</a>
+    <a href="#person">About</a>
+  </nav>
+
+  <a class="island__tel" href="tel:+447395063764">
+    <span aria-hidden="true">↳</span> 07395 063764
+  </a>
+
+  <span class="island__cta">
+    <a class="btn btn--solid" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+  </span>
+
+  <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu">
+    <span class="vh">Open menu</span>
+    <span class="burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</header>
+
+<!-- MOBILE PANEL — deliberately a SIBLING of .island, direct child of <body>.
+     .island carries backdrop-filter AND translateX(-50%); either one alone
+     would make it the containing block for a position:fixed descendant and
+     trap this overlay inside a 46px pill. -->
+<div class="menu on-dark" id="menu" hidden>
+  <button class="menu__close" type="button" id="menuClose">
+    <span class="vh">Close menu</span>
+    <span aria-hidden="true">✕</span>
+  </button>
+  <nav class="menu__list" aria-label="Mobile">
+    <a class="menu__item" href="#services">Services</a>
+    <a class="menu__item" href="#pricing">Pricing</a>
+    <a class="menu__item" href="#work">Portfolio</a>
+    <a class="menu__item" href="/blog">Blog</a>
+    <a class="menu__item" href="#person">About</a>
+  </nav>
+  <div class="menu__foot menu__item">
+    <a class="btn btn--solid" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+    <a class="btn btn--line" href="tel:+447395063764">Call 07395 063764</a>
+    <p style="color:var(--smoke);font-size:var(--fs-tiny);margin-top:.4rem">Mon–Fri 9:00–17:30 · Sat by appointment</p>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ==================== 1 · HERO ==================== -->
+<section class="hero panel panel--paper" id="top" data-tone="light" aria-labelledby="h1">
+  <div class="wrap hero__grid">
+
+    <p class="hero__eyebrow label">
+      <span>Website design &amp; build studio</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Est. 2019</span>
+      <span class="dot dot--crimson" aria-hidden="true"></span>
+      <span>Polegate, East Sussex — working UK-wide</span>
+    </p>
+
+    <h1 class="display split-t" id="h1"><span class="plate">Agency</span><span class="ln"> work</span><br><span class="ln">for small</span><br><span class="ln">businesses.</span></h1>
+
+    <div class="hero__cols">
+      <div>
+        <p class="lead">Sites that stand next to what London and New York studios put out — for a
+        fraction of the cost, and a tiny fraction of the effort from you. This page is the proof:
+        I designed it, wrote it and built it, the same way I would do yours.</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="hero__tel" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="pricechip">
+        <p class="label">What it costs</p>
+        <p class="pricechip__big num">From £995 + £15/mo</p>
+        <p class="pricechip__note">— or £45/mo with nothing upfront. Full pricing below, no surprises.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- marquee band docked to the hero's own bottom edge -->
+  <div class="band" aria-label="Sectors we build for">
+    <div class="band__track">
+      <p class="band__run">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+      <p class="band__run" aria-hidden="true">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2 · THE ARGUMENT (claim + promise merged) ==================== -->
+<section class="panel panel--ink on-dark" data-tone="dark" aria-labelledby="argument-h">
+  <div class="wrap">
+    <div class="split">
+      <div class="sechead">
+        <span class="sechead__bar sechead__bar--lit" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Three claims · four things you never do</p>
+        <h2 class="h2 resolve" id="argument-h">The whole<br>argument.</h2>
+      </div>
+
+      <ul class="claims">
+        <li class="claim claim--deep reveal">
+          <p class="claim__n num" aria-hidden="true">01</p>
+          <div>
+            <h3 class="claim__h">Big-city standard</h3>
+            <p class="claim__p">The design, the writing and the build are held to what a London or New
+            York studio would ship. Look at the work, then look at this page.</p>
+          </div>
+        </li>
+        <li class="claim claim--mid reveal">
+          <p class="claim__n num" aria-hidden="true">02</p>
+          <div>
+            <h3 class="claim__h">A fraction of the cost</h3>
+            <p class="claim__p">Every number this studio charges is printed further down this page, in
+            full. There is no proposal stage where the figure changes.</p>
+          </div>
+        </li>
+        <li class="claim claim--lit reveal">
+          <p class="claim__n num" aria-hidden="true">03</p>
+          <div>
+            <h3 class="claim__h">A tiny fraction of your effort</h3>
+            <p class="claim__p">No brief to write, no copy to supply, no system to learn. A conversation,
+            a review, and then it is live and looked after.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <ol class="promise">
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">01</span>
+        <h3 class="h3">Write a brief</h3>
+        <p>Most studios want you to arrive with one. There is nothing to fill in here — it comes out of a conversation.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">02</span>
+        <h3 class="h3">Supply the words</h3>
+        <p>Copy is part of the job. You will not be sent a blank document and asked what you'd like it to say.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">03</span>
+        <h3 class="h3">Learn a system</h3>
+        <p>No CMS, no login, no dashboard. If something needs changing, you send a message and it changes.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">04</span>
+        <h3 class="h3">Chase anyone</h3>
+        <p>Hosting, security, updates and monitoring are handled. One person is accountable and you have his number.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==================== 3 · SERVICES ==================== -->
+<section class="panel panel--paper" id="services" data-tone="light" aria-labelledby="services-h">
+  <div class="wrap split">
+    <div>
+      <div class="sechead">
+        <span class="sechead__bar" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Services · Six</p>
+        <h2 class="h2 resolve" id="services-h">What I<br>actually do.</h2>
+      </div>
+
+      <figure style="margin:clamp(1rem,2.5vh,1.75rem) 0 0">
+        <div class="media media--169 media--duo">
+          <video id="vidFabric" muted playsinline loop preload="metadata"
+                 poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-fabric.jpg"
+                 aria-label="Silent looping clip: a bolt of coloured fabric unrolling across a worktable in raking light.">
+          </video>
+        </div>
+        <figcaption class="media__cap">A silent five-second loop — coloured fabric unrolling across a worktable.
+        Illustrative of the kind of business this studio builds for; not a photograph of a client.</figcaption>
+      </figure>
+    </div>
+
+    <div class="svcs">
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">01</span>
+        <span class="svc__name">Website Design</span>
+        <span class="svc__desc">Designed and built for your business. No templates, no page-builders.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">02</span>
+        <span class="svc__name">Local SEO</span>
+        <span class="svc__desc">Service pages, location pages, structured data — so you're found where you work.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">03</span>
+        <span class="svc__name">Ongoing Management</span>
+        <span class="svc__desc">We look after the site so you can get on with the business.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">04</span>
+        <span class="svc__name">Google Workspace Email</span>
+        <span class="svc__desc">Professional business email on your own domain.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">05</span>
+        <span class="svc__name">eCommerce Websites</span>
+        <span class="svc__desc">Online stores built, loaded with your products, and kept running.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">06</span>
+        <span class="svc__name">Analytics &amp; Reporting</span>
+        <span class="svc__desc">Analytics, Search Console and monthly reporting, so you know what's working.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4 · WORK ==================== -->
+<section class="panel panel--graphite on-dark" id="work" data-tone="dark" aria-labelledby="work-h">
+  <div class="wrap split">
+    <div>
+      <div class="sechead">
+        <span class="sechead__bar sechead__bar--lit" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Selected work</p>
+        <h2 class="h2 resolve" id="work-h">Nine clients.<br>Nine kinds<br>of business.</h2>
+        <p class="sechead__sub lead">Fabric shop, yoga studio, tuition, signage, automotive, scaffolding,
+        electrical, removals, made-to-order eCommerce. The range is the point.</p>
+      </div>
+      <p class="workfoot">
+        <span>Est. 2019 · 20+ sites delivered</span>
+        <span>5+ years with the longest-standing client</span>
+        <span>Everything managed in-house</span>
+      </p>
+    </div>
+
+    <ul class="work">
+      <!-- the one crimson tile: the alarm lands on the flagship client story,
+           and deliberately not on a trade — trades are one sector here, never the frame -->
+      <li class="tile tile--crimson reveal">
+        <p class="tile__sector">eCommerce · Fabrics</p>
+        <div>
+          <h3 class="tile__name">Cuddle Plush Fabrics</h3>
+          <p class="tile__line">Five years and counting — one of our longest client relationships.</p>
+        </div>
+      </li>
+      <li class="tile tile--paper reveal">
+        <p class="tile__sector">Made-to-order eCommerce</p>
+        <div>
+          <h3 class="tile__name">Luna Landings</h3>
+          <p class="tile__line">Product configurator, automatic work orders, worldwide shipping.</p>
+        </div>
+      </li>
+      <li class="tile tile--lit reveal">
+        <p class="tile__sector">Yoga studio</p>
+        <div>
+          <h3 class="tile__name">Sanctuary Ida</h3>
+          <p class="tile__line">Students book and pay for classes online.</p>
+        </div>
+      </li>
+      <li class="tile tile--ink reveal">
+        <p class="tile__sector">Tuition</p>
+        <div>
+          <h3 class="tile__name">Nicola Noble Tuition</h3>
+          <p class="tile__line">Moved classes online during Covid instead of closing.</p>
+        </div>
+      </li>
+      <li class="tile tile--mid reveal">
+        <p class="tile__sector">Signage &amp; print</p>
+        <div>
+          <h3 class="tile__name">Mad Graphics</h3>
+          <p class="tile__line">Full rebuild.</p>
+        </div>
+      </li>
+      <li class="tile tile--paper reveal">
+        <p class="tile__sector">Automotive</p>
+        <div>
+          <h3 class="tile__name">DCH Automotive</h3>
+          <p class="tile__line">A credible presence from a standing start.</p>
+        </div>
+      </li>
+      <li class="tile tile--deep reveal">
+        <p class="tile__sector">Scaffolding</p>
+        <div>
+          <h3 class="tile__name">Colossus Scaffolding</h3>
+          <p class="tile__line">First enquiry from Google within three weeks of launch.</p>
+        </div>
+      </li>
+      <li class="tile tile--deep reveal">
+        <p class="tile__sector">Electrical</p>
+        <div>
+          <h3 class="tile__name">DJ Fox Electrical</h3>
+          <p class="tile__line">20+ page site, live at djfoxelectrical.com.</p>
+        </div>
+      </li>
+      <li class="tile tile--lit reveal">
+        <p class="tile__sector">Removals</p>
+        <div>
+          <h3 class="tile__name">Bexhill Removals</h3>
+          <p class="tile__line">Design approved on the first presentation, no revisions.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 5 · SECTORS ==================== -->
+<section class="panel panel--paper" data-tone="light" aria-labelledby="sectors-h">
+  <div class="wrap stack-head">
+    <div class="sechead">
+      <span class="sechead__bar sechead__bar--deep" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Who this is for</p>
+      <h2 class="h2 resolve" id="sectors-h">Owner-run. Any sector.</h2>
+      <p class="sechead__sub lead">Usually one to twenty people, where the owner makes the decision and
+      pays the invoice. Time-poor, not technical, and has been putting the website off for a while.</p>
+    </div>
+
+    <ul class="sectors">
+      <li class="duo reveal">
+        <figure>
+          <div class="duo__frame">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="Interior of a small independent clothing boutique, rails and shelving in daylight.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Retail</span>
+            <span class="duo__what">Shops that need to sell online as well as on the street.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duo__frame">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="An empty yoga studio with rolled mats stacked beside tall windows.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Studios &amp; practitioners</span>
+            <span class="duo__what">Classes, sessions and appointments booked and paid for online.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duo__frame">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="The counter of an independent cafe with an espresso machine in morning light.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Hospitality</span>
+            <span class="duo__what">Found on a phone, five minutes before someone walks in.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duo__frame">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="Scaffolding erected against a building elevation, seen from below.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Trades &amp; contractors</span>
+            <span class="duo__what">Service and location pages that turn up in local searches.</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 6 · PROCESS ==================== -->
+<section class="panel panel--ink on-dark" data-tone="dark" aria-labelledby="process-h">
+  <div class="wrap split split--even">
+    <div>
+      <div class="sechead">
+        <span class="sechead__bar" aria-hidden="true"></span>
+        <p class="sechead__kicker label">How it goes</p>
+        <h2 class="h2 resolve" id="process-h">Four steps.<br>You are in<br>one of them.</h2>
+      </div>
+      <figure style="margin:clamp(1rem,2.5vh,1.75rem) 0 0">
+        <div class="media media--169 media--duo media--duo--mid">
+          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/detail-swatches.jpg" width="1600" height="900" loading="lazy" decoding="async"
+               alt="A fan of printed colour swatches spread open on a desk.">
+        </div>
+        <figcaption class="media__cap">Colour and material decisions are made here, not handed to you as homework.</figcaption>
+      </figure>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__n num">Step 01</span>
+        <h3 class="h3">A conversation</h3>
+        <p>A call or a few messages. No brief needed, nothing to fill in.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__n num">Step 02</span>
+        <h3 class="h3">We write it and design it</h3>
+        <p>Copy, structure, imagery, colour — all handled.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__n num">Step 03</span>
+        <h3 class="h3">You review</h3>
+        <p>Unlimited revisions during the build until you're happy.</p>
+      </li>
+      <li class="step step--last reveal">
+        <span class="step__n num">Step 04</span>
+        <h3 class="h3">It goes live, and we keep it running</h3>
+        <p>Hosting, updates, monitoring, support. This is the part that does not end.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==================== 7 · PRICING ==================== -->
+<section class="panel panel--paper" id="pricing" data-tone="light" aria-labelledby="pricing-h">
+  <div class="wrap">
+    <div class="pricecols">
+
+      <div class="sechead">
+        <span class="sechead__bar sechead__bar--crimson" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Pricing</p>
+        <h2 class="h2 resolve" id="pricing-h">Same site.<br>Two ways<br>to pay.</h2>
+        <p class="sechead__sub lead">You choose how to pay, not what you get. The tiers differ on ongoing
+        service level, never on quality of the build.</p>
+      </div>
+
+      <div class="priceblock">
+        <div class="priceblock__head">
+          <h3>Option A — Upfront + monthly</h3>
+          <p class="label">Setup fee, then a low monthly</p>
+        </div>
+        <!-- roles restated: .tiers/.tier use display:grid, which drops implicit table roles -->
+        <table role="table">
+          <caption class="vh">Option A pricing: setup fee, monthly fee and page allowance by tier</caption>
+          <thead class="vh" role="rowgroup">
+            <tr role="row"><th scope="col" role="columnheader">Tier</th><th scope="col" role="columnheader">Setup</th><th scope="col" role="columnheader">Monthly</th></tr>
+          </thead>
+          <tbody class="tiers" role="rowgroup">
+            <tr class="tier" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Starter
+                <span class="tier__pages num">Up to 20 pages</span></th>
+              <td class="tier__fig" role="cell">£995<span class="tier__sub">Setup</span></td>
+              <td class="tier__fig" role="cell">£15<span class="tier__sub">Per month</span></td>
+            </tr>
+            <tr class="tier tier--pop" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Professional
+                <span class="tier__tag">Most popular</span>
+                <span class="tier__pages num">Up to 50 pages</span></th>
+              <td class="tier__fig" role="cell">£1,995<span class="tier__sub">Setup</span></td>
+              <td class="tier__fig" role="cell">£25<span class="tier__sub">Per month</span></td>
+            </tr>
+            <tr class="tier" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Growth
+                <span class="tier__pages num">Up to 100 pages</span></th>
+              <td class="tier__fig" role="cell">£3,495<span class="tier__sub">Setup</span></td>
+              <td class="tier__fig" role="cell">£50<span class="tier__sub">Per month</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="priceblock">
+        <div class="priceblock__head">
+          <h3>Option B — Pay monthly</h3>
+          <p class="label">Nothing upfront · 12-month minimum</p>
+        </div>
+        <table role="table">
+          <caption class="vh">Option B pricing: monthly fee by tier, nothing upfront</caption>
+          <thead class="vh" role="rowgroup">
+            <tr role="row"><th scope="col" role="columnheader">Tier</th><th scope="col" role="columnheader">Monthly</th></tr>
+          </thead>
+          <tbody class="tiers" role="rowgroup">
+            <tr class="tier" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Starter
+                <span class="tier__pages num">Up to 20 pages</span></th>
+              <td class="tier__fig" role="cell">£45<span class="tier__sub">Per month</span></td>
+            </tr>
+            <tr class="tier tier--pop" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Professional
+                <span class="tier__tag">Most popular</span>
+                <span class="tier__pages num">Up to 50 pages</span></th>
+              <td class="tier__fig" role="cell">£75<span class="tier__sub">Per month</span></td>
+            </tr>
+            <tr class="tier" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Growth
+                <span class="tier__pages num">Up to 100 pages</span></th>
+              <td class="tier__fig" role="cell">£125<span class="tier__sub">Per month</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="pricenote">Nothing upfront is the option most people take when cash flow matters more
+        than the total. It is the same site either way.</p>
+      </div>
+    </div>
+
+    <div class="incl">
+      <h4>Every site includes, whichever you pick</h4>
+      <ul>
+        <li>Custom design</li>
+        <li>Local SEO — service pages, location pages, structured data</li>
+        <li>Mobile-first and fast</li>
+        <li>Contact form</li>
+        <li>Hosting</li>
+        <li>SSL</li>
+        <li>Domain management</li>
+        <li>Security updates</li>
+        <li>Uptime monitoring</li>
+        <li>Unlimited revisions during the build</li>
+        <li>Search Console submission</li>
+      </ul>
+      <p class="addons"><strong>Add-ons:</strong> blog post writing £75/post · custom theme design £350 ·
+      Google Ads setup and management £200/mo plus ad spend · monthly SEO retainer £200/mo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8 · TESTIMONIALS ==================== -->
+<section class="panel panel--bone" data-tone="light" aria-labelledby="words-h">
+  <div class="wrap stack-head">
+    <div class="sechead">
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">In their words</p>
+      <h2 class="h2 resolve" id="words-h">Three clients,<br>none of them a builder.</h2>
+    </div>
+
+    <ul class="quotes">
+      <li class="quote quote--deep reveal">
+        <figure>
+          <blockquote><p>“Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.”</p></blockquote>
+          <figcaption>Sarah<span>Cuddle Plush Fabrics</span></figcaption>
+        </figure>
+      </li>
+      <li class="quote quote--mid reveal">
+        <figure>
+          <blockquote><p>“I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.”</p></blockquote>
+          <figcaption>Nicola<span>Nicola Noble Tuition</span></figcaption>
+        </figure>
+      </li>
+      <li class="quote quote--lit reveal">
+        <figure>
+          <blockquote><p>“My yoga students love that they can book and pay for my classes on my website.”</p></blockquote>
+          <figcaption>Molly<span>Sanctuary Ida</span></figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 9 · PERSON ==================== -->
+<section class="panel panel--ink on-dark" id="person" data-tone="dark" aria-labelledby="person-h">
+  <div class="wrap stack-head">
+    <div class="sechead">
+      <span class="sechead__bar sechead__bar--lit" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Who you're hiring</p>
+      <h2 class="h2 resolve" id="person-h">A person, not a company.</h2>
+    </div>
+
+    <div class="person">
+      <div class="person__body reveal">
+        <p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and
+        I have built and looked after every site on this page myself.</p>
+        <p>Nothing is outsourced and nothing is offshored. When you call, you get the person who
+        designed your site, not an account manager reading a ticket.</p>
+        <p>There is no team to route you through and no junior doing the build. That is not
+        something I apologise for — it is precisely why the work is this considered, why it is
+        personal, and why it costs what it costs. The studio is in Polegate, East Sussex; the
+        clients are all over the country.</p>
+      </div>
+
+      <dl class="creds reveal">
+        <div><dt>Founded</dt><dd class="num">2019</dd></div>
+        <div><dt>Sites delivered</dt><dd class="num">20+</dd></div>
+        <div><dt>Longest client relationship</dt><dd class="num">5+ years</dd></div>
+        <div><dt>Work outsourced</dt><dd>None</dd></div>
+        <div><dt>Studio</dt><dd>Polegate, UK-wide</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10 · THE QUIET ONE ==================== -->
+<section class="panel panel--paper quiet" data-tone="light" aria-label="A note">
+  <div class="wrap">
+    <div>
+      <span class="quiet__mark" aria-hidden="true"></span>
+      <p class="quiet__line">Most of my clients had been putting it off for years. The hardest part is the first message.</p>
+    </div>
+
+    <figure style="margin:0">
+      <div class="media media--169 media--duo">
+        <video id="vidInk" muted playsinline loop preload="metadata"
+               poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-ink.jpg"
+               aria-label="Silent looping clip: saturated teal ink blooming slowly through water.">
+        </video>
+        <button class="media__toggle" type="button" id="inkToggle" aria-pressed="false">Play</button>
+      </div>
+      <figcaption class="media__cap">A silent five-second loop of coloured ink blooming through water. Decorative.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== 11 · FINAL CTA ==================== -->
+<section class="panel panel--ink on-dark" id="contact" data-tone="dark" aria-labelledby="final-h">
+  <div class="wrap">
+    <div class="final__grid">
+      <div>
+        <h2 class="h2 resolve" id="final-h">Let's get<br>it started.</h2>
+        <p class="sechead__sub lead">Tell me what the business does. I'll tell you what the site needs,
+        what it costs, and how long it takes. No charge, and no obligation at the end of it.</p>
+        <div class="final__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="btn btn--teal" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="contactlist reveal">
+        <a href="tel:+447395063764"><span>Phone</span><b class="num">07395 063764</b></a>
+        <a href="mailto:mail@digitalconsultingservices.co.uk"><span>Email</span><b>mail@digitalconsultingservices.co.uk</b></a>
+        <p><span>Hours</span><b>Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</b></p>
+        <p><span>Studio</span><b>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer on-dark" data-tone="dark">
+  <div class="wrap">
+    <div class="footcols">
+      <section>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Service areas</h2>
+        <ul>
+          <li><a href="/contact">Polegate</a></li>
+          <li><a href="/contact">Eastbourne</a></li>
+          <li><a href="/contact">Hailsham</a></li>
+          <li><a href="/contact">Lewes</a></li>
+          <li><a href="/contact">Seaford</a></li>
+          <li><a href="/contact">Brighton &amp; Hove</a></li>
+          <li><a href="/contact">Uckfield</a></li>
+          <li><a href="/contact">— and UK-wide</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Studio</h2>
+        <ul>
+          <li><a href="#work">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#person">About Ricky</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Get a free quote</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <address>
+          <a href="tel:+447395063764" class="num">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex, BN26 6QH<br><br>
+          Mon–Fri 9:00–17:30<br>
+          Sat by appointment · Sun closed
+        </address>
+      </section>
+    </div>
+
+    <div class="footbar">
+      <span class="footbrand"><span class="brand__mark">DCS</span> Digital Consulting Services</span>
+      <span>© 2026 Digital Consulting Services. Established 2019, Polegate, East Sussex.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- persistent floating CTA (desktop) -->
+<a class="float" id="float" href="/contact">
+  <span class="float__dot" aria-hidden="true"></span>
+  Start your project
+</a>
+
+<!-- persistent action bar (mobile) -->
+<nav class="mobar" aria-label="Quick actions">
+  <a href="tel:+447395063764">Call 07395 063764</a>
+  <a href="/contact">Get a free quote</a>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var reduced = mqReduce ? mqReduce.matches : false;
+
+  /* Failsafe: whatever happens below, nothing stays invisible. */
+  function revealAll() {
+    var hidden = document.querySelectorAll('.reveal, .sechead__bar, .resolve, .menu__item, .split-t');
+    for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('is-in');
+    var heroEl = document.querySelector('.hero');
+    if (heroEl) heroEl.classList.add('is-in');
+  }
+  var failsafe = setTimeout(revealAll, 2500);
+
+  try {
+
+    /* ---------- video: sources attached by JS so no-JS never downloads them.
+                  autoplay is granted only when motion is allowed. ---------- */
+    var vids = [
+      { el: document.getElementById('vidFabric'), src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-fabric.mp4' },
+      { el: document.getElementById('vidInk'),    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4' }
+    ];
+    var players = [];
+    for (var v = 0; v < vids.length; v++) {
+      if (!vids[v].el) continue;
+      var s = document.createElement('source');
+      s.src = vids[v].src;
+      s.type = 'video/mp4';
+      vids[v].el.appendChild(s);
+      vids[v].el.load();
+      players.push(vids[v].el);
+    }
+    function setMotion(isReduced) {
+      for (var i = 0; i < players.length; i++) {
+        if (isReduced) {
+          players[i].removeAttribute('autoplay');
+          players[i].pause();
+        } else {
+          players[i].setAttribute('autoplay', '');
+          var p = players[i].play();
+          if (p && p.catch) p.catch(function () { /* blocked autoplay is fine */ });
+        }
+      }
+      var t = document.getElementById('inkToggle');
+      if (t) {
+        t.textContent = isReduced ? 'Play' : 'Pause';
+        t.setAttribute('aria-pressed', isReduced ? 'false' : 'true');
+      }
+    }
+    setMotion(reduced);
+    if (mqReduce && mqReduce.addEventListener) {
+      mqReduce.addEventListener('change', function (e) { reduced = e.matches; setMotion(reduced); });
+    }
+    var inkToggle = document.getElementById('inkToggle');
+    var ink = document.getElementById('vidInk');
+    if (inkToggle && ink) {
+      inkToggle.addEventListener('click', function () {
+        if (ink.paused) {
+          var p = ink.play();
+          if (p && p.catch) p.catch(function () {});
+          inkToggle.textContent = 'Pause';
+          inkToggle.setAttribute('aria-pressed', 'true');
+        } else {
+          ink.pause();
+          inkToggle.textContent = 'Play';
+          inkToggle.setAttribute('aria-pressed', 'false');
+        }
+      });
+    }
+
+    /* ---------- persistent CTA inverts with the panel beneath it ---------- */
+    var float = document.getElementById('float');
+    var toned = document.querySelectorAll('[data-tone]');
+    function syncFloat() {
+      var r = float.getBoundingClientRect();
+      var y = r.top + r.height / 2;
+      var tone = 'light';
+      for (var i = 0; i < toned.length; i++) {
+        var b = toned[i].getBoundingClientRect();
+        if (b.top <= y && b.bottom >= y) tone = toned[i].getAttribute('data-tone');
+      }
+      if (tone === 'dark') float.setAttribute('data-tone', 'dark');
+      else float.removeAttribute('data-tone');
+      var heroEl = document.querySelector('.hero');
+      if (heroEl) float.classList.toggle('is-on', heroEl.getBoundingClientRect().bottom < window.innerHeight * 0.45);
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { syncFloat(); ticking = false; });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    syncFloat();
+
+    /* ---------- mobile menu (sibling of the glass island) ---------- */
+    var burger = document.getElementById('burger');
+    var menu = document.getElementById('menu');
+    var menuClose = document.getElementById('menuClose');
+    var lastFocus = null;
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      menu.hidden = false;
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(function () {
+        menu.classList.add('is-open');
+        var items = menu.querySelectorAll('.menu__item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.transitionDelay = (reduced ? 0 : i * 55) + 'ms';
+        }
+        menuClose.focus();
+      });
+    }
+    function closeMenu() {
+      menu.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      menu.hidden = true;
+      if (lastFocus) lastFocus.focus();
+    }
+    burger.addEventListener('click', function () {
+      if (burger.getAttribute('aria-expanded') === 'true') closeMenu(); else openMenu();
+    });
+    menuClose.addEventListener('click', closeMenu);
+    menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') closeMenu(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') closeMenu();
+    });
+
+    /* ---------- h1: per-character reveal, letters arrive IN COLOUR ---------- */
+    var h1 = document.getElementById('h1');
+    if (h1 && !reduced) {
+      /* teal leads; the crimson lands on one letter in nine */
+      var tints = ['var(--teal-700)', 'var(--teal-500)', 'var(--teal-300)',
+                   'var(--teal-500)', 'var(--teal-700)', 'var(--teal-300)',
+                   'var(--teal-500)', 'var(--teal-700)', 'var(--crimson)'];
+      var lines = h1.querySelectorAll('.ln, .plate');
+      var n = 0;
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li];
+        var text = line.textContent;
+        var frag = document.createDocumentFragment();
+        for (var c = 0; c < text.length; c++) {
+          var sp = document.createElement('span');
+          sp.className = 'ch';
+          sp.textContent = text.charAt(c);
+          sp.style.setProperty('--d', (n * 22) + 'ms');
+          sp.style.setProperty('--tint', tints[n % tints.length]);
+          frag.appendChild(sp);
+          n++;
+        }
+        line.textContent = '';
+        line.appendChild(frag);
+      }
+      h1.setAttribute('aria-label', 'Agency work for small businesses.');
+      var kids = h1.children;
+      for (var k = 0; k < kids.length; k++) kids[k].setAttribute('aria-hidden', 'true');
+      h1.classList.add('is-split');
+      requestAnimationFrame(function () {
+        h1.classList.add('is-in');
+        document.querySelector('.hero').classList.add('is-in');
+      });
+    } else if (h1) {
+      h1.classList.add('is-in');
+      document.querySelector('.hero').classList.add('is-in');
+    }
+
+    /* ---------- scroll reveals ---------- */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var group = el.parentNode ? el.parentNode.querySelectorAll(':scope > .reveal') : [];
+          var idx = Array.prototype.indexOf.call(group, el);
+          el.style.setProperty('--d', (reduced ? 0 : Math.max(0, idx) * 60) + 'ms');
+          el.classList.add('is-in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+
+      var targets = document.querySelectorAll('.reveal, .sechead__bar, .resolve');
+      for (var t = 0; t < targets.length; t++) io.observe(targets[t]);
+    } else {
+      revealAll();
+    }
+
+    clearTimeout(failsafe);
+    setTimeout(revealAll, 4000);
+
+  } catch (err) {
+    clearTimeout(failsafe);
+    revealAll();
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+</body>
+</html>

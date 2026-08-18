@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — websites for UK tradespeople</title>
+<meta name="description" content="One phone call, then it's built, live and looked after. Websites for UK tradespeople from £995 + £15/mo, or £45/mo with nothing upfront. Polegate, East Sussex. UK-wide.">
+<meta name="theme-color" content="#101315">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Martian+Mono:wdth,wght@75..112.5,400..800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   TRADE GRADE — the moulded tool-case system.
+   A power tool is distilled by manufacture: the case has a routed recess for
+   exactly what is included, and nothing optional rattles around inside it.
+   Colour means one thing each. Teal is the tool body — the offer. Black is
+   the over-mould — the ground. Red is the trigger, and it is reserved for
+   ACTION ONLY: it appears on this page nowhere but the primary buttons.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* over-mould: the ground. Chosen from the use scene — a plumber reading on
+     a phone at 7:40pm in a van cab, screen at half brightness. */
+  --case:       #101315;
+  --case-hi:    #171B1E;   /* raised case panel */
+  --case-lo:    #0A0C0D;   /* routed floor / spec plate */
+
+  /* tool body: the offer. Owns whole regions, never an accent. */
+  --body-teal:  #0A7A72;
+  --body-deep:  #065450;
+
+  /* trigger: ACTION ONLY */
+  --trigger:    #D9291C;
+  --trigger-hi: #EE3A2C;
+
+  /* machined surfaces */
+  --steel:      #C9D2D3;
+  --etch:       #EAF0F0;
+  --etch-soft:  #9FB8B5;   /* tinted from the teal, never grey */
+  --on-teal:    #FFFFFF;
+  --on-teal-2:  #E8F4F2;   /* 4.62:1 on teal, 7.80:1 on deep */
+  --hair:       rgba(201,210,211,.16);
+  --hair-hard:  rgba(201,210,211,.30);
+
+  --f-sans: 'Archivo','Helvetica Neue',Arial,sans-serif;
+  --f-mono: 'Martian Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --t-display: clamp(2.25rem,6.2vw,4.85rem);
+  --t-h2:      clamp(1.95rem,4.4vw,3.4rem);
+  --t-h3:      clamp(1.12rem,1.7vw,1.4rem);
+  --t-lead:    clamp(1.08rem,1.5vw,1.35rem);
+  --t-body:    1.0625rem;
+  --t-data:    0.78rem;
+
+  --s1:8px; --s2:16px; --s3:26px; --s4:44px; --s5:72px; --s6:104px; --s7:148px;
+
+  --shell:1280px;
+  --rail:96px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --seat:cubic-bezier(.12,.9,.2,1); /* hard deceleration — a part seating into foam */
+}
+
+/* ── reset ──────────────────────────────────────────────────────────────── */
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body,h1,h2,h3,h4,p,ul,ol,figure,blockquote,dl,dd,table{ margin:0 }
+ul,ol{ padding:0; list-style:none }
+img{ display:block; max-width:100%; height:auto }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer }
+a{ color:inherit }
+
+/* ── browser surfaces: the parts nobody draws still carry the design ───── */
+::selection{ background:var(--body-teal); color:#fff }
+html{
+  scrollbar-color: var(--body-teal) var(--case-lo);
+  caret-color: var(--body-teal);
+  scroll-behavior:smooth;
+}
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto } }
+::-webkit-scrollbar{ width:12px; height:12px }
+::-webkit-scrollbar-track{ background:var(--case-lo) }
+::-webkit-scrollbar-thumb{ background:var(--body-teal); border:3px solid var(--case-lo); border-radius:8px }
+::-webkit-scrollbar-thumb:hover{ background:#0C8C83 }
+:focus-visible{ outline:3px solid var(--steel); outline-offset:3px; border-radius:2px }
+.teal :focus-visible,.trigger-field :focus-visible{ outline-color:#fff }
+
+body{
+  margin:0;
+  background:var(--case);
+  color:var(--etch);
+  font-family:var(--f-sans);
+  font-size:var(--t-body);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body.is-locked{ overflow:hidden }
+
+.shell{ width:100%; max-width:var(--shell); margin-inline:auto; padding-inline:clamp(16px,4vw,52px) }
+
+/* The still margin: one rigid rail runs the whole page. The fields inside it
+   change; it never moves. Its mark is real wayfinding — this page has six
+   sections and the rail says which one you are in, and how many are left. */
+.rail{ display:grid; grid-template-columns:var(--rail) minmax(0,1fr); gap:clamp(20px,3.2vw,44px); position:relative }
+.rail::before{
+  content:''; position:absolute; left:calc(var(--rail) - 1px); top:0; bottom:0;
+  width:1px; background:var(--hair);
+}
+.rail__mark{
+  font-family:var(--f-mono); font-size:.75rem; font-weight:500; font-stretch:75%;
+  letter-spacing:.06em; color:var(--etch-soft); line-height:1.5;
+  padding-top:.55rem;
+}
+.rail__mark b{ display:block; color:var(--steel); font-weight:700; font-size:.98rem }
+.teal .rail::before{ background:rgba(255,255,255,.24) }
+.teal .rail__mark{ color:var(--on-teal-2) }
+.teal .rail__mark b{ color:#fff }
+@media (max-width:880px){
+  .rail{ grid-template-columns:34px minmax(0,1fr); gap:12px }
+  .rail::before{ left:33px }
+  .rail__mark{ padding-top:.4rem; font-size:.72rem }
+}
+
+/* ── type ───────────────────────────────────────────────────────────────── */
+h1,h2,h3{ font-weight:900; line-height:1.02; letter-spacing:-.035em; text-wrap:balance }
+h1{ font-size:var(--t-display); font-stretch:112%; }
+h2{ font-size:var(--t-h2); font-stretch:112%; }
+h3{ font-size:var(--t-h3); font-weight:800; font-stretch:100%; letter-spacing:-.02em; line-height:1.16 }
+.lead{ font-size:var(--t-lead); line-height:1.5; color:var(--etch-soft); max-width:56ch; text-wrap:pretty }
+.teal .lead{ color:var(--on-teal-2) }
+p{ max-width:68ch; text-wrap:pretty }
+.data{
+  font-family:var(--f-mono); font-size:var(--t-data); font-weight:500; font-stretch:75%;
+  letter-spacing:.08em; text-transform:uppercase; font-variant-numeric:tabular-nums;
+}
+.num{ font-family:var(--f-mono); font-variant-numeric:tabular-nums; font-feature-settings:'tnum' 1 }
+
+/* ── actions: the trigger ───────────────────────────────────────────────── */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+  min-height:56px; padding:0 1.6rem;
+  font-family:var(--f-sans); font-weight:800; font-stretch:100%; font-size:1rem;
+  letter-spacing:-.01em; text-decoration:none; border-radius:3px;
+  transition:background-color .18s var(--ease), transform .12s var(--ease), box-shadow .18s var(--ease);
+}
+.btn svg{ flex:none }
+.btn--go{
+  background:var(--trigger); color:#fff;
+  box-shadow:0 2px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.btn--go:hover{ background:var(--trigger-hi) }
+.btn--go:active{ transform:translateY(2px); box-shadow:0 0 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14) }
+.btn--call{
+  background:var(--case-hi); color:var(--etch);
+  box-shadow:0 2px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.09);
+}
+.btn--call:hover{ background:#20262A }
+.btn--call:active{ transform:translateY(2px); box-shadow:0 0 0 rgba(0,0,0,.5) }
+.teal .btn--call{ background:rgba(0,0,0,.28); color:#fff; box-shadow:0 2px 0 rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.16) }
+.teal .btn--call:hover{ background:rgba(0,0,0,.42) }
+.btn--sm{ min-height:46px; font-size:.92rem; padding:0 1.15rem }
+
+/* ── header ─────────────────────────────────────────────────────────────── */
+.hdr{
+  position:sticky; top:0; z-index:60;
+  background:var(--case-lo);
+  box-shadow:0 1px 0 var(--hair);
+  transition:box-shadow .25s var(--ease);
+}
+.hdr.seated{ box-shadow:0 1px 0 var(--hair-hard), 0 14px 30px -18px rgba(0,0,0,.9) }
+.hdr__in{ display:flex; align-items:center; gap:clamp(12px,2.4vw,32px); min-height:68px }
+.brand{ display:flex; align-items:baseline; gap:.6rem; text-decoration:none; margin-right:auto; padding-block:.55rem }
+.brand__mark{
+  font-weight:900; font-stretch:125%; font-size:1.34rem; letter-spacing:-.05em;
+  color:var(--case-lo); background:var(--steel); padding:.16em .34em .2em; border-radius:2px;
+  line-height:1;
+}
+.brand__name{ font-size:.78rem; font-weight:600; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--etch-soft) }
+.nav{ display:flex; align-items:center; gap:clamp(10px,1.6vw,24px) }
+.nav a{
+  text-decoration:none; font-size:.94rem; font-weight:600; color:var(--etch); padding:.66rem 0;
+  background-image:linear-gradient(var(--body-teal),var(--body-teal));
+  background-repeat:no-repeat; background-position:0 100%; background-size:0% 2px;
+  transition:background-size .28s var(--ease), color .18s var(--ease);
+}
+.nav a:hover{ background-size:100% 2px; color:#fff }
+.hdr__cta{ display:flex; align-items:center; gap:.7rem }
+.hdr__tel{ font-family:var(--f-mono); font-size:.82rem; font-weight:600; font-stretch:75%; text-decoration:none; color:var(--etch); letter-spacing:.02em; white-space:nowrap; padding-block:.72rem }
+.hdr__tel:hover{ color:#fff; text-decoration:underline; text-underline-offset:4px }
+.burger{ display:none; width:48px; height:48px; align-items:center; justify-content:center; border-radius:3px; background:var(--case-hi) }
+.burger:hover{ background:#20262A }
+.burger span{ display:block; width:20px; height:2px; background:var(--etch); position:relative }
+.burger span::before,.burger span::after{ content:''; position:absolute; left:0; width:20px; height:2px; background:var(--etch) }
+.burger span::before{ top:-6px } .burger span::after{ top:6px }
+@media (max-width:1040px){ .nav,.hdr__tel{ display:none } .burger{ display:flex } }
+@media (max-width:520px){ .hdr__cta .btn{ display:none } .brand__name{ display:none } }
+
+/* mobile panel — sibling of the header, never nested inside it */
+.mnav{ position:fixed; inset:0; z-index:80; background:var(--case); display:none; flex-direction:column }
+.mnav[data-open="true"]{ display:flex }
+.mnav__top{ display:flex; align-items:center; min-height:68px; gap:1rem; border-bottom:1px solid var(--hair) }
+.mnav__close{ margin-left:auto; width:48px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--case-hi); border-radius:3px }
+.mnav__close:hover{ background:#20262A }
+.mnav__list{ padding:var(--s3) 0; display:flex; flex-direction:column; overflow-y:auto; flex:1 }
+.mnav__list a{
+  text-decoration:none; font-size:1.55rem; font-weight:800; font-stretch:100%; letter-spacing:-.03em;
+  padding:.72rem 0; border-bottom:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center;
+}
+.mnav__list a:hover{ color:var(--body-teal) }
+.mnav__list a span{ font-family:var(--f-mono); font-size:.75rem; font-weight:500; color:var(--etch-soft); letter-spacing:.08em }
+.mnav__foot{ padding:var(--s3) 0 var(--s4); display:grid; gap:.7rem }
+.mnav__foot .btn{ width:100% }
+
+/* ── hero ───────────────────────────────────────────────────────────────── */
+.hero{ position:relative; background:var(--case); padding-top:clamp(32px,4.4vw,54px) }
+.hero__grid{ display:grid; grid-template-columns:minmax(0,1.22fr) minmax(0,.9fr); gap:clamp(28px,4vw,56px); align-items:end; padding-bottom:clamp(30px,3.6vw,48px) }
+.hero h1{ margin-bottom:1.05rem }
+.hero .lead{ margin-bottom:clamp(24px,3vw,36px) }
+.hero__acts{ display:flex; flex-wrap:wrap; gap:.75rem }
+.hero__plate{ position:relative; align-self:end; display:flex; align-items:flex-end; padding:30px 30px 0 0 }
+/* the tool-body plane: colour carries the structure, nothing is outlined */
+.hero__plane{ position:absolute; top:0; right:0; width:calc(100% - 30px); height:calc(100% - 30px); background:var(--body-teal); border-radius:3px }
+.hero__shot{ position:relative; width:100%; border-radius:3px; overflow:hidden; box-shadow:0 26px 54px -30px rgba(0,0,0,.95) }
+.hero__shot img{ width:100%; height:100%; object-fit:cover; aspect-ratio:4/5; filter:saturate(.86) contrast(1.06) }
+.hero__shot figcaption{
+  position:absolute; left:0; right:0; bottom:0; padding:2.4rem 1.1rem .85rem;
+  background:linear-gradient(180deg,rgba(10,12,13,0) 0%,rgba(10,12,13,.9) 72%);
+  font-size:.72rem; font-weight:600; font-stretch:75%;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--steel);
+}
+/* the spec plate: machine data, laser-etched. Not a label above a heading —
+   it sits under the actions and carries facts nothing else on the page says. */
+.spec{ background:var(--case-lo); box-shadow:inset 0 1px 0 var(--hair) }
+.spec__in{ display:grid; grid-template-columns:repeat(5,1fr); }
+.spec__cell{ padding:clamp(16px,2vw,22px) 0; position:relative }
+.spec__cell + .spec__cell{ box-shadow:inset 1px 0 0 var(--hair) }
+.spec__cell + .spec__cell{ padding-left:clamp(14px,2vw,24px) }
+.spec__cell b{ display:block; font-family:var(--f-mono); font-size:clamp(.95rem,1.5vw,1.22rem); font-weight:700; font-stretch:87.5%; color:var(--steel); letter-spacing:-.02em; line-height:1.1 }
+.spec__cell span{ display:block; margin-top:.42rem; font-family:var(--f-mono); font-size:.72rem; font-weight:500; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--etch-soft) }
+@media (max-width:880px){
+  .hero__grid{ grid-template-columns:minmax(0,1fr); align-items:start }
+  .hero__plate{ padding:22px 22px 0 0 }
+  .hero__shot img{ aspect-ratio:3/2 }
+  .hero__plane{ width:calc(100% - 22px); height:calc(100% - 22px) }
+  .spec__in{ grid-template-columns:repeat(2,1fr) }
+  .spec__cell + .spec__cell{ box-shadow:none }
+  .spec__cell{ box-shadow:inset 0 1px 0 var(--hair) !important; padding-left:0 !important }
+  .spec__cell:nth-child(even){ box-shadow:inset 0 1px 0 var(--hair), inset 1px 0 0 var(--hair) !important; padding-left:clamp(14px,4vw,24px) !important }
+  .spec__cell:last-child{ grid-column:1 / -1 }
+}
+@media (max-width:520px){ .hero__acts .btn{ width:100% } }
+
+/* ── section furniture ──────────────────────────────────────────────────── */
+.sec{ padding-block:clamp(64px,8.5vw,132px) }
+.sec--teal{ background:var(--body-teal); color:var(--on-teal) }
+.sec--deep{ background:var(--body-deep); color:var(--on-teal) }
+.sec__head{ margin-bottom:clamp(32px,4.4vw,58px) }
+.sec__head h2{ margin-bottom:1rem }
+
+/* ── 02 · the case ──────────────────────────────────────────────────────── */
+.case{ position:relative; background:var(--case); overflow:hidden }
+.case__tex{
+  position:absolute; top:0; left:0; width:100%; height:clamp(104px,12vw,178px);
+  object-fit:cover; object-position:50% 42%; opacity:.46; filter:grayscale(.32) contrast(1.06);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);
+          mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);
+}
+.case > .shell{ position:relative }
+/* the moulded insert: recesses are routed to the size of what goes in them,
+   so they are deliberately unequal. An equal grid would be the wrong object. */
+.insert{ display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(10px,1.2vw,16px) }
+.recess{
+  position:relative;
+  background:linear-gradient(180deg,#0B0E10,#131719);
+  border-radius:4px; padding:clamp(20px,2.3vw,30px);
+  box-shadow:inset 0 3px 9px rgba(0,0,0,.8), inset 0 -1px 0 rgba(201,210,211,.07);
+  display:flex; flex-direction:column; gap:.6rem; min-height:152px;
+  transition:background .28s var(--ease), box-shadow .28s var(--ease);
+}
+.recess:hover{ background:linear-gradient(180deg,#0D1113,#171C1F); box-shadow:inset 0 3px 9px rgba(0,0,0,.8), inset 0 -1px 0 rgba(201,210,211,.14) }
+/* routed to size: seats are cut to their contents, and every row fills edge to edge */
+.recess--xl{ grid-column:span 4 }
+.recess--l{ grid-column:span 2 }
+.recess--m{ grid-column:span 3 }
+.recess--h{ grid-column:span 2 }
+.recess--s{ grid-column:span 4 }
+.recess p{ color:var(--etch-soft); font-size:.98rem; line-height:1.5 }
+.recess__id{ position:absolute; top:clamp(13px,1.5vw,19px); right:clamp(13px,1.5vw,19px);
+  font-family:var(--f-mono); font-size:.72rem; font-weight:500; font-stretch:75%;
+  letter-spacing:.06em; color:var(--etch-soft) }
+.recess--xl h3,.recess--l h3{ font-size:clamp(1.3rem,2.1vw,1.75rem) }
+
+.kit{ margin-top:clamp(12px,1.4vw,18px) }
+.kit__bar{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:.5rem 1rem;
+  padding:clamp(16px,1.8vw,22px) clamp(18px,2vw,26px);
+  background:var(--body-deep); border-radius:4px 4px 0 0;
+}
+.kit__bar b{ font-size:clamp(1.05rem,1.7vw,1.32rem); font-weight:800; letter-spacing:-.025em; color:#fff }
+.kit__bar span{ font-size:.74rem; font-weight:600; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--on-teal-2) }
+.kit__list{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:2px; background:transparent; padding:2px 0 0; border-radius:0 0 4px 4px;
+}
+.kit__item{
+  display:flex; align-items:center; gap:.7rem; min-height:58px;
+  padding:.7rem clamp(12px,1.4vw,18px);
+  background:linear-gradient(180deg,#0B0E10,#121618);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.7);
+  font-size:.95rem; font-weight:600; letter-spacing:-.01em;
+  transition:background .2s var(--ease);
+}
+.kit__item:hover{ background:linear-gradient(180deg,#0D1113,#161B1E) }
+.kit__item i{ font-family:var(--f-mono); font-style:normal; font-size:.72rem; font-weight:500; color:var(--etch-soft); letter-spacing:.06em; flex:none; width:1.9rem }
+.kit__item svg{ flex:none; margin-left:auto; color:var(--body-teal) }
+@media (max-width:980px){
+  .insert{ grid-template-columns:repeat(4,1fr) }
+  .recess--xl,.recess--s{ grid-column:span 4 }
+  .recess--l,.recess--m,.recess--h{ grid-column:span 2 }
+}
+@media (max-width:620px){
+  .insert{ grid-template-columns:repeat(2,1fr) }
+  .recess--xl,.recess--l,.recess--m,.recess--s,.recess--h{ grid-column:span 2; min-height:0 }
+  .kit__list{ grid-template-columns:1fr }
+}
+
+/* ── 03 · the work ──────────────────────────────────────────────────────── */
+.found{ display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr); gap:clamp(26px,4vw,58px); align-items:center; margin-bottom:clamp(44px,6vw,84px) }
+.found h2{ margin-bottom:1.1rem }
+.found figure{ border-radius:3px; overflow:hidden; box-shadow:0 26px 54px -30px rgba(0,0,0,.9) }
+.found figure img{ width:100%; aspect-ratio:3/2; object-fit:cover; filter:saturate(.8) contrast(1.05) }
+.found figcaption{ padding:.75rem .1rem 0; font-size:.72rem; font-weight:600; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--on-teal-2) }
+
+.work{ display:grid; gap:0 }
+.work__row{
+  display:grid; grid-template-columns:minmax(0,1fr) 150px minmax(0,1.5fr);
+  gap:clamp(14px,2.4vw,34px); align-items:baseline;
+  padding:clamp(16px,1.9vw,24px) 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+  transition:background .2s var(--ease), transform .28s var(--ease);
+}
+.work__row:hover{ background:rgba(0,0,0,.17); transform:translateX(9px) }
+.work__row:last-child{ box-shadow:inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(255,255,255,.22) }
+.work__name{ font-size:clamp(1.06rem,1.8vw,1.34rem); font-weight:800; letter-spacing:-.028em; color:#fff; line-height:1.2 }
+.work__sector{ font-size:.73rem; font-weight:600; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--on-teal-2) }
+.work__out{ color:#fff; font-size:1rem; line-height:1.5 }
+@media (max-width:760px){
+  .found{ grid-template-columns:minmax(0,1fr) }
+  .work__row{ grid-template-columns:minmax(0,1fr); gap:.3rem }
+}
+
+.says{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.2vw,16px); margin-top:clamp(36px,4.6vw,64px) }
+.says blockquote{ background:var(--body-deep); border-radius:4px; padding:clamp(20px,2.4vw,30px); display:flex; flex-direction:column; gap:1rem }
+.says p{ font-size:clamp(1.02rem,1.5vw,1.2rem); font-weight:600; line-height:1.42; letter-spacing:-.02em; color:#fff; max-width:none }
+.says footer{ font-size:.74rem; font-weight:600; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--on-teal-2); margin-top:auto }
+@media (max-width:820px){ .says{ grid-template-columns:1fr } }
+
+/* ── 04 · who you're hiring ─────────────────────────────────────────────── */
+.who{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); align-items:start }
+.who h2{ font-size:clamp(2.1rem,5.2vw,4rem) }
+.who p{ font-size:clamp(1.06rem,1.45vw,1.24rem); line-height:1.55; color:var(--etch-soft) }
+.who p + p{ margin-top:1.05rem }
+.who p strong{ color:var(--etch); font-weight:700 }
+@media (max-width:760px){ .who{ grid-template-columns:minmax(0,1fr) } }
+
+/* ── 05 · what it costs ─────────────────────────────────────────────────── */
+.price{ background:var(--case) }
+.tbl{ width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums }
+.tbl caption{ text-align:left; padding-bottom:1rem; color:var(--etch-soft); font-size:.95rem }
+.tbl th,.tbl td{ text-align:left; padding:clamp(15px,1.7vw,21px) clamp(10px,1.3vw,18px); vertical-align:baseline }
+.tbl thead th{
+  font-family:var(--f-mono); font-size:.72rem; font-weight:500; font-stretch:75%;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--etch-soft); font-weight:600;
+  box-shadow:inset 0 -1px 0 var(--hair-hard);
+}
+.tbl tbody th{ font-size:1.16rem; font-weight:800; letter-spacing:-.028em; color:var(--etch); white-space:nowrap }
+.tbl tbody td{ box-shadow:inset 0 -1px 0 var(--hair) }
+.tbl tbody th{ box-shadow:inset 0 -1px 0 var(--hair) }
+.tbl tbody tr{ transition:background .2s var(--ease) }
+.tbl tbody tr:hover{ background:var(--case-hi) }
+.tbl .fig{ font-family:var(--f-mono); font-size:1.02rem; font-weight:700; font-stretch:87.5%; color:var(--etch); letter-spacing:-.03em }
+.tbl .fig-2{ font-family:var(--f-mono); font-size:.95rem; font-weight:500; font-stretch:87.5%; color:var(--etch-soft); letter-spacing:-.02em }
+.tbl .pages{ font-family:var(--f-mono); font-size:.86rem; font-weight:500; font-stretch:75%; color:var(--etch-soft) }
+.tbl tr.pick th{ position:relative }
+.tbl tr.pick{ background:rgba(10,122,114,.17) }
+.tbl tr.pick:hover{ background:rgba(10,122,114,.24) }
+.pick__tag{ display:inline-block; margin-left:.6rem; font-size:.7rem; font-weight:700; font-stretch:75%; letter-spacing:.1em; text-transform:uppercase; color:var(--case-lo); background:var(--steel); padding:.28em .5em; border-radius:2px; vertical-align:middle }
+.price__notes{ margin-top:clamp(22px,2.6vw,34px); display:grid; gap:.55rem; color:var(--etch-soft); font-size:.95rem }
+.price__notes b{ color:var(--etch); font-weight:700 }
+@media (max-width:820px){
+  .tbl,.tbl tbody,.tbl caption{ display:block }
+  .tbl tbody th{ white-space:normal }
+  .tbl thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+  .tbl tbody tr{ display:block; padding:clamp(16px,3vw,22px) 0; box-shadow:inset 0 -1px 0 var(--hair-hard) }
+  .tbl tbody th,.tbl tbody td{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:.34rem 0; box-shadow:none }
+  .tbl tbody th{ padding-bottom:.7rem; font-size:1.3rem }
+  .tbl tbody td::before{
+    content:attr(data-l); font-family:var(--f-mono); font-size:.72rem; font-weight:500; font-stretch:75%;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--etch-soft); flex:none;
+  }
+  .tbl tr.pick{ padding-inline:clamp(12px,3vw,18px) }
+}
+
+/* ── 06 · what happens next ─────────────────────────────────────────────── */
+.next{ background:var(--body-deep); color:var(--on-teal) }
+.steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,1.2vw,16px); margin-bottom:clamp(40px,5vw,72px) }
+.step{ position:relative; background:var(--case-lo); border-radius:4px; padding:clamp(20px,2.3vw,28px); display:flex; flex-direction:column; gap:.6rem }
+.step b{ position:absolute; top:clamp(13px,1.5vw,19px); right:clamp(13px,1.5vw,19px);
+  font-family:var(--f-mono); font-size:.78rem; font-weight:600; font-stretch:87.5%; color:var(--etch-soft) }
+.step h3{ color:#fff; font-size:clamp(1.05rem,1.6vw,1.25rem) }
+.step p{ color:var(--etch-soft); font-size:.96rem; line-height:1.48 }
+@media (max-width:860px){ .steps{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width:520px){ .steps{ grid-template-columns:1fr } }
+.close__grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:clamp(26px,4vw,60px); align-items:end }
+.close__grid h2{ font-size:clamp(2.15rem,5.4vw,4.2rem); color:#fff }
+.close__acts{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:clamp(22px,2.6vw,32px) }
+.close__hours{ font-family:var(--f-mono); font-size:.78rem; font-weight:500; font-stretch:75%; letter-spacing:.08em; text-transform:uppercase; color:var(--on-teal-2); line-height:1.9 }
+@media (max-width:760px){ .close__grid{ grid-template-columns:minmax(0,1fr) } .close__acts .btn{ width:100% } }
+
+/* ── footer ─────────────────────────────────────────────────────────────── */
+.ftr{ background:var(--case-lo); padding-block:clamp(52px,6vw,84px) clamp(28px,3vw,40px) }
+.ftr__grid{ display:grid; grid-template-columns:minmax(0,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(26px,3.4vw,48px) }
+.ftr h4{ font-size:.72rem; font-weight:700; font-stretch:75%; letter-spacing:.12em; text-transform:uppercase; color:var(--etch-soft); margin-bottom:1.1rem }
+.ftr a{ display:block; padding-block:.62rem; text-decoration:none; font-size:.95rem; color:var(--etch) }
+.ftr address a{ display:inline-block; padding-block:.62rem }
+.ftr a:hover{ color:var(--body-teal); text-decoration:underline; text-underline-offset:4px }
+.ftr address{ font-style:normal; font-size:.95rem; line-height:1.7; color:var(--etch-soft) }
+.ftr address a{ color:var(--etch) }
+.ftr__brand{ display:flex; align-items:baseline; gap:.6rem; margin-bottom:1.2rem }
+.ftr__brand .brand__mark{ font-size:1.5rem }
+.ftr__blurb{ color:var(--etch-soft); font-size:.95rem; max-width:38ch }
+.ftr__base{ margin-top:clamp(36px,4.4vw,58px); padding-top:1.4rem; box-shadow:inset 0 1px 0 var(--hair); display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; align-items:center }
+.ftr__base p{ font-size:.73rem; font-weight:600; font-stretch:75%; letter-spacing:.09em; text-transform:uppercase; color:var(--etch-soft) }
+@media (max-width:900px){ .ftr__grid{ grid-template-columns:repeat(2,minmax(0,1fr)) } }
+@media (max-width:520px){ .ftr__grid{ grid-template-columns:minmax(0,1fr) } }
+
+/* ── motion. JS adds .motion only when it runs AND motion is allowed, so
+      content is fully visible when the script never runs. ─────────────── */
+.motion .rv{ opacity:0; transform:translateY(16px) }
+.motion .rv.in{ opacity:1; transform:none; transition:opacity .66s var(--ease), transform .66s var(--ease) }
+/* the one authored moment: parts seating into their routed recesses — they
+   arrive from above and decelerate hard, the way a part drops home into foam. */
+.motion .seat{ opacity:0; transform:translateY(-22px) scale(.984) }
+.motion .seat.in{ opacity:1; transform:none; transition:opacity .34s linear, transform .62s var(--seat) }
+/* the spec plate etches rather than fades — a different entrance, not the
+   same one repeated. */
+.motion .etchin{ clip-path:inset(0 100% 0 0) }
+.motion .etchin.in{ clip-path:inset(0 0 0 0); transition:clip-path 1.05s var(--ease) }
+@media (prefers-reduced-motion:reduce){
+  .motion .rv,.motion .seat,.motion .etchin{ opacity:1; transform:none; clip-path:none; transition:none }
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important }
+}
+.skip{ position:absolute; left:-9999px; top:0; z-index:100; background:var(--steel); color:var(--case-lo); padding:.8rem 1.1rem; font-weight:700; border-radius:0 0 3px 0 }
+.skip:focus{ left:0 }
+</style>
+</head>
+<body>
+<!--
+  DIRECTION CONTRACT — Trade Grade
+  THESIS: A tool case is distilled by manufacture — it has a routed recess for
+    exactly what is included and nothing optional rattles inside. Refuses the
+    agency default: hero claim, gradient, and an equal grid of service cards.
+  OWN-WORLD: Power-tool brand identity. Near-black over-mould ground (#101315),
+    saturated tool-body teal (#0A7A72/#065450) owning whole regions, a single
+    trigger red (#D9291C) reserved for actions only, machined steel etch, laser
+    spec plates, routed inset recesses of unequal size. Archivo on its width
+    axis; Martian Mono for real data only.
+  STORY: A plumber sees himself, reads the offer and the price in ten seconds,
+    sees the case opened with everything already in it, and rings the number.
+  FIRST VIEWPORT: H1 left at 112% width; lead under it; red quote button and
+    dark call button; right, the plumber plate seated over an offset teal
+    plane; a five-cell etched spec plate spans the full width at the base.
+  FORM: candidate 4 of 7 on my ordered grounded list (top-ranked was the
+    Yellow Pages boxed display ad — the roll overrode it). Seed key 017e13c3.
+  RAISE / orizuru: a numbered ordinal spine — every included part is indexed
+    and the count is real and countable on the page.
+  RAISE / plankton: motion carries mass — parts seat with overshoot and damp,
+    never a linear fade.
+  RAISE / tanaka: no outlines anywhere. Structure is colour plane and routed
+    depth; not one bordered card on the page.
+  RAISE / vu-meter: one colour, one meaning. Red appears on the primary
+    actions and nowhere else at all.
+  RAISE / suminagashi: a still margin — one rail runs the whole page and never
+    moves while the fields inside it change.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the
+  finish review, the verdict, DESIGN.md, and every shipping raster carrying
+  its provenance.
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="top">
+  <div class="shell hdr__in">
+    <a class="brand" href="#top">
+      <span class="brand__mark">DCS</span>
+      <span class="brand__name">Digital Consulting Services</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#case">Services</a>
+      <a href="#price">Pricing</a>
+      <a href="#work">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="#who">About</a>
+    </nav>
+    <div class="hdr__cta">
+      <a class="hdr__tel" href="tel:+447395063764">07395 063764</a>
+      <a class="btn btn--go btn--sm" href="/contact">Get a free quote</a>
+    </div>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="shell mnav__top">
+    <span class="brand__mark">DCS</span>
+    <button class="mnav__close" type="button" id="mclose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16"/></svg>
+    </button>
+  </div>
+  <nav class="shell mnav__list" aria-label="Menu">
+    <a href="#case">Services <span>01</span></a>
+    <a href="#price">Pricing <span>02</span></a>
+    <a href="#work">Portfolio <span>03</span></a>
+    <a href="/blog">Blog <span>04</span></a>
+    <a href="#who">About <span>05</span></a>
+  </nav>
+  <div class="shell mnav__foot">
+    <a class="btn btn--go" href="/contact">Get a free quote</a>
+    <a class="btn btn--call" href="tel:+447395063764">Call 07395 063764</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- 01 · hero ─────────────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>01</b>/06</p>
+        <div class="hero__grid">
+          <div>
+            <h1 id="h-hero" class="rv">One phone call. Then it&rsquo;s built, live, and looked after.</h1>
+            <p class="lead rv">Websites for UK tradespeople. I ask the questions, write the words, make the design decisions, build it, host it and keep it running. You carry on working.</p>
+            <div class="hero__acts rv">
+              <a class="btn btn--go" href="/contact">Get a free quote
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+              </a>
+              <a class="btn btn--call" href="tel:+447395063764">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" aria-hidden="true"><path d="M3 2.5h3l1 3-1.6 1.2a9 9 0 0 0 3.9 3.9L10.5 9l3 1v3a1 1 0 0 1-1.1 1A11.5 11.5 0 0 1 2 3.6 1 1 0 0 1 3 2.5Z"/></svg>
+                Call 07395 063764
+              </a>
+            </div>
+          </div>
+          <div class="hero__plate rv">
+            <div class="hero__plane" aria-hidden="true"></div>
+            <figure class="hero__shot">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-plumber.jpg" width="1600" height="1067"
+                   alt="A plumber working on pipework under a kitchen sink in warm interior light."
+                   fetchpriority="high" decoding="async">
+              <figcaption>Illustrative photography &middot; not a DCS client</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spec">
+      <div class="shell">
+        <div class="rail">
+          <p class="rail__mark" aria-hidden="true"></p>
+          <div class="spec__in etchin">
+            <div class="spec__cell"><b>2019</b><span>Established</span></div>
+            <div class="spec__cell"><b>20+</b><span>Sites delivered</span></div>
+            <div class="spec__cell"><b>100%</b><span>Managed by me</span></div>
+            <div class="spec__cell"><b>Polegate</b><span>East Sussex</span></div>
+            <div class="spec__cell"><b>UK-wide</b><span>Wherever you work</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · the case ─────────────────────────────────────────────────────── -->
+  <section class="sec case" id="case" aria-labelledby="h-case">
+    <img class="case__tex" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/tools-flatlay.jpg" width="1600" height="1067" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>02</b>/06</p>
+        <div>
+          <div class="sec__head">
+            <h2 id="h-case" class="rv">Open the case.</h2>
+            <p class="lead rv">Six services. Thirteen things in every single site, whichever tier you pick. Nothing is sold separately and nothing gets added to the bill later.</p>
+          </div>
+
+          <div class="insert">
+            <article class="recess recess--xl seat">
+              <h3>Website Design</h3>
+              <p>Bespoke websites built for local tradespeople. No templates, no DIY, no page builder for you to wrestle with.</p>
+              <span class="recess__id" aria-hidden="true">01</span>
+            </article>
+            <article class="recess recess--l seat">
+              <h3>Local SEO</h3>
+              <p>Service pages, location pages, Schema markup, Google ranking &mdash; built in from the start, not sold as an extra.</p>
+              <span class="recess__id" aria-hidden="true">02</span>
+            </article>
+            <article class="recess recess--m seat">
+              <h3>Ongoing Management</h3>
+              <p>I look after your site so you can focus on your trade.</p>
+              <span class="recess__id" aria-hidden="true">03</span>
+            </article>
+            <article class="recess recess--m seat">
+              <h3>eCommerce Websites</h3>
+              <p>WooCommerce or custom stores &mdash; built and loaded with your products.</p>
+              <span class="recess__id" aria-hidden="true">04</span>
+            </article>
+            <article class="recess recess--h seat">
+              <h3>Google Workspace Email</h3>
+              <p>Professional business email on your own domain.</p>
+              <span class="recess__id" aria-hidden="true">05</span>
+            </article>
+            <article class="recess recess--s seat">
+              <h3>Analytics &amp; Reporting</h3>
+              <p>Analytics, Search Console and monthly reports so you know what&rsquo;s working.</p>
+              <span class="recess__id" aria-hidden="true">06</span>
+            </article>
+          </div>
+
+          <div class="kit">
+            <div class="kit__bar rv">
+              <b>In every site, on every tier</b>
+              <span>13 parts &middot; count them</span>
+            </div>
+            <ul class="kit__list">
+              <li class="kit__item seat"><i>01</i>Custom design<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>02</i>Service pages<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>03</i>Location pages<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>04</i>Schema markup<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>05</i>Mobile-first and fast<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>06</i>Contact form<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>07</i>Hosting<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>08</i>SSL certificate<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>09</i>Domain management<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>10</i>Security updates<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>11</i>Uptime monitoring<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>12</i>Unlimited revisions while I build<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+              <li class="kit__item seat"><i>13</i>Search Console submission<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · the work ─────────────────────────────────────────────────────── -->
+  <section class="sec sec--teal teal" id="work" aria-labelledby="h-work">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>03</b>/06</p>
+        <div>
+          <div class="found">
+            <div>
+              <h2 id="h-work" class="rv">Someone is looking for your trade right now.</h2>
+              <p class="lead rv">They are stood in their kitchen with a phone in their hand, typing your trade and your town into Google. Either something of yours comes back, or somebody else&rsquo;s does. That is the whole job.</p>
+            </div>
+            <figure class="rv">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg" width="1600" height="1067"
+                   alt="A work-worn hand holding a phone on a building site." loading="lazy" decoding="async">
+              <figcaption>Illustrative photography &mdash; not a photograph of a DCS client</figcaption>
+            </figure>
+          </div>
+
+          <div class="work">
+            <div class="work__row rv"><p class="work__name">Colossus Scaffolding</p><p class="work__sector">Scaffolding &middot; E. Sussex</p><p class="work__out">First Google enquiry within 3 weeks of launch. 30-page site.</p></div>
+            <div class="work__row rv"><p class="work__name">DJ Fox Electrical</p><p class="work__sector">Electrician &middot; E. Sussex</p><p class="work__out">20+ page site, service and location pages, live at djfoxelectrical.com</p></div>
+            <div class="work__row rv"><p class="work__name">Cuddle Plush Fabrics</p><p class="work__sector">eCommerce &middot; Fabrics</p><p class="work__out">5+ years and counting &mdash; one of our longest client relationships.</p></div>
+            <div class="work__row rv"><p class="work__name">DCH Automotive</p><p class="work__sector">Automotive</p><p class="work__out">Professional presence from a standing start, with a live Instagram feed.</p></div>
+            <div class="work__row rv"><p class="work__name">Luna Landings</p><p class="work__sector">Made-to-order eCommerce</p><p class="work__out">Product configurator, automatic work orders, worldwide shipping.</p></div>
+            <div class="work__row rv"><p class="work__name">Bexhill Removals</p><p class="work__sector">Removals</p><p class="work__out">Design approved on the first presentation, no revisions.</p></div>
+            <div class="work__row rv"><p class="work__name">Nicola Noble Tuition</p><p class="work__sector">Tutoring</p><p class="work__out">Moved classes online during Covid instead of closing.</p></div>
+            <div class="work__row rv"><p class="work__name">Sanctuary Ida</p><p class="work__sector">Yoga</p><p class="work__out">Students book and pay for classes online.</p></div>
+            <div class="work__row rv"><p class="work__name">Mad Graphics</p><p class="work__sector">Signage &amp; print</p><p class="work__out">Full rebuild.</p></div>
+          </div>
+
+          <div class="says">
+            <blockquote class="rv">
+              <p>&ldquo;Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be happier with his work.&rdquo;</p>
+              <footer>Sarah &middot; Cuddle Plush Fabrics</footer>
+            </blockquote>
+            <blockquote class="rv">
+              <p>&ldquo;I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.&rdquo;</p>
+              <footer>Nicola &middot; Nicola Noble Tuition</footer>
+            </blockquote>
+            <blockquote class="rv">
+              <p>&ldquo;My yoga students love that they can book and pay for my classes on my website.&rdquo;</p>
+              <footer>Molly &middot; Sanctuary Ida</footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · who you're hiring ────────────────────────────────────────────── -->
+  <section class="sec" id="who" aria-labelledby="h-who">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>04</b>/06</p>
+        <div class="who">
+          <h2 id="h-who" class="rv">You&rsquo;re hiring me, not a company.</h2>
+          <div class="rv">
+            <p><strong>Ricky Wilson.</strong> I have been building and running websites for local businesses in East Sussex since 2019. Nothing is outsourced, nothing is offshored, and there is no account manager sat in between us.</p>
+            <p>You will not be asked for a brief, or for copy, or for a folder of photographs. You will not be given a login and left to it. We have a conversation, I pull out what I need, and then I go and do the work.</p>
+            <p>When you ring the number on this page, you get me.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · what it costs ────────────────────────────────────────────────── -->
+  <section class="sec price" id="price" aria-labelledby="h-price">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>05</b>/06</p>
+        <div>
+          <div class="sec__head">
+            <h2 id="h-price" class="rv">What it costs.</h2>
+            <p class="lead rv">Two ways to pay for the same site. You choose how to pay, not what you get &mdash; the tiers differ on ongoing service level, never on build quality.</p>
+          </div>
+          <div class="rv">
+            <table class="tbl">
+              <caption>All prices in GBP. Monthly covers hosting, security, updates and support.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Tier</th>
+                  <th scope="col">Pages</th>
+                  <th scope="col">Setup, upfront</th>
+                  <th scope="col">Then monthly</th>
+                  <th scope="col">Or pay monthly, nothing upfront</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Starter</th>
+                  <td data-l="Pages" class="pages">up to 20</td>
+                  <td data-l="Setup" class="fig">&pound;995</td>
+                  <td data-l="Then monthly" class="fig-2">&pound;15/mo</td>
+                  <td data-l="Or monthly" class="fig">&pound;45/mo</td>
+                </tr>
+                <tr class="pick">
+                  <th scope="row">Professional<span class="pick__tag">Most popular</span></th>
+                  <td data-l="Pages" class="pages">up to 50</td>
+                  <td data-l="Setup" class="fig">&pound;1,995</td>
+                  <td data-l="Then monthly" class="fig-2">&pound;25/mo</td>
+                  <td data-l="Or monthly" class="fig">&pound;75/mo</td>
+                </tr>
+                <tr>
+                  <th scope="row">Growth</th>
+                  <td data-l="Pages" class="pages">up to 100</td>
+                  <td data-l="Setup" class="fig">&pound;3,495</td>
+                  <td data-l="Then monthly" class="fig-2">&pound;50/mo</td>
+                  <td data-l="Or monthly" class="fig">&pound;125/mo</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="price__notes">
+              <p><b>Pay monthly has a 12-month minimum.</b> Everything in the case above is included on all three tiers.</p>
+              <p>Add-ons, only if you want them: blog post writing &pound;75/post &middot; custom theme design &pound;350 &middot; Google Ads setup and management &pound;200/mo plus ad spend &middot; monthly SEO retainer &pound;200/mo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · what happens next ────────────────────────────────────────────── -->
+  <section class="sec next" id="next" aria-labelledby="h-next">
+    <div class="shell">
+      <div class="rail">
+        <p class="rail__mark"><b>06</b>/06</p>
+        <div>
+          <div class="sec__head">
+            <h2 id="h-next" class="rv" style="color:#fff">What happens next.</h2>
+          </div>
+          <ol class="steps">
+            <li class="step rv"><h3>A conversation</h3><p>A call or a few messages. No brief needed, nothing to fill in.</p><b>01</b></li>
+            <li class="step rv"><h3>I write it and design it</h3><p>Copy, structure, images, colours &mdash; all handled.</p><b>02</b></li>
+            <li class="step rv"><h3>You review</h3><p>Unlimited revisions during the build, until you are happy with it.</p><b>03</b></li>
+            <li class="step rv"><h3>It goes live and stays looked after</h3><p>Hosting, updates, monitoring and support, for as long as you want it.</p><b>04</b></li>
+          </ol>
+
+          <div class="close__grid">
+            <div class="rv">
+              <h2>You have been putting this off. It takes one phone call to stop.</h2>
+              <div class="close__acts">
+                <a class="btn btn--go" href="/contact">Get a free quote
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                </a>
+                <a class="btn btn--call" href="tel:+447395063764">Call 07395 063764</a>
+              </div>
+            </div>
+            <p class="close__hours rv">
+              Mon&ndash;Fri 9:00&ndash;17:30<br>
+              Sat by appointment<br>
+              Sun closed<br>
+              mail@digitalconsultingservices.co.uk
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="shell">
+    <div class="ftr__grid">
+      <div>
+        <div class="ftr__brand">
+          <span class="brand__mark">DCS</span>
+          <span class="brand__name">Digital Consulting Services</span>
+        </div>
+        <p class="ftr__blurb">Websites that get local tradespeople more jobs. Designed, built, hosted and looked after from Polegate, East Sussex.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#case">Website Design</a></li>
+          <li><a href="#case">Local SEO</a></li>
+          <li><a href="#case">Ongoing Management</a></li>
+          <li><a href="#case">Google Workspace Email</a></li>
+          <li><a href="#case">eCommerce Websites</a></li>
+          <li><a href="#case">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service areas</h4>
+        <ul>
+          <li><a href="#work">Polegate</a></li>
+          <li><a href="#work">Eastbourne</a></li>
+          <li><a href="#work">Hailsham</a></li>
+          <li><a href="#work">Lewes</a></li>
+          <li><a href="#work">Seaford</a></li>
+          <li><a href="#work">Brighton &amp; Hove</a></li>
+          <li><a href="#work">Uckfield</a></li>
+          <li><a href="#work">&mdash; and UK-wide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <address>
+          <a href="tel:+447395063764">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@<wbr>digitalconsultingservices<wbr>.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex, BN26 6QH<br><br>
+          Mon&ndash;Fri 9:00&ndash;17:30<br>
+          Sat by appointment &middot; Sun closed
+        </address>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <p>&copy; 2026 Digital Consulting Services</p>
+      <p>Established 2019 &middot; Polegate, East Sussex</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── mobile nav ─────────────────────────────────────────────────────── */
+  var burger = document.getElementById('burger');
+  var mnav   = document.getElementById('mnav');
+  var mclose = document.getElementById('mclose');
+
+  function setNav(open) {
+    mnav.setAttribute('data-open', open ? 'true' : 'false');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('is-locked', open);
+    if (open) {
+      var first = mnav.querySelector('a');
+      if (first) first.focus();
+    } else {
+      burger.focus();
+    }
+  }
+  if (burger && mnav) {
+    burger.addEventListener('click', function () { setNav(mnav.getAttribute('data-open') !== 'true'); });
+    if (mclose) mclose.addEventListener('click', function () { setNav(false); });
+    mnav.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (a) setNav(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mnav.getAttribute('data-open') === 'true') setNav(false);
+    });
+    /* keep the panel from surviving a resize back to desktop */
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1040 && mnav.getAttribute('data-open') === 'true') setNav(false);
+    });
+  }
+
+  /* ── header seats on scroll ─────────────────────────────────────────── */
+  var hdr = document.querySelector('.hdr');
+  var seatHdr = function () {
+    if (hdr) hdr.classList.toggle('seated', window.scrollY > 8);
+  };
+  seatHdr();
+  window.addEventListener('scroll', seatHdr, { passive: true });
+
+  /* ── motion. The hidden state is added by JS only, and only when motion
+        is allowed, so a page whose script never runs is fully readable. ── */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+
+  document.documentElement.classList.add('motion');
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      io.unobserve(el);
+
+      /* stagger is scoped to the group the element belongs to, so parts seat
+         into one insert in order rather than the whole page firing at once */
+      var group = el.parentElement;
+      var peers = group ? Array.prototype.filter.call(group.children, function (c) {
+        return c.classList.contains('seat') || c.classList.contains('rv');
+      }) : [];
+      var i = peers.indexOf(el);
+      var delay = i > 0 ? Math.min(i, 12) * (el.classList.contains('seat') ? 46 : 66) : 0;
+
+      el.style.transitionDelay = delay + 'ms';
+      el.classList.add('in');
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  document.querySelectorAll('.rv, .seat, .etchin').forEach(function (el) { io.observe(el); });
+
+  /* safety net: if anything is still hidden after load (an observer that
+     never fired, a print, a zero-height container), show it. Content must
+     never be permanently gated behind an animation. */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.querySelectorAll('.rv:not(.in), .seat:not(.in), .etchin:not(.in)').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 1.1) el.classList.add('in');
+      });
+    }, 240);
+  });
+})();
+</script>
+</body>
+</html>

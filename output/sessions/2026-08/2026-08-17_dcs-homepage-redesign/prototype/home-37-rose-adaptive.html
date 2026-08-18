@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Agency work for small businesses</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Sites that stand next to what London and New York studios put out — for a fraction of the cost and a tiny fraction of the effort from you. From £995 plus £15/mo, or £45/mo with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================
+   DCS — Direction 37  "ROSE / ADAPTIVE"
+   Round 4 variation on direction 27 "Poster".
+
+   CHORD — ROSE. A SINGLE-HUE SYSTEM.
+   One pink at two values (hue 338°), plus ink and bone. There is no
+   second chromatic note anywhere on this page: no cyan, no violet,
+   no gold. Every coloured thing is the same pink.
+
+     --rose      #FF1F70   ink on it 5.14:1
+     --rose-deep #C4004A   white on it 6.09:1   (same hue, darker value)
+
+   The answer to "I like the pink but I'm not a pink guy" is not a
+   softer pink. It is a HARDER one, and it is what you put ON it:
+   near-black, never white. Black on hot pink is Jamie Reid, acid
+   house, Schiaparelli — it is punk, not cosmetics. White on hot pink
+   is the girly combination, so white never touches the pink here.
+
+   The pink also does structural work rather than decoration: it is
+   the page's joinery. Every section seam is a 3px rose rule; the
+   numerals, the section bars, the price chip, the service floods and
+   the hover states are all the same pink. Twice — once early, once
+   at the end — it stops being a line and becomes an entire room.
+
+   NAV — A, colour-adaptive bar. Solid, full width. NO backdrop-filter
+   anywhere in this file (Poster's no-blur discipline is kept in full).
+
+   Carried over from the parent: neutral shell / chromatic contents,
+   zero gradients, zero box-shadows, zero blurs, one grotesk family,
+   display type in the 120–180px band, hard section seams, per-character
+   hero reveal where letters arrive in colour and resolve to ink,
+   phone number + CTA + real prices in the first viewport.
+
+   New in this round: every section fits one viewport at >=1024px.
+   ============================================================ */
+
+:root{
+  /* ---- THE ROOM (neutral only) ---- */
+  --bone:   #EFEBE3;   /* warm off-white ground        ink on it 15.97:1 */
+  --bone-2: #DFD9CE;   /* deeper bone ground                             */
+  --ink:    #0D0C10;   /* near-black ground                              */
+  --ink-2:  #17161C;   /* dark secondary ground                          */
+  --chalk:  #F2EFE8;   /* text on dark                                   */
+  --ash:    #57534A;   /* muted text on bone            6.44:1           */
+  --smoke:  #A29E96;   /* muted text on ink             7.11:1           */
+  --rule-light: rgba(13,12,16,.16);
+  --rule-dark:  rgba(242,239,232,.22);
+  --rule-rose:  rgba(13,12,16,.30);   /* rules drawn ON the pink: ink, not white */
+
+  /* ---- THE ONLY COLOUR ---- */
+  --rose:      #FF1F70;   /* ink on it  5.14:1  — the working value      */
+  --rose-deep: #C4004A;   /* chalk on it 6.09:1 — same hue, darker value */
+
+  /* ---- type ---- */
+  --font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Display and H2 are clamped against viewport HEIGHT as well as width.
+     One-section-per-viewport means a headline that is correct at
+     1440x900 will overflow at 1280x800 unless height is in the maths. */
+  --fs-display: clamp(2.5rem, min(9.6vw, 15.5svh), 9rem);      /* 138px @1440x900 */
+  --fs-h2:      clamp(1.85rem, min(5.4vw, 8.8svh), 4.75rem);   /*  78px @1440x900 */
+  --fs-h3:      clamp(1.15rem, 1.5vw, 1.4rem);                 /*  22px */
+  --fs-figure:  clamp(1.7rem, min(3.1vw, 5.2svh), 2.9rem);     /*  45px */
+  --fs-lead:    clamp(1rem, 1.3vw, 1.22rem);                   /*  19px */
+  --fs-body:    1.0625rem;                                      /*  17px */
+  --fs-small:   0.9375rem;                                      /*  15px */
+  --fs-label:   0.75rem;                                        /*  12px — the floor */
+
+  /* ---- system ---- */
+  --gut: clamp(1.25rem, 3.2vw, 3rem);
+  --max: 1560px;
+  --bar: 68px;              /* adaptive nav bar height */
+  --seam: 3px;              /* the rose joinery */
+  --pad-v: clamp(1.5rem, 3.4vh, 2.75rem);
+  --rise: 22px;             /* reveal travel — see the note on .reveal */
+  --ease: cubic-bezier(.16,1,.3,1);
+  --snap: cubic-bezier(.2,.8,.2,1);
+
+  --z-panel: 1;
+  --z-float: 60;
+  --z-bar:   70;
+  --z-menu:  90;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+/* Viewport-locked sections. `proximity`, never `mandatory` — mandatory
+   fights trackpads and traps keyboard users. scroll-padding-top keeps a
+   snapped section clear of the fixed bar, and also fixes #anchor jumps. */
+html{
+  scroll-padding-top:var(--bar);
+}
+@media (min-width:1024px) and (prefers-reduced-motion: no-preference){
+  html{scroll-snap-type:y proximity}
+}
+html:focus-within{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html:focus-within{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.55;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4,p,figure,blockquote,ul,ol,dl,dd,table{margin:0}
+ul,ol{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+table{border-collapse:collapse;width:100%}
+
+/* Focus ring is the pink, except on the pink — where it is ink. */
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.on-dark :focus-visible{outline-color:var(--rose)}
+.on-rose :focus-visible{outline-color:var(--ink)}
+
+.skip{
+  position:absolute;left:8px;top:8px;z-index:200;
+  transform:translateY(-250%);
+  background:var(--ink);color:var(--chalk);
+  padding:14px 20px;font-weight:700;text-decoration:none;
+}
+.skip:focus{transform:none}
+
+.vh{
+  position:absolute!important;width:1px;height:1px;
+  margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ============================================================
+   TYPE PRIMITIVES
+   ============================================================ */
+.display{
+  font-size:var(--fs-display);
+  line-height:.86;font-weight:800;letter-spacing:-.038em;
+  text-transform:uppercase;text-wrap:balance;
+}
+.h2{
+  font-size:var(--fs-h2);
+  line-height:.9;font-weight:800;letter-spacing:-.032em;
+  text-transform:uppercase;text-wrap:balance;
+}
+.h3{font-size:var(--fs-h3);line-height:1.08;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:var(--fs-lead);line-height:1.42;max-width:46ch}
+.label{
+  font-size:var(--fs-label);font-weight:700;
+  text-transform:uppercase;letter-spacing:.2em;line-height:1.2;
+}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ============================================================
+   THE VIEWPORT SECTION
+   Each one is exactly one screen below the bar. Hard seams — a 3px
+   rose rule, which is the pink doing structural work.
+   ============================================================ */
+.vp{
+  position:relative;z-index:var(--z-panel);
+  min-height:calc(100svh - var(--bar));
+  display:flex;flex-direction:column;
+  padding-block:var(--pad-v);
+  border-top:var(--seam) solid var(--rose);
+  scroll-snap-align:start;
+}
+.vp__in{flex:1;display:flex;flex-direction:column;min-height:0}
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+
+.gnd--bone   {background:var(--bone);color:var(--ink)}
+.gnd--bone-2 {background:var(--bone-2);color:var(--ink)}
+.gnd--ink    {background:var(--ink);color:var(--chalk)}
+.gnd--ink-2  {background:var(--ink-2);color:var(--chalk)}
+.gnd--rose   {background:var(--rose);color:var(--ink)}
+/* on a pink room the seam inverts to ink, so the joinery stays visible */
+.gnd--rose{border-top-color:var(--ink)}
+.on-dark a{color:var(--chalk)}
+
+/* ---- section heading block ---- */
+.sechead{margin-bottom:clamp(1.5rem,3.2vh,2.75rem)}
+.sechead__bar{
+  display:block;height:10px;width:clamp(80px,11vw,160px);
+  background:var(--rose);transform-origin:left center;
+  margin-bottom:clamp(.9rem,1.8vh,1.5rem);
+}
+.on-rose .sechead__bar{background:var(--ink)}
+.sechead__kicker{color:var(--ash);margin-bottom:.7rem}
+.on-dark .sechead__kicker{color:var(--smoke)}
+.on-rose .sechead__kicker{color:var(--ink);opacity:.72}
+.sechead .h2{color:inherit;transition:color .7s var(--ease)}
+.sechead__sub{margin-top:clamp(.9rem,1.8vh,1.4rem);color:var(--ash)}
+.on-dark .sechead__sub{color:var(--smoke)}
+.on-rose .sechead__sub{color:var(--ink);opacity:.86}
+
+/* the standard "heading beside content" split — this is what makes the
+   dense sections fit a viewport without shrinking anything */
+.split2{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:minmax(0,.82fr) minmax(0,2fr);
+  gap:clamp(1.5rem,3vw,3.25rem);
+}
+/* min-width:0 is load-bearing, not defensive. A grid item defaults to
+   min-width:auto, so a wide intrinsic child (the sectors track: six
+   300px columns) drags the whole column to its min-content width and
+   the document scrolls sideways. Measured at 390: 1846px wide. */
+.split2__aside{display:flex;flex-direction:column;min-height:0;min-width:0}
+.split2__main{display:flex;flex-direction:column;min-height:0;min-width:0}
+
+/* ============================================================
+   BUTTONS — flat, hard, no blur, no shadow.
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  min-height:52px;padding:.8rem 1.4rem;
+  font-size:var(--fs-small);font-weight:700;letter-spacing:.02em;
+  text-decoration:none;border:2px solid transparent;
+  transition:transform .18s var(--snap),background-color .18s linear,color .18s linear,border-color .18s linear;
+}
+.btn__arrow{
+  display:grid;place-items:center;
+  width:26px;height:26px;flex:0 0 26px;
+  border:2px solid currentColor;
+  transition:transform .28s var(--snap);
+}
+.btn__arrow svg{width:12px;height:12px;display:block}
+.btn:hover .btn__arrow,.btn:focus-visible .btn__arrow{transform:translate(3px,-3px)}
+.btn:active{transform:translateY(2px)}
+
+.btn--solid{background:var(--ink);color:var(--chalk)}
+.btn--solid:hover{background:var(--rose);color:var(--ink)}
+.on-dark .btn--solid{background:var(--chalk);color:var(--ink)}
+.on-dark .btn--solid:hover{background:var(--rose);color:var(--ink)}
+/* in a pink room the solid button is ink — white on pink never happens here */
+.on-rose .btn--solid,.on-rose .btn--solid:hover{background:var(--ink);color:var(--chalk)}
+.on-rose .btn--solid:hover{background:var(--bone);color:var(--ink)}
+
+.btn--line{border-color:currentColor;color:inherit;background:transparent}
+.btn--line:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.on-dark .btn--line:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+.on-rose .btn--line{border-color:var(--ink)}
+.on-rose .btn--line:hover{background:var(--ink);color:var(--rose)}
+
+/* rose button: only ever carries INK text (5.14:1) */
+.btn--rose,.on-dark .btn--rose{background:var(--rose);color:var(--ink);border-color:var(--rose)}
+.btn--rose:hover,.on-dark .btn--rose:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+
+/* ============================================================
+   NAV A — THE COLOUR-ADAPTIVE BAR
+   Solid, full width, no backdrop-filter. It repaints to match the
+   section geometrically BEHIND it, so scrolling plays the palette:
+       light ground  -> ink bar
+       dark ground   -> ROSE bar   (the pink's loudest recurring moment)
+       rose ground   -> bone bar
+   No-JS default is data-bar="ink", which is legible on every ground
+   used in this page.
+   ============================================================ */
+.bar{
+  position:fixed;inset:0 0 auto 0;z-index:var(--z-bar);
+  height:var(--bar);
+  background:var(--bar-bg);color:var(--bar-fg);
+  border-bottom:1px solid var(--bar-line);
+  transition:background-color .34s var(--ease),color .34s var(--ease),border-color .34s var(--ease);
+}
+.bar[data-bar="ink"]{
+  --bar-bg:var(--ink);      --bar-fg:var(--chalk);
+  --bar-line:rgba(242,239,232,.22);
+  --bar-accent:var(--rose);
+  --mark-bg:var(--rose);    --mark-fg:var(--ink);
+  --cta-bg:var(--rose);     --cta-fg:var(--ink);
+}
+.bar[data-bar="rose"]{
+  --bar-bg:var(--rose);     --bar-fg:var(--ink);
+  --bar-line:rgba(13,12,16,.32);
+  --bar-accent:var(--ink);
+  --mark-bg:var(--ink);     --mark-fg:var(--rose);
+  --cta-bg:var(--ink);      --cta-fg:var(--chalk);
+}
+.bar[data-bar="bone"]{
+  --bar-bg:var(--bone);     --bar-fg:var(--ink);
+  --bar-line:rgba(13,12,16,.20);
+  --bar-accent:var(--rose-deep);
+  --mark-bg:var(--rose-deep); --mark-fg:#fff;   /* 6.09:1 — the only white-on-pink on the page, and it is the DEEP value */
+  --cta-bg:var(--ink);      --cta-fg:var(--chalk);
+}
+.bar__in{
+  display:flex;align-items:center;gap:clamp(.75rem,1.6vw,1.5rem);
+  height:100%;width:100%;max-width:var(--max);
+  margin-inline:auto;padding-inline:var(--gut);
+}
+.brand{
+  display:flex;align-items:baseline;gap:.6rem;min-height:44px;
+  text-decoration:none;font-weight:900;letter-spacing:-.04em;
+  font-size:1.45rem;line-height:1;padding-block:.35rem;
+}
+.brand__mark{
+  background:var(--mark-bg,var(--rose));color:var(--mark-fg,var(--ink));
+  padding:.28em .34em .22em;letter-spacing:-.02em;
+  transition:background-color .34s var(--ease),color .34s var(--ease);
+}
+.brand__full{
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;opacity:.72;
+}
+.bar__nav{margin-left:auto;display:flex;align-items:center;gap:clamp(.9rem,1.8vw,1.9rem)}
+.bar__nav a{
+  display:inline-flex;align-items:center;min-height:44px;
+  text-decoration:none;font-size:var(--fs-small);font-weight:500;
+  padding:.5rem 0;position:relative;
+}
+.bar__nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:var(--bar-accent,var(--rose));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.bar__nav a:hover::after,.bar__nav a:focus-visible::after{transform:scaleX(1)}
+.bar__tel{
+  display:inline-flex;align-items:center;gap:.5rem;
+  text-decoration:none;font-weight:700;font-size:var(--fs-small);
+  min-height:44px;white-space:nowrap;
+  border-bottom:3px solid var(--bar-accent,var(--rose));
+  transition:border-color .34s var(--ease);
+}
+.bar__cta{
+  display:inline-flex;align-items:center;gap:.6rem;
+  min-height:44px;padding:.55rem 1.05rem;
+  background:var(--cta-bg,var(--rose));color:var(--cta-fg,var(--ink));
+  font-size:var(--fs-small);font-weight:700;text-decoration:none;
+  transition:background-color .34s var(--ease),color .34s var(--ease),transform .18s var(--snap);
+}
+.bar__cta:active{transform:translateY(2px)}
+.bar__cta .btn__arrow{width:22px;height:22px;flex:0 0 22px}
+.bar__cta .btn__arrow svg{width:10px;height:10px}
+.bar__cta:hover .btn__arrow{transform:translate(3px,-3px)}
+
+/* burger */
+.burger{
+  display:none;margin-left:auto;
+  width:46px;height:46px;place-items:center;
+  border:2px solid currentColor;
+}
+.burger__box{width:20px;height:14px;position:relative}
+.burger__box i{
+  position:absolute;left:0;right:0;height:2px;background:currentColor;
+  transition:transform .34s var(--ease),opacity .2s linear;
+}
+.burger__box i:nth-child(1){top:0}
+.burger__box i:nth-child(2){top:6px}
+.burger__box i:nth-child(3){top:12px}
+[aria-expanded="true"] .burger__box i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+[aria-expanded="true"] .burger__box i:nth-child(2){opacity:0}
+[aria-expanded="true"] .burger__box i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* mobile menu — a SIBLING of the bar, never nested inside it */
+.menu{
+  position:fixed;inset:0;z-index:var(--z-menu);
+  background:var(--ink);color:var(--chalk);
+  display:flex;flex-direction:column;
+  padding:calc(var(--bar) + 1.5rem) var(--gut) 2rem;
+  overflow-y:auto;
+}
+.menu[hidden]{display:none}
+.menu__list{display:flex;flex-direction:column;gap:.2rem;margin-bottom:2rem}
+.menu__list a{
+  display:block;text-decoration:none;
+  font-size:clamp(2rem,10vw,3rem);font-weight:800;
+  letter-spacing:-.03em;text-transform:uppercase;line-height:1.1;
+  padding:.35rem 0;border-bottom:1px solid var(--rule-dark);
+}
+.menu__list a:hover{color:var(--rose)}
+.menu__foot{margin-top:auto;display:grid;gap:.75rem}
+.menu__close{
+  position:absolute;top:11px;right:var(--gut);
+  width:46px;height:46px;display:grid;place-items:center;
+  border:2px solid currentColor;
+}
+.js .menu__item{opacity:0;transform:translateY(22px)}
+.menu.is-open .menu__item{
+  opacity:1;transform:none;
+  transition:opacity .45s var(--ease),transform .55s var(--ease);
+}
+
+/* ============================================================
+   1 — HERO   (bone)
+   ============================================================ */
+.hero{
+  min-height:100svh;
+  padding-top:calc(var(--bar) + var(--pad-v));
+  padding-bottom:0;
+  border-top:0;
+}
+.hero__in{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(1rem,2.2vh,1.7rem);
+  padding-bottom:clamp(1rem,2.4vh,2rem);
+}
+.hero__eyebrow{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;
+  color:var(--ash);
+}
+.hero__eyebrow .dot{width:8px;height:8px;background:var(--rose);flex:0 0 8px}
+.hero h1{margin:0}
+
+/* per-character reveal: the letters ARRIVE IN ROSE and resolve to ink */
+.split .ch{display:inline-block;white-space:pre}
+.js .split.is-split .ch{opacity:0;transform:translateY(.34em);color:var(--rose)}
+.split.is-split.is-in .ch{
+  opacity:1;transform:none;color:inherit;
+  transition:opacity .5s linear,transform .66s var(--ease),color .95s ease-out;
+  transition-delay:var(--d,0ms);
+}
+/* the plate word — a hard rose block sat inside the headline, ink type on it */
+.plate{
+  display:inline-block;background:var(--rose);color:var(--ink);
+  padding:0 .12em .06em;transform-origin:left center;
+}
+.js .plate{transform:scaleX(0)}
+.js .hero.is-in .plate{transform:scaleX(1);transition:transform .7s var(--ease) .15s}
+
+.hero__cols{
+  display:grid;gap:clamp(1.25rem,2.4vw,2.5rem);
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  align-items:end;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:clamp(1rem,2.2vh,1.6rem)}
+.pricechip{
+  background:var(--rose);color:var(--ink);
+  padding:clamp(.9rem,1.7vh,1.4rem) clamp(1rem,1.8vw,1.5rem);
+  display:grid;gap:.35rem;align-self:end;
+}
+.pricechip__big{font-size:clamp(1.3rem,2.1vw,1.8rem);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.pricechip__note{font-size:var(--fs-small);font-weight:500}
+.hero__tel{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:clamp(1rem,1.5vw,1.3rem);font-weight:800;letter-spacing:-.01em;
+  text-decoration:none;min-height:52px;padding:.8rem 1.4rem;
+  border:2px solid var(--ink);
+  transition:background-color .18s linear,color .18s linear;
+}
+.hero__tel:hover{background:var(--ink);color:var(--rose)}
+
+/* the marquee band sits flush on the hero's bottom edge and carries its
+   own data-tone, because it is a rose object inside a light section —
+   which is exactly the stacking case the adaptive bar has to get right */
+.band{
+  flex:0 0 auto;position:relative;z-index:2;
+  background:var(--rose);color:var(--ink);
+  padding:clamp(.7rem,1.5vh,1.1rem) 0;
+  overflow:hidden;border-top:var(--seam) solid var(--ink);
+}
+.band__track{display:flex;width:max-content}
+.band__run{
+  display:flex;align-items:center;flex:0 0 auto;padding-right:2rem;
+  font-size:clamp(1rem,1.85vw,1.6rem);font-weight:800;letter-spacing:-.01em;
+  text-transform:uppercase;white-space:nowrap;
+}
+.band__run span{padding-inline:1rem;display:inline-flex;align-items:center;gap:1rem}
+.band__run span::after{content:"";width:9px;height:9px;background:var(--ink);flex:0 0 9px}
+@media (prefers-reduced-motion: no-preference){
+  .band__track{animation:marquee 46s linear infinite}
+  .band:hover .band__track{animation-play-state:paused}
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   2 — THE CLAIM   (ink)   three claims + the ink-bloom video
+   ============================================================ */
+.claims{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(.6rem,1.1vw,1rem);
+}
+.claim{
+  display:flex;flex-direction:column;justify-content:space-between;
+  gap:clamp(.8rem,1.9vh,1.6rem);
+  padding:clamp(1rem,1.7vw,1.6rem);
+  min-height:0;
+}
+.claim--rose{background:var(--rose);color:var(--ink)}
+.claim--line{border:2px solid var(--rule-dark);color:var(--chalk)}
+.claim__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em}
+.claim--line .claim__n{color:var(--rose)}
+.claim__h{
+  font-size:clamp(1.35rem,2.4vw,2.15rem);font-weight:800;
+  letter-spacing:-.035em;line-height:.98;text-transform:uppercase;
+  margin-bottom:.7rem;margin-top:auto;
+}
+.claim__p{font-size:var(--fs-small);font-weight:500;line-height:1.45}
+.claim--line .claim__p{color:var(--smoke)}
+
+/* duotone media frame — the single-hue rule applies to imagery too.
+   A rose frame gives a pink duotone; an ink frame gives pure monochrome.
+   Nothing on this page can introduce a second hue. */
+.duo{position:relative;isolation:isolate;overflow:hidden;background:var(--rose)}
+.duo--ink{background:var(--ink)}
+.duo>img,.duo>video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.08);
+  mix-blend-mode:luminosity;
+}
+/* vid-ink is bright ink on a white tank. Inverting it first turns the
+   water black and the blooms into hot rose — the chord, moving. */
+.duo--invert>video{filter:grayscale(1) invert(1) contrast(1.14)}
+.mediafig{margin:0;display:flex;flex-direction:column;min-height:0}
+.mediafig .duo{flex:1;min-height:0}
+.mediafig figcaption{
+  margin-top:.65rem;font-size:var(--fs-label);font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);
+  display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+}
+.on-rose .mediafig figcaption,.gnd--bone .mediafig figcaption,.gnd--bone-2 .mediafig figcaption{color:var(--ash)}
+.vidbtn{
+  border:1px solid currentColor;padding:.25rem .55rem;
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  min-height:32px;display:inline-flex;align-items:center;
+}
+.vidbtn:hover{background:var(--rose);color:var(--ink);border-color:var(--rose)}
+
+/* ============================================================
+   3 — THE PROMISE   (ROSE ROOM #1)
+   A whole viewport of hot pink carrying real content, entirely in
+   near-black. This is the conviction half of the brief.
+   ============================================================ */
+.promise{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:2px solid var(--ink);
+}
+.promise li{
+  display:flex;flex-direction:column;
+  padding:clamp(1.1rem,2vw,1.75rem) clamp(.9rem,1.6vw,1.5rem) clamp(1rem,2vh,1.6rem) 0;
+  border-right:1px solid var(--rule-rose);
+  min-height:0;
+}
+.promise li:last-child{border-right:0}
+.promise__n{
+  display:grid;place-items:center;width:46px;height:46px;
+  font-weight:900;font-size:1.05rem;
+  background:var(--ink);color:var(--rose);
+  margin-bottom:clamp(1rem,2.4vh,2rem);
+}
+.promise h3{margin-bottom:.55rem;margin-top:auto}
+.promise p{font-size:var(--fs-small);line-height:1.45;opacity:.86}
+
+/* ============================================================
+   4 — SERVICES   (bone)   six rows, the flood is rose
+   ============================================================ */
+.svcs{flex:1;display:grid;grid-template-rows:repeat(6,minmax(0,1fr));min-height:0;border-top:2px solid var(--ink)}
+.svc{
+  position:relative;display:grid;align-items:center;
+  grid-template-columns:4.5rem minmax(0,1fr) minmax(0,1.15fr) 2rem;
+  gap:clamp(.75rem,1.6vw,1.75rem);
+  padding:clamp(.6rem,1.4vh,1.1rem) clamp(.75rem,1.5vw,1.35rem);
+  border-bottom:1px solid var(--rule-light);
+  text-decoration:none;color:inherit;isolation:isolate;
+}
+.svc::before{
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--rose);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .42s var(--ease);
+}
+.svc:hover::before,.svc:focus-visible::before{transform:scaleY(1)}
+.svc>*{transition:color .2s linear}
+.svc:hover,.svc:focus-visible{color:var(--ink)}
+.svc:hover .svc__desc,.svc:focus-visible .svc__desc{color:var(--ink)}
+.svc__idx{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;color:var(--rose-deep)}
+.svc:hover .svc__idx{color:var(--ink)}
+.svc__name{font-size:clamp(1.2rem,2.2vw,2.05rem);font-weight:800;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.svc__desc{color:var(--ash);font-size:var(--fs-small);line-height:1.35}
+.svc__go{justify-self:end;font-size:1.3rem;line-height:1;transition:transform .3s var(--snap)}
+.svc:hover .svc__go,.svc:focus-visible .svc__go{transform:translate(4px,-4px)}
+
+/* ============================================================
+   5 — WORK   (ink-2)   nine clients, 3x3
+   ============================================================ */
+.work{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:repeat(3,minmax(0,1fr));
+  gap:clamp(.5rem,.9vw,.85rem);
+}
+.tile{
+  display:flex;flex-direction:column;justify-content:space-between;
+  gap:clamp(.75rem,2vh,1.6rem);
+  padding:clamp(.85rem,1.5vw,1.4rem);
+  min-height:0;
+  transition:background-color .14s linear,color .14s linear,border-color .14s linear;
+}
+.tile--rose{background:var(--rose);color:var(--ink)}
+.tile--bone{background:var(--bone);color:var(--ink)}
+.tile--line{border:1px solid var(--rule-dark);color:var(--chalk)}
+.tile:hover,.tile:focus-within{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+.tile__sector{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.tile--line .tile__sector{color:var(--rose)}
+.tile--line:hover .tile__sector{color:var(--rose-deep)}
+.tile__name{font-size:clamp(1.1rem,1.6vw,1.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin-bottom:.4rem}
+.tile__line{font-size:var(--fs-small);font-weight:500;line-height:1.35}
+.tile--line .tile__line{color:var(--smoke)}
+.tile--line:hover .tile__line{color:var(--ash)}
+.workfoot{
+  margin-top:auto;padding-top:clamp(1rem,2.4vh,1.75rem);
+  display:grid;gap:.55rem;color:var(--smoke);font-size:var(--fs-small);
+  border-top:1px solid var(--rule-dark);
+}
+.workfoot b{color:var(--chalk);font-weight:800}
+
+/* ============================================================
+   6 — SECTORS   (bone-2)   a horizontal track, so six items fit one screen
+   ============================================================ */
+.track{
+  flex:1;min-height:0;
+  display:grid;grid-auto-flow:column;
+  grid-auto-columns:clamp(200px,20vw,290px);
+  gap:clamp(.6rem,1.1vw,1rem);
+  overflow-x:auto;overflow-y:hidden;min-width:0;
+  scroll-snap-type:x proximity;
+  padding-bottom:.75rem;
+  scrollbar-color:var(--rose) var(--bone);
+}
+.track>*{scroll-snap-align:start;min-height:0}
+.track:focus-visible{outline:3px solid var(--rose);outline-offset:4px}
+.trackhint{
+  margin-top:.65rem;font-size:var(--fs-label);font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ash);
+}
+.sector{display:flex;flex-direction:column;min-height:0}
+.sector .duo{flex:1;min-height:0}
+/* .duo is flex:1, so an uneven caption makes an uneven frame. Reserving a
+   uniform caption block keeps the tops and bottoms of the track aligned. */
+.sector figcaption{margin-top:.7rem;display:flex;flex-direction:column;gap:.15rem;min-height:5.5rem}
+.sector__name{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.sector__what{font-size:var(--fs-small);color:var(--ash);line-height:1.35}
+
+/* ============================================================
+   7 — PROCESS   (ink)
+   ============================================================ */
+.steps{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(.75rem,1.4vw,1.35rem);
+}
+.step{
+  display:flex;flex-direction:column;
+  border-top:3px solid var(--rose);
+  padding-top:clamp(.9rem,1.8vh,1.4rem);min-height:0;
+}
+.step--last{background:var(--rose);color:var(--ink);border-top-color:var(--ink);padding:clamp(.9rem,1.8vh,1.4rem)}
+.step__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;margin-bottom:clamp(1rem,2.6vh,2.2rem);display:block;color:var(--rose)}
+.step--last .step__n{color:var(--ink);opacity:.7}
+.step h3{margin-bottom:.5rem;margin-top:auto}
+.step p{font-size:var(--fs-small);color:var(--smoke);line-height:1.4}
+.step--last p{color:var(--ink);opacity:.88}
+
+/* ============================================================
+   8 — PRICING   (bone)
+   The parent printed two separate tier tables stacked above an
+   "includes" block. Measured at 1280x800 that is 752px against a 729px
+   budget — a genuine 23px overflow. Rather than shrink the figures,
+   the two tables are CONDENSED INTO ONE: three tier rows, three figure
+   columns (A setup, A monthly, B monthly). Same six prices, half the
+   rows, and it reads better — you can now compare the two ways to pay
+   across a single row instead of scanning between two tables. The
+   includes list then sits BESIDE the table rather than under it.
+   ============================================================ */
+.pricehead{
+  flex:0 0 auto;display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(1.25rem,2.6vw,2.75rem);align-items:end;
+  margin-bottom:clamp(1.1rem,2.6vh,2rem);
+}
+.pricebody{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
+  gap:clamp(1.25rem,2.6vw,2.75rem);
+}
+.pricetablewrap{display:flex;flex-direction:column;min-width:0}
+
+.ptable{width:100%;border-collapse:separate;border-spacing:0 .5rem}
+.ptable thead th{
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ash);text-align:right;vertical-align:bottom;
+  padding:0 clamp(.6rem,1vw,1rem) .55rem;
+  border-bottom:2px solid var(--ink);
+}
+.ptable thead th:first-child{text-align:left}
+.ptable thead th span{display:block;font-weight:500;letter-spacing:.1em;margin-top:.2rem;opacity:.8}
+.ptable tbody tr{background:var(--bone-2)}
+.ptable tbody tr.is-pop{background:var(--rose);color:var(--ink)}
+.ptable tbody th,.ptable tbody td{
+  padding:clamp(.6rem,1.3vh,1.05rem) clamp(.6rem,1vw,1rem);vertical-align:middle;
+}
+.ptable tbody th{text-align:left}
+.ptable tbody td{text-align:right}
+.tier__name{font-size:1.05rem;font-weight:800;letter-spacing:-.01em;text-transform:uppercase}
+.tier__pages{display:block;font-size:var(--fs-label);font-weight:500;letter-spacing:.12em;text-transform:uppercase;opacity:.82;margin-top:.25rem}
+/* tabular figures give the comma a full digit advance — "£1 , 995".
+   Lining (non-tabular) keeps the numerals even without wrecking the comma;
+   the column is right-aligned so nothing needs tabular to line up. */
+.tier__fig{
+  font-size:var(--fs-figure);font-weight:800;letter-spacing:-.04em;line-height:1;white-space:nowrap;
+  font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;
+}
+.tier__tag{
+  display:inline-block;background:var(--ink);color:var(--rose);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.22rem .45rem;margin-left:.45rem;vertical-align:middle;
+}
+.pricenote{margin-top:auto;padding-top:.9rem;font-size:var(--fs-small);color:var(--ash);line-height:1.4;max-width:60ch}
+
+.incl{display:flex;flex-direction:column;min-width:0;border-left:2px solid var(--ink);padding-left:clamp(1rem,1.8vw,1.75rem)}
+.incl h4{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;color:var(--ash)}
+.incl ul{display:flex;flex-wrap:wrap;gap:.35rem;align-content:flex-start}
+.incl li{font-size:var(--fs-small);font-weight:500;border:1px solid var(--rule-light);padding:.3rem .6rem;line-height:1.25}
+.addons{margin-top:auto;padding-top:1rem;font-size:var(--fs-small);color:var(--ash);line-height:1.45}
+.addons strong{color:var(--ink);font-weight:800;border-bottom:2px solid var(--rose)}
+
+/* ============================================================
+   9 — WORDS   (ink)
+   ============================================================ */
+.quotes{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(.6rem,1.1vw,1rem);
+}
+.quote{
+  display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;
+  padding:clamp(1.1rem,2vw,1.8rem);min-height:0;
+}
+.quote--rose{background:var(--rose);color:var(--ink)}
+.quote--line{border:2px solid var(--rule-dark);color:var(--chalk)}
+.quote figure{display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;height:100%}
+.quote blockquote p{
+  font-size:clamp(1.05rem,1.55vw,1.45rem);font-weight:700;
+  letter-spacing:-.02em;line-height:1.26;text-wrap:pretty;
+}
+.quote figcaption{font-size:var(--fs-small);font-weight:800}
+.quote figcaption span{display:block;font-weight:500;opacity:.9}
+.quote--line figcaption span{color:var(--smoke);opacity:1}
+.quote__q{font-size:2.5rem;line-height:.6;font-weight:900;display:block;margin-bottom:.5rem}
+.quote--line .quote__q{color:var(--rose)}
+
+/* ============================================================
+   10 — PERSON   (bone-2)
+   ============================================================ */
+.person{
+  flex:1;display:grid;min-height:0;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(1.5rem,3vw,3.25rem);align-items:start;
+}
+.person__body p+p{margin-top:.9rem}
+.person__body{color:var(--ash);font-size:var(--fs-lead);line-height:1.5;max-width:46ch}
+.person__body strong{color:var(--ink);font-weight:800;border-bottom:2px solid var(--rose)}
+.creds{display:grid;gap:0;border-top:2px solid var(--ink);align-content:start}
+.creds div{
+  display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;
+  padding:clamp(.6rem,1.4vh,1rem) 0;border-bottom:1px solid var(--rule-light);
+}
+.creds dt{font-size:var(--fs-small);color:var(--ash)}
+.creds dd{margin:0;font-size:1.3rem;font-weight:800;letter-spacing:-.02em;text-align:right}
+
+/* ============================================================
+   11 — FINAL CTA   (ROSE ROOM #2)
+   The parent's "quiet one" viewport is folded in here as the opening
+   line — it is a conversion line, and it belongs next to the CTA.
+   ============================================================ */
+.final{flex:1;display:grid;min-height:0;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(1.5rem,3vw,3.25rem);align-items:stretch}
+.final__col{display:flex;flex-direction:column;justify-content:space-between;gap:2rem;min-height:0}
+.contactlist{align-self:end;width:100%}
+.final__quiet{
+  font-size:clamp(1.05rem,1.9vw,1.65rem);font-weight:500;letter-spacing:-.02em;
+  max-width:30ch;line-height:1.25;
+}
+.final__mark{display:block;width:clamp(40px,4.4vw,64px);height:clamp(40px,4.4vw,64px);background:var(--ink);margin-bottom:clamp(1rem,2.4vh,2rem)}
+.final__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:clamp(1rem,2.4vh,1.75rem)}
+.contactlist{display:grid;gap:0;border-top:2px solid var(--ink)}
+.contactlist a,.contactlist p{
+  display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:clamp(.55rem,1.3vh,.95rem) 0;border-bottom:1px solid var(--rule-rose);
+  text-decoration:none;font-size:var(--fs-small);transition:color .18s linear;
+}
+.contactlist a:hover{color:var(--bone)}
+.contactlist b{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;text-align:right}
+
+/* ============================================================
+   FOOTER   (ink) — a tone region, or the bar goes wrong at the bottom
+   ============================================================ */
+.footer{
+  background:var(--ink);color:var(--chalk);
+  position:relative;z-index:2;
+  border-top:var(--seam) solid var(--ink);
+  padding:clamp(2.5rem,5vw,4rem) 0 calc(2rem + var(--mobile-bar,0px));
+}
+.footcols{
+  display:grid;gap:clamp(1.5rem,3vw,3rem);
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  padding-bottom:clamp(1.75rem,3vw,2.75rem);
+  border-bottom:1px solid var(--rule-dark);
+}
+.footcols h2{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.9rem}
+.footcols a{display:flex;align-items:center;min-height:40px;text-decoration:none;font-size:var(--fs-small)}
+.footcols a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--rose);text-decoration-thickness:2px}
+.footcols address{font-style:normal;font-size:var(--fs-small);color:var(--smoke);line-height:1.7}
+.footcols address a{color:var(--chalk);font-weight:700;display:inline-flex;min-height:40px}
+.footbar{
+  padding-top:1.5rem;display:flex;flex-wrap:wrap;gap:1rem 2rem;
+  justify-content:space-between;align-items:center;
+  font-size:var(--fs-small);color:var(--smoke);
+}
+.footbrand{display:flex;align-items:baseline;gap:.6rem;font-weight:900;font-size:1.3rem;letter-spacing:-.04em;color:var(--chalk)}
+.footbrand .brand__mark{background:var(--rose);color:var(--ink)}
+
+/* ============================================================
+   NO PERSISTENT FLOATING CTA ON DESKTOP — deliberate, and a
+   consequence of the nav variable under test.
+
+   Poster's floating bottom-right pill worked because its panels had
+   generous bottom padding. Here every section fills the viewport
+   edge to edge, so a fixed bottom-right pill lands on live content:
+   rendering caught it obscuring "you have his number" in the pink
+   room, the Bexhill Removals outcome line, the add-ons line and the
+   studio address. Padding it out would cost real vertical budget in
+   sections that have none to give.
+
+   It is also redundant here. Nav A already carries a permanent,
+   always-legible "Get a free quote" AND the phone number, and it
+   repaints with the section beneath it — which is the same
+   inverting-persistent-CTA idea at full width. Mobile keeps the
+   bottom action bar.
+   ============================================================ */
+
+/* mobile bottom action bar */
+.mobar{display:none;position:fixed;inset:auto 0 0 0;z-index:var(--z-float);background:var(--ink);border-top:1px solid var(--rule-dark)}
+.mobar a{
+  flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:60px;text-decoration:none;color:var(--chalk);
+  font-size:var(--fs-small);font-weight:700;
+}
+.mobar a+a{background:var(--rose);color:var(--ink)}
+
+/* ============================================================
+   REVEALS — hidden state only ever applied when JS is present
+   ============================================================ */
+/* The pre-reveal offset is transformed overflow, and transformed overflow
+   counts towards scrollHeight. If the travel exceeds a section's bottom
+   padding, an un-revealed section reports as overflowing its viewport even
+   though nothing is actually out of place — measured as a phantom +6px at
+   1366x768 once the short-viewport block trimmed padding to 18.4px. So the
+   travel is a variable and shrinks with the padding it has to live inside. */
+.js .reveal{opacity:0;transform:translateY(var(--rise))}
+.js .reveal.is-in{
+  opacity:1;transform:none;
+  transition:opacity .6s linear var(--d,0ms),transform .8s var(--ease) var(--d,0ms);
+}
+.js .sechead__bar{transform:scaleX(0)}
+.js .sechead__bar.is-in{transform:scaleX(1);transition:transform .7s var(--ease)}
+.js .resolve{color:var(--ash)}
+.js .on-dark .resolve{color:var(--smoke)}
+.js .on-rose .resolve{color:rgba(13,12,16,.45)}
+.js .resolve.is-in{color:inherit}
+
+/* ============================================================
+   REDUCED MOTION — everything off, everything visible, video paused
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .js .reveal,.js .split.is-split .ch,.js .menu__item{opacity:1!important;transform:none!important}
+  .js .split.is-split .ch{color:inherit!important}
+  .js .sechead__bar,.js .plate{transform:none!important}
+  .js .resolve{color:inherit!important}
+  .band__track{animation:none!important}
+  html{scroll-snap-type:none!important}
+}
+
+/* ============================================================
+   BREAKPOINTS
+   Below 1024 the one-section-per-viewport rule is relaxed: sections
+   flow to their natural height, but stay tight and self-contained.
+   ============================================================ */
+/* ============================================================
+   SHORT VIEWPORTS
+   1440x900 and 1280x800 are the two tallest common cases. A real
+   laptop is shorter: 1366x768 is one of the most used resolutions
+   going, and any window loses another 60-100px to a bookmarks bar
+   and a downloads shelf. Measured, unaided, this page already held
+   at 1366x768 and 1440x700 because the display and H2 are capped
+   against svh as well as vw. Below that it needs help.
+
+   Everything in this block trims FURNITURE — heading margins,
+   gutters, cell padding, tile padding. No type is touched: the
+   12px label floor and the 15px small-text floor are untouched at
+   every size, and no content is dropped.
+   ============================================================ */
+@media (min-width:1024px) and (max-height:790px){
+  :root{--pad-v:1.15rem;--rise:12px}
+  .sechead{margin-bottom:1rem}
+  .sechead__bar{height:8px;margin-bottom:.7rem}
+  .sechead__sub{margin-top:.7rem}
+  .pricehead{margin-bottom:.8rem}
+  .ptable{border-spacing:0 .35rem}
+  .ptable tbody th,.ptable tbody td{padding:.5rem .8rem}
+  .ptable thead th{padding-bottom:.4rem}
+  .incl h4{margin-bottom:.5rem}
+  .incl li{padding:.25rem .55rem}
+  .addons{padding-top:.7rem}
+  .pricenote{padding-top:.7rem}
+  .workfoot{gap:.35rem;padding-top:.9rem}
+  .work{gap:.5rem}
+  .tile{padding:.85rem;gap:.6rem}
+  .claim{padding:.95rem;gap:.75rem}
+  .quote{padding:1rem;gap:1rem}
+  .promise li{padding-top:1rem}
+  .promise__n{width:40px;height:40px;margin-bottom:1rem}
+  .step__n{margin-bottom:1rem}
+  .sector figcaption{min-height:4.6rem}
+  .final__col{gap:1.25rem}
+}
+
+/* THE RELEASE THRESHOLD. Under ~620px of usable height a full section
+   cannot carry its content without pushing type under the floor or
+   cutting copy, and both of those are off the table. So the
+   one-section-per-viewport rule is released here and sections flow
+   naturally with snap off — the same answer already used on mobile,
+   applied for the same reason. Stated rather than hidden.
+
+   Threshold set from measurement, not taste: at 1440x620 the hero alone
+   needs 652px for three lines of display type, the lead, both CTAs, the
+   price chip and the marquee. 660 is the last height that holds. */
+@media (min-width:1024px) and (max-height:659px){
+  html{scroll-snap-type:none}
+  .vp{min-height:0;scroll-snap-align:none;padding-block:2.25rem}
+  .hero{min-height:100svh}
+}
+
+@media (max-width:1240px){
+  .split2{grid-template-columns:minmax(0,.95fr) minmax(0,1.9fr)}
+  .pricebody{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+  .hero__cols{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+}
+
+@media (max-width:1023px){
+  html{scroll-snap-type:none}
+  .vp{min-height:0;scroll-snap-align:none;padding-block:clamp(3rem,7vw,4.5rem)}
+  .vp__in,.split2,.split2__main,.split2__aside{flex:0 0 auto;display:block}
+  .split2{display:grid;grid-template-columns:minmax(0,1fr);gap:2rem}
+  .hero{min-height:100svh}
+  .claims,.quotes{grid-template-columns:1fr;gap:.6rem}
+  .claim,.quote{min-height:200px}
+  .promise{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promise li{padding-bottom:1.75rem}
+  .promise li:nth-child(2n){border-right:0}
+  .work{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}
+  .tile{min-height:170px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+  .step{min-height:150px}
+  .svcs{grid-template-rows:none}
+  .svc{padding-block:1.1rem}
+  .person,.final{grid-template-columns:1fr;gap:2rem}
+  .final{align-items:start}
+  .track{grid-auto-columns:min(62vw,280px)}
+  .sector .duo,.mediafig .duo{aspect-ratio:3/4}
+  .mediafig .duo{aspect-ratio:16/9}
+  .incl{margin-top:2rem}
+  .workfoot{margin-top:1.75rem}
+  .bar__nav a[data-optional]{display:none}
+  .footcols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:860px){
+  :root{--bar:60px}
+  .bar__nav,.bar__cta{display:none}
+  .burger{display:grid}
+  .bar__tel{margin-left:auto}
+  .mobar{display:flex}
+  body{--mobile-bar:60px}
+}
+
+@media (max-width:700px){
+  .brand__full{display:none}
+  .promise{grid-template-columns:1fr}
+  .promise li{border-right:0;border-bottom:1px solid var(--rule-rose);padding-right:0}
+  .promise li:last-child{border-bottom:0}
+  .steps,.work{grid-template-columns:1fr}
+  .pricehead,.pricebody{grid-template-columns:minmax(0,1fr)}
+  .incl{border-left:0;border-top:2px solid var(--ink);padding-left:0;padding-top:1.25rem}
+  .pricenote{margin-top:1rem}
+  /* stacked table: real <table> markup kept, roles restated, labels injected */
+  .ptable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ptable,.ptable tbody,.ptable tr,.ptable tbody th,.ptable tbody td{display:block;width:100%}
+  .ptable{border-spacing:0}
+  .ptable tbody tr{padding:1rem;margin-bottom:.6rem}
+  .ptable tbody th{padding:0 0 .6rem}
+  .ptable tbody td{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+    padding:.45rem 0;border-top:1px solid rgba(13,12,16,.18);text-align:right;
+  }
+  .ptable tbody td::before{
+    content:attr(data-l);font-size:var(--fs-label);font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;opacity:.75;text-align:left;
+  }
+  .footcols{grid-template-columns:1fr}
+  .svc{grid-template-columns:2.5rem minmax(0,1fr) 1.6rem;padding-inline:0;align-items:baseline}
+  .svc__desc{grid-column:2 / -1;margin-top:.4rem}
+  .tier{grid-template-columns:1fr auto;gap:.35rem 1rem}
+  .tier__fig{font-size:clamp(1.55rem,7.5vw,2.1rem)}
+  .hero__cols{grid-template-columns:1fr}
+  .pricechip{justify-self:stretch}
+  .hero__tel,.hero__actions .btn{width:100%;justify-content:center}
+  .creds dd{font-size:1.1rem}
+  .track{grid-auto-columns:min(76vw,300px)}
+}
+
+@media (max-width:400px){
+  :root{--fs-display:clamp(2.15rem,10.5vw,9rem)}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ==================== NAV A — COLOUR-ADAPTIVE BAR ====================
+     data-bar="ink" is the authored, no-JS state. Solid; no backdrop-filter. -->
+<header class="bar on-dark" id="bar" data-bar="ink">
+  <div class="bar__in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <span class="brand__mark">DCS</span>
+      <span class="brand__full">Digital Consulting<br>Services</span>
+    </a>
+
+    <nav class="bar__nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Portfolio</a>
+      <a href="/blog" data-optional>Blog</a>
+      <a href="#person">About</a>
+    </nav>
+
+    <a class="bar__tel" href="tel:+447395063764">
+      <span aria-hidden="true">↳</span> 07395 063764
+    </a>
+
+    <a class="bar__cta" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu">
+      <span class="vh">Open menu</span>
+      <span class="burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== MOBILE MENU — sibling of the bar ==================== -->
+<div class="menu on-dark" id="menu" hidden>
+  <button class="menu__close" type="button" id="menuClose">
+    <span class="vh">Close menu</span>
+    <span aria-hidden="true">✕</span>
+  </button>
+  <nav class="menu__list" aria-label="Mobile">
+    <a class="menu__item" href="#services">Services</a>
+    <a class="menu__item" href="#pricing">Pricing</a>
+    <a class="menu__item" href="#work">Portfolio</a>
+    <a class="menu__item" href="/blog">Blog</a>
+    <a class="menu__item" href="#person">About</a>
+  </nav>
+  <div class="menu__foot menu__item">
+    <a class="btn btn--rose" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+    <a class="btn btn--line" href="tel:+447395063764">Call 07395 063764</a>
+    <p style="color:var(--smoke);font-size:var(--fs-small);margin-top:.5rem">Mon–Fri 9:00–17:30 · Sat by appointment</p>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ==================== 1 · HERO (bone) ==================== -->
+<section class="vp hero gnd--bone" id="top" data-tone="light" aria-labelledby="h1">
+  <div class="wrap hero__in">
+
+    <p class="hero__eyebrow label">
+      <span>Website design &amp; build studio</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Est. 2019</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Polegate, East Sussex — working UK-wide</span>
+    </p>
+
+    <h1 class="display split" id="h1"><span class="plate">Agency</span><span class="ln"> work</span><br><span class="ln">for small</span><br><span class="ln">businesses.</span></h1>
+
+    <div class="hero__cols">
+      <div>
+        <p class="lead">Sites that stand next to what London and New York studios put out — for a
+        fraction of the cost, and a tiny fraction of the effort from you. This page is the proof:
+        I designed it, wrote it and built it, the same way I would do yours.</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="hero__tel" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="pricechip">
+        <p class="label">What it costs</p>
+        <p class="pricechip__big num">From £995 + £15/mo</p>
+        <p class="pricechip__note">— or £45/mo with nothing upfront. Full pricing below, no surprises.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- A rose object nested inside a light section. It carries its own
+       data-tone, because the bar must repaint when THIS passes behind it. -->
+  <div class="band" data-tone="rose" aria-label="Sectors we build for">
+    <div class="band__track">
+      <p class="band__run">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+      <p class="band__run" aria-hidden="true">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2 · THE CLAIM (ink) ==================== -->
+<section class="vp gnd--ink on-dark" data-tone="dark" aria-labelledby="claim-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">The pitch, in three parts</p>
+          <h2 class="h2 resolve" id="claim-h">Three claims.<br>All three hold.</h2>
+        </div>
+
+        <figure class="mediafig reveal">
+          <div class="duo duo--invert" style="aspect-ratio:16/9">
+            <video id="vidInk" muted loop playsinline preload="metadata"
+                   poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-ink.jpg" width="640" height="360"></video>
+          </div>
+          <figcaption>
+            <span>Ink blooming through water</span>
+            <button class="vidbtn" type="button" data-vid="vidInk" aria-pressed="false">
+              <span class="vh">Play or pause the ink video</span><span aria-hidden="true">Pause</span>
+            </button>
+          </figcaption>
+        </figure>
+      </div>
+
+      <ul class="split2__main claims">
+        <li class="claim claim--rose reveal">
+          <p class="claim__n num" aria-hidden="true">01</p>
+          <div>
+            <h3 class="claim__h">Big-city standard</h3>
+            <p class="claim__p">The design, the writing and the build are held to what a London or New
+            York studio would ship. Look at the work, then look at this page.</p>
+          </div>
+        </li>
+        <li class="claim claim--line reveal">
+          <p class="claim__n num" aria-hidden="true">02</p>
+          <div>
+            <h3 class="claim__h">A fraction of the cost</h3>
+            <p class="claim__p">Every number this studio charges is printed further down this page, in
+            full. There is no proposal stage where the figure changes.</p>
+          </div>
+        </li>
+        <li class="claim claim--line reveal">
+          <p class="claim__n num" aria-hidden="true">03</p>
+          <div>
+            <h3 class="claim__h">A tiny fraction of your effort</h3>
+            <p class="claim__p">No brief to write, no copy to supply, no system to learn. A conversation,
+            a review, and then it is live and looked after.</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3 · THE PROMISE — ROSE ROOM #1 ==================== -->
+<section class="vp gnd--rose on-rose" data-tone="rose" aria-labelledby="promise-h">
+  <div class="wrap vp__in">
+    <div class="sechead">
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">A tiny fraction of the effort</p>
+      <h2 class="h2 resolve" id="promise-h">Four things<br>you never have to do.</h2>
+    </div>
+
+    <ol class="promise">
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">01</span>
+        <h3 class="h3">Write a brief</h3>
+        <p>Most studios want you to arrive with one. There is nothing to fill in here — it comes out of a conversation.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">02</span>
+        <h3 class="h3">Supply the words</h3>
+        <p>Copy is part of the job. You will not be sent a blank document and asked what you'd like it to say.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">03</span>
+        <h3 class="h3">Learn a system</h3>
+        <p>No CMS, no login, no dashboard. If something needs changing, you send a message and it changes.</p>
+      </li>
+      <li class="reveal">
+        <span class="promise__n num" aria-hidden="true">04</span>
+        <h3 class="h3">Chase anyone</h3>
+        <p>Hosting, security, updates and monitoring are handled. One person is accountable and you have his number.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==================== 4 · SERVICES (bone) ==================== -->
+<section class="vp gnd--bone" id="services" data-tone="light" aria-labelledby="services-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">Services · Six</p>
+          <h2 class="h2 resolve" id="services-h">What I<br>actually do.</h2>
+          <p class="sechead__sub lead">Six things, and all six are run by the same person. Nothing is
+          outsourced to a subcontractor you never meet.</p>
+        </div>
+      </div>
+
+      <div class="split2__main svcs">
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">01</span>
+          <span class="svc__name">Website Design</span>
+          <span class="svc__desc">Designed and built for your business. No templates, no page-builders.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">02</span>
+          <span class="svc__name">Local SEO</span>
+          <span class="svc__desc">Service pages, location pages, structured data — so you're found where you work.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">03</span>
+          <span class="svc__name">Ongoing Management</span>
+          <span class="svc__desc">We look after the site so you can get on with the business.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">04</span>
+          <span class="svc__name">Google Workspace Email</span>
+          <span class="svc__desc">Professional business email on your own domain.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">05</span>
+          <span class="svc__name">eCommerce Websites</span>
+          <span class="svc__desc">Online stores built, loaded with your products, and kept running.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+        <a class="svc" href="/contact">
+          <span class="svc__idx num">06</span>
+          <span class="svc__name">Analytics &amp; Reporting</span>
+          <span class="svc__desc">Analytics, Search Console and monthly reporting, so you know what's working.</span>
+          <span class="svc__go" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5 · WORK (ink-2) ==================== -->
+<section class="vp gnd--ink-2 on-dark" id="work" data-tone="dark" aria-labelledby="work-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">Selected work</p>
+          <h2 class="h2 resolve" id="work-h">Nine clients.<br>Nine kinds of business.</h2>
+          <p class="sechead__sub lead">Fabric shop, yoga studio, tuition, signage, automotive, scaffolding,
+          electrical, removals, made-to-order eCommerce. The range is the point.</p>
+        </div>
+        <div class="workfoot">
+          <span><b>Est. 2019</b> — nine of twenty-plus sites shown</span>
+          <span><b>5+ years</b> with the longest-standing client</span>
+          <span><b>Everything</b> managed in-house</span>
+        </div>
+      </div>
+
+      <ul class="split2__main work">
+        <li class="tile tile--rose reveal">
+          <p class="tile__sector">eCommerce · Fabrics</p>
+          <div>
+            <h3 class="tile__name">Cuddle Plush Fabrics</h3>
+            <p class="tile__line">Five years and counting — one of our longest client relationships.</p>
+          </div>
+        </li>
+        <li class="tile tile--line reveal">
+          <p class="tile__sector">Made-to-order eCommerce</p>
+          <div>
+            <h3 class="tile__name">Luna Landings</h3>
+            <p class="tile__line">Product configurator, automatic work orders, worldwide shipping.</p>
+          </div>
+        </li>
+        <li class="tile tile--bone reveal">
+          <p class="tile__sector">Yoga studio</p>
+          <div>
+            <h3 class="tile__name">Sanctuary Ida</h3>
+            <p class="tile__line">Students book and pay for classes online.</p>
+          </div>
+        </li>
+        <li class="tile tile--line reveal">
+          <p class="tile__sector">Tuition</p>
+          <div>
+            <h3 class="tile__name">Nicola Noble Tuition</h3>
+            <p class="tile__line">Moved classes online during Covid instead of closing.</p>
+          </div>
+        </li>
+        <li class="tile tile--rose reveal">
+          <p class="tile__sector">Signage &amp; print</p>
+          <div>
+            <h3 class="tile__name">Mad Graphics</h3>
+            <p class="tile__line">Full rebuild.</p>
+          </div>
+        </li>
+        <li class="tile tile--line reveal">
+          <p class="tile__sector">Automotive</p>
+          <div>
+            <h3 class="tile__name">DCH Automotive</h3>
+            <p class="tile__line">A credible presence from a standing start.</p>
+          </div>
+        </li>
+        <li class="tile tile--bone reveal">
+          <p class="tile__sector">Scaffolding</p>
+          <div>
+            <h3 class="tile__name">Colossus Scaffolding</h3>
+            <p class="tile__line">First enquiry from Google within three weeks of launch.</p>
+          </div>
+        </li>
+        <li class="tile tile--line reveal">
+          <p class="tile__sector">Electrical</p>
+          <div>
+            <h3 class="tile__name">DJ Fox Electrical</h3>
+            <p class="tile__line">20+ page site, live at djfoxelectrical.com.</p>
+          </div>
+        </li>
+        <li class="tile tile--rose reveal">
+          <p class="tile__sector">Removals</p>
+          <div>
+            <h3 class="tile__name">Bexhill Removals</h3>
+            <p class="tile__line">Design approved on the first presentation, no revisions.</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6 · SECTORS (bone-2) — horizontal track ==================== -->
+<section class="vp gnd--bone-2" data-tone="light" aria-labelledby="sectors-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">Who this is for</p>
+          <h2 class="h2 resolve" id="sectors-h">Owner-run.<br>Any sector.</h2>
+          <p class="sechead__sub lead">Usually one to twenty people, where the owner makes the decision and
+          pays the invoice. Time-poor, not technical, and has been putting the website off for a while.</p>
+        </div>
+      </div>
+
+      <div class="split2__main">
+        <div class="track" id="track" tabindex="0" role="group" aria-label="Sectors — scroll or use arrow keys">
+
+          <figure class="sector">
+            <div class="duo">
+              <video id="vidShop" muted loop playsinline preload="metadata"
+                     poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-shopfront.jpg" width="640" height="360"></video>
+            </div>
+            <figcaption>
+              <span class="sector__name">Retail</span>
+              <span class="sector__what">A small shop interior at opening — light moving, door swinging. Shops that need to sell online as well as on the street.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo duo--ink">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-florist.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="A florist's shop with buckets of cut stems on a tiled floor.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Independent retail</span>
+              <span class="sector__what">Found on a phone, five minutes before someone walks in.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="An empty yoga studio with rolled mats stacked beside tall windows.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Studios &amp; practitioners</span>
+              <span class="sector__what">Classes, sessions and appointments booked and paid for online.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo duo--ink">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-bakery.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="An artisan bakery counter stacked with loaves behind glass.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Hospitality &amp; food</span>
+              <span class="sector__what">Opening hours, menus and directions that are actually correct.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="Two people seated at a meeting table, seen from behind, in a plain office.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Professional services</span>
+              <span class="sector__what">Consultancies, lettings and property, where credibility does the selling.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo duo--ink">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="Scaffolding erected against a building elevation, seen from below.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Trades &amp; contractors</span>
+              <span class="sector__what">Service and location pages that turn up in local searches.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="sector">
+            <div class="duo">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-garden.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="A designed urban garden with planting beds and a paved terrace.">
+            </div>
+            <figcaption>
+              <span class="sector__name">Landscaping &amp; outdoor</span>
+              <span class="sector__what">Portfolio work that has to be seen before anyone rings.</span>
+            </figcaption>
+          </figure>
+
+        </div>
+        <p class="trackhint">Seven of many · scroll sideways, or use the arrow keys</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7 · PROCESS (ink) ==================== -->
+<section class="vp gnd--ink on-dark" data-tone="dark" aria-labelledby="process-h">
+  <div class="wrap vp__in">
+    <div class="sechead">
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">How it goes</p>
+      <h2 class="h2 resolve" id="process-h">Four steps.<br>You are in one of them.</h2>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__n num">Step 01</span>
+        <div>
+          <h3 class="h3">A conversation</h3>
+          <p>A call or a few messages. No brief needed, nothing to fill in.</p>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step__n num">Step 02</span>
+        <div>
+          <h3 class="h3">We write it and design it</h3>
+          <p>Copy, structure, imagery, colour — all handled.</p>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step__n num">Step 03</span>
+        <div>
+          <h3 class="h3">You review</h3>
+          <p>Unlimited revisions during the build until you're happy.</p>
+        </div>
+      </li>
+      <li class="step step--last reveal">
+        <span class="step__n num">Step 04</span>
+        <div>
+          <h3 class="h3">It goes live, and we keep it running</h3>
+          <p>Hosting, updates, monitoring, support. This is the part that does not end.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==================== 8 · PRICING (bone) ==================== -->
+<section class="vp gnd--bone" id="pricing" data-tone="light" aria-labelledby="pricing-h">
+  <div class="wrap vp__in">
+    <div class="pricehead">
+      <div class="sechead" style="margin-bottom:0">
+        <span class="sechead__bar" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Pricing · every figure in full</p>
+        <h2 class="h2 resolve" id="pricing-h">Same site. Two ways to pay.</h2>
+      </div>
+      <p class="sechead__sub lead" style="margin-top:0">You choose how to pay, not what you get. The tiers
+      differ on ongoing service level, never on quality of the build. <strong>Option A</strong> is a setup
+      fee plus a low monthly. <strong>Option B</strong> is nothing upfront, on a 12-month minimum.</p>
+    </div>
+
+    <div class="pricebody">
+
+      <div class="pricetablewrap">
+        <table class="ptable" role="table">
+          <caption class="vh">Pricing by tier. Option A is a setup fee plus a monthly fee. Option B is a monthly fee with nothing upfront, on a twelve-month minimum.</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">Tier</th>
+              <th scope="col" role="columnheader">Option A<span>Setup</span></th>
+              <th scope="col" role="columnheader">Option A<span>Per month</span></th>
+              <th scope="col" role="columnheader">Option B<span>Per month, nothing upfront</span></th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <th scope="row" role="rowheader" class="tier__name">Starter
+                <span class="tier__pages num">Up to 20 pages</span></th>
+              <td class="tier__fig num" role="cell" data-l="Option A · Setup">£995</td>
+              <td class="tier__fig num" role="cell" data-l="Option A · Per month">£15</td>
+              <td class="tier__fig num" role="cell" data-l="Option B · Per month">£45</td>
+            </tr>
+            <tr class="is-pop" role="row">
+              <th scope="row" role="rowheader" class="tier__name">Professional
+                <span class="tier__tag">Most popular</span>
+                <span class="tier__pages num">Up to 50 pages</span></th>
+              <td class="tier__fig num" role="cell" data-l="Option A · Setup">£1,995</td>
+              <td class="tier__fig num" role="cell" data-l="Option A · Per month">£25</td>
+              <td class="tier__fig num" role="cell" data-l="Option B · Per month">£75</td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader" class="tier__name">Growth
+                <span class="tier__pages num">Up to 100 pages</span></th>
+              <td class="tier__fig num" role="cell" data-l="Option A · Setup">£3,495</td>
+              <td class="tier__fig num" role="cell" data-l="Option A · Per month">£50</td>
+              <td class="tier__fig num" role="cell" data-l="Option B · Per month">£125</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="pricenote">Nothing upfront is the option most people take when cash flow matters more
+        than the total. It is the same site either way.</p>
+      </div>
+
+      <div class="incl">
+        <h4>Every site includes, whichever you pick</h4>
+        <ul>
+          <li>Custom design</li>
+          <li>Local SEO — service pages, location pages, structured data</li>
+          <li>Mobile-first and fast</li>
+          <li>Contact form</li>
+          <li>Hosting</li>
+          <li>SSL</li>
+          <li>Domain management</li>
+          <li>Security updates</li>
+          <li>Uptime monitoring</li>
+          <li>Unlimited revisions during the build</li>
+          <li>Search Console submission</li>
+        </ul>
+        <p class="addons"><strong>Add-ons:</strong> blog post writing £75/post · custom theme design £350 ·
+        Google Ads setup and management £200/mo plus ad spend · monthly SEO retainer £200/mo.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 9 · WORDS (ink) ==================== -->
+<section class="vp gnd--ink on-dark" data-tone="dark" aria-labelledby="words-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">In their words</p>
+          <h2 class="h2 resolve" id="words-h">Three clients,<br>none of them a builder.</h2>
+          <p class="sechead__sub lead">A fabric shop, a tutor and a yoga teacher. Between them they cover
+          most of what a small business actually needs a website to do.</p>
+        </div>
+      </div>
+
+      <ul class="split2__main quotes">
+        <li class="quote quote--rose reveal">
+          <figure>
+            <blockquote><span class="quote__q" aria-hidden="true">“</span><p>Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.</p></blockquote>
+            <figcaption>Sarah<span>Cuddle Plush Fabrics</span></figcaption>
+          </figure>
+        </li>
+        <li class="quote quote--line reveal">
+          <figure>
+            <blockquote><span class="quote__q" aria-hidden="true">“</span><p>I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</p></blockquote>
+            <figcaption>Nicola<span>Nicola Noble Tuition</span></figcaption>
+          </figure>
+        </li>
+        <li class="quote quote--line reveal">
+          <figure>
+            <blockquote><span class="quote__q" aria-hidden="true">“</span><p>My yoga students love that they can book and pay for my classes on my website.</p></blockquote>
+            <figcaption>Molly<span>Sanctuary Ida</span></figcaption>
+          </figure>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10 · PERSON (bone-2) ==================== -->
+<section class="vp gnd--bone-2" id="person" data-tone="light" aria-labelledby="person-h">
+  <div class="wrap vp__in">
+    <div class="split2">
+
+      <div class="split2__aside">
+        <div class="sechead">
+          <span class="sechead__bar" aria-hidden="true"></span>
+          <p class="sechead__kicker label">Who you're hiring</p>
+          <h2 class="h2 resolve" id="person-h">A person,<br>not a company.</h2>
+        </div>
+      </div>
+
+      <div class="split2__main person">
+        <div class="person__body reveal">
+          <p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and
+          I have built and looked after every site on this page myself.</p>
+          <p>Nothing is outsourced and nothing is offshored. When you call, you get the person who
+          designed your site, not an account manager reading a ticket.</p>
+          <p>There is no team to route you through and no junior doing the build. That is not
+          something I apologise for — it is precisely why the work is this considered, why it is
+          personal, and why it costs what it costs.</p>
+          <p>The studio is in Polegate, East Sussex. The clients are all over the country.</p>
+        </div>
+
+        <dl class="creds reveal">
+          <div><dt>Founded</dt><dd class="num">2019</dd></div>
+          <div><dt>Sites delivered</dt><dd class="num">20+</dd></div>
+          <div><dt>Longest client relationship</dt><dd class="num">5+ years</dd></div>
+          <div><dt>Work outsourced</dt><dd>None</dd></div>
+          <div><dt>Studio</dt><dd>Polegate, UK-wide</dd></div>
+        </dl>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 11 · FINAL CTA — ROSE ROOM #2 ==================== -->
+<section class="vp gnd--rose on-rose" data-tone="rose" aria-labelledby="final-h">
+  <div class="wrap vp__in">
+    <div class="final">
+      <div class="final__col">
+        <div>
+          <span class="final__mark" aria-hidden="true"></span>
+          <p class="final__quiet">Most of my clients had been putting it off for years. The hardest part
+          is the first message.</p>
+        </div>
+
+        <div>
+        <h2 class="h2 resolve" id="final-h">Let's get<br>it started.</h2>
+        <p class="sechead__sub lead">Tell me what the business does. I'll tell you what the site needs,
+        what it costs, and how long it takes. No charge, and no obligation at the end of it.</p>
+        <div class="final__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="btn btn--line" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+        </div>
+      </div>
+
+      <div class="contactlist reveal">
+        <a href="tel:+447395063764"><span>Phone</span><b class="num">07395 063764</b></a>
+        <a href="mailto:mail@digitalconsultingservices.co.uk"><span>Email</span><b>mail@digitalconsultingservices.co.uk</b></a>
+        <p><span>Hours</span><b>Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</b></p>
+        <p><span>Studio</span><b>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER — carries data-tone, or the bar goes wrong here ==================== -->
+<footer class="footer on-dark" data-tone="dark">
+  <div class="wrap">
+    <div class="footcols">
+      <section>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Service areas</h2>
+        <ul>
+          <li><a href="/contact">Polegate</a></li>
+          <li><a href="/contact">Eastbourne</a></li>
+          <li><a href="/contact">Hailsham</a></li>
+          <li><a href="/contact">Lewes</a></li>
+          <li><a href="/contact">Seaford</a></li>
+          <li><a href="/contact">Brighton &amp; Hove</a></li>
+          <li><a href="/contact">Uckfield</a></li>
+          <li><a href="/contact">— and UK-wide</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Studio</h2>
+        <ul>
+          <li><a href="#work">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#person">About Ricky</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Get a free quote</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <address>
+          <a href="tel:+447395063764" class="num">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex, BN26 6QH<br><br>
+          Mon–Fri 9:00–17:30<br>
+          Sat by appointment · Sun closed
+        </address>
+      </section>
+    </div>
+
+    <div class="footbar">
+      <span class="footbrand"><span class="brand__mark">DCS</span> Digital Consulting Services</span>
+      <span>© 2026 Digital Consulting Services. Established 2019, Polegate, East Sussex.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- persistent action bar (mobile) -->
+<nav class="mobar" aria-label="Quick actions">
+  <a href="tel:+447395063764">Call 07395 063764</a>
+  <a href="/contact">Get a free quote</a>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var reduced = mqReduce ? mqReduce.matches : false;
+
+  /* Failsafe: whatever happens below, nothing stays invisible. */
+  function revealAll() {
+    var hidden = document.querySelectorAll('.reveal, .sechead__bar, .resolve, .menu__item, .split');
+    for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('is-in');
+    var heroEl = document.querySelector('.hero');
+    if (heroEl) heroEl.classList.add('is-in');
+  }
+  var failsafe = setTimeout(revealAll, 2500);
+
+  try {
+
+    /* ==========================================================
+       NAV A — THE COLOUR-ADAPTIVE BAR
+
+       THE TRAP (direction 26 found it, direction 23 is exposed to it):
+       an IntersectionObserver with a thin rootMargin band tells you which
+       section *intersects* that band. It does not tell you which section
+       is visually *behind* the bar. The moment anything stacks or nests —
+       here, the rose marquee band living inside the light hero section —
+       the observer can fire for the wrong one, and the bar paints a colour
+       that is not actually underneath it.
+
+       The fix is to stop asking "what intersects?" and ask "what is at
+       this point?" — a hit-test one pixel below the bar. Two independent
+       answers are computed:
+
+         1. pointTest() — document.elementFromPoint() at the probe, walked
+            up to its nearest [data-tone] ancestor. This is the browser's
+            own hit-testing, so it is right about stacking, nesting,
+            clipping and sub-pixel seams by construction. It DRIVES the
+            bar, and it costs one forced layout per scroll.
+
+         2. hitTest() — a geometric scan of every [data-tone] rect in
+            DOCUMENT ORDER, last match wins. Later elements paint over
+            earlier ones and a child always follows its parent in document
+            order, so "last match" is "topmost painter". This is the
+            FALLBACK, for the cases elementFromPoint cannot answer: a
+            probe outside the viewport, or an overlay covering the point.
+
+       Ordering them this way was a measurement result, not a preference.
+       With geometry in front, an audit at 1440x620 threw 24 disagreements
+       out of 260, every one at a fractional scroll offset where the probe
+       line lay within a pixel of a section seam — a rounding tie between
+       my comparison and the painter's. The browser cannot disagree with
+       itself, so the browser goes first. It is also the cheaper of the
+       two: one forced layout instead of thirteen getBoundingClientRects.
+
+       window.__navAudit() still walks every boundary and reports how
+       often the geometric fallback matches, so the fallback stays honest.
+       ========================================================== */
+
+    var bar = document.getElementById('bar');
+    var toned = [].slice.call(document.querySelectorAll('[data-tone]'));
+    var BAR_FOR = { light: 'ink', dark: 'rose', rose: 'bone' };
+
+    function barHeight() { return bar ? bar.offsetHeight : 68; }
+
+    /* geometric hit-test: last match in document order = topmost painter */
+    function hitTest(y) {
+      var tone = null;
+      for (var i = 0; i < toned.length; i++) {
+        var r = toned[i].getBoundingClientRect();
+        if (r.top <= y && r.bottom > y) tone = toned[i].getAttribute('data-tone');
+      }
+      return tone;
+    }
+
+    /* browser ground truth at the same point */
+    function pointTest(x, y) {
+      if (!document.elementFromPoint) return null;
+      var el = document.elementFromPoint(x, y);
+      while (el && el !== document.body) {
+        if (el.hasAttribute && el.hasAttribute('data-tone')) return el.getAttribute('data-tone');
+        el = el.parentElement;
+      }
+      return null;
+    }
+
+    var lastBarTone = 'light';
+    function toneUnderBar() {
+      var y = barHeight() + 3;               /* first pixels of page below the bar */
+      var t = pointTest(Math.round(window.innerWidth / 2), y);
+      return t !== null ? t : hitTest(y);    /* browser first, geometry as backstop */
+    }
+    function syncBar() {
+      if (!bar) return;
+      var tone = toneUnderBar();
+      if (!tone) tone = lastBarTone;         /* never flash a default into a gap */
+      lastBarTone = tone;
+      var next = BAR_FOR[tone] || 'ink';
+      if (bar.getAttribute('data-bar') !== next) bar.setAttribute('data-bar', next);
+      /* the bar's own text colour class, for descendant selectors */
+      bar.classList.toggle('on-dark', next === 'ink');
+      bar.classList.toggle('on-rose', next === 'rose');
+    }
+
+    /* This decides legibility, not decoration, so it runs synchronously on
+       the scroll event rather than waiting a frame. One hit-test and at
+       most one attribute write is cheap enough to do inline. */
+    function onScroll() { syncBar(); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+
+    /* ---------- dev audit: hit-test vs elementFromPoint at every boundary ---------- */
+    window.__navAudit = function () {
+      var h = barHeight();
+      var probeY = h + 3;
+      var xs = [Math.round(window.innerWidth * 0.5), Math.round(window.innerWidth * 0.25)];
+      var stops = [];
+      var startY = window.scrollY;
+
+      toned.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var top = r.top + window.scrollY;
+        var bot = top + el.offsetHeight;
+        [top, bot].forEach(function (edge) {
+          [-8, -2, 0, 2, 8].forEach(function (d) {
+            stops.push(Math.max(0, edge + d - h));
+          });
+        });
+      });
+
+      var checks = 0, agree = 0, disagreements = [];
+      stops.forEach(function (s) {
+        window.scrollTo(0, s);
+        void document.body.offsetHeight;         /* force layout */
+        var geo = hitTest(probeY);
+        xs.forEach(function (x) {
+          var pt = pointTest(x, probeY);
+          if (pt === null) return;               /* probe fell on nothing measurable */
+          checks++;
+          if (pt === geo) agree++;
+          else disagreements.push({ scrollY: s, x: x, geometric: geo, elementFromPoint: pt });
+        });
+      });
+
+      window.scrollTo(0, startY);
+      return {
+        toneRegions: toned.length,
+        boundaryStops: stops.length,
+        checks: checks,
+        agreements: agree,
+        disagreements: disagreements
+      };
+    };
+
+    /* ---------- mobile menu ---------- */
+    var burger = document.getElementById('burger');
+    var menu = document.getElementById('menu');
+    var menuClose = document.getElementById('menuClose');
+    var lastFocus = null;
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      menu.hidden = false;
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(function () {
+        menu.classList.add('is-open');
+        var items = menu.querySelectorAll('.menu__item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.transitionDelay = (reduced ? 0 : i * 55) + 'ms';
+        }
+        menuClose.focus();
+      });
+    }
+    function closeMenu() {
+      menu.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      menu.hidden = true;
+      if (lastFocus) lastFocus.focus();
+    }
+    burger.addEventListener('click', function () {
+      if (burger.getAttribute('aria-expanded') === 'true') closeMenu(); else openMenu();
+    });
+    menuClose.addEventListener('click', closeMenu);
+    menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') closeMenu(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') closeMenu();
+    });
+
+    /* ---------- h1: per-character reveal, letters arrive IN ROSE ---------- */
+    var h1 = document.getElementById('h1');
+    if (h1 && !reduced) {
+      var lines = h1.querySelectorAll('.ln, .plate');
+      var n = 0;
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li];
+        var text = line.textContent;
+        var frag = document.createDocumentFragment();
+        for (var c = 0; c < text.length; c++) {
+          var s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = text.charAt(c);
+          s.style.setProperty('--d', (n * 22) + 'ms');
+          frag.appendChild(s);
+          n++;
+        }
+        line.textContent = '';
+        line.appendChild(frag);
+      }
+      h1.setAttribute('aria-label', 'Agency work for small businesses.');
+      var kids = h1.children;
+      for (var k = 0; k < kids.length; k++) kids[k].setAttribute('aria-hidden', 'true');
+      h1.classList.add('is-split');
+      requestAnimationFrame(function () {
+        h1.classList.add('is-in');
+        document.querySelector('.hero').classList.add('is-in');
+      });
+    } else if (h1) {
+      h1.classList.add('is-in');
+      document.querySelector('.hero').classList.add('is-in');
+    }
+
+    /* ---------- scroll reveals ---------- */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var group = el.parentNode ? el.parentNode.querySelectorAll(':scope > .reveal') : [];
+          var idx = Array.prototype.indexOf.call(group, el);
+          el.style.setProperty('--d', (reduced ? 0 : Math.max(0, idx) * 70) + 'ms');
+          el.classList.add('is-in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
+      var targets = document.querySelectorAll('.reveal, .sechead__bar, .resolve');
+      for (var t = 0; t < targets.length; t++) io.observe(targets[t]);
+    } else {
+      revealAll();
+    }
+
+    /* ==========================================================
+       VIDEO
+       Sources are attached by JS, and autoplay only ever starts when
+       motion is allowed. Under prefers-reduced-motion the video is
+       paused and left on its poster frame — an autoplaying video is a
+       real accessibility failure, not a stylistic preference. The
+       reduced-motion query is also watched live, so changing the OS
+       setting pauses a playing video without a reload.
+       ========================================================== */
+    var VIDEOS = [
+      { id: 'vidInk',  src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4' },
+      { id: 'vidShop', src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-shopfront.mp4' }
+    ];
+    var vids = [];
+    VIDEOS.forEach(function (v) {
+      var el = document.getElementById(v.id);
+      if (!el) return;
+      el.src = v.src;
+      /* If the file cannot load, drop the element. The container keeps its
+         aspect-ratio and solid rose/ink ground, so nothing collapses. */
+      el.addEventListener('error', function () { el.style.display = 'none'; });
+      vids.push(el);
+    });
+
+    function applyMotionToVideos() {
+      var off = mqReduce ? mqReduce.matches : false;
+      vids.forEach(function (el) {
+        if (off) { el.pause(); }
+        else { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+      document.querySelectorAll('.vidbtn').forEach(function (b) {
+        var lbl = b.querySelector('[aria-hidden]');
+        if (lbl) lbl.textContent = off ? 'Play' : 'Pause';
+        b.setAttribute('aria-pressed', off ? 'true' : 'false');
+      });
+    }
+    applyMotionToVideos();
+    if (mqReduce) {
+      var onMQ = function () { reduced = mqReduce.matches; applyMotionToVideos(); };
+      if (mqReduce.addEventListener) mqReduce.addEventListener('change', onMQ);
+      else if (mqReduce.addListener) mqReduce.addListener(onMQ);
+    }
+
+    /* explicit pause control for the prominent video */
+    document.querySelectorAll('.vidbtn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById(b.getAttribute('data-vid'));
+        if (!el) return;
+        var lbl = b.querySelector('[aria-hidden]');
+        if (el.paused) {
+          var p = el.play(); if (p && p.catch) p.catch(function () {});
+          if (lbl) lbl.textContent = 'Pause';
+          b.setAttribute('aria-pressed', 'false');
+        } else {
+          el.pause();
+          if (lbl) lbl.textContent = 'Play';
+          b.setAttribute('aria-pressed', 'true');
+        }
+      });
+    });
+
+    /* Pause offscreen video — no point compositing a blend mode nobody sees. */
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var el = e.target;
+          if (mqReduce && mqReduce.matches) return;
+          if (e.isIntersecting) { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+          else el.pause();
+        });
+      }, { threshold: 0.05 });
+      vids.forEach(function (el) { vio.observe(el); });
+    }
+
+    clearTimeout(failsafe);
+    setTimeout(revealAll, 4000);
+
+  } catch (err) {
+    clearTimeout(failsafe);
+    revealAll();
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+</body>
+</html>

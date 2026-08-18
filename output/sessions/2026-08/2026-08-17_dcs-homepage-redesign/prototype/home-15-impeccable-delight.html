@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — the hoarding that never comes down</title>
+<meta name="description" content="Websites for local tradespeople, built and looked after by one person in Polegate, East Sussex. One phone call. Copy written, site built, hosted and monitored. From £995 or £45 a month.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;800;900&family=Chivo:ital,wght@0,400;0,500;0,700;1,400&family=Azeret+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THE HOARDING — Digital Consulting Services
+   Palette: debris-netting green drenched, limewash chalk mid-page,
+   galvanised steel rules, hazard yellow at boundaries only.
+   ============================================================ */
+
+:root{
+  --ground:      #0D3327;
+  --ground-deep: #071D16;
+  --panel:       #12503A;
+  --panel-hi:    #17624A;
+  --net:         #4FBF89;
+  --chalk:       #F2F4EF;
+  --chalk-dim:   #B8C7BE;
+  --steel:       #93A0A4;
+  --steel-dark:  #5A6669;
+  --hazard:      #FFC72C;
+  --lime:        #E8EDE8;
+  --lime-2:      #DCE4DD;
+  --ink:         #0D3327;
+  --ink-dim:     #46584E;
+
+  --display: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --body:    'Chivo', system-ui, sans-serif;
+  --data:    'Azeret Mono', ui-monospace, monospace;
+
+  --bay: 1360px;              /* the scaffold bay — one measure for the whole page */
+  --gut: clamp(20px, 5vw, 56px);
+  --rule: 1px solid rgba(147,160,164,.34);
+  --lift: cubic-bezier(.16,.84,.28,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--chalk);
+  font-family:var(--body);
+  font-size:clamp(1rem,.96rem + .18vw,1.0625rem);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* --- browser surfaces: theme what we did not draw --- */
+::selection{ background:var(--hazard); color:var(--ground-deep); }
+:root{ caret-color:var(--hazard); accent-color:var(--net); }
+::-webkit-scrollbar{ width:12px; height:12px; }
+::-webkit-scrollbar-track{ background:var(--ground-deep); }
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(90deg,var(--steel-dark),var(--steel) 45%,var(--steel-dark));
+  border:3px solid var(--ground-deep); border-radius:0;
+}
+::-webkit-scrollbar-thumb:hover{ background:var(--steel); }
+html{ scrollbar-color:var(--steel) var(--ground-deep); scrollbar-width:thin; }
+
+:focus-visible{
+  outline:3px solid var(--hazard);
+  outline-offset:3px;
+  border-radius:1px;
+}
+
+a{ color:inherit; text-decoration-thickness:1px; text-underline-offset:.28em; }
+
+img{ max-width:100%; display:block; }
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+h1,h2,h3,h4{
+  font-family:var(--display);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:-.018em;
+  line-height:.88;
+  margin:0;
+  text-wrap:balance;
+}
+h2{ font-size:clamp(2.5rem,7vw,5.25rem); }
+h3{ font-size:clamp(1.5rem,2.6vw,2.125rem); letter-spacing:-.012em; line-height:.95; }
+h4{ font-size:1.0625rem; letter-spacing:.02em; line-height:1.1; }
+p{ margin:0 0 1.1em; max-width:68ch; }
+p:last-child{ margin-bottom:0; }
+
+.lede{ font-size:clamp(1.0625rem,1rem + .5vw,1.375rem); line-height:1.5; color:var(--chalk); }
+.plate{
+  font-family:var(--data); font-weight:700; font-size:.6875rem;
+  letter-spacing:.19em; text-transform:uppercase; color:var(--net);
+  display:flex; align-items:center; gap:.7em; margin:0 0 1.4rem;
+  max-width:min(100%, 46ch);
+}
+.plate::after{ content:""; flex:1; height:1px; background:rgba(79,191,137,.4); }
+.num{ font-family:var(--data); font-variant-numeric:tabular-nums; }
+
+/* ============================================================
+   LAYOUT — the bay
+   ============================================================ */
+.bay{ width:100%; max-width:var(--bay); margin-inline:auto; padding-inline:var(--gut); }
+main{ display:block; }
+section{ position:relative; }
+.band{ padding-block:clamp(60px,7.6vw,112px); }
+.band--tight{ padding-block:clamp(48px,5.6vw,80px); }
+
+/* The scaffold: standards drawn, not implied. One grid, declared.
+   They stand in the gutter, outside the text column, and behind every
+   section — a standard that slices the first glyph of a heading is a
+   defect, not a texture. */
+.scaffold{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  max-width:var(--bay); margin-inline:auto;
+  display:flex; justify-content:space-between;
+}
+.scaffold span{
+  width:7px; height:100%;
+  background:
+    linear-gradient(90deg,
+      rgba(7,29,22,.5) 0 1px,
+      rgba(147,160,164,.16) 1px 2.5px,
+      rgba(147,160,164,.30) 2.5px 4.5px,
+      rgba(147,160,164,.12) 4.5px 6px,
+      rgba(7,29,22,.5) 6px 7px);
+  transform-origin:50% 100%;
+}
+@media (max-width:900px){ .scaffold{ display:none; } }
+
+/* Scroll lift — a real progress read, stencilled with the tube */
+.riser{
+  position:fixed; left:0; top:0; bottom:0; width:5px; z-index:6;
+  background:rgba(7,29,22,.55); pointer-events:none;
+}
+.riser i{
+  position:absolute; inset:auto 0 0 0; height:0;
+  background:linear-gradient(180deg,var(--net),var(--hazard));
+  display:block;
+}
+@media (max-width:900px){ .riser{ width:3px; } }
+
+/* ============================================================
+   HEADER  (solid — never backdrop-filtered, so the mobile
+   dialog stays anchored to the viewport)
+   ============================================================ */
+.top{
+  position:sticky; top:0; z-index:40;
+  background:var(--ground-deep);
+  border-bottom:2px solid rgba(147,160,164,.3);
+}
+.top__in{
+  display:flex; align-items:center; gap:clamp(12px,2vw,32px);
+  min-height:74px; padding-block:12px;
+}
+.mark{
+  display:flex; align-items:center; gap:11px; min-height:44px;
+  text-decoration:none; margin-right:auto; flex-shrink:0;
+}
+.mark svg{ display:block; }
+.mark b{
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:1.3rem; letter-spacing:-.01em; line-height:.9; color:var(--chalk);
+}
+.mark s{
+  display:block; text-decoration:none;
+  font-family:var(--data); font-weight:500; font-size:.5625rem;
+  letter-spacing:.2em; color:var(--net); text-transform:uppercase;
+}
+.nav{ display:flex; align-items:center; gap:clamp(14px,1.9vw,30px); }
+.nav a{
+  font-family:var(--display); font-weight:800; text-transform:uppercase;
+  font-size:1rem; letter-spacing:.045em; text-decoration:none;
+  color:var(--chalk-dim); padding:13px 2px; position:relative;
+  transition:color .18s ease;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; right:0; bottom:2px; height:2px;
+  background:var(--hazard); transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .26s var(--lift);
+}
+.nav a:hover, .nav a:focus-visible{ color:var(--chalk); }
+.nav a:hover::after, .nav a:focus-visible::after{ transform:scaleX(1); }
+
+/* ============================================================
+   BUTTONS — painted plates with a keyline, real depth
+   ============================================================ */
+.btn{
+  --btn-bg:var(--chalk); --btn-fg:var(--ground-deep);
+  display:inline-flex; align-items:center; justify-content:center; gap:.6em;
+  min-height:52px; padding:14px 26px;
+  background:var(--btn-bg); color:var(--btn-fg);
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:1.0625rem; letter-spacing:.035em; line-height:1;
+  text-decoration:none; border:2px solid var(--ground-deep); border-radius:0;
+  box-shadow:0 6px 0 -1px rgba(7,29,22,.5), 0 14px 26px -12px rgba(0,0,0,.85);
+  cursor:pointer;
+  transition:transform .16s var(--lift), box-shadow .16s var(--lift), background-color .16s ease;
+}
+.btn:hover{
+  --btn-bg:var(--hazard);
+  transform:translateY(-2px);
+  box-shadow:0 8px 0 -1px rgba(7,29,22,.5), 0 20px 34px -14px rgba(0,0,0,.9);
+}
+.btn:active{
+  transform:translateY(3px);
+  box-shadow:0 2px 0 -1px rgba(7,29,22,.5), 0 8px 16px -10px rgba(0,0,0,.8);
+}
+.btn--ghost{
+  --btn-bg:transparent; --btn-fg:var(--chalk);
+  border-color:var(--steel);
+  box-shadow:none;
+}
+.btn--ghost:hover{
+  --btn-bg:rgba(147,160,164,.16); --btn-fg:var(--chalk);
+  border-color:var(--chalk); box-shadow:none; transform:translateY(-2px);
+}
+.btn--ghost:active{ transform:translateY(1px); box-shadow:none; }
+.btn svg{ flex:none; }
+.top .btn{ min-height:46px; padding:11px 18px; font-size:.9375rem; }
+
+/* burger */
+.burger{
+  display:none; width:48px; height:48px; flex:none;
+  background:transparent; border:2px solid var(--steel); color:var(--chalk);
+  cursor:pointer; padding:0; align-items:center; justify-content:center;
+}
+.burger:hover{ border-color:var(--chalk); background:rgba(147,160,164,.14); }
+.burger i{ display:block; width:22px; height:2px; background:currentColor; position:relative; }
+.burger i::before,.burger i::after{
+  content:""; position:absolute; left:0; width:22px; height:2px; background:currentColor;
+}
+.burger i::before{ top:-7px; } .burger i::after{ top:7px; }
+
+/* mobile dialog — sibling of header, never nested inside it */
+.sheet{
+  position:fixed; inset:0; z-index:60; display:none;
+  background:var(--ground-deep);
+  padding:22px var(--gut) 40px; overflow-y:auto;
+}
+.sheet[data-open="true"]{ display:flex; flex-direction:column; }
+.sheet__top{ display:flex; align-items:center; justify-content:space-between; min-height:50px; margin-bottom:26px; }
+.sheet__x{
+  width:48px; height:48px; background:transparent; border:2px solid var(--steel);
+  color:var(--chalk); cursor:pointer; font-size:1.5rem; line-height:1; font-family:var(--body);
+}
+.sheet__x:hover{ border-color:var(--chalk); background:rgba(147,160,164,.14); }
+.sheet nav{ display:flex; flex-direction:column; border-top:var(--rule); }
+.sheet nav a{
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:2.25rem; letter-spacing:-.01em; text-decoration:none; color:var(--chalk);
+  padding:18px 0; border-bottom:var(--rule); display:flex; align-items:baseline; gap:14px;
+}
+.sheet nav a span{ font-family:var(--data); font-size:.625rem; color:var(--net); letter-spacing:.16em; }
+.sheet nav a:hover{ color:var(--hazard); }
+.sheet__foot{ margin-top:auto; padding-top:32px; display:grid; gap:14px; }
+.sheet__foot .btn{ width:100%; }
+
+@media (max-width:1000px){
+  .nav, .top .btn{ display:none; }
+  .burger{ display:flex; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative; z-index:2; overflow:hidden;
+  background:var(--ground-deep);
+  border-bottom:0;
+}
+.hero__shot{
+  position:absolute; inset:0; z-index:0;
+}
+.hero__shot img{
+  width:100%; height:100%; object-fit:cover; object-position:58% 30%;
+  filter:saturate(.62) contrast(1.04) brightness(.86);
+}
+/* the printed banner is perforated — that is the mesh, not a texture flourish */
+.hero__mesh{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background-image:radial-gradient(circle at 1px 1px, rgba(7,29,22,.6) 1.05px, transparent 1.5px);
+  background-size:5px 5px;
+}
+.hero__wash{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    linear-gradient(96deg, rgba(7,29,22,.96) 4%, rgba(13,51,39,.88) 40%, rgba(13,51,39,.2) 72%, rgba(7,29,22,.5) 100%),
+    linear-gradient(180deg, rgba(7,29,22,.72), transparent 30%, rgba(7,29,22,.45));
+}
+.hero__in{
+  position:relative; z-index:3;
+  padding-block:clamp(38px,4.6vw,60px) clamp(46px,5.4vw,74px);
+  display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,.62fr);
+  gap:clamp(28px,4vw,64px); align-items:end;
+}
+.board{
+  background:
+    repeating-linear-gradient(91deg, rgba(255,255,255,.022) 0 2px, transparent 2px 7px),
+    linear-gradient(172deg, var(--panel-hi), var(--panel) 58%, #0F452F);
+  border:2px solid rgba(7,29,22,.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -3px 0 rgba(7,29,22,.4),
+    0 26px 60px -30px rgba(0,0,0,.95);
+  padding:clamp(22px,2.5vw,34px);
+}
+.hero__board{ position:relative; }
+.hero__board::before{
+  content:""; position:absolute; inset:9px; border:1px solid rgba(242,244,239,.16); pointer-events:none;
+}
+h1{
+  font-size:clamp(2.6rem,6.6vw,6.25rem);
+  letter-spacing:-.026em; line-height:.86;
+  margin:0 0 clamp(16px,1.8vw,24px);
+}
+h1 .ln{ display:block; }
+h1 .ln i{ display:block; font-style:normal; }
+h1 em{ font-style:normal; color:var(--hazard); }
+.hero p{ max-width:56ch; color:var(--chalk-dim); }
+.hero p strong{ color:var(--chalk); font-weight:700; }
+.hero__do{ display:flex; flex-wrap:wrap; gap:13px; margin-top:clamp(18px,2vw,24px); }
+.hero__note{
+  margin-top:18px; font-family:var(--data); font-size:.6875rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--net);
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:.35em .85em;
+}
+.hero__note b{ color:var(--chalk); font-weight:700; }
+
+.hero__side{ display:grid; gap:16px; align-content:end; }
+.spec{
+  border:1px solid rgba(147,160,164,.4);
+  background:rgba(7,29,22,.62);
+  padding:13px 16px;
+}
+.spec dt{
+  font-family:var(--data); font-size:.625rem; letter-spacing:.17em;
+  text-transform:uppercase; color:var(--net); margin-bottom:5px;
+}
+.spec dd{
+  margin:0; font-family:var(--display); font-weight:800; text-transform:uppercase;
+  font-size:1.375rem; line-height:1; letter-spacing:-.005em; color:var(--chalk);
+}
+.spec dd small{ display:block; font-family:var(--body); font-weight:400; font-size:.8125rem;
+  letter-spacing:0; text-transform:none; color:var(--chalk-dim); margin-top:6px; line-height:1.45; }
+
+/* the site boundary — hazard appears here and on the tag. Nowhere else. */
+.boundary{
+  height:20px; position:relative; z-index:4;
+  background:repeating-linear-gradient(-45deg,
+    var(--hazard) 0 22px, var(--ground-deep) 22px 44px);
+  border-block:2px solid var(--ground-deep);
+}
+
+@media (max-width:1000px){
+  .hero__in{ grid-template-columns:1fr; align-items:start; }
+  .hero__side{ grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); }
+}
+@media (max-width:560px){
+  .hero__shot img{ object-position:64% 28%; }
+  .hero__do .btn{ width:100%; }
+}
+
+/* ============================================================
+   TALLY — credentials as a chalked five-bar gate
+   ============================================================ */
+.tally{ background:var(--ground); border-bottom:var(--rule); }
+.tally__grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px,3vw,44px);
+  align-items:start;
+}
+.tally__cell dt{
+  font-family:var(--data); font-size:.625rem; letter-spacing:.17em; text-transform:uppercase;
+  color:var(--net); margin-bottom:14px;
+}
+.tally__cell dd{ margin:0; }
+.tally__big{
+  font-family:var(--display); font-weight:900; font-size:clamp(2.75rem,5.4vw,4.5rem);
+  line-height:.85; letter-spacing:-.03em; color:var(--chalk); font-variant-numeric:tabular-nums;
+}
+.tally__cap{ font-size:.875rem; color:var(--chalk-dim); margin-top:10px; line-height:1.45; }
+.gates{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:12px; }
+.gate{ width:46px; height:40px; overflow:visible; }
+.gate:nth-child(odd){ transform:rotate(-1.6deg); }
+.gate:nth-child(even){ transform:rotate(1.2deg); }
+.gate line{ stroke:var(--chalk); stroke-width:3.4; stroke-linecap:round; }
+.gate line.slash{ stroke:var(--hazard); }
+@media (max-width:860px){ .tally__grid{ grid-template-columns:repeat(2,1fr); row-gap:38px; } }
+@media (max-width:440px){ .tally__grid{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   THE ASYMMETRY — what you do / what I do
+   ============================================================ */
+.split{
+  display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:clamp(18px,2.4vw,34px); align-items:stretch; margin-top:clamp(34px,4vw,54px);
+}
+.col{ display:flex; flex-direction:column; }
+.col__hd{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  padding-bottom:12px; margin-bottom:22px; border-bottom:2px solid rgba(147,160,164,.42);
+}
+.col__hd h3{ color:var(--chalk); }
+.col__ct{
+  font-family:var(--data); font-weight:700; font-size:.75rem; letter-spacing:.1em;
+  color:var(--net); font-variant-numeric:tabular-nums;
+}
+.col--you{ background:rgba(7,29,22,.5); border:1px solid rgba(147,160,164,.32); padding:clamp(22px,2.6vw,34px); }
+.col--you .one{
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:clamp(2rem,4.4vw,3.5rem); line-height:.9; letter-spacing:-.02em;
+  color:var(--hazard); margin:auto 0;
+}
+.col--you p{ color:var(--chalk-dim); font-size:.9375rem; margin-top:20px; }
+.col--me ul{ list-style:none; margin:0; padding:0; columns:2; column-gap:clamp(20px,3vw,44px); }
+.col--me li{
+  break-inside:avoid; display:flex; gap:11px; align-items:flex-start;
+  padding:9px 0; border-bottom:1px solid rgba(147,160,164,.2);
+  font-size:.9375rem; color:var(--chalk);
+}
+.col--me li svg{ flex:none; margin-top:3px; color:var(--net); }
+@media (max-width:900px){
+  .split{ grid-template-columns:1fr; }
+  .col--you .one{ margin:0; }
+}
+@media (max-width:560px){ .col--me ul{ columns:1; } }
+
+/* ============================================================
+   THE LAMP — a work lamp lights the board you are looking at
+   ============================================================ */
+.lamp{ position:relative; }
+.lamp::before{
+  content:""; position:absolute; inset:-40px; z-index:0; pointer-events:none;
+  opacity:0; transition:opacity .4s ease;
+  background:radial-gradient(340px 340px at var(--lx,50%) var(--ly,50%),
+    rgba(255,199,44,.16), rgba(255,199,44,.05) 42%, transparent 68%);
+}
+.lamp[data-lit="true"]::before{ opacity:1; }
+
+/* ============================================================
+   SERVICES — the site notice board
+   ============================================================ */
+.notice{ border-top:2px solid rgba(147,160,164,.42); margin-top:clamp(34px,4vw,54px); position:relative; z-index:1; }
+.svc{
+  display:grid; grid-template-columns:44px minmax(0,15rem) minmax(0,1fr);
+  gap:clamp(14px,2.4vw,34px); align-items:start;
+  padding:clamp(20px,2.4vw,30px) 8px;
+  border-bottom:1px solid rgba(147,160,164,.26);
+  transition:background-color .22s ease, transform .22s var(--lift);
+}
+.svc:hover, .svc:focus-within{ background:rgba(23,98,74,.42); transform:translateX(10px); }
+.svc__ic{ color:var(--net); transition:color .22s ease; }
+.svc:hover .svc__ic{ color:var(--hazard); }
+.svc h3{ color:var(--chalk); }
+.svc p{ color:var(--chalk-dim); margin:0; font-size:.9375rem; max-width:52ch; }
+@media (max-width:760px){
+  .svc{ grid-template-columns:36px minmax(0,1fr); row-gap:8px; }
+  .svc p{ grid-column:2; }
+}
+
+/* ============================================================
+   PORTFOLIO — boards mounted along the hoarding
+   ============================================================ */
+.rack{
+  display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(14px,1.8vw,24px); margin-top:clamp(34px,4vw,54px);
+  position:relative; z-index:1;
+}
+.job{
+  grid-column:span 4; display:flex; flex-direction:column;
+  background:var(--ground-deep);
+  border:1px solid rgba(147,160,164,.34);
+  padding:14px; text-decoration:none; color:inherit;
+  transition:transform .3s var(--lift), border-color .3s ease, box-shadow .3s ease;
+}
+.job:hover, .job:focus-visible{
+  transform:translateY(-6px);
+  border-color:var(--hazard);
+  box-shadow:0 22px 44px -24px rgba(0,0,0,.95);
+}
+.job--wide{ grid-column:span 6; }
+.job--tall{ grid-column:span 6; }
+.job__mock{
+  aspect-ratio:16/10; background:var(--lime); border:1px solid rgba(7,29,22,.5);
+  overflow:hidden; position:relative; margin-bottom:14px;
+  display:flex; flex-direction:column;
+}
+/* a footer band grounds the miniature so the tiles do not read as bare columns */
+.job__mock::after{ content:""; flex:none; height:15px; background:rgba(13,51,39,.32); }
+.job__bar{
+  height:15px; background:var(--lime-2); border-bottom:1px solid rgba(13,51,39,.22);
+  display:flex; align-items:center; gap:4px; padding-inline:6px;
+}
+.job__bar i{ width:5px; height:5px; border-radius:50%; background:rgba(13,51,39,.34); }
+.job__bar u{ flex:1; height:5px; background:rgba(13,51,39,.16); text-decoration:none; margin-left:4px; }
+.job__body{ padding:9px; display:flex; flex-direction:column; gap:5px; flex:1; }
+.job__body b{ display:block; height:11px; background:var(--ink); width:62%; }
+.job__body s{ display:block; height:5px; background:rgba(13,51,39,.3); text-decoration:none; }
+.job__body s.w2{ width:88%; } .job__body s.w3{ width:70%; }
+/* the tiles stretch to fill the frame — a mock that is nine-tenths empty
+   paper reads as unfinished, not as a miniature site */
+.job__strip{ display:flex; gap:5px; margin-top:3px; flex:1; align-items:stretch; min-height:26px; }
+.job__strip i{ flex:1; background:rgba(13,51,39,.16); border-top:3px solid rgba(13,51,39,.3); }
+.job__strip i:first-child{ background:var(--net); border-top-color:rgba(13,51,39,.55); }
+.job__hd{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:7px; }
+.job h3{ font-size:1.1875rem; color:var(--chalk); }
+.job__sec{ font-family:var(--data); font-size:.625rem; letter-spacing:.14em; text-transform:uppercase; color:var(--net); flex:none; }
+.job p{ margin:0; font-size:.875rem; color:var(--chalk-dim); }
+@media (max-width:980px){
+  .job, .job--wide, .job--tall{ grid-column:span 6; }
+}
+@media (max-width:620px){
+  .job, .job--wide, .job--tall{ grid-column:span 12; }
+}
+
+/* ============================================================
+   PROCESS — built in lifts (the sequence is the information)
+   ============================================================ */
+.lifts{ margin-top:clamp(34px,4vw,54px); border-top:2px solid rgba(147,160,164,.42); }
+.step{
+  display:grid; grid-template-columns:clamp(78px,9vw,132px) minmax(0,1fr) minmax(0,.9fr);
+  gap:clamp(16px,2.6vw,40px); align-items:start;
+  padding:clamp(24px,3vw,40px) 0; border-bottom:1px solid rgba(147,160,164,.26);
+}
+.step__n{
+  font-family:var(--display); font-weight:900; font-size:clamp(2.5rem,5.4vw,4.25rem);
+  line-height:.8; letter-spacing:-.04em; color:var(--net); font-variant-numeric:tabular-nums;
+}
+.step__n small{ display:block; font-family:var(--data); font-weight:500; font-size:.5625rem;
+  letter-spacing:.2em; color:var(--steel); margin-bottom:8px; }
+.step h3{ color:var(--chalk); }
+.step p{ margin:12px 0 0; color:var(--chalk-dim); font-size:.9375rem; }
+.step__ph{ align-self:stretch; }
+.step__ph img{ width:100%; height:100%; min-height:170px; object-fit:cover; border:1px solid rgba(147,160,164,.34); filter:saturate(.6) brightness(.78); }
+.step__ph figcaption{
+  font-family:var(--data); font-size:.625rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--steel); margin-top:9px;
+}
+@media (max-width:900px){
+  .step{ grid-template-columns:clamp(64px,14vw,90px) minmax(0,1fr); }
+  .step__ph{ grid-column:2; }
+}
+
+/* ============================================================
+   PRICING — the price board, in daylight
+   ============================================================ */
+.daylight{ background:var(--lime); color:var(--ink); position:relative; z-index:2; }
+.daylight h2, .daylight h3, .daylight h4{ color:var(--ink); }
+.daylight .plate{ color:#1E7A56; }
+.daylight .plate::after{ background:rgba(13,51,39,.28); }
+.daylight p{ color:var(--ink-dim); }
+.daylight .lede{ color:var(--ink); }
+
+.tabs{ display:flex; gap:0; margin-top:clamp(30px,3.6vw,44px); border-bottom:2px solid rgba(13,51,39,.24); flex-wrap:wrap; }
+.tab{
+  appearance:none; background:transparent; border:0; cursor:pointer;
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:clamp(1.0625rem,2vw,1.5rem); letter-spacing:-.005em; color:rgba(13,51,39,.5);
+  padding:12px 22px 14px; margin-bottom:-2px; border-bottom:4px solid transparent;
+  transition:color .2s ease, border-color .2s ease;
+}
+.tab:hover{ color:var(--ink); }
+.tab[aria-selected="true"]{ color:var(--ink); border-bottom-color:#1E7A56; }
+.tab small{ display:block; font-family:var(--body); font-weight:400; text-transform:none;
+  font-size:.75rem; letter-spacing:0; color:var(--ink-dim); margin-top:5px; }
+
+.prices{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,1.8vw,22px); margin-top:clamp(26px,3vw,38px); }
+.tier{
+  background:#fff; border:2px solid rgba(13,51,39,.2); padding:clamp(20px,2.4vw,30px);
+  display:flex; flex-direction:column;
+  box-shadow:0 16px 34px -24px rgba(13,51,39,.55);
+  transition:transform .26s var(--lift), border-color .26s ease, box-shadow .26s ease;
+}
+.tier:hover{ transform:translateY(-5px); border-color:#1E7A56; box-shadow:0 24px 44px -26px rgba(13,51,39,.7); }
+.tier--best{ border-color:var(--ink); background:var(--ink); color:var(--chalk); }
+.tier--best h3, .tier--best .tier__fig{ color:var(--chalk); }
+.tier--best .tier__sub, .tier--best li{ color:var(--chalk-dim); }
+.tier--best li svg{ color:var(--net); }
+.tier--best:hover{ border-color:var(--hazard); }
+.tier__tag{
+  font-family:var(--data); font-weight:700; font-size:.625rem; letter-spacing:.16em;
+  text-transform:uppercase; color:#1E7A56; margin-bottom:12px; min-height:1em;
+}
+.tier--best .tier__tag{ color:var(--hazard); }
+.tier h3{ margin-bottom:16px; }
+.tier__fig{
+  font-family:var(--display); font-weight:900; font-size:clamp(2.5rem,5vw,3.75rem);
+  line-height:.85; letter-spacing:-.03em; color:var(--ink); font-variant-numeric:tabular-nums;
+}
+.tier__sub{ font-family:var(--data); font-size:.8125rem; color:var(--ink-dim); margin-top:10px; font-variant-numeric:tabular-nums; }
+.tier ul{ list-style:none; margin:20px 0 24px; padding:18px 0 0; border-top:1px solid rgba(13,51,39,.18); display:grid; gap:9px; }
+.tier--best ul{ border-top-color:rgba(242,244,239,.24); }
+.tier li{ display:flex; gap:9px; align-items:flex-start; font-size:.875rem; color:var(--ink-dim); }
+.tier li svg{ flex:none; margin-top:3px; color:#1E7A56; }
+/* declared after the base rules so the dark tier actually wins — an
+   equal-specificity override placed earlier silently loses and ships at 1.8:1 */
+.tier--best li{ color:var(--chalk-dim); }
+.tier--best li svg{ color:var(--net); }
+.tier--best .tier__sub{ color:var(--chalk-dim); }
+.tier--best .tier__tag{ color:var(--hazard); }
+.tier .btn{ margin-top:auto; --btn-bg:var(--ink); --btn-fg:var(--chalk); border-color:var(--ink); width:100%; }
+.tier .btn:hover{ --btn-bg:#1E7A56; --btn-fg:#fff; }
+.tier--best .btn{ --btn-bg:var(--hazard); --btn-fg:var(--ground-deep); border-color:var(--hazard); }
+.tier--best .btn:hover{ --btn-bg:var(--chalk); }
+@media (max-width:900px){ .prices{ grid-template-columns:1fr; } }
+
+.included{
+  margin-top:clamp(30px,3.6vw,46px); padding-top:clamp(24px,2.6vw,32px);
+  border-top:2px solid rgba(13,51,39,.24);
+  display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(20px,3vw,48px);
+}
+.included ul{ list-style:none; margin:0; padding:0; columns:2; column-gap:clamp(20px,3vw,40px); }
+.included li{ break-inside:avoid; display:flex; gap:9px; padding:6px 0; font-size:.875rem; color:var(--ink-dim); }
+.included li svg{ flex:none; margin-top:3px; color:#1E7A56; }
+.addons{ margin-top:26px; font-family:var(--data); font-size:.8125rem; color:var(--ink-dim); line-height:1.9; }
+.addons b{ color:var(--ink); }
+@media (max-width:860px){ .included{ grid-template-columns:1fr; } }
+@media (max-width:520px){ .included ul{ columns:1; } }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.said{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.2vw,30px); margin-top:clamp(34px,4vw,54px); }
+.said blockquote{
+  margin:0; padding:clamp(22px,2.6vw,32px);
+  border:1px solid rgba(147,160,164,.34); background:rgba(7,29,22,.5);
+  display:flex; flex-direction:column;
+}
+.said svg{ color:var(--net); margin-bottom:16px; }
+.said p{
+  font-family:var(--display); font-weight:700; text-transform:none;
+  font-size:clamp(1.25rem,2vw,1.625rem); line-height:1.14; letter-spacing:-.008em;
+  color:var(--chalk); margin:0 0 20px;
+}
+.said footer{ margin-top:auto; font-family:var(--data); font-size:.6875rem; letter-spacing:.13em; text-transform:uppercase; color:var(--net); }
+.said footer span{ display:block; color:var(--steel); margin-top:5px; letter-spacing:.1em; }
+@media (max-width:900px){ .said{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   TRADES + the phone argument
+   ============================================================ */
+.trades{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.92fr); gap:clamp(26px,4vw,64px); align-items:center; }
+.trades__ph{ position:relative; margin:0; }
+.trades__ph img{ width:100%; aspect-ratio:3/2; object-fit:cover; border:1px solid rgba(147,160,164,.34); filter:saturate(.62) brightness(.8); }
+.trades__ph figcaption{
+  position:absolute; left:0; bottom:0; right:0; padding:14px 16px;
+  background:linear-gradient(0deg, rgba(7,29,22,.94), rgba(7,29,22,0));
+  font-family:var(--data); font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--chalk-dim);
+}
+.tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; list-style:none; padding:0; }
+.tags li{
+  font-family:var(--display); font-weight:800; text-transform:uppercase; font-size:.9375rem;
+  letter-spacing:.03em; padding:7px 13px; border:1px solid rgba(147,160,164,.42); color:var(--chalk-dim);
+  transition:color .2s ease, border-color .2s ease, background-color .2s ease;
+}
+.tags li:hover{ color:var(--ground-deep); background:var(--net); border-color:var(--net); }
+@media (max-width:900px){ .trades{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   THE PERSON
+   ============================================================ */
+.person{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:clamp(26px,4vw,64px); align-items:start; }
+.person__big{
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:clamp(2.25rem,5.2vw,4.25rem); line-height:.9; letter-spacing:-.026em; color:var(--chalk);
+  margin:0 0 24px;
+}
+.person__big em{ font-style:normal; color:var(--net); }
+.person__card{ background:rgba(7,29,22,.55); border:1px solid rgba(147,160,164,.34); padding:clamp(22px,2.6vw,32px); }
+.person__card dl{ margin:0; display:grid; gap:15px; }
+.person__card dt{ font-family:var(--data); font-size:.625rem; letter-spacing:.17em; text-transform:uppercase; color:var(--net); }
+.person__card dd{ margin:4px 0 0; font-size:.9375rem; color:var(--chalk); }
+.person__card dd a{ color:var(--chalk); display:inline-block; min-height:44px; padding-block:11px; }
+.person__card dd a:hover{ color:var(--hazard); }
+@media (max-width:860px){ .person{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   AREAS
+   ============================================================ */
+.areas{ position:relative; overflow:hidden; background:var(--ground-deep); }
+.areas__ph{ position:absolute; inset:0; z-index:0; }
+.areas__ph img{ width:100%; height:100%; object-fit:cover; filter:saturate(.4) brightness(.42) contrast(1.05); }
+.areas__ph::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(7,29,22,.86), rgba(7,29,22,.6) 50%, rgba(7,29,22,.92));
+}
+.areas .bay{ position:relative; z-index:1; }
+.areas ol{
+  list-style:none; margin:clamp(24px,3vw,36px) 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:0 clamp(16px,2.4vw,34px);
+}
+.areas li{
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:clamp(1.75rem,4.4vw,3.25rem); line-height:1.06; letter-spacing:-.022em; color:var(--chalk);
+}
+.areas li:nth-child(even){ color:var(--chalk-dim); }
+.areas li.last{ color:var(--hazard); }
+.areas__note{ margin-top:26px; color:var(--chalk-dim); }
+
+/* ============================================================
+   FINAL CTA — the number at hoarding scale
+   ============================================================ */
+.shout{ background:var(--net); color:var(--ground-deep); position:relative; z-index:2; }
+.shout h2{ color:var(--ground-deep); font-size:clamp(2.25rem,6vw,4.5rem); }
+.shout p{ color:#083A28; max-width:52ch; margin-top:20px; }
+.tel{
+  display:block; margin:clamp(28px,4vw,44px) 0 clamp(22px,3vw,32px); padding-block:6px;
+  font-family:var(--display); font-weight:900; font-size:clamp(2.75rem,12.5vw,10rem);
+  line-height:.82; letter-spacing:-.035em; color:var(--ground-deep);
+  text-decoration:none; font-variant-numeric:tabular-nums;
+  transition:color .2s ease, transform .3s var(--lift);
+  transform-origin:0 50%;
+}
+.tel:hover{ color:#062E21; transform:scale(1.012); }
+.shout__do{ display:flex; flex-wrap:wrap; gap:13px; align-items:center; }
+.shout .btn{ --btn-bg:var(--ground-deep); --btn-fg:var(--chalk); border-color:var(--ground-deep); }
+.shout .btn:hover{ --btn-bg:var(--hazard); --btn-fg:var(--ground-deep); }
+.shout .btn--ghost{ --btn-bg:transparent; --btn-fg:var(--ground-deep); border-color:rgba(8,58,40,.5); box-shadow:none; }
+.shout .btn--ghost:hover{ --btn-bg:rgba(8,58,40,.12); --btn-fg:var(--ground-deep); border-color:var(--ground-deep); }
+.shout__hrs{ font-family:var(--data); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:#0B4531; margin-top:26px; }
+@media (max-width:560px){ .shout__do .btn{ width:100%; } }
+
+/* ============================================================
+   FOOTER + THE SCAFFTAG
+   ============================================================ */
+.foot{ background:var(--ground-deep); border-top:2px solid rgba(147,160,164,.3); padding-block:clamp(56px,7vw,88px) 40px; }
+.foot__grid{ display:grid; grid-template-columns:minmax(0,1.25fr) repeat(3,minmax(0,1fr)); gap:clamp(24px,3vw,48px); }
+.foot h4{ color:var(--net); font-family:var(--data); font-weight:700; font-size:.625rem;
+  letter-spacing:.18em; margin-bottom:16px; }
+.foot ul{ list-style:none; margin:0; padding:0; display:grid; gap:2px; }
+.foot li, .foot address{ font-size:.875rem; color:var(--chalk-dim); font-style:normal; line-height:1.7; }
+.foot a{ color:var(--chalk-dim); text-decoration:none; }
+/* thumb-sized targets: a 17px footer link is a miss on a phone */
+.foot ul a, .foot address a{ display:inline-block; min-height:44px; padding-block:11px; }
+/* the email is one long unbreakable token — let it break rather than clip */
+.foot address a, .person__card dd a{ overflow-wrap:anywhere; max-width:100%; }
+.foot ul li:not(:has(a)){ padding-block:11px; }
+.foot a:hover{ color:var(--hazard); text-decoration:underline; }
+.foot__brand p{ font-size:.875rem; color:var(--chalk-dim); margin-top:16px; max-width:34ch; }
+
+.tagwrap{ margin-top:clamp(40px,4.4vw,60px); display:grid; grid-template-columns:auto minmax(0,auto); justify-content:start; gap:clamp(20px,3vw,44px); align-items:center; }
+.scafftag{
+  width:238px; flex:none; background:var(--hazard); color:var(--ground-deep);
+  border:2px solid var(--ground-deep); padding:14px 16px 16px; transform:rotate(-2.2deg);
+  box-shadow:0 18px 34px -20px rgba(0,0,0,.9);
+  transition:transform .4s var(--lift);
+}
+.scafftag:hover{ transform:rotate(0deg) translateY(-3px); }
+.scafftag__hole{ width:15px; height:15px; border:2px solid var(--ground-deep); border-radius:50%; margin:0 auto 12px; background:var(--ground-deep); }
+.scafftag b{
+  display:block; font-family:var(--display); font-weight:900; text-transform:uppercase;
+  font-size:1.1875rem; line-height:.95; letter-spacing:-.01em; text-align:center;
+  padding-bottom:9px; margin-bottom:10px; border-bottom:2px solid rgba(7,29,22,.55);
+}
+.scafftag dl{ margin:0; display:grid; gap:7px; font-family:var(--data); font-size:.5625rem; letter-spacing:.09em; text-transform:uppercase; }
+.scafftag dt{ color:rgba(7,29,22,.72); }
+.scafftag dd{ margin:1px 0 0; font-weight:700; color:var(--ground-deep); font-size:.625rem; }
+.scafftag__st{ margin:11px 0 0; padding-top:9px; border-top:2px solid rgba(7,29,22,.55);
+  font-family:var(--display); font-weight:900; text-transform:uppercase; font-size:1.0625rem;
+  text-align:center; letter-spacing:.02em; color:var(--ground-deep); }
+/* direct child only — this rule used to leak into the tag and repaint its status line */
+.tagwrap > p{ font-size:1rem; color:var(--chalk-dim); max-width:44ch; }
+.tagwrap > p b{ color:var(--chalk); font-weight:700; }
+
+.foot__end a{ display:inline-block; min-height:44px; padding-block:11px; }
+.foot__end{
+  margin-top:clamp(40px,5vw,64px); padding-top:12px; border-top:1px solid rgba(147,160,164,.24);
+  display:flex; flex-wrap:wrap; gap:14px 28px; justify-content:space-between; align-items:center;
+  font-family:var(--data); font-size:.6875rem; letter-spacing:.1em; text-transform:uppercase; color:var(--steel);
+}
+@media (max-width:900px){ .foot__grid{ grid-template-columns:repeat(2,1fr); row-gap:36px; } }
+@media (max-width:640px){
+  .foot__grid{ grid-template-columns:1fr; }
+  .tagwrap{ grid-template-columns:1fr; justify-items:start; }
+}
+
+/* ============================================================
+   MOTION — one authored moment, from an already-visible default
+   ============================================================ */
+.js .rv{ opacity:0; transform:translateY(26px); }
+.js .rv.in{
+  opacity:1; transform:none;
+  transition:opacity .72s var(--lift), transform .72s var(--lift);
+  transition-delay:calc(var(--i,0) * 70ms);
+}
+/* THE HOARDING GOES UP — standards first, then the mesh, then the lettering
+   gets rollered on left to right, then the boundary runs out.
+   These are animations with `both`, not class-gated transitions: they need no
+   JS to finish, so a throttled rAF can never strand the h1 invisible. */
+@keyframes standUp   { from{ transform:scaleY(0);         } to{ transform:none; } }
+@keyframes meshIn    { from{ opacity:0;                   } to{ opacity:1; } }
+@keyframes rollerOn  { from{ clip-path:inset(0 100% 0 0); } to{ clip-path:inset(0 0 0 0); } }
+@keyframes runOut    { from{ transform:scaleX(0);         } to{ transform:none; } }
+
+.js .scaffold span{ animation:standUp 1s var(--lift) both; }
+.js .scaffold span:last-child{ animation-delay:.12s; }
+.js .hero__mesh{ animation:meshIn 1.1s ease .1s both; }
+.js .hero__board h1 .ln i{
+  animation:rollerOn .78s var(--lift) both;
+  animation-delay:calc(140ms + var(--i,0) * 110ms);
+}
+.js .boundary{ transform-origin:0 50%; animation:runOut .9s var(--lift) .5s both; }
+
+/* Safety net: the headline carries the offer, so it may never depend on an
+   animation finishing. A throttled tab can stall CSS animations mid-fill, so
+   a timer drops every entrance state shortly after load. Worst case the
+   hoarding is simply already up. */
+.settled .scaffold span, .settled .hero__mesh,
+.settled .hero__board h1 .ln i, .settled .boundary{
+  animation:none !important; clip-path:none !important;
+  opacity:1 !important; transform:none !important;
+}
+
+.js .gate line{ stroke-dasharray:60; stroke-dashoffset:60; }
+.js .tally.in .gate line{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset .42s ease;
+  transition-delay:calc(var(--g,0) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .js .rv, .js .rv.in,
+  .js .scaffold span, .js .boundary, .js .hero__mesh,
+  .js .hero__board h1 .ln i{
+    opacity:1 !important; transform:none !important;
+    clip-path:none !important; animation:none !important; transition:none !important;
+  }
+  .js .gate line, .js .tally.in .gate line{ stroke-dashoffset:0 !important; transition:none !important; }
+  .lamp::before{ display:none; }
+  *{ scroll-behavior:auto !important; }
+}
+
+/* parked vertically, never horizontally — a -9999px left inflates scrollWidth */
+.skip{
+  position:fixed; left:12px; top:-80px; z-index:100;
+  background:var(--hazard); color:var(--ground-deep); padding:12px 20px;
+  font-family:var(--display); font-weight:900; text-transform:uppercase;
+  text-decoration:none; transition:top .18s var(--lift);
+}
+.skip:focus{ top:12px; }
+.vh{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+</style>
+</head>
+<body>
+<!--
+THESIS: A website is the hoarding that never comes down. Refuses the agency-homepage
+arrangement of centred claim, gradient wash and floating browser screenshots.
+OWN-WORLD: Drenched debris-netting green with a limewash-chalk daylight middle,
+galvanised steel rules, hazard yellow only at boundary and tag; Saira Condensed
+painted caps at hoarding scale, Chivo body, Azeret Mono for measured data;
+scaffold standards and ledgers as the literal, drawn grid.
+STORY: A time-poor tradesperson recognises their own world, understands one call buys
+a written, built, hosted and monitored site, reads the real prices, and rings.
+FIRST VIEWPORT: Full-bleed scaffolder photograph under a perforated banner mesh; a
+painted board overlaps it left carrying the H1 at hoarding scale; primary action sits
+under the sub-line; a hazard chevron closes the viewport as the site boundary.
+FORM: Site hoarding / scaffold banner — candidate 4 of 7, seed c7d7a7c2.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="scaffold" aria-hidden="true"><span></span><span></span></div>
+<div class="riser" aria-hidden="true"><i></i></div>
+
+<header class="top">
+  <div class="bay top__in">
+    <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect x="1.4" y="1.4" width="31.2" height="31.2" stroke="#4FBF89" stroke-width="2.2"/>
+        <path d="M1.4 11.6h31.2M1.4 22.4h31.2M11.6 1.4v31.2M22.4 1.4v31.2" stroke="#4FBF89" stroke-width="1.2" opacity=".55"/>
+        <path d="M1.4 32.6 32.6 1.4" stroke="#FFC72C" stroke-width="2.6"/>
+      </svg>
+      <span>
+        <b>Digital Consulting Services</b>
+        <s>Polegate · Est. 2019</s>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <a class="btn" href="/contact">Get a free quote</a>
+
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="sheet" aria-label="Open menu"><i></i></button>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="sheet__top">
+    <span class="mark" aria-hidden="true"><b style="font-size:1.0625rem">Digital Consulting Services</b></span>
+    <button class="sheet__x" type="button" id="sheetX" aria-label="Close menu">&times;</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#services">Services <span>Six of them</span></a>
+    <a href="#pricing">Pricing <span>In public</span></a>
+    <a href="#portfolio">Portfolio <span>20+ sites</span></a>
+    <a href="/blog">Blog</a>
+    <a href="#about">About <span>One person</span></a>
+  </nav>
+  <div class="sheet__foot">
+    <a class="btn" href="/contact">Get a free quote</a>
+    <a class="btn btn--ghost" href="tel:07395063764">Call 07395 063764</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="hero__shot">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062"
+           alt="A scaffolder in a hi-vis jacket assembling a scaffold across the front of a terraced house, photographed from street level looking up.">
+    </div>
+    <div class="hero__mesh" aria-hidden="true"></div>
+    <div class="hero__wash" aria-hidden="true"></div>
+
+    <div class="bay hero__in">
+      <div class="board hero__board">
+        <h1 id="h1">
+          <span class="ln" style="--i:0"><i>The hoarding</i></span>
+          <span class="ln" style="--i:1"><i>that never</i></span>
+          <span class="ln" style="--i:2"><i><em>comes down.</em></i></span>
+        </h1>
+        <p class="lede">A banner on the scaffold works for three weeks, on one street. A website
+        built properly works every day, on every street. I build it, write it, host it and keep an
+        eye on it. <strong>Your part is one phone call.</strong></p>
+
+        <div class="hero__do">
+          <a class="btn" href="/contact">Get a free quote</a>
+          <a class="btn btn--ghost" href="tel:07395063764">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+            Call 07395 063764
+          </a>
+        </div>
+
+        <p class="hero__note"><b>No brief needed.</b> <span aria-hidden="true">·</span> Polegate, East Sussex <span aria-hidden="true">·</span> Working UK-wide</p>
+      </div>
+
+      <div class="hero__side">
+        <dl class="spec rv" style="--i:1">
+          <dt>What it costs</dt>
+          <dd>From £995<small>Or £45 a month with nothing upfront. Same site either way.</small></dd>
+        </dl>
+        <dl class="spec rv" style="--i:2">
+          <dt>What you write</dt>
+          <dd>Nothing<small>I ask the questions and write the copy. There is no form to fill in.</small></dd>
+        </dl>
+        <dl class="spec rv" style="--i:3">
+          <dt>What you log into</dt>
+          <dd>Nothing<small>No dashboard, no CMS, no password to lose. You ring me instead.</small></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <div class="boundary" aria-hidden="true"></div>
+
+  <!-- ========== TALLY ========== -->
+  <section class="tally band--tight" aria-labelledby="tally-h">
+    <div class="bay">
+      <h2 id="tally-h" class="vh">Track record</h2>
+      <dl class="tally__grid">
+        <div class="tally__cell rv" style="--i:0">
+          <dt>Sites delivered</dt>
+          <dd>
+            <div class="gates" aria-hidden="true">
+              <svg class="gate" viewBox="0 0 46 40" style="--g:0"><line x1="5" y1="4" x2="5" y2="36"/><line x1="14" y1="4" x2="14" y2="36"/><line x1="23" y1="4" x2="23" y2="36"/><line x1="32" y1="4" x2="32" y2="36"/><line class="slash" x1="1" y1="34" x2="40" y2="6"/></svg>
+              <svg class="gate" viewBox="0 0 46 40" style="--g:1"><line x1="5" y1="4" x2="5" y2="36"/><line x1="14" y1="4" x2="14" y2="36"/><line x1="23" y1="4" x2="23" y2="36"/><line x1="32" y1="4" x2="32" y2="36"/><line class="slash" x1="1" y1="34" x2="40" y2="6"/></svg>
+              <svg class="gate" viewBox="0 0 46 40" style="--g:2"><line x1="5" y1="4" x2="5" y2="36"/><line x1="14" y1="4" x2="14" y2="36"/><line x1="23" y1="4" x2="23" y2="36"/><line x1="32" y1="4" x2="32" y2="36"/><line class="slash" x1="1" y1="34" x2="40" y2="6"/></svg>
+              <svg class="gate" viewBox="0 0 46 40" style="--g:3"><line x1="5" y1="4" x2="5" y2="36"/><line x1="14" y1="4" x2="14" y2="36"/><line x1="23" y1="4" x2="23" y2="36"/><line x1="32" y1="4" x2="32" y2="36"/><line class="slash" x1="1" y1="34" x2="40" y2="6"/></svg>
+            </div>
+            <div class="tally__big">20+</div>
+            <p class="tally__cap">Chalked up since 2019. Scaffolders, sparkies, removals, tutors, a fabric shop.</p>
+          </dd>
+        </div>
+        <div class="tally__cell rv" style="--i:1">
+          <dt>Years at it</dt>
+          <dd>
+            <div class="gates" aria-hidden="true">
+              <svg class="gate" viewBox="0 0 46 40" style="--g:4"><line x1="5" y1="4" x2="5" y2="36"/><line x1="14" y1="4" x2="14" y2="36"/><line x1="23" y1="4" x2="23" y2="36"/><line x1="32" y1="4" x2="32" y2="36"/><line class="slash" x1="1" y1="34" x2="40" y2="6"/></svg>
+            </div>
+            <div class="tally__big">5+</div>
+            <p class="tally__cap">Long enough that the first sites I built are still up, still looked after.</p>
+          </dd>
+        </div>
+        <div class="tally__cell rv" style="--i:2">
+          <dt>Managed by me</dt>
+          <dd>
+            <div class="tally__big">100%</div>
+            <p class="tally__cap">Nothing outsourced, nothing offshored. The person who builds it is the person who answers.</p>
+          </dd>
+        </div>
+        <div class="tally__cell rv" style="--i:3">
+          <dt>Established</dt>
+          <dd>
+            <div class="tally__big">2019</div>
+            <p class="tally__cap">Unit H3, Chaucer Business Park, Polegate. Working right across the UK.</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ========== THE ASYMMETRY ========== -->
+  <section class="band" aria-labelledby="promise-h">
+    <div class="bay">
+      <h2 id="promise-h" class="rv">Barely lift<br>a finger.</h2>
+      <p class="lede rv" style="--i:1; margin-top:26px">Most agencies want you to turn up with a brief,
+      your own copy, your own photos and a clear idea of what you want. If you had time for that
+      you would have done it years ago. Here is the honest division of labour.</p>
+
+      <div class="split">
+        <div class="col col--you rv" style="--i:2">
+          <div class="col__hd">
+            <h3>Your list</h3>
+            <span class="col__ct">1 item</span>
+          </div>
+          <p class="one">Answer<br>the phone.</p>
+          <p>That is the whole thing. A call, or a few messages if you are on a job. I ask the
+          questions, you talk about your work, which you can do in your sleep, and I take it from
+          there.</p>
+        </div>
+
+        <div class="col col--me rv" style="--i:3">
+          <div class="col__hd">
+            <h3>My list</h3>
+            <span class="col__ct">11 items</span>
+          </div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Work out what your customers actually search for</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Write every word on every page</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Choose the colours, type and layout</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Build a page for each service you offer</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Build a page for each town you cover</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Make it fast, and make it work on a phone first</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Submit it to Google and get it indexed</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Sort the domain, the SSL and the hosting</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Keep it patched and secure, month after month</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Watch it around the clock in case it goes down</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Change it whenever you ring and ask</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="band lamp" id="services" data-lamp aria-labelledby="svc-h">
+    <div class="bay">
+      <p class="plate rv">What goes up</p>
+      <h2 id="svc-h" class="rv" style="--i:1">Six things,<br>done properly.</h2>
+
+      <div class="notice">
+        <article class="svc rv" style="--i:0">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="M3 8h18"/><path d="M8 8v13"/><path d="M12 12h6M12 16h4"/></svg>
+          <h3>Website design</h3>
+          <p>Built for your trade from scratch. No templates, no drag-and-drop, nothing for you to
+          assemble on a Sunday night. It looks like a firm people ring.</p>
+        </article>
+
+        <article class="svc rv" style="--i:1">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 5 5"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg>
+          <h3>Local SEO</h3>
+          <p>A page for every service and a page for every town you cover, with the markup Google
+          wants, built in from the first day rather than sold to you later.</p>
+        </article>
+
+        <article class="svc rv" style="--i:2">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 3.5a5 5 0 0 0-6.6 6.6L3 15v6h6l4.9-4.9a5 5 0 0 0 6.6-6.6l-3.1 3.1-3-3z"/></svg>
+          <h3>Ongoing management</h3>
+          <p>Hosting, updates, security, backups, uptime monitoring. Ring or text when something
+          needs changing and I change it. You stay on the tools.</p>
+        </article>
+
+        <article class="svc rv" style="--i:3">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15"/><path d="m2.5 6.5 9.5 7 9.5-7"/></svg>
+          <h3>Google Workspace email</h3>
+          <p>Proper business email on your own name (you@yourfirm.co.uk), set up, moved over and
+          working on your phone before you notice.</p>
+        </article>
+
+        <article class="svc rv" style="--i:4">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21.5 7H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+          <h3>eCommerce websites</h3>
+          <p>Online shops, built and loaded with your products. Payments, postage, stock: set up
+          properly so orders land in your inbox and not in a spreadsheet.</p>
+        </article>
+
+        <article class="svc rv" style="--i:5">
+          <svg class="svc__ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M6 21V11M11 21V5M16 21v-7M21 21V8"/></svg>
+          <h3>Analytics &amp; reporting</h3>
+          <p>Analytics and Search Console set up, then a plain-English report each month: what
+          people searched, what they clicked, whether the phone rang more.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PORTFOLIO ========== -->
+  <section class="band lamp" id="portfolio" data-lamp aria-labelledby="port-h" style="background:var(--ground-deep)">
+    <div class="bay">
+      <p class="plate rv">Boards along the hoarding</p>
+      <h2 id="port-h" class="rv" style="--i:1">Work that<br>went up and<br>stayed up.</h2>
+      <p class="lede rv" style="--i:2; margin-top:24px; color:var(--chalk-dim)">Real firms, real sites, still running.
+      The little screens below are drawings, not photographs. The real sites are a click away.</p>
+
+      <div class="rack">
+        <a class="job job--wide rv" style="--i:0" href="/portfolio/colossus-scaffolding">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body">
+              <b></b><s class="w2"></s><s class="w3"></s>
+              <span class="job__strip"><i></i><i></i><i></i><i></i></span>
+            </span>
+          </span>
+          <span class="job__hd"><h3>Colossus Scaffolding</h3><span class="job__sec">Scaffolding · E. Sussex</span></span>
+          <p>First enquiry through Google within three weeks of launch. Thirty pages.</p>
+        </a>
+
+        <a class="job job--tall rv" style="--i:1" href="/portfolio/dj-fox-electrical">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body">
+              <b></b><s class="w2"></s><s class="w3"></s><s class="w2"></s>
+              <span class="job__strip"><i></i><i></i><i></i></span>
+            </span>
+          </span>
+          <span class="job__hd"><h3>DJ Fox Electrical</h3><span class="job__sec">Electrician · E. Sussex</span></span>
+          <p>Twenty-plus pages, one for every service and every town. Live at djfoxelectrical.com.</p>
+        </a>
+
+        <a class="job rv" style="--i:2" href="/portfolio/dch-automotive">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w2"></s><span class="job__strip"><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>DCH Automotive</h3><span class="job__sec">Automotive</span></span>
+          <p>A professional presence from a standing start, with a live Instagram feed.</p>
+        </a>
+
+        <a class="job rv" style="--i:3" href="/portfolio/cuddle-plush-fabrics">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w3"></s><span class="job__strip"><i></i><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Cuddle Plush Fabrics</h3><span class="job__sec">eCommerce · Fabrics</span></span>
+          <p>Five years and counting. One of the longest relationships on the books.</p>
+        </a>
+
+        <a class="job rv" style="--i:4" href="/portfolio/luna-landings">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w2"></s><span class="job__strip"><i></i><i></i><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Luna Landings</h3><span class="job__sec">Made-to-order</span></span>
+          <p>Product configurator, automatic work orders, shipping worldwide.</p>
+        </a>
+
+        <a class="job rv" style="--i:5" href="/portfolio/bexhill-removals">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w3"></s><span class="job__strip"><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Bexhill Removals</h3><span class="job__sec">Removals</span></span>
+          <p>Design approved on the first presentation. Not a single revision asked for.</p>
+        </a>
+
+        <a class="job rv" style="--i:6" href="/portfolio/nicola-noble-tuition">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w2"></s><span class="job__strip"><i></i><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Nicola Noble Tuition</h3><span class="job__sec">Tutoring</span></span>
+          <p>Moved her classes online when Covid hit, instead of closing the business.</p>
+        </a>
+
+        <a class="job rv" style="--i:7" href="/portfolio/sanctuary-ida">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w3"></s><span class="job__strip"><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Sanctuary Ida</h3><span class="job__sec">Yoga</span></span>
+          <p>Students book and pay for their classes on the website.</p>
+        </a>
+
+        <a class="job rv" style="--i:8" href="/portfolio/mad-graphics">
+          <span class="job__mock" aria-hidden="true">
+            <span class="job__bar"><i></i><i></i><i></i><u></u></span>
+            <span class="job__body"><b></b><s class="w2"></s><span class="job__strip"><i></i><i></i><i></i></span></span>
+          </span>
+          <span class="job__hd"><h3>Mad Graphics</h3><span class="job__sec">Signage &amp; print</span></span>
+          <p>A full rebuild for a firm that makes other people's signs for a living.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS ========== -->
+  <section class="band" aria-labelledby="proc-h">
+    <div class="bay">
+      <p class="plate rv">How it goes up</p>
+      <h2 id="proc-h" class="rv" style="--i:1">Four lifts.</h2>
+      <p class="lede rv" style="--i:2; margin-top:24px; color:var(--chalk-dim)">Scaffold goes up a lift at a time,
+      in order, and nobody stands on the next one until the last one is sound. Same here.</p>
+
+      <div class="lifts">
+        <article class="step rv" style="--i:0">
+          <div class="step__n"><small>Lift 01</small>01</div>
+          <div>
+            <h3>A conversation</h3>
+            <p>A phone call, or a few messages if you are up a ladder. No brief to write, no form to
+            fill in, no questionnaire landing in your inbox. I ask, you talk about your work, I take
+            notes. Twenty minutes usually does it.</p>
+          </div>
+        </article>
+
+        <article class="step rv" style="--i:1">
+          <div class="step__n"><small>Lift 02</small>02</div>
+          <div>
+            <h3>I write it and design it</h3>
+            <p>Copy, structure, colours, images, the lot. You do not need to know what to say about
+            your own business. That is my job, and it is the part most people dread. Nothing is
+            outsourced and nothing is offshored.</p>
+          </div>
+          <figure class="step__ph" style="margin:0">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/hands-sketching.jpg" width="1600" height="1062" loading="lazy"
+                 alt="A pair of hands sketching a rough page wireframe in pencil on paper.">
+            <figcaption>The design gets worked out on paper first</figcaption>
+          </figure>
+        </article>
+
+        <article class="step rv" style="--i:2">
+          <div class="step__n"><small>Lift 03</small>03</div>
+          <div>
+            <h3>You have a look</h3>
+            <p>You see it, you tell me what you think, I change it. Unlimited revisions while we are
+            building. There is no meter running and no change-request form. We stop when you are
+            actually happy with it, not when you have run out of patience.</p>
+          </div>
+        </article>
+
+        <article class="step rv" style="--i:3">
+          <div class="step__n"><small>Lift 04</small>04</div>
+          <div>
+            <h3>It goes live, and it stays looked after</h3>
+            <p>Domain, SSL, hosting, Search Console: all handled. Then it is monitored, patched and
+            updated for as long as you want it. This is the lift that never comes down.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING ========== -->
+  <section class="band daylight" id="pricing" aria-labelledby="price-h">
+    <div class="bay">
+      <p class="plate rv">The price board</p>
+      <h2 id="price-h" class="rv" style="--i:1">On the wall,<br>not in a PDF.</h2>
+      <p class="lede rv" style="--i:2; margin-top:24px">There is no fourteen-page proposal and no
+      "starting from". The whole price list fits on one board. Two ways to pay for the same site.
+      You choose how you pay, not what you get.</p>
+
+      <div class="tabs rv" style="--i:3" role="tablist" aria-label="How you would like to pay">
+        <button class="tab" type="button" role="tab" id="tab-a" aria-controls="panel-a" aria-selected="true">
+          Upfront + monthly<small>Own it from day one</small>
+        </button>
+        <button class="tab" type="button" role="tab" id="tab-b" aria-controls="panel-b" aria-selected="false">
+          Nothing upfront<small>Spread it over 12 months minimum</small>
+        </button>
+      </div>
+
+      <div class="prices" id="panel-a" role="tabpanel" aria-labelledby="tab-a">
+        <div class="tier rv" style="--i:0">
+          <p class="tier__tag">Up to 20 pages</p>
+          <h3>Starter</h3>
+          <div class="tier__fig">£995</div>
+          <p class="tier__sub">then £15 / month</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Everything in the list below</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Right for a sole trader covering a few towns</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Support by phone and email</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+
+        <div class="tier tier--best rv" style="--i:1">
+          <p class="tier__tag">Most popular · up to 50 pages</p>
+          <h3>Professional</h3>
+          <div class="tier__fig">£1,995</div>
+          <p class="tier__sub">then £25 / month</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Everything in the list below</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Room for every service and every town you cover</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Where most trades end up</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+
+        <div class="tier rv" style="--i:2">
+          <p class="tier__tag">Up to 100 pages</p>
+          <h3>Growth</h3>
+          <div class="tier__fig">£3,495</div>
+          <p class="tier__sub">then £50 / month</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Everything in the list below</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>For a firm with a team and a wide patch</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Priority on changes</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+      </div>
+
+      <div class="prices" id="panel-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+        <div class="tier">
+          <p class="tier__tag">Up to 20 pages · 12-month minimum</p>
+          <h3>Starter</h3>
+          <div class="tier__fig">£45</div>
+          <p class="tier__sub">per month · nothing upfront</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>The identical site, just paid differently</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Nothing to find before you start</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Support by phone and email</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+
+        <div class="tier tier--best">
+          <p class="tier__tag">Most popular · up to 50 pages</p>
+          <h3>Professional</h3>
+          <div class="tier__fig">£75</div>
+          <p class="tier__sub">per month · nothing upfront</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>The identical site, just paid differently</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Room for every service and every town you cover</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Where most trades end up</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+
+        <div class="tier">
+          <p class="tier__tag">Up to 100 pages · 12-month minimum</p>
+          <h3>Growth</h3>
+          <div class="tier__fig">£125</div>
+          <p class="tier__sub">per month · nothing upfront</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>The identical site, just paid differently</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>For a firm with a team and a wide patch</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Priority on changes</li>
+          </ul>
+          <a class="btn" href="/contact">Start here</a>
+        </div>
+      </div>
+
+      <div class="included rv">
+        <div>
+          <h3>In every one<br>of them</h3>
+          <p style="margin-top:16px; font-size:.9375rem">The tiers differ on how much site you need
+          and how quickly I turn changes around. They do not differ on quality. Nobody gets the
+          cheap version.</p>
+        </div>
+        <div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Custom design, not a template</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>A page for each service</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>A page for each town</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Schema markup for local search</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Mobile-first and quick</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Contact form that reaches you</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Hosting and SSL</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Domain management</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Security updates</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Uptime monitoring</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Unlimited revisions while building</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Submitted to Google Search Console</li>
+          </ul>
+          <p class="addons">
+            <b>Extras, if you want them:</b><br>
+            Blog post written for you, <span class="num">£75</span> each ·
+            Custom theme design, <span class="num">£350</span> ·
+            Google Ads set up and managed, <span class="num">£200</span>/month plus your ad spend ·
+            Monthly SEO retainer, <span class="num">£200</span>/month
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="band" aria-labelledby="said-h" style="background:var(--ground-deep)">
+    <div class="bay">
+      <p class="plate rv">In their words</p>
+      <h2 id="said-h" class="rv" style="--i:1">Three people<br>who stayed.</h2>
+
+      <div class="said">
+        <blockquote class="rv" style="--i:0">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="currentColor" aria-hidden="true"><path d="M0 24V13.2C0 5.9 4.2 1.4 12 0l1.4 4.3C9 5.5 6.8 7.7 6.8 11H12v13H0Zm17 0V13.2C17 5.9 21.2 1.4 29 0l1.4 4.3c-4.4 1.2-6.6 3.4-6.6 6.7H29v13H17Z"/></svg>
+          <p>Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.</p>
+          <footer>Sarah<span>Cuddle Plush Fabrics</span></footer>
+        </blockquote>
+
+        <blockquote class="rv" style="--i:1">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="currentColor" aria-hidden="true"><path d="M0 24V13.2C0 5.9 4.2 1.4 12 0l1.4 4.3C9 5.5 6.8 7.7 6.8 11H12v13H0Zm17 0V13.2C17 5.9 21.2 1.4 29 0l1.4 4.3c-4.4 1.2-6.6 3.4-6.6 6.7H29v13H17Z"/></svg>
+          <p>I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</p>
+          <footer>Nicola<span>Nicola Noble Tuition</span></footer>
+        </blockquote>
+
+        <blockquote class="rv" style="--i:2">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="currentColor" aria-hidden="true"><path d="M0 24V13.2C0 5.9 4.2 1.4 12 0l1.4 4.3C9 5.5 6.8 7.7 6.8 11H12v13H0Zm17 0V13.2C17 5.9 21.2 1.4 29 0l1.4 4.3c-4.4 1.2-6.6 3.4-6.6 6.7H29v13H17Z"/></svg>
+          <p>My yoga students love that they can book and pay for my classes on my website.</p>
+          <footer>Molly<span>Sanctuary Ida</span></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRADES ========== -->
+  <section class="band" aria-labelledby="trades-h">
+    <div class="bay trades">
+      <div>
+        <p class="plate rv">Who this is for</p>
+        <h2 id="trades-h" class="rv" style="--i:1">If you are<br>on the tools.</h2>
+        <p class="lede rv" style="--i:2; margin-top:24px; color:var(--chalk-dim)">Someone in your area is
+        looking for exactly what you do, on a phone, right now. They will ring whoever turns up
+        looking like they know what they are doing. That is the entire game.</p>
+        <ul class="tags rv" style="--i:3">
+          <li>Electricians</li><li>Plumbers</li><li>Builders</li><li>Scaffolders</li>
+          <li>Gardeners</li><li>Decorators</li><li>Roofers</li><li>Handymen</li>
+          <li>Locksmiths</li><li>Flooring fitters</li><li>Tutors</li><li>Therapists</li>
+          <li>Coaches</li><li>Salons</li>
+        </ul>
+      </div>
+      <figure class="trades__ph rv" style="--i:4">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg" width="1600" height="1062" loading="lazy"
+             alt="A work-worn hand holding a mobile phone on a building site.">
+        <figcaption>This is where your website is actually read</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== THE PERSON ========== -->
+  <section class="band" id="about" aria-labelledby="about-h" style="background:var(--ground-deep)">
+    <div class="bay person">
+      <div>
+        <p class="plate rv">Who you are hiring</p>
+        <h2 id="about-h" class="vh">About</h2>
+        <p class="person__big rv" style="--i:1">You are hiring<br>a person, not<br><em>a company.</em></p>
+        <p class="lede rv" style="--i:2">I'm Ricky. I've been building websites for local
+        firms since 2019, out of a unit on Chaucer Business Park in Polegate. There is no account
+        manager, no ticket system and no team in another timezone. You get my number, and the person
+        on the end of it is the person who built the thing.</p>
+        <p class="rv" style="--i:3; color:var(--chalk-dim); margin-top:18px">That is the whole
+        proposition, and it is also the limit of it: I take on what I can genuinely look after. If
+        we work together it is because I had room to do it properly.</p>
+      </div>
+      <div class="person__card rv" style="--i:4">
+        <dl>
+          <dt>Ring</dt>
+          <dd><a href="tel:07395063764" class="num">07395 063764</a></dd>
+          <dt>Email</dt>
+          <dd><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></dd>
+          <dt>Workshop</dt>
+          <dd>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</dd>
+          <dt>Hours</dt>
+          <dd>Monday to Friday, 9:00–17:30<br>Saturday by appointment<br>Sunday closed</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AREAS ========== -->
+  <section class="areas band" aria-labelledby="areas-h">
+    <div class="areas__ph" aria-hidden="true">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/locale-south-downs.jpg" width="1600" height="904" loading="lazy" alt="">
+    </div>
+    <div class="bay">
+      <p class="plate rv">The patch</p>
+      <h2 id="areas-h" class="rv" style="--i:1">Local, and<br>then some.</h2>
+      <ol class="rv" style="--i:2">
+        <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+        <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+        <li class="last">and UK-wide</li>
+      </ol>
+      <p class="areas__note rv" style="--i:3">Most of my clients are within half an hour of the unit,
+      which is handy when someone wants to sit down with a coffee. Plenty of them I have never met in
+      person, and their sites are no worse for it.</p>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="shout band" id="quote" aria-labelledby="shout-h">
+    <div class="bay">
+      <h2 id="shout-h" class="rv">Right then.<br>Let's have a look<br>at your lot.</h2>
+      <p class="rv" style="--i:1">Tell me what you do and where you do it. I'll tell you straight
+      what I would build, what it costs and how long it takes. No obligation, no follow-up
+      campaign, no salesperson.</p>
+      <a class="tel num rv" style="--i:2" href="tel:07395063764">07395 063764</a>
+      <div class="shout__do rv" style="--i:3">
+        <a class="btn" href="/contact">Get a free quote</a>
+        <a class="btn btn--ghost" href="mailto:mail@digitalconsultingservices.co.uk">Email me instead</a>
+      </div>
+      <p class="shout__hrs rv" style="--i:4">Mon–Fri 9:00–17:30 · Sat by appointment · Sun closed</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="bay">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+          <svg width="30" height="30" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <rect x="1.4" y="1.4" width="31.2" height="31.2" stroke="#4FBF89" stroke-width="2.2"/>
+            <path d="M1.4 11.6h31.2M1.4 22.4h31.2M11.6 1.4v31.2M22.4 1.4v31.2" stroke="#4FBF89" stroke-width="1.2" opacity=".55"/>
+            <path d="M1.4 32.6 32.6 1.4" stroke="#FFC72C" stroke-width="2.6"/>
+          </svg>
+          <span><b style="font-size:1.0625rem">Digital Consulting Services</b><s>Polegate · Est. 2019</s></span>
+        </a>
+        <p>Websites that get local tradespeople more jobs. Built, written, hosted and looked after by one person.</p>
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Website design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing management</a></li>
+          <li><a href="#services">Google Workspace email</a></li>
+          <li><a href="#services">eCommerce websites</a></li>
+          <li><a href="#services">Analytics &amp; reporting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Areas covered</h4>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton &amp; Hove</li><li>Uckfield</li><li>UK-wide</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Get in touch</h4>
+        <address>
+          <a class="num" href="tel:07395063764">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH<br><br>
+          Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed
+        </address>
+      </div>
+    </div>
+
+    <div class="tagwrap">
+      <div class="scafftag">
+        <div class="scafftag__hole" aria-hidden="true"></div>
+        <b>This site<br>erected by</b>
+        <dl>
+          <dt>Contractor</dt>
+          <dd>Digital Consulting Services</dd>
+          <dt>Location</dt>
+          <dd>Polegate, East Sussex</dd>
+          <dt>In service since</dt>
+          <dd class="num">2019</dd>
+          <dt>Monitoring</dt>
+          <dd>Continuous</dd>
+        </dl>
+        <p class="scafftag__st">Safe for use</p>
+      </div>
+      <p>Scaffolders hang a tag on their work so anyone walking past can see who put it up and when
+      it was last checked. <b>Seemed like a fair standard to hold a website to.</b> Every site I build
+      is monitored, patched and mine to answer for, which is why the number at the top of this page
+      is a mobile, and why it is mine.</p>
+    </div>
+
+    <div class="foot__end">
+      <span>© 2026 Digital Consulting Services</span>
+      <span>Polegate · East Sussex · BN26 6QH</span>
+      <span><a href="/contact">Get a free quote</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supported = 'IntersectionObserver' in window && 'classList' in root;
+
+  /* Only hide anything once JS has confirmed it can reveal it again. */
+  if (supported && !reduce) root.classList.add('js');
+
+  /* ...and guarantee it is revealed, animation or no animation. */
+  window.setTimeout(function(){ root.classList.add('settled'); }, 2000);
+
+  /* ---- mobile sheet -------------------------------------------------- */
+  var burger = document.getElementById('burger');
+  var sheet  = document.getElementById('sheet');
+  var sheetX = document.getElementById('sheetX');
+  function setSheet(open){
+    if(!sheet || !burger) return;
+    sheet.setAttribute('data-open', open ? 'true' : 'false');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if(open){ var f = sheet.querySelector('a,button'); if(f) f.focus(); }
+    else { burger.focus(); }
+  }
+  if(burger) burger.addEventListener('click', function(){ setSheet(sheet.getAttribute('data-open') !== 'true'); });
+  if(sheetX) sheetX.addEventListener('click', function(){ setSheet(false); });
+  if(sheet){
+    sheet.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a');
+      if(a) setSheet(false);
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && sheet && sheet.getAttribute('data-open') === 'true') setSheet(false);
+  });
+  /* keep the dialog from stranding open when the layout returns to desktop */
+  if(window.matchMedia){
+    var wide = window.matchMedia('(min-width:1001px)');
+    var onWide = function(m){ if(m.matches && sheet && sheet.getAttribute('data-open')==='true') setSheet(false); };
+    if(wide.addEventListener) wide.addEventListener('change', onWide);
+    else if(wide.addListener) wide.addListener(onWide);
+  }
+
+  /* ---- pricing: two ways to pay -------------------------------------- */
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  function pick(tab){
+    tabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if(p){ if(on){ p.removeAttribute('hidden'); } else { p.setAttribute('hidden',''); } }
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ pick(t); });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if(e.key === 'ArrowRight') n = tabs[(i+1) % tabs.length];
+      if(e.key === 'ArrowLeft')  n = tabs[(i-1+tabs.length) % tabs.length];
+      if(n){ e.preventDefault(); n.focus(); pick(n); }
+    });
+  });
+
+  if(!supported) return;
+
+  /* ---- scroll reveal, staggered -------------------------------------- */
+  if(!reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+
+    [].slice.call(document.querySelectorAll('.rv, .tally')).forEach(function(el){ io.observe(el); });
+    /* the hero's own build-in is pure CSS — nothing to trigger here */
+  } else {
+    [].slice.call(document.querySelectorAll('.rv, .tally')).forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- the work lamp -------------------------------------------------- */
+  if(!reduce && window.matchMedia('(hover:hover)').matches){
+    [].slice.call(document.querySelectorAll('[data-lamp]')).forEach(function(zone){
+      zone.addEventListener('pointermove', function(e){
+        var r = zone.getBoundingClientRect();
+        zone.style.setProperty('--lx', ((e.clientX - r.left) / r.width * 100) + '%');
+        zone.style.setProperty('--ly', ((e.clientY - r.top) / r.height * 100) + '%');
+        zone.setAttribute('data-lit','true');
+      });
+      zone.addEventListener('pointerleave', function(){ zone.setAttribute('data-lit','false'); });
+    });
+  }
+
+  /* ---- the lift: real scroll progress --------------------------------- */
+  var riser = document.querySelector('.riser i');
+  if(riser){
+    var ticking = false;
+    var draw = function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      riser.style.height = (p * 100) + '%';
+      ticking = false;
+    };
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; window.requestAnimationFrame(draw); }
+    }, { passive:true });
+    draw();
+  }
+})();
+</script>
+</body>
+</html>

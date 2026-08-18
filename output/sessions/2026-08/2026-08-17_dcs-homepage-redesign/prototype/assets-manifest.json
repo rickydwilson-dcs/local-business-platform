@@ -1,0 +1,545 @@
+{
+  "slug": "2026-08-17_dcs-homepage-redesign",
+  "bucket": "local-business-platform",
+  "prefix": "prototypes/2026-08-17_dcs-homepage-redesign/",
+  "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
+  "totalBytes": 137460792,
+  "assets": [
+    {
+      "relativePath": "assets/img/abstract-mesh.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/abstract-mesh.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/abstract-mesh.png",
+      "contentType": "image/png",
+      "bytes": 4026999,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/abstract-wash.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/abstract-wash.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/abstract-wash.png",
+      "contentType": "image/png",
+      "bytes": 4719940,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/detail-parcel.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/detail-parcel.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/detail-parcel.png",
+      "contentType": "image/png",
+      "bytes": 3664894,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/detail-swatches.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/detail-swatches.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/detail-swatches.png",
+      "contentType": "image/png",
+      "bytes": 3675672,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/hands-sketching.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/hands-sketching.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/hands-sketching.png",
+      "contentType": "image/png",
+      "bytes": 3385928,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/interior-light.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/interior-light.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/interior-light.png",
+      "contentType": "image/png",
+      "bytes": 5529521,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/laptop-store.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/laptop-store.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/laptop-store.png",
+      "contentType": "image/png",
+      "bytes": 3115844,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/locale-south-downs.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/locale-south-downs.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/locale-south-downs.png",
+      "contentType": "image/png",
+      "bytes": 6342896,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/phone-on-site.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/phone-on-site.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/phone-on-site.png",
+      "contentType": "image/png",
+      "bytes": 3185934,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-bakery.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-bakery.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-bakery.png",
+      "contentType": "image/png",
+      "bytes": 4556283,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-barber.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-barber.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-barber.png",
+      "contentType": "image/png",
+      "bytes": 3155882,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-boutique.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-boutique.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-boutique.png",
+      "contentType": "image/png",
+      "bytes": 3289639,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-cafe.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-cafe.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-cafe.png",
+      "contentType": "image/png",
+      "bytes": 3771152,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-florist.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-florist.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-florist.png",
+      "contentType": "image/png",
+      "bytes": 4764704,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-garden.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-garden.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-garden.png",
+      "contentType": "image/png",
+      "bytes": 4423381,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-maker.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-maker.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-maker.png",
+      "contentType": "image/png",
+      "bytes": 3410727,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-office.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-office.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-office.png",
+      "contentType": "image/png",
+      "bytes": 3485234,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-salon.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-salon.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-salon.png",
+      "contentType": "image/png",
+      "bytes": 3671396,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/sector-studio.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-studio.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/sector-studio.png",
+      "contentType": "image/png",
+      "bytes": 3895474,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/still-products.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/still-products.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/still-products.png",
+      "contentType": "image/png",
+      "bytes": 4192771,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/texture-dark-grain.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-dark-grain.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-dark-grain.png",
+      "contentType": "image/png",
+      "bytes": 7969077,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/texture-linen.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-linen.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-linen.png",
+      "contentType": "image/png",
+      "bytes": 4690718,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/texture-paper.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-paper.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/texture-paper.png",
+      "contentType": "image/png",
+      "bytes": 4759938,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/tools-flatlay.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/tools-flatlay.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/tools-flatlay.png",
+      "contentType": "image/png",
+      "bytes": 6084292,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/trade-electrician.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-electrician.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-electrician.png",
+      "contentType": "image/png",
+      "bytes": 3296742,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/trade-plumber.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-plumber.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-plumber.png",
+      "contentType": "image/png",
+      "bytes": 3404982,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/trade-scaffolder.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-scaffolder.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-scaffolder.png",
+      "contentType": "image/png",
+      "bytes": 4288371,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/trade-van.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-van.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/trade-van.png",
+      "contentType": "image/png",
+      "bytes": 3849660,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/workspace-desk.png",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/workspace-desk.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/_archive/workspace-desk.png",
+      "contentType": "image/png",
+      "bytes": 3943095,
+      "archive": true
+    },
+    {
+      "relativePath": "assets/img/poster/vid-ink.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-ink.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-ink.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 19906,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/poster/vid-shopfront.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-shopfront.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/poster/vid-shopfront.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 60229,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/abstract-mesh.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-mesh.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-mesh.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 108294,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/abstract-wash.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-wash.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-wash.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 138009,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/detail-parcel.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/detail-parcel.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/detail-parcel.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 261071,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/detail-swatches.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/detail-swatches.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/detail-swatches.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 262039,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/hands-sketching.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/hands-sketching.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/hands-sketching.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 208207,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/interior-light.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/interior-light.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/interior-light.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 191315,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/laptop-store.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/laptop-store.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/laptop-store.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 175692,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/locale-south-downs.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/locale-south-downs.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/locale-south-downs.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 337475,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/phone-on-site.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 217799,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-bakery.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-bakery.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-bakery.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 425369,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-barber.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-barber.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-barber.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 248789,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-boutique.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 252172,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-cafe.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 359873,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-florist.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-florist.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-florist.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 496384,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-garden.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-garden.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-garden.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 485661,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-maker.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-maker.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-maker.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 251866,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-office.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 222590,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-salon.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-salon.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-salon.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 327553,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/sector-studio.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 348967,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/still-products.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/still-products.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/still-products.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 304460,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/texture-dark-grain.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-dark-grain.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-dark-grain.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 360200,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/texture-linen.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-linen.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-linen.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 465787,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/texture-paper.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-paper.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-paper.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 454945,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/tools-flatlay.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/tools-flatlay.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/tools-flatlay.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 599073,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/trade-electrician.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 248101,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/trade-plumber.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-plumber.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-plumber.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 236438,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/trade-scaffolder.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 357647,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/trade-van.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-van.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-van.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 349479,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/workspace-desk.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/workspace-desk.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/workspace-desk.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 273564,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/logo.svg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg",
+      "contentType": "image/svg+xml",
+      "bytes": 189576,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/poster-fabric.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-fabric.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-fabric.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 48861,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/poster-ink.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-ink.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-ink.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 18030,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/vid-fabric.mp4",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-fabric.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-fabric.mp4",
+      "contentType": "video/mp4",
+      "bytes": 1556360,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/vid-ink.mp4",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4",
+      "contentType": "video/mp4",
+      "bytes": 1366735,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/vid-pour.mp4",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-pour.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-pour.mp4",
+      "contentType": "video/mp4",
+      "bytes": 1292997,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/vid-shopfront.mp4",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-shopfront.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-shopfront.mp4",
+      "contentType": "video/mp4",
+      "bytes": 1388133,
+      "archive": false
+    }
+  ]
+}

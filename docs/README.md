@@ -41,20 +41,21 @@ Rules and requirements for how things should be done.
 
 Step-by-step instructions for common tasks.
 
-| Guide                                                        | Purpose                                       |
-| ------------------------------------------------------------ | --------------------------------------------- |
-| [Adding a New Site](guides/adding-new-site.md)               | Create a new client site from base-template   |
-| [Adding a Service](guides/adding-service.md)                 | Add service MDX content                       |
-| [Adding a Location](guides/adding-location.md)               | Add location MDX content                      |
-| [Adding a Content Section](guides/adding-content-section.md) | Add a new content type (blog, projects, etc.) |
-| [Theming](guides/theming.md)                                 | Configure site theme and brand colours        |
-| [Component Versioning](guides/component-versioning.md)       | Changesets workflow for core-components       |
-| [Git Workflow](guides/git-workflow.md)                       | Branch workflow (develop to staging to main)  |
-| [GitHub Actions](guides/github-actions.md)                   | CI/CD pipeline configuration                  |
-| [Deploying a Site](guides/deploying-site.md)                 | Deployment procedures                         |
-| [Monitoring Setup](guides/monitoring-setup.md)               | NewRelic configuration                        |
-| [Registry Setup](guides/registry-setup.md)                   | Component registry configuration              |
-| [End-to-End Workflow](guides/end-to-end-workflow.md)         | Complete workflow from intake to deployment   |
+| Guide                                                        | Purpose                                          |
+| ------------------------------------------------------------ | ------------------------------------------------ |
+| [Adding a New Site](guides/adding-new-site.md)               | Create a new client site from base-template      |
+| [Adding a Service](guides/adding-service.md)                 | Add service MDX content                          |
+| [Adding a Location](guides/adding-location.md)               | Add location MDX content                         |
+| [Adding a Content Section](guides/adding-content-section.md) | Add a new content type (blog, projects, etc.)    |
+| [Theming](guides/theming.md)                                 | Configure site theme and brand colours           |
+| [Component Versioning](guides/component-versioning.md)       | Changesets workflow for core-components          |
+| [Git Workflow](guides/git-workflow.md)                       | Branch workflow (develop to staging to main)     |
+| [GitHub Actions](guides/github-actions.md)                   | CI/CD pipeline configuration                     |
+| [Deploying a Site](guides/deploying-site.md)                 | Deployment procedures                            |
+| [Monitoring Setup](guides/monitoring-setup.md)               | NewRelic configuration                           |
+| [Registry Setup](guides/registry-setup.md)                   | Component registry configuration                 |
+| [End-to-End Workflow](guides/end-to-end-workflow.md)         | Complete workflow from intake to deployment      |
+| [Prototype Hosting](guides/prototype-hosting.md)             | Prototype assets to R2, prototype HTML to Vercel |
 
 ---
 
