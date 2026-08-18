@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Websites that get local tradespeople more work</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Agency-quality sites for tradespeople and local service businesses — written, designed, built, hosted and looked after.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Spectral:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   TWO INKS — Digital Consulting Services
+   ───────────────────────────────────────────────────────────────────────────
+   The page is set as a two-colour letterpress job: two inks and one stock.
+   Every value below is either ink A (ivy), ink B (cerise), the stock (chalk),
+   or a tint of one of them. There is no third hue and no neutral grey — the
+   "greys" are all tints of ivy, so the page has one temperature throughout.
+
+   INK A · IVY     structure. Grounds, rules, all text on the stock.
+   INK B · CERISE  action, and ONLY action. If it is cerise, it moves you
+                   forward: a link, a button, a focus ring, the selection,
+                   the tier you are most likely to choose. Nothing decorative
+                   is ever cerise. Rarity is what gives it force.
+   STOCK · CHALK   the paper. Reading grounds, and reversed type on ivy.
+
+   Every pair below was computed in OKLCH and checked for WCAG contrast
+   before it was used; the ratio is recorded next to each text token. The
+   hex is authored rather than oklch() so the shipped value is exactly the
+   value that was measured, with no browser gamut-mapping in between.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── STOCK ─────────────────────────────────────────────────────────── */
+  --chalk:        #f6f4ed;  /* oklch(.968 .010  95) page stock            */
+  --chalk-2:      #edebe0;  /* oklch(.938 .015  95) second stock          */
+  --chalk-3:      #dad7c9;  /* oklch(.878 .020  98) hairline on stock     */
+  --chalk-4:      #c1bead;  /* oklch(.800 .024  98) stem rule on stock    */
+
+  /* ── INK A · IVY ───────────────────────────────────────────────────── */
+  --ivy-900:      #00170a;  /* deepest field, footer                      */
+  --ivy-800:      #012b17;  /* principal ivy field                        */
+  --ivy-700:      #0f3d24;  /* raised panel on ivy                        */
+  --ivy-600:      #245337;  /* hairline on ivy                            */
+  --ivy-500:      #376749;  /* stem rule on ivy                           */
+  --ink-1:        #052816;  /* text on stock          14.44:1  ✓ AAA      */
+  --ink-2:        #3b6048;  /* secondary on stock      6.46:1  ✓ AA       */
+  --ink-3:        #4b6f55;  /* annotation on stock     5.15:1  ✓ AA       */
+  --rev-1:        #f3f2e7;  /* text on ivy            13.73:1  ✓ AAA      */
+  --rev-2:        #b9c4af;  /* secondary on ivy        8.52:1  ✓ AAA      */
+  --rev-3:        #93a48f;  /* annotation on ivy       5.85:1  ✓ AA       */
+
+  /* ── INK B · CERISE — action only ──────────────────────────────────── */
+  --act:          #d11761;  /* solid fill / mark on stock                 */
+  --act-text:     #b80051;  /* action TEXT on stock    6.04:1  ✓ AA       */
+  --act-hov:      #9c0043;  /* action text, hovered    7.65:1  ✓ AAA      */
+  --act-rev:      #ff7497;  /* action text on ivy      6.03:1  ✓ AA       */
+  --act-rev-hov:  #ff99ad;  /* action text on ivy, hov 7.66:1  ✓ AAA      */
+  --act-wash:     #ffdce2;  /* screen tint on stock                       */
+  --act-wash-d:   #702339;  /* overprint tint on ivy                      */
+
+  /* Ground-relative aliases. Each band re-points these once, so every
+     component underneath simply reads --fg / --fg-2 / --link and is
+     correct on whichever ink it happens to be sitting on. */
+  --bg:      var(--chalk);
+  --fg:      var(--ink-1);
+  --fg-2:    var(--ink-2);
+  --fg-3:    var(--ink-3);
+  --rule:    var(--chalk-3);
+  --rule-2:  var(--chalk-4);
+  --link:    var(--act-text);
+  --link-hov:var(--act-hov);
+
+  /* ═══ TYPE SCALE ═══════════════════════════════════════════════════════
+     Anchor 17px. Two ratios meeting at the anchor:
+       · text roles   ratio 1.125 (major second) — fine steps, so label,
+                      body and lead can differ without shouting.
+       · display roles ratio 1.5  (perfect fifth) — coarse steps, so the
+                      hierarchy is unmistakable from across the room.
+     One ratio cannot do both jobs: 1.125 never gets big enough to carry a
+     hero, and 1.5 has no rung between a caption and body copy.
+     The hero is the exception — the 1.5⁵ step lands at 129px, past the 96px
+     ceiling this page holds itself to, so the hero is clamped to the ceiling
+     rather than to the step. Stated rather than fudged.
+     ══════════════════════════════════════════════════════════════════════ */
+  --t-2xs: 0.780rem;   /* 12.5px  tracked annotation                      */
+  --t-xs:  0.875rem;   /* 14.0px  label, caption                          */
+  --t-sm:  0.944rem;   /* 15.1px  17 ÷ 1.125                              */
+  --t-md:  1.0625rem;  /* 17.0px  BODY — the anchor                       */
+  --t-lg:  1.195rem;   /* 19.1px  17 × 1.125                              */
+  /* The lead is the one text role that has to move with the viewport: held at
+     21.5px on a 390px screen its measure collapses to about 30 characters,
+     well under the comfortable range, so it scales back to ~18.6px there. */
+  --t-xl:  clamp(1.16rem, 1.02rem + .6vw, 1.345rem);  /* 17 × 1.125²      */
+
+  --d1: clamp(1.35rem, 1.10rem + 1.1vw, 1.594rem);  /* 17 × 1.5           */
+  --d2: clamp(1.75rem, 1.25rem + 2.2vw, 2.391rem);  /* 17 × 1.5²          */
+  --d3: clamp(2.20rem, 1.40rem + 3.6vw, 3.586rem);  /* 17 × 1.5³          */
+  --d4: clamp(2.70rem, 1.50rem + 5.4vw, 5.379rem);  /* 17 × 1.5⁴          */
+  --d5: clamp(3.10rem, 1.40rem + 7.4vw, 6.000rem);  /* ceiling, not step  */
+
+  /* ═══ VERTICAL RHYTHM ══════════════════════════════════════════════════
+     Derived from type, not chosen: body 17px × line-height 1.62 = 27.5px.
+     Every vertical measurement on the page is a multiple of that one line.
+     This is what makes the spacing feel related to the text rather than
+     applied on top of it. ═══════════════════════════════════════════════ */
+  --lh:  1.72rem;              /* 27.5px — one line of body copy          */
+  --s1:  calc(var(--lh) * .25);
+  --s2:  calc(var(--lh) * .5);
+  --s3:  var(--lh);
+  --s4:  calc(var(--lh) * 1.5);
+  --s5:  calc(var(--lh) * 2);
+  --s6:  calc(var(--lh) * 3);
+  --s7:  calc(var(--lh) * 4);
+  --s8:  calc(var(--lh) * 6);
+  --band: clamp(var(--s6), 9vw, var(--s8));  /* band padding, top/bottom  */
+
+  /* Measure. Columns are sized in ch, so the grid is literally a function
+     of the type rather than a set of arbitrary fractions. */
+  --measure:        66ch;
+  --measure-narrow: 42ch;
+  --measure-lead:   54ch;
+
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --maxw:   82rem;
+
+  --display: 'Bodoni Moda', 'Didot', 'Bodoni MT', 'Times New Roman', serif;
+  --text:    'Spectral', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+
+  --ease: cubic-bezier(.16, 1, .3, 1);   /* exponential ease-out           */
+}
+
+/* ═══ RESET ══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--text);
+  font-size: var(--t-md);
+  font-weight: 400;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ═══ BROWSER SURFACES ═══════════════════════════════════════════════════
+   The parts of the page nobody draws still carry the design. Selection,
+   caret, scrollbar, focus ring and underline offset all ship with browser
+   defaults that belong to no design system; they are set from the two inks
+   here so nothing on the page is an accident. ══════════════════════════ */
+::selection      { background: var(--act-wash); color: var(--ink-1); }
+.ivy ::selection { background: var(--act-wash-d); color: var(--rev-1); }
+html { caret-color: var(--act); scrollbar-color: var(--ivy-600) var(--chalk-2); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--chalk-2); }
+::-webkit-scrollbar-thumb { background: var(--ivy-600); border: 3px solid var(--chalk-2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ivy-800); }
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--act);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.ivy :where(a, button, summary, [tabindex]):focus-visible { outline-color: var(--act-rev); }
+
+/* ═══ TYPOGRAPHIC ROLES ══════════════════════════════════════════════════ */
+
+/* Display — Bodoni Moda.
+   Optical size is driven manually, not by font-optical-sizing:auto. The auto
+   behaviour maps opsz to the rendered size, which is right for print but too
+   timid on screen: at 96px it still leaves the hairlines heavier than the eye
+   wants. Each display role therefore names its own opsz, and the tracking
+   tightens as the size grows — a fixed tracking value that looks correct at
+   24px opens into gaps at 96px. Line-height moves the opposite way for the
+   same reason. Tracking floor is -0.035em; nothing on the page goes past it. */
+.d, h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-synthesis: none;
+  text-wrap: balance;
+}
+.d5 { font-size: var(--d5); font-variation-settings: 'opsz' 96, 'wght' 700; line-height: .90; letter-spacing: -.035em; }
+.d4 { font-size: var(--d4); font-variation-settings: 'opsz' 88, 'wght' 700; line-height: .96; letter-spacing: -.028em; }
+.d3 { font-size: var(--d3); font-variation-settings: 'opsz' 72, 'wght' 700; line-height: 1.02; letter-spacing: -.022em; }
+.d2 { font-size: var(--d2); font-variation-settings: 'opsz' 44, 'wght' 700; line-height: 1.12; letter-spacing: -.015em; }
+.d1 { font-size: var(--d1); font-variation-settings: 'opsz' 28, 'wght' 700; line-height: 1.22; letter-spacing: -.008em; }
+
+/* Light-on-dark compensation. Reversed type blooms: the ivy field bleeds into
+   the counters and thins the strokes, so on ivy every display role steps its
+   optical size DOWN (which thickens the hairlines Bodoni is built around) and
+   its weight UP. Body copy on ivy gains weight, tracking and leading on the
+   same principle. Without this the Didone hairlines simply vanish. */
+.ivy .d5 { font-variation-settings: 'opsz' 60, 'wght' 760; }
+.ivy .d4 { font-variation-settings: 'opsz' 54, 'wght' 760; }
+.ivy .d3 { font-variation-settings: 'opsz' 44, 'wght' 750; }
+.ivy .d2 { font-variation-settings: 'opsz' 30, 'wght' 750; }
+.ivy .d1 { font-variation-settings: 'opsz' 22, 'wght' 740; }
+.ivy p, .ivy li, .ivy dd { font-weight: 500; letter-spacing: .006em; line-height: 1.68; }
+
+/* Text roles — Spectral. A second family earns its place only by doing a job
+   the first cannot: Bodoni is unreadable below about 20px and hostile at a
+   paragraph's length, so Spectral carries everything that is actually read.
+   No sans and no monospace anywhere on the page; a mono label would be a
+   costume here, since nothing on this page is code, and the annotations are
+   set as tracked text-face capitals instead — which at 12.5px hold their
+   stroke weight far better than either Bodoni or faked small caps would. */
+p, li, dd, dt, td, th, figcaption, address { font-family: var(--text); }
+
+.lead {
+  font-size: var(--t-xl);
+  line-height: 1.52;             /* wider measure, more leading            */
+  font-weight: 300;
+  max-width: var(--measure-lead);
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+.ivy .lead { color: var(--rev-2); font-weight: 400; }
+
+.body  { max-width: var(--measure); text-wrap: pretty; }
+.body + .body { margin-top: var(--s3); }
+
+/* Annotation. Tracked capitals need optical compensation the maths misses:
+   letter-spacing adds a trailing space after the final glyph, which pushes
+   the label out of alignment with any rule or column edge beneath it. The
+   negative right margin removes exactly that trailing space. */
+.ann {
+  font-family: var(--text);
+  font-size: var(--t-2xs);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--fg-3);
+  margin-right: -.16em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.ivy .ann { color: var(--rev-3); }
+
+/* Human speech. The italic is reserved — it only ever appears when a person
+   is talking: a client's words, or Ricky's. It is never used for emphasis,
+   for captions, or for decoration, so that italic on this page always means
+   "someone said this". */
+.speech { font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 40, 'wght' 500; }
+
+/* ═══ LAYOUT ═════════════════════════════════════════════════════════════ */
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.band { padding-block: var(--band); position: relative; }
+
+.ivy { --bg: var(--ivy-800); --fg: var(--rev-1); --fg-2: var(--rev-2); --fg-3: var(--rev-3);
+       --rule: var(--ivy-600); --rule-2: var(--ivy-500); --link: var(--act-rev); --link-hov: var(--act-rev-hov);
+       background: var(--bg); color: var(--fg); }
+.ivy-deep { --bg: var(--ivy-900); background: var(--ivy-900); }
+.stock-2 { --bg: var(--chalk-2); background: var(--chalk-2); }
+
+/* Two rule weights, both taken from the display face: the hairline matches
+   Bodoni's thin stroke, the stem matches its thick one. Nothing in between. */
+.hair { border: 0; border-top: 1px solid var(--rule); }
+.stem { border: 0; border-top: 3px solid var(--rule-2); }
+
+/* The annotated grid: a marginal note column, then the content. On narrow
+   screens the note stacks above the block it annotates rather than being
+   dropped, because the note usually carries the section's name. */
+.annotated { display: grid; grid-template-columns: minmax(9rem, 12ch) minmax(0, 1fr); gap: var(--s3) var(--s5); }
+.annotated > .ann { padding-top: .55em; }   /* baseline-align to the block  */
+/* Below 900px the note has no margin to sit in, and stacking it above the
+   heading would turn an editorial marginal annotation into a kicker — a label
+   the heading does not need and never earns. It is dropped rather than
+   relocated: every heading here already says what its section is. */
+@media (max-width: 900px) {
+  .annotated { grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+  .annotated > .ann { display: none; }
+}
+
+/* ═══ LINKS ══════════════════════════════════════════════════════════════
+   One interaction language for the whole page: a cerise rule that grows from
+   the left. Drawn as a background gradient so it animates without touching
+   layout, and it is the same gesture on a nav item, a body link and a service
+   name — different sizes of one idea, not three separate hover effects. */
+a { color: var(--link); text-decoration: none; }
+.tlink {
+  color: var(--link);
+  background-image: linear-gradient(var(--link), var(--link));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: .14em;
+  transition: color .3s var(--ease), background-size .45s var(--ease);
+}
+.tlink:hover, .tlink:focus-visible { color: var(--link-hov); background-size: 100% 2px; }
+.body a:not(.tlink), address a { color: var(--link); text-decoration: underline;
+  text-decoration-thickness: 1px; text-underline-offset: .18em;
+  transition: color .25s var(--ease), text-decoration-thickness .25s var(--ease); }
+.body a:not(.tlink):hover, address a:hover { color: var(--link-hov); text-decoration-thickness: 2px; }
+
+/* ═══ BUTTONS ════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: .7em;
+  font-family: var(--text); font-size: var(--t-sm); font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 1.05rem 1.6rem; min-height: 48px;
+  border: 1px solid transparent; cursor: pointer;
+  transition: background-color .3s var(--ease), color .3s var(--ease),
+              border-color .3s var(--ease), transform .3s var(--ease);
+}
+.btn-fill { background: var(--act); color: var(--chalk); }          /* 4.76:1 */
+.btn-fill:hover { background: var(--act-hov); }
+.ivy .btn-fill { background: var(--act-rev); color: var(--ivy-900); } /* 7.27:1 */
+.ivy .btn-fill:hover { background: var(--act-rev-hov); }
+.btn-line { border-color: var(--rule-2); color: var(--fg); background: transparent; }
+.btn-line:hover { border-color: var(--link); color: var(--link); }
+.btn svg { flex: none; transition: transform .35s var(--ease); }
+.btn:hover svg { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .btn, .btn svg, .tlink { transition: none; } .btn:hover svg { transform: none; } }
+
+/* ═══ HEADER ═════════════════════════════════════════════════════════════ */
+.site-head {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--chalk);
+  border-bottom: 1px solid var(--chalk-3);
+  transition: box-shadow .35s var(--ease), background-color .35s var(--ease);
+}
+.site-head.is-stuck { box-shadow: 0 6px 22px -18px rgba(5,40,22,.85); }
+.head-in { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 74px; }
+
+/* The brand is set, not placed. An all-type page that reached for a logo file
+   would be arguing against itself, so the mark is the initials in the display
+   face with the full name set beneath as an annotation. */
+.brand { display: flex; align-items: baseline; gap: .7rem; color: var(--ink-1); }
+.brand-mark { font-family: var(--display); font-size: 1.62rem; font-variation-settings: 'opsz' 30, 'wght' 800;
+              letter-spacing: -.02em; line-height: 1; }
+.brand-name { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+              color: var(--ink-3); margin-right: -.16em; }
+@media (max-width: 620px) { .brand-name { display: none; } }
+
+.nav-desktop { display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2.1rem); }
+.nav-desktop a { font-size: var(--t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+                 color: var(--ink-2); margin-right: -.1em; }
+.nav-desktop a.tlink { background-size: 0% 1px; }
+.nav-desktop a.tlink:hover, .nav-desktop a.tlink:focus-visible { background-size: 100% 1px; color: var(--act-text); }
+.head-cta { font-size: var(--t-2xs); padding: .8rem 1.15rem; min-height: 44px; }
+@media (max-width: 1000px) { .nav-desktop, .head-cta { display: none; } }
+
+.nav-toggle { display: none; background: none; border: 1px solid var(--chalk-4); color: var(--ink-1);
+              width: 48px; height: 48px; align-items: center; justify-content: center; cursor: pointer;
+              transition: border-color .25s var(--ease), color .25s var(--ease); }
+.nav-toggle:hover { border-color: var(--act); color: var(--act-text); }
+@media (max-width: 1000px) { .nav-toggle { display: inline-flex; } }
+
+/* Rendered as a sibling of the header, never a child — a fixed overlay nested
+   inside a sticky/filtered ancestor gets trapped in that ancestor's box. */
+.nav-mobile {
+  position: fixed; inset: 0; z-index: 90; background: var(--ivy-900); color: var(--rev-1);
+  display: flex; flex-direction: column; padding: var(--s3) var(--gutter) var(--s5);
+  opacity: 0; visibility: hidden; transform: translateY(-1.2rem);
+  /* visibility is stepped explicitly rather than left in the transition list:
+     it flips to visible instantly on open (so the panel is focusable on the
+     very first frame) and only back to hidden after the fade has finished on
+     close. Transitioning it like a normal property leaves the moment of the
+     flip up to discrete-interpolation rules, which is exactly the ambiguity
+     that stops .focus() landing. */
+  transition: opacity .38s var(--ease), transform .38s var(--ease), visibility 0s linear .38s;
+  overflow-y: auto;
+}
+.nav-mobile[data-open="true"] {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity .38s var(--ease), transform .38s var(--ease), visibility 0s linear 0s;
+}
+.nav-mobile-head { display: flex; align-items: center; justify-content: space-between; min-height: 74px; }
+.nav-mobile .brand { color: var(--rev-1); }
+.nav-mobile .brand-name { color: var(--rev-3); }
+.nav-mobile .nav-toggle { border-color: var(--ivy-600); color: var(--rev-1); }
+.nav-mobile ul { list-style: none; padding: 0; margin: var(--s4) 0 0; }
+.nav-mobile li + li { border-top: 1px solid var(--ivy-700); }
+.nav-mobile li a { display: block; padding: var(--s2) 0; font-family: var(--display);
+                   font-size: var(--d2); font-variation-settings: 'opsz' 30, 'wght' 740;
+                   letter-spacing: -.015em; color: var(--rev-1); }
+.nav-mobile li a:hover { color: var(--act-rev); }
+.nav-mobile .btn { margin-top: var(--s4); justify-content: center; }
+.nav-mobile .m-contact { margin-top: var(--s3); }
+.nav-mobile .m-contact a { display: inline-flex; align-items: center; min-height: 48px;
+                           font-size: var(--t-lg); font-weight: 500; letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile { transition: none; transform: none; }
+  .nav-mobile[data-open="true"] { transition: none; }
+}
+body.nav-open { overflow: hidden; }
+
+/* ═══ HERO ═══════════════════════════════════════════════════════════════ */
+.hero { padding-block: clamp(var(--s5), 8vw, var(--s8)) var(--band); }
+
+/* The hero is one composition, not a column: the headline runs the full
+   measure it needs, then the argument and the marginal note sit beneath it in
+   two unequal columns. The asymmetry is what stops a type-only hero reading
+   as an unfinished left rail. */
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 27ch);
+             gap: var(--s5) var(--s7); align-items: start; margin-top: var(--s5); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: var(--s4); } }
+
+.hero h1 { max-width: 22ch; }
+.h1-a, .h1-c { display: block; font-size: var(--d2); font-variation-settings: 'opsz' 40, 'wght' 500;
+               letter-spacing: -.012em; line-height: 1.14; color: var(--ink-2); }
+.h1-b { display: block; font-size: var(--d5); font-variation-settings: 'opsz' 96, 'wght' 800;
+        letter-spacing: -.035em; line-height: .92; color: var(--ink-1);
+        /* Cap-height correction: the em box leaves optical air above the caps
+           that the line box does not account for, so the big line reads as if
+           it has drifted low against the two smaller lines. -0.06em closes it. */
+        margin-block: -.04em .06em; }
+.h1-b-in { display: inline-block; position: relative; }
+.h1-c { color: var(--ink-2); }
+
+/* The mark under "more work" is the second ink being laid down. It is the one
+   piece of cerise in the hero that is not a control, and it earns that by
+   being the thing the entire page is selling. Sized to the words, not to the
+   line box, so it reads as an underline rather than a rule. */
+.h1-mark { position: absolute; left: 0; right: 0; bottom: .08em; height: .07em;
+           background: var(--act); transform-origin: left center; }
+
+.hero-note { border-top: 1px solid var(--chalk-4); padding-top: var(--s2); }
+.hero-note p + p { margin-top: var(--s2); }
+.hero-note .k { display: block; font-size: var(--t-2xs); font-weight: 600; letter-spacing: .16em;
+                text-transform: uppercase; color: var(--ink-3); margin-right: -.16em; margin-bottom: .3rem; }
+.hero-note .v { font-size: var(--t-sm); color: var(--ink-2); }
+@media (max-width: 900px) { .hero-note { max-width: 42ch; } }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s3); align-items: center; margin-top: var(--s4); }
+.hero-actions .tel { font-size: var(--t-sm); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+                     margin-right: -.1em; }
+
+/* Credentials run as a single line of small type on a rule — deliberately not
+   a row of big numbers with small labels, which is a template, not a design. */
+.credentials { margin-top: var(--s6); }
+.credentials ul { list-style: none; padding: var(--s2) 0 0; margin: 0;
+                  display: flex; flex-wrap: wrap; gap: .55rem 1.4rem; }
+.credentials li { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .14em;
+                  text-transform: uppercase; color: var(--ink-3); margin-right: -.14em; }
+.credentials li + li::before { content: ''; display: inline-block; width: 3px; height: 3px;
+                  background: var(--chalk-4); vertical-align: .35em; margin-right: 1.4rem; margin-left: -.95rem; }
+
+/* ═══ PROMISE ════════════════════════════════════════════════════════════ */
+.promise-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: var(--s5) var(--s7); margin-top: var(--s5); }
+@media (max-width: 860px) { .promise-grid { grid-template-columns: 1fr; gap: var(--s5); } }
+.promise-col h3 { font-size: var(--d1); margin-bottom: var(--s2); }
+.promise-list { list-style: none; padding: 0; margin: 0; column-gap: var(--s4); }
+.promise-col--mine .promise-list { columns: 2; }
+@media (max-width: 640px) { .promise-col--mine .promise-list { columns: 1; } }
+.promise-list li { border-top: 1px solid var(--ivy-600); padding: .62rem 0; font-size: var(--t-sm);
+                   color: var(--rev-2); break-inside: avoid; }
+.promise-col--yours .promise-list li { font-family: var(--display); font-size: var(--d1);
+                   font-variation-settings: 'opsz' 24, 'wght' 700; letter-spacing: -.008em;
+                   color: var(--rev-1); padding: var(--s2) 0; line-height: 1.2; }
+
+/* ═══ SERVICE INDEX ══════════════════════════════════════════════════════
+   Six services as an index, not six identical cards. The rule between rows is
+   the structure; the name and its line are the content. Cards would have added
+   a box around each one and told the reader nothing extra. */
+.index { margin-top: var(--s5); border-top: 3px solid var(--rule-2); }
+.idx-row { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr); gap: var(--s2) var(--s5);
+           align-items: baseline; padding: var(--s3) 0; border-bottom: 1px solid var(--rule);
+           position: relative; transition: border-color .35s var(--ease); }
+.idx-row::after { content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+                  background: var(--act); transform: scaleX(0); transform-origin: left center;
+                  transition: transform .5s var(--ease); }
+.idx-row:hover::after, .idx-row:focus-within::after { transform: scaleX(1); }
+.idx-name { font-family: var(--display); font-size: var(--d2); font-variation-settings: 'opsz' 46, 'wght' 700;
+            letter-spacing: -.018em; line-height: 1.06; color: var(--fg);
+            transition: color .3s var(--ease); }
+.idx-row:hover .idx-name, .idx-row:focus-within .idx-name { color: var(--act-text); }
+.idx-line { font-size: var(--t-md); color: var(--fg-2); max-width: 46ch; }
+@media (max-width: 760px) { .idx-row { grid-template-columns: 1fr; } }
+
+/* ═══ WORK LEDGER ════════════════════════════════════════════════════════ */
+.ledger { margin-top: var(--s5); border-top: 3px solid var(--ivy-500); }
+.led-row { display: grid; grid-template-columns: minmax(0, 1fr) 18ch minmax(0, 1.2fr); gap: .35rem var(--s4);
+           align-items: baseline; padding: var(--s3) var(--s2); border-bottom: 1px solid var(--ivy-600);
+           margin-inline: calc(var(--s2) * -1); transition: background-color .35s var(--ease); }
+.led-row:hover { background: var(--act-wash-d); }
+.led-name { font-family: var(--display); font-size: var(--d1); font-variation-settings: 'opsz' 26, 'wght' 740;
+            letter-spacing: -.01em; color: var(--rev-1); line-height: 1.14; }
+.led-sector { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+              color: var(--rev-3); margin-right: -.14em; }
+.led-row:hover .led-sector { color: var(--act-rev-hov); }   /* 5.24:1 on the wash */
+.led-out { font-size: var(--t-sm); color: var(--rev-2); }
+@media (max-width: 860px) { .led-row { grid-template-columns: 1fr; padding-block: var(--s3); } }
+
+/* ═══ PROCESS ════════════════════════════════════════════════════════════
+   Numerals are set at display size here because the sequence genuinely carries
+   information — step three cannot happen before step two — and because a
+   Didone's figures are the most beautiful thing in the family. This is the
+   only place on the page that numbers a sequence. */
+.steps { margin-top: var(--s5); }
+.step { display: grid; grid-template-columns: minmax(3.6rem, 8ch) minmax(0, 1fr); gap: var(--s2) var(--s4);
+        padding: var(--s4) 0; border-top: 1px solid var(--rule); align-items: start; }
+.step:first-child { border-top: 3px solid var(--rule-2); }
+.step-n { font-family: var(--display); font-size: var(--d3); font-variation-settings: 'opsz' 72, 'wght' 400;
+          letter-spacing: -.02em; line-height: .82; color: var(--act-text);
+          font-variant-numeric: lining-nums; margin-top: -.06em; }
+.step h3 { font-size: var(--d1); margin-bottom: var(--s1); }
+.step p { color: var(--fg-2); max-width: 58ch; }
+@media (max-width: 620px) { .step { grid-template-columns: 1fr; gap: var(--s1); } .step-n { font-size: var(--d2); } }
+
+/* ═══ DUOTONE PLATES ═════════════════════════════════════════════════════
+   The photographs are printed in the same two inks as the rest of the page:
+   shadows take ink A, highlights take ink B. That is what earns them a place
+   here — they become part of the colour system instead of sitting on top of
+   it as full-colour intruders. */
+/* This section carries no photograph, and that is a decision rather than an
+   omission. A shared image set was available, but the only usable frames are
+   2048px multi-megabyte PNGs with no smaller variant, and nothing here may add
+   resized files. Rendered into a 570px slot they cost a visible blank on
+   arrival, and a proper duotone separation of one froze the renderer outright.
+   The trade list set large in the display face says the same thing instantly,
+   at no weight, and keeps the page's argument where the direction wants it. */
+.trade-run { border-top: 3px solid var(--chalk-4); padding-top: var(--s4);
+             margin-top: var(--s5); display: flex; flex-wrap: wrap; gap: .5rem 0; }
+.trade-run span { font-family: var(--display); font-size: var(--d2);
+                  font-variation-settings: 'opsz' 44, 'wght' 620; letter-spacing: -.018em;
+                  line-height: 1.16; color: var(--ink-1); }
+.trade-run span::after { content: ' · '; color: var(--act); font-weight: 700; padding-inline: .3em; }
+.trade-run span:last-child::after { content: '.'; padding-inline: 0; }
+
+/* ═══ PRICING ════════════════════════════════════════════════════════════
+   Tabular, lining figures throughout: prices in a table must align on the
+   decimal or the column stops being readable as a column. Prose elsewhere on
+   the page uses proportional figures, which sit better inside a sentence. */
+.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5) var(--s7); margin-top: var(--s5); }
+@media (max-width: 940px) { .price-grid { grid-template-columns: 1fr; } }
+.price-block h3 { font-size: var(--d1); }
+.price-block > p { font-size: var(--t-sm); color: var(--fg-2); margin-top: var(--s1); max-width: 44ch; }
+table.price { width: 100%; border-collapse: collapse; margin-top: var(--s3);
+              font-variant-numeric: lining-nums tabular-nums; }
+table.price caption { text-align: left; font-size: var(--t-2xs); font-weight: 600; letter-spacing: .16em;
+                      text-transform: uppercase; color: var(--ink-3); padding-bottom: var(--s2);
+                      margin-right: -.16em; }
+table.price th, table.price td { text-align: right; padding: .85rem .5rem; border-bottom: 1px solid var(--rule); }
+table.price th:first-child, table.price td:first-child { text-align: left; padding-left: 0; }
+table.price td:last-child, table.price th:last-child { padding-right: 0; }
+table.price thead th { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+                       color: var(--ink-3); border-bottom: 3px solid var(--chalk-4); }
+table.price tbody th { font-family: var(--display); font-size: var(--d1);
+                       font-variation-settings: 'opsz' 24, 'wght' 700; letter-spacing: -.008em;
+                       color: var(--ink-1); font-weight: 700; }
+table.price tbody td { font-size: var(--t-lg); color: var(--ink-2); }
+table.price tbody tr { transition: background-color .3s var(--ease); }
+table.price tbody tr:hover { background: var(--act-wash); }
+table.price tr.is-popular th, table.price tr.is-popular td { background: var(--act-wash); }
+.pop-mark { display: block; font-family: var(--text); font-size: var(--t-2xs); font-weight: 600;
+            letter-spacing: .14em; text-transform: uppercase; color: var(--act-text); margin-top: .2rem;
+            margin-right: -.14em; }
+.price-note { margin-top: var(--s2); font-size: var(--t-xs); color: var(--ink-3); }
+
+.includes { margin-top: var(--s6); }
+.inc-list { list-style: none; padding: 0; margin: var(--s3) 0 0; columns: 3; column-gap: var(--s5); }
+@media (max-width: 900px) { .inc-list { columns: 2; } }
+@media (max-width: 560px) { .inc-list { columns: 1; } }
+.inc-list li { display: flex; gap: .6rem; align-items: baseline; padding: .42rem 0; font-size: var(--t-sm);
+               color: var(--ink-2); break-inside: avoid; }
+.inc-list svg { flex: none; color: var(--ink-3); transform: translateY(1px); }
+.addons { margin-top: var(--s5); border-top: 1px solid var(--chalk-3); padding-top: var(--s3);
+          display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+.addons li { list-style: none; font-size: var(--t-sm); color: var(--ink-2); }
+.addons b { font-weight: 600; color: var(--ink-1); font-variant-numeric: lining-nums; }
+
+/* ═══ TESTIMONIALS ═══════════════════════════════════════════════════════
+   Hanging punctuation: the opening quote mark is optically empty, so a quote
+   that starts flush to the column reads as indented. Safari honours the
+   property; everywhere else gets an equivalent negative indent, guarded so
+   the two never both apply. */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5) var(--s6); margin-top: var(--s5); }
+@media (max-width: 900px) { .quotes { grid-template-columns: 1fr; gap: var(--s5); } }
+.quote { border-top: 1px solid var(--ivy-600); padding-top: var(--s3); }
+.quote blockquote { margin: 0; hanging-punctuation: first; }
+@supports not (hanging-punctuation: first) { .quote blockquote p { text-indent: -.4em; } }
+.quote p { font-family: var(--display); font-style: italic; font-size: var(--d1);
+           font-variation-settings: 'opsz' 34, 'wght' 520; line-height: 1.36; letter-spacing: -.004em;
+           color: var(--rev-1); text-wrap: pretty; }
+.quote footer { margin-top: var(--s2); font-size: var(--t-2xs); font-weight: 600; letter-spacing: .14em;
+                text-transform: uppercase; color: var(--rev-3); margin-right: -.14em; }
+.quote footer b { color: var(--act-rev); font-weight: 600; }
+
+/* ═══ THE PERSON ═════════════════════════════════════════════════════════ */
+.person { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) var(--s7);
+          align-items: start; margin-top: var(--s5); }
+@media (max-width: 860px) { .person { grid-template-columns: 1fr; } }
+.person-pull { font-family: var(--display); font-style: italic; font-size: var(--d2);
+               font-variation-settings: 'opsz' 44, 'wght' 500; line-height: 1.22; letter-spacing: -.012em;
+               color: var(--ink-1); max-width: 20ch; }
+.person-sig { margin-top: var(--s3); font-size: var(--t-2xs); font-weight: 600; letter-spacing: .16em;
+              text-transform: uppercase; color: var(--ink-3); margin-right: -.16em; }
+
+/* ═══ SERVICE AREAS ══════════════════════════════════════════════════════ */
+/* Measured in rem, not ch: a ch here would be computed against this block's
+   17px body size while the run itself sets at 38px, which collapsed it into a
+   five-line column. */
+.areas { margin-top: var(--s4); max-width: 47rem; }
+.areas dt { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+            color: var(--ink-3); margin-right: -.16em; }
+.area-run { margin-top: var(--s2); font-family: var(--display); font-size: var(--d2);
+            font-variation-settings: 'opsz' 44, 'wght' 620; letter-spacing: -.015em; line-height: 1.2;
+            color: var(--ink-1); }
+.area-run em { font-style: normal; color: var(--ink-3); }
+
+/* ═══ FINAL CTA — the action ink owns a whole field ══════════════════════
+   Cerise has been rationed for the entire page precisely so that this one
+   band can be built out of it. It is the last thing on the page and the only
+   full field of ink B; everything before it has been training the eye to read
+   this colour as "do something". */
+.closer { background: var(--act); color: var(--chalk); --link: var(--chalk); --link-hov: var(--chalk); }
+.closer h2 { color: var(--ivy-900); }                          /* 3.55:1, large */
+.closer .lead { color: var(--chalk); font-weight: 400; }       /* 4.76:1        */
+.closer .btn-fill { background: var(--ivy-900); color: var(--chalk); }
+.closer .btn-fill:hover { background: var(--ink-1); }
+.closer .btn-line { border-color: rgba(246,244,237,.55); color: var(--chalk); }
+.closer .btn-line:hover { border-color: var(--chalk); background: rgba(246,244,237,.12); }
+.closer :focus-visible { outline-color: var(--ivy-900); }
+.closer-actions { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s3); margin-top: var(--s4); }
+.closer-mail { margin-top: var(--s4); font-size: var(--t-sm); }
+.closer-mail a { color: var(--chalk); text-decoration: underline; text-decoration-thickness: 1px;
+                 text-underline-offset: .18em; }
+.closer-mail a:hover { text-decoration-thickness: 2px; }
+
+/* ═══ FOOTER ═════════════════════════════════════════════════════════════ */
+.site-foot { background: var(--ivy-900); color: var(--rev-2); padding-block: var(--band) var(--s5); }
+.foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: var(--s5) var(--s4); }
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .foot-grid { grid-template-columns: 1fr; } }
+.site-foot .brand { color: var(--rev-1); }
+.site-foot .brand-name { color: var(--rev-3); }
+.foot-blurb { margin-top: var(--s2); font-size: var(--t-sm); color: var(--rev-2); max-width: 34ch; }
+.foot-col h2 { font-size: var(--t-2xs); font-family: var(--text); font-weight: 600; letter-spacing: .16em;
+               text-transform: uppercase; color: var(--rev-3); margin-right: -.16em; }
+.foot-col ul { list-style: none; padding: 0; margin: var(--s2) 0 0; }
+.foot-col li { padding: .3rem 0; font-size: var(--t-sm); }
+.foot-col li a { color: var(--rev-2); }
+.foot-col li a:hover { color: var(--act-rev); }
+.site-foot address { font-style: normal; font-size: var(--t-sm); line-height: 1.7; margin-top: var(--s2); }
+.site-foot address a { color: var(--rev-1); }
+.site-foot address a:hover { color: var(--act-rev); }
+.foot-hours { margin-top: var(--s2); font-size: var(--t-xs); color: var(--rev-3); }
+.foot-base { margin-top: var(--s5); padding-top: var(--s3); border-top: 1px solid var(--ivy-700);
+             display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2);
+             font-size: var(--t-2xs); letter-spacing: .1em; text-transform: uppercase; color: var(--rev-3); }
+.foot-base span { margin-right: -.1em; }
+
+/* ═══ MOTION ═════════════════════════════════════════════════════════════
+   One authored moment plus a single quiet entrance vocabulary. The hidden
+   state is applied by script only after IntersectionObserver is confirmed, so
+   if the script never runs the page is simply visible. ══════════════════ */
+.js .reveal { opacity: 0; transform: translateY(14px); }
+.js .reveal.is-in { opacity: 1; transform: none;
+  transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0ms); }
+
+/* THE SIGNATURE MOMENT — "the second ink registers".
+   A two-colour job goes through the press twice: the first ink is laid down,
+   then the sheet is registered and run again for the second. That is the whole
+   animation. The headline prints left to right under a clip wipe, and only
+   once it has finished does the cerise rule land beneath it as the second
+   pull. It is the page's argument in one gesture: type is the material, and
+   the colour arrives separately and means something.
+
+   Deliberately NOT animated: font-variation-settings. Interpolating an optical
+   size axis is the obvious move for a Didone and it was the first attempt, but
+   Chrome leaves a stale glyph raster behind and paints both weights at once.
+   A clip wipe expresses the same idea on the compositor with no repaint risk. */
+@keyframes print { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -8% 0 0); } }
+@keyframes ink { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.js .hero-anim .h1-b-in { animation: print .9s var(--ease) .1s both; }
+.js .hero-anim .h1-mark { animation: ink .8s var(--ease) .95s both; }
+.js .hero-anim .h1-a { animation: rise .7s var(--ease) both; }
+.js .hero-anim .h1-c { animation: rise .7s var(--ease) .12s both; }
+.js .hero-anim .hero-lead { animation: rise .7s var(--ease) .26s both; }
+.js .hero-anim .hero-actions { animation: rise .7s var(--ease) .38s both; }
+.js .hero-anim .credentials { animation: rise .7s var(--ease) .5s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal, .js .reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .js .hero-anim .h1-b-in, .js .hero-anim .h1-mark, .js .hero-anim .h1-a, .js .hero-anim .h1-c,
+  .js .hero-anim .hero-lead, .js .hero-anim .hero-actions, .js .hero-anim .credentials {
+    animation: none; opacity: 1; transform: none; clip-path: none;
+  }
+  .idx-row::after, .led-row, table.price tbody tr, .site-head { transition: none; }
+}
+
+.skip { position: absolute; left: -9999px; top: 0; background: var(--ivy-900); color: var(--chalk);
+        padding: .9rem 1.3rem; z-index: 200; font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; }
+.skip:focus { left: var(--gutter); top: .6rem; }
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+
+<header class="site-head" id="siteHead">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <span class="brand-mark">DCS</span>
+      <span class="brand-name">Digital Consulting Services</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <a class="tlink" href="#services">Services</a>
+      <a class="tlink" href="#pricing">Pricing</a>
+      <a class="tlink" href="#work">Portfolio</a>
+      <a class="tlink" href="/blog">Blog</a>
+      <a class="tlink" href="#person">About</a>
+    </nav>
+
+    <a class="btn btn-fill head-cta" href="/contact">
+      Get a free quote
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <button class="nav-toggle" id="navOpen" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+        <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="nav-mobile ivy" id="navMobile" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="nav-mobile-head">
+    <span class="brand">
+      <span class="brand-mark">DCS</span>
+      <span class="brand-name">Digital Consulting Services</span>
+    </span>
+    <button class="nav-toggle" id="navClose" aria-label="Close menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M1 1l16 16M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <nav aria-label="Primary, mobile">
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#work">Portfolio</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="#person">About</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn-fill" href="/contact">
+    Get a free quote
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+      <path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <p class="m-contact"><a class="tlink" href="tel:+447395063764">Call 07395 063764</a></p>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════════ -->
+<section class="band hero hero-anim" aria-labelledby="h1">
+  <div class="wrap">
+    <h1 id="h1">
+      <span class="h1-a">Websites that get local tradespeople</span>
+      <span class="h1-b"><span class="h1-b-in">more work<span class="h1-mark" aria-hidden="true"></span></span></span>
+      <span class="h1-c">and you barely lift a finger.</span>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <p class="lead hero-lead">Most agencies want a brief, your copy, your photographs and a
+          clear idea of what you want before they'll start. I don't work that way. We have a
+          conversation, I write it, design it and build it, and then I look after it. You get on
+          with the job.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-fill" href="/contact">
+            Get a free quote
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+              <path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="tlink tel" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="hero-note">
+        <p><span class="k">Where</span><span class="v">Polegate, East Sussex. Working UK-wide.</span></p>
+        <p><span class="k">Who you get</span><span class="v">Ricky Wilson. Every question, every
+          word, every build. Nothing outsourced.</span></p>
+        <p><span class="k">What it costs</span><span class="v">From &pound;995 and &pound;15 a month,
+          or &pound;45 a month with nothing upfront.</span></p>
+      </div>
+    </div>
+
+    <div class="credentials">
+      <hr class="hair">
+      <ul>
+        <li>Established 2019</li>
+        <li>5+ years building local websites</li>
+        <li>20+ sites delivered</li>
+        <li>100% managed</li>
+        <li>Polegate, East Sussex</li>
+        <li>Working UK-wide</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ THE PROMISE ════════════════════════════════════════════════════ -->
+<section class="band ivy" aria-labelledby="promise-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">The deal</p>
+      <div>
+        <h2 class="d3" id="promise-h">You do three things. I do everything else.</h2>
+        <p class="lead" style="margin-top:var(--s3)">There is no login, no dashboard, no content
+          management system to learn, and nothing you have to remember to update. If you never
+          want to think about your website again after it launches, that is the intended
+          experience, not a compromise.</p>
+      </div>
+    </div>
+
+    <div class="promise-grid">
+      <div class="promise-col promise-col--mine reveal" style="--d:80ms">
+        <h3 class="d1">What I handle</h3>
+        <ul class="promise-list">
+          <li>Asking the questions that get the content out of your head</li>
+          <li>Writing every word on the site</li>
+          <li>The design, the structure, the colours</li>
+          <li>Sourcing and preparing the images</li>
+          <li>Building it and testing it on real phones</li>
+          <li>Service pages and location pages for Google</li>
+          <li>Schema markup and Search Console submission</li>
+          <li>Hosting, the domain and the SSL certificate</li>
+          <li>Security updates and uptime monitoring</li>
+          <li>Changes and fixes whenever you need them</li>
+          <li>Your business email on your own domain</li>
+          <li>The monthly report, in plain English</li>
+        </ul>
+      </div>
+
+      <div class="promise-col promise-col--yours reveal" style="--d:180ms">
+        <h3 class="d1">What you do</h3>
+        <ul class="promise-list">
+          <li>Have a conversation.</li>
+          <li>Tell me whether you like it.</li>
+          <li>Answer the phone when the work starts coming in.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ═══════════════════════════════════════════════════════ -->
+<section class="band" id="services" aria-labelledby="services-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">Services</p>
+      <div>
+        <h2 class="d3" id="services-h">Six things, done properly.</h2>
+        <p class="lead" style="margin-top:var(--s3)">Most clients take the first three together.
+          The rest get added when the business needs them, not before.</p>
+      </div>
+    </div>
+
+    <div class="index">
+      <div class="idx-row reveal">
+        <h3 class="idx-name"><a class="idx-link" href="/services/website-design" style="color:inherit">Website Design</a></h3>
+        <p class="idx-line">Websites built from scratch for local tradespeople. No templates,
+          no page builders, nothing for you to assemble yourself.</p>
+      </div>
+      <div class="idx-row reveal" style="--d:60ms">
+        <h3 class="idx-name"><a href="/services/local-seo" style="color:inherit">Local SEO</a></h3>
+        <p class="idx-line">Service pages, location pages, Schema markup and Google ranking, built
+          into the site from day one rather than sold back to you later.</p>
+      </div>
+      <div class="idx-row reveal" style="--d:120ms">
+        <h3 class="idx-name"><a href="/services/ongoing-management" style="color:inherit">Ongoing Management</a></h3>
+        <p class="idx-line">I look after the site so you can focus on your trade. Hosting,
+          updates, monitoring, and changes whenever you want them.</p>
+      </div>
+      <div class="idx-row reveal" style="--d:180ms">
+        <h3 class="idx-name"><a href="/services/google-workspace-email" style="color:inherit">Google Workspace Email</a></h3>
+        <p class="idx-line">Professional business email on your own domain. Set up for you,
+          working on your phone before you put it down.</p>
+      </div>
+      <div class="idx-row reveal" style="--d:240ms">
+        <h3 class="idx-name"><a href="/services/ecommerce" style="color:inherit">eCommerce Websites</a></h3>
+        <p class="idx-line">WooCommerce or custom stores, built and loaded with your products
+          so you are not typing them in yourself on a Sunday night.</p>
+      </div>
+      <div class="idx-row reveal" style="--d:300ms">
+        <h3 class="idx-name"><a href="/services/analytics" style="color:inherit">Analytics &amp; Reporting</a></h3>
+        <p class="idx-line">Analytics, Search Console and a monthly report, so you know what
+          is actually bringing the work in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORK ═══════════════════════════════════════════════════════════ -->
+<section class="band ivy ivy-deep" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">Selected work</p>
+      <div>
+        <h2 class="d3" id="work-h">Real businesses, still trading.</h2>
+        <p class="lead" style="margin-top:var(--s3)">Every one of these is a live client, and
+          most of them are still on the books years later. That is the part of the record that
+          matters more than the launch.</p>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="led-row reveal">
+        <h3 class="led-name">Colossus Scaffolding</h3>
+        <p class="led-sector">Scaffolding · E. Sussex</p>
+        <p class="led-out">First Google enquiry within three weeks of launch. Thirty-page site.</p>
+      </div>
+      <div class="led-row reveal" style="--d:50ms">
+        <h3 class="led-name">DJ Fox Electrical</h3>
+        <p class="led-sector">Electrician · E. Sussex</p>
+        <p class="led-out">A 20+ page site with service and location pages, live at
+          <a class="tlink" href="https://djfoxelectrical.com" rel="noopener">djfoxelectrical.com</a>.</p>
+      </div>
+      <div class="led-row reveal" style="--d:100ms">
+        <h3 class="led-name">Cuddle Plush Fabrics</h3>
+        <p class="led-sector">eCommerce · Fabrics</p>
+        <p class="led-out">Five years and counting. One of the longest client relationships here.</p>
+      </div>
+      <div class="led-row reveal" style="--d:150ms">
+        <h3 class="led-name">Luna Landings</h3>
+        <p class="led-sector">Made-to-order</p>
+        <p class="led-out">Product configurator, automatic work orders, worldwide shipping.</p>
+      </div>
+      <div class="led-row reveal" style="--d:200ms">
+        <h3 class="led-name">DCH Automotive</h3>
+        <p class="led-sector">Automotive</p>
+        <p class="led-out">A professional presence from a standing start, with a live Instagram feed.</p>
+      </div>
+      <div class="led-row reveal" style="--d:250ms">
+        <h3 class="led-name">Bexhill Removals</h3>
+        <p class="led-sector">Removals</p>
+        <p class="led-out">Design approved on the first presentation. No revisions asked for.</p>
+      </div>
+      <div class="led-row reveal" style="--d:300ms">
+        <h3 class="led-name">Nicola Noble Tuition</h3>
+        <p class="led-sector">Tutoring</p>
+        <p class="led-out">Moved classes online during Covid instead of closing the business.</p>
+      </div>
+      <div class="led-row reveal" style="--d:350ms">
+        <h3 class="led-name">Sanctuary Ida</h3>
+        <p class="led-sector">Yoga</p>
+        <p class="led-out">Students book and pay for their classes online.</p>
+      </div>
+      <div class="led-row reveal" style="--d:400ms">
+        <h3 class="led-name">Mad Graphics</h3>
+        <p class="led-sector">Signage &amp; print</p>
+        <p class="led-out">A full rebuild of an ageing site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ════════════════════════════════════════════════════════ -->
+<section class="band" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">How it goes</p>
+      <div>
+        <h2 class="d3" id="process-h">Four steps, and three of them are mine.</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <p class="step-n" aria-hidden="true">1</p>
+        <div>
+          <h3 class="d1">A conversation</h3>
+          <p>A call, or a few messages if you'd rather. There's no brief to write and no form to
+            fill in — I ask the questions, you just answer them, and I take it from there.</p>
+        </div>
+      </div>
+      <div class="step reveal" style="--d:80ms">
+        <p class="step-n" aria-hidden="true">2</p>
+        <div>
+          <h3 class="d1">I write it and design it</h3>
+          <p>Copy, structure, images, colours, the lot. You'll see it when there is something
+            worth looking at, not a fortnight of half-finished pages.</p>
+        </div>
+      </div>
+      <div class="step reveal" style="--d:160ms">
+        <p class="step-n" aria-hidden="true">3</p>
+        <div>
+          <h3 class="d1">You review it</h3>
+          <p>Unlimited revisions while the site is being built. We keep going until you are happy
+            with it. That isn't a sales line, it's how the price is worked out.</p>
+        </div>
+      </div>
+      <div class="step reveal" style="--d:240ms">
+        <p class="step-n" aria-hidden="true">4</p>
+        <div>
+          <h3 class="d1">It goes live, and stays looked after</h3>
+          <p>Hosting, updates, monitoring and support from then on. Nothing to log into, nothing
+            to learn, and someone to ring if it needs changing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHO IT'S FOR ═══════════════════════════════════════════════════ -->
+<section class="band stock-2" id="trades" aria-labelledby="trades-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">Who it's for</p>
+      <div>
+        <h2 class="d3" id="trades-h">People who work with their hands, and don't want to work on a website.</h2>
+        <p class="lead" style="margin-top:var(--s3)">If you're out on jobs all day, the last thing
+          you want at nine at night is a page builder. That is the entire reason this service is
+          shaped the way it is.</p>
+      </div>
+    </div>
+
+    <div class="trade-run reveal" style="--d:80ms">
+      <span>Electricians</span><span>Plumbers</span><span>Builders</span><span>Scaffolders</span><span>Gardeners</span><span>Decorators</span><span>Roofers</span><span>Handymen</span><span>Locksmiths</span><span>Flooring fitters</span>
+    </div>
+
+    <p class="body reveal" style="--d:160ms; margin-top:var(--s4); color:var(--ink-2)">And a good
+      number of sole traders and micro-businesses too: tutors, therapists, coaches and salons. If
+      you get most of your work by word of mouth and you'd like to add "findable on Google" to
+      that, this is built for you.</p>
+  </div>
+</section>
+
+<!-- ══ PRICING ════════════════════════════════════════════════════════ -->
+<section class="band" id="pricing" aria-labelledby="pricing-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">Pricing</p>
+      <div>
+        <h2 class="d3" id="pricing-h">Two ways to pay for the same site.</h2>
+        <p class="lead" style="margin-top:var(--s3)">You are choosing how to pay, not what you get.
+          The tiers differ on the level of ongoing service, never on the quality of the build.</p>
+      </div>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-block reveal">
+        <h3 class="d1">Upfront, then monthly</h3>
+        <p>Pay for the build, then a low monthly fee that covers everything afterwards.</p>
+        <table class="price">
+          <caption>Option A</caption>
+          <thead>
+            <tr><th scope="col">Tier</th><th scope="col">Setup</th><th scope="col">Monthly</th><th scope="col">Pages</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Starter</th>
+              <td>&pound;995</td><td>&pound;15</td><td>20</td>
+            </tr>
+            <tr class="is-popular">
+              <th scope="row">Professional<span class="pop-mark">Most popular</span></th>
+              <td>&pound;1,995</td><td>&pound;25</td><td>50</td>
+            </tr>
+            <tr>
+              <th scope="row">Growth</th>
+              <td>&pound;3,495</td><td>&pound;50</td><td>100</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">Page counts are an upper limit, not a target. Monthly covers hosting,
+          security, updates and support.</p>
+      </div>
+
+      <div class="price-block reveal" style="--d:100ms">
+        <h3 class="d1">Monthly, nothing upfront</h3>
+        <p>Nothing to pay at the start. Twelve-month minimum term.</p>
+        <table class="price">
+          <caption>Option B</caption>
+          <thead>
+            <tr><th scope="col">Tier</th><th scope="col">Monthly</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Starter</th><td>&pound;45</td></tr>
+            <tr class="is-popular"><th scope="row">Professional<span class="pop-mark">Most popular</span></th><td>&pound;75</td></tr>
+            <tr><th scope="row">Growth</th><td>&pound;125</td></tr>
+          </tbody>
+        </table>
+        <p class="price-note">Same site, same build, same support, spread out instead of paid
+          for in one go.</p>
+      </div>
+    </div>
+
+    <div class="includes reveal">
+      <hr class="stem">
+      <h3 class="d1" style="margin-top:var(--s3)">In every site, on every tier</h3>
+      <ul class="inc-list">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom design, not a template</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Service pages</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Location pages</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Schema markup</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile-first and fast</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contact form</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Hosting</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>SSL certificate</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Domain management</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Security updates</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Uptime monitoring</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited revisions during the build</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.4 3.4L12 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Google Search Console submission</li>
+      </ul>
+
+      <ul class="addons">
+        <li>Blog post writing <b>&pound;75</b> / post</li>
+        <li>Custom theme design <b>&pound;350</b></li>
+        <li>Google Ads setup &amp; management <b>&pound;200</b> / mo + spend</li>
+        <li>Monthly SEO retainer <b>&pound;200</b> / mo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════════════════════════ -->
+<section class="band ivy" aria-labelledby="voices-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">In their words</p>
+      <div><h2 class="d3" id="voices-h">What clients actually say.</h2></div>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote reveal">
+        <blockquote><p>"Ricky has built and managed our online store for over 5 years. I couldn't
+          be happier with his work."</p></blockquote>
+        <figcaption><footer><b>Sarah</b> — Cuddle Plush Fabrics</footer></figcaption>
+      </figure>
+      <figure class="quote reveal" style="--d:100ms">
+        <blockquote><p>"I feared I would have to close my tutoring business when Covid struck,
+          but now offer my classes online."</p></blockquote>
+        <figcaption><footer><b>Nicola</b> — Nicola Noble Tuition</footer></figcaption>
+      </figure>
+      <figure class="quote reveal" style="--d:200ms">
+        <blockquote><p>"My yoga students love that they can book and pay for my classes on my
+          website."</p></blockquote>
+        <figcaption><footer><b>Molly</b> — Sanctuary Ida</footer></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══ THE PERSON ═════════════════════════════════════════════════════ -->
+<section class="band" id="person" aria-labelledby="person-h">
+  <div class="wrap">
+    <div class="annotated reveal">
+      <p class="ann">About</p>
+      <div><h2 class="d3" id="person-h">You're hiring a person, not a company.</h2></div>
+    </div>
+
+    <div class="person">
+      <div class="reveal" style="--d:80ms">
+        <p class="person-pull">"The person who answers the phone is the person who builds the site.
+          That is the whole business model."</p>
+        <p class="person-sig">Ricky Wilson — Digital Consulting Services</p>
+      </div>
+      <div class="reveal" style="--d:160ms">
+        <p class="body">I started Digital Consulting Services in 2019, from a unit on Chaucer
+          Business Park in Polegate. Since then I've built and looked after more than twenty
+          sites for businesses across East Sussex and the rest of the country.</p>
+        <p class="body">Nothing here is outsourced and nothing is offshored. I do the questions,
+          the writing, the design, the build and the support myself, which is why the work is
+          consistent, and why I can only take on so much of it at a time.</p>
+        <p class="body">It also means you are never explaining your business twice to a new
+          account manager. If we work together in 2027, you will still be dealing with me.</p>
+      </div>
+    </div>
+
+    <div class="areas reveal" style="--d:240ms">
+      <hr class="hair" style="margin-bottom:var(--s3)">
+      <dl>
+        <dt>Where the work is</dt>
+        <dd class="area-run">Polegate, Eastbourne, Hailsham, Lewes, Seaford, Brighton, Hove,
+          Uckfield <em>— and UK-wide.</em></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSER ═════════════════════════════════════════════════════════ -->
+<section class="band closer" aria-labelledby="closer-h">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="d4" id="closer-h" style="max-width:16ch">You've put it off long enough.</h2>
+      <p class="lead" style="margin-top:var(--s3)">Tell me what you do and roughly where you work.
+        I'll tell you what it would cost and how long it would take. No obligation, and no
+        pressure afterwards.</p>
+
+      <div class="closer-actions">
+        <a class="btn btn-fill" href="/contact">
+          Get a free quote
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+            <path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="btn btn-line" href="tel:+447395063764">Call 07395 063764</a>
+      </div>
+
+      <p class="closer-mail">Or email
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>.
+        Monday to Friday, 9:00 to 17:30.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════════ -->
+<footer class="site-foot ivy ivy-deep">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="brand">
+          <span class="brand-mark">DCS</span>
+          <span class="brand-name">Digital Consulting Services</span>
+        </span>
+        <p class="foot-blurb">Websites that get local tradespeople more work. Written, designed,
+          built, hosted and looked after, from Polegate, East Sussex.</p>
+      </div>
+
+      <div class="foot-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a class="tlink" href="/services/website-design">Website Design</a></li>
+          <li><a class="tlink" href="/services/local-seo">Local SEO</a></li>
+          <li><a class="tlink" href="/services/ongoing-management">Ongoing Management</a></li>
+          <li><a class="tlink" href="/services/google-workspace-email">Google Workspace Email</a></li>
+          <li><a class="tlink" href="/services/ecommerce">eCommerce Websites</a></li>
+          <li><a class="tlink" href="/services/analytics">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h2>Service areas</h2>
+        <ul>
+          <li><a class="tlink" href="/areas/polegate">Polegate</a></li>
+          <li><a class="tlink" href="/areas/eastbourne">Eastbourne</a></li>
+          <li><a class="tlink" href="/areas/hailsham">Hailsham</a></li>
+          <li><a class="tlink" href="/areas/lewes">Lewes</a></li>
+          <li><a class="tlink" href="/areas/seaford">Seaford</a></li>
+          <li><a class="tlink" href="/areas/brighton">Brighton</a></li>
+          <li><a class="tlink" href="/areas/hove">Hove</a></li>
+          <li><a class="tlink" href="/areas/uckfield">Uckfield</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h2>Get in touch</h2>
+        <address>
+          <a class="tlink" href="tel:+447395063764">07395 063764</a><br>
+          <a class="tlink" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex BN26 6QH
+        </address>
+        <p class="foot-hours">Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</p>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Established 2019 · Polegate, East Sussex</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* The hidden state is added only once JS is confirmed to be running, so a
+     failed or blocked script leaves a fully visible page rather than a blank
+     one. Nothing on this page is gated on JS. */
+  root.classList.remove('no-js');
+  root.classList.add('js');
+
+  /* ── Scroll reveal ─────────────────────────────────────────────────── */
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  /* ── Header state ──────────────────────────────────────────────────── */
+  var head = document.getElementById('siteHead');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      head.classList.toggle('is-stuck', window.scrollY > 12);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Mobile navigation ─────────────────────────────────────────────── */
+  var panel = document.getElementById('navMobile');
+  var openBtn = document.getElementById('navOpen');
+  var closeBtn = document.getElementById('navClose');
+  var lastFocus = null;
+
+  function setNav(open) {
+    panel.setAttribute('data-open', open ? 'true' : 'false');
+    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('nav-open', open);
+    if (open) {
+      lastFocus = document.activeElement;
+      /* The panel animates from visibility:hidden, and an element that is still
+         hidden at the moment .focus() is called silently refuses it — the focus
+         stays on body and the keyboard user is left outside the dialog. Waiting
+         a frame lets the panel become visible first. */
+      window.requestAnimationFrame(function () { closeBtn.focus(); });
+    } else if (lastFocus && typeof lastFocus.focus === 'function') { lastFocus.focus(); }
+  }
+  openBtn.addEventListener('click', function () { setNav(true); });
+  closeBtn.addEventListener('click', function () { setNav(false); });
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setNav(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.getAttribute('data-open') === 'true') setNav(false);
+  });
+  /* Keep focus inside the panel while it is modal. */
+  panel.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab' || panel.getAttribute('data-open') !== 'true') return;
+    var f = panel.querySelectorAll('a[href], button:not([disabled])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  /* Close the panel if the viewport grows past the mobile breakpoint. */
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(min-width: 1001px)');
+    var onMq = function (e) { if (e.matches) setNav(false); };
+    if (mq.addEventListener) mq.addEventListener('change', onMq);
+    else if (mq.addListener) mq.addListener(onMq);
+  }
+})();
+</script>
+</body>
+</html>

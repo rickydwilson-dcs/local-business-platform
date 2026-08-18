@@ -19,6 +19,8 @@ Images are stored in Cloudflare R2 (not in the Git repository) for performance a
 - ❌ NO images in Git repository (except placeholders)
 - ❌ NO `/public` directory bloat
 
+Design-prototype assets under `output/sessions/**/prototype/assets/` follow this rule too — they go to R2 and the prototype HTML is rewritten to absolute URLs. `output/.gitignore`'s `!sessions/**` line used to override the root image rules for every session folder, which is how 117MB of PNGs became stageable in August 2026; an explicit binary deny-list now sits below it. See [Prototype Hosting](../guides/prototype-hosting.md).
+
 **Exceptions to R2-only** (each carved out explicitly in `.gitignore`, not a general escape hatch):
 
 - **Playwright visual baselines** (`sites/**/e2e/**/*.png`) — snapshots, not content images.
@@ -162,7 +164,9 @@ project-003-industrial-canterbury.jpg
 
 ## R2 Bucket Structure
 
-**IMPORTANT:** All images in R2 must be organized within site-specific folders. This ensures clear separation between sites and prevents naming conflicts.
+**IMPORTANT:** All site images in R2 must be organized within site-specific folders. This ensures clear separation between sites and prevents naming conflicts.
+
+The one non-site namespace is `prototypes/`, which holds design-prototype assets keyed by session slug (`prototypes/<YYYY-MM-DD_topic>/assets/…`). Prototypes are not sites and never become one, so filing them under a site folder would misrepresent them. See [Prototype Hosting](../guides/prototype-hosting.md).
 
 ```
 R2 Bucket/
@@ -199,8 +203,14 @@ R2 Bucket/
 ├── another-site/                 # Another site's images
 │   ├── hero/
 │   └── ...
-└── shared/                       # Only for truly shared assets
-    └── platform-logo.webp
+├── shared/                       # Only for truly shared assets
+│   └── platform-logo.webp
+└── prototypes/                   # Design prototypes, keyed by session slug
+    └── 2026-08-17_dcs-homepage-redesign/
+        └── assets/
+            ├── img/web/          # Referenced by the prototypes
+            ├── img/_archive/     # Unreferenced masters, cold storage
+            └── video/
 ```
 
 ### Site Folder Naming

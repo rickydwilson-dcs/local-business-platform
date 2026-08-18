@@ -187,6 +187,29 @@ export class R2Client {
   }
 
   /**
+   * Head a file in R2, returning its size and etag, or null if absent.
+   *
+   * Used by callers that need to skip re-uploading unchanged objects
+   * (fileExists() only answers presence, not whether the bytes match).
+   */
+  async headFile(key: string): Promise<{ size: number; etag: string } | null> {
+    try {
+      const response = await this.client.send(
+        new HeadObjectCommand({
+          Bucket: this.config.bucketName,
+          Key: key,
+        })
+      );
+      return {
+        size: response.ContentLength ?? 0,
+        etag: (response.ETag ?? "").replace(/"/g, ""),
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  /**
    * Delete a file from R2
    */
   async deleteFile(key: string): Promise<boolean> {

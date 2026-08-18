@@ -12,3 +12,20 @@
 !briefs/**
 !migrations/
 !migrations/**
+
+# ...but never binaries. Prototype assets live in Cloudflare R2, not git —
+# see docs/guides/prototype-hosting.md. Without these rules the `!sessions/**`
+# line above overrides the root .gitignore's image rules, which is how 117MB of
+# PNGs became stageable in August 2026.
+sessions/**/*.png
+sessions/**/*.jpg
+sessions/**/*.jpeg
+sessions/**/*.webp
+sessions/**/*.gif
+sessions/**/*.avif
+sessions/**/*.svg
+sessions/**/*.mp4
+sessions/**/*.webm
+sessions/**/*.mov
+sessions/**/.impeccable/
+sessions/**/.DS_Store

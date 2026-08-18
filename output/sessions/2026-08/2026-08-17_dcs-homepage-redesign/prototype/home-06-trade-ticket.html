@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Websites that get local tradespeople more jobs</title>
+<meta name="description" content="Websites for UK tradespeople, built and looked after by one person. Agency-quality work, plain pricing, and you barely have to lift a finger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   DCS — DIRECTION 06 "TRADE TICKET"
+   Site notice / job sheet. Hi-vis yellow, near-black, docket paper.
+   Hard edges only. No radius above 0. No soft shadows.
+   ========================================================================= */
+
+:root{
+  /* --- ground --- */
+  --ink:        #0B0B0B;   /* site-notice black          */
+  --ink-2:      #151513;   /* raised panel on black      */
+  --ink-3:      #2A2A26;   /* hairline on black          */
+  --paper:      #EFEDE6;   /* docket stock (warm)        */
+  --paper-2:    #E2DFD4;   /* paper shade / ruled line   */
+  --paper-3:    #CFCBBC;   /* paper rule, stronger       */
+
+  /* --- hi-vis --- */
+  --hv:         #F2DF00;   /* safety yellow              */
+  --hv-deep:    #C6B600;   /* yellow shade / rule        */
+  --hv-dark:    #8A7F00;   /* yellow on paper, legible   */
+
+  /* --- ink stamps --- */
+  --stamp:      #D8341C;   /* rubber stamp red (LARGE type + graphics only) */
+
+  /* --- text --- */
+  --t-on-paper:      #1A1815;
+  --t-on-paper-mute: #5F5B50;
+  --t-on-ink:        #F2F0E9;
+  --t-on-ink-mute:   #9C9789;
+
+  /* --- structure --- */
+  --rule:   3px;
+  --rule-h: 1px;
+  --tape:   38px;
+  --gutter: clamp(18px, 4.2vw, 64px);
+  --maxw:   1440px;
+
+  /* --- spacing scale (4/8 rhythm) --- */
+  --s1: 8px;  --s2: 16px; --s3: 24px; --s4: 32px;
+  --s5: 48px; --s6: 64px; --s7: 96px; --s8: 128px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--t-on-paper);
+  font-family:'Archivo', system-ui, -apple-system, sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+  font-variant-ligatures:none;
+}
+body[data-nav="open"]{ overflow:hidden; }
+
+img,svg{ max-width:100%; display:block; }
+
+/* ---------- type system ---------- */
+.display{
+  font-family:'Anton', 'Archivo', sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  line-height:.86;
+  letter-spacing:.004em;
+  margin:0;
+}
+h1.display{ font-size:clamp(2.6rem, 7.6vw, 7.4rem); }
+/* .ln clips the hero wipe, so pad it for Anton's descenders (j, p) and pull the
+   NEXT line back up into that clip room. Never set a max-width on the h1 — a line
+   that wraps inside a .ln collides with the line below it. */
+h1 .ln{ padding-bottom:.12em; }
+h1 .ln + .ln{ margin-top:-.12em; }
+/* .94 not .9 — Anton's comma descends far enough to hit the next line's caps. */
+h2.display{ font-size:clamp(2.1rem, 5.6vw, 4.6rem); line-height:.94; }
+h3.display{ font-size:clamp(1.4rem, 2.5vw, 2.1rem); line-height:.98; }
+
+.label{
+  font-family:'IBM Plex Mono', ui-monospace, monospace;
+  font-size:.6875rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  line-height:1.2;
+}
+.mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums; }
+.lede{ font-size:clamp(1.0625rem, 1.5vw, 1.375rem); line-height:1.5; max-width:62ch; }
+p{ margin:0 0 var(--s2); max-width:68ch; }
+p:last-child{ margin-bottom:0; }
+a{ color:inherit; }
+
+/* ---------- layout ---------- */
+.wrap{ max-width:var(--maxw); margin:0 auto; padding-inline:var(--gutter); }
+.band{ padding-block:clamp(56px, 8vw, 128px); }
+.band--ink{ background:var(--ink); color:var(--t-on-ink); }
+.band--hv{ background:var(--hv); color:var(--ink); }
+.grid{ display:grid; gap:var(--s4); }
+
+/* ---------- focus ---------- */
+a:focus-visible, button:focus-visible{
+  outline:4px solid var(--stamp);
+  outline-offset:3px;
+}
+.band--ink a:focus-visible, .band--ink button:focus-visible,
+.siteheader a:focus-visible, .siteheader button:focus-visible{
+  outline-color:var(--hv);
+}
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--hv); color:var(--ink); padding:14px 20px;
+  font-family:'IBM Plex Mono',monospace; font-weight:600; text-transform:uppercase;
+}
+.skip:focus{ left:0; }
+
+/* =========================================================================
+   HAZARD TAPE
+   ========================================================================= */
+.tape{
+  position:relative; height:var(--tape); overflow:hidden;
+  background:var(--ink);
+  border-block:var(--rule) solid var(--ink);
+}
+.tape__run{
+  position:absolute; top:0; bottom:0; left:-900px; right:-900px;
+  background:repeating-linear-gradient(135deg,
+    var(--hv) 0 28px, var(--ink) 28px 56px);
+  will-change:transform;
+}
+.tape--thin{ height:22px; }
+.tape--legend{
+  height:auto; background:var(--ink); color:var(--hv);
+  border-block:var(--rule) solid var(--ink);
+  padding-block:9px;
+}
+.tape--legend .tape__run{
+  position:relative; left:0; right:0;
+  background:none; white-space:nowrap; display:flex; gap:0;
+}
+.tape--legend .seg{
+  font-family:'IBM Plex Mono',monospace; font-size:.75rem; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase; padding-inline:0;
+  display:inline-block;
+}
+.tape--legend .seg span{ padding-inline:18px; }
+.tape--legend .seg em{ color:var(--t-on-ink-mute); font-style:normal; }
+
+/* =========================================================================
+   TOP STRIP + HEADER
+   ========================================================================= */
+.topstrip{
+  background:var(--ink); color:var(--t-on-ink-mute);
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  border-bottom:var(--rule-h) solid var(--ink-3);
+}
+.topstrip .wrap{
+  display:flex; flex-wrap:wrap; gap:6px 22px; align-items:center;
+  padding-block:8px;
+}
+.topstrip b{ color:var(--hv); font-weight:600; }
+.topstrip .sep{ color:var(--ink-3); }
+
+.siteheader{
+  position:sticky; top:0; z-index:60;
+  background:var(--ink); color:var(--t-on-ink);
+  border-bottom:var(--rule) solid var(--hv);
+}
+.siteheader .wrap{
+  display:flex; align-items:stretch; gap:var(--s3);
+  min-height:74px;
+}
+.brand{
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none; padding-block:10px; margin-right:auto;
+}
+.brand__plate{
+  background:var(--hv); padding:7px 10px;
+  display:flex; align-items:center; justify-content:center;
+}
+.brand__plate img{ width:104px; height:auto; flex:none; }
+.brand__ref{
+  display:none; color:var(--t-on-ink-mute);
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem;
+  letter-spacing:.18em; text-transform:uppercase; line-height:1.35;
+}
+.brand__ref b{ display:block; color:var(--t-on-ink); font-weight:500; }
+
+.nav{ display:none; align-items:stretch; }
+.nav a{
+  display:flex; align-items:center; padding:0 18px;
+  font-family:'Archivo',sans-serif; font-weight:700; font-size:.8125rem;
+  text-transform:uppercase; letter-spacing:.12em; text-decoration:none;
+  color:var(--t-on-ink);
+  border-left:var(--rule-h) solid var(--ink-3);
+  transition:background .12s linear, color .12s linear;
+}
+.nav a:last-of-type{ border-right:var(--rule-h) solid var(--ink-3); }
+.nav a:hover{ background:var(--hv); color:var(--ink); }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:52px; padding:0 24px;
+  font-family:'Archivo',sans-serif; font-weight:800; font-size:.875rem;
+  text-transform:uppercase; letter-spacing:.1em; text-decoration:none;
+  border:var(--rule) solid var(--ink); background:var(--hv); color:var(--ink);
+  cursor:pointer; transition:transform .12s linear, background .12s linear, color .12s linear;
+}
+.btn:hover{ background:var(--ink); color:var(--hv); border-color:var(--hv); }
+.btn--ghost{ background:transparent; color:var(--ink); }
+.btn--ghost:hover{ background:var(--ink); color:var(--hv); }
+.btn--onink{ border-color:var(--hv); }
+.btn--onink.btn--ghost{ color:var(--hv); background:transparent; }
+.btn--onink.btn--ghost:hover{ background:var(--hv); color:var(--ink); }
+.btn--head{ align-self:center; min-height:46px; display:none; }
+.btn__arrow{ width:16px; height:12px; flex:none; }
+
+.burger{
+  display:flex; align-items:center; gap:10px; margin-left:auto;
+  background:var(--hv); color:var(--ink); border:0; cursor:pointer;
+  padding:0 16px; min-height:46px; align-self:center;
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.6875rem;
+  text-transform:uppercase; letter-spacing:.16em;
+}
+.burger__bars{ display:grid; gap:3px; }
+.burger__bars i{ display:block; width:20px; height:3px; background:var(--ink); }
+
+.navpanel{
+  position:fixed; inset:0; z-index:80; display:none;
+  background:var(--ink); color:var(--t-on-ink);
+  overflow-y:auto; padding:var(--gutter);
+  border-top:var(--rule) solid var(--hv);
+}
+body[data-nav="open"] .navpanel{ display:block; }
+.navpanel__head{
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:var(--rule-h) solid var(--ink-3); padding-bottom:16px; margin-bottom:26px;
+}
+.navpanel__close{
+  background:var(--hv); color:var(--ink); border:0; cursor:pointer;
+  min-height:46px; padding:0 18px;
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.6875rem;
+  letter-spacing:.16em; text-transform:uppercase;
+}
+.navpanel a.navpanel__link{
+  display:flex; align-items:baseline; gap:16px;
+  padding:18px 0; text-decoration:none; color:var(--t-on-ink);
+  border-bottom:var(--rule-h) solid var(--ink-3);
+  font-family:'Anton',sans-serif; text-transform:uppercase;
+  font-size:2rem; line-height:1;
+}
+.navpanel a.navpanel__link .n{
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; color:var(--hv);
+  letter-spacing:.16em;
+}
+.navpanel__cta{ display:grid; gap:12px; margin-top:28px; }
+
+/* =========================================================================
+   HERO — SITE NOTICE
+   ========================================================================= */
+.hero{ background:var(--ink); color:var(--t-on-ink); padding-block:0; }
+.hero__inner{
+  display:grid; gap:0;
+  grid-template-columns:1fr;
+}
+.notice{
+  background:var(--hv); color:var(--ink);
+  padding:clamp(24px,4vw,52px) var(--gutter) clamp(28px,4vw,56px);
+  position:relative;
+  border-bottom:var(--rule) solid var(--ink);
+}
+.notice::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  border:12px solid transparent;
+  border-image:repeating-linear-gradient(135deg,
+    var(--ink) 0 14px, transparent 14px 28px) 12;
+  opacity:.9;
+}
+.notice__in{ max-width:var(--maxw); margin:0 auto; position:relative; }
+.notice__tag{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--ink); color:var(--hv);
+  padding:8px 14px; margin-bottom:clamp(16px,2.4vw,26px);
+}
+.notice__tag .dot{ width:9px; height:9px; background:var(--stamp); flex:none; }
+h1 .ln{ display:block; overflow:hidden; }
+h1 .ln > span{ display:block; }
+.notice__meta{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0; margin-top:clamp(22px,3vw,40px);
+  border-top:var(--rule) solid var(--ink);
+}
+.notice__meta div{
+  padding:12px 14px 12px 0;
+  border-bottom:var(--rule-h) solid rgba(11,11,11,.28);
+}
+.notice__meta div:nth-child(odd){ border-right:var(--rule-h) solid rgba(11,11,11,.28); padding-left:0; }
+.notice__meta div:nth-child(even){ padding-left:14px; }
+.notice__meta dt{
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase; color:rgba(11,11,11,.66);
+}
+.notice__meta dd{
+  margin:3px 0 0; font-family:'Archivo',sans-serif; font-weight:700;
+  font-size:.9375rem; text-transform:uppercase; letter-spacing:.02em;
+}
+
+.herobody{
+  padding:clamp(28px,4vw,56px) var(--gutter);
+  display:grid; gap:clamp(24px,3vw,44px);
+  grid-template-columns:1fr;
+  max-width:var(--maxw); margin:0 auto; width:100%;
+}
+.herobody .lede{ color:var(--t-on-ink); }
+.herobody .lede strong{ color:var(--hv); font-weight:700; }
+.hero__cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:var(--s3); }
+
+/* credential dockets */
+.stats{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  border:var(--rule) solid var(--ink-3);
+}
+.stat{
+  padding:16px 18px 18px;
+  border-right:var(--rule-h) solid var(--ink-3);
+  border-bottom:var(--rule-h) solid var(--ink-3);
+}
+.stat:nth-child(2n){ border-right:0; }
+.stat:nth-last-child(-n+2){ border-bottom:0; }
+.stat__n{
+  font-family:'Anton',sans-serif; font-size:clamp(2.1rem,4.4vw,3.1rem);
+  line-height:.9; color:var(--hv); display:block;
+}
+.stat__l{
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--t-on-ink-mute);
+  margin-top:8px; display:block;
+}
+
+/* =========================================================================
+   SECTION HEADS
+   ========================================================================= */
+.shead{
+  display:grid; gap:var(--s2); margin-bottom:clamp(28px,4vw,56px);
+  grid-template-columns:1fr;
+}
+.shead__no{
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.6875rem;
+  letter-spacing:.22em; text-transform:uppercase;
+  display:flex; align-items:center; gap:12px;
+}
+.shead__no::after{ content:''; height:var(--rule-h); background:currentColor; flex:1; opacity:.35; }
+.band--ink .shead__no{ color:var(--hv); }
+.shead p{ color:var(--t-on-paper-mute); }
+.band--ink .shead p{ color:var(--t-on-ink-mute); }
+
+/* =========================================================================
+   DUTIES — TWO-COLUMN JOB SHEET
+   ========================================================================= */
+.duties{ display:grid; grid-template-columns:1fr; border:var(--rule) solid var(--ink); background:var(--paper); }
+.duty{ padding:clamp(22px,3vw,38px); }
+.duty--you{ background:var(--hv); }
+.duty--me{ border-top:var(--rule) solid var(--ink); }
+.duty__hd{
+  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  border-bottom:var(--rule) solid var(--ink); padding-bottom:12px; margin-bottom:20px;
+}
+.duty__hd .label{ color:rgba(11,11,11,.7); }
+.duty--me .duty__hd .label{ color:var(--t-on-paper-mute); }
+.duty ol{ margin:0; padding:0; list-style:none; counter-reset:d; }
+.duty li{
+  counter-increment:d; display:grid; grid-template-columns:34px 1fr; gap:12px;
+  padding:11px 0; border-bottom:var(--rule-h) solid rgba(11,11,11,.2);
+  align-items:start;
+}
+.duty--me li{ border-bottom-color:var(--paper-3); }
+.duty li:last-child{ border-bottom:0; }
+.duty li::before{
+  content:counter(d,decimal-leading-zero);
+  grid-column:1; grid-row:1 / span 2;
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.75rem;
+  letter-spacing:.08em; padding-top:4px; opacity:.6;
+}
+/* Both text nodes must be pinned to column 2 — otherwise the description
+   auto-places into the 34px number column and wraps one word per line. */
+.duty li b{ grid-column:2; grid-row:1; font-weight:700; }
+.duty li span{ grid-column:2; grid-row:2; display:block; font-size:.9375rem; color:inherit; opacity:.82; }
+.duty--you li{ font-size:1.0625rem; }
+.duty__foot{
+  margin-top:22px; padding-top:14px; border-top:var(--rule) solid var(--ink);
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.duty--me .duty__foot{ border-top-color:var(--paper-3); color:var(--t-on-paper-mute); }
+
+/* =========================================================================
+   SERVICES — SCHEDULE OF WORKS
+   ========================================================================= */
+.sow{ border-top:var(--rule) solid var(--hv); }
+.sow__row{
+  display:grid; grid-template-columns:auto 1fr; gap:4px 20px;
+  align-items:baseline;
+  padding:22px 0 24px;
+  border-bottom:var(--rule-h) solid var(--ink-3);
+  position:relative; text-decoration:none; color:inherit;
+  transition:background .14s linear, color .14s linear, padding-inline .18s cubic-bezier(.2,.8,.3,1);
+}
+.sow__row:hover, .sow__row:focus-visible{
+  background:var(--hv); color:var(--ink);
+  padding-inline:clamp(12px,2vw,26px);
+}
+.sow__n{
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.75rem;
+  letter-spacing:.18em; color:var(--hv); padding-top:6px;
+}
+.sow__row:hover .sow__n{ color:var(--ink); }
+.sow__body{ display:grid; gap:8px; }
+.sow__t{
+  font-family:'Anton',sans-serif; text-transform:uppercase;
+  font-size:clamp(1.5rem,3.4vw,2.6rem); line-height:.94;
+}
+.sow__d{ color:var(--t-on-ink-mute); max-width:56ch; font-size:1rem; }
+.sow__row:hover .sow__d{ color:rgba(11,11,11,.78); }
+.sow__go{
+  grid-column:1/-1; display:flex; align-items:center; gap:10px;
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--hv); margin-top:4px;
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .16s linear, transform .16s linear;
+}
+.sow__row:hover .sow__go, .sow__row:focus-visible .sow__go{
+  opacity:1; transform:translateX(0); color:var(--ink);
+}
+
+/* =========================================================================
+   PORTFOLIO — COMPLETED JOB CARDS
+   ========================================================================= */
+.jobs{ display:grid; gap:var(--s3); grid-template-columns:1fr; }
+.job{
+  background:var(--paper); border:var(--rule) solid var(--ink);
+  display:flex; flex-direction:column; position:relative; overflow:hidden;
+}
+.job__hd{
+  display:flex; justify-content:space-between; gap:12px; align-items:center;
+  padding:10px 14px; background:var(--ink); color:var(--hv);
+}
+.job__hd .label{ letter-spacing:.18em; }
+.job__hd .sector{ color:var(--t-on-ink-mute); letter-spacing:.14em; }
+.job__mock{
+  position:relative; z-index:2;
+  padding:18px 18px 0; background:
+    repeating-linear-gradient(0deg, transparent 0 23px, var(--paper-2) 23px 24px);
+}
+.job__body{ padding:18px; display:grid; gap:10px; flex:1; }
+.job__client{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.5rem; line-height:1; }
+.job__out{ font-size:.9375rem; color:var(--t-on-paper); }
+.job__foot{
+  margin-top:auto; padding:12px 18px; border-top:var(--rule-h) dashed var(--paper-3);
+  display:flex; justify-content:space-between; gap:10px; align-items:center;
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--t-on-paper-mute);
+}
+
+/* rubber stamp */
+/* Anchored to the mock, straddling its bottom edge onto the paper beside the client
+   name. Anchoring here (not to the card) means outcome copy of any length can never
+   end up underneath it — and the stamp lands on paper, where the red reads properly. */
+.stamp{
+  position:absolute; right:4px; bottom:-34px; z-index:3;
+  border:3px solid var(--stamp); color:var(--stamp);
+  padding:6px 12px 7px; text-align:center;
+  mix-blend-mode:multiply; opacity:.88;
+  transform:rotate(-9deg);
+  box-shadow:inset 0 0 0 1px var(--stamp);
+}
+.stamp::after{
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(74deg, transparent 0 2px, rgba(239,237,230,.55) 2px 3px);
+  pointer-events:none;
+}
+.stamp b{
+  display:block; font-family:'Anton',sans-serif; text-transform:uppercase;
+  font-size:1.125rem; line-height:1; letter-spacing:.06em;
+}
+.stamp i{
+  display:block; font-style:normal; font-family:'IBM Plex Mono',monospace;
+  font-size:.5625rem; letter-spacing:.14em; margin-top:3px;
+}
+
+/* mini browser mock, CSS-drawn */
+.mock{ border:2px solid var(--ink); background:#fff; }
+.mock__bar{
+  display:flex; align-items:center; gap:5px; padding:6px 8px;
+  background:var(--ink);
+}
+.mock__bar i{ width:7px; height:7px; background:var(--t-on-ink-mute); display:block; }
+.mock__url{
+  flex:1; margin-left:6px; height:14px; background:#3A3A35;
+  display:flex; align-items:center; padding-inline:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:.5rem; color:#C9C4B4;
+  letter-spacing:.06em; overflow:hidden; white-space:nowrap;
+}
+.mock__view{ padding:0; aspect-ratio:16/10; display:grid; grid-template-rows:auto 1fr; overflow:hidden; }
+.mock__nav{
+  display:flex; align-items:center; gap:4px; padding:5px 6px;
+  background:var(--mc1,#3A5A78);
+}
+.mock__nav b{ width:22px; height:6px; background:#fff; display:block; }
+.mock__nav i{ width:12px; height:4px; background:rgba(255,255,255,.55); display:block; }
+.mock__nav u{ width:20px; height:8px; background:var(--mc2,#F2DF00); display:block; margin-left:auto; }
+.mock__hero{ background:var(--mc1,#3A5A78); padding:8px 6px 9px; display:grid; gap:4px; }
+.mock__hero .l{ height:7px; background:#fff; width:76%; }
+.mock__hero .l2{ height:7px; background:#fff; width:52%; }
+.mock__hero .s{ height:3px; background:rgba(255,255,255,.5); width:64%; }
+.mock__hero .b{ height:9px; width:34px; background:var(--mc2,#F2DF00); margin-top:2px; }
+.mock__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:4px; padding:6px; background:#F1EFE9; }
+.mock__grid span{ display:block; height:100%; background:#DAD6CA; border-bottom:3px solid var(--mc1,#3A5A78); }
+.mock--shop .mock__grid{ grid-template-columns:repeat(4,1fr); }
+.mock--long .mock__grid{ grid-template-columns:repeat(2,1fr); }
+
+.alsolist{
+  margin-top:var(--s4); border-top:var(--rule) solid var(--ink);
+}
+.alsolist__row{
+  display:grid; grid-template-columns:auto 1fr; gap:6px 16px; align-items:baseline;
+  padding:16px 0; border-bottom:var(--rule-h) solid var(--paper-3);
+}
+.alsolist__row .c{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.25rem; }
+.alsolist__row .d{ font-size:.9375rem; color:var(--t-on-paper-mute); grid-column:2; }
+.alsolist__row .r{
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.16em;
+  color:var(--t-on-paper-mute); padding-top:5px;
+}
+
+/* =========================================================================
+   PROCESS — WORKS ORDER
+   ========================================================================= */
+.wo{ display:grid; gap:0; grid-template-columns:1fr; border-top:var(--rule) solid var(--ink); }
+.wo__step{
+  display:grid; grid-template-columns:auto 1fr; gap:18px;
+  padding:26px 0; border-bottom:var(--rule-h) solid var(--paper-3);
+  align-items:start;
+}
+.wo__n{
+  font-family:'Anton',sans-serif; font-size:clamp(2.6rem,6vw,4.6rem); line-height:.8;
+  color:transparent; -webkit-text-stroke:2px var(--ink);
+  width:1.6em;
+}
+.wo__c h3{ margin:0 0 8px; }
+.wo__c p{ color:var(--t-on-paper-mute); font-size:1rem; }
+.wo__sign{
+  display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+  border:2px solid var(--ink); padding:6px 10px;
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.wo__sign svg{ width:14px; height:11px; flex:none; }
+
+/* =========================================================================
+   TRADES CHECKLIST
+   ========================================================================= */
+.checks{
+  display:grid; gap:0; grid-template-columns:1fr;
+  border-top:var(--rule-h) solid var(--ink-3);
+}
+.check{
+  display:flex; align-items:center; gap:14px; padding:14px 4px;
+  border-bottom:var(--rule-h) solid var(--ink-3);
+  font-family:'Archivo',sans-serif; font-weight:700; font-size:1.0625rem;
+  text-transform:uppercase; letter-spacing:.03em;
+}
+.check__box{
+  width:26px; height:26px; flex:none; border:2px solid var(--hv);
+  display:grid; place-items:center; background:transparent;
+}
+.js .check__box{ border-color:var(--ink-3); }
+.js .check.in .check__box{
+  border-color:var(--hv);
+  transition:border-color .2s linear var(--d,0ms);
+}
+.check__box svg{ width:16px; height:13px; overflow:visible; }
+.check__box path{
+  fill:none; stroke:var(--hv); stroke-width:3.2; stroke-linecap:square; stroke-linejoin:miter;
+}
+.check__extra{
+  font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:.625rem;
+  letter-spacing:.16em; color:var(--t-on-ink-mute); margin-left:auto;
+  text-transform:uppercase;
+}
+.checks__note{
+  grid-column:1/-1; padding:20px 4px 0; color:var(--t-on-ink-mute); font-size:.9375rem;
+}
+.checks__note b{ color:var(--hv); }
+
+/* =========================================================================
+   PRICING — QUOTATION DOCKETS
+   ========================================================================= */
+.quotes{ display:grid; gap:var(--s4); grid-template-columns:1fr; align-items:start; }
+.docket{
+  background:var(--paper); color:var(--t-on-paper);
+  border:var(--rule) solid var(--ink); border-bottom:0;
+  padding-bottom:20px; position:relative;
+  -webkit-mask:
+    linear-gradient(#000 0 0) top/100% calc(100% - 13px) no-repeat,
+    radial-gradient(circle 6px at 50% 0, transparent 0 6px, #000 6.5px) bottom/14px 13px repeat-x;
+  mask:
+    linear-gradient(#000 0 0) top/100% calc(100% - 13px) no-repeat,
+    radial-gradient(circle 6px at 50% 0, transparent 0 6px, #000 6.5px) bottom/14px 13px repeat-x;
+}
+.docket__hd{
+  background:var(--ink); color:var(--hv); padding:14px 18px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+}
+.docket__hd h3{ margin:0; color:var(--hv); }
+.docket__hd .label{ color:var(--t-on-ink-mute); }
+.docket__sub{
+  padding:12px 18px; border-bottom:var(--rule-h) dashed var(--paper-3);
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--t-on-paper-mute);
+}
+.tier{
+  display:grid; grid-template-columns:1fr auto; gap:4px 16px;
+  padding:18px; border-bottom:var(--rule-h) solid var(--paper-3);
+  position:relative; align-items:baseline;
+}
+/* extra top padding so the corner flag never sits on top of the right-aligned price */
+.tier--pop{ background:var(--hv); padding-top:38px; }
+.tier__flag{
+  position:absolute; top:0; right:0;
+  background:var(--ink); color:var(--hv);
+  font-family:'IBM Plex Mono',monospace; font-size:.5625rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; padding:5px 10px;
+}
+.tier__name{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.5rem; line-height:1; }
+.tier__price{ text-align:right; font-family:'Anton',sans-serif; font-size:1.75rem; line-height:1; }
+.tier__price small{ font-family:'IBM Plex Mono',monospace; font-size:.6875rem; font-weight:500; letter-spacing:.1em; display:block; margin-top:5px; }
+.tier__meta{
+  grid-column:1/-1; display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--t-on-paper-mute);
+}
+.tier--pop .tier__meta{ color:rgba(11,11,11,.7); }
+.docket__foot{
+  padding:16px 18px 4px;
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--t-on-paper-mute);
+  display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+
+.included{
+  margin-top:var(--s5); border:var(--rule) solid var(--ink); background:var(--paper);
+}
+.included__hd{
+  padding:14px 18px; background:var(--hv); border-bottom:var(--rule) solid var(--ink);
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;
+}
+.included ul{
+  margin:0; padding:8px 18px 18px; list-style:none;
+  display:grid; grid-template-columns:1fr; gap:0;
+}
+.included li{
+  display:flex; align-items:center; gap:12px; padding:11px 0;
+  border-bottom:var(--rule-h) solid var(--paper-2); font-size:.9375rem;
+}
+.included li:last-child{ border-bottom:0; }
+.included li .tk{ width:20px; height:20px; flex:none; border:2px solid var(--ink); display:grid; place-items:center; }
+.included li .tk svg{ width:12px; height:10px; }
+.included li .tk path{ fill:none; stroke:var(--ink); stroke-width:3.4; }
+
+.addons{ margin-top:var(--s5); }
+.addons__t{ border-top:var(--rule) solid var(--ink); }
+.addon{
+  display:flex; align-items:baseline; gap:14px; padding:14px 0;
+  border-bottom:var(--rule-h) solid var(--paper-3);
+}
+.addon .n{ font-weight:700; text-transform:uppercase; letter-spacing:.03em; font-size:.9375rem; }
+.addon .dots{ flex:1; height:1px; border-bottom:2px dotted var(--paper-3); }
+.addon .p{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.9375rem; white-space:nowrap; }
+
+/* =========================================================================
+   TESTIMONIALS
+   ========================================================================= */
+.signoffs{ display:grid; gap:var(--s3); grid-template-columns:1fr; }
+.signoff{
+  background:var(--paper); color:var(--t-on-paper);
+  border:var(--rule) solid var(--ink); padding:22px 20px 18px;
+  display:flex; flex-direction:column; gap:16px; position:relative;
+}
+.signoff__q{
+  font-family:'Archivo',sans-serif; font-weight:600; font-size:1.125rem; line-height:1.42;
+  margin:0;
+}
+.signoff__q::before{ content:'“'; }
+.signoff__q::after{ content:'”'; }
+.signoff__by{
+  margin-top:auto; padding-top:14px; border-top:var(--rule-h) dashed var(--paper-3);
+  display:flex; justify-content:space-between; gap:12px; align-items:flex-end;
+}
+.signoff__by b{ display:block; font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.125rem; line-height:1.1; }
+.signoff__by span{ font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.14em; text-transform:uppercase; color:var(--t-on-paper-mute); }
+.signoff__tick{
+  width:34px; height:34px; flex:none; border:2px solid var(--stamp);
+  display:grid; place-items:center; mix-blend-mode:multiply;
+}
+.signoff__tick svg{ width:18px; height:15px; }
+.signoff__tick path{ fill:none; stroke:var(--stamp); stroke-width:3.2; }
+
+/* =========================================================================
+   THE PERSON — SITE PASS
+   ========================================================================= */
+.person{ display:grid; gap:var(--s5); grid-template-columns:1fr; align-items:start; }
+.pass{
+  background:var(--paper); color:var(--t-on-paper);
+  border:var(--rule) solid var(--ink); width:100%; max-width:340px;
+  position:relative; margin-inline:auto;
+}
+.pass__hole{
+  height:34px; display:grid; place-items:center; border-bottom:var(--rule-h) solid var(--paper-3);
+}
+.pass__hole i{ display:block; width:56px; height:12px; background:var(--ink); }
+.pass__hd{
+  background:var(--hv); border-block:var(--rule) solid var(--ink);
+  padding:8px 14px; display:flex; justify-content:space-between; align-items:center;
+}
+.pass__body{ padding:18px 16px; display:grid; gap:14px; }
+.pass__id{
+  width:92px; height:92px; background:var(--ink); color:var(--hv);
+  display:grid; place-items:center;
+  font-family:'Anton',sans-serif; font-size:2.6rem; line-height:1; letter-spacing:.02em;
+}
+.pass__name{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.75rem; line-height:1; }
+.pass__role{ font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase; color:var(--t-on-paper-mute); margin-top:6px; }
+.pass__rows{ display:grid; gap:0; border-top:var(--rule-h) solid var(--paper-3); }
+.pass__rows div{
+  display:flex; justify-content:space-between; gap:10px; padding:9px 0;
+  border-bottom:var(--rule-h) solid var(--paper-2);
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; letter-spacing:.1em; text-transform:uppercase;
+}
+.pass__rows dt{ color:var(--t-on-paper-mute); margin:0; }
+.pass__rows dd{ margin:0; font-weight:600; }
+.barcode{
+  height:44px; display:flex; align-items:stretch; gap:2px; padding:0 16px 14px;
+}
+.barcode i{ display:block; background:var(--ink); }
+.pass__no{
+  text-align:center; padding:0 16px 14px;
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.3em;
+  color:var(--t-on-paper-mute);
+}
+.person__copy blockquote{
+  /* .display headings carry margin:0, so the top gap has to come from here */
+  margin:var(--s3) 0; padding:0 0 0 20px; border-left:6px solid var(--hv);
+  font-family:'Anton',sans-serif; text-transform:uppercase; line-height:.94;
+  font-size:clamp(1.5rem,3.2vw,2.4rem);
+}
+.person__copy p{ color:var(--t-on-ink-mute); }
+.person__copy p strong{ color:var(--t-on-ink); font-weight:700; }
+
+/* =========================================================================
+   AREAS + FINAL CTA
+   ========================================================================= */
+.areas{ padding-block:0; background:var(--ink); }
+.areas__in{
+  display:flex; align-items:center; gap:22px; padding-block:20px;
+  flex-wrap:wrap;
+}
+.areas__l{ color:var(--hv); }
+.areas__list{
+  display:flex; flex-wrap:wrap; gap:8px;
+  list-style:none; margin:0; padding:0;
+}
+.areas__list li{
+  border:var(--rule-h) solid var(--ink-3); color:var(--t-on-ink);
+  padding:7px 12px; font-family:'IBM Plex Mono',monospace; font-size:.6875rem;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+.areas__list li.uk{ background:var(--hv); color:var(--ink); border-color:var(--hv); font-weight:600; }
+
+.raise{ background:var(--hv); color:var(--ink); }
+.raise__grid{ display:grid; gap:var(--s4); grid-template-columns:1fr; align-items:end; }
+.raise h2{ max-width:14ch; }
+.raise__contact{ display:grid; gap:0; border-top:var(--rule) solid var(--ink); }
+.raise__contact a, .raise__contact div{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  padding:15px 0; border-bottom:var(--rule-h) solid rgba(11,11,11,.3);
+  text-decoration:none; min-height:56px;
+  transition:padding-inline .16s cubic-bezier(.2,.8,.3,1), background .12s linear;
+}
+.raise__contact a:hover{ background:var(--ink); color:var(--hv); padding-inline:14px; }
+.raise__contact .k{ font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; opacity:.7; }
+.raise__contact .v{ font-family:'Archivo',sans-serif; font-weight:700; font-size:1.0625rem; text-align:right; word-break:break-word; }
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.sitefooter{ background:var(--ink); color:var(--t-on-ink); padding-block:var(--s6) var(--s4); }
+.foot{ display:grid; gap:var(--s5); grid-template-columns:1fr; }
+.foot h2{
+  font-family:'IBM Plex Mono',monospace; font-size:.6875rem; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--hv);
+  margin:0 0 16px; padding-bottom:10px; border-bottom:var(--rule-h) solid var(--ink-3);
+}
+.foot ul{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }
+.foot a{ text-decoration:none; color:var(--t-on-ink-mute); font-size:.9375rem; }
+.foot a:hover{ color:var(--hv); text-decoration:underline; text-underline-offset:3px; }
+.foot address{ font-style:normal; color:var(--t-on-ink-mute); font-size:.9375rem; line-height:1.7; }
+/* height:auto + align-items:center — a flex item img defaults to align-self:stretch
+   and will distort the 600x300 lockup otherwise. */
+.foot__brand img{ width:150px; height:auto; }
+.foot__plate{ background:var(--hv); padding:10px 12px; display:inline-flex; align-items:center; }
+.foot__tag{ margin-top:16px; color:var(--t-on-ink-mute); font-size:.9375rem; max-width:34ch; }
+.foot__bottom{
+  margin-top:var(--s6); padding-top:18px; border-top:var(--rule-h) solid var(--ink-3);
+  display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace; font-size:.625rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--t-on-ink-mute);
+}
+
+/* =========================================================================
+   REVEAL / MOTION — only active once JS confirms support
+   ========================================================================= */
+.js .rv{ opacity:0; transform:translate3d(0,26px,0); }
+.js .rv.in{
+  opacity:1; transform:none;
+  transition:opacity .5s cubic-bezier(.2,.7,.3,1), transform .62s cubic-bezier(.2,.7,.3,1);
+  transition-delay:var(--d,0ms);
+}
+.js .rv-l{ opacity:0; transform:translate3d(-24px,0,0); }
+.js .rv-l.in{ opacity:1; transform:none; transition:opacity .5s ease-out, transform .6s cubic-bezier(.2,.7,.3,1); transition-delay:var(--d,0ms); }
+
+/* hero build-in */
+.js .hero h1 .ln > span{ transform:translate3d(0,105%,0); }
+.js .hero.in h1 .ln > span{
+  transform:none;
+  transition:transform .78s cubic-bezier(.16,.9,.24,1);
+  transition-delay:calc(var(--i,0) * 90ms + 120ms);
+}
+.js .notice::before{ transform:scaleX(0); transform-origin:left; }
+.js .hero.in .notice::before{ transform:none; transition:transform .7s cubic-bezier(.2,.8,.2,1) .1s; }
+.js .notice__tag{ opacity:0; transform:translate3d(0,-10px,0); }
+.js .hero.in .notice__tag{ opacity:1; transform:none; transition:opacity .4s ease-out .05s, transform .4s ease-out .05s; }
+
+/* checklist tick-in */
+.js .check__box path{ stroke-dasharray:26; stroke-dashoffset:26; }
+.js .check.in .check__box path{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset .32s cubic-bezier(.4,1.4,.5,1);
+  transition-delay:var(--d,0ms);
+}
+
+/* stamp impact */
+.js .stamp{ opacity:0; transform:rotate(-30deg) scale(2.6); }
+.js .stamp.in{
+  opacity:.88; transform:rotate(-9deg) scale(1);
+  transition:opacity .12s linear var(--d,0ms), transform .34s cubic-bezier(.2,1.5,.4,1) var(--d,0ms);
+}
+
+/* tick marks in works order + includes */
+.js .wo__sign svg path, .js .included li .tk path, .js .signoff__tick path{
+  stroke-dasharray:26; stroke-dashoffset:26;
+}
+.js .in .wo__sign svg path, .js .in .tk path, .js .signoff.in .signoff__tick path{
+  stroke-dashoffset:0; transition:stroke-dashoffset .4s ease-out .2s;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .js .rv, .js .rv-l, .js .hero h1 .ln > span, .js .notice__tag, .js .stamp{
+    opacity:1 !important; transform:none !important; transition:none !important;
+  }
+  .js .notice::before{ transform:none !important; }
+  .js .check__box path, .js .wo__sign svg path, .js .included li .tk path, .js .signoff__tick path{
+    stroke-dashoffset:0 !important; transition:none !important;
+  }
+  .tape__run{ transform:none !important; }
+  *{ animation:none !important; }
+}
+
+/* =========================================================================
+   BREAKPOINTS
+   ========================================================================= */
+/* Narrow: stack label over value so the email address gets the full column and
+   doesn't break mid-word ("...co.u / k"). */
+@media (max-width:559px){
+  .raise__contact a, .raise__contact div{
+    flex-direction:column; align-items:flex-start; gap:4px; padding-block:13px;
+  }
+  .raise__contact .v{ text-align:left; font-size:1rem; }
+}
+
+@media (min-width:640px){
+  .jobs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .signoffs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .included ul{ grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:28px; }
+  .stats{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .stat{ border-bottom:0; border-right:var(--rule-h) solid var(--ink-3); }
+  .stat:last-child{ border-right:0; }
+  .brand__ref{ display:block; }
+  .checks{ grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:32px; }
+}
+
+@media (min-width:900px){
+  .duties{ grid-template-columns:0.9fr 1.1fr; }
+  .duty--me{ border-top:0; border-left:var(--rule) solid var(--ink); }
+  .quotes{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s5); }
+  .signoffs{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .person{ grid-template-columns:340px 1fr; gap:var(--s6); align-items:center; }
+  .pass{ margin-inline:0; }
+  .foot{ grid-template-columns:1.3fr 1fr 1fr 1.2fr; gap:var(--s4); }
+  .raise__grid{ grid-template-columns:1fr 1fr; gap:var(--s6); }
+  .shead{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--s4); align-items:end; }
+  .shead__no{ grid-column:1/-1; }
+  .wo{ grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:var(--s5); }
+  .wo__step:nth-child(-n+2){ border-top:0; }
+  .checks{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .herobody{ grid-template-columns:1.15fr .85fr; align-items:end; }
+}
+
+@media (min-width:1080px){
+  .nav{ display:flex; }
+  .burger{ display:none; }
+  .btn--head{ display:inline-flex; }
+  .jobs{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .notice__meta{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .notice__meta div:nth-child(odd){ border-right:none; }
+  .notice__meta div{ border-right:var(--rule-h) solid rgba(11,11,11,.28); padding-left:14px; }
+  .notice__meta div:first-child{ padding-left:0; }
+  .notice__meta div:last-child{ border-right:0; }
+}
+</style>
+<script>
+/* Opt into hidden-by-default reveal states BEFORE first paint, and only when we
+   can actually reveal them again (IntersectionObserver present, motion allowed).
+   Without JS, or with reduced motion, every section renders fully visible. */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    document.documentElement.className += ' js';
+  }
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ========================= TOP STRIP ========================= -->
+<div class="topstrip">
+  <div class="wrap">
+    <span>Unit H3, Chaucer Business Park, Polegate BN26 6QH</span>
+    <span class="sep" aria-hidden="true">/</span>
+    <span>Mon&ndash;Fri 9:00&ndash;17:30 &middot; Sat by appointment</span>
+    <span class="sep" aria-hidden="true">/</span>
+    <span>Est. <b>2019</b></span>
+  </div>
+</div>
+
+<!-- ========================= HEADER ========================= -->
+<header class="siteheader">
+  <div class="wrap">
+    <a class="brand" href="#main" aria-label="Digital Consulting Services — home">
+      <span class="brand__plate"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="600" height="300"></span>
+      <span class="brand__ref"><b>Job sheet 01</b>Websites for trades</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <a class="btn btn--head" href="/contact">
+      Get a free quote
+      <svg class="btn__arrow" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </a>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="navpanel" data-nav-open>
+      <span class="burger__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      Menu
+    </button>
+  </div>
+</header>
+
+<div class="navpanel" id="navpanel" hidden>
+  <div class="navpanel__head">
+    <span class="label" style="color:var(--hv)">Index / 05 items</span>
+    <button class="navpanel__close" type="button" data-nav-close>Close &times;</button>
+  </div>
+  <a class="navpanel__link" href="#services"><span class="n">01</span> Services</a>
+  <a class="navpanel__link" href="#pricing"><span class="n">02</span> Pricing</a>
+  <a class="navpanel__link" href="#portfolio"><span class="n">03</span> Portfolio</a>
+  <a class="navpanel__link" href="/blog"><span class="n">04</span> Blog</a>
+  <a class="navpanel__link" href="#about"><span class="n">05</span> About</a>
+  <div class="navpanel__cta">
+    <a class="btn" href="/contact">Get a free quote</a>
+    <a class="btn btn--ghost btn--onink" href="tel:+447395063764">Call 07395 063764</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ========================= HERO / SITE NOTICE ========================= -->
+<section class="hero" id="top" aria-labelledby="h-hero">
+  <div class="notice">
+    <div class="notice__in">
+      <span class="notice__tag label"><i class="dot" aria-hidden="true"></i> Site notice &mdash; work in progress</span>
+      <h1 class="display" id="h-hero">
+        <span class="ln" style="--i:0"><span>Websites that get</span></span>
+        <span class="ln" style="--i:1"><span>local tradespeople</span></span>
+        <span class="ln" style="--i:2"><span>more jobs.</span></span>
+      </h1>
+
+      <dl class="notice__meta">
+        <div><dt>Job no.</dt><dd>DCS&ndash;2026</dd></div>
+        <div><dt>Contractor</dt><dd>Ricky Wilson</dd></div>
+        <div><dt>Site</dt><dd>Polegate &middot; UK-wide</dd></div>
+        <div><dt>Status</dt><dd>Taking bookings</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="herobody">
+    <div>
+      <p class="lede rv">Most agencies want you to turn up with a brief, your copy, your photos and a
+        clear idea of what you want. <strong>I don't.</strong> I ask the right questions, write the
+        words, make the design calls, build it, host it and keep it running &mdash; while you get on
+        with the job you actually do.</p>
+      <div class="hero__cta rv" style="--d:90ms">
+        <a class="btn" href="/contact">Get a free quote
+          <svg class="btn__arrow" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--onink" href="tel:+447395063764">Call 07395 063764</a>
+      </div>
+    </div>
+
+    <div class="stats rv" style="--d:160ms" aria-label="Credentials">
+      <div class="stat"><span class="stat__n mono" data-count="2019" data-plain="1">2019</span><span class="stat__l">Established</span></div>
+      <div class="stat"><span class="stat__n mono" data-count="5" data-suffix="+">5+</span><span class="stat__l">Years building</span></div>
+      <div class="stat"><span class="stat__n mono" data-count="20" data-suffix="+">20+</span><span class="stat__l">Sites delivered</span></div>
+      <div class="stat"><span class="stat__n mono" data-count="100" data-suffix="%">100%</span><span class="stat__l">Managed for you</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- tape -->
+<div class="tape" role="presentation"><div class="tape__run" data-hs data-speed="0.30" data-dir="1"></div></div>
+
+<!-- ========================= DUTIES ========================= -->
+<section class="band" aria-labelledby="h-duties">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">01 &mdash; Division of labour</span>
+      <h2 class="display rv" id="h-duties">You do three things.<br>I do the rest.</h2>
+      <p class="rv" style="--d:80ms">This is the whole pitch, honestly. You're out on jobs, not sat at a
+        desk waiting to write website copy. So the list on your side is deliberately short, and it
+        stays short from the first phone call to five years after launch.</p>
+    </div>
+
+    <div class="duties rv">
+      <div class="duty duty--you">
+        <div class="duty__hd">
+          <h3 class="display">Your duties</h3>
+          <span class="label">03 items</span>
+        </div>
+        <ol>
+          <li><b>Have a conversation.</b><span>A phone call, or a few messages. Whichever suits you.</span></li>
+          <li><b>Tell me what you think.</b><span>When I show you the site, say what you like and what you don't.</span></li>
+          <li><b>Keep answering the phone.</b><span>Because it's going to ring. That's the point of all this.</span></li>
+        </ol>
+        <div class="duty__foot">Total client effort &mdash; roughly one hour</div>
+      </div>
+
+      <div class="duty duty--me">
+        <div class="duty__hd">
+          <h3 class="display">My duties</h3>
+          <span class="label">12 items</span>
+        </div>
+        <ol>
+          <li><b>Ask the right questions</b><span>No brief needed. I'll pull it out of a conversation.</span></li>
+          <li><b>Write every word</b><span>You don't need to know what to say. That's my job.</span></li>
+          <li><b>Design it properly</b><span>Custom, not a template with your logo dropped in.</span></li>
+          <li><b>Build the service pages</b><span>One page per thing you do, written to be found.</span></li>
+          <li><b>Build the location pages</b><span>Every town you cover, treated as its own page.</span></li>
+          <li><b>Set up Google</b><span>Search Console, Schema markup, the lot &mdash; submitted and checked.</span></li>
+          <li><b>Make it fast on a phone</b><span>Most of your customers will never see it on a desktop.</span></li>
+          <li><b>Host it and secure it</b><span>Hosting, SSL, your domain &mdash; all handled, all included.</span></li>
+          <li><b>Watch it stay up</b><span>Uptime monitoring, so I find out before you do.</span></li>
+          <li><b>Keep it updated</b><span>Security updates and fixes, without you asking.</span></li>
+          <li><b>Change things when you ask</b><span>New service, new number, new photos &mdash; message me.</span></li>
+          <li><b>Report back</b><span>What's working, what isn't, in plain English.</span></li>
+        </ol>
+        <div class="duty__foot">No CMS &middot; No logins &middot; No dashboard to learn</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SERVICES ========================= -->
+<section class="band band--ink" id="services" aria-labelledby="h-services">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">02 &mdash; Schedule of works</span>
+      <h2 class="display rv" id="h-services">Everything on<br>the ticket.</h2>
+      <p class="rv" style="--d:80ms">Six things. All of them included in a build, or available on their
+        own if you've already got a site that just needs looking after.</p>
+    </div>
+
+    <div class="sow">
+      <a class="sow__row rv" href="/contact" style="--d:0ms">
+        <span class="sow__n">01</span>
+        <span class="sow__body">
+          <span class="sow__t">Website design</span>
+          <span class="sow__d">Bespoke websites built for local tradespeople. No templates, no DIY builders, no half-finished job left on your desk.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+      <a class="sow__row rv" href="/contact" style="--d:60ms">
+        <span class="sow__n">02</span>
+        <span class="sow__body">
+          <span class="sow__t">Local SEO</span>
+          <span class="sow__d">Service pages, location pages, Schema markup and Google ranking &mdash; built in from the start, not sold to you as an extra later.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+      <a class="sow__row rv" href="/contact" style="--d:120ms">
+        <span class="sow__n">03</span>
+        <span class="sow__body">
+          <span class="sow__t">Ongoing management</span>
+          <span class="sow__d">I look after your site so you can focus on your trade. Updates, fixes, changes and monitoring, for a fixed monthly amount.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+      <a class="sow__row rv" href="/contact" style="--d:0ms">
+        <span class="sow__n">04</span>
+        <span class="sow__body">
+          <span class="sow__t">Google Workspace email</span>
+          <span class="sow__d">Professional business email on your own domain. Set up, moved over and working on your phone before you put it down.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+      <a class="sow__row rv" href="/contact" style="--d:60ms">
+        <span class="sow__n">05</span>
+        <span class="sow__body">
+          <span class="sow__t">eCommerce websites</span>
+          <span class="sow__d">WooCommerce or custom stores &mdash; built and loaded with your products, so you're not typing in three hundred listings yourself.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+      <a class="sow__row rv" href="/contact" style="--d:120ms">
+        <span class="sow__n">06</span>
+        <span class="sow__body">
+          <span class="sow__t">Analytics &amp; reporting</span>
+          <span class="sow__d">Analytics, Search Console and monthly reports, so you know what's working &mdash; written so you can actually read them.</span>
+        </span>
+        <span class="sow__go">Enquire <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- legend tape -->
+<div class="tape tape--legend" role="presentation">
+  <div class="tape__run" data-hs data-speed="0.16" data-dir="-1">
+    <span class="seg"><span>Completed jobs &mdash; East Sussex &amp; UK-wide</span><span><em>&bull;</em></span><span>Colossus Scaffolding</span><span><em>&bull;</em></span><span>DJ Fox Electrical</span><span><em>&bull;</em></span><span>DCH Automotive</span><span><em>&bull;</em></span><span>Cuddle Plush Fabrics</span><span><em>&bull;</em></span><span>Bexhill Removals</span><span><em>&bull;</em></span><span>Luna Landings</span><span><em>&bull;</em></span><span>Mad Graphics</span><span><em>&bull;</em></span><span>Nicola Noble Tuition</span><span><em>&bull;</em></span><span>Sanctuary Ida</span><span><em>&bull;</em></span></span>
+  </div>
+</div>
+
+<!-- ========================= PORTFOLIO ========================= -->
+<section class="band" id="portfolio" aria-labelledby="h-portfolio">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">03 &mdash; Completed job cards</span>
+      <h2 class="display rv" id="h-portfolio">Signed off.<br>Live and working.</h2>
+      <p class="rv" style="--d:80ms">Real businesses, real results. Every one of these is still running
+        today &mdash; because a site isn't finished the day it goes live, it's finished when it's
+        bringing work in.</p>
+    </div>
+
+    <div class="jobs">
+
+      <article class="job rv">
+        <div class="job__hd"><span class="label">Job 0114</span><span class="label sector">Scaffolding</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>East Sussex</i></div>
+          <div class="mock" style="--mc1:#2E4A52;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">colossusscaffolding.co.uk</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">Colossus Scaffolding</h3>
+          <p class="job__out">First Google enquiry within 3 weeks of launch. 30-page site.</p>
+        </div>
+        <div class="job__foot"><span>30 pages</span><span>Live</span></div>
+      </article>
+
+      <article class="job rv" style="--d:70ms">
+        <div class="job__hd"><span class="label">Job 0121</span><span class="label sector">Electrician</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>East Sussex</i></div>
+          <div class="mock" style="--mc1:#8C3A22;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">djfoxelectrical.com</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid mock--long" aria-hidden="true"><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">DJ Fox Electrical</h3>
+          <p class="job__out">20+ page site with service and location pages, live at djfoxelectrical.com.</p>
+        </div>
+        <div class="job__foot"><span>20+ pages</span><span>Live</span></div>
+      </article>
+
+      <article class="job rv" style="--d:140ms">
+        <div class="job__hd"><span class="label">Job 0133</span><span class="label sector">Automotive</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>Automotive</i></div>
+          <div class="mock" style="--mc1:#5B5B5B;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">dchautomotive.co.uk</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid mock--shop" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">DCH Automotive</h3>
+          <p class="job__out">A professional presence from a standing start, with a live Instagram feed.</p>
+        </div>
+        <div class="job__foot"><span>New build</span><span>Live</span></div>
+      </article>
+
+      <article class="job rv">
+        <div class="job__hd"><span class="label">Job 0042</span><span class="label sector">eCommerce &mdash; fabrics</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>Since 2020</i></div>
+          <div class="mock" style="--mc1:#7A5C1E;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">cuddleplushfabrics.co.uk</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid mock--shop" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">Cuddle Plush Fabrics</h3>
+          <p class="job__out">Five years and counting &mdash; one of our longest client relationships.</p>
+        </div>
+        <div class="job__foot"><span>Online store</span><span>Live</span></div>
+      </article>
+
+      <article class="job rv" style="--d:70ms">
+        <div class="job__hd"><span class="label">Job 0108</span><span class="label sector">Removals</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>First time</i></div>
+          <div class="mock" style="--mc1:#4E5F3C;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">bexhillremovals.co.uk</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">Bexhill Removals</h3>
+          <p class="job__out">Design approved on the first presentation. No revisions asked for.</p>
+        </div>
+        <div class="job__foot"><span>No revisions</span><span>Live</span></div>
+      </article>
+
+      <article class="job rv" style="--d:140ms">
+        <div class="job__hd"><span class="label">Job 0126</span><span class="label sector">Made-to-order</span></div>
+        <div class="job__mock">
+          <div class="stamp" aria-hidden="true"><b>Completed</b><i>Worldwide</i></div>
+          <div class="mock" style="--mc1:#3A5A78;--mc2:#F2DF00">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">lunalandings.co.uk</span></div>
+            <div class="mock__view">
+              <div class="mock__nav" aria-hidden="true"><b></b><i></i><i></i><i></i><u></u></div>
+              <div class="mock__hero" aria-hidden="true"><span class="l"></span><span class="l2"></span><span class="s"></span><span class="b"></span></div>
+              <div class="mock__grid mock--long" aria-hidden="true"><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job__body">
+          <h3 class="job__client">Luna Landings</h3>
+          <p class="job__out">Product configurator, automatic work orders and worldwide shipping.</p>
+        </div>
+        <div class="job__foot"><span>Configurator</span><span>Live</span></div>
+      </article>
+
+    </div>
+
+    <div class="alsolist rv">
+      <div class="alsolist__row">
+        <span class="r">0087</span>
+        <span class="c">Mad Graphics</span>
+        <span class="d">Signage &amp; print &mdash; full rebuild.</span>
+      </div>
+      <div class="alsolist__row">
+        <span class="r">0061</span>
+        <span class="c">Nicola Noble Tuition</span>
+        <span class="d">Tutoring &mdash; moved classes online during Covid instead of closing.</span>
+      </div>
+      <div class="alsolist__row">
+        <span class="r">0072</span>
+        <span class="c">Sanctuary Ida</span>
+        <span class="d">Yoga &mdash; students book and pay for classes online.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- tape -->
+<div class="tape" role="presentation"><div class="tape__run" data-hs data-speed="0.30" data-dir="-1"></div></div>
+
+<!-- ========================= PROCESS ========================= -->
+<section class="band" aria-labelledby="h-process">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">04 &mdash; Works order</span>
+      <h2 class="display rv" id="h-process">Four steps.<br>Start to signed off.</h2>
+      <p class="rv" style="--d:80ms">No forms to fill in, no discovery workshop, no forty-page brief.
+        Here is genuinely the whole thing.</p>
+    </div>
+
+    <div class="wo">
+      <div class="wo__step rv">
+        <span class="wo__n" aria-hidden="true">01</span>
+        <div class="wo__c">
+          <h3 class="display">A conversation</h3>
+          <p>A call, or a few messages &mdash; whichever you prefer. I'll ask about what you do, where
+            you work and who you want ringing you. That's the brief, and I write it, not you.</p>
+          <span class="wo__sign">
+            <svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+            No brief required
+          </span>
+        </div>
+      </div>
+
+      <div class="wo__step rv" style="--d:70ms">
+        <span class="wo__n" aria-hidden="true">02</span>
+        <div class="wo__c">
+          <h3 class="display">I write it and design it</h3>
+          <p>Copy, structure, images, colours &mdash; all handled here. You won't be asked to "send
+            over some content" or approve a wireframe you can't read.</p>
+          <span class="wo__sign">
+            <svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+            Copy included
+          </span>
+        </div>
+      </div>
+
+      <div class="wo__step rv" style="--d:140ms">
+        <span class="wo__n" aria-hidden="true">03</span>
+        <div class="wo__c">
+          <h3 class="display">You review it</h3>
+          <p>You see the real thing, not a mock-up. Tell me what to change. Unlimited revisions during
+            the build &mdash; we keep going until you're happy with it.</p>
+          <span class="wo__sign">
+            <svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+            Unlimited revisions
+          </span>
+        </div>
+      </div>
+
+      <div class="wo__step rv" style="--d:210ms">
+        <span class="wo__n" aria-hidden="true">04</span>
+        <div class="wo__c">
+          <h3 class="display">It goes live &mdash; and stays that way</h3>
+          <p>Hosting, updates, monitoring and support from then on. When something needs changing you
+            message me and it gets changed. You never log in to anything.</p>
+          <span class="wo__sign">
+            <svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+            Managed, not handed over
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TRADES CHECKLIST ========================= -->
+<section class="band band--ink" aria-labelledby="h-trades">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">05 &mdash; Trades covered</span>
+      <h2 class="display rv" id="h-trades">Who this is for.</h2>
+      <p class="rv" style="--d:80ms">If you're on the tools, on the road, or running a small business
+        on your own name, you're on the list.</p>
+    </div>
+
+    <div class="checks">
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Electricians <span class="check__extra">01</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Plumbers <span class="check__extra">02</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Builders <span class="check__extra">03</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Scaffolders <span class="check__extra">04</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Gardeners <span class="check__extra">05</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Decorators <span class="check__extra">06</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Roofers <span class="check__extra">07</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Handymen <span class="check__extra">08</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Locksmiths <span class="check__extra">09</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Flooring fitters <span class="check__extra">10</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Removals <span class="check__extra">11</span></div>
+      <div class="check"><span class="check__box"><svg viewBox="0 0 16 13" aria-hidden="true"><path d="M1.5 6.6 6 11.2 14.5 1.6"/></svg></span> Signage &amp; print <span class="check__extra">12</span></div>
+      <p class="checks__note rv">Not on the tools? Still fine. <b>Tutors, therapists, coaches, salons and
+        sole traders</b> get exactly the same treatment &mdash; the work is the same, only the words change.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PRICING ========================= -->
+<section class="band" id="pricing" aria-labelledby="h-pricing">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">06 &mdash; Quotation</span>
+      <h2 class="display rv" id="h-pricing">Same site.<br>Two ways to pay.</h2>
+      <p class="rv" style="--d:80ms">You're choosing <em>how</em> you pay, not <em>what</em> you get.
+        Every tier is the same quality of build &mdash; what changes is the level of ongoing service.</p>
+    </div>
+
+    <div class="quotes">
+
+      <div class="docket rv">
+        <div class="docket__hd">
+          <h3 class="display">Option A</h3>
+          <span class="label">Upfront + monthly</span>
+        </div>
+        <div class="docket__sub">Pay for the build, then a small amount each month</div>
+
+        <div class="tier">
+          <span class="tier__name">Starter</span>
+          <span class="tier__price mono">&pound;995<small>+ &pound;15/mo</small></span>
+          <span class="tier__meta"><span>Up to 20 pages</span><span>Setup + monthly</span></span>
+        </div>
+
+        <div class="tier tier--pop">
+          <span class="tier__flag">Most popular</span>
+          <span class="tier__name">Professional</span>
+          <span class="tier__price mono">&pound;1,995<small>+ &pound;25/mo</small></span>
+          <span class="tier__meta"><span>Up to 50 pages</span><span>Setup + monthly</span></span>
+        </div>
+
+        <div class="tier">
+          <span class="tier__name">Growth</span>
+          <span class="tier__price mono">&pound;3,495<small>+ &pound;50/mo</small></span>
+          <span class="tier__meta"><span>Up to 100 pages</span><span>Setup + monthly</span></span>
+        </div>
+
+        <div class="docket__foot"><span>Ref. QUO-A</span><span>Prices held for 30 days</span></div>
+      </div>
+
+      <div class="docket rv" style="--d:90ms">
+        <div class="docket__hd">
+          <h3 class="display">Option B</h3>
+          <span class="label">Nothing upfront</span>
+        </div>
+        <div class="docket__sub">Pay monthly &mdash; 12-month minimum term</div>
+
+        <div class="tier">
+          <span class="tier__name">Starter</span>
+          <span class="tier__price mono">&pound;45<small>per month</small></span>
+          <span class="tier__meta"><span>Up to 20 pages</span><span>&pound;0 to start</span></span>
+        </div>
+
+        <div class="tier tier--pop">
+          <span class="tier__flag">Most popular</span>
+          <span class="tier__name">Professional</span>
+          <span class="tier__price mono">&pound;75<small>per month</small></span>
+          <span class="tier__meta"><span>Up to 50 pages</span><span>&pound;0 to start</span></span>
+        </div>
+
+        <div class="tier">
+          <span class="tier__name">Growth</span>
+          <span class="tier__price mono">&pound;125<small>per month</small></span>
+          <span class="tier__meta"><span>Up to 100 pages</span><span>&pound;0 to start</span></span>
+        </div>
+
+        <div class="docket__foot"><span>Ref. QUO-B</span><span>12-month minimum</span></div>
+      </div>
+
+    </div>
+
+    <div class="included rv">
+      <div class="included__hd">
+        <h3 class="display">Included on every job</h3>
+        <span class="label">Regardless of tier</span>
+      </div>
+      <ul>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Custom design &mdash; no templates</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Local SEO built in</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Service pages for everything you do</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Location pages for every town you cover</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Schema markup</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Mobile-first and fast</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Contact form</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Hosting</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> SSL certificate</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Domain management</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Security updates</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Uptime monitoring</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Unlimited revisions during the build</li>
+        <li><span class="tk"><svg viewBox="0 0 14 11" aria-hidden="true"><path d="M1 5.6 5 9.5 13 1"/></svg></span> Google Search Console submission</li>
+      </ul>
+    </div>
+
+    <div class="addons rv">
+      <div class="shead" style="margin-bottom:var(--s3)">
+        <span class="shead__no">06.1 &mdash; Extras, if you want them</span>
+      </div>
+      <div class="addons__t">
+        <div class="addon"><span class="n">Blog post writing</span><span class="dots" aria-hidden="true"></span><span class="p">&pound;75 / post</span></div>
+        <div class="addon"><span class="n">Custom theme design</span><span class="dots" aria-hidden="true"></span><span class="p">&pound;350</span></div>
+        <div class="addon"><span class="n">Google Ads setup + management</span><span class="dots" aria-hidden="true"></span><span class="p">&pound;200 / mo + spend</span></div>
+        <div class="addon"><span class="n">Monthly SEO retainer</span><span class="dots" aria-hidden="true"></span><span class="p">&pound;200 / mo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- tape -->
+<div class="tape tape--thin" role="presentation"><div class="tape__run" data-hs data-speed="0.42" data-dir="1"></div></div>
+
+<!-- ========================= TESTIMONIALS ========================= -->
+<section class="band" aria-labelledby="h-signoff" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">07 &mdash; Client sign-off</span>
+      <h2 class="display rv" id="h-signoff">In their words.</h2>
+    </div>
+
+    <div class="signoffs">
+      <figure class="signoff rv">
+        <blockquote class="signoff__q">Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.</blockquote>
+        <figcaption class="signoff__by">
+          <span><b>Sarah</b><span>Cuddle Plush Fabrics</span></span>
+          <span class="signoff__tick" aria-hidden="true"><svg viewBox="0 0 18 15"><path d="M1.5 7.6 6.5 13 16.5 1.6"/></svg></span>
+        </figcaption>
+      </figure>
+
+      <figure class="signoff rv" style="--d:80ms">
+        <blockquote class="signoff__q">I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</blockquote>
+        <figcaption class="signoff__by">
+          <span><b>Nicola</b><span>Nicola Noble Tuition</span></span>
+          <span class="signoff__tick" aria-hidden="true"><svg viewBox="0 0 18 15"><path d="M1.5 7.6 6.5 13 16.5 1.6"/></svg></span>
+        </figcaption>
+      </figure>
+
+      <figure class="signoff rv" style="--d:160ms">
+        <blockquote class="signoff__q">My yoga students love that they can book and pay for my classes on my website.</blockquote>
+        <figcaption class="signoff__by">
+          <span><b>Molly</b><span>Sanctuary Ida</span></span>
+          <span class="signoff__tick" aria-hidden="true"><svg viewBox="0 0 18 15"><path d="M1.5 7.6 6.5 13 16.5 1.6"/></svg></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= THE PERSON ========================= -->
+<section class="band band--ink" id="about" aria-labelledby="h-about">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead__no">08 &mdash; Site pass</span>
+    </div>
+
+    <div class="person">
+      <div class="pass rv-l">
+        <div class="pass__hole" aria-hidden="true"><i></i></div>
+        <div class="pass__hd">
+          <span class="label">Contractor pass</span>
+          <span class="label">No. 001</span>
+        </div>
+        <div class="pass__body">
+          <div class="pass__id" aria-hidden="true">RW</div>
+          <div>
+            <div class="pass__name">Ricky Wilson</div>
+            <div class="pass__role">Designer, writer, builder</div>
+          </div>
+          <dl class="pass__rows">
+            <div><dt>Trading since</dt><dd>2019</dd></div>
+            <div><dt>Based</dt><dd>Polegate</dd></div>
+            <div><dt>Outsourced</dt><dd>None</dd></div>
+            <div><dt>Offshored</dt><dd>None</dd></div>
+          </dl>
+        </div>
+        <div class="barcode" aria-hidden="true"></div>
+        <div class="pass__no">DCS &middot; 07395 063764</div>
+      </div>
+
+      <div class="person__copy">
+        <h2 class="display rv" id="h-about">You're hiring a person &mdash;<br>not a company.</h2>
+        <blockquote class="rv" style="--d:60ms">Same bloke on the phone, same bloke doing the work.</blockquote>
+        <p class="rv" style="--d:100ms">There's no account manager, no ticket queue and nobody
+          "circling back". When you ring, I answer. When something needs fixing, I fix it. When you
+          want a new service page adding six months from now, you send me a message and it's done.</p>
+        <p class="rv" style="--d:140ms">That's also why the work is consistent. Nothing gets handed to a
+          junior, nothing gets sent overseas, and nothing gets built to a template just to hit a
+          deadline. <strong>I've been doing this since 2019, and the first clients are still here.</strong></p>
+        <div class="hero__cta rv" style="--d:180ms">
+          <a class="btn" href="/contact">Get a free quote
+            <svg class="btn__arrow" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+          <a class="btn btn--ghost btn--onink" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= AREAS ========================= -->
+<section class="areas" aria-labelledby="h-areas">
+  <div class="wrap">
+    <div class="areas__in">
+      <h2 class="label areas__l" id="h-areas">Areas covered</h2>
+      <ul class="areas__list">
+        <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+        <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+        <li class="uk">&amp; UK-wide</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- tape -->
+<div class="tape" role="presentation"><div class="tape__run" data-hs data-speed="0.34" data-dir="-1"></div></div>
+
+<!-- ========================= FINAL CTA ========================= -->
+<section class="band raise" aria-labelledby="h-raise">
+  <div class="wrap">
+    <div class="raise__grid">
+      <div>
+        <span class="shead__no" style="margin-bottom:18px;display:flex">09 &mdash; Raise a job</span>
+        <h2 class="display rv" id="h-raise">Right then.<br>Let's get you booked in.</h2>
+        <p class="rv" style="--d:70ms; margin-top:20px; max-width:46ch">Tell me what you do and where you
+          work. I'll tell you what I'd build and what it would cost &mdash; no obligation, no sales call,
+          no follow-up sequence.</p>
+        <div class="hero__cta rv" style="--d:120ms">
+          <a class="btn btn--ghost" href="/contact" style="background:var(--ink);color:var(--hv);border-color:var(--ink)">Get a free quote
+            <svg class="btn__arrow" viewBox="0 0 16 12" aria-hidden="true"><path d="M0 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="raise__contact rv" style="--d:100ms">
+        <a href="tel:+447395063764"><span class="k">Phone</span><span class="v">07395 063764</span></a>
+        <a href="mailto:mail@digitalconsultingservices.co.uk"><span class="k">Email</span><span class="v">mail@digitalconsultingservices.co.uk</span></a>
+        <div><span class="k">Mon&ndash;Fri</span><span class="v">9:00 &ndash; 17:30</span></div>
+        <div><span class="k">Saturday</span><span class="v">By appointment</span></div>
+        <div><span class="k">Sunday</span><span class="v">Closed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="sitefooter">
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <span class="foot__plate"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="600" height="300"></span>
+        <p class="foot__tag">Websites that get local tradespeople more jobs. Built in Polegate, working UK-wide since 2019.</p>
+      </div>
+
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing management</a></li>
+          <li><a href="#services">Google Workspace email</a></li>
+          <li><a href="#services">eCommerce websites</a></li>
+          <li><a href="#services">Analytics &amp; reporting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Areas covered</h2>
+        <ul>
+          <li><a href="/contact">Polegate</a></li>
+          <li><a href="/contact">Eastbourne</a></li>
+          <li><a href="/contact">Hailsham</a></li>
+          <li><a href="/contact">Lewes</a></li>
+          <li><a href="/contact">Seaford</a></li>
+          <li><a href="/contact">Brighton &amp; Hove</a></li>
+          <li><a href="/contact">Uckfield</a></li>
+          <li><a href="/contact">Everywhere else in the UK</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Get in touch</h2>
+        <address>
+          Digital Consulting Services<br>
+          Unit H3, Chaucer Business Park<br>
+          Dittons Road, Polegate<br>
+          East Sussex, BN26 6QH<br><br>
+          <a href="tel:+447395063764">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="foot__bottom">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Mon&ndash;Fri 9:00&ndash;17:30 &middot; Sat by appointment &middot; Sun closed</span>
+      <span>Polegate, East Sussex</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supportsIO = 'IntersectionObserver' in window;
+
+  /* ---------------- mobile nav ---------------- */
+  var panel = document.getElementById('navpanel');
+  var openBtns = document.querySelectorAll('[data-nav-open]');
+  var closeBtns = document.querySelectorAll('[data-nav-close]');
+  var lastFocus = null;
+
+  function setNav(open){
+    document.body.setAttribute('data-nav', open ? 'open' : 'closed');
+    if (panel) { if (open) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden',''); } }
+    for (var i=0;i<openBtns.length;i++){ openBtns[i].setAttribute('aria-expanded', open ? 'true' : 'false'); }
+    if (open) {
+      lastFocus = document.activeElement;
+      var first = panel && panel.querySelector('a, button');
+      if (first) first.focus();
+    } else if (lastFocus) {
+      lastFocus.focus();
+    }
+  }
+  if (panel) panel.setAttribute('hidden','');
+  for (var i=0;i<openBtns.length;i++) openBtns[i].addEventListener('click', function(){ setNav(true); });
+  for (var j=0;j<closeBtns.length;j++) closeBtns[j].addEventListener('click', function(){ setNav(false); });
+  if (panel) {
+    panel.addEventListener('click', function(e){
+      var t = e.target;
+      while (t && t !== panel) { if (t.tagName === 'A') { setNav(false); return; } t = t.parentNode; }
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.body.getAttribute('data-nav') === 'open') setNav(false);
+  });
+
+  /* ---------------- barcode (CSS-drawn, deterministic) ---------------- */
+  var bc = document.querySelector('.barcode');
+  if (bc) {
+    var widths = [3,1,2,1,4,1,2,3,1,1,2,4,1,3,1,2,1,1,3,2,1,4,1,2,3,1,1,2,1,3];
+    var html = '';
+    for (var b=0;b<widths.length;b++){
+      html += '<i style="width:' + widths[b] + 'px;' + (b % 2 ? 'opacity:0;' : '') + '"></i>';
+    }
+    bc.innerHTML = html;
+  }
+
+  if (!supportsIO || reduce) return; /* everything below is motion only */
+
+  /* ---------------- scroll reveal ---------------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+  var revealables = document.querySelectorAll('.rv, .rv-l, .hero, .wo__step, .signoff, .included');
+  for (var r=0;r<revealables.length;r++) io.observe(revealables[r]);
+
+  /* ---------------- checklist: tick in, one by one ---------------- */
+  var checkGroups = document.querySelectorAll('.checks');
+  for (var g=0; g<checkGroups.length; g++){
+    (function(group){
+      var items = group.querySelectorAll('.check');
+      var gio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          for (var k=0;k<items.length;k++){
+            items[k].style.setProperty('--d', (k * 85) + 'ms');
+            items[k].classList.add('in');
+          }
+          gio.unobserve(en.target);
+        });
+      }, { threshold: 0.2 });
+      gio.observe(group);
+    })(checkGroups[g]);
+  }
+
+  /* ---------------- rubber stamp impact ---------------- */
+  var jobCards = document.querySelectorAll('.job');
+  for (var jc=0; jc<jobCards.length; jc++){
+    (function(card){
+      var stamp = card.querySelector('.stamp');
+      if (!stamp) return;
+      var sio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          stamp.style.setProperty('--d', '260ms');
+          stamp.classList.add('in');
+          sio.unobserve(en.target);
+        });
+      }, { threshold: 0.4 });
+      sio.observe(card);
+    })(jobCards[jc]);
+  }
+
+  /* ---------------- credential count-up ---------------- */
+  var stats = document.querySelectorAll('[data-count]');
+  var nio = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      nio.unobserve(el);
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var plain = el.getAttribute('data-plain');
+      var from = plain ? Math.max(0, target - 30) : 0;
+      var start = null, dur = 900;
+      function step(ts){
+        if (start === null) start = ts;
+        var p = Math.min(1, (ts - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (target - from) * eased) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.6 });
+  for (var s=0;s<stats.length;s++) nio.observe(stats[s]);
+
+  /* ---------------- signature: scroll-driven hazard tape ---------------- */
+  var runs = document.querySelectorAll('[data-hs]');
+  var stripePeriod = 791.96; /* 10 x horizontal period of a 135deg / 56px stripe */
+  var measured = [];
+  for (var t=0;t<runs.length;t++){
+    var run = runs[t];
+    var isLegend = run.parentNode.classList.contains('tape--legend');
+    var period = stripePeriod;
+    if (isLegend) {
+      /* duplicate the legend so it can loop seamlessly */
+      var seg = run.firstElementChild;
+      if (seg) {
+        var clone = seg.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        run.appendChild(clone);
+        var clone2 = seg.cloneNode(true);
+        clone2.setAttribute('aria-hidden', 'true');
+        run.appendChild(clone2);
+        period = seg.getBoundingClientRect().width || 800;
+      }
+    }
+    measured.push({
+      el: run,
+      period: period,
+      speed: parseFloat(run.getAttribute('data-speed')) || 0.3,
+      dir: parseFloat(run.getAttribute('data-dir')) || 1
+    });
+  }
+
+  var ticking = false;
+  function paintTapes(){
+    ticking = false;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    for (var m=0;m<measured.length;m++){
+      var it = measured[m];
+      var v = y * it.speed * it.dir;
+      var x = ((v % it.period) + it.period) % it.period;
+      it.el.style.transform = 'translate3d(' + (x - it.period) + 'px,0,0)';
+    }
+  }
+  function onScroll(){
+    if (!ticking) { ticking = true; requestAnimationFrame(paintTapes); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  paintTapes();
+
+})();
+</script>
+</body>
+</html>

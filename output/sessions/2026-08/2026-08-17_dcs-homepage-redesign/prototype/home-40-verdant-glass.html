@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Agency work for small businesses</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Sites that stand next to what London and New York studios put out — for a fraction of the cost and a tiny fraction of the effort from you. From £995 plus £15/mo, or £45/mo with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================
+   DCS — Direction 40 "POSTER / VERDANT / GLASS ISLAND"
+   Round 4 variation on direction 27.
+
+   CHORD — Verdant: emerald leads, coral is the structural counter.
+     emerald #00784F  deep, saturated, blue-shifted. Not mint, not sage.
+     jade    #00C27A  the bright register of the same green.
+     coral   #F2452E  warm counter. Load-bearing, not decorative:
+                      it caps every section seam, numbers every room,
+                      plates the popular price tier, marks the live nav item.
+
+   NAV — B: floating glass island. Genuine backdrop-filter blur +
+   saturation. This is the ONLY blur in the file. Everything else is flat:
+   no gradients, no shadows on structural surfaces, no glow.
+
+   LAYOUT — every section is one viewport at >=1024px (100svh),
+   scroll-snap proximity. Below 768px sections flow.
+   ============================================================ */
+
+:root{
+  /* ---- THE ROOM (neutral only) ---- */
+  --paper:    #F3F3F1;
+  --bone:     #E3E3E0;
+  --ink:      #101014;
+  --graphite: #1B1B20;
+  --chalk:    #F3F3F1;
+  --ash:      #55555E;   /* 6.64:1 on paper */
+  --smoke:    #A6A6B0;   /* 7.87:1 on ink   */
+  --rule-light: rgba(16,16,20,.14);
+  --rule-dark:  rgba(243,243,241,.20);
+
+  /* ---- THE FURNITURE (flat, saturated, hard-edged) ----
+     emerald: #fff on it 5.53:1  · chalk on it 4.98:1
+     jade:    ink on it 8.19:1   (never white — 2.33:1)
+     coral:   ink on it 5.16:1   · as text on ink 5.16:1
+     coral vs paper 3.34:1 · emerald vs bone 4.30:1  (seam rules) */
+  --emerald: #00784F;
+  --jade:    #00C27A;
+  --coral:   #F2452E;
+
+  /* dark glass, emerald-tinted. Chalk on it: 6.82:1 over paper (worst
+     ground on the page), 9.4:1 over jade, 11.9:1 over coral, 16:1 over ink. */
+  --glass:      rgba(6,30,22,.72);
+  --glass-top:  rgba(255,255,255,.34);
+  --glass-bot:  rgba(0,0,0,.46);
+
+  /* ---- type ---- */
+  --font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* height-aware: a 100svh section cannot be blown out by a wide viewport */
+  /* capped by height as well as width so a short window cannot blow the section,
+     but floored at 7.5rem so a 768-tall laptop never drops under the 120px band.
+     1440x900 -> 139.5px · 1280x800 -> 124px · 1366x768 -> 120px · 390 -> width governs */
+  --fs-display: clamp(2.6rem, min(10vw, max(15.5svh, 7.5rem)), 9rem);
+  --fs-h2:      clamp(1.9rem, min(6.1vw, 9.6svh), 5.25rem);/*  86px @1440x900 */
+  --fs-h3:      clamp(1.2rem, 1.9vw, 1.75rem);
+  --fs-figure:  clamp(1.6rem, 2.9vw, 2.6rem);
+  --fs-lead:    clamp(1.0625rem, 1.35vw, 1.3125rem);
+  --fs-body:    1.0625rem;
+  --fs-small:   0.9375rem;
+  --fs-label:   0.75rem;
+
+  /* ---- system ---- */
+  --gut: clamp(1.25rem, 3.2vw, 3rem);
+  --max: 1440px;
+  --seam: clamp(20px, 3vw, 44px);
+  --lip: 6px;                       /* coral seam cap */
+  --nav-clear: clamp(84px, 11vh, 116px);
+  --foot-clear: clamp(2rem, 4vh, 3.25rem);
+  --float-clear: 68px;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --snap: cubic-bezier(.32,.72,0,1);
+
+  --z-panel: 1;
+  --z-float: 60;
+  --z-nav: 70;
+  --z-menu: 90;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html:focus-within{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html:focus-within{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4,p,figure,blockquote,ul,ol,dl,dd,table{margin:0}
+ul,ol{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+/* focus scrolling must clear the floating island above and the snap position below */
+a,button{scroll-margin-block:calc(var(--nav-clear) + 12px) 32px}
+.on-dark :focus-visible,.island :focus-visible,.menu :focus-visible{outline-color:var(--jade)}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--ink);color:var(--chalk);
+  padding:14px 20px;font-weight:700;text-decoration:none;
+}
+.skip:focus{left:8px;top:8px}
+
+.vh{
+  position:absolute!important;width:1px;height:1px;
+  margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ============================================================
+   TYPE PRIMITIVES
+   ============================================================ */
+.display{
+  font-size:var(--fs-display);line-height:.86;font-weight:800;
+  letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance;
+}
+.h2{
+  font-size:var(--fs-h2);line-height:.9;font-weight:800;
+  letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance;
+}
+.h3{font-size:var(--fs-h3);line-height:1.08;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:var(--fs-lead);line-height:1.42;max-width:44ch}
+.label{
+  font-size:var(--fs-label);font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;line-height:1.2;
+}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ============================================================
+   SECTIONS — one viewport each. Neutral rooms, coral-capped seams.
+   ============================================================ */
+.sec{
+  position:relative;
+  z-index:var(--z-panel);
+  display:grid;
+  align-content:center;
+  /* default is natural flow. The strict one-section-per-viewport rule is applied
+     only inside the gate at the foot of this file. */
+  padding-block:clamp(2.75rem,9vw,4rem) calc(var(--seam) + 2rem);
+  margin-top:calc(var(--seam) * -1);
+  border-radius:var(--seam) var(--seam) 0 0;
+  border-top:var(--lip) solid var(--coral);
+}
+.sec:first-of-type{padding-top:var(--nav-clear)}
+.sec:first-of-type{margin-top:0;border-radius:0;border-top:0}
+.sec--paper{background:var(--paper);color:var(--ink)}
+.sec--bone{background:var(--bone);color:var(--ink);border-top-color:var(--emerald)}
+.sec--ink{background:var(--ink);color:var(--chalk)}
+.sec--graphite{background:var(--graphite);color:var(--chalk)}
+.on-dark a{color:var(--chalk)}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+
+/* split: heading rail on the left, content on the right */
+.split2{display:grid;gap:clamp(1.5rem,3vw,3rem);grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}
+.split2--wide{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+.split2--flip{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+
+/* section heading block */
+/* width comes from the grid column; .lead caps the measure of the sub-copy.
+   A hard ch cap here forced the 84px h2 to wrap to four lines in the wide rail. */
+.sechead{max-width:none}
+.sechead--stack{margin-bottom:clamp(1rem,2vw,1.75rem);max-width:none}
+.sechead__idx{
+  display:inline-block;
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.22em;
+  color:var(--coral);margin-bottom:.7rem;
+}
+.sechead__bar{
+  display:block;height:10px;width:clamp(80px,12vw,164px);
+  background:var(--emerald);transform-origin:left center;margin-bottom:.85rem;
+}
+.sechead__bar--jade{background:var(--jade)}
+.sechead__bar--coral{background:var(--coral)}
+.sechead__kicker{color:var(--ash);margin-bottom:.7rem}
+.on-dark .sechead__kicker{color:var(--smoke)}
+.sechead .h2{color:inherit;transition:color .7s var(--ease)}
+.sechead__sub{margin-top:clamp(.9rem,1.6vw,1.35rem);color:var(--ash)}
+.on-dark .sechead__sub{color:var(--smoke)}
+
+/* ============================================================
+   BUTTONS — flat, hard. The only shadow in this file is the nav's.
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  min-height:52px;padding:.8rem 1.4rem;
+  font-size:var(--fs-small);font-weight:700;letter-spacing:.02em;
+  text-decoration:none;border:2px solid transparent;
+  transition:transform .18s var(--snap), background-color .18s linear, color .18s linear, border-color .18s linear;
+}
+.btn__arrow{
+  display:grid;place-items:center;width:26px;height:26px;flex:0 0 26px;
+  border:2px solid currentColor;transition:transform .28s var(--snap);
+}
+.btn__arrow svg{width:12px;height:12px;display:block}
+.btn:hover .btn__arrow,.btn:focus-visible .btn__arrow{transform:translate(3px,-3px)}
+.btn:active{transform:translateY(2px)}
+
+.btn--solid{background:var(--ink);color:var(--chalk)}
+.btn--solid:hover{background:var(--emerald)}
+.on-dark .btn--solid{background:var(--chalk);color:var(--ink)}
+.on-dark .btn--solid:hover{background:var(--jade);color:var(--ink)}
+
+.btn--line{border-color:currentColor;color:inherit;background:transparent}
+.btn--line:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.on-dark .btn--line:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+
+/* specificity must beat `.on-dark a` or the label loses its ink colour */
+.btn--jade,.on-dark .btn--jade,.island .btn--jade{background:var(--jade);color:var(--ink);border-color:var(--jade)}
+.btn--jade:hover,.on-dark .btn--jade:hover,.island .btn--jade:hover{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+
+/* ============================================================
+   NAV B — FLOATING GLASS ISLAND
+   Real glass: blur + saturation, a bright top edge, a dark bottom edge,
+   an inner top highlight, and a shadow cast downward (light from above).
+   Constant dark tint so labels clear AA on every ground it crosses —
+   it does NOT repaint per section; that is direction 39's job.
+   ============================================================ */
+.island{
+  position:fixed;
+  top:clamp(10px,1.5vh,20px);
+  left:50%;
+  transform:translateX(-50%);
+  z-index:var(--z-nav);
+  display:flex;align-items:center;gap:clamp(.5rem,1.1vw,1.15rem);
+  width:max-content;max-width:calc(100vw - 2 * var(--gut));
+  padding:7px 7px 7px 14px;
+  border-radius:999px;
+  color:var(--chalk);
+
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(20px) saturate(190%);
+  backdrop-filter:blur(20px) saturate(190%);
+
+  border-top:1px solid var(--glass-top);
+  border-left:1px solid rgba(255,255,255,.18);
+  border-right:1px solid rgba(255,255,255,.18);
+  border-bottom:1px solid var(--glass-bot);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    inset 0 -1px 0 rgba(0,0,0,.34),
+    0 13px 24px -13px rgba(6,20,14,.68);   /* cast downward: light is above */
+}
+/* no backdrop-filter support: fall back to an opaque tint, same legibility */
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  .island{background:rgba(6,30,22,.94)}
+}
+
+.island__brand{
+  display:flex;align-items:center;gap:.5rem;
+  text-decoration:none;font-weight:900;letter-spacing:-.04em;
+  font-size:1.05rem;line-height:1;min-height:40px;padding-right:.2rem;
+}
+.island__mark{background:var(--emerald);color:#fff;padding:.34em .38em .28em;letter-spacing:-.02em}
+
+.island__links{display:flex;align-items:center;gap:clamp(.35rem,.9vw,.9rem)}
+.island__links a{
+  position:relative;display:inline-flex;align-items:center;
+  min-height:44px;padding:.5rem .55rem;
+  text-decoration:none;font-size:var(--fs-small);font-weight:500;
+  transition:color .2s linear;
+}
+.island__links a::after{
+  content:"";position:absolute;left:.55rem;right:.55rem;bottom:9px;height:3px;
+  background:var(--coral);transform:scaleX(0);transform-origin:left;
+  transition:transform .32s var(--ease);
+}
+.island__links a:hover,.island__links a:focus-visible{color:#fff}
+.island__links a:hover::after,.island__links a:focus-visible::after{transform:scaleX(1)}
+/* live section: colour + weight carry the state, the coral bar confirms it */
+.island__links a[aria-current="true"]{color:#fff;font-weight:700}
+.island__links a[aria-current="true"]::after{transform:scaleX(1)}
+
+.island__tel{
+  display:inline-flex;align-items:center;gap:.45rem;
+  min-height:44px;padding:.5rem .2rem;
+  text-decoration:none;font-weight:700;font-size:var(--fs-small);
+  white-space:nowrap;border-bottom:3px solid var(--jade);
+}
+.island .btn{min-height:44px;padding:.55rem 1rem;border-radius:999px}
+.island .btn__arrow{border-radius:999px;width:24px;height:24px;flex:0 0 24px}
+
+.burger{
+  display:none;width:44px;height:44px;place-items:center;
+  border:1px solid rgba(255,255,255,.34);border-radius:999px;
+}
+.burger__box{width:18px;height:12px;position:relative}
+.burger__box i{
+  position:absolute;left:0;right:0;height:2px;background:currentColor;
+  transition:transform .34s var(--ease), opacity .2s linear;
+}
+.burger__box i:nth-child(1){top:0}
+.burger__box i:nth-child(2){top:5px}
+.burger__box i:nth-child(3){top:10px}
+[aria-expanded="true"] .burger__box i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+[aria-expanded="true"] .burger__box i:nth-child(2){opacity:0}
+[aria-expanded="true"] .burger__box i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+
+/* ------------------------------------------------------------
+   THE TRAP: a position:fixed overlay nested inside a
+   backdrop-filter ancestor is contained BY that ancestor and
+   collapses into the nav's own pill. This panel is therefore a
+   SIBLING of .island, never a descendant — and carries no
+   backdrop-filter of its own.
+   ------------------------------------------------------------ */
+.menu{
+  position:fixed;inset:0;z-index:var(--z-menu);
+  background:var(--ink);color:var(--chalk);
+  display:flex;flex-direction:column;
+  padding:calc(72px + 1.25rem) var(--gut) 1.5rem;
+  overflow-y:auto;
+}
+.menu[hidden]{display:none}
+.menu__list{display:flex;flex-direction:column;gap:.15rem;margin-bottom:1.5rem}
+.menu__list a{
+  display:block;text-decoration:none;
+  font-size:clamp(1.85rem,9vw,2.75rem);font-weight:800;
+  letter-spacing:-.03em;text-transform:uppercase;line-height:1.1;
+  padding:.3rem 0;border-bottom:1px solid var(--rule-dark);
+}
+.menu__foot{margin-top:auto;display:grid;gap:.7rem}
+.menu__close{
+  position:absolute;top:14px;right:var(--gut);
+  width:44px;height:44px;display:grid;place-items:center;
+  border:1px solid var(--rule-dark);border-radius:999px;
+}
+.js .menu__item{opacity:0;transform:translateY(20px)}
+.menu.is-open .menu__item{
+  opacity:1;transform:none;
+  transition:opacity .42s var(--ease), transform .52s var(--ease);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  grid-template-rows:1fr auto;
+  align-content:stretch;
+  /* the next panel pulls up by --seam; pad by the same so the band is never clipped */
+  padding-bottom:var(--seam);
+  min-height:100svh;
+  background:var(--paper);
+}
+.hero__in{display:grid;align-content:center;gap:clamp(.9rem,1.7vw,1.5rem);padding-bottom:clamp(1rem,2.4vh,2rem)}
+.hero__eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;color:var(--ash)}
+.hero__eyebrow .dot{width:7px;height:7px;background:var(--coral);flex:0 0 7px}
+.hero h1{margin:0}
+
+/* per-character reveal: letters ARRIVE IN COLOUR and resolve to ink */
+.split .ch{display:inline-block;white-space:pre}
+.js .split.is-split .ch{opacity:0;transform:translateY(.34em);color:var(--tint,var(--emerald))}
+.split.is-split.is-in .ch{
+  opacity:1;transform:none;color:inherit;
+  transition:opacity .5s linear, transform .66s var(--ease), color .95s ease-out;
+  transition-delay:var(--d,0ms);
+}
+.plate{display:inline-block;background:var(--emerald);color:#fff;padding:0 .12em .06em;transform-origin:left center}
+.js .plate{transform:scaleX(0)}
+.js .hero.is-in .plate{transform:scaleX(1);transition:transform .7s var(--ease) .15s}
+
+.hero__cols{display:grid;gap:clamp(1.25rem,2.6vw,2.5rem);grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:end}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem}
+.pricechip{
+  background:var(--jade);color:var(--ink);
+  padding:clamp(.9rem,1.6vw,1.35rem) clamp(1rem,1.8vw,1.45rem);
+  display:grid;gap:.35rem;align-self:end;
+}
+.pricechip__big{font-size:clamp(1.25rem,2.1vw,1.75rem);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.pricechip__note{font-size:var(--fs-small);font-weight:500}
+.hero__tel{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:clamp(1rem,1.5vw,1.25rem);font-weight:800;letter-spacing:-.01em;
+  text-decoration:none;min-height:52px;padding:.8rem 1.4rem;border:2px solid var(--ink);
+  transition:background-color .18s linear,color .18s linear;
+}
+.hero__tel:hover{background:var(--ink);color:var(--chalk)}
+
+/* marquee band — an emerald object closing the hero viewport */
+.band{
+  position:relative;z-index:2;
+  background:var(--emerald);color:#fff;
+  padding:clamp(.7rem,1.3vw,1.05rem) 0;
+  overflow:hidden;
+}
+.band__track{display:flex;width:max-content}
+.band__run{
+  display:flex;align-items:center;flex:0 0 auto;padding-right:2rem;
+  font-size:clamp(.95rem,1.6vw,1.35rem);font-weight:800;
+  letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;
+}
+.band__run span{padding-inline:1rem;display:inline-flex;align-items:center;gap:1rem}
+.band__run span::after{content:"";width:8px;height:8px;background:#fff;flex:0 0 8px}
+@media (prefers-reduced-motion: no-preference){
+  .band__track{animation:marquee 44s linear infinite}
+  .band:hover .band__track{animation-play-state:paused}
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   THE CLAIM — three saturated objects in a neutral room
+   ============================================================ */
+.claims{display:grid;gap:clamp(.6rem,1.2vw,1rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.claim{
+  display:flex;flex-direction:column;gap:clamp(1rem,2.4vw,2.25rem);
+  padding:clamp(1.2rem,2.2vw,1.9rem);
+  min-height:clamp(210px,26svh,300px);
+}
+.claim--emerald{background:var(--emerald);color:#fff}
+.claim--jade{background:var(--jade);color:var(--ink)}
+.claim--coral{background:var(--coral);color:var(--ink)}
+.claim__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em}
+.claim__h{
+  font-size:clamp(1.35rem,2.5vw,2.15rem);font-weight:800;
+  letter-spacing:-.035em;line-height:.98;text-transform:uppercase;
+  margin-bottom:.7rem;margin-top:auto;
+}
+.claim__p{font-size:var(--fs-small);font-weight:500;line-height:1.45}
+
+/* ============================================================
+   SERVICES — an index. Colour arrives on interaction.
+   ============================================================ */
+.svcs{border-top:2px solid currentColor}
+.svc{
+  position:relative;display:grid;
+  grid-template-columns:4rem minmax(0,1fr) minmax(0,1.1fr) 2rem;
+  gap:clamp(.75rem,1.6vw,1.5rem);align-items:baseline;
+  padding:clamp(.7rem,1.4vw,1.15rem) clamp(.6rem,1.2vw,1.1rem);
+  border-bottom:1px solid var(--rule-light);
+  text-decoration:none;color:inherit;isolation:isolate;
+}
+.svc::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--flood,var(--emerald));
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .42s var(--ease);
+}
+.svc:hover::before,.svc:focus-visible::before{transform:scaleY(1)}
+.svc>*{transition:color .2s linear}
+.svc:hover,.svc:focus-visible{color:var(--on-flood,#fff)}
+.svc:hover .svc__desc,.svc:focus-visible .svc__desc{color:var(--on-flood,#fff)}
+.svc__idx{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;color:var(--coral)}
+.svc:hover .svc__idx,.svc:focus-visible .svc__idx{color:var(--on-flood,#fff)}
+.svc__name{font-size:clamp(1.15rem,2vw,1.85rem);font-weight:800;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.svc__desc{color:var(--ash);font-size:var(--fs-small);line-height:1.35}
+.svc__go{justify-self:end;font-size:1.25rem;line-height:1;transition:transform .3s var(--snap)}
+.svc:hover .svc__go,.svc:focus-visible .svc__go{transform:translate(4px,-4px)}
+.svc:nth-child(2n){--flood:var(--jade);--on-flood:var(--ink)}
+.svc:nth-child(3n){--flood:var(--coral);--on-flood:var(--ink)}
+
+/* ============================================================
+   WORK — nine clients, nine kinds of business
+   ============================================================ */
+.work{display:grid;gap:clamp(.5rem,.9vw,.8rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem;
+  min-height:clamp(132px,17svh,178px);
+  padding:clamp(.85rem,1.4vw,1.25rem);
+  transition:background-color .14s linear, color .14s linear;
+}
+.tile--emerald{background:var(--emerald);color:#fff}
+.tile--jade{background:var(--jade);color:var(--ink)}
+.tile--coral{background:var(--coral);color:var(--ink)}
+.tile--paper{background:var(--paper);color:var(--ink)}
+.tile--ink{background:var(--ink);color:var(--chalk);outline:1px solid var(--rule-dark);outline-offset:-1px}
+.tile:hover,.tile:focus-within{background:var(--chalk);color:var(--ink)}
+.tile--paper:hover{background:var(--ink);color:var(--chalk)}
+.tile__sector{font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.tile__name{font-size:clamp(1.05rem,1.55vw,1.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin-bottom:.35rem}
+.tile__line{font-size:var(--fs-small);font-weight:500;line-height:1.32}
+.workfoot{
+  margin-top:clamp(.9rem,1.6vw,1.4rem);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;align-items:center;
+  color:var(--smoke);font-size:var(--fs-small);
+}
+
+/* ============================================================
+   SECTORS — duotone tiles + a duotone loop. Colour via the media.
+   ============================================================ */
+.duoframe{
+  position:relative;overflow:hidden;
+  background:var(--emerald);           /* also the no-media fallback */
+  aspect-ratio:3/2;
+}
+.duoframe img,.duoframe video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.08);
+  mix-blend-mode:luminosity;
+}
+.duoframe img{transition:transform .8s var(--ease)}
+.duo:hover .duoframe img{transform:scale(1.04)}
+.duoframe--jade{background:var(--jade)}
+.duoframe--coral{background:var(--coral)}
+.duoframe--ink{background:var(--ink)}
+.duoframe--wide{aspect-ratio:16/9}
+/* a bright-ground source blended at luminosity over emerald comes out pastel mint —
+   the exact trap this chord has to avoid. Inverting drops the field into deep
+   emerald and lifts the bloom, so the green stays saturated. */
+.duoframe--deep video{filter:grayscale(1) invert(1) contrast(1.12) brightness(.92)}
+
+.sectors{display:grid;gap:clamp(.6rem,1.2vw,1rem);grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(.85rem,1.7vw,1.4rem)}
+.duo figure{margin:0}
+.duo figcaption{margin-top:.6rem;display:flex;flex-direction:column;gap:.1rem}
+.duo__sector{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.duo__what{font-size:var(--fs-small);color:var(--ash);line-height:1.35}
+
+.vcap{margin-top:.55rem;font-size:var(--fs-small);line-height:1.35;color:var(--ash);max-width:64ch}
+.on-dark .vcap{color:var(--smoke)}
+.vtoggle{
+  position:absolute;left:10px;bottom:10px;z-index:3;
+  min-height:36px;padding:.35rem .8rem;
+  background:var(--ink);color:var(--chalk);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.vtoggle:hover{background:var(--chalk);color:var(--ink)}
+
+/* ============================================================
+   PROCESS + PROMISE (merged)
+   ============================================================ */
+.twocol{display:grid;gap:clamp(1.25rem,2.6vw,2.75rem);grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}
+.coltitle{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:.7rem}
+
+.steps{display:grid;gap:clamp(.6rem,1.1vw,.95rem);grid-template-columns:repeat(2,minmax(0,1fr))}
+.step{border-top:3px solid var(--chalk);padding-top:.85rem}
+.step--last{background:var(--jade);color:var(--ink);border-top-color:var(--jade);padding:.85rem}
+.step__n{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;margin-bottom:.7rem;display:block;color:var(--coral)}
+.step--last .step__n{color:var(--ink)}
+.step h3{margin-bottom:.35rem}
+.step p{font-size:var(--fs-small);color:var(--smoke);line-height:1.36}
+.step--last p{color:var(--ink)}
+
+.promise{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.promise li{
+  display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.9rem;
+  padding:.55rem 0;border-bottom:1px solid var(--rule-dark);
+}
+.promise__n{
+  width:34px;height:34px;display:grid;place-items:center;
+  font-weight:900;font-size:.9rem;
+}
+.promise li:nth-child(1) .promise__n{background:var(--coral);color:var(--ink)}
+.promise li:nth-child(2) .promise__n{background:var(--jade);color:var(--ink)}
+.promise li:nth-child(3) .promise__n{background:var(--chalk);color:var(--ink)}
+.promise li:nth-child(4) .promise__n{background:var(--emerald);color:#fff}
+.promise h3{font-size:1.0625rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.15rem}
+.promise p{color:var(--smoke);font-size:var(--fs-small);line-height:1.3}
+
+/* ============================================================
+   PRICING — one condensed table. Every figure printed in full.
+   ============================================================ */
+.plegend{display:grid;gap:.4rem;margin-bottom:1.1rem}
+.plegend p{font-size:var(--fs-small);color:var(--ash);display:flex;gap:.6rem;align-items:baseline}
+.plegend b{
+  flex:0 0 auto;background:var(--ink);color:var(--chalk);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:.25rem .5rem;
+}
+.plegend p:nth-child(2) b{background:var(--emerald);color:#fff}
+
+/* the wrapper is what carries overflow-x. A <table> given display:block
+   still propagates its anonymous table box's min-content to the grid track,
+   which blew the 390 layout viewport out to 626px. A real div does not. */
+.ptable-wrap{overflow-x:auto}
+.ptable{width:100%;min-width:0;border-collapse:separate;border-spacing:0 6px;text-align:left}
+.ptable th,.ptable td{padding:.7rem .9rem;vertical-align:baseline;background:var(--bone)}
+.sec--bone .ptable th,.sec--bone .ptable td{background:var(--paper)}
+.ptable thead th{
+  background:transparent;padding-block:0 .4rem;
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);
+}
+.ptable tbody tr.is-pop th,.ptable tbody tr.is-pop td{background:var(--coral);color:var(--ink)}
+.ptable tbody th{font-size:1.05rem;font-weight:800;letter-spacing:-.01em;text-transform:uppercase}
+.ptable .fig{font-size:var(--fs-figure);font-weight:800;letter-spacing:-.04em;line-height:1;white-space:nowrap;
+  /* tnum gives the thousands comma a full digit slot, printing "£1 , 995" */
+  font-variant-numeric:normal;font-feature-settings:normal}
+.ptable .pages{display:block;font-size:var(--fs-small);font-weight:500;letter-spacing:0;text-transform:none;margin-top:.3rem;opacity:.88}
+.ptable td::before{content:none}
+.ptable .tag{
+  display:inline-block;background:var(--ink);color:var(--chalk);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.2rem .4rem;margin-left:.5rem;vertical-align:middle;
+}
+
+.incl{margin-top:clamp(1rem,2vw,1.6rem)}
+.incl h3{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;color:var(--ash)}
+.incl ul{display:flex;flex-wrap:wrap;gap:.4rem}
+.incl li{font-size:var(--fs-small);font-weight:500;border:1px solid var(--rule-light);padding:.3rem .65rem}
+.addons{margin-top:.9rem;font-size:var(--fs-small);color:var(--ash);max-width:74ch;line-height:1.45}
+.addons strong{color:var(--ink);font-weight:700}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{display:grid;gap:clamp(.6rem,1.2vw,1rem);grid-template-columns:repeat(3,minmax(0,1fr))}
+.quote{
+  display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;
+  padding:clamp(1.2rem,2.2vw,1.9rem);min-height:clamp(210px,26svh,290px);
+}
+.quote--emerald{background:var(--emerald);color:#fff}
+.quote--jade{background:var(--jade);color:var(--ink)}
+.quote--coral{background:var(--coral);color:var(--ink)}
+.quote blockquote p{font-size:clamp(1.1rem,1.7vw,1.5rem);font-weight:700;letter-spacing:-.02em;line-height:1.24;text-wrap:pretty}
+.quote figcaption{font-size:var(--fs-small);font-weight:700}
+.quote figcaption span{display:block;font-weight:500;opacity:.92}
+
+/* ============================================================
+   PERSON
+   ============================================================ */
+.person{display:grid;gap:clamp(1.5rem,3.2vw,3.5rem);grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}
+.person__body p+p{margin-top:.85rem}
+.person__body{color:var(--smoke);font-size:var(--fs-lead);line-height:1.5;max-width:46ch}
+.person__body strong{color:var(--chalk);font-weight:700}
+.creds{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.creds div{display:flex;justify-content:space-between;gap:1.25rem;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--rule-dark)}
+.creds dt{font-size:var(--fs-small);color:var(--smoke)}
+.creds dd{margin:0;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;text-align:right}
+
+/* ============================================================
+   THE QUIET ONE — a viewport carrying almost nothing
+   ============================================================ */
+.quiet{display:grid;gap:clamp(1.5rem,3.2vw,3.5rem);grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center}
+.quiet__line{font-size:clamp(1.1rem,2.05vw,1.75rem);font-weight:500;letter-spacing:-.02em;max-width:24ch;line-height:1.25}
+.quiet__mark{display:block;width:clamp(40px,5vw,72px);height:clamp(40px,5vw,72px);background:var(--jade);margin-bottom:clamp(1.25rem,3vw,2.5rem)}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final{display:grid;gap:clamp(1.5rem,3.2vw,3.5rem);grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end}
+.final__actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}
+.contactlist{display:grid;gap:0;border-top:1px solid var(--rule-dark)}
+.contactlist a,.contactlist p{
+  display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:.8rem 0;border-bottom:1px solid var(--rule-dark);
+  text-decoration:none;font-size:var(--fs-small);transition:color .18s linear;
+}
+.contactlist a:hover{color:var(--jade)}
+.contactlist b{font-size:1rem;font-weight:800;letter-spacing:-.01em;text-align:right;overflow-wrap:anywhere}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:var(--graphite);color:var(--chalk);
+  position:relative;z-index:2;
+  border-radius:var(--seam) var(--seam) 0 0;
+  border-top:var(--lip) solid var(--coral);
+  margin-top:calc(var(--seam) * -1);
+  padding:clamp(2.5rem,5vw,4rem) 0 calc(1.75rem + var(--mobile-bar,0px));
+}
+.footcols{
+  display:grid;gap:clamp(1.5rem,3vw,2.5rem);grid-template-columns:repeat(4,minmax(0,1fr));
+  padding-bottom:clamp(1.75rem,3vw,2.5rem);border-bottom:1px solid var(--rule-dark);
+}
+.footcols h2{font-size:var(--fs-label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:.9rem}
+.footcols a{display:flex;align-items:center;min-height:40px;text-decoration:none;font-size:var(--fs-small)}
+.footcols a:hover{text-decoration:underline;text-underline-offset:4px}
+.footcols address{font-style:normal;font-size:var(--fs-small);color:var(--smoke);line-height:1.7}
+.footcols address a{display:inline-flex;align-items:center;min-height:40px;color:var(--chalk);font-weight:700;overflow-wrap:anywhere}
+.footbar{
+  padding-top:1.4rem;display:flex;flex-wrap:wrap;gap:.75rem 2rem;
+  justify-content:space-between;align-items:center;font-size:var(--fs-small);color:var(--smoke);
+}
+.footbrand{display:flex;align-items:baseline;gap:.5rem;font-weight:900;font-size:1.2rem;letter-spacing:-.04em}
+.footbrand .island__mark{font-size:1.2rem}
+
+/* ============================================================
+   PERSISTENT FLOATING CTA (desktop) / ACTION BAR (mobile)
+   ============================================================ */
+.float{
+  position:fixed;right:clamp(1rem,2vw,1.75rem);bottom:clamp(1rem,2vw,1.75rem);
+  z-index:var(--z-float);
+  display:inline-flex;align-items:center;gap:.6rem;
+  min-height:52px;padding:.8rem 1.25rem;
+  background:var(--ink);color:var(--chalk);border:2px solid var(--chalk);
+  font-size:var(--fs-small);font-weight:700;text-decoration:none;
+  transition:background-color .22s linear,color .22s linear,border-color .22s linear,transform .2s var(--snap);
+}
+.float[data-tone="dark"]{background:var(--chalk);color:var(--ink);border-color:var(--ink)}
+.float:hover{background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.float:active{transform:translateY(2px)}
+.float__dot{width:10px;height:10px;background:var(--jade);flex:0 0 10px}
+.float[data-tone="dark"] .float__dot{background:var(--coral)}
+.float:hover .float__dot{background:#fff}
+
+.mobar{display:none;position:fixed;inset:auto 0 0 0;z-index:var(--z-float);background:var(--ink);border-top:1px solid var(--rule-dark)}
+.mobar a{
+  flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:60px;text-decoration:none;color:var(--chalk);font-size:var(--fs-small);font-weight:700;
+}
+.mobar a+a{background:var(--jade);color:var(--ink)}
+
+/* ============================================================
+   REVEALS — hidden state only ever applied when JS is present
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px)}
+.js .reveal.is-in{opacity:1;transform:none;transition:opacity .6s linear var(--d,0ms), transform .8s var(--ease) var(--d,0ms)}
+.js .sechead__bar{transform:scaleX(0)}
+.js .sechead__bar.is-in{transform:scaleX(1);transition:transform .7s var(--ease)}
+.js .resolve{color:var(--ash)}
+.js .on-dark .resolve{color:var(--smoke)}
+.js .resolve.is-in{color:inherit}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .js .reveal,.js .split.is-split .ch,.js .menu__item{opacity:1!important;transform:none!important}
+  .js .split.is-split .ch{color:inherit!important}
+  .js .sechead__bar,.js .plate{transform:none!important}
+  .js .resolve{color:inherit!important}
+  .band__track{animation:none!important}
+  html{scroll-snap-type:none!important}
+}
+
+/* ============================================================
+   THE ONE-SECTION-PER-VIEWPORT GATE
+   Claimed at >=1024px wide AND >=740px tall, which is where the
+   multi-column layouts below are still in force. Outside it —
+   narrow, or a short window such as 1440x700 with a bookmarks bar —
+   sections flow naturally and snap is off. Snap is PROXIMITY: it
+   computes to `y`, since proximity is the initial strictness.
+   ============================================================ */
+@media (min-width:1024px) and (min-height:740px){
+  html{scroll-snap-type:y proximity}
+  .sec{
+    min-height:100svh;
+    padding-block:var(--nav-clear) calc(var(--seam) + var(--foot-clear));
+    scroll-snap-align:start;
+  }
+  .hero{padding-bottom:var(--seam)}
+}
+
+/* ============================================================
+   BREAKPOINTS
+   ============================================================ */
+/* ---- relief for the 1024-1400 band, where the fit rule still binds ---- */
+@media (max-width:1400px){
+  /* the 16/9 loop was driving the sectors row; give it a narrower column */
+  .split2--flip{grid-template-columns:minmax(0,8fr) minmax(0,4fr)}
+  /* and match the sector tiles to it */
+  .sectors .duoframe{aspect-ratio:16/9}
+}
+@media (max-width:1199px), (max-width:1400px) and (max-height:820px){
+  /* eleven bordered chips wrap to four rows in a narrow column and cost ~160px.
+     In a narrow column — or a wide but short window such as 1366x768 — the same
+     eleven items run on as one sentence instead. Nothing is removed. */
+  .incl ul{display:block;font-size:var(--fs-small);color:var(--ash);line-height:1.45}
+  .incl li{display:inline;border:0;padding:0;font-weight:500}
+  .incl li::after{content:" · ";opacity:.55}
+  .incl li:last-child::after{content:""}
+  .ptable th,.ptable td{padding:.5rem .7rem}
+  .ptable .pages{margin-top:.2rem}
+}
+
+/* 1023, not 1180: collapsing at 1180 would run a stacked layout inside a
+   fixed-height section for the whole 1024-1180 band, which is exactly what
+   breaks the viewport-fit rule. */
+@media (max-width:1023px){
+  .split2,.split2--wide,.split2--flip{grid-template-columns:1fr}
+  .sechead{max-width:none;margin-bottom:1.5rem}
+  .hero__cols{grid-template-columns:1fr;align-items:start}
+  .pricechip{justify-self:start}
+  .sectors{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .twocol{grid-template-columns:1fr}
+  .person,.final,.quiet{grid-template-columns:1fr}
+  .footcols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:1023px){
+  .island__links a[data-optional]{display:none}
+  .svc{grid-template-columns:3rem minmax(0,1fr) 1.75rem}
+  .svc__desc{grid-column:2 / -1;margin-top:.35rem}
+  .work{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quotes{grid-template-columns:1fr}
+  .quote{min-height:0}
+  .claims{grid-template-columns:1fr}
+  .claim{min-height:0}
+  .claim__h{margin-top:0}
+  .sectors{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:768px){
+  .steps{grid-template-columns:1fr}
+}
+
+@media (max-width:860px){
+  .island__links,.island__cta{display:none}
+  .burger{display:grid}
+  .island{gap:.6rem;padding-right:6px}
+  .island__tel{margin-left:.25rem}
+  .float{display:none}
+  .mobar{display:flex}
+  body{--mobile-bar:60px}
+  .footer{padding-bottom:calc(1.75rem + 60px)}
+  /* no JS: no burger, so the links wrap inside the island. A wrapped island is
+     ~170px tall, which would sit on top of the hero if it stayed fixed — so it
+     becomes a static nav at the top of the document instead. */
+  html:not(.js) .island{position:absolute;flex-wrap:wrap;border-radius:26px;max-width:calc(100vw - 1.5rem)}
+  html:not(.js) .island__links{display:flex;flex-wrap:wrap}
+  html:not(.js) .island__cta{display:none}
+  html:not(.js) .burger{display:none}
+  html:not(.js) .sec:first-of-type{padding-top:calc(var(--nav-clear) + 104px)}
+}
+
+@media (max-width:640px){
+  .work{grid-template-columns:1fr}
+  .sectors{grid-template-columns:1fr}
+  .footcols{grid-template-columns:1fr}
+  .svc{grid-template-columns:2.5rem minmax(0,1fr) 1.5rem;padding-inline:0}
+  .hero__tel,.hero__actions .btn{width:100%;justify-content:center}
+  /* prices must stay full-size and readable — no horizontal scroll.
+     Each tier becomes a card with a three-up figure row. */
+  .ptable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ptable tbody tr{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.5rem;padding:.85rem;background:var(--bone);margin-bottom:.5rem;
+  }
+  .ptable tbody th,.ptable tbody td{background:transparent;padding:0}
+  .ptable tbody th{grid-column:1 / -1;margin-bottom:.35rem}
+  .ptable td::before{
+    content:attr(data-label);display:block;
+    font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    opacity:.7;margin-bottom:.2rem;
+  }
+  .ptable .fig{font-size:clamp(1.35rem,7vw,1.75rem)}
+  .ptable .tag{margin-left:0;margin-top:.35rem;display:inline-block}
+  .creds dd{font-size:1.05rem}
+}
+
+@media (max-width:400px){
+  :root{--fs-display:clamp(2.15rem,10.5vw,9rem)}
+}
+
+/* Short desktop windows — 1366x768, 1280x800, 1024x768, and any 1440 window
+   with a bookmarks bar. Tightens vertical rhythm only; no type shrinks and
+   nothing is removed. Above 820px tall this block never applies, so the
+   1440x900 measurements are untouched. */
+@media (min-width:1024px) and (max-height:820px){
+  .sechead--stack{margin-bottom:clamp(.85rem,1.6vw,1.4rem)}
+  .promise li{padding:.45rem 0}
+  .steps{gap:.55rem}
+  .step{padding-top:.7rem}
+  .incl{margin-top:.8rem}
+  .addons{margin-top:.7rem}
+  .sectors{margin-top:.8rem}
+  .duo figcaption{margin-top:.5rem}
+}
+
+/* ============================================================
+   SHORT-AND-WIDE DESKTOP WINDOWS — the second half of the fit rule.
+   The gate above claims one-section-per-viewport at >=1024w AND >=740h.
+   The block above relieves SHORT windows generally. Neither was enough:
+   a 1440x900 laptop with browser chrome subtracted is a 1440x800 VIEWPORT,
+   which sits inside the gate and still overflowed (worst +16px on #sectors),
+   as did 1600x800, 1920x800 and — worst of all — 1440x740, the gate's own
+   lower edge, at +72px.
+
+   Why height AND aspect ratio, rather than a taller --fs-* svh factor:
+   a single svh factor that holds 1440x900 and 1280x800 has to be set so
+   high that it gives almost no relief at 740-800px tall. The failures are
+   not "short" — they are "short AND wide", because a wider column rewraps
+   headings onto fewer lines and leaves the fixed-aspect media to set the
+   height.
+
+   Both signed-off reference sizes are exactly 16:10 (1.600). 41/25 = 1.64,
+   so 1440x900 and 1280x800 fall outside this query BY CONSTRUCTION, not by
+   tuning — they cannot regress no matter what is changed in here. 1440x900
+   is excluded twice over (900 > 860 as well).
+
+   Clause 1 is 799, not 740: 799 already excludes both reference sizes (800
+   and 900) by construction, so widening it to cover NARROW short windows
+   too costs nothing and leaves one less number to misread. But 799 alone is
+   NOT sufficient, which is what clause 2 is for: height exactly 800
+   overflows at every width >=1366. Hence 860 on the aspect clause, which
+   also covers 1512x850-class windows.
+
+   Nothing is removed in here, no type drops below its floor, and the
+   display band at 1440 is untouched (it is already svh-floored at 120px).
+   ============================================================ */
+@media (min-width:1024px) and (max-height:799px),
+       (min-width:1024px) and (max-height:860px) and (min-aspect-ratio:41/25){
+
+  /* ---- system: the seam and the foot gap carry most of the relief,
+          because they are paid once per section on all fifteen ---- */
+  :root{
+    --seam: clamp(18px, 2.2vw, 32px);
+    --foot-clear: clamp(1.25rem, 2.6vh, 2rem);
+  }
+  /* --nav-clear is deliberately NOT reduced: it is what holds the glass
+     island off the top of every snapped section, and it is already tight.
+     Measured island bottom edge vs section padding-top: 11.3px clear at
+     1440x740, 14.4px at 1440x800, 23.9px at 1440x900. Taking any of that
+     back would put the island on top of the section it is floating over,
+     so all of the relief below comes from the seam, the foot gap, row
+     padding and stack gaps instead. */
+
+  /* ---- hero: three display lines, a lead, a price chip and the ticker.
+          Type is untouched; only the gaps between them close up. ---- */
+  .hero__in{gap:clamp(.65rem,1vw,.9rem);padding-bottom:clamp(.6rem,1.5vh,1.1rem)}
+  .hero__actions{margin-top:.85rem}
+
+  /* ---- sectors (#05): the tallest section at every size. Two stacked
+          fixed-aspect media rows were setting the height. The four tiles
+          take the 16/9 crop this file already uses in narrow columns, and
+          the lead video takes a 2/1 crop. Both are object-fit:cover, so
+          this crops the frame — it does not letterbox or distort, and no
+          tile, caption or sector name is dropped. ---- */
+  .sectors{margin-top:.5rem}
+  .sectors .duoframe{aspect-ratio:16/9}
+  .duoframe--wide{aspect-ratio:2/1}
+  .duo figcaption{margin-top:.4rem}
+  .vcap{margin-top:.4rem}
+
+  /* ---- process (#07): the promise list is the taller of the two columns ---- */
+  .sechead--stack{margin-bottom:clamp(.6rem,1.1vw,1rem)}
+  .promise li{padding:.34rem 0}
+  .steps{gap:clamp(.45rem,.9vw,.7rem)}
+  .step{padding-top:.6rem}
+  .step--last{padding:.6rem}
+
+  /* ---- pricing (#08): the eleven "what's included" chips wrap to four
+          bordered rows in a wide-but-short window and cost ~117px. This is
+          the same run-on-sentence treatment the file already applies in a
+          narrow column — all eleven items survive verbatim, as one
+          sentence instead of four rows of chips. Every price, the tier
+          names and the page counts are untouched. ---- */
+  .incl{margin-top:.6rem}
+  .incl ul{display:block;font-size:var(--fs-small);color:var(--ash);line-height:1.45}
+  .incl li{display:inline;border:0;padding:0;font-weight:500}
+  .incl li::after{content:" · ";opacity:.55}
+  .incl li:last-child::after{content:""}
+  .addons{margin-top:.5rem}
+  .plegend{margin-bottom:.7rem}
+  .ptable th,.ptable td{padding:.5rem .7rem}
+  .ptable .pages{margin-top:.2rem}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ==================== NAV B — FLOATING GLASS ISLAND ==================== -->
+<nav class="island" id="island" aria-label="Primary">
+  <a class="island__brand" href="#top" aria-label="Digital Consulting Services — home">
+    <span class="island__mark">DCS</span>
+  </a>
+
+  <ul class="island__links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#work">Portfolio</a></li>
+    <li><a href="/blog" data-optional>Blog</a></li>
+    <li><a href="#person">About</a></li>
+  </ul>
+
+  <a class="island__tel" href="tel:+447395063764">
+    <span aria-hidden="true">↳</span> 07395 063764
+  </a>
+
+  <span class="island__cta">
+    <a class="btn btn--jade" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+  </span>
+
+  <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu">
+    <span class="vh">Open menu</span>
+    <span class="burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</nav>
+
+<!-- ============ MOBILE PANEL — SIBLING of the island, never inside it ============
+     A position:fixed overlay nested in a backdrop-filter ancestor would be
+     contained by the nav pill instead of the viewport. This one is a sibling
+     and carries no backdrop-filter, so inset:0 resolves against the viewport. -->
+<div class="menu on-dark" id="menu" hidden>
+  <button class="menu__close" type="button" id="menuClose">
+    <span class="vh">Close menu</span>
+    <span aria-hidden="true">✕</span>
+  </button>
+  <nav class="menu__list" aria-label="Mobile">
+    <a class="menu__item" href="#services">Services</a>
+    <a class="menu__item" href="#pricing">Pricing</a>
+    <a class="menu__item" href="#work">Portfolio</a>
+    <a class="menu__item" href="/blog">Blog</a>
+    <a class="menu__item" href="#person">About</a>
+  </nav>
+  <div class="menu__foot menu__item">
+    <a class="btn btn--jade" href="/contact">
+      Get a free quote
+      <span class="btn__arrow" aria-hidden="true">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+      </span>
+    </a>
+    <a class="btn btn--line" href="tel:+447395063764">Call 07395 063764</a>
+    <p style="color:var(--smoke);font-size:var(--fs-small);margin-top:.4rem">Mon–Fri 9:00–17:30 · Sat by appointment</p>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ==================== 01 · HERO ==================== -->
+<section class="sec sec--paper hero" id="top" data-tone="light" data-nav="" aria-labelledby="h1">
+  <div class="wrap hero__in">
+
+    <p class="hero__eyebrow label">
+      <span>Website design &amp; build studio</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Est. 2019</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Polegate, East Sussex — working UK-wide</span>
+    </p>
+
+    <h1 class="display split" id="h1"><span class="plate">Agency</span><span class="ln"> work</span><br><span class="ln">for small</span><br><span class="ln">businesses.</span></h1>
+
+    <div class="hero__cols">
+      <div>
+        <p class="lead">Sites that stand next to what London and New York studios put out — for a
+        fraction of the cost, and a tiny fraction of the effort from you.</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="hero__tel" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="pricechip">
+        <p class="label">What it costs</p>
+        <p class="pricechip__big num">From £995 + £15/mo</p>
+        <p class="pricechip__note">— or £45/mo with nothing upfront. Full pricing below, no surprises.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="band" aria-label="Sectors we build for">
+    <div class="band__track">
+      <p class="band__run">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+      <p class="band__run" aria-hidden="true">
+        <span>Fabric shops</span><span>Yoga studios</span><span>Lettings agents</span><span>Tutors</span><span>Scaffolders</span><span>Salons</span><span>Signmakers</span><span>Cafés</span><span>Garages</span><span>Removals</span><span>Therapists</span><span>Electricians</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 02 · THE CLAIM ==================== -->
+<section class="sec sec--ink on-dark" id="offer" data-tone="dark" data-nav="" aria-labelledby="claim-h">
+  <div class="wrap">
+    <div class="sechead sechead--stack">
+      <span class="sechead__idx num">02 / 11</span>
+      <span class="sechead__bar sechead__bar--jade" aria-hidden="true"></span>
+      <p class="sechead__kicker label">The whole pitch, in three</p>
+      <h2 class="h2 resolve" id="claim-h">This page is the argument.</h2>
+    </div>
+
+    <ul class="claims">
+      <li class="claim claim--emerald reveal">
+        <p class="claim__n num" aria-hidden="true">01</p>
+        <h3 class="claim__h">Big-city standard</h3>
+        <p class="claim__p">The design, the writing and the build are held to what a London or New
+        York studio would ship. I designed this page, wrote it and built it — the same way I would do yours.</p>
+      </li>
+      <li class="claim claim--jade reveal">
+        <p class="claim__n num" aria-hidden="true">02</p>
+        <h3 class="claim__h">A fraction of the cost</h3>
+        <p class="claim__p">Every number this studio charges is printed further down this page, in
+        full. There is no proposal stage where the figure changes.</p>
+      </li>
+      <li class="claim claim--coral reveal">
+        <p class="claim__n num" aria-hidden="true">03</p>
+        <h3 class="claim__h">A tiny fraction of your effort</h3>
+        <p class="claim__p">No brief to write, no copy to supply, no system to learn. A conversation,
+        a review, and then it is live and looked after.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 03 · SERVICES ==================== -->
+<section class="sec sec--paper" id="services" data-tone="light" data-nav="services" aria-labelledby="services-h">
+  <div class="wrap split2">
+    <div class="sechead">
+      <span class="sechead__idx num">03 / 11</span>
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Services · Six</p>
+      <h2 class="h2 resolve" id="services-h">What I<br>actually do.</h2>
+      <p class="sechead__sub lead">One studio, six things. Every one of them handled here, in-house, by the person you spoke to.</p>
+    </div>
+
+    <div class="svcs">
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">01</span>
+        <span class="svc__name">Website Design</span>
+        <span class="svc__desc">Designed and built for your business. No templates, no page-builders.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">02</span>
+        <span class="svc__name">Local SEO</span>
+        <span class="svc__desc">Service pages, location pages, structured data — so you're found where you work.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">03</span>
+        <span class="svc__name">Ongoing Management</span>
+        <span class="svc__desc">We look after the site so you can get on with the business.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">04</span>
+        <span class="svc__name">Workspace Email</span>
+        <span class="svc__desc">Professional business email on your own domain.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">05</span>
+        <span class="svc__name">eCommerce Websites</span>
+        <span class="svc__desc">Online stores built, loaded with your products, and kept running.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="svc" href="/contact">
+        <span class="svc__idx num">06</span>
+        <span class="svc__name">Analytics &amp; Reporting</span>
+        <span class="svc__desc">Analytics, Search Console and monthly reporting, so you know what's working.</span>
+        <span class="svc__go" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 04 · WORK ==================== -->
+<section class="sec sec--graphite on-dark" id="work" data-tone="dark" data-nav="work" aria-labelledby="work-h">
+  <div class="wrap split2--wide split2">
+    <div class="sechead">
+      <span class="sechead__idx num">04 / 11</span>
+      <span class="sechead__bar sechead__bar--jade" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Selected work</p>
+      <h2 class="h2 resolve" id="work-h">Nine clients.<br>Nine kinds<br>of business.</h2>
+      <p class="sechead__sub lead">The range is the point — and every one of them got the same standard of design.</p>
+    </div>
+
+    <div>
+      <ul class="work">
+        <li class="tile tile--emerald reveal">
+          <p class="tile__sector">eCommerce · Fabrics</p>
+          <div>
+            <h3 class="tile__name">Cuddle Plush Fabrics</h3>
+            <p class="tile__line">Five years and counting — one of our longest client relationships.</p>
+          </div>
+        </li>
+        <li class="tile tile--paper reveal">
+          <p class="tile__sector">Made-to-order eCommerce</p>
+          <div>
+            <h3 class="tile__name">Luna Landings</h3>
+            <p class="tile__line">Product configurator, automatic work orders, worldwide shipping.</p>
+          </div>
+        </li>
+        <li class="tile tile--jade reveal">
+          <p class="tile__sector">Yoga studio</p>
+          <div>
+            <h3 class="tile__name">Sanctuary Ida</h3>
+            <p class="tile__line">Students book and pay for classes online.</p>
+          </div>
+        </li>
+        <li class="tile tile--ink reveal">
+          <p class="tile__sector">Tuition</p>
+          <div>
+            <h3 class="tile__name">Nicola Noble Tuition</h3>
+            <p class="tile__line">Moved classes online during Covid instead of closing.</p>
+          </div>
+        </li>
+        <li class="tile tile--coral reveal">
+          <p class="tile__sector">Signage &amp; print</p>
+          <div>
+            <h3 class="tile__name">Mad Graphics</h3>
+            <p class="tile__line">Full rebuild.</p>
+          </div>
+        </li>
+        <li class="tile tile--paper reveal">
+          <p class="tile__sector">Automotive</p>
+          <div>
+            <h3 class="tile__name">DCH Automotive</h3>
+            <p class="tile__line">A credible presence from a standing start.</p>
+          </div>
+        </li>
+        <li class="tile tile--jade reveal">
+          <p class="tile__sector">Scaffolding</p>
+          <div>
+            <h3 class="tile__name">Colossus Scaffolding</h3>
+            <p class="tile__line">First enquiry from Google within three weeks of launch.</p>
+          </div>
+        </li>
+        <li class="tile tile--emerald reveal">
+          <p class="tile__sector">Electrical</p>
+          <div>
+            <h3 class="tile__name">DJ Fox Electrical</h3>
+            <p class="tile__line">20+ page site, live at djfoxelectrical.com.</p>
+          </div>
+        </li>
+        <li class="tile tile--ink reveal">
+          <p class="tile__sector">Removals</p>
+          <div>
+            <h3 class="tile__name">Bexhill Removals</h3>
+            <p class="tile__line">Design approved on the first presentation, no revisions.</p>
+          </div>
+        </li>
+      </ul>
+
+      <p class="workfoot">
+        <span>Est. 2019</span>
+        <span aria-hidden="true">·</span>
+        <span>20+ sites delivered</span>
+        <span aria-hidden="true">·</span>
+        <span>5+ years with the longest-standing client</span>
+        <span aria-hidden="true">·</span>
+        <span>Everything managed in-house</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 05 · SECTORS ==================== -->
+<section class="sec sec--paper" id="sectors" data-tone="light" data-nav="" aria-labelledby="sectors-h">
+  <div class="wrap">
+    <div class="split2 split2--flip">
+      <div class="sechead">
+        <span class="sechead__idx num">05 / 11</span>
+        <span class="sechead__bar sechead__bar--coral" aria-hidden="true"></span>
+        <p class="sechead__kicker label">Who this is for</p>
+        <h2 class="h2 resolve" id="sectors-h">Owner-run.<br>Any sector.</h2>
+        <p class="sechead__sub lead">Usually one to twenty people, where the owner makes the decision and
+        pays the invoice. Time-poor, not technical, and has been putting the website off for a while.</p>
+      </div>
+
+      <figure style="margin:0">
+        <div class="duoframe duoframe--wide">
+          <video id="vidFabric" muted playsinline loop preload="metadata" width="1280" height="720"
+                 poster="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='9'%3E%3Crect%20width='16'%20height='9'%20fill='%23006544'/%3E%3C/svg%3E">
+            <source src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-fabric.mp4" type="video/mp4">
+          </video>
+          <button class="vtoggle" type="button" data-vid="vidFabric" aria-pressed="false">Pause</button>
+        </div>
+        <figcaption class="vcap">Short silent loop: fabric unrolling across a worktable — illustrative of the
+        makers and retailers here, not a client's premises.</figcaption>
+      </figure>
+    </div>
+
+    <ul class="sectors">
+      <li class="duo reveal">
+        <figure>
+          <div class="duoframe">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-florist.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="A florist's shop counter with buckets of cut stems arranged along a bench.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Retail</span>
+            <span class="duo__what">Shops that need to sell online as well as on the street.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duoframe duoframe--jade">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="An empty yoga studio with rolled mats stacked beside tall windows.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Studios &amp; practitioners</span>
+            <span class="duo__what">Classes, sessions and appointments booked and paid for online.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duoframe duoframe--coral">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-bakery.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="An artisan bakery counter with loaves and pastries on wooden trays.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Hospitality &amp; food</span>
+            <span class="duo__what">Found on a phone, five minutes before someone walks in.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="duo reveal">
+        <figure>
+          <div class="duoframe">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                 alt="Scaffolding erected against a building elevation, seen from below.">
+          </div>
+          <figcaption>
+            <span class="duo__sector">Trades &amp; contractors</span>
+            <span class="duo__what">Service and location pages that turn up in local searches.</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 06 · PROCESS + PROMISE (merged) ==================== -->
+<section class="sec sec--ink on-dark" id="process" data-tone="dark" data-nav="" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="sechead sechead--stack">
+      <span class="sechead__idx num">06 / 11</span>
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">How it goes</p>
+      <h2 class="h2 resolve" id="process-h">Four steps. Four things you never do.</h2>
+    </div>
+
+    <div class="twocol">
+      <div>
+        <h3 class="coltitle">The four steps — you are in one of them</h3>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__n num">Step 01</span>
+            <h3 class="h3">A conversation</h3>
+            <p>A call or a few messages. No brief needed, nothing to fill in.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__n num">Step 02</span>
+            <h3 class="h3">We write it and design it</h3>
+            <p>Copy, structure, imagery, colour — all handled.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__n num">Step 03</span>
+            <h3 class="h3">You review</h3>
+            <p>Unlimited revisions during the build until you're happy.</p>
+          </li>
+          <li class="step step--last reveal">
+            <span class="step__n num">Step 04</span>
+            <h3 class="h3">It goes live, and we keep it running</h3>
+            <p>Hosting, updates, monitoring, support. This is the part that does not end.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 class="coltitle">And four things you never have to do</h3>
+        <ol class="promise">
+          <li class="reveal">
+            <span class="promise__n num" aria-hidden="true">01</span>
+            <div>
+              <h3>Write a brief</h3>
+              <p>Most studios want you to arrive with one. There is nothing to fill in here — it comes out of a conversation.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="promise__n num" aria-hidden="true">02</span>
+            <div>
+              <h3>Supply the words</h3>
+              <p>Copy is part of the job. You will not be sent a blank document and asked what you'd like it to say.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="promise__n num" aria-hidden="true">03</span>
+            <div>
+              <h3>Learn a system</h3>
+              <p>No CMS, no login, no dashboard. If something needs changing, you send a message and it changes.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="promise__n num" aria-hidden="true">04</span>
+            <div>
+              <h3>Chase anyone</h3>
+              <p>Hosting, security, updates and monitoring are handled. One person is accountable and you have his number.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 07 · PRICING ==================== -->
+<section class="sec sec--paper" id="pricing" data-tone="light" data-nav="pricing" aria-labelledby="pricing-h">
+  <div class="wrap split2--wide split2">
+    <div class="sechead">
+      <span class="sechead__idx num">07 / 11</span>
+      <span class="sechead__bar sechead__bar--coral" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Pricing</p>
+      <h2 class="h2 resolve" id="pricing-h">Same site.<br>Two ways<br>to pay.</h2>
+      <p class="sechead__sub lead">You choose how to pay, not what you get. The tiers differ on ongoing
+      service level, never on quality of the build.</p>
+    </div>
+
+    <div>
+      <div class="plegend">
+        <p><b>Option A</b> <span>Upfront setup fee, then a low monthly.</span></p>
+        <p><b>Option B</b> <span>Pay monthly, nothing upfront. 12-month minimum.</span></p>
+      </div>
+
+      <div class="ptable-wrap">
+        <!-- roles restated explicitly: below 640px the rows become grid cards,
+             and display:grid drops the implicit table roles in Chrome -->
+        <table class="ptable" role="table">
+          <caption class="vh">Pricing by tier: page allowance, Option A setup and monthly fees, and Option B monthly fee</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">Tier</th>
+              <th scope="col" role="columnheader">A · Setup</th>
+              <th scope="col" role="columnheader">A · Monthly</th>
+              <th scope="col" role="columnheader">B · Monthly</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <th scope="row" role="rowheader">Starter <span class="pages num">Up to 20 pages</span></th>
+              <td class="fig num" role="cell" data-label="A · Setup">£995</td>
+              <td class="fig num" role="cell" data-label="A · Monthly">£15</td>
+              <td class="fig num" role="cell" data-label="B · Monthly">£45</td>
+            </tr>
+            <tr class="is-pop" role="row">
+              <th scope="row" role="rowheader">Professional <span class="tag">Most popular</span>
+                <span class="pages num">Up to 50 pages</span></th>
+              <td class="fig num" role="cell" data-label="A · Setup">£1,995</td>
+              <td class="fig num" role="cell" data-label="A · Monthly">£25</td>
+              <td class="fig num" role="cell" data-label="B · Monthly">£75</td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Growth <span class="pages num">Up to 100 pages</span></th>
+              <td class="fig num" role="cell" data-label="A · Setup">£3,495</td>
+              <td class="fig num" role="cell" data-label="A · Monthly">£50</td>
+              <td class="fig num" role="cell" data-label="B · Monthly">£125</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="incl">
+        <h3>Every site includes, whichever you pick</h3>
+        <ul>
+          <li>Custom design</li>
+          <li>Local SEO — service pages, location pages, structured data</li>
+          <li>Mobile-first and fast</li>
+          <li>Contact form</li>
+          <li>Hosting</li>
+          <li>SSL</li>
+          <li>Domain management</li>
+          <li>Security updates</li>
+          <li>Uptime monitoring</li>
+          <li>Unlimited revisions during the build</li>
+          <li>Search Console submission</li>
+        </ul>
+        <p class="addons"><strong>Add-ons:</strong> blog post writing £75/post · custom theme design £350 ·
+        Google Ads setup and management £200/mo plus ad spend · monthly SEO retainer £200/mo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 08 · TESTIMONIALS ==================== -->
+<section class="sec sec--bone" id="words" data-tone="light" data-nav="" aria-labelledby="words-h">
+  <div class="wrap">
+    <div class="sechead sechead--stack">
+      <span class="sechead__idx num">08 / 11</span>
+      <span class="sechead__bar" aria-hidden="true"></span>
+      <p class="sechead__kicker label">In their words</p>
+      <h2 class="h2 resolve" id="words-h">Three clients,<br>none of them a builder.</h2>
+    </div>
+
+    <ul class="quotes">
+      <li class="quote quote--emerald reveal">
+        <figure>
+          <blockquote><p>“Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.”</p></blockquote>
+          <figcaption>Sarah<span>Cuddle Plush Fabrics</span></figcaption>
+        </figure>
+      </li>
+      <li class="quote quote--coral reveal">
+        <figure>
+          <blockquote><p>“I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.”</p></blockquote>
+          <figcaption>Nicola<span>Nicola Noble Tuition</span></figcaption>
+        </figure>
+      </li>
+      <li class="quote quote--jade reveal">
+        <figure>
+          <blockquote><p>“My yoga students love that they can book and pay for my classes on my website.”</p></blockquote>
+          <figcaption>Molly<span>Sanctuary Ida</span></figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 09 · PERSON ==================== -->
+<section class="sec sec--ink on-dark" id="person" data-tone="dark" data-nav="person" aria-labelledby="person-h">
+  <div class="wrap">
+    <div class="sechead sechead--stack">
+      <span class="sechead__idx num">09 / 11</span>
+      <span class="sechead__bar sechead__bar--coral" aria-hidden="true"></span>
+      <p class="sechead__kicker label">Who you're hiring</p>
+      <h2 class="h2 resolve" id="person-h">A person, not a company.</h2>
+    </div>
+
+    <div class="person">
+      <div class="person__body reveal">
+        <p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and
+        I have built and looked after every site on this page myself. Nothing is outsourced and
+        nothing is offshored.</p>
+        <p>When you call, you get the person who designed your site, not an account manager reading a
+        ticket. There is no team to route you through and no junior doing the build.</p>
+        <p>That is not something I apologise for — it is precisely why the work is this considered,
+        why it is personal, and why it costs what it costs. The studio is in Polegate, East Sussex.
+        The clients are all over the country.</p>
+      </div>
+
+      <dl class="creds reveal">
+        <div><dt>Founded</dt><dd class="num">2019</dd></div>
+        <div><dt>Sites delivered</dt><dd class="num">20+</dd></div>
+        <div><dt>Longest client relationship</dt><dd class="num">5+ years</dd></div>
+        <div><dt>Work outsourced</dt><dd>None</dd></div>
+        <div><dt>Studio</dt><dd>Polegate, UK-wide</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10 · THE QUIET ONE ==================== -->
+<section class="sec sec--paper" id="note" data-tone="light" data-nav="" aria-label="A note">
+  <div class="wrap quiet">
+    <div>
+      <span class="quiet__mark" aria-hidden="true"></span>
+      <p class="quiet__line">Most of my clients had been putting it off for years. The hardest part is the first message.</p>
+    </div>
+
+    <figure style="margin:0">
+      <div class="duoframe duoframe--wide duoframe--deep">
+        <video id="vidInk" muted playsinline loop preload="metadata" width="1280" height="720"
+               poster="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='9'%3E%3Crect%20width='16'%20height='9'%20fill='%23006544'/%3E%3C/svg%3E">
+          <source src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4" type="video/mp4">
+        </video>
+        <button class="vtoggle" type="button" data-vid="vidInk" aria-pressed="false">Pause</button>
+      </div>
+      <figcaption class="vcap">A short silent loop: coloured ink blooming through water, printed here in the studio's green.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== 11 · FINAL CTA ==================== -->
+<section class="sec sec--ink on-dark" id="contact" data-tone="dark" data-nav="" aria-labelledby="final-h">
+  <div class="wrap">
+    <div class="final">
+      <div>
+        <span class="sechead__idx num">11 / 11</span>
+        <h2 class="h2 resolve" id="final-h">Let's get<br>it started.</h2>
+        <p class="sechead__sub lead">Tell me what the business does. I'll tell you what the site needs,
+        what it costs, and how long it takes. No charge, and no obligation at the end of it.</p>
+        <div class="final__actions">
+          <a class="btn btn--solid" href="/contact">
+            Get a free quote
+            <span class="btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </span>
+          </a>
+          <a class="btn btn--jade" href="tel:+447395063764">Call 07395 063764</a>
+        </div>
+      </div>
+
+      <div class="contactlist reveal">
+        <a href="tel:+447395063764"><span>Phone</span><b class="num">07395 063764</b></a>
+        <a href="mailto:mail@digitalconsultingservices.co.uk"><span>Email</span><b>mail@digitalconsultingservices.co.uk</b></a>
+        <p><span>Hours</span><b>Mon–Fri 9:00–17:30<br>Sat by appointment · Sun closed</b></p>
+        <p><span>Studio</span><b>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer on-dark" data-tone="dark">
+  <div class="wrap">
+    <div class="footcols">
+      <section>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Service areas</h2>
+        <ul>
+          <li><a href="/contact">Polegate</a></li>
+          <li><a href="/contact">Eastbourne</a></li>
+          <li><a href="/contact">Hailsham</a></li>
+          <li><a href="/contact">Lewes</a></li>
+          <li><a href="/contact">Seaford</a></li>
+          <li><a href="/contact">Brighton &amp; Hove</a></li>
+          <li><a href="/contact">Uckfield</a></li>
+          <li><a href="/contact">— and UK-wide</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Studio</h2>
+        <ul>
+          <li><a href="#work">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#person">About Ricky</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Get a free quote</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <address>
+          <a href="tel:+447395063764" class="num">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex, BN26 6QH<br><br>
+          Mon–Fri 9:00–17:30<br>
+          Sat by appointment · Sun closed
+        </address>
+      </section>
+    </div>
+
+    <div class="footbar">
+      <span class="footbrand"><span class="island__mark">DCS</span> Digital Consulting Services</span>
+      <span>© 2026 Digital Consulting Services. Established 2019, Polegate, East Sussex.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- persistent floating CTA (desktop) -->
+<a class="float" id="float" href="/contact">
+  <span class="float__dot" aria-hidden="true"></span>
+  Start your project
+</a>
+
+<!-- persistent action bar (mobile) -->
+<nav class="mobar" aria-label="Quick actions">
+  <a href="tel:+447395063764">Call 07395 063764</a>
+  <a href="/contact">Get a free quote</a>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var reduced = mq ? mq.matches : false;
+
+  /* Failsafe: whatever happens below, nothing stays invisible. */
+  function revealAll() {
+    var hidden = document.querySelectorAll('.reveal, .sechead__bar, .resolve, .menu__item, .split');
+    for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('is-in');
+    var heroEl = document.querySelector('.hero');
+    if (heroEl) heroEl.classList.add('is-in');
+  }
+  var failsafe = setTimeout(revealAll, 2500);
+
+  try {
+
+    /* ---------- video: autoplay only when motion is allowed ---------- */
+    var vids = document.querySelectorAll('video');
+    function applyMotionToVideo() {
+      for (var i = 0; i < vids.length; i++) {
+        var v = vids[i];
+        var t = document.querySelector('.vtoggle[data-vid="' + v.id + '"]');
+        if (reduced) {
+          v.autoplay = false;
+          v.removeAttribute('autoplay');
+          try { v.pause(); } catch (e) {}
+          if (t) { t.textContent = 'Play'; t.setAttribute('aria-pressed', 'true'); }
+        } else {
+          v.autoplay = true;
+          v.setAttribute('autoplay', '');
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+          if (t) { t.textContent = 'Pause'; t.setAttribute('aria-pressed', 'false'); }
+        }
+      }
+    }
+    applyMotionToVideo();
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) { reduced = e.matches; applyMotionToVideo(); });
+    }
+
+    var toggles = document.querySelectorAll('.vtoggle');
+    for (var ti = 0; ti < toggles.length; ti++) {
+      toggles[ti].addEventListener('click', function () {
+        var v = document.getElementById(this.getAttribute('data-vid'));
+        if (!v) return;
+        if (v.paused) {
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+          this.textContent = 'Pause'; this.setAttribute('aria-pressed', 'false');
+        } else {
+          v.pause();
+          this.textContent = 'Play'; this.setAttribute('aria-pressed', 'true');
+        }
+      });
+    }
+
+    /* ---------- persistent CTA inverts with the panel beneath it ---------- */
+    var float = document.getElementById('float');
+    var toned = document.querySelectorAll('[data-tone]');
+    function syncFloat() {
+      var r = float.getBoundingClientRect();
+      var y = r.top + r.height / 2;
+      var tone = 'light';
+      for (var i = 0; i < toned.length; i++) {
+        var b = toned[i].getBoundingClientRect();
+        if (b.top <= y && b.bottom >= y) tone = toned[i].getAttribute('data-tone');
+      }
+      if (tone === 'dark') float.setAttribute('data-tone', 'dark');
+      else float.removeAttribute('data-tone');
+    }
+
+    /* ---------- nav: mark the live section (state only, no repaint) ----------
+       The island's own colour is constant by design — it is the glass being
+       tested here, not an adaptive bar. Only the current-item marker moves. */
+    var navLinks = document.querySelectorAll('.island__links a');
+    var navSections = document.querySelectorAll('.sec[data-nav]');
+    function syncNav() {
+      var mid = window.innerHeight * 0.42;
+      var live = '';
+      for (var i = 0; i < navSections.length; i++) {
+        var b = navSections[i].getBoundingClientRect();
+        if (b.top <= mid && b.bottom > mid) live = navSections[i].getAttribute('data-nav') || '';
+      }
+      for (var j = 0; j < navLinks.length; j++) {
+        var href = navLinks[j].getAttribute('href') || '';
+        var id = href.charAt(0) === '#' ? href.slice(1) : '';
+        if (live && id === live) navLinks[j].setAttribute('aria-current', 'true');
+        else navLinks[j].removeAttribute('aria-current');
+      }
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        syncFloat();
+        syncNav();
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    syncFloat();
+    syncNav();
+
+    /* ---------- keyboard traversal must not fight proximity snap ----------
+       Tabbing scrolls the focused control into view; snap can then pull the
+       scroller back to the nearest section start and leave that control just
+       off screen. Suspend snap while the user is tabbing, restore after. */
+    var snapTimer;
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      root.style.scrollSnapType = 'none';
+      clearTimeout(snapTimer);
+      snapTimer = setTimeout(function () { root.style.scrollSnapType = ''; }, 900);
+    }, true);
+
+    /* ---------- mobile menu (sibling of the island) ---------- */
+    var burger = document.getElementById('burger');
+    var menu = document.getElementById('menu');
+    var menuClose = document.getElementById('menuClose');
+    var lastFocus = null;
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      menu.hidden = false;
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(function () {
+        menu.classList.add('is-open');
+        var items = menu.querySelectorAll('.menu__item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.transitionDelay = (reduced ? 0 : i * 55) + 'ms';
+        }
+        menuClose.focus();
+      });
+    }
+    function closeMenu() {
+      menu.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      menu.hidden = true;
+      if (lastFocus) lastFocus.focus();
+    }
+    burger.addEventListener('click', function () {
+      if (burger.getAttribute('aria-expanded') === 'true') closeMenu(); else openMenu();
+    });
+    menuClose.addEventListener('click', closeMenu);
+    menu.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') closeMenu();
+    });
+
+    /* ---------- h1: per-character reveal, letters arrive IN COLOUR ---------- */
+    var h1 = document.getElementById('h1');
+    if (h1 && !reduced) {
+      var tints = ['var(--emerald)', 'var(--jade)', 'var(--coral)'];
+      var lines = h1.querySelectorAll('.ln, .plate');
+      var n = 0;
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li];
+        var text = line.textContent;
+        var frag = document.createDocumentFragment();
+        for (var c = 0; c < text.length; c++) {
+          var s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = text.charAt(c);
+          s.style.setProperty('--d', (n * 22) + 'ms');
+          s.style.setProperty('--tint', tints[n % tints.length]);
+          frag.appendChild(s);
+          n++;
+        }
+        line.textContent = '';
+        line.appendChild(frag);
+      }
+      h1.setAttribute('aria-label', 'Agency work for small businesses.');
+      var kids = h1.children;
+      for (var k = 0; k < kids.length; k++) kids[k].setAttribute('aria-hidden', 'true');
+      h1.classList.add('is-split');
+      requestAnimationFrame(function () {
+        h1.classList.add('is-in');
+        document.querySelector('.hero').classList.add('is-in');
+      });
+    } else if (h1) {
+      h1.classList.add('is-in');
+      document.querySelector('.hero').classList.add('is-in');
+    }
+
+    /* ---------- scroll reveals ---------- */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var group = el.parentNode ? el.parentNode.querySelectorAll(':scope > .reveal') : [];
+          var idx = Array.prototype.indexOf.call(group, el);
+          el.style.setProperty('--d', (reduced ? 0 : Math.max(0, idx) * 55) + 'ms');
+          el.classList.add('is-in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
+
+      var targets = document.querySelectorAll('.reveal, .sechead__bar, .resolve');
+      for (var t = 0; t < targets.length; t++) io.observe(targets[t]);
+    } else {
+      revealAll();
+    }
+
+    clearTimeout(failsafe);
+    setTimeout(revealAll, 4000);
+
+  } catch (err) {
+    clearTimeout(failsafe);
+    revealAll();
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+</body>
+</html>
