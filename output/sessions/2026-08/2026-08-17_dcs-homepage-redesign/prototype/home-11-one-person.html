@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — Websites for tradespeople, built by one person</title>
+<meta name="description" content="I'm Ricky Wilson. I write, design, build and look after websites for tradespeople across East Sussex and the UK. One conversation is all it takes to start.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  /* Set the animation flag before first paint, plus a failsafe so a broken
+     script can never leave content hidden. */
+  (function () {
+    var d = document.documentElement;
+    d.className += ' js';
+    setTimeout(function () {
+      if (!d.classList.contains('anim-ready')) d.classList.add('anim-off');
+    }, 1600);
+  })();
+</script>
+<style>
+/* ============================================================
+   ONE PERSON — a letter from Ricky Wilson
+   Letterpress / correspondence art direction
+   ============================================================ */
+
+:root{
+  --paper:      #F2EDE3;
+  --paper-2:    #E8E0CF;
+  --paper-3:    #DED3BE;
+  --plate:      #FBF8F1;
+  --ink:        #17140F;
+  --ink-soft:   #241F18;
+  --ink-2:      #463E33;
+  --ink-3:      #6B6153;
+  --rule:       #CBC0AB;
+  --rule-soft:  #DED4C1;
+  --red:        #A2301C;
+  --red-2:      #C2492F;
+  --pen:        #1E2A45;
+
+  --shell: 1180px;
+  --rail-w: 168px;
+  --measure: 62ch;
+  --rail-h: 72px;
+
+  --ease: cubic-bezier(.32,.72,0,1);
+  --ease-soft: cubic-bezier(.22,.61,.36,1);
+
+  --t-display: clamp(2.75rem, 7.6vw, 6.4rem);
+  --t-h2: clamp(1.9rem, 4vw, 3.15rem);
+  --t-h3: clamp(1.2rem, 1.7vw, 1.45rem);
+  --t-body: clamp(1.06rem, .42vw + .96rem, 1.22rem);
+  --t-mono: .715rem;
+
+  --z-header: 40;
+  --z-rail: 50;
+  --z-sheet: 70;
+  --z-grain: 90;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink-2);
+  font-family:'Newsreader', Georgia, 'Times New Roman', serif;
+  font-size:var(--t-body);
+  line-height:1.64;
+  font-optical-sizing:auto;
+  overflow-x:hidden;
+}
+body.nav-open{ overflow:hidden; }
+
+img{ max-width:100%; height:auto; display:block; }
+
+/* --- paper grain, fixed, never on a scrolling container ---------------- */
+.grain{
+  position:fixed; inset:0; z-index:var(--z-grain);
+  pointer-events:none;
+  mix-blend-mode:multiply;
+  opacity:.34;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+::selection{ background:var(--ink); color:var(--paper); }
+
+a{ color:inherit; }
+:focus-visible{ outline:2px solid var(--red); outline-offset:3px; border-radius:1px; }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--ink); color:var(--paper);
+  padding:14px 20px; font-family:'IBM Plex Mono',monospace; font-size:.75rem;
+  letter-spacing:.12em; text-transform:uppercase; text-decoration:none;
+}
+.skip:focus{ left:12px; top:12px; }
+
+/* --- shared layout ------------------------------------------------------ */
+.sheet{
+  width:100%; max-width:var(--shell);
+  margin-inline:auto;
+  padding-inline:clamp(20px, 5vw, 60px);
+}
+.section{ padding-block:clamp(74px, 8.5vw, 138px); position:relative; }
+.section + .section{ border-top:1px solid var(--rule-soft); }
+
+.ruled{
+  display:grid;
+  grid-template-columns:var(--rail-w) minmax(0,1fr);
+  gap:clamp(24px,3.6vw,54px);
+  align-items:start;
+}
+.rail{
+  position:sticky; top:118px;
+  padding-right:20px;
+  border-right:1px solid var(--rule);
+  min-height:88px;
+}
+.sec-no{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--t-mono); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--red); margin-bottom:12px;
+}
+.margin-note{
+  margin:0; font-size:.86rem; line-height:1.5;
+  font-style:italic; color:var(--ink-3); max-width:20ch;
+}
+.blot{
+  display:inline-block; width:7px; height:7px; background:var(--ink);
+  border-radius:62% 38% 55% 45% / 45% 55% 42% 58%;
+  vertical-align:middle; opacity:.85; margin-inline:.5em;
+}
+.blot--red{ background:var(--red); }
+
+.col > p{ max-width:var(--measure); }
+
+.mono{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--t-mono); letter-spacing:.18em; text-transform:uppercase;
+  font-weight:500;
+}
+
+h1,h2,h3{ color:var(--ink); font-weight:400; margin:0; }
+h2{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:var(--t-h2); line-height:1.02; letter-spacing:-.012em;
+  max-width:19ch; margin-bottom:.55em;
+}
+h3{ font-family:'Newsreader',Georgia,serif; font-size:var(--t-h3); line-height:1.25; font-weight:500; }
+
+.caption{
+  font-family:'IBM Plex Mono',monospace; font-size:.74rem; letter-spacing:.06em;
+  color:var(--ink-3); line-height:1.7;
+}
+
+/* --- buttons ------------------------------------------------------------ */
+.btn{
+  display:inline-flex; align-items:center; gap:12px;
+  min-height:48px; padding:13px 20px;
+  font-family:'IBM Plex Mono',monospace; font-weight:500;
+  font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+  text-decoration:none; border-radius:2px; border:1px solid transparent;
+  transition:background .45s var(--ease), color .45s var(--ease),
+             border-color .45s var(--ease), transform .45s var(--ease);
+  will-change:transform;
+}
+.btn:active{ transform:scale(.975); }
+.btn-ink{
+  background:var(--ink); color:var(--paper);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13), 0 1px 0 rgba(23,20,15,.22);
+}
+.btn-ink:hover{ background:#332B21; }
+.btn-line{ border-color:var(--ink); color:var(--ink); background:transparent; }
+.btn-line:hover{ background:var(--ink); color:var(--paper); }
+.btn-red{ background:var(--red); color:#FBF6EC; box-shadow:inset 0 1px 0 rgba(255,255,255,.16); }
+.btn-red:hover{ background:#8E2716; }
+
+.nib{
+  width:22px; height:22px; border-radius:50%;
+  display:inline-grid; place-items:center; flex:0 0 auto;
+  background:rgba(242,237,227,.15);
+  transition:transform .6s var(--ease), background .45s var(--ease);
+}
+.btn-line .nib{ background:rgba(23,20,15,.09); }
+.btn-line:hover .nib{ background:rgba(242,237,227,.18); }
+.btn:hover .nib{ transform:translate(3px,-1px) scale(1.07); background:rgba(242,237,227,.28); }
+.nib svg{ width:9px; height:9px; display:block; }
+
+/* --- letterhead / header ------------------------------------------------ */
+.letterhead{
+  position:sticky; top:0; z-index:var(--z-header);
+  background:rgba(242,237,227,.9);
+  -webkit-backdrop-filter:blur(12px) saturate(1.1);
+  backdrop-filter:blur(12px) saturate(1.1);
+  border-bottom:1px solid var(--rule);
+}
+.letterhead__in{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding-block:14px;
+}
+.brand{ text-decoration:none; display:block; line-height:1; }
+.brand__name{
+  display:block;
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:1.34rem; color:var(--ink); letter-spacing:.004em;
+}
+.brand__sub{
+  display:block; margin-top:5px;
+  font-family:'IBM Plex Mono',monospace; font-size:.66rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+}
+.nav{ display:flex; align-items:center; gap:clamp(14px,2vw,30px); }
+.nav a{
+  position:relative; text-decoration:none; color:var(--ink-2);
+  font-size:1rem; line-height:1; padding-block:6px;
+  transition:color .4s var(--ease);
+}
+.nav a sup{
+  font-family:'IBM Plex Mono',monospace; font-size:.6rem;
+  letter-spacing:.08em; color:var(--ink-3); margin-right:4px; top:-.7em;
+  transition:color .4s var(--ease);
+}
+.nav a::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--ink); transform:scaleX(0); transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.nav a:hover{ color:var(--ink); }
+.nav a:hover sup{ color:var(--red); }
+.nav a:hover::after{ transform:scaleX(1); }
+.head-cta{ display:flex; align-items:center; gap:12px; }
+
+.burger{
+  display:none; width:48px; height:48px; padding:0;
+  background:transparent; border:1px solid var(--rule); border-radius:2px;
+  cursor:pointer; position:relative;
+}
+.burger span{
+  position:absolute; left:13px; width:22px; height:1.5px; background:var(--ink);
+  transition:transform .5s var(--ease), opacity .3s var(--ease);
+}
+.burger span:nth-child(1){ top:18px; }
+.burger span:nth-child(2){ top:24px; }
+.burger span:nth-child(3){ top:30px; }
+.burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; transform:scaleX(.4); }
+.burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+/* --- mobile sheet ------------------------------------------------------- */
+.mobile-sheet{
+  position:fixed; inset:0; z-index:var(--z-sheet);
+  background:var(--paper);
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(24px,7vw,48px);
+  opacity:0; visibility:hidden;
+  transition:opacity .5s var(--ease), visibility .5s var(--ease);
+}
+.mobile-sheet.is-open{ opacity:1; visibility:visible; }
+.mobile-sheet nav{ display:flex; flex-direction:column; gap:2px; }
+.mobile-sheet nav a{
+  font-family:'Instrument Serif',Georgia,serif; font-size:clamp(2rem,9vw,2.9rem);
+  color:var(--ink); text-decoration:none; line-height:1.25;
+  padding-block:8px; display:flex; align-items:baseline; gap:14px;
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+}
+.mobile-sheet.is-open nav a{ opacity:1; transform:none; }
+.mobile-sheet nav a i{
+  font-style:normal; font-family:'IBM Plex Mono',monospace;
+  font-size:.68rem; letter-spacing:.16em; color:var(--red);
+}
+.sheet-foot{ margin-top:38px; padding-top:24px; border-top:1px solid var(--rule); }
+.sheet-foot .btn{ width:100%; justify-content:space-between; margin-bottom:10px; }
+
+/* --- hero --------------------------------------------------------------- */
+.hero{ padding-block:clamp(58px,7vw,104px) clamp(56px,6vw,92px); position:relative; }
+.hero__meta{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 28px;
+  padding-bottom:16px; border-bottom:1px solid var(--rule);
+  font-family:'IBM Plex Mono',monospace; font-size:.69rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+.salutation{
+  margin:clamp(30px,4vw,52px) 0 clamp(16px,2vw,26px);
+  font-size:clamp(1.05rem,1.5vw,1.3rem); font-style:italic; color:var(--ink-2);
+}
+h1{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:var(--t-display); line-height:.99; letter-spacing:-.017em;
+  max-width:15ch; color:var(--ink);
+}
+h1 em{ font-style:italic; color:var(--red); }
+.w{
+  display:inline-block; overflow:hidden; vertical-align:bottom;
+  padding-bottom:.13em; margin-bottom:-.13em;
+}
+.w > span{ display:inline-block; }
+.js:not(.anim-off) .h1-anim .w > span{ transform:translateY(105%); opacity:0; }
+.js:not(.anim-off) .h1-anim.is-writing .w > span{
+  transform:none; opacity:1;
+  transition:transform .82s var(--ease), opacity .7s var(--ease);
+}
+.hero__deck{
+  margin:clamp(26px,3vw,40px) 0 0;
+  max-width:46ch; font-size:clamp(1.1rem,1.1vw,1.28rem);
+  color:var(--ink-2);
+}
+.hero__actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(26px,3vw,38px); }
+
+.postmark{
+  position:absolute; right:clamp(14px,4vw,58px); top:clamp(124px,14vw,190px);
+  width:clamp(104px,12vw,164px); height:auto;
+  color:var(--red); opacity:.62; mix-blend-mode:multiply;
+  transform:rotate(-9deg) scale(.86); transform-origin:center;
+  pointer-events:none;
+}
+.js:not(.anim-off) .postmark{ opacity:0; }
+.js:not(.anim-off) .postmark.is-stamped{
+  opacity:.62; transform:rotate(-9deg) scale(1);
+  transition:opacity .5s var(--ease-soft), transform .9s cubic-bezier(.2,1.5,.4,1);
+}
+.postmark text{ font-family:'IBM Plex Mono',monospace; font-weight:500; }
+
+/* --- credential ledger -------------------------------------------------- */
+.ledger-strip{
+  border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  background:rgba(232,224,207,.42);
+}
+.ledger-strip__in{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  padding-block:clamp(22px,2.6vw,34px);
+}
+.stat{ padding-inline:clamp(10px,1.6vw,26px); }
+.stat + .stat{ border-left:1px solid var(--rule); }
+.stat b{
+  display:block; font-family:'Instrument Serif',Georgia,serif; font-weight:400;
+  font-size:clamp(1.7rem,3.2vw,2.7rem); line-height:1; color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.stat > span{
+  display:block; margin-top:9px;
+  font-family:'IBM Plex Mono',monospace; font-size:.68rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); line-height:1.5;
+}
+
+/* --- the letter --------------------------------------------------------- */
+.letter p{ margin:0 0 1.25em; }
+.letter p:last-child{ margin-bottom:0; }
+.dropcap::first-letter{
+  float:left; font-family:'Instrument Serif',Georgia,serif;
+  font-size:4.15em; line-height:.79; color:var(--ink);
+  padding-right:.09em; margin-top:.055em;
+}
+.letter .pull{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(1.45rem,2.4vw,2rem); line-height:1.22; color:var(--ink);
+  max-width:24ch; margin-block:1.5em;
+  padding-left:clamp(18px,2vw,26px); border-left:2px solid var(--red);
+}
+
+/* --- your side / my side ------------------------------------------------ */
+.deal{ display:grid; grid-template-columns:.86fr 1.14fr; gap:clamp(28px,4vw,58px); margin-top:clamp(24px,3vw,40px); }
+.deal__mine{ padding-left:clamp(24px,3vw,44px); border-left:1px solid var(--rule); }
+.lbl{
+  margin:0 0 20px; padding-bottom:9px; border-bottom:1px solid var(--rule);
+  font-family:'IBM Plex Mono',monospace; font-size:var(--t-mono);
+  letter-spacing:.18em; text-transform:uppercase; color:var(--red); font-weight:500;
+}
+.yours{ list-style:none; margin:0; padding:0; counter-reset:y; }
+.yours li{
+  counter-increment:y; position:relative; padding-left:52px;
+  margin-bottom:26px; font-size:1.08rem;
+}
+.yours li::before{
+  content:counter(y,decimal-leading-zero);
+  position:absolute; left:0; top:.05em;
+  font-family:'Instrument Serif',Georgia,serif; font-size:1.75rem;
+  color:var(--red); line-height:1;
+}
+.yours strong{ display:block; color:var(--ink); font-weight:500; }
+.checks{ list-style:none; margin:0; padding:0; columns:2; column-gap:34px; }
+.checks li{
+  position:relative; padding-left:22px; margin-bottom:11px;
+  font-size:.99rem; line-height:1.45; break-inside:avoid;
+}
+.checks li::before{
+  content:''; position:absolute; left:2px; top:.42em;
+  width:5px; height:10px;
+  border-right:1.6px solid var(--red); border-bottom:1.6px solid var(--red);
+  transform:rotate(42deg);
+}
+.deal-note{ margin-top:clamp(26px,3vw,38px); padding-top:16px; border-top:1px solid var(--rule); }
+
+/* --- the work (services ledger) ----------------------------------------- */
+.work{ border-top:1px solid var(--rule); margin-top:clamp(20px,2.5vw,34px); }
+.work__row{
+  display:grid; grid-template-columns:58px 250px minmax(0,1fr);
+  gap:clamp(14px,2vw,28px); align-items:baseline;
+  padding-block:clamp(20px,2.3vw,30px);
+  border-bottom:1px solid var(--rule);
+  position:relative; transition:padding-left .55s var(--ease);
+}
+.work__row::before{
+  content:''; position:absolute; left:0; top:-1px; height:1px; width:0;
+  background:var(--red); transition:width .7s var(--ease);
+}
+.work__row:hover{ padding-left:10px; }
+.work__row:hover::before{ width:100%; }
+.work__no{
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+  letter-spacing:.12em; color:var(--red);
+}
+.work__row h3{ font-size:clamp(1.18rem,1.7vw,1.42rem); }
+.work__row p{ margin:0; font-size:1rem; color:var(--ink-2); max-width:48ch; }
+
+/* --- plates (portfolio) ------------------------------------------------- */
+.plates{
+  display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(20px,2.6vw,40px); margin-top:clamp(26px,3vw,44px);
+}
+.plate{ margin:0; grid-column:span 6; }
+.plate:nth-child(1),.plate:nth-child(4){ grid-column:span 7; }
+.plate:nth-child(2),.plate:nth-child(3){ grid-column:span 5; }
+
+/* double-bezel mount */
+.mount{
+  position:relative; padding:10px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+  transition:transform .7s var(--ease), box-shadow .7s var(--ease);
+}
+.plate:hover .mount{
+  transform:translateY(-5px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 14px 30px -18px rgba(23,20,15,.42);
+}
+.mount::before,.mount::after{
+  content:''; position:absolute; width:19px; height:19px;
+  background:linear-gradient(135deg, rgba(203,192,171,.95) 50%, transparent 50%);
+  pointer-events:none;
+}
+.mount::before{ top:0; left:0; }
+.mount::after{ bottom:0; right:0; transform:rotate(180deg); }
+
+.browser{
+  background:var(--plate); border:1px solid var(--rule);
+  border-radius:2px; overflow:hidden;
+}
+.chrome{
+  display:flex; align-items:center; gap:6px;
+  padding:8px 10px; background:#E4DDCD; border-bottom:1px solid var(--rule);
+}
+.chrome i{ width:7px; height:7px; border-radius:50%; background:#BDB19A; display:block; }
+.chrome .bar{
+  flex:1; height:11px; margin-left:8px; border-radius:6px;
+  background:#F3EEE3; border:1px solid #D5C9B3;
+}
+.viewport{ height:clamp(196px,23vw,268px); overflow:hidden; position:relative; }
+.mini{
+  position:absolute; inset:0 0 auto 0;
+  transition:transform 2.2s var(--ease-soft);
+  will-change:transform;
+}
+.plate:hover .mini{ transform:translateY(-38%); }
+.mini > *{ display:block; }
+.m-nav{ display:flex; align-items:center; gap:6px; padding:10px 12px; }
+.m-logo{ width:34px; height:8px; border-radius:1px; }
+.m-links{ margin-left:auto; display:flex; gap:6px; }
+.m-links span{ width:20px; height:4px; border-radius:1px; opacity:.6; }
+.m-hero{ padding:16px 12px 18px; }
+.m-t{ height:11px; border-radius:1px; margin-bottom:6px; }
+.m-t.s{ height:5px; opacity:.42; }
+.m-btn{ width:56px; height:14px; border-radius:2px; margin-top:10px; }
+.m-grid{ display:grid; gap:6px; padding:12px; }
+.m-grid.c3{ grid-template-columns:repeat(3,1fr); }
+.m-grid.c2{ grid-template-columns:repeat(2,1fr); }
+.m-card{ height:44px; border-radius:2px; }
+.m-round{ display:flex; gap:10px; padding:14px 12px; justify-content:center; }
+.m-round i{ width:26px; height:26px; border-radius:50%; display:block; }
+.m-strip{ height:26px; }
+.m-foot{ height:52px; }
+.m-line{ height:4px; border-radius:1px; margin:0 12px 5px; opacity:.35; }
+
+figcaption{ padding-top:16px; }
+.plate-no{
+  font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--red); display:block; margin-bottom:7px;
+}
+figcaption h3{ margin-bottom:4px; }
+.sector{
+  margin:0 0 8px; font-family:'IBM Plex Mono',monospace;
+  font-size:.69rem; letter-spacing:.1em; color:var(--ink-3); text-transform:uppercase;
+}
+figcaption p:last-child{ margin:0; font-size:1rem; max-width:40ch; }
+
+.more-clients{ list-style:none; margin:clamp(34px,4vw,56px) 0 0; padding:0; border-top:1px solid var(--rule); }
+.more-clients li{
+  display:grid; grid-template-columns:230px 200px minmax(0,1fr);
+  gap:16px; align-items:baseline;
+  padding-block:16px; border-bottom:1px solid var(--rule-soft);
+  transition:background .5s var(--ease);
+}
+.more-clients li:hover{ background:rgba(232,224,207,.5); }
+.more-clients b{ color:var(--ink); font-weight:500; font-size:1.06rem; }
+.more-clients .sector{ margin:0; }
+.more-clients p{ margin:0; font-size:.98rem; }
+
+/* --- testimonials (ink ground) ------------------------------------------ */
+.ink-ground{ background:var(--ink); color:#DDD4C4; border-top:none; }
+.ink-ground h2{ color:var(--paper); }
+.ink-ground .sec-no{ color:var(--red-2); }
+.ink-ground .rail{ border-right-color:rgba(242,237,227,.2); }
+.ink-ground .margin-note{ color:#9C9384; }
+.quotes{ display:grid; gap:clamp(30px,4vw,54px); margin-top:clamp(24px,3vw,40px); }
+.quote{ position:relative; padding-left:clamp(40px,5vw,74px); max-width:52ch; }
+.quote:nth-child(2){ margin-left:auto; }
+.quote:nth-child(3){ margin-left:clamp(0px,4vw,64px); }
+.quote__mark{
+  position:absolute; left:0; top:-.24em;
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(4.4rem,7vw,7.2rem); line-height:1; color:var(--red-2);
+  opacity:.9; pointer-events:none; user-select:none;
+}
+.quote blockquote{
+  margin:0; font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(1.35rem,2.5vw,2.05rem); line-height:1.28; color:var(--paper);
+}
+.quote figcaption{
+  padding-top:14px; font-family:'IBM Plex Mono',monospace;
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:#A69C8B;
+}
+.quote figcaption b{ color:#E4DBCA; font-weight:500; }
+
+/* --- what happens next -------------------------------------------------- */
+.steps{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:clamp(18px,2.4vw,36px); margin-top:clamp(26px,3vw,44px);
+  position:relative;
+}
+.step{ padding-top:26px; border-top:1px solid var(--rule); position:relative; }
+.step::before{
+  content:''; position:absolute; top:-4.5px; left:0;
+  width:8px; height:8px; background:var(--paper);
+  border:1px solid var(--red); border-radius:50%;
+}
+.step .n{
+  display:block; font-family:'IBM Plex Mono',monospace; font-size:.68rem;
+  letter-spacing:.18em; color:var(--red); margin-bottom:12px; text-transform:uppercase;
+}
+.step h3{ margin-bottom:9px; }
+.step p{ margin:0; font-size:1rem; }
+
+/* --- pricing ------------------------------------------------------------ */
+.price-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:28px; flex-wrap:wrap; }
+.freestamp{
+  flex:0 0 auto; transform:rotate(-6deg);
+  border:2px solid var(--red); border-radius:3px;
+  box-shadow:inset 0 0 0 1px var(--paper), inset 0 0 0 3px var(--red);
+  padding:11px 16px; color:var(--red); opacity:.82;
+  font-family:'IBM Plex Mono',monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+  text-align:center; line-height:1.5; mix-blend-mode:multiply;
+}
+.freestamp small{ display:block; font-size:.62rem; letter-spacing:.14em; opacity:.85; }
+
+.tariff{ width:100%; border-collapse:collapse; margin-top:clamp(26px,3vw,42px); }
+.tariff caption{
+  text-align:left; padding-bottom:14px;
+  font-family:'IBM Plex Mono',monospace; font-size:var(--t-mono);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+.tariff th,.tariff td{ text-align:left; padding:18px 14px; border-bottom:1px solid var(--rule); vertical-align:baseline; }
+.tariff thead th{
+  border-bottom:1px solid var(--ink); padding-top:0;
+  font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:.68rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
+}
+.tariff th[scope="row"]{ font-family:'Newsreader',serif; font-weight:500; font-size:1.15rem; color:var(--ink); }
+.tariff td{ font-variant-numeric:tabular-nums; font-family:'IBM Plex Mono',monospace; font-size:.92rem; color:var(--ink-2); }
+.tariff .num{ font-size:1.02rem; color:var(--ink); }
+.tariff tbody tr{ transition:background .45s var(--ease); }
+.tariff tbody tr:hover{ background:rgba(232,224,207,.55); }
+.tariff tr.pop th[scope="row"]{ box-shadow:inset 3px 0 0 var(--red); padding-left:16px; }
+.tag{
+  display:inline-block; margin-left:9px; padding:3px 7px;
+  background:var(--red); color:#FBF6EC; border-radius:2px;
+  font-family:'IBM Plex Mono',monospace; font-size:.62rem;
+  letter-spacing:.14em; text-transform:uppercase; vertical-align:middle;
+}
+.price-cards{ display:none; }
+.addons{ list-style:none; margin:clamp(30px,3.4vw,46px) 0 0; padding:0; border-top:1px solid var(--rule); max-width:640px; }
+.addons li{
+  display:flex; justify-content:space-between; gap:18px; align-items:baseline;
+  padding-block:13px; border-bottom:1px solid var(--rule-soft); font-size:1rem;
+}
+.addons b{ font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:.86rem; color:var(--ink); white-space:nowrap; }
+
+/* --- trades / areas ----------------------------------------------------- */
+.trades{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(1.5rem,3.1vw,2.5rem); line-height:1.3; color:var(--ink);
+  max-width:26ch; margin:0;
+}
+.trades span{ white-space:nowrap; }
+.areas{ margin-top:clamp(30px,3.4vw,46px); padding-top:20px; border-top:1px solid var(--rule); }
+.areas ul{ list-style:none; display:flex; flex-wrap:wrap; gap:9px; margin:14px 0 0; padding:0; }
+.areas li{
+  padding:8px 13px; border:1px solid var(--rule); border-radius:2px;
+  background:rgba(251,248,241,.7);
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2);
+  transition:background .45s var(--ease), border-color .45s var(--ease), color .45s var(--ease);
+}
+.areas li:hover{ background:var(--ink); border-color:var(--ink); color:var(--paper); }
+
+/* --- sign-off ----------------------------------------------------------- */
+.signoff{ background:linear-gradient(180deg, rgba(232,224,207,.42), rgba(242,237,227,0) 62%); }
+.yours-line{
+  font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+  font-size:clamp(1.5rem,2.6vw,2.1rem); color:var(--ink); margin:clamp(30px,3.4vw,44px) 0 6px;
+}
+.sig{ width:min(348px,80vw); height:auto; display:block; color:var(--pen); margin:0 0 6px -8px; }
+.sig path{ fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; }
+.sig .s-name{ stroke-width:5.4; }
+.sig .s-flourish{ stroke-width:3.6; }
+.sig .s-dot{ fill:currentColor; stroke:none; }
+.js:not(.anim-off) .sig .s-name,
+.js:not(.anim-off) .sig .s-flourish{ stroke-dasharray:1; stroke-dashoffset:1; }
+.js:not(.anim-off) .sig .s-dot{ opacity:0; }
+/* Each letter is its own stroke: SVG restarts the dash pattern on every
+   subpath, so one path with pen-lifts would draw all letters at once. */
+.js:not(.anim-off) .sig.is-drawn .s-name{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset .44s cubic-bezier(.4,.05,.5,1) var(--d,0s);
+}
+.js:not(.anim-off) .sig.is-drawn .s-flourish{ stroke-dashoffset:0; transition:stroke-dashoffset .55s ease-out 2.4s; }
+.js:not(.anim-off) .sig.is-drawn .s-dot{ opacity:1; transition:opacity .25s ease 2.55s; }
+.sig-block{
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); line-height:1.9;
+}
+.sig-block b{ color:var(--ink); font-weight:500; }
+.ps{
+  margin-top:clamp(30px,3.4vw,44px); padding-top:20px;
+  border-top:1px solid var(--rule); max-width:56ch; font-style:italic; color:var(--ink-2);
+}
+.ps b{ font-style:normal; font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.16em; color:var(--red); }
+.signoff__actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(26px,3vw,38px); }
+
+/* --- footer ------------------------------------------------------------- */
+.site-foot{
+  background:var(--ink); color:#A9A090;
+  padding-block:clamp(56px,6vw,84px) calc(28px + var(--rail-h));
+  font-size:.95rem;
+}
+.foot-grid{
+  display:grid; grid-template-columns:1.45fr 1fr 1fr 1.25fr;
+  gap:clamp(26px,3.4vw,52px);
+}
+.foot-logo{
+  width:150px; height:auto; margin-bottom:20px;
+  background:var(--paper); padding:12px 14px; border-radius:3px;
+}
+.site-foot h4{
+  margin:0 0 16px; font-family:'IBM Plex Mono',monospace; font-weight:500;
+  font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--paper);
+}
+.site-foot ul{ list-style:none; margin:0; padding:0; }
+.site-foot li{ margin-bottom:9px; line-height:1.5; }
+.site-foot a{ color:#C6BDAC; text-decoration:none; transition:color .4s var(--ease); }
+.site-foot a:hover{ color:var(--paper); text-decoration:underline; text-underline-offset:3px; }
+.site-foot address{ font-style:normal; line-height:1.7; }
+.foot-bottom{
+  margin-top:clamp(38px,4vw,58px); padding-top:22px;
+  border-top:1px solid rgba(242,237,227,.16);
+  display:flex; flex-wrap:wrap; gap:12px 26px; justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+  letter-spacing:.13em; text-transform:uppercase; color:#9A917F;
+}
+
+/* --- persistent reply rail ---------------------------------------------- */
+.reply-rail{
+  position:fixed; left:0; right:0; bottom:0; z-index:var(--z-rail);
+  background:rgba(23,20,15,.965);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-top:1px solid rgba(242,237,227,.2);
+  transform:translateY(115%);
+  transition:transform .75s var(--ease);
+}
+.reply-rail.is-in{ transform:translateY(0); }
+.reply-rail__in{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:18px; padding-block:12px; min-height:var(--rail-h);
+}
+.reply-rail p{ margin:0; color:#C6BDAC; font-size:.95rem; }
+.reply-rail .mono{ color:var(--red-2); display:block; margin-bottom:2px; font-size:.66rem; }
+.reply-rail b{ color:var(--paper); font-weight:500; }
+.reply-rail .acts{ display:flex; gap:10px; flex:0 0 auto; }
+.reply-rail .btn-line{ border-color:rgba(242,237,227,.42); color:var(--paper); }
+.reply-rail .btn-line:hover{ background:var(--paper); color:var(--ink); border-color:var(--paper); }
+.reply-rail .btn-line .nib{ background:rgba(242,237,227,.16); }
+
+/* --- scroll reveal ------------------------------------------------------- */
+.js:not(.anim-off) .rv{ opacity:0; transform:translateY(26px); }
+.js:not(.anim-off) .rv.is-in{
+  opacity:1; transform:none;
+  transition:opacity .85s var(--ease-soft), transform .95s var(--ease);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1100px){
+  .nav{ gap:16px; }
+  .nav a{ font-size:.95rem; }
+  .more-clients li{ grid-template-columns:190px 170px minmax(0,1fr); }
+}
+
+@media (max-width:980px){
+  .letterhead .nav, .head-cta .btn{ display:none; }
+  .burger{ display:block; }
+  .ruled{ grid-template-columns:1fr; gap:14px; }
+  .rail{
+    position:static; border-right:none; min-height:0;
+    padding-right:0; padding-bottom:12px; border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
+  }
+  .sec-no{ margin-bottom:0; }
+  .margin-note{ max-width:38ch; }
+  .plate,.plate:nth-child(1),.plate:nth-child(2),.plate:nth-child(3),.plate:nth-child(4){ grid-column:span 12; }
+  .steps{ grid-template-columns:repeat(2,1fr); }
+  .foot-grid{ grid-template-columns:1fr 1fr; }
+  .quote:nth-child(2),.quote:nth-child(3){ margin-left:0; }
+  /* drop the postmark clear of the opening line */
+  .postmark{ top:auto; bottom:6%; right:14px; width:96px; }
+}
+
+@media (max-width:820px){
+  .deal{ grid-template-columns:1fr; gap:34px; }
+  .deal__mine{ padding-left:0; border-left:none; padding-top:30px; border-top:1px solid var(--rule); }
+  .ledger-strip__in{ grid-template-columns:repeat(2,1fr); gap:22px 0; }
+  .stat:nth-child(3){ border-left:none; }
+  .stat:nth-child(odd){ border-left:none; }
+  .work__row{ grid-template-columns:44px minmax(0,1fr); }
+  .work__row p{ grid-column:2; }
+  .more-clients li{ grid-template-columns:1fr; gap:5px; padding-block:18px; }
+}
+
+@media (max-width:680px){
+  :root{ --rail-h:78px; --t-body:1.05rem; }
+  .checks{ columns:1; }
+  .steps{ grid-template-columns:1fr; gap:0; }
+  .step{ padding-block:24px 22px; }
+  .step:last-child{ border-bottom:1px solid var(--rule); }
+  /* the postmark would sit over the opening line at this width */
+  .postmark{ display:none; }
+  .hero__actions .btn,.signoff__actions .btn,.sheet-foot .btn{ flex:1 1 100%; justify-content:space-between; }
+
+  /* pricing becomes stacked cards */
+  .tariff thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .tariff, .tariff tbody, .tariff tr, .tariff th, .tariff td{ display:block; width:100%; }
+  .tariff tr{
+    border:1px solid var(--rule); border-radius:3px; padding:16px;
+    margin-bottom:14px; background:rgba(251,248,241,.66);
+  }
+  .tariff th[scope="row"]{ border-bottom:1px solid var(--rule); padding:0 0 12px; font-size:1.3rem; }
+  .tariff tr.pop th[scope="row"]{ box-shadow:none; padding-left:0; border-left:none; }
+  .tariff tr.pop{ border-color:var(--red); box-shadow:inset 3px 0 0 var(--red); }
+  .tariff td{ border-bottom:none; padding:9px 0 0; display:flex; justify-content:space-between; gap:14px; }
+  .tariff td::before{
+    content:attr(data-label); color:var(--ink-3);
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  }
+  .reply-rail__in{ flex-direction:column; align-items:stretch; gap:9px; padding-block:10px; }
+  .reply-rail p{ text-align:center; font-size:.85rem; }
+  .reply-rail .acts{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .reply-rail .btn{ justify-content:center; min-height:46px; padding:11px 10px; font-size:.69rem; letter-spacing:.1em; }
+  .reply-rail .nib{ display:none; }
+  .freestamp{ font-size:.66rem; padding:9px 13px; }
+}
+
+@media (max-width:430px){
+  .ledger-strip__in{ grid-template-columns:1fr 1fr; }
+  .stat{ padding-inline:0; }
+  .stat:nth-child(even){ padding-left:16px; border-left:1px solid var(--rule); }
+  .dropcap::first-letter{ font-size:3.4em; }
+  .foot-grid{ grid-template-columns:1fr; }
+  .quote{ padding-left:32px; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .js .rv,
+  .js .h1-anim .w > span{ opacity:1 !important; transform:none !important; }
+  .js .sig .s-name,.js .sig .s-flourish{ stroke-dashoffset:0 !important; }
+  .js .sig .s-dot{ opacity:1 !important; }
+  .js .postmark{ opacity:.62 !important; transform:rotate(-9deg) !important; }
+  .plate:hover .mini{ transform:none !important; }
+  .plate:hover .mount{ transform:none !important; }
+  .reply-rail{ transform:translateY(0); }
+}
+
+/* failsafe: script never finished */
+.anim-off .rv,
+.anim-off .h1-anim .w > span{ opacity:1 !important; transform:none !important; }
+.anim-off .sig .s-name,.anim-off .sig .s-flourish{ stroke-dashoffset:0 !important; }
+.anim-off .postmark{ opacity:.62 !important; }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#letter">Skip to the letter</a>
+
+<!-- ============================ LETTERHEAD ============================ -->
+<header class="letterhead">
+  <div class="sheet letterhead__in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services, home">
+      <span class="brand__name">Digital Consulting Services</span>
+      <span class="brand__sub">Ricky Wilson &middot; Polegate &middot; Est. 2019</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#work"><sup>01</sup>Services</a>
+      <a href="#pricing"><sup>02</sup>Pricing</a>
+      <a href="#portfolio"><sup>03</sup>Portfolio</a>
+      <a href="/blog"><sup>04</sup>Blog</a>
+      <a href="#letter"><sup>05</sup>About</a>
+    </nav>
+
+    <div class="head-cta">
+      <a class="btn btn-ink" href="#reply">
+        Get a free quote
+        <span class="nib" aria-hidden="true">
+          <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg>
+        </span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobilenav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ MOBILE SHEET ============================ -->
+<div class="mobile-sheet" id="mobilenav" role="dialog" aria-modal="true" aria-label="Menu">
+  <nav aria-label="Mobile">
+    <a href="#work"><i>01</i>Services</a>
+    <a href="#pricing"><i>02</i>Pricing</a>
+    <a href="#portfolio"><i>03</i>Portfolio</a>
+    <a href="/blog"><i>04</i>Blog</a>
+    <a href="#letter"><i>05</i>About</a>
+  </nav>
+  <div class="sheet-foot">
+    <a class="btn btn-ink" href="#reply">Get a free quote
+      <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+    </a>
+    <a class="btn btn-line" href="tel:07395063764">Call 07395 063764
+      <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+    </a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ============================ HERO / OPENING LINE ============================ -->
+  <section class="hero">
+    <div class="sheet">
+      <p class="hero__meta">
+        <span>Unit H3, Chaucer Business Park, Polegate BN26 6QH</span>
+        <span>Ref. RW &middot; Est. 2019</span>
+      </p>
+
+      <svg class="postmark" id="postmark" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <path id="arcTop" d="M100 100 m-74 0 a74 74 0 1 1 148 0"/>
+          <path id="arcBot" d="M100 100 m-62 0 a62 62 0 1 0 124 0"/>
+        </defs>
+        <circle cx="100" cy="100" r="88" fill="none" stroke="currentColor" stroke-width="2.6"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="1"/>
+        <text fill="currentColor" font-size="12.5" letter-spacing="2.2">
+          <textPath href="#arcTop" startOffset="50%" text-anchor="middle">DIGITAL CONSULTING SERVICES</textPath>
+        </text>
+        <text fill="currentColor" font-size="10.5" letter-spacing="2.4">
+          <textPath href="#arcBot" startOffset="50%" text-anchor="middle">POLEGATE &#183; EAST SUSSEX</textPath>
+        </text>
+        <line x1="44" y1="80" x2="156" y2="80" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="44" y1="122" x2="156" y2="122" stroke="currentColor" stroke-width="1.4"/>
+        <text x="100" y="108" text-anchor="middle" fill="currentColor" font-size="17" letter-spacing="2.6">EST. 2019</text>
+      </svg>
+
+      <p class="salutation">To whoever&rsquo;s been putting the website off,</p>
+
+      <h1 class="h1-anim" id="opening"><span class="w"><span>Every</span></span> <span class="w"><span>site</span></span> <span class="w"><span>on</span></span> <span class="w"><span>this</span></span> <span class="w"><span>page</span></span> <span class="w"><span>was</span></span> <span class="w"><span>written,</span></span> <span class="w"><span>designed</span></span> <span class="w"><span>and</span></span> <span class="w"><span>built</span></span> <span class="w"><span><em>by me</em>.</span></span></h1>
+
+      <p class="hero__deck">I&rsquo;m Ricky Wilson. I&rsquo;ve been making websites for tradespeople out of Polegate since 2019. More than twenty of them so far, and I still look after every one.</p>
+
+      <div class="hero__actions">
+        <a class="btn btn-ink" href="#reply">Get a free quote
+          <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+        </a>
+        <a class="btn btn-line" href="tel:07395063764">Call 07395 063764
+          <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CREDENTIAL LEDGER ============================ -->
+  <div class="ledger-strip">
+    <div class="sheet ledger-strip__in rv">
+      <div class="stat"><b><span class="count" data-to="2019" data-plain="1">2019</span></b><span>Established</span></div>
+      <div class="stat"><b><span class="count" data-to="5">5</span>+</b><span>Years building<br>local websites</span></div>
+      <div class="stat"><b><span class="count" data-to="20">20</span>+</b><span>Sites delivered</span></div>
+      <div class="stat"><b><span class="count" data-to="100">100</span>%</b><span>Managed &mdash; I<br>handle everything</span></div>
+    </div>
+  </div>
+
+  <!-- ============================ THE LETTER ============================ -->
+  <section class="section sheet ruled" id="letter">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 01 &mdash; The opening</span>
+      <p class="margin-note">Why the usual way of buying a website never quite happens.</p>
+    </div>
+    <div class="col letter rv">
+      <p class="dropcap">You&rsquo;ve probably had one of these offers before. Someone will build you a website, then sends over a twelve page brief and asks for your logo files, your photos, and a rough idea of what each page should say. That&rsquo;s the bit that kills it. You&rsquo;re up a ladder, or under a van, or halfway through a rewire, and the homework sits in the inbox for eight months.</p>
+
+      <p>So I do it the other way round. We have a conversation, twenty minutes on the phone is usually enough, and I take it from there. I ask the questions. I write the words. I choose the colours and the pictures. I build it, put it live, host it, keep it patched, and I answer the phone when something needs changing.</p>
+
+      <p class="pull">There&rsquo;s no login for you to learn and no password for you to forget.</p>
+
+      <p>The work itself is proper agency work. Scroll down and judge it for yourself, because that is the only fair test. The part that&rsquo;s different is that there&rsquo;s one name on it and it&rsquo;s mine. Nothing gets passed to a junior, nothing gets sent offshore, and you never get handed to an account manager who wasn&rsquo;t on the first call.</p>
+
+      <p>Sat here in Polegate, I know most of the trades I build for by name. That&rsquo;s not a business model I chose to sound friendly. It&rsquo;s just what happens when one person does the work.</p>
+    </div>
+  </section>
+
+  <!-- ============================ THE ARRANGEMENT ============================ -->
+  <section class="section sheet ruled" id="promise">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 02 &mdash; The arrangement</span>
+      <p class="margin-note">What lands on your desk, and what lands on mine.</p>
+    </div>
+    <div class="col rv">
+      <h2>What this actually asks of you</h2>
+      <p>Most of the reason people put a website off for years is the size of the job they imagine. Here it is written out, both columns, so there&rsquo;s nothing to guess at.</p>
+
+      <div class="deal">
+        <div class="deal__yours">
+          <p class="lbl">Your side</p>
+          <ol class="yours">
+            <li><strong>One conversation.</strong>Twenty minutes on the phone, or a few messages if you&rsquo;d rather type.</li>
+            <li><strong>Tell me what you think.</strong>I&rsquo;ll show you the site. You say what you want changed, as many times as it takes.</li>
+            <li><strong>That&rsquo;s the list.</strong>No brief, no forms, no folder of photos to dig out.</li>
+          </ol>
+        </div>
+        <div class="deal__mine">
+          <p class="lbl">My side</p>
+          <ul class="checks">
+            <li>Asking the right questions</li>
+            <li>Writing every word on the site</li>
+            <li>Designing it around your trade</li>
+            <li>Choosing the colours and imagery</li>
+            <li>A page for each service you offer</li>
+            <li>A page for each town you cover</li>
+            <li>Schema markup so Google reads it properly</li>
+            <li>Built to load fast on a phone</li>
+            <li>A contact form that reaches you</li>
+            <li>Hosting</li>
+            <li>SSL certificate</li>
+            <li>Domain management</li>
+            <li>Security updates</li>
+            <li>Uptime monitoring</li>
+            <li>Google Search Console submission</li>
+            <li>Unlimited revisions while we build</li>
+            <li>Answering the phone afterwards</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="caption deal-note">Three things on your side. Seventeen on mine. That is the arrangement, and it hasn&rsquo;t changed since 2019.</p>
+    </div>
+  </section>
+
+  <!-- ============================ THE WORK / SERVICES ============================ -->
+  <section class="section sheet ruled" id="work">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 03 &mdash; The work</span>
+      <p class="margin-note">Six things I do. All of them by hand.</p>
+    </div>
+    <div class="col rv">
+      <h2>What I&rsquo;ll do for you</h2>
+      <p>Most people start with the first one and pick up the rest as the business grows.</p>
+
+      <div class="work">
+        <div class="work__row">
+          <span class="work__no">01</span>
+          <h3>Website Design</h3>
+          <p>Built for your trade from scratch. No templates, and nothing left for you to assemble.</p>
+        </div>
+        <div class="work__row">
+          <span class="work__no">02</span>
+          <h3>Local SEO</h3>
+          <p>Service pages, location pages and Schema markup, in from the start so Google can find you in the towns you actually work in.</p>
+        </div>
+        <div class="work__row">
+          <span class="work__no">03</span>
+          <h3>Ongoing Management</h3>
+          <p>I look after the site so you can get on with the trade. Updates, backups, changes, the lot.</p>
+        </div>
+        <div class="work__row">
+          <span class="work__no">04</span>
+          <h3>Google Workspace Email</h3>
+          <p>Proper business email on your own domain, set up and working on your phone before you hang up.</p>
+        </div>
+        <div class="work__row">
+          <span class="work__no">05</span>
+          <h3>eCommerce Websites</h3>
+          <p>WooCommerce or custom built stores, loaded with your products and ready to take money.</p>
+        </div>
+        <div class="work__row">
+          <span class="work__no">06</span>
+          <h3>Analytics &amp; Reporting</h3>
+          <p>Analytics, Search Console and a monthly report, so you know what&rsquo;s working and what isn&rsquo;t.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PORTFOLIO / PLATES ============================ -->
+  <section class="section sheet ruled" id="portfolio">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 04 &mdash; Enclosed</span>
+      <p class="margin-note">Nine of the people I&rsquo;ve worked with. Four shown, five listed.</p>
+    </div>
+    <div class="col rv">
+      <h2>Some of the people I&rsquo;ve worked with</h2>
+      <p>Real businesses, real names, all still live. I still manage every one of these.</p>
+
+      <div class="plates">
+
+        <!-- Plate i -->
+        <figure class="plate">
+          <div class="mount">
+            <div class="browser">
+              <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="bar"></span></div>
+              <div class="viewport">
+                <div class="mini" style="background:#FFFFFF" aria-hidden="true">
+                  <div class="m-nav" style="background:#22303F">
+                    <span class="m-logo" style="background:#E8B23A"></span>
+                    <span class="m-links"><span style="background:#fff"></span><span style="background:#fff"></span><span style="background:#fff"></span><span style="background:#E8B23A"></span></span>
+                  </div>
+                  <div class="m-hero" style="background:#2C3B4C">
+                    <span class="m-t" style="background:#fff;width:78%"></span>
+                    <span class="m-t" style="background:#fff;width:52%"></span>
+                    <span class="m-t s" style="background:#fff;width:66%"></span>
+                    <span class="m-btn" style="background:#E8B23A"></span>
+                  </div>
+                  <div class="m-grid c3">
+                    <span class="m-card" style="background:#EEF1F4"></span>
+                    <span class="m-card" style="background:#EEF1F4"></span>
+                    <span class="m-card" style="background:#EEF1F4"></span>
+                  </div>
+                  <span class="m-line" style="background:#22303F;width:60%"></span>
+                  <span class="m-line" style="background:#22303F;width:74%"></span>
+                  <div class="m-grid c2">
+                    <span class="m-card" style="background:#22303F;height:56px"></span>
+                    <span class="m-card" style="background:#E8B23A;height:56px"></span>
+                  </div>
+                  <span class="m-foot" style="background:#22303F;display:block"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="plate-no">Plate i</span>
+            <h3>Colossus Scaffolding</h3>
+            <p class="sector">Scaffolding &middot; East Sussex</p>
+            <p>First enquiry through Google within three weeks of going live. Thirty pages, one for every service and every town they cover.</p>
+          </figcaption>
+        </figure>
+
+        <!-- Plate ii -->
+        <figure class="plate">
+          <div class="mount">
+            <div class="browser">
+              <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="bar"></span></div>
+              <div class="viewport">
+                <div class="mini" style="background:#FFFFFF" aria-hidden="true">
+                  <div class="m-nav" style="background:#141414">
+                    <span class="m-logo" style="background:#C8202A"></span>
+                    <span class="m-links"><span style="background:#fff"></span><span style="background:#fff"></span><span style="background:#fff"></span></span>
+                  </div>
+                  <div class="m-hero" style="background:#1C1C1C;padding-block:26px">
+                    <span class="m-t" style="background:#fff;width:86%"></span>
+                    <span class="m-t" style="background:#C8202A;width:44%"></span>
+                    <span class="m-t s" style="background:#fff;width:70%"></span>
+                    <span class="m-btn" style="background:#C8202A"></span>
+                  </div>
+                  <div class="m-round">
+                    <i style="background:#F1EEE9"></i><i style="background:#F1EEE9"></i><i style="background:#F1EEE9"></i><i style="background:#F1EEE9"></i>
+                  </div>
+                  <span class="m-line" style="background:#141414;width:68%"></span>
+                  <span class="m-line" style="background:#141414;width:80%"></span>
+                  <span class="m-line" style="background:#141414;width:52%"></span>
+                  <div class="m-grid c3">
+                    <span class="m-card" style="background:#F1EEE9;height:34px"></span>
+                    <span class="m-card" style="background:#F1EEE9;height:34px"></span>
+                    <span class="m-card" style="background:#F1EEE9;height:34px"></span>
+                  </div>
+                  <span class="m-foot" style="background:#141414;display:block"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="plate-no">Plate ii</span>
+            <h3>DJ Fox Electrical</h3>
+            <p class="sector">Electrician &middot; East Sussex</p>
+            <p>A 20+ page site with a page per service and a page per location. Live at djfoxelectrical.com.</p>
+          </figcaption>
+        </figure>
+
+        <!-- Plate iii -->
+        <figure class="plate">
+          <div class="mount">
+            <div class="browser">
+              <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="bar"></span></div>
+              <div class="viewport">
+                <div class="mini" style="background:#151517" aria-hidden="true">
+                  <div class="m-nav" style="background:#0E0E10">
+                    <span class="m-logo" style="background:#F26B21"></span>
+                    <span class="m-links"><span style="background:#fff"></span><span style="background:#fff"></span><span style="background:#F26B21"></span></span>
+                  </div>
+                  <div class="m-hero" style="background:#1C1C1E">
+                    <span class="m-t" style="background:#fff;width:70%"></span>
+                    <span class="m-t" style="background:#F26B21;width:38%"></span>
+                    <span class="m-t s" style="background:#fff;width:62%"></span>
+                    <span class="m-btn" style="background:#F26B21"></span>
+                  </div>
+                  <div class="m-grid c3" style="padding-top:6px">
+                    <span class="m-card" style="background:#2A2A2E;height:30px"></span>
+                    <span class="m-card" style="background:#2A2A2E;height:30px"></span>
+                    <span class="m-card" style="background:#2A2A2E;height:30px"></span>
+                    <span class="m-card" style="background:#2A2A2E;height:30px"></span>
+                    <span class="m-card" style="background:#F26B21;height:30px;opacity:.75"></span>
+                    <span class="m-card" style="background:#2A2A2E;height:30px"></span>
+                  </div>
+                  <span class="m-line" style="background:#fff;width:56%"></span>
+                  <span class="m-line" style="background:#fff;width:70%"></span>
+                  <span class="m-foot" style="background:#0E0E10;display:block"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="plate-no">Plate iii</span>
+            <h3>DCH Automotive</h3>
+            <p class="sector">Automotive</p>
+            <p>A professional presence from a standing start, with their Instagram feed running live on the page.</p>
+          </figcaption>
+        </figure>
+
+        <!-- Plate iv -->
+        <figure class="plate">
+          <div class="mount">
+            <div class="browser">
+              <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="bar"></span></div>
+              <div class="viewport">
+                <div class="mini" style="background:#FBF3EE" aria-hidden="true">
+                  <div class="m-nav" style="background:#FFFFFF">
+                    <span class="m-logo" style="background:#D2607F"></span>
+                    <span class="m-links"><span style="background:#5B4A50"></span><span style="background:#5B4A50"></span><span style="background:#D2607F"></span></span>
+                  </div>
+                  <div class="m-hero" style="background:#F3DCE2;padding-block:20px">
+                    <span class="m-t" style="background:#5B4A50;width:64%"></span>
+                    <span class="m-t s" style="background:#5B4A50;width:48%"></span>
+                    <span class="m-btn" style="background:#D2607F"></span>
+                  </div>
+                  <div class="m-grid c3">
+                    <span class="m-card" style="background:#EBD3D9;height:40px"></span>
+                    <span class="m-card" style="background:#E4D9CE;height:40px"></span>
+                    <span class="m-card" style="background:#DCE4DA;height:40px"></span>
+                  </div>
+                  <div class="m-grid c3" style="padding-top:0">
+                    <span class="m-card" style="background:#E4D9CE;height:40px"></span>
+                    <span class="m-card" style="background:#DCE4DA;height:40px"></span>
+                    <span class="m-card" style="background:#EBD3D9;height:40px"></span>
+                  </div>
+                  <span class="m-line" style="background:#5B4A50;width:44%"></span>
+                  <span class="m-foot" style="background:#5B4A50;display:block"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="plate-no">Plate iv</span>
+            <h3>Cuddle Plush Fabrics</h3>
+            <p class="sector">eCommerce &middot; Fabrics</p>
+            <p>Five years and counting. One of the longest relationships on the books, and the store has been mine to run the whole time.</p>
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <ul class="more-clients">
+        <li><b>Bexhill Removals</b><span class="sector">Removals</span><p>Design approved on the first presentation. No revisions asked for.</p></li>
+        <li><b>Luna Landings</b><span class="sector">Made-to-order eCommerce</span><p>A product configurator that raises the work order automatically, shipping worldwide.</p></li>
+        <li><b>Mad Graphics</b><span class="sector">Signage &amp; print</span><p>A full rebuild of the old site, top to bottom.</p></li>
+        <li><b>Nicola Noble Tuition</b><span class="sector">Tutoring</span><p>Moved the classes online during Covid instead of closing the business.</p></li>
+        <li><b>Sanctuary Ida</b><span class="sector">Yoga</span><p>Students book and pay for their classes on the site.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ TESTIMONIALS ============================ -->
+  <section class="section sheet ruled ink-ground" id="words">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 05 &mdash; In their words</span>
+      <p class="margin-note">Three replies, printed exactly as they were sent.</p>
+    </div>
+    <div class="col rv">
+      <h2>What they said afterwards</h2>
+
+      <div class="quotes">
+        <figure class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be happier with his work.</blockquote>
+          <figcaption><b>Sarah</b> &middot; Cuddle Plush Fabrics</figcaption>
+        </figure>
+
+        <figure class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</blockquote>
+          <figcaption><b>Nicola</b> &middot; Nicola Noble Tuition</figcaption>
+        </figure>
+
+        <figure class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>My yoga students love that they can book and pay for my classes on my website.</blockquote>
+          <figcaption><b>Molly</b> &middot; Sanctuary Ida</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WHAT HAPPENS NEXT ============================ -->
+  <section class="section sheet ruled" id="next">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 06 &mdash; What happens next</span>
+      <p class="margin-note">Four steps. Most sites take a few weeks end to end.</p>
+    </div>
+    <div class="col rv">
+      <h2>Here&rsquo;s what happens next</h2>
+      <p>If you ring today, this is the order it goes in.</p>
+
+      <div class="steps">
+        <div class="step">
+          <span class="n">Step 01</span>
+          <h3>A conversation</h3>
+          <p>A call or a few messages. I ask about the work you do and the jobs you want more of. No brief needed, nothing to fill in.</p>
+        </div>
+        <div class="step">
+          <span class="n">Step 02</span>
+          <h3>I write it and design it</h3>
+          <p>Copy, structure, images, colours. You don&rsquo;t need to know what to say, that&rsquo;s my part of it.</p>
+        </div>
+        <div class="step">
+          <span class="n">Step 03</span>
+          <h3>You review it</h3>
+          <p>I show you the site and you tell me what you&rsquo;d change. Unlimited revisions while we build, until you&rsquo;re happy with it.</p>
+        </div>
+        <div class="step">
+          <span class="n">Step 04</span>
+          <h3>It goes live, and stays live</h3>
+          <p>Hosting, updates, monitoring and support from then on. When something needs changing, you ring me.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRICING ============================ -->
+  <section class="section sheet ruled" id="pricing">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 07 &mdash; The cost</span>
+      <p class="margin-note">Same site either way. You&rsquo;re choosing how to pay for it.</p>
+    </div>
+    <div class="col rv">
+      <div class="price-head">
+        <div>
+          <h2>Here&rsquo;s what it costs, plainly</h2>
+          <p>Two ways to pay for the same website. The tier sets how many pages you get and how much of my time you have afterwards. The build is the same standard at every level.</p>
+        </div>
+        <p class="freestamp">Quotes are free<small>No obligation</small></p>
+      </div>
+
+      <table class="tariff">
+        <caption>All prices in pounds sterling. Pay monthly has a twelve month minimum.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tier</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Setup</th>
+            <th scope="col">Then monthly</th>
+            <th scope="col">Or monthly, nothing upfront</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Starter</th>
+            <td data-label="Pages">up to 20</td>
+            <td data-label="Setup" class="num">&pound;995</td>
+            <td data-label="Then monthly" class="num">&pound;15/mo</td>
+            <td data-label="Or pay monthly" class="num">&pound;45/mo</td>
+          </tr>
+          <tr class="pop">
+            <th scope="row">Professional <span class="tag">Most popular</span></th>
+            <td data-label="Pages">up to 50</td>
+            <td data-label="Setup" class="num">&pound;1,995</td>
+            <td data-label="Then monthly" class="num">&pound;25/mo</td>
+            <td data-label="Or pay monthly" class="num">&pound;75/mo</td>
+          </tr>
+          <tr>
+            <th scope="row">Growth</th>
+            <td data-label="Pages">up to 100</td>
+            <td data-label="Setup" class="num">&pound;3,495</td>
+            <td data-label="Then monthly" class="num">&pound;50/mo</td>
+            <td data-label="Or pay monthly" class="num">&pound;125/mo</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="caption" style="margin-top:22px;max-width:62ch">Everything in the right hand column further up this letter is included in all three: the custom design, the local SEO, mobile speed, contact form, hosting, SSL, domain management, security updates, uptime monitoring, unlimited revisions during the build and Search Console submission.</p>
+
+      <ul class="addons">
+        <li><span>Blog post writing</span><b>&pound;75 / post</b></li>
+        <li><span>Custom theme design</span><b>&pound;350</b></li>
+        <li><span>Google Ads setup and management</span><b>&pound;200 / mo + spend</b></li>
+        <li><span>Monthly SEO retainer</span><b>&pound;200 / mo</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ WHO IT'S FOR ============================ -->
+  <section class="section sheet ruled" id="trades">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 08 &mdash; Who this is for</span>
+      <p class="margin-note">If your trade isn&rsquo;t on the list, ring anyway. It usually still fits.</p>
+    </div>
+    <div class="col rv">
+      <h2>Who I build these for</h2>
+      <p class="trades">
+        <span>Electricians</span> <span class="blot blot--red" aria-hidden="true"></span>
+        <span>plumbers</span> <span class="blot" aria-hidden="true"></span>
+        <span>builders</span> <span class="blot" aria-hidden="true"></span>
+        <span>scaffolders</span> <span class="blot blot--red" aria-hidden="true"></span>
+        <span>gardeners</span> <span class="blot" aria-hidden="true"></span>
+        <span>decorators</span> <span class="blot" aria-hidden="true"></span>
+        <span>roofers</span> <span class="blot blot--red" aria-hidden="true"></span>
+        <span>handymen</span> <span class="blot" aria-hidden="true"></span>
+        <span>locksmiths</span> <span class="blot" aria-hidden="true"></span>
+        <span>flooring fitters</span>.
+      </p>
+      <p style="margin-top:1.4em">Sole traders and small businesses too. Tutors, therapists, coaches and salons have all had one, and they work the same way.</p>
+
+      <div class="areas">
+        <p class="lbl" style="border:none;padding:0;margin:0">Where I work</p>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+          <li>&mdash; and UK wide</li>
+        </ul>
+        <p class="caption" style="margin-top:18px">The whole thing runs over the phone and by email, so where you are has never been the deciding factor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SIGN OFF ============================ -->
+  <section class="section sheet ruled signoff" id="reply">
+    <div class="rail rv">
+      <span class="sec-no">&sect; 09 &mdash; Sign off</span>
+      <p class="margin-note">The end of the letter. Reply whenever suits.</p>
+    </div>
+    <div class="col rv">
+      <h2>That&rsquo;s the letter</h2>
+      <p>If any of this sounds like the thing you&rsquo;ve been meaning to sort out, the quickest route is to ring me on <a href="tel:07395063764" style="color:var(--ink)">07395 063764</a>. If I&rsquo;m on a job I&rsquo;ll ring you back the same day. Email works too, at <a href="mailto:mail@digitalconsultingservices.co.uk" style="color:var(--ink)">mail@digitalconsultingservices.co.uk</a>.</p>
+      <p>Either way you get a real answer from me about what it would cost and how long it would take. Nothing else happens until you say so.</p>
+
+      <p class="yours-line">Yours,</p>
+
+      <svg class="sig" id="signature" viewBox="0 0 640 200" role="img" aria-label="Signature of Ricky Wilson">
+        <path class="s-name" pathLength="1" style="--d:0s"    d="M30 142 C36 106 44 68 52 40 C55 30 62 28 68 34 C84 46 88 72 68 86 C60 92 50 92 46 88 C58 90 70 102 78 118 C84 130 90 138 98 142"/>
+        <path class="s-name" pathLength="1" style="--d:.2s"   d="M104 100 C108 114 112 126 118 134"/>
+        <path class="s-name" pathLength="1" style="--d:.38s"  d="M130 104 C138 96 150 96 154 104 C148 98 136 100 130 110 C124 120 128 132 138 134 C147 136 155 130 160 124"/>
+        <path class="s-name" pathLength="1" style="--d:.58s"  d="M168 136 C176 108 186 74 194 46 C197 36 202 32 204 42 C208 58 199 98 191 120 C197 110 207 102 215 98 C209 106 207 114 211 120 C215 126 223 128 230 124"/>
+        <path class="s-name" pathLength="1" style="--d:.8s"   d="M240 100 C242 112 246 124 252 132 C258 122 262 110 266 98 C262 120 258 144 250 160 C244 172 234 176 228 170 C224 166 226 160 232 158"/>
+        <path class="s-name" pathLength="1" style="--d:1.08s" d="M306 90 C312 110 318 128 324 140 C330 128 336 112 340 98 C342 112 346 128 352 140 C360 126 368 106 376 86"/>
+        <path class="s-name" pathLength="1" style="--d:1.3s"  d="M386 100 C388 114 390 124 392 130"/>
+        <path class="s-name" pathLength="1" style="--d:1.48s" d="M402 132 C408 104 416 68 422 42 C424 34 429 32 429 42 C429 64 421 106 415 124 C413 130 413 134 417 136"/>
+        <path class="s-name" pathLength="1" style="--d:1.68s" d="M427 114 C435 106 445 104 449 110 C451 114 445 118 437 122 C429 126 425 132 431 136 C437 140 447 136 453 130"/>
+        <path class="s-name" pathLength="1" style="--d:1.88s" d="M477 117 C469 123 469 135 477 138 C487 141 495 129 493 119 C491 111 483 109 477 115"/>
+        <path class="s-name" pathLength="1" style="--d:2.06s" d="M506 142 C508 128 512 114 516 106 C518 118 518 130 522 138 C526 128 532 114 540 108 C546 104 550 108 548 118 C546 128 544 136 546 142"/>
+        <path class="s-flourish" pathLength="1" d="M550 142 C574 143 600 133 618 112"/>
+        <circle class="s-dot" cx="106" cy="80" r="3.2"/>
+        <circle class="s-dot" cx="388" cy="82" r="3.2"/>
+      </svg>
+
+      <p class="sig-block">
+        <b>Ricky Wilson</b><br>
+        Digital Consulting Services<br>
+        Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26 6QH
+      </p>
+
+      <div class="signoff__actions">
+        <a class="btn btn-red" href="mailto:mail@digitalconsultingservices.co.uk?subject=Website%20enquiry">Reply by email
+          <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+        </a>
+        <a class="btn btn-line" href="tel:07395063764">Call 07395 063764
+          <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+        </a>
+      </div>
+
+      <p class="ps"><b>P.S.</b> The quote is free and I don&rsquo;t chase. If you get one and decide against it, that&rsquo;s the end of it. Nobody rings you six weeks later.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-foot">
+  <div class="sheet">
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services logo" width="150" height="75">
+        <address>
+          Unit H3, Chaucer Business Park,<br>
+          Dittons Road, Polegate,<br>
+          East Sussex, BN26 6QH
+        </address>
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#work">Website Design</a></li>
+          <li><a href="#work">Local SEO</a></li>
+          <li><a href="#work">Ongoing Management</a></li>
+          <li><a href="#work">Google Workspace Email</a></li>
+          <li><a href="#work">eCommerce Websites</a></li>
+          <li><a href="#work">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Where I work</h4>
+        <ul>
+          <li>Polegate</li>
+          <li>Eastbourne</li>
+          <li>Hailsham</li>
+          <li>Lewes</li>
+          <li>Seaford</li>
+          <li>Brighton &amp; Hove</li>
+          <li>Uckfield</li>
+          <li>UK wide</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:07395063764">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        </ul>
+        <h4 style="margin-top:24px">Hours</h4>
+        <ul>
+          <li>Monday to Friday, 9:00 to 17:30</li>
+          <li>Saturday by appointment</li>
+          <li>Sunday closed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Websites that get local tradespeople more jobs</span>
+      <span>Written, designed and built by Ricky Wilson</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ REPLY RAIL ============================ -->
+<div class="reply-rail" id="replyRail">
+  <div class="sheet reply-rail__in">
+    <p><span class="mono">Reply</span><b>Ricky Wilson</b> &middot; Polegate &middot; One conversation is all it takes to start</p>
+    <div class="acts">
+      <a class="btn btn-red" href="#reply">Get a free quote
+        <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+      </a>
+      <a class="btn btn-line" href="tel:07395063764">07395 063764
+        <span class="nib" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 9L9 1M9 1H3.2M9 1v5.8"/></svg></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supported = 'IntersectionObserver' in window;
+
+  /* Tell the CSS the script got here. Everything hidden by .js rules is now
+     the animation's responsibility. */
+  root.classList.add('anim-ready');
+
+  /* ---------------------------------------------------------------
+     1. Mobile navigation
+     --------------------------------------------------------------- */
+  var burger = document.getElementById('burger');
+  var sheet  = document.getElementById('mobilenav');
+  var links  = sheet ? sheet.querySelectorAll('nav a') : [];
+
+  function setNav(open) {
+    if (!burger || !sheet) return;
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    sheet.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
+    for (var i = 0; i < links.length; i++) {
+      links[i].style.transitionDelay = open ? (0.08 + i * 0.055) + 's' : '0s';
+    }
+    if (open) { var f = links[0]; if (f) setTimeout(function () { f.focus(); }, 260); }
+  }
+
+  if (burger) {
+    burger.addEventListener('click', function () {
+      setNav(burger.getAttribute('aria-expanded') !== 'true');
+    });
+  }
+  for (var l = 0; l < links.length; l++) {
+    links[l].addEventListener('click', function () { setNav(false); });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && burger && burger.getAttribute('aria-expanded') === 'true') {
+      setNav(false); burger.focus();
+    }
+  });
+
+  /* ---------------------------------------------------------------
+     2. Scroll reveal, staggered per section
+     --------------------------------------------------------------- */
+  var revealables = document.querySelectorAll('.rv');
+
+  function revealAll() {
+    for (var i = 0; i < revealables.length; i++) revealables[i].classList.add('is-in');
+  }
+
+  /* Content must never depend on the observer firing. If anything is still
+     hidden after 5s (throttled tab, observer never delivered), show it. */
+  setTimeout(revealAll, 5000);
+
+  if (!supported || reduced) {
+    revealAll();
+  } else {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, idx) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.style.transitionDelay = (idx * 0.09) + 's';
+        el.classList.add('is-in');
+        revealObs.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+    for (var rr = 0; rr < revealables.length; rr++) revealObs.observe(revealables[rr]);
+  }
+
+  /* ---------------------------------------------------------------
+     3. SIGNATURE MOMENT A — the opening statement writes itself,
+        word by word, at reading cadence.
+     --------------------------------------------------------------- */
+  var h1 = document.getElementById('opening');
+  if (h1) {
+    var words = h1.querySelectorAll('.w > span');
+
+    if (reduced) {
+      h1.classList.add('is-writing');
+    } else {
+      for (var w = 0; w < words.length; w++) {
+        /* Reading cadence: a touch slower at the start, quicker as it runs on. */
+        words[w].style.transitionDelay = (0.18 + w * 0.072) + 's';
+      }
+      var write = function () { h1.classList.add('is-writing'); };
+      requestAnimationFrame(function () { requestAnimationFrame(write); });
+      /* If rAF is throttled (background tab, offscreen frame) the opening line
+         must still arrive rather than sit blank. */
+      setTimeout(write, 1200);
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     4. Postmark stamps itself in
+     --------------------------------------------------------------- */
+  var stamp = document.getElementById('postmark');
+  if (stamp) {
+    if (reduced || !supported) {
+      stamp.classList.add('is-stamped');
+    } else {
+      setTimeout(function () { stamp.classList.add('is-stamped'); }, 1150);
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     5. SIGNATURE MOMENT B — the signature draws itself on entry
+     --------------------------------------------------------------- */
+  var sig = document.getElementById('signature');
+  if (sig) {
+    if (reduced || !supported) {
+      sig.classList.add('is-drawn');
+    } else {
+      var sigObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          setTimeout(function () { sig.classList.add('is-drawn'); }, 220);
+          sigObs.unobserve(entry.target);
+        });
+      }, { threshold: 0.45 });
+      sigObs.observe(sig);
+
+      /* The signature is the one thing on this page that must never render as
+         an empty gap. If the observer is throttled and never delivers, fall
+         back to measuring the rect ourselves. */
+      var tries = 0;
+      var sigPoll = setInterval(function () {
+        if (sig.classList.contains('is-drawn') || ++tries > 90) {
+          clearInterval(sigPoll); return;
+        }
+        var r = sig.getBoundingClientRect();
+        if (r.top < (window.innerHeight || 0) && r.bottom > 0) {
+          sig.classList.add('is-drawn');
+          clearInterval(sigPoll);
+        }
+      }, 700);
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     6. Credential count-up
+     --------------------------------------------------------------- */
+  var counters = document.querySelectorAll('.count');
+
+  function runCount(el) {
+    var target = parseInt(el.getAttribute('data-to'), 10);
+    if (isNaN(target)) return;
+    var plain = el.getAttribute('data-plain') === '1';
+    var from = plain ? Math.max(target - 40, 0) : 0;
+    var dur = 1150, start = null;
+
+    function tick(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(from + (target - from) * eased));
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = String(target);
+    }
+    requestAnimationFrame(tick);
+    /* These are factual claims. If rAF is throttled part way, the number must
+       still end on the true figure rather than freezing on a wrong one. */
+    setTimeout(function () { el.textContent = String(target); }, dur + 500);
+  }
+
+  if (counters.length) {
+    if (reduced || !supported) {
+      for (var c = 0; c < counters.length; c++) {
+        counters[c].textContent = counters[c].getAttribute('data-to');
+      }
+    } else {
+      var countObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          runCount(entry.target);
+          countObs.unobserve(entry.target);
+        });
+      }, { threshold: 0.6 });
+      for (var cc = 0; cc < counters.length; cc++) countObs.observe(counters[cc]);
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     7. SIGNATURE MOMENT C — the persistent reply rail slides in from
+        the bottom once you're past the fold, and steps aside once the
+        real sign-off is on screen.
+     --------------------------------------------------------------- */
+  var rail = document.getElementById('replyRail');
+  var hero = document.querySelector('.hero');
+  var signoffSection = document.getElementById('reply');
+  var pastFold = false;
+  var atSignoff = false;
+
+  function syncRail() {
+    if (!rail) return;
+    rail.classList.toggle('is-in', pastFold && !atSignoff);
+  }
+
+  if (rail && supported) {
+    if (hero) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { pastFold = !e.isIntersecting; syncRail(); });
+      }, { threshold: 0, rootMargin: '-40% 0px 0px 0px' }).observe(hero);
+    }
+    if (signoffSection) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { atSignoff = e.isIntersecting; syncRail(); });
+      }, { threshold: 0.22 }).observe(signoffSection);
+    }
+  } else if (rail) {
+    rail.classList.add('is-in');
+  }
+
+})();
+</script>
+
+</body>
+</html>

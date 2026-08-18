@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — websites for small businesses, whatever the business</title>
+<meta name="description" content="A design and build studio in Polegate, East Sussex. Websites for retail, studios, creative businesses, motor trade and contractors — designed, written, built and looked after by one person.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   THE RANGE — Digital Consulting Services
+   An index of small businesses. Gallery register: bone ground, petrol bands,
+   one coral accent, everything else carried by type and hairlines.
+   ========================================================================== */
+
+:root{
+  /* -- ground ---------------------------------------------------------- */
+  --bone:      #E7E5DE;
+  --bone-hi:   #F2F1EC;
+  --bone-lo:   #DBD8CF;
+  --petrol:    #0D2B2F;
+  --petrol-hi: #17454A;
+
+  /* -- ink ------------------------------------------------------------- */
+  --ink:       #14171A;
+  --ink-70:    #4C5155;
+  --on-petrol:     #F2F1EC;
+  --on-petrol-70:  #A9B3B0;
+
+  /* -- accent ---------------------------------------------------------- */
+  --coral:      #D4553C;  /* large type, rules, marks only */
+  --coral-ink:  #A8331F;  /* small type on bone — 5.3:1 */
+  --coral-lite: #E8907A;  /* small type on petrol — 5.7:1 */
+
+  /* -- lines ----------------------------------------------------------- */
+  --rule:      rgba(20,23,26,.16);
+  --rule-soft: rgba(20,23,26,.09);
+  --rule-dark: rgba(242,241,236,.20);
+
+  /* -- type ------------------------------------------------------------ */
+  --display: 'Syne', 'Helvetica Neue', Arial, sans-serif;
+  --text:    'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --mono:    'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* -- rhythm (spacious: 8pt scale) ------------------------------------ */
+  --s1: 8px;  --s2: 16px; --s3: 24px; --s4: 32px;
+  --s5: 48px; --s6: 64px; --s7: 96px; --s8: 128px;
+
+  --gutter: clamp(20px, 5vw, 72px);
+  --maxw: 1420px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-out: cubic-bezier(.16,.84,.44,1);
+
+  --z-header: 100;
+  --z-sheet: 1000;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+html.is-locked{ overflow:hidden; }
+
+body{
+  margin:0;
+  background:var(--bone);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:17px;
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+img{ max-width:100%; display:block; }
+
+::selection{ background:var(--coral); color:#fff; }
+
+/* focus — visible everywhere, never removed ------------------------------ */
+:focus-visible{
+  outline:2px solid var(--coral);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.on-dark :focus-visible{ outline-color:var(--coral-lite); }
+
+.skip{
+  position:absolute; left:-9999px; top:0;
+  background:var(--ink); color:var(--bone-hi);
+  padding:14px 20px; z-index:2000;
+  font:500 14px/1 var(--text); text-decoration:none;
+}
+.skip:focus{ left:12px; top:12px; }
+
+.vh{
+  position:absolute!important; width:1px; height:1px;
+  padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ---------- shared type ------------------------------------------------- */
+.wrap{ max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px; font-weight:400;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-70);
+  margin:0;
+}
+.eyebrow .dot{ color:var(--coral-ink); }
+.on-dark .eyebrow{ color:var(--on-petrol-70); }
+.on-dark .eyebrow .dot{ color:var(--coral-lite); }
+
+.h2{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2rem, 4.6vw, 3.7rem);
+  line-height:.98;
+  letter-spacing:-.028em;
+  margin:0;
+}
+.h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.25rem, 2vw, 1.6rem);
+  line-height:1.1;
+  letter-spacing:-.018em;
+  margin:0;
+}
+.lede{
+  font-size:clamp(1.03rem, 1.35vw, 1.28rem);
+  line-height:1.55;
+  color:var(--ink-70);
+  max-width:52ch;
+  margin:0;
+}
+.on-dark .lede{ color:var(--on-petrol-70); }
+
+.num{
+  font-family:var(--mono);
+  font-size:12px; font-weight:400;
+  letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;
+  color:var(--coral-ink);
+}
+.on-dark .num{ color:var(--coral-lite); }
+
+/* section head: eyebrow / rule / heading --------------------------------- */
+.head{ display:grid; gap:var(--s3); padding-block:var(--s7) var(--s5); }
+.head__rule{ height:1px; background:var(--rule); transform-origin:left; }
+.on-dark .head__rule{ background:var(--rule-dark); }
+.head__grid{
+  display:grid; gap:var(--s4);
+  grid-template-columns:minmax(0,1fr);
+  align-items:end;
+}
+@media (min-width:900px){
+  .head__grid{ grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:var(--s6); }
+}
+
+/* ---------- buttons ----------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  min-height:52px; padding:0 26px;
+  font:500 15px/1 var(--text);
+  letter-spacing:.005em;
+  text-decoration:none;
+  border:1px solid transparent;
+  border-radius:0;
+  cursor:pointer;
+  transition:background .25s var(--ease), color .25s var(--ease),
+             border-color .25s var(--ease), transform .25s var(--ease);
+  will-change:transform;
+}
+.btn__arrow{
+  width:14px; height:9px; flex:none;
+  transition:transform .3s var(--ease-out);
+}
+.btn:hover .btn__arrow{ transform:translateX(5px); }
+
+.btn--primary{ background:var(--ink); color:var(--bone-hi); }
+.btn--primary:hover{ background:var(--coral); color:#fff; }
+.btn--primary:active{ transform:translateY(1px); }
+
+.btn--ghost{ background:transparent; color:var(--ink); border-color:var(--rule); }
+.btn--ghost:hover{ border-color:var(--ink); background:rgba(20,23,26,.04); }
+
+.on-dark .btn--primary{ background:var(--coral); color:#fff; }
+.on-dark .btn--primary:hover{ background:var(--bone-hi); color:var(--ink); }
+.on-dark .btn--ghost{ color:var(--on-petrol); border-color:var(--rule-dark); }
+.on-dark .btn--ghost:hover{ border-color:var(--on-petrol); background:rgba(242,241,236,.07); }
+
+.btn--sm{ min-height:44px; padding:0 18px; font-size:14px; }
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header{
+  position:sticky; top:0; z-index:var(--z-header);
+  background:var(--bone);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s var(--ease), background .3s var(--ease);
+}
+/* fully opaque: at 94% the hero headline ghosted through the nav */
+.header.is-stuck{ border-bottom-color:var(--rule); background:var(--bone); }
+
+.header__in{
+  max-width:var(--maxw); margin-inline:auto;
+  padding:14px var(--gutter);
+  display:flex; align-items:center; gap:var(--s4);
+}
+
+.brand{
+  display:flex; align-items:center; gap:14px;
+  text-decoration:none; color:var(--ink);
+  flex:none;
+  padding-block:11px;      /* brings the tap target to 45px */
+  min-height:44px;
+}
+.brand__mark{
+  font-family:var(--display); font-weight:800;
+  font-size:23px; letter-spacing:-.03em; line-height:1;
+}
+.brand__mark i{ color:var(--coral-ink); font-style:normal; }
+.brand__bar{ width:1px; height:22px; background:var(--rule); }
+.brand__full{
+  font-family:var(--mono); font-size:10px; line-height:1.35;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-70);
+  max-width:11ch;
+}
+@media (max-width:1099px){ .brand__bar,.brand__full{ display:none; } }
+
+.nav{ margin-left:auto; display:none; }
+@media (min-width:1000px){ .nav{ display:block; } }
+.nav ul{ display:flex; align-items:center; gap:var(--s4); list-style:none; margin:0; padding:0; }
+.nav a{
+  position:relative;
+  display:inline-block; padding:10px 2px;
+  font:400 15px/1 var(--text);
+  color:var(--ink); text-decoration:none;
+  letter-spacing:.005em;
+}
+.nav a::after{
+  content:''; position:absolute; left:0; right:0; bottom:4px;
+  height:1px; background:var(--coral);
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .3s var(--ease-out);
+}
+.nav a:hover::after,.nav a:focus-visible::after{ transform:scaleX(1); transform-origin:left; }
+
+.header__cta{ display:none; margin-left:var(--s3); }
+@media (min-width:1000px){ .header__cta{ display:inline-flex; } }
+
+.burger{
+  margin-left:auto;
+  width:48px; height:48px;
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  background:none; border:1px solid var(--rule); cursor:pointer; padding:0;
+}
+@media (min-width:1000px){ .burger{ display:none; } }
+.burger span{
+  display:block; width:19px; height:1.5px; background:var(--ink);
+  transition:transform .3s var(--ease), opacity .2s linear;
+}
+.burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+/* mobile sheet — sibling of header, never nested inside it ---------------- */
+.sheet{
+  position:fixed; inset:0; z-index:var(--z-sheet);
+  background:var(--petrol); color:var(--on-petrol);
+  display:flex; flex-direction:column;
+  padding:var(--s3) var(--gutter) var(--s5);
+  overflow-y:auto;
+}
+.sheet[hidden]{ display:none; }
+.sheet__top{ display:flex; align-items:center; justify-content:space-between; min-height:48px; }
+.sheet__mark{ font-family:var(--display); font-weight:800; font-size:23px; letter-spacing:-.03em; }
+.sheet__mark i{ color:var(--coral-lite); font-style:normal; }
+.sheet__close{
+  width:48px; height:48px; border:1px solid var(--rule-dark);
+  background:none; color:var(--on-petrol); cursor:pointer;
+  font-size:22px; line-height:1;
+}
+.sheet__close:hover{ background:rgba(242,241,236,.08); }
+.sheet__nav{ margin-top:var(--s5); }
+.sheet__nav ul{ list-style:none; margin:0; padding:0; }
+.sheet__nav li{ border-top:1px solid var(--rule-dark); }
+.sheet__nav li:last-child{ border-bottom:1px solid var(--rule-dark); }
+.sheet__nav a{
+  display:flex; align-items:baseline; gap:16px;
+  padding:20px 0; min-height:60px;
+  font-family:var(--display); font-weight:600; font-size:1.75rem;
+  letter-spacing:-.02em; color:var(--on-petrol); text-decoration:none;
+}
+.sheet__nav a em{
+  font:400 11px/1 var(--mono); font-style:normal;
+  letter-spacing:.14em; color:var(--coral-lite);
+}
+.sheet__nav a:hover{ color:var(--coral-lite); }
+.sheet__foot{ margin-top:auto; padding-top:var(--s5); display:grid; gap:var(--s2); }
+.sheet__foot .btn{ justify-content:center; }
+.sheet__tel{
+  font-family:var(--mono); font-size:14px; letter-spacing:.05em;
+  color:var(--on-petrol-70); text-decoration:none; text-align:center; padding:12px;
+  min-height:44px; display:flex; align-items:center; justify-content:center;
+}
+.sheet__tel:hover{ color:var(--on-petrol); }
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{ padding-block:clamp(48px,9vw,110px) clamp(40px,6vw,72px); position:relative; }
+/* The headline takes the full measure. Boxing it into a hero column made the
+   longest word wider than its track, which only *looked* fine because
+   overflow-wrap was silently breaking "busines/ses" mid-word. */
+.hero__grid{ display:grid; gap:var(--s5); margin-top:var(--s5); }
+@media (min-width:1000px){
+  .hero__grid{ grid-template-columns:minmax(0,1.35fr) minmax(260px,.8fr); gap:var(--s7); align-items:start; }
+}
+
+.hero__eyebrow{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; margin-bottom:var(--s4); }
+
+h1{
+  font-family:var(--display);
+  font-weight:800;
+  /* Syne is a wide face. Both ends of this clamp are measured, not guessed:
+     the floor keeps "businesses." inside 350px at 390 wide, the ceiling keeps
+     "No two alike." inside the full measure at 1440. No overflow-wrap escape
+     hatch here on purpose — a mid-word break must fail loudly, not hide. */
+  font-size:clamp(1.9rem, 8.2vw, 6.8rem);
+  line-height:.9;
+  letter-spacing:-.042em;
+  margin:0;
+}
+h1 .line{ display:block; overflow:hidden; }
+h1 .line > span{ display:block; }
+h1 .alike{ color:var(--coral); }
+
+.hero__lede{
+  font-size:clamp(1.05rem, 1.45vw, 1.32rem);
+  line-height:1.55; color:var(--ink-70);
+  max-width:56ch; margin:0 0 var(--s5);
+}
+.hero__lede strong{ color:var(--ink); font-weight:500; }
+
+.hero__actions{ display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center; }
+
+/* the credentials card — mono definition list ---------------------------- */
+.creds{ border-top:1px solid var(--ink); padding-top:var(--s2); }
+.creds dl{ margin:0; }
+.creds__row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s2);
+  padding:13px 0; border-bottom:1px solid var(--rule-soft);
+}
+.creds dt{
+  font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-70); flex:none;
+}
+.creds dd{
+  margin:0; font-family:var(--display); font-weight:600;
+  font-size:clamp(1rem,1.25vw,1.15rem); letter-spacing:-.015em;
+  text-align:right;
+}
+
+/* sector word-run under the hero ----------------------------------------- */
+.runline{
+  border-top:1px solid var(--rule);
+  padding-top:var(--s3);
+  display:flex; flex-wrap:wrap; gap:8px 0;
+  align-items:baseline;
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(.98rem,1.9vw,1.5rem);
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.runline span{ display:inline-flex; align-items:center; }
+.runline span::after{
+  content:'';
+  width:clamp(14px,2.2vw,34px); height:1px; margin-inline:clamp(10px,1.4vw,18px);
+  background:var(--rule);
+}
+.runline span:last-child::after{ display:none; }
+.runline .muted{ color:var(--ink-70); }
+
+/* ==========================================================================
+   THE INDEX — sticky sector plate + filterable entry grid
+   ========================================================================== */
+.index{ padding-bottom:var(--s8); }
+
+.rail{
+  position:relative;
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:var(--s5);
+}
+.rail__scroll{
+  display:flex; gap:0;
+  overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;
+  scroll-snap-type:x proximity;
+}
+.rail__scroll::-webkit-scrollbar{ display:none; }
+
+.chip{
+  position:relative;
+  flex:none; scroll-snap-align:start;
+  display:flex; align-items:baseline; gap:9px;
+  min-height:56px; padding:18px 22px 18px 0;
+  margin-right:26px;
+  background:none; border:0; cursor:pointer;
+  font-family:var(--text); font-size:15px; font-weight:400;
+  letter-spacing:.005em; color:var(--ink-70);
+  white-space:nowrap;
+  transition:color .25s var(--ease);
+}
+.chip:last-child{ margin-right:0; }
+.chip:hover{ color:var(--ink); }
+.chip b{ font-weight:500; }
+.chip i{
+  font-style:normal; font-family:var(--mono); font-size:11px;
+  letter-spacing:.06em; font-variant-numeric:tabular-nums;
+  color:var(--ink-70); opacity:.75;
+}
+.chip[aria-selected="true"]{ color:var(--ink); }
+.chip[aria-selected="true"] b{ font-weight:500; }
+.chip[aria-selected="true"] i{ color:var(--coral-ink); opacity:1; }
+
+.rail__ind{
+  position:absolute; left:0; bottom:-1px;
+  height:2px; width:0; background:var(--coral);
+  transition:transform .45s var(--ease), width .45s var(--ease);
+  pointer-events:none;
+}
+
+.index__grid{ display:grid; gap:var(--s5); }
+@media (min-width:1100px){
+  .index__grid{ grid-template-columns:minmax(300px,.72fr) minmax(0,1.55fr); gap:var(--s6); align-items:start; }
+}
+
+/* sticky sector plate ----------------------------------------------------- */
+.plate{ display:grid; gap:var(--s3); }
+@media (min-width:1100px){ .plate{ position:sticky; top:104px; } }
+
+.plate__frame{
+  position:relative; overflow:hidden;
+  aspect-ratio:16/10; background:var(--bone-lo);
+}
+@media (min-width:1100px){ .plate__frame{ aspect-ratio:4/3; } }
+.plate__frame img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .6s var(--ease);
+}
+.plate__frame img.is-on{ opacity:1; }
+.plate__frame::after{
+  content:''; position:absolute; inset:0;
+  box-shadow:inset 0 0 0 1px rgba(20,23,26,.10);
+  pointer-events:none;
+}
+
+.plate__caption{
+  display:flex; justify-content:space-between; gap:var(--s2);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-70);
+  border-bottom:1px solid var(--rule-soft); padding-bottom:10px;
+}
+.plate__name{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(1.35rem,2.4vw,1.95rem); line-height:1.02;
+  letter-spacing:-.025em; margin:0;
+}
+.plate__say{
+  font-size:15.5px; line-height:1.6; color:var(--ink-70);
+  margin:0; max-width:46ch;
+}
+.plate__count{
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink);
+  border-top:1px solid var(--rule); padding-top:12px;
+}
+.plate__count b{ color:var(--coral-ink); font-weight:400; }
+
+/* entries ---------------------------------------------------------------- */
+.entries{ display:grid; gap:var(--s4); grid-template-columns:minmax(0,1fr); }
+@media (min-width:620px){ .entries{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1100px){ .entries{ gap:var(--s4) var(--s4); } }
+@media (min-width:1400px){ .entries{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+.entry{ display:flex; flex-direction:column; gap:14px; }
+.entry.is-hidden{ display:none; }
+
+.entry__plate{
+  position:relative;
+  aspect-ratio:4/3;
+  background:var(--bone-hi);
+  box-shadow:inset 0 0 0 1px var(--rule-soft);
+  padding:11px;
+  overflow:hidden;
+  transition:box-shadow .3s var(--ease), transform .3s var(--ease), background .3s var(--ease);
+}
+.entry:hover .entry__plate,
+.entry:focus-within .entry__plate{
+  box-shadow:inset 0 0 0 1px rgba(20,23,26,.28);
+  transform:translateY(-3px);
+}
+
+.entry__meta{ display:flex; align-items:baseline; gap:10px; }
+.entry__meta .num{ transition:color .25s var(--ease); }
+.entry__sector{
+  font-family:var(--mono); font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-70);
+  margin-left:auto; text-align:right;
+}
+.entry__name{
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(1.08rem,1.5vw,1.32rem);
+  line-height:1.08; letter-spacing:-.022em; margin:0;
+}
+.entry__line{
+  font-size:14.5px; line-height:1.5; color:var(--ink-70); margin:0;
+  max-width:38ch;
+}
+
+/* ---------- the CSS-drawn site mocks ------------------------------------ */
+.mock{
+  --c:#5E6A72;
+  width:100%; height:100%;
+  background:#fff;
+  box-shadow:0 1px 0 rgba(20,23,26,.05);
+  display:flex; flex-direction:column;
+  gap:7px; padding:9px;
+  overflow:hidden;
+}
+.m-bar{ display:flex; align-items:center; gap:5px; padding-bottom:7px; border-bottom:1px solid rgba(20,23,26,.10); }
+.m-bar em{ width:13px; height:5px; background:var(--c); flex:none; display:block; }
+.m-bar s{ width:11px; height:2px; background:rgba(20,23,26,.22); display:block; text-decoration:none; }
+.m-bar s:first-of-type{ margin-left:auto; }
+.m-body{ flex:1; display:flex; flex-direction:column; gap:6px; min-height:0; }
+
+.m-band{ height:34%; background:rgba(20,23,26,.10); position:relative; flex:none; }
+.m-band--c{ background:var(--c); opacity:.9; }
+.m-band em{ position:absolute; left:8px; bottom:7px; display:block; width:44%; height:4px; background:rgba(255,255,255,.85); }
+.m-band i{ position:absolute; left:8px; bottom:15px; display:block; width:26%; height:3px; background:rgba(255,255,255,.55); }
+
+.m-grid{ flex:1; display:grid; gap:5px; min-height:0; }
+.m-grid--3{ grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); }
+.m-grid--4{ grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(3,1fr); }
+.m-tile{ background:rgba(20,23,26,.09); }
+.m-tile--c{ background:var(--c); opacity:.85; }
+
+.m-split{ flex:1; display:grid; grid-template-columns:1.15fr 1fr; gap:6px; min-height:0; }
+.m-block{ background:var(--c); opacity:.88; }
+.m-block--flat{ background:rgba(20,23,26,.09); opacity:1; }
+.m-stack{ display:flex; flex-direction:column; gap:4px; justify-content:flex-start; }
+.m-opt{ height:11px; background:rgba(20,23,26,.08); }
+.m-opt--on{ background:transparent; box-shadow:inset 0 0 0 1.5px var(--c); }
+
+.m-chips{ display:flex; gap:4px; flex:none; }
+.m-chips b{ flex:1; height:15px; background:rgba(20,23,26,.08); display:block; font-size:0; }
+.m-chips b.on{ background:var(--c); opacity:.88; }
+
+.m-btn{ height:15px; background:var(--c); opacity:.92; flex:none; }
+.m-btn--w{ width:52%; }
+
+.m-lines{ display:flex; flex-direction:column; gap:5px; flex:none; }
+.m-lines u{ height:3px; background:rgba(20,23,26,.16); display:block; text-decoration:none; }
+.m-lines u:nth-child(2){ width:88%; }
+.m-lines u:nth-child(3){ width:72%; }
+.m-lines u:nth-child(4){ width:80%; }
+
+.m-rows{ flex:1; display:flex; flex-direction:column; gap:5px; min-height:0; }
+.m-row{ flex:1; background:rgba(20,23,26,.07); display:flex; align-items:center; gap:6px; padding-inline:6px; }
+.m-row em{ width:4px; height:60%; background:var(--c); display:block; flex:none; }
+.m-row s{ height:3px; background:rgba(20,23,26,.20); display:block; flex:1; max-width:60%; text-decoration:none; }
+
+.m-swatch{ display:flex; gap:4px; flex:none; height:12px; }
+.m-swatch b{ flex:1; display:block; font-size:0; background:var(--c); }
+.m-swatch b:nth-child(2){ opacity:.62; }
+.m-swatch b:nth-child(3){ opacity:.38; }
+.m-swatch b:nth-child(4){ background:rgba(20,23,26,.14); }
+
+.m-map{ background:rgba(20,23,26,.08); position:relative; }
+.m-map::before{
+  content:''; position:absolute; left:22%; top:34%;
+  width:9px; height:9px; border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg); background:var(--c);
+}
+.m-map::after{
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(to right, rgba(20,23,26,.07) 1px, transparent 1px) 0 0/33.33% 100%,
+    linear-gradient(to bottom, rgba(20,23,26,.07) 1px, transparent 1px) 0 0/100% 33.33%;
+}
+
+.m-word{
+  flex:1; background:rgba(20,23,26,.06);
+  display:flex; align-items:center; justify-content:center;
+  min-height:0; position:relative;
+}
+.m-word::before{
+  content:''; width:56%; height:26%; background:var(--c); opacity:.9;
+}
+.m-word::after{
+  content:''; position:absolute; right:14%; top:20%;
+  width:18%; height:22%; box-shadow:inset 0 0 0 2px var(--c);
+}
+
+/* ==========================================================================
+   CONSTANT — the argument, on petrol
+   ========================================================================== */
+.on-dark{ background:var(--petrol); color:var(--on-petrol); }
+.constant{ padding-bottom:var(--s8); }
+.constant .head{ padding-block:var(--s7) var(--s5); }
+
+.points{ display:grid; gap:1px; background:var(--rule-dark); border-block:1px solid var(--rule-dark); }
+@media (min-width:800px){ .points{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1200px){ .points{ grid-template-columns:repeat(4,1fr); } }
+.point{ background:var(--petrol); padding:var(--s4) var(--s3) var(--s5); display:grid; gap:14px; align-content:start; }
+.point__n{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  color:var(--coral-lite);
+}
+.point h3{
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(1.15rem,1.7vw,1.42rem); line-height:1.1;
+  letter-spacing:-.022em; margin:0;
+}
+.point p{ margin:0; font-size:15px; line-height:1.6; color:var(--on-petrol-70); }
+
+/* ==========================================================================
+   SERVICES — numbered index list
+   ========================================================================== */
+.services{ padding-bottom:var(--s8); }
+.svc-list{ border-top:1px solid var(--ink); }
+.svc{
+  position:relative;
+  display:grid; gap:6px var(--s4);
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:baseline;
+  padding:var(--s3) 0;
+  border-bottom:1px solid var(--rule-soft);
+  transition:padding-left .35s var(--ease);
+}
+/* Explicit placement matters: there are THREE children and two columns at
+   small widths. Left to auto-placement the <p> lands in the `auto` column and
+   drags it out to max-content — which widened the page to 509px at 390. */
+.svc__n{ grid-column:1; grid-row:1; }
+.svc h3{ grid-column:2; grid-row:1; }
+.svc p { grid-column:2; grid-row:2; }
+@media (min-width:860px){
+  .svc{ grid-template-columns:64px minmax(0,.9fr) minmax(0,1.35fr); gap:var(--s4); padding:var(--s4) 0; }
+  .svc p{ grid-column:3; grid-row:1; }
+}
+.svc::before{
+  content:''; position:absolute; left:0; top:-1px; bottom:-1px; width:2px;
+  background:var(--coral); transform:scaleY(0); transform-origin:top;
+  transition:transform .35s var(--ease-out);
+}
+.svc:hover::before,.svc:focus-within::before{ transform:scaleY(1); }
+@media (min-width:860px){ .svc:hover,.svc:focus-within{ padding-left:22px; } }
+.svc__n{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; color:var(--ink-70); font-variant-numeric:tabular-nums; }
+.svc h3{
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(1.3rem,2.4vw,2rem); line-height:1.02;
+  letter-spacing:-.028em; margin:0;
+}
+.svc p{ margin:0; font-size:15.5px; line-height:1.55; color:var(--ink-70); max-width:50ch; }
+
+/* ==========================================================================
+   PROCESS
+   ========================================================================== */
+.process{ padding-bottom:var(--s8); }
+.steps{ display:grid; gap:var(--s4); }
+@media (min-width:700px){ .steps{ grid-template-columns:repeat(2,1fr); gap:var(--s5) var(--s4); } }
+@media (min-width:1100px){ .steps{ grid-template-columns:repeat(4,1fr); } }
+.step{ border-top:1px solid var(--ink); padding-top:var(--s2); display:grid; gap:12px; align-content:start; }
+.step__n{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(2.4rem,4.5vw,3.6rem); line-height:.85;
+  letter-spacing:-.05em; color:var(--coral);
+  font-variant-numeric:tabular-nums;
+}
+.step h3{ font-family:var(--display); font-weight:600; font-size:1.18rem; letter-spacing:-.02em; margin:0; line-height:1.1; }
+.step p{ margin:0; font-size:15px; line-height:1.6; color:var(--ink-70); }
+
+/* ==========================================================================
+   PRICING
+   ========================================================================== */
+.pricing{ padding-bottom:var(--s8); }
+.pricing .head{ padding-block:var(--s7) var(--s4); }
+
+.pay{
+  display:inline-flex; border:1px solid var(--rule-dark); margin-bottom:var(--s5);
+  max-width:100%; flex-wrap:wrap;
+}
+.pay button{
+  min-height:48px; padding:0 20px;
+  background:none; border:0; cursor:pointer;
+  font:400 14.5px/1 var(--text); color:var(--on-petrol-70);
+  transition:background .25s var(--ease), color .25s var(--ease);
+}
+.pay button[aria-selected="true"]{ background:var(--bone-hi); color:var(--ink); font-weight:500; }
+.pay button:hover:not([aria-selected="true"]){ color:var(--on-petrol); background:rgba(242,241,236,.07); }
+
+.tiers{ display:grid; gap:1px; background:var(--rule-dark); border-block:1px solid var(--rule-dark); }
+@media (min-width:860px){ .tiers{ grid-template-columns:repeat(3,1fr); } }
+.tiers[hidden]{ display:none; }
+
+.tier{ background:var(--petrol); padding:var(--s4) var(--s3) var(--s5); display:grid; gap:var(--s2); align-content:start; }
+.tier--pop{ background:var(--petrol-hi); }
+.tier__top{ display:flex; align-items:baseline; gap:12px; }
+.tier__name{ font-family:var(--display); font-weight:600; font-size:1.35rem; letter-spacing:-.022em; margin:0; }
+.tier__tag{
+  font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--petrol); background:var(--coral-lite); padding:4px 8px;
+}
+.tier__price{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(2.4rem,4vw,3.1rem); line-height:.95;
+  letter-spacing:-.04em; font-variant-numeric:tabular-nums;
+  margin:6px 0 0;
+}
+.tier__price small{ font-family:var(--mono); font-size:12px; font-weight:400; letter-spacing:.08em; color:var(--on-petrol-70); display:block; margin-top:10px; }
+.tier__meta{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--on-petrol-70); border-top:1px solid var(--rule-dark); padding-top:12px;
+}
+.tier__note{ font-size:14.5px; line-height:1.55; color:var(--on-petrol-70); margin:0; }
+
+.incl{ padding-top:var(--s5); display:grid; gap:var(--s4); }
+@media (min-width:900px){ .incl{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--s6); } }
+.incl h3{ font-family:var(--display); font-weight:600; font-size:1.15rem; letter-spacing:-.02em; margin:0 0 var(--s2); }
+.incl ul{ list-style:none; margin:0; padding:0; columns:2; column-gap:var(--s3); }
+@media (max-width:560px){ .incl ul{ columns:1; } }
+.incl li{
+  break-inside:avoid; padding:7px 0 7px 18px; position:relative;
+  font-size:14.5px; line-height:1.5; color:var(--on-petrol-70);
+}
+.incl li::before{
+  content:''; position:absolute; left:0; top:15px;
+  width:7px; height:1px; background:var(--coral-lite);
+}
+/* must reset: .incl ul sets columns:2, which split these rows across two
+   columns and dragged their bottom rules through the neighbouring text */
+.addons{ list-style:none; margin:0; padding:0; columns:1; }
+.addons li{
+  display:flex; justify-content:space-between; gap:var(--s2);
+  padding:12px 0; border-bottom:1px solid var(--rule-dark);
+  font-size:15px;
+}
+.addons b{ font-weight:400; color:var(--on-petrol-70); }
+.addons span{ font-family:var(--mono); font-size:13.5px; letter-spacing:.03em; white-space:nowrap; color:var(--on-petrol); }
+
+/* ==========================================================================
+   VOICES
+   ========================================================================== */
+.voices{ padding-bottom:var(--s8); }
+.quotes{ display:grid; gap:var(--s4); }
+@media (min-width:900px){ .quotes{ grid-template-columns:repeat(3,1fr); gap:var(--s5); } }
+.quote{ border-top:1px solid var(--ink); padding-top:var(--s3); display:grid; gap:var(--s3); align-content:start; }
+.quote blockquote{
+  margin:0;
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(1.16rem,1.75vw,1.42rem); line-height:1.22;
+  letter-spacing:-.022em;
+}
+.quote figcaption{ display:grid; gap:4px; }
+.quote__who{ font-size:15px; font-weight:500; }
+.quote__what{ font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-70); }
+
+/* ==========================================================================
+   STUDIO
+   ========================================================================== */
+.studio{ padding-bottom:var(--s8); }
+.studio__grid{ display:grid; gap:var(--s5); }
+@media (min-width:1000px){ .studio__grid{ grid-template-columns:minmax(0,1.3fr) minmax(280px,.9fr); gap:var(--s7); align-items:start; } }
+.studio__body p{ font-size:clamp(1rem,1.25vw,1.16rem); line-height:1.65; color:var(--ink-70); max-width:58ch; }
+.studio__body p:first-of-type{
+  font-family:var(--display); font-weight:600; color:var(--ink);
+  font-size:clamp(1.35rem,2.4vw,1.95rem); line-height:1.16; letter-spacing:-.025em;
+  max-width:24ch;
+}
+/* The real DCS mark is blue/green and sits outside this palette. Framing it on
+   a white plate with a caption presents it as a brand asset on show, rather
+   than letting it read as a stray colour clash on the bone ground. */
+.studio__logo{
+  margin:0 0 var(--s5);
+  display:inline-grid; gap:12px; justify-items:start;
+  background:#fff; padding:20px 24px 16px;
+  box-shadow:inset 0 0 0 1px var(--rule-soft);
+}
+.studio__logo img{ width:140px; height:70px; }
+.studio__logo figcaption{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-70);
+  border-top:1px solid var(--rule-soft); padding-top:10px; width:100%;
+}
+
+.facts{ border-top:1px solid var(--ink); }
+.facts__row{ display:grid; gap:4px; padding:16px 0; border-bottom:1px solid var(--rule-soft); }
+@media (min-width:520px){ .facts__row{ grid-template-columns:110px minmax(0,1fr); gap:var(--s3); align-items:baseline; } }
+.facts dt{ font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-70); }
+/* the email address is a single 36-character unbreakable token — without this
+   it pushed the page 10px wide at 1024 */
+.facts dd{ margin:0; font-size:15.5px; line-height:1.5; overflow-wrap:anywhere; }
+.facts a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule); }
+.facts a:hover{ border-bottom-color:var(--coral-ink); color:var(--coral-ink); }
+
+.areas{ margin-top:var(--s4); }
+.areas__list{ display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:10px 0 0; padding:0; }
+.areas__list li{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.07em;
+  padding:7px 11px; border:1px solid var(--rule); color:var(--ink-70);
+}
+.areas__list li.wide{ border-color:var(--coral-ink); color:var(--coral-ink); }
+
+/* ==========================================================================
+   CLOSE
+   ========================================================================== */
+.close{ padding-block:clamp(64px,9vw,124px); }
+/* sized so the longest authored line ("Tell me what you do.") fits the full
+   measure at 1440 — a 16ch max-width was forcing it to re-wrap mid-line */
+.close h2{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(2.1rem,6vw,4.6rem); line-height:.96;
+  letter-spacing:-.04em; margin:0 0 var(--s4);
+}
+.close p{ font-size:clamp(1.02rem,1.35vw,1.24rem); line-height:1.55; color:var(--on-petrol-70); max-width:50ch; margin:0 0 var(--s5); }
+.close__actions{ display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center; }
+.close__tel{
+  font-family:var(--mono); font-size:clamp(1rem,1.6vw,1.3rem); letter-spacing:.02em;
+  color:var(--on-petrol); text-decoration:none;
+  border-bottom:1px solid var(--rule-dark); padding:8px 0;
+  min-height:44px; display:inline-flex; align-items:center;
+}
+.close__tel:hover{ border-bottom-color:var(--coral-lite); color:var(--coral-lite); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer{ background:var(--petrol); color:var(--on-petrol); border-top:1px solid var(--rule-dark); }
+.footer__grid{
+  display:grid; gap:var(--s5);
+  padding-block:var(--s6) var(--s5);
+}
+@media (min-width:760px){ .footer__grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1100px){ .footer__grid{ grid-template-columns:1.2fr 1fr 1fr 1.1fr; gap:var(--s4); } }
+
+.footer h2, .footer h3{
+  font-family:var(--mono); font-size:10.5px; font-weight:400;
+  letter-spacing:.15em; text-transform:uppercase;
+  color:var(--on-petrol-70); margin:0 0 var(--s3);
+}
+.footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.footer a{ color:var(--on-petrol); text-decoration:none; font-size:15px; }
+.footer a:hover{ color:var(--coral-lite); }
+.footer li{ font-size:15px; color:var(--on-petrol-70); line-height:1.5; }
+
+.footer__mark{ font-family:var(--display); font-weight:800; font-size:1.9rem; letter-spacing:-.03em; margin:0 0 14px; }
+.footer__mark i{ color:var(--coral-lite); font-style:normal; }
+.footer__blurb{ font-size:15px; line-height:1.6; color:var(--on-petrol-70); margin:0 0 var(--s3); max-width:34ch; }
+.footer address{ font-style:normal; font-size:15px; line-height:1.65; color:var(--on-petrol-70); overflow-wrap:anywhere; }
+
+.footer__bar{
+  border-top:1px solid var(--rule-dark);
+  padding-block:var(--s3);
+  display:flex; flex-wrap:wrap; gap:12px var(--s4); justify-content:space-between;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--on-petrol-70);
+}
+
+/* ==========================================================================
+   MOTION — only ever applied once JS confirms support
+   ========================================================================== */
+html.js .reveal{ opacity:0; transform:translateY(20px); }
+html.js .reveal.in{
+  opacity:1; transform:none;
+  transition:opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  transition-delay:var(--d,0ms);
+}
+html.js .draw{ transform:scaleX(0); }
+html.js .draw.in{ transform:scaleX(1); transition:transform .9s var(--ease-out); transition-delay:var(--d,0ms); }
+
+html.js .hero h1 .line > span{ transform:translateY(105%); }
+html.js .hero.in h1 .line > span{
+  transform:none;
+  transition:transform .9s var(--ease-out);
+}
+html.js .hero.in h1 .line:nth-child(1) > span{ transition-delay:.05s; }
+html.js .hero.in h1 .line:nth-child(2) > span{ transition-delay:.14s; }
+html.js .hero.in h1 .line:nth-child(3) > span{ transition-delay:.23s; }
+
+/* signature: entries re-enter after a filter change */
+@keyframes entryIn{
+  from{ opacity:0; transform:translateY(14px) scale(.985); }
+  to  { opacity:1; transform:none; }
+}
+.entry.is-anim{ animation:entryIn .5s var(--ease-out) both; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+  html.js .reveal,
+  html.js .hero h1 .line > span{ opacity:1!important; transform:none!important; }
+  html.js .draw{ transform:scaleX(1)!important; }
+  .entry.is-anim{ animation:none!important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================================================================
+     HEADER
+     ====================================================================== -->
+<header class="header" id="top">
+  <div class="header__in">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <span class="brand__mark">DCS<i>.</i></span>
+      <span class="brand__bar" aria-hidden="true"></span>
+      <span class="brand__full" aria-hidden="true">Digital Consulting Services</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#work">Portfolio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="#studio">About</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary btn--sm header__cta" href="/contact">
+      Get a free quote
+      <svg class="btn__arrow" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M0 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.3"/></svg>
+    </a>
+
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile sheet: sibling of the header, so nothing above it can trap it -->
+<div class="sheet on-dark" id="sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="sheet__top">
+    <span class="sheet__mark">DCS<i>.</i></span>
+    <button class="sheet__close" id="sheetClose" type="button" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="sheet__nav" aria-label="Mobile">
+    <ul>
+      <li><a href="#services"><em>01</em> Services</a></li>
+      <li><a href="#pricing"><em>02</em> Pricing</a></li>
+      <li><a href="#work"><em>03</em> Portfolio</a></li>
+      <li><a href="/blog"><em>04</em> Blog</a></li>
+      <li><a href="#studio"><em>05</em> About</a></li>
+    </ul>
+  </nav>
+  <div class="sheet__foot">
+    <a class="btn btn--primary" href="/contact">Get a free quote</a>
+    <a class="sheet__tel" href="tel:07395063764">Call 07395 063764</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       HERO
+       ==================================================================== -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <p class="eyebrow hero__eyebrow">
+        <span>Digital Consulting Services</span>
+        <span class="dot" aria-hidden="true">/</span>
+        <span>Polegate, East Sussex</span>
+        <span class="dot" aria-hidden="true">/</span>
+        <span>Est. 2019</span>
+      </p>
+
+      <h1>
+        <span class="line"><span>Twenty small</span></span>
+        <span class="line"><span>businesses.</span></span>
+        <span class="line"><span>No two <em class="alike">alike</em>.</span></span>
+      </h1>
+
+      <div class="hero__grid">
+        <div>
+          <p class="hero__lede">
+            A fabric shop. A yoga studio. A tuition business. A signage company. A garage.
+            A scaffolding contractor. Different worlds entirely — and every one of them
+            needed the same thing: to look online as good as they already are in person.
+            <strong>I design it, write it, build it, and then I look after it.</strong>
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="/contact">
+              Get a free quote
+              <svg class="btn__arrow" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M0 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.3"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#work">See the index</a>
+          </div>
+        </div>
+
+        <div class="creds reveal">
+          <dl>
+            <div class="creds__row"><dt>Founded</dt><dd>2019</dd></div>
+            <div class="creds__row"><dt>Sites built</dt><dd>20+</dd></div>
+            <div class="creds__row"><dt>Longest client</dt><dd>5+ years</dd></div>
+            <div class="creds__row"><dt>Outsourced</dt><dd>Nothing</dd></div>
+            <div class="creds__row"><dt>Reach</dt><dd>UK-wide</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <p class="runline reveal" style="--d:120ms; margin-top:var(--s6)">
+        <span>Retail &amp; eCommerce</span>
+        <span>Studios &amp; practitioners</span>
+        <span>Creative &amp; signage</span>
+        <span>Motor &amp; moving</span>
+        <span>Trades &amp; contractors</span>
+        <span class="muted">and whatever you do</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       THE INDEX
+       ==================================================================== -->
+  <section class="index" id="work" aria-labelledby="index-h">
+    <div class="wrap">
+
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> The index &mdash; selected work</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="index-h">Find your own trade<br>in someone else&rsquo;s.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            Nine businesses that have nothing in common except me. Pick the room closest to
+            yours and read what changed &mdash; the arguments transfer better than you&rsquo;d expect.
+          </p>
+        </div>
+      </div>
+
+      <!-- filter rail: tablist semantics, roving tabindex, arrow keys -->
+      <div class="rail">
+        <div class="rail__scroll" role="tablist" aria-label="Filter the index by sector" id="rail">
+          <button class="chip" role="tab" type="button" id="tab-all"      aria-selected="true"  tabindex="0"  aria-controls="entries" data-sector="all"><b>All work</b> <i>09</i></button>
+          <button class="chip" role="tab" type="button" id="tab-retail"   aria-selected="false" tabindex="-1" aria-controls="entries" data-sector="retail"><b>Retail &amp; eCommerce</b> <i>02</i></button>
+          <button class="chip" role="tab" type="button" id="tab-studio"   aria-selected="false" tabindex="-1" aria-controls="entries" data-sector="studio"><b>Studios &amp; practitioners</b> <i>02</i></button>
+          <button class="chip" role="tab" type="button" id="tab-creative" aria-selected="false" tabindex="-1" aria-controls="entries" data-sector="creative"><b>Creative &amp; signage</b> <i>01</i></button>
+          <button class="chip" role="tab" type="button" id="tab-motor"    aria-selected="false" tabindex="-1" aria-controls="entries" data-sector="motor"><b>Motor &amp; moving</b> <i>02</i></button>
+          <button class="chip" role="tab" type="button" id="tab-trade"    aria-selected="false" tabindex="-1" aria-controls="entries" data-sector="trade"><b>Trades &amp; contractors</b> <i>02</i></button>
+        </div>
+        <div class="rail__ind" id="railInd" aria-hidden="true"></div>
+      </div>
+
+      <div class="index__grid">
+
+        <!-- sticky sector plate: photography stands for the SECTOR, never a named client -->
+        <div class="plate">
+          <div class="plate__frame">
+            <img class="is-on" id="img-all" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/interior-light.jpg" width="1600" height="904" alt="Raking daylight across a plain plaster wall and pale timber floor." loading="lazy" decoding="async">
+            <img id="img-retail"   src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg"  width="1600" height="1062" alt="The interior of a small independent clothing boutique, rails and folded stock, no people present." loading="lazy" decoding="async">
+            <img id="img-studio"   src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg"    width="1600" height="1062" alt="An empty yoga studio with rolled mats stacked beside tall windows." loading="lazy" decoding="async">
+            <img id="img-creative" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/still-products.jpg"   width="1600" height="1062" alt="A still life of a ceramic vase, folded linen and a candle on a plaster surface." loading="lazy" decoding="async">
+            <img id="img-motor"    src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-van.jpg"        width="1600" height="1062" alt="A plain work van parked on a quiet street in morning light." loading="lazy" decoding="async">
+            <img id="img-trade"    src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" width="1600" height="1062" alt="Scaffolding erected against the side of a building, seen from the ground." loading="lazy" decoding="async">
+          </div>
+
+          <p class="plate__caption">
+            <span>Illustrative photography</span>
+            <span id="plateTag">Not a client premises</span>
+          </p>
+
+          <h3 class="plate__name" id="plateName">Nine businesses, six worlds</h3>
+          <p class="plate__say" id="plateSay">
+            The brief was different every single time. The job underneath it was identical
+            every single time.
+          </p>
+          <p class="plate__count" id="plateCount" role="status" aria-live="polite">
+            Showing <b>9</b> of 9
+          </p>
+        </div>
+
+        <!-- entries -->
+        <div class="entries" id="entries" aria-labelledby="index-h">
+
+          <!-- 01 -->
+          <article class="entry reveal" data-sector="retail" style="--c:#B2727F">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#B2727F" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-grid m-grid--3">
+                    <span class="m-tile m-tile--c"></span><span class="m-tile"></span><span class="m-tile"></span>
+                    <span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span>
+                  </div>
+                  <div class="m-chips"><b class="on"></b><b></b><b></b><b></b></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">01</span><span class="entry__sector">Retail &amp; eCommerce</span></div>
+            <h3 class="entry__name">Cuddle Plush Fabrics</h3>
+            <p class="entry__line">Five years and counting &mdash; one of our longest client relationships.</p>
+          </article>
+
+          <!-- 02 -->
+          <article class="entry reveal" data-sector="retail" style="--c:#54708C">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#54708C" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-split">
+                    <span class="m-block"></span>
+                    <span class="m-stack">
+                      <b class="m-opt m-opt--on"></b><b class="m-opt"></b><b class="m-opt"></b><b class="m-opt"></b>
+                    </span>
+                  </div>
+                  <div class="m-btn m-btn--w"></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">02</span><span class="entry__sector">Retail &amp; eCommerce</span></div>
+            <h3 class="entry__name">Luna Landings</h3>
+            <p class="entry__line">Product configurator, automatic work orders, worldwide shipping.</p>
+          </article>
+
+          <!-- 03 -->
+          <article class="entry reveal" data-sector="studio" style="--c:#7A8F6E">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#7A8F6E" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-band m-band--c"><i></i><em></em></div>
+                  <div class="m-chips"><b></b><b class="on"></b><b></b><b class="on"></b><b></b><b></b></div>
+                  <div class="m-lines"><u></u><u></u><u></u></div>
+                  <div class="m-btn m-btn--w"></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">03</span><span class="entry__sector">Studios &amp; practitioners</span></div>
+            <h3 class="entry__name">Sanctuary Ida</h3>
+            <p class="entry__line">Students book and pay for classes online.</p>
+          </article>
+
+          <!-- 04 -->
+          <article class="entry reveal" data-sector="studio" style="--c:#6E5A80">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#6E5A80" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-band m-band--c"><i></i><em></em></div>
+                  <div class="m-lines"><u></u><u></u><u></u><u></u></div>
+                  <div class="m-rows"><span class="m-row"><em></em><s></s></span><span class="m-row"><em></em><s></s></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">04</span><span class="entry__sector">Studios &amp; practitioners</span></div>
+            <h3 class="entry__name">Nicola Noble Tuition</h3>
+            <p class="entry__line">Moved classes online during Covid instead of closing.</p>
+          </article>
+
+          <!-- 05 -->
+          <article class="entry reveal" data-sector="creative" style="--c:#C9563C">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#C9563C" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-word"></div>
+                  <div class="m-swatch"><b></b><b></b><b></b><b></b></div>
+                  <div class="m-lines"><u></u><u></u></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">05</span><span class="entry__sector">Creative &amp; signage</span></div>
+            <h3 class="entry__name">Mad Graphics</h3>
+            <p class="entry__line">A full rebuild for a signage and print business.</p>
+          </article>
+
+          <!-- 06 -->
+          <article class="entry reveal" data-sector="motor" style="--c:#A87434">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#A87434" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-band m-band--c"><i></i><em></em></div>
+                  <div class="m-rows">
+                    <span class="m-row"><em></em><s></s></span>
+                    <span class="m-row"><em></em><s></s></span>
+                    <span class="m-row"><em></em><s></s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">06</span><span class="entry__sector">Motor &amp; moving</span></div>
+            <h3 class="entry__name">DCH Automotive</h3>
+            <p class="entry__line">A credible presence from a standing start.</p>
+          </article>
+
+          <!-- 07 -->
+          <article class="entry reveal" data-sector="trade" style="--c:#5E6A72">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#5E6A72" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-band m-band--c"><i></i><em></em></div>
+                  <div class="m-split">
+                    <span class="m-map"></span>
+                    <span class="m-stack"><b class="m-opt"></b><b class="m-opt m-opt--on"></b><b class="m-opt"></b><b class="m-opt"></b></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">07</span><span class="entry__sector">Trades &amp; contractors</span></div>
+            <h3 class="entry__name">Colossus Scaffolding</h3>
+            <p class="entry__line">First enquiry from Google within three weeks of launch.</p>
+          </article>
+
+          <!-- 08 -->
+          <article class="entry reveal" data-sector="trade" style="--c:#9A3B33">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#9A3B33" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-grid m-grid--4">
+                    <span class="m-tile m-tile--c"></span><span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span>
+                    <span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span>
+                    <span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">08</span><span class="entry__sector">Trades &amp; contractors</span></div>
+            <h3 class="entry__name">DJ Fox Electrical</h3>
+            <p class="entry__line">A 20+ page site, live at djfoxelectrical.com.</p>
+          </article>
+
+          <!-- 09 -->
+          <article class="entry reveal" data-sector="motor" style="--c:#3F7A75">
+            <div class="entry__plate">
+              <div class="mock" style="--c:#3F7A75" aria-hidden="true">
+                <div class="m-bar"><em></em><s></s><s></s><s></s></div>
+                <div class="m-body">
+                  <div class="m-band"><i></i><em></em></div>
+                  <div class="m-stack" style="flex:1">
+                    <b class="m-opt"></b><b class="m-opt"></b><b class="m-opt"></b>
+                  </div>
+                  <div class="m-btn m-btn--w"></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__meta"><span class="num">09</span><span class="entry__sector">Motor &amp; moving</span></div>
+            <h3 class="entry__name">Bexhill Removals</h3>
+            <p class="entry__line">Design approved on the first presentation, no revisions.</p>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       WHAT DOESN'T CHANGE
+       ==================================================================== -->
+  <section class="constant on-dark" aria-labelledby="constant-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> The constant</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="constant-h">Six sectors.<br>One job.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            The businesses are nothing alike. What they actually wanted was word for word
+            the same, every time &mdash; and most studios don&rsquo;t offer it.
+          </p>
+        </div>
+      </div>
+
+      <div class="points">
+        <div class="point reveal">
+          <span class="point__n">01</span>
+          <h3>You&rsquo;re hiring a person, not a company</h3>
+          <p>Ricky Wilson, in Polegate. The same person on the first call and on the email you
+             send eighteen months later. Nothing outsourced, nothing offshored.</p>
+        </div>
+        <div class="point reveal" style="--d:70ms">
+          <span class="point__n">02</span>
+          <h3>You don&rsquo;t need a brief</h3>
+          <p>Most studios expect you to arrive with copy, images and a clear idea. I ask the
+             right questions instead, then write it and design it from your answers.</p>
+        </div>
+        <div class="point reveal" style="--d:140ms">
+          <span class="point__n">03</span>
+          <h3>You don&rsquo;t need to learn anything</h3>
+          <p>No content system, no login, no dashboard waiting for you to update it. Something
+             needs changing, you say so and it&rsquo;s changed.</p>
+        </div>
+        <div class="point reveal" style="--d:210ms">
+          <span class="point__n">04</span>
+          <h3>One price, everything in it</h3>
+          <p>A setup fee and a low monthly that covers hosting, security, updates, monitoring
+             and support. No surprise invoices, no hourly rate ticking over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SERVICES
+       ==================================================================== -->
+  <section class="services" id="services" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> What&rsquo;s on offer</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="services-h">Six services.<br>Usually you need four.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            Nobody buys all of it on day one. We start with the site and add the rest when
+            there&rsquo;s a reason to &mdash; not because it padded the quote.
+          </p>
+        </div>
+      </div>
+
+      <div class="svc-list">
+        <div class="svc reveal">
+          <span class="svc__n">01</span>
+          <h3>Website Design</h3>
+          <p>Designed and built for your business. No templates, no page-builders.</p>
+        </div>
+        <div class="svc reveal" style="--d:60ms">
+          <span class="svc__n">02</span>
+          <h3>Local SEO</h3>
+          <p>Service pages, location pages, structured data &mdash; so you&rsquo;re found where you work.</p>
+        </div>
+        <div class="svc reveal" style="--d:120ms">
+          <span class="svc__n">03</span>
+          <h3>Ongoing Management</h3>
+          <p>We look after the site so you can get on with the business.</p>
+        </div>
+        <div class="svc reveal" style="--d:180ms">
+          <span class="svc__n">04</span>
+          <h3>Google Workspace Email</h3>
+          <p>Professional business email on your own domain.</p>
+        </div>
+        <div class="svc reveal" style="--d:240ms">
+          <span class="svc__n">05</span>
+          <h3>eCommerce Websites</h3>
+          <p>Online stores built, loaded with your products, and kept running.</p>
+        </div>
+        <div class="svc reveal" style="--d:300ms">
+          <span class="svc__n">06</span>
+          <h3>Analytics &amp; Reporting</h3>
+          <p>Analytics, Search Console and monthly reporting, so you know what&rsquo;s working.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PROCESS
+       ==================================================================== -->
+  <section class="process" aria-labelledby="process-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> How it goes</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="process-h">Four steps, and<br>three of them are mine.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            The whole point of the way I work is that the part you have to do is small,
+            and it happens in conversation rather than in a form.
+          </p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__n">1</span>
+          <h3>A conversation</h3>
+          <p>A call, or a few messages if you&rsquo;d rather. No brief needed, nothing to fill in.</p>
+        </div>
+        <div class="step reveal" style="--d:70ms">
+          <span class="step__n">2</span>
+          <h3>We write it and design it</h3>
+          <p>Copy, structure, imagery, colour &mdash; all handled here, drawn out of what you told me.</p>
+        </div>
+        <div class="step reveal" style="--d:140ms">
+          <span class="step__n">3</span>
+          <h3>You review</h3>
+          <p>Unlimited revisions during the build. It goes nowhere until you&rsquo;re happy with it.</p>
+        </div>
+        <div class="step reveal" style="--d:210ms">
+          <span class="step__n">4</span>
+          <h3>It goes live, and stays live</h3>
+          <p>Hosting, updates, monitoring and support carry on for as long as you want them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PRICING
+       ==================================================================== -->
+  <section class="pricing on-dark" id="pricing" aria-labelledby="pricing-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> What it costs</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="pricing-h">Two ways to pay.<br>The same website.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            You choose how to pay, not what you get. The tiers differ on page count and
+            ongoing service level &mdash; never on the quality of the design or the build.
+          </p>
+        </div>
+      </div>
+
+      <div class="pay" role="tablist" aria-label="Choose how to pay">
+        <button role="tab" type="button" id="pay-a" aria-selected="true"  tabindex="0"  aria-controls="panel-a" data-pay="a">Upfront + monthly</button>
+        <button role="tab" type="button" id="pay-b" aria-selected="false" tabindex="-1" aria-controls="panel-b" data-pay="b">Pay monthly, nothing upfront</button>
+      </div>
+
+      <!-- Option A — every figure authored here, never computed -->
+      <div class="tiers" id="panel-a" role="tabpanel" aria-labelledby="pay-a" tabindex="0">
+        <div class="tier">
+          <div class="tier__top"><h3 class="tier__name">Starter</h3></div>
+          <p class="tier__price">&pound;995<small>Setup, then &pound;15/mo</small></p>
+          <p class="tier__meta">Up to 20 pages</p>
+          <p class="tier__note">For a business that needs to exist properly online, be findable, and take enquiries.</p>
+        </div>
+        <div class="tier tier--pop">
+          <div class="tier__top"><h3 class="tier__name">Professional</h3><span class="tier__tag">Most popular</span></div>
+          <p class="tier__price">&pound;1,995<small>Setup, then &pound;25/mo</small></p>
+          <p class="tier__meta">Up to 50 pages</p>
+          <p class="tier__note">Room for service pages and location pages, which is where local search is actually won.</p>
+        </div>
+        <div class="tier">
+          <div class="tier__top"><h3 class="tier__name">Growth</h3></div>
+          <p class="tier__price">&pound;3,495<small>Setup, then &pound;50/mo</small></p>
+          <p class="tier__meta">Up to 100 pages</p>
+          <p class="tier__note">For a wider catalogue, a bigger service area, or a store that needs looking after closely.</p>
+        </div>
+      </div>
+
+      <!-- Option B -->
+      <div class="tiers" id="panel-b" role="tabpanel" aria-labelledby="pay-b" tabindex="0" hidden>
+        <div class="tier">
+          <div class="tier__top"><h3 class="tier__name">Starter</h3></div>
+          <p class="tier__price">&pound;45<small>Per month &middot; nothing upfront</small></p>
+          <p class="tier__meta">Up to 20 pages &middot; 12-month minimum</p>
+          <p class="tier__note">Identical site to the Starter opposite. The build cost is spread instead of paid on day one.</p>
+        </div>
+        <div class="tier tier--pop">
+          <div class="tier__top"><h3 class="tier__name">Professional</h3><span class="tier__tag">Most popular</span></div>
+          <p class="tier__price">&pound;75<small>Per month &middot; nothing upfront</small></p>
+          <p class="tier__meta">Up to 50 pages &middot; 12-month minimum</p>
+          <p class="tier__note">The usual choice for a business that wants service and location pages doing real work.</p>
+        </div>
+        <div class="tier">
+          <div class="tier__top"><h3 class="tier__name">Growth</h3></div>
+          <p class="tier__price">&pound;125<small>Per month &middot; nothing upfront</small></p>
+          <p class="tier__meta">Up to 100 pages &middot; 12-month minimum</p>
+          <p class="tier__note">The largest builds, spread. Same design, same care, no capital outlay at the start.</p>
+        </div>
+      </div>
+
+      <div class="incl">
+        <div class="reveal">
+          <h3>In every site, on every tier</h3>
+          <ul>
+            <li>Custom design</li>
+            <li>Local SEO</li>
+            <li>Service pages</li>
+            <li>Location pages</li>
+            <li>Structured data</li>
+            <li>Mobile-first and fast</li>
+            <li>Contact form</li>
+            <li>Hosting</li>
+            <li>SSL</li>
+            <li>Domain management</li>
+            <li>Security updates</li>
+            <li>Uptime monitoring</li>
+            <li>Unlimited revisions during the build</li>
+            <li>Search Console submission</li>
+          </ul>
+        </div>
+        <div class="reveal" style="--d:90ms">
+          <h3>Add-ons, only when you want them</h3>
+          <ul class="addons">
+            <li><b>Blog post writing</b><span>&pound;75 / post</span></li>
+            <li><b>Custom theme design</b><span>&pound;350</span></li>
+            <li><b>Google Ads setup &amp; management</b><span>&pound;200/mo + spend</span></li>
+            <li><b>Monthly SEO retainer</b><span>&pound;200/mo</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       VOICES
+       ==================================================================== -->
+  <section class="voices" aria-labelledby="voices-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> In their words</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="voices-h">A fabric shop, a tutor<br>and a yoga teacher.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            Not one of them is a tradesperson, and not one of them had done anything like
+            this before. That is the client base, fairly represented.
+          </p>
+        </div>
+      </div>
+
+      <div class="quotes">
+        <figure class="quote reveal">
+          <blockquote>&ldquo;Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be happier with his work.&rdquo;</blockquote>
+          <figcaption>
+            <span class="quote__who">Sarah</span>
+            <span class="quote__what">Cuddle Plush Fabrics &middot; eCommerce</span>
+          </figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:80ms">
+          <blockquote>&ldquo;I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.&rdquo;</blockquote>
+          <figcaption>
+            <span class="quote__who">Nicola</span>
+            <span class="quote__what">Nicola Noble Tuition &middot; Tuition</span>
+          </figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:160ms">
+          <blockquote>&ldquo;My yoga students love that they can book and pay for my classes on my website.&rdquo;</blockquote>
+          <figcaption>
+            <span class="quote__who">Molly</span>
+            <span class="quote__what">Sanctuary Ida &middot; Yoga studio</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       STUDIO
+       ==================================================================== -->
+  <section class="studio" id="studio" aria-labelledby="studio-h">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot">&#9679;</span> The studio</p>
+        <div class="head__rule draw"></div>
+        <div class="head__grid">
+          <h2 class="h2 reveal" id="studio-h">There is one<br>person here.</h2>
+          <p class="lede reveal" style="--d:90ms">
+            Which is the point. It is also the reason the range above exists &mdash; twenty-odd
+            businesses, and I have sat with every single one of them.
+          </p>
+        </div>
+      </div>
+
+      <div class="studio__grid">
+        <div class="studio__body reveal">
+          <figure class="studio__logo">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" width="600" height="300" alt="The Digital Consulting Services logo" loading="lazy">
+            <figcaption>The mark, since 2019</figcaption>
+          </figure>
+          <p>My name is Ricky Wilson. I started Digital Consulting Services in Polegate in 2019.</p>
+          <p>
+            I don&rsquo;t have account managers, a sales team, or a queue of freelancers you&rsquo;ll never
+            meet. You talk to me, and the person you talk to is the person who does the work.
+            When something breaks at half nine on a Tuesday, you don&rsquo;t raise a ticket &mdash; you
+            text me.
+          </p>
+          <p>
+            What I&rsquo;ve learned across a fabric shop, a yoga studio, a garage and a scaffolding
+            firm is that the differences are mostly on the surface. Underneath, every owner
+            wants the same three things: to be found, to look credible, and never to have to
+            think about the website again. That&rsquo;s what I sell, and it&rsquo;s the same product
+            whatever line you&rsquo;re in.
+          </p>
+        </div>
+
+        <div class="reveal" style="--d:90ms">
+          <dl class="facts">
+            <div class="facts__row"><dt>Telephone</dt><dd><a href="tel:07395063764">07395 063764</a></dd></div>
+            <div class="facts__row"><dt>Email</dt><dd><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></dd></div>
+            <div class="facts__row"><dt>Studio</dt><dd>Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26&nbsp;6QH</dd></div>
+            <div class="facts__row"><dt>Hours</dt><dd>Mon&ndash;Fri 9:00&ndash;17:30<br>Saturday by appointment<br>Sunday closed</dd></div>
+          </dl>
+
+          <div class="areas">
+            <p class="eyebrow">Nearby, and then everywhere</p>
+            <ul class="areas__list">
+              <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+              <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+              <li class="wide">&amp; UK-wide</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       CLOSE
+       ==================================================================== -->
+  <section class="close on-dark" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 id="close-h" class="reveal">Tell me what you do.<br>I&rsquo;ll tell you<br>what I&rsquo;d build.</h2>
+      <p class="reveal" style="--d:90ms">
+        No brief required, no forms to fill in first, and no charge for the conversation.
+        If it isn&rsquo;t a fit I&rsquo;ll say so &mdash; that&rsquo;s cheaper for both of us.
+      </p>
+      <div class="close__actions reveal" style="--d:160ms">
+        <a class="btn btn--primary" href="/contact">
+          Get a free quote
+          <svg class="btn__arrow" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M0 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.3"/></svg>
+        </a>
+        <a class="close__tel" href="tel:07395063764">or call 07395 063764</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================================================================
+     FOOTER
+     ====================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__mark">DCS<i>.</i></p>
+        <p class="footer__blurb">
+          A website design and build studio in Polegate, East Sussex, working with small
+          businesses across the UK since 2019.
+        </p>
+      </div>
+
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Service areas</h2>
+        <ul>
+          <li>Polegate &middot; Eastbourne</li>
+          <li>Hailsham &middot; Lewes</li>
+          <li>Seaford &middot; Uckfield</li>
+          <li>Brighton &middot; Hove</li>
+          <li>&mdash; and UK-wide</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Get in touch</h2>
+        <address>
+          <a href="tel:07395063764">07395 063764</a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park<br>
+          Dittons Road, Polegate<br>
+          East Sussex, BN26 6QH<br><br>
+          Mon&ndash;Fri 9:00&ndash;17:30<br>
+          Sat by appointment &middot; Sun closed
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Design &amp; build, Polegate &mdash; East Sussex</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ------------------------------------------------------------------
+     Header: hairline appears once scrolled
+     ------------------------------------------------------------------ */
+  var header = document.querySelector('.header');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      header.classList.toggle('is-stuck', window.scrollY > 24);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ------------------------------------------------------------------
+     Mobile sheet — focus trap, Esc, scroll lock, focus restore
+     ------------------------------------------------------------------ */
+  var burger = document.getElementById('burger');
+  var sheet  = document.getElementById('sheet');
+  var sheetClose = document.getElementById('sheetClose');
+  var lastFocus = null;
+
+  function openSheet() {
+    lastFocus = document.activeElement;
+    sheet.hidden = false;
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Close menu');
+    root.classList.add('is-locked');
+    sheetClose.focus();
+  }
+  function closeSheet() {
+    sheet.hidden = true;
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Open menu');
+    root.classList.remove('is-locked');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  burger.addEventListener('click', function () {
+    if (sheet.hidden) { openSheet(); } else { closeSheet(); }
+  });
+  sheetClose.addEventListener('click', closeSheet);
+  sheet.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (sheet.hidden) return;
+    if (e.key === 'Escape') { closeSheet(); return; }
+    if (e.key !== 'Tab') return;
+    var f = sheet.querySelectorAll('a[href], button:not([disabled])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  // if the viewport grows past the mobile breakpoint, don't strand the sheet open
+  window.addEventListener('resize', function () {
+    if (!sheet.hidden && window.innerWidth >= 1000) closeSheet();
+  });
+
+  /* ------------------------------------------------------------------
+     Scroll reveal — content is only ever hidden once we know JS runs,
+     and IntersectionObserver exists to bring it back.
+     ------------------------------------------------------------------ */
+  var revealables = [].slice.call(document.querySelectorAll('.reveal, .draw'));
+  var hero = document.querySelector('.hero');
+
+  if (!('IntersectionObserver' in window)) {
+    root.classList.remove('js');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    revealables.forEach(function (el) { io.observe(el); });
+    // hero builds immediately rather than on intersection
+    requestAnimationFrame(function () { hero.classList.add('in'); });
+  }
+
+  /* ------------------------------------------------------------------
+     SIGNATURE: the index filter.
+     Sector chips re-flow the gallery, crossfade the sector plate and
+     rewrite the sector statement. Counts are read from the DOM, never
+     from a hard-coded number, so they cannot drift out of true.
+     ------------------------------------------------------------------ */
+  var rail    = document.getElementById('rail');
+  var chips   = [].slice.call(rail.querySelectorAll('.chip'));
+  var ind     = document.getElementById('railInd');
+  var entries = [].slice.call(document.querySelectorAll('.entry'));
+  var frame   = document.querySelector('.plate__frame');
+  var plateName  = document.getElementById('plateName');
+  var plateSay   = document.getElementById('plateSay');
+  var plateTag   = document.getElementById('plateTag');
+  var plateCount = document.getElementById('plateCount');
+
+  var TOTAL = entries.length;
+
+  var COPY = {
+    all: {
+      name: 'Nine businesses, six worlds',
+      say:  'The brief was different every single time. The job underneath it was identical every single time.',
+      tag:  'Not a client premises'
+    },
+    retail: {
+      name: 'Retail &amp; eCommerce',
+      say:  'Stock, photography, postage, returns. Selling online is a second business bolted onto the first, so the site has to carry it without you babysitting it.',
+      tag:  'Illustrative &mdash; retail'
+    },
+    studio: {
+      name: 'Studios &amp; practitioners',
+      say:  'A class isn&rsquo;t sold so much as booked. The site&rsquo;s real work is taking the booking and the payment while you&rsquo;re busy teaching.',
+      tag:  'Illustrative &mdash; studios'
+    },
+    creative: {
+      name: 'Creative &amp; signage',
+      say:  'You already sell on the strength of your eye. A thin, dated website quietly argues the opposite to every visitor before you get a word in.',
+      tag:  'Illustrative &mdash; creative'
+    },
+    motor: {
+      name: 'Motor &amp; moving',
+      say:  'People check you exist before they ring. A slow or half-finished site loses the job at exactly the moment someone had decided to trust you.',
+      tag:  'Illustrative &mdash; motor &amp; moving'
+    },
+    trade: {
+      name: 'Trades &amp; contractors',
+      say:  'You&rsquo;re found on a phone, in a van, at seven in the morning. Everything else follows from being findable in the right places and looking legitimate when you are.',
+      tag:  'Illustrative &mdash; trades'
+    }
+  };
+
+  function moveIndicator(chip) {
+    ind.style.width = chip.offsetWidth - 22 + 'px';
+    ind.style.transform = 'translateX(' + chip.offsetLeft + 'px)';
+  }
+
+  function showImage(sector) {
+    var next = document.getElementById('img-' + sector);
+    if (!next) return;
+    [].slice.call(frame.querySelectorAll('img')).forEach(function (im) {
+      im.classList.toggle('is-on', im === next);
+    });
+  }
+
+  function select(chip, focusIt) {
+    var sector = chip.getAttribute('data-sector');
+
+    chips.forEach(function (c) {
+      var on = c === chip;
+      c.setAttribute('aria-selected', on ? 'true' : 'false');
+      c.tabIndex = on ? 0 : -1;
+    });
+    if (focusIt) chip.focus();
+    moveIndicator(chip);
+
+    // filter, then stagger the survivors back in
+    var shown = 0;
+    entries.forEach(function (el) {
+      var match = (sector === 'all') || el.getAttribute('data-sector') === sector;
+      el.classList.toggle('is-hidden', !match);
+      el.classList.remove('is-anim');
+      if (match) {
+        el.style.animationDelay = (shown * 45) + 'ms';
+        shown++;
+      }
+    });
+
+    if (!reduce.matches) {
+      // force a reflow so the animation restarts on every selection
+      void document.getElementById('entries').offsetWidth;
+      entries.forEach(function (el) {
+        if (!el.classList.contains('is-hidden')) el.classList.add('is-anim');
+      });
+    }
+
+    var copy = COPY[sector] || COPY.all;
+    plateName.innerHTML  = copy.name;
+    plateSay.innerHTML   = copy.say;
+    plateTag.innerHTML   = copy.tag;
+    // counted from the live DOM — the displayed figure is always the real one
+    plateCount.innerHTML = 'Showing <b>' + shown + '</b> of ' + TOTAL;
+
+    showImage(sector);
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () { select(chip, false); });
+  });
+
+  rail.addEventListener('keydown', function (e) {
+    var i = chips.indexOf(document.activeElement);
+    if (i === -1) return;
+    var next = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = chips[(i + 1) % chips.length];
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = chips[(i - 1 + chips.length) % chips.length];
+    else if (e.key === 'Home') next = chips[0];
+    else if (e.key === 'End') next = chips[chips.length - 1];
+    if (!next) return;
+    e.preventDefault();
+    select(next, true);
+  });
+
+  // place the indicator once, and again once webfonts have settled the widths
+  function placeIndicator() {
+    var current = rail.querySelector('.chip[aria-selected="true"]');
+    if (current) moveIndicator(current);
+  }
+  placeIndicator();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeIndicator);
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(placeIndicator, 120);
+  });
+
+  /* ------------------------------------------------------------------
+     Pricing: two authored panels, toggled. No figure is ever computed.
+     ------------------------------------------------------------------ */
+  var payTabs = [].slice.call(document.querySelectorAll('.pay [role="tab"]'));
+  function selectPay(tab, focusIt) {
+    payTabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focusIt) tab.focus();
+  }
+  payTabs.forEach(function (t) {
+    t.addEventListener('click', function () { selectPay(t, false); });
+  });
+  document.querySelector('.pay').addEventListener('keydown', function (e) {
+    var i = payTabs.indexOf(document.activeElement);
+    if (i === -1) return;
+    var next = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = payTabs[(i + 1) % payTabs.length];
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = payTabs[(i - 1 + payTabs.length) % payTabs.length];
+    if (!next) return;
+    e.preventDefault();
+    selectPay(next, true);
+  });
+
+  /* ------------------------------------------------------------------
+     Smooth in-page links close the sheet and respect reduced motion
+     ------------------------------------------------------------------ */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (id.length < 2) return;
+    var target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
+  });
+})();
+</script>
+</body>
+</html>

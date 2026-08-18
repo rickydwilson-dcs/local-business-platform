@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — website design and build studio, East Sussex</title>
+<meta name="description" content="A design and build studio for small businesses across the UK. I ask the questions, write the words, design and build the site, and keep it running. Setup from £995, or from £45 a month with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   COLOUR FIELD — DCS
+   ---------------------------------------------------------------------------
+   The page is built from large planes of saturated colour. Every hue carries
+   one role and keeps it everywhere it appears:
+
+     ULTRAMARINE #1B27B8  the studio's own voice — the hero, the person, the ask
+     PLASTER     #F2ECE1  explanation — anywhere the reader has to actually read
+     PINE        #0B4F3F  the work — client proof, portfolio, testimonials
+     VERMILION   #C8331A  decision — the pricing plane, and every primary button
+     INK         #17151A  structure — the footer and the rules
+     MARIGOLD    #EDAE4E  accent only. NEVER a field, and NEVER on ink.
+
+   The marigold rule is what keeps this out of industrial-safety territory:
+   because the accent may only sit on ultramarine or pine, a yellow-on-black
+   pairing is structurally impossible anywhere on the page.
+
+   Every foreground/background pair below was computed, not estimated:
+     white / ultramarine ....... 10.35   marigold / ultramarine ..... 5.31
+     #A8B0DF / ultramarine ..... 4.90    marigold / pine ............ 4.88
+     plaster / pine ............ 8.10    #9FC4B6 / pine ............. 5.01
+     white / vermilion ......... 5.32    plaster / vermilion ........ 4.53
+     ink / plaster ............ 15.42    #55505C / plaster .......... 6.64
+     #9E2610 / plaster ......... 6.52    plaster / ink ............. 15.42
+     #A29CAB / ink ............. 6.80
+   Nothing carrying text falls below 4.5:1.
+   ========================================================================== */
+
+/* ---------- reset ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body,h1,h2,h3,h4,p,figure,blockquote,dl,dd,ul,ol{margin:0}
+ul,ol{list-style:none;padding:0}
+img{max-width:100%;display:block;height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+
+/* ---------- tokens ---------- */
+:root{
+  --ultramarine:#1B27B8;
+  --pine:#0B4F3F;
+  --vermilion:#C8331A;
+  --vermilion-deep:#9E2610;
+  --plaster:#F2ECE1;
+  --ink:#17151A;
+  --marigold:#EDAE4E;
+
+  --font-display:'Archivo','Archivo Fallback',system-ui,sans-serif;
+  --font-read:'Newsreader',Georgia,'Times New Roman',serif;
+
+  /* spacing — generous by default, this page breathes */
+  --gutter:clamp(1.25rem,5vw,5.5rem);
+  --field-pad:clamp(5rem,11vw,11rem);
+  --stack-lg:clamp(3rem,6vw,6rem);
+  --stack-md:clamp(2rem,3.5vw,3.25rem);
+
+  --head-h:68px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-plane:cubic-bezier(.65,0,.35,1);
+
+  /* The header sits ABOVE the sheet, not below it. If the sheet covers the
+     header, the hamburger becomes unclickable the moment it is opened and a
+     touch user has no way to dismiss the menu except by navigating away. */
+  --z-sheet:80;
+  --z-nav:90;
+  --z-marker:5;
+}
+@media (min-width:900px){ :root{ --head-h:82px } }
+
+/* Fallback metrics keep the poster headline from reflowing when Archivo lands */
+@font-face{
+  font-family:'Archivo Fallback';
+  src:local('Helvetica Neue'),local('Arial');
+  size-adjust:97%;
+  ascent-override:92%;
+  descent-override:24%;
+}
+
+body{
+  font-family:var(--font-display);
+  font-size:1.0625rem;
+  line-height:1.6;
+  background:var(--ink);
+  color:var(--plaster);
+  font-synthesis-weight:none;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============================================================================
+   FIELDS — every section is an edge-to-edge plane that sets its own palette.
+   Nothing on the page has a border radius. Colour fields have hard edges;
+   softening them into cards would be a different design entirely.
+   ========================================================================== */
+.field{
+  position:relative;
+  background:var(--bg);
+  color:var(--fg);
+  padding:var(--field-pad) 0;
+}
+.field--ultramarine{--bg:var(--ultramarine);--fg:#FFFFFF;--mute:#A8B0DF;--accent:var(--marigold);--rule:rgba(255,255,255,.24)}
+.field--pine       {--bg:var(--pine);       --fg:#F2ECE1;--mute:#9FC4B6;--accent:var(--marigold);--rule:rgba(242,236,225,.22)}
+.field--vermilion  {--bg:var(--vermilion);  --fg:#FFFFFF;--mute:#F2ECE1;--accent:#F2ECE1;        --rule:rgba(255,255,255,.3)}
+.field--plaster    {--bg:var(--plaster);    --fg:#17151A;--mute:#55505C;--accent:var(--vermilion-deep);--rule:rgba(23,21,26,.18)}
+.field--ink        {--bg:var(--ink);        --fg:#F2ECE1;--mute:#A29CAB;--accent:#F2ECE1;        --rule:rgba(242,236,225,.16)}
+
+.wrap{width:100%;max-width:1420px;margin-inline:auto;padding-inline:var(--gutter)}
+.wrap--narrow{max-width:960px}
+
+/* Field marker — straddles the seam between two planes, painted in the colour
+   of the field it is leaving. The colours quote each other across every edge. */
+.marker{
+  position:absolute;top:0;left:var(--gutter);
+  transform:translateY(-50%);
+  z-index:var(--z-marker);
+  display:flex;align-items:center;gap:.85rem;
+  padding:.6rem 1.1rem;
+  background:var(--m-bg);color:var(--m-fg);
+  font-size:.6875rem;font-weight:600;
+  font-variation-settings:'wdth' 104;
+  letter-spacing:.2em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.marker__n{font-variant-numeric:tabular-nums;opacity:.62}
+.m-from-ultra   {--m-bg:var(--ultramarine);--m-fg:#FFFFFF}
+.m-from-plaster {--m-bg:var(--plaster);    --m-fg:#17151A}
+.m-from-pine    {--m-bg:var(--pine);       --m-fg:#F2ECE1}
+.m-from-verm    {--m-bg:var(--vermilion);  --m-fg:#FFFFFF}
+
+/* ---------- type system ----------
+   Archivo variable, driven on the wdth axis. Expanded heavy caps sit flat on a
+   colour plane the way poster type sits on paper. Newsreader carries the
+   reading voice — and only ever on the plaster field. Sans on colour, serif on
+   paper: the type obeys the same system as everything else. */
+.display{
+  font-weight:700;
+  font-variation-settings:'wdth' 112;
+  line-height:.87;
+  letter-spacing:-.028em;
+  text-transform:none;
+  text-wrap:balance;
+}
+/* sized so each authored line of the headline holds together on one visual
+   line at 390 — the line breaks are a typographic decision, not an accident
+   of the viewport */
+h1.display{font-size:clamp(2.35rem,8.3vw,8.4rem)}
+h2.display{font-size:clamp(2.15rem,5.4vw,4.6rem);line-height:.92}
+h3{
+  font-size:clamp(1.2rem,1.9vw,1.6rem);
+  font-weight:650;
+  font-variation-settings:'wdth' 106;
+  letter-spacing:-.012em;
+  line-height:1.18;
+}
+.eyebrow{
+  font-size:.6875rem;font-weight:600;
+  font-variation-settings:'wdth' 104;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);
+}
+.lede{
+  font-size:clamp(1.125rem,1.65vw,1.4rem);
+  line-height:1.52;color:var(--fg);
+  max-width:46ch;
+}
+.read{
+  font-family:var(--font-read);
+  font-size:clamp(1.45rem,3.1vw,2.35rem);
+  line-height:1.34;font-weight:350;
+  letter-spacing:-.008em;
+  max-width:26ch;
+  text-wrap:pretty;
+}
+.body{color:var(--mute);max-width:60ch}
+.body + .body{margin-top:1rem}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+.rule{height:1px;background:var(--rule);border:0;margin:0}
+
+/* ---------- buttons ---------- */
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{
+  --btn-bg:var(--vermilion);--btn-fg:#FFFFFF;
+  position:relative;display:inline-flex;align-items:center;gap:1.1rem;
+  min-height:56px;padding:0 1.6rem;
+  background:var(--btn-bg);color:var(--btn-fg);
+  font-size:.8125rem;font-weight:650;
+  font-variation-settings:'wdth' 106;
+  letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;
+  transition:transform .28s var(--ease), background-color .28s var(--ease), color .28s var(--ease);
+}
+.btn__arrow{display:block;width:18px;height:10px;flex:none;overflow:visible}
+.btn__arrow line,.btn__arrow polyline{stroke:currentColor;stroke-width:1.5;fill:none}
+.btn svg{transition:transform .34s var(--ease)}
+.btn:hover svg{transform:translateX(5px)}
+.btn:active{transform:scale(.981)}
+.btn--ghost{--btn-bg:transparent;--btn-fg:var(--fg);box-shadow:inset 0 0 0 1px currentColor}
+.btn--ghost:hover{--btn-bg:var(--fg);--btn-fg:var(--bg)}
+/* On the vermilion plane the primary button inverts — it can never be the same
+   colour as the field it sits on. */
+.field--vermilion .btn:not(.btn--ghost){--btn-bg:var(--plaster);--btn-fg:var(--vermilion-deep)}
+.field--plaster .btn--ghost:hover{--btn-fg:var(--plaster)}
+
+a:focus-visible,button:focus-visible{
+  outline:3px solid var(--accent,#EDAE4E);
+  outline-offset:3px;
+}
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--marigold);color:var(--ink);
+  padding:.9rem 1.4rem;font-weight:650;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;
+}
+.skip:focus{left:0}
+
+/* ============================================================================
+   HEADER — the signature. The header is not a floating pill; it is a plane,
+   and it adopts the colour of whichever field is currently beneath it,
+   cross-fading at each seam. Scrolling the page plays the palette.
+   ========================================================================== */
+.site-head{
+  position:fixed;inset:0 0 auto 0;z-index:var(--z-nav);
+  height:var(--head-h);
+  display:flex;align-items:center;
+  background:var(--h-bg,var(--ultramarine));
+  color:var(--h-fg,#FFFFFF);
+  transition:background-color .45s var(--ease-plane), color .45s var(--ease-plane), box-shadow .45s var(--ease-plane);
+}
+.site-head[data-solid="true"]{box-shadow:inset 0 -1px 0 var(--h-rule,rgba(255,255,255,.22))}
+.h-ultramarine{--h-bg:#1B27B8;--h-fg:#FFFFFF;--h-rule:rgba(255,255,255,.22);--h-acc:#EDAE4E}
+.h-plaster    {--h-bg:#F2ECE1;--h-fg:#17151A;--h-rule:rgba(23,21,26,.18); --h-acc:#9E2610}
+.h-pine       {--h-bg:#0B4F3F;--h-fg:#F2ECE1;--h-rule:rgba(242,236,225,.22);--h-acc:#EDAE4E}
+.h-vermilion  {--h-bg:#C8331A;--h-fg:#FFFFFF;--h-rule:rgba(255,255,255,.3); --h-acc:#F2ECE1}
+.h-ink        {--h-bg:#17151A;--h-fg:#F2ECE1;--h-rule:rgba(242,236,225,.16);--h-acc:#F2ECE1}
+
+.head-inner{
+  width:100%;max-width:1420px;margin-inline:auto;padding-inline:var(--gutter);
+  display:flex;align-items:center;gap:2rem;
+}
+.brand{
+  display:flex;align-items:baseline;gap:.7rem;
+  text-decoration:none;margin-right:auto;
+  min-height:44px;padding-block:.7rem;
+}
+.brand__mark{
+  font-size:1.32rem;font-weight:800;
+  font-variation-settings:'wdth' 118;
+  letter-spacing:-.02em;line-height:1;
+}
+.brand__full{
+  display:none;font-size:.625rem;font-weight:500;
+  font-variation-settings:'wdth' 100;
+  letter-spacing:.2em;text-transform:uppercase;opacity:.72;line-height:1;
+}
+@media (min-width:1100px){ .brand__full{display:block} }
+
+.nav{display:none}
+@media (min-width:900px){
+  .nav{display:flex;align-items:center;gap:2rem}
+}
+.nav a{
+  position:relative;text-decoration:none;
+  font-size:.75rem;font-weight:600;
+  font-variation-settings:'wdth' 104;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding-block:.4rem;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--h-acc,#EDAE4E);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .34s var(--ease);
+}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+
+.head-cta{
+  display:none;align-items:center;
+  min-height:44px;padding:0 1.15rem;
+  background:var(--h-fg);color:var(--h-bg);
+  font-size:.6875rem;font-weight:700;
+  font-variation-settings:'wdth' 106;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  transition:background-color .45s var(--ease-plane), color .45s var(--ease-plane), transform .24s var(--ease);
+}
+@media (min-width:900px){ .head-cta{display:inline-flex} }
+.head-cta:active{transform:scale(.97)}
+
+/* hamburger — the two bars rotate into a true X, they do not swap out */
+.burger{
+  display:flex;flex-direction:column;justify-content:center;gap:7px;
+  width:48px;height:48px;margin-right:-12px;padding:0 11px;
+}
+@media (min-width:900px){ .burger{display:none} }
+.burger span{
+  display:block;height:2px;width:100%;background:currentColor;
+  transition:transform .38s var(--ease-plane), opacity .2s linear;
+}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(4.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-4.5px) rotate(-45deg)}
+
+/* Mobile sheet is a SIBLING of the header, never a child — a fixed overlay
+   nested inside a transformed or filtered ancestor gets trapped in that
+   ancestor's box instead of filling the viewport. */
+.sheet{
+  position:fixed;inset:0;z-index:var(--z-sheet);
+  background:var(--ultramarine);color:#FFFFFF;
+  display:flex;flex-direction:column;
+  padding:calc(var(--head-h) + 2.5rem) var(--gutter) 2.5rem;
+  overflow-y:auto;
+  opacity:0;visibility:hidden;
+  transform:translateY(-14px);
+  transition:opacity .34s var(--ease), transform .42s var(--ease-plane), visibility 0s linear .42s;
+}
+.sheet[data-open="true"]{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.sheet__list{display:flex;flex-direction:column;gap:.2rem;margin-bottom:auto}
+.sheet__list a{
+  display:block;padding:.6rem 0;text-decoration:none;
+  font-size:clamp(2rem,10vw,3rem);font-weight:700;
+  font-variation-settings:'wdth' 112;
+  letter-spacing:-.025em;line-height:1.05;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .4s var(--ease), transform .5s var(--ease-plane);
+}
+.sheet[data-open="true"] .sheet__list a{opacity:1;transform:none}
+.sheet[data-open="true"] .sheet__list a:nth-child(1){transition-delay:.06s}
+.sheet[data-open="true"] .sheet__list a:nth-child(2){transition-delay:.11s}
+.sheet[data-open="true"] .sheet__list a:nth-child(3){transition-delay:.16s}
+.sheet[data-open="true"] .sheet__list a:nth-child(4){transition-delay:.21s}
+.sheet[data-open="true"] .sheet__list a:nth-child(5){transition-delay:.26s}
+.sheet__foot{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem}
+.sheet__foot .btn{width:100%;justify-content:space-between}
+.sheet__tel{
+  font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;text-decoration:none;color:var(--marigold);
+  min-height:44px;display:inline-flex;align-items:center;
+}
+body[data-locked="true"]{overflow:hidden}
+
+/* ============================================================================
+   FIELD 01 — ULTRAMARINE. The hero. This is the field doing the selling:
+   positioning, the low-effort promise, both calls to action and the
+   credentials, all on one plane so the argument lands in a single colour.
+   ========================================================================== */
+.hero{padding-top:calc(var(--head-h) + clamp(3.5rem,9vw,8rem))}
+.hero__eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+.hero__eyebrow span{white-space:nowrap}
+.hero__eyebrow .rule{flex:1;background:var(--marigold);opacity:.55}
+/* below 640 the connecting rule is dropped and the two halves stack, rather
+   than the second one running off the right edge */
+@media (max-width:639px){
+  .hero__eyebrow{flex-wrap:wrap;gap:.3rem 1rem}
+  .hero__eyebrow .rule{display:none}
+  .hero__eyebrow span{white-space:normal}
+}
+
+/* Each headline line rides in from behind its own edge. The mask is the only
+   place on the page using overflow:hidden. */
+.line{display:block;overflow:hidden}
+.line > span{display:block;will-change:transform}
+.js .line > span{transform:translateY(102%)}
+.js .hero.is-in .line > span{
+  transform:none;
+  transition:transform 1s var(--ease-plane);
+}
+.js .hero.is-in .line:nth-child(2) > span{transition-delay:.09s}
+.js .hero.is-in .line:nth-child(3) > span{transition-delay:.18s}
+
+.hero__grid{
+  display:grid;gap:clamp(2.5rem,5vw,4.5rem);
+  margin-top:clamp(2.5rem,5vw,4rem);
+}
+@media (min-width:900px){
+  .hero__grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:start}
+}
+.hero__lede{max-width:42ch}
+.hero__lede p{color:#FFFFFF}
+.hero__lede p + p{margin-top:1.1rem;color:var(--mute)}
+.hero .btns{margin-top:clamp(2rem,3.5vw,2.75rem)}
+
+/* the three-part promise — hairline-ruled, numbered, no icon cards anywhere */
+.promise{border-top:1px solid var(--rule)}
+.promise li{
+  display:grid;grid-template-columns:auto 1fr;gap:0 1.25rem;
+  padding:1.35rem 0;border-bottom:1px solid var(--rule);
+}
+.promise__n{
+  font-size:.6875rem;font-weight:650;font-variant-numeric:tabular-nums;
+  letter-spacing:.16em;color:var(--accent);padding-top:.35rem;
+}
+.promise h3{margin-bottom:.35rem}
+.promise p{color:var(--mute);font-size:.9375rem;grid-column:2}
+
+.creds{
+  margin-top:clamp(3rem,6vw,5rem);padding-top:1.5rem;
+  border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;gap:.5rem 2.5rem;
+  font-size:.75rem;font-weight:600;
+  font-variation-settings:'wdth' 102;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+}
+.creds .num{color:var(--accent)}
+
+/* ============================================================================
+   FIELD 02 — PLASTER. The range. Photography lives here and only here.
+   ========================================================================== */
+.range__head{display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
+@media (min-width:900px){
+  .range__head{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:end}
+}
+.range__note{
+  font-size:.8125rem;color:var(--mute);max-width:44ch;
+  padding-left:1.25rem;border-left:2px solid var(--accent);
+}
+
+.sectors{
+  display:grid;gap:clamp(1.25rem,2.4vw,2rem);
+  margin-top:clamp(2.5rem,5vw,4.5rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:620px){ .sectors{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1050px){ .sectors{grid-template-columns:repeat(3,1fr)} }
+
+.sector{position:relative;display:block;text-decoration:none;color:inherit}
+.sector__frame{
+  position:relative;overflow:hidden;
+  aspect-ratio:1600/1062;background:rgba(23,21,26,.08);
+}
+.sector__frame img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.001);
+  transition:transform 1.1s var(--ease-plane);
+}
+.sector:hover .sector__frame img{transform:scale(1.045)}
+.sector__bar{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:.85rem;
+  padding:.95rem 1rem;
+  background:var(--chip);color:var(--chip-fg);
+}
+/* the chip floods the caption bar on hover — colour as the interaction */
+.sector__bar::before{
+  content:"";position:absolute;inset:0;background:var(--chip-hover,var(--ink));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .55s var(--ease-plane);
+}
+.sector:hover .sector__bar::before,
+.sector:focus-visible .sector__bar::before{transform:scaleX(1)}
+.sector__bar > *{position:relative;z-index:1}
+.sector__n{font-size:.6875rem;font-variant-numeric:tabular-nums;opacity:.7;font-weight:600;letter-spacing:.12em}
+.sector__name{
+  font-size:.8125rem;font-weight:650;
+  font-variation-settings:'wdth' 104;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.c-ultra{--chip:#1B27B8;--chip-fg:#FFFFFF;--chip-hover:#141E8E}
+.c-pine {--chip:#0B4F3F;--chip-fg:#F2ECE1;--chip-hover:#073328}
+.c-verm {--chip:#C8331A;--chip-fg:#FFFFFF;--chip-hover:#9E2610}
+.c-ink  {--chip:#17151A;--chip-fg:#F2ECE1;--chip-hover:#33303A}
+.sector__cap{
+  margin-top:.7rem;font-size:.8125rem;color:var(--mute);max-width:34ch;line-height:1.5;
+}
+.honesty{
+  margin-top:clamp(2rem,3.5vw,3rem);
+  font-size:.75rem;color:var(--mute);letter-spacing:.02em;
+  padding-top:1.25rem;border-top:1px solid var(--rule);
+}
+
+/* ============================================================================
+   FIELD 03 — PINE. The work. No photography here: a generated photograph
+   captioned with a real client's name would fabricate a record about that
+   business. The sites are drawn in CSS instead.
+   ========================================================================== */
+.work__head{display:grid;gap:clamp(1.5rem,3vw,3rem)}
+@media (min-width:900px){ .work__head{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);align-items:end} }
+
+.cases{
+  display:grid;gap:clamp(1.5rem,3vw,2.5rem);
+  margin-top:clamp(2.5rem,5vw,4.5rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:660px){ .cases{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1100px){ .cases{grid-template-columns:repeat(3,1fr)} }
+
+.case{display:flex;flex-direction:column}
+.mock{
+  aspect-ratio:4/3;background:var(--mk-bg);
+  padding:0;overflow:hidden;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.14);
+  transition:transform .6s var(--ease-plane);
+}
+.case:hover .mock{transform:translateY(-6px)}
+.mock__bar{
+  height:16%;background:var(--mk-bar);
+  display:flex;align-items:center;gap:4px;padding:0 8%;
+}
+.mock__dot{width:4px;height:4px;background:var(--mk-dotc);opacity:.7}
+.mock__nav{margin-left:auto;display:flex;gap:5px}
+.mock__nav i{display:block;width:14px;height:3px;background:var(--mk-dotc);opacity:.55}
+.mock__body{padding:7% 8% 0}
+.mock__h{height:11px;background:var(--mk-ink);width:78%;margin-bottom:6px}
+.mock__h.short{width:46%}
+.mock__t{height:4px;background:var(--mk-ink);opacity:.34;width:100%;margin-bottom:4px}
+.mock__t.s{width:64%}
+.mock__cta{height:13px;width:34%;background:var(--mk-acc);margin-top:9px}
+.mock__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9%}
+.mock__grid i{display:block;aspect-ratio:1/1;background:var(--mk-acc);opacity:.85}
+.mock__grid i:nth-child(2){opacity:.55}
+.mock__grid i:nth-child(3){opacity:.32}
+
+.case__meta{display:flex;align-items:baseline;gap:.75rem;margin-top:1.15rem}
+.case__sector{
+  font-size:.625rem;font-weight:650;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);white-space:nowrap;
+}
+.case h3{margin-top:.35rem}
+.case__out{margin-top:.5rem;font-size:.9375rem;color:var(--mute);line-height:1.55}
+
+.also{
+  margin-top:clamp(2.5rem,4vw,3.5rem);
+  border-top:1px solid var(--rule);
+}
+.also li{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.25rem;
+  padding:1.05rem 0;border-bottom:1px solid var(--rule);
+}
+.also__name{font-weight:650;font-variation-settings:'wdth' 106;font-size:1.0625rem}
+.also__sector{font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.also__out{margin-left:auto;font-size:.875rem;color:var(--mute)}
+
+.quotes{
+  display:grid;gap:clamp(2rem,4vw,3rem);
+  margin-top:clamp(3.5rem,7vw,6rem);
+  padding-top:clamp(2.5rem,4vw,3.5rem);
+  border-top:1px solid var(--rule);
+}
+@media (min-width:860px){ .quotes{grid-template-columns:repeat(3,1fr)} }
+.quote blockquote{
+  font-family:var(--font-read);font-style:italic;font-weight:340;
+  font-size:clamp(1.2rem,1.9vw,1.5rem);line-height:1.36;
+  letter-spacing:-.005em;
+}
+.quote figcaption{
+  margin-top:1.1rem;font-size:.6875rem;font-weight:650;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--mute);
+}
+.quote figcaption b{color:var(--accent);font-weight:650}
+
+/* ============================================================================
+   FIELD 04 — PLASTER. What you get, and how it happens.
+   ========================================================================== */
+.svc{border-top:1px solid var(--rule);margin-top:clamp(2.5rem,5vw,4rem)}
+.svc li{
+  display:grid;gap:.4rem 2rem;
+  padding:clamp(1.5rem,2.5vw,2.25rem) 0;
+  border-bottom:1px solid var(--rule);
+  transition:padding-left .5s var(--ease-plane);
+}
+@media (min-width:820px){
+  .svc li{grid-template-columns:5rem minmax(0,20rem) minmax(0,1fr);align-items:baseline}
+  .svc li:hover{padding-left:1rem}
+}
+.svc__n{
+  font-size:.75rem;font-weight:650;font-variant-numeric:tabular-nums;
+  letter-spacing:.16em;color:var(--accent);
+}
+.svc__name{
+  font-size:clamp(1.35rem,2.5vw,1.95rem);font-weight:650;
+  font-variation-settings:'wdth' 108;letter-spacing:-.015em;line-height:1.12;
+}
+.svc__desc{color:var(--mute);font-size:.9375rem;max-width:46ch}
+
+.process{
+  display:grid;gap:clamp(1.75rem,3vw,2.5rem);
+  margin-top:clamp(3.5rem,7vw,6rem);
+}
+@media (min-width:760px){ .process{grid-template-columns:repeat(4,1fr)} }
+.step{padding-top:1.1rem;border-top:2px solid var(--accent)}
+.step__n{
+  font-size:.6875rem;font-weight:650;letter-spacing:.2em;
+  color:var(--accent);font-variant-numeric:tabular-nums;
+}
+.step h3{margin:.6rem 0 .5rem}
+.step p{color:var(--mute);font-size:.9375rem}
+
+/* ============================================================================
+   FIELD 05 — VERMILION. The decision. Every primary button on the page has
+   been this colour; arriving here should feel like arriving at the thing all
+   those buttons were pointing at.
+   ========================================================================== */
+.pay{display:grid;gap:clamp(2.5rem,5vw,4rem);margin-top:clamp(2.5rem,5vw,4rem)}
+@media (min-width:1000px){ .pay{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,4vw,4.5rem)} }
+
+.pay__label{
+  display:flex;align-items:baseline;gap:1rem;
+  padding-bottom:.9rem;margin-bottom:1.5rem;
+  border-bottom:2px solid currentColor;
+  font-size:.6875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+}
+.pay__label em{font-style:normal;margin-left:auto;opacity:.82;letter-spacing:.1em}
+
+/* Prices are authored in the markup as text and are never written, formatted or
+   interpolated by JavaScript. The only animation touching this block is a
+   transform on its container. */
+.tiers{display:grid;gap:1px;background:var(--rule)}
+.tier{
+  background:var(--vermilion);
+  display:grid;grid-template-columns:1fr auto;gap:.35rem 1.5rem;
+  padding:1.4rem 0 1.5rem;align-items:baseline;
+}
+.tier--flag{position:relative}
+.tier__name{
+  font-size:1.0625rem;font-weight:650;
+  font-variation-settings:'wdth' 106;letter-spacing:-.005em;
+}
+.tier__flag{
+  display:inline-block;margin-left:.6rem;vertical-align:.12em;
+  padding:.2rem .5rem;background:#FFFFFF;color:var(--vermilion-deep);
+  font-size:.5625rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.tier__price{
+  grid-row:1;grid-column:2;text-align:right;
+  font-size:clamp(1.75rem,3.6vw,2.6rem);font-weight:700;
+  font-variation-settings:'wdth' 110;
+  letter-spacing:-.03em;line-height:1;
+}
+.tier__price small{font-size:.4em;font-weight:600;letter-spacing:.04em;opacity:.85}
+.tier__sub{grid-column:1/-1;font-size:.8125rem;color:var(--mute);letter-spacing:.02em}
+.tier__sub b{color:#FFFFFF;font-weight:650}
+
+.incl{margin-top:clamp(2.5rem,4vw,3.5rem);padding-top:1.5rem;border-top:1px solid var(--rule)}
+.incl h3{margin-bottom:1.1rem}
+.incl ul{display:grid;gap:.55rem 1.5rem}
+@media (min-width:640px){ .incl ul{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1000px){ .incl ul{grid-template-columns:repeat(3,1fr)} }
+.incl li{
+  position:relative;padding-left:1.5rem;font-size:.875rem;color:var(--mute);line-height:1.45;
+}
+.incl li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:8px;height:2px;background:#FFFFFF;
+}
+.addons{
+  margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--rule);
+  font-size:.8125rem;color:var(--mute);line-height:1.7;
+}
+.addons b{color:#FFFFFF;font-weight:650}
+.pay__foot{margin-top:clamp(2.5rem,4vw,3.5rem)}
+
+/* ============================================================================
+   FIELD 06 — ULTRAMARINE returns. The person, the reach, the ask. Bookending
+   the page in the signature colour is what makes it remembered as a blue page.
+   ========================================================================== */
+.person{display:grid;gap:clamp(2.5rem,5vw,4.5rem)}
+@media (min-width:960px){ .person{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start} }
+.sig{
+  margin-top:1.75rem;font-family:var(--font-read);font-style:italic;
+  font-size:1.5rem;color:var(--accent);
+}
+.sig span{
+  display:block;font-family:var(--font-display);font-style:normal;
+  font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);margin-top:.5rem;
+}
+.reach{border-top:1px solid var(--rule);padding-top:1.5rem}
+.reach h3{margin-bottom:1rem}
+.areas{display:flex;flex-wrap:wrap;gap:.5rem}
+.areas li{
+  padding:.45rem .85rem;box-shadow:inset 0 0 0 1px var(--rule);
+  font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+}
+.areas li.wide{background:var(--marigold);color:var(--ink);box-shadow:none}
+.reach p{margin-top:1.25rem;color:var(--mute);font-size:.9375rem;max-width:42ch}
+
+.close{
+  margin-top:clamp(4rem,8vw,7rem);padding-top:clamp(2.5rem,4vw,3.5rem);
+  border-top:1px solid var(--rule);
+}
+.close__lines{margin-bottom:clamp(1.75rem,3vw,2.5rem)}
+.contact{
+  display:grid;gap:1.5rem 3rem;margin-top:clamp(2.5rem,4vw,3.5rem);
+  padding-top:1.5rem;border-top:1px solid var(--rule);
+}
+@media (min-width:700px){ .contact{grid-template-columns:repeat(3,1fr)} }
+.contact dt{font-size:.625rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:.4rem;font-weight:600}
+.contact dd{margin:0;font-size:1.0625rem;font-weight:600;font-variation-settings:'wdth' 104}
+.contact a{
+  text-decoration:none;border-bottom:1px solid var(--rule);
+  display:inline-flex;align-items:center;min-height:44px;
+}
+.contact a:hover{border-bottom-color:currentColor}
+
+/* ---------- footer ---------- */
+.foot{padding:clamp(3.5rem,7vw,6rem) 0 2.5rem}
+.foot__grid{display:grid;gap:2.5rem}
+@media (min-width:760px){ .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr} }
+.foot h4{
+  font-size:.625rem;font-weight:650;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:1.1rem;
+}
+.foot li{font-size:.9375rem}
+.foot li a{
+  text-decoration:none;color:var(--fg);opacity:.88;
+  display:inline-flex;align-items:center;min-height:44px;
+}
+/* non-link footer items keep the same rhythm as the linked ones */
+.foot li:not(:has(a)){min-height:44px;display:flex;align-items:center}
+.foot li a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.foot__brand{
+  font-size:2rem;font-weight:800;font-variation-settings:'wdth' 118;
+  letter-spacing:-.02em;line-height:1;margin-bottom:1rem;
+}
+.foot__addr{font-style:normal;font-size:.9375rem;color:var(--mute);line-height:1.7}
+.foot__bar{
+  margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;gap:.75rem 2rem;align-items:center;
+  font-size:.75rem;color:var(--mute);
+}
+/* the palette, declared in the footer — the system stated plainly */
+.swatches{display:flex;gap:0;margin-left:auto}
+.swatches i{display:block;width:26px;height:12px}
+
+/* ---------- scroll reveal ---------- */
+.js .rv{opacity:0;transform:translateY(26px)}
+.js .rv.is-in{
+  opacity:1;transform:none;
+  transition:opacity .8s var(--ease), transform .9s var(--ease-plane);
+}
+.js .rv.is-in.d1{transition-delay:.07s}
+.js .rv.is-in.d2{transition-delay:.14s}
+.js .rv.is-in.d3{transition-delay:.21s}
+.js .rv.is-in.d4{transition-delay:.28s}
+.js .rv.is-in.d5{transition-delay:.35s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;
+  }
+  .js .rv,.js .line > span{opacity:1 !important;transform:none !important}
+  .sector:hover .sector__frame img{transform:none}
+  .case:hover .mock{transform:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head h-ultramarine" id="head" data-solid="false">
+  <div class="head-inner">
+    <a class="brand" href="#top" aria-label="Digital Consulting Services — home">
+      <span class="brand__mark">DCS</span>
+      <span class="brand__full">Digital Consulting Services</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Portfolio</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="head-cta" href="#contact">Get a free quote</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <nav class="sheet__list" aria-label="Mobile">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#work">Portfolio</a>
+    <a href="#blog">Blog</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="sheet__foot">
+    <a class="btn" href="#contact">
+      Get a free quote
+      <svg class="btn__arrow" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="5" x2="16" y2="5"/><polyline points="12,1 16,5 12,9"/></svg>
+    </a>
+    <a class="sheet__tel" href="tel:+447395063764">Call 07395 063764</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ==================== FIELD 01 — ULTRAMARINE ==================== -->
+  <section class="field field--ultramarine hero" id="top" data-field="ultramarine" aria-labelledby="h-hero">
+    <div class="wrap">
+
+      <p class="hero__eyebrow eyebrow">
+        <span>Digital Consulting Services</span>
+        <span class="rule" aria-hidden="true"></span>
+        <span>Polegate · UK-wide · Est. 2019</span>
+      </p>
+
+      <h1 class="display" id="h-hero">
+        <span class="line"><span>The website</span></span>
+        <span class="line"><span>you’d have made,</span></span>
+        <span class="line"><span>if you had the time.</span></span>
+      </h1>
+
+      <div class="hero__grid">
+        <div class="hero__lede rv">
+          <p class="lede">A design and build studio for small businesses. I ask the questions, write the words, make the design decisions, build the site, and keep it running afterwards.</p>
+          <p class="lede">You don’t arrive with a brief. You don’t learn a system. You look at what I’ve made and tell me what you think.</p>
+          <div class="btns">
+            <a class="btn" href="#contact">
+              Get a free quote
+              <svg class="btn__arrow" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="5" x2="16" y2="5"/><polyline points="12,1 16,5 12,9"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="tel:+447395063764">
+              Call 07395 063764
+            </a>
+          </div>
+        </div>
+
+        <ul class="promise rv d2">
+          <li>
+            <span class="promise__n num">01</span>
+            <h3>No brief required</h3>
+            <p>A call, or a few messages. I draw out what’s needed by asking — you don’t have to arrive knowing what you want.</p>
+          </li>
+          <li>
+            <span class="promise__n num">02</span>
+            <h3>The words are handled</h3>
+            <p>Copy written for you. Most people know their business inside out and still freeze at a blank page. That part is mine.</p>
+          </li>
+          <li>
+            <span class="promise__n num">03</span>
+            <h3>Nothing to learn</h3>
+            <p>No CMS, no logins, no dashboard sitting there reproaching you. Something needs changing, you ask, it’s changed.</p>
+          </li>
+        </ul>
+      </div>
+
+      <p class="creds rv d3">
+        <span><span class="num">Est. 2019</span></span>
+        <span><span class="num">20+</span> sites delivered</span>
+        <span><span class="num">5</span> years with our longest-standing client</span>
+        <span>Everything handled in-house</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==================== FIELD 02 — PLASTER ==================== -->
+  <section class="field field--plaster" id="about" data-field="plaster" aria-labelledby="h-range">
+    <p class="marker m-from-ultra"><span class="marker__n num">02</span><span>Who it’s for</span></p>
+    <div class="wrap">
+
+      <div class="range__head">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:1.25rem">Small businesses of every kind</p>
+          <h2 class="display" id="h-range">A fabric shop and a scaffolding firm have more in common than they think.</h2>
+        </div>
+        <div class="rv d2">
+          <p class="read" style="font-family:var(--font-read);max-width:34ch;color:var(--fg)">An owner who is genuinely good at the thing, and has no intention of becoming good at websites as well.</p>
+          <p class="range__note" style="margin-top:1.75rem">Retail, makers and online stores. Studios and practitioners. Consultancies, lettings and property. Signage, print and marketing. Trades and contractors. Usually one to twenty people, and the person deciding is the person paying.</p>
+        </div>
+      </div>
+
+      <ul class="sectors">
+        <li class="rv">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="Interior of a small independent clothing boutique, garments on rails beside a folded stock table in daylight.">
+            </div>
+            <div class="sector__bar c-ultra"><span class="sector__n num">01</span><span class="sector__name">Retail &amp; boutiques</span></div>
+            <p class="sector__cap">Shops that want the website to look as considered as the room.</p>
+          </article>
+        </li>
+        <li class="rv d1">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="An empty yoga studio with rolled mats stacked against a wall beneath tall windows.">
+            </div>
+            <div class="sector__bar c-pine"><span class="sector__n num">02</span><span class="sector__name">Studios &amp; practitioners</span></div>
+            <p class="sector__cap">Yoga, tuition, therapy, coaching — with booking and payment built in.</p>
+          </article>
+        </li>
+        <li class="rv d2">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-maker.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="A pair of hands folding fabric on a workbench in a textile studio.">
+            </div>
+            <div class="sector__bar c-verm"><span class="sector__n num">03</span><span class="sector__name">Makers &amp; eCommerce</span></div>
+            <p class="sector__cap">Made-to-order and stocked ranges, loaded in and kept running.</p>
+          </article>
+        </li>
+        <li class="rv d3">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="Two people in conversation across a table in a small office, faces turned away from the camera.">
+            </div>
+            <div class="sector__bar c-ink"><span class="sector__n num">04</span><span class="sector__name">Professional services</span></div>
+            <p class="sector__cap">Consultancies, lettings and property, where credibility is the whole pitch.</p>
+          </article>
+        </li>
+        <li class="rv d4">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="The counter of an independent cafe with an espresso machine, lit by morning light.">
+            </div>
+            <div class="sector__bar c-ultra"><span class="sector__n num">05</span><span class="sector__name">Hospitality &amp; food</span></div>
+            <p class="sector__cap">Places people need to find, with the hours and the menu actually current.</p>
+          </article>
+        </li>
+        <li class="rv d5">
+          <article class="sector">
+            <div class="sector__frame">
+              <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+                   alt="An electrician working at a consumer unit, photographed close in low light.">
+            </div>
+            <div class="sector__bar c-pine"><span class="sector__n num">06</span><span class="sector__name">Trades &amp; contractors</span></div>
+            <p class="sector__cap">A large part of the work, and one sector among six — never the whole picture.</p>
+          </article>
+        </li>
+      </ul>
+
+      <p class="honesty">Photography above is illustrative of the kinds of business we work with. It is not of DCS, and it is not of any named client.</p>
+
+    </div>
+  </section>
+
+  <!-- ==================== FIELD 03 — PINE ==================== -->
+  <section class="field field--pine" id="work" data-field="pine" aria-labelledby="h-work">
+    <p class="marker m-from-plaster"><span class="marker__n num">03</span><span>The work</span></p>
+    <div class="wrap">
+
+      <div class="work__head">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:1.25rem">Selected clients</p>
+          <h2 class="display" id="h-work">Twenty-odd businesses, and not one of them looks like another.</h2>
+        </div>
+        <p class="body rv d2" style="max-width:38ch">Every site below was designed and built from nothing — no template, no page-builder, no theme bought off a marketplace. Layouts shown are indicative representations of the live sites.</p>
+      </div>
+
+      <ul class="cases">
+        <li class="case rv">
+          <div class="mock" style="--mk-bg:#F6EFE8;--mk-bar:#7C4A3F;--mk-ink:#3A2620;--mk-acc:#C87F6A;--mk-dotc:#F6EFE8" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h"></div><div class="mock__t"></div><div class="mock__t s"></div>
+              <div class="mock__grid"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">eCommerce · Fabrics</span></div>
+          <h3>Cuddle Plush Fabrics</h3>
+          <p class="case__out">Five years and counting — one of our longest client relationships.</p>
+        </li>
+
+        <li class="case rv d1">
+          <div class="mock" style="--mk-bg:#EFF1F6;--mk-bar:#2A3550;--mk-ink:#1D2436;--mk-acc:#5C7FC0;--mk-dotc:#EFF1F6" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h short"></div><div class="mock__t"></div><div class="mock__t"></div><div class="mock__t s"></div>
+              <div class="mock__cta"></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">Made-to-order eCommerce</span></div>
+          <h3>Luna Landings</h3>
+          <p class="case__out">Product configurator, automatic work orders, worldwide shipping.</p>
+        </li>
+
+        <li class="case rv d2">
+          <div class="mock" style="--mk-bg:#F1F3EC;--mk-bar:#4A5B44;--mk-ink:#28331F;--mk-acc:#8FA37C;--mk-dotc:#F1F3EC" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h"></div><div class="mock__t s"></div>
+              <div class="mock__cta"></div>
+              <div class="mock__grid"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">Yoga studio</span></div>
+          <h3>Sanctuary Ida</h3>
+          <p class="case__out">Students book and pay for classes online.</p>
+        </li>
+
+        <li class="case rv d3">
+          <div class="mock" style="--mk-bg:#FBF3E4;--mk-bar:#3C4C7A;--mk-ink:#22293D;--mk-acc:#E0A93F;--mk-dotc:#FBF3E4" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h"></div><div class="mock__t"></div><div class="mock__t s"></div>
+              <div class="mock__cta"></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">Tuition</span></div>
+          <h3>Nicola Noble Tuition</h3>
+          <p class="case__out">Moved classes online during Covid instead of closing.</p>
+        </li>
+
+        <li class="case rv d4">
+          <div class="mock" style="--mk-bg:#1C1B20;--mk-bar:#D9482E;--mk-ink:#F0ECE6;--mk-acc:#D9482E;--mk-dotc:#1C1B20" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h"></div><div class="mock__t"></div><div class="mock__t s"></div>
+              <div class="mock__grid"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">Signage &amp; print</span></div>
+          <h3>Mad Graphics</h3>
+          <p class="case__out">A full rebuild, top to bottom.</p>
+        </li>
+
+        <li class="case rv d5">
+          <div class="mock" style="--mk-bg:#EEF0F2;--mk-bar:#16233C;--mk-ink:#16233C;--mk-acc:#3E6DA8;--mk-dotc:#EEF0F2" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><span class="mock__nav"><i></i><i></i><i></i></span></div>
+            <div class="mock__body">
+              <div class="mock__h short"></div><div class="mock__t"></div><div class="mock__t"></div>
+              <div class="mock__cta"></div>
+            </div>
+          </div>
+          <div class="case__meta"><span class="case__sector">Scaffolding</span></div>
+          <h3>Colossus Scaffolding</h3>
+          <p class="case__out">First enquiry from Google within three weeks of launch.</p>
+        </li>
+      </ul>
+
+      <ul class="also rv">
+        <li>
+          <span class="also__name">DCH Automotive</span>
+          <span class="also__sector">Automotive</span>
+          <span class="also__out">A credible presence from a standing start</span>
+        </li>
+        <li>
+          <span class="also__name">DJ Fox Electrical</span>
+          <span class="also__sector">Electrical</span>
+          <span class="also__out">20+ page site, live at djfoxelectrical.com</span>
+        </li>
+        <li>
+          <span class="also__name">Bexhill Removals</span>
+          <span class="also__sector">Removals</span>
+          <span class="also__out">Design approved on the first presentation, no revisions</span>
+        </li>
+      </ul>
+
+      <div class="quotes">
+        <figure class="quote rv">
+          <blockquote>“Ricky has built and managed our online store for over 5 years. I couldn’t be happier with his work.”</blockquote>
+          <figcaption><b>Sarah</b> — Cuddle Plush Fabrics</figcaption>
+        </figure>
+        <figure class="quote rv d1">
+          <blockquote>“I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.”</blockquote>
+          <figcaption><b>Nicola</b> — Nicola Noble Tuition</figcaption>
+        </figure>
+        <figure class="quote rv d2">
+          <blockquote>“My yoga students love that they can book and pay for my classes on my website.”</blockquote>
+          <figcaption><b>Molly</b> — Sanctuary Ida</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FIELD 04 — PLASTER ==================== -->
+  <section class="field field--plaster" id="services" data-field="plaster" aria-labelledby="h-svc">
+    <p class="marker m-from-pine"><span class="marker__n num">04</span><span>What you get</span></p>
+    <div class="wrap">
+
+      <div class="range__head">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:1.25rem">Six services</p>
+          <h2 class="display" id="h-svc">Everything the site needs, and the person who looks after it.</h2>
+        </div>
+        <p class="body rv d2" style="max-width:40ch">Nothing here is outsourced and nothing is offshored. It’s one studio, which is why there’s only ever one person to ask.</p>
+      </div>
+
+      <ul class="svc">
+        <li class="rv">
+          <span class="svc__n num">01</span>
+          <span class="svc__name">Website Design</span>
+          <span class="svc__desc">Designed and built for your business. No templates, no page-builders.</span>
+        </li>
+        <li class="rv">
+          <span class="svc__n num">02</span>
+          <span class="svc__name">Local SEO</span>
+          <span class="svc__desc">Service pages, location pages, structured data — so you’re found where you work.</span>
+        </li>
+        <li class="rv">
+          <span class="svc__n num">03</span>
+          <span class="svc__name">Ongoing Management</span>
+          <span class="svc__desc">We look after the site so you can get on with the business.</span>
+        </li>
+        <li class="rv">
+          <span class="svc__n num">04</span>
+          <span class="svc__name">Google Workspace Email</span>
+          <span class="svc__desc">Professional business email on your own domain.</span>
+        </li>
+        <li class="rv">
+          <span class="svc__n num">05</span>
+          <span class="svc__name">eCommerce Websites</span>
+          <span class="svc__desc">Online stores built, loaded with your products, and kept running.</span>
+        </li>
+        <li class="rv">
+          <span class="svc__n num">06</span>
+          <span class="svc__name">Analytics &amp; Reporting</span>
+          <span class="svc__desc">Analytics, Search Console and monthly reporting, so you know what’s working.</span>
+        </li>
+      </ul>
+
+      <h2 class="display rv" style="margin-top:clamp(4rem,8vw,7rem);max-width:16ch">Four steps, and three of them are mine.</h2>
+
+      <ol class="process">
+        <li class="step rv">
+          <span class="step__n num">Step 01</span>
+          <h3>A conversation</h3>
+          <p>A call or a few messages. No brief needed, nothing to fill in.</p>
+        </li>
+        <li class="step rv d1">
+          <span class="step__n num">Step 02</span>
+          <h3>We write it and design it</h3>
+          <p>Copy, structure, imagery, colour — all handled here.</p>
+        </li>
+        <li class="step rv d2">
+          <span class="step__n num">Step 03</span>
+          <h3>You review</h3>
+          <p>Unlimited revisions during the build, until you’re happy with it.</p>
+        </li>
+        <li class="step rv d3">
+          <span class="step__n num">Step 04</span>
+          <h3>It goes live, and stays looked after</h3>
+          <p>Hosting, updates, monitoring and support, for as long as you want it.</p>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- ==================== FIELD 05 — VERMILION ==================== -->
+  <section class="field field--vermilion" id="pricing" data-field="vermilion" aria-labelledby="h-price">
+    <p class="marker m-from-plaster"><span class="marker__n num">05</span><span>Pricing</span></p>
+    <div class="wrap">
+
+      <div class="range__head">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:1.25rem;color:#FFFFFF">Two ways to pay</p>
+          <h2 class="display" id="h-price">Same site either way. You’re choosing how to pay, not what you get.</h2>
+        </div>
+        <p class="body rv d2" style="max-width:38ch;color:var(--mute)">Tiers differ on page count and ongoing service level — never on how well it’s designed or how carefully it’s built.</p>
+      </div>
+
+      <div class="pay">
+        <div class="rv">
+          <p class="pay__label">Option A — Upfront + monthly<em>One-off setup</em></p>
+          <div class="tiers">
+            <div class="tier">
+              <span class="tier__name">Starter</span>
+              <span class="tier__price num">£995</span>
+              <span class="tier__sub">then <b class="num">£15</b> a month · up to <b class="num">20</b> pages</span>
+            </div>
+            <div class="tier tier--flag">
+              <span class="tier__name">Professional<span class="tier__flag">Most popular</span></span>
+              <span class="tier__price num">£1,995</span>
+              <span class="tier__sub">then <b class="num">£25</b> a month · up to <b class="num">50</b> pages</span>
+            </div>
+            <div class="tier">
+              <span class="tier__name">Growth</span>
+              <span class="tier__price num">£3,495</span>
+              <span class="tier__sub">then <b class="num">£50</b> a month · up to <b class="num">100</b> pages</span>
+            </div>
+          </div>
+          <p class="addons" style="margin-top:1.5rem;border-top:0;padding-top:1rem">Setup is invoiced at the start of the build. The monthly only begins once the site is live.</p>
+        </div>
+
+        <div class="rv d2">
+          <p class="pay__label">Option B — Pay monthly<em>Nothing upfront</em></p>
+          <div class="tiers">
+            <div class="tier">
+              <span class="tier__name">Starter</span>
+              <span class="tier__price num">£45<small>/mo</small></span>
+              <span class="tier__sub">up to <b class="num">20</b> pages</span>
+            </div>
+            <div class="tier">
+              <span class="tier__name">Professional</span>
+              <span class="tier__price num">£75<small>/mo</small></span>
+              <span class="tier__sub">up to <b class="num">50</b> pages</span>
+            </div>
+            <div class="tier">
+              <span class="tier__name">Growth</span>
+              <span class="tier__price num">£125<small>/mo</small></span>
+              <span class="tier__sub">up to <b class="num">100</b> pages</span>
+            </div>
+          </div>
+          <p class="addons" style="margin-top:1.5rem;border-top:0;padding-top:1rem">Twelve-month minimum term. Nothing to pay before the site is live.</p>
+        </div>
+      </div>
+
+      <div class="incl rv">
+        <h3>Every site includes, whichever way you pay</h3>
+        <ul>
+          <li>Custom design, made for your business</li>
+          <li>Local SEO — service and location pages</li>
+          <li>Structured data, properly marked up</li>
+          <li>Mobile-first, and genuinely fast</li>
+          <li>Contact form</li>
+          <li>Hosting and SSL</li>
+          <li>Domain management</li>
+          <li>Security updates</li>
+          <li>Uptime monitoring</li>
+          <li>Unlimited revisions during the build</li>
+          <li>Search Console submission</li>
+          <li>One person to ask, by name</li>
+        </ul>
+        <p class="addons">
+          <b>Add-ons</b> — blog post writing <span class="num">£75</span> per post ·
+          custom theme design <span class="num">£350</span> ·
+          Google Ads setup and management <span class="num">£200</span> a month plus spend ·
+          monthly SEO retainer <span class="num">£200</span> a month.
+        </p>
+      </div>
+
+      <div class="pay__foot btns rv">
+        <a class="btn" href="#contact">
+          Get a free quote
+          <svg class="btn__arrow" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="5" x2="16" y2="5"/><polyline points="12,1 16,5 12,9"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="tel:+447395063764">Call 07395 063764</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FIELD 06 — ULTRAMARINE RETURNS ==================== -->
+  <section class="field field--ultramarine" id="contact" data-field="ultramarine" aria-labelledby="h-person">
+    <p class="marker m-from-verm"><span class="marker__n num">06</span><span>The person</span></p>
+    <div class="wrap">
+
+      <div class="person">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:1.25rem">Not a faceless agency</p>
+          <h2 class="display" id="h-person">You’re hiring a person, not a company.</h2>
+          <p class="lede" style="margin-top:1.75rem">Digital Consulting Services is run by Ricky Wilson from a unit on Chaucer Business Park in Polegate. Founded in 2019. Nothing outsourced, nothing offshored, no account manager between you and the person doing the work.</p>
+          <p class="body" style="margin-top:1.1rem">Which is the honest reason the whole thing works the way it does: when one person writes it, designs it, builds it and looks after it, there’s nobody to hand you a form and ask you to specify what you want.</p>
+          <p class="sig">Ricky Wilson<span>Founder · Digital Consulting Services</span></p>
+        </div>
+
+        <div class="reach rv d2">
+          <h3>Where the work is</h3>
+          <ul class="areas">
+            <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+            <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+            <li class="wide">And UK-wide</li>
+          </ul>
+          <p>Being local is reassurance, not a limit — plenty of clients have never been to East Sussex. If you’d rather do the whole thing by phone and email, that’s completely normal here.</p>
+        </div>
+      </div>
+
+      <div class="close">
+        <div class="close__lines rv">
+          <h2 class="display" style="max-width:14ch">Tell me about the business. I’ll do the rest.</h2>
+        </div>
+        <div class="btns rv d1">
+          <a class="btn" href="#contact-form">
+            Get a free quote
+            <svg class="btn__arrow" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="5" x2="16" y2="5"/><polyline points="12,1 16,5 12,9"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="mailto:mail@digitalconsultingservices.co.uk">Email the studio</a>
+        </div>
+
+        <dl class="contact rv d2" id="contact-form">
+          <div>
+            <dt>Telephone</dt>
+            <dd><a href="tel:+447395063764" class="num">07395 063764</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>Mon–Fri <span class="num">9:00–17:30</span><br><span style="font-weight:400;font-size:.9375rem;color:var(--mute)">Sat by appointment · Sun closed</span></dd>
+          </div>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== FIELD 07 — INK ==================== -->
+<footer class="field field--ink foot" data-field="ink">
+  <p class="marker m-from-ultra"><span class="marker__n num">07</span><span>Digital Consulting Services</span></p>
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <p class="foot__brand">DCS</p>
+        <address class="foot__addr">
+          Unit H3, Chaucer Business Park<br>
+          Dittons Road, Polegate<br>
+          East Sussex, BN26 6QH
+        </address>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Website Design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing Management</a></li>
+          <li><a href="#services">Google Workspace Email</a></li>
+          <li><a href="#services">eCommerce Websites</a></li>
+          <li><a href="#services">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service areas</h4>
+        <ul>
+          <li>Polegate &amp; Eastbourne</li>
+          <li>Hailsham &amp; Lewes</li>
+          <li>Seaford &amp; Uckfield</li>
+          <li>Brighton &amp; Hove</li>
+          <li>UK-wide, remotely</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+447395063764" class="num">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li>Mon–Fri <span class="num">9:00–17:30</span></li>
+          <li>Sat by appointment</li>
+          <li>Sunday closed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bar">
+      <span>© 2026 Digital Consulting Services</span>
+      <span>Design and build studio · Est. 2019 · Polegate, East Sussex</span>
+      <span class="swatches" aria-label="The six colours this page is built from" title="Ultramarine · Plaster · Pine · Vermilion · Marigold · Ink">
+        <i style="background:#1B27B8"></i><i style="background:#F2ECE1"></i><i style="background:#0B4F3F"></i><i style="background:#C8331A"></i><i style="background:#EDAE4E"></i><i style="background:#33303A"></i>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supported = 'IntersectionObserver' in window && 'classList' in root;
+
+  /* The reveal "before" states live behind .js, so if this script never runs —
+     or the browser is too old for IntersectionObserver — every word on the page
+     is visible at full opacity. Content is never gated on JavaScript. */
+  if (supported && !reduced) root.classList.add('js');
+
+  /* ---- 1. scroll reveals ------------------------------------------------ */
+  if (supported && !reduced) {
+    var revealer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          revealer.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.rv'), function (el) {
+      revealer.observe(el);
+    });
+
+    /* hero build-in fires immediately rather than on scroll */
+    var hero = document.querySelector('.hero');
+    if (hero) requestAnimationFrame(function () { hero.classList.add('is-in'); });
+  }
+
+  /* ---- 2. SIGNATURE: the header adopts the colour of the field beneath it
+     A 1px observation band is pinned at the header's lower edge; whichever
+     field intersects it owns the header. The result is that scrolling the page
+     plays the palette in order — blue, paper, green, paper, red, blue, black. */
+  var head = document.getElementById('head');
+  var fields = Array.prototype.slice.call(document.querySelectorAll('[data-field]'));
+  var HEAD_CLASSES = ['h-ultramarine', 'h-plaster', 'h-pine', 'h-vermilion', 'h-ink'];
+  var fieldObserver = null;
+  var sheetOpen = false;
+  var lastField = 'ultramarine';
+
+  function paintHead(name) {
+    if (!head) return;
+    var next = 'h-' + name;
+    if (head.classList.contains(next)) return;
+    HEAD_CLASSES.forEach(function (c) { head.classList.remove(c); });
+    head.classList.add(next);
+  }
+
+  function applyField(name) {
+    lastField = name;
+    /* While the menu is open the header is pinned to the sheet's own colour —
+       an adaptive header would otherwise sit as a stray plaster or vermilion
+       band across an ultramarine overlay. */
+    if (sheetOpen) return;
+    paintHead(name);
+  }
+
+  function buildFieldObserver() {
+    if (!('IntersectionObserver' in window) || !fields.length) return;
+    if (fieldObserver) fieldObserver.disconnect();
+
+    var h = head ? head.offsetHeight : 68;
+    var bottom = Math.max(0, window.innerHeight - h - 1);
+
+    fieldObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) applyField(e.target.getAttribute('data-field'));
+      });
+    }, { rootMargin: '-' + h + 'px 0px -' + bottom + 'px 0px', threshold: 0 });
+
+    fields.forEach(function (f) { fieldObserver.observe(f); });
+  }
+
+  /* Fallback for browsers without IntersectionObserver: the header keeps its
+     authored ultramarine, which is correct at the top of the page and legible
+     (10.35:1) everywhere else. Nothing breaks. */
+  buildFieldObserver();
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildFieldObserver, 180);
+  }, { passive: true });
+
+  /* ---- 3. header solidity at the very top ------------------------------ */
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      if (head) head.setAttribute('data-solid', window.scrollY > 8 ? 'true' : 'false');
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- 4. mobile sheet -------------------------------------------------- */
+  var burger = document.getElementById('burger');
+  var sheet = document.getElementById('sheet');
+
+  function setSheet(open) {
+    if (!burger || !sheet) return;
+    sheetOpen = open;
+    /* sheet is ultramarine, so the header becomes ultramarine with it and
+       restores to whatever field it was over on close */
+    paintHead(open ? 'ultramarine' : lastField);
+    sheet.setAttribute('data-open', open ? 'true' : 'false');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.setAttribute('data-locked', open ? 'true' : 'false');
+    if (open) {
+      var first = sheet.querySelector('a');
+      if (first) first.focus();
+    } else {
+      burger.focus();
+    }
+  }
+
+  if (burger && sheet) {
+    burger.addEventListener('click', function () {
+      setSheet(sheet.getAttribute('data-open') !== 'true');
+    });
+    Array.prototype.forEach.call(sheet.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { setSheet(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.getAttribute('data-open') === 'true') setSheet(false);
+    });
+    /* keep focus inside the sheet while it is open */
+    sheet.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || sheet.getAttribute('data-open') !== 'true') return;
+      var f = sheet.querySelectorAll('a, button');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 900 && sheet.getAttribute('data-open') === 'true') setSheet(false);
+    }, { passive: true });
+  }
+
+  /* ---- 5. no number on this page is generated, formatted, incremented or
+     animated by script. Prices, page counts and credentials are authored as
+     text in the markup and this file never writes to their textContent.
+     The check below is a guard, not a renderer: if a future edit ever wires a
+     counter to these nodes, it fails loudly in the console instead of quietly
+     publishing a wrong price. -------------------------------------------- */
+  var EXPECTED = ['£995', '£1,995', '£3,495', '£45/mo', '£75/mo', '£125/mo'];
+  var priced = Array.prototype.map.call(
+    document.querySelectorAll('.tier__price'),
+    function (n) { return n.textContent.replace(/\s+/g, ''); }
+  );
+  EXPECTED.forEach(function (v, i) {
+    if (priced[i] !== v) {
+      console.error('[DCS] price integrity check failed at index ' + i + ': expected ' + v + ', found ' + priced[i]);
+    }
+  });
+})();
+</script>
+</body>
+</html>

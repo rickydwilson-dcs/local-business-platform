@@ -45,6 +45,46 @@ pnpm images:intake joes-plumbing-canterbury ~/client-images/joe/ --quality 90
 
 ---
 
+#### `upload-prototype-assets.ts`
+
+Upload a design prototype's assets to R2 and rewrite its HTML to reference them.
+
+```bash
+npx tsx tools/upload-prototype-assets.ts <prototype-dir> [--dry-run] [--no-rewrite] [--force]
+```
+
+**What it does:**
+
+- Uploads everything under `assets/` to `prototypes/<session-slug>/assets/…`, mirroring the local tree
+- Routes unreferenced masters in `assets/img/` to an `img/_archive/` prefix
+- **Verifies every object returns 200 with the expected content type before rewriting anything**, so a failed upload can never orphan a reference
+- Rewrites `(["'])assets/` to absolute R2 URLs across the top-level HTML (idempotent — safe to re-run)
+- Writes `assets-manifest.json` recording local path → key → URL → bytes
+
+Live assets get `Cache-Control: public, max-age=300` rather than the client's default `immutable, 1 year`: prototype assets are regenerated mid-session, and overwriting an R2 key does not bust the CDN cache. Only `_archive/` keeps the long TTL.
+
+---
+
+#### `publish-prototype.ts`
+
+Deploy a prototype directory to Vercel as a static site.
+
+```bash
+npx tsx tools/publish-prototype.ts <prototype-dir> [--project <name>] [--no-deploy]
+```
+
+**What it does:**
+
+- Refuses to deploy if `assets-manifest.json` is missing or any relative `assets/` reference survives — both would 404, since assets are excluded from the upload
+- Uses the session's own `index.html` if one exists; generates a plain listing only if none does
+- Pins `vercel.json` to a static, no-build deployment and runs `vercel deploy --prod`
+
+Runs the Vercel CLI with its working directory set to the prototype folder rather than passing `--cwd`: the CLI resolves `vercel.json` against the process cwd, so invoking it from the repo root pulls in the monorepo's root config.
+
+See [Prototype Hosting](../docs/guides/prototype-hosting.md) for the full workflow.
+
+---
+
 #### `test-r2-connection.ts`
 
 Test Cloudflare R2 connection and credentials.
@@ -253,11 +293,11 @@ Cloudflare R2 client wrapper (S3-compatible).
 **Features:**
 
 - Upload files or buffers
-- Check file existence
+- Check file existence (`fileExists`) or read size and etag (`headFile`, for skipping unchanged uploads)
 - Delete files
 - List files with prefix
 - Generate public URLs
-- Automatic content type detection
+- Automatic content type detection — images only; callers uploading video or SVG should pass `contentType` explicitly
 
 **Usage:**
 
@@ -457,7 +497,7 @@ Test R2 connection:
 pnpm test:r2
 ```
 
-See [R2_SETUP.md](../docs/R2_SETUP.md) for detailed R2 troubleshooting.
+See [Images standard](../docs/standards/images.md) for R2 configuration, bucket structure and troubleshooting. (This previously pointed at `docs/R2_SETUP.md`, which does not exist.)
 
 ---
 

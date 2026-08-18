@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — websites for tradespeople, built for you</title>
+<meta name="description" content="Websites that get local tradespeople more jobs. One conversation, and Ricky writes it, designs it, builds it, hosts it and keeps it running. Polegate, East Sussex. UK-wide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wght@300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ============================================================
+   GALLERY — Digital Consulting Services
+   A bright studio. One dark monitor. A website building itself.
+   ============================================================ */
+
+@property --mock-accent { syntax: '<color>'; inherits: true; initial-value: #1F5CFF; }
+@property --sweep { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+:root{
+  /* Studio grey ground — the room the equipment sits in */
+  --ground:      #E3E4DE;
+  --ground-2:    #D5D7CF;
+  --ground-3:    #EDEEE9;
+  /* Monitor black — the object */
+  --monitor:     #0A0B0A;
+  --monitor-2:   #17191A;
+  --monitor-3:   #242726;
+  /* Ink */
+  --ink:         #0C0D0C;
+  --ink-2:       #4A4D48;
+  --ink-3:       #585C53;
+  --hair:        #B9BCB3;
+  --hair-soft:   #C9CBC2;
+  /* One chroma: tally red. Live, urgent, never body text. */
+  --tally:       #E01D06;
+  --tally-hot:   #FF3B1F;
+  --paper:       #FBFBF8;
+
+  --mock-accent: #1F5CFF;
+
+  --f-display: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --f-text:    'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --f-read:    'Martian Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+
+  --pad: clamp(20px, 4vw, 56px);
+  --max: 1440px;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --ease-in: cubic-bezier(.7,0,.84,0);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{
+  -webkit-text-size-adjust:100%; scrollbar-color: var(--ink-3) var(--ground-2);
+  scroll-padding-top:86px; /* the sticky header must never cover an anchored heading */
+}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--f-text); font-size:17px; line-height:1.55;
+  font-variation-settings:'wdth' 100,'wght' 420;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{ background:var(--tally); color:#fff; }
+input,textarea{ caret-color:var(--tally); }
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration-thickness:1px; text-underline-offset:.22em; }
+:focus-visible{ outline:2.5px solid var(--tally); outline-offset:3px; border-radius:2px; }
+.dark :focus-visible{ outline-color:var(--tally-hot); }
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{ margin:0; font-family:var(--f-display); text-wrap:balance; }
+h1{
+  font-size:clamp(2.7rem, 6.4vw, 5.4rem); line-height:.92;
+  letter-spacing:-.038em; font-variation-settings:'wdth' 112,'wght' 780;
+}
+h2{
+  font-size:clamp(1.9rem, 3.6vw, 3.4rem); line-height:.96;
+  letter-spacing:-.032em; font-variation-settings:'wdth' 110,'wght' 740;
+}
+h3{
+  font-size:clamp(1.15rem,1.7vw,1.5rem); line-height:1.1;
+  letter-spacing:-.022em; font-variation-settings:'wdth' 104,'wght' 660;
+}
+p{ margin:0; }
+.lede{ font-size:clamp(1.05rem,1.35vw,1.28rem); line-height:1.5; color:var(--ink-2); max-width:34ch; }
+.body{ max-width:68ch; color:var(--ink-2); }
+
+/* Instrument readout type — used only for measurement, state and labels */
+.read{
+  font-family:var(--f-read); font-size:.66rem; letter-spacing:.09em;
+  text-transform:uppercase; font-weight:500; font-variant-numeric:tabular-nums;
+  color:var(--ink-3);
+}
+
+/* Labels that are NOT measurements stay in Archivo. Mono is reserved for the
+   instrument: stage, state, timecode, build log, units. A business name is not a readout. */
+.label{
+  font-size:.8rem; letter-spacing:.06em; text-transform:uppercase;
+  font-variation-settings:'wdth' 100,'wght' 640; color:var(--ink-3);
+}
+.dark .label{ color:#A9ADA4; }
+
+.wrap{ max-width:var(--max); margin:0 auto; padding-inline:var(--pad); }
+.rule{ height:1px; background:var(--hair); border:0; margin:0; }
+
+/* ================= HEADER ================= */
+.site-head{
+  position:sticky; top:0; z-index:60; background:var(--ground);
+  border-bottom:1px solid var(--hair);
+}
+.head-in{
+  max-width:var(--max); margin:0 auto; padding:14px var(--pad);
+  display:flex; align-items:center; gap:clamp(16px,3vw,40px);
+}
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; flex:0 0 auto; }
+.brand img{ height:34px; width:auto; }
+.brand-txt{ display:none; }
+.nav{ display:flex; gap:clamp(14px,2vw,30px); margin-left:auto; align-items:center; }
+.nav a{
+  font-size:.9rem; font-variation-settings:'wght' 540; letter-spacing:-.01em;
+  text-decoration:none; padding:10px 0; position:relative; color:var(--ink);
+}
+.nav a::after{
+  content:''; position:absolute; left:0; right:100%; bottom:6px; height:2px;
+  background:var(--tally); transition:right .38s var(--ease);
+}
+.nav a:hover::after, .nav a:focus-visible::after{ right:0; }
+.head-cta{ display:flex; align-items:center; gap:10px; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-display); font-variation-settings:'wdth' 104,'wght' 650;
+  letter-spacing:-.015em; text-decoration:none; cursor:pointer;
+  border:1px solid var(--ink); background:var(--ink); color:var(--ground-3);
+  padding:13px 22px; min-height:46px; border-radius:2px;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  box-shadow:0 1px 0 rgba(12,13,12,.2);
+}
+.btn:hover{ background:var(--tally); border-color:var(--tally); transform:translateY(-2px); box-shadow:0 8px 18px -8px rgba(12,13,12,.55); }
+.btn:active{ transform:translateY(0); }
+.btn-ghost{ background:transparent; color:var(--ink); border-color:var(--ink); box-shadow:none; }
+.btn-ghost:hover{ background:var(--ink); color:var(--ground-3); border-color:var(--ink); }
+.btn-sm{ padding:10px 16px; font-size:.88rem; min-height:44px; }
+.burger{
+  display:none; width:46px; height:46px; align-items:center; justify-content:center;
+  background:transparent; border:1px solid var(--hair); border-radius:2px; cursor:pointer;
+}
+.burger svg{ width:20px; height:20px; }
+
+/* scroll progress hairline */
+.progress{ position:absolute; left:0; bottom:-1px; height:2px; background:var(--tally); width:0; z-index:2; }
+@supports (animation-timeline: scroll()){
+  .progress{ width:100%; transform-origin:0 50%; transform:scaleX(0);
+    animation:prog linear both; animation-timeline:scroll(root block); }
+  @keyframes prog{ to{ transform:scaleX(1); } }
+}
+
+/* mobile nav — sibling of header, never inside a blurred ancestor */
+.mnav{
+  position:fixed; inset:0; z-index:80; background:var(--ground);
+  display:flex; flex-direction:column; padding:var(--pad);
+  transform:translateY(-100%); transition:transform .5s var(--ease); visibility:hidden;
+}
+.mnav[data-open="true"]{ transform:none; visibility:visible; }
+.mnav-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+.mnav-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.mnav-list a{
+  display:block; padding:16px 0; text-decoration:none; border-bottom:1px solid var(--hair);
+  font-family:var(--f-display); font-size:1.7rem; letter-spacing:-.03em;
+  font-variation-settings:'wdth' 108,'wght' 700;
+}
+.mnav-foot{ margin-top:auto; display:flex; flex-direction:column; gap:12px; }
+
+/* ================= HERO ================= */
+.hero{ padding:clamp(34px,5vw,66px) 0 clamp(30px,4vw,52px); position:relative; }
+.hero-grid{
+  display:grid; grid-template-columns:minmax(0,42fr) minmax(0,58fr);
+  gap:clamp(24px,3.4vw,54px); align-items:start;
+}
+.hero-grid > *{ min-width:0; }
+.mon{ min-width:0; }
+.mon-rail{ flex-wrap:wrap; row-gap:8px; }
+.hero-copy{ padding-top:6px; }
+.hero h1 span{ display:block; }
+.hero h1 .em{ color:var(--tally); }
+.hero .lede{ margin-top:22px; }
+.hero-actions{
+  margin-top:30px; display:flex; flex-wrap:wrap; align-items:stretch; gap:14px;
+}
+.tel-block{
+  display:flex; flex-direction:column; justify-content:center; gap:2px;
+  border:1px solid var(--ink); border-radius:2px; padding:8px 18px 10px; text-decoration:none;
+  background:var(--ground-3); transition:background .3s var(--ease), transform .3s var(--ease);
+}
+.tel-block:hover{ background:#fff; transform:translateY(-2px); }
+.tel-block .label{ color:var(--ink-3); font-size:.72rem; }
+.tel-num{
+  font-family:var(--f-display); font-size:clamp(1.9rem,3vw,2.6rem); line-height:1;
+  letter-spacing:-.038em; font-variation-settings:'wdth' 112,'wght' 780; white-space:nowrap;
+}
+.hero-meta{ margin-top:26px; display:flex; gap:22px; flex-wrap:wrap; align-items:center; }
+.hero-meta .label{ color:var(--ink-2); }
+.dot-live{
+  width:8px; height:8px; border-radius:50%; background:var(--tally); display:inline-block;
+  margin-right:7px; vertical-align:1px;
+}
+
+/* ---------- the monitor ---------- */
+.mon{
+  background:var(--monitor); border-radius:8px; padding:12px;
+  box-shadow:0 26px 50px -26px rgba(12,13,12,.62), 0 3px 10px -4px rgba(12,13,12,.35);
+  position:relative;
+}
+.mon::after{
+  content:''; position:absolute; inset:0; border-radius:8px; pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10);
+}
+.mon-rail{
+  display:flex; align-items:center; gap:12px; padding:2px 4px 11px; color:#8B8F88;
+  font-family:var(--f-read); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  font-variant-numeric:tabular-nums;
+}
+.tally{
+  width:9px; height:9px; border-radius:50%; background:var(--tally-hot); flex:0 0 auto;
+  box-shadow:0 0 0 0 rgba(255,59,31,.55);
+}
+.js .mon[data-stage]:not([data-stage="5"]) .tally{ animation:pulse 1.5s var(--ease) infinite; }
+@keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(255,59,31,.5);} 70%{ box-shadow:0 0 0 8px rgba(255,59,31,0);} 100%{ box-shadow:0 0 0 0 rgba(255,59,31,0);} }
+.rail-state{ color:#fff; font-weight:600; }
+.rail-trade{ color:#8B8F88; }
+.rail-spacer{ margin-left:auto; }
+/* nothing moves without JS, so there is nothing to pause */
+.pausebtn{ display:none; }
+.js .pausebtn{
+  display:inline-flex; align-items:center; justify-content:center;
+  background:transparent; border:1px solid #3A3E3B; color:#B9BCB3; border-radius:2px;
+  font-family:var(--f-read); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:0 14px; height:44px; min-width:88px; cursor:pointer;
+  transition:border-color .25s var(--ease), color .25s var(--ease), background .25s var(--ease);
+}
+.pausebtn:hover{ border-color:var(--tally-hot); color:#fff; background:rgba(255,59,31,.12); }
+
+.mon-screen{
+  position:relative; background:var(--paper); border-radius:3px; overflow:hidden;
+  aspect-ratio:16/9.7;
+}
+
+/* browser chrome inside the monitor */
+.chrome{
+  height:34px; background:#E9E9E4; border-bottom:1px solid #D4D5CE;
+  display:flex; align-items:center; gap:8px; padding:0 10px;
+}
+.chrome i{ width:8px; height:8px; border-radius:50%; background:#C6C7C0; display:block; }
+.urlbar{
+  flex:1; height:20px; background:#FBFBF8; border:1px solid #D9DAD3; border-radius:10px;
+  display:flex; align-items:center; gap:6px; padding:0 9px; overflow:hidden;
+  font-family:var(--f-read); font-size:.52rem; letter-spacing:.02em; color:#8A8D84;
+}
+.urlbar svg{ width:8px; height:8px; flex:0 0 auto; }
+.urlbar span{
+  display:inline-block; overflow:hidden; white-space:nowrap;
+  clip-path:inset(0 100% 0 0); transition:clip-path 1s var(--ease);
+}
+.mon[data-stage="5"] .urlbar span{ clip-path:inset(0 0 0 0); }
+
+/* the miniature site */
+.mock{ position:absolute; inset:34px 0 0; display:flex; flex-direction:column; background:var(--paper); }
+.m-nav{
+  display:flex; align-items:center; gap:14px; padding:11px 18px; border-bottom:1px solid #E4E5DE;
+  flex:0 0 auto;
+}
+.m-logo{
+  font-family:var(--f-display); font-size:.72rem; letter-spacing:-.02em;
+  font-variation-settings:'wdth' 118,'wght' 800; color:#14161A;
+}
+.m-logo b{ color:var(--mock-accent); transition:color .8s var(--ease); }
+.m-links{ display:flex; gap:11px; margin-left:6px; }
+.m-links i{
+  display:block; width:26px; height:5px; border-radius:1px; background:#D8D9D2;
+  transition:background .6s var(--ease);
+}
+.mon[data-stage="4"] .m-links i:first-child,
+.mon[data-stage="5"] .m-links i:first-child{ background:var(--mock-accent); }
+.m-cta{
+  margin-left:auto; font-family:var(--f-read); font-size:.5rem; letter-spacing:.06em;
+  background:#14161A; color:#fff; padding:5px 9px; border-radius:2px; white-space:nowrap;
+  transition:background .8s var(--ease);
+}
+.mon[data-stage="4"] .m-cta, .mon[data-stage="5"] .m-cta{ background:var(--mock-accent); }
+
+.m-hero{ display:grid; grid-template-columns:47fr 53fr; flex:1 1 auto; min-height:0; }
+.m-copy{ padding:clamp(12px,1.6vw,24px); display:flex; flex-direction:column; justify-content:center; gap:9px; position:relative; }
+.m-head{
+  font-family:var(--f-display); font-size:clamp(.95rem,1.55vw,1.5rem); line-height:1.02;
+  letter-spacing:-.035em; font-variation-settings:'wdth' 106,'wght' 760; color:#14161A;
+}
+.m-sub{ font-size:clamp(.56rem,.72vw,.72rem); line-height:1.45; color:#5C605A; max-width:30ch; }
+.m-btns{ display:flex; gap:7px; align-items:center; margin-top:3px; }
+.m-btn{
+  font-family:var(--f-display); font-size:.56rem; font-variation-settings:'wght' 660;
+  background:#14161A; color:#fff; padding:7px 11px; border-radius:2px; white-space:nowrap;
+  transition:background .8s var(--ease);
+}
+.mon[data-stage="4"] .m-btn, .mon[data-stage="5"] .m-btn{ background:var(--mock-accent); }
+.m-tel{
+  font-family:var(--f-display); font-size:.6rem; font-variation-settings:'wght' 700;
+  letter-spacing:-.02em; color:#14161A; white-space:nowrap;
+}
+.m-shot{ position:relative; overflow:hidden; background:#DCDDD6; }
+.m-shot img{ width:100%; height:100%; object-fit:cover; }
+.m-tiles{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#E4E5DE; flex:0 0 auto; }
+.m-tile{ background:var(--paper); padding:9px 12px 11px; display:flex; flex-direction:column; gap:5px; }
+.m-tile svg{ width:13px; height:13px; stroke:var(--mock-accent); fill:none; stroke-width:1.6; transition:stroke .8s var(--ease); }
+.mon[data-stage="0"] .m-tile svg, .mon[data-stage="1"] .m-tile svg,
+.mon[data-stage="2"] .m-tile svg, .mon[data-stage="3"] .m-tile svg{ stroke:#B4B6AE; }
+.m-tile b{ font-size:.56rem; font-variation-settings:'wght' 650; letter-spacing:-.01em; color:#14161A; }
+.m-tile span{ font-size:.5rem; color:#6A6E67; line-height:1.35; }
+.m-foot{
+  flex:0 0 auto; background:#14161A; color:#9FA39B; padding:8px 18px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--f-read); font-size:.48rem; letter-spacing:.06em;
+}
+
+/* --- build stages --- */
+.gridlines{
+  position:absolute; inset:34px 0 0; pointer-events:none; opacity:0;
+  transition:opacity .5s var(--ease);
+  background-image:
+    linear-gradient(to right, rgba(12,13,12,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(12,13,12,.07) 1px, transparent 1px);
+  background-size:8.333% 34px;
+}
+.js .mon[data-stage="0"] .gridlines, .js .mon[data-stage="1"] .gridlines{ opacity:1; }
+
+.wipe{
+  position:absolute; inset:0; background:var(--paper); pointer-events:none;
+  clip-path:inset(0 0 0 100%); transition:clip-path .55s var(--ease-in);
+}
+.mon[data-wipe="true"] .wipe{ clip-path:inset(0 0 0 0%); }
+
+/* text + media build-in, driven by stage */
+.js .mon .m-head, .js .mon .m-sub, .js .mon .m-btns, .js .mon .m-logo,
+.js .mon .m-tile b, .js .mon .m-tile span, .js .mon .m-foot{
+  opacity:0; transition:opacity .55s var(--ease);
+}
+.js .mon[data-stage="2"] .m-head, .js .mon[data-stage="3"] .m-head,
+.js .mon[data-stage="4"] .m-head, .js .mon[data-stage="5"] .m-head,
+.js .mon[data-stage="2"] .m-logo, .js .mon[data-stage="3"] .m-logo,
+.js .mon[data-stage="4"] .m-logo, .js .mon[data-stage="5"] .m-logo{ opacity:1; }
+.js .mon[data-stage="2"] .m-sub, .js .mon[data-stage="3"] .m-sub,
+.js .mon[data-stage="4"] .m-sub, .js .mon[data-stage="5"] .m-sub{ opacity:1; transition-delay:.12s; }
+.js .mon[data-stage="2"] .m-btns, .js .mon[data-stage="3"] .m-btns,
+.js .mon[data-stage="4"] .m-btns, .js .mon[data-stage="5"] .m-btns{ opacity:1; transition-delay:.24s; }
+.js .mon[data-stage="2"] .m-tile b, .js .mon[data-stage="3"] .m-tile b,
+.js .mon[data-stage="4"] .m-tile b, .js .mon[data-stage="5"] .m-tile b,
+.js .mon[data-stage="2"] .m-tile span, .js .mon[data-stage="3"] .m-tile span,
+.js .mon[data-stage="4"] .m-tile span, .js .mon[data-stage="5"] .m-tile span,
+.js .mon[data-stage="2"] .m-foot, .js .mon[data-stage="3"] .m-foot,
+.js .mon[data-stage="4"] .m-foot, .js .mon[data-stage="5"] .m-foot{ opacity:1; transition-delay:.3s; }
+
+/* skeleton bars stand in before the copy is written */
+.js .mon .m-copy::before{
+  content:''; position:absolute; left:clamp(12px,1.6vw,24px); right:auto; width:32%;
+  height:40%; background:
+    linear-gradient(#DEDFD8 0 0) 0 0/100% 30% no-repeat,
+    linear-gradient(#E6E7E1 0 0) 0 44%/78% 14% no-repeat,
+    linear-gradient(#E6E7E1 0 0) 0 66%/64% 14% no-repeat;
+  clip-path:inset(0 0 100% 0); opacity:0;
+  transition:clip-path .5s var(--ease), opacity .4s var(--ease);
+}
+.js .mon[data-stage="1"] .m-copy::before{ clip-path:inset(0 0 0 0); opacity:1; }
+
+.js .mon .m-shot img{ opacity:0; transform:scale(1.07); filter:blur(16px); transition:opacity .7s var(--ease), transform 1s var(--ease), filter .9s var(--ease); }
+.js .mon[data-stage="3"] .m-shot img, .js .mon[data-stage="4"] .m-shot img, .js .mon[data-stage="5"] .m-shot img{ opacity:1; transform:none; filter:none; }
+
+.js .mon .m-nav, .js .mon .m-tiles, .js .mon .m-shot{ opacity:0; transform:translateY(8px); transition:opacity .5s var(--ease), transform .6s var(--ease); }
+.js .mon[data-stage]:not([data-stage="0"]) .m-nav{ opacity:1; transform:none; }
+.js .mon[data-stage]:not([data-stage="0"]) .m-shot{ opacity:1; transform:none; transition-delay:.08s; }
+.js .mon[data-stage]:not([data-stage="0"]) .m-tiles{ opacity:1; transform:none; transition-delay:.16s; }
+
+/* build log + signal */
+.mon-under{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,190px); gap:14px; padding:12px 4px 2px; align-items:end; min-width:0; }
+.mon-log{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 8px; }
+/* pending items must stay legible — this list IS the sales argument */
+.mon-log li{
+  font-family:var(--f-read); font-size:.55rem; letter-spacing:.05em; text-transform:uppercase;
+  color:#8E938A; border:1px solid #2C302D; border-radius:2px; padding:4px 8px;
+  transition:color .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
+}
+.mon-log li[data-done="true"]{ color:#F0F1EC; border-color:#5A5F59; background:#1D201E; }
+.mon-log li[data-done="true"]:last-child{ color:#fff; border-color:var(--tally); background:rgba(224,29,6,.16); }
+.mon-signal{ display:flex; flex-direction:column; gap:5px; align-items:flex-end; min-width:0; }
+/* the canvas's width attribute is its intrinsic size — without this it sets the
+   page's min-content width and drags a horizontal scrollbar onto small screens */
+.mon-signal canvas{ width:100%; max-width:100%; min-width:0; height:26px; display:block; }
+.sig-read{ font-family:var(--f-read); font-size:.55rem; letter-spacing:.08em; color:#7E827A; font-variant-numeric:tabular-nums; }
+.mon-cap{ margin-top:14px; color:var(--ink-2); font-size:.92rem; max-width:60ch; }
+
+/* instrument strip under the hero */
+.strip{
+  border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  display:grid; grid-template-columns:repeat(3,1fr);
+}
+.strip div{ padding:20px 0 22px; border-right:1px solid var(--hair-soft); }
+.strip div:last-child{ border-right:0; }
+.strip b{
+  display:block; font-family:var(--f-display); font-size:clamp(1.6rem,3vw,2.5rem); line-height:1;
+  letter-spacing:-.04em; font-variation-settings:'wdth' 114,'wght' 780; font-variant-numeric:tabular-nums;
+}
+.strip .read{ display:block; margin-top:8px; }
+
+/* ================= sections ================= */
+section{ position:relative; }
+.sec{ padding:clamp(56px,7vw,110px) 0; }
+.sec-head{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,52ch); gap:clamp(18px,3vw,48px); align-items:end; margin-bottom:clamp(30px,4vw,58px); }
+.sec-head p{ color:var(--ink-2); }
+.dark{ background:var(--monitor); color:#E7E8E3; }
+.dark h2{ color:#fff; }
+.dark p{ color:#A9ADA4; }
+.dark .read{ color:#82867E; }
+.dark .rule{ background:#2A2E2B; }
+
+/* --- effort ledger --- */
+.ledger{ display:grid; grid-template-columns:minmax(0,34fr) minmax(0,66fr); gap:clamp(20px,3vw,52px); }
+/* the split is painted, not laid out: --sweep animates, nothing reflows */
+.ledger-bar{
+  height:14px; border:1px solid var(--ink); margin-bottom:34px; grid-column:1/-1;
+  border-radius:2px; overflow:hidden; --sweep:16%;
+  background:linear-gradient(90deg, var(--tally) 0 var(--sweep), var(--ink) var(--sweep) 100%);
+  transition:--sweep 1.4s var(--ease) .15s;
+}
+.ledger-bar i{ display:none; }
+.js .ledger-bar{ --sweep:52%; }
+.js .ledger-bar.in{ --sweep:16%; }
+.col-h{ display:flex; align-items:baseline; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:2px solid var(--ink); }
+.col-h h3{ font-size:clamp(1.3rem,2.2vw,1.9rem); letter-spacing:-.03em; font-variation-settings:'wdth' 110,'wght' 760; }
+.col-h .read{ margin-left:auto; }
+.tasklist{ list-style:none; margin:0; padding:0; }
+.tasklist li{
+  display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--hair-soft);
+  font-size:.98rem;
+}
+.tasklist li svg{ width:15px; height:15px; flex:0 0 auto; margin-top:3px; stroke-width:2; fill:none; }
+.yours-list li svg{ stroke:var(--tally); }
+.mine-list{ columns:2; column-gap:clamp(20px,3vw,44px); }
+.mine-list li{ break-inside:avoid; }
+.mine-list li svg{ stroke:var(--ink-3); }
+
+/* --- services rows --- */
+.srv{ border-top:1px solid var(--hair); }
+.srv-row{
+  display:grid; grid-template-columns:64px minmax(0,1fr) minmax(0,44%);
+  gap:clamp(14px,2.5vw,36px); align-items:center; padding:clamp(18px,2.4vw,30px) 0;
+  border-bottom:1px solid var(--hair); position:relative; text-decoration:none; color:inherit;
+  transition:color .35s var(--ease); isolation:isolate;
+}
+/* the row's content slides in on hover via transform — animating padding would relayout */
+.srv-icon, .srv-row h3{ transition:transform .45s var(--ease); }
+.srv-row:hover .srv-icon, .srv-row:focus-visible .srv-icon,
+.srv-row:hover h3, .srv-row:focus-visible h3{ transform:translateX(14px); }
+.srv-row::before{
+  content:''; position:absolute; inset:0; background:var(--ink); z-index:-1;
+  clip-path:inset(0 100% 0 0); transition:clip-path .5s var(--ease);
+}
+.srv-row:hover, .srv-row:focus-visible{ color:var(--ground-3); }
+.srv-row:hover::before, .srv-row:focus-visible::before{ clip-path:inset(0 0 0 0); }
+.srv-row:hover .read, .srv-row:focus-visible .read{ color:#8E9289; }
+.srv-row:hover .srv-arrow, .srv-row:focus-visible .srv-arrow{ transform:translateX(6px); opacity:1; }
+.srv-icon{ width:34px; height:34px; stroke:currentColor; fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.srv-row h3{ font-size:clamp(1.35rem,2.6vw,2.15rem); letter-spacing:-.032em; font-variation-settings:'wdth' 108,'wght' 720; }
+.srv-line{ display:flex; align-items:center; gap:16px; }
+.srv-line p{ font-size:.96rem; }
+.srv-arrow{ width:22px; height:22px; flex:0 0 auto; stroke:currentColor; fill:none; stroke-width:1.6; opacity:.45; transition:transform .4s var(--ease), opacity .4s var(--ease); }
+
+/* --- portfolio --- */
+.work{ display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(14px,1.8vw,26px); }
+.work-item{ grid-column:span 2; display:flex; flex-direction:column; gap:14px; }
+.work-item.wide{ grid-column:span 3; }
+.frame{
+  background:var(--monitor); border-radius:5px; padding:7px;
+  box-shadow:0 14px 30px -18px rgba(12,13,12,.5);
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+.work-item:hover .frame{ transform:translateY(-6px); box-shadow:0 26px 44px -22px rgba(12,13,12,.6); }
+.frame-bar{ display:flex; gap:5px; align-items:center; padding:0 2px 6px; }
+.frame-bar i{ width:5px; height:5px; border-radius:50%; background:#333834; }
+.frame-bar u{ flex:1; height:9px; border-radius:5px; background:#1E2220; margin-left:6px; text-decoration:none; }
+.screen{
+  aspect-ratio:16/10; border-radius:2px; overflow:hidden; position:relative; background:#fff;
+  display:flex; flex-direction:column; container-type:inline-size;
+}
+.s-nav{ display:flex; align-items:center; gap:6px; padding:7px 9px; }
+.s-nav b{ font-family:var(--f-display); font-size:.5rem; font-variation-settings:'wdth' 118,'wght' 800; letter-spacing:-.01em; }
+.s-nav i{ width:14px; height:3px; border-radius:1px; background:currentColor; opacity:.28; }
+.s-nav u{ margin-left:auto; width:26px; height:9px; border-radius:1px; text-decoration:none; }
+.s-body{ flex:1; display:flex; min-height:0; }
+.s-l{ flex:1.1; padding:9px; display:flex; flex-direction:column; gap:5px; justify-content:center; }
+.s-l b{ font-family:var(--f-display); font-size:.62rem; line-height:1.02; letter-spacing:-.03em; font-variation-settings:'wdth' 106,'wght' 760; }
+.s-l i{ height:3px; border-radius:1px; background:currentColor; opacity:.2; display:block; }
+.s-l u{ width:38px; height:11px; border-radius:1px; text-decoration:none; margin-top:3px; }
+.s-r{ flex:1; }
+.s-strip{ display:flex; gap:1px; height:22%; }
+.s-strip span{ flex:1; display:flex; align-items:center; justify-content:center; }
+.s-strip em{ width:9px; height:9px; border-radius:1px; opacity:.55; display:block; }
+
+/* the miniature sites scale with their own frame, not with the page */
+@supports (width: 1cqw){
+  .s-nav{ gap:1.6cqw; padding:2cqw 2.6cqw; }
+  .s-nav b{ font-size:2.1cqw; }
+  .s-nav i{ width:4.2cqw; height:.8cqw; }
+  .s-nav u{ width:7.4cqw; height:2.7cqw; }
+  .s-l{ padding:2.8cqw; gap:1.5cqw; }
+  .s-l b{ font-size:3.6cqw; }
+  .s-l i{ height:.9cqw; }
+  .s-l u{ width:11cqw; height:3.4cqw; margin-top:.9cqw; }
+  .s-strip em{ width:2.7cqw; height:2.7cqw; }
+}
+.work-meta{ display:flex; flex-direction:column; gap:5px; }
+.work-meta h3{ font-size:clamp(1.05rem,1.5vw,1.32rem); letter-spacing:-.025em; }
+.work-meta p{ font-size:.9rem; color:var(--ink-2); }
+.dark .work-meta p{ color:#A9ADA4; }
+.work-more{ margin-top:clamp(26px,3vw,44px); display:flex; flex-wrap:wrap; gap:10px 26px; align-items:center; }
+
+/* --- process --- */
+.steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,2.4vw,34px); counter-reset:s; }
+.step{ border-top:2px solid var(--ink); padding-top:16px; }
+.step .num{
+  font-family:var(--f-display); font-size:clamp(2.2rem,4vw,3.2rem); line-height:.9;
+  letter-spacing:-.05em; font-variation-settings:'wdth' 120,'wght' 800; display:block; margin-bottom:12px;
+  font-variant-numeric:tabular-nums;
+}
+.step h3{ margin-bottom:8px; }
+.step p{ font-size:.95rem; color:var(--ink-2); }
+
+/* --- trades --- */
+.trades{ display:flex; flex-wrap:wrap; gap:8px; }
+.trades span{
+  border:1px solid var(--hair); border-radius:2px; padding:9px 15px;
+  font-family:var(--f-display); font-size:clamp(.95rem,1.4vw,1.18rem);
+  font-variation-settings:'wdth' 104,'wght' 600; letter-spacing:-.02em;
+}
+/* deliberately no hover: these are labels, not controls */
+
+/* --- pricing --- */
+.plan-switch{
+  display:inline-flex; border:1px solid var(--ink); border-radius:2px; overflow:hidden; background:var(--ground-3);
+}
+.plan-switch button{
+  font-family:var(--f-display); font-size:.9rem; font-variation-settings:'wght' 620; letter-spacing:-.015em;
+  background:transparent; border:0; padding:12px 20px; min-height:46px; cursor:pointer; color:var(--ink);
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.plan-switch button[aria-pressed="true"]{ background:var(--ink); color:var(--ground-3); }
+.plan-switch button+button{ border-left:1px solid var(--ink); }
+.tiers{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,1.8vw,26px); margin-top:clamp(26px,3vw,42px); }
+.tier{ border:1px solid var(--hair); border-radius:3px; padding:clamp(20px,2.2vw,30px); background:var(--ground-3); display:flex; flex-direction:column; gap:14px; position:relative; }
+.tier.pop{ border-color:var(--ink); border-width:2px; background:#fff; }
+.tier .flag{
+  position:absolute; top:-1px; right:-1px; background:var(--tally); color:#fff;
+  font-family:var(--f-read); font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 10px;
+}
+.tier h3{ font-size:1.35rem; }
+.price{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+.price b{
+  font-family:var(--f-display); font-size:clamp(2rem,3.4vw,2.9rem); line-height:.95; letter-spacing:-.045em;
+  font-variation-settings:'wdth' 112,'wght' 780; font-variant-numeric:tabular-nums;
+}
+.price span{ font-size:.92rem; color:var(--ink-2); }
+.tier ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:.94rem; color:var(--ink-2); }
+.tier ul li{ display:flex; gap:9px; align-items:flex-start; }
+.tier ul svg{ width:14px; height:14px; margin-top:4px; flex:0 0 auto; stroke:var(--ink); fill:none; stroke-width:2.2; }
+.tier .btn{ margin-top:auto; }
+.incl{ margin-top:clamp(26px,3vw,44px); display:grid; grid-template-columns:minmax(0,26ch) minmax(0,1fr); gap:clamp(16px,3vw,44px); padding-top:26px; border-top:1px solid var(--hair); }
+.incl-list{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:7px 10px; }
+.incl-list li{ font-size:.9rem; color:var(--ink-2); }
+.incl-list li::after{ content:'·'; margin-left:10px; color:var(--hair); }
+.incl-list li:last-child::after{ content:''; }
+
+/* --- testimonials --- */
+.quotes{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,2.6vw,40px); }
+.quote{ display:flex; flex-direction:column; }
+.quote blockquote{ margin:0 0 20px; font-family:var(--f-display); font-size:clamp(1.15rem,1.8vw,1.5rem); line-height:1.22; letter-spacing:-.028em; font-variation-settings:'wdth' 102,'wght' 560; }
+.quote figcaption{ margin-top:auto; padding-top:12px; border-top:1px solid #2A2E2B; }
+.quote .who{ font-variation-settings:'wght' 640; }
+
+/* --- person --- */
+.person{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,50ch); gap:clamp(20px,4vw,64px); align-items:start; }
+.person .big{
+  font-family:var(--f-display); font-size:clamp(2rem,4.4vw,3.7rem); line-height:.98; letter-spacing:-.038em;
+  font-variation-settings:'wdth' 110,'wght' 760;
+}
+.person .big em{ font-style:normal; color:var(--tally); }
+/* his name is set in the page's own face — a drawn "signature" would be an invented personal mark */
+.sig{ margin-top:26px; padding-top:18px; border-top:2px solid var(--ink); display:inline-block; }
+.sig b{
+  font-family:var(--f-display); font-size:clamp(1.3rem,2vw,1.7rem); line-height:1;
+  letter-spacing:-.035em; font-variation-settings:'wdth' 116,'wght' 800; display:block;
+}
+.sig span{ display:block; margin-top:6px; color:var(--ink-2); font-size:.92rem; }
+
+/* --- areas --- */
+.areas{ display:grid; grid-template-columns:minmax(0,52fr) minmax(0,48fr); gap:clamp(22px,3.4vw,56px); align-items:center; }
+.area-list{ display:flex; flex-wrap:wrap; gap:6px 0; margin-top:22px; }
+.area-list span{ font-family:var(--f-display); font-size:clamp(1.2rem,2.4vw,2rem); letter-spacing:-.03em; font-variation-settings:'wdth' 108,'wght' 700; }
+.area-list span::after{ content:'/'; margin:0 12px; color:var(--tally); font-variation-settings:'wght' 400; }
+.area-list span:last-child::after{ content:''; }
+.area-img{ border-radius:3px; overflow:hidden; aspect-ratio:3/2; background:var(--ground-2); }
+.area-img img{ width:100%; height:100%; object-fit:cover; }
+
+/* --- final CTA --- */
+.close{ padding:clamp(60px,8vw,120px) 0; }
+.close-num{
+  display:block; font-family:var(--f-display); text-decoration:none;
+  font-size:clamp(2.6rem,9.4vw,8rem); line-height:.9; letter-spacing:-.05em;
+  font-variation-settings:'wdth' 116,'wght' 820; white-space:nowrap;
+  transition:color .35s var(--ease);
+}
+.close-num:hover{ color:var(--tally-hot); }
+.close-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,34ch); gap:clamp(20px,4vw,64px); align-items:end; margin-top:clamp(24px,3vw,40px); }
+.close-facts{ display:flex; flex-direction:column; gap:10px; }
+.close-facts div{ display:flex; gap:14px; align-items:baseline; border-bottom:1px solid #2A2E2B; padding-bottom:9px; }
+.close-facts .label{ flex:0 0 74px; }
+
+/* --- footer --- */
+.foot{ background:var(--ground-2); padding:clamp(40px,5vw,72px) 0 28px; }
+.foot-grid{ display:grid; grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr)); gap:clamp(20px,3vw,48px); }
+.foot h4{ font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:14px; font-variation-settings:'wght' 640; }
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:.93rem; }
+/* long unbreakable strings (the email address) must not widen the page */
+.foot a, .foot li, .close-facts span, .person a{ overflow-wrap:anywhere; }
+.foot a{ text-decoration:none; }
+.foot a:hover{ text-decoration:underline; }
+.foot img{ height:40px; width:auto; margin-bottom:14px; }
+.foot-note{ font-size:.86rem; color:var(--ink-3); }
+.foot-bot{ margin-top:clamp(30px,4vw,54px); padding-top:20px; border-top:1px solid var(--hair); display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between; }
+
+.sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.skip{ position:absolute; left:-9999px; top:0; z-index:100; background:var(--ink); color:#fff; padding:12px 18px; }
+.skip:focus{ left:0; }
+
+/* ================= reveal ================= */
+.js .rv{ opacity:0; transform:translateY(22px); transition:opacity .8s var(--ease), transform .9s var(--ease); }
+.js .rv.in{ opacity:1; transform:none; }
+.js .rv-s > *{ opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .8s var(--ease); }
+.js .rv-s.in > *{ opacity:1; transform:none; }
+.js .rv-s.in > *:nth-child(1){ transition-delay:.02s } .js .rv-s.in > *:nth-child(2){ transition-delay:.08s }
+.js .rv-s.in > *:nth-child(3){ transition-delay:.14s } .js .rv-s.in > *:nth-child(4){ transition-delay:.2s }
+.js .rv-s.in > *:nth-child(5){ transition-delay:.26s } .js .rv-s.in > *:nth-child(6){ transition-delay:.32s }
+
+/* ================= responsive ================= */
+@media (max-width:1180px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-copy{ max-width:42ch; }
+  .work-item{ grid-column:span 3; }
+}
+@media (max-width:1000px){
+  .nav{ display:none; }
+  .head-cta .btn{ display:none; }
+  .burger{ display:flex; margin-left:auto; }
+  .head-cta{ margin-left:auto; }
+  .steps{ grid-template-columns:repeat(2,1fr); }
+  .quotes{ grid-template-columns:1fr; }
+  .quote{ padding-bottom:6px; }
+  .tiers{ grid-template-columns:1fr; }
+  .person, .areas, .ledger, .sec-head, .close-grid, .incl{ grid-template-columns:1fr; }
+  .sec-head{ align-items:start; }
+  .foot-grid{ grid-template-columns:repeat(2,1fr); }
+  /* three cells stay three across — a 2-col grid orphans the third */
+  .strip{ grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:760px){
+  body{ font-size:16px; }
+  .work{ grid-template-columns:1fr; }
+  .work-item, .work-item.wide{ grid-column:span 1; }
+  .mine-list{ columns:1; }
+  .mon-under{ grid-template-columns:minmax(0,1fr); align-items:start; }
+  .mon-signal{ align-items:flex-start; width:100%; }
+  .m-hero{ grid-template-columns:1fr; }
+  .m-shot{ min-height:88px; }
+  .m-copy{ padding:12px 14px 14px; }
+  .m-sub{ display:none; }
+  .mon-screen{ aspect-ratio:auto; }
+  .mock{ position:static; }
+  .gridlines, .wipe{ position:absolute; inset:0; }
+  .gridlines{ inset:34px 0 0; }
+  .hero-actions{ flex-direction:column; align-items:stretch; }
+  .tel-block{ align-items:center; padding:12px 18px 14px; }
+  .close-num{ font-size:clamp(2.1rem,11vw,3.4rem); }
+  .steps{ grid-template-columns:1fr; }
+  .srv-row{ grid-template-columns:40px 1fr; row-gap:8px; }
+  .srv-line{ grid-column:2/-1; }
+  .srv-icon{ width:26px; height:26px; }
+  .foot-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:420px){
+  .area-list span::after{ margin:0 8px; }
+  .trades span{ font-size:.92rem; padding:8px 12px; }
+  /* three across is too tight for the labels at this width — stack them */
+  .strip{ grid-template-columns:1fr; }
+  .strip div{ border-right:0; border-bottom:1px solid var(--hair-soft); padding:14px 0 15px; }
+  .strip div:last-child{ border-bottom:0; }
+}
+
+/* ================= reduced motion ================= */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  .js .rv, .js .rv-s > *{ opacity:1 !important; transform:none !important; }
+  .js .mon .m-head, .js .mon .m-sub, .js .mon .m-btns, .js .mon .m-logo,
+  .js .mon .m-tile b, .js .mon .m-tile span, .js .mon .m-foot,
+  .js .mon .m-nav, .js .mon .m-tiles, .js .mon .m-shot{ opacity:1 !important; transform:none !important; }
+  .js .mon .m-shot img{ opacity:1 !important; filter:none !important; transform:none !important; }
+  .js .mon .m-copy::before{ display:none; }
+  .js .mon .gridlines{ opacity:0 !important; }
+}
+</style>
+</head>
+<body>
+<!--
+  DIRECTION CONTRACT — home-14, impeccable / overdrive
+  THESIS: An agency proves it can build rather than claiming it. The page refuses the
+    case-study card grid and the dark-plus-neon agency default: it is a broadcast gallery
+    where one dark monitor builds a real trade website in front of you, on repeat,
+    re-themed for a different trade each cycle.
+  OWN-WORLD: Studio grey ground (#E3E4DE) with monitor black objects and one chroma,
+    tally red (#E01D06). Archivo on its width axis for display, Martian Mono for
+    instrument readouts only. Hairline rules, no cards as structure, no eyebrows.
+  STORY: This person builds something better than I could get elsewhere; I have to do
+    almost nothing; here is the number; I call it.
+  FIRST VIEWPORT: Left 42% — h1 "You'll barely lift a finger", one paragraph, the ink CTA
+    and the phone number set at display scale in a bordered plate. Right 58% — the black
+    monitor with a tally rail, a live pause control, the self-building site, a build log
+    and a canvas build-signal readout. Primary action never moves and nothing animates over it.
+  FORM: Live broadcast gallery, ranked 2nd of seven derived worlds, raised by van-livery
+    (phone number is the largest permanent object) and by test-instrumentation (every
+    number is a measured readout with a unit, never a stat tile). Seed key: none —
+    concept-seed.mjs returned empty output (exit 0) here; direction derived by hand.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+    review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="progress" aria-hidden="true"></div>
+  <div class="head-in">
+    <a class="brand" href="/" aria-label="Digital Consulting Services — home">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="600" height="300">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/services">Services</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-sm" href="/contact">Get a free quote</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M1 5h18M1 10h18M1 15h18" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mnav" id="mnav" data-open="false" aria-label="Menu" role="dialog" aria-modal="true">
+  <div class="mnav-top">
+    <span class="label">Menu</span>
+    <button class="burger" type="button" id="mclose" aria-label="Close menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="mnav-list">
+    <li><a href="/services">Services</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/portfolio">Portfolio</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
+  <div class="mnav-foot">
+    <a class="btn" href="/contact">Get a free quote</a>
+    <a class="btn btn-ghost" href="tel:+447395063764">Call 07395 063764</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+
+        <div class="hero-copy">
+          <h1><span>You'll barely</span><span>lift a <span class="em">finger.</span></span></h1>
+          <p class="lede">I'm Ricky. I build and look after websites for tradespeople and small
+            businesses across the UK. One conversation is all I need. I write the words, make the
+            design decisions, build it, host it and keep it running.</p>
+
+          <div class="hero-actions">
+            <a class="btn" href="/contact">Get a free quote</a>
+            <a class="tel-block" href="tel:+447395063764">
+              <span class="label">Or just call</span>
+              <span class="tel-num">07395 063764</span>
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <span class="label"><span class="dot-live" aria-hidden="true"></span>Polegate, East Sussex</span>
+            <span class="label">Working UK-wide since 2019</span>
+          </div>
+        </div>
+
+        <!-- the monitor -->
+        <div class="mon" id="mon" data-stage="5" data-wipe="false">
+          <div class="mon-rail">
+            <span class="tally" aria-hidden="true"></span>
+            <span class="rail-state" id="railState">Live</span>
+            <span class="rail-trade" id="railTrade">Electrical business</span>
+            <span class="rail-spacer"></span>
+            <button class="pausebtn" type="button" id="pause" aria-pressed="false">Pause</button>
+          </div>
+
+          <div class="mon-screen" aria-hidden="true">
+            <div class="chrome">
+              <i></i><i></i><i></i>
+              <span class="urlbar">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="5.5" width="7" height="5" rx="1"/><path d="M4.2 5.5V4a1.8 1.8 0 0 1 3.6 0v1.5"/></svg>
+                <span>https://yourbusiness.co.uk</span>
+              </span>
+            </div>
+
+            <div class="mock">
+              <div class="m-nav">
+                <span class="m-logo" id="mLogo">YOUR<b>BUSINESS</b></span>
+                <span class="m-links"><i></i><i></i><i></i></span>
+                <span class="m-cta">Get a quote</span>
+              </div>
+              <div class="m-hero">
+                <div class="m-copy">
+                  <span class="m-head" id="mHead">Emergency electrician, out to you today.</span>
+                  <span class="m-sub" id="mSub">Rewires, fuse boards and EV chargers. Fully qualified, covering Eastbourne and across East Sussex.</span>
+                  <span class="m-btns">
+                    <span class="m-btn">Book a visit</span>
+                    <span class="m-tel">07000 000 000</span>
+                  </span>
+                </div>
+                <div class="m-shot">
+                  <img id="mShot" src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg" width="1600" height="1062"
+                       alt="An electrician fitting a consumer unit in a domestic hallway" fetchpriority="high" decoding="async">
+                </div>
+              </div>
+              <div class="m-tiles">
+                <span class="m-tile">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+                  <b id="mT1">Rewiring</b><span id="mS1">Full and partial rewires</span>
+                </span>
+                <span class="m-tile">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 5v14M16 5v14"/></svg>
+                  <b id="mT2">Fuse boards</b><span id="mS2">Upgrades and testing</span>
+                </span>
+                <span class="m-tile">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  <b id="mT3">EV chargers</b><span id="mS3">Supplied and fitted</span>
+                </span>
+              </div>
+              <div class="m-foot"><span id="mArea">Eastbourne · Hailsham · Lewes</span><span>Call 07000 000 000</span></div>
+            </div>
+
+            <div class="gridlines"></div>
+            <div class="wipe"></div>
+          </div>
+
+          <div class="mon-under">
+            <ul class="mon-log" id="log">
+              <li data-done="true">One conversation</li>
+              <li data-done="true">Copy written for you</li>
+              <li data-done="true">Photos placed</li>
+              <li data-done="true">Your colours applied</li>
+              <li data-done="true">Service &amp; location pages</li>
+              <li data-done="true">Hosting, SSL, monitoring</li>
+              <li data-done="true">Live</li>
+            </ul>
+            <div class="mon-signal">
+              <canvas id="sig" width="380" height="52" aria-hidden="true"></canvas>
+              <span class="sig-read" id="sigRead">Stage 5/5 · 00:00.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mon-cap">A live demonstration, not a video: that site is being assembled in your browser right now,
+        and it rebuilds itself for a different trade every few seconds.</p>
+    </div>
+  </section>
+
+  <!-- instrument strip -->
+  <div class="wrap">
+    <!-- final values ship in the HTML: with no JS these must read true, not zero -->
+    <div class="strip" id="strip">
+      <div><b data-count="2019" data-plain="true">2019</b><span class="read">Trading since</span></div>
+      <div><b data-count="20">20+</b><span class="read">Sites delivered</span></div>
+      <div><b data-count="5">5+</b><span class="read">Years, longest client</span></div>
+    </div>
+  </div>
+
+  <!-- ============ EFFORT LEDGER ============ -->
+  <section class="sec" aria-labelledby="effort-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="effort-h">Here is the complete list of things you have to do.</h2>
+        <p>Most agencies want a brief, your copy, your images and a clear idea of what you want.
+          If you had all that you wouldn't need an agency. So I don't ask for it.</p>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger-bar rv" aria-hidden="true"><i class="yours"></i><i class="mine"></i></div>
+
+        <div class="rv">
+          <div class="col-h">
+            <h3>Your side</h3>
+            <span class="read">3 items</span>
+          </div>
+          <ul class="tasklist yours-list">
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Answer the phone once, or send a few messages.</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tell me what you do and where you do it.</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Say yes, or tell me what to change.</li>
+          </ul>
+        </div>
+
+        <div class="rv">
+          <div class="col-h">
+            <h3>My side</h3>
+            <span class="read">16 items</span>
+          </div>
+          <ul class="tasklist mine-list">
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Ask the right questions</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Write every word on the site</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Choose the colours and the type</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Design every page</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Source and place the images</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Build a page for every service</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Build a page for every town you cover</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Add Schema markup so Google understands you</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Make it fast, and right on a phone first</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Set up your contact form</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Register and manage your domain</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Host it and fit the SSL certificate</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Keep it patched and secure</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Monitor that it's up, around the clock</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Submit it to Google Search Console</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Answer when you ring about a change</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="sec" aria-labelledby="srv-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="srv-h">Six things I do, and do properly.</h2>
+        <p>You won't find packages stuffed with features you'll never use, because this is the whole list.</p>
+      </div>
+
+      <div class="srv">
+        <a class="srv-row" href="/services/website-design">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="2"/><path d="M3 12h26M8 9.2h.01M11 9.2h.01M14 9.2h.01M9 17h9M9 21h6"/></svg>
+          <h3>Website Design</h3>
+          <span class="srv-line">
+            <p>Bespoke websites built for local tradespeople. No templates, no DIY.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="srv-row" href="/services/local-seo">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29s10-9.2 10-15.6A10 10 0 0 0 6 13.4C6 19.8 16 29 16 29Z"/><circle cx="16" cy="13.2" r="3.6"/></svg>
+          <h3>Local SEO</h3>
+          <span class="srv-line">
+            <p>Service pages, location pages, Schema markup, Google ranking: built in.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="srv-row" href="/services/ongoing-management">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 27 8v8.2c0 6.6-4.6 11.3-11 12.8-6.4-1.5-11-6.2-11-12.8V8Z"/><path d="M11.5 16.2 15 19.6l6-6.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Ongoing Management</h3>
+          <span class="srv-line">
+            <p>I look after your site so you can focus on your trade.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="srv-row" href="/services/google-workspace-email">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="2"/><path d="m3.8 8.6 12.2 9 12.2-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Google Workspace Email</h3>
+          <span class="srv-line">
+            <p>Professional business email on your own domain.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="srv-row" href="/services/ecommerce">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h4l3.2 14.4h13L27 10H9"/><circle cx="13" cy="26" r="2"/><circle cx="23" cy="26" r="2"/></svg>
+          <h3>eCommerce Websites</h3>
+          <span class="srv-line">
+            <p>WooCommerce or custom stores, built and loaded with your products.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="srv-row" href="/services/analytics">
+          <svg class="srv-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 27h24M8 27V16M14.6 27V9M21.3 27v-8M28 27V5" stroke-linecap="round"/></svg>
+          <h3>Analytics &amp; Reporting</h3>
+          <span class="srv-line">
+            <p>Analytics, Search Console and monthly reports so you know what's working.</p>
+            <svg class="srv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <section class="sec dark" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="work-h">Sites that are out there earning.</h2>
+        <p>Real businesses, real work. Every one of these is still running, still looked after,
+          still mine to answer for.</p>
+      </div>
+
+      <div class="work rv-s">
+
+        <article class="work-item wide">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#0B2340" aria-hidden="true">
+              <div class="s-nav" style="background:#0B2340;color:#fff"><b>COLOSSUS</b><i></i><i></i><i></i><u style="background:#F2B705"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#F4F5F2"><b>Scaffolding across East Sussex</b><i style="width:80%"></i><i style="width:62%"></i><u style="background:#F2B705"></u></div>
+                <div class="s-r" style="background:linear-gradient(160deg,#123A63 0%,#0B2340 60%,#164272 100%)"></div>
+              </div>
+              <div class="s-strip" style="background:#DDE1E4">
+                <span style="background:#F4F5F2"><em style="background:#0B2340"></em></span>
+                <span style="background:#F4F5F2"><em style="background:#0B2340"></em></span>
+                <span style="background:#F4F5F2"><em style="background:#0B2340"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Colossus Scaffolding</h3>
+            <p>Scaffolding, East Sussex. First Google enquiry within three weeks of launch, on a 30-page site.</p>
+          </div>
+        </article>
+
+        <article class="work-item wide">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#111" aria-hidden="true">
+              <div class="s-nav" style="background:#141414;color:#fff"><b>DJ FOX</b><i></i><i></i><i></i><u style="background:#D62828"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#141414;color:#fff"><b>Electricians you can actually get hold of</b><i style="width:74%"></i><i style="width:58%"></i><u style="background:#D62828"></u></div>
+                <div class="s-r" style="background:linear-gradient(200deg,#2A2A2A 0%,#1A1A1A 55%,#3A0F0F 100%)"></div>
+              </div>
+              <div class="s-strip" style="background:#2A2A2A">
+                <span style="background:#1A1A1A"><em style="background:#D62828"></em></span>
+                <span style="background:#1A1A1A"><em style="background:#D62828"></em></span>
+                <span style="background:#1A1A1A"><em style="background:#D62828"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>DJ Fox Electrical</h3>
+            <p>Electrician, East Sussex. 20+ pages with service and location pages, live at djfoxelectrical.com.</p>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#111" aria-hidden="true">
+              <div class="s-nav" style="background:#101112;color:#fff"><b>DCH</b><i></i><i></i><u style="background:#FF7A00"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#101112;color:#fff"><b>Servicing, repairs, remaps</b><i style="width:70%"></i><u style="background:#FF7A00"></u></div>
+                <div class="s-r" style="background:linear-gradient(180deg,#26282B,#121314)"></div>
+              </div>
+              <div class="s-strip" style="background:#26282B">
+                <span style="background:#161819"><em style="background:#FF7A00"></em></span>
+                <span style="background:#161819"><em style="background:#FF7A00"></em></span>
+                <span style="background:#161819"><em style="background:#FF7A00"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>DCH Automotive</h3>
+            <p>Automotive. A professional presence from a standing start, with a live Instagram feed.</p>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#3B2340" aria-hidden="true">
+              <div class="s-nav" style="background:#FBF7FA"><b>CUDDLE PLUSH</b><i></i><i></i><u style="background:#B5478A"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#FBF7FA"><b>Fabrics by the metre</b><i style="width:66%"></i><u style="background:#B5478A"></u></div>
+                <div class="s-r" style="background:linear-gradient(150deg,#F3D9E8,#D7A9C6 60%,#B5478A)"></div>
+              </div>
+              <div class="s-strip" style="background:#EFE3EB">
+                <span style="background:#FBF7FA"><em style="background:#B5478A"></em></span>
+                <span style="background:#FBF7FA"><em style="background:#B5478A"></em></span>
+                <span style="background:#FBF7FA"><em style="background:#B5478A"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Cuddle Plush Fabrics</h3>
+            <p>eCommerce. Five years and counting, and one of the longest client relationships DCS has.</p>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#123B2E" aria-hidden="true">
+              <div class="s-nav" style="background:#123B2E;color:#fff"><b>BEXHILL REMOVALS</b><i></i><u style="background:#EDE7D8"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#F7F5EE"><b>Moving you, without the drama</b><i style="width:72%"></i><u style="background:#123B2E"></u></div>
+                <div class="s-r" style="background:linear-gradient(200deg,#2E6B54,#123B2E)"></div>
+              </div>
+              <div class="s-strip" style="background:#E3E0D5">
+                <span style="background:#F7F5EE"><em style="background:#123B2E"></em></span>
+                <span style="background:#F7F5EE"><em style="background:#123B2E"></em></span>
+                <span style="background:#F7F5EE"><em style="background:#123B2E"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Bexhill Removals</h3>
+            <p>Removals. Design approved on the first presentation, with no revisions asked for.</p>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+            <div class="screen" style="color:#1B2A4A" aria-hidden="true">
+              <div class="s-nav" style="background:#FDFCF9"><b>LUNA LANDINGS</b><i></i><i></i><u style="background:#1B2A4A"></u></div>
+              <div class="s-body">
+                <div class="s-l" style="background:#FDFCF9"><b>Build yours, made to order</b><i style="width:64%"></i><u style="background:#C9A227"></u></div>
+                <div class="s-r" style="background:linear-gradient(170deg,#E9E3D3,#C9A227 70%,#1B2A4A)"></div>
+              </div>
+              <div class="s-strip" style="background:#EDE9DE">
+                <span style="background:#FDFCF9"><em style="background:#1B2A4A"></em></span>
+                <span style="background:#FDFCF9"><em style="background:#C9A227"></em></span>
+                <span style="background:#FDFCF9"><em style="background:#1B2A4A"></em></span>
+              </div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Luna Landings</h3>
+            <p>Made-to-order eCommerce. Product configurator, automatic work orders, worldwide shipping.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="work-more rv">
+        <span class="label">Also built and looked after</span>
+        <p>Mad Graphics, signage and print, full rebuild · Nicola Noble Tuition, who moved classes
+          online during Covid instead of closing · Sanctuary Ida, whose yoga students book and pay online.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="sec" aria-labelledby="proc-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="proc-h">Four steps, and three of them are mine.</h2>
+        <p>Start to live is usually two to four weeks, depending on how big it is and how
+          quickly you come back to me.</p>
+      </div>
+      <div class="steps rv-s">
+        <div class="step">
+          <span class="num">1</span>
+          <h3>A conversation</h3>
+          <p>A call, or a few messages if you're on site. No brief needed, no forms to fill in. I ask
+            the questions, you just answer them the way you'd explain it to a customer.</p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <h3>I write it and design it</h3>
+          <p>Copy, structure, images, colours: all handled here. You don't have to work out what
+            to say about your own business. That's the bit I'm good at.</p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <h3>You review it</h3>
+          <p>I show you the real thing, not a mock-up. Unlimited revisions during the build until
+            you're happy with it. Tell me it's wrong and I'll change it.</p>
+        </div>
+        <div class="step">
+          <span class="num">4</span>
+          <h3>It goes live, and stays live</h3>
+          <p>Hosting, updates, monitoring and support from then on. If something breaks at 8pm on a
+            Sunday it's my problem, not yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRADES ============ -->
+  <section class="sec" aria-labelledby="trade-h" style="padding-top:0">
+    <div class="wrap">
+      <hr class="rule">
+      <div class="sec-head" style="margin-top:clamp(40px,5vw,70px)">
+        <h2 id="trade-h">Built for people who work with their hands.</h2>
+        <p>If you're out on jobs all day and the website has been on the list for three years,
+          you're exactly who this is for.</p>
+      </div>
+      <div class="trades rv-s">
+        <span>Electricians</span><span>Plumbers</span><span>Builders</span><span>Scaffolders</span>
+        <span>Gardeners</span><span>Decorators</span><span>Roofers</span><span>Handymen</span>
+        <span>Locksmiths</span><span>Flooring fitters</span><span>Tutors</span><span>Therapists</span>
+        <span>Coaches</span><span>Salons</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="sec" aria-labelledby="price-h" id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="price-h">Same site either way. You just pick how to pay.</h2>
+        <p>The tiers differ on how much ongoing service you need and how big the site is,
+          never on how good it is.</p>
+      </div>
+
+      <div class="plan-switch rv" role="group" aria-label="Choose how to pay">
+        <button type="button" id="planA" aria-pressed="true">Upfront + monthly</button>
+        <button type="button" id="planB" aria-pressed="false">Pay monthly</button>
+      </div>
+
+      <p id="planNote" style="margin-top:16px;color:var(--ink-2);font-size:.97rem">Setup fee, then a low monthly for hosting, security, updates and support.</p>
+
+      <div class="tiers" id="tiers">
+        <div class="tier">
+          <h3>Starter</h3>
+          <div class="price" data-tier="starter">
+            <b class="p-main">£995</b><span class="p-sub">setup, then £15/mo</span>
+          </div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 20 pages</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom design, no template</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in the included list</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact">Start with Starter</a>
+        </div>
+
+        <div class="tier pop">
+          <span class="flag">Most popular</span>
+          <h3>Professional</h3>
+          <div class="price" data-tier="professional">
+            <b class="p-main">£1,995</b><span class="p-sub">setup, then £25/mo</span>
+          </div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 50 pages</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Room for every service and every town</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in the included list</li>
+          </ul>
+          <a class="btn" href="/contact">Get a free quote</a>
+        </div>
+
+        <div class="tier">
+          <h3>Growth</h3>
+          <div class="price" data-tier="growth">
+            <b class="p-main">£3,495</b><span class="p-sub">setup, then £50/mo</span>
+          </div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 100 pages</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>For multi-branch and larger operations</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in the included list</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact">Talk about Growth</a>
+        </div>
+      </div>
+
+      <div class="incl rv">
+        <h3>In every site, whichever tier</h3>
+        <div>
+          <ul class="incl-list">
+            <li>Custom design</li><li>Local SEO</li><li>Service pages</li><li>Location pages</li>
+            <li>Schema markup</li><li>Mobile-first and fast</li><li>Contact form</li><li>Hosting</li>
+            <li>SSL</li><li>Domain management</li><li>Security updates</li><li>Uptime monitoring</li>
+            <li>Unlimited revisions during the build</li><li>Google Search Console submission</li>
+          </ul>
+          <p class="body" style="margin-top:20px">Add-ons when you want them: blog post writing £75 a post ·
+            custom theme design £350 · Google Ads setup and management £200/mo plus your ad spend ·
+            monthly SEO retainer £200/mo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="sec dark" aria-labelledby="quotes-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="quotes-h">What they said afterwards.</h2>
+        <p>Three of them, in their own words.</p>
+      </div>
+      <div class="quotes rv-s">
+        <figure class="quote">
+          <blockquote>“Ricky has built and managed our online store for over 5 years. I couldn't be
+            happier with his work.”</blockquote>
+          <figcaption><span class="who">Sarah</span><br><span class="label">Cuddle Plush Fabrics</span></figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“I feared I would have to close my tutoring business when Covid struck, but now
+            offer my classes online.”</blockquote>
+          <figcaption><span class="who">Nicola</span><br><span class="label">Nicola Noble Tuition</span></figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“My yoga students love that they can book and pay for my classes on my
+            website.”</blockquote>
+          <figcaption><span class="who">Molly</span><br><span class="label">Sanctuary Ida</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PERSON ============ -->
+  <section class="sec" aria-labelledby="person-h">
+    <div class="wrap">
+      <div class="person">
+        <div class="rv">
+          <h2 id="person-h" class="sr">About Ricky</h2>
+          <p class="big">There is no team, no account manager and no ticket system. You get
+            <em>me</em>, and my mobile number.</p>
+          <p class="sig"><b>Ricky Wilson</b><span>Digital Consulting Services, Polegate</span></p>
+        </div>
+        <div class="rv">
+          <p class="body">Digital Consulting Services has been running since 2019 out of Polegate in
+            East Sussex. Nothing gets outsourced and nothing goes offshore. When you ring the number
+            on this page, I answer it, and I'm the same person who wrote your homepage and who
+            gets the alert if your site goes down.</p>
+          <p class="body" style="margin-top:18px">That's the whole pitch, really. Agency-quality work,
+            without an agency between you and the person doing it.</p>
+          <p class="body" style="margin-top:18px"><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AREAS ============ -->
+  <section class="sec" aria-labelledby="areas-h" style="padding-top:0">
+    <div class="wrap">
+      <hr class="rule">
+      <div class="areas" style="margin-top:clamp(40px,5vw,70px)">
+        <div class="rv">
+          <h2 id="areas-h">On your patch, and everywhere else.</h2>
+          <div class="area-list">
+            <span>Polegate</span><span>Eastbourne</span><span>Hailsham</span><span>Lewes</span>
+            <span>Seaford</span><span>Brighton</span><span>Hove</span><span>Uckfield</span>
+          </div>
+          <p class="body" style="margin-top:22px">Most clients are within half an hour of the unit, which
+            means I can meet you on a job if that's easier than a phone call. The rest are spread
+            across the UK, and it makes no difference to the work.</p>
+        </div>
+        <div class="area-img rv">
+          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-van.jpg" width="1600" height="1062" loading="lazy" decoding="async"
+               alt="A tidy trade van parked on a British residential street with its rear doors open">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="close dark" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 id="close-h" style="font-size:clamp(1.6rem,2.6vw,2.4rem);margin-bottom:18px">Right. Shall we get yours built?</h2>
+      <a class="close-num" href="tel:+447395063764">07395 063764</a>
+      <div class="close-grid">
+        <div>
+          <p style="max-width:46ch;margin-top:20px">Ring it, or send a message and I'll come back to you.
+            There's no pressure and no sales call, and I'll tell you straight whether I can help and what it would cost.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+            <a class="btn" href="/contact" style="background:var(--tally);border-color:var(--tally);color:#fff">Get a free quote</a>
+            <a class="btn btn-ghost" href="mailto:mail@digitalconsultingservices.co.uk" style="color:#E7E8E3;border-color:#4A4F4A">Email instead</a>
+          </div>
+        </div>
+        <div class="close-facts">
+          <div><span class="label">Hours</span><span>Mon–Fri 9:00–17:30 · Sat by appointment · Sun closed</span></div>
+          <div><span class="label">Studio</span><span>Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26 6QH</span></div>
+          <div><span class="label">Email</span><span>mail@digitalconsultingservices.co.uk</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="600" height="300" loading="lazy">
+        <p class="body" style="font-size:.93rem;max-width:32ch">Websites that get local tradespeople more jobs.
+          Designed, built, hosted and looked after in Polegate, East Sussex.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services/website-design">Website Design</a></li>
+          <li><a href="/services/local-seo">Local SEO</a></li>
+          <li><a href="/services/ongoing-management">Ongoing Management</a></li>
+          <li><a href="/services/google-workspace-email">Google Workspace Email</a></li>
+          <li><a href="/services/ecommerce">eCommerce Websites</a></li>
+          <li><a href="/services/analytics">Analytics &amp; Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Areas covered</h4>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton &amp; Hove</li><li>Uckfield</li><li>UK-wide</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+447395063764">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li style="margin-top:6px">Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate,<br>East Sussex, BN26 6QH</li>
+          <li style="margin-top:6px">Mon–Fri 9:00–17:30<br>Sat by appointment<br>Sun closed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-note">© 2026 Digital Consulting Services</span>
+      <span class="foot-note">Polegate · East Sussex · UK-wide</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('ready');
+
+  /* ---------------- mobile nav ---------------- */
+  var burger = document.getElementById('burger'),
+      mnav   = document.getElementById('mnav'),
+      mclose = document.getElementById('mclose');
+  /* the rest of the page goes inert while the overlay is open, so focus cannot
+     walk out of it into content the user cannot see */
+  var behind = [document.querySelector('.skip'), document.querySelector('.site-head'),
+                document.getElementById('main'), document.querySelector('.foot')];
+  function setNav(open){
+    mnav.setAttribute('data-open', open ? 'true' : 'false');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    behind.forEach(function(el){
+      if(!el) return;
+      if(open){ el.setAttribute('inert',''); } else { el.removeAttribute('inert'); }
+    });
+    if(open){ mclose.focus(); } else { burger.focus(); }
+  }
+  burger.addEventListener('click', function(){ setNav(mnav.getAttribute('data-open') !== 'true'); });
+  mclose.addEventListener('click', function(){ setNav(false); });
+  mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ setNav(false); } });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mnav.getAttribute('data-open') === 'true'){ setNav(false); }
+  });
+
+  /* ---------------- scroll reveal ---------------- */
+  var revealables = document.querySelectorAll('.rv, .rv-s');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    revealables.forEach(function(el){ io.observe(el); });
+  } else {
+    revealables.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------------- count-up on the instrument strip ---------------- */
+  var strip = document.getElementById('strip');
+  function runCounts(){
+    strip.querySelectorAll('[data-count]').forEach(function(el){
+      if(el.getAttribute('data-plain') === 'true') return;
+      var target = parseInt(el.getAttribute('data-count'), 10),
+          suffix = el.getAttribute('data-suffix') || '+',
+          start  = performance.now(), dur = 1100;
+      if(reduce){ el.textContent = target + suffix; return; }
+      el.textContent = '0' + suffix; /* only JS may zero it; the HTML ships the true value */
+      (function tick(now){
+        var t = Math.min(1, (now - start) / dur),
+            e = 1 - Math.pow(1 - t, 4);
+        el.textContent = Math.round(target * e) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+      })(start);
+    });
+  }
+  if('IntersectionObserver' in window){
+    var io2 = new IntersectionObserver(function(en){
+      if(en[0].isIntersecting){ runCounts(); io2.disconnect(); }
+    }, { threshold: 0.4 });
+    io2.observe(strip);
+  } else { runCounts(); }
+
+  /* ---------------- pricing: two ways to pay ---------------- */
+  var planA = document.getElementById('planA'),
+      planB = document.getElementById('planB'),
+      note  = document.getElementById('planNote'),
+      PRICES = {
+        a: { starter:['£995','setup, then £15/mo'], professional:['£1,995','setup, then £25/mo'], growth:['£3,495','setup, then £50/mo'],
+             note:'Setup fee, then a low monthly for hosting, security, updates and support.' },
+        b: { starter:['£45','per month, nothing upfront'], professional:['£75','per month, nothing upfront'], growth:['£125','per month, nothing upfront'],
+             note:'Nothing upfront. 12-month minimum term. Exactly the same site.' }
+      };
+  function paint(plan){
+    var set = PRICES[plan];
+    document.querySelectorAll('.price').forEach(function(p){
+      var t = p.getAttribute('data-tier');
+      p.querySelector('.p-main').textContent = set[t][0];
+      p.querySelector('.p-sub').textContent  = set[t][1];
+    });
+    note.textContent = set.note;
+    planA.setAttribute('aria-pressed', plan === 'a' ? 'true' : 'false');
+    planB.setAttribute('aria-pressed', plan === 'b' ? 'true' : 'false');
+  }
+  function switchPlan(plan){
+    if(document.startViewTransition && !reduce){
+      document.querySelectorAll('.price .p-main').forEach(function(el, i){ el.style.viewTransitionName = 'p' + i; });
+      document.startViewTransition(function(){ paint(plan); }).finished.then(function(){
+        document.querySelectorAll('.price .p-main').forEach(function(el){ el.style.viewTransitionName = ''; });
+      }).catch(function(){});
+    } else { paint(plan); }
+  }
+  planA.addEventListener('click', function(){ switchPlan('a'); });
+  planB.addEventListener('click', function(){ switchPlan('b'); });
+
+  /* ================================================================
+     THE BUILD — a website assembling itself, re-themed per trade
+     ================================================================ */
+  var mon = document.getElementById('mon');
+  if(!mon) return;
+
+  var TRADES = [
+    { name:'Electrical business', accent:'#1F5CFF', logo:['YOUR','BUSINESS'],
+      head:'Emergency electrician, out to you today.',
+      sub:'Rewires, fuse boards and EV chargers. Fully qualified, covering Eastbourne and across East Sussex.',
+      tiles:['Rewiring','Fuse boards','EV chargers'],
+      subs:['Full and partial rewires','Upgrades and testing','Supplied and fitted'],
+      area:'Eastbourne · Hailsham · Lewes',
+      img:'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg',
+      alt:'An electrician fitting a consumer unit in a domestic hallway' },
+    { name:'Plumbing business', accent:'#0E8A7D', logo:['YOUR','BUSINESS'],
+      head:'Blocked, leaking or broken? We come out.',
+      sub:'Boilers, bathrooms, leaks and emergencies. Same day wherever we can manage it.',
+      tiles:['Boilers','Bathrooms','Leak repairs'],
+      subs:['Serviced, repaired, replaced','Fitted end to end','Traced and fixed fast'],
+      area:'Seaford · Polegate · Brighton',
+      img:'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-plumber.jpg',
+      alt:'A plumber working on pipework under a kitchen sink' },
+    { name:'Scaffolding firm', accent:'#D2691E', logo:['YOUR','BUSINESS'],
+      head:'Scaffolding, up when you need it.',
+      sub:'Domestic and commercial. Erected, inspected and signed off properly.',
+      tiles:['Domestic','Commercial','Inspections'],
+      subs:['Houses and extensions','Sites and contracts','Weekly, and signed off'],
+      area:'Uckfield · Lewes · Hove',
+      img:'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg',
+      alt:'A scaffolder in hi-vis assembling scaffolding on a terraced house' }
+  ];
+
+  var el = {
+    state: document.getElementById('railState'),
+    trade: document.getElementById('railTrade'),
+    head:  document.getElementById('mHead'),
+    sub:   document.getElementById('mSub'),
+    logo:  document.getElementById('mLogo'),
+    shot:  document.getElementById('mShot'),
+    t1:    document.getElementById('mT1'),
+    t2:    document.getElementById('mT2'),
+    t3:    document.getElementById('mT3'),
+    s1:    document.getElementById('mS1'),
+    s2:    document.getElementById('mS2'),
+    s3:    document.getElementById('mS3'),
+    area:  document.getElementById('mArea'),
+    log:   document.getElementById('log').children,
+    read:  document.getElementById('sigRead'),
+    pause: document.getElementById('pause')
+  };
+
+  var STAGE_LABEL = ['Measuring','Structure','Writing','Photography','Colour','Live'];
+  var DURS = [700, 1000, 1000, 900, 800, 2600];
+  var LOG_AT = [[], [0], [1], [2], [3,4], [5,6]];
+
+  var idx = 0, stage = 5, paused = false, offscreen = false,
+      timer = null, t0 = performance.now(), rafId = null;
+
+  function setLog(upTo){
+    for(var i=0;i<el.log.length;i++){ el.log[i].setAttribute('data-done','false'); }
+    for(var s=0;s<=upTo;s++){
+      LOG_AT[s].forEach(function(n){ if(el.log[n]) el.log[n].setAttribute('data-done','true'); });
+    }
+  }
+
+  function applyTrade(t){
+    el.trade.textContent = t.name;
+    el.head.textContent  = t.head;
+    el.sub.textContent   = t.sub;
+    el.t1.textContent    = t.tiles[0];
+    el.t2.textContent    = t.tiles[1];
+    el.t3.textContent    = t.tiles[2];
+    el.s1.textContent    = t.subs[0];
+    el.s2.textContent    = t.subs[1];
+    el.s3.textContent    = t.subs[2];
+    el.area.textContent  = t.area;
+    el.logo.innerHTML    = t.logo[0] + '<b>' + t.logo[1] + '</b>';
+    if(el.shot.getAttribute('src') !== t.img){
+      el.shot.setAttribute('src', t.img);
+      el.shot.setAttribute('alt', t.alt);
+    }
+    mon.style.setProperty('--mock-accent', t.accent);
+  }
+
+  function setStage(s){
+    stage = s;
+    mon.setAttribute('data-stage', String(s));
+    el.state.textContent = STAGE_LABEL[s];
+    setLog(s);
+  }
+
+  /* One chain, always. Every entry point reschedules rather than adding a
+     second timer — two chains race and overwrite each other's stages. */
+  function schedule(ms){ clearTimeout(timer); timer = setTimeout(step, ms); }
+
+  var preloaded = {};
+  function preload(t){
+    if(preloaded[t.img]) return;
+    var im = new Image(); im.src = t.img; preloaded[t.img] = im;
+  }
+
+  function step(){
+    if(paused || offscreen || reduce) return;
+    if(stage < 5){
+      /* never show an empty photo slot: hold until the image has actually arrived */
+      if(stage === 2 && !el.shot.complete){ schedule(150); return; }
+      setStage(stage + 1);
+      /* load the next trade's photo during this cycle's hold, not all at once */
+      if(stage === 5){ preload(TRADES[(idx + 1) % TRADES.length]); }
+      schedule(DURS[stage]);
+    } else {
+      /* wipe, swap trade, rebuild */
+      mon.setAttribute('data-wipe','true');
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+        idx = (idx + 1) % TRADES.length;
+        applyTrade(TRADES[idx]);
+        setStage(0);
+        mon.setAttribute('data-wipe','false');
+        t0 = performance.now();
+        schedule(DURS[0]);
+      }, 560);
+    }
+  }
+
+  function start(){
+    if(reduce) return;
+    setStage(0);
+    t0 = performance.now();
+    schedule(DURS[0]);
+  }
+  function resume(){
+    if(paused || offscreen || reduce) return;
+    schedule(160);
+  }
+  function stop(){ clearTimeout(timer); }
+
+  el.pause.addEventListener('click', function(){
+    paused = !paused;
+    el.pause.textContent = paused ? 'Resume' : 'Pause';
+    el.pause.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    if(paused){
+      stop();
+      /* never freeze mid-wipe: a paused blank screen reads as a broken page */
+      if(mon.getAttribute('data-wipe') === 'true'){
+        mon.setAttribute('data-wipe','false');
+        setStage(5);
+      }
+    } else { resume(); }
+  });
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ stop(); } else { resume(); }
+  });
+
+  if('IntersectionObserver' in window){
+    var io3 = new IntersectionObserver(function(en){
+      var wasOff = offscreen;
+      offscreen = !en[0].isIntersecting;
+      if(offscreen){ stop(); }
+      else if(wasOff){ resume(); }
+    }, { threshold: 0.12 });
+    io3.observe(mon);
+  }
+
+  /* ---------------- canvas build signal ---------------- */
+  var cv = document.getElementById('sig'), ctx = cv && cv.getContext ? cv.getContext('2d') : null;
+  var N = 64, buf = new Array(N).fill(0.05), dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function sizeCanvas(){
+    if(!ctx) return;
+    var r = cv.getBoundingClientRect();
+    cv.width  = Math.max(120, Math.round(r.width  * dpr));
+    cv.height = Math.max(26,  Math.round(r.height * dpr));
+  }
+
+  function drawSignal(){
+    if(!ctx) return;
+    var w = cv.width, h = cv.height, bw = w / N;
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<N;i++){
+      var v = buf[i], bh = Math.max(1 * dpr, v * h);
+      ctx.fillStyle = i > N - 5 ? '#FF3B1F' : (v > 0.45 ? '#6E736C' : '#3A3E3B');
+      ctx.fillRect(i * bw, (h - bh), Math.max(1, bw - 1.2 * dpr), bh);
+    }
+  }
+
+  function tick(now){
+    var busy = (!paused && !offscreen && stage < 5) ? 1 : 0;
+    buf.shift();
+    buf.push(busy ? 0.22 + Math.random() * 0.74 : 0.04 + Math.random() * 0.07);
+    drawSignal();
+    var secs = (now - t0) / 1000;
+    el.read.textContent = 'Stage ' + stage + '/5 · ' + (secs < 100 ? secs.toFixed(1).padStart(4,'0') : '99.9') + 's';
+    rafId = requestAnimationFrame(tick);
+  }
+
+  sizeCanvas();
+  if(window.ResizeObserver){ new ResizeObserver(function(){ sizeCanvas(); drawSignal(); }).observe(cv); }
+
+  if(reduce){
+    /* static instrument, finished site, full log */
+    setStage(5);
+    buf = buf.map(function(){ return 0.06; });
+    drawSignal();
+    el.read.textContent = 'Stage 5/5 · complete';
+    el.pause.disabled = true;
+    el.pause.textContent = 'Static';
+    el.pause.style.opacity = '.5';
+  } else {
+    rafId = requestAnimationFrame(tick);
+    start();
+  }
+})();
+</script>
+</body>
+</html>

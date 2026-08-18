@@ -6,6 +6,25 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-18
+
+### Infrastructure
+
+- **Prototype assets now live in Cloudflare R2, and prototypes deploy to a URL.** Design sessions were accumulating serious weight in git: `output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/` held 142MB, 117MB of it 2048px PNG masters that nothing referenced. All 67 assets (14.2MB live + 116.9MB masters) moved to `prototypes/<session-slug>/…` in the existing bucket, the 54 prototypes' 311 asset references were rewritten to absolute R2 URLs, and the folder dropped to 19MB. The prototypes now deploy as a static Vercel project — https://dcs-prototypes.vercel.app — so they can be reviewed on a phone or sent to a client instead of only opening from a `file://` path on the machine that built them. Trade-off accepted deliberately: prototypes now require an internet connection to render.
+- **Root cause fixed, not just the symptom.** The root `.gitignore` has excluded images since it was written (_"These go to Cloudflare R2, not Git"_), but `output/.gitignore`'s `!sessions/**` line un-ignored everything beneath `output/sessions/`, binaries included — verified with `git check-ignore --no-index -v`. That is why 78 image files became stageable without anyone forcing them, and it had been true for every session folder, not just this one. `**/*.mp4`, `**/*.mov`, `**/*.webm` and `**/*.svg` were never in the root list at all. `output/.gitignore` now carries an explicit binary deny-list below the allow rules.
+- Two new tools: `tools/upload-prototype-assets.ts` (upload, verify, rewrite, manifest) and `tools/publish-prototype.ts` (pre-flight, static Vercel deploy). `R2Client` gained an additive `headFile()` so callers can skip re-uploading unchanged objects — `fileExists()` only answers presence, not whether the bytes match. New guide: [docs/guides/prototype-hosting.md](docs/guides/prototype-hosting.md).
+- Three traps found while building this, all encoded in the tools and the guide: `R2Client`'s default `immutable, 1 year` Cache-Control is wrong for assets that get regenerated (overwriting a key does not bust the CDN cache), so live prototype assets get `max-age=300` and only `_archive/` keeps the long TTL; `R2Client.getContentType()` has no video entry, so content types are mapped explicitly and fail loudly on an unknown extension; and the Vercel CLI resolves `vercel.json` against the process working directory, so running it from the repo root pulled in the monorepo's root config and the first deploy served the root placeholder page instead of the prototypes.
+
+### Documentation
+
+- Two new CSS gotchas documented in root `CLAUDE.md` (CSS Syntax section), both surfaced repeatedly while building the DCS homepage design prototypes and both invisible in markup:
+  - The existing `backdrop-filter` containing-block rule already noted `transform` in passing; the trap bites **independently** and catches floating navs in particular. A centred floating nav built with `transform: translateX(-50%)` establishes a containing block with no `backdrop-filter` present at all, so a nav carrying both has two separate triggers and fixing only the blur leaves the overlay trapped. Centre with `left`/`right`/`margin-inline` instead. Verified by measurement: a `position:fixed` probe nested inside such a nav reports the nav's own box (277×58) where a correct sibling overlay reports the viewport (390×844).
+  - `font-variant-numeric: tabular-nums` on a figure containing a thousands comma gives the comma a full digit advance, rendering **`£1,995` as `£1 , 995`**. It corrupts a price, is invisible in source, and only shows on screen. It inherits, so an ancestor carrying the property breaks a figure that looks clean itself — resolve it up the ancestor chain when checking, and scope `tnum` to comma-free numerals rather than setting it on `body`. Hit independently in six prototypes across two typefaces (Schibsted Grotesk, Newsreader).
+
+### Design
+
+- `output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/` — 54 static HTML homepage prototypes for the DCS site redesign, across five brief iterations, with `prototype/index.html` as a live-iframe library. Design exploration only: nothing in `sites/dcs` was touched and no platform or site code changed. The brief evolved twice on client feedback (positioning broadened from trades-only to all small businesses; register moved from under-construction to elevated design studio), leaving six directions off-brief and retained as record only. `HANDOFF.md` in that folder carries the traps and next steps.
+
 ## 2026-08-04
 
 ### Fixes

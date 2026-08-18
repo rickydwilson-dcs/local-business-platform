@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DCS — Homepage design library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0c0e;
+    --panel:#131518;
+    --panel-2:#191c20;
+    --line:#26292e;
+    --line-soft:#1e2126;
+    --fg:#f2f3f4;
+    --fg-soft:#a7acb3;
+    --fg-faint:#6d737b;
+    --accent:#ff5a2b;
+    --accent-soft:rgba(255,90,43,.14);
+    --r:14px;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --shell:1440px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ink);color:var(--fg);
+    font-family:'Inter Tight',system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:var(--shell);margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+
+  /* ── masthead ─────────────────────────────────────────── */
+  .masthead{border-bottom:1px solid var(--line-soft);position:sticky;top:0;z-index:50;
+    background:rgba(11,12,14,.82);backdrop-filter:blur(14px) saturate(140%)}
+  .masthead .wrap{display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;height:60px}
+  .brand{display:flex;align-items:center;gap:.7rem;font-weight:600;letter-spacing:-.01em}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft)}
+  .brand small{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--fg-faint);
+    letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+  .mast-meta{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--fg-faint);
+    letter-spacing:.06em;text-transform:uppercase}
+
+  /* ── hero ─────────────────────────────────────────────── */
+  .hero{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(2rem,4vw,3rem);
+    border-bottom:1px solid var(--line-soft)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    gap:clamp(2rem,6vw,5rem);align-items:end}
+  .eyebrow{display:inline-flex;align-items:center;gap:.55rem;
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--fg-faint);margin-bottom:1.4rem}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+  h1{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+    font-size:clamp(2.6rem,6.4vw,5.4rem);line-height:.98;letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lede{color:var(--fg-soft);font-size:clamp(.98rem,1.15vw,1.06rem);line-height:1.7;
+    max-width:46ch;margin:0}
+  .lede + .lede{margin-top:1rem}
+  .lede strong{color:var(--fg);font-weight:500}
+
+  /* ── controls ─────────────────────────────────────────── */
+  .bar{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;justify-content:space-between;
+    padding:1.4rem 0;border-bottom:1px solid var(--line-soft);position:sticky;top:60px;z-index:40;
+    background:rgba(11,12,14,.9);backdrop-filter:blur(14px)}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--fg-soft);background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;cursor:pointer;
+    transition:all .25s var(--ease);min-height:44px;display:inline-flex;align-items:center}
+  .chip:hover{border-color:#3a3f46;color:var(--fg)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .count{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--fg-faint);
+    letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+
+  /* ── grid ─────────────────────────────────────────────── */
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(1.1rem,2vw,1.75rem);padding:clamp(1.75rem,4vw,2.75rem) 0 4rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .5s var(--ease),border-color .4s,box-shadow .5s var(--ease);
+    opacity:0;transform:translateY(18px)}
+  .card.in{opacity:1;transform:none}
+  .card:hover{transform:translateY(-5px);border-color:#3c4147;
+    box-shadow:0 22px 48px -22px rgba(0,0,0,.85)}
+  .card[hidden]{display:none}
+
+  .frame{position:relative;aspect-ratio:16/11;overflow:hidden;background:#08090a;
+    border-bottom:1px solid var(--line)}
+  .frame iframe{position:absolute;top:0;left:0;width:1440px;height:1980px;border:0;
+    transform-origin:0 0;pointer-events:none;background:#fff}
+  .frame .veil{position:absolute;inset:0;z-index:2;
+    background:linear-gradient(to bottom,transparent 55%,rgba(11,12,14,.55) 100%)}
+  .frame .num{position:absolute;top:.7rem;left:.7rem;z-index:3;
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:500;letter-spacing:.1em;
+    background:rgba(8,9,10,.78);border:1px solid rgba(255,255,255,.14);color:#fff;
+    padding:.28rem .58rem;border-radius:6px;backdrop-filter:blur(6px)}
+  .frame .miss{position:absolute;inset:0;z-index:4;display:none;
+    align-items:center;justify-content:center;text-align:center;padding:1.5rem;
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--fg-faint);
+    background:repeating-linear-gradient(45deg,#0d0e10 0 10px,#111214 10px 20px)}
+  .card.missing .frame .miss{display:flex}
+  .card.missing .frame iframe{display:none}
+
+  .body{padding:1.15rem 1.25rem 1.35rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent)}
+  h2{margin:0;font-size:1.28rem;font-weight:600;letter-spacing:-.015em;line-height:1.2}
+  .card p{margin:0;color:var(--fg-soft);font-size:.9rem;line-height:1.58}
+  .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.15rem}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--fg-faint);border:1px solid var(--line);
+    border-radius:5px;padding:.22rem .45rem}
+  .spec{margin:.5rem 0 0;padding:.7rem 0 0;border-top:1px solid var(--line-soft);
+    display:grid;grid-template-columns:auto 1fr;gap:.3rem .7rem;align-items:baseline}
+  .spec dt{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--fg-faint)}
+  .spec dd{margin:0;font-size:.79rem;line-height:1.5;color:var(--fg-soft)}
+  .card.out{opacity:.5}
+  .card.out:hover{opacity:1}
+  .card.out .frame{filter:grayscale(.8)}
+  .card.out:hover .frame{filter:none}
+  .outnote{margin:0!important;font-size:.78rem!important;line-height:1.5;
+    color:#e0a08c!important;background:rgba(224,120,80,.08);
+    border-left:2px solid #c2603c;padding:.45rem .6rem;border-radius:0 5px 5px 0}
+  .outnote strong{color:#f0c0ac;font-weight:600}
+  .swatches{display:flex;gap:.3rem;margin-top:.35rem}
+  .sw{width:15px;height:15px;border-radius:4px;border:1px solid rgba(255,255,255,.14)}
+  .actions{margin-top:auto;padding-top:1rem;display:flex;gap:.5rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+    font-size:.85rem;font-weight:500;padding:.62rem 1rem;border-radius:9px;
+    border:1px solid var(--line);min-height:40px;transition:all .25s var(--ease)}
+  .btn-primary{background:var(--fg);color:var(--ink);border-color:var(--fg);flex:1}
+  .btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn-ghost{color:var(--fg-soft)}
+  .btn-ghost:hover{color:var(--fg);border-color:#3c4147}
+  .btn svg{width:14px;height:14px}
+
+  /* ── how to use ───────────────────────────────────────── */
+  .notes{border-top:1px solid var(--line-soft);padding:clamp(2.5rem,5vw,4rem) 0 5rem}
+  .notes-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+  .note h3{margin:0 0 .6rem;font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+  .note .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--accent);
+    letter-spacing:.12em;display:block;margin-bottom:.7rem}
+  .note p{margin:0;color:var(--fg-soft);font-size:.89rem;line-height:1.68}
+
+  footer{border-top:1px solid var(--line-soft);padding:1.5rem 0 3rem;
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--fg-faint);
+    letter-spacing:.06em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+    justify-content:space-between}
+
+  @media (max-width:1100px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .notes-grid{grid-template-columns:1fr;gap:1.75rem}
+  }
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:1.75rem;align-items:start}
+    .bar{position:static}
+  }
+  @media (max-width:620px){
+    .grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .card{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>Digital Consulting Services <small>Design Library</small></div>
+    <div class="mast-meta">Homepage · Rounds 1–2 · 17 Aug 2026</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Fifty-four directions · five briefs</span>
+        <h1>Fifty-four ways to build the <em>same homepage.</em></h1>
+      </div>
+      <div>
+        <p class="lede">Same business, same services, same prices, same real client work — <strong>fifty-four design directions across five briefs.</strong> Each was built by a different design skill, so they disagree with each other on purpose.</p>
+        <p class="lede"><strong>The brief was revised after this round.</strong> DCS builds websites for any small business, not only trades — and the site should feel like an elevated design studio, not an under-construction site notice. Six directions leaned into hoardings, dockets and hi-vis and are now off-brief. They're hidden by default and kept only as a record; switch to <em>All 19</em> to see them.</p>
+        <p class="lede">Open the rest full-screen, scroll the whole page, and tell me which to run with — or which bits of each to steal.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="bar">
+      <div class="chips" role="group" aria-label="Filter directions">
+        <button class="chip" data-filter="round5" aria-pressed="true">Round 5 — counterpoint bar (12)</button>
+        <button class="chip" data-filter="round4" aria-pressed="false">Round 4 (12)</button>
+        <button class="chip" data-filter="round3" aria-pressed="false">Round 3 (5)</button>
+        <button class="chip" data-filter="round2" aria-pressed="false">Round 2 (6)</button>
+        <button class="chip" data-filter="onbrief" aria-pressed="false">All on brief (36)</button>
+        <button class="chip" data-filter="all" aria-pressed="false">Everything (54)</button>
+        <button class="chip" data-filter="ruledout" aria-pressed="false">Off-brief (6)</button>
+        <button class="chip" data-filter="directed" aria-pressed="false">Art-directed</button>
+        <button class="chip" data-filter="impeccable" aria-pressed="false">Impeccable</button>
+        <button class="chip" data-filter="light" aria-pressed="false">Light</button>
+        <button class="chip" data-filter="dark" aria-pressed="false">Dark</button>
+        <button class="chip" data-filter="bold" aria-pressed="false">Bold</button>
+        <button class="chip" data-filter="calm" aria-pressed="false">Calm</button>
+        <button class="chip" data-filter="motion" aria-pressed="false">Motion-led</button>
+      </div>
+      <span class="count" id="count">Showing 12 of 12</span>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- cards injected -->
+    </div>
+  </div>
+
+  <section class="notes">
+    <div class="wrap notes-grid">
+      <div class="note">
+        <span class="n">HOW TO REVIEW</span>
+        <h3>Judge the direction, not the details</h3>
+        <p>These are prototypes, not the finished site. Wording, section order and spacing all get fixed in round 2. What matters now is whether the <em>feeling</em> is right — would a plumber trust it, and does it look like it came from somewhere expensive?</p>
+      </div>
+      <div class="note">
+        <span class="n">WHAT'S REAL</span>
+        <h3>The content is accurate</h3>
+        <p>Prices, tiers, client names, outcomes and testimonials all come straight from the live business. There are no stock photos anywhere — every visual is drawn in code, which is why they load instantly and will translate cleanly into the React build.</p>
+      </div>
+      <div class="note">
+        <span class="n">WHAT'S NEXT</span>
+        <h3>Shortlist, then round 2</h3>
+        <p>Pick two or three. Round 2 takes those further — real motion work, the inner pages, and a proper mobile pass — and only then does the winner get rebuilt as the actual site.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Digital Consulting Services — homepage design library</span>
+  <span>Static prototypes · no CMS · not deployed</span>
+</footer>
+
+<script>
+const DIRECTIONS = [
+  { n:"01", file:"home-01-studio-editorial.html", name:"Studio Editorial",
+    kicker:"High-end visual design",
+    desc:"The expensive one. Ink on warm paper, enormous typographic scale contrast, and the portfolio set as a hairline editorial index — hover a row and a browser mock of that client's site follows your cursor.",
+    fonts:"Fraunces · Instrument Sans",
+    moment:"Hero headline reveals line by line out of masked boxes, held until the real serif has loaded",
+    tags:["Serif display","Editorial index","Restraint"], tone:["light","calm"],
+    sw:["#F4F1EB","#141310","#BF3D22","#D6D0C0"] },
+
+  { n:"02", file:"home-02-bento-signal.html", name:"Bento Signal",
+    kicker:"UI/UX Pro Max · bento",
+    desc:"A trades agency with the engineering confidence of a product company. Every tile does a different job and holds real working miniature UI — a full CSS-drawn site, a rank widget, a live enquiry notifier, an East Sussex map.",
+    fonts:"Space Grotesk · Geist · JetBrains Mono",
+    moment:"A pointer-tracked spotlight sweeps the whole grid as one continuous field of light",
+    tags:["Bento grid","Miniature UI","Signal lime"], tone:["dark","bold","motion"],
+    sw:["#08090B","#15181D","#C4E85C","#A9B0B4"] },
+
+  { n:"03", file:"home-03-blueprint.html", name:"Blueprint",
+    kicker:"Industrial brutalist",
+    desc:"The agency shows its working. Laid out as an eleven-sheet drawing set — dimension lines, sheet codes, a running Y coordinate — with services as a spec table and pricing as a rate card, because a tradesperson trusts a spec more than a sales pitch.",
+    fonts:"Archivo (62.5% width) · IBM Plex Mono",
+    moment:"Every technical drawing inks itself onto the page, stroke by stroke, on its own measured path length",
+    tags:["Two inks","Drawing set","Rate card"], tone:["light","bold"],
+    sw:["#F2F1EC","#14140F","#E8471C","#8C8A7F"] },
+
+  { n:"04", file:"home-04-quiet-confidence.html", name:"Quiet Confidence",
+    kicker:"Minimalist UI",
+    desc:"The calmest option, built to relax a nervous customer. Warm monochrome, completely flat — no gradients or shadows anywhere in the file. Pricing is one honest table per payment option rather than competing cards.",
+    fonts:"Newsreader · Instrument Sans",
+    moment:"A sticky section label that cross-fades index and name as you scroll, on a left-margin rail at full width",
+    tags:["Warm mono","Flat","Conversational"], tone:["light","calm"],
+    sw:["#F7F4EF","#191713","#A2593B","#EFE9DF"] },
+
+  { n:"05", file:"home-05-kinetic.html", name:"Kinetic",
+    kicker:"Design taste · motion-led",
+    desc:"Scroll is the interface. The work moves, so you believe DCS can make things move. Carries 22 numbered motion annotations mapping each effect to its Framer or GSAP translation for the React rebuild.",
+    fonts:"Anybody (variable width) · Space Grotesk",
+    moment:"A scroll-pinned four-viewport sequence where the browser mock evolves conversation → draft → review → live",
+    tags:["Scroll-pinned","GPU motion","Annotated"], tone:["dark","motion","bold"],
+    sw:["#060A10","#C4F94E","#2FD9C8","#FF7A45"] },
+
+  { n:"06", status:"out", why:"hi-vis, hazard tape", file:"home-06-trade-ticket.html", name:"Trade Ticket",
+    kicker:"UI/UX Pro Max · brutalist",
+    desc:"A site notice, not a website — read in the customer's own visual language before they read a word of it. Runs as an actual job sheet: a duties split, a schedule of works, quotation dockets with tear-off perforations, a client sign-off.",
+    fonts:"Anton · Archivo · IBM Plex Mono",
+    moment:"Hazard-tape dividers scroll horizontally, and each portfolio outcome takes a rubber-stamp impact",
+    tags:["Hi-vis","Job sheet","Hard edges"], tone:["bold","light"],
+    sw:["#F2DF00","#0B0B0B","#EFEDE6","#D8341C"] },
+
+  { n:"07", file:"home-07-glass-atelier.html", name:"Glass Atelier",
+    kicker:"UI/UX Pro Max · glass",
+    desc:"A deep-midnight atelier where a slow aurora burns behind the page. Only the things that should float are glass — nav, stats, pricing, testimonials — and their edges and shadows obey a single light source.",
+    fonts:"Sora · Instrument Sans · JetBrains Mono",
+    moment:"Panels tilt ±3° toward the pointer while a specular highlight tracks the cursor across the glass",
+    tags:["Glassmorphism","Aurora","Depth"], tone:["dark","motion"],
+    sw:["#05060B","#101426","#7C6BFF","#F5C77E"] },
+
+  { n:"08", file:"home-08-ledger.html", name:"Ledger",
+    kicker:"Dataviz · proof-led",
+    desc:"Argues with evidence instead of adjectives — and labels every figure for whether it is measured or illustrative. The honesty is the design: a numbered \"Notes to the figures\" section, styled like notes to the accounts.",
+    fonts:"Inter Tight · IBM Plex Mono",
+    moment:"Chart paths draw in on normalised path length; KPIs count up in tabular figures, then relax to proportional at rest",
+    tags:["SVG charts","Measured vs illustrative","Notes"], tone:["light","calm"],
+    sw:["#F4F2ED","#141613","#1B5FC1","#C2410C"] },
+
+  { n:"09", file:"home-09-nightshift.html", name:"Nightshift",
+    kicker:"Stitch design taste",
+    desc:"Your website works the night shift so you don't have to. Near-black, asymmetric — no two sections share a column structure — and never still. Includes a 24-hour timeline from \"07:20 you load the van\" to \"03:00 security updates applied\".",
+    fonts:"Geist · Geist Mono",
+    moment:"A scroll-linked sodium line traces the left rail and branches into each section as it becomes active",
+    tags:["Asymmetric","Perpetual motion","Sodium"], tone:["dark","motion"],
+    sw:["#08090B","#0F1114","#FF9E2C","#4ADE80"] },
+
+  { n:"10", file:"home-10-workshop.html", name:"Workshop",
+    kicker:"UI/UX Pro Max · soft depth",
+    desc:"The friendliest option on the table — earthy clay surfaces wrapped around copy that names a nervous tradesperson's fears out loud and answers them straight. Averages 7.3 words a sentence.",
+    fonts:"Bricolage Grotesque · Nunito Sans",
+    moment:"Keycap buttons physically depress onto their edge; every shadow obeys one fixed light source at top-left",
+    tags:["Soft UI","Earthy","Objection-led"], tone:["light","calm"],
+    sw:["#EFE4D6","#2E2419","#C1553A","#6F8768"] },
+
+  { n:"11", file:"home-11-one-person.html", name:"One Person",
+    kicker:"High-end design · Ricky's voice",
+    desc:"The homepage as a signed letter. Correspondence structure, letterpress paper, a postmark and a drop cap — so \"you're hiring a person\" is the form of the page rather than a claim made on it. No avatar, no silhouette.",
+    fonts:"Instrument Serif · Newsreader · IBM Plex Mono",
+    moment:"The opening statement reveals word by word at reading pace, then an ink signature writes itself left to right",
+    tags:["First person","Letterpress","Drawn signature"], tone:["light","calm"],
+    sw:["#F2EDE3","#17140F","#A2301C","#1E2A45"] },
+
+  { n:"12", file:"home-12-showroom.html", name:"Showroom",
+    kicker:"UI/UX Pro Max · work-first",
+    desc:"A dark gallery where the portfolio is the page. The hero is a device-frame showroom holding a real CSS-drawn client site, and the accent colour isn't fixed — it tracks whichever trade you select.",
+    fonts:"Archivo · Inter Tight · IBM Plex Mono",
+    moment:"The trade selector re-themes the mock and re-tints the entire page — five trades, five full palettes",
+    tags:["Work-first","Trade selector","Device frames"], tone:["dark","motion","bold"],
+    sw:["#08080A","#F6F6F4","#E4231B","#3D7BFF"] },
+
+  { n:"13", status:"out", why:"merchant catalogue", file:"home-13-impeccable-shape.html", name:"The Merchant Catalogue",
+    kicker:"impeccable · shape",
+    desc:"The agency homepage as the document a tradesperson already trusts: a catalogue with a contents page, stock codes and a real price list. Answers \"what do I get, what does it cost\" before anyone has to ask.",
+    fonts:"Archivo (width axis) · Azeret Mono",
+    moment:"A thumb index of ten catalogue tabs tucked past the right edge, sliding out on hover and inverting as you scroll",
+    tags:["Catalogue","Press blue","Stock codes"], tone:["dark","bold"],
+    sw:["#0B2B3C","#E7EAE6","#F5B301","#B32D1F"] },
+
+  { n:"14", file:"home-14-impeccable-overdrive.html", name:"Overdrive",
+    kicker:"impeccable · overdrive",
+    desc:"Ambition as the argument — the direction that proves capability above the fold rather than claiming it in a paragraph, while keeping the phone number the loudest thing on the page.",
+    fonts:"Archivo · Martian Mono",
+    moment:"A live build demo on a near-black monitor field, with a tally-red counter strip that ships its true values in markup",
+    tags:["Maximal","Live demo","Tally red"], tone:["light","bold","motion"],
+    sw:["#E3E4DE","#0A0B0A","#E01D06","#1F5CFF"] },
+
+  { n:"15", status:"out", why:"scaffold hoarding", file:"home-15-impeccable-delight.html", name:"The Hoarding",
+    kicker:"impeccable · delight",
+    desc:"A website is the hoarding that never comes down. The scaffold banner works three weeks on one street; a proper site works every day on every street. Delight arrives once, in the footer.",
+    fonts:"Saira Condensed · Chivo · Azeret Mono",
+    moment:"The hoarding goes up — standards rise, mesh fades in, headlines roller on left-to-right, then the hazard boundary runs out across the viewport",
+    tags:["Scaffold","Drenched green","Scafftag"], tone:["dark","bold","motion"],
+    sw:["#0D3327","#4FBF89","#FFC72C","#F2F4EF"] },
+
+  { n:"16", status:"out", why:"road signage", file:"home-16-impeccable-distill.html", name:"Primary Route",
+    kicker:"impeccable · distill",
+    desc:"A homepage built like a UK motorway sign: one panel, one message, colour that means something, readable at speed by a plumber who isn't concentrating. Seven blocks, nothing optional.",
+    fonts:"Overpass (one family, 400/700/900)",
+    moment:"Approach — the hero sign resolves from small, blurred and low-contrast to full scale in one 950ms ease, once, like driving up to it",
+    tags:["Signage","One family","Yellow means act"], tone:["light","bold"],
+    sw:["#006B3C","#FFD100","#EDF1EE","#101010"] },
+
+  { n:"16b", status:"out", why:"tool case", file:"home-16b-impeccable-distill-rolled.html", name:"Trade Grade",
+    kicker:"impeccable · distill · seeded re-roll",
+    desc:"The same brief as Primary Route, re-run with impeccable's concept seed working. A tool case is distilled by manufacture — a routed recess for exactly what's included, and nothing optional rattling around inside.",
+    fonts:"Archivo (width axis 62–125) · Martian Mono",
+    moment:"Parts seat into their routed recesses — arriving from above and decelerating hard into place",
+    tags:["A/B re-roll","Tool case","Trigger red"], tone:["dark","bold"],
+    sw:["#101315","#0A7A72","#D9291C","#C9D2D3"] },
+
+  { n:"17", status:"out", why:"merchant counter", file:"home-17-impeccable-animate.html", name:"The Trade Counter",
+    kicker:"impeccable · animate",
+    desc:"You don't brief this agency, you order from it. Say the job and a docket writes itself, gets priced and gets stamped in front of you. Motion appears only where it explains cause and state.",
+    fonts:"Big Shoulders Display · Archivo · Courier Prime",
+    moment:"Paper in a channel — pick a trade and six docket lines write in along their rules, then a PRICED stamp lands",
+    tags:["Docket","Enamel green","No count-ups"], tone:["dark","motion"],
+    sw:["#15352C","#E6D6B4","#F5D34E","#B03526"] },
+
+  { n:"18", file:"home-18-impeccable-typeset.html", name:"Two Inks",
+    kicker:"impeccable · typeset + colorize",
+    desc:"A two-colour letterpress job for a design agency — ivy and cerise on chalk, built entirely from type, with rules set to the display face's own hairline. No photography at all.",
+    fonts:"Bodoni Moda (variable opsz) · Spectral — all serif, no mono",
+    moment:"The second ink registers — the headline prints under a clip wipe, and only when it finishes does the cerise rule land beneath it",
+    tags:["Two inks","Didone","OKLCH-checked"], tone:["light","calm"],
+    sw:["#F6F4ED","#00170A","#D11761","#DAD7C9"] },
+
+  { n:"20", file:"home-20-atelier.html", name:"The Pattern",
+    kicker:"round 2 · impeccable · free choice",
+    desc:"A website is a proven pattern cut to your measurements — one make, every kind of business. A dressmaking pattern envelope printed in two inks, which refuses the agency wall of portfolio thumbnails.",
+    fonts:"Archivo variable only — both axes, wdth 62–125 × wght 100–900",
+    moment:"Pattern lines trace on across sixteen marks, and the hero cycles four views as the range argument made operable",
+    tags:["Round 2","Two inks","Seed-rolled"], tone:["bold","motion"],
+    sw:["#1D2BA8","#D93A22","#EEEFF3","#14151C"] },
+
+  { n:"21", file:"home-21-the-range.html", name:"The Range",
+    kicker:"round 2 · breadth as the argument",
+    desc:"The client list is the argument — a gallery-quiet curated index where a fabric shop, a yoga studio and a scaffolder hang as equals, and you filter to your own sector and watch the page answer.",
+    fonts:"Syne · Schibsted Grotesk · DM Mono",
+    moment:"The index filter — sector choice re-flows the gallery, slides the coral rail, and rewrites the statement and count together",
+    tags:["Round 2","Nine CSS mocks","Real tablist"], tone:["light","calm"],
+    sw:["#E7E5DE","#0D2B2F","#D4553C","#14171A"] },
+
+  { n:"22", file:"home-22-quiet-authority.html", name:"Quiet Authority",
+    kicker:"round 2 · assured restraint",
+    desc:"Everything the reader needs and nothing they don't, set with the exactness of an architecture monograph. The only cool ground in the whole set — no warm tone appears anywhere, and that abstinence is the colour position.",
+    fonts:"Frank Ruhl Libre · Schibsted Grotesk · DM Mono",
+    moment:"The rule draw — every hairline scales from its left edge over 1000ms, staggered down the page, structure assembling itself",
+    tags:["Round 2","Cool grey","No icons"], tone:["light","calm"],
+    sw:["#E8EAED","#0C1017","#2C3E8C","#C4C9CF"] },
+
+  { n:"23", file:"home-23-colour-field.html", name:"Colour Field",
+    kicker:"round 2 · elevated through colour",
+    desc:"Seven edge-to-edge planes where every hue carries one fixed role, and the header repaints itself as you cross each seam. Proof that elevated doesn't mean beige — colour drawn from Klein and Le Corbusier, not signage.",
+    fonts:"Archivo variable (wdth axis) · Newsreader — sans on colour, serif on paper",
+    moment:"The colour-adaptive header cross-fades to whichever field owns the 1px band at its lower edge",
+    tags:["Round 2","Seven planes","0 of 238 fail"], tone:["bold","motion"],
+    sw:["#1B27B8","#0B4F3F","#C8331A","#F2ECE1"] },
+
+  { n:"24", file:"home-24-serif-modern.html", name:"Serif Modern",
+    kicker:"round 2 · contemporary luxury",
+    desc:"A near-black brand house where a variable Didone does the talking and the price is still the second thing you see. Optical size set by hand at every step, and reduced again on dark grounds where hairlines optically thin.",
+    fonts:"Playfair variable (opsz 5–1200) · Archivo variable",
+    moment:"The hero curtain — headline lines rise from masks while the plate unmasks by clip-path and drifts on scroll",
+    tags:["Round 2","Oxblood","Hand-set opsz"], tone:["dark","bold","motion"],
+    sw:["#14100F","#6B1226","#F2EDE6","#C8A16A"] },
+
+  { n:"25", file:"home-25-motion-studio.html", name:"Motion Studio",
+    kicker:"round 2 · motion as craft",
+    desc:"Moves the way an expensive object moves — everything travels a short distance along one axis and settles onto a hairline, never bouncing. Notable for what it cut: seven effects removed and reported.",
+    fonts:"Familjen Grotesk · Schibsted Grotesk · Spline Sans Mono",
+    moment:"The sector register — one ruby indicator travels a six-sector track with slight ease-in, because a carriage has mass",
+    tags:["Round 2","Motion cut list","Rebuild spec"], tone:["light","motion","calm"],
+    sw:["#E7E8E3","#101A1C","#A3203C","#C3C6BF"] },
+
+  { n:"26", file:"home-26-spectrum.html", name:"Spectrum",
+    kicker:"round 3 · atmospheric colour",
+    desc:"A neutral studio with weather moving through it. Enormous grainy gradient masses drift across the rooms rather than painting them — dusk-to-solar at full saturation, nothing like the reference's pastels.",
+    fonts:"Geist variable — one family · 166px display at 1440",
+    moment:"Five bloom masses drifting on 46–74s cycles under a per-word grey→bone resolve",
+    tags:["Round 3","Blooms as furniture","166px"], tone:["dark","bold","motion"],
+    sw:["#0C0C0E","#3B2BF0","#E8134F","#FFB020"] },
+
+  { n:"27", file:"home-27-poster.html", name:"Poster",
+    kicker:"round 3 · flat blocks",
+    desc:"A plain room hung with loud objects. Neutral shell throughout; every saturated colour is a thing — a work tile, a marquee band, a price chip, a letter arriving. Zero gradients, shadows or blurs on the page.",
+    fonts:"Schibsted Grotesk — one family · 144px display at 1440",
+    moment:"Per-character hero reveal where letters arrive in colour and resolve to ink",
+    tags:["Round 3","Riso chord","0/265 contrast fails"], tone:["light","bold","motion"],
+    sw:["#F3F3F1","#D6006B","#00D2D8","#5B21E0"] },
+
+  { n:"28", file:"home-28-blackout.html", name:"Blackout",
+    kicker:"round 3 · one accent, max contrast",
+    desc:"Near-black room, one electric colour, the biggest type in the thirty. Glyphs land in colour and settle to white, so the accent is something the page does rather than something it's painted with.",
+    fonts:"Switzer — one family, weight 400 throughout · 196px display at 1440",
+    moment:"Per-character assembly at 196px, each glyph arriving voltage and fading to neutral",
+    tags:["Round 3","196px","Voltage cyan"], tone:["dark","bold","motion"],
+    sw:["#08080A","#22E4FF","#EDEFF2","#26262E"] },
+
+  { n:"29", file:"home-29-chromatic.html", name:"Chromatic",
+    kicker:"round 3 · colour in the type",
+    desc:"The grounds carry nothing; every colour is inside a letterform. UI chrome is strictly monochrome — buttons, rules and panels are ink or paper only — so colour reads as furniture, never as walls.",
+    fonts:"Archivo variable, both axes · 138px display at 1440",
+    moment:"Colour travelling along each line, with scroll-driven weight and width breathing",
+    tags:["Round 3","Gradient type","4.70:1 measured"], tone:["light","bold","motion"],
+    sw:["#FBFBFC","#3B14E0","#C4108A","#DE1252"] },
+
+  { n:"30", file:"home-30-momentum.html", name:"Momentum",
+    kicker:"round 3 · motion-maximal",
+    desc:"Still and expensive when you stop, kinetic when you move. Ink-and-bone architecture with every saturated colour attached to something moving — marquees, scramble, velocity-reactive type.",
+    fonts:"Archivo variable — one family · 160px display at 1440",
+    moment:"A velocity bus writing --vel to :root, so type surges with scroll speed and settles after 600ms",
+    tags:["Round 3","Velocity bus","Still on reduced-motion"], tone:["dark","bold","motion"],
+    sw:["#0B0B0C","#FF3B14","#D8FF3E","#1B34E8"] },
+
+  { n:"31", file:"home-31-solar-adaptive.html", name:"Solar · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"Bright orange leads, deep violet counters — your two favourite colours in one page. They never share an edge; every meeting is brokered by a neutral gutter.",
+    fonts:"Schibsted Grotesk · 135px display at 1440",
+    moment:"Bar plays six tones down the page; --bar-bg/--bar-fg make its contrast structurally correct",
+    tags:["Round 4","Nav A","Fits 11 sizes"], tone:["light","dark","bold","motion"],
+    sw:["#FF5A00","#4C10A8","#B69CFF","#F3F3F1"] },
+
+  { n:"32", file:"home-32-solar-glass.html", name:"Solar · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"Same orange-and-violet chord as 31, with a floating glass island instead. Violet can only be an object in bright rooms and orange only in dark ones, so every meeting is a hard value cut.",
+    fonts:"Schibsted Grotesk · 136px display at 1440",
+    moment:"Violet glass measurably refracts what passes beneath — rgb(88,80,102) over paper, rgb(24,16,41) over ink",
+    tags:["Round 4","Nav B","Glass 6.86:1"], tone:["light","dark","bold","motion"],
+    sw:["#FF5A1F","#C03A0C","#45189E","#F3F3F1"] },
+
+  { n:"33", file:"home-33-ultra-adaptive.html", name:"Ultra · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"Purple as the star with an acid counter. Acid never occupies a field larger than 48px on a dark ground, so it shares an edge with nothing darker than bone — no hi-vis anywhere.",
+    fonts:"Schibsted Grotesk · 132px display at 1440",
+    moment:"Bar validated 100/100 against elementFromPoint; the heading rail is what makes the viewport rule possible",
+    tags:["Round 4","Nav A","Heading rail"], tone:["light","dark","bold","motion"],
+    sw:["#7A22FF","#3A0F8F","#A8E80C","#C9A6FF"] },
+
+  { n:"34", file:"home-34-ultra-glass.html", name:"Ultra · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"Deliberately adopted 33's exact hex values so the nav is the only variable between them. Centred without transform, because that would create a second containing-block trap.",
+    fonts:"Schibsted Grotesk · 144px display at 1440",
+    moment:"Glass labels measured 5.35:1 by histogram sampling — a naive read said 3.34:1 and was wrong",
+    tags:["Round 4","Nav B","Paired to 33"], tone:["light","dark","bold","motion"],
+    sw:["#7A22FF","#3A0F8F","#A8E80C","#C9A6FF"] },
+
+  { n:"35", file:"home-35-flare-adaptive.html", name:"Flare · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"Persimmon and cobalt. Type on orange is always ink, never white — white-on-orange is the airline signature, black-on-orange is the Pantone one. The two never touch.",
+    fonts:"Schibsted Grotesk · 138px display at 1440",
+    moment:"Bar plays twelve tones; validated 86/86 against elementFromPoint through the seam zone",
+    tags:["Round 4","Nav A","Ink on orange"], tone:["light","dark","bold","motion"],
+    sw:["#E9541D","#1740C8","#F3F3F1","#101014"] },
+
+  { n:"36", file:"home-36-flare-glass.html", name:"Flare · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"Same chord as 35, glass nav instead. Beats the budget-airline read with a value split rather than a hue choice: orange is the light chromatic carrying ink, cobalt the deep one carrying white.",
+    fonts:"Schibsted Grotesk · 137px display at 1440",
+    moment:"Light glass with ink labels crosses every ground — 7.88:1 worst over ink, 17.99:1 best",
+    tags:["Round 4","Nav B","Value split"], tone:["light","dark","bold","motion"],
+    sw:["#F24E15","#0F3BC9","#A9C2FF","#F3F3F1"] },
+
+  { n:"37", file:"home-37-rose-adaptive.html", name:"Rose · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"A single-hue system answering the pink question directly: never white on the rose, always near-black. Jamie Reid and acid house rather than cosmetics. Pink is the joinery, then twice a whole room.",
+    fonts:"Schibsted Grotesk · 138px display at 1440",
+    moment:"Inverted the nav architecture — elementFromPoint drives the bar, geometry is fallback. 2080/2080 agreement",
+    tags:["Round 4","Nav A","Single hue"], tone:["light","dark","bold","motion"],
+    sw:["#FF1F70","#C4004A","#EFEBE3","#0D0C10"] },
+
+  { n:"38", file:"home-38-rose-glass.html", name:"Rose · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"The only chromatic value in the file is one pink. Ink-on-pink and pink-on-ink are both exactly 5.00:1, which enforces black type on every pink fill. Punk poster, not blush.",
+    fonts:"Schibsted Grotesk · 144px display at 1440",
+    moment:"Neutral smoked glass that blooms pink on its own when pink content passes beneath — colour borrowed, never painted",
+    tags:["Round 4","Nav B","One colour"], tone:["light","dark","bold","motion"],
+    sw:["#FF0F6B","#0D0D10","#E6E2D9","#F5F3EE"] },
+
+  { n:"39", file:"home-39-verdant-adaptive.html", name:"Verdant · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"Emerald and coral, avoiding orange, purple and pink entirely. Emerald takes near-black type, not white — fintech green is always white-on-green, so that one move breaks the finance read.",
+    fonts:"Schibsted Grotesk · 140px display at 1440",
+    moment:"Coral is the joinery, a 5px seam rule holding the stack together. Emerald vs coral is 1.10:1, so they never abut",
+    tags:["Round 4","Nav A","No orange/purple/pink"], tone:["light","dark","bold","motion"],
+    sw:["#00A05E","#FF5B41","#00563A","#F3F3F1"] },
+
+  { n:"40", file:"home-40-verdant-glass.html", name:"Verdant · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"Deep blue-shifted emerald with a jade bright register. Declined the garden photograph on purpose — a garden tile inside an emerald page collapses into the eco read it was built to avoid.",
+    fonts:"Schibsted Grotesk · 140px display at 1440",
+    moment:"Constant emerald-black glass rather than adaptive, so it doesn't duplicate 39's variable. 6.6:1 worst case",
+    tags:["Round 4","Nav B","Coral seam lip"], tone:["light","dark","bold","motion"],
+    sw:["#00784F","#00C27A","#F2452E","#F3F3F1"] },
+
+  { n:"41", file:"home-41-tide-adaptive.html", name:"Tide · adaptive bar",
+    kicker:"round 4 · poster variation",
+    desc:"Deep teal carries whole panels as a near-neutral; crimson lands in exactly five places and means a lot because it does so little. The coolest chord in the set.",
+    fonts:"Schibsted Grotesk · 141px display at 1440",
+    moment:"Bar ordered by (z-index, DOM index) — the compositor's real order. 204 checks, zero mismatches",
+    tags:["Round 4","Nav A","Crimson ×5"], tone:["light","dark","bold","motion"],
+    sw:["#04383A","#067A76","#0AAFA8","#C8102E"] },
+
+  { n:"42", file:"home-42-tide-glass.html", name:"Tide · glass island",
+    kicker:"round 4 · poster variation",
+    desc:"Teal glass over a neutral shell — the most promising combination in the round for the treatment. Crimson could not hold on glass at 1.80:1, so it stays on opaque fields only.",
+    fonts:"Schibsted Grotesk · 144px display at 1440",
+    moment:"Glass sampled every 100px of scroll: 7.49:1 worst over the paper hero, 14.69:1 over dark",
+    tags:["Round 4","Nav B","12 sizes verified"], tone:["light","dark","bold","motion"],
+    sw:["#04353B","#05555E","#10ADB4","#C0102F"] },
+
+  { n:"43", file:"home-43-ultra-counterpoint.html", name:"Ultra · Counterpoint",
+    kicker:"round 5 · chosen direction",
+    desc:"Ultra's chord with Flare's bar behaviour: the bar counterpoints each section instead of matching it. Ink over the paper hero, purple over light sections, plum over the acid band, paper over the darks.",
+    fonts:"Schibsted Grotesk · 132px display at 1440",
+    moment:"The bar is always a visible band of contrast rather than dissolving into the ground beneath",
+    tags:["Round 5","Chromatic counterpoint","Nav A"], tone:["light","dark","bold","motion"],
+    sw:["#7A22FF","#3A0F8F","#A8E80C","#F3F3F1"] },
+
+  { n:"44", file:"home-44-ultra-acid.html", name:"Ultra · Acid counterpoint",
+    kicker:"round 5 · chosen direction",
+    desc:"The loudest of the three. Acid becomes the bar itself over light sections — but never over a dark one, which would be the hi-vis composition this chord was built to avoid. Purple carries the dark sections.",
+    fonts:"Schibsted Grotesk · 132px display at 1440",
+    moment:"An acid bar arriving over bone is the most arresting moment in the set",
+    tags:["Round 5","Acid bar","Nav A"], tone:["light","dark","bold","motion"],
+    sw:["#A8E80C","#7A22FF","#3A0F8F","#F3F3F1"] },
+
+  { n:"45", file:"home-45-ultra-tonal.html", name:"Ultra · Tonal flip",
+    kicker:"round 5 · chosen direction",
+    desc:"The disciplined reading of contrast: the bar is only ever the tonal opposite — ink over every light section, paper over every dark one, no chromatics in the bar at all. Colour stays entirely in the content.",
+    fonts:"Schibsted Grotesk · 132px display at 1440",
+    moment:"A hard black-white flip at every seam; the chord never appears in the chrome",
+    tags:["Round 5","Neutral bar","Nav A"], tone:["light","dark","bold","motion"],
+    sw:["#101014","#F3F3F1","#7A22FF","#A8E80C"] },
+
+  { n:"46", file:"home-46-ultra-counterpoint-light.html", name:"Ultra · Counterpoint · light hero",
+    kicker:"round 5 · light hero",
+    desc:"The same counterpoint rhythm as 43 with the original light hero restored, so the two can be compared directly. Carries the breathing-room pass.",
+    fonts:"Schibsted Grotesk · 126px display at 1440",
+    moment:"Ink bar over the paper hero, purple over light sections, paper over the darks",
+    tags:["Round 5","Light hero","Nav A"], tone:["light","bold","motion"],
+    sw:["#F3F3F1","#7A22FF","#3A0F8F","#A8E80C"] },
+
+  { n:"47", file:"home-47-ultra-acid-light.html", name:"Ultra · Acid · light hero",
+    kicker:"round 5 · light hero",
+    desc:"Acid counterpoint with the light hero. The acid price chip survives here — on a paper ground it is not the hi-vis pairing it would be on black.",
+    fonts:"Schibsted Grotesk · 126px display at 1440",
+    moment:"An acid bar arriving over bone, with the hero still in paper",
+    tags:["Round 5","Light hero","Acid chip"], tone:["light","bold","motion"],
+    sw:["#F3F3F1","#A8E80C","#7A22FF","#3A0F8F"] },
+
+  { n:"48", file:"home-48-ultra-tonal-light.html", name:"Ultra · Tonal flip · light hero",
+    kicker:"round 5 · light hero",
+    desc:"The disciplined bar — only ever ink over light and paper over dark — with the light hero kept. The quietest of the six Ultra readings.",
+    fonts:"Schibsted Grotesk · 126px display at 1440",
+    moment:"A hard black-white flip at every seam, chord confined entirely to content",
+    tags:["Round 5","Light hero","Neutral bar"], tone:["light","calm","motion"],
+    sw:["#F3F3F1","#101014","#7A22FF","#A8E80C"] },
+
+  { n:"49", file:"home-49-poster-counterpoint.html", name:"Poster chord · Counterpoint",
+    kicker:"round 5 · original Poster colours",
+    desc:"Poster's own riso chord — magenta, violet and cyan — on the round 5 structure: counterpoint bar, dark hero, breathing room. The chord that started this branch, with everything learned since.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"Magenta plate on a black hero, magenta and violet bars counterpointing the light sections",
+    tags:["Round 5","Poster chord","Dark hero"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#5B21E0","#00D2D8","#101014"] },
+
+  { n:"50", file:"home-50-poster-cyan.html", name:"Poster chord · Cyan counterpoint",
+    kicker:"round 5 · original Poster colours",
+    desc:"The loudest Poster reading — cyan becomes the bar itself over light sections. Cyan is not hazard-coded the way acid is, so it can go where acid could not.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"A full cyan bar crossing the offer section, against a magenta marquee",
+    tags:["Round 5","Poster chord","Cyan bar"], tone:["dark","bold","motion"],
+    sw:["#00D2D8","#D6006B","#5B21E0","#101014"] },
+
+  { n:"51", file:"home-51-poster-tonal.html", name:"Poster chord · Tonal flip",
+    kicker:"round 5 · original Poster colours",
+    desc:"Poster's chord with the neutral bar — ink over light, paper over dark, no chromatics in the chrome at all. Colour stays entirely in the content.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"The chord never appears in the bar; the hard tonal flip carries the rhythm",
+    tags:["Round 5","Poster chord","Neutral bar"], tone:["dark","calm","motion"],
+    sw:["#101014","#D6006B","#5B21E0","#00D2D8"] },
+
+  { n:"52", file:"home-52-poster-indigo.html", name:"Poster · Indigo tertiary",
+    kicker:"round 5 · tertiary option",
+    desc:"Violet swapped for indigo — cooler and deeper, sitting between magenta and cyan rather than leaning toward the magenta. The most separation of the three alternatives.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"White holds at 11.3:1 on indigo, the strongest of the four tertiaries",
+    tags:["Round 5","Tertiary option","Indigo"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#2B1FA8","#00D2D8","#101014"] },
+
+  { n:"53", file:"home-53-poster-oxblood.html", name:"Poster · Oxblood tertiary",
+    kicker:"round 5 · tertiary option",
+    desc:"Violet swapped for oxblood — warms the whole grid and harmonises with the magenta instead of contrasting it. The trade-off is that the two warm tiles read closer together.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"A warm three-colour grid where magenta and oxblood share a family",
+    tags:["Round 5","Tertiary option","Oxblood"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#8E0F3C","#00D2D8","#101014"] },
+
+  { n:"54", file:"home-54-poster-teal.html", name:"Poster · Deep teal tertiary",
+    kicker:"round 5 · tertiary option",
+    desc:"Violet swapped for deep teal — pulls toward the cyan and leaves magenta as the only warm note. The most harmonious, though it effectively reduces the chord to two hues plus neutrals.",
+    fonts:"Schibsted Grotesk · 101px display at 1440",
+    moment:"Teal and cyan as one family, magenta alone against them",
+    tags:["Round 5","Tertiary option","Deep teal"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#065E63","#00D2D8","#101014"] }
+];
+
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const EXT   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v8H3V6h8"/></svg>';
+
+const grid = document.getElementById('grid');
+
+grid.innerHTML = DIRECTIONS.map(d => `
+  <article class="card${d.status==='out' ? ' out' : ''}" data-tone="${d.tone.join(' ')} ${parseInt(d.n,10) >= 43 ? 'round5' : (parseInt(d.n,10) >= 31 ? 'round4' : (parseInt(d.n,10) >= 26 ? 'round3' : (parseInt(d.n,10) >= 20 ? 'round2' : (parseInt(d.n,10) <= 12 ? 'directed' : 'impeccable'))))} ${d.status==='out' ? 'ruledout' : 'onbrief'}">
+    <div class="frame">
+      <span class="num">${d.n}</span>
+      <iframe src="${d.file}" title="${d.name} homepage preview" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="miss">Prototype not built yet<br>${d.file}</div>
+    </div>
+    <div class="body">
+      <span class="kicker">${d.kicker}</span>
+      <h2>${d.name}</h2>
+      ${d.status==='out' ? `<p class="outnote"><strong>Off-brief since v2</strong> — ${d.why}. Kept as a record, not a candidate.</p>` : ''}
+      <p>${d.desc}</p>
+      <div class="tags">${d.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      <dl class="spec">
+        <dt>Type</dt><dd>${d.fonts}</dd>
+        <dt>Motion</dt><dd>${d.moment}</dd>
+      </dl>
+      <div class="swatches" aria-hidden="true">${d.sw.map(c => `<span class="sw" style="background:${c}"></span>`).join('')}</div>
+      <div class="actions">
+        <a class="btn btn-primary" href="${d.file}">Open ${ARROW}</a>
+        <a class="btn btn-ghost" href="${d.file}" target="_blank" rel="noopener" aria-label="Open ${d.name} in a new tab">${EXT}</a>
+      </div>
+    </div>
+  </article>
+`).join('');
+
+/* scale the live preview iframes to fit their frame */
+function fitFrames(){
+  document.querySelectorAll('.frame').forEach(f => {
+    const iframe = f.querySelector('iframe');
+    if (!iframe) return;
+    iframe.style.transform = `scale(${f.clientWidth / 1440})`;
+  });
+}
+fitFrames();
+window.addEventListener('resize', fitFrames);
+
+/* flag prototypes that aren't on disk yet */
+document.querySelectorAll('.card').forEach(card => {
+  const iframe = card.querySelector('iframe');
+  iframe.addEventListener('error', () => card.classList.add('missing'));
+});
+
+/* filters */
+const countEl = document.getElementById('count');
+
+function applyFilter(f){
+  let shown = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const match = f === 'all' || card.dataset.tone.split(' ').includes(f);
+    card.hidden = !match;
+    if (match) shown++;
+  });
+  countEl.textContent = `Showing ${shown} of ${DIRECTIONS.length}`;
+  fitFrames();
+}
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+    applyFilter(chip.dataset.filter);
+  });
+});
+
+/* default view hides the six the revised brief rules out */
+applyFilter('round5');
+
+/* reveal */
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduce || !('IntersectionObserver' in window)) {
+  document.querySelectorAll('.card').forEach(c => c.classList.add('in'));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.card').forEach(c => io.observe(c));
+}
+</script>
+</body>
+</html>

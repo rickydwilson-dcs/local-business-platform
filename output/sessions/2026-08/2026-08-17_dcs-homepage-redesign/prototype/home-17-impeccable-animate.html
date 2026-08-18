@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — websites for tradespeople, built at the counter</title>
+<meta name="description" content="Websites for UK tradespeople. Tell me the job on one call — I write it, design it, build it, host it and keep it running. Setup from £995, or £45 a month with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Archivo:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   THE TRADE COUNTER — colour, material and type
+   Ground is the counter itself: enamelled spruce green, the colour of an old
+   builders' merchant fascia. Everything the visitor is given is paper laid on
+   that counter — manila docket card, canary carbon copy, pink flimsy.
+   Colour strategy: full palette, committed ground. The green owns the page.
+   ========================================================================== */
+:root{
+  --counter:      #15352C;
+  --counter-deep: #0C221C;
+  --counter-lift: #1C4436;
+  --rule:         #2E6350;
+  --rule-soft:    #23503F;
+
+  --manila:       #E6D6B4;
+  --manila-deep:  #D3BE93;
+  --manila-edge:  #C0A97C;
+  --canary:       #F5D34E;
+  --canary-deep:  #E0B92F;
+  --flimsy:       #E7BDB2;
+
+  --ink:          #1A1512;
+  --ink-soft:     #57493A;
+  --biro:         #1B3F8F;
+  --stamp:        #B03526;
+
+  --fore:         #F1E7D2;
+  --fore-2:       #B8C9BF;
+
+  --shadow-card:  0 10px 22px -12px rgba(6,20,16,.85), 0 2px 4px -1px rgba(6,20,16,.5);
+  --shadow-lift:  0 20px 40px -18px rgba(6,20,16,.9), 0 4px 8px -2px rgba(6,20,16,.55);
+
+  /* Motion grammar — PAPER IN A CHANNEL.
+     Nothing on this page fades in place. Anything that changes travels along
+     an axis, and is displaced by whatever replaces it. Three durations only. */
+  --t-feedback: 130ms;   /* acknowledgement: press, hover, focus            */
+  --t-state:    280ms;   /* a state legibly changing: slot, tab, header     */
+  --t-focal:    420ms;   /* the authored arrival: a docket line, a price    */
+  --ease-in-place: cubic-bezier(.16,1,.3,1);      /* confident arrival      */
+  --ease-out-fast: cubic-bezier(.4,0,1,1);        /* exits leave faster     */
+  /* Critically damped, not springy. A real meter movement is deliberately
+     damped so the needle never overshoots the value it is reporting; a card
+     dropping into a slot behaves the same way. Heavier tail, no bounce. */
+  --ease-settle:   cubic-bezier(.19,1,.22,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scrollbar-color: var(--manila-deep) var(--counter-deep);
+}
+body{
+  margin:0;
+  background:var(--counter);
+  color:var(--fore);
+  font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:1.0625rem;
+  line-height:1.62;
+  font-synthesis-weight:none;
+  overflow-x:hidden;
+}
+
+/* Browser surfaces — the parts nobody draws still belong to the design. */
+::selection{background:var(--canary);color:var(--ink);text-shadow:none}
+::-webkit-scrollbar{width:13px;height:13px}
+::-webkit-scrollbar-track{background:var(--counter-deep)}
+::-webkit-scrollbar-thumb{background:var(--manila-deep);border:3px solid var(--counter-deep);border-radius:0}
+::-webkit-scrollbar-thumb:hover{background:var(--manila)}
+:root{caret-color:var(--biro)}
+
+/* Focus: a second offset keyline, the way a marker outline is doubled.
+   Not a browser default ring, and never removed. */
+:where(a,button,[tabindex]):focus-visible{
+  outline:2px solid var(--canary);
+  outline-offset:3px;
+  border-radius:1px;
+}
+.on-paper:focus-visible{outline-color:var(--biro)}
+
+h1,h2,h3,h4{
+  font-family:'Big Shoulders Display','Haettenschweiler','Arial Narrow',sans-serif;
+  font-weight:800;
+  margin:0;
+  letter-spacing:-.012em;
+  text-wrap:balance;
+}
+p{margin:0 0 1.05em}
+p:last-child{margin-bottom:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+
+.wrap{width:min(1320px,100% - 2.6rem);margin-inline:auto}
+.wrap-tight{width:min(980px,100% - 2.6rem);margin-inline:auto}
+.measure{max-width:66ch}
+.tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.skip{
+  position:absolute;left:.75rem;top:-4rem;z-index:200;
+  background:var(--canary);color:var(--ink);
+  padding:.7rem 1.1rem;font-weight:700;text-decoration:none;
+  transition:top var(--t-state) var(--ease-in-place);
+}
+.skip:focus{top:.75rem}
+
+/* label — a printed field label on an artifact. Never sits above a heading. */
+.label{
+  font-family:'Archivo',sans-serif;font-size:.6875rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1.3;
+}
+
+/* ---------------------------------------------------------------- BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  min-height:52px;padding:.85rem 1.5rem;
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:.9375rem;
+  letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer;
+  background:var(--canary);color:var(--ink);
+  box-shadow:0 4px 0 0 var(--canary-deep);
+  transition:transform var(--t-feedback) var(--ease-in-place),
+             box-shadow var(--t-feedback) var(--ease-in-place),
+             background var(--t-feedback) linear;
+}
+.btn:hover{background:#FFE066;transform:translateY(-2px);box-shadow:0 6px 0 0 var(--canary-deep)}
+/* Press: the button physically travels the height of its own edge and the edge
+   disappears under it. The control looks pressed because it IS pressed. */
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 0 var(--canary-deep)}
+.btn-ghost{
+  background:transparent;color:var(--fore);
+  box-shadow:inset 0 0 0 1.5px var(--rule);
+}
+.btn-ghost:hover{background:var(--counter-lift);color:var(--fore);box-shadow:inset 0 0 0 1.5px var(--canary);transform:translateY(-2px)}
+.btn-ghost:active{transform:translateY(0)}
+
+/* ----------------------------------------------------------------- HEADER */
+.fascia{
+  position:sticky;top:0;z-index:100;
+  background:var(--counter);
+  border-bottom:1px solid transparent;
+  transition:background var(--t-state) linear,
+             border-color var(--t-state) linear,
+             box-shadow var(--t-state) linear;
+}
+/* Header state change: once the counter-top has scrolled away, this bar is no
+   longer part of the counter — it is floating above the page, so it gains a
+   ground, a rule and an offset shadow to say so. */
+.fascia.is-lifted{
+  background:var(--counter-deep);
+  border-bottom-color:var(--rule-soft);
+  box-shadow:0 12px 28px -20px rgba(0,0,0,.9);
+}
+.fascia-in{
+  display:flex;align-items:center;gap:1.4rem;padding-block:.9rem;
+  transition:padding-block var(--t-state) var(--ease-in-place);
+}
+.fascia.is-lifted .fascia-in{padding-block:.4rem}
+.brand{display:flex;align-items:center;text-decoration:none;flex:0 0 auto}
+/* The signboard shrinks by scale, not by re-laying-out its box: `scale` and
+   `translate` are independent properties, so the hover lift and the lifted
+   state compose without either one clobbering the other, and neither touches
+   layout. */
+.brand-plate{
+  background:var(--manila);padding:.5rem .7rem;
+  box-shadow:var(--shadow-card);
+  transform-origin:left center;
+  transition:translate var(--t-feedback) var(--ease-in-place),
+             scale var(--t-state) var(--ease-in-place);
+}
+.brand:hover .brand-plate{translate:0 -2px}
+.brand-plate img{width:138px;height:69px;object-fit:contain}
+.fascia.is-lifted .brand-plate{scale:.68}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:.35rem}
+.nav a{
+  position:relative;text-decoration:none;padding:.55rem .8rem;
+  font-size:.9375rem;font-weight:500;color:var(--fore);
+}
+/* Hover on a nav item draws its rule from the left, the way a line is written
+   along a ruled docket. Same grammar as every other arrival on the page. */
+.nav a::after{
+  content:"";position:absolute;left:.8rem;right:.8rem;bottom:.28rem;height:2px;
+  background:var(--canary);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-state) var(--ease-in-place);
+}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+.fascia-cta{display:flex;align-items:center;gap:.7rem;margin-left:.6rem}
+.fascia-tel{
+  font-family:'Courier Prime',monospace;font-size:.9375rem;font-weight:700;
+  text-decoration:none;color:var(--fore);white-space:nowrap;
+  border-bottom:1.5px solid var(--rule);padding-bottom:2px;
+  transition:border-color var(--t-feedback) linear,color var(--t-feedback) linear;
+}
+.fascia-tel:hover{color:var(--canary);border-color:var(--canary)}
+
+.burger{
+  display:none;width:52px;height:52px;margin-left:auto;
+  background:var(--counter-lift);border:1px solid var(--rule);cursor:pointer;
+  align-items:center;justify-content:center;
+}
+.burger svg{width:24px;height:24px}
+.burger rect{fill:var(--fore);transition:transform var(--t-state) var(--ease-in-place),opacity 120ms linear}
+.burger[aria-expanded="true"] rect:nth-child(1){transform:translate(0,7px) rotate(45deg);transform-origin:center}
+.burger[aria-expanded="true"] rect:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] rect:nth-child(3){transform:translate(0,-7px) rotate(-45deg);transform-origin:center}
+
+/* Mobile board: a slotted price board dropping into its channel. */
+.board{
+  position:fixed;inset:0 0 auto 0;z-index:99;
+  background:var(--counter-deep);
+  border-bottom:3px solid var(--canary);
+  padding:110px 1.3rem 2rem;
+  transform:translateY(-102%);
+  visibility:hidden;
+  transition:transform 320ms var(--ease-in-place),visibility 0s linear 320ms;
+}
+.board.is-open{transform:translateY(0);visibility:visible;transition:transform 340ms var(--ease-in-place),visibility 0s linear 0s}
+.board a{
+  display:block;text-decoration:none;padding:.95rem 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:1.7rem;
+  letter-spacing:.01em;
+}
+.board a:hover{color:var(--canary)}
+.board .btn{margin-top:1.6rem;width:100%;justify-content:center}
+.board-tel{
+  display:block;margin-top:1rem;text-align:center;
+  font-family:'Courier Prime',monospace;font-weight:700;
+  border-bottom:0!important;
+}
+
+/* ------------------------------------------------------------------- HERO */
+.counter{position:relative;padding-block:clamp(2.6rem,6vw,5rem) 0;overflow:hidden}
+.counter::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(245,211,78,.10), transparent 62%),
+    radial-gradient(90% 80% at 92% 12%, rgba(27,63,143,.16), transparent 60%);
+}
+.counter-grid{
+  position:relative;display:grid;gap:clamp(2.2rem,4vw,3.4rem);
+  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  align-items:start;
+}
+h1{
+  font-size:clamp(3rem,7.4vw,5.6rem);line-height:.86;letter-spacing:-.022em;
+  font-weight:900;margin-bottom:1.5rem;
+}
+h1 .h1-b{display:block;color:var(--canary)}
+.standfirst{font-size:clamp(1.0625rem,1.35vw,1.1875rem);color:var(--fore);max-width:52ch}
+.standfirst strong{color:var(--canary);font-weight:600}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2rem}
+.hero-note{
+  margin-top:1.7rem;padding-top:1.2rem;border-top:1px solid var(--rule-soft);
+  color:var(--fore-2);font-size:.9375rem;max-width:46ch;
+}
+.hero-note b{color:var(--fore);font-weight:600}
+
+/* -------------------------------------------------------------- THE DOCKET */
+.docket{
+  position:relative;background:var(--manila);color:var(--ink);
+  box-shadow:var(--shadow-lift);
+  padding:1.5rem 1.5rem 1.35rem;
+}
+/* The carbon copy underneath. Static on purpose — two offset sheets already
+   say "you say it once, I keep the record". Animating it added time and no
+   understanding, so it was cut. See the motion ledger at the end of body. */
+.docket-stack{position:relative;isolation:isolate}
+.docket-stack::before,.docket-stack::after{
+  content:"";position:absolute;left:9px;right:-9px;top:9px;bottom:-9px;
+  background:var(--canary);z-index:-1;box-shadow:var(--shadow-card);
+}
+.docket-stack::after{left:18px;right:-18px;top:18px;bottom:-18px;background:var(--flimsy);z-index:-2}
+.docket-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;border-bottom:2px solid var(--ink);padding-bottom:.75rem}
+.docket-title{font-family:'Big Shoulders Display',sans-serif;font-size:1.75rem;font-weight:800;line-height:1;color:var(--ink)}
+.docket-meta{font-family:'Courier Prime',monospace;font-size:.75rem;line-height:1.5;text-align:right;color:var(--ink-soft)}
+.docket-account{
+  font-family:'Courier Prime',monospace;font-size:.75rem;color:var(--ink-soft);
+  padding:.6rem 0;border-bottom:1px dashed var(--manila-edge);
+  display:flex;flex-wrap:wrap;gap:.15rem 1rem;
+}
+.docket-account span{white-space:nowrap}
+.docket-account b{color:var(--ink);font-weight:700}
+
+.trade-pick{padding:.95rem 0 .55rem;border-bottom:1px dashed var(--manila-edge)}
+.trade-pick .label{color:var(--ink-soft);display:block;margin-bottom:.6rem}
+.trade-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.trade-btn{
+  min-height:44px;padding:.5rem .8rem;cursor:pointer;
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--manila-edge);
+  font-size:.8125rem;font-weight:600;letter-spacing:.01em;
+  transition:background var(--t-feedback) linear,
+             border-color var(--t-feedback) linear,
+             transform var(--t-feedback) var(--ease-in-place);
+}
+.trade-btn:hover{border-color:var(--ink);transform:translateY(-2px)}
+/* Selected state is a doubled keyline plus a filled ground, not a colour tint:
+   at a glance you can see which card is in the slot. */
+.trade-btn[aria-pressed="true"]{
+  background:var(--ink);color:var(--manila);border-color:var(--ink);
+  box-shadow:0 0 0 2px var(--manila),0 0 0 3.5px var(--ink);
+  transform:none;
+}
+
+.docket-lines{margin:0;padding:.4rem 0 0;list-style:none}
+.docket-lines li{
+  display:grid;grid-template-columns:2.1rem 1fr auto;gap:.5rem;
+  align-items:baseline;padding:.62rem 0;
+  border-bottom:1px solid var(--manila-deep);
+  font-family:'Courier Prime',monospace;font-size:.8125rem;line-height:1.45;
+}
+.docket-lines .qty{color:var(--ink-soft)}
+.docket-lines .desc{color:var(--ink)}
+.docket-lines .desc small{display:block;color:var(--ink-soft);font-size:.75rem;margin-top:.15rem}
+.docket-lines .inc{color:var(--ink-soft);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+
+/* The line text sits inside a clipping channel and travels in along the rule,
+   because that is how a line gets written onto a docket. */
+.line-slot{display:block;overflow:hidden}
+.line-slot > span{display:block}
+.is-writing .line-slot > span{
+  animation:write-in var(--t-focal) var(--ease-in-place) backwards;
+  animation-delay:var(--d,0ms);
+}
+@keyframes write-in{
+  from{transform:translateX(-14px);opacity:0;clip-path:inset(0 100% 0 0)}
+  to  {transform:translateX(0);opacity:1;clip-path:inset(0 0 0 0)}
+}
+
+.docket-total{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;border-top:2px solid var(--ink);margin-top:.5rem;padding-top:.9rem}
+.total-figs{display:flex;gap:1.6rem}
+.total-figs div{line-height:1}
+.total-figs .label{color:var(--ink-soft);display:block;margin-bottom:.3rem}
+.total-figs strong{font-family:'Big Shoulders Display',sans-serif;font-size:2.1rem;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.docket-alt{font-family:'Courier Prime',monospace;font-size:.75rem;color:var(--ink-soft);margin-top:.75rem;padding-top:.55rem;border-top:1px dashed var(--manila-edge)}
+.docket-alt b{color:var(--biro)}
+
+/* The stamp. The only motion on this page that does not travel: a stamp lands.
+   It marks the docket as priced, which is a genuine state, and it fires once
+   per docket — never on a loop, never on scroll. */
+.stamp{
+  position:absolute;right:-.5rem;top:.85rem;
+  transform:rotate(-9deg);
+  border:3px solid var(--stamp);color:var(--stamp);
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.25rem;
+  letter-spacing:.1em;padding:.2rem .65rem;
+  opacity:.86;pointer-events:none;
+}
+.is-writing .stamp{animation:stamp-land 320ms var(--ease-settle) 300ms backwards}
+@keyframes stamp-land{
+  from{transform:rotate(-9deg) scale(1.5);opacity:0}
+  60% {opacity:.95}
+  to  {transform:rotate(-9deg) scale(1);opacity:.86}
+}
+
+/* Counter edge — where the counter-top ends and the customer side begins. */
+.counter-edge{margin-top:clamp(3rem,6vw,5rem);height:16px;background:linear-gradient(180deg,#20503F 0%,#173B31 42%,var(--counter-deep) 100%);box-shadow:0 -1px 0 0 rgba(245,231,210,.12) inset}
+
+/* ------------------------------------------------------------ SECTION BASE */
+section{padding-block:clamp(3.6rem,7vw,6.5rem)}
+.sec-head{font-size:clamp(2rem,4.2vw,3.2rem);line-height:.96;margin-bottom:1.4rem;max-width:20ch}
+.sec-intro{color:var(--fore-2);max-width:60ch;font-size:1.0625rem}
+.on-dark-deep{background:var(--counter-deep)}
+
+/* ------------------------------------------------------------ THE TWO LISTS */
+.effort{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,4vw,4rem);align-items:start}
+.effort-yours{background:var(--canary);color:var(--ink);padding:1.7rem 1.6rem;box-shadow:var(--shadow-card)}
+.effort-yours h3,.effort-mine h3{font-size:1.9rem;line-height:1;margin-bottom:1rem}
+.effort-yours ol{margin:0;padding-left:1.15rem;font-family:'Courier Prime',monospace;font-size:.9375rem}
+.effort-yours li{padding:.45rem 0;border-bottom:1px dashed rgba(26,21,18,.28)}
+.effort-yours li:last-child{border-bottom:0}
+.effort-note{margin-top:1.1rem;font-size:.8125rem;color:#4A3D14;font-weight:600}
+.effort-mine{background:var(--manila);color:var(--ink);padding:1.7rem 1.6rem;box-shadow:var(--shadow-card)}
+.effort-mine ul{margin:0;padding:0;list-style:none;column-count:2;column-gap:1.8rem}
+.effort-mine li{
+  break-inside:avoid;padding:.42rem 0 .42rem 1.35rem;position:relative;
+  font-family:'Courier Prime',monospace;font-size:.8125rem;line-height:1.4;
+}
+.effort-mine li::before{content:"";position:absolute;left:0;top:.72em;width:.7rem;height:2px;background:var(--stamp)}
+
+/* -------------------------------------------------------------- RATE CARD */
+.rate{border-top:2px solid var(--rule)}
+/* Hover marks the row the way a line gets ticked on a rate card: a rule is
+   drawn along it from the left. Nothing about it animates layout. */
+.rate-row{
+  position:relative;
+  display:grid;grid-template-columns:2.6rem minmax(9rem,15rem) 1fr;
+  gap:1.2rem;align-items:baseline;
+  padding:1.25rem 0;border-bottom:1px solid var(--rule-soft);
+  transition:background var(--t-feedback) linear;
+}
+.rate-row::before{
+  content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  background:var(--canary);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-state) var(--ease-in-place);
+}
+.rate-row:hover{background:var(--counter-lift)}
+.rate-row:hover::before{transform:scaleX(1)}
+.rate-ico{width:26px;height:26px;color:var(--canary);align-self:center}
+.rate-name{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:1.55rem;line-height:1.05;letter-spacing:0}
+.rate-desc{color:var(--fore-2);font-size:.9375rem}
+.rate-desc::before{
+  content:"";display:none;
+}
+@media (min-width:900px){
+  .rate-desc{display:flex;align-items:baseline;gap:.7rem}
+  .rate-desc .dots{flex:0 0 auto;width:3.5rem;border-bottom:2px dotted var(--rule);transform:translateY(-.28em)}
+}
+
+/* ---------------------------------------------------------------- THE WORK */
+.work-lead{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-bottom:1.6rem}
+.job-card{background:var(--manila);color:var(--ink);padding:1rem 1rem 1.1rem;box-shadow:var(--shadow-card);
+  transition:transform var(--t-state) var(--ease-in-place),box-shadow var(--t-state) var(--ease-in-place)}
+.job-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift)}
+.mock{background:#0E1B26;padding:7px 7px 0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.mock-bar{display:flex;align-items:center;gap:5px;padding-bottom:7px}
+.mock-dot{width:7px;height:7px;border-radius:50%;background:#3D4B56}
+.mock-url{flex:1;height:14px;background:#1B2C3A;margin-left:5px;display:flex;align-items:center;padding:0 6px;
+  font-family:'Courier Prime',monospace;font-size:8px;color:#8FA6B6;letter-spacing:.02em;overflow:hidden;white-space:nowrap}
+.mock-view{height:152px;overflow:hidden;position:relative}
+.job-meta{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;margin-top:.85rem}
+.job-name{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.35rem;line-height:1;color:var(--ink)}
+.job-sector{font-family:'Courier Prime',monospace;font-size:.6875rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.job-out{margin-top:.5rem;font-size:.875rem;line-height:1.45;color:var(--ink-soft)}
+.job-out b{color:var(--ink);font-weight:600}
+
+/* miniature site interiors, drawn */
+.m-col{position:absolute;inset:0;display:flex;flex-direction:column}
+.m-nav{height:16px;display:flex;align-items:center;gap:4px;padding:0 8px}
+.m-logo{width:22px;height:6px}
+.m-link{width:13px;height:3px;background:rgba(255,255,255,.4)}
+.m-hero{flex:1;padding:9px 8px;display:flex;flex-direction:column;justify-content:center;gap:5px}
+.m-h{height:8px;width:74%}
+.m-h2{height:8px;width:52%}
+.m-p{height:3px;width:64%;background:rgba(255,255,255,.32)}
+.m-btn{height:9px;width:34px;margin-top:3px}
+.m-grid{height:44px;display:flex;gap:4px;padding:0 8px 8px}
+.m-tile{flex:1;background:rgba(255,255,255,.14);border-top:2px solid rgba(255,255,255,.3)}
+
+.ledger{border-top:2px solid var(--rule);margin-top:2.2rem}
+.ledger-row{
+  position:relative;
+  display:grid;grid-template-columns:minmax(8rem,13rem) minmax(6rem,10rem) 1fr;
+  gap:1rem;padding:1rem 0;border-bottom:1px solid var(--rule-soft);align-items:baseline;
+  transition:background var(--t-feedback) linear;
+}
+.ledger-row::before{
+  content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  background:var(--canary);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-state) var(--ease-in-place);
+}
+.ledger-row:hover{background:var(--counter-lift)}
+.ledger-row:hover::before{transform:scaleX(1)}
+.ledger-name{font-weight:700;font-size:1rem}
+.ledger-sector{font-family:'Courier Prime',monospace;font-size:.75rem;color:var(--fore-2);text-transform:uppercase;letter-spacing:.06em}
+.ledger-out{color:var(--fore-2);font-size:.9375rem}
+
+/* ----------------------------------------------------------- PHOTO BANDS */
+.band{position:relative;isolation:isolate;overflow:hidden}
+.band img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:-2}
+.band::after{content:"";position:absolute;inset:0;z-index:-1}
+.band-van{min-height:clamp(460px,58vw,620px);display:flex;align-items:flex-end}
+.band-van::after{background:linear-gradient(90deg,rgba(12,34,28,.96) 0%,rgba(12,34,28,.88) 38%,rgba(12,34,28,.28) 78%,rgba(12,34,28,.5) 100%)}
+.band-inner{padding-block:clamp(2.6rem,5vw,4.2rem)}
+.band-copy{max-width:44ch}
+.band-copy h2{font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:.95;margin-bottom:1.1rem}
+.band-copy p{color:var(--fore);font-size:1.0625rem}
+
+.trades{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.8rem;max-width:56ch}
+.trades li{
+  list-style:none;padding:.45rem .8rem;font-size:.875rem;font-weight:600;
+  background:rgba(12,34,28,.72);box-shadow:inset 0 0 0 1px var(--rule);
+  transition:background var(--t-feedback) linear,box-shadow var(--t-feedback) linear;
+}
+.trades li:hover{background:var(--counter-lift);box-shadow:inset 0 0 0 1px var(--canary)}
+
+/* -------------------------------------------------------------- PROCESS */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;margin-top:2.4rem}
+.step{position:relative;padding-top:1.3rem;border-top:2px solid var(--rule)}
+/* The numbers stay: this is a sequence and the order is the information. */
+.step-n{font-family:'Big Shoulders Display',sans-serif;font-size:3.4rem;font-weight:900;line-height:.8;color:var(--canary);display:block;margin-bottom:.6rem}
+.step h3{font-size:1.5rem;line-height:1.05;margin-bottom:.5rem}
+.step p{color:var(--fore-2);font-size:.9375rem}
+
+/* -------------------------------------------------------------- THE BOARD */
+.price-board{background:var(--counter-deep);border:1px solid var(--rule-soft);padding:clamp(1.4rem,3vw,2.4rem)}
+.board-head{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--rule);padding-bottom:1.3rem;margin-bottom:1.8rem}
+.board-head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:.98;max-width:16ch}
+.switch{display:flex;background:var(--counter);box-shadow:inset 0 0 0 1.5px var(--rule)}
+.switch button{
+  min-height:52px;padding:.75rem 1.15rem;background:transparent;border:0;cursor:pointer;
+  font-weight:700;font-size:.875rem;color:var(--fore-2);letter-spacing:.01em;
+  transition:color var(--t-feedback) linear;
+}
+.switch button[aria-pressed="true"]{color:var(--ink)}
+.switch{position:relative}
+/* The slot marker travels between the two positions rather than appearing under
+   the new one. You watch the card move; you know it is the same board. */
+.switch-marker{
+  position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+  background:var(--canary);z-index:0;
+  transition:transform var(--t-state) var(--ease-settle);
+}
+.switch.is-b .switch-marker{transform:translateX(100%)}
+.switch button{position:relative;z-index:1;flex:1 1 0;min-width:10.75rem;white-space:nowrap}
+
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.3rem}
+.tier{position:relative;background:var(--manila);color:var(--ink);padding:1.4rem 1.35rem 1.5rem;box-shadow:var(--shadow-card)}
+.tier.is-popular{background:var(--canary);box-shadow:var(--shadow-lift)}
+.tier-flag{position:absolute;top:0;right:0;background:var(--stamp);color:#FFF3E6;font-size:.625rem;font-weight:700;letter-spacing:.12em;padding:.3rem .55rem;text-transform:uppercase}
+.tier h3{font-size:1.85rem;line-height:1;margin-bottom:.15rem}
+.tier-pages{font-family:'Courier Prime',monospace;font-size:.75rem;color:var(--ink-soft);margin-bottom:1rem}
+
+/* PRICE SLOT — both true figures live in the DOM at all times, stacked inside a
+   clipping channel. Switching payment method slides the strip; the page never
+   interpolates a price, so it can never display a number that is not real. */
+.price-slot{height:4.4rem;overflow:hidden;border-top:1px solid var(--manila-edge);border-bottom:1px solid var(--manila-edge);margin-bottom:1rem}
+.price-strip{transition:transform var(--t-state) var(--ease-settle)}
+.is-b .price-strip{transform:translateY(-4.4rem)}
+.price-cell{height:4.4rem;display:flex;flex-direction:column;justify-content:center}
+.price-main{font-family:'Big Shoulders Display',sans-serif;font-size:2.5rem;font-weight:900;line-height:.92;letter-spacing:-.015em;color:var(--ink)}
+.price-main .per{font-family:'Archivo',sans-serif;font-size:.9375rem;font-weight:600;letter-spacing:0}
+.price-sub{font-family:'Courier Prime',monospace;font-size:.75rem;color:var(--ink-soft);margin-top:.15rem}
+.tier ul{margin:0 0 1.3rem;padding:0;list-style:none}
+.tier li{padding:.38rem 0 .38rem 1.25rem;position:relative;font-size:.875rem;border-bottom:1px dashed rgba(26,21,18,.2)}
+.tier li:last-child{border-bottom:0}
+.tier li::before{content:"";position:absolute;left:0;top:.78em;width:.65rem;height:2px;background:var(--ink)}
+.tier .btn{width:100%;justify-content:center;background:var(--ink);color:var(--manila);box-shadow:0 4px 0 0 #000}
+.tier .btn:hover{background:#2B231D;color:#fff}
+.tier.is-popular .btn{background:var(--ink);color:var(--canary)}
+
+.board-status{
+  margin-top:1.5rem;padding-top:1.1rem;border-top:1px solid var(--rule-soft);
+  font-family:'Courier Prime',monospace;font-size:.8125rem;color:var(--fore-2);
+}
+.board-status b{color:var(--canary)}
+.included{margin-top:2.2rem;display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:1.6rem;align-items:start}
+.included h3{font-size:1.6rem;line-height:1.02}
+.included-list{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem}
+.included-list li{font-family:'Courier Prime',monospace;font-size:.8125rem;padding:.35rem .65rem;background:var(--counter);box-shadow:inset 0 0 0 1px var(--rule-soft)}
+.addons{margin-top:1.4rem;font-size:.875rem;color:var(--fore-2)}
+.addons b{color:var(--fore);font-weight:600}
+
+/* --------------------------------------------------------- TESTIMONIALS */
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:2.2rem}
+.note{
+  background:var(--flimsy);color:var(--ink);padding:1.4rem 1.3rem 1.2rem;
+  box-shadow:var(--shadow-card);
+  transition:transform var(--t-state) var(--ease-in-place);
+}
+.note:nth-child(2){transform:rotate(-.6deg)}
+.note:nth-child(3){transform:rotate(.5deg)}
+.note:hover{transform:rotate(0deg) translateY(-4px)}
+.note blockquote{margin:0;font-size:1.0625rem;line-height:1.5;font-weight:500}
+.note figcaption{margin-top:1rem;padding-top:.8rem;border-top:1px solid rgba(26,21,18,.25);font-family:'Courier Prime',monospace;font-size:.8125rem;color:var(--ink-soft)}
+.note figcaption b{color:var(--ink);font-weight:700;display:block}
+
+/* --------------------------------------------------------- THE PERSON */
+/* Deliberate emptiness. In a world made of printed matter, one surface is left
+   almost bare so the page can breathe before the close. */
+.person{padding-block:clamp(4.5rem,9vw,8rem)}
+.person-in{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  gap:clamp(2rem,5vw,4.5rem);align-items:end;
+}
+.person-line{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;
+  font-size:clamp(2.4rem,6vw,4.6rem);line-height:.94;letter-spacing:-.02em;
+  max-width:14ch;align-self:start;
+}
+.person-line em{font-style:normal;color:var(--canary)}
+.person-body{max-width:44ch;color:var(--fore-2)}
+.person-sign{
+  margin-top:1.6rem;font-family:'Courier Prime',monospace;font-size:.875rem;
+  color:var(--canary);border-left:2px solid var(--canary);padding-left:.9rem;
+}
+
+/* --------------------------------------------------------------- CLOSE */
+.band-close{min-height:clamp(520px,62vw,680px);display:flex;align-items:center;text-align:left}
+.band-close::after{background:
+  linear-gradient(100deg,rgba(12,34,28,.95) 0%,rgba(12,34,28,.88) 34%,rgba(12,34,28,.42) 66%,rgba(12,34,28,.62) 100%),
+  linear-gradient(180deg,rgba(12,34,28,.35) 0%,rgba(12,34,28,0) 30%,rgba(12,34,28,.55) 100%)}
+.close-h{font-size:clamp(2.6rem,6.4vw,5rem);line-height:.9;max-width:14ch;margin-bottom:1.3rem}
+.close-tel{
+  display:inline-flex;align-items:center;gap:.7rem;margin-top:1.6rem;
+  font-family:'Courier Prime',monospace;font-weight:700;font-size:1.25rem;
+  text-decoration:none;color:var(--canary);
+  border-bottom:2px solid var(--rule);padding-bottom:.3rem;
+  transition:border-color var(--t-feedback) linear,transform var(--t-feedback) var(--ease-in-place);
+}
+.close-tel:hover{border-color:var(--canary);transform:translateX(3px)}
+.areas{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--rule);max-width:62ch;color:var(--fore-2);font-size:.9375rem}
+.areas b{color:var(--fore);font-weight:600}
+
+/* -------------------------------------------------------------- FOOTER */
+footer{background:var(--counter-deep);border-top:3px solid var(--canary);padding-block:clamp(3rem,5vw,4.5rem) 2rem}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:2.2rem}
+.foot-grid h3{font-size:1.15rem;margin-bottom:.9rem;letter-spacing:.02em}
+.foot-grid ul{margin:0;padding:0;list-style:none}
+.foot-grid li{padding:.28rem 0;font-size:.9375rem;color:var(--fore-2)}
+.foot-grid a{color:var(--fore-2);text-decoration:none;text-underline-offset:4px;text-decoration-thickness:1px}
+.foot-grid a:hover{color:var(--canary);text-decoration:underline}
+.foot-brand .brand-plate{display:inline-block;margin-bottom:1rem}
+.foot-hours{font-family:'Courier Prime',monospace;font-size:.8125rem;color:var(--fore-2);line-height:1.7}
+.foot-hours b{color:var(--fore)}
+.foot-base{margin-top:2.8rem;padding-top:1.3rem;border-top:1px solid var(--rule-soft);display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between;font-size:.8125rem;color:var(--fore-2)}
+
+/* --------------------------------------------- SCROLL REVEAL (3 places) */
+/* Only lists that genuinely arrive as lists get a stagger. Section headings,
+   paragraphs, images and the hero do not animate on scroll at all — an
+   identical entrance on every section is not motion, it is a tic. */
+.motion-ready [data-reveal] > *{
+  opacity:0;transform:translateX(-16px);clip-path:inset(0 100% 0 0);
+}
+.motion-ready [data-reveal].is-in > *{
+  animation:write-in 460ms var(--ease-in-place) forwards;
+  animation-delay:calc(var(--i,0) * 55ms);
+}
+
+/* ------------------------------------------------------------ RESPONSIVE */
+@media (max-width:1120px){
+  .counter-grid{grid-template-columns:1fr;gap:2.6rem}
+  .docket-stack{max-width:600px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media (max-width:1000px){
+  .work-lead{grid-template-columns:1fr;max-width:520px}
+  .tiers{grid-template-columns:1fr;max-width:520px}
+  .steps{grid-template-columns:1fr 1fr}
+  .notes{grid-template-columns:1fr;max-width:560px}
+  .effort{grid-template-columns:1fr}
+  .included{grid-template-columns:1fr}
+  .ledger-row{grid-template-columns:1fr 1fr;gap:.4rem 1rem}
+  .ledger-out{grid-column:1 / -1}
+}
+@media (max-width:860px){
+  .nav,.fascia-cta{display:none}
+  .burger{display:flex}
+  .fascia-in{min-height:78px}
+  .rate-row{grid-template-columns:2.2rem 1fr;gap:.5rem 1rem}
+  .rate-desc{grid-column:2}
+  .effort-mine ul{column-count:1}
+  .person-in{grid-template-columns:1fr;gap:2rem}
+  .person-line{max-width:18ch}
+}
+@media (max-width:620px){
+  .wrap,.wrap-tight{width:min(100% - 1.6rem,100%)}
+  body{font-size:1rem}
+  h1{font-size:clamp(2.5rem,10.5vw,3.4rem)}
+  .docket{padding:1.15rem 1.05rem}
+  .docket-stack::after{display:none}
+  .docket-stack::before{left:6px;right:-6px;top:6px;bottom:-6px}
+  .docket-lines li{grid-template-columns:1.7rem 1fr;gap:.3rem .5rem}
+  .docket-lines .inc{grid-column:2;margin-top:.2rem}
+  .total-figs{gap:1.1rem}
+  .total-figs strong{font-size:1.75rem}
+  .stamp{top:1rem;right:-.1rem;font-size:1rem;border-width:2px;padding:.15rem .5rem}
+  .steps{grid-template-columns:1fr}
+  .switch{width:100%}
+  .switch button{min-width:0;font-size:.75rem;padding:.75rem .4rem;white-space:normal}
+  .hero-actions .btn{width:100%;justify-content:center}
+  .band-van,.band-close{min-height:auto;padding-block:3rem}
+  .band-van::after{background:linear-gradient(180deg,rgba(12,34,28,.72) 0%,rgba(12,34,28,.94) 55%)}
+  .foot-grid{grid-template-columns:1fr}
+  .person-line{font-size:clamp(2.1rem,9.6vw,3rem)}
+}
+
+/* ------------------------------------------------- REDUCED MOTION PATH */
+/* Fewer and gentler, not switched off. Travel goes to zero; the things that
+   confirm an action — the docket redrawing, the stamp landing, the slot
+   changing, pressed and focus states — still register, without movement. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important;
+  }
+  .motion-ready [data-reveal] > *{opacity:1;transform:none;clip-path:none}
+  .btn:hover,.btn-ghost:hover,.job-card:hover,.note:hover,.trade-btn:hover,.close-tel:hover{transform:none}
+  .stamp{opacity:.86}
+  /* The one thing that must still be obvious without movement. */
+  .is-writing .docket-lines .desc{box-shadow:inset 0 -.85em 0 0 rgba(245,211,78,.55)}
+}
+</style>
+</head>
+<body>
+<!--
+  ============================================================================
+  DIRECTION CONTRACT — home-17-impeccable-animate
+  THESIS: A builders' merchant trade counter, where you say the job and someone
+    behind the counter makes it up for you. Refuses the agency-homepage rut of
+    a dark hero, a claim, and a wall of portfolio thumbnails.
+  OWN-WORLD: Enamelled spruce-green counter (#15352C) as the page's ground,
+    carrying 50%+ of the surface. Everything given to the visitor is paper laid
+    on it: manila docket card, canary carbon copy, pink flimsy. One alarm red,
+    used only as a rubber stamp. Big Shoulders Display for signage, Archivo for
+    running text, Courier Prime for anything that is data on a docket.
+  STORY: A tradesperson sees a counter, not a brief. He picks his trade; the
+    docket writes itself and gets priced in front of him. He understands he
+    supplies one conversation and gets back everything else, then finds the
+    same price on the board two ways round, and calls.
+  FIRST VIEWPORT: Fascia bar across the top, logo on a manila plate. Left, the
+    h1 at ~5.6rem in condensed 900 with the offer beneath and two actions.
+    Right, the job docket on its carbon copies — trade selector, six written
+    lines, a total and a PRICED stamp. Primary action sits under the h1 and
+    again at the foot of every price tier.
+  FORM: Builders' merchant trade counter — candidate 6 of 7 on my own grounded
+    list. Seed key dcs17anim, direction scope, persuade mode.
+  RAISE (from the cutaway-spread challenger): every artifact on this page
+    carries its own printed label at constant scale, so nothing outranks
+    anything by shouting.
+  RAISE (from the VU-meter challenger): ballistics. Nothing on this page ever
+    displays a value it has not settled on — see the price slot, which moves
+    real figures rather than interpolating fake ones.
+  RAISE (from the floated-pigment challenger): displacement over cross-fade.
+    Nothing appears by opacity alone; something moved it there.
+  RAISE (from the blackbook challenger): a fast version beside every dense one,
+    and active state is a doubled keyline, not a tint.
+  RAISE (from the ikebana challenger): one charged emptiness — the personal
+    section is left almost bare in a world otherwise made of print.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the
+    finish review, the verdict, DESIGN.md, and every shipping raster carrying
+    its provenance.
+  ============================================================================
+-->
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- MOTION · header lift · trigger: hero sentinel leaves the viewport ·
+     280ms linear on background/border/shadow, 280ms ease-in-place on height ·
+     WHY: tells you the bar has left the counter-top and is now floating over
+     the page. Without it the sticky header reads as a rendering artefact. -->
+<header class="fascia" id="fascia">
+  <div class="wrap fascia-in">
+    <a class="brand" href="/" aria-label="Digital Consulting Services — home">
+      <span class="brand-plate"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="138" height="69"></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/services">Services</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="fascia-cta">
+      <a class="fascia-tel" href="tel:+447395063764">07395 063764</a>
+      <a class="btn" href="/contact">Get a free quote</a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="board" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="3" y="5" width="18" height="2"></rect>
+        <rect x="3" y="11" width="18" height="2"></rect>
+        <rect x="3" y="17" width="18" height="2"></rect>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- MOTION · mobile board drop · trigger: menu button, Escape, or a link ·
+     340ms in / 320ms out, cubic-bezier(.16,1,.3,1) · WHY: the panel arrives
+     from behind the fascia it belongs to, so its origin is never ambiguous.
+     Nothing about it fades. -->
+<div class="board" id="board" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services">Services</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+  </nav>
+  <a class="btn" href="/contact">Get a free quote</a>
+  <a class="board-tel" href="tel:+447395063764">Or call 07395 063764</a>
+</div>
+
+<main id="main">
+
+<!-- ==================================================================== HERO -->
+<section class="counter" aria-labelledby="h1">
+  <div class="wrap counter-grid">
+
+    <div>
+      <h1 id="h1">Tell me the job.<span class="h1-b">I'll do the rest.</span></h1>
+      <p class="standfirst">
+        I build websites for tradespeople and local businesses across Sussex and the UK.
+        You don't need a brief, copy, photos, or the first idea about websites —
+        <strong>that's my end of the counter</strong>. One conversation and I take it from there.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="/contact">Get a free quote</a>
+        <a class="btn btn-ghost" href="tel:+447395063764">Call 07395 063764</a>
+      </div>
+      <p class="hero-note">
+        <b>Ricky Wilson.</b> Polegate, East Sussex. Working since 2019.
+        I do the work myself — nothing outsourced, nothing offshored, no account manager
+        between you and the person building your site.
+      </p>
+    </div>
+
+    <div class="docket-stack">
+      <article class="docket" id="docket">
+        <div class="docket-head">
+          <h2 class="docket-title">Job docket</h2>
+          <p class="docket-meta">
+            COUNTER: POLEGATE<br>
+            MON&ndash;FRI 09:00&ndash;17:30
+          </p>
+        </div>
+
+        <div class="docket-account">
+          <span>ACCOUNT <b>DIGITAL CONSULTING SERVICES</b></span>
+          <span>EST. <b>2019</b></span>
+          <span>SITES DELIVERED <b>20+</b></span>
+          <span>ALL <b>MANAGED</b></span>
+        </div>
+
+        <div class="trade-pick">
+          <span class="label" id="trade-label">What's the trade?</span>
+          <div class="trade-row" role="group" aria-labelledby="trade-label">
+            <button class="trade-btn on-paper" type="button" data-trade="electrician" aria-pressed="true">Electrician</button>
+            <button class="trade-btn on-paper" type="button" data-trade="plumber" aria-pressed="false">Plumber</button>
+            <button class="trade-btn on-paper" type="button" data-trade="scaffolder" aria-pressed="false">Scaffolder</button>
+            <button class="trade-btn on-paper" type="button" data-trade="builder" aria-pressed="false">Builder</button>
+            <button class="trade-btn on-paper" type="button" data-trade="roofer" aria-pressed="false">Roofer</button>
+            <button class="trade-btn on-paper" type="button" data-trade="gardener" aria-pressed="false">Gardener</button>
+          </div>
+        </div>
+
+        <!-- MOTION · docket line write-in · trigger: the visitor picks a trade ·
+             420ms per line, 55ms stagger capped at 6 lines (330ms total tail),
+             cubic-bezier(.16,1,.3,1), travelling in from the left under a
+             left-to-right clip · WHY: this is the page's focal moment and it
+             is pure causality — one click by the visitor produces a whole
+             specification he did not have to write. The direction of travel is
+             the direction a line is written along a ruled docket. It fires on
+             a deliberate action, never on scroll, never on load. -->
+        <ul class="docket-lines" id="docket-lines" aria-live="polite">
+          <li>
+            <span class="qty tnum">1</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l1">Website designed for an electrician</span></span></span>
+            <span class="inc">included</span>
+          </li>
+          <li>
+            <span class="qty tnum">6</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l2">Service pages, written for you<small data-slot="l2s">Rewires &middot; Consumer units &middot; EV chargers &middot; Fault finding &middot; Testing &middot; Lighting</small></span></span></span>
+            <span class="inc">included</span>
+          </li>
+          <li>
+            <span class="qty tnum">8</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l3">Location pages<small>Polegate &middot; Eastbourne &middot; Hailsham &middot; Lewes &middot; Seaford &middot; Brighton &middot; Hove &middot; Uckfield</small></span></span></span>
+            <span class="inc">included</span>
+          </li>
+          <li>
+            <span class="qty tnum">1</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l4">All the words &mdash; I write them, you approve them</span></span></span>
+            <span class="inc">included</span>
+          </li>
+          <li>
+            <span class="qty tnum">1</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l5">Google Search Console, Schema markup, local SEO</span></span></span>
+            <span class="inc">included</span>
+          </li>
+          <li>
+            <span class="qty tnum">1</span>
+            <span class="desc"><span class="line-slot"><span data-slot="l6">Hosting, SSL, security updates, uptime monitoring</span></span></span>
+            <span class="inc">monthly</span>
+          </li>
+        </ul>
+
+        <div class="docket-total">
+          <div class="total-figs">
+            <div>
+              <span class="label">Setup</span>
+              <strong class="tnum">&pound;1,995</strong>
+            </div>
+            <div>
+              <span class="label">Then</span>
+              <strong class="tnum">&pound;25<span style="font-size:.9rem;font-family:Archivo,sans-serif;font-weight:600">/mo</span></strong>
+            </div>
+          </div>
+
+          <!-- MOTION · stamp land · trigger: end of a docket rewrite (300ms in) ·
+               320ms, cubic-bezier(.19,1,.22,1) from scale 1.5 · WHY: the only
+               non-travelling motion on the page, reserved for the one moment
+               something becomes a record. It says the docket is now priced. It
+               does not loop and it does not run on page load. -->
+          <div class="stamp" aria-hidden="true">Priced</div>
+        </div>
+        <p class="docket-alt">
+          OR <b>&pound;75/MO</b>, NOTHING UPFRONT (12-MONTH MINIMUM). SAME SITE EITHER WAY.<br>
+          PROFESSIONAL TIER SHOWN &mdash; UP TO 50 PAGES. EXAMPLE DOCKET; YOUR ACTUAL LIST IS AGREED ON THE CALL.
+        </p>
+
+      </article>
+    </div>
+
+  </div>
+  <div class="counter-edge" aria-hidden="true"></div>
+  <span id="hero-sentinel" aria-hidden="true"></span>
+</section>
+
+<!-- ================================================================== EFFORT -->
+<section class="on-dark-deep" aria-labelledby="effort-h">
+  <div class="wrap">
+    <h2 class="sec-head" id="effort-h">Two lists. Yours is short on purpose.</h2>
+    <p class="sec-intro" style="margin-bottom:2.6rem">
+      Most agencies hand you homework: a brief, your copy, your photos, a sitemap, and a
+      decision about something you've never heard of. Here's how the work actually splits.
+    </p>
+
+    <div class="effort">
+      <div class="effort-yours">
+        <h3>What you do</h3>
+        <ol>
+          <li>Have one conversation with me.</li>
+          <li>Tell me what you do and where you work.</li>
+          <li>Say yes, or say what you'd change.</li>
+        </ol>
+        <p class="effort-note">That is the whole of your side of it, and there is nothing to fill in or log into at any point afterwards.</p>
+      </div>
+
+      <div class="effort-mine">
+        <h3>What I do</h3>
+        <ul>
+          <li>Ask the right questions</li>
+          <li>Write every word on the site</li>
+          <li>Design it from scratch</li>
+          <li>Build the service pages</li>
+          <li>Build the location pages</li>
+          <li>Sort the photos and graphics</li>
+          <li>Set up the contact form</li>
+          <li>Add Schema markup for Google</li>
+          <li>Submit it to Search Console</li>
+          <li>Register and manage the domain</li>
+          <li>Host it and keep it fast</li>
+          <li>Fit the SSL certificate</li>
+          <li>Run the security updates</li>
+          <li>Monitor it around the clock</li>
+          <li>Revise it as often as you like while we build</li>
+          <li>Answer the phone when you ring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ SERVICES -->
+<section aria-labelledby="services-h">
+  <div class="wrap">
+    <h2 class="sec-head" id="services-h">What's behind the counter</h2>
+    <p class="sec-intro" style="margin-bottom:2.4rem">
+      Six things. Most people take the first three together and never think about them again.
+    </p>
+
+    <div class="rate" data-reveal>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="14"></rect><path d="M2.5 8h19M6 20h12"></path></svg>
+        <h3 class="rate-name">Website design</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> Bespoke websites built for local tradespeople. No templates, no DIY.</p>
+      </div>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+        <h3 class="rate-name">Local SEO</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> Service pages, location pages, Schema markup, Google ranking &mdash; built in.</p>
+      </div>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 3.5a5 5 0 0 0-6.4 6.4L3 15v5.5h5.5l5.1-5.1a5 5 0 0 0 6.4-6.4l-3 3-2.5-2.5Z"></path></svg>
+        <h3 class="rate-name">Ongoing management</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> I look after your site so you can get on with your trade.</p>
+      </div>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14"></rect><path d="m2.5 6.5 9.5 7 9.5-7"></path></svg>
+        <h3 class="rate-name">Google Workspace email</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> Professional business email on your own domain.</p>
+      </div>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1.4 12.5H5.4L4 7Z"></path><path d="M8.5 7V5.4a3.5 3.5 0 0 1 7 0V7"></path></svg>
+        <h3 class="rate-name">eCommerce websites</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> WooCommerce or custom stores &mdash; built and loaded with your products.</p>
+      </div>
+      <div class="rate-row">
+        <svg class="rate-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20h17M6 20V11M11 20V5M16 20v-6M21 20V8"></path></svg>
+        <h3 class="rate-name">Analytics &amp; reporting</h3>
+        <p class="rate-desc"><span class="dots" aria-hidden="true"></span> Analytics, Search Console and monthly reports so you know what's working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== WORK -->
+<section class="on-dark-deep" aria-labelledby="work-h">
+  <div class="wrap">
+    <h2 class="sec-head" id="work-h">Off the shelf, so to speak</h2>
+    <p class="sec-intro" style="margin-bottom:2.4rem">
+      Real businesses, real sites, still running. The screens below are drawn, not
+      photographed &mdash; the names and the outcomes are the real thing.
+    </p>
+
+    <div class="work-lead">
+      <article class="job-card">
+        <div class="mock">
+          <div class="mock-bar" aria-hidden="true">
+            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+            <span class="mock-url"></span>
+          </div>
+          <div class="mock-view" aria-hidden="true" style="background:#132B4A">
+            <div class="m-col">
+              <div class="m-nav" style="background:#0C1E36"><span class="m-logo" style="background:#F0B429"></span><span class="m-link"></span><span class="m-link"></span><span class="m-link"></span></div>
+              <div class="m-hero">
+                <span class="m-h" style="background:#F0B429"></span>
+                <span class="m-h2" style="background:#EDF2F7"></span>
+                <span class="m-p"></span><span class="m-p" style="width:48%"></span>
+                <span class="m-btn" style="background:#F0B429"></span>
+              </div>
+              <div class="m-grid"><span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job-meta">
+          <h3 class="job-name">Colossus Scaffolding</h3>
+          <span class="job-sector">Scaffolding</span>
+        </div>
+        <p class="job-out"><b>First Google enquiry within three weeks of launch.</b> Thirty-page site, East Sussex.</p>
+      </article>
+
+      <article class="job-card">
+        <div class="mock">
+          <div class="mock-bar" aria-hidden="true">
+            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+            <span class="mock-url">djfoxelectrical.com</span>
+          </div>
+          <div class="mock-view" aria-hidden="true" style="background:#1A1A1D">
+            <div class="m-col">
+              <div class="m-nav" style="background:#0F0F11"><span class="m-logo" style="background:#D93025"></span><span class="m-link"></span><span class="m-link"></span><span class="m-link"></span></div>
+              <div class="m-hero">
+                <span class="m-h" style="background:#F5F5F5"></span>
+                <span class="m-h2" style="background:#D93025"></span>
+                <span class="m-p"></span><span class="m-p" style="width:40%"></span>
+                <span class="m-btn" style="background:#D93025"></span>
+              </div>
+              <div class="m-grid"><span class="m-tile"></span><span class="m-tile"></span><span class="m-tile"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="job-meta">
+          <h3 class="job-name">DJ Fox Electrical</h3>
+          <span class="job-sector">Electrician</span>
+        </div>
+        <p class="job-out"><b>20+ pages, service and location pages throughout.</b> Live at djfoxelectrical.com.</p>
+      </article>
+
+      <article class="job-card">
+        <div class="mock">
+          <div class="mock-bar" aria-hidden="true">
+            <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+            <span class="mock-url"></span>
+          </div>
+          <div class="mock-view" aria-hidden="true" style="background:#F4EDE3">
+            <div class="m-col">
+              <div class="m-nav" style="background:#E4D6C3"><span class="m-logo" style="background:#7A5A3A"></span><span class="m-link" style="background:rgba(0,0,0,.28)"></span><span class="m-link" style="background:rgba(0,0,0,.28)"></span><span class="m-link" style="background:rgba(0,0,0,.28)"></span></div>
+              <div class="m-hero">
+                <span class="m-h" style="background:#7A5A3A"></span>
+                <span class="m-h2" style="background:#B08D63"></span>
+                <span class="m-p" style="background:rgba(0,0,0,.22)"></span><span class="m-p" style="width:44%;background:rgba(0,0,0,.22)"></span>
+                <span class="m-btn" style="background:#7A5A3A"></span>
+              </div>
+              <div class="m-grid"><span class="m-tile" style="background:rgba(122,90,58,.22);border-top-color:#7A5A3A"></span><span class="m-tile" style="background:rgba(122,90,58,.22);border-top-color:#7A5A3A"></span><span class="m-tile" style="background:rgba(122,90,58,.22);border-top-color:#7A5A3A"></span></div>
+              </div>
+          </div>
+        </div>
+        <div class="job-meta">
+          <h3 class="job-name">Luna Landings</h3>
+          <span class="job-sector">Made-to-order</span>
+        </div>
+        <p class="job-out"><b>Product configurator with automatic work orders.</b> Ships worldwide.</p>
+      </article>
+    </div>
+
+    <div class="ledger" data-reveal>
+      <div class="ledger-row">
+        <span class="ledger-name">DCH Automotive</span>
+        <span class="ledger-sector">Automotive</span>
+        <span class="ledger-out">Professional presence from a standing start, with a live Instagram feed.</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-name">Cuddle Plush Fabrics</span>
+        <span class="ledger-sector">eCommerce &middot; fabrics</span>
+        <span class="ledger-out">Five years and counting &mdash; one of the longest client relationships here.</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-name">Bexhill Removals</span>
+        <span class="ledger-sector">Removals</span>
+        <span class="ledger-out">Design approved on the first presentation. No revisions asked for.</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-name">Mad Graphics</span>
+        <span class="ledger-sector">Signage &amp; print</span>
+        <span class="ledger-out">Full rebuild of an ageing site.</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-name">Nicola Noble Tuition</span>
+        <span class="ledger-sector">Tutoring</span>
+        <span class="ledger-out">Moved classes online during Covid instead of closing the business.</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-name">Sanctuary Ida</span>
+        <span class="ledger-sector">Yoga</span>
+        <span class="ledger-out">Students book and pay for classes online.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= WHO IT'S FOR -->
+<!-- Illustrative photography of the trades this agency serves. Not a client's
+     van, not a client's job. No caption claims otherwise. -->
+<section class="band band-van" aria-labelledby="who-h">
+  <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-van.jpg" alt="An unbranded white trade van parked on a British residential street with its rear doors open, showing tidy racking inside." width="1600" height="1062" loading="lazy" decoding="async">
+  <div class="wrap band-inner">
+    <div class="band-copy">
+      <h2 id="who-h">The van already earns its keep. The website should too.</h2>
+      <p>
+        You paid for the sign-writing because people need to know who you are and how to reach
+        you. A website is the same job, done where people now look first. It's on all night,
+        it answers the questions you're tired of answering, and it doesn't need washing.
+      </p>
+    </div>
+    <ul class="trades" data-reveal>
+      <li>Electricians</li><li>Plumbers</li><li>Builders</li><li>Scaffolders</li>
+      <li>Gardeners</li><li>Decorators</li><li>Roofers</li><li>Handymen</li>
+      <li>Locksmiths</li><li>Flooring fitters</li><li>Tutors</li><li>Therapists</li>
+      <li>Coaches</li><li>Salons</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================================================================= PROCESS -->
+<section aria-labelledby="process-h">
+  <div class="wrap">
+    <h2 class="sec-head" id="process-h">Four steps, and three of them are mine</h2>
+    <p class="sec-intro">From first phone call to a site that's live and looked after.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-n tnum" aria-hidden="true">01</span>
+        <h3>A conversation</h3>
+        <p>A call, or a few messages if that suits you better. You don't need to prepare anything beforehand.</p>
+      </div>
+      <div class="step">
+        <span class="step-n tnum" aria-hidden="true">02</span>
+        <h3>I write it and design it</h3>
+        <p>Copy, structure, images, colours. All handled, all from what you told me on the call.</p>
+      </div>
+      <div class="step">
+        <span class="step-n tnum" aria-hidden="true">03</span>
+        <h3>You have a look</h3>
+        <p>Unlimited revisions while we're building. It isn't finished until you say it is.</p>
+      </div>
+      <div class="step">
+        <span class="step-n tnum" aria-hidden="true">04</span>
+        <h3>It goes live and stays live</h3>
+        <p>Hosting, updates, monitoring and support. You ring me, not a ticket queue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= PRICING -->
+<section class="on-dark-deep" aria-labelledby="price-h">
+  <div class="wrap">
+    <div class="price-board" id="price-board">
+      <div class="board-head">
+        <h2 class="sec-head" id="price-h" style="margin-bottom:0">Same site. Two ways to pay for it.</h2>
+
+        <!-- MOTION · price slot change · trigger: the payment-method switch ·
+             280ms, cubic-bezier(.19,1,.22,1), critically damped so the figure
+             never overshoots the value it reports; the whole strip translates
+             exactly one cell height · WHY: this is the one
+             fact the pricing has to land — you are choosing how to pay, not
+             what you get. A cross-fade would say "different product". A card
+             sliding in the same slot on the same board says "same goods".
+             The overshoot is the card settling against the stop.
+             INTEGRITY: both figures are authored in the markup and both are
+             true. Nothing is interpolated, nothing counts up, so there is no
+             state in which this page can display a price that is not real. -->
+        <div class="switch" id="switch" role="group" aria-label="Choose how to pay">
+          <span class="switch-marker" aria-hidden="true"></span>
+          <button type="button" data-pay="a" aria-pressed="true">Upfront + monthly</button>
+          <button type="button" data-pay="b" aria-pressed="false">Pay monthly</button>
+        </div>
+      </div>
+
+      <div class="tiers" id="tiers">
+        <article class="tier">
+          <h3>Starter</h3>
+          <p class="tier-pages tnum">Up to 20 pages</p>
+          <div class="price-slot">
+            <div class="price-strip">
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;995<span class="per"> setup</span></span>
+                <span class="price-sub tnum">then &pound;15/mo</span>
+              </div>
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;45<span class="per">/month</span></span>
+                <span class="price-sub">nothing upfront &middot; 12-month minimum</span>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li>Custom design, built for your trade</li>
+            <li>Local SEO and location pages</li>
+            <li>Hosting, SSL and updates</li>
+            <li>Email and phone support</li>
+          </ul>
+          <a class="btn" href="/contact">Get a free quote</a>
+        </article>
+
+        <article class="tier is-popular">
+          <span class="tier-flag">Most popular</span>
+          <h3>Professional</h3>
+          <p class="tier-pages tnum">Up to 50 pages</p>
+          <div class="price-slot">
+            <div class="price-strip">
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;1,995<span class="per"> setup</span></span>
+                <span class="price-sub tnum">then &pound;25/mo</span>
+              </div>
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;75<span class="per">/month</span></span>
+                <span class="price-sub">nothing upfront &middot; 12-month minimum</span>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li>Everything in Starter</li>
+            <li>More service and location pages</li>
+            <li>Priority support</li>
+            <li>Monthly performance report</li>
+          </ul>
+          <a class="btn" href="/contact">Get a free quote</a>
+        </article>
+
+        <article class="tier">
+          <h3>Growth</h3>
+          <p class="tier-pages tnum">Up to 100 pages</p>
+          <div class="price-slot">
+            <div class="price-strip">
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;3,495<span class="per"> setup</span></span>
+                <span class="price-sub tnum">then &pound;50/mo</span>
+              </div>
+              <div class="price-cell">
+                <span class="price-main tnum">&pound;125<span class="per">/month</span></span>
+                <span class="price-sub">nothing upfront &middot; 12-month minimum</span>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li>Everything in Professional</li>
+            <li>Largest page allowance</li>
+            <li>Fastest response times</li>
+            <li>Ongoing content additions</li>
+          </ul>
+          <a class="btn" href="/contact">Get a free quote</a>
+        </article>
+      </div>
+
+      <p class="board-status" id="board-status" aria-live="polite">
+        SHOWING <b>UPFRONT + MONTHLY</b>. THE TIERS DIFFER ON SERVICE LEVEL AND PAGE ALLOWANCE, NEVER ON QUALITY OF BUILD.
+      </p>
+
+      <div class="included">
+        <h3>In every tier, no matter which</h3>
+        <ul class="included-list">
+          <li>Custom design</li><li>Local SEO</li><li>Service pages</li><li>Location pages</li>
+          <li>Schema markup</li><li>Mobile-first</li><li>Fast loading</li><li>Contact form</li>
+          <li>Hosting</li><li>SSL certificate</li><li>Domain management</li><li>Security updates</li>
+          <li>Uptime monitoring</li><li>Unlimited revisions during the build</li><li>Search Console submission</li>
+        </ul>
+      </div>
+
+      <p class="addons">
+        Extras, if you ever want them: <b>blog post writing &pound;75 per post</b> &middot;
+        <b>custom theme design &pound;350</b> &middot;
+        <b>Google Ads setup and management &pound;200/mo</b> plus ad spend &middot;
+        <b>monthly SEO retainer &pound;200/mo</b>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TESTIMONIALS -->
+<section aria-labelledby="words-h">
+  <div class="wrap">
+    <h2 class="sec-head" id="words-h">In their words, not mine</h2>
+
+    <div class="notes">
+      <figure class="note">
+        <blockquote>&ldquo;Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.&rdquo;</blockquote>
+        <figcaption><b>Sarah</b> Cuddle Plush Fabrics</figcaption>
+      </figure>
+      <figure class="note">
+        <blockquote>&ldquo;I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.&rdquo;</blockquote>
+        <figcaption><b>Nicola</b> Nicola Noble Tuition</figcaption>
+      </figure>
+      <figure class="note">
+        <blockquote>&ldquo;My yoga students love that they can book and pay for my classes on my website.&rdquo;</blockquote>
+        <figcaption><b>Molly</b> Sanctuary Ida</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== PERSON -->
+<section class="person" aria-labelledby="person-h">
+  <div class="wrap person-in">
+    <h2 class="person-line" id="person-h">There's nobody behind the counter <em>but me.</em></h2>
+    <div class="person-body">
+      <p>
+        No account manager, no studio, no offshore team doing the actual building. You get my
+        number, and when you ring it I answer. If your site goes down at nine on a Sunday, it's
+        me who notices and me who fixes it.
+      </p>
+      <p>
+        That's the whole business model. It's why the work is consistent, and it's why I'd
+        rather have twenty clients I know by name than two hundred I don't.
+      </p>
+      <p class="person-sign">Ricky Wilson &middot; Polegate, East Sussex &middot; since 2019</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== CLOSE -->
+<!-- Illustrative photography of a trade this agency serves. Not a named client. -->
+<section class="band band-close" aria-labelledby="close-h">
+  <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-scaffolder.jpg" alt="A scaffolder in a hi-vis vest assembling scaffolding against a terraced house, photographed from ground level looking up." width="1600" height="1062" loading="lazy" decoding="async">
+  <div class="wrap band-inner">
+    <h2 class="close-h" id="close-h">Right then. What's the job?</h2>
+    <p class="measure" style="color:var(--fore);font-size:1.0625rem">
+      Tell me what you do and where you do it. I'll tell you what it costs and how long it takes,
+      with no obligation and no sales patter. If it isn't right for you I'll say so.
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="/contact">Get a free quote</a>
+      <a class="btn btn-ghost" href="mailto:mail@digitalconsultingservices.co.uk">Email me instead</a>
+    </div>
+    <a class="close-tel" href="tel:+447395063764">07395 063764</a>
+    <p class="areas">
+      <b>Where I work:</b> Polegate, Eastbourne, Hailsham, Lewes, Seaford, Brighton, Hove and
+      Uckfield &mdash; and UK-wide, because none of this needs me stood in your kitchen.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand-plate"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" alt="Digital Consulting Services" width="138" height="69" loading="lazy"></span>
+        <p style="color:var(--fore-2);font-size:.9375rem;max-width:32ch">
+          Websites that get local tradespeople more jobs. Built and looked after in
+          Polegate, East Sussex.
+        </p>
+      </div>
+
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="/services/website-design">Website design</a></li>
+          <li><a href="/services/local-seo">Local SEO</a></li>
+          <li><a href="/services/ongoing-management">Ongoing management</a></li>
+          <li><a href="/services/google-workspace-email">Google Workspace email</a></li>
+          <li><a href="/services/ecommerce">eCommerce websites</a></li>
+          <li><a href="/services/analytics-reporting">Analytics &amp; reporting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Where I work</h3>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+          <li>&mdash; and UK-wide</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>The counter</h3>
+        <p class="foot-hours">
+          <a href="tel:+447395063764"><b>07395 063764</b></a><br>
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br><br>
+          Unit H3, Chaucer Business Park<br>
+          Dittons Road, Polegate<br>
+          East Sussex, BN26 6QH<br><br>
+          <b>Mon&ndash;Fri</b> 9:00&ndash;17:30<br>
+          <b>Sat</b> by appointment<br>
+          <b>Sun</b> closed
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Photography on this page is illustrative of the trades served, not of named clients.</span>
+    </div>
+  </div>
+</footer>
+
+<!--
+  ============================================================================
+  MOTION LEDGER — home-17-impeccable-animate
+  Every movement on this page had to answer: what does the visitor understand
+  better because this moved? The list below is what survived, and what did not.
+
+  SHIPPED
+  1. Docket line write-in     · click a trade · 420ms / 55ms stagger, capped
+                                at 6 · ease-in-place · CAUSALITY. One click
+                                produces a whole specification. The focal
+                                moment of the page.
+  2. Priced stamp             · end of that sequence · 320ms · ease-settle ·
+                                STATE. Marks the docket as a record. Fires
+                                once per rewrite, never loops.
+  3. Price slot travel        · payment switch · 280ms · ease-settle ·
+                                CONTINUITY. Same board, different card in the
+                                slot. Carries the one fact the pricing must
+                                land. Only real figures ever exist in the DOM.
+  4. Switch marker travel     · payment switch · 280ms · ease-settle ·
+                                HIERARCHY. Shows which of two positions is
+                                live, and that they are two positions on one
+                                control rather than two controls.
+  5. Header lift              · hero sentinel exits · 280ms · linear/ease ·
+                                STATE. The bar has left the counter-top and is
+                                now floating above content.
+  6. Mobile board drop        · menu button / Escape / link · 340ms in,
+                                320ms out · ease-in-place · CONTINUITY. The
+                                panel comes from behind the bar it belongs to.
+  7. List write-in, 3 places  · IntersectionObserver, once · 460ms / 55ms ·
+                                HIERARCHY. Only where content genuinely
+                                arrives as a list: the rate card, the client
+                                ledger, the trades. Same left-to-right travel
+                                as the docket, so the page has one grammar.
+  8. Control feedback         · hover / active / focus · 130ms ·
+                                ACKNOWLEDGEMENT. Buttons travel the height of
+                                their own edge when pressed. Rows shift right
+                                on hover. Focus is a doubled keyline.
+
+  CONSIDERED AND CUT
+  - Number count-up on prices and credentials. A counter that stalls displays
+    a false price, and interpolated digits are false values by construction.
+    Replaced by a slot that only ever moves between two authored true figures.
+    The credential stats were also cut as a stats row and folded into the
+    docket's account line, where they read as a trade account rather than a
+    scoreboard.
+  - Fade-and-rise on every section. An identical entrance on everything is a
+    tic, not motion. Headings, paragraphs, photographs and the hero do not
+    animate on scroll at all.
+  - Animating the carbon copy under the docket. The two offset sheets already
+    say "you say it once, I keep the record". Motion added time, not meaning.
+  - Parallax on the photographic bands. It says nothing about the offer.
+  - A ticker or marquee of client names. Motion with no state behind it.
+  - Hero build-in on load. It delays the one thing the visitor came for and
+    the page has no state to explain before he has done anything.
+
+  REDUCED MOTION
+  Travel goes to zero; the meaning stays. The docket still redraws and marks
+  the changed lines with a highlight rule instead of movement, the stamp is
+  present, the slot still shows the correct figures, aria-live still announces
+  both changes, and pressed and focus states are unaffected. Fewer and gentler,
+  not switched off.
+  ============================================================================
+-->
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var reduceQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function reduced() { return !!(reduceQuery && reduceQuery.matches); }
+
+  /* Content is visible by default. The reveal styles only exist once JS has
+     confirmed IntersectionObserver, so a failed script can never hide a
+     section. */
+  var canObserve = 'IntersectionObserver' in window;
+  if (canObserve && !reduced()) root.classList.add('motion-ready');
+
+  /* ---------------------------------------------------------- MOBILE BOARD */
+  var burger = document.getElementById('burger');
+  var board = document.getElementById('board');
+  if (burger && board) {
+    board.hidden = false;
+    var setBoard = function (open) {
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      board.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        var first = board.querySelector('a');
+        if (first) first.focus();
+      }
+    };
+    burger.addEventListener('click', function () {
+      setBoard(burger.getAttribute('aria-expanded') !== 'true');
+    });
+    board.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setBoard(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+        setBoard(false);
+        burger.focus();
+      }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && burger.getAttribute('aria-expanded') === 'true') setBoard(false);
+    });
+  }
+
+  /* --------------------------------------------------------- HEADER LIFT */
+  var fascia = document.getElementById('fascia');
+  var sentinel = document.getElementById('hero-sentinel');
+  if (fascia && sentinel && canObserve) {
+    new IntersectionObserver(function (entries) {
+      fascia.classList.toggle('is-lifted', !entries[0].isIntersecting);
+    }, { rootMargin: '-90px 0px 0px 0px' }).observe(sentinel);
+  }
+
+  /* ------------------------------------------------------- THE JOB DOCKET */
+  var TRADES = {
+    electrician: {
+      noun: 'an electrician',
+      pages: 'Rewires · Consumer units · EV chargers · Fault finding · Testing · Lighting'
+    },
+    plumber: {
+      noun: 'a plumber',
+      pages: 'Boilers · Bathrooms · Leaks · Power flushing · Radiators · Emergency call-outs'
+    },
+    scaffolder: {
+      noun: 'a scaffolder',
+      pages: 'Domestic scaffold · Commercial · Roof work · Temporary roofs · Edge protection · Hire'
+    },
+    builder: {
+      noun: 'a builder',
+      pages: 'Extensions · Loft conversions · Groundworks · Renovations · Brickwork · Garages'
+    },
+    roofer: {
+      noun: 'a roofer',
+      pages: 'Re-roofs · Flat roofs · Repairs · Guttering · Chimneys · Leadwork'
+    },
+    gardener: {
+      noun: 'a gardener',
+      pages: 'Maintenance · Turfing · Fencing · Planting · Hedge cutting · Clearance'
+    }
+  };
+
+  var docket = document.getElementById('docket');
+  var writeTimer = null;
+
+  if (docket) {
+    var slots = docket.querySelectorAll('.line-slot > span');
+    /* Stagger is capped: six lines at 55ms is a 275ms tail, and the last line
+       is never left waiting behind an ever-growing delay. */
+    for (var i = 0; i < slots.length; i++) {
+      slots[i].style.setProperty('--d', Math.min(i, 5) * 55 + 'ms');
+    }
+
+    var slotL1 = docket.querySelector('[data-slot="l1"]');
+    var slotL2s = docket.querySelector('[data-slot="l2s"]');
+
+    docket.addEventListener('click', function (e) {
+      var btn = e.target.closest('.trade-btn');
+      if (!btn) return;
+      var key = btn.getAttribute('data-trade');
+      var trade = TRADES[key];
+      if (!trade || btn.getAttribute('aria-pressed') === 'true') return;
+
+      var all = docket.querySelectorAll('.trade-btn');
+      for (var j = 0; j < all.length; j++) {
+        all[j].setAttribute('aria-pressed', all[j] === btn ? 'true' : 'false');
+      }
+
+      /* The text changes first and is always correct in the DOM, whether or
+         not the animation class ever gets applied or removed. */
+      if (slotL1) slotL1.firstChild.nodeValue = 'Website designed for ' + trade.noun;
+      if (slotL2s) slotL2s.textContent = trade.pages;
+
+      docket.classList.remove('is-writing');
+      /* force reflow so the animation restarts on a repeat selection */
+      void docket.offsetWidth;
+      docket.classList.add('is-writing');
+
+      if (writeTimer) clearTimeout(writeTimer);
+      writeTimer = setTimeout(function () {
+        docket.classList.remove('is-writing');
+      }, reduced() ? 900 : 1100);
+    });
+  }
+
+  /* --------------------------------------------------------- PRICE BOARD */
+  var board2 = document.getElementById('price-board');
+  var sw = document.getElementById('switch');
+  var status = document.getElementById('board-status');
+  if (board2 && sw) {
+    var COPY = {
+      a: 'SHOWING <b>UPFRONT + MONTHLY</b>. THE TIERS DIFFER ON SERVICE LEVEL AND PAGE ALLOWANCE, NEVER ON QUALITY OF BUILD.',
+      b: 'SHOWING <b>PAY MONTHLY</b> — NOTHING UPFRONT, 12-MONTH MINIMUM. IT IS THE SAME SITE, BUILT THE SAME WAY.'
+    };
+    sw.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-pay]');
+      if (!btn) return;
+      var mode = btn.getAttribute('data-pay');
+      var bs = sw.querySelectorAll('button[data-pay]');
+      for (var k = 0; k < bs.length; k++) {
+        bs[k].setAttribute('aria-pressed', bs[k] === btn ? 'true' : 'false');
+      }
+      sw.classList.toggle('is-b', mode === 'b');
+      board2.classList.toggle('is-b', mode === 'b');
+      if (status) status.innerHTML = COPY[mode];
+    });
+  }
+
+  /* ------------------------------------------------------ LIST WRITE-IN */
+  if (canObserve && !reduced()) {
+    var groups = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var kids = entry.target.children;
+        for (var n = 0; n < kids.length; n++) {
+          /* Cap the stagger so a fourteen-item list does not end on a
+             three-quarter-second delay. */
+          kids[n].style.setProperty('--i', Math.min(n, 7));
+        }
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    for (var g = 0; g < groups.length; g++) io.observe(groups[g]);
+  }
+
+  /* If the user turns reduced motion on mid-session, drop the reveal styles
+     immediately rather than leaving elements mid-animation. */
+  if (reduceQuery && reduceQuery.addEventListener) {
+    reduceQuery.addEventListener('change', function () {
+      if (reduced()) {
+        root.classList.remove('motion-ready');
+        var pending = document.querySelectorAll('[data-reveal]');
+        for (var p = 0; p < pending.length; p++) pending[p].classList.add('is-in');
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

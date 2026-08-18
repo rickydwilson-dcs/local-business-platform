@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Consulting Services — a website, made to your measurements</title>
+<meta name="description" content="A website designed, written, built, hosted and looked after for you. One person, any kind of small business. From £995 and £15 a month, or £45 a month with nothing upfront.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THE PATTERN — two inks on tissue
+   Ultramarine + vermilion, printed on cool pattern tissue.
+   One family: Archivo variable (width 62–125 x weight 100–900).
+   ============================================================ */
+
+:root{
+  /* inks */
+  --ultra:        #1D2BA8;
+  --ultra-deep:   #111C6E;
+  --ultra-soft:   #2E3CC4;
+  --verm:         #D93A22;
+  --verm-bright:  #F2452B;
+  --verm-tint:    #FF7A5C;   /* small text on ultramarine grounds */
+  --verm-deep:    #B92C17;   /* small text on tissue grounds */
+
+  /* stock */
+  --tissue:       #EEEFF3;
+  --tissue-2:     #E1E3EC;
+  --rule:         #C7CBD8;
+
+  /* type colours */
+  --ink:          #14151C;
+  --ink-mute:     #5B6070;
+  --chalk:        #A9B2E8;
+
+  /* scale */
+  --s1:.5rem; --s2:.75rem; --s3:1rem; --s4:1.5rem; --s5:2rem;
+  --s6:3rem;  --s7:4.5rem; --s8:7rem; --s9:10rem;
+
+  --pad-sec: clamp(4rem, 9vw, 8.5rem);
+  --gutter:  clamp(1.25rem, 4vw, 3.5rem);
+  --measure: 68ch;
+
+  --t-display: clamp(2.5rem, 9.2vw, 7.5rem);
+  --t-h2:      clamp(1.85rem, 4.4vw, 3.5rem);
+  --t-h3:      clamp(1.0625rem, 1.5vw, 1.3125rem);
+  --t-lead:    clamp(1.0625rem, 1.45vw, 1.375rem);
+  --t-body:    1.0625rem;
+  --t-small:   .9375rem;
+  --t-label:   .6875rem;
+
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scrollbar-color: var(--ultra) var(--tissue-2);
+}
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--tissue);
+  color:var(--ink);
+  font-family:'Archivo', 'Archivo Narrow', 'Helvetica Neue', Arial, sans-serif;
+  font-size:var(--t-body);
+  line-height:1.6;
+  font-variant-numeric: tabular-nums;
+  /* clip, not hidden: `hidden` makes body a scroll container and kills the
+     sticky header. `clip` contains any sub-pixel spill without that. */
+  overflow-x:clip;
+}
+
+/* ---- browser surfaces, themed ---- */
+::selection{ background:var(--verm); color:#fff; }
+::-webkit-scrollbar{ width:12px; height:12px; }
+::-webkit-scrollbar-track{ background:var(--tissue-2); }
+::-webkit-scrollbar-thumb{ background:var(--ultra); border:3px solid var(--tissue-2); }
+::-webkit-scrollbar-thumb:hover{ background:var(--ultra-soft); }
+input,textarea{ caret-color:var(--verm); }
+
+:focus-visible{
+  outline:3px solid var(--verm-bright);
+  outline-offset:3px;
+  border-radius:1px;
+}
+.on-ultra :focus-visible,
+.on-verm :focus-visible{ outline-color:var(--tissue); }
+
+img{ max-width:100%; height:auto; display:block; }
+h1,h2,h3,h4,p,figure,blockquote,ul,ol,dl{ margin:0; }
+ul,ol{ padding:0; list-style:none; }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--verm); color:#fff; padding:.85rem 1.25rem;
+  font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:var(--t-label);
+}
+.skip:focus{ left:var(--gutter); top:.5rem; }
+
+.wrap{
+  width:100%; max-width:1440px; margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.wrap--tight{ max-width:1180px; }
+
+/* ---- printed labels (marginalia, never a heading eyebrow) ---- */
+.mark{
+  font-size:var(--t-label);
+  font-weight:700;
+  font-stretch:104%;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.4;
+}
+.mark--mute{ color:var(--ink-mute); }
+.mark--chalk{ color:var(--chalk); }
+.mark--verm{ color:var(--verm-deep); }
+
+.rule{ border:0; border-top:1px solid var(--rule); margin:0; }
+.rule--ink{ border-top-color:rgba(169,178,232,.42); }
+.rule--dash{ border-top:1px dashed var(--rule); }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{
+  position:sticky; top:0; z-index:90;
+  background:var(--ultra);
+  color:var(--tissue);
+  border-bottom:1px solid var(--ultra-soft);
+}
+.site-header__in{
+  display:flex; align-items:center; gap:var(--s4);
+  min-height:72px;
+}
+.brand{
+  display:flex; align-items:center; gap:.7rem;
+  text-decoration:none; margin-right:auto; padding-block:.5rem;
+}
+.brand__chip{
+  display:grid; place-items:center;
+  width:40px; height:40px;
+  background:var(--verm); color:#fff;
+  font-weight:900; font-stretch:78%; font-size:1.0625rem; letter-spacing:.02em;
+}
+.brand__name{
+  display:block;
+  font-weight:700; font-stretch:88%;
+  font-size:.9375rem; letter-spacing:.02em; line-height:1.28;
+}
+.brand__sub{
+  display:block; font-size:.6875rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--chalk); font-weight:600;
+}
+@media (max-width:520px){ .brand__lock{ display:none; } }
+
+.nav{ display:none; }
+@media (min-width:1000px){
+  .nav{ display:flex; align-items:center; gap:var(--s5); }
+}
+.nav a{
+  text-decoration:none;
+  font-size:.875rem; font-weight:600; font-stretch:96%;
+  letter-spacing:.06em; text-transform:uppercase;
+  padding:.6rem 0; position:relative;
+}
+.nav a::after{
+  content:''; position:absolute; left:0; right:0; bottom:.25rem;
+  border-top:1px dashed var(--chalk);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .45s var(--ease);
+}
+.nav a:hover::after, .nav a:focus-visible::after{ transform:scaleX(1); }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
+  min-height:48px; padding:.8rem 1.4rem;
+  font-size:.8125rem; font-weight:800; font-stretch:98%;
+  letter-spacing:.11em; text-transform:uppercase;
+  text-decoration:none; border:1px solid transparent; cursor:pointer;
+  transition:background .3s var(--ease), color .3s var(--ease),
+             border-color .3s var(--ease), transform .3s var(--ease);
+}
+.btn--verm{ background:var(--verm); color:#fff; }
+.btn--verm:hover{ background:var(--verm-deep); }
+.btn--ink{ background:var(--ink); color:var(--tissue); }
+.btn--ink:hover{ background:#000; }
+.btn--tissue{ background:var(--tissue); color:var(--ink); }
+.btn--tissue:hover{ background:#fff; }
+.btn--ghost{ background:transparent; border-color:currentColor; }
+.btn--ghost:hover{ background:currentColor; }
+.btn--ghost:hover span{ color:var(--ultra); }
+.on-verm .btn--ghost:hover span{ color:var(--verm); }
+.btn--lg{ min-height:56px; padding:1rem 1.75rem; font-size:.875rem; }
+.site-header .btn{ display:none; }
+@media (min-width:1000px){ .site-header .btn{ display:inline-flex; } }
+
+.burger{
+  display:grid; place-items:center; gap:0;
+  width:48px; height:48px; margin-left:auto;
+  background:transparent; border:1px solid var(--ultra-soft); cursor:pointer;
+}
+@media (min-width:1000px){ .burger{ display:none; } }
+.burger svg{ width:22px; height:16px; }
+.burger line{ stroke:var(--tissue); stroke-width:1.6; stroke-dasharray:5 3; }
+
+/* mobile drawer — sibling of header, no blurred ancestor */
+.drawer{
+  position:fixed; inset:0; z-index:120;
+  background:var(--ultra-deep); color:var(--tissue);
+  display:flex; flex-direction:column;
+  padding:var(--gutter);
+  transform:translateY(-100%);
+  transition:transform .5s var(--ease);
+  overflow-y:auto;
+}
+.drawer[hidden]{ display:none; }
+.drawer[data-open="true"]{ transform:translateY(0); }
+.drawer__top{ display:flex; align-items:center; justify-content:space-between; min-height:56px; }
+.drawer__close{
+  width:48px; height:48px; background:transparent;
+  border:1px solid var(--ultra-soft); cursor:pointer; color:var(--tissue);
+  display:grid; place-items:center;
+}
+.drawer__close line{ stroke:var(--tissue); stroke-width:1.6; }
+.drawer__nav{ margin-top:var(--s6); display:flex; flex-direction:column; }
+.drawer__nav a{
+  text-decoration:none; padding:1.15rem 0;
+  border-bottom:1px dashed rgba(169,178,232,.35);
+  font-size:1.75rem; font-weight:800; font-stretch:80%;
+  letter-spacing:.01em; text-transform:uppercase;
+}
+.drawer__foot{ margin-top:auto; padding-top:var(--s6); display:grid; gap:var(--s2); }
+@media (prefers-reduced-motion: reduce){
+  .drawer{ transition:none; }
+}
+
+/* =========================================================
+   HERO — the envelope front
+   ========================================================= */
+.hero{
+  position:relative;
+  background:var(--ultra);
+  color:var(--tissue);
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero__lines{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  opacity:.5;
+}
+.hero__lines path,
+.hero__lines line,
+.hero__lines circle,
+.hero__lines polyline{
+  fill:none; stroke:var(--chalk); stroke-width:1.25; vector-effect:non-scaling-stroke;
+}
+.hero__in{ position:relative; z-index:1; }
+
+.band{
+  display:flex; flex-wrap:wrap; gap:.5rem var(--s5);
+  padding-block:.9rem;
+  border-bottom:1px solid rgba(169,178,232,.4);
+}
+.band > *{ color:var(--chalk); }
+.band > *:last-child{ margin-left:auto; }
+@media (max-width:700px){ .band > *:last-child{ margin-left:0; } }
+
+.hero__grid{
+  display:grid; gap:var(--s6);
+  padding-block:clamp(3rem,7vw,6rem) clamp(3.5rem,8vw,7rem);
+}
+@media (min-width:1024px){
+  .hero__grid{ grid-template-columns:7fr 5fr; gap:var(--s7); align-items:end; }
+}
+
+h1.hero__title{
+  font-size:var(--t-display);
+  line-height:.9;
+  font-weight:900;
+  font-stretch:70%;
+  letter-spacing:-.025em;
+  text-transform:uppercase;
+  text-wrap:balance;
+  margin-bottom:var(--s4);
+}
+.hero__title em{
+  font-style:normal;
+  display:block;
+  color:var(--verm-tint);
+}
+.hero__lead{
+  font-size:var(--t-lead);
+  font-weight:300;
+  font-stretch:106%;
+  line-height:1.55;
+  max-width:36ch;
+  color:#fff;
+}
+.hero__actions{
+  display:flex; flex-wrap:wrap; gap:var(--s2);
+  margin-top:var(--s5);
+}
+@media (max-width:520px){
+  .hero__actions .btn,
+  .close__actions .btn,
+  .drawer__foot .btn{ width:100%; }
+}
+.hero__notes{
+  margin-top:var(--s5); padding-top:var(--s3);
+  border-top:1px dashed rgba(169,178,232,.5);
+  display:flex; flex-wrap:wrap; gap:.4rem var(--s4);
+}
+
+/* the envelope panel */
+.envelope{
+  position:relative;
+  background:var(--tissue);
+  color:var(--ink);
+  padding:.6rem .6rem 1.1rem;
+  /* second plate off register — the page carries no soft shadows */
+  box-shadow:9px 9px 0 -1px rgba(217,58,34,.6);
+}
+.envelope__tab{
+  position:absolute; top:-1px; right:1.4rem;
+  background:var(--verm); color:#fff;
+  padding:.5rem .8rem .55rem;
+  font-size:var(--t-label); font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  z-index:2;
+}
+.envelope__media{
+  position:relative; background:var(--ultra); isolation:isolate;
+  aspect-ratio:1600/1062; overflow:hidden;
+}
+@media (min-width:1024px){ .envelope__media{ aspect-ratio:4/5; } }
+.env-slide{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  mix-blend-mode:luminosity; opacity:0;
+  transition:opacity .9s var(--ease);
+}
+/* without JS the first view simply stands */
+.envelope__media:not([data-js]) .env-slide:first-child{ opacity:1; }
+.env-slide.is-on{ opacity:1; }
+.envelope:hover .env-slide.is-on{ mix-blend-mode:normal; }
+@media (hover:none){ .env-slide{ mix-blend-mode:normal; } }
+@media (prefers-reduced-motion: reduce){ .env-slide{ transition:none; } }
+.envelope__dots{
+  display:flex; gap:.3rem; padding:.6rem .3rem 0; margin-top:.55rem;
+  border-top:1px dashed var(--rule);
+}
+.envelope__dots button{
+  min-width:44px; min-height:44px; cursor:pointer;
+  background:transparent; border:1px solid var(--rule); color:var(--ink-mute);
+  font-size:.75rem; font-weight:800; letter-spacing:.1em;
+  transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.envelope__dots button:hover{ border-color:var(--ink); color:var(--ink); }
+.envelope__dots button[aria-current="true"]{ background:var(--ultra); border-color:var(--ultra); color:var(--tissue); }
+.envelope__cap{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);
+  padding:.85rem .3rem 0;
+}
+
+/* =========================================================
+   TAPE — notions marquee
+   ========================================================= */
+.tape{
+  background:var(--verm); color:#fff;
+  overflow:hidden; border-block:1px solid rgba(0,0,0,.2);
+}
+.tape__track{
+  display:flex; width:max-content;
+  animation:tape 46s linear infinite;
+}
+.tape:hover .tape__track,
+.tape:focus-within .tape__track{ animation-play-state:paused; }
+.tape__set{ display:flex; flex-shrink:0; padding-block:.85rem; }
+.tape__set span{
+  padding-inline:1.4rem;
+  font-size:.75rem; font-weight:800; font-stretch:100%;
+  letter-spacing:.19em; text-transform:uppercase; white-space:nowrap;
+}
+.tape__set span::after{
+  content:''; display:inline-block; vertical-align:-.08em;
+  width:1px; height:.85em; background:currentColor; opacity:.45; margin-left:1.4rem;
+}
+@keyframes tape{ to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){
+  .tape__track{ animation:none; }
+  .tape{ overflow-x:auto; }
+}
+
+/* =========================================================
+   SECTION SHELL
+   ========================================================= */
+.sec{ padding-block:var(--pad-sec); position:relative; }
+.sec--ultra{ background:var(--ultra); color:var(--tissue); }
+.sec--deep{ background:var(--ultra-deep); color:var(--tissue); }
+.sec--tint{ background:var(--tissue-2); }
+
+.sec__head{
+  display:grid; gap:var(--s4);
+  margin-bottom:clamp(2.5rem,5vw,4.5rem);
+}
+@media (min-width:900px){
+  .sec__head{ grid-template-columns:1fr 1fr; gap:var(--s7); align-items:start; }
+  .sec__head--wide{ grid-template-columns:1.15fr .85fr; }
+}
+h2.sec__title{
+  font-size:var(--t-h2);
+  font-weight:900; font-stretch:74%;
+  line-height:.94; letter-spacing:-.02em; text-transform:uppercase;
+  text-wrap:balance;
+}
+h2.sec__title em{ font-style:normal; color:var(--verm); }
+.sec--ultra h2.sec__title em,
+.sec--deep h2.sec__title em{ color:var(--verm-tint); }
+.sec__blurb{
+  font-size:var(--t-lead); font-weight:300; font-stretch:104%;
+  line-height:1.6; max-width:52ch;
+}
+.sec--ultra .sec__blurb, .sec--deep .sec__blurb{ color:#fff; }
+
+/* =========================================================
+   VIEWS — the range argument
+   ========================================================= */
+.views{
+  display:grid; gap:var(--s5);
+  grid-template-columns:1fr;
+}
+@media (min-width:640px){ .views{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1100px){ .views{ grid-template-columns:repeat(4,1fr); gap:var(--s4); } }
+
+.view{ display:flex; flex-direction:column; }
+.view__frame{
+  position:relative; background:var(--ultra); isolation:isolate;
+  aspect-ratio:1600/1062; overflow:hidden;
+}
+.view__frame img{
+  width:100%; height:100%; object-fit:cover;
+  mix-blend-mode:luminosity; opacity:.88;
+  transition:opacity .6s var(--ease), transform .9s var(--ease);
+}
+.view:hover .view__frame img,
+.view:focus-within .view__frame img{
+  mix-blend-mode:normal; opacity:1; transform:scale(1.03);
+}
+@media (hover:none){
+  .view__frame img{ mix-blend-mode:normal; opacity:1; }
+}
+@media (prefers-reduced-motion: reduce){
+  .view__frame img{ transition:opacity .01s; }
+  .view:hover .view__frame img{ transform:none; }
+}
+.view__letter{
+  position:absolute; left:0; top:0; z-index:2;
+  background:var(--tissue); color:var(--ink);
+  padding:.45rem .7rem .5rem;
+  font-size:var(--t-label); font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+}
+.view__body{ padding-top:var(--s3); border-top:1px solid var(--rule); margin-top:var(--s3); }
+.sec--ultra .view__body{ border-top-color:rgba(169,178,232,.42); }
+h3.view__name{
+  font-size:var(--t-h3); font-weight:800; font-stretch:88%;
+  letter-spacing:-.005em; margin-bottom:.4rem;
+}
+.view__text{ font-size:var(--t-small); color:var(--ink-mute); }
+.sec--ultra .view__text{ color:var(--chalk); }
+
+.also{
+  margin-top:var(--s6); padding-top:var(--s4);
+  border-top:1px dashed var(--rule);
+  display:flex; flex-wrap:wrap; gap:.5rem;
+  align-items:center;
+}
+.sec--ultra .also{ border-top-color:rgba(169,178,232,.5); }
+.also li{
+  border:1px solid var(--rule);
+  padding:.45rem .75rem;
+  font-size:.75rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.sec--ultra .also li{ border-color:rgba(169,178,232,.5); color:var(--chalk); }
+
+/* =========================================================
+   SEAM — what you supply / what's in the envelope
+   ========================================================= */
+.seam{ display:grid; gap:var(--s7); position:relative; }
+@media (min-width:900px){
+  .seam{ grid-template-columns:1fr 1px 1fr; gap:var(--s7); }
+}
+.seam__line{ display:none; position:relative; }
+@media (min-width:900px){
+  .seam__line{ display:block; background:linear-gradient(var(--rule) 50%, transparent 0) repeat-y; background-size:1px 12px; }
+}
+.seam__col > .mark{ padding-bottom:var(--s3); border-bottom:2px solid var(--ink); display:block; }
+.seam__col--answer > .mark{ border-bottom-color:var(--verm); color:var(--verm-deep); }
+
+.supply{ margin-top:var(--s5); display:grid; gap:var(--s4); counter-reset:sup; }
+.supply li{
+  display:grid; grid-template-columns:auto 1fr; gap:var(--s3); align-items:start;
+  counter-increment:sup;
+}
+.supply li::before{
+  content:counter(sup,decimal-leading-zero);
+  font-size:2.25rem; font-weight:900; font-stretch:70%; line-height:.8;
+  color:var(--ink); letter-spacing:-.03em;
+}
+.supply h3{ font-size:var(--t-h3); font-weight:800; font-stretch:90%; margin-bottom:.25rem; }
+.supply p{ color:var(--ink-mute); font-size:var(--t-small); max-width:40ch; }
+
+.included{ margin-top:var(--s5); display:grid; }
+.included li{
+  display:grid; grid-template-columns:22px 1fr; gap:var(--s3);
+  padding-block:var(--s3);
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.included li:first-child{ border-top:0; padding-top:0; }
+.included svg{ width:22px; height:22px; margin-top:.28rem; }
+.included svg *{ fill:none; stroke:var(--verm); stroke-width:1.5; }
+.included b{ font-weight:800; font-stretch:92%; display:block; }
+.included span{ color:var(--ink-mute); font-size:var(--t-small); }
+
+/* =========================================================
+   PIECES — services
+   ========================================================= */
+.pieces{
+  display:grid; gap:var(--s4);
+  grid-template-columns:1fr;
+}
+@media (min-width:700px){ .pieces{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1100px){ .pieces{ grid-template-columns:repeat(6,1fr); } }
+
+.piece{ position:relative; min-height:230px; }
+@media (min-width:1100px){
+  .piece{ grid-column:span 2; }
+  .piece--w2{ grid-column:span 2; }
+  .piece--w3{ grid-column:span 3; }
+  .piece--w4{ grid-column:span 4; }
+}
+.piece__ink,
+.piece__body{ clip-path:var(--shape); }
+.piece__ink{
+  position:absolute; inset:0; background:var(--verm);
+  /* the second plate, printed a few px off register. this is the world's
+     depth device — there are no soft shadows on this page. */
+  transform:translate(5px,5px); opacity:.5;
+  transition:transform .35s var(--ease), opacity .35s var(--ease);
+}
+.piece__body{
+  position:relative;
+  background:#fff;
+  border:0;
+  height:100%;
+  padding:var(--s4) var(--s4) var(--s5);
+  display:flex; flex-direction:column;
+  box-shadow:inset 0 0 0 1px var(--rule);
+  transition:transform .35s var(--ease);
+}
+.piece:hover .piece__ink,
+.piece:focus-within .piece__ink{ opacity:1; transform:translate(10px,10px); }
+.piece:hover .piece__body,
+.piece:focus-within .piece__body{ transform:translate(-2px,-2px); }
+@media (prefers-reduced-motion: reduce){
+  .piece__ink,.piece__body{ transition:none; }
+}
+.piece__no{
+  font-size:var(--t-label); font-weight:800; letter-spacing:.16em;
+  color:var(--verm-deep); text-transform:uppercase;
+}
+h3.piece__name{
+  font-size:clamp(1.25rem,2.1vw,1.75rem);
+  font-weight:900; font-stretch:76%; line-height:1;
+  text-transform:uppercase; letter-spacing:-.012em;
+  margin-bottom:var(--s2);
+}
+.piece__text{ color:var(--ink-mute); font-size:var(--t-small); max-width:38ch; }
+.piece__foot{
+  margin-top:auto; padding-top:var(--s4);
+  display:flex; align-items:center; gap:var(--s2);
+}
+.piece__foot .piece__no{ margin-left:auto; }
+.piece__grain{ width:64px; height:10px; }
+.piece__grain *{ fill:none; stroke:var(--ink); stroke-width:1.3; }
+
+/* =========================================================
+   CUTTING LAYOUT — process
+   ========================================================= */
+.layout{ position:relative; }
+.layout__field{
+  position:relative;
+  border:1px dashed var(--chalk);
+  padding:clamp(1.5rem,4vw,3rem);
+}
+.layout__selvedge{
+  position:absolute; left:0; right:0; height:14px;
+  background:repeating-linear-gradient(90deg, rgba(169,178,232,.55) 0 2px, transparent 2px 9px);
+}
+.layout__selvedge--t{ top:-1px; }
+.layout__selvedge--b{ bottom:-1px; }
+
+.steps{ display:grid; gap:var(--s5); position:relative; }
+@media (min-width:900px){ .steps{ grid-template-columns:repeat(4,1fr); gap:var(--s4); } }
+
+.steps__stitch{
+  position:absolute; z-index:0;
+  background:repeating-linear-gradient(90deg, var(--verm-bright) 0 10px, transparent 10px 18px);
+  left:0; right:0; top:34px; height:2px;
+  transform-origin:left center;
+  display:none;
+}
+@media (min-width:900px){ .steps__stitch{ display:block; } }
+@supports (animation-timeline: view()){
+  @media (min-width:900px) and (prefers-reduced-motion: no-preference){
+    .steps__stitch{
+      animation:stitch linear both;
+      animation-timeline:view();
+      animation-range:entry 15% cover 45%;
+    }
+    @keyframes stitch{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  }
+}
+.step{ position:relative; z-index:1; }
+.step__no{
+  width:68px; height:68px; display:grid; place-items:center;
+  background:var(--ultra); color:var(--tissue);
+  font-size:1.75rem; font-weight:900; font-stretch:72%; line-height:1;
+  margin-bottom:var(--s4);
+}
+h3.step__name{
+  font-size:var(--t-h3); font-weight:900; font-stretch:82%;
+  text-transform:uppercase; letter-spacing:-.008em;
+  margin-bottom:var(--s2);
+}
+.step__text{ color:var(--ink-mute); font-size:var(--t-small); max-width:32ch; }
+.step__notch{ margin-top:var(--s3); width:34px; height:8px; }
+.step__notch *{ fill:none; stroke:var(--verm); stroke-width:1.4; }
+
+/* =========================================================
+   SIZES — pricing
+   ========================================================= */
+.pay{
+  display:inline-flex; flex-wrap:wrap; gap:0;
+  border:1px solid var(--rule); background:var(--tissue);
+  margin-bottom:var(--s6);
+}
+.pay button + button{ border-left:1px solid var(--rule); }
+@media (max-width:560px){
+  .pay{ display:grid; grid-template-columns:1fr; width:100%; }
+  .pay button + button{ border-left:0; border-top:1px solid var(--rule); }
+}
+.pay button{
+  min-height:52px; padding:.85rem 1.35rem;
+  background:transparent; border:0; cursor:pointer;
+  font-size:.8125rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink-mute);
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.pay button[aria-selected="true"]{ background:var(--ultra); color:var(--tissue); }
+.pay button:hover:not([aria-selected="true"]){ background:var(--tissue-2); color:var(--ink); }
+
+.panel__note{ margin-bottom:var(--s4); color:var(--ink-mute); font-size:var(--t-small); }
+.tiers{ display:grid; gap:var(--s4); }
+@media (min-width:840px){ .tiers{ grid-template-columns:repeat(3,1fr); } }
+
+.tier{
+  background:#fff; padding:var(--s5) var(--s4) var(--s4);
+  box-shadow:inset 0 0 0 1px var(--rule), 5px 5px 0 -1px rgba(217,58,34,.45);
+  display:flex; flex-direction:column; position:relative;
+}
+.tier--pick{ box-shadow:inset 0 0 0 2px var(--verm), 5px 5px 0 -1px rgba(217,58,34,.6); }
+.tier__flag{
+  position:absolute; top:0; right:0;
+  background:var(--verm); color:#fff;
+  padding:.4rem .7rem;
+  font-size:.6875rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+}
+h3.tier__name{
+  font-size:1.375rem; font-weight:900; font-stretch:76%;
+  text-transform:uppercase; letter-spacing:-.01em; margin-bottom:var(--s3);
+}
+.tier__price{
+  display:flex; align-items:baseline; gap:.35rem;
+  font-weight:900; font-stretch:70%; letter-spacing:-.03em;
+  line-height:.9;
+  font-size:clamp(2.75rem,5.2vw,3.75rem);
+}
+.tier__price small{
+  font-size:.875rem; font-weight:700; font-stretch:100%;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute);
+}
+.tier__then{
+  margin-top:var(--s3); padding-top:var(--s3);
+  border-top:1px dashed var(--rule);
+  font-size:var(--t-small); color:var(--ink-mute);
+}
+.tier__then b{ color:var(--ink); font-weight:800; }
+.tier__pages{
+  margin-top:var(--s4);
+  font-size:var(--t-label); font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+}
+.tier__cta{ margin-top:var(--s5); }
+
+/* included table */
+.same{ margin-top:var(--s7); }
+.same__scroll{ overflow-x:auto; }
+table.same__table{
+  width:100%; min-width:640px; border-collapse:collapse;
+  text-align:left;
+}
+.same__table caption{
+  text-align:left; padding-bottom:var(--s3);
+  font-size:var(--t-small); color:var(--ink-mute); max-width:60ch;
+}
+.same__table th, .same__table td{
+  padding:.85rem .75rem; border-top:1px solid var(--rule);
+  vertical-align:middle;
+}
+.same__table thead th{
+  border-top:0; border-bottom:2px solid var(--ink);
+  font-size:var(--t-label); font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+}
+.same__table tbody th{ font-weight:600; font-size:var(--t-small); }
+.same__table td{ text-align:center; width:15%; }
+.same__table thead th + th{ text-align:center; }
+.same__table tbody th{ width:55%; }
+.same__table svg{ width:20px; height:20px; display:inline-block; }
+.same__table svg *{ fill:none; stroke:var(--verm); stroke-width:1.6; }
+.same__diff th, .same__diff td{ background:var(--tissue-2); font-weight:800; }
+
+.addons{
+  margin-top:var(--s6); padding-top:var(--s4); border-top:1px dashed var(--rule);
+  display:grid; gap:var(--s3);
+}
+@media (min-width:760px){ .addons{ grid-template-columns:repeat(4,1fr); } }
+.addons li b{ display:block; font-weight:800; font-stretch:90%; }
+.addons li span{ color:var(--ink-mute); font-size:var(--t-small); }
+
+/* =========================================================
+   MADE UP — portfolio
+   ========================================================= */
+.filters{
+  display:flex; flex-wrap:wrap; gap:.5rem;
+  margin-bottom:var(--s6);
+}
+.filters button{
+  min-height:44px; padding:.6rem 1rem;
+  background:transparent; cursor:pointer;
+  border:1px solid rgba(169,178,232,.5); color:var(--chalk);
+  font-size:.75rem; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+  transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.filters button[aria-pressed="true"]{ background:var(--tissue); color:var(--ink); border-color:var(--tissue); }
+.filters button:hover:not([aria-pressed="true"]){ border-color:var(--tissue); color:var(--tissue); }
+
+.works{ display:grid; gap:var(--s4); }
+@media (min-width:680px){ .works{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1080px){ .works{ grid-template-columns:repeat(3,1fr); } }
+.work{
+  background:var(--ultra-deep);
+  box-shadow:inset 0 0 0 1px rgba(169,178,232,.35), 5px 5px 0 -1px rgba(255,122,92,.4);
+  padding:var(--s3);
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.work:hover{ transform:translateY(-4px); box-shadow:inset 0 0 0 1px var(--chalk), 9px 9px 0 -1px rgba(255,122,92,.55); }
+.work[hidden]{ display:none; }
+@media (prefers-reduced-motion: reduce){ .work{ transition:none; } }
+
+/* CSS-drawn site mock — no photography of a real client */
+.mock{ background:var(--tissue); aspect-ratio:16/11; padding:0; overflow:hidden; }
+.mock__bar{
+  height:20px; background:var(--tissue-2); display:flex; align-items:center; gap:4px; padding-inline:7px;
+  border-bottom:1px solid var(--rule);
+}
+.mock__dot{ width:6px; height:6px; border-radius:50%; background:var(--rule); }
+.mock__stage{ padding:10px; display:grid; gap:6px; height:calc(100% - 20px); }
+.mock__hero{ background:var(--ultra); }
+.mock__row{ display:grid; gap:6px; }
+.mock__band{ background:var(--rule); height:6px; }
+.mock__band--v{ background:var(--verm); }
+.mock__band--w{ background:var(--ink); opacity:.35; }
+.mock--a .mock__stage{ grid-template-rows:1.5fr 1fr; }
+.mock--a .mock__row{ grid-template-columns:repeat(4,1fr); }
+.mock--a .mock__row > i{ background:var(--tissue-2); box-shadow:inset 0 0 0 1px var(--rule); }
+.mock--b .mock__stage{ grid-template-rows:1fr 1.4fr; }
+.mock--b .mock__row{ grid-template-columns:1fr 1fr; }
+.mock--b .mock__row > i{ background:var(--ultra); opacity:.16; }
+.mock--b .mock__row > i:first-child{ opacity:1; }
+.mock--c .mock__stage{ grid-template-columns:1fr 1.6fr; grid-template-rows:1fr; }
+.mock--c .mock__row{ grid-auto-rows:8px; align-content:start; }
+.mock--c .mock__row > i{ background:var(--rule); }
+/* hero-first, four tiles */
+.mock--d .mock__stage{ grid-template-rows:1fr 1.2fr; }
+.mock--d .mock__row{ grid-template-columns:repeat(2,1fr); grid-auto-rows:1fr; }
+.mock--d .mock__row > i{ background:var(--tissue-2); box-shadow:inset 0 0 0 1px var(--rule); }
+.mock--d .mock__row > i:nth-child(2){ background:var(--verm); box-shadow:none; }
+.mock--e .mock__stage{ grid-template-columns:1.5fr 1fr; grid-template-rows:1fr; }
+.mock--e .mock__row{ grid-auto-rows:1fr; }
+.mock--e .mock__row > i{ background:var(--tissue-2); box-shadow:inset 0 0 0 1px var(--rule); }
+/* hero-first, two tiles */
+.mock--h .mock__stage{ grid-template-rows:1.7fr 1fr; }
+.mock--h .mock__row{ grid-template-columns:1fr; grid-auto-rows:1fr; }
+.mock--h .mock__row > i{ background:var(--ultra); opacity:.22; }
+.mock--f .mock__stage{ grid-template-rows:22px 1fr; }
+.mock--f .mock__hero{ background:var(--verm); }
+.mock--f .mock__row{ grid-template-columns:1fr 1fr; }
+.mock--f .mock__row > i{ background:var(--tissue-2); box-shadow:inset 0 0 0 1px var(--rule); }
+/* row-first, five bands */
+.mock--g .mock__stage{ grid-template-columns:1.6fr 1fr; grid-template-rows:1fr; }
+.mock--g .mock__row{ grid-auto-rows:9px; align-content:start; }
+.mock--g .mock__row > i{ background:var(--rule); }
+.mock--g .mock__row > i:nth-child(odd){ background:var(--tissue-2); }
+.mock--i .mock__stage{ grid-template-rows:1fr auto; }
+.mock--i .mock__row{ grid-auto-rows:10px; align-content:end; }
+.mock--i .mock__row > i{ background:var(--rule); }
+.mock--i .mock__row > i:first-child{ background:var(--verm); }
+.work__meta{ padding:var(--s3) .35rem .35rem; }
+.work__sector{
+  font-size:var(--t-label); font-weight:800; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--verm-tint);
+  margin-top:var(--s3); padding-top:var(--s2);
+  border-top:1px dashed rgba(169,178,232,.4);
+}
+h3.work__name{ font-size:1.125rem; font-weight:800; font-stretch:88%; margin-bottom:.4rem; }
+.work__out{ font-size:var(--t-small); color:var(--chalk); }
+.works__none{ padding:var(--s5) 0; color:var(--chalk); }
+
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
+.quotes{ display:grid; gap:var(--s6); }
+@media (min-width:900px){ .quotes{ grid-template-columns:repeat(3,1fr); gap:var(--s5); } }
+.quote{ border-top:2px solid var(--verm); padding-top:var(--s4); }
+.quote blockquote p{
+  font-size:clamp(1.125rem,1.9vw,1.5rem);
+  font-weight:300; font-stretch:104%; line-height:1.4;
+  letter-spacing:-.012em;
+}
+.quote figcaption{
+  margin-top:var(--s4); padding-top:var(--s3);
+  border-top:1px dashed var(--rule);
+  font-size:var(--t-small);
+}
+.quote figcaption b{ font-weight:800; display:block; }
+.quote figcaption span{ color:var(--ink-mute); }
+
+/* =========================================================
+   MAKER
+   ========================================================= */
+.maker{ display:grid; gap:var(--s6); }
+@media (min-width:960px){ .maker{ grid-template-columns:1.25fr .75fr; gap:var(--s7); align-items:start; } }
+.maker__lead{
+  font-size:clamp(1.375rem,2.8vw,2.125rem);
+  font-weight:300; font-stretch:100%; line-height:1.32; letter-spacing:-.02em;
+  margin-bottom:var(--s4); text-wrap:balance;
+}
+.maker__body{ max-width:var(--measure); color:var(--ink-mute); display:grid; gap:var(--s3); }
+.maker__facts{
+  margin-top:var(--s5); display:grid; gap:0;
+  border-top:1px solid var(--rule);
+}
+.maker__facts div{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);
+  padding-block:.85rem; border-bottom:1px solid var(--rule);
+}
+.maker__facts dt{ font-size:var(--t-small); color:var(--ink-mute); }
+.maker__facts dd{
+  margin:0; font-weight:900; font-stretch:76%; font-size:1.25rem; letter-spacing:-.01em;
+  text-align:right;
+}
+.maker__shot{ background:var(--ultra); isolation:isolate; }
+.maker__shot img{ mix-blend-mode:luminosity; opacity:.9; }
+.maker__swatch figcaption{
+  margin-top:var(--s2); font-size:var(--t-label); letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-mute);
+}
+.reach{ margin-top:var(--s6); padding-top:var(--s4); border-top:2px solid var(--ink); }
+.reach ul{ display:flex; flex-wrap:wrap; gap:.4rem 1rem; margin-top:var(--s3); }
+.reach li{ font-weight:700; font-stretch:92%; }
+.reach li:last-child{ color:var(--verm-deep); }
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+.close{ background:var(--verm); color:#fff; }
+.close__grid{ display:grid; gap:var(--s5); }
+@media (min-width:960px){ .close__grid{ grid-template-columns:1.15fr .85fr; gap:var(--s7); align-items:end; } }
+h2.close__title{
+  color:var(--ink);
+  font-size:clamp(2.5rem,7.5vw,5.5rem);
+  font-weight:900; font-stretch:70%; line-height:.88;
+  letter-spacing:-.028em; text-transform:uppercase; text-wrap:balance;
+}
+.close__lead{ font-size:var(--t-lead); font-weight:400; max-width:44ch; margin-top:var(--s4); }
+.close__actions{ display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s5); }
+.close__details{ display:grid; gap:var(--s3); }
+.close__details div{ padding-top:var(--s3); border-top:1px solid rgba(255,255,255,.5); }
+.close__details dt{ font-size:var(--t-label); font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+.close__details dd{ margin:.25rem 0 0; font-weight:600; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{ background:var(--ultra-deep); color:var(--tissue); padding-block:var(--s7) var(--s5); }
+.foot{ display:grid; gap:var(--s6); }
+@media (min-width:820px){ .foot{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1120px){ .foot{ grid-template-columns:1.2fr 1fr 1fr 1fr; gap:var(--s5); } }
+.foot h3{
+  font-size:var(--t-label); font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--chalk); padding-bottom:var(--s3); margin-bottom:var(--s3);
+  border-bottom:1px solid rgba(169,178,232,.35);
+}
+.foot ul{ display:grid; gap:.55rem; font-size:var(--t-small); }
+.foot a{ text-decoration:none; }
+.foot a:hover{ text-decoration:underline; text-underline-offset:.28em; text-decoration-color:var(--verm-bright); text-decoration-thickness:2px; }
+.foot__logo{ display:inline-block; margin-bottom:var(--s4); }
+/* knocked to tissue so the mark prints in the page's own ink rather than
+   dropping two foreign colours into a two-ink footer */
+.foot__logo img{ width:150px; height:75px; object-fit:contain; filter:brightness(0) invert(1); }
+.foot__about{ font-size:var(--t-small); color:var(--chalk); max-width:38ch; }
+.legal{
+  margin-top:var(--s7); padding-top:var(--s4);
+  border-top:1px solid rgba(169,178,232,.35);
+  display:flex; flex-wrap:wrap; gap:.5rem var(--s5);
+  font-size:.75rem; color:var(--chalk);
+}
+.legal > *:last-child{ margin-left:auto; }
+@media (max-width:640px){ .legal > *:last-child{ margin-left:0; } }
+
+/* =========================================================
+   REVEAL — visible by default, hidden only once JS confirms
+   ========================================================= */
+[data-motion="on"] .rv[data-hide]{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+  transition-delay:var(--d,0ms);
+}
+[data-motion="on"] .rv[data-hide].is-in{ opacity:1; transform:none; }
+
+[data-motion="on"] .hero__lines path,
+[data-motion="on"] .hero__lines polyline,
+[data-motion="on"] .hero__lines line,
+[data-motion="on"] .hero__lines circle{
+  stroke-dasharray:1400;
+  stroke-dashoffset:1400;
+  animation:trace 2.6s var(--ease) forwards;
+}
+[data-motion="on"] .hero__lines *:nth-child(2){ animation-delay:.18s; }
+[data-motion="on"] .hero__lines *:nth-child(3){ animation-delay:.34s; }
+[data-motion="on"] .hero__lines *:nth-child(4){ animation-delay:.5s; }
+[data-motion="on"] .hero__lines *:nth-child(5){ animation-delay:.62s; }
+[data-motion="on"] .hero__lines *:nth-child(6){ animation-delay:.74s; }
+[data-motion="on"] .hero__lines *:nth-child(7){ animation-delay:.86s; }
+[data-motion="on"] .hero__lines *:nth-child(8){ animation-delay:.96s; }
+[data-motion="on"] .hero__lines *:nth-child(9){ animation-delay:1.04s; }
+[data-motion="on"] .hero__lines *:nth-child(10){ animation-delay:1.12s; }
+[data-motion="on"] .hero__lines *:nth-child(11){ animation-delay:1.2s; }
+[data-motion="on"] .hero__lines *:nth-child(12){ animation-delay:1.26s; }
+[data-motion="on"] .hero__lines *:nth-child(13){ animation-delay:1.32s; }
+[data-motion="on"] .hero__lines *:nth-child(14){ animation-delay:1.38s; }
+[data-motion="on"] .hero__lines *:nth-child(15){ animation-delay:1.44s; }
+[data-motion="on"] .hero__lines *:nth-child(16){ animation-delay:1.5s; }
+@keyframes trace{ to{ stroke-dashoffset:0; } }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+}
+</style>
+</head>
+<body>
+<!--
+  THESIS: DCS is a proven pattern cut to your measurements — one make, every kind of
+  business. Refuses the agency wall of portfolio thumbnails.
+  OWN-WORLD: Two-ink offset print on a dressmaking pattern envelope. Ultramarine #1D2BA8
+  fields, vermilion #D93A22 second ink, cool tissue #EEEFF3 stock. One family: Archivo
+  variable, wdth 62–125 x wght 100–900. Marks are pattern markings — notches, grainlines,
+  fold lines, piece numbers. Depth is ink misregistration, not soft shadow.
+  STORY: The visitor finds their own kind of business among four views, learns they supply
+  almost nothing, reads a real price, and calls.
+  FIRST VIEWPORT: Full-bleed ultramarine envelope front, printed masthead band across the
+  top. Left: h1 at 7.5rem condensed black, lead, vermilion quote button + phone. Right: a
+  tall View A panel, photograph in one ink under a vermilion tab. Tissue pattern lines
+  traced across the whole field.
+  FORM: The paper pattern — candidate 5 of 7 on my ordered list; seed key 26bcf012.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review,
+  the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header on-ultra">
+  <div class="wrap site-header__in">
+    <a class="brand" href="#main">
+      <span class="brand__chip" aria-hidden="true">DCS</span>
+      <span class="brand__lock">
+        <span class="brand__name">Digital Consulting Services</span>
+        <span class="brand__sub">Polegate &middot; Est. 2019</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn btn--verm" href="/contact"><span>Get a free quote</span></a>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <svg viewBox="0 0 22 16" aria-hidden="true" focusable="false">
+        <line x1="0" y1="2" x2="22" y2="2"></line>
+        <line x1="0" y1="8" x2="22" y2="8"></line>
+        <line x1="0" y1="14" x2="22" y2="14"></line>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="drawer on-ultra" id="drawer" data-open="false" aria-label="Menu" hidden>
+  <div class="drawer__top">
+    <span class="mark mark--chalk">Menu</span>
+    <button class="drawer__close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true" focusable="false">
+        <line x1="3" y1="3" x2="19" y2="19"></line><line x1="19" y1="3" x2="3" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Mobile">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="/blog">Blog</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="drawer__foot">
+    <a class="btn btn--verm btn--lg" href="/contact"><span>Get a free quote</span></a>
+    <a class="btn btn--ghost btn--lg" href="tel:07395063764"><span>Call 07395 063764</span></a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO — the envelope front ============ -->
+  <section class="hero on-ultra" aria-labelledby="hero-title">
+    <svg class="hero__lines" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <path d="M96 40 C 250 26, 402 118, 452 300 C 494 452, 452 636, 292 742 L 96 742 Z"></path>
+      <path d="M812 74 C 962 66, 1122 158, 1158 330 C 1188 476, 1114 654, 946 736"></path>
+      <line x1="640" y1="0" x2="640" y2="760" stroke-dasharray="14 10"></line>
+      <polyline points="606,352 640,320 674,352"></polyline>
+      <polyline points="606,410 640,442 674,410"></polyline>
+      <line x1="640" y1="330" x2="640" y2="432"></line>
+      <circle cx="292" cy="560" r="6"></circle>
+      <polyline points="452,300 472,286 452,272"></polyline>
+      <line x1="0" y1="112" x2="1200" y2="112" stroke-dasharray="3 9"></line>
+      <line x1="964" y1="0" x2="964" y2="760" stroke-dasharray="14 10"></line>
+      <polyline points="150,40 162,62 174,40"></polyline>
+      <polyline points="196,40 208,62 220,40"></polyline>
+      <circle cx="1064" cy="196" r="6"></circle>
+      <line x1="96" y1="676" x2="452" y2="676" stroke-dasharray="20 8"></line>
+      <polyline points="1158,330 1140,316 1158,302"></polyline>
+      <line x1="760" y1="742" x2="1200" y2="742" stroke-dasharray="3 9"></line>
+    </svg>
+
+    <div class="hero__in">
+      <div class="wrap">
+        <p class="band mark">
+          <span>Digital Consulting Services</span>
+          <span>Polegate, East Sussex</span>
+          <span>Working UK-wide</span>
+          <span>Series 2019</span>
+        </p>
+      </div>
+
+      <div class="wrap hero__grid">
+        <div>
+          <h1 class="hero__title" id="hero-title">A website,<br>made to your <em>measurements</em></h1>
+          <p class="hero__lead">
+            You don&rsquo;t arrive with a brief, copy or photographs. You bring what you already
+            know about your business. I draw the rest &mdash; the design, the words, the build,
+            the hosting, and the looking after.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--verm btn--lg" href="/contact"><span>Get a free quote</span></a>
+            <a class="btn btn--ghost btn--lg" href="tel:07395063764"><span>Call 07395 063764</span></a>
+          </div>
+          <p class="hero__notes mark mark--chalk">
+            <span>No brief needed</span>
+            <span>Nothing to fill in</span>
+            <span>Unlimited revisions while it&rsquo;s made</span>
+          </p>
+        </div>
+
+        <figure class="envelope" id="envelope">
+          <span class="envelope__tab" id="env-tab">View A</span>
+          <div class="envelope__media">
+            <img class="env-slide" data-label="View A" data-cap="Studios &amp; practitioners"
+                 src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062"
+                 alt="An empty yoga studio with rolled mats stacked beside tall windows.">
+            <img class="env-slide" data-label="View B" data-cap="Retail &amp; eCommerce"
+                 src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy"
+                 alt="Interior of a small independent clothing boutique, rails and folded stock in daylight.">
+            <img class="env-slide" data-label="View C" data-cap="Caf&eacute;s &amp; hospitality"
+                 src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-cafe.jpg" width="1600" height="1062" loading="lazy"
+                 alt="The counter of an independent cafe, espresso machine catching the morning light.">
+            <img class="env-slide" data-label="View D" data-cap="Salons &amp; personal services"
+                 src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-salon.jpg" width="1600" height="1062" loading="lazy"
+                 alt="A small modern hair salon, a single chair facing a mirror in daylight.">
+          </div>
+          <figcaption class="envelope__cap">
+            <span class="mark" id="env-cap">Studios &amp; practitioners</span>
+            <span class="mark mark--mute">Illustrative</span>
+          </figcaption>
+          <div class="envelope__dots" role="group" aria-label="Choose a view">
+            <button type="button" aria-current="true" aria-label="View A, studios and practitioners">A</button>
+            <button type="button" aria-current="false" aria-label="View B, retail and eCommerce">B</button>
+            <button type="button" aria-current="false" aria-label="View C, caf&eacute;s and hospitality">C</button>
+            <button type="button" aria-current="false" aria-label="View D, salons and personal services">D</button>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAPE — notions ============ -->
+  <div class="tape" aria-label="Included in every size">
+    <div class="tape__track">
+      <div class="tape__set" aria-hidden="false">
+        <span>Included in every size</span><span>Custom design</span><span>Words written for you</span>
+        <span>Local SEO</span><span>Service &amp; location pages</span><span>Structured data</span>
+        <span>Mobile-first and fast</span><span>Contact form</span><span>Hosting</span><span>SSL</span>
+        <span>Domain management</span><span>Security updates</span><span>Uptime monitoring</span>
+        <span>Unlimited revisions during the build</span><span>Search Console submission</span>
+      </div>
+      <div class="tape__set" aria-hidden="true">
+        <span>Included in every size</span><span>Custom design</span><span>Words written for you</span>
+        <span>Local SEO</span><span>Service &amp; location pages</span><span>Structured data</span>
+        <span>Mobile-first and fast</span><span>Contact form</span><span>Hosting</span><span>SSL</span>
+        <span>Domain management</span><span>Security updates</span><span>Uptime monitoring</span>
+        <span>Unlimited revisions during the build</span><span>Search Console submission</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ VIEWS — the range ============ -->
+  <section class="sec" aria-labelledby="views-title">
+    <div class="wrap">
+      <div class="sec__head sec__head--wide rv">
+        <h2 class="sec__title" id="views-title">One pattern.<br><em>Every kind of business.</em></h2>
+        <p class="sec__blurb">
+          The same care, the same build, the same looking-after. What changes is who it is
+          for &mdash; a fabric shop, a yoga studio, a lettings office, a contractor. Four
+          views of one pattern, made up in different cloth.
+        </p>
+      </div>
+
+      <div class="views">
+        <article class="view rv" style="--d:0ms">
+          <div class="view__frame">
+            <span class="view__letter">View A</span>
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-boutique.jpg" width="1600" height="1062" loading="lazy"
+                 alt="A small independent clothing boutique interior, rails of stock beside a window.">
+          </div>
+          <div class="view__body">
+            <h3 class="view__name">Retail &amp; eCommerce</h3>
+            <p class="view__text">Stock, stories and a checkout. Online stores built, loaded with your products, and kept running.</p>
+          </div>
+        </article>
+
+        <article class="view rv" style="--d:90ms">
+          <div class="view__frame">
+            <span class="view__letter">View B</span>
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-studio.jpg" width="1600" height="1062" loading="lazy"
+                 alt="An empty yoga studio with rolled mats stacked beside tall windows.">
+          </div>
+          <div class="view__body">
+            <h3 class="view__name">Studios &amp; practitioners</h3>
+            <p class="view__text">Classes booked and paid for on the website, so the timetable largely looks after itself.</p>
+          </div>
+        </article>
+
+        <article class="view rv" style="--d:180ms">
+          <div class="view__frame">
+            <span class="view__letter">View C</span>
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg" width="1600" height="1062" loading="lazy"
+                 alt="A small office: two people seated at a table in conversation, seen from behind.">
+          </div>
+          <div class="view__body">
+            <h3 class="view__name">Professional &amp; property</h3>
+            <p class="view__text">Consultancies, lettings and property. Credibility first, and pages that answer the questions before the call.</p>
+          </div>
+        </article>
+
+        <article class="view rv" style="--d:270ms">
+          <div class="view__frame">
+            <span class="view__letter">View D</span>
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/trade-electrician.jpg" width="1600" height="1062" loading="lazy"
+                 alt="An electrician working at a consumer unit, hands and tools in close view.">
+          </div>
+          <div class="view__body">
+            <h3 class="view__name">Trades &amp; contractors</h3>
+            <p class="view__text">Service pages and location pages, so the work comes from the places you actually cover.</p>
+          </div>
+        </article>
+      </div>
+
+      <ul class="also rv">
+        <li>Fabrics</li><li>Made-to-order goods</li><li>Tuition</li><li>Coaching</li>
+        <li>Therapy</li><li>Salons</li><li>Signage &amp; print</li><li>Marketing</li>
+        <li>Removals</li><li>Automotive</li><li>Scaffolding</li><li>Electrical</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SEAM — supply / envelope ============ -->
+  <section class="sec sec--tint" aria-labelledby="supply-title">
+    <div class="wrap wrap--tight">
+      <div class="sec__head rv">
+        <h2 class="sec__title" id="supply-title">You barely<br><em>lift a finger.</em></h2>
+        <p class="sec__blurb">
+          Most studios expect you to turn up with a brief, the copy, the images and a clear
+          idea of what you want. If you had time for that, you would have done it years ago.
+          Here is the whole of your side, and the whole of mine.
+        </p>
+      </div>
+
+      <div class="seam">
+        <div class="seam__col rv">
+          <span class="mark">What you supply</span>
+          <ol class="supply">
+            <li>
+              <div>
+                <h3>Twenty minutes on the phone</h3>
+                <p>One call, or a few messages if you would rather. That is the brief.</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>What you do, and who for</h3>
+                <p>In your own words. I ask the questions; you already know the answers.</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>A yes when you&rsquo;re happy</h3>
+                <p>Revise it as many times as you like first. That part is not rationed.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="seam__line" aria-hidden="true"></div>
+
+        <div class="seam__col seam__col--answer rv" style="--d:120ms">
+          <span class="mark">What&rsquo;s in the envelope</span>
+          <ul class="included">
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>One person, start to finish</b><span>Nothing outsourced, nothing offshored. When you call, you get me.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>The design decisions, made for you</b><span>Colour, type, structure, imagery. You approve; you don&rsquo;t author.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>Every word written</b><span>You never have to sit and work out what to say about yourself.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>Imagery sourced and placed</b><span>Chosen to suit the business, cropped and set for you.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>No CMS, no login, no dashboard</b><span>Nothing to learn, and nothing to break at eleven at night.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>Hosting, security and updates in the monthly</b><span>One predictable figure, not a line of surprise invoices.</span></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M3 12l5 5 11-12"></path></svg>
+              <span><b>Someone to call, for as long as you&rsquo;re with me</b><span>A managed service and a relationship, not a hand-off at launch.</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIECES — services ============ -->
+  <section class="sec" id="services" aria-labelledby="pieces-title">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <h2 class="sec__title" id="pieces-title">The pieces<br><em>you get cut.</em></h2>
+        <p class="sec__blurb">
+          Six things I make. Most businesses take the first three and add the rest when the
+          site has earned them.
+        </p>
+      </div>
+
+      <div class="pieces">
+        <article class="piece piece--w4 rv" style="--shape:polygon(0 0,100% 0,100% 82%,90% 100%,0 100%); --d:0ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">Website design</h3>
+            <p class="piece__text">Designed and built for your business. No templates, no page-builders, nothing recycled from the last job.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 1 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="piece piece--w2 rv" style="--shape:polygon(0 0,92% 0,100% 14%,100% 100%,0 100%); --d:70ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">Local SEO</h3>
+            <p class="piece__text">Service pages, location pages and structured data &mdash; so you are found where you actually work.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 2 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="piece piece--w2 rv" style="--shape:polygon(0 10%,10% 0,100% 0,100% 100%,0 100%); --d:140ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">Ongoing management</h3>
+            <p class="piece__text">I look after the site so you can get on with the business. Updates, monitoring, changes, support.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 3 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="piece piece--w4 rv" style="--shape:polygon(0 0,100% 0,100% 100%,12% 100%,0 86%); --d:0ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">Google Workspace email</h3>
+            <p class="piece__text">Professional business email on your own domain, set up and managed. No more sending quotes from a free address.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 4 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="piece piece--w3 rv" style="--shape:polygon(0 0,100% 0,100% 100%,0 100%,0 12%); --d:70ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">eCommerce websites</h3>
+            <p class="piece__text">Online stores built, loaded with your products and kept running &mdash; including made-to-order work, configurators and worldwide shipping.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 5 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="piece piece--w3 rv" style="--shape:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%); --d:140ms">
+          <div class="piece__ink" aria-hidden="true"></div>
+          <div class="piece__body">            <h3 class="piece__name">Analytics &amp; reporting</h3>
+            <p class="piece__text">Analytics, Search Console and a monthly report in plain English, so you know what is working.</p>
+            <p class="piece__foot">
+              <svg class="piece__grain" viewBox="0 0 64 10" aria-hidden="true" focusable="false">
+                <line x1="6" y1="5" x2="58" y2="5"></line>
+                <polyline points="12,1 6,5 12,9"></polyline>
+                <polyline points="52,1 58,5 52,9"></polyline>
+              </svg>
+              <span class="piece__no">Piece 6 &middot; Cut 1</span>
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CUTTING LAYOUT — process ============ -->
+  <section class="sec sec--tint" aria-labelledby="layout-title">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <h2 class="sec__title" id="layout-title">Cutting<br><em>layout.</em></h2>
+        <p class="sec__blurb">
+          Four steps, laid out end to end. Between the first call and going live you are
+          asked for your opinion, and very little else.
+        </p>
+      </div>
+
+      <div class="layout rv">
+        <div class="layout__field">
+          <span class="layout__selvedge layout__selvedge--t" aria-hidden="true"></span>
+          <span class="layout__selvedge layout__selvedge--b" aria-hidden="true"></span>
+
+          <ol class="steps">
+            <span class="steps__stitch" aria-hidden="true"></span>
+            <li class="step">
+              <span class="step__no" aria-hidden="true">1</span>
+              <h3 class="step__name">A conversation</h3>
+              <p class="step__text">A call, or a few messages. No brief needed, nothing to fill in, no forms to work through.</p>
+              <svg class="step__notch" viewBox="0 0 34 8" aria-hidden="true" focusable="false">
+                <polyline points="0,8 5,0 10,8"></polyline><polyline points="24,8 29,0 34,8"></polyline>
+              </svg>
+            </li>
+            <li class="step">
+              <span class="step__no" aria-hidden="true">2</span>
+              <h3 class="step__name">I write it and design it</h3>
+              <p class="step__text">Copy, structure, imagery, colour. All handled, and shown to you as a finished thing rather than a wireframe.</p>
+              <svg class="step__notch" viewBox="0 0 34 8" aria-hidden="true" focusable="false">
+                <polyline points="0,8 5,0 10,8"></polyline><polyline points="24,8 29,0 34,8"></polyline>
+              </svg>
+            </li>
+            <li class="step">
+              <span class="step__no" aria-hidden="true">3</span>
+              <h3 class="step__name">You review</h3>
+              <p class="step__text">Unlimited revisions during the build until you are happy. Say what you think; it is quicker than being polite.</p>
+              <svg class="step__notch" viewBox="0 0 34 8" aria-hidden="true" focusable="false">
+                <polyline points="0,8 5,0 10,8"></polyline><polyline points="24,8 29,0 34,8"></polyline>
+              </svg>
+            </li>
+            <li class="step">
+              <span class="step__no" aria-hidden="true">4</span>
+              <h3 class="step__name">It goes live, and stays looked after</h3>
+              <p class="step__text">Hosting, updates, monitoring and support from then on. The relationship starts at launch rather than ending there.</p>
+              <svg class="step__notch" viewBox="0 0 34 8" aria-hidden="true" focusable="false">
+                <polyline points="0,8 5,0 10,8"></polyline><polyline points="24,8 29,0 34,8"></polyline>
+              </svg>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIZES — pricing ============ -->
+  <section class="sec" id="pricing" aria-labelledby="sizes-title">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <h2 class="sec__title" id="sizes-title">Three sizes.<br><em>The same make.</em></h2>
+        <p class="sec__blurb">
+          Every size is the same site, built to the same standard. What changes is how many
+          pages there are and how closely it is looked after afterwards. Choose how you pay,
+          not what you get.
+        </p>
+      </div>
+
+      <div class="pay rv" role="tablist" aria-label="How you pay">
+        <button type="button" role="tab" id="tab-upfront" aria-selected="true" aria-controls="panel-upfront">Upfront + monthly</button>
+        <button type="button" role="tab" id="tab-monthly" aria-selected="false" aria-controls="panel-monthly">Monthly, nothing upfront</button>
+      </div>
+
+      <div id="panel-upfront" role="tabpanel" aria-labelledby="tab-upfront" class="rv">
+        <h3 class="mark" style="margin-bottom:var(--s3)">Option A &mdash; upfront, then a low monthly</h3>
+        <p class="panel__note">A one-off setup fee for the build, then a small monthly that covers hosting, security, updates and support.</p>
+        <div class="tiers">
+          <article class="tier">
+            <h3 class="tier__name">Starter</h3>
+            <p class="tier__price">£995 <small>setup</small></p>
+            <p class="tier__then">then <b>£15</b> a month</p>
+            <p class="tier__pages">Up to 20 pages</p>
+            <p class="tier__cta"><a class="btn btn--ink" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+          <article class="tier tier--pick">
+            <span class="tier__flag">Most popular</span>
+            <h3 class="tier__name">Professional</h3>
+            <p class="tier__price">£1,995 <small>setup</small></p>
+            <p class="tier__then">then <b>£25</b> a month</p>
+            <p class="tier__pages">Up to 50 pages</p>
+            <p class="tier__cta"><a class="btn btn--verm" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+          <article class="tier">
+            <h3 class="tier__name">Growth</h3>
+            <p class="tier__price">£3,495 <small>setup</small></p>
+            <p class="tier__then">then <b>£50</b> a month</p>
+            <p class="tier__pages">Up to 100 pages</p>
+            <p class="tier__cta"><a class="btn btn--ink" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+        </div>
+      </div>
+
+      <div id="panel-monthly" role="tabpanel" aria-labelledby="tab-monthly" class="rv">
+        <h3 class="mark" style="margin-bottom:var(--s3)">Option B &mdash; pay monthly, nothing upfront</h3>
+        <p class="panel__note">The same three sizes, spread over a twelve-month minimum term. Nothing to pay before the build starts.</p>
+        <div class="tiers">
+          <article class="tier">
+            <h3 class="tier__name">Starter</h3>
+            <p class="tier__price">£45 <small>a month</small></p>
+            <p class="tier__then">nothing upfront &middot; <b>12-month minimum</b></p>
+            <p class="tier__pages">Up to 20 pages</p>
+            <p class="tier__cta"><a class="btn btn--ink" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+          <article class="tier tier--pick">
+            <span class="tier__flag">Most popular</span>
+            <h3 class="tier__name">Professional</h3>
+            <p class="tier__price">£75 <small>a month</small></p>
+            <p class="tier__then">nothing upfront &middot; <b>12-month minimum</b></p>
+            <p class="tier__pages">Up to 50 pages</p>
+            <p class="tier__cta"><a class="btn btn--verm" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+          <article class="tier">
+            <h3 class="tier__name">Growth</h3>
+            <p class="tier__price">£125 <small>a month</small></p>
+            <p class="tier__then">nothing upfront &middot; <b>12-month minimum</b></p>
+            <p class="tier__pages">Up to 100 pages</p>
+            <p class="tier__cta"><a class="btn btn--ink" href="/contact"><span>Get a free quote</span></a></p>
+          </article>
+        </div>
+      </div>
+
+      <div class="same rv">
+        <div class="same__scroll">
+          <table class="same__table">
+            <caption>What every size includes. The marks are identical on purpose &mdash; drawn rather than left blank, because the thing that does not change between sizes is the point.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Included</th>
+                <th scope="col">Starter</th>
+                <th scope="col">Professional</th>
+                <th scope="col">Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Custom design &mdash; no templates</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Copy written for you</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Local SEO, service &amp; location pages, structured data</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Mobile-first and fast</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Hosting, SSL and domain management</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Security updates and uptime monitoring</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr><th scope="row">Unlimited revisions during the build</th>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td>
+                <td><svg viewBox="0 0 20 20" role="img" aria-label="Included"><path d="M3 11l4 4 10-11"/></svg></td></tr>
+              <tr class="same__diff"><th scope="row">Pages</th><td>Up to 20</td><td>Up to 50</td><td>Up to 100</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="addons">
+          <li><b>Blog post writing</b><span>£75 per post</span></li>
+          <li><b>Custom theme design</b><span>£350</span></li>
+          <li><b>Google Ads setup &amp; management</b><span>£200 a month, plus ad spend</span></li>
+          <li><b>Monthly SEO retainer</b><span>£200 a month</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MADE UP — portfolio ============ -->
+  <section class="sec sec--ultra on-ultra" id="portfolio" aria-labelledby="works-title">
+    <div class="wrap">
+      <div class="sec__head sec__head--wide rv">
+        <h2 class="sec__title" id="works-title">Made up<br><em>in nine cloths.</em></h2>
+        <p class="sec__blurb">
+          Twenty-plus sites since 2019. Filter by the kind of business and see how little the
+          sector changes the standard. Layouts below are drawn as schematics, not screenshots.
+        </p>
+      </div>
+
+      <div class="filters rv" role="group" aria-label="Filter portfolio by sector">
+        <button type="button" data-filter="all" aria-pressed="true">All nine</button>
+        <button type="button" data-filter="retail" aria-pressed="false">Retail &amp; eCommerce</button>
+        <button type="button" data-filter="studio" aria-pressed="false">Studios &amp; practitioners</button>
+        <button type="button" data-filter="creative" aria-pressed="false">Creative &amp; B2B</button>
+        <button type="button" data-filter="trade" aria-pressed="false">Trades &amp; contractors</button>
+      </div>
+
+      <div class="works" id="works">
+        <article class="work rv" data-sector="retail">
+          <div class="mock mock--a" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Cuddle Plush Fabrics</h3>
+            <p class="work__out">Five years and counting &mdash; one of our longest client relationships.</p>
+            <p class="work__sector">eCommerce &middot; Fabrics</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="studio" style="--d:60ms">
+          <div class="mock mock--b" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Sanctuary Ida</h3>
+            <p class="work__out">Students book and pay for classes online.</p>
+            <p class="work__sector">Yoga studio</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="retail" style="--d:120ms">
+          <div class="mock mock--c" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__row"><i></i><i></i><i></i><i></i><i></i></div><div class="mock__hero"></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Luna Landings</h3>
+            <p class="work__out">Product configurator, automatic work orders, worldwide shipping.</p>
+            <p class="work__sector">Made-to-order eCommerce</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="studio">
+          <div class="mock mock--h" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Nicola Noble Tuition</h3>
+            <p class="work__out">Moved classes online during Covid instead of closing.</p>
+            <p class="work__sector">Tuition</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="creative" style="--d:60ms">
+          <div class="mock mock--d" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Mad Graphics</h3>
+            <p class="work__out">Full rebuild.</p>
+            <p class="work__sector">Signage &amp; print</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="trade" style="--d:120ms">
+          <div class="mock mock--g" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__row"><i></i><i></i><i></i><i></i><i></i></div><div class="mock__hero"></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Colossus Scaffolding</h3>
+            <p class="work__out">First enquiry from Google within three weeks of launch.</p>
+            <p class="work__sector">Scaffolding</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="trade">
+          <div class="mock mock--e" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">DCH Automotive</h3>
+            <p class="work__out">A credible presence from a standing start.</p>
+            <p class="work__sector">Automotive</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="trade" style="--d:60ms">
+          <div class="mock mock--f" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__hero"></div><div class="mock__row"><i></i><i></i></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">Bexhill Removals</h3>
+            <p class="work__out">Design approved on the first presentation, no revisions.</p>
+            <p class="work__sector">Removals</p>
+          </div>
+        </article>
+
+        <article class="work rv" data-sector="trade" style="--d:120ms">
+          <div class="mock mock--i" aria-hidden="true">
+            <div class="mock__bar"><i class="mock__dot"></i><i class="mock__dot"></i><i class="mock__dot"></i></div>
+            <div class="mock__stage"><div class="mock__row"><i></i><i></i><i></i><i></i><i></i></div><div class="mock__hero"></div></div>
+          </div>
+          <div class="work__meta">
+            <h3 class="work__name">DJ Fox Electrical</h3>
+            <p class="work__out">A 20-page site, live at djfoxelectrical.com.</p>
+            <p class="work__sector">Electrical</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="works__none" id="works-none" hidden>Nothing in that sector yet &mdash; but the pattern is the same one. <a href="/contact">Ask what it would look like for yours.</a></p>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="sec sec--tint" aria-labelledby="said-title">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <h2 class="sec__title" id="said-title">What they<br><em>said after.</em></h2>
+        <p class="sec__blurb">
+          A shop, a tutor and a yoga teacher. Not one of them wanted to learn how a website
+          works, and none of them had to.
+        </p>
+      </div>
+      <div class="quotes">
+        <figure class="quote rv">
+          <blockquote><p>&ldquo;Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be happier with his work.&rdquo;</p></blockquote>
+          <figcaption><b>Sarah</b><span>Cuddle Plush Fabrics</span></figcaption>
+        </figure>
+        <figure class="quote rv" style="--d:100ms">
+          <blockquote><p>&ldquo;I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.&rdquo;</p></blockquote>
+          <figcaption><b>Nicola</b><span>Nicola Noble Tuition</span></figcaption>
+        </figure>
+        <figure class="quote rv" style="--d:200ms">
+          <blockquote><p>&ldquo;My yoga students love that they can book and pay for my classes on my website.&rdquo;</p></blockquote>
+          <figcaption><b>Molly</b><span>Sanctuary Ida</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAKER ============ -->
+  <section class="sec" id="about" aria-labelledby="maker-title">
+    <div class="wrap wrap--tight">
+      <div class="maker">
+        <div class="rv">
+          <h2 class="sec__title" id="maker-title" style="margin-bottom:var(--s5)">You&rsquo;re hiring a person,<br><em>not a company.</em></h2>
+          <p class="maker__lead">
+            My name is Ricky Wilson. I started Digital Consulting Services in Polegate in
+            2019 and I have drawn, written and built every site since.
+          </p>
+          <div class="maker__body">
+            <p>
+              There is no account manager, no studio floor and no overseas team. That is not
+              a limitation I am apologising for &mdash; it is the reason the work is
+              consistent and the reason you can ring the person who made it.
+            </p>
+            <p>
+              It also means I can take on the parts most studios hand back to you. I ask the
+              questions, write the words, choose the pictures, make the design decisions and
+              build the thing. You look at it and tell me what you think.
+            </p>
+          </div>
+          <dl class="maker__facts">
+            <div><dt>Founded</dt><dd>2019</dd></div>
+            <div><dt>Sites delivered</dt><dd>20+</dd></div>
+            <div><dt>Longest client relationship</dt><dd>5+ years</dd></div>
+            <div><dt>Work outsourced</dt><dd>None</dd></div>
+          </dl>
+        </div>
+
+        <figure class="maker__swatch rv" style="--d:120ms">
+          <div class="maker__shot">
+            <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/texture-linen.jpg" width="1600" height="1062" loading="lazy"
+                 alt="Undyed linen weave photographed in raking light, the threads clearly visible.">
+          </div>
+          <figcaption>Material study &middot; undyed linen</figcaption>
+        </figure>
+      </div>
+
+      <div class="reach rv">
+        <h3 class="mark">Where the work is</h3>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li>
+          <li>&mdash; and UK-wide</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="sec close on-verm" aria-labelledby="close-title">
+    <div class="wrap close__grid">
+      <div class="rv">
+        <h2 class="close__title" id="close-title">Send your measurements.</h2>
+        <p class="close__lead">
+          A phone call and a few questions. No brief, no forms, no obligation &mdash; I will
+          tell you what it would cost, what it would include, and how long it would take.
+        </p>
+        <div class="close__actions">
+          <a class="btn btn--ink btn--lg" href="/contact"><span>Get a free quote</span></a>
+          <a class="btn btn--ghost btn--lg" href="tel:07395063764"><span>Call 07395 063764</span></a>
+        </div>
+      </div>
+      <dl class="close__details rv" style="--d:120ms">
+        <div><dt>Email</dt><dd><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></dd></div>
+        <div><dt>Studio</dt><dd>Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26 6QH</dd></div>
+        <div><dt>Hours</dt><dd>Monday to Friday, 9:00&ndash;17:30 &middot; Saturday by appointment &middot; Sunday closed</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer on-ultra">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="foot__logo"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/logo.svg" width="150" height="75" loading="lazy" alt="Digital Consulting Services"></span>
+        <p class="foot__about">
+          A website design and build studio in Polegate, East Sussex, working UK-wide for
+          small businesses of every kind. Founded 2019.
+        </p>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#services">Website design</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Ongoing management</a></li>
+          <li><a href="#services">Google Workspace email</a></li>
+          <li><a href="#services">eCommerce websites</a></li>
+          <li><a href="#services">Analytics &amp; reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Service areas</h3>
+        <ul>
+          <li>Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+          <li>Seaford</li><li>Brighton &amp; Hove</li><li>Uckfield</li><li>UK-wide</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:07395063764">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li>Unit H3, Chaucer Business Park</li>
+          <li>Dittons Road, Polegate</li>
+          <li>East Sussex, BN26 6QH</li>
+          <li>Mon&ndash;Fri 9:00&ndash;17:30</li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>Sector photography is illustrative, not of named clients</span>
+      <span>Made in Polegate</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Motion is opt-in: the page is fully visible until JS confirms it is safe. */
+  if (!reduce && 'IntersectionObserver' in window) {
+    root.setAttribute('data-motion','on');
+    var vh = window.innerHeight || 800;
+    var items = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+    var pending = [];
+    items.forEach(function(el){
+      /* anything already at or above the fold is never hidden */
+      if (el.getBoundingClientRect().top > vh * 0.9) { el.setAttribute('data-hide',''); pending.push(el); }
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    pending.forEach(function(el){ io.observe(el); });
+    /* failsafe: nothing on this page may stay invisible because an observer
+       never fired. After 4s everything is shown, whatever happened. */
+    window.setTimeout(function(){
+      pending.forEach(function(el){ el.classList.add('is-in'); });
+    }, 4000);
+  }
+
+  /* ---- hero: the pattern made up in four cloths ----
+     tab text and caption are read off the active slide's own data attributes,
+     so the label can never disagree with the photograph. */
+  var env = document.getElementById('envelope');
+  if (env) {
+    var media  = env.querySelector('.envelope__media');
+    var slides = env.querySelectorAll('.env-slide');
+    var dots   = env.querySelectorAll('.envelope__dots button');
+    var tab    = document.getElementById('env-tab');
+    var cap    = document.getElementById('env-cap');
+    var at = 0, timer = null, halted = false;
+    media.setAttribute('data-js','');
+    function show(n){
+      at = n;
+      for (var k = 0; k < slides.length; k++){
+        slides[k].classList.toggle('is-on', k === n);
+        dots[k].setAttribute('aria-current', k === n ? 'true' : 'false');
+      }
+      tab.innerHTML = slides[n].getAttribute('data-label');
+      cap.innerHTML = slides[n].getAttribute('data-cap');
+    }
+    function tick(){ if (!halted) { show((at + 1) % slides.length); } }
+    function start(){ if (!reduce && !halted && !timer) { timer = window.setInterval(tick, 5000); } }
+    function stop(){ if (timer) { window.clearInterval(timer); timer = null; } }
+    show(0); start();
+    env.addEventListener('mouseenter', stop);
+    env.addEventListener('mouseleave', start);
+    env.addEventListener('focusin', stop);
+    env.addEventListener('focusout', start);
+    for (var q = 0; q < dots.length; q++){
+      (function(idx){
+        dots[idx].addEventListener('click', function(){ halted = true; stop(); show(idx); });
+      })(q);
+    }
+  }
+
+  /* ---- mobile drawer ---- */
+  var burger = document.getElementById('burger');
+  var drawer = document.getElementById('drawer');
+  var closeBtn = document.getElementById('drawer-close');
+  var lastFocus = null;
+
+  function openDrawer(){
+    lastFocus = document.activeElement;
+    drawer.hidden = false;
+    /* allow the element to lay out before transitioning */
+    requestAnimationFrame(function(){ drawer.setAttribute('data-open','true'); });
+    burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closeDrawer(){
+    drawer.setAttribute('data-open','false');
+    burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+    window.setTimeout(function(){ drawer.hidden = true; }, reduce ? 0 : 460);
+    if (lastFocus) { lastFocus.focus(); }
+  }
+  if (burger && drawer && closeBtn) {
+    burger.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    Array.prototype.forEach.call(drawer.querySelectorAll('a'), function(a){
+      a.addEventListener('click', closeDrawer);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && drawer.getAttribute('data-open') === 'true') { closeDrawer(); }
+    });
+  }
+
+  /* ---- pricing: how you pay ----
+     Both panels carry the real, authored prices in the markup. JS only hides
+     one of them, so a failed script shows both price lists rather than none. */
+  var tabs = [document.getElementById('tab-upfront'), document.getElementById('tab-monthly')];
+  var panels = [document.getElementById('panel-upfront'), document.getElementById('panel-monthly')];
+  if (tabs[0] && tabs[1] && panels[0] && panels[1]) {
+    panels[1].hidden = true;
+    function selectPay(i){
+      tabs.forEach(function(t,n){ t.setAttribute('aria-selected', n === i ? 'true' : 'false'); });
+      panels.forEach(function(p,n){ p.hidden = (n !== i); });
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click', function(){ selectPay(i); });
+      t.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          var next = i === 0 ? 1 : 0;
+          selectPay(next); tabs[next].focus();
+        }
+      });
+    });
+  }
+
+  /* ---- portfolio: sector filter ----
+     All nine are in the markup and visible without JS. */
+  var filterBtns = document.querySelectorAll('.filters button');
+  var works = document.querySelectorAll('#works .work');
+  var none = document.getElementById('works-none');
+  if (filterBtns.length && works.length) {
+    Array.prototype.forEach.call(filterBtns, function(btn){
+      btn.addEventListener('click', function(){
+        var f = btn.getAttribute('data-filter');
+        Array.prototype.forEach.call(filterBtns, function(b){
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        var shown = 0;
+        Array.prototype.forEach.call(works, function(w){
+          var match = (f === 'all') || (w.getAttribute('data-sector') === f);
+          w.hidden = !match;
+          if (match) { shown++; }
+        });
+        if (none) { none.hidden = shown !== 0; }
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
