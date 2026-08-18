@@ -3,10 +3,20 @@ name: Regression Watchdog
 on:
   push:
     branches: [staging, main]
-    paths-ignore:
-      - "output/**"
-      - "docs/**"
-      - "**/*.md"
+    # Cross-site smoke hits live sites, so commits that cannot change a deployed
+    # site should not run it. Expressed as `paths` rather than `paths-ignore`
+    # because GitHub supports `!` negation only in `paths`, and forbids using
+    # both filters for the same event — and we need one re-inclusion:
+    # tools/watchdog/** IS the watchdog (gate.ts decides its pass/fail), so a
+    # blanket tools/** exclusion would stop the watchdog running on changes to
+    # its own gating logic. Order matters: last matching pattern wins per file.
+    paths:
+      - "**"
+      - "!output/**"
+      - "!docs/**"
+      - "!**/*.md"
+      - "!tools/**"
+      - "tools/watchdog/**"
   workflow_dispatch:
     inputs:
       env:
