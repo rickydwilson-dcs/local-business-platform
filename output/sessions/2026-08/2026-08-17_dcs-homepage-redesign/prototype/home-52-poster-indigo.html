@@ -200,9 +200,7 @@ table{border-collapse:collapse;width:100%}
 /* interactive furniture */
 .btn,
 .bar__nav a,
-.bar__tel,
 .bar__cta,
-.float,
 .menu__item,
 .hero__tel,
 /* the hero price chip, all three lines */
@@ -330,6 +328,22 @@ table{border-collapse:collapse;width:100%}
 .bar[data-ground="ultra"]   {--bar-bg:var(--ultra);   --bar-fg:#fff;        --bar-rule:rgba(255,255,255,.34); --bar-acc:var(--acid)}
 .bar[data-ground="plum"]    {--bar-bg:var(--plum);    --bar-fg:#fff;        --bar-rule:rgba(255,255,255,.30); --bar-acc:var(--acid)}
 .bar[data-ground="acid"]    {--bar-bg:var(--acid);    --bar-fg:var(--ink);  --bar-rule:rgba(16,16,20,.30);    --bar-acc:var(--plum)}
+/* The CTA hover carries its own token pair rather than reusing --bar-acc.
+   --bar-acc is tuned for the nav underline, where a 3px cyan rule on the
+   magenta ground is fine; as a 178px block the same cyan vibrates against the
+   pink (2.75:1, and a clashing hue pair). On magenta the button flips tonally
+   to ink instead — 3.74:1 against the ground, white label at 18.7:1.
+   Ratios, block:bar / label:block —
+     paper·bone  magenta on paper   4.64 / 5.16
+     ink·graphite cyan on near-black 10.13 / 10.13
+     plum        cyan on navy        7.63 / 10.13
+     ultra       ink on magenta      3.74 / 18.72
+     acid        navy on cyan        7.60 / 14.23  */
+.bar[data-ground="paper"],.bar[data-ground="bone"]   {--cta-hov:var(--ultra);--cta-hov-fg:#fff}
+.bar[data-ground="ink"],.bar[data-ground="graphite"] {--cta-hov:var(--acid); --cta-hov-fg:var(--ink)}
+.bar[data-ground="plum"]                             {--cta-hov:var(--acid); --cta-hov-fg:var(--ink)}
+.bar[data-ground="ultra"]                            {--cta-hov:var(--ink);  --cta-hov-fg:#fff}
+.bar[data-ground="acid"]                             {--cta-hov:var(--plum); --cta-hov-fg:#fff}
 /* focus ring must survive every repaint */
 .bar[data-ground="ink"] :focus-visible,
 .bar[data-ground="graphite"] :focus-visible{outline-color:var(--acid)}
@@ -382,22 +396,22 @@ table{border-collapse:collapse;width:100%}
   transition:transform .3s var(--ease), background-color .3s linear;
 }
 .bar__nav a:hover::after,.bar__nav a:focus-visible::after{transform:scaleX(1)}
-.bar__tel{
-  display:inline-flex;align-items:center;gap:.5rem;
-  text-decoration:none;font-weight:500;font-size:var(--fs-small);
-  min-height:44px;white-space:nowrap;
-  border-bottom:3px solid var(--bar-acc);
-  transition:border-color .3s linear;
-}
-/* the bar CTA is drawn from currentColor, so it is legible on all seven grounds */
+/* The bar CTA is the page's only persistent contact button — the floating
+   bottom-right one was relocated into the bar on 2026-08-19 and deleted.
+   It knocks out of the bar: the block takes --bar-fg, the label --bar-bg, so
+   it inverts correctly on all seven grounds with no per-ground overrides.
+   NOTE: this used `background:currentColor` until 2026-08-19. currentColor in
+   `background` resolves against the element's OWN `color`, which the next
+   declaration set to --bar-bg — so block and label were the same colour and
+   the button was invisible on every ground. Do not reintroduce that. */
 .bar__cta{
   display:inline-flex;align-items:center;gap:.6rem;
   min-height:44px;padding:.55rem 1.05rem;
-  background:currentColor;color:var(--bar-bg);
+  background:var(--bar-fg);color:var(--bar-bg);
   font-size:var(--fs-small);font-weight:500;text-decoration:none;
   transition:background-color .3s linear, color .3s linear, transform .18s var(--snap);
 }
-.bar__cta span{color:var(--bar-bg)}
+.bar__cta:hover,.bar__cta:focus-visible{background:var(--cta-hov);color:var(--cta-hov-fg)}
 .bar__cta:active{transform:translateY(2px)}
 
 .burger{display:none;margin-left:auto;width:46px;height:46px;place-items:center;border:2px solid currentColor}
@@ -741,26 +755,6 @@ table{border-collapse:collapse;width:100%}
 .footbrand .brand__mark{height:26px}
 .footrule{display:block;height:4px;width:64px;background:var(--acid)}  /* acid on dark: small furniture only */
 
-/* ============================================================
-   PERSISTENT FLOATING CTA — inverts against the ground behind it,
-   using the same geometric hit-test as the bar.
-   ============================================================ */
-.float{
-  position:fixed;right:clamp(1rem,2vw,1.75rem);bottom:clamp(1rem,2vw,1.75rem);
-  z-index:var(--z-float);
-  display:inline-flex;align-items:center;gap:.6rem;
-  min-height:50px;padding:.8rem 1.3rem;
-  background:var(--ink);color:var(--chalk);border:2px solid var(--chalk);
-  font-size:var(--fs-small);font-weight:500;text-decoration:none;
-  transition:background-color .22s linear,color .22s linear,border-color .22s linear,transform .2s var(--snap);
-}
-.float[data-tone="dark"]{background:var(--chalk);color:var(--ink);border-color:var(--ink)}
-.float:hover{background:var(--ultra);color:#fff;border-color:var(--ultra)}
-.float:active{transform:translateY(2px)}
-.float__dot{width:10px;height:10px;background:var(--acid);flex:0 0 10px}
-.float[data-tone="dark"] .float__dot{background:var(--ultra)}
-.float:hover .float__dot{background:#fff}
-
 /* mobile bottom action bar */
 .mobar{display:none;position:fixed;inset:auto 0 0 0;z-index:var(--z-float);background:var(--ink);border-top:1px solid var(--rule-dark)}
 .mobar a{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:58px;text-decoration:none;color:var(--chalk);font-size:var(--fs-small);font-weight:700}
@@ -896,8 +890,6 @@ table{border-collapse:collapse;width:100%}
 @media (max-width:860px){
   .bar__nav,.bar__cta{display:none}
   .burger{display:grid}
-  .bar__tel{margin-left:auto}
-  .float{display:none}
   .mobar{display:flex}
   body{--mobile-bar:58px}
   /* the condensed price table becomes a stack of tier cards */
@@ -1066,8 +1058,6 @@ table{border-collapse:collapse;width:100%}
       <a href="/blog" data-optional>Blog</a>
       <a href="#person">About</a>
     </nav>
-
-    <a class="bar__tel" href="tel:+447395063764"><span aria-hidden="true">↳</span> 07395 063764</a>
 
     <a class="bar__cta" href="/contact">Get a free quote</a>
 
@@ -1732,11 +1722,6 @@ table{border-collapse:collapse;width:100%}
   </div>
 </footer>
 
-<a class="float" id="float" href="/contact">
-  <span class="float__dot" aria-hidden="true"></span>
-  Start your project
-</a>
-
 <nav class="mobar" aria-label="Quick actions">
   <a href="tel:+447395063764">Call 07395 063764</a>
   <a href="/contact">Get a free quote</a>
@@ -1812,32 +1797,18 @@ table{border-collapse:collapse;width:100%}
       if (bar.getAttribute('data-ground') !== g) bar.setAttribute('data-ground', g);
     }
 
-    /* the persistent CTA inverts against the ground behind IT, same test */
-    var float = document.getElementById('float');
-    var DARK = { ink: 1, graphite: 1, ultra: 1, plum: 1 };
-    function paintFloat() {
-      if (!float) return;
-      var r = float.getBoundingClientRect();
-      var g = groundAt(Math.round(r.top + r.height / 2));
-      if (!g) return;
-      if (DARK[g]) float.setAttribute('data-tone', 'dark');
-      else float.removeAttribute('data-tone');
-    }
-
     var ticking = false;
     function onScroll() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(function () {
         paintBar();
-        paintFloat();
         ticking = false;
       });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     paintBar();
-    paintFloat();
 
     /* expose the hit-test so the render harness can diff it against
        document.elementFromPoint at every boundary */
