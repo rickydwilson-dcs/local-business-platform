@@ -1,342 +1,250 @@
 # DCS homepage redesign — handoff
 
-> **✅ RESOLVED 2026-08-18 — the R2 migration below is DONE. Read this box, not the warning under it.**
->
-> The 117MB never entered git. All 67 prototype assets are in R2 under
-> `prototypes/2026-08-17_dcs-homepage-redesign/`, all 311 references across the 54 prototypes
-> were rewritten to absolute R2 URLs, and the prototype folder went 142MB → 19MB.
->
-> **The prototypes are live: https://dcs-prototypes.vercel.app** (all 54 verified 200, the
-> hand-built design library is the index). Per-deployment URLs are SSO-gated; this project
-> alias is public.
->
-> The root cause was not a stray `git add -f`: `output/.gitignore`'s `!sessions/**` was
-> overriding the root `.gitignore`'s image rules for every session folder. Fixed with an
-> explicit binary deny-list. See `plan-r2-prototype-hosting.md` and
-> `docs/guides/prototype-hosting.md`.
->
-> **Still to do:** commit and deploy (`develop → staging → PR to main`). Nothing has been
-> committed or pushed. The everything-below section is kept as the record of why the deploy
-> was stopped.
->
-> **Pre-existing, unrelated to this work:** the sector video tiles (e.g. `home-43`'s RETAIL
-> tile) show their flat poster rather than playing. Confirmed identical on the original
-> pre-rewrite HTML served with local assets, so it is not a migration regression. R2 serves
-> the mp4 correctly (206 with range support).
-
----
-
-> **⚠️ READ THIS FIRST — the deploy was deliberately stopped mid-flight.**
-> A commit containing **117MB of unreferenced PNGs** was made and then **undone**. Nothing was
-> ever pushed. The next session's first job is the R2 migration described in
-> "**Blocked: R2 migration before deploy**" below, _then_ the deploy. Do not simply
-> `git commit && push` — that is the exact outcome this stop was to avoid.
-
-**Status:** blocked — 54 prototypes built and verified; deploy halted so prototype assets can
-be moved to R2 before anything enters git history.
-**Branch:** `develop` at `141f1a79` — **identical to `origin/develop`. Nothing has been pushed.**
-**Working tree:** 156 files **staged** (the session folder, from the undone commit) plus two
-**unstaged** doc edits: `CLAUDE.md` and `CHANGELOG.md`.
-**`sites/dcs`:** verified clean — untouched by this session.
-
-## Blocked: R2 migration before deploy
-
-Ricky, on being told the 117MB would be permanent in git history once pushed:
-
-> _"Actually, we probably should build it into this deploy, or we end up with it always in our
-> history. So, stop the deployment."_
-
-and earlier:
-
-> _"In an ideal world, we will probably move any assets that we create and they use for
-> prototyping and put them into R2, where they will persist as we do with sites that we build."_
-
-### Why this is still fixable
-
-A commit (`f326a724`) containing everything **was** created, then removed with
-`git reset --soft HEAD~1`. `origin/develop` never moved. **Verified:** local HEAD and
-`origin/develop` are both `141f1a79`. The 117MB has never touched a remote and is not in any
-reachable history. It only becomes permanent if someone commits and pushes it.
-
-### The asset situation — measured, not assumed
-
-|                                      | files | size      | referenced by prototypes |
-| ------------------------------------ | ----- | --------- | ------------------------ |
-| `assets/img/*.png` (2048px archives) | 29    | **117MB** | **0**                    |
-| `assets/img/web/*.jpg` (1600px)      | 29    | 8.6MB     | 24                       |
-| `assets/video/*.mp4`                 | 4     | 5.3MB     | 4                        |
-
-The 117MB is **pure archive — nothing references it.** That is the whole problem and also why
-it is easy to solve.
-
-### R2 is ready — verified 2026-08-18
-
-- **Credentials present** in `.env.local`: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`,
-  `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME` all set. `R2_PUBLIC_URL` is **not** set — the tools
-  do not appear to need it, but check before assuming.
-- **Public URL shape** (from existing site content):
-  `https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/<path>` — e.g.
-  `.../dch-automotive/stitch-images/led-auto-lamps`.
-- **Existing tooling** (read these before writing anything new):
-  `tools/upload-djfox-to-r2.ts` (S3 client + `PutObjectCommand`, reads `.env.local`),
-  `tools/images-intake.ts`, `tools/update-to-r2-urls.ts`.
-- No `rclone`, `aws` or `wrangler` on PATH — use the repo's own tsx tools.
-
-### The decision a fresh session must get from Ricky first
-
-**Which assets go to R2?** Two defensible answers with a real trade-off:
-
-1. **Archives only** (the 117MB of root PNGs). Removes 94% of the weight, keeps the 14MB of
-   referenced web JPEGs and video in git, and **the prototypes keep working offline from
-   `file://`** — which is how Ricky reviews them. Simplest, lowest risk.
-2. **All prototype assets**, matching how built sites work. Repo stays tiny and assets persist
-   independently — but every referenced URL across 54 files must be rewritten to R2, and **the
-   prototypes then require an internet connection to render**. Ricky's "in an ideal world"
-   message points here; his review workflow points at option 1.
-
-Do not guess. This changes 54 files if it is option 2.
-
-### Suggested sequence once decided
-
-```bash
-# 1. upload (adapt the existing tool; do NOT hand-roll a new uploader)
-#    suggested key prefix, matching the dch-automotive convention:
-#      dcs-prototypes/2026-08-17/<filename>
-npx tsx tools/upload-djfox-to-r2.ts   # READ IT FIRST — it is site-specific, needs adapting
-
-# 2. verify every uploaded object is fetchable before deleting anything local
-#    curl -sI <public-url>/<key> | head -1   → expect 200
-
-# 3. only then remove the local archives
-rm output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/assets/img/*.png
-
-# 4. add a .gitignore rule so they can never be re-added
-#    e.g.  output/sessions/**/prototype/assets/img/*.png
-
-# 5. unstage everything and re-stage clean, then verify the size before committing
-git reset
-git add output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/ CLAUDE.md CHANGELOG.md
-git diff --cached --stat | tail -1        # sanity-check the total
-```
-
-**Verify the staged payload is small before committing.** The previous attempt's commit added
-100,201 insertions and pushed the pack to ~107MB.
-
-### Then, and only then, deploy
-
-`.claude/deploy.md` is authoritative and was already resolved:
-
-- **base:** `develop` · **promotion:** staircase → `staging` → `main` · **docs:** `update.docs`
-- Gates are enforced by pre-push hooks (type-check + lint, turbo, all packages). No site was
-  modified, so no per-site lint is needed.
-- **`main` is protected** — a direct push returns `GH006`. The final rung is
-  `gh pr create --base main --head staging --fill`, then **stop**; a human owns the merge.
-
-## Documentation work already done (unstaged, ready to include)
-
-Both edits are in the working tree and should go in the same commit:
-
-- **`CLAUDE.md`** — two verified CSS gotchas added to the CSS Syntax section: the `transform`
-  containing-block trap on centred floating navs (independent of `backdrop-filter`), and
-  `tabular-nums` corrupting comma'd prices (`£1,995` → `£1 , 995`).
-- **`CHANGELOG.md`** — a `2026-08-18` entry covering both gotchas plus the design session,
-  following the precedent of the `2026-08-04` entry which documented a CLAUDE.md gotcha the
-  same way.
-
-`/update.docs` was run as part of the halted deploy. Its finding: the commit touches only
-`output/sessions/`, so `README.md`, `AGENTS.md` and `docs/**` need **no** changes — the
-CHANGELOG explicitly scopes itself to "notable platform-level changes" and has never
-referenced prototypes or design rounds, so only the two genuine platform gotchas were added
-rather than manufacturing an entry for the prototypes alone.
+**Status:** in-progress — **a direction has been chosen** (52) and substantially reworked: new
+logo and favicon, new accent colour, new body typeface, and a full copy pass. All of it is
+**uncommitted**, and all of it is **deployed** to a public URL. Those two facts together are the
+main risk in this handoff.
+**Branch:** `develop` @ `5d622f93` — level with `origin/develop`, **zero commits made this
+session**. `staging` and `main` untouched.
+**Commits:** none. Every change below exists only in the working tree of this machine.
+**Working tree:** **20 dirty paths** (6 modified, 14 untracked). Listed under "Working tree" below.
+A fresh clone gets none of this work.
+**Supersedes:** the previous `HANDOFF.md` in this folder (the "pick one of 54" handoff). Its
+R2/deploy facts and its Traps #2–#13 still hold and are not repeated in full — read it for
+background. Its "Next step" (choose a direction) is **done**.
 
 ## What this is trying to resolve
 
-The DCS site (Digital Consulting Services, Ricky's own agency) works but doesn't sell. The
-April 2026 attempts (`2026-04-08_dcs-redesign` → `2026-04-12_dcs-parity`) went straight into
-React and produced that outcome. This session restarts the redesign using the process that
-worked for NP Racing: **static HTML prototypes iterated until a direction is agreed, and only
-then rebuilt in React inside `sites/dcs`.**
+DCS needs a new homepage. An earlier session produced 54 static HTML prototypes. This session
+**picked direction 52** and moved from "which direction" to "make 52 right", panel by panel.
 
-Explicit user decisions that constrain the work — a fresh session will otherwise re-litigate
-these:
+Ricky's stated working method for the rest of this: **content first, then layout, panel by
+panel.** He has said twice that layout is a separate pass. Do not restructure panels while doing
+copy — surface the observation and move on.
 
-1. **Positioning is broad.** DCS builds websites for small businesses of _any_ kind. Trades are
-   one sector among several, never the frame. (Corrected in round 2; `content-brief.md` is v2.)
-2. **Register is an elevated design studio**, not an under-construction site notice. Hi-vis,
-   hazard tape, dockets, job sheets and road signs are ruled out by name.
-3. **Reference is [kota.co.uk](https://kota.co.uk)** — for _ambition_, explicitly **not** to be
-   cloned. See `reference-kota.md`.
-4. **The pitch:** "work that competes with London/NYC agencies, for a fraction of the cost and
-   a tiny fraction of the client effort." The site is the proof of the first claim.
-5. **Colour is furniture, not walls.** Grounds/panels/sections stay neutral; saturated colour
-   belongs to content, moving elements and objects. Ricky's phrase: _"the furnishings rather
-   than the walls, ceilings and floors."_
-6. **Every section fits one viewport** at ≥1024px (relaxed on mobile and below stated height
-   floors).
-7. Ricky's colour preferences: bright orange and bright purple are his favourites; he is
-   ambivalent about pink ("I like it but I'm not a pink guy").
+Decisions he made explicitly, which constrain the work:
+
+- **Direction 52 is the one.** The other 53 are reference only and are now inconsistent with it.
+- **Accent tertiary is navy `#17265E`**, chosen from `/colour-lab` over the original indigo.
+- **Body typeface is DM Mono 500.** Chosen over Inconsolata 600, Space Grotesk, JetBrains Mono,
+  Anonymous Pro and Geologica, from `/type-lab`. Headings stay Schibsted Grotesk — he is happy
+  with them and said so directly.
+- **Logotype is Poppins Light 300**, lowercase, two lines.
+- **No serifs in body copy.** He rejected them outright. Serifs were offered again as _headings_
+  and he did not take them.
+- **PAYG minimum contract is 24 months** (was 12).
+- **Do not name Google Workspace on the homepage** — "it won't mean anything to anybody."
+- **Detailed pricing and service mechanics belong on inner pages, not the homepage.**
 
 ## Actions taken
 
-No commits. All work is files in this session folder. Chronologically:
+**There are no SHAs — nothing was committed.** In rough order:
 
-| Round | Directions | What                                                                                              |
-| ----- | ---------- | ------------------------------------------------------------------------------------------------- |
-| 1     | 01–12      | Twelve prescribed art directions, one agent each, different UI skill each                         |
-| 1b    | 13–18, 16b | Six built by the `impeccable` skill choosing its own visual world, plus one seeded A/B re-roll    |
-| 2     | 20–25      | Elevated round on the revised (broader, non-trades) brief                                         |
-| 3     | 26–30      | Assertive round against the kota reference                                                        |
-| 4     | 31–42      | Twelve variations on direction 27 "Poster" — 6 chords × 2 nav treatments                          |
-| 5     | 43–54      | Ultra chord + Flare-style counterpoint bar; dark and light heroes; Poster chord; tertiary options |
+| #   | Change                                                               | Where                                                    |
+| --- | -------------------------------------------------------------------- | -------------------------------------------------------- |
+| 1   | Hero CTA → white at rest, aqua on hover                              | `home-52`                                                |
+| 2   | Hero price chip → aqua field, navy label                             | `home-52`                                                |
+| 3   | Logo: DCS monogram vectorised, `currentColor`, + Poppins wordmark    | `home-52`, `sites/dcs/public/`                           |
+| 4   | New favicon: magenta field, D clipped from the real monogram         | `sites/dcs/public/favicon.svg`                           |
+| 5   | Re-did the mark from Ricky's own `logo_black_vector_cropped.svg`     | `dcs-mark.svg`, `home-52`                                |
+| 6   | Removed "This page is the proof…" from the hero lead                 | `home-52`                                                |
+| 7   | Full copy pass — 14 changes, see "Copy" below                        | `home-52`                                                |
+| 8   | Hero H1 "Agency work…" → "Websites as professional as you are."      | `home-52`                                                |
+| 9   | Services restructured to 3 offerings + 3 support services            | `home-52`, `content-brief.md`                            |
+| 10  | PAYG minimum 12 → 24 months                                          | `home-52`, `PRODUCT.md`, `content-brief.md`              |
+| 11  | Removed the "every site includes" list and add-ons line from pricing | `home-52`, `content-brief.md`                            |
+| 12  | Accent tertiary indigo → navy `#17265E`                              | `home-52`, `index.html`                                  |
+| 13  | Body typeface → DM Mono 500 via a new `--font-body` token            | `home-52`                                                |
+| 14  | Extended DM Mono to buttons, nav, and the hero price chip            | `home-52`                                                |
+| 15  | Four decision-record pages built and deployed                        | `logo-lab`, `colour-lab`, `type-lab`, `home-52-typetest` |
 
-Full detail per round, including every agent's findings, is in **`session.md` (787 lines)** —
-that is the record; this file is only what the next session needs to _act_.
+## Current state — verified 2026-08-19
 
-## Current state — verified 2026-08-18
+Everything here was measured today, not recalled.
 
-- **54 prototypes** in `prototype/`, plus `prototype/index.html` (the library page).
-- **Library page** renders all 54 as **live scaled iframes**, not screenshots, so it never goes
-  stale. Filters by round. Opens on round 5. The `DIRECTIONS` array parses as 54 entries
-  (verified with `node -e` eval).
-- **Media:** 29 web-optimised images (`prototype/assets/img/web/*.jpg`, 1600px) and 4 silent
-  video loops (`prototype/assets/video/*.mp4`, faststart-remuxed). Root PNGs are 2048px/3–7MB
-  archives — **do not use them**.
-- **Round 5 is the live branch of work**, 12 directions:
+**Live and reachable** — all 200:
+`/` · `/home-52-poster-indigo` · `/logo-lab` · `/colour-lab` · `/type-lab` · `/home-52-typetest`
+on `https://dcs-prototypes.vercel.app`.
 
-  |                         | Counterpoint                                        | Acid/cyan | Tonal flip |
-  | ----------------------- | --------------------------------------------------- | --------- | ---------- |
-  | Ultra, dark hero        | 43                                                  | 44        | 45         |
-  | Ultra, light hero       | 46                                                  | 47        | 48         |
-  | Poster chord, dark hero | 49                                                  | 50        | 51         |
-  | Poster tertiary options | 52 indigo · 53 oxblood · 54 deep teal (all from 50) |           |            |
+**Confirmed present in the deployed HTML** (curl + grep, not assumed):
+`--plum: #17265E` · `--font-body: 'DM Mono'` · the `Websites` plate word · `24-month` ·
+`Real people` / `No bots` · `WordPress and WooCommerce` · zero occurrences of `Agency`,
+`Workspace`, `Every site includes`, or `Add-ons`.
 
-- **Viewport fit verified** for round 5 at 1440×900, 1366×768, 1440×800, 1600×800 and
-  1920×720 — measured as natural content height with the `min-height:100svh` pin released,
-  which is the only way to get a true reading.
-- **Six directions are off-brief** and kept as record only, dimmed in the library and excluded
-  from the default filter: **06, 13, 15, 16, 16b, 17** (hi-vis / hoarding / road sign / docket /
-  tool case / merchant counter). They pre-date the round 2 brief correction.
-- **No live-data changes of any kind.** This session wrote no production data, touched no
-  database, and deployed nothing. Two real-world side effects did occur, both outside the repo —
-  see the next section.
-- **Background processes:** all stopped (`caffeinate` and the local server both confirmed dead).
+**Layout fits one viewport** on `home-52`, measured across 1920×1080, 1440×810, 1366×690,
+1280×720, 1440×740 — **all sections fit at all five.** This is better than the file started: the
+`pricing` panel used to overflow by 7px at 1366×690, and still does in every other round-5 file.
+Removing the includes list fixed it.
 
-## Side effects outside this repo — do not repeat
+**No faux bold anywhere.** Swept every element in the DOM for one computing to DM Mono above
+weight 500 — returns clean.
 
-Not live _data_, but real and already done. A fresh session must not redo these.
+**Font assignment verified per element**, not inferred from the selector list. Prose, buttons,
+nav, phone, floating CTA, mobile menu and the price chip resolve to `DM Mono 500`; h1, `.h2`,
+`.label`, `.svc__name`, `.tier__fig`, `.duo__sector`, `.tile__sector` resolve to Schibsted
+Grotesk; `.brand__full` resolves to Poppins 300.
 
-- **`impeccable` skill installed globally** at `~/.claude/skills/impeccable` (v4.1.1,
-  Apache-2.0, real directory, npm deps present so the detector runs at full strength).
-  Its bundled agents are in `~/.claude/agents/impeccable-*.md`.
-  **Its hooks were deliberately NOT enabled** — its shipped `settings.json` registers
-  `PostToolUse`/`Stop` hooks that would run its detector after every edit across all projects.
-  Ricky has not been asked to approve that.
-  **Outstanding:** a duplicate copy still exists at `~/.agents/skills/impeccable` from the
-  install staging. Byte-identical today, will drift on update. Ricky was asked and has not yet
-  said whether to remove it — **do not delete it unilaterally.**
-- **Higgsfield credits spent: 300** of an original 1,198. Balance verified at **897.85** on
-  2026-08-18. Spent on 23 images and 4 videos, all already downloaded into `prototype/assets/`.
-  **Do not regenerate them.**
+**Nav bar fits** at 390 / 430 / 760 / 900 / 1024 / 1100 / 1180 / 1280 / 1440 / 1600 / 1920 — no
+overflow, no horizontal scroll, bar height 68px throughout.
+
+**Assumed, not verified:** that the other 53 prototypes still render correctly (untouched, but
+they were redeployed each time). That `home-52` is correct on a real phone — only emulated
+viewports were checked. That the video tiles still play (not re-tested this session; see the
+prior handoff's Trap #1 — review in Safari).
+
+## Working tree
+
+Modified (6):
+
+```
+output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/HANDOFF.md
+output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/PRODUCT.md
+output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/content-brief.md
+output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/home-52-poster-indigo.html
+output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/index.html
+sites/dcs/public/favicon.svg
+```
+
+Untracked and **new this session** (7):
+
+```
+prototype/colour-lab.html   prototype/logo-lab.html   prototype/type-lab.html
+prototype/home-52-typetest.html
+sites/dcs/public/dcs-mark.svg
+```
+
+Untracked but **added by Ricky, not me** (6): `logo black.svg`, `logo white.svg`,
+`logo_black_vector.svg`, `logo_black_vector_cropped.svg`, `logo_white_vector.svg`,
+`logo_white_vector_cropped.svg`, plus `favicon-old.svg` (his rename of the original tracked
+`favicon.svg` — which is why `favicon.svg` shows as _modified_ rather than added).
+
+Pre-existing and unrelated: `supabase/`, `codex-peer-review/.../openrouter-response.json`.
+
+## Live changes already applied
+
+**Vercel only. No R2 writes this session** — `tools/upload-prototype-assets.ts` was never run, and
+the 67 objects from the previous session are untouched. The prototypes' assets are unchanged.
+
+`tools/publish-prototype.ts` was run **about ten times** against the existing `dcs-prototypes`
+project. Each run redeploys **every HTML file in the prototype directory**, so all 59 pages
+currently live are from this machine's working tree. The alias
+`https://dcs-prototypes.vercel.app` points at the most recent.
+
+There is no rollback command. Reverting the files and re-running `publish-prototype.ts` is the
+only way back, and the four lab pages would need deleting from the directory first or they stay
+deployed.
 
 ## What was NOT done
 
-- **No React. Nothing in `sites/dcs` was touched.** Verified clean.
-- **Nothing committed, nothing pushed.** The whole session folder is untracked.
-- **No direction has been chosen.** All 54 are candidates except the six off-brief ones.
-- **Homepage only.** No Services, Pricing, Portfolio, Blog, About or Contact page exists in any
-  direction.
-- **`sites/dcs/site.config.ts` still carries the old trades-only service wording** and would
-  need the same generalisation `content-brief.md` §5 applies. Noted, not done.
-- **Contrast triage never completed.** The impeccable detector at full strength reports ~1,296
-  findings across the round 1–3 files, of which the objective subset is 148 `low-contrast` +
-  25 `gray-on-color`. **6 are provably impossible** (a colour against itself); the remaining
-  **142 were never triaged** to separate real failures from static-pairing artifacts. Rounds 4–5
-  are much cleaner (several directions measured 0 failures on rendered pixels) but the older
-  files were never swept.
-- **Rounds 1–3 were never re-verified at the corrected viewport sizes.** Only round 4 and 5 got
-  the wide sweep. Directions 01–30 may fail at 1366×768 / 1440×800 — unknown, never measured.
-- **Direction 34 still fails** at heights ≤740px (+18px at 1440×740, +31px at 1920×720). Left
-  deliberately; all realistic sizes pass.
-- **Mobile is relaxed, not solved.** Below 768–1024px (varies by direction) sections flow
-  naturally rather than fitting the viewport. That was the brief, but no direction has had a
-  proper mobile design pass.
-- **`session-wrap-up.md` has not been written.** This work is mid-flight, not shipped.
+- **Nothing was committed, pushed, staged or merged.** No branch was created. This is the single
+  biggest risk here — the entire session's work is one `git checkout` away from gone.
+- **Only `home-52` was touched.** The other 53 prototypes still carry the old copy, the old
+  indigo, Schibsted body text, the old DCS tile logo, the 12-month PAYG line and the includes
+  list. They are now inconsistent with the chosen direction. Deliberate — but do not treat any
+  other file as current.
+- **`sites/dcs` has had no React work.** Only two asset files were written there
+  (`favicon.svg`, `dcs-mark.svg`). No component, config or content file was touched, and
+  `sites/dcs/site.config.ts` still carries the old trades-only service wording.
+- **The layout pass has not started.** Content only. Two known layout debts, both surfaced and
+  deliberately left: the pricing panel is bottom-light with a visible gap since the includes list
+  was removed, and the hero no longer hints that a person builds these (the "I designed it" line
+  was cut at Ricky's request).
+- **No inner pages exist.** Services, Pricing, Portfolio, About, Contact — none. Three pieces of
+  content have been explicitly banked in `content-brief.md` _for_ those pages and must not be
+  reinstated on the homepage: the eleven-item includes list, the add-ons pricing, and the email
+  explanation (including that Google bills the client monthly per mailbox, which must be
+  disclosed as a third-party cost).
+- **The old FAQ has no home.** The live site has 7 FAQ questions; nothing on this page carries
+  them.
+- **Mobile is still relaxed, not designed** — unchanged from the previous handoff.
+- **The 46 other prototypes still say "12-month minimum".** Not updated; they are superseded.
+- **`output/sessions/.current-session` is still stale**, pointing at
+  `2026-07/2026-07-18_deploy-hardening`. Detection falls back to most-recently-modified and
+  resolves correctly, but the pointer is wrong.
+- **`session-wrap-up.md` has not been written.**
 
 ## Traps
 
-Every one of these cost time this session. They will mislead a fresh session identically.
+The previous handoff's Traps #2–#13 still apply. These are new.
 
-1. **`getComputedStyle` lies about transitioning/scroll-driven state.** It produced two full
-   false alarms — a "flat image" bug and a "broken nav bar" — both disproved by a single
-   screenshot. **For anything resolving through transitions, custom properties or scroll state,
-   screenshot first and measure second.**
-2. **The reference viewport sizes are wrong by ~90px.** 1440×900 and 1280×800 are _screen_
-   dimensions; a real 1440×900 laptop yields ~810px of viewport after browser chrome. Both are
-   also exactly **16:10**, which makes an entire failure class invisible — type sized off
-   viewport _width_ happens to scale with height at a fixed aspect ratio, and breaks at 16:9.
-   **Any layout rule verified at one aspect ratio is undertested.**
-3. **`font-variant-numeric: tabular-nums` corrupts prices.** Schibsted Grotesk (and Newsreader)
-   give the thousands comma a full digit slot, rendering **"£1,995" as "£1 , 995"**. It
-   inherits, so an ancestor `.num` breaks a figure that looks clean itself. Hit in 6+ directions.
-   Resolve `font-variant-numeric` _up the ancestor chain_ when checking.
-4. **Never symlink the impeccable skill.** Scripts invoked through a symlinked path **exit 0
-   with no output on stdout or stderr** — a silent failure that disabled its concept seed for a
-   whole direction.
-5. **Its detector writes findings to stderr.** `2>/dev/null` reports a false zero.
-6. **`python3 -m http.server` does not support HTTP Range**, so video hangs at `readyState 0`
-   and looks broken. A range-capable server is at
-   `/private/tmp/claude-501/.../scratchpad/rangeserver.py` (scratchpad — **will not persist**;
-   rewrite it if needed).
-7. **Playwright's bundled Chromium cannot decode H.264.** System Google Chrome plays the videos
-   fine (`readyState 4`, confirmed by four directions). A `readyState 0` is a harness
-   limitation, **never a bad asset — do not delete or regenerate the MP4s on the strength of it.**
-8. **Media honesty rules are binding and non-obvious.** No generated image may be captioned as a
-   real named client's premises/van/team, and none may be presented as Ricky, "our team" or "the
-   person who builds your site" — there is no photograph of him. **`sector-office.jpg` is the
-   specific trap:** two people at a table seen from behind, safe as a professional-services
-   sector tile, unsafe beside process step 1 ("A conversation") or first-person copy, because a
-   reader will infer one of them is him. Full rules in `prototype/assets/img/MANIFEST-round4.md`.
-9. **The six off-brief directions look finished and are not candidates.** They are good work
-   against a superseded brief. Don't resurrect one because it looks strong in isolation.
-10. **`--lilac` in the Poster-chord files is my invention**, not Poster's own chord. It was a
-    light-tint slot needed when mapping Ultra's tokens onto Poster's palette.
-11. **A `#pricing` ID selector out-specifies `.panel` rules.** Cost a whole debugging pass when a
-    short-viewport recovery rule silently failed to apply to pricing.
+1. **The filename lies about the colour.** `home-52-poster-indigo.html` is no longer indigo — it
+   is navy. The filename and the URL were kept deliberately so Ricky's link keeps working; only
+   the display name in `index.html` changed, to "Poster · Navy tertiary". Do not "fix" the
+   filename without telling him the URL changes.
+2. **DM Mono ships 300/400/500 only — there is no 600 or 700.** Every rule converted to the body
+   face had to come down to 500 or the browser fakes the weight and the text goes furry. If you
+   add a `font-weight: 700` to anything on `var(--font-body)`, you have introduced faux bold.
+   Sweep for it; do not eyeball it.
+3. **The hero price is now lighter than it was** — `.pricechip__big` went from Schibsted 800 to
+   DM Mono 500, compensated with a size bump and looser tracking. **Ricky has not yet ruled on
+   this.** It is the most important figure in the hero. If he objects, the fix is to return
+   `.pricechip__big` alone to grotesk 800 and let the label and note carry the mono.
+4. **Do not put `.tier__fig` on the body face.** DM Mono is monospaced, so a comma takes a full
+   character cell — the exact `£1 , 995` failure in CLAUDE.md. `£1,995` and `£3,495` in the
+   pricing table are the only comma'd figures on the page and they stay grotesk for that reason.
+   There is a comment in the stylesheet saying so.
+5. **There is a `@media (max-height:740px)` rule for `.svc` that is load-bearing.** DM Mono runs
+   ~22% wider than the grotesk, which overflows the services panel by 39px on short viewports.
+   That one rule pays for it. Deleting it as "tidying" silently breaks the panel on a 1366×768
+   laptop, and it will look fine on the developer's larger screen.
+6. **`home-52-typetest.html` is a stale fork of the homepage and is deployed.** It was branched
+   before the DM Mono and font-weight work and is now at least two changes behind. It has a font
+   switcher bottom-left. At a glance it looks like the real page. **Recommend deleting it** —
+   `/type-lab` is the durable record of that decision. Ricky was told twice and has not answered.
+7. **The four lab pages are not linked from `index.html`.** `/logo-lab`, `/colour-lab`,
+   `/type-lab` and `/home-52-typetest` are reachable by direct URL only. `index.html` mentions
+   `/colour-lab` in prose but links nothing.
+8. **Canvas `measureText` silently falls back to a default font** if the family is not applied in
+   that context, and returns plausible-looking numbers rather than an error. It produced two
+   wrong x-height readings this session before being caught — the tell is several different
+   fonts returning identical values. **Measure x-height with the CSS `ex` unit inside an element
+   where the font is actually rendering.** There is a working implementation in `type-lab.html`.
+9. **The nav's `plum` ground is a dead branch.** The cyan band above pricing carries
+   `data-ground-src="plum"`, intending the bar to repaint navy while crossing it. Sweeping the
+   whole page at 40px steps, the bar only ever reaches `paper`, `acid`, `ink` and `ultra`.
+   Confirmed the same on two untouched siblings, so it predates this session. Nothing looks
+   broken; the intended counterpoint just never fires.
+10. **Do not go darker than `#17265E`.** Darker navies separate _better_ from magenta, so that is
+    not the constraint — the limit is the Selected Work tile against the ink ground behind it.
+    1.33:1 at the chosen value; below about 1.25 the tiles stop reading. `/colour-lab` option 5
+    at 1.07 shows the failure. A comment in the stylesheet records this.
+11. **Ricky's raster logo files are not the source of truth.** `logo.svg`, `logo black.svg` and
+    `logo white.svg` are all 530×254 PNGs inside SVG wrappers, and the two mono ones are
+    pixel-identical in shape to the colour one. Use `logo_black_vector_cropped.svg`, or the
+    derived `sites/dcs/public/dcs-mark.svg`. See the memory note `reference_dcs_logo_asset.md`.
 
 ## Next step
 
-**First: the R2 migration above, then the deploy.** Only after that does design work resume.
-
-**Then: nothing is built until Ricky picks a direction.** To review:
+**Ask Ricky whether to commit before doing anything else.** Twenty dirty paths, ten deploys, zero
+commits. Suggested:
 
 ```bash
-open output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/index.html
+git checkout -b feature/dcs-homepage-direction-52
+git add output/sessions/2026-08/2026-08-17_dcs-homepage-redesign sites/dcs/public
+git status                     # confirm supabase/ and openrouter-response.json are NOT staged
 ```
 
-Opens on round 5 (12 directions). Filter to any round, or "Everything (54)".
+Then, unless he redirects, continue the panel-by-panel pass. Content is broadly done; **layout is
+the outstanding half**, and the pricing panel's gap is the first item. To redeploy after any edit:
 
-Once a direction is chosen, in order:
+```bash
+npx tsx tools/publish-prototype.ts \
+  output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype --project dcs-prototypes
+```
 
-1. **Round 6 — inner pages for the winner only.** Services, Pricing, Portfolio, About, Contact,
-   in the chosen direction's system. Same process: one agent per page, each rendering and
-   verifying its own file.
-2. **A proper mobile design pass** on the winner — currently relaxed, not designed.
-3. **Only then rebuild in React** in `sites/dcs`, with `site.config.ts` service copy
-   generalised per `content-brief.md` §5.
+Assets are on R2 and unchanged — **do not** re-run `upload-prototype-assets.ts` unless you add a
+new image. To re-check the one-viewport rule after any content change, the measurement harness
+lives in the scratchpad, which does not persist — rewrite it: load the page in Playwright at
+1920×1080 / 1440×810 / 1366×690 / 1280×720 / 1440×740 and compare each `main > section`
+`getBoundingClientRect().height` against the viewport height.
 
-If instead the next task is to keep iterating on the homepage, the working set is
-**43–54** and the parent of that branch is `home-33-ultra-adaptive.html`.
+## Open questions
 
-## Open questions for Ricky
-
-1. **R2 scope — archives only, or all prototype assets?** Blocks the deploy. See
-   "Blocked: R2 migration before deploy" above; option 2 rewrites URLs in 54 files and costs
-   offline review.
-2. **Which direction?** Nothing proceeds on the design work without this.
-3. **The one-viewport rule.** It is what caused the cramped padding he objected to — pricing
-   sits at ~100% of the viewport, so uniform padding was set by the densest section. Keeping it
-   costs air on hero and pricing permanently. Worth confirming he still wants it before it
-   shapes the React build.
-4. **Remove the duplicate `~/.agents/skills/impeccable`?** Asked, not yet answered.
-5. **Enable impeccable's detector hooks?** Deliberately left off; they change harness behaviour
-   across all projects.
+1. **Commit now, or keep going uncommitted?** Blocks nothing, risks everything.
+2. **Is the hero price acceptable at DM Mono 500?** See Trap #3. Ricky has not seen a direct
+   before/after of that one element.
+3. **Delete `home-52-typetest.html`?** Asked twice, unanswered. See Trap #6.
+4. **Should the other 53 prototypes be left to rot, archived, or deleted?** They are now
+   materially inconsistent with the chosen direction and the index still offers all 54.
+5. Carried over and still unanswered from the previous handoff: the one-viewport rule itself,
+   the duplicate `~/.agents/skills/impeccable`, and impeccable's detector hooks.
