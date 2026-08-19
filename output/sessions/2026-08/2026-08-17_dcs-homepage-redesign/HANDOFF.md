@@ -1,14 +1,14 @@
 # DCS homepage redesign — handoff
 
 **Status:** in-progress — **a direction has been chosen** (52) and substantially reworked: new
-logo and favicon, new accent colour, new body typeface, and a full copy pass. All of it is
-**uncommitted**, and all of it is **deployed** to a public URL. Those two facts together are the
-main risk in this handoff.
-**Branch:** `develop` @ `5d622f93` — level with `origin/develop`, **zero commits made this
-session**. `staging` and `main` untouched.
-**Commits:** none. Every change below exists only in the working tree of this machine.
-**Working tree:** **20 dirty paths** (6 modified, 14 untracked). Listed under "Working tree" below.
-A fresh clone gets none of this work.
+logo and favicon, new accent colour, new body typeface, and a full copy pass. **Committed but not
+pushed**, and deployed to a public URL.
+**Branch:** `develop`, **5 commits ahead** of `origin/develop` at `5d622f93`.
+**Not pushed. Not merged to `staging` or `main`.** Those commits exist only on this machine.
+**Commits:** 5 — see "Actions taken".
+**Working tree:** clean for this work. Two pre-existing untracked items unrelated to it:
+`supabase/` and `output/sessions/codex-peer-review/.../openrouter-response.json`.
+`sites/dcs` lint passes (`pnpm --filter @platform/dcs run lint`, exit 0).
 **Supersedes:** the previous `HANDOFF.md` in this folder (the "pick one of 54" handoff). Its
 R2/deploy facts and its Traps #2–#13 still hold and are not repeated in full — read it for
 background. Its "Next step" (choose a direction) is **done**.
@@ -38,7 +38,17 @@ Decisions he made explicitly, which constrain the work:
 
 ## Actions taken
 
-**There are no SHAs — nothing was committed.** In rough order:
+Five commits on `develop`, none pushed:
+
+| SHA        | What                                                |
+| ---------- | --------------------------------------------------- |
+| `8ae19235` | Vector DCS mark + new favicon in `sites/dcs/public` |
+| `15de79d3` | Direction 52 rework — navy, DM Mono, logo, copy     |
+| `3c9bbeb3` | The four decision-record lab pages                  |
+| `79910b7d` | 24-month PAYG, restructured services, handoff       |
+| _(head)_   | This SHA table — self-referential, so not named     |
+
+The underlying changes, in rough order:
 
 | #   | Change                                                               | Where                                                    |
 | --- | -------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -136,8 +146,9 @@ deployed.
 
 ## What was NOT done
 
-- **Nothing was committed, pushed, staged or merged.** No branch was created. This is the single
-  biggest risk here — the entire session's work is one `git checkout` away from gone.
+- **Nothing was pushed or merged.** Committed on `develop`, but `origin/develop` is still at
+  `5d622f93` and `staging`/`main` are untouched. The five commits exist only on this machine.
+  Per CLAUDE.md the flow from here is develop → push → staging → main, gated on CI.
 - **Only `home-52` was touched.** The other 53 prototypes still carry the old copy, the old
   indigo, Schibsted body text, the old DCS tile logo, the 12-month PAYG line and the includes
   list. They are now inconsistent with the chosen direction. Deliberate — but do not treat any
@@ -215,14 +226,9 @@ The previous handoff's Traps #2–#13 still apply. These are new.
 
 ## Next step
 
-**Ask Ricky whether to commit before doing anything else.** Twenty dirty paths, ten deploys, zero
-commits. Suggested:
-
-```bash
-git checkout -b feature/dcs-homepage-direction-52
-git add output/sessions/2026-08/2026-08-17_dcs-homepage-redesign sites/dcs/public
-git status                     # confirm supabase/ and openrouter-response.json are NOT staged
-```
+**Ask Ricky whether to push.** Five commits sit unpushed on `develop`; the live prototype URL is
+already ahead of `origin`. Pushing triggers CI, and per CLAUDE.md promotion runs develop → staging
+→ main via `/deploy.changes`.
 
 Then, unless he redirects, continue the panel-by-panel pass. Content is broadly done; **layout is
 the outstanding half**, and the pricing panel's gap is the first item. To redeploy after any edit:
@@ -240,7 +246,8 @@ lives in the scratchpad, which does not persist — rewrite it: load the page in
 
 ## Open questions
 
-1. **Commit now, or keep going uncommitted?** Blocks nothing, risks everything.
+1. **Push the five commits?** They are committed locally but `origin/develop` has none of them,
+   so the work still does not survive this machine.
 2. **Is the hero price acceptable at DM Mono 500?** See Trap #3. Ricky has not seen a direct
    before/after of that one element.
 3. **Delete `home-52-typetest.html`?** Asked twice, unanswered. See Trap #6.
