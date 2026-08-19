@@ -6,6 +6,32 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-19
+
+### Documentation
+
+- **`.svg` in a session folder is gitignored, and the guide now says so.** `output/.gitignore`'s
+  August 2026 binary deny-list includes `sessions/**/*.svg`. SVG is a text format, so it does not
+  read as part of an image rule — a vector written under `output/sessions/**/` is silently absent
+  from a commit that looks like it included it, with `git status` saying nothing either way. Hit
+  while building the DCS mark. Correct behaviour for prototype artwork, which belongs on R2, but
+  brand assets should go in the site's tracked `public/` instead. Recorded in
+  [docs/guides/prototype-hosting.md](docs/guides/prototype-hosting.md) with
+  `git check-ignore -v` as the way to confirm.
+
+### Sites
+
+- **DCS gains a real vector logo and a new favicon** (`sites/dcs/public/dcs-mark.svg`,
+  `favicon.svg`). Every prior logo file was a 530×254 raster PNG inside an SVG wrapper — including
+  the black and white variants, which are pixel-identical in shape to the colour original and so
+  added no resolution. The mark draws in `currentColor`, so one file covers black on light grounds
+  and white knocked out of dark or colour grounds. The favicon uses the D alone, clipped from the
+  real monogram: all three letters turn to mush at 16px. The previous Arial-text favicon is parked
+  as `favicon-old.svg`. `sites/dcs/app/layout.tsx` still points `logoSrc` at the old raster
+  `/logo.svg` — the new mark is not wired in yet, pending the homepage rebuild.
+
+---
+
 ## 2026-08-18
 
 ### Infrastructure

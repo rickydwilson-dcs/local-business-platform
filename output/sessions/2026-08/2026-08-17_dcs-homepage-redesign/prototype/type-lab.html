@@ -1,0 +1,469 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCS — typography: body and headings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&family=Inconsolata:wght@400;600&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&family=DM+Mono:ital,wght@0,400;0,500&family=Space+Grotesk:wght@400;500;700&family=Instrument+Sans:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Anonymous+Pro:wght@400;700&family=Geologica:wght@400;500&family=Archivo:wght@400;500;800;900&family=Instrument+Serif:wght@400&family=Fraunces:wght@700;900&family=Bodoni+Moda:wght@700;900&family=Anton&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F3F1;--ink:#101014;--ash:#55555E;--smoke:#A6A6B0;--chalk:#F3F3F1;
+--ultra:#D6006B;--plum:#17265E;--acid:#00D2D8;
+--grot:'Schibsted Grotesk',ui-sans-serif,system-ui,sans-serif;--rule-light:rgba(16,16,20,.14)}
+*,*::before,*::after{box-sizing:border-box} body,h1,h2,h3,h4,p,ul{margin:0} ul{list-style:none;padding:0}
+body{background:#6f6f78;font-family:var(--grot);color:var(--ink);-webkit-font-smoothing:antialiased}
+.labhead{background:var(--ink);color:var(--chalk);padding:clamp(1.2rem,3vw,2.4rem) clamp(1rem,3vw,3rem)}
+.labhead h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.labhead p{max-width:80ch;color:var(--smoke);font-size:.95rem;margin-top:.75rem;line-height:1.6}
+.labhead .key{color:var(--acid);font-weight:700}
+.jump{display:flex;gap:.6rem;margin-top:1.2rem;flex-wrap:wrap}
+.jump a{color:var(--ink);background:var(--acid);text-decoration:none;font-weight:700;font-size:.8rem;padding:.5rem .9rem}
+.partbar{background:var(--ultra);color:#fff;padding:.9rem clamp(1rem,3vw,3rem)}
+.partbar h2{font-size:1.3rem;font-weight:900;letter-spacing:-.02em;text-transform:uppercase}
+.partbar p{font-size:.85rem;opacity:.92;max-width:80ch;margin-top:.25rem;line-height:1.45}
+.spec{border-top:10px solid #6f6f78}
+.spechead{background:var(--ink);color:var(--chalk);padding:1rem clamp(1rem,3vw,3rem);
+display:flex;gap:1.5rem 2rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.sn{font-size:1.05rem;font-weight:800;letter-spacing:-.02em}
+.note{font-size:.85rem;color:var(--smoke);max-width:82ch;line-height:1.45;margin-top:.3rem}
+.metrics{display:flex;gap:1.5rem} .metrics li{display:grid;gap:.1rem;text-align:right}
+.metrics b{font-size:1.15rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--acid)}
+.metrics i{font-style:normal;font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:var(--smoke)}
+.metrics .low b{color:#FF6C6C} .metrics .warn b{color:#FFC94A} .metrics .same b{color:var(--smoke)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.col{padding:clamp(1.2rem,2.4vw,2.2rem) clamp(1rem,3vw,3rem)}
+.paper{background:var(--paper);color:var(--ink)} .dark{background:var(--ink);color:var(--chalk)}
+.kick{font-family:var(--grot);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-bottom:.5rem}
+.dark .kick{color:var(--smoke)} .kick + *{margin-bottom:1.4rem}
+/* body specimens */
+.lead{font-family:var(--body);font-weight:var(--bw);font-size:19px;line-height:1.45;max-width:44ch}
+.svcs{border-top:2px solid var(--ink)}
+.svc{display:grid;grid-template-columns:2.6rem minmax(0,1fr) minmax(0,1.15fr);gap:1rem;align-items:baseline;padding:.7rem 0;border-bottom:1px solid var(--rule-light)}
+.svc__n{font-family:var(--grot);font-size:.75rem;font-weight:700;color:var(--ash)}
+.svc__name{font-family:var(--grot);font-size:1.05rem;font-weight:800;letter-spacing:-.02em;text-transform:uppercase}
+.svc__desc{font-family:var(--body);font-weight:var(--bw);font-size:15px;line-height:1.35;color:var(--ash)}
+.hh{font-family:var(--grot);font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:.9;text-transform:uppercase;margin-bottom:1rem}
+.person{font-family:var(--body);font-weight:var(--bw);font-size:16px;line-height:1.55;max-width:52ch;color:var(--smoke)}
+.person p + p{margin-top:.8rem} .person strong{color:var(--chalk);font-weight:700}
+/* heading specimens */
+.hspec .disp{font-family:var(--disp);font-weight:var(--dw);line-height:var(--dlh);letter-spacing:var(--dls);
+  text-transform:uppercase;font-size:clamp(2rem,4.6vw,3.9rem);text-wrap:balance}
+.hspec .disp--sm{font-size:clamp(1.6rem,3.2vw,2.6rem)}
+.hspec .plate{background:var(--ultra);color:#fff;padding:0 .06em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hspec .person.inc{font-family:'Inconsolata';font-weight:600;font-size:16px}
+</style></head><body>
+<div class="labhead">
+  <h1>Typography — body and headings</h1>
+  <p>Two labs on one page. <span class="key">Part A</span> changes the prose and holds the headings at
+  Schibsted. <span class="key">Part B</span> changes the headings and holds the prose at Inconsolata 600,
+  so you can see what each display face does against your front-runner. Poppins is dropped from both.</p>
+  <p><span class="key">On the serif question:</span> you were right. A serif fails as body copy on a page
+  like this and comes into its own at display size, where the thin strokes read as refinement instead of
+  weakness. Three are in Part B — <em>Instrument Serif</em>, <em>Bodoni Moda</em>, <em>Fraunces</em> —
+  alongside five non-serifs, so it is not a serif-only question.</p>
+  <p><span class="key">The heading metric to watch is “widest line”.</span> The hero is three lines with
+  a hard-set break, and the longest of them is PROFESSIONAL. Anything much over +5% will not fit the
+  hero at its current size and would force the display type down a step.</p>
+  <div class="jump"><a href="#body">Part A · Body</a><a href="#head">Part B · Headings</a></div>
+</div>
+
+<div class="partbar" id="body"><h2>Part A · Body</h2><p>Headings fixed to Schibsted Grotesk. Real sizes, measures, colours and copy.</p></div>
+
+<section class="spec" style="--body:'Schibsted Grotesk'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B1 &middot; Control — what is on the page now</h3><p class="note">Same face as the headings, which is why the prose reads as undesigned.</p></div>
+    <ul class="metrics" data-font="Schibsted Grotesk" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Inconsolata'; --bw:600">
+  <div class="spechead">
+    <div><h3 class="sn">B2 &middot; Inconsolata 600 — your front-runner</h3><p class="note">Your current site's face at the weight that actually matches the page. Narrow for a mono, so it costs nothing in line length.</p></div>
+    <ul class="metrics" data-font="Inconsolata" data-wt="600">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Space Mono'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B3 &middot; Space Mono — the loudest mono</h3><p class="note">Far more character than Inconsolata: slab-ish terminals, odd curves, unmistakably deliberate. Wide, and it tires the eye over a long paragraph.</p></div>
+    <ul class="metrics" data-font="Space Mono" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'JetBrains Mono'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B4 &middot; JetBrains Mono — the sturdy mono</h3><p class="note">Drawn for reading code all day, so it holds up at length better than any mono here. Tall x-height, plenty of ink at 400.</p></div>
+    <ul class="metrics" data-font="JetBrains Mono" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'JetBrains Mono'; --bw:500">
+  <div class="spechead">
+    <div><h3 class="sn">B4b &middot; JetBrains Mono 500</h3><p class="note">Added on your ask. Same family one weight up; JetBrains starts denser than DM Mono so the jump matters less here.</p></div>
+    <ul class="metrics" data-font="JetBrains Mono" data-wt="500">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'DM Mono'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B5 &middot; DM Mono — the quiet mono</h3><p class="note">Refined and a little softer. The mono to pick if Inconsolata 600 feels heavy-handed but you still want the effect.</p></div>
+    <ul class="metrics" data-font="DM Mono" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Anonymous Pro'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B10 &middot; Anonymous Pro 400</h3><p class="note">Your ask. A typewriter-flavoured mono with real warmth. Constraint worth knowing before you fall for it: the family ships only 400 and 700 &mdash; there is no 500 or 600, so if 400 measures too faint there is nowhere to go but bold.</p></div>
+    <ul class="metrics" data-font="Anonymous Pro" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Geologica'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B11 &middot; Geologica 400</h3><p class="note">Your ask. A modern variable grotesk with squared-off curves and a large x-height. Not a mono, so no width penalty, but far more voice than Schibsted.</p></div>
+    <ul class="metrics" data-font="Geologica" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Geologica'; --bw:500">
+  <div class="spechead">
+    <div><h3 class="sn">B11b &middot; Geologica 500</h3><p class="note">Same face one weight up, for comparison against the ink figure of the current page.</p></div>
+    <ul class="metrics" data-font="Geologica" data-wt="500">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'DM Mono'; --bw:500">
+  <div class="spechead">
+    <div><h3 class="sn">B5b &middot; DM Mono 500 — the usable weight</h3><p class="note">The weight to actually use. DM Mono 400 measures fainter than the Inconsolata 400 you already rejected, so 400 is not really on the table — judge the face here.</p></div>
+    <ul class="metrics" data-font="DM Mono" data-wt="500">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Space Grotesk'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B6 &middot; Space Grotesk — mono character, sans readability</h3><p class="note">Drawn from a mono but spaced proportionally. Reads as designed without committing the whole page to monospace. My pick if the mono is a step too far.</p></div>
+    <ul class="metrics" data-font="Space Grotesk" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Archivo'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B7 &middot; Archivo — the sturdy grotesk</h3><p class="note">More robust and slightly wider than Schibsted, with tighter apertures. A quiet upgrade rather than a statement.</p></div>
+    <ul class="metrics" data-font="Archivo" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'Instrument Sans'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B8 &middot; Instrument Sans — the safe change</h3><p class="note">Slightly condensed, a little more character than Schibsted. The smallest move that still registers.</p></div>
+    <ul class="metrics" data-font="Instrument Sans" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+<section class="spec" style="--body:'IBM Plex Sans'; --bw:400">
+  <div class="spechead">
+    <div><h3 class="sn">B9 &middot; IBM Plex Sans — the technical sans</h3><p class="note">Distinct letterforms, faintly engineered. Pairs naturally if a mono lands anywhere else on the page.</p></div>
+    <ul class="metrics" data-font="IBM Plex Sans" data-wt="400">
+      <li class="ink"><b>—</b><i>ink vs now</i></li><li class="xh"><b>—</b><i>x-height</i></li><li class="wd"><b>—</b><i>line length</i></li>
+    </ul>
+  </div>
+  <div class="cols">
+    <div class="col paper"><p class="kick">Hero lead &middot; 19px</p><p class="lead">Sites that stand next to what London and New York studios put out — for a fraction of the cost, and a tiny fraction of the effort from you.</p>
+      <p class="kick">Service rows &middot; 15px</p><div class="svcs"><div class="svc"><span class="svc__n">01</span><span class="svc__name">A new website</span><span class="svc__desc">Designed and built around your business, not dropped into a template.</span></div><div class="svc"><span class="svc__n">02</span><span class="svc__name">An online shop</span><span class="svc__desc">A WooCommerce store, built and loaded with your products, orders and stock handled.</span></div><div class="svc"><span class="svc__n">03</span><span class="svc__name">Fixing the site you have</span><span class="svc__desc">Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to.</span></div></div></div>
+    <div class="col dark"><p class="kick">About prose &middot; 16px</p>
+      <h4 class="hh">Real people.<br>No bots.</h4><div class="person"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p><p>Plenty of what looks like a website service is a bot that takes what you type and drops it into a template you are then left to maintain. That is not this. I do the work myself, which is why it is this considered, and why it is personal.</p></div></div>
+  </div>
+</section>
+
+<div class="partbar" id="head"><h2>Part B · Headings</h2><p>Prose fixed to Inconsolata 600. Each display face gets the leading and tracking it actually wants — a Bodoni set at a grotesk's line-height would be an unfair test, so those two values vary per specimen and the rest does not.</p></div>
+
+<section class="spec hspec" style="--disp:'Schibsted Grotesk'; --dw:800; --dlh:.86; --dls:-.03em">
+  <div class="spechead">
+    <div><h3 class="sn">H1 &middot; Control — what is on the page now</h3><p class="note">Heavy neutral grotesk. Does the poster job well; says little in itself.</p></div>
+    <ul class="metrics hmet" data-font="Schibsted Grotesk"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Archivo'; --dw:900; --dlh:.86; --dls:-.03em">
+  <div class="spechead">
+    <div><h3 class="sn">H2 &middot; Archivo Black-weight — same idea, more muscle</h3><p class="note">The closest swap. Denser and squarer than Schibsted, so the plate word hits harder without changing the page's language.</p></div>
+    <ul class="metrics hmet" data-font="Archivo"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Anton'; --dw:400; --dlh:.88; --dls:-.01em">
+  <div class="spechead">
+    <div><h3 class="sn">H3 &middot; Anton — condensed poster</h3><p class="note">Properly condensed, so far more headline fits per line. The most 'poster' of the eight, and the most likely to look like a sale banner if pushed.</p></div>
+    <ul class="metrics hmet" data-font="Anton"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Syne'; --dw:800; --dlh:.9; --dls:-.02em">
+  <div class="spechead">
+    <div><h3 class="sn">H4 &middot; Syne — the art-gallery grotesk</h3><p class="note">Wonky widths and flared joins. Immediately reads as a design studio; some will find it too clever.</p></div>
+    <ul class="metrics hmet" data-font="Syne"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Space Grotesk'; --dw:700; --dlh:.88; --dls:-.03em">
+  <div class="spechead">
+    <div><h3 class="sn">H5 &middot; Space Grotesk — quirky, and it pairs with the monos</h3><p class="note">The natural heading if you take Space Mono or Inconsolata below. One family logic across the page.</p></div>
+    <ul class="metrics hmet" data-font="Space Grotesk"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Instrument Serif'; --dw:400; --dlh:.92; --dls:-.01em">
+  <div class="spechead">
+    <div><h3 class="sn">H6 &middot; Instrument Serif — high-contrast serif</h3><p class="note">Your serif question answered. At display size the thin strokes are an asset, not a liability. Elegant against a mono body — the biggest visual departure here.</p></div>
+    <ul class="metrics hmet" data-font="Instrument Serif"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Bodoni Moda'; --dw:900; --dlh:.95; --dls:.0em">
+  <div class="spechead">
+    <div><h3 class="sn">H7 &middot; Bodoni Moda — editorial serif, maximum contrast</h3><p class="note">Fashion-magazine register. Wants generous leading and looser tracking in caps; give it room and it is the most expensive-looking option.</p></div>
+    <ul class="metrics hmet" data-font="Bodoni Moda"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+<section class="spec hspec" style="--disp:'Fraunces'; --dw:900; --dlh:.88; --dls:-.02em">
+  <div class="spechead">
+    <div><h3 class="sn">H8 &middot; Fraunces — the chunky serif</h3><p class="note">Soft, slightly wonky, warm. Serif character without the fragility of a Bodoni, and it survives being set heavy.</p></div>
+    <ul class="metrics hmet" data-font="Fraunces"><li class="hw"><b>—</b><i>widest line</i></li></ul>
+  </div>
+  <div class="cols">
+    <div class="col paper">
+      <p class="kick">Hero H1</p>
+      <h2 class="disp"><span class="plate">Websites</span> as<br>professional<br><span class="mline">as you are.</span></h2>
+      <p class="kick" style="margin-top:1.6rem">Section H2</p>
+      <h2 class="disp disp--sm">Same site.<br>Two ways<br>to pay.</h2>
+    </div>
+    <div class="col dark">
+      <p class="kick">Paired with Inconsolata 600</p>
+      <h2 class="disp disp--sm">Real people.<br>No bots.</h2>
+      <div class="person inc"><p>My name is <strong>Ricky Wilson</strong>. I started Digital Consulting Services in 2019 and I have built and looked after every site on this page myself.</p><p>Nothing is outsourced and nothing is offshored. When you call, you get the person who designed your site, not an account manager reading a ticket. No techno-babble either — you will not be made to feel slow for asking what something means.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.fonts.ready.then(function(){
+  var S=200, cv=document.createElement('canvas'); cv.width=3000; cv.height=S*1.6; var c=cv.getContext('2d');
+  var SAMPLE="Handgloves the quick brown fox 0123";
+  function probe(f,w){
+    c.clearRect(0,0,cv.width,cv.height); c.font=w+' '+S+'px '+f; c.fillStyle='#000'; c.textBaseline='alphabetic';
+    var m=c.measureText(SAMPLE); c.fillText(SAMPLE,0,S);
+    var d=c.getImageData(0,0,Math.min(cv.width,Math.ceil(m.width)),cv.height).data, ink=0;
+    for(var i=3;i<d.length;i+=4) ink+=d[i];
+    return { ink: ink/255/(m.width*S), w: m.width };
+  }
+  // x-height via the ex unit, which reads the font's own metrics (canvas probes can silently fall back)
+  function exRatio(el){
+    var d=document.createElement('div');
+    d.style.cssText='position:absolute;visibility:hidden;width:100ex';
+    el.appendChild(d);
+    var r=d.getBoundingClientRect().width/100/parseFloat(getComputedStyle(el).fontSize);
+    d.remove(); return r;
+  }
+  var base=probe("'Schibsted Grotesk'",400);
+  var baseEx=exRatio(document.querySelector('.spec .person'));
+  document.querySelectorAll('.metrics:not(.hmet)').forEach(function(el){
+    var spec=el.closest('.spec');
+    var p=probe("'"+el.dataset.font+"'", el.dataset.wt);
+    var ink=p.ink/base.ink, wd=p.w/base.w, xh=exRatio(spec.querySelector('.person'))/baseEx;
+    var li=el.querySelector('.ink b'); li.textContent=ink.toFixed(2);
+    if(ink<0.82) li.parentNode.classList.add('low'); else if(ink<0.90) li.parentNode.classList.add('warn');
+    else if(Math.abs(ink-1)<0.03) li.parentNode.classList.add('same');
+    var lx=el.querySelector('.xh b'); lx.textContent=xh.toFixed(2);
+    if(xh<0.90) lx.parentNode.classList.add('warn'); else if(Math.abs(xh-1)<0.03) lx.parentNode.classList.add('same');
+    var lw=el.querySelector('.wd b'); lw.textContent=(wd>=1?'+':'')+Math.round((wd-1)*100)+'%';
+    if(wd>1.10) lw.parentNode.classList.add('warn'); else if(Math.abs(wd-1)<0.03) lw.parentNode.classList.add('same');
+  });
+  // heading: measure the real rendered width of the longest hero line
+  function longest(spec){
+    var el=spec.querySelector('.mline'); var r=document.createRange(); r.selectNodeContents(el);
+    return r.getBoundingClientRect().width;
+  }
+  var specs=[].slice.call(document.querySelectorAll('.hspec'));
+  var hbase=longest(specs[0]);
+  specs.forEach(function(s){
+    var v=longest(s)/hbase, li=s.querySelector('.hw b');
+    li.textContent=(v>=1?'+':'')+Math.round((v-1)*100)+'%';
+    if(v>1.05) li.parentNode.classList.add('warn');
+    if(v>1.15) li.parentNode.classList.add('low');
+    if(Math.abs(v-1)<0.02) li.parentNode.classList.add('same');
+  });
+});
+</script></body></html>

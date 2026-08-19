@@ -117,19 +117,33 @@ genuinely earns it.
 
 ## 5. Services (six)
 
-Descriptions generalised from v1, which framed everything around tradespeople.
+Restructured 2026-08-19 on Ricky's steer. The list now leads with the **three things people
+actually ask for**, then the three that keep the site working. Stack, in his words: most sites
+are Next.js brochureware; WordPress with a custom theme when the client needs to manage their
+own content or wants an existing site fixed; WooCommerce for eCommerce.
 
-| Service                | One-liner                                                                        |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| Website Design         | Designed and built for your business. No templates, no page-builders.            |
-| Local SEO              | Service pages, location pages, structured data — so you're found where you work. |
-| Ongoing Management     | We look after the site so you can get on with the business.                      |
-| Google Workspace Email | Professional business email on your own domain.                                  |
-| eCommerce Websites     | Online stores built, loaded with your products, and kept running.                |
-| Analytics & Reporting  | Analytics, Search Console and monthly reporting, so you know what's working.     |
+| #   | Service                  | One-liner                                                                                |
+| --- | ------------------------ | ---------------------------------------------------------------------------------------- |
+| 1   | A new website            | Designed and built around your business, not dropped into a template.                    |
+| 2   | An online shop           | A WooCommerce store, built and loaded with your products, orders and stock handled.      |
+| 3   | Fixing the site you have | Already on WordPress? We will fix it, rebuild it, or add a custom theme you can post to. |
+| 4   | Local SEO                | Service pages, location pages, structured data — so you are found where you work.        |
+| 5   | Hosting and management   | Hosting, security, updates, business email on your domain, and one person to call.       |
+| 6   | Analytics and reporting  | Analytics, Search Console and monthly reporting, so you know what is working.            |
+
+Google Workspace Email is no longer its own row — it was never a reason to hire anyone, and it
+now sits inside "Hosting and management" where it belongs, phrased as "email on your own domain".
+
+**Do not name Google Workspace on the homepage.** Ricky, 2026-08-19: it will not mean anything to
+anybody. The customer-facing promise is simply that they get professional email on their own
+domain instead of a Gmail or Hotmail address. The mechanics — that we set the account up, and
+that Google then bills them a monthly per-mailbox fee on top of anything we charge — is real and
+must be disclosed, but it belongs in the **Services page** copy (round 6), not the homepage. Flag
+it there as a third-party cost so it never reads as a hidden extra, given the homepage's whole
+argument is that every number is printed.
 
 _(Note for the React build: `sites/dcs/site.config.ts` still carries the trades-only wording
-and would need the same generalisation.)_
+and needs this same list.)_
 
 ## 6. Pricing (must be accurate)
 
@@ -143,7 +157,7 @@ Two ways to pay for the **same site**. Clients choose how to pay, not what they 
 | Professional _(most popular)_ | £1,995 | £25/mo  | up to 50  |
 | Growth                        | £3,495 | £50/mo  | up to 100 |
 
-**Option B — Pay monthly, nothing upfront** (12-month minimum)
+**Option B — Pay monthly, nothing upfront** (24-month minimum)
 
 | Tier         | Monthly |
 | ------------ | ------- |
@@ -151,13 +165,22 @@ Two ways to pay for the **same site**. Clients choose how to pay, not what they 
 | Professional | £75/mo  |
 | Growth       | £125/mo |
 
-Every site includes: custom design, local SEO (service pages, location pages, structured
+**Homepage carries the table only.** The two blocks below were on the homepage and were
+**removed 2026-08-19 on Ricky's call** — they belong on a dedicated pricing page. The homepage
+now ends the panel with a one-line pointer to `/pricing`. Do not put them back on the homepage;
+build the pricing page in round 6 and put them there in full.
+
+_Every site includes:_ custom design, local SEO (service pages, location pages, structured
 data), mobile-first and fast, contact form, hosting, SSL, domain management, security
 updates, uptime monitoring, unlimited revisions during the build, Search Console submission.
 Tiers differ on **ongoing service level**, not quality.
 
-Add-ons: blog post writing £75/post · custom theme design £350 · Google Ads setup +
+_Add-ons:_ blog post writing £75/post · custom theme design £350 · Google Ads setup +
 management £200/mo + spend · monthly SEO retainer £200/mo.
+
+_Also for the pricing page:_ the email explanation from §5 — professional email on the client's
+own domain, set up by us, billed monthly per mailbox by Google. Disclose it as a third-party
+cost, not an aside.
 
 ## 7. Proof and portfolio — LEAD WITH THE RANGE
 
