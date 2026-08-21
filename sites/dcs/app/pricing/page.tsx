@@ -1,134 +1,134 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "Pricing | Digital Consulting Services",
+  title: 'Pricing | Digital Consulting Services',
   description:
-    "Simple, transparent pricing for tradesperson websites. Pay monthly from £59/month or upfront from £995. No hidden fees.",
+    'Simple, transparent pricing for tradesperson websites. Pay monthly from £45/month or upfront from £750. No hidden fees.',
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const tiers = [
   {
-    name: "Starter",
-    pages: "Up to 20",
-    upfront: "£995",
-    monthlyAfterUpfront: "£15/mo",
-    payMonthly: "£45/mo",
-    minTerm: "12 months",
+    name: 'Starter',
+    pages: 'Up to 20',
+    upfront: '£750',
+    monthlyAfterUpfront: '£10/mo',
+    payMonthly: '£45/mo',
+    minTerm: '24 months',
     popular: false,
   },
   {
-    name: "Professional",
-    pages: "Up to 50",
-    upfront: "£1,995",
-    monthlyAfterUpfront: "£25/mo",
-    payMonthly: "£75/mo",
-    minTerm: "12 months",
+    name: 'Professional',
+    pages: 'Up to 50',
+    upfront: '£1,495',
+    monthlyAfterUpfront: '£15/mo',
+    payMonthly: '£85/mo',
+    minTerm: '24 months',
     popular: true,
   },
   {
-    name: "Growth",
-    pages: "Up to 100",
-    upfront: "£3,495",
-    monthlyAfterUpfront: "£50/mo",
-    payMonthly: "£125/mo",
-    minTerm: "12 months",
+    name: 'Growth',
+    pages: 'Up to 100',
+    upfront: '£2,995',
+    monthlyAfterUpfront: '£25/mo',
+    payMonthly: '£150/mo',
+    minTerm: '24 months',
     popular: false,
   },
 ] as const;
 
 const included = [
-  "Custom bespoke design",
-  "Local SEO built in (service pages, location pages, Schema markup)",
-  "Mobile-first and fast",
-  "Contact form with email notification",
-  "Hosting, SSL certificate, and domain management",
-  "Ongoing support and monitoring",
-  "Unlimited revision rounds during build",
-  "Google Search Console submission",
+  'Custom bespoke design',
+  'Local SEO built in (service pages, location pages, Schema markup)',
+  'Mobile-first and fast',
+  'Contact form with email notification',
+  'Hosting, SSL certificate, and domain management',
+  'Ongoing support and monitoring',
+  'Unlimited revision rounds during build',
+  'Google Search Console submission',
 ];
 
 const tierDifferences = [
-  { label: "Pages", starter: "20", professional: "50", growth: "100" },
+  { label: 'Pages', starter: '20', professional: '50', growth: '100' },
   {
-    label: "Content updates included per month",
-    starter: "1",
-    professional: "2",
-    growth: "4",
+    label: 'Content updates included per month',
+    starter: '1',
+    professional: '2',
+    growth: '4',
   },
   {
-    label: "Build timeline",
-    starter: "4 weeks",
-    professional: "6 weeks",
-    growth: "8 weeks",
+    label: 'Build timeline',
+    starter: '4 weeks',
+    professional: '6 weeks',
+    growth: '8 weeks',
   },
 ] as const;
 
 const addons = [
   {
-    icon: "star",
-    name: "Review capture widget",
-    description: "Prompt happy customers to leave a review on Google or Trustpilot automatically.",
+    icon: 'star',
+    name: 'Review capture widget',
+    description: 'Prompt happy customers to leave a review on Google or Trustpilot automatically.',
   },
   {
-    icon: "sms",
-    name: "SMS lead notification",
-    description: "Get a text message the moment a new enquiry lands in your inbox.",
+    icon: 'sms',
+    name: 'SMS lead notification',
+    description: 'Get a text message the moment a new enquiry lands in your inbox.',
   },
   {
-    icon: "analytics",
-    name: "Call tracking number",
-    description: "A dedicated number that records which marketing channel drove the call.",
+    icon: 'analytics',
+    name: 'Call tracking number',
+    description: 'A dedicated number that records which marketing channel drove the call.',
   },
   {
-    icon: "smart_toy",
-    name: "AI chatbot FAQ",
-    description: "A lightweight chatbot that answers common questions 24/7 without your input.",
+    icon: 'smart_toy',
+    name: 'AI chatbot FAQ',
+    description: 'A lightweight chatbot that answers common questions 24/7 without your input.',
   },
   {
-    icon: "calendar_month",
-    name: "Booking calendar integration",
-    description: "Let customers book a slot directly from your website.",
+    icon: 'calendar_month',
+    name: 'Booking calendar integration',
+    description: 'Let customers book a slot directly from your website.',
   },
   {
-    icon: "location_on",
-    name: "Google My Business setup",
-    description: "Full GMB profile creation and optimisation for local search visibility.",
+    icon: 'location_on',
+    name: 'Google My Business setup',
+    description: 'Full GMB profile creation and optimisation for local search visibility.',
   },
   {
-    icon: "ads_click",
-    name: "Google Ads management",
-    description: "Targeted pay-per-click campaigns managed monthly to drive immediate leads.",
+    icon: 'ads_click',
+    name: 'Google Ads management',
+    description: 'Targeted pay-per-click campaigns managed monthly to drive immediate leads.',
   },
 ] as const;
 
 const faqs = [
   {
-    question: "Do I own my website?",
+    question: 'Do I own my website?',
     answer:
-      "Yes, if you paid upfront. Pay-monthly clients own all their content; the hosting arrangement transfers to you if you cancel after your minimum term.",
+      'Yes, if you paid upfront. Pay-monthly clients own all their content; the hosting arrangement transfers to you if you cancel after your minimum term.',
   },
   {
-    question: "What happens if I want to cancel?",
+    question: 'What happens if I want to cancel?',
     answer:
       "Give us 30 days notice after your minimum term and we'll export all your content so you can take it elsewhere. No fuss.",
   },
   {
-    question: "Can I upgrade my tier later?",
+    question: 'Can I upgrade my tier later?',
     answer:
       "Yes, you can upgrade at any time. We'll quote for the additional pages and work out the most cost-effective route for you.",
   },
   {
-    question: "Is there a contract?",
+    question: 'Is there a contract?',
     answer:
-      "Pay-monthly has a 12-month minimum term, after which it rolls monthly. Upfront clients have no ongoing commitment beyond the monthly hosting fee.",
+      'Pay-monthly has a 24-month minimum term, after which it rolls monthly. Upfront clients have no ongoing commitment beyond the monthly hosting fee.',
   },
   {
     question: "What's included in 'managed hosting'?",
     answer:
-      "Hosting on fast UK servers, SSL certificate, domain renewal, security monitoring, and uptime alerts — all managed by us.",
+      'Hosting on fast UK servers, SSL certificate, domain renewal, security monitoring, and uptime alerts — all managed by us.',
   },
 ] as const;
 
@@ -203,7 +203,7 @@ export default function PricingPage() {
                   >
                     check_circle
                   </span>
-                  You own the site outright after 12 months.
+                  You own the site outright from day one.
                 </li>
               </ul>
             </div>
@@ -253,7 +253,7 @@ export default function PricingPage() {
                   >
                     check_circle
                   </span>
-                  12-month minimum term.
+                  24-month minimum term.
                 </li>
               </ul>
             </div>
@@ -272,7 +272,7 @@ export default function PricingPage() {
               <div
                 key={tier.name}
                 className={`bg-surface-card rounded-[20px] border border-surface-card-border p-6 relative flex flex-col${
-                  tier.popular ? " shadow-2xl ring-2 ring-brand-primary/30" : " shadow-md"
+                  tier.popular ? ' shadow-2xl ring-2 ring-brand-primary/30' : ' shadow-md'
                 }`}
               >
                 {tier.popular && (
@@ -321,8 +321,8 @@ export default function PricingPage() {
                   href="/contact"
                   className={`block text-center py-3 px-6 rounded-xl text-sm font-bold font-body transition-colors${
                     tier.popular
-                      ? " bg-brand-primary text-white hover:opacity-90"
-                      : " bg-brand-primary/10 text-brand-primary hover:bg-brand-primary/20"
+                      ? ' bg-brand-primary text-white hover:opacity-90'
+                      : ' bg-brand-primary/10 text-brand-primary hover:bg-brand-primary/20'
                   }`}
                 >
                   Get a quote
@@ -385,7 +385,7 @@ export default function PricingPage() {
             {tierDifferences.map((row, i) => (
               <div
                 key={row.label}
-                className={`grid grid-cols-4${i < tierDifferences.length - 1 ? " border-b border-surface-card-border" : ""}`}
+                className={`grid grid-cols-4${i < tierDifferences.length - 1 ? ' border-b border-surface-card-border' : ''}`}
               >
                 <div className="p-4 font-body text-sm text-surface-muted-foreground leading-relaxed">
                   {row.label}
