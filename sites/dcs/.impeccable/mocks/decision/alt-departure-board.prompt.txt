@@ -1,0 +1,15 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the entire frame edge to edge. This is a UI render, not a photograph of a screen, not a device mockup, not a laptop on a desk. No browser chrome. Real legible typography. No lorem ipsum. No stock photography of people. Do not invent any review scores, star ratings, award badges, client logos or statistics.
+
+The page is a rail concourse split-flap departure board. Ground: near-black (#101014) with a brushed steel frame edge catching a soft highlight along the top and left.
+
+The centre of the page is a board of split-flap rows. Each row is made of individual matte black character tiles with a fine horizontal hinge line across the middle of every tile, white condensed sans characters painted on them. Two or three tiles mid-flip, caught halfway, showing the top half of one character and the bottom half of another.
+
+Column headers in small amber monospaced caps: SERVICE, COVERAGE, LEAD TIME, STATUS. Four rows beneath, reading across: "WEBSITE DESIGN / UK-WIDE / 3 WEEKS / TAKING WORK", "LOCAL SEO / UK-WIDE / ONGOING / TAKING WORK", "ONGOING MANAGEMENT / UK-WIDE / MONTHLY / TAKING WORK", "ECOMMERCE / UK-WIDE / 5 WEEKS / TAKING WORK". One row is lit by a warm amber lamp bar down its left edge.
+
+Above the board, in large paper-white condensed sans on the black ground: "Websites as professional as you are."
+
+Below the board: a saturated magenta (#D6006B) rectangular button reading "Get a free quote", and small white monospaced text reading "POLEGATE, EAST SUSSEX · EST. 2019".
+
+Top bar: small outlined square D monogram with "digital consulting" over "services" in white, minimal navigation in grey.
+
+Mood: mechanical, authoritative, the half-second before the whole board cascades. Crisp, high contrast, no gradients, no glows, no photographs of a real station.

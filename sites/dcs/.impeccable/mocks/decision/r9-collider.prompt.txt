@@ -1,0 +1,12 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the frame edge to edge. A UI render, not a photo of a screen, no device mockup, no browser chrome. Real legible typography, no lorem ipsum. No stock photos of people. Invent no review scores, star ratings, awards, client logos, statistics, prices or lead times.
+CRITICAL PALETTE BAN: absolutely no cream, no beige, no sepia, no off-white paper, no ochre, no terracotta, no muted earth tones, no warm parchment, no thin architectural hairlines on pale grounds. This must read as a contemporary DESIGN AGENCY, not an architecture practice. High contrast, saturated, confident, kinetic.
+
+The page is a particle collider event display. Ground: deep near-black vacuum (#0A0B10). At the right, one frozen collision blooms: concentric detector rings drawn in muted steel blue, and out of the centre curve dozens of fine particle tracks — electric cyan (#00D2D8) and signal yellow, with two stiff magenta (#D6006B) tracks punching straight out to the edge. Beyond the rings, a ring of stacked red-orange calorimeter wedge bars of varying heights, like a radial bar chart.
+
+Left third: an enormous, very bold, tight-tracked grotesk headline in pure white reading "Websites as professional as you are." Below it a short line of cool-grey body text, then a solid electric cyan rectangular button with black text reading "Get a free quote".
+
+Fine white technical grotesk labels pinned to individual tracks on thin leader lines, reading service names: "WEBSITE DESIGN", "LOCAL SEO", "ONGOING MANAGEMENT", "ECOMMERCE".
+
+Top bar: small outlined square D monogram in white with "digital consulting" over "services"; minimal nav in cool grey. Bottom right, small cyan monospaced caps "POLEGATE, EAST SUSSEX · EST. 2019".
+
+Mood: high-energy, technically extraordinary, the half-second after impact. Glowing signal colour on black. Precise, scientific, spectacular. No sepia, no warm tones, no photographs.
