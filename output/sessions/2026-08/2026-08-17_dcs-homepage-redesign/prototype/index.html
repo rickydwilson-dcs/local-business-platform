@@ -193,6 +193,11 @@
         <p class="lede">Same business, same services, same prices, same real client work — <strong>fifty-four design directions across five briefs.</strong> Each was built by a different design skill, so they disagree with each other on purpose.</p>
         <p class="lede"><strong>The brief was revised after this round.</strong> DCS builds websites for any small business, not only trades — and the site should feel like an elevated design studio, not an under-construction site notice. Six directions leaned into hoardings, dockets and hi-vis and are now off-brief. They're hidden by default and kept only as a record; switch to <em>All 19</em> to see them.</p>
         <p class="lede">Open the rest full-screen, scroll the whole page, and tell me which to run with — or which bits of each to steal.</p>
+        <p class="lede" style="border-top:1px solid rgba(255,255,255,.22);padding-top:1rem;margin-top:1rem">
+          <strong>Direction 52 is chosen.</strong> Its mobile layout now has five competing
+          treatments, side by side with the measurements behind each &mdash;
+          <a href="mobile-lab.html" style="color:inherit">open the mobile lab &rarr;</a>
+        </p>
       </div>
     </div>
   </section>
@@ -681,7 +686,125 @@ const DIRECTIONS = [
     fonts:"Schibsted Grotesk · 101px display at 1440",
     moment:"Teal and cyan as one family, magenta alone against them",
     tags:["Round 5","Tertiary option","Deep teal"], tone:["dark","bold","motion"],
-    sw:["#D6006B","#065E63","#00D2D8","#101014"] }
+    sw:["#D6006B","#065E63","#00D2D8","#101014"] },
+
+  { n:"55", file:"home-55-poster-elevated.html", name:"Poster · Elevated",
+    kicker:"round 6 · structure pass on 52",
+    desc:"Direction 52 with the flat sections rebuilt. Selected work goes from nine equal swatches to a 2\u00d72 feature plus an eight-card index carrying real figures; the pricing table becomes three cards with both payment options, a tick list and a CTA on each. Colours, fonts and the poster idiom are unchanged.",
+    fonts:"Schibsted Grotesk \u00b7 DM Mono \u00b7 45px display at 390",
+    moment:"The pricing cards, and a client grid with one loud object instead of nine equal ones",
+    tags:["Round 6","Structure pass","Pricing cards","Mobile"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#17265E","#00D2D8","#101014"] },
+
+  { n:"56", file:"home-56-poster-elevated.html", name:"Poster \u00b7 Elevated (editorial index)",
+    kicker:"round 6 \u00b7 second take on the same brief",
+    desc:"An independent pass at the same brief as 55, built for comparison. Selected work becomes an editorial index \u2014 one client leading at poster scale with its tenure as a figure, eight more as ledger rows. Pricing becomes three cards over a single Upfront / Nothing-upfront control, so the two options read as the same cards repriced rather than two offers. \u201cWhat you skip\u201d is struck through in the chord. Colours, fonts, prices and copy unchanged.",
+    fonts:"Schibsted Grotesk \u00b7 DM Mono \u00b7 45px display at 390 (33px in 52)",
+    moment:"Flipping the pay control and watching all three prices repaint",
+    tags:["Round 6","Structure pass","Pricing cards","Mobile","Editorial index"], tone:["dark","bold","motion"],
+    sw:["#D6006B","#17265E","#00D2D8","#101014"] },
+
+  /* ── Round 7 — research-led. Built from output/sessions/2026-08/2026-08-20_framer-gallery-research/
+     prototype-brief.md, itself distilled from ~150 Framer gallery sites and 85 agency template demos.
+     House rules for this round: no count-up numbers anywhere; the page must be a complete readable
+     document with JavaScript disabled; 390px designed explicitly rather than reflowed, with pricing
+     as a vertical selector, never columns; and no section may be text and colour alone. ───────── */
+
+  { n:"57", file:"home-57-spec-sheet.html", name:"Spec Sheet",
+    kicker:"round 7 · research-led",
+    desc:"Engineering restraint. A repeating header bar on a hairline ([01] · // WHAT WE DO · © 2026) gives the page its rhythm; services are a typographic table with per-row line diagrams instead of cards; proof is a spec table of who you are actually hiring rather than a stats bar. Zero radius, zero shadow, one accent used four times. The hero is a technical elevation drawing of a webpage — dimension lines, hatched image region, one live node.",
+    fonts:"Schibsted Grotesk · DM Mono · 88px display at 1440, 44px at 390",
+    moment:"The hero elevation drawing, and the pay toggle repainting all three prices with no JavaScript",
+    tags:["Round 7","Spec sheet","Typographic table","Vertical pricing","SVG diagrams"], tone:["light","quiet","still"],
+    sw:["#F3F3F1","#101014","#D6006B","#17265E"] },
+
+  { n:"58", file:"home-58-poster.html", name:"Poster",
+    kicker:"round 7 · research-led",
+    desc:"Near-black agency poster. Condensed grotesk at viewport scale with imagery interleaved in z — a duotone plate sits behind the letterforms while an abstract UI mock passes in front, both drifting at different scroll rates. Process is four two-tile stacks assembling diagonally, colour-coded; services are six flat zero-radius colour blocks, each opening with its own div-built mock and closing with its own full-width Enquire bar.",
+    fonts:"Schibsted Grotesk 900 · DM Mono · 128px display at 1440, 52px at 390",
+    moment:"“business.” passing in front of Plate 01 while the Site live mock passes in front of the line below",
+    tags:["Round 7","Poster","Z-interleave","Per-card CTA","Vertical pricing"], tone:["dark","bold","motion"],
+    sw:["#0B0B0E","#D6006B","#00D2D8","#17265E"] },
+
+  { n:"59", file:"home-59-quiet.html", name:"Quiet",
+    kicker:"round 7 · research-led",
+    desc:"Expensive without loud. Warm monochrome and one desaturated indigo, macro-whitespace, and abstract in-card mocks doing all the visual work — a tinted canvas with grey skeleton bars and exactly one element in full colour. Services are a typographic table with a reading-position highlight; the process is a scroll-spy rail; pricing is a vertical selector driving one detail panel with a payment-shape diagram.",
+    fonts:"Schibsted Grotesk · DM Mono · 74px display at 1440",
+    moment:"The hero’s faux-window mock: greyed placeholder rows and a hollow ‘not sent yet’ radio, with one live ‘Enquiry received’ card in full colour",
+    tags:["Round 7","Quiet","In-card mocks","Vertical selector"], tone:["light","quiet","still"],
+    sw:["#F7F6F3","#3E4E6E","#151512","#E3E1DA"] },
+
+  { n:"60", file:"home-60-trade-blocks.html", name:"Trade Blocks",
+    kicker:"round 7 · research-led",
+    desc:"Distributed conversion. Zero radius, flat saturated colour blocks, hard offsets with no blur, and each of the six services carrying its own full-width Enquire now footer bar — six conversion points, not one. Blocks go full-bleed one-up at 390 and every service stays thumb-reachable. Every ground/text pair is contrast-checked; the lowest is 5.1:1.",
+    fonts:"Schibsted Grotesk 900 · DM Mono · 80px display at 1440",
+    moment:"Six colour blocks in the chord, each with an oversized outline glyph set into it and its own Enquire now bar in a contrasting colour",
+    tags:["Round 7","Trade blocks","Per-service CTA","Zero radius"], tone:["light","bold","still"],
+    sw:["#D6006B","#17265E","#00D2D8","#FF9BC8"] },
+
+  { n:"61", file:"home-61-masthead.html", name:"Editorial Masthead",
+    kicker:"round 7 · research-led",
+    desc:"The homepage set as the front page of a design journal. A justified full-width nav row on a hairline with comma-delimited items, a three-slot folio bar beneath it, and the proposition delivered as one running paragraph at display scale where the client names are inline links rather than a logo wall. No cards, no shadows, no radii anywhere. Services are a typographic table with a right-aligned deliverables stack and a per-row abstract SVG figure; proof is an accreditation row and a coverage diagram instead of a stats bar. One hand-drawn lasso, used once.",
+    fonts:"Schibsted Grotesk · DM Mono · 43px display at 1440, 29px at 390",
+    moment:"The running-paragraph hero — client names as inline links, with a hand-drawn lasso round “almost none of your time”",
+    tags:["Round 7","Editorial","Typographic table","Vertical pricing","No cards"], tone:["light","quiet","motion"],
+    sw:["#F3F3F1","#101014","#D6006B","#17265E"] },
+
+  { n:"62", file:"home-62-workbench.html", name:"Workbench",
+    kicker:"round 7 · research-led",
+    desc:"The in-card UI mock is not a decoration here, it is the whole page. An asymmetric bento of flat tinted canvases built to one recipe without exception: a tinted ground, grey skeleton bars for the text that doesn’t matter, and exactly one element in full colour — “Site live”, “Order paid”, “Renewed automatically”, “£0 due today”. Headings and copy always sit outside and below the canvas on the page ground, so there is no card on the page.",
+    fonts:"Schibsted Grotesk · DM Mono · 60px display at 1440, 36px at 390",
+    moment:"Flipping to “monthly, nothing upfront” and watching the panel repaint to a £0 due today chip",
+    tags:["Round 7","Bento","In-card mocks","Vertical pricing","Mobile"], tone:["light","bold","motion"],
+    sw:["#F2F2EF","#D6006B","#00BFC6","#17265E"] },
+
+  { n:"63", file:"home-63-index-rail.html", name:"Index Rail",
+    kicker:"round 7 · research-led",
+    desc:"The homepage as one indexed document rather than a deck of cards. A sticky numbered rail runs down the left and tracks your position; a rotated watermark in the right margin names the section you are in; every section opens on the same hairline header bar. Services are a typographic table with a reading-position highlight, work is six bespoke div-built mocks (a swatch grid, a booked class, an enquiry toast), pricing is a CSS-only vertical selector. At 390 the rail becomes a pinned horizontal chip scroller, not a stack.",
+    fonts:"Schibsted Grotesk · DM Mono · 62px display at 1440, 44px at 390",
+    moment:"Scrolling and watching the rail marker, the self-drawing hairline and the margin watermark all move together",
+    tags:["Round 7","Index rail","Scroll-spy","Typographic table","Mobile chip rail"], tone:["light","quiet","motion"],
+    sw:["#D6006B","#101014","#E3E3E0","#55555E"] },
+
+  { n:"64", file:"home-64-swiss-grid.html", name:"Swiss Grid",
+    kicker:"round 7 · research-led · real photography",
+    desc:"International Typographic Style applied honestly: a four-column grid whose five hairlines are drawn full viewport height and never move, so everything is measured against them. Flush-left ragged-right setting, one accent, zero radius, no shadows. A half-bleed duotone photograph runs off the right edge beside an abstract UI mock; sectors are four duotone tiles over a nine-row client ledger. The only prototype in this round using real R2 photography rather than placeholders — tiles are labelled by sector, never by named client. Needs network to show the images.",
+    fonts:"Schibsted Grotesk · DM Mono · 92px display at 1440, 42px at 390",
+    moment:"The fixed column rules holding while the duotone photograph bleeds off the right edge",
+    tags:["Round 7","Swiss grid","Duotone","Half-bleed","Real photography"], tone:["light","bold","still"],
+    sw:["#D6006B","#17265E","#101014","#F3F3F1"] },
+
+  { n:"65", file:"home-65-warm-local.html", name:"Warm Local",
+    kicker:"round 7 · research-led",
+    desc:"A local studio’s page rather than a local trade’s. Warm sand ground, a deep damson field colour that owns whole regions, and photography stood in for by flat two-ink duotone plates — drawn in SVG, crop-marked, each captioned with the shot it reserves. Trust is carried by four obviously-placeholder accreditation seals and by testimonials attributed with town and year rather than by a stats bar. Palette departs from the inherited greys: warm ink on warm ground, ultra kept as the single hot accent.",
+    fonts:"Schibsted Grotesk · DM Mono · Poppins 300 · 70px display at 1440, 42px at 390",
+    moment:"The duotone plates coming into register — the two inks arriving from opposite directions and settling",
+    tags:["Round 7","Warm ground","Duotone","Accreditation seals","Vertical pricing","Mobile"], tone:["light","quiet","motion"],
+    sw:["#F4ECE2","#3B1330","#D6006B","#241E1C"] },
+
+  { n:"66", file:"home-66-chamfer.html", name:"Chamfer",
+    kicker:"round 7 · research-led",
+    desc:"Every container on the page has two corners cut at 45°, from the 48px menu button to a full-bleed pricing tile. Under the hero sits a three-cell spec strip — what it is, how long it takes, how much it costs — each cell carrying a drawn diagram rather than a claim. Services run on a 7/5 · 5/7 · 6/6 broken grid with a per-block Enquire bar, and pricing is three full-bleed solid colour tiles stacked vertically, a selector by construction. The inherited palette is re-roled: plum promoted to the dominant field, acid the single highlight.",
+    fonts:"Schibsted Grotesk · DM Mono · Poppins 300 · 70px display at 1440, 42px at 390",
+    moment:"The three full-bleed pricing tiles — navy, magenta, near-black — opening one at a time under a cut tick",
+    tags:["Round 7","Chamfer","Spec strip","Full-bleed pricing","Broken grid","Mobile"], tone:["light","bold","motion"],
+    sw:["#F3F3F1","#17265E","#A80054","#00D2D8"] },
+
+  { n:"67", file:"home-67-dock.html", name:"Dock",
+    kicker:"round 7 · mobile-first thesis",
+    desc:"The 390px layout designed first and given room afterwards, organised around thumb reach. A bottom-pinned floating dock carries four destinations plus a persistent Get a quote, and opens a full-screen menu sheet that is a body-level sibling driven by a checkbox — so it works with JS off and never gets trapped by the dock’s box. The division of labour is drawn as a real 17-cell split bar rather than described; services are flat colour blocks each with its own footer CTA and its own div-built mock.",
+    fonts:"Schibsted Grotesk · DM Mono · 46px display at 390, 82px at 1440",
+    moment:"The You / Me split bar — three cells against fourteen, which is the whole pitch in one picture",
+    tags:["Round 7","Mobile-first","Dock nav","In-card mocks","Vertical selector"], tone:["light","bold","motion"],
+    sw:["#D6006B","#17265E","#00D2D8","#101014"] },
+
+  { n:"68", file:"home-68-selector.html", name:"Selector",
+    kicker:"round 7 · conversion thesis",
+    desc:"A funnel with three gates the visitor operates rather than reads: persona tabs (shops · studios · garages · trades · professional), a nine-item symptom checklist naming problems the owner recognises in themselves, and a vertical pricing selector with objection-led tiers over an upfront / nothing-upfront control that repaints every price. Tabs, ticks and both pricing controls are radio-and-:checked — zero JavaScript required. Every persona panel carries its own purpose-built mock.",
+    fonts:"Schibsted Grotesk · DM Mono · 44px display at 390, 80px at 1440",
+    moment:"Ticking three symptoms, then flipping the pay control and watching all three prices repaint",
+    tags:["Round 7","Conversion","Persona tabs","Symptom checklist","Vertical selector"], tone:["dark","bold","motion"],
+    sw:["#00D2D8","#D6006B","#17265E","#101014"] }
 ];
 
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';

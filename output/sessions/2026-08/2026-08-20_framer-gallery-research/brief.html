@@ -1,0 +1,417 @@
+<title>DCS Prototype Brief</title>
+<style>
+  :root {
+    --paper:  #F3F2EC;
+    --panel:  #FFFFFF;
+    --sunk:   #E8E7DE;
+    --ink:    #171813;
+    --muted:  #63665A;
+    --faint:  #91958A;
+    --rule:   #D6D6CA;
+    --accent: #2F5FE0;
+    --stop:   #B03A22;
+    --go:     #3F7A3A;
+    --display: "Avenir Next Condensed", "Oswald", "Arial Narrow", system-ui, sans-serif;
+    --body: "Inter", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:  #14150F;
+      --panel:  #1C1E17;
+      --sunk:   #24261E;
+      --ink:    #ECEDE2;
+      --muted:  #9DA192;
+      --faint:  #6E7265;
+      --rule:   #2F3229;
+      --accent: #7E9DFF;
+      --stop:   #E88266;
+      --go:     #8CC77F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:  #14150F; --panel: #1C1E17; --sunk: #24261E; --ink: #ECEDE2;
+    --muted: #9DA192; --faint: #6E7265; --rule: #2F3229;
+    --accent: #7E9DFF; --stop: #E88266; --go: #8CC77F;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 26px 100px; }
+  .mono { font-family: var(--mono); }
+
+  .eyebrow { font-family: var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color: var(--muted); }
+
+  header.top { padding: 66px 0 32px; border-bottom: 2px solid var(--ink); }
+  h1 { font-family: var(--display); font-weight:700; text-transform:uppercase; font-size: clamp(44px,9.5vw,110px); line-height:.9; margin:14px 0 0; letter-spacing:.004em; text-wrap:balance; }
+  .stand { margin:22px 0 0; max-width:60ch; font-size:18.5px; color: var(--muted); }
+  .counts { display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:24px; font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:var(--faint); }
+
+  section { padding-top: 62px; }
+  h2 { font-family: var(--display); text-transform:uppercase; font-weight:700; font-size: clamp(26px,4.2vw,40px); line-height:1; margin:0 0 6px; letter-spacing:.008em; }
+  h3 { font-family: var(--display); text-transform:uppercase; font-size:22px; margin:34px 0 10px; letter-spacing:.015em; }
+  .note { max-width:66ch; color: var(--muted); margin:12px 0 26px; }
+  .partnum { font-family:var(--mono); font-size:11px; letter-spacing:.15em; color:var(--accent); text-transform:uppercase; }
+
+  .callout { background: var(--panel); border:1px solid var(--rule); border-left:5px solid var(--accent); padding:24px 28px; border-radius:3px; }
+  .callout p { margin:0 0 12px; max-width:68ch; }
+  .callout p:last-child { margin-bottom:0; }
+  .recipe { font-family: var(--display); text-transform:uppercase; font-size: clamp(19px,2.7vw,27px); line-height:1.18; margin:0 0 16px; max-width:28ch; }
+
+  .scroll { overflow-x:auto; border:1px solid var(--rule); background: var(--panel); border-radius:3px; }
+  table { border-collapse:collapse; width:100%; min-width:640px; }
+  th,td { text-align:left; padding:12px 16px; border-bottom:1px solid var(--rule); vertical-align:top; font-size:14.5px; }
+  th { font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:400; background:var(--sunk); }
+  tr:last-child td { border-bottom:0; }
+  td.mech { font-family:var(--mono); font-size:12.5px; color:var(--muted); }
+
+  .banned { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+  .ban { background: var(--panel); border:1px solid var(--rule); border-top:3px solid var(--stop); padding:16px 18px; border-radius:3px; }
+  .ban h4 { font-family:var(--display); text-transform:uppercase; font-size:16px; margin:0 0 7px; letter-spacing:.02em; color:var(--stop); }
+  .ban p { margin:0; font-size:13.5px; color:var(--muted); }
+
+  .rules { counter-reset: r; list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:13px; }
+  .rules li { counter-increment:r; position:relative; padding-left:46px; max-width:74ch; }
+  .rules li::before {
+    content:counter(r,decimal-leading-zero);
+    position:absolute; left:0; top:0;
+    font-family:var(--mono); font-size:12px; line-height:1.62; color:var(--accent);
+  }
+
+  .pat { background: var(--panel); border:1px solid var(--rule); padding:20px 24px; border-radius:3px; margin-bottom:14px; }
+  .pat h4 { font-family:var(--display); text-transform:uppercase; font-size:19px; margin:0 0 4px; letter-spacing:.015em; }
+  .pat .job { font-size:13px; color:var(--accent); font-family:var(--mono); letter-spacing:.03em; margin-bottom:12px; }
+  .pat ul { margin:0; padding-left:18px; }
+  .pat li { font-size:14.5px; margin-bottom:7px; color:var(--muted); }
+  .pat li:last-child { margin-bottom:0; }
+  .pat li strong { color: var(--ink); }
+
+  .cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+
+  pre { background: var(--sunk); border:1px solid var(--rule); border-radius:3px; padding:20px 22px; overflow-x:auto; font-family:var(--mono); font-size:13px; line-height:1.6; white-space:pre-wrap; margin:0; color:var(--ink); }
+  .dir { margin-bottom:18px; }
+  .dir h4 { font-family:var(--display); text-transform:uppercase; font-size:20px; margin:0 0 10px; letter-spacing:.02em; }
+
+  .trap { border-left:4px solid var(--stop); padding:14px 18px; background:var(--panel); margin:14px 0 0; border-radius:3px; }
+  .trap b { color:var(--stop); font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:5px; }
+  .trap p { margin:0; font-size:14px; color:var(--muted); max-width:74ch; }
+
+  .gaps { background: var(--sunk); padding:26px 30px; border-radius:3px; }
+  .gaps ul { margin:0; padding-left:20px; }
+  .gaps li { margin-bottom:9px; font-size:15px; color:var(--muted); }
+  .gaps li:last-child { margin-bottom:0; }
+  .gaps b { color: var(--ink); }
+
+  a { color: var(--accent); }
+  a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">DCS homepage redesign · combined research output · 20 Aug 2026</div>
+    <h1>DCS Prototype Brief</h1>
+    <p class="stand">Both Framer sweeps distilled into a motion policy, a component vocabulary and three
+      paste-ready direction briefs. No template is being bought — this is what to build ourselves.</p>
+    <div class="counts">
+      <span>2 ROUNDS · 11 AGENTS</span>
+      <span>~600 TILES SKIMMED</span>
+      <span>163 SITES + DEMOS OPENED</span>
+      <span>4 MEASURED AT 390PX</span>
+      <span>12 COUNT-UPS CAUGHT</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">How the two rounds fit together</div>
+    <h2>What each half answered</h2>
+    <p class="note">The rounds targeted different halves of the original complaint, so the combined brief
+      has two distinct spines.</p>
+    <div class="cols">
+      <div class="pat">
+        <h4>Round one — the gallery</h4>
+        <div class="job">→ "components weren't elevated"</div>
+        <ul>
+          <li>Real published sites across agency, business, SaaS/AI, landing page, portfolio and featured.</li>
+          <li>Produced the <strong>component vocabulary</strong> and the only <strong>measured mobile evidence</strong>.</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Round two — the templates</h4>
+        <div class="job">→ "engaging yet functional animation"</div>
+        <ul>
+          <li>159 agency templates, 85 demos driven with real wheel events.</li>
+          <li>Produced the <strong>motion policy</strong> and the <strong>anti-pattern ledger</strong>. Desktop only.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="trap"><b>The connection worth naming</b>
+      <p>Round two found the dominant defect across this entire design world is content held at
+        <span class="mono">opacity: 0</span> until an IntersectionObserver fires. That is very likely a
+        contributor to our own prototypes' "dreadful mobile" — it isn't a layout bug, it's a
+        content-visibility bug, and it shows up worst on slow connections and small screens. Part 1 exists
+        so we don't inherit it.</p></div>
+  </section>
+
+  <section>
+    <div class="partnum">Part 1</div>
+    <h2>Motion policy</h2>
+    <p class="note">Non-negotiable. Nine of twenty-seven demos in one batch showed the visitor a blank
+      screen on arrival. Paid templates at $49–$129 render nothing at all.</p>
+
+    <ol class="rules">
+      <li><strong>Content renders at full opacity by default.</strong> Never author <span class="mono">opacity: 0</span> as the resting state. Animate <span class="mono">transform</span> from a visible state, or opacity <span class="mono">0.6 → 1</span> so the intermediate state stays legible.</li>
+      <li><strong>Never gate anything above the fold.</strong> The hero is complete at first paint.</li>
+      <li><strong>Arm hidden states from JS only after support is confirmed.</strong> A dead script must leave a readable page.</li>
+      <li><strong>Latch reveals</strong> — one-shot, then <span class="mono">unobserve</span>. One template blanks its About section when you scroll back <em>up</em>.</li>
+      <li><strong>Wrap motion in <span class="mono">prefers-reduced-motion: no-preference</span></strong>, with the un-animated state being the complete one.</li>
+      <li><strong>Acceptance test: screenshot with JavaScript disabled.</strong> If that isn't a complete page, the build is wrong.</li>
+    </ol>
+
+    <h3>Banned outright</h3>
+    <div class="banned">
+      <div class="ban"><h4>Count-up numbers</h4><p>Your instruction, and twelve were caught mid-flight showing false figures — <span class="mono">0+ years of experience</span>, <span class="mono">Awards 0</span>, one frozen permanently at <span class="mono">01+</span>. Sylven rendered <span class="mono">0% / 0% / $0</span>.</p></div>
+      <div class="ban"><h4>Preloaders</h4><p>Three demos never finished loading at all (16+ seconds). One used a percentage counter <em>as</em> the preloader.</p></div>
+      <div class="ban"><h4>Welcome gates</h4><p>A full-screen "scroll to explore" panel between the visitor and the homepage; a modal fired before you've read anything.</p></div>
+      <div class="ban"><h4>Scroll-jacking</h4><p>Wheel remapped to a horizontal filmstrip; a hero that refuses to scroll; a carousel that captures the wheel and never releases.</p></div>
+      <div class="ban"><h4>Incomplete text fills</h4><p>Per-character scroll-fill that leaves the tail of every headline ghosted at rest — <span class="mono">Virtual Reality Encounte</span>. Motion that makes content less readable when it stops.</p></div>
+      <div class="ban"><h4>Fake live data</h4><p>One nav clock ran <em>backwards</em>. Another hardcodes "Available — EARLY FEB 2025", stale 18 months. Wire it to a real source or make it static text.</p></div>
+    </div>
+
+    <h3>Allowed — motion that carries information</h3>
+    <p class="note">The test: remove it, and does the visitor lose something they need? All reproducible
+      in Next.js. None needs a proprietary scroll engine.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Effect</th><th>The job it does</th><th>Mechanism</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Reading-position list</strong></td><td>Item nearest viewport centre goes full contrast — tells you where you are. Degrades to "all grey", still legible.</td><td class="mech">IO, centred rootMargin</td></tr>
+          <tr><td><strong>Scroll-spy index rail</strong></td><td>Sticky list; marker tracks the in-view section. A table of contents that follows you.</td><td class="mech">IO + class toggle</td></tr>
+          <tr><td><strong>Nav collapse w/ progress</strong></td><td>Shrinks on scroll-down, restores on scroll-up; the collapsed pill <em>is</em> the progress bar.</td><td class="mech">scroll-direction + CSS var</td></tr>
+          <tr><td><strong>Sticky section-label pill</strong></td><td>Rides a hairline, swaps at section boundaries. Orientation with no sidebar.</td><td class="mech">sticky + IO</td></tr>
+          <tr><td><strong>Accordion services</strong></td><td>The motion <em>is</em> the IA; closed state still shows every service name.</td><td class="mech">grid-template-rows 0fr→1fr</td></tr>
+          <tr><td><strong>Self-drawing rule</strong></td><td>Hairline draws left-to-right connecting index to label as the row arrives.</td><td class="mech">IO + scaleX()</td></tr>
+          <tr><td><strong>Flow diagram</strong></td><td>Draws the process the copy is describing.</td><td class="mech">SVG stroke-dashoffset</td></tr>
+          <tr><td><strong>Hover rail</strong></td><td>Hovering a thumbnail prints title / discipline / year. <strong>Needs a tap fallback.</strong></td><td class="mech">state + transition</td></tr>
+          <tr><td><strong>Tracking watermark</strong></td><td>Rotated margin label swaps <span class="mono">/about → /services → /work</span>.</td><td class="mech">sticky + IO</td></tr>
+          <tr><td><strong>Labelled marquee</strong></td><td>A fixed opaque panel names what's scrolling — the static label explains the moving thing.</td><td class="mech">keyframe + overlay</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="partnum">Part 2</div>
+    <h2>Component vocabulary</h2>
+    <p class="note">Abstracted patterns, mostly from round one. Build any of these fresh — nothing here
+      is "clone site X".</p>
+
+    <h3>The in-card mock</h3>
+    <div class="callout">
+      <p class="recipe">A flat <em>tinted</em> canvas. Grey skeleton bars for text that doesn't matter.
+        <em>Exactly one</em> element in full colour — the thing the caption is about.</p>
+      <p>Three agents reverse-engineered this independently. ~20 lines of CSS, and it never dates the way
+        a product screenshot does. <strong>Real screenshots go in full-bleed slabs, never inside a card</strong> —
+        verified at 390px, where the abstract mock stays legible and the real screenshot becomes a grey
+        smudge. This is a mobile technique, not just an aesthetic one.</p>
+      <p>The "not done yet" row — a greyed line with a hollow radio dot — is the cheapest way to make a
+        static mock look live. For DCS the single full-colour element is an <span class="mono">Enquiry received</span>
+        toast, a <span class="mono">Site live</span> badge, or a <span class="mono">£0 due today</span> chip.</p>
+    </div>
+
+    <h3>Services — four alternatives to the card grid</h3>
+    <p class="note">Four agents independently concluded that <strong>a flat card is often worse than no
+      card.</strong> "Elevated" may mean removing container chrome rather than decorating it.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Variant</th><th>Construction</th><th>Best when</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Typographic table</strong></td><td>Names left at full contrast, descriptions right in grey, hairline between. No cards, icons or boxes.</td><td>Default. Most information per pixel.</td></tr>
+          <tr><td><strong>Vertical hairlines</strong></td><td>Columns separated by 1px rules instead of card borders.</td><td>3–4 services of equal weight.</td></tr>
+          <tr><td><strong>Canvas + caption below</strong></td><td>Tinted panel holds the mock; heading and copy sit outside and below it on the page ground.</td><td>When each service needs a visual.</td></tr>
+          <tr><td><strong>Flat colour blocks</strong></td><td>Zero radius, flat brand colour, title top, copy bottom, then a rule and a full-width <span class="mono">Enquire now</span> bar as the card's own footer.</td><td>Trades. Every service becomes its own conversion point. Verified to stack cleanly at 390px.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:18px">Also: pair each service name with a <strong>right-aligned stack
+      of deliverables</strong> (<span class="mono">Design / Build / Hosting / Support</span>) rather than a
+      paragraph. More information, no motion needed.</p>
+
+    <div class="cols">
+      <div class="pat">
+        <h4>Audience segmentation</h4>
+        <div class="job">the component DCS most obviously needs</div>
+        <ul>
+          <li><strong>Persona tab switcher</strong> — <span class="mono">Trades · Salons · Garages · Professional</span> swapping the block below. Plain text tabs with the active in accent is the quieter version.</li>
+          <li><strong>Sector card grid</strong> — two-tone line illustration + sector + <span class="mono">Learn more ›</span>, linking to sector pages our MDX routes already support.</li>
+          <li><strong>Sticky audience rail</strong> — two-column by construction; needs the mobile chip-scroller treatment.</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Process / how it works</h4>
+        <div class="job">sequence, legibly</div>
+        <ul>
+          <li><strong>Numbered rows</strong> — numeral, one-word label, body, thumbnail, hairline between. Reads as one table, not four cards.</li>
+          <li><strong>Two-tile stacks</strong> — numeral tile above, name+copy tile below; the set assembles diagonally, colour-coded per step.</li>
+          <li><strong>Duotone photography inside the step card</strong> — the fix for not controlling client photography; makes mismatched sources look like one set.</li>
+          <li>Numeral <strong>inline on the title's baseline</strong>, small. A giant ghost numeral is the generic choice.</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Pricing</h4>
+        <div class="job">survive the phone; qualify the click</div>
+        <ul>
+          <li><strong>Vertical selector list, not columns</strong> — the only pricing construction verified intact at 390px. It was never columns, so there's nothing to squeeze.</li>
+          <li><strong>Retainer + project shape</strong> — one retainer card, reassurance strips <em>outside</em> the cards, then a separate horizontal project card at a "from" price.</li>
+          <li><strong>Objection-led tiers</strong> — open each with the customer's own objection in quotes.</li>
+          <li><strong>Make the price the button</strong> — <span class="mono">From £95/month →</span> as the CTA itself.</li>
+          <li>One loud button only. Own icon per feature row, not repeated ticks.</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Proof — replacing the stats bar</h4>
+        <div class="job">since count-ups are out</div>
+        <ul>
+          <li><strong>Accreditation rows</strong> — seal + name + tags + year on hairlines. Gas Safe, NICEIC, Checkatrade, ICO.</li>
+          <li><strong>Stats as a two-column table</strong> (<span class="mono">New clients ——— 15</span>) — reads as a table, so nobody animates it.</li>
+          <li><strong>Marquee of authored literals</strong> — motion, but every figure is DOM text, always correct.</li>
+          <li><strong>Testimonial with the client's own logo</strong>, plus town and year for local proof.</li>
+          <li><strong>Spec table</strong> — company number, years trading, coverage area, response time. "Who you're actually hiring."</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Nav and status</h4>
+        <div class="job">look staffed and reachable</div>
+        <ul>
+          <li><strong>Superscript numerals that are real counts</strong> — <span class="mono">Projects⁰⁷</span>, populated from MDX frontmatter.</li>
+          <li><strong>Avatar in the CTA</strong> — a real photograph set into the left edge of "Book a call".</li>
+          <li><strong>Status cluster</strong> — dot + <span class="mono">Based in East Sussex</span> + real local time + availability.</li>
+          <li><strong>Bottom-pinned pill nav</strong> — thumb-reachable by construction, not by media query.</li>
+        </ul>
+      </div>
+      <div class="pat">
+        <h4>Contact and lead capture</h4>
+        <div class="job">the highest-value component on the page</div>
+        <ul>
+          <li><strong>Photo-upload dropzone</strong> — "send us your current site or a screenshot of the problem". Worth more than any amount of form styling.</li>
+          <li><strong>Channel tiles instead of a form</strong> — phone, email, WhatsApp, book a call.</li>
+          <li><strong>Pre-qualifying select</strong> plus a reassurance line under the button.</li>
+          <li><strong>Symptom checklist</strong> — pill cards naming a problem the visitor recognises <em>in themselves</em> ("looks fine on your laptop, broken on a phone"), not a feature you sell.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Section furniture — the "elevated" vocabulary</h3>
+    <div class="pat">
+      <div class="job">cheap, static, responsible for most of the perceived craft</div>
+      <ul>
+        <li><strong>Section header bar on a hairline</strong>: <span class="mono">[01]</span> · <span class="mono">// WHAT WE DO</span> · <span class="mono">© 2026</span>. Or the two-slot version: label hard left, <span class="mono">(01)</span> hard right.</li>
+        <li><strong>Corner metadata framing the hero</strong> — fill the slot with proof copy, not decoration.</li>
+        <li><strong>Two-tone headings</strong> — line 1 near-black, line 2 at 40% grey. Free hierarchy, no extra type sizes. Use the <em>static</em> version, not the scroll-driven fill.</li>
+        <li><strong>Mono uppercase eyebrow chips</strong> — square/bordered reads "spec sheet"; pill reads "product".</li>
+        <li><strong>Hand-drawn marker</strong> — a rough ellipse round one phrase. Found independently on two unrelated sites, so a live trend, not one designer's tic. Once or twice per page, maximum.</li>
+        <li><strong>Diagonal-hatch placeholder tiles</strong> — images that haven't loaded degrade to a designed box, not white space.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="partnum">Part 3</div>
+    <h2>Mobile rules</h2>
+    <p class="note">Half the original complaint. Only four sites were measured at a true 390px viewport —
+      everything else is construction-based inference, and is flagged as such.</p>
+    <ol class="rules">
+      <li><strong>Pricing is a vertical selector, never columns.</strong> Verified.</li>
+      <li><strong>Per-card CTA survives stacking</strong> — flat service blocks each keeping a full-width <span class="mono">Enquire now</span> footer bar stack cleanly, and every service stays thumb-reachable. Verified.</li>
+      <li><strong>Abstract mocks survive; screenshots don't.</strong> Verified side by side.</li>
+      <li><strong>Anything hover-only needs an authored tap equivalent</strong> — not a reflow.</li>
+      <li><strong>Anything constructionally two-column</strong> (sticky rails, split screens) needs an explicit mobile design.</li>
+      <li><strong>Never put display type at low opacity over a photograph</strong> — a hero at ~35% white over a busy image was illegible at 390px, worse than desktop.</li>
+    </ol>
+    <div class="trap"><b>Two traps for whoever builds this</b>
+      <p><strong>The floating-nav containing block.</strong> A centred dock built with
+        <span class="mono">translateX(-50%)</span> and/or <span class="mono">backdrop-filter</span> becomes the
+        containing block for any <span class="mono">position: fixed</span> mobile dialog inside it. Centre with
+        <span class="mono">left/right/margin-inline</span> and portal the dialog to <span class="mono">document.body</span>.
+        Already in CLAUDE.md — this pattern is exactly where it bites.<br><br>
+        <strong>Testing.</strong> <span class="mono">resize_window</span> does not work in our Chrome tooling —
+        the screenshot tool pins a viewport override and reports success while <span class="mono">innerWidth</span>
+        stays at desktop. Inject the page into a same-origin <span class="mono">&lt;iframe width="390"&gt;</span>
+        instead. And reveals don't fire on programmatic scroll, so drive motion with real wheel events.</p></div>
+  </section>
+
+  <section>
+    <div class="partnum">Part 4</div>
+    <h2>Three directions to prototype</h2>
+    <p class="note">Deliberately divergent, so the comparison is informative. Paste each into a design
+      skill, then append the shared constraints block.</p>
+
+    <div class="dir">
+      <h4>A — Spec sheet</h4>
+      <pre>Design a homepage for DCS, a small East Sussex firm that builds and maintains
+websites for local businesses (trades, salons, garages, small professional firms).
+Aesthetic: engineering/blueprint restraint. Off-white ground, near-black type, one
+accent used no more than four times on the page. A repeating section-header bar on a
+hairline — index left, mono uppercase label centre, year right. Services as a
+typographic table: name at full contrast left, right-aligned stack of deliverables.
+Process as numbered rows in a four-column grid with hairlines between. Proof as an
+accreditation table, not a stats bar. A spec table giving company number, years
+trading, coverage area and response time. No cards, no shadows, no rounded corners.
+Motion limited to a reading-position highlight on the services list and a sticky
+section label.</pre>
+    </div>
+
+    <div class="dir">
+      <h4>B — Poster</h4>
+      <pre>Design a homepage for DCS (as above). Aesthetic: agency poster. Near-black ground,
+heavy condensed grotesk display type at viewport scale, two flat accent colours plus
+bone. Hero is a statement line with project imagery interleaved in z — some cards
+passing in front of the letterforms, some behind — drifting at different scroll rates.
+Process as four two-tile stacks: a tall tile carrying only the numeral at ~200px, a
+second tile beneath with a plain-spoken step name and one paragraph; the four assemble
+diagonally, each offset down-right, colour-coded per step. Services as flat zero-radius
+colour blocks, each with a full-width "Enquire now" bar as its own footer. Proof as a
+testimonial with the client's own logo, town and year.</pre>
+    </div>
+
+    <div class="dir">
+      <h4>C — Quiet</h4>
+      <pre>Design a homepage for DCS (as above). Aesthetic: expensive without loud. Greyscale
+plus a single desaturated accent, enormous white space, one strong photograph doing all
+the visual work. Services as a two-column typographic table, no cards or icons. Feature
+panels use a tinted canvas holding an abstract UI mock — flat tint, grey skeleton bars,
+exactly one element in full colour — with the heading and copy sitting outside and below
+the panel on the page ground, no container. Pricing as a vertical selector list driving
+one detail panel. A status cluster in the nav: location, real local time, availability.
+Motion limited to an accordion for services and a scroll-spy rail for the process.</pre>
+    </div>
+
+    <div class="dir">
+      <h4>Append to every direction</h4>
+      <pre>Build in Next.js + Tailwind using theme tokens only — no hardcoded hex. All content
+renders at full opacity by default; animate transform from a visible state, never gate
+opacity above the fold, latch reveals with unobserve, and wrap motion in
+prefers-reduced-motion: no-preference. Ship no count-up animations — author every figure
+statically. Design the 390px layout explicitly rather than reflowing the desktop one;
+pricing must be a vertical selector, not columns. The page must be a complete, readable
+document with JavaScript disabled.</pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Provenance</div>
+    <h2>What this rests on, and what it doesn't</h2>
+    <div class="gaps">
+      <ul>
+        <li><b>Round one — gallery.</b> 6 agents, ~450 tiles skimmed, 78 sites opened, 18 shortlisted, 4 measured at 390px. Six findings files in the session folder.</li>
+        <li><b>Round two — templates.</b> 5 agents, 159 templates listed, 85 demos opened, 27 shortlisted, 12 count-ups photographed. Five findings files.</li>
+        <li><b>~60 Featured-shelf templates were never opened</b> — Trending-ordered, so they're the ones Framer itself promotes. The obvious next sweep; slugs are listed in the batch-E file.</li>
+        <li><b>No mobile pass in round two, and no hover or mobile-menu pass in either.</b> Every mobile claim not marked "verified" is inference from construction.</li>
+        <li><b>One findings file is a summary only</b> — the landing-page agent's detail was lost to a blocked write and only its returned summary survives.</li>
+        <li><b>Demo URLs are unreliable</b> — Framer serves across three hostnames and about a third of slugs don't match. One template was wrongly reported dead. Treat any "Site Not Found" as unverified.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
