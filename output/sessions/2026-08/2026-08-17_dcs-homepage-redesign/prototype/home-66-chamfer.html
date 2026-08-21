@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Consulting Services — A website designed, written and built for you</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. What it is, how long it takes and how much it costs, printed before you ask. From £995 plus £15 a month, or £45 a month with nothing upfront.">
+<meta property="og:title" content="Digital Consulting Services — websites for small businesses">
+<meta property="og:description" content="Designed, written, built, hosted and looked after by one person in East Sussex. From £995 + £15/mo, or £45/mo with nothing upfront.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 0h50v50L50 64H0V14z' fill='%2317265E'/%3E%3Cpath d='M20 18h11a14 14 0 0 1 0 28H20z' fill='none' stroke='%2300D2D8' stroke-width='7'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&family=Poppins:wght@300;400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================================
+   DCS — DIRECTION 66 · "CHAMFER"
+   Round 7. Research lineage: Huehaus.
+   Contract in full sits in the HTML comment at the top of <body>.
+   ========================================================================= */
+
+/* --- tokens ------------------------------------------------------------- */
+:root{
+  --paper:#F3F3F1;
+  --bone:#E3E3E0;
+  --line:#CFCFCB;
+  --ink:#101014;
+  --graphite:#1B1B20;
+  --ash:#55555E;
+
+  --plum:#17265E;
+  --plum-2:#0E1A45;
+  --ultra:#D6006B;      /* graphics + display type only on light ground */
+  --ultra-d:#A80054;    /* the field colour: white body text clears 7:1 */
+  --acid:#00D2D8;
+
+  --ch:14px;            /* the cut. one number, everywhere. */
+  --gutter:clamp(1.25rem,5vw,4.5rem);
+  --maxw:1400px;
+}
+
+/* --- reset -------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"DM Mono",ui-monospace,monospace;font-size:16px;line-height:1.6;
+  font-variant-numeric:normal;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4,p,figure,ul,ol,dl,dd,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit}
+
+/* --- browser surfaces themed from the palette --------------------------- */
+::selection{background:var(--acid);color:var(--ink)}
+:root{caret-color:var(--ultra);accent-color:var(--ultra);
+  scrollbar-color:var(--plum) var(--bone);scrollbar-width:thin}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--bone)}
+::-webkit-scrollbar-thumb{background:var(--plum);border:3px solid var(--bone)}
+::-webkit-scrollbar-thumb:hover{background:var(--ultra-d)}
+:focus-visible{outline:2px solid var(--ultra);outline-offset:3px}
+
+/* --- the chamfer ---------------------------------------------------------
+   One clip-path, two corners cut at 45°: top-left and bottom-right. A bordered
+   chamfer is two stacked clips — an outer plate that IS the border colour and
+   a 1px-inset inner plate. Because clip-path also clips outline, chamfered
+   controls show focus by swapping the outer plate to the accent and thickening
+   it, not by drawing an outline that would be cut off. ------------------- */
+.cut{clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+  calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.cut-r{clip-path:polygon(0 0,calc(100% - var(--ch)) 0,100% var(--ch),
+  100% 100%,var(--ch) 100%,0 calc(100% - var(--ch)))}
+.plate{background:var(--line);padding:1px}
+.plate>.face{background:var(--paper);height:100%}
+.plate:focus-within{background:var(--ultra);padding:2px}
+
+/* --- shell -------------------------------------------------------------- */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+section{padding-block:clamp(3.25rem,6.5vw,6.5rem)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:1rem;top:1rem;z-index:99;background:var(--ink);color:var(--paper);
+  padding:.75rem 1rem;position:fixed}
+
+/* grain — breaks the flatness without touching a single colour value */
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* --- type --------------------------------------------------------------- */
+h1,h2,h3,.disp{font-family:"Schibsted Grotesk",system-ui,sans-serif;font-weight:900;
+  letter-spacing:-0.045em;line-height:.92;text-wrap:balance}
+h1{font-size:clamp(2.6rem,5vw,4.4rem)}
+h2{font-size:clamp(2rem,4.6vw,3.5rem)}
+h3{font-size:clamp(1.2rem,1.8vw,1.55rem);font-weight:800;letter-spacing:-0.03em;line-height:1.05}
+.lede{font-size:clamp(1.0625rem,1.35vw,1.25rem);line-height:1.58;max-width:52ch;color:var(--ash)}
+p{max-width:64ch}
+.mono{font-family:"DM Mono",ui-monospace,monospace;font-size:.6875rem;letter-spacing:.15em;
+  text-transform:uppercase;line-height:1.5}
+.ash{color:var(--ash)}
+
+/* section furniture — a cut tab carrying real meta, hard against a hairline */
+.sechead{border-top:2px solid var(--ink);padding-top:.85rem;
+  display:flex;flex-wrap:wrap;gap:.65rem 1.5rem;justify-content:space-between;
+  align-items:baseline;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+.sechead .tab{--ch:9px;background:var(--ink);color:var(--paper);padding:.35rem .8rem;
+  font-family:"DM Mono",monospace;font-size:.6875rem;letter-spacing:.15em;text-transform:uppercase}
+.sechead .rt{color:var(--ash);font-size:.75rem;letter-spacing:.06em}
+
+/* --- buttons ------------------------------------------------------------ */
+.btn{--ch:11px;display:inline-flex;align-items:center;gap:.6rem;min-height:52px;
+  padding:.85rem 1.5rem;text-decoration:none;background:var(--ink);color:var(--paper);
+  font-family:"DM Mono",monospace;font-size:.8125rem;letter-spacing:.11em;
+  text-transform:uppercase;
+  transition:background .2s cubic-bezier(.2,.7,.2,1),color .2s,transform .18s}
+.btn svg{width:16px;height:16px;flex:none}
+.btn:hover{background:var(--ultra-d)}
+.btn:active{transform:translateY(1px)}
+.btn--acid{background:var(--acid);color:var(--ink)}
+.btn--acid:hover{background:var(--ultra-d);color:#fff}
+.btn--out{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.btn--out:hover{background:var(--ink);color:var(--paper)}
+.btn--pale{background:var(--paper);color:var(--ink)}
+.btn--pale:hover{background:var(--acid)}
+.btn:focus-visible{outline:2px solid var(--ultra);outline-offset:0;
+  box-shadow:inset 0 0 0 3px var(--ultra)}
+
+/* --- header ------------------------------------------------------------- */
+/* No backdrop-filter anywhere on this page and no transform on the header,
+   so nothing here can become a containing block for a fixed descendant. */
+.site-head{position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;gap:1.25rem;min-height:78px;
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.logo svg{width:36px;height:36px;flex:none}
+.logo span{font-family:"Poppins",system-ui,sans-serif;font-weight:300;font-size:.8125rem;
+  line-height:1.15;text-transform:lowercase}
+.nav{display:none;gap:1.6rem;align-items:center}
+.nav a{text-decoration:none;font-size:.8125rem;letter-spacing:.04em;position:relative;
+  padding-block:.4rem}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--ultra);transform:scaleX(0);transform-origin:left;
+  transition:transform .24s cubic-bezier(.2,.7,.2,1)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.head-cta{display:none}
+.menu{position:relative}
+.menu>summary{--ch:9px;list-style:none;display:flex;align-items:center;justify-content:center;
+  width:48px;height:48px;background:var(--ink);color:var(--paper);cursor:pointer;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.menu>summary::-webkit-details-marker{display:none}
+.menu>summary svg{width:20px;height:20px}
+.menu[open]>summary{background:var(--ultra-d)}
+.menu-panel{--ch:14px;position:absolute;right:0;top:calc(100% + 12px);width:min(80vw,320px);
+  background:var(--ink);color:var(--paper);padding:.6rem}
+.menu-panel a{display:block;text-decoration:none;padding:.85rem 1rem;min-height:48px;
+  border-bottom:1px solid rgba(243,243,241,.18);font-size:.9375rem}
+.menu-panel a:last-of-type{border-bottom:0}
+.menu-panel a:hover{background:rgba(243,243,241,.1)}
+.menu-panel .btn{width:100%;justify-content:center;margin-top:.6rem}
+@media (min-width:1020px){.nav,.head-cta{display:flex}.menu{display:none}}
+
+/* --- hero --------------------------------------------------------------- */
+.hero{position:relative;padding-top:clamp(2.25rem,4.5vw,4rem);
+  padding-bottom:clamp(2.5rem,5vw,4.5rem)}
+.hero-grid{display:grid;gap:clamp(2rem,4vw,3.25rem);align-items:center}
+@media (min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+.hero h1 span{color:var(--ultra)}
+.hero .lede{margin-top:1.35rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.9rem}
+/* facet stack: chamfered plates offset from one another. the offset plate IS
+   the depth system — a clip-path cannot carry a box-shadow. */
+.facets{position:relative}
+.facets>svg{width:100%;height:auto}
+.facets .mockcard{--ch:12px;position:absolute;left:-4%;bottom:-7%;width:min(320px,64%);
+  background:var(--ink);padding:1px}
+.facets .mockcard .face{background:var(--graphite);padding:.9rem}
+@media (max-width:600px){.facets .mockcard{left:0;bottom:-10%;width:74%}}
+.mockcard .mhead{display:flex;align-items:center;gap:.4rem;margin-bottom:.85rem}
+.mockcard .mdot{width:7px;height:7px;background:rgba(243,243,241,.28)}
+.mockcard .mbar{height:8px;background:rgba(243,243,241,.2)}
+.mockcard .mrow{display:flex;align-items:center;gap:.6rem;padding-block:.55rem;
+  border-bottom:1px solid rgba(243,243,241,.12)}
+.mockcard .mrow:last-of-type{border-bottom:0}
+.mockcard .mring{width:14px;height:14px;border-radius:50%;
+  border:1px solid rgba(243,243,241,.35);flex:none}
+.mockcard .chip{--ch:6px;display:inline-flex;align-items:center;gap:.4rem;background:var(--acid);
+  color:var(--ink);padding:.35rem .6rem;font-size:.6875rem;letter-spacing:.09em;
+  text-transform:uppercase;font-weight:500;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.mockcard .chip svg{width:13px;height:13px}
+.mockcard .mcap{margin-top:.7rem;font-size:.625rem;letter-spacing:.11em;text-transform:uppercase;
+  color:rgba(243,243,241,.5)}
+
+/* --- three-cell spec strip ---------------------------------------------- */
+.strip{display:grid;gap:1px;background:var(--ink);margin-top:clamp(3.5rem,7vw,6rem)}
+@media (min-width:840px){.strip{grid-template-columns:repeat(3,1fr)}}
+.cell{background:var(--paper);padding:clamp(1.25rem,2.6vw,2rem);
+  display:flex;flex-direction:column;gap:1rem;min-height:200px}
+.cell:nth-child(2){background:var(--bone)}
+.cell .k{font-family:"DM Mono",monospace;font-size:.6875rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ash)}
+.cell .v{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;letter-spacing:-0.035em;
+  font-size:clamp(1.35rem,2.3vw,1.85rem);line-height:1.06;font-variant-numeric:normal}
+.cell .v em{font-style:normal;color:var(--ultra)}
+.cell p{font-size:.875rem;color:var(--ash);max-width:38ch}
+.cell figure{margin-top:auto}
+.cell svg{width:100%;height:auto;max-width:230px}
+
+/* --- sector marquee ----------------------------------------------------- */
+.mq-wrap{position:relative;border-block:1px solid var(--line);background:var(--bone);
+  padding-block:1rem;overflow:hidden}
+.mq-label{--ch:9px;position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;
+  align-items:center;padding:0 1.1rem 0 var(--gutter);background:var(--ink);color:var(--paper);
+  font-family:"DM Mono",monospace;font-size:.6875rem;letter-spacing:.15em;text-transform:uppercase;
+  clip-path:polygon(0 0,100% 0,calc(100% - 18px) 100%,0 100%)}
+.mq{display:flex;gap:0;width:max-content}
+.mq-track{display:flex;align-items:center;gap:.75rem;padding-inline:.75rem}
+.chipx{--ch:8px;display:inline-flex;align-items:center;gap:.55rem;white-space:nowrap;
+  background:var(--paper);padding:.55rem .9rem;font-size:.8125rem;letter-spacing:.02em;
+  box-shadow:inset 0 0 0 1px var(--line);
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.chipx svg{width:18px;height:18px;color:var(--plum);flex:none}
+.mq-note{margin-top:.9rem;color:var(--ash);font-size:.8125rem}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+  .js .mq{animation:mq 46s linear infinite}
+  .mq-wrap:hover .mq{animation-play-state:paused}
+}
+@media (prefers-reduced-motion:reduce){
+  .mq-wrap{overflow:visible}
+  .mq{width:auto;flex-wrap:wrap}
+  .mq-track{flex-wrap:wrap;gap:.6rem;padding-left:14rem}
+  .mq-dup{display:none}
+}
+
+/* --- services: broken grid, not three equal columns ---------------------- */
+.svcs{display:grid;gap:1px;background:var(--line)}
+@media (min-width:900px){
+  .svcs{grid-template-columns:repeat(12,1fr)}
+  .svcs>li:nth-child(1){grid-column:span 7}
+  .svcs>li:nth-child(2){grid-column:span 5}
+  .svcs>li:nth-child(3){grid-column:span 5}
+  .svcs>li:nth-child(4){grid-column:span 7}
+  .svcs>li:nth-child(5){grid-column:span 6}
+  .svcs>li:nth-child(6){grid-column:span 6}
+}
+.svc{background:var(--paper);display:flex;flex-direction:column;position:relative}
+.svc .body{padding:clamp(1.25rem,2.4vw,1.9rem);display:flex;flex-direction:column;gap:.7rem;flex:1}
+.svc .gl{--ch:9px;width:46px;height:46px;background:var(--plum);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch));
+  transition:background .22s}
+.svc .gl svg{width:24px;height:24px}
+.svc:nth-child(3n+2) .gl{background:var(--ultra-d)}
+.svc:nth-child(3n) .gl{background:var(--graphite)}
+.svc p{font-size:.9375rem;color:var(--ash);max-width:46ch}
+.svc .deliv{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.4rem}
+.svc .deliv li{font-size:.625rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ash);
+  box-shadow:inset 0 0 0 1px var(--line);padding:.25rem .5rem}
+/* every service is its own conversion point — a full-width footer bar */
+.svc .enq{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  min-height:52px;padding:.85rem clamp(1.25rem,2.4vw,1.9rem);text-decoration:none;
+  background:var(--bone);border-top:1px solid var(--line);
+  font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:background .2s,color .2s}
+.svc .enq svg{width:17px;height:17px;transition:transform .24s cubic-bezier(.2,.7,.2,1)}
+.svc .enq:hover{background:var(--ink);color:var(--paper)}
+.svc .enq:hover svg{transform:translateX(5px)}
+.svc:hover .gl{background:var(--ultra)}
+
+/* --- work --------------------------------------------------------------- */
+.work{display:grid;gap:1px;background:var(--line)}
+@media (min-width:760px){.work{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.work{grid-template-columns:repeat(4,1fr)}
+  .work>li:first-child{grid-column:span 2;grid-row:span 2}}
+.tile{background:var(--paper);padding:clamp(1rem,2vw,1.4rem);display:flex;
+  flex-direction:column;gap:.55rem;min-height:150px;transition:background .2s}
+.tile:hover{background:var(--bone)}
+.tile .ix{--ch:6px;align-self:flex-start;background:var(--ink);color:var(--paper);
+  font-size:.625rem;letter-spacing:.12em;padding:.2rem .5rem;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.tile:nth-child(3n+2) .ix{background:var(--plum)}
+.tile:nth-child(3n) .ix{background:var(--ultra-d)}
+.tile b{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;font-size:1.0625rem;
+  letter-spacing:-0.025em}
+.tile .sec{font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+.tile .out{font-size:.875rem;color:var(--ash);margin-top:auto}
+.tile--lead{background:var(--plum);color:var(--paper);gap:1rem}
+.tile--lead:hover{background:var(--plum-2)}
+.tile--lead .ix{background:var(--acid);color:var(--ink)}
+.tile--lead b{font-size:clamp(1.4rem,2.4vw,1.9rem)}
+.tile--lead .sec,.tile--lead .out{color:rgba(243,243,241,.72)}
+.tile--lead .yrs{font-family:"Schibsted Grotesk",sans-serif;font-weight:900;
+  font-size:clamp(3.5rem,8vw,6rem);line-height:.82;letter-spacing:-0.05em;color:var(--acid);
+  font-variant-numeric:normal}
+.tile--lead .yrs sup{font-size:.2em;letter-spacing:.1em;font-weight:500;vertical-align:super;
+  margin-left:.3em;text-transform:uppercase;color:var(--paper)}
+.tile--lead .wire{margin-top:auto}
+.wire{--ch:8px;background:rgba(243,243,241,.1);padding:.75rem;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.wire .wh{display:flex;gap:.35rem;margin-bottom:.6rem}
+.wire .wh span{width:6px;height:6px;background:rgba(243,243,241,.35)}
+.wire .wb{height:7px;background:rgba(243,243,241,.28);margin-bottom:.45rem}
+.wire .wchip{--ch:5px;display:inline-block;background:var(--acid);color:var(--ink);
+  font-size:.625rem;letter-spacing:.09em;text-transform:uppercase;padding:.25rem .5rem;
+  margin-top:.3rem;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+
+/* --- process flow ------------------------------------------------------- */
+.flow{display:grid;gap:0;margin-top:clamp(1.5rem,3vw,2.5rem)}
+@media (min-width:940px){.flow{grid-template-columns:repeat(4,1fr);gap:0}}
+.node{position:relative;padding-block:1.4rem;display:grid;
+  grid-template-columns:44px minmax(0,1fr);gap:.5rem 1rem;align-content:start}
+.node .nn{grid-column:1;grid-row:1/-1;align-self:start}
+.node h3,.node p{grid-column:2}
+@media (min-width:940px){
+  .node{display:flex;flex-direction:column;gap:.6rem;padding-right:2.25rem}
+}
+.node .nn{--ch:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:var(--ink);color:var(--paper);font-family:"Schibsted Grotesk",sans-serif;
+  font-weight:800;font-size:1rem;font-variant-numeric:normal;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.node:nth-child(2) .nn{background:var(--plum)}
+.node:nth-child(3) .nn{background:var(--ultra-d)}
+.node:nth-child(4) .nn{background:var(--acid);color:var(--ink)}
+.node p{font-size:.9375rem;color:var(--ash);max-width:34ch}
+/* travelling dashes — the connector is drawn, and it moves along the path */
+.node .conn{position:absolute;left:22px;top:66px;width:2px;height:calc(100% - 60px);
+  background-image:repeating-linear-gradient(180deg,var(--ink) 0 7px,transparent 7px 15px)}
+@media (min-width:940px){
+  .node .conn{left:56px;top:44px;height:2px;width:calc(100% - 60px);
+    background-image:repeating-linear-gradient(90deg,var(--ink) 0 7px,transparent 7px 15px)}
+}
+.node:last-child .conn{display:none}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes travelx{from{background-position:0 0}to{background-position:15px 0}}
+  @keyframes travely{from{background-position:0 0}to{background-position:0 15px}}
+  .js .node .conn{animation:travely 1.1s linear infinite}
+  @media (min-width:940px){.js .node .conn{animation:travelx 1.1s linear infinite}}
+}
+
+/* --- pricing: full-bleed solid colour tiles, stacked vertically ---------- */
+/* This is a vertical selector by construction at every width. It was never
+   columns, so there is nothing to squeeze at 390px. */
+.pricing{padding-block:0}
+.tset{border:0;padding:0;margin:0}
+.tset legend{position:absolute;left:-9999px}
+.tset>input{position:absolute;opacity:0;width:1px;height:1px}
+.tile-p{color:var(--paper);border-bottom:1px solid rgba(243,243,241,.16)}
+.tile-p:nth-of-type(1){background:var(--plum)}
+.tile-p:nth-of-type(2){background:var(--ultra-d)}
+.tile-p:nth-of-type(3){background:var(--graphite)}
+.tile-p>label{display:block;cursor:pointer;padding-block:clamp(1.5rem,3.2vw,2.5rem)}
+.tile-p .row{display:grid;gap:1rem 2rem;align-items:center}
+@media (min-width:820px){.tile-p .row{grid-template-columns:minmax(0,1fr) auto auto}}
+.tile-p .tname{font-family:"Schibsted Grotesk",sans-serif;font-weight:900;
+  font-size:clamp(2rem,5vw,3.6rem);letter-spacing:-0.05em;line-height:.95;
+  display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.tile-p .pop{--ch:6px;font-family:"DM Mono",monospace;font-size:.625rem;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:400;background:var(--paper);color:var(--ink);
+  padding:.25rem .6rem;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.tile-p .pages{font-size:.8125rem;letter-spacing:.05em;color:rgba(243,243,241,.75);margin-top:.5rem}
+.tile-p .prices{display:flex;flex-wrap:wrap;gap:.6rem}
+.pplate{--ch:9px;background:rgba(243,243,241,.14);padding:.7rem .95rem;min-width:150px;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.pplate .pl{font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(243,243,241,.75)}
+.pplate .pv{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;letter-spacing:-0.04em;
+  font-size:clamp(1.5rem,3vw,2rem);line-height:1.05;margin-top:.2rem;font-variant-numeric:normal}
+.pplate .pv .cur{font-size:.46em;vertical-align:super;font-weight:700;margin-right:.06em}
+.pplate .pv .per{font-family:"DM Mono",monospace;font-size:.32em;font-weight:400;
+  letter-spacing:.04em;margin-left:.35em;color:rgba(243,243,241,.8)}
+.tile-p .mark{--ch:8px;width:46px;height:46px;display:flex;align-items:center;
+  justify-content:center;background:rgba(243,243,241,.16);color:var(--paper);
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch));transition:background .2s}
+.tile-p .mark svg{width:19px;height:19px}
+.tile-p .mark .tick{display:none}
+.tile-p>label:hover .mark{background:rgba(243,243,241,.3)}
+.tile-p .detail{display:none;padding-bottom:clamp(1.5rem,3.2vw,2.5rem)}
+.tile-p .detail .inner{display:grid;gap:1.5rem;padding-top:1.4rem;
+  border-top:1px solid rgba(243,243,241,.25)}
+@media (min-width:820px){.tile-p .detail .inner{grid-template-columns:1.1fr .9fr;gap:2.5rem}}
+.tile-p .feat{display:grid;gap:.65rem}
+.tile-p .feat li{display:grid;grid-template-columns:22px 1fr;gap:.75rem;align-items:start;
+  font-size:.9375rem;color:rgba(243,243,241,.85)}
+.tile-p .feat svg{width:20px;height:20px;margin-top:.1rem;color:var(--paper)}
+.tile-p .aside{display:flex;flex-direction:column;gap:1rem}
+.tile-p .aside p{font-size:.8125rem;color:rgba(243,243,241,.75)}
+#p1:checked~.tset-body .tile-p:nth-of-type(1) .detail,
+#p2:checked~.tset-body .tile-p:nth-of-type(2) .detail,
+#p3:checked~.tset-body .tile-p:nth-of-type(3) .detail{display:block}
+#p1:checked~.tset-body .tile-p:nth-of-type(1) .mark,
+#p2:checked~.tset-body .tile-p:nth-of-type(2) .mark,
+#p3:checked~.tset-body .tile-p:nth-of-type(3) .mark{background:var(--paper);color:var(--ink)}
+#p1:checked~.tset-body .tile-p:nth-of-type(1) .mark .tick,
+#p2:checked~.tset-body .tile-p:nth-of-type(2) .mark .tick,
+#p3:checked~.tset-body .tile-p:nth-of-type(3) .mark .tick{display:block}
+#p1:checked~.tset-body .tile-p:nth-of-type(1) .mark .arw,
+#p2:checked~.tset-body .tile-p:nth-of-type(2) .mark .arw,
+#p3:checked~.tset-body .tile-p:nth-of-type(3) .mark .arw{display:none}
+#p1:focus-visible~.tset-body .tile-p:nth-of-type(1) .mark,
+#p2:focus-visible~.tset-body .tile-p:nth-of-type(2) .mark,
+#p3:focus-visible~.tset-body .tile-p:nth-of-type(3) .mark{
+  background:var(--acid);color:var(--ink);box-shadow:0 0 0 3px var(--paper)}
+.price-head{background:var(--ink);color:var(--paper);padding-block:clamp(2.5rem,5vw,4.5rem)}
+.price-head h2{color:var(--paper)}
+.price-head .sechead{border-top-color:var(--paper)}
+.price-head .sechead .tab{background:var(--paper);color:var(--ink)}
+.price-head .sechead .rt{color:rgba(243,243,241,.7)}
+.price-foot{background:var(--ink);color:rgba(243,243,241,.75);padding-block:1.6rem;font-size:.8125rem}
+.price-foot a{color:var(--acid)}
+
+/* --- proof: spec table + cut quotes ------------------------------------- */
+.proof-grid{display:grid;gap:clamp(2rem,4vw,3.25rem)}
+@media (min-width:980px){.proof-grid{grid-template-columns:.95fr 1.05fr;align-items:start}}
+.spec{border-top:1px solid var(--ink)}
+.spec div{display:grid;grid-template-columns:minmax(0,13ch) minmax(0,1fr);gap:.4rem 1.25rem;
+  padding-block:.85rem;border-bottom:1px solid var(--line);align-items:baseline}
+.spec dt{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ash)}
+.spec dd{margin:0;font-size:.9375rem}
+.spec dd b{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;letter-spacing:-0.02em}
+.quotes{display:grid;gap:1rem}
+.qt{--ch:16px;background:var(--bone);padding:clamp(1.25rem,2.4vw,1.75rem);
+  display:flex;flex-direction:column;gap:1rem}
+.qt:nth-child(2){background:var(--plum);color:var(--paper)}
+.qt:nth-child(2) .who span{color:rgba(243,243,241,.72)}
+.qt:nth-child(2) .qm{color:var(--acid)}
+.qt .qm{width:34px;height:auto;color:var(--ultra)}
+.qt blockquote{font-family:"Schibsted Grotesk",sans-serif;font-weight:500;
+  font-size:clamp(1.0625rem,1.6vw,1.3rem);line-height:1.3;letter-spacing:-0.02em}
+.qt .who{display:flex;align-items:center;gap:.8rem;margin-top:auto}
+.qt .cm{--ch:6px;width:44px;height:44px;flex:none}
+.qt .who b{display:block;font-family:"Schibsted Grotesk",sans-serif;font-weight:800;
+  font-size:.9375rem;letter-spacing:-0.015em}
+.qt .who span{display:block;font-size:.75rem;color:var(--ash)}
+.qt .who span.ph{display:inline;font-size:inherit}
+.ph{color:var(--ultra);font-style:normal}
+.qt:nth-child(2) .ph{color:var(--acid)}
+.proof-note{margin-top:1.25rem;font-size:.8125rem;color:var(--ash);max-width:70ch}
+
+/* --- contact ------------------------------------------------------------ */
+.contact{background:var(--graphite);color:var(--paper)}
+.contact h2{color:var(--paper)}
+.contact .sechead{border-top-color:var(--paper)}
+.contact .sechead .tab{background:var(--acid);color:var(--ink)}
+.contact .sechead .rt{color:rgba(243,243,241,.7)}
+.mailto{display:inline-block;font-family:"Schibsted Grotesk",sans-serif;font-weight:900;
+  letter-spacing:-0.045em;line-height:1;font-size:clamp(1.5rem,4.4vw,3.25rem);
+  color:var(--paper);text-decoration:none;margin-top:1.25rem;
+  border-bottom:4px solid var(--acid);padding-bottom:.15rem;word-break:break-word;
+  transition:color .2s,border-color .2s}
+.mailto:hover{color:var(--acid);border-color:var(--paper)}
+.contact-grid{display:grid;gap:1.5rem;margin-top:clamp(2rem,4vw,3rem)}
+@media (min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem)}}
+.drop{--ch:16px;background:rgba(243,243,241,.3);padding:2px;display:block;
+  text-decoration:none;transition:background .2s}
+.drop .dface{--ch:15px;background:var(--graphite);display:flex;flex-direction:column;
+  align-items:flex-start;gap:.85rem;padding:clamp(1.5rem,3vw,2.25rem);height:100%;
+  transition:background .2s;
+  clip-path:polygon(var(--ch) 0,100% 0,100% calc(100% - var(--ch)),
+    calc(100% - var(--ch)) 100%,0 100%,0 var(--ch))}
+.drop:hover{background:var(--acid)}
+.drop:hover .dface{background:#16262B}
+.drop .di{--ch:9px;width:52px;height:52px;background:rgba(243,243,241,.12);display:flex;
+  align-items:center;justify-content:center;color:var(--acid)}
+.drop .di svg{width:26px;height:26px}
+.drop b{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;font-size:1.125rem;
+  letter-spacing:-0.025em}
+.drop .dp{font-size:.875rem;color:rgba(243,243,241,.72);max-width:44ch}
+.drop b{display:block}
+.chans{display:grid;gap:1px;background:rgba(243,243,241,.2)}
+.chan{display:flex;align-items:center;gap:1rem;min-height:76px;padding:1rem 1.15rem;
+  background:var(--graphite);text-decoration:none;transition:background .2s}
+.chan:hover{background:var(--ink)}
+.chan .ci{--ch:7px;width:38px;height:38px;flex:none;background:rgba(243,243,241,.12);
+  display:flex;align-items:center;justify-content:center;color:var(--acid)}
+.chan .ci svg{width:19px;height:19px}
+.chan .cl{display:block;font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(243,243,241,.7)}
+.chan .cv{display:block;font-family:"Schibsted Grotesk",sans-serif;font-weight:800;font-size:1rem;
+  letter-spacing:-0.02em;word-break:break-word;margin-top:.15rem}
+.chan>span:not(.ci){flex:1;min-width:0}
+.chan .go{margin-left:auto;width:18px;height:18px;color:rgba(243,243,241,.6);
+  transition:transform .22s}
+.chan:hover .go{transform:translateX(5px);color:var(--acid)}
+.contact .after{margin-top:1.5rem;font-size:.8125rem;color:rgba(243,243,241,.72)}
+
+/* --- footer ------------------------------------------------------------- */
+.site-foot{background:var(--ink);color:rgba(243,243,241,.72);
+  padding-block:clamp(2.5rem,5vw,4rem);position:relative;z-index:2}
+.foot-grid{display:grid;gap:2rem}
+@media (min-width:860px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr 1fr}}
+.foot-grid h4{font-family:"DM Mono",monospace;font-weight:500;font-size:.6875rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--paper);margin-bottom:.85rem}
+.foot-grid li,.foot-grid p{font-size:.875rem;line-height:1.85}
+.foot-grid a{text-decoration:none;border-bottom:1px solid transparent}
+.foot-grid a:hover{border-bottom-color:var(--acid);color:var(--paper)}
+.site-foot .logo span{color:var(--paper)}
+.chips{display:flex;margin-top:1.5rem;max-width:300px}
+.chips span{height:26px;flex:1}
+.foot-end{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;
+  margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgba(243,243,241,.22);font-size:.75rem}
+
+/* --- motion: staggered, from an already-visible state -------------------- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes cutin{from{transform:translate3d(0,16px,0)}to{transform:translate3d(0,0,0)}}
+  .js .rv.is-in{animation:cutin .68s cubic-bezier(.16,1,.3,1) both}
+  .js .rv.is-in:nth-child(2){animation-delay:.07s}
+  .js .rv.is-in:nth-child(3){animation-delay:.14s}
+  .js .rv.is-in:nth-child(4){animation-delay:.21s}
+  .js .rv.is-in:nth-child(5){animation-delay:.28s}
+  .js .rv.is-in:nth-child(6){animation-delay:.35s}
+}
+</style>
+</head>
+<body>
+<!-- ===========================================================================
+  DIRECTION 66 — "CHAMFER"   ·   Round 7   ·   home-66-chamfer.html
+
+  THESIS. Every container on the page has two corners cut at 45°, from the
+  48px menu button to a full-bleed pricing tile. One machined detail, applied
+  without exception, does the work that a wall of same-size rounded cards was
+  failing to do. It refuses the three-equal-icon-cards feature row outright:
+  services run on a 7/5 · 5/7 · 6/6 broken grid.
+
+  RESEARCH LINEAGE. Huehaus (the chamfer language and full-bleed colour
+  tiles); brief §2.2 flat colour blocks with a per-card Enquire bar, §2.4
+  vertical pricing, §2.5 spec table + town-and-year attribution, §2.7 labelled
+  marquee and cut section tabs, §2.8 the raw email where the button goes and
+  the "send us a screenshot" dropzone.
+
+  THE HARD RULE — visual device, section by section. No section is text and
+  colour alone:
+    Header ......... cut monogram, cut menu button, drawn underline rule
+    Hero ........... a facet stack — six chamfered plates in SVG, offset from
+                     one another — with a chamfered dark UI mock overlapping it
+                     (tinted canvas, skeleton bars, exactly one full-colour
+                     "Enquiry received" chip)
+    Spec strip ..... three cells, each carrying a drawn diagram: a cut page
+                     glyph, a four-week timeline with ticks, a two-chip price
+                     ladder
+    Sectors ........ a labelled marquee, each chip carrying a drawn glyph, with
+                     an opaque cut panel naming what is scrolling
+    Services ....... six blocks on a broken grid, each a drawn 24px glyph in a
+                     cut colour plate plus its own full-width Enquire bar
+    Work ........... a cut-tile mosaic; the lead client is a 2×2 plum tile
+                     carrying a figure and a wireframe site mock
+    Process ........ four cut nodes joined by a connector with travelling
+                     dashes, horizontal at desktop, vertical at 390
+    Pricing ........ three full-bleed solid colour tiles, each with cut price
+                     plates and a cut tick/arrow selector mark
+    Proof .......... hairline spec table + three cut quote plates with drawn
+                     quotation marks and drawn client marks
+    Contact ........ a cut dropzone with a drawn icon, plus a channel stack
+                     with drawn icons and real values
+    Footer ......... cut monogram + the palette printed as a chip strip
+    Whole page ..... a fixed SVG grain overlay at 5%
+
+  DEPARTURE. The inherited palette is kept but re-roled: --plum #17265E is
+  promoted from tertiary to the dominant field colour, --acid #00D2D8 becomes
+  the single highlight, and --ultra ships in two values — #D6006B for graphics
+  and display type on the light ground, #A80054 for any field carrying white
+  body text, because #D6006B under white is 4.1:1 and fails. Faces unchanged.
+
+  WHERE THE REDESIGN SKILL WAS OVERRULED, DELIBERATELY. It asks for tabular
+  figures on data — refused: tabular-nums renders £1,995 as "£1 , 995" and
+  this page prints prices. It offers picsum.photos placeholders — refused: the
+  file must be self-contained, so every visual is CSS or inline SVG. It warns
+  against a dark band inside a light page — taken as a warning about accidents,
+  not commitments: pricing, contact and footer are three deliberate full-bleed
+  fields, and the page ends dark rather than dipping and returning.
+
+  STANDING RULES HELD. No count-ups — every figure is authored text. Nothing
+  rests at opacity 0; the reveal animates transform only, staggers, latches and
+  unobserves. Pricing is a vertical stack at every width and works with JS off
+  (radio + :checked). No backdrop-filter and no transform on the header, so no
+  containing-block trap. Chamfered controls show focus by swapping their plate
+  colour, because clip-path also clips an outline. 390px is designed, not
+  reflowed.
+============================================================================ -->
+
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===================== SVG sprite ====================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 48 48">
+      <path d="M11 0h37v37L37 48H0V11z" fill="var(--plum)"/>
+      <path d="M13 12h9a12 12 0 0 1 0 24h-9z" fill="none" stroke="var(--acid)" stroke-width="5"/>
+      <path d="M40 17a9 9 0 1 0 0 14" fill="none" stroke="var(--paper)" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- service glyphs, one stroke weight throughout -->
+    <symbol id="g-site" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h16v13l-5 5H3V5z"/><path d="M3 8h18"/><path d="M12 12v5M9.5 14.5h5"/></g></symbol>
+    <symbol id="g-shop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8h15l-1.2 13H5.7z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/><path d="M9 12.5h6"/></g></symbol>
+    <symbol id="g-fix" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v10l-4 4H4z"/><path d="M4 8h16"/><path d="m9 20 3-3 3 3"/><path d="M12 11.5v3.5"/></g></symbol>
+    <symbol id="g-seo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-6.2 6.5-11a6.5 6.5 0 1 0-13 0C5.5 14.8 12 21 12 21z"/><path d="M9 9.8h6M10.5 12.4h3"/></g></symbol>
+    <symbol id="g-host" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5 12 3l8 2.5v6c0 5-3.4 8.4-8 9.5-4.6-1.1-8-4.5-8-9.5z"/><path d="M8 10.5h8M8 14h5"/></g></symbol>
+    <symbol id="g-data" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17"/><path d="M6.5 20.5v-5M11 20.5v-9M15.5 20.5v-4M20 20.5v-12"/></g></symbol>
+
+    <!-- sector glyphs for the marquee -->
+    <symbol id="s-fabric" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="5" height="13" rx="2.5"/><rect x="11" y="4" width="5" height="15" rx="2.5"/><path d="M18 8v11"/></g></symbol>
+    <symbol id="s-yoga" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 9v5"/><path d="m7 18 5-4 5 4"/><path d="M4.5 20.5h15"/></g></symbol>
+    <symbol id="s-desk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H4z"/><path d="M2.5 18.5h19"/><path d="M8 8.5h8M8 11.5h5"/></g></symbol>
+    <symbol id="s-van" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l4 4v3h-8z"/><circle cx="7" cy="18.5" r="2"/><circle cx="17.5" cy="18.5" r="2"/></g></symbol>
+    <symbol id="s-print" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="11"/><path d="M7 18.5 12 15l5 3.5"/><path d="M7 8h4M7 11h7"/></g></symbol>
+    <symbol id="s-car" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.5h18v3H3z"/><path d="m5 15.5 2-6h10l2 6"/><circle cx="7.5" cy="18.5" r="1.6"/><circle cx="16.5" cy="18.5" r="1.6"/></g></symbol>
+    <symbol id="s-bolt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5 5 13.5h5.5L9.5 21.5 19 10.5h-5.8z"/></g></symbol>
+    <symbol id="s-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5 12 3.5l8.5 4v9L12 20.5l-8.5-4z"/><path d="M3.5 7.5 12 11.5l8.5-4M12 11.5v9"/></g></symbol>
+    <symbol id="s-scaff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5v17M12 3.5v17M19 3.5v17"/><path d="M3.5 8.5h17M3.5 15h17"/></g></symbol>
+
+    <!-- utility icons -->
+    <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></g></symbol>
+    <symbol id="i-tick" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></g></symbol>
+    <symbol id="i-burger" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></g></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 2.8h11c.9 0 1.7.8 1.7 1.7v15c0 .9-.8 1.7-1.7 1.7h-11c-.9 0-1.7-.8-1.7-1.7v-15c0-.9.8-1.7 1.7-1.7z"/><path d="M10.5 18.3h3"/></g></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 5h19v14h-19z"/><path d="m2.5 7 9.5 6.5L21.5 7"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3.5 20.5l1.6-5.1A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 10.5h6M9 14h4"/></g></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v16H3z"/><path d="M3 9.5h18M8 3v4M16 3v4"/><path d="m9.5 15 2 2 3.5-4"/></g></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v4.5h16V15"/><path d="M12 3.5v11"/><path d="m7.5 8 4.5-4.5L16.5 8"/></g></symbol>
+    <symbol id="i-quote" viewBox="0 0 40 30"><g fill="currentColor"><path d="M0 30V16C0 7.2 5.6 1.4 15 0l1.6 5.2C11 6.6 8.4 9.4 8.4 13H16v17zM24 30V16c0-8.8 5.6-14.6 15-16l1.6 5.2C35 6.6 32.4 9.4 32.4 13H40v17z"/></g></symbol>
+
+    <!-- placeholder client marks -->
+    <symbol id="cm-1" viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--paper)"/><path d="M11 22h22" stroke="var(--ultra)" stroke-width="3"/><path d="M22 11v22" stroke="var(--plum)" stroke-width="3"/></symbol>
+    <symbol id="cm-2" viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--paper)"/><path d="M11 30 22 12l11 18z" fill="none" stroke="var(--plum)" stroke-width="3" stroke-linejoin="round"/><path d="M17 30h10" stroke="var(--ultra)" stroke-width="3"/></symbol>
+    <symbol id="cm-3" viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--paper)"/><path d="M13 13h18v18H13z" fill="none" stroke="var(--plum)" stroke-width="3"/><path d="M13 22h18" stroke="var(--ultra)" stroke-width="3"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============================== HEADER ================================= -->
+<header class="site-head">
+  <div class="head-in">
+    <a class="logo" href="#main">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#mark"/></svg>
+      <span>digital<br>consulting services</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Portfolio</a>
+      <a href="#process">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#proof">About</a>
+    </nav>
+    <a class="btn head-cta" href="#contact">Get a free quote
+      <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <details class="menu">
+      <summary aria-label="Menu"><svg aria-hidden="true"><use href="#i-burger"/></svg></summary>
+      <div class="menu-panel">
+        <a href="#services">Services</a>
+        <a href="#work">Portfolio</a>
+        <a href="#process">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#proof">About</a>
+        <a class="btn btn--acid" href="#contact">Get a free quote</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- =============================== HERO ================================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>A website designed, written and built <span>for you</span> — not dropped into a template.</h1>
+      <p class="lede">Work that stands next to what London and New York studios put out, for a fraction of the cost and
+        almost none of your time. You have one conversation; everything after that is my job.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Get a free quote
+          <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--out" href="#work">See the work</a>
+      </div>
+    </div>
+
+    <div class="facets">
+      <svg viewBox="0 0 620 480" role="img" aria-label="An abstract composition of chamfered plates in navy, magenta and cyan, standing in for the studio's visual language.">
+        <path d="M60 40h340v250l-40 40H60z" fill="var(--plum)"/>
+        <path d="M420 90h160v190l-34 34H420z" fill="var(--bone)"/>
+        <path d="M420 90h160v190l-34 34H420z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+        <path d="M300 300h180v130l-26 26H300z" fill="var(--ultra)"/>
+        <path d="M120 330h150v110l-22 22H120z" fill="var(--acid)"/>
+        <path d="M470 26h120v70l-18 18H470z" fill="var(--graphite)"/>
+        <g stroke="var(--paper)" stroke-width="2" opacity=".55">
+          <path d="M92 92h180M92 122h240M92 152h140"/>
+        </g>
+        <g stroke="var(--ink)" stroke-width="2" opacity=".5">
+          <path d="M448 130h100M448 158h74M448 186h100M448 214h56"/>
+        </g>
+        <g stroke="var(--ink)" stroke-width="2" opacity=".45">
+          <path d="M148 366h94M148 394h60"/>
+        </g>
+        <path d="M60 40h340v250l-40 40H60z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+        <path d="M300 300h180v130l-26 26H300z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+        <path d="M120 330h150v110l-22 22H120z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+        <path d="M470 26h120v70l-18 18H470z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      </svg>
+
+      <div class="mockcard cut">
+        <div class="face">
+          <div class="mhead"><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span>
+            <span class="mbar" style="width:76px"></span></div>
+          <div class="mrow"><span class="mbar" style="width:62%"></span></div>
+          <div class="mrow"><span class="chip"><svg aria-hidden="true"><use href="#i-tick"/></svg>Enquiry received</span></div>
+          <div class="mrow"><span class="mring"></span><span class="mbar" style="width:44%"></span></div>
+          <p class="mcap">Illustrative · not a live inbox</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- three-cell spec strip: what / how long / how much -->
+  <div class="wrap">
+    <div class="strip rv">
+      <div class="cell">
+        <p class="k">What it is</p>
+        <p class="v">A website designed, written and built around your business.</p>
+        <p>Copy, structure, imagery and colour all handled. No brief to write, no CMS to learn.</p>
+        <figure>
+          <svg viewBox="0 0 230 76" role="img" aria-label="Diagram: a chamfered page with content blocks, the first block highlighted.">
+            <path d="M8 4h84v54l-14 14H8z" fill="var(--bone)" stroke="var(--ink)" stroke-width="1.5"/>
+            <path d="M18 16h50M18 28h64M18 40h40" stroke="var(--ash)" stroke-width="3"/>
+            <path d="M110 32h22" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M138 4h84v54l-14 14h-70z" fill="var(--plum)"/>
+            <path d="M148 16h50M148 28h64M148 40h40" stroke="var(--paper)" stroke-width="3" opacity=".7"/>
+            <path d="M148 54h34" stroke="var(--acid)" stroke-width="5"/>
+          </svg>
+        </figure>
+      </div>
+
+      <div class="cell">
+        <p class="k">How long it takes</p>
+        <p class="v">About <em>four weeks</em>, and barely any of it is your time.</p>
+        <p>One conversation up front, one review in the middle, and it goes live.</p>
+        <figure>
+          <svg viewBox="0 0 230 76" role="img" aria-label="Diagram: a four-week timeline, weeks one and three marked as the only client involvement.">
+            <path d="M8 44h214" stroke="var(--ink)" stroke-width="2"/>
+            <g>
+              <path d="M20 30h22v14H20z" fill="var(--ultra)"/>
+              <path d="M70 36h22v8H70z" fill="var(--ash)"/>
+              <path d="M120 30h22v14h-22z" fill="var(--ultra)"/>
+              <path d="M170 36h44v8h-44z" fill="var(--ash)"/>
+            </g>
+            <g fill="var(--ash)" font-family="DM Mono, monospace" font-size="9" letter-spacing="1">
+              <text x="20" y="62">W1</text><text x="70" y="62">W2</text>
+              <text x="120" y="62">W3</text><text x="170" y="62">W4</text>
+            </g>
+            <g fill="var(--ultra)" font-family="DM Mono, monospace" font-size="8" letter-spacing="1">
+              <text x="20" y="22">YOU</text><text x="120" y="22">YOU</text>
+            </g>
+          </svg>
+        </figure>
+      </div>
+
+      <div class="cell">
+        <p class="k">How much it costs</p>
+        <p class="v">From £995 plus £15 a month — or £45 a month with nothing upfront.</p>
+        <p>Two ways to pay for the same site. Twenty-four month minimum on the monthly option.</p>
+        <figure>
+          <svg viewBox="0 0 230 76" role="img" aria-label="Diagram: two chamfered price chips, one upfront and one monthly, on the same rule.">
+            <path d="M8 38h214" stroke="var(--line)" stroke-width="2"/>
+            <path d="M14 10h96v34l-10 10H14z" fill="var(--ink)"/>
+            <text x="26" y="34" fill="var(--paper)" font-family="Schibsted Grotesk, sans-serif" font-weight="800" font-size="17">£995</text>
+            <text x="26" y="66" fill="var(--ash)" font-family="DM Mono, monospace" font-size="8" letter-spacing="1">+ £15/MO</text>
+            <path d="M130 10h86v34l-10 10h-76z" fill="var(--acid)"/>
+            <text x="142" y="34" fill="var(--ink)" font-family="Schibsted Grotesk, sans-serif" font-weight="800" font-size="17">£45</text>
+            <text x="142" y="66" fill="var(--ash)" font-family="DM Mono, monospace" font-size="8" letter-spacing="1">/MO, £0 UPFRONT</text>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SECTOR MARQUEE =========================== -->
+<section aria-labelledby="sect-h" style="padding-block:0">
+  <div class="mq-wrap">
+    <p class="mq-label" id="sect-h">Sectors on the books</p>
+    <div class="mq">
+      <ul class="mq-track">
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-fabric"/></svg>Fabrics &amp; homeware</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-yoga"/></svg>Yoga studios</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-desk"/></svg>Tuition</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-print"/></svg>Signage &amp; print</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-car"/></svg>Automotive</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-scaff"/></svg>Scaffolding</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-bolt"/></svg>Electrical</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-box"/></svg>Removals</li>
+        <li class="chipx"><svg aria-hidden="true"><use href="#s-van"/></svg>Lettings &amp; property</li>
+      </ul>
+      <ul class="mq-track mq-dup" aria-hidden="true">
+        <li class="chipx"><svg><use href="#s-fabric"/></svg>Fabrics &amp; homeware</li>
+        <li class="chipx"><svg><use href="#s-yoga"/></svg>Yoga studios</li>
+        <li class="chipx"><svg><use href="#s-desk"/></svg>Tuition</li>
+        <li class="chipx"><svg><use href="#s-print"/></svg>Signage &amp; print</li>
+        <li class="chipx"><svg><use href="#s-car"/></svg>Automotive</li>
+        <li class="chipx"><svg><use href="#s-scaff"/></svg>Scaffolding</li>
+        <li class="chipx"><svg><use href="#s-bolt"/></svg>Electrical</li>
+        <li class="chipx"><svg><use href="#s-box"/></svg>Removals</li>
+        <li class="chipx"><svg><use href="#s-van"/></svg>Lettings &amp; property</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SERVICES ================================ -->
+<section id="services" aria-labelledby="services-h">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="tab cut">What you can ask for</span>
+      <span class="rt">Six services · three you ask for, three that keep it working</span>
+    </div>
+    <h2 id="services-h">Everything the site needs, from one person.</h2>
+    <p class="lede" style="margin-top:1rem">No account manager, no handover, nothing offshored. You deal with the
+      person who builds it.</p>
+
+    <ul class="svcs rv" style="margin-top:clamp(1.75rem,3.5vw,2.75rem)">
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-site"/></svg></span>
+          <h3>A new website</h3>
+          <p>Designed and built around your business, and written for it too. You do not need to know what to say about
+            your own trade — that is the part you are paying for.</p>
+          <ul class="deliv"><li>Design</li><li>Copy</li><li>Build</li><li>Launch</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-shop"/></svg></span>
+          <h3>An online shop</h3>
+          <p>A store built and loaded with your products, with orders and stock handled the way you already work.</p>
+          <ul class="deliv"><li>Products</li><li>Payments</li><li>Orders</li><li>Stock</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-fix"/></svg></span>
+          <h3>Fixing the site you have</h3>
+          <p>Already on WordPress? I will fix it, rebuild it, or fit a custom theme you can post to yourself.</p>
+          <ul class="deliv"><li>Audit</li><li>Repair</li><li>Rebuild</li><li>Theme</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-seo"/></svg></span>
+          <h3>Local SEO</h3>
+          <p>Service pages, location pages and structured data, so you turn up where you actually work — not just where
+            your postcode is.</p>
+          <ul class="deliv"><li>Service pages</li><li>Location pages</li><li>Schema</li><li>Search Console</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-host"/></svg></span>
+          <h3>Hosting and management</h3>
+          <p>Hosting, security, updates, email on your own domain instead of a Gmail address, and one person to call
+            when something looks wrong.</p>
+          <ul class="deliv"><li>Hosting</li><li>SSL</li><li>Updates</li><li>Support</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+      <li class="svc">
+        <div class="body">
+          <span class="gl" aria-hidden="true"><svg><use href="#g-data"/></svg></span>
+          <h3>Analytics and reporting</h3>
+          <p>Analytics, Search Console and a monthly report in plain English, so you know what is working and what is
+            not.</p>
+          <ul class="deliv"><li>Analytics</li><li>Search Console</li><li>Monthly report</li></ul>
+        </div>
+        <a class="enq" href="#contact">Enquire about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============================== WORK ================================== -->
+<section id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="tab cut">Selected work</span>
+      <span class="rt">Real clients · real outcomes · nine sectors</span>
+    </div>
+    <h2 id="work-h">Some of them have been with me longer than their premises.</h2>
+
+    <ul class="work rv" style="margin-top:clamp(1.75rem,3.5vw,2.75rem)">
+      <li class="tile tile--lead">
+        <span class="ix">01</span>
+        <p class="yrs">5<sup>years +</sup></p>
+        <b>Cuddle Plush Fabrics</b>
+        <span class="sec">eCommerce · fabrics</span>
+        <span class="out">Built and managed for over five years — still one of the longest relationships on the books.</span>
+        <div class="wire" aria-hidden="true">
+          <div class="wh"><span></span><span></span><span></span></div>
+          <div class="wb" style="width:72%"></div>
+          <div class="wb" style="width:54%"></div>
+          <div class="wb" style="width:63%"></div>
+          <span class="wchip">Order placed</span>
+        </div>
+      </li>
+      <li class="tile"><span class="ix">02</span><b>Luna Landings</b><span class="sec">Made-to-order</span><span class="out">Product configurator, automatic work orders, worldwide shipping</span></li>
+      <li class="tile"><span class="ix">03</span><b>Sanctuary Ida</b><span class="sec">Yoga studio</span><span class="out">Students book and pay for classes online</span></li>
+      <li class="tile"><span class="ix">04</span><b>Nicola Noble Tuition</b><span class="sec">Tuition</span><span class="out">Moved classes online during Covid instead of closing</span></li>
+      <li class="tile"><span class="ix">05</span><b>Mad Graphics</b><span class="sec">Signage &amp; print</span><span class="out">Full rebuild</span></li>
+      <li class="tile"><span class="ix">06</span><b>DCH Automotive</b><span class="sec">Automotive</span><span class="out">A credible presence from a standing start</span></li>
+      <li class="tile"><span class="ix">07</span><b>Colossus Scaffolding</b><span class="sec">Scaffolding</span><span class="out">First enquiry from Google within three weeks of launch</span></li>
+      <li class="tile"><span class="ix">08</span><b>DJ Fox Electrical</b><span class="sec">Electrical</span><span class="out">A twenty-page site, live at djfoxelectrical.com</span></li>
+      <li class="tile"><span class="ix">09</span><b>Bexhill Removals</b><span class="sec">Removals</span><span class="out">Design approved on the first presentation, no revisions</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== PROCESS ================================ -->
+<section id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="tab cut">How it works</span>
+      <span class="rt">Four steps · one conversation and one review from you</span>
+    </div>
+    <h2 id="process-h">It starts with a conversation, not a contract.</h2>
+
+    <ol class="flow">
+      <li class="node">
+        <span class="conn" aria-hidden="true"></span>
+        <span class="nn">1</span>
+        <h3>We talk</h3>
+        <p>A call, or a few messages if that suits you better. Nothing to prepare and no brief to write — I ask, you
+          already know the answers.</p>
+      </li>
+      <li class="node">
+        <span class="conn" aria-hidden="true"></span>
+        <span class="nn">2</span>
+        <h3>I write it and design it</h3>
+        <p>Copy, structure, imagery and colour, all handled. You get shown something real, not a mood board.</p>
+      </li>
+      <li class="node">
+        <span class="conn" aria-hidden="true"></span>
+        <span class="nn">3</span>
+        <h3>You decide</h3>
+        <p>Unlimited revisions while it is being built. We keep going until it is right, not until the hours run out.</p>
+      </li>
+      <li class="node">
+        <span class="nn">4</span>
+        <h3>It goes live, and stays looked after</h3>
+        <p>Hosting, updates, monitoring and support from then on. No dashboard to learn, no login to lose.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================== PRICING ================================ -->
+<section id="pricing" class="pricing" aria-labelledby="pricing-h">
+  <div class="price-head">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="tab cut">Pricing</span>
+        <span class="rt">The same site either way · you choose how to pay</span>
+      </div>
+      <h2 id="pricing-h">Every number printed, before you ask.</h2>
+      <p class="lede" style="color:rgba(243,243,241,.75);margin-top:1rem">Tiers differ on ongoing service level and how
+        many pages you get — never on how well it is built.</p>
+    </div>
+  </div>
+
+  <form onsubmit="return false">
+    <fieldset class="tset">
+      <legend>Choose a tier</legend>
+      <input type="radio" name="plan" id="p1">
+      <input type="radio" name="plan" id="p2" checked>
+      <input type="radio" name="plan" id="p3">
+
+      <div class="tset-body">
+        <!-- STARTER -->
+        <div class="tile-p">
+          <label for="p1">
+            <div class="wrap row">
+              <div>
+                <p class="tname">Starter</p>
+                <p class="pages">Up to 20 pages</p>
+              </div>
+              <div class="prices">
+                <div class="pplate"><p class="pl">Upfront</p>
+                  <p class="pv"><span class="cur">£</span>995<span class="per">+ £15/mo</span></p></div>
+                <div class="pplate"><p class="pl">Or nothing upfront</p>
+                  <p class="pv"><span class="cur">£</span>45<span class="per">/mo</span></p></div>
+              </div>
+              <span class="mark" aria-hidden="true">
+                <svg class="tick"><use href="#i-tick"/></svg>
+                <svg class="arw"><use href="#i-arrow"/></svg></span>
+            </div>
+          </label>
+          <div class="detail">
+            <div class="wrap inner">
+              <ul class="feat">
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Custom design and written copy — never a template</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Local SEO: service pages, location pages, structured data</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Hosting, SSL, domain management and security updates</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Unlimited revisions while it is being built</span></li>
+              </ul>
+              <div class="aside">
+                <p>Right if you are starting from nothing, or replacing a site you have been quietly embarrassed by.
+                  Twenty-four month minimum applies to the monthly option.</p>
+                <a class="btn btn--pale" href="#contact">Get a free quote
+                  <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROFESSIONAL -->
+        <div class="tile-p">
+          <label for="p2">
+            <div class="wrap row">
+              <div>
+                <p class="tname">Professional <span class="pop">Most popular</span></p>
+                <p class="pages">Up to 50 pages</p>
+              </div>
+              <div class="prices">
+                <div class="pplate"><p class="pl">Upfront</p>
+                  <p class="pv"><span class="cur">£</span>1,995<span class="per">+ £25/mo</span></p></div>
+                <div class="pplate"><p class="pl">Or nothing upfront</p>
+                  <p class="pv"><span class="cur">£</span>75<span class="per">/mo</span></p></div>
+              </div>
+              <span class="mark" aria-hidden="true">
+                <svg class="tick"><use href="#i-tick"/></svg>
+                <svg class="arw"><use href="#i-arrow"/></svg></span>
+            </div>
+          </label>
+          <div class="detail">
+            <div class="wrap inner">
+              <ul class="feat">
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Everything in Starter, plus:</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Room for a full set of service and location pages</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Email on your own domain, not a Gmail address</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Priority support and faster turnaround on changes</span></li>
+              </ul>
+              <div class="aside">
+                <p>Where most businesses land. Enough pages to cover every service you offer and every town you cover,
+                  with the support level to match.</p>
+                <a class="btn btn--pale" href="#contact">Get a free quote
+                  <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GROWTH -->
+        <div class="tile-p">
+          <label for="p3">
+            <div class="wrap row">
+              <div>
+                <p class="tname">Growth</p>
+                <p class="pages">Up to 100 pages</p>
+              </div>
+              <div class="prices">
+                <div class="pplate"><p class="pl">Upfront</p>
+                  <p class="pv"><span class="cur">£</span>3,495<span class="per">+ £50/mo</span></p></div>
+                <div class="pplate"><p class="pl">Or nothing upfront</p>
+                  <p class="pv"><span class="cur">£</span>125<span class="per">/mo</span></p></div>
+              </div>
+              <span class="mark" aria-hidden="true">
+                <svg class="tick"><use href="#i-tick"/></svg>
+                <svg class="arw"><use href="#i-arrow"/></svg></span>
+            </div>
+          </label>
+          <div class="detail">
+            <div class="wrap inner">
+              <ul class="feat">
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Everything in Professional, plus:</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Scale for a shop, a large location set, or both</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>Analytics, Search Console and a monthly report</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tick"/></svg><span>The highest ongoing service level on offer</span></li>
+              </ul>
+              <div class="aside">
+                <p>For a shop with a real catalogue, or a business covering a lot of ground and wanting a page for
+                  every part of it.</p>
+                <a class="btn btn--pale" href="#contact">Get a free quote
+                  <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="price-foot">
+    <div class="wrap">
+      <p>Add-ons, the twenty-four-month terms and how the monthly option works in full are set out on the
+        <a href="#">pricing page</a>. Every site includes custom design, local SEO, hosting, SSL, domain management,
+        security updates, uptime monitoring and unlimited revisions during the build.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== PROOF ================================= -->
+<section id="proof" aria-labelledby="proof-h">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="tab cut">Who you are actually hiring</span>
+      <span class="rt">One person · Polegate, East Sussex · since 2019</span>
+    </div>
+    <h2 id="proof-h">Not one of these is a website business.</h2>
+
+    <div class="proof-grid" style="margin-top:clamp(1.75rem,3.5vw,2.75rem)">
+      <dl class="spec">
+        <div><dt>Trading since</dt><dd><b>2019</b></dd></div>
+        <div><dt>Studio</dt><dd>Unit H3, Chaucer Business Park, Dittons Road, Polegate BN26 6QH</dd></div>
+        <div><dt>Sites delivered</dt><dd><b>20+</b> across nine sectors</dd></div>
+        <div><dt>Longest client</dt><dd><b>5+ years</b> and still running</dd></div>
+        <div><dt>Coverage</dt><dd>Polegate, Eastbourne, Hailsham, Lewes, Seaford, Brighton, Hove, Uckfield — and UK-wide</dd></div>
+        <div><dt>In-house</dt><dd>Design, copy, build and hosting — nothing outsourced, nothing offshored</dd></div>
+        <div><dt>Reply within</dt><dd>One working day</dd></div>
+        <div><dt>Hours</dt><dd>Mon–Fri 9:00–17:30 · Sat by appointment</dd></div>
+      </dl>
+
+      <div class="quotes">
+        <figure class="qt cut rv">
+          <svg class="qm" viewBox="0 0 40 30" aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote>Ricky has built and managed our online store for over 5 years. I couldn’t be happier with his work.</blockquote>
+          <figcaption class="who">
+            <svg class="cm cut" viewBox="0 0 44 44" role="img" aria-label="Placeholder client mark"><use href="#cm-1"/></svg>
+            <span><b>Sarah, Cuddle Plush Fabrics</b>
+              <span><span class="ph">[town]</span> · <span class="ph">[year]</span></span></span>
+          </figcaption>
+        </figure>
+        <figure class="qt cut rv">
+          <svg class="qm" viewBox="0 0 40 30" aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote>I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</blockquote>
+          <figcaption class="who">
+            <svg class="cm cut" viewBox="0 0 44 44" role="img" aria-label="Placeholder client mark"><use href="#cm-2"/></svg>
+            <span><b>Nicola, Nicola Noble Tuition</b>
+              <span><span class="ph">[town]</span> · <span class="ph">[year]</span></span></span>
+          </figcaption>
+        </figure>
+        <figure class="qt cut rv">
+          <svg class="qm" viewBox="0 0 40 30" aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote>My yoga students love that they can book and pay for my classes on my website.</blockquote>
+          <figcaption class="who">
+            <svg class="cm cut" viewBox="0 0 44 44" role="img" aria-label="Placeholder client mark"><use href="#cm-3"/></svg>
+            <span><b>Molly, Sanctuary Ida</b>
+              <span><span class="ph">[town]</span> · <span class="ph">[year]</span></span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="proof-note">The quotes and names are real and unedited. The bracketed town and year are placeholders —
+      they get confirmed with each client before launch rather than guessed at. The marks beside them are drawn
+      placeholders, to be replaced by each client's own logo.</p>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ================================ -->
+<section id="contact" class="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="tab cut">Start a conversation</span>
+      <span class="rt">Free and without obligation · reply within one working day</span>
+    </div>
+    <h2 id="contact-h">No form to fill in. Just write to me.</h2>
+    <a class="mailto" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsulting&#8203;services.co.uk</a>
+
+    <div class="contact-grid">
+      <a class="drop cut" href="#contact">
+        <span class="dface">
+          <span class="di cut" aria-hidden="true"><svg><use href="#i-upload"/></svg></span>
+          <b>Or send me your current site</b>
+          <span class="dp">A link, or a screenshot of the bit that annoys you most. That is more useful than any
+            brief, and it takes you thirty seconds.</span>
+          <span class="mono" style="color:var(--acid)">Drop a file or paste a link →</span>
+        </span>
+      </a>
+
+      <div class="chans">
+        <a class="chan" href="tel:07395063764">
+          <span class="ci cut" aria-hidden="true"><svg><use href="#i-phone"/></svg></span>
+          <span><span class="cl">Call or text</span><span class="cv">07395 063764</span></span>
+          <svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="chan" href="mailto:mail@digitalconsultingservices.co.uk">
+          <span class="ci cut" aria-hidden="true"><svg><use href="#i-mail"/></svg></span>
+          <span><span class="cl">Email</span><span class="cv">mail@digitalconsulting&#8203;services.co.uk</span></span>
+          <svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="chan" href="https://wa.me/447395063764">
+          <span class="ci cut" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
+          <span><span class="cl">WhatsApp</span><span class="cv">Message the same number</span></span>
+          <svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="chan" href="#contact">
+          <span class="ci cut" aria-hidden="true"><svg><use href="#i-cal"/></svg></span>
+          <span><span class="cl">Book a call</span><span class="cv">Twenty minutes, no prep</span></span>
+          <svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="after">Tell me what the business does and roughly what is wrong with how it looks online now. That is
+      enough to start — everything else comes out of the conversation.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== FOOTER ================================= -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#main" style="margin-right:0">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#mark"/></svg>
+          <span>digital<br>consulting services</span>
+        </a>
+        <p style="margin-top:1rem">A website design and build studio in Polegate, East Sussex.
+          Founded 2019. Working UK-wide.</p>
+        <div class="chips cut" aria-hidden="true">
+          <span style="background:var(--paper)"></span>
+          <span style="background:var(--bone)"></span>
+          <span style="background:var(--plum)"></span>
+          <span style="background:var(--ultra)"></span>
+          <span style="background:var(--acid)"></span>
+          <span style="background:var(--graphite)"></span>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">A new website</a></li>
+          <li><a href="#services">An online shop</a></li>
+          <li><a href="#services">Fixing the site you have</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Hosting and management</a></li>
+          <li><a href="#services">Analytics and reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Where we work</h4>
+        <ul>
+          <li>Polegate · Eastbourne</li>
+          <li>Hailsham · Lewes · Seaford</li>
+          <li>Brighton · Hove · Uckfield</li>
+          <li>…and UK-wide</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:07395063764">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li>Unit H3, Chaucer Business Park,<br>Dittons Road, Polegate BN26 6QH</li>
+          <li>Mon–Fri 9:00–17:30 · Sat by appointment</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-end mono">
+      <span>© 2026 Digital Consulting Services</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a></span>
+      <span>Prototype · direction 66 · chamfer</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Staggered entry, one grammar, from an already-visible state. The page is a
+   complete document before this runs: nothing rests at opacity 0, the reveal
+   animates transform only, it latches, and it unobserves. */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+  document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+
+  /* Current-section marker in the nav. Degrades to no marker at all. */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var i = targets.indexOf(e.target);
+      if (i < 0) return;
+      links.forEach(function (a) { a.removeAttribute('aria-current'); });
+      links[i].setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  targets.forEach(function (t) { if (t) spy.observe(t); });
+}());
+</script>
+</body>
+</html>

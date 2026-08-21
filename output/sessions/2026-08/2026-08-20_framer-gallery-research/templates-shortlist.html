@@ -1,0 +1,439 @@
+<title>Agency Template Sweep</title>
+<style>
+  :root {
+    --ground:  #12130F;
+    --panel:   #1A1C17;
+    --raised:  #23261F;
+    --ink:     #EFF1E6;
+    --muted:   #9BA08D;
+    --faint:   #6B7061;
+    --rule:    #2E322A;
+    --lime:    #D8F24A;
+    --indigo:  #5A63EE;
+    --flag:    #E9765B;
+    --ok:      #86C46B;
+
+    --display: "Avenir Next Condensed", "Oswald", "Haettenschweiler", "Arial Narrow", system-ui, sans-serif;
+    --body: "Inter", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  :root[data-theme="light"] {
+    --ground:  #F4F5EF;
+    --panel:   #FFFFFF;
+    --raised:  #E9EBE0;
+    --ink:     #14160F;
+    --muted:   #5E634F;
+    --faint:   #8B9080;
+    --rule:    #D9DCCC;
+    --lime:    #C3DE23;
+    --indigo:  #4048D8;
+    --flag:    #B4462C;
+    --ok:      #4E8C36;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground:  #F4F5EF;
+      --panel:   #FFFFFF;
+      --raised:  #E9EBE0;
+      --ink:     #14160F;
+      --muted:   #5E634F;
+      --faint:   #8B9080;
+      --rule:    #D9DCCC;
+      --lime:    #C3DE23;
+      --indigo:  #4048D8;
+      --flag:    #B4462C;
+      --ok:      #4E8C36;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 26px 100px; }
+  .mono { font-family: var(--mono); }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  /* masthead */
+  header.top { padding: 68px 0 34px; border-bottom: 1px solid var(--rule); }
+  h1 {
+    font-family: var(--display); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(46px, 10vw, 118px); line-height: .88; letter-spacing: .004em;
+    margin: 16px 0 0; text-wrap: balance;
+  }
+  .stand { margin: 22px 0 0; max-width: 58ch; font-size: 18.5px; color: var(--muted); }
+  .counts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; color: var(--faint); }
+
+  section { padding-top: 66px; }
+  h2 {
+    font-family: var(--display); text-transform: uppercase; font-weight: 700;
+    font-size: clamp(27px, 4.2vw, 42px); line-height: 1; margin: 0 0 6px; letter-spacing: .008em;
+  }
+  .note { max-width: 64ch; color: var(--muted); margin: 12px 0 28px; }
+
+  /* hero pick */
+  .pick { background: var(--panel); border: 1px solid var(--rule); box-shadow: 0 24px 60px -40px rgba(0,0,0,.7); }
+  .pick-head { padding: 26px 30px 22px; border-bottom: 1px solid var(--rule); display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .pick-head h3 { font-family: var(--display); text-transform: uppercase; font-size: 38px; margin: 0 0 5px; line-height: 1; letter-spacing: .01em; }
+  .pick-body { padding: 24px 30px 28px; }
+  .lede { font-size: 17px; margin: 0 0 20px; max-width: 68ch; }
+
+  /* step strip — mirrors the thing being described */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 26px 0 8px; }
+  .step { border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .step .n { font-family: var(--display); font-size: 62px; line-height: 1; padding: 16px 16px 10px; font-weight: 700; }
+  .step .t { font-family: var(--display); text-transform: uppercase; font-size: 20px; padding: 0 16px 4px; letter-spacing: .02em; }
+  .step .d { font-size: 13.5px; padding: 0 16px 18px; opacity: .82; }
+  .s1 { background: var(--lime); color: #14160F; }
+  .s2 { background: #F2F3EC; color: #14160F; }
+  .s3 { background: var(--indigo); color: #fff; }
+  .s4 { background: #DDE6C4; color: #14160F; }
+
+  ul.take { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  ul.take li { position: relative; padding-left: 16px; font-size: 15px; max-width: 72ch; }
+  ul.take li::before {
+    content: ""; position: absolute; left: 0; top: .48em;
+    width: 3px; height: 1.06em; background: var(--lime);
+  }
+  ul.take strong { font-family: var(--display); text-transform: uppercase; letter-spacing: .02em; font-size: 15px; font-weight: 700; }
+
+  .badges { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+  .badge { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border: 1px solid var(--rule); color: var(--muted); white-space: nowrap; border-radius: 3px; }
+  .badge.free { border-color: var(--ok); color: var(--ok); }
+  .badge.clean { background: var(--lime); color: #14160F; border-color: var(--lime); }
+  .badge.warn { border-color: var(--flag); color: var(--flag); }
+
+  .caveat { margin: 20px 0 0; padding: 13px 16px; background: var(--raised); font-size: 14px; color: var(--muted); max-width: 72ch; border-radius: 4px; }
+  .caveat b { color: var(--flag); font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 5px; }
+
+  /* tables */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); background: var(--panel); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; min-width: 660px; }
+  th, td { text-align: left; padding: 12px 17px; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 14.5px; }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 400; background: var(--raised); }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--flag); white-space: nowrap; }
+
+  /* cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--rule); padding: 22px 24px; border-radius: 4px; }
+  .card h4 { font-family: var(--display); text-transform: uppercase; font-size: 21px; margin: 8px 0 4px; letter-spacing: .015em; }
+  .card .url { font-family: var(--mono); font-size: 12px; color: var(--faint); word-break: break-all; }
+  .card p { font-size: 14.5px; color: var(--muted); margin: 12px 0 0; }
+  .card p.hit { color: var(--ink); }
+
+  .gaps { background: var(--raised); padding: 26px 30px; border-radius: 4px; }
+  .gaps ul { margin: 0; padding-left: 20px; }
+  .gaps li { margin-bottom: 10px; font-size: 15px; color: var(--muted); }
+  .gaps li:last-child { margin-bottom: 0; }
+  .gaps b { color: var(--ink); }
+
+  a { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">DCS homepage redesign · Framer templates · agency category · 20 Aug 2026</div>
+    <h1>Agency Template Sweep</h1>
+    <p class="stand">Five agents across 159 agency templates, judging motion on whether it does a job —
+      and whether the page still works when it doesn't run.</p>
+    <div class="counts">
+      <span>159 TEMPLATES LISTED</span>
+      <span>85 DEMOS OPENED</span>
+      <span>27 SHORTLISTED</span>
+      <span>11 COUNT-UPS CAUGHT</span>
+      <span>~60 FEATURED NOT COVERED</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Your pick, verified</div>
+    <h2>Bold Design / "Boldness"</h2>
+    <p class="note">You flagged this one. An agent had reported its demo dead — that was wrong, it only
+      tried the guessed URL. It loads fine, and it is the strongest fit in the sweep for what you asked for.</p>
+
+    <article class="pick">
+      <div class="pick-head">
+        <div style="flex:1 1 300px; min-width:0">
+          <h3>Boldness</h3>
+          <span class="url mono">bolddesign.framer.website</span>
+        </div>
+        <div class="badges">
+          <span class="badge free">Free</span>
+          <span class="badge clean">No count-ups</span>
+          <span class="badge">Poster</span>
+        </div>
+      </div>
+      <div class="pick-body">
+        <p class="lede">Real identity is <strong>"Boldness — Brand &amp; Web Design by Remy Cole"</strong>.
+          Near-black ground, chartreuse / indigo / bone accents, heavy condensed poster grotesk. It is the
+          only shortlist-grade template in the entire sweep that is <strong>clean on your count-up rule by
+          construction</strong> — a DOM scan for numeric leaf nodes returns nothing but <span class="mono">01
+          02 03 04</span>, the process numerals. No stat band, no percentages, no counter anywhere.</p>
+
+        <ul class="take">
+          <li><strong>The animated imagery</strong> — image cards at four or five sizes drifting at
+            <em>different scroll rates</em> over giant ghosted display type, and interleaved in z so some pass
+            in front of the headline and some behind. That z-interleave is what creates the poster depth; a
+            flat parallax grid doesn't read the same way.</li>
+          <li><strong>Process steps</strong> — each step is a two-tile stack: a tall tile carrying only the
+            numeral at ~200px, and a second tile beneath with the name and copy. The four assemble
+            <em>diagonally</em> as you scroll, each offset down-right of the last, until they sit in a row.</li>
+          <li><strong>Service slabs</strong> — service name set enormous inside a rounded chartreuse block,
+            with project imagery abutting its edges.</li>
+          <li><strong>Statement type</strong> — full-viewport lines like <em>"NOBODY REMEMBERS POLITE
+            DESIGN"</em> in bone on black, with image cards passing through the letterforms.</li>
+        </ul>
+
+        <div class="steps">
+          <div class="step s1"><div class="n">01</div><div class="t">We Talk</div><div class="d">"It starts with a conversation, not a contract."</div></div>
+          <div class="step s2"><div class="n">02</div><div class="t">You Decide</div><div class="d">Fixed scope, fixed price, first visual direction.</div></div>
+          <div class="step s3"><div class="n">03</div><div class="t">I Build</div><div class="d">Design and build in the same pass. No handoff drift.</div></div>
+          <div class="step s4"><div class="n">04</div><div class="t">You Own It</div><div class="d">"Everything documented, nothing locked in."</div></div>
+        </div>
+        <p class="note" style="margin-top:18px">The copy is worth as much as the layout. Step 04 is almost
+          exactly how DCS already positions itself against agencies that hold clients hostage — and step 02's
+          "before you've spent a cent" answers the objection a plumber actually has.</p>
+
+        <div class="caveat"><b>Two things to weigh</b>
+          <strong>First paint is reveal-gated</strong> — black with a single image at five seconds. Same
+          disease as the rest of this corpus; take the layout, not the reveal policy. And <strong>the voice is
+          first-person singular</strong> ("I design and build in the same pass", "I'm Remy"). For a local
+          business audience a named person often builds more trust than a "we", but it is a decision, not a
+          detail.</div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="eyebrow">The rule you set</div>
+    <h2>Every count-up we caught</h2>
+    <p class="note">You said you don't like numbers that count up. Agents photographed these mid-flight. The
+      middle column is what a visitor actually saw on screen — not a hypothetical failure, the observed state.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Template</th><th>What was on screen</th><th>Intended value</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Theory Studio</strong></td><td class="num">01+ projects delivered — frozen</td><td>never resolved</td></tr>
+          <tr><td><strong>Sevora</strong> (hero, above fold)</td><td class="num">0+ · 0yr · 0+</td><td>30+ · 8yr · 40+</td></tr>
+          <tr><td><strong>Hanza®</strong> ($99)</td><td class="num">0+ · 0+ · 0+</td><td>122+ · 84+ · 12+</td></tr>
+          <tr><td><strong>MVN Studio</strong></td><td class="num">+0 · +0</td><td>+120 · +240</td></tr>
+          <tr><td><strong>Create®</strong> ($129)</td><td class="num">10+ · 10% · 10 · 10%</td><td>86+ · 80% · 32 · 89%</td></tr>
+          <tr><td><strong>Intelli™</strong> ($99)</td><td class="num">13+ · 3+ · 0M+ · 3%</td><td>500+ · 120+ · 12M+ · 100%</td></tr>
+          <tr><td><strong>Nyro</strong></td><td class="num">13 · 2 · 16 · Awards 0</td><td>64 · 10 · 80 · 10</td></tr>
+          <tr><td><strong>Portavia</strong></td><td class="num">0 Years of Experience</td><td>12 years</td></tr>
+          <tr><td><strong>Astra®</strong></td><td class="num">1997 mid-roll, double digits visible</td><td>1997</td></tr>
+          <tr><td><strong>Oberon</strong> ($129)</td><td class="num">1X faster lead response</td><td>4X</td></tr>
+          <tr><td><strong>Quomi</strong></td><td class="num">100+ · 65% · 10+</td><td>120+ · 85% · 30+</td></tr>
+          <tr><td><strong>Sylven</strong> — your seed reference</td><td class="num">0% · 0% · $0</td><td>never resolved on my visit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:22px"><strong>And one in the same family.</strong> Lumenary's nav clock
+      read <span class="mono">06:45 AM</span>, then <span class="mono">06:41</span>, then <span class="mono">06:43</span>
+      — it runs <em>backwards</em>. It isn't a clock, it's an animation cycling digits to look like one. Nakula's
+      "Available — EARLY FEB 2025" badge is hardcoded, so it has advertised stale availability for eighteen months.
+      If we take a live clock or an availability state, it gets wired to real data or it doesn't ship.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Three static replacements</div>
+    <h2>What to do instead</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="eyebrow">Kanso · $99</div>
+        <h4>Marquee of literals</h4>
+        <p>A horizontal strip — <span class="mono">15+ Years / 140+ Projects / 97%</span> — separated by slashes,
+          drifting continuously. Motion, but every figure is authored DOM text, so it is always correct.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Fuel · free</div>
+        <h4>Stats as a table</h4>
+        <p>Two columns on hairline rules: <span class="mono">New clients ——— 15</span>. Because it reads as a
+          table rather than a KPI band, there is no temptation to animate it at all.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Small Studio · free</div>
+        <h4>Awards instead of numbers</h4>
+        <p>Drops the stats bar entirely: rows of favicon chip + award name + discipline tags + year. Proof
+          rather than figures — and for DCS this is Gas Safe, NICEIC, Checkatrade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Engaging yet functional</div>
+    <h2>Motion that does a job</h2>
+    <p class="note">Ranked by whether the effect carries information. All of these are reproducible in
+      Next.js — CSS, IntersectionObserver or a few lines of Framer Motion. None needs Framer's scroll engine.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Effect</th><th>Source</th><th>The job it does</th><th>How</th></tr></thead>
+        <tbody>
+          <tr><td><strong>View-mode switcher as oversized type</strong></td><td class="mono">Other °</td><td>Grid / List / Feed / Full, active in black, inactive stepping through greys. A functional control that <em>is</em> the typography.</td><td>CSS grid + state toggle</td></tr>
+          <tr><td><strong>Reading-position service list</strong></td><td class="mono">SwissBrut</td><td>The item nearest viewport centre goes black, the rest stay pale — you always know where you are. Degrades to "all grey", still legible.</td><td>IO, centred rootMargin</td></tr>
+          <tr><td><strong>Nav collapses with progress built in</strong></td><td class="mono">MATTTER®</td><td>Shrinks on scroll-down, restores on scroll-up, and the collapsed pill <em>is</em> the scroll-progress bar.</td><td>scroll-direction hook + CSS var</td></tr>
+          <tr><td><strong>Scroll-spy client rail</strong></td><td class="mono">Nexsign</td><td>Sticky index where a marker moves to whichever case study is in view. A table of contents that tracks you.</td><td>IO + class toggle</td></tr>
+          <tr><td><strong>Services accordion</strong></td><td class="mono">Halo Studio</td><td>The motion <em>is</em> the information architecture, and the closed state still shows every service name.</td><td><span class="mono">grid-template-rows: 0fr→1fr</span></td></tr>
+          <tr><td><strong>Self-drawing rule</strong></td><td class="mono">ProLab</td><td>A hairline draws left-to-right connecting the index to the service name as the row arrives.</td><td>IO + <span class="mono">scaleX()</span></td></tr>
+          <tr><td><strong>Flow diagram</strong></td><td class="mono">Oberon</td><td>An isometric node graph that literally draws the pipeline the copy is selling.</td><td>SVG <span class="mono">stroke-dashoffset</span></td></tr>
+          <tr><td><strong>Hover project rail</strong></td><td class="mono">Rolen</td><td>Hovering a thumbnail prints title, discipline and year beside it. Needs a tap fallback on mobile.</td><td>state + CSS transition</td></tr>
+          <tr><td><strong>Section watermark that tracks</strong></td><td class="mono">Lurais</td><td>A rotated label in the margin swaps <span class="mono">/about</span> → <span class="mono">/featured</span> → <span class="mono">/portfolio</span>. Answers "where am I" with no sticky nav.</td><td>sticky + IO</td></tr>
+          <tr><td><strong>Labelled marquee</strong></td><td class="mono">Nexsign</td><td>A fixed opaque panel over the strip's left end reads "brands we helped to scale" — the static label explains the moving thing.</td><td>CSS keyframe + overlay</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Best of the rest</div>
+    <h2>The shortlist</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="badges"><span class="badge free">Free</span><span class="badge clean">No count-ups</span></div>
+        <h4>SwissBrut</h4><span class="url">swissbrut.framer.website</span>
+        <p class="hit">Strongest thing in its batch and free. The flat-but-expensive look done <em>structurally</em> —
+          grid, hairlines and type weight, no shadows or gradients. Its process rows (giant numeral · one-word
+          label · body · thumbnail, on a hairline) are the exact component DCS needs for "how we work".</p>
+        <p>Flaw: the right half of the hero is blank for 2–3s on first paint. Drop that stagger.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge free">Free</span><span class="badge clean">No count-ups</span></div>
+        <h4>Halo Studio</h4><span class="url">halo-studio.framer.website</span>
+        <p class="hit">The most <em>usable</em> template found — only 6% of visible elements opacity-gated, the
+          lowest of any multi-screen page opened. Reads like an agency, not a portfolio. Services accordion, and
+          a live status chip in the nav (green dot + "Based in…").</p>
+        <p>Oddity: scrolling back up leaves the About section blank — the reveal reverses instead of latching.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge free">Free</span><span class="badge clean">No count-ups</span></div>
+        <h4>Lurais</h4><span class="url">lurais.framer.website</span>
+        <p class="hit">The one an agent said it would actually build from, and the only template praised for
+          getting reveals <em>right</em> — its intermediate state is greyed-but-legible, not invisible. Its
+          "work principles" row is three cards of deliberately <em>unequal</em> construction, which is a direct
+          answer to the flat-generic-card problem.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge">Paid</span><span class="badge clean">No count-ups</span></div>
+        <h4>Other °</h4><span class="url">other-template.framer.website</span>
+        <p class="hit">The only template in its batch that rendered its full hero at first paint with
+          <em>no reveal gating whatsoever</em>. Four-slot top bar with the raw email where the CTA button
+          usually goes. <span class="mono">Selected Works⁽¹²⁾</span> superscript count.</p>
+        <p>Bug not to copy: the sticky bar has no background and collides with headlines.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge">Paid</span><span class="badge warn">Blank first paint</span></div>
+        <h4>MATTTER®</h4><span class="url">mattter.framer.website</span>
+        <p class="hit">Near-black, one green accent, type at two extremes and nothing between. Best motion set
+          found: collapsing nav with built-in scroll progress, and a sticky section-label pill riding a hairline
+          that swaps as you cross sections.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge">$79</span><span class="badge warn">Fake clock</span></div>
+        <h4>Lumenary</h4><span class="url">lumenary.framer.website</span>
+        <p class="hit">Greyscale only, no accent colour at all — "expensive without loud". Its two-column
+          services table (names left at full contrast, descriptions right in grey, no cards or icons) is the
+          strongest replacement for the service cards you disliked.</p>
+        <p>Hero has no headline at all, and the nav clock runs backwards.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge">$129</span><span class="badge">Closest positioning</span></div>
+        <h4>Mattis®</h4><span class="url">mattis.framer.website</span>
+        <p class="hit">Bills itself as a "conversion-first design &amp; development agency" — the closest
+          positioning to DCS in the whole sweep. Mono-uppercase body copy with weight-based emphasis, a
+          persistent bottom utility bar, hairline spine down the page.</p>
+        <p>From the Featured shelf, which no batch systematically covered.</p>
+      </div>
+      <div class="card">
+        <div class="badges"><span class="badge">Free</span><span class="badge clean">No count-ups</span></div>
+        <h4>Small Studio</h4><span class="url">smallstudio.framer.website</span>
+        <p class="hit">Obsessive label-left / content-right metadata on hairlines — it reads like a studio that
+          keeps records. Services rows pair a service name with a right-aligned <em>stack of deliverables</em>,
+          carrying information with no motion at all.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The corpus itself</div>
+    <h2>Health warning</h2>
+    <p class="note">These demos are in poor condition, and it is one design decision repeated — <span class="mono">opacity: 0</span>
+      until observed — taken without asking what happens when the observer never fires.</p>
+    <div class="grid">
+      <div class="card">
+        <h4>Blank on arrival</h4>
+        <p><strong>Mondragon</strong> ($59) renders entirely blank on the page a buyer lands on — 4,035 characters
+          in the DOM, nothing painted. <strong>Bungee</strong> ($49) the same over 11,214px. <strong>Pearl</strong>,
+          <strong>Elian</strong>, <strong>Flexio</strong>, <strong>Fathom</strong>, <strong>SwissFolio</strong>
+          all show a coloured void where the hero should be.</p>
+      </div>
+      <div class="card">
+        <h4>Preloaders that never finish</h4>
+        <p><strong>Fabrica</strong> ($129), <strong>Mōno</strong> ($99) and <strong>Asake</strong> sit on splash
+          screens for 16+ seconds with no content ever appearing. <strong>Mira</strong> ($129) uses a percentage
+          count-up <em>as</em> the preloader. <strong>Creatiq</strong>'s blur-reveal never resolves and scrolling
+          stops working.</p>
+      </div>
+      <div class="card">
+        <h4>Motion ahead of the visitor</h4>
+        <p><strong>Torque®</strong> ($129) puts a full-screen "welcome, scroll to explore" gate between you and
+          the homepage. <strong>Raw Studio</strong> fires an interstitial modal before you've read anything.
+          <strong>Nora Vale</strong> remaps vertical scroll to a horizontal filmstrip. <strong>Rolen</strong>'s
+          hero simply doesn't scroll.</p>
+      </div>
+      <div class="card">
+        <h4>Motion that damages legibility</h4>
+        <p><strong>Agenciy</strong>, <strong>Platform®</strong> and <strong>Nyro</strong> use a per-character
+          scroll-linked colour fill that <em>never completes</em> — at rest the tail of every headline stays
+          ghosted (<span class="mono">Virtual Reality Encounte</span>). <strong>Collins</strong>' rotated card
+          stack is only legible mid-transition.</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:24px"><strong>The test to apply to anything we build:</strong> screenshot
+      it with JavaScript disabled. That is what a visitor on a bad train connection gets. Content renders at full
+      opacity by default; motion animates <span class="mono">transform</span> from a visible state, gated behind
+      <span class="mono">prefers-reduced-motion: no-preference</span>, with the un-animated state being the
+      complete one.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Scope</div>
+    <h2>What this didn't cover</h2>
+    <div class="gaps">
+      <ul>
+        <li><b>~60 Featured templates were never touched.</b> The Featured shelf holds 99+ agency templates and is
+          Trending-ordered, so those are the ones Framer itself promotes. My partition sent agents down the
+          alphabetical tail instead. One strong candidate (Mattis®) came from there by chance. <b>This is the
+          obvious next pass</b> — the slugs are listed in <span class="mono">findings-tpl-batch-e.md</span>.</li>
+        <li><b>Mobile was not assessed at all this round.</b> Desktop only. Agents were barred from resizing
+          because it corrupts concurrent screenshots and doesn't work anyway — the screenshot tool pins a fixed
+          viewport override.</li>
+        <li><b>Demo URLs are unreliable.</b> Framer serves across three hostnames
+          (<span class="mono">.framer.website</span>, <span class="mono">.framer.media</span>,
+          <span class="mono">.framer.ai</span>) and about a third of slugs don't match their demo. Several
+          resolve to squatted or unrelated sites. Verified URL tables for two batches are in the findings files.</li>
+        <li><b>One template was wrongly reported dead</b> — Bold Design, the one you asked about. Treat any
+          "Site Not Found" in these files as unverified unless the agent checked the embedded
+          <span class="mono">previewUrl</span>.</li>
+        <li><b>85 of 159 demos opened.</b> Roughly 20 slugs resolved but went unopened on budget, and a handful
+          (<span class="mono">optique</span>, <span class="mono">fox-x</span>, <span class="mono">james</span>,
+          <span class="mono">hrzns</span>) could not be resolved at all.</li>
+        <li><b>No hover-state or mobile-menu pass</b>, and no interior pages — homepages only.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>

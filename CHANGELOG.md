@@ -6,6 +6,99 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-21
+
+### Infrastructure
+
+- **A docs-only commit could reach staging but could never be promoted to `main`.** Two
+  individually-correct policies deadlocked. `e2e-tests.yml` carried
+  `paths-ignore: output/**, docs/**, **/*.md` on its `push` trigger, so a
+  documentation-or-prototypes-only commit produced **no workflow run at all**. The promotion gate
+  (`scripts/verify-staging-e2e.ts`) requires a push-triggered `e2e-tests.yml` run concluding
+  `success` for the exact commit being promoted, and it fails closed by design — "I could not prove
+  it is green" is treated as "it is not green". With no run to find, the required check
+  `Verify promoted commit passed staging E2E` failed and branch protection blocked the merge, with
+  no override flag anywhere (the gate was deliberately built without one, having closed three
+  earlier bypass holes). Hit while promoting the round-7 prototypes.
+- **Fixed by removing `paths-ignore` from the `push` trigger only.** The jobs already scope
+  themselves by branch with `if:` conditions, so the cost is one smoke run on a docs push, and the
+  promoted commit is now genuinely E2E-tested rather than merely unblocked. `pull_request` keeps its
+  filter — the verifier already ignores PR-triggered runs, so it was never the problem. The
+  alternative (teaching the gate to accept a legitimately-skipped run) was rejected because it
+  weakens the guarantee the gate exists to provide. A comment on the trigger records why, so the
+  filter is not re-added without changing the gate to match.
+
+### Documentation
+
+- **A monospaced body face corrupts a comma'd price on its own — `tabular-nums` is not the only
+  way in.** The CSS Syntax rule in [CLAUDE.md](CLAUDE.md) warned only about
+  `font-variant-numeric: tabular-nums`. Setting prices in DM Mono reproduced the identical
+  `£1 , 995` failure with no `tnum` anywhere in the stylesheet: every glyph in a mono face occupies
+  one cell, so the comma takes a full digit advance regardless. This matters because DM Mono is the
+  chosen DCS body face, making it a live risk rather than a hypothetical. The rule now says to
+  resolve **both** `font-variant-numeric` and `font-family` up the ancestor chain, and to keep
+  comma'd figures on the grotesk. Found by rendering, not by review — the markup looks correct
+  either way. (Direction 52 had already anticipated this in a code comment; the house rule had not.)
+
+### Research
+
+- **Two sweeps of the Framer ecosystem, distilled into a prototype brief**
+  (`output/sessions/2026-08/2026-08-20_framer-gallery-research/prototype-brief.md`). Round one
+  covered the community gallery (~450 tiles skimmed, 78 sites opened) and answered "the components
+  weren't elevated"; round two covered all 159 agency marketplace templates (85 demos opened) and
+  answered "engaging yet functional animation". The brief carries a motion policy, a component
+  vocabulary, mobile rules and three paste-ready direction briefs.
+- **The dominant defect in that whole design world is content held at `opacity: 0` until an
+  IntersectionObserver fires.** Nine of twenty-seven demos in one batch showed a blank screen on
+  arrival; paid templates at $49–$129 render nothing at all. It is a content-visibility bug, not a
+  layout bug, and it degrades worst on slow connections and small screens — so it is a plausible
+  contributor to the "dreadful mobile" complaint against the earlier DCS prototypes. The house
+  acceptance test that came out of it: **screenshot the page with JavaScript disabled; if that is
+  not a complete document, the build is wrong.**
+- **Animated count-ups are ruled out for DCS**, not merely handled carefully. Twelve were caught
+  mid-flight publishing false figures (`0+ years of experience`, `Awards 0`, one frozen permanently
+  at `01+ projects delivered`). Every figure is authored static text from here on.
+
+### Sites
+
+- **DCS gains twelve research-led homepage prototypes** (`home-57` … `home-68`) in
+  `output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/`, built to
+  `build-spec-round7.md` and registered in that folder's `index.html`. Twelve deliberately divergent
+  directions — spec sheet, poster, quiet, trade blocks, editorial masthead, workbench, index rail,
+  Swiss grid, warm local, chamfer, dock, selector — each shaped by a different design skill so they
+  diverge by construction. The binding constraint this round was that **no section may be text and
+  colour alone**: every section carries an abstract div-built UI mock, an inline SVG diagram, a
+  hatched wireframe placeholder or a duotone photo plate. `home-64` is the only one using real R2
+  photography; the other eleven are self-contained and work offline.
+
+---
+
+## 2026-08-19
+
+### Documentation
+
+- **`.svg` in a session folder is gitignored, and the guide now says so.** `output/.gitignore`'s
+  August 2026 binary deny-list includes `sessions/**/*.svg`. SVG is a text format, so it does not
+  read as part of an image rule — a vector written under `output/sessions/**/` is silently absent
+  from a commit that looks like it included it, with `git status` saying nothing either way. Hit
+  while building the DCS mark. Correct behaviour for prototype artwork, which belongs on R2, but
+  brand assets should go in the site's tracked `public/` instead. Recorded in
+  [docs/guides/prototype-hosting.md](docs/guides/prototype-hosting.md) with
+  `git check-ignore -v` as the way to confirm.
+
+### Sites
+
+- **DCS gains a real vector logo and a new favicon** (`sites/dcs/public/dcs-mark.svg`,
+  `favicon.svg`). Every prior logo file was a 530×254 raster PNG inside an SVG wrapper — including
+  the black and white variants, which are pixel-identical in shape to the colour original and so
+  added no resolution. The mark draws in `currentColor`, so one file covers black on light grounds
+  and white knocked out of dark or colour grounds. The favicon uses the D alone, clipped from the
+  real monogram: all three letters turn to mush at 16px. The previous Arial-text favicon is parked
+  as `favicon-old.svg`. `sites/dcs/app/layout.tsx` still points `logoSrc` at the old raster
+  `/logo.svg` — the new mark is not wired in yet, pending the homepage rebuild.
+
+---
+
 ## 2026-08-18
 
 ### Infrastructure

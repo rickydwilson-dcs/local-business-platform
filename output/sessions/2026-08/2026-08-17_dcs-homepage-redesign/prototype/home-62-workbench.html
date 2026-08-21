@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Consulting Services — websites designed, built, hosted and looked after</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide since 2019. We write it, design it, build it, host it and keep it running. From £995 plus £15/mo, or £45/mo with nothing upfront.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23D6006B'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='40' font-weight='700' fill='%23F3F3F1' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&family=Poppins:wght@300;400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ==================================================================
+   DCS — DIRECTION 62 · "WORKBENCH"
+   Round 7. Research lineage: Billow, Planhat, Mimo.
+
+   THESIS
+   The in-card UI mock is not a decoration on this page — it IS the
+   page. Every section is a bento of flat tinted canvases, and each
+   canvas is built to one recipe, without exception:
+
+       1. A flat TINTED canvas. Never white, never a screenshot.
+       2. Grey SKELETON BARS standing in for the text that doesn't
+          matter.
+       3. Exactly ONE element in full colour and full fidelity — the
+          thing the caption underneath is about.
+       4. Where a canvas needs to read as live rather than finished, a
+          greyed "not done yet" row with a hollow radio dot.
+
+   The heading and the copy always sit OUTSIDE and BELOW the canvas,
+   on the page ground, with no container round them. There is no such
+   thing as a card on this page — there are canvases, and there is
+   text on the ground.
+
+   WHY THIS RECIPE AND NOT A SCREENSHOT
+   Verified in the research at a true 390px: an abstract mock stays
+   legible at phone width while a real product screenshot collapses to
+   a grey smudge. It is a mobile technique before it is an aesthetic
+   one. It also never dates.
+
+   THE PRIMITIVE SET (the whole page is composed from these)
+   .canvas  tinted ground        .sk    skeleton bar
+   .panel   lighter inner shade  .todo  greyed row + hollow radio dot
+   .row     mock table row       .hot   THE one full-colour element
+   Every mock below is those six things arranged differently. That is
+   the point: one vocabulary, applied six ways, is what makes a page
+   look designed rather than assembled.
+
+   HOW EACH SECTION SATISFIES THE HARD RULE (no text-and-colour-only)
+   01 Nav ......... status cluster with an authored (not live) mark.
+   02 Hero ........ full browser-frame canvas; the one full-colour
+                    element is a "Site live" badge.
+   03 Effort ...... three canvases: the conversation thread, the copy
+                    being written for you, and the nothing-to-learn
+                    row set.
+   04 Services .... six canvases in an asymmetric 7/5, 5/7, 8/4 bento,
+                    each with one full-colour element and a caption on
+                    the ground below it.
+   05 Process ..... four canvases carrying a progress rail, one step
+                    filled in full colour per step.
+   06 Work ........ nine tinted plates, the client name being the one
+                    full-colour element in each.
+   07 Voices ...... skeleton logo plates beside each real quote.
+   08 Pricing ..... vertical selector (radios; works with JS off)
+                    driving one canvas that repaints, carrying either
+                    a "£0 due today" chip or a "yours outright" chip.
+   09 Contact ..... four channel canvases, icon plus real value.
+
+   DELIBERATE DEPARTURES
+   - Palette: the inherited chord is kept but re-roled. The page ground
+     is a warm off-white; the canvas tints are LOW-SATURATION derivatives
+     of ultra, acid, plum and bone. The saturated originals appear only
+     as the one full-colour element inside a canvas — which is precisely
+     what makes that element read as the subject.
+   - Type: inherited link unchanged. Prose runs in Schibsted Grotesk;
+     DM Mono is reserved for labels, mock UI text and figures — mono
+     inside a mock is what makes it read as an interface.
+
+   NON-NEGOTIABLES HELD
+   - No count-ups. Every figure is authored static text.
+   - Nothing rests at opacity:0. Reveals animate transform from a fully
+     visible state, are armed by JS, latch, and unobserve.
+   - Complete document with JavaScript disabled — including pricing,
+     which is radio + :checked.
+   - 390px designed explicitly: the bento collapses to one column of
+     canvases with their own short aspect ratios, not squeezed desktop
+     tiles. Pricing is a vertical selector at every width.
+   - font-variant-numeric is never tabular on £1,995 / £3,495.
+   - No backdrop-filter and no translateX-centred floating nav, so the
+     containing-block trap cannot bite.
+   ================================================================== */
+
+:root{
+  --ground:#F2F2EF;
+  --ink:#101014;
+  --graphite:#1B1B20;
+  --ash:#55555E;
+  --smoke:#9C9CA6;
+  --line:#D9D9D3;
+  --line-soft:#E4E4DF;
+
+  /* skeleton greys — the bars that stand in for text that doesn't matter */
+  --sk:#CFCFC9;
+  --sk-lite:#DEDED8;
+
+  /* the saturated set: only ever the ONE full-colour element */
+  --ultra:#D6006B;
+  --acid:#00BFC6;
+  --plum:#17265E;
+
+  /* canvas tints: low-saturation derivatives, never white */
+  --c-rose:#F0DCE6;
+  --c-mint:#D8EBEB;
+  --c-navy:#DEE3EF;
+  --c-bone:#E4E2DA;
+  --c-sand:#EEE3D5;
+
+  --panel:rgba(255,255,255,.66);
+  --panel-2:rgba(255,255,255,.38);
+
+  --gut:clamp(18px,3.6vw,52px);
+  --maxw:1480px;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --logo:"Poppins",var(--sans);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r:14px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.55;
+  font-variant-numeric:normal;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
+ul{list-style:none;padding:0}
+::selection{background:var(--ultra);color:#fff}
+:focus-visible{outline:2px solid var(--ultra);outline-offset:3px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.mono{font-family:var(--mono)}
+
+/* ================= THE PRIMITIVE SET ============================ */
+.canvas{
+  position:relative;overflow:hidden;border-radius:var(--r);
+  background:var(--c-bone);border:1px solid var(--line);
+  padding:clamp(14px,1.5vw,22px);
+  display:flex;flex-direction:column;gap:10px;
+}
+.canvas.rose{background:var(--c-rose)}
+.canvas.mint{background:var(--c-mint)}
+.canvas.navy{background:var(--c-navy)}
+.canvas.sand{background:var(--c-sand)}
+.canvas.bone{background:var(--c-bone)}
+
+.panel{background:var(--panel);border-radius:9px;padding:12px;display:flex;flex-direction:column;gap:9px}
+.panel.q{background:var(--panel-2)}
+
+.sk{height:9px;border-radius:99px;background:var(--sk)}
+.sk.lite{background:var(--sk-lite)}
+.sk.t{height:13px}
+.sk.s{height:7px}
+.skblock{border-radius:8px;background:var(--sk-lite)}
+
+.row{display:flex;align-items:center;gap:10px}
+.row .grow{flex:1}
+.dotO{width:13px;height:13px;border-radius:50%;border:1.6px solid var(--smoke);flex:none}
+.dotF{width:13px;height:13px;border-radius:50%;background:var(--sk);flex:none}
+.todo{display:flex;align-items:center;gap:10px;opacity:.75}
+
+/* THE one full-colour element */
+.hot{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  background:var(--ultra);color:#fff;border-radius:99px;padding:8px 13px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.01em;line-height:1;
+  font-variant-numeric:normal;
+}
+.hot.acid{background:var(--acid);color:#07282A}
+.hot.plum{background:var(--plum);color:#F3F3F1}
+.hot.sq{border-radius:8px}
+.hot svg{width:13px;height:13px;flex:none}
+.hot .pip{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+
+/* ================= LAYOUT FURNITURE ============================= */
+.bar{
+  display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+  padding-bottom:11px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--ash);
+}
+.bar .n{color:var(--ultra)}
+section{padding-block:clamp(46px,5.4vw,92px)}
+.h2{font-size:clamp(29px,3.3vw,50px);font-weight:700;line-height:1.05;letter-spacing:-.032em;max-width:19ch}
+.h2 .dim{color:var(--smoke)}
+.lede{max-width:56ch;color:var(--ash);font-size:clamp(16px,1.1vw,18.5px);line-height:1.6;margin-top:14px}
+.cap{margin-top:15px}
+.cap h3{font-size:clamp(19px,1.6vw,24px);font-weight:700;letter-spacing:-.022em;line-height:1.15}
+.cap p{color:var(--ash);font-size:16px;line-height:1.5;margin-top:7px;max-width:46ch}
+.cap .deliv{display:flex;flex-wrap:wrap;gap:0 7px;margin-top:11px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--smoke)}
+.cap .deliv span:not(:last-child)::after{content:" /";color:var(--line)}
+.illus{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-top:18px}
+
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(16px,2vw,34px)}
+.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}
+.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+.s3{grid-column:span 3}
+
+/* ================= 01 NAV ======================================= */
+.nav{position:sticky;top:0;z-index:40;background:var(--ground);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:clamp(14px,2.4vw,38px);padding-block:13px}
+.logotype{font-family:var(--logo);font-weight:300;font-size:15px;line-height:1.14;text-decoration:none;white-space:nowrap}
+.logotype b{font-weight:300;display:block}
+.logotype sup{font-size:.55em;vertical-align:super;color:var(--ultra)}
+.nav-links{display:flex;gap:clamp(12px,1.6vw,26px);font-family:var(--mono);font-size:12.5px;margin-left:auto}
+.nav-links a{text-decoration:none;padding:6px 0;transition:color .2s var(--ease)}
+.nav-links a:hover{color:var(--ultra)}
+.statuspill{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+  border-radius:99px;padding:7px 13px;background:var(--c-bone);
+  font-family:var(--mono);font-size:11px;color:var(--ash);white-space:nowrap;
+}
+.statuspill svg{width:9px;height:9px;flex:none}
+.cta{
+  display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 18px;border-radius:99px;
+  background:var(--ink);color:var(--ground);text-decoration:none;
+  font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  transition:transform .18s var(--ease),background .2s var(--ease);
+}
+.cta:hover{background:var(--ultra)}
+.cta:active{transform:translateY(1px)}
+.cta.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.cta.ghost:hover{background:var(--ink);color:var(--ground)}
+.cta svg{width:14px;height:14px}
+
+/* ================= 02 HERO ====================================== */
+.hero{padding-top:clamp(34px,4.2vw,64px)}
+.hero .bento{align-items:center}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+h1.big{font-size:clamp(33px,3.9vw,60px);line-height:1.03;letter-spacing:-.035em;font-weight:700;margin-top:16px}
+h1.big .dim{color:var(--smoke)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:clamp(22px,2.6vw,32px)}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-family:var(--mono);font-size:12px;color:var(--ash);font-variant-numeric:normal}
+.hero-facts b{color:var(--ink);font-weight:500}
+.canvas.hero-c{aspect-ratio:16/11.4;gap:12px}
+.browser{flex:1;display:flex;flex-direction:column;background:var(--panel);border-radius:10px;overflow:hidden}
+.browser .chrome{display:flex;align-items:center;gap:7px;padding:10px 12px;border-bottom:1px solid rgba(16,16,20,.07)}
+.browser .chrome i{width:8px;height:8px;border-radius:50%;background:var(--sk);display:block}
+.browser .addr{flex:1;height:16px;border-radius:99px;background:var(--sk-lite);margin-left:6px}
+.browser .body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.browser .col{display:flex;flex-direction:column;gap:9px;justify-content:center}
+
+/* ================= 05 PROCESS =================================== */
+.rail{display:flex;align-items:center;gap:6px;margin-top:auto}
+.rail .seg{height:5px;flex:1;border-radius:99px;background:var(--sk-lite)}
+.rail .seg.done{background:var(--sk)}
+.rail .seg.now{background:var(--ultra)}
+.a10{height:clamp(238px,22vw,310px)}
+.a96,.a74{height:clamp(252px,24vw,338px)}
+.a9{aspect-ratio:16/9}
+.stepno{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+
+/* ================= 06 WORK ====================================== */
+.plate{height:clamp(200px,17.5vw,252px);justify-content:flex-end}
+.plate .cname{font-size:clamp(17px,1.5vw,22px);font-weight:700;letter-spacing:-.022em;line-height:1.1}
+.plate.lead .cname{font-size:clamp(22px,2.2vw,32px)}
+.workcap{margin-top:12px;display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+.workcap .sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--smoke)}
+.workcap .out{color:var(--ash);font-size:15px;flex:1 1 100%}
+
+/* ================= 07 VOICES ==================================== */
+.voice .lp{aspect-ratio:16/5;align-items:center;justify-content:center}
+.voice q{display:block;font-size:clamp(17px,1.4vw,21px);line-height:1.42;letter-spacing:-.016em;margin-top:15px;quotes:'\201C' '\201D'}
+.voice .attr{font-family:var(--mono);font-size:11.5px;color:var(--ash);margin-top:11px}
+.voice .attr b{color:var(--ink);font-weight:500}
+
+/* ================= 08 PRICING =================================== */
+.price-wrap{position:relative}
+.price-wrap input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.paybar{display:inline-flex;border:1px solid var(--line);border-radius:99px;background:var(--c-bone);padding:4px;margin-bottom:clamp(20px,2.4vw,30px);flex-wrap:wrap}
+.paybar label{
+  display:flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border-radius:99px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;color:var(--ash);
+  transition:background .22s var(--ease),color .22s var(--ease);
+}
+.tierlist{display:grid;gap:10px}
+.tier{
+  display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:16px;align-items:center;
+  min-height:82px;padding:16px 18px;border-radius:var(--r);cursor:pointer;
+  border:1px solid var(--line);background:var(--c-bone);
+  transition:border-color .22s var(--ease),background .22s var(--ease),transform .18s var(--ease);
+}
+.tier:active{transform:translateY(1px)}
+.tier .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--smoke);position:relative}
+.tier .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--ultra);transform:scale(0);transition:transform .2s var(--ease)}
+.tier .tn{font-size:19.5px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.tier .pop{font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ultra);border:1px solid var(--ultra);border-radius:99px;padding:2px 8px}
+.tier .tsub{display:block;width:100%;font-family:var(--mono);font-size:11.5px;color:var(--ash);margin-top:4px}
+.tier .tp{text-align:right;font-variant-numeric:normal}
+.tier .tp b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:normal}
+.tier .tp b .cur{font-size:.6em;vertical-align:super;margin-right:1px}
+.tier .tp small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--ash);margin-top:3px}
+.dpanel{display:none}
+.dcanvas{gap:12px}
+.dhead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.dhead h3{font-size:clamp(23px,2.2vw,32px);font-weight:700;letter-spacing:-.026em}
+.dhead .dp{font-family:var(--mono);font-size:12px;color:var(--ash);font-variant-numeric:normal}
+.dfeat{display:grid;gap:9px}
+.dfeat li{display:grid;grid-template-columns:15px 1fr;gap:11px;align-items:start;font-size:15.5px;color:var(--ash)}
+.dfeat li i{display:block;width:3px;height:15px;border-radius:99px;background:var(--sk);margin-top:4px}
+.dnote{padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--ash);line-height:1.7}
+.dnote a{color:var(--ink);text-decoration:none;box-shadow:inset 0 -1px 0 var(--ultra)}
+.p-mo{display:none}
+
+#pay-up:checked ~ .paybar label[for="pay-up"],
+#pay-mo:checked ~ .paybar label[for="pay-mo"]{background:var(--ink);color:var(--ground)}
+#pay-mo:checked ~ .bento .p-up{display:none}
+#pay-mo:checked ~ .bento .p-mo{display:block}
+#pay-mo:checked ~ .bento .hot.p-mo{display:inline-flex}
+#pay-mo:checked ~ .bento .dp .p-mo{display:inline}
+#pay-mo:checked ~ .bento .note-up{display:none}
+.note-mo{display:none}
+#pay-mo:checked ~ .bento .note-mo{display:block}
+#t1:checked ~ .bento .tierlist label[for="t1"],
+#t2:checked ~ .bento .tierlist label[for="t2"],
+#t3:checked ~ .bento .tierlist label[for="t3"]{border-color:var(--ink);background:var(--c-rose)}
+#t1:checked ~ .bento .tierlist label[for="t1"] .dot::after,
+#t2:checked ~ .bento .tierlist label[for="t2"] .dot::after,
+#t3:checked ~ .bento .tierlist label[for="t3"] .dot::after{transform:scale(1)}
+#t1:checked ~ .bento .tierlist label[for="t1"] .dot,
+#t2:checked ~ .bento .tierlist label[for="t2"] .dot,
+#t3:checked ~ .bento .tierlist label[for="t3"] .dot{border-color:var(--ultra)}
+#t1:checked ~ .bento .dpanel[data-t="1"],
+#t2:checked ~ .bento .dpanel[data-t="2"],
+#t3:checked ~ .bento .dpanel[data-t="3"]{display:block}
+
+/* ================= 09 CONTACT / FOOTER ========================== */
+.foot{background:var(--ink);color:var(--ground);padding-block:clamp(44px,5.4vw,88px) clamp(28px,3.4vw,48px);margin-top:clamp(30px,4vw,60px)}
+.foot .bar{border-color:#2C2C34;color:var(--smoke)}
+.foot .h2{color:var(--ground)}
+.foot .h2 .dim{color:var(--ash)}
+.chan{
+  background:var(--graphite);border:1px solid #2C2C34;border-radius:var(--r);
+  padding:20px;display:flex;flex-direction:column;gap:11px;min-height:142px;text-decoration:none;
+  transition:background .2s var(--ease),transform .18s var(--ease);
+}
+.chan:hover{background:#24242B}
+.chan:active{transform:translateY(1px)}
+.chan svg{width:22px;height:22px;color:var(--acid)}
+.chan .cl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--smoke);margin-top:auto}
+.chan .cv{font-size:16.5px;font-weight:700;letter-spacing:-.016em;word-break:break-word;font-variant-numeric:normal}
+.foot-spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,64px);margin-top:clamp(28px,3.4vw,46px)}
+.foot-spec div{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px solid #2C2C34;font-family:var(--mono);font-size:11.5px;color:var(--smoke)}
+.foot-spec div b{color:var(--ground);font-weight:500;text-align:right;font-variant-numeric:normal}
+.foot-end{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:clamp(26px,3.2vw,44px);padding-top:14px;border-top:1px solid #2C2C34;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke)}
+
+/* ================= MOTION (armed by JS only) ==================== */
+@media (prefers-reduced-motion: no-preference){
+  html.js [data-reveal].armed{transform:translateY(16px);transition:transform .66s var(--ease)}
+  html.js [data-reveal].armed.in{transform:none}
+  /* the only perpetual motion on the page: the live badge's ring.
+     Decorative, transform+opacity only, and it carries no information
+     that is not already in the badge's own text. */
+  html.js .liveRing{animation:ring 2.9s var(--ease) infinite}
+  @keyframes ring{
+    0%{transform:scale(.6);opacity:.55}
+    70%{transform:scale(1.9);opacity:0}
+    100%{transform:scale(1.9);opacity:0}
+  }
+}
+
+/* ================= 390px: DESIGNED, NOT REFLOWED ================ */
+@media (max-width:1000px){
+  .s3,.s4,.s5,.s6,.s7,.s8{grid-column:span 12}
+  .bento.work .s4,.bento.work .s3{grid-column:span 6}
+  .bento.proc .s3{grid-column:span 6}
+  .foot-spec{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding-inline:18px}
+  .nav-in{flex-wrap:wrap;gap:10px 14px;padding-block:11px}
+  .nav-links{order:3;width:100%;margin-left:0;justify-content:space-between;gap:6px;
+             font-size:12px;border-top:1px solid var(--line-soft);padding-top:9px}
+  .statuspill{display:none}
+  .nav .cta{margin-left:auto;min-height:40px;padding:0 14px;font-size:11.5px}
+  h1.big{font-size:36px;letter-spacing:-.03em}
+  .hero-actions .cta{flex:1 1 100%;justify-content:space-between}
+  /* canvases get their own phone aspect ratios rather than being
+     squeezed versions of the desktop tile */
+  .canvas{padding:14px;border-radius:12px}
+  .canvas.hero-c{aspect-ratio:16/13}
+  .canvas.a10,.canvas.a96{height:auto;aspect-ratio:16/11}
+  .canvas.a74{height:auto;aspect-ratio:16/9}
+  .canvas.a9{aspect-ratio:16/8}
+  .bento.work .s4,.bento.work .s3,.bento.proc .s3{grid-column:span 12}
+  .plate,.plate.lead{height:auto;aspect-ratio:16/9}
+  .voice .lp{aspect-ratio:16/6}
+  .h2{font-size:31px}
+  .cap h3{font-size:20px}
+  .cap p{max-width:none}
+  .paybar{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .paybar label{padding:0 8px;font-size:11px;text-align:center}
+  .tier{grid-template-columns:20px minmax(0,1fr);gap:7px 14px;min-height:0;padding:15px 16px}
+  .tier .tp{grid-column:2;text-align:left}
+  .tier .tp b{font-size:21px}
+  .foot-end{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ================= 01 NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logotype" href="#top" aria-label="Digital Consulting Services, home"><b>digital consulting</b><b>services<sup>&reg;</sup></b></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="statuspill">
+      <svg viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="none" stroke="#D6006B" stroke-width="1.4"/><circle cx="5" cy="5" r="1.7" fill="#D6006B"/></svg>
+      Polegate &middot; Mon&ndash;Fri 9:00&ndash;17:30
+    </span>
+    <a class="cta" href="#contact">Get a free quote
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 02 HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="bento">
+      <div class="s5">
+        <p class="eyebrow">Website studio &middot; Polegate, East Sussex &middot; working UK-wide</p>
+        <h1 class="big">We write it, design it, build it, host it. <span class="dim">You look at it and say yes.</span></h1>
+        <p class="lede">A website that stands next to what London and New York studios put out, for a fraction of the cost and almost none of your time. No brief to write. No dashboard to learn. One person to call.</p>
+        <div class="hero-actions">
+          <a class="cta" href="#contact">Get a free quote
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="cta ghost" href="tel:07395063764">Call 07395 063764</a>
+        </div>
+        <p class="hero-facts">
+          <span>From <b>&pound;995 + &pound;15/mo</b></span>
+          <span>or <b>&pound;45/mo</b>, nothing upfront</span>
+          <span>Studio since <b>2019</b></span>
+        </p>
+      </div>
+
+      <!-- CANVAS 01 — tinted mint ground, skeleton page, ONE full-colour
+           element: the "Site live" badge. -->
+      <div class="s7">
+        <div class="canvas mint hero-c" data-reveal>
+          <div class="row" style="justify-content:space-between">
+            <span class="hot acid" style="align-self:auto">
+              <span style="position:relative;display:inline-flex;align-items:center;justify-content:center;width:9px;height:9px">
+                <span class="liveRing" style="position:absolute;inset:0;border-radius:50%;border:1.5px solid currentColor"></span>
+                <span class="pip" style="width:6px;height:6px"></span>
+              </span>
+              Site live
+            </span>
+            <span class="mono" style="font-size:11px;color:var(--ash)">yourbusiness.co.uk</span>
+          </div>
+          <div class="browser">
+            <div class="chrome"><i></i><i></i><i></i><span class="addr"></span></div>
+            <div class="body">
+              <div class="col">
+                <div class="sk t" style="width:78%"></div>
+                <div class="sk t" style="width:56%"></div>
+                <div class="sk s lite" style="width:92%"></div>
+                <div class="sk s lite" style="width:84%"></div>
+                <div class="sk s lite" style="width:60%"></div>
+                <div class="row" style="margin-top:6px;gap:8px">
+                  <span class="skblock" style="width:88px;height:26px"></span>
+                  <span class="skblock" style="width:64px;height:26px"></span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="skblock" style="flex:1;min-height:74px"></div>
+                <div class="row" style="gap:8px">
+                  <span class="skblock" style="flex:1;height:34px"></span>
+                  <span class="skblock" style="flex:1;height:34px"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <span class="dotF"></span><span class="sk s grow lite" style="max-width:150px"></span>
+            <span class="mono" style="font-size:10.5px;color:var(--smoke);margin-left:auto">Hosted &amp; monitored</span>
+          </div>
+        </div>
+        <p class="illus">Fig. 01 &mdash; illustrative. Every mock on this page is drawn, not screenshotted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 EFFORT ================= -->
+<section id="effort">
+  <div class="wrap">
+    <div class="bar"><span class="n">[01] How little you have to do</span><span>Three things we do not ask of you</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">Most studios want a brief. <span class="dim">We want a conversation.</span></h2>
+
+    <div class="bento" style="margin-top:clamp(24px,3vw,44px)">
+      <!-- CANVAS 02 — rose. ONE full-colour element: the reply bubble. -->
+      <div class="s5">
+        <div class="canvas rose svc-c a10" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center">
+            <div class="row"><span class="dotF"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="sk s" style="width:70%"></span><span class="sk s lite" style="width:48%"></span></div></div>
+            <div class="row" style="justify-content:flex-end"><span class="skblock" style="width:56%;height:30px"></span></div>
+            <div class="row"><span class="dotF"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="sk s" style="width:58%"></span></div></div>
+          </div>
+          <span class="hot">What does the business actually do?</span>
+        </div>
+        <div class="cap">
+          <h3>You talk, we take the notes</h3>
+          <p>A call, or a few messages if that suits you better. No brief to write, nothing to prepare, no forms. The questions are our job.</p>
+        </div>
+      </div>
+
+      <!-- CANVAS 03 — sand. ONE full-colour element: the written line. -->
+      <div class="s4">
+        <div class="canvas sand svc-c a10" data-reveal>
+          <div class="panel" style="flex:1">
+            <div class="sk t" style="width:64%"></div>
+            <div class="sk s lite" style="width:96%"></div>
+            <div class="sk s lite" style="width:88%"></div>
+            <div class="hot plum sq" style="align-self:stretch;justify-content:flex-start">Twelve years on the same trade &mdash; and it shows.</div>
+            <div class="sk s lite" style="width:74%"></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:52%"></span></div>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>The words are written for you</h3>
+          <p>You do not need to know what to say about your own business. That is the part we are good at drawing out and putting on the page.</p>
+        </div>
+      </div>
+
+      <!-- CANVAS 04 — navy. ONE full-colour element: the "nothing to learn" chip. -->
+      <div class="s3">
+        <div class="canvas navy svc-c a10" data-reveal>
+          <div class="panel q" style="flex:1;justify-content:center;gap:11px">
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="flex:1"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:72%"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:84%"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:60%"></span></div>
+          </div>
+          <span class="hot">Nothing here for you to learn</span>
+        </div>
+        <div class="cap">
+          <h3>No CMS, no login, no dashboard</h3>
+          <p>Changes go through one phone number. Nothing to remember, nothing to break.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="bar"><span class="n">[02] What we do</span><span>Six services</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">Three things people ask for. <span class="dim">Three that keep it working.</span></h2>
+
+    <div class="bento" style="margin-top:clamp(24px,3vw,44px)">
+
+      <!-- 01 A new website — mint. ONE full colour: "Yours, not a template". -->
+      <div class="s7">
+        <div class="canvas mint svc-c a96" data-reveal>
+          <div class="panel" style="flex:1;flex-direction:row;gap:12px">
+            <div style="flex:1.3;display:flex;flex-direction:column;gap:9px;justify-content:center">
+              <span class="sk t" style="width:72%"></span>
+              <span class="sk s lite" style="width:94%"></span>
+              <span class="sk s lite" style="width:80%"></span>
+              <span class="skblock" style="width:96px;height:28px;margin-top:4px"></span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:9px">
+              <span class="skblock" style="flex:1"></span>
+              <span class="skblock" style="height:26px"></span>
+            </div>
+          </div>
+          <span class="hot">Designed round your business</span>
+        </div>
+        <div class="cap">
+          <h3>01 &mdash; A new website</h3>
+          <p>Designed and built around your business, not dropped into a template with your logo in the corner. We write it, structure it and make the decisions.</p>
+          <p class="deliv"><span>Research</span><span>Copywriting</span><span>Design</span><span>Build</span><span>Launch</span></p>
+        </div>
+      </div>
+
+      <!-- 02 An online shop — rose. ONE full colour: the paid chip. -->
+      <div class="s5">
+        <div class="canvas rose svc-c a96" data-reveal>
+          <div class="panel" style="flex:1;gap:10px">
+            <div class="row" style="gap:10px;flex:1">
+              <span class="skblock" style="flex:1;height:100%"></span>
+              <span class="skblock" style="flex:1;height:100%"></span>
+              <span class="skblock" style="flex:1;height:100%"></span>
+            </div>
+            <div class="row"><span class="sk s" style="width:38%"></span><span class="sk s lite" style="width:22%;margin-left:auto"></span></div>
+          </div>
+          <span class="hot">Order paid</span>
+        </div>
+        <div class="cap">
+          <h3>02 &mdash; An online shop</h3>
+          <p>A store built and loaded with your products, with orders, stock and shipping handled. Made-to-order and configurable products included &mdash; we have built both.</p>
+          <p class="deliv"><span>Catalogue</span><span>Checkout</span><span>Orders</span><span>Stock</span><span>Shipping</span></p>
+        </div>
+      </div>
+
+      <!-- 03 Fixing the site you have — bone. ONE full colour: the fixed row. -->
+      <div class="s5">
+        <div class="canvas bone svc-c a96" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center;gap:11px">
+            <div class="row"><span class="dotF"></span><span class="sk s grow"></span></div>
+            <div class="hot plum sq" style="align-self:stretch;justify-content:flex-start">Slow on a phone &mdash; fixed</div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="flex:1"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:66%"></span></div>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>03 &mdash; Fixing the site you have</h3>
+          <p>Already on WordPress and unhappy with it? We will fix it, rebuild it, or give it a custom theme you can post to yourself &mdash; without starting from nothing.</p>
+          <p class="deliv"><span>Audit</span><span>Repair</span><span>Rebuild</span><span>Custom theme</span></p>
+        </div>
+      </div>
+
+      <!-- 04 Local SEO — navy. ONE full colour: your listing. -->
+      <div class="s7">
+        <div class="canvas navy svc-c a96" data-reveal>
+          <div class="panel" style="flex:1;gap:10px">
+            <span class="sk s lite" style="width:44%;height:20px;border-radius:99px"></span>
+            <div class="hot sq" style="align-self:stretch;justify-content:flex-start;padding:11px 13px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+              Your business &mdash; the town you actually work in
+            </div>
+            <div class="row"><span class="dotF"></span><span class="sk s grow lite"></span></div>
+            <div class="row"><span class="dotF"></span><span class="sk s grow lite" style="max-width:70%"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:54%"></span></div>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>04 &mdash; Local SEO</h3>
+          <p>Service pages, location pages and structured data, so you turn up where you actually work. Written properly, not stuffed with the name of every town in the county.</p>
+          <p class="deliv"><span>Service pages</span><span>Location pages</span><span>Structured data</span><span>Search Console</span></p>
+        </div>
+      </div>
+
+      <!-- 05 Hosting and management — sand. ONE full colour: renewed automatically. -->
+      <div class="s8">
+        <div class="canvas sand svc-c a74" data-reveal>
+          <div class="panel" style="flex:1;gap:10px;justify-content:center">
+            <div class="row"><span class="dotF"></span><span class="sk s" style="width:26%"></span><span class="sk s lite" style="width:14%;margin-left:auto"></span></div>
+            <div class="hot acid sq" style="align-self:stretch;justify-content:space-between;padding:11px 13px">
+              <span>Domain &amp; SSL renewed automatically</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            </div>
+            <div class="row"><span class="dotF"></span><span class="sk s lite" style="width:34%"></span><span class="sk s lite" style="width:18%;margin-left:auto"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:30%"></span></div>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>05 &mdash; Hosting and management</h3>
+          <p>Hosting, security, updates, monitoring, and email on your own domain instead of a Gmail address. One person to call, and no ticket queue to join.</p>
+          <p class="deliv"><span>Hosting</span><span>SSL</span><span>Domain</span><span>Email on your domain</span><span>Support</span></p>
+        </div>
+      </div>
+
+      <!-- 06 Analytics — bone. ONE full colour: the one bar that matters. -->
+      <div class="s4">
+        <div class="canvas bone svc-c a96" data-reveal>
+          <div class="panel" style="flex:1;justify-content:flex-end">
+            <div class="row" style="align-items:flex-end;gap:8px;height:100%">
+              <span class="skblock" style="flex:1;height:36%"></span>
+              <span class="skblock" style="flex:1;height:52%"></span>
+              <span class="skblock" style="flex:1;height:44%"></span>
+              <span style="flex:1;height:80%;border-radius:8px;background:var(--ultra)"></span>
+              <span class="skblock" style="flex:1;height:58%"></span>
+            </div>
+          </div>
+          <span class="mono" style="font-size:11px;color:var(--ash)">One page in plain English, once a month</span>
+        </div>
+        <div class="cap">
+          <h3>06 &mdash; Analytics and reporting</h3>
+          <p>Analytics, Search Console and a monthly note telling you what people did and what we would change next.</p>
+          <p class="deliv"><span>Analytics</span><span>Search Console</span><span>Monthly report</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 PROCESS ================= -->
+<section id="process">
+  <div class="wrap">
+    <div class="bar"><span class="n">[03] How it goes</span><span>Four steps</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">It starts with a conversation, <span class="dim">not a contract.</span></h2>
+
+    <div class="bento proc" style="margin-top:clamp(24px,3vw,44px)">
+
+      <div class="s3">
+        <div class="canvas rose step-c a9" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center;gap:8px">
+            <div class="row"><span class="dotF"></span><span class="sk s grow"></span></div>
+            <div class="row" style="justify-content:flex-end"><span class="skblock" style="width:60%;height:22px"></span></div>
+          </div>
+          <span class="hot">A call, or a few messages</span>
+          <div class="rail" aria-hidden="true"><span class="seg now"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+        </div>
+        <div class="cap"><p class="stepno">Step 01</p><h3>A conversation</h3><p>No brief to write, no form to fill in, nothing to prepare. We ask the questions and take the notes.</p></div>
+      </div>
+
+      <div class="s3">
+        <div class="canvas sand step-c a9" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center;gap:8px">
+            <span class="sk t" style="width:58%"></span>
+            <span class="sk s lite" style="width:90%"></span>
+            <span class="sk s lite" style="width:72%"></span>
+          </div>
+          <span class="hot plum">Copy, structure, colour &mdash; handled</span>
+          <div class="rail" aria-hidden="true"><span class="seg done"></span><span class="seg now"></span><span class="seg"></span><span class="seg"></span></div>
+        </div>
+        <div class="cap"><p class="stepno">Step 02</p><h3>We write it and design it</h3><p>Copy, structure, imagery and colour, all decided here. You do not have to know what you want.</p></div>
+      </div>
+
+      <div class="s3">
+        <div class="canvas mint step-c a9" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center;gap:9px">
+            <div class="row"><span class="dotF"></span><span class="sk s grow lite"></span></div>
+            <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:64%"></span></div>
+          </div>
+          <span class="hot acid">Change it as often as you like</span>
+          <div class="rail" aria-hidden="true"><span class="seg done"></span><span class="seg done"></span><span class="seg now"></span><span class="seg"></span></div>
+        </div>
+        <div class="cap"><p class="stepno">Step 03</p><h3>You review it</h3><p>Unlimited revisions while we build. Say what you don't like in your own words &mdash; never a hex code.</p></div>
+      </div>
+
+      <div class="s3">
+        <div class="canvas navy step-c a9" data-reveal>
+          <div class="panel" style="flex:1;justify-content:center;gap:9px">
+            <div class="row"><span class="dotF"></span><span class="sk s grow"></span></div>
+            <div class="row"><span class="dotF"></span><span class="sk s grow lite" style="max-width:60%"></span></div>
+          </div>
+          <span class="hot">Live, hosted, and looked after</span>
+          <div class="rail" aria-hidden="true"><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg now"></span></div>
+        </div>
+        <div class="cap"><p class="stepno">Step 04</p><h3>It goes live and stays looked after</h3><p>Hosting, security, updates, monitoring and support from launch day. One number to ring.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="bar"><span class="n">[04] Selected work</span><span>Nine of twenty-plus, since 2019</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">A fabric shop, a yoga studio, a tutor, <span class="dim">a signwriter, a garage and a scaffolder.</span></h2>
+
+    <div class="bento work" style="margin-top:clamp(24px,3vw,44px)">
+      <div class="s6">
+        <div class="canvas rose plate lead" data-reveal>
+          <div class="panel q" style="position:absolute;left:clamp(14px,1.5vw,22px);right:clamp(14px,1.5vw,22px);top:clamp(14px,1.5vw,22px);gap:8px">
+            <span class="sk s lite" style="width:60%"></span>
+            <span class="sk s lite" style="width:44%"></span>
+          </div>
+          <span class="cname" style="color:var(--ultra)">Cuddle Plush Fabrics</span>
+        </div>
+        <div class="workcap"><span class="sec">eCommerce &middot; fabrics</span><span class="mono" style="font-size:10.5px;color:var(--smoke)">2020 &rarr;</span><span class="out">Five years and counting &mdash; one of our longest client relationships.</span></div>
+      </div>
+      <div class="s3">
+        <div class="canvas navy plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:70%"></span></div>
+          <span class="cname" style="color:var(--plum)">Luna Landings</span>
+        </div>
+        <div class="workcap"><span class="sec">Made-to-order</span><span class="out">Product configurator, automatic work orders, worldwide shipping.</span></div>
+      </div>
+      <div class="s3">
+        <div class="canvas mint plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:56%"></span></div>
+          <span class="cname" style="color:#046F74">Sanctuary Ida</span>
+        </div>
+        <div class="workcap"><span class="sec">Yoga studio</span><span class="out">Students book and pay for classes online.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas sand plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:64%"></span></div>
+          <span class="cname" style="color:var(--ultra)">Nicola Noble Tuition</span>
+        </div>
+        <div class="workcap"><span class="sec">Tuition</span><span class="out">Moved classes online during Covid instead of closing.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas bone plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:50%"></span></div>
+          <span class="cname" style="color:var(--plum)">Mad Graphics</span>
+        </div>
+        <div class="workcap"><span class="sec">Signage &amp; print</span><span class="out">A full rebuild.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas navy plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:62%"></span></div>
+          <span class="cname" style="color:var(--ultra)">DCH Automotive</span>
+        </div>
+        <div class="workcap"><span class="sec">Automotive</span><span class="out">A credible presence from a standing start.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas mint plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:58%"></span></div>
+          <span class="cname" style="color:#046F74">Colossus Scaffolding</span>
+        </div>
+        <div class="workcap"><span class="sec">Scaffolding</span><span class="out">First enquiry from Google within three weeks of launch.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas rose plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:66%"></span></div>
+          <span class="cname" style="color:var(--ultra)">DJ Fox Electrical</span>
+        </div>
+        <div class="workcap"><span class="sec">Electrical</span><span class="out">A twenty-page site, live at djfoxelectrical.com.</span></div>
+      </div>
+      <div class="s4">
+        <div class="canvas sand plate" data-reveal>
+          <div class="panel q" style="position:absolute;left:16px;right:16px;top:16px;gap:8px"><span class="sk s lite" style="width:54%"></span></div>
+          <span class="cname" style="color:var(--plum)">Bexhill Removals</span>
+        </div>
+        <div class="workcap"><span class="sec">Removals</span><span class="out">Design approved on the first presentation, no revisions.</span></div>
+      </div>
+    </div>
+    <p class="illus">Plates are placeholders. Real screenshots are reserved for full-bleed slabs &mdash; inside a tile at phone width they collapse to a smudge.</p>
+  </div>
+</section>
+
+<!-- ================= 07 VOICES ================= -->
+<section id="voices">
+  <div class="wrap">
+    <div class="bar"><span class="n">[05] In their words</span><span>Three clients, none of them a trade</span></div>
+    <div class="bento" style="margin-top:clamp(24px,3vw,40px)">
+      <figure class="s4 voice" data-reveal>
+        <div class="canvas rose lp"><span class="hot" style="align-self:center">Cuddle Plush Fabrics</span></div>
+        <q>Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.</q>
+        <figcaption class="attr"><b>Sarah</b> &mdash; Cuddle Plush Fabrics, eCommerce</figcaption>
+      </figure>
+      <figure class="s4 voice" data-reveal>
+        <div class="canvas sand lp"><span class="hot plum" style="align-self:center">Nicola Noble Tuition</span></div>
+        <q>I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.</q>
+        <figcaption class="attr"><b>Nicola</b> &mdash; Nicola Noble Tuition</figcaption>
+      </figure>
+      <figure class="s4 voice" data-reveal>
+        <div class="canvas mint lp"><span class="hot acid" style="align-self:center">Sanctuary Ida</span></div>
+        <q>My yoga students love that they can book and pay for my classes on my website.</q>
+        <figcaption class="attr"><b>Molly</b> &mdash; Sanctuary Ida, yoga studio</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="bar"><span class="n">[06] What it costs</span><span>Every number printed</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">Two ways to pay for the same site. <span class="dim">You choose how, not what.</span></h2>
+
+    <div class="price-wrap" style="margin-top:clamp(22px,2.6vw,36px)">
+      <input type="radio" name="pay" id="pay-up" checked>
+      <input type="radio" name="pay" id="pay-mo">
+      <input type="radio" name="tier" id="t1">
+      <input type="radio" name="tier" id="t2" checked>
+      <input type="radio" name="tier" id="t3">
+
+      <div class="paybar" role="group" aria-label="How you would like to pay">
+        <label for="pay-up">Upfront + monthly</label>
+        <label for="pay-mo">Monthly, nothing upfront</label>
+      </div>
+
+      <div class="bento">
+        <ul class="tierlist s5">
+          <li><label class="tier" for="t1">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="tn">Starter<span class="tsub">Up to 20 pages</span></span>
+            <span class="tp">
+              <span class="p-up"><b><span class="cur">&pound;</span>995</b><small>+ &pound;15/mo</small></span>
+              <span class="p-mo"><b><span class="cur">&pound;</span>45</b><small>per month</small></span>
+            </span>
+          </label></li>
+          <li><label class="tier" for="t2">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="tn">Professional <i class="pop">Most popular</i><span class="tsub">Up to 50 pages</span></span>
+            <span class="tp">
+              <span class="p-up"><b><span class="cur">&pound;</span>1,995</b><small>+ &pound;25/mo</small></span>
+              <span class="p-mo"><b><span class="cur">&pound;</span>75</b><small>per month</small></span>
+            </span>
+          </label></li>
+          <li><label class="tier" for="t3">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="tn">Growth<span class="tsub">Up to 100 pages</span></span>
+            <span class="tp">
+              <span class="p-up"><b><span class="cur">&pound;</span>3,495</b><small>+ &pound;50/mo</small></span>
+              <span class="p-mo"><b><span class="cur">&pound;</span>125</b><small>per month</small></span>
+            </span>
+          </label></li>
+          <li><p class="dnote" style="border-top:0;padding-top:6px">
+            <span class="note-up">Every tier is the same build. Tiers differ on page count and ongoing service level, never on the quality of the work.</span>
+            <span class="note-mo">Nothing to pay upfront, 24-month minimum term. Every tier is the same build &mdash; the difference is page count and ongoing service level, never quality.</span>
+            <br>Full mechanics, add-ons and third-party costs are on the <a href="#pricing">pricing page</a>.
+          </p></li>
+        </ul>
+
+        <div class="s7">
+          <!-- CANVAS — the detail panel is itself a mock. ONE full-colour
+               element: the chip, which repaints with the pay control. -->
+          <div class="canvas navy dcanvas">
+            <div class="dpanel" data-t="1">
+              <div class="dhead"><h3>Starter</h3><span class="dp"><span class="p-up">&pound;995 setup, then &pound;15/mo</span><span class="p-mo">&pound;45/mo, 24-month minimum</span></span></div>
+              <div class="panel" style="gap:10px">
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Pages</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Up to 20</span></div>
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Build quality</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Same as every tier</span></div>
+                <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:44%"></span></div>
+              </div>
+              <span class="hot p-up">Yours from &pound;995</span>
+              <span class="hot acid p-mo">&pound;0 due today</span>
+              <ul class="dfeat">
+                <li><i></i><span>Custom design &mdash; not a template with your logo dropped in</span></li>
+                <li><i></i><span>Local SEO: service pages, location pages, structured data</span></li>
+                <li><i></i><span>Hosting, SSL, domain management, security updates, monitoring</span></li>
+                <li><i></i><span>Unlimited revisions while we are building it</span></li>
+              </ul>
+            </div>
+
+            <div class="dpanel" data-t="2">
+              <div class="dhead"><h3>Professional</h3><span class="dp"><span class="p-up">&pound;1,995 setup, then &pound;25/mo</span><span class="p-mo">&pound;75/mo, 24-month minimum</span></span></div>
+              <div class="panel" style="gap:10px">
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Pages</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Up to 50</span></div>
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Ongoing service</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Priority</span></div>
+                <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:52%"></span></div>
+              </div>
+              <span class="hot p-up">Yours from &pound;1,995</span>
+              <span class="hot acid p-mo">&pound;0 due today</span>
+              <ul class="dfeat">
+                <li><i></i><span>Everything in Starter, plus:</span></li>
+                <li><i></i><span>Room for a page per service and a page per area you cover</span></li>
+                <li><i></i><span>Analytics, Search Console and a monthly note in plain English</span></li>
+                <li><i></i><span>Priority on changes &mdash; you ring, it gets done</span></li>
+              </ul>
+            </div>
+
+            <div class="dpanel" data-t="3">
+              <div class="dhead"><h3>Growth</h3><span class="dp"><span class="p-up">&pound;3,495 setup, then &pound;50/mo</span><span class="p-mo">&pound;125/mo, 24-month minimum</span></span></div>
+              <div class="panel" style="gap:10px">
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Pages</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Up to 100</span></div>
+                <div class="row"><span class="mono" style="font-size:11.5px;color:var(--ash)">Ongoing service</span><span class="sk s lite grow" style="max-width:120px"></span><span class="mono" style="font-size:11.5px;margin-left:auto">Highest</span></div>
+                <div class="todo"><span class="dotO"></span><span class="sk s lite" style="width:40%"></span></div>
+              </div>
+              <span class="hot p-up">Yours from &pound;3,495</span>
+              <span class="hot acid p-mo">&pound;0 due today</span>
+              <ul class="dfeat">
+                <li><i></i><span>Everything in Professional, plus:</span></li>
+                <li><i></i><span>Room for a full shop, or a hundred pages of service and area copy</span></li>
+                <li><i></i><span>The largest ongoing allowance for changes and additions</span></li>
+                <li><i></i><span>Add-ons available: writing, custom themes, ads, an SEO retainer</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="illus">Fig. 08 &mdash; the panel above repaints with the control. Nothing here counts up; every figure is typed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= 09 CONTACT / FOOTER ================= -->
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <div class="bar"><span class="n" style="color:#FF9BC8">[07] Start here</span><span>Free, and without obligation</span></div>
+    <h2 class="h2" style="margin-top:clamp(18px,2.2vw,30px)">Tell us about the business. <span class="dim">We will do the rest of the thinking.</span></h2>
+
+    <div class="bento" style="margin-top:clamp(24px,3vw,42px)">
+      <a class="chan s3" href="tel:07395063764">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 3h4l2 5-3 2a13 13 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>
+        <span class="cv">07395 063764</span><span class="cl">Phone &mdash; Mon to Fri, 9:00&ndash;17:30</span>
+      </a>
+      <a class="chan s3" href="mailto:mail@digitalconsultingservices.co.uk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 6.5 10 7 10-7"/></svg>
+        <span class="cv">mail@digitalconsultingservices.co.uk</span><span class="cl">Email &mdash; reply within one working day</span>
+      </a>
+      <a class="chan s3" href="#contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg>
+        <span class="cv">Book a call</span><span class="cl">Twenty minutes, no pitch</span>
+      </a>
+      <a class="chan s3" href="#services">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <span class="cv">Send us the problem</span><span class="cl">Your current site, or a screenshot</span>
+      </a>
+    </div>
+
+    <div class="foot-spec">
+      <div><span>Studio</span><b>Unit H3, Chaucer Business Park</b></div>
+      <div><span>Founded</span><b>2019</b></div>
+      <div><span>Address</span><b>Dittons Road, Polegate, BN26 6QH</b></div>
+      <div><span>Sites delivered</span><b>20+, across every sector</b></div>
+      <div><span>Coverage</span><b>East Sussex, and UK-wide</b></div>
+      <div><span>Longest client</span><b>5+ years</b></div>
+    </div>
+
+    <div class="foot-end">
+      <span>&copy; 2026 Digital Consulting Services</span>
+      <span>No. 62 &middot; Workbench &mdash; prototype, placeholder imagery throughout</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* The only job of this script is to ARM motion. Remove it and the page is
+   a complete, readable document: nothing is transparent, nothing is
+   translated, and the pricing selector still works on :checked. */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+  var els = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  els.forEach(function (el) { el.classList.add('armed'); });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');   /* latch */
+      io.unobserve(e.target);         /* never reverses on scroll-up */
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Consulting Services — Websites that hold their own</title>
+<meta name="description" content="A website design and build studio in Polegate, East Sussex, working UK-wide. Design, build, hosting and support for small businesses. From £995 plus £15/mo, or £45/mo with nothing upfront.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23D6006B'/%3E%3Cpath d='M18 18h13a14 14 0 0 1 0 28H18z' fill='none' stroke='%23fff' stroke-width='7'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&family=Poppins:wght@300;400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================================
+   DCS HOMEPAGE — DIRECTION 67 "DOCK"
+   Round 7. Research lineage: Magnetto, Karolina Hess (brief §2.6 bottom-pinned
+   floating pill nav; §Part 3 mobile rules).
+
+   THESIS, ONE SENTENCE
+   The phone is not the degraded version of this page — it is the page. Every
+   layout decision starts at 390px and thumb reach is the organising principle;
+   the desktop is the 390 layout given room, not the other way round.
+
+   WHAT IT TAKES FROM THE RESEARCH
+   - §2.6 Bottom-pinned floating dock nav, persistent CTA, thumb-reachable by
+     construction rather than by media query. Five slots, icon + label, never
+     icon-only (nav-label-icon).
+   - §2.1 The in-card mock — flat tinted canvas, grey skeleton bars, exactly one
+     element in full colour. Used seven times on this page; it is the visual
+     spine of the whole thing, because §Part 3 verified it survives 390px where
+     a real screenshot becomes a grey smudge.
+   - §2.2 Flat colour service blocks with a per-block "Enquire" footer bar —
+     verified to stack cleanly at 390 and keeps every service thumb-reachable.
+   - §2.4 Pricing as a vertical selector list driving one detail panel.
+   - §2.5 Proof as one lead client at scale plus an index; no stats bar.
+   - §2.7 Section header bar on a hairline, two-tone headings, corner metadata.
+   - §2.8 Channel tiles instead of a form.
+
+   THE HARD RULE — WHAT CARRIES EACH SECTION VISUALLY
+   01 Hero .......... phone-proportioned tinted canvas holding an abstract site
+                      mock; one full-colour element (an "Enquiry received" toast).
+   02 Division ...... a real 17-cell split-bar diagram drawing who does what.
+                      The picture IS the argument; the copy only names it.
+   03 Services ...... three flat colour blocks, each with its own div-built mock
+                      (nav pill / basket button / rebuilt chip) and its own
+                      full-width footer CTA; three support rows each with an
+                      inline stroke-SVG glyph.
+   04 Work .......... a lead client at poster scale with an abstract storefront
+                      mock, then eight rows each carrying a two-tone sector tile
+                      built from divs (no photography, no logos invented).
+   05 Process ....... four steps, each with its own purpose-built mock: message
+                      bubbles, a wireframe, a review tick, a "Site live" badge.
+   06 Pricing ....... vertical selector; the detail panel holds a "£0 due today"
+                      chip mock and icon-per-line inclusions.
+   07 Words ......... each quote carries a two-tone monogram tile, not a stock
+                      headshot we do not have.
+   08 Reach ......... inline SVG node diagram of the towns with a dashed UK-wide
+                      arc; Polegate is the one full-colour node.
+   09 Contact ....... four channel tiles, each an inline stroke SVG.
+   10 Footer ........ hairline grid plus the logotype lockup.
+   No section is text and colour alone.
+
+   DELIBERATE DEPARTURES FROM THE INHERITED STYLE
+   - Ground is --paper #F3F3F1, not the near-black of 52-56. A dock reads as a
+     hardware chrome; against a light page it is unmistakably a control surface,
+     against black it dissolves into the page. --ink is the dock.
+   - Prose is set in Schibsted Grotesk 400, not DM Mono. DM Mono gives ~36
+     characters at full 390px width against a 35-character floor, which is a
+     paragraph one word from breaking. DM Mono is kept for every label, figure,
+     eyebrow and price. Headings unchanged.
+   - --ultra #D6006B is the single loud colour; --plum and --acid are structural.
+
+   MOBILE TRAPS EXPLICITLY AVOIDED (CLAUDE.md)
+   - The dock is centred with left/right/margin-inline. There is NO
+     transform: translateX(-50%) anywhere on it, and NO backdrop-filter anywhere
+     in the document. Both would make the dock the containing block for the menu
+     sheet.
+   - The menu sheet is a direct child of <body>, a SIBLING of the dock, never
+     nested inside it. Verified by measuring: the opened sheet must report the
+     viewport box, not the dock's.
+   - The sheet is driven by a checkbox + :checked, so it opens with JS disabled.
+   - No font-variant-numeric: tabular-nums anywhere near £1,995 / £3,495.
+
+   MOTION POLICY
+   - Nothing is ever authored at opacity 0. Reveals are transform-only, armed by
+     JS after support is confirmed, latched with unobserve, and wrapped in
+     prefers-reduced-motion: no-preference.
+   - No count-ups. Every figure on this page is authored static text.
+   - The dock's progress hairline is CSS scroll-timeline — no JS, no fallback
+     needed; where unsupported it simply sits at zero width.
+============================================================================ */
+
+/* ---- tokens ------------------------------------------------------------ */
+:root{
+  --ink:#101014;
+  --graphite:#1B1B20;
+  --paper:#F3F3F1;
+  --bone:#E3E3E0;
+  --ash:#55555E;
+  --smoke:#A6A6B0;
+  --acid:#00D2D8;
+  --ultra:#D6006B;
+  --lilac:#FF9BC8;
+  --plum:#17265E;
+
+  --canvas:#E8E8E4;      /* the tinted mock ground — never white */
+  --skel:#CBCBC6;        /* skeleton bar grey */
+  --skel-2:#D8D8D3;
+
+  --pad:20px;
+  --dock-h:64px;
+  --rule:1px solid var(--bone);
+  --rule-dark:1px solid rgba(255,255,255,.16);
+
+  --e-out:cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Schibsted Grotesk',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  /* content must clear the floating dock, always */
+  padding-bottom:calc(var(--dock-h) + 34px + env(safe-area-inset-bottom,0px));
+}
+
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;touch-action:manipulation}
+button,label,summary{touch-action:manipulation}
+:focus-visible{outline:3px solid var(--ultra);outline-offset:3px;border-radius:2px}
+
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---- type -------------------------------------------------------------- */
+.mono{font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.display{
+  font-family:'Schibsted Grotesk',sans-serif;
+  font-weight:900;
+  font-size:clamp(46px,12.6vw,104px);
+  line-height:.94;
+  letter-spacing:-.035em;
+  margin:0;
+}
+h2{
+  font-family:'Schibsted Grotesk',sans-serif;
+  font-weight:800;
+  font-size:clamp(32px,8.2vw,54px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin:0;
+}
+h3{font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.02em;margin:0}
+p{margin:0}
+.lede{font-size:17px;line-height:1.5;color:var(--ash);max-width:34ch}
+.dim{color:var(--smoke)}
+.grey-line{color:var(--smoke)}
+
+/* the static two-tone heading device: line 1 ink, line 2 at 40% */
+.tone-2{color:var(--smoke)}
+
+/* ---- shell ------------------------------------------------------------- */
+.wrap{padding-inline:var(--pad);max-width:1320px;margin-inline:auto}
+section{padding-block:60px}
+.hair{border-top:var(--rule)}
+
+/* section header bar: index left · label centre · meta right */
+.sechead{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  border-top:2px solid var(--ink);
+  padding-top:10px;
+  margin-bottom:26px;
+}
+.sechead .idx{color:var(--ultra)}
+.sechead .lbl{color:var(--ink);text-align:left}
+.sechead .meta{color:var(--smoke);text-align:right}
+@media (max-width:420px){ .sechead .meta{display:none} }
+
+/* ---- masthead ---------------------------------------------------------- */
+.masthead{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding-top:calc(16px + env(safe-area-inset-top,0px));
+  padding-bottom:16px;
+}
+.logotype{font-family:'Poppins',sans-serif;font-weight:300;font-size:15px;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+.logotype b{display:block;font-weight:400}
+.status{display:flex;align-items:center;gap:7px;color:var(--ash)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--acid);flex:none}
+@media (prefers-reduced-motion:no-preference){
+  .dot{animation:breathe 2.6s ease-in-out infinite}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.35}}
+}
+
+/* ---- hero -------------------------------------------------------------- */
+.hero{padding-top:8px;padding-bottom:44px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);padding:6px 10px;color:var(--ink);margin-bottom:22px}
+.hero .eyebrow::before{content:"";width:10px;height:10px;background:var(--ultra);flex:none}
+.hero .display{margin-bottom:20px}
+.hero .lede{margin-bottom:26px}
+
+.hero-cta{display:flex;flex-direction:column;gap:10px;margin-bottom:34px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:52px;padding:0 18px;
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--ink);background:transparent;color:var(--ink);
+  transition:transform .18s var(--e-out),background .18s var(--e-out),color .18s var(--e-out);
+}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-fill{background:var(--ultra);border-color:var(--ultra);color:#fff}
+.btn:active{transform:scale(.985)}
+@media (hover:hover){ .btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)} .btn-fill:hover{background:var(--ink)} }
+
+.corner-meta{display:flex;justify-content:space-between;gap:12px;color:var(--smoke);border-top:var(--rule);padding-top:10px}
+
+/* ---- THE MOCK RECIPE (brief §2.1) -------------------------------------- */
+/* flat tinted canvas · grey skeleton bars · exactly one full-colour element */
+.canvas{background:var(--canvas);padding:14px;position:relative;overflow:hidden}
+.bar{height:9px;background:var(--skel);border-radius:1px}
+.bar.sm{height:7px;background:var(--skel-2)}
+.bar.w90{width:90%} .bar.w76{width:76%} .bar.w64{width:64%} .bar.w52{width:52%} .bar.w40{width:40%} .bar.w28{width:28%}
+.stack{display:flex;flex-direction:column;gap:8px}
+.plate{background:var(--skel-2);width:100%;aspect-ratio:16/9}
+/* the "not done yet" row — the cheapest way to make a static mock read live */
+.todo{display:flex;align-items:center;gap:9px;color:var(--smoke);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em}
+.todo::before{content:"";width:11px;height:11px;border:1.5px solid var(--smoke);border-radius:50%;flex:none}
+/* the single full-colour object */
+.toast{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ultra);color:#fff;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;
+  padding:9px 12px;
+}
+.toast::before{content:"";width:8px;height:8px;background:#fff;border-radius:50%;flex:none}
+
+/* hero device — phone proportions, because that is this page's whole argument */
+.device{
+  border:1px solid var(--ink);
+  background:var(--canvas);
+  padding:10px 10px 12px;
+  position:relative;
+}
+.device-chrome{display:flex;align-items:center;gap:6px;padding-bottom:10px}
+.device-chrome i{display:block;width:6px;height:6px;border-radius:50%;background:var(--skel);flex:none}
+.device-chrome .url{flex:1;height:16px;background:var(--skel-2);border-radius:2px}
+.device-screen{background:#fff;padding:12px;display:flex;flex-direction:column;gap:11px}
+.device-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:9px;border-bottom:1px solid var(--bone)}
+.device-nav .mark{width:26px;height:10px;background:var(--ink)}
+.device-nav .links{display:flex;gap:6px}
+.device-nav .links i{display:block;width:16px;height:6px;background:var(--skel)}
+.device-hero{height:74px;background:var(--plum);position:relative}
+.device-hero::after{content:"";position:absolute;left:12px;right:34%;top:22px;height:10px;background:rgba(255,255,255,.85)}
+.device-hero::before{content:"";position:absolute;left:12px;right:56%;top:40px;height:10px;background:rgba(255,255,255,.45)}
+.device-foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.device .toast{position:absolute;right:-6px;bottom:44px;box-shadow:none}
+@media (max-width:359px){ .device .toast{right:0;bottom:26px;font-size:10px;padding:8px 10px} }
+
+/* ---- 02 the division of labour ----------------------------------------- */
+.split-chart{margin-top:30px}
+.split-row + .split-row{margin-top:26px}
+.split-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:9px}
+.split-head .who{font-weight:800;font-size:19px;letter-spacing:-.02em}
+.split-head .count{color:var(--ash)}
+.track{display:grid;grid-template-columns:repeat(17,1fr);gap:3px}
+.cell{height:34px;border:1px solid var(--bone);background:transparent}
+.cell.you{background:var(--ultra);border-color:var(--ultra)}
+.cell.me{background:var(--ink);border-color:var(--ink)}
+.split-items{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.split-items li{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.03em;color:var(--ash);border:1px solid var(--bone);padding:4px 8px;background:#fff}
+.split-items.mine li{color:var(--ink)}
+.chart-note{margin-top:22px;color:var(--ash);font-size:15px;border-left:2px solid var(--ultra);padding-left:12px;max-width:46ch}
+
+/* ---- 03 services ------------------------------------------------------- */
+.svc{display:grid;gap:16px}
+.svc-block{background:var(--ink);color:var(--paper);display:flex;flex-direction:column}
+.svc-block .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:14px;flex:1}
+.svc-block .no{color:var(--smoke)}
+.svc-block h3{color:#fff;font-size:26px;letter-spacing:-.025em}
+.svc-block p{color:#B9B9C2;font-size:15px;line-height:1.5}
+.svc-block .canvas{background:#26262C;padding:12px}
+.svc-block .bar{background:#3A3A43}
+.svc-block .bar.sm{background:#33333B}
+.svc-block .todo{color:#7A7A86}
+.svc-block .todo::before{border-color:#7A7A86}
+.svc-mockrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;
+  padding:7px 10px;color:#fff;background:var(--ultra);
+}
+.chip.acid{background:var(--acid);color:var(--ink)}
+.chip.lilac{background:var(--lilac);color:var(--ink)}
+.svc-cta{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  min-height:54px;padding:0 18px;
+  background:var(--ultra);color:#fff;
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  transition:background .18s var(--e-out);
+}
+.svc-cta svg{width:18px;height:18px}
+.svc-cta:active{background:#A80054}
+@media (hover:hover){ .svc-cta:hover{background:var(--paper);color:var(--ink)} }
+.svc-block:nth-child(2) .svc-cta{background:var(--plum)}
+.svc-block:nth-child(2) .chip{background:var(--acid);color:var(--ink)}
+.svc-block:nth-child(3) .svc-cta{background:var(--graphite);border-top:1px solid rgba(255,255,255,.2)}
+
+.support{margin-top:34px;border-top:2px solid var(--ink)}
+.support-row{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:18px 0;border-bottom:var(--rule)}
+.support-row .glyph{width:34px;height:34px;border:1px solid var(--ink);display:grid;place-items:center}
+.support-row .glyph svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.support-row > h3{grid-column:2;font-size:17px;margin-bottom:4px}
+.support-row > p{grid-column:2;color:var(--ash);font-size:15px;line-height:1.45}
+
+/* ---- 04 work ----------------------------------------------------------- */
+.lead-work{border:1px solid var(--ink);background:#fff}
+.lead-work .canvas{border-bottom:1px solid var(--ink);padding:16px}
+.shop-mock{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.shop-mock .tile{aspect-ratio:1/1;background:var(--skel-2);position:relative}
+.shop-mock .tile:nth-child(1){background:var(--plum)}
+.shop-mock .tile:nth-child(4){background:var(--skel)}
+.shop-mock .tile.buy{background:var(--canvas);display:grid;place-items:center;padding:8px}
+.lead-work .info{padding:18px}
+.lead-work .figure{display:block;font-family:'DM Mono',monospace;font-weight:500;font-size:46px;line-height:1;letter-spacing:-.03em;color:var(--ultra)}
+.lead-work .figure small{font-size:14px;letter-spacing:.1em;color:var(--ash);display:block;margin-top:6px}
+.lead-work h3{margin:14px 0 6px;font-size:24px}
+.lead-work p{color:var(--ash);font-size:15px}
+
+.work-index{margin-top:26px;border-top:2px solid var(--ink)}
+.work-row{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px 0;border-bottom:var(--rule)}
+.sector-tile{width:44px;height:44px;position:relative;overflow:hidden;background:var(--bone)}
+.sector-tile i{position:absolute;display:block}
+.work-row > div{grid-column:2}
+.work-row > p.out{grid-column:2}
+.work-row .nm{font-weight:700;font-size:16px;letter-spacing:-.01em}
+.work-row .sc{color:var(--smoke);font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase}
+.work-row .out{color:var(--ash);font-size:14px;line-height:1.4;margin-top:3px}
+
+/* ---- 05 process -------------------------------------------------------- */
+.step{border-top:var(--rule);padding-top:18px;margin-top:18px}
+.step:first-child{border-top:2px solid var(--ink)}
+.step-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.step-head .n{font-family:'DM Mono',monospace;font-weight:500;font-size:14px;color:var(--ultra);letter-spacing:.08em}
+.step-head h3{font-size:23px;letter-spacing:-.025em}
+.step p{color:var(--ash);font-size:15px;line-height:1.5;margin-bottom:14px}
+.step .canvas{padding:14px}
+
+.bubbles{display:flex;flex-direction:column;gap:7px}
+.bub{display:block;max-width:74%;padding:9px 11px;background:#fff;border-radius:2px}
+.bub.them{align-self:flex-end;background:var(--ink)}
+.bub.them .bar{background:#3A3A43}
+.wire{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wire .col{display:flex;flex-direction:column;gap:7px}
+.wire .hatch{
+  aspect-ratio:4/3;border:1px solid var(--smoke);
+  background-image:repeating-linear-gradient(45deg,var(--skel) 0 2px,transparent 2px 7px);
+}
+.review{display:flex;flex-direction:column;gap:9px}
+.review-line{display:flex;align-items:center;gap:9px}
+.review-line .tick{width:18px;height:18px;border:1.5px solid var(--smoke);border-radius:50%;flex:none}
+.review-line.done .tick{background:var(--ink);border-color:var(--ink);position:relative}
+.review-line.done .tick::after{content:"";position:absolute;left:5px;top:4px;width:5px;height:9px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(42deg)}
+.live-badge{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--acid);color:var(--ink);padding:12px 14px}
+.live-badge .t{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.live-badge .m{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.05em}
+
+/* ---- 06 pricing — VERTICAL SELECTOR, never columns ---------------------- */
+.pricing input.tier{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.tier-list{border-top:2px solid var(--ink)}
+.tier-row{
+  display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+  padding:16px 14px;border-bottom:var(--rule);cursor:pointer;background:transparent;
+  min-height:66px;
+  transition:background .18s var(--e-out);
+}
+.tier-row .nm{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tier-row .pop{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);padding:2px 6px}
+.tier-row .sub{color:var(--ash);font-size:14px;margin-top:2px}
+.tier-row .mark{width:26px;height:26px;border:1.5px solid var(--smoke);border-radius:50%;position:relative;flex:none}
+.tier-row .mark::after{content:"";position:absolute;left:8px;top:11px;width:9px;height:2px;background:var(--smoke)}
+.tier-row .mark::before{content:"";position:absolute;right:7px;top:8px;width:8px;height:8px;border:solid var(--smoke);border-width:2px 2px 0 0;transform:rotate(45deg)}
+#t1:checked ~ .tier-list [for="t1"],
+#t2:checked ~ .tier-list [for="t2"],
+#t3:checked ~ .tier-list [for="t3"]{background:var(--ink);color:var(--paper)}
+#t1:checked ~ .tier-list [for="t1"] .sub,
+#t2:checked ~ .tier-list [for="t2"] .sub,
+#t3:checked ~ .tier-list [for="t3"] .sub{color:#B9B9C2}
+#t1:checked ~ .tier-list [for="t1"] .pop,
+#t2:checked ~ .tier-list [for="t2"] .pop,
+#t3:checked ~ .tier-list [for="t3"] .pop{border-color:var(--paper)}
+#t1:checked ~ .tier-list [for="t1"] .mark,
+#t2:checked ~ .tier-list [for="t2"] .mark,
+#t3:checked ~ .tier-list [for="t3"] .mark{background:var(--acid);border-color:var(--acid)}
+#t1:checked ~ .tier-list [for="t1"] .mark::before,
+#t2:checked ~ .tier-list [for="t2"] .mark::before,
+#t3:checked ~ .tier-list [for="t3"] .mark::before{
+  right:8px;top:7px;width:6px;height:11px;border-width:0 2px 2px 0;border-color:var(--ink);transform:rotate(42deg)
+}
+#t1:checked ~ .tier-list [for="t1"] .mark::after,
+#t2:checked ~ .tier-list [for="t2"] .mark::after,
+#t3:checked ~ .tier-list [for="t3"] .mark::after{display:none}
+
+.tier-panel{border:1px solid var(--ink);border-top:0;padding:20px 16px;background:#fff}
+/* every panel is in the DOM and readable; JS-off shows all three, stacked and
+   labelled, which is a complete document. :checked narrows it to one. */
+.panel-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:var(--rule);padding-bottom:12px;margin-bottom:14px}
+/* NOT DM Mono. DM Mono is monospaced, so a comma takes a full digit advance
+   and £1,995 renders as "£1 , 995" — the exact failure CLAUDE.md warns about,
+   arriving through the typeface rather than through tabular-nums. Proportional
+   grotesk, and no font-variant-numeric anywhere near a price. */
+.price{font-family:'Schibsted Grotesk',sans-serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.035em}
+.price sup{font-size:20px;font-weight:500;line-height:0;letter-spacing:0}
+.price .u{font-family:'Schibsted Grotesk',sans-serif;font-size:14px;font-weight:400;color:var(--ash);letter-spacing:0}
+.alt-price{font-family:'DM Mono',monospace;font-size:14px;color:var(--ash)}
+.panel-h .pages{color:var(--smoke);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.incl{margin:0;padding:0;list-style:none;display:grid;gap:11px}
+.incl li{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;font-size:15px;color:var(--ink)}
+.incl svg{width:20px;height:20px;stroke:var(--ultra);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.zero-chip{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;background:var(--canvas);padding:12px 14px}
+.zero-chip .k{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ash)}
+.zero-chip .v{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--ink);background:var(--acid);padding:4px 8px}
+.price-note{margin-top:16px;color:var(--ash);font-size:14px}
+.price-note a{border-bottom:1px solid var(--ultra)}
+
+@media (min-width:760px){
+  .tier-panel{border-top:1px solid var(--ink)}
+}
+/* JS-on: only the selected panel shows. JS-off: all three show, each with its
+   own visible tier name — a complete, readable document either way. */
+.js .tier-panel{display:none}
+.js #t1:checked ~ .tier-panels [data-tier="1"],
+.js #t2:checked ~ .tier-panels [data-tier="2"],
+.js #t3:checked ~ .tier-panels [data-tier="3"]{display:block}
+.panel-tag{display:none}
+:root:not(.js) .panel-tag{display:block}
+html:not(.js) .panel-tag{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ultra);margin-bottom:10px}
+
+/* ---- 07 words ---------------------------------------------------------- */
+.quote{border-top:var(--rule);padding-top:20px;margin-top:20px;display:grid;grid-template-columns:52px 1fr;gap:14px}
+.quote:first-child{border-top:2px solid var(--ink)}
+.mono-tile{width:52px;height:52px;position:relative;overflow:hidden;display:grid;place-items:center;background:var(--plum)}
+.mono-tile span{font-family:'Schibsted Grotesk',sans-serif;font-weight:900;font-size:19px;color:#fff;letter-spacing:-.03em;position:relative;z-index:1}
+.mono-tile::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;background:rgba(255,255,255,.16)}
+.quote blockquote{margin:0;font-size:18px;line-height:1.4;font-weight:500;letter-spacing:-.015em}
+.quote cite{display:block;margin-top:10px;font-style:normal;color:var(--ash);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---- 08 reach ---------------------------------------------------------- */
+.reach-map{border:1px solid var(--ink);background:var(--canvas);padding:16px}
+.reach-map svg{width:100%;height:auto}
+.reach-list{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.reach-list li{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.05em;border:1px solid var(--bone);background:#fff;padding:5px 9px;color:var(--ash)}
+.reach-list li.home{background:var(--ultra);border-color:var(--ultra);color:#fff}
+
+/* ---- 09 contact -------------------------------------------------------- */
+.channels{display:grid;gap:12px;border-top:2px solid var(--ink);padding-top:20px}
+.channel{
+  display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;
+  border:1px solid var(--ink);padding:14px;min-height:72px;background:#fff;
+  transition:background .18s var(--e-out),color .18s var(--e-out);
+}
+.channel .g{width:44px;height:44px;background:var(--ink);display:grid;place-items:center}
+.channel .g svg{width:20px;height:20px;stroke:var(--paper);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.channel .k{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--smoke)}
+.channel .v{font-weight:700;font-size:16px;letter-spacing:-.01em;word-break:break-word}
+.channel .arw{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.5}
+.channel:active{background:var(--canvas)}
+@media (hover:hover){ .channel:hover{background:var(--ink);color:var(--paper)} .channel:hover .g{background:var(--ultra)} .channel:hover .arw{stroke:var(--paper)} .channel:hover .k{color:var(--smoke)} }
+.reassure{margin-top:16px;color:var(--ash);font-size:14px;display:flex;align-items:flex-start;gap:9px}
+.reassure svg{width:18px;height:18px;stroke:var(--acid);fill:none;stroke-width:1.6;flex:none;margin-top:2px}
+
+/* ---- footer ------------------------------------------------------------ */
+footer{background:var(--ink);color:var(--paper);padding-block:36px;margin-top:20px}
+footer .logotype{color:var(--paper)}
+footer .fgrid{display:grid;gap:22px;border-top:var(--rule-dark);padding-top:22px;margin-top:22px}
+footer h4{margin:0 0 10px;font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--smoke);font-weight:500}
+footer ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+footer li a{font-size:15px;color:#D6D6D9}
+footer .legal{border-top:var(--rule-dark);margin-top:24px;padding-top:16px;color:var(--smoke);font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.06em;display:flex;flex-wrap:wrap;gap:8px 18px}
+
+/* ============================================================================
+   THE DOCK
+   Fixed, bottom-pinned, thumb-reachable. Centred with left/right + margin-inline
+   — deliberately NOT transform: translateX(-50%), and there is no backdrop-filter
+   anywhere in this document, so the dock never becomes the containing block for
+   the fixed menu sheet.
+============================================================================ */
+.dock{
+  position:fixed;
+  left:12px; right:12px;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  margin-inline:auto;
+  max-width:440px;
+  z-index:80;
+  background:var(--ink);
+  color:var(--paper);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  align-items:stretch;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(16,16,20,.28);
+}
+/* scroll progress hairline, CSS-only. Zero-width where unsupported. */
+.dock::before{
+  content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--acid);
+  transform-origin:0 50%;transform:scaleX(0);z-index:2;
+}
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .dock::before{animation:dockprog linear both;animation-timeline:scroll(root block)}
+    @keyframes dockprog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  }
+}
+.dock-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  min-height:var(--dock-h);padding:8px 2px 9px;
+  color:#9E9EA9;
+  font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  border:0;background:transparent;cursor:pointer;
+  transition:color .18s var(--e-out),background .18s var(--e-out);
+}
+.dock-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dock-item:active{background:#26262C}
+.dock-item.is-active{color:var(--paper)}
+.dock-item.is-active svg{stroke:var(--acid)}
+.dock-item.cta{background:var(--ultra);color:#fff}
+.dock-item.cta:active{background:#A80054}
+@media (hover:hover){ .dock-item:hover{color:var(--paper)} .dock-item.cta:hover{background:#EE1179} }
+
+/* menu sheet — a SIBLING of the dock, a direct child of <body>.
+   Driven by a checkbox so it opens with JavaScript disabled. */
+#menu-open{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.sheet{
+  position:fixed;inset:0;z-index:90;
+  background:var(--ink);color:var(--paper);
+  display:flex;flex-direction:column;
+  padding:calc(24px + env(safe-area-inset-top,0px)) var(--pad) calc(24px + env(safe-area-inset-bottom,0px));
+  visibility:hidden;pointer-events:none;
+  transform:translateY(100%);
+  transition:transform .34s var(--e-out),visibility 0s linear .34s;
+}
+#menu-open:checked ~ .sheet{visibility:visible;pointer-events:auto;transform:translateY(0);transition:transform .34s var(--e-out),visibility 0s}
+@media (prefers-reduced-motion:reduce){ .sheet{transition:none} }
+.sheet-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:auto}
+.sheet-close{
+  display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 14px;
+  border:1px solid rgba(255,255,255,.3);color:var(--paper);background:transparent;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+}
+.sheet-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.sheet-nav{display:grid;gap:2px;margin-block:28px}
+.sheet-nav a{
+  display:flex;align-items:baseline;gap:12px;
+  padding:10px 0;border-bottom:var(--rule-dark);
+  font-weight:800;font-size:32px;letter-spacing:-.03em;color:var(--paper);
+  min-height:52px;
+}
+.sheet-nav a .n{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--smoke);letter-spacing:.1em}
+.sheet-foot{display:grid;gap:6px;color:#B9B9C2;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.04em}
+.sheet-foot a{color:var(--acid)}
+
+/* ---- reveals: transform only. Content is never authored at opacity 0. --- */
+@media (prefers-reduced-motion:no-preference){
+  html.js .reveal{transform:translateY(14px);transition:transform .62s var(--e-out)}
+  html.js .reveal.in{transform:none}
+}
+
+/* ============================================================================
+   SCALE-UP. 390 is the design; these are the rooms it gets given.
+============================================================================ */
+@media (min-width:600px){
+  :root{--pad:32px}
+  .hero-cta{flex-direction:row;flex-wrap:wrap}
+  .btn{min-width:220px}
+  .svc{grid-template-columns:1fr 1fr}
+  .channels{grid-template-columns:1fr 1fr}
+  .support-row{grid-template-columns:34px 1.1fr 2fr;align-items:center}
+  .support-row > p{grid-column:3}
+  .support-row > h3{margin-bottom:0}
+}
+@media (min-width:900px){
+  :root{--pad:44px}
+  section{padding-block:88px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding-block:36px 72px}
+  .hero .display{font-size:clamp(48px,5.7vw,82px)}
+  .hero .corner-meta{grid-column:1/-1}
+  .lede{font-size:19px;max-width:40ch}
+  .svc{grid-template-columns:repeat(3,1fr)}
+  .split-chart{display:grid;grid-template-columns:1fr 1fr;gap:38px}
+  .split-row + .split-row{margin-top:0}
+  .chart-note{grid-column:1/-1;margin-top:8px}
+  .lead-work{display:grid;grid-template-columns:1.1fr .9fr}
+  .lead-work .canvas{border-bottom:0;border-right:1px solid var(--ink)}
+  .lead-work .info{display:flex;flex-direction:column;justify-content:center;padding:36px}
+  .lead-work .figure{font-size:72px}
+  .work-row{grid-template-columns:44px 1.1fr 1.5fr;align-items:center}
+  .work-row > p.out{grid-column:3;margin-top:0}
+  .step{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+  .step .txt{align-self:center}
+  .pricing-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start}
+  .tier-panel{border-left:0}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .quote{margin-top:0}
+  .quote:first-child{border-top:2px solid var(--ink)}
+  .quote{border-top:2px solid var(--ink)}
+  footer .fgrid{grid-template-columns:repeat(4,1fr)}
+  .dock{max-width:560px}
+  .dock-item{font-size:10.5px}
+  .sheet-nav a{font-size:46px}
+}
+@media (min-width:1200px){
+  :root{--pad:64px}
+  .display{line-height:.9}
+  .reach{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<a class="sr" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <header class="masthead">
+    <a class="logotype" href="#top" aria-label="Digital Consulting Services, home">
+      digital consulting
+      <b>services</b>
+    </a>
+    <span class="status mono"><i class="dot" aria-hidden="true"></i>Polegate · UK-wide</span>
+  </header>
+</div>
+
+<main id="main">
+
+  <!-- ==================== 01 HERO ==================== -->
+  <section class="hero wrap" id="top" style="padding-top:8px">
+    <div>
+      <span class="eyebrow mono">Est. 2019 · Website studio</span>
+      <h1 class="display reveal">
+        Websites that<br>
+        hold their own<br>
+        <span class="tone-2">against London.</span>
+      </h1>
+      <p class="lede reveal">I design, build, host and look after websites for small businesses. You have a conversation. I do the rest of it.</p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#contact">Get a free quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn" href="#work">See the work
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- HARD RULE §01 — abstract in-card mock, one full-colour element -->
+    <div class="device reveal" role="img" aria-label="Abstract mock of a client website on a phone, with an enquiry-received notification.">
+      <div class="device-chrome"><i></i><i></i><i></i><span class="url"></span></div>
+      <div class="device-screen">
+        <div class="device-nav">
+          <span class="mark"></span>
+          <span class="links"><i></i><i></i><i></i></span>
+        </div>
+        <div class="device-hero"></div>
+        <div class="stack">
+          <span class="bar w90"></span>
+          <span class="bar sm w76"></span>
+          <span class="bar sm w52"></span>
+        </div>
+        <div class="device-foot">
+          <span class="bar w40"></span>
+          <span class="todo">Draft page</span>
+        </div>
+      </div>
+      <span class="toast">Enquiry received</span>
+    </div>
+
+    <div class="corner-meta mono">
+      <span>(© 2019 — © 2026)</span>
+      <span>Run by Ricky Wilson</span>
+    </div>
+  </section>
+
+  <!-- ==================== 02 THE DIVISION OF LABOUR ==================== -->
+  <section class="wrap" id="how">
+    <div class="sechead mono">
+      <span class="idx">[02]</span>
+      <span class="lbl">// What you actually do</span>
+      <span class="meta">© 2026</span>
+    </div>
+
+    <h2 class="reveal">Most studios want a brief.<br><span class="tone-2">I'd rather have a conversation.</span></h2>
+
+    <!-- HARD RULE §02 — a real 17-cell split diagram. The picture is the argument. -->
+    <div class="split-chart reveal">
+      <div class="split-row">
+        <div class="split-head">
+          <span class="who">You</span>
+          <span class="count mono">3 of 17</span>
+        </div>
+        <div class="track" role="img" aria-label="Three of seventeen parts of the job are yours.">
+          <span class="cell you"></span><span class="cell you"></span><span class="cell you"></span>
+          <span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell"></span>
+          <span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell"></span>
+          <span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell"></span>
+          <span class="cell"></span><span class="cell"></span>
+        </div>
+        <ul class="split-items">
+          <li>Talk to me once</li><li>Look at it</li><li>Say yes</li>
+        </ul>
+      </div>
+
+      <div class="split-row">
+        <div class="split-head">
+          <span class="who">Me</span>
+          <span class="count mono">14 of 17</span>
+        </div>
+        <div class="track" role="img" aria-label="Fourteen of seventeen parts of the job are mine.">
+          <span class="cell"></span><span class="cell"></span><span class="cell"></span>
+          <span class="cell me"></span><span class="cell me"></span><span class="cell me"></span><span class="cell me"></span>
+          <span class="cell me"></span><span class="cell me"></span><span class="cell me"></span><span class="cell me"></span>
+          <span class="cell me"></span><span class="cell me"></span><span class="cell me"></span><span class="cell me"></span>
+          <span class="cell me"></span><span class="cell me"></span>
+        </div>
+        <ul class="split-items mine">
+          <li>The questions</li><li>Structure</li><li>Words</li><li>Design</li><li>Build</li>
+          <li>Images</li><li>Local SEO</li><li>Forms</li><li>Speed</li><li>Security</li>
+          <li>Hosting</li><li>Domain</li><li>Monitoring</li><li>Support</li>
+        </ul>
+      </div>
+
+      <p class="chart-note">No brief to write. No copy to supply. No login to learn, and no dashboard waiting for you at the end of it. If something needs changing next year, you send a message and it gets changed.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 03 SERVICES ==================== -->
+  <section class="wrap" id="services">
+    <div class="sechead mono">
+      <span class="idx">[03]</span>
+      <span class="lbl">// What I make</span>
+      <span class="meta">Six services</span>
+    </div>
+
+    <div class="svc">
+      <!-- HARD RULE §03a — each block carries its own div-built mock -->
+      <article class="svc-block reveal">
+        <div class="body">
+          <span class="no mono">01</span>
+          <h3>A new website</h3>
+          <p>Designed and built around your business, not dropped into a template someone else is already using.</p>
+          <div class="canvas">
+            <div class="stack">
+              <div class="svc-mockrow"><span class="chip">Home</span><span class="bar sm w28"></span></div>
+              <span class="bar w90"></span>
+              <span class="bar sm w64"></span>
+              <span class="bar sm w40"></span>
+              <span class="todo">Second draft</span>
+            </div>
+          </div>
+        </div>
+        <a class="svc-cta" href="#contact">Enquire
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+      <article class="svc-block reveal">
+        <div class="body">
+          <span class="no mono">02</span>
+          <h3>An online shop</h3>
+          <p>A store built and loaded with your products. Orders, stock and postage handled, so you only have to pack the box.</p>
+          <div class="canvas">
+            <div class="stack">
+              <div class="svc-mockrow"><span class="bar w40"></span><span class="bar sm w28"></span></div>
+              <span class="bar sm w76"></span>
+              <div class="svc-mockrow"><span class="chip acid">Add to basket</span><span class="bar sm w28"></span></div>
+              <span class="todo">3 items in stock</span>
+            </div>
+          </div>
+        </div>
+        <a class="svc-cta" href="#contact">Enquire
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+      <article class="svc-block reveal">
+        <div class="body">
+          <span class="no mono">03</span>
+          <h3>Fixing the site you have</h3>
+          <p>Already on WordPress? I'll fix it, rebuild it, or give you a custom theme you can post to yourself.</p>
+          <div class="canvas">
+            <div class="stack">
+              <span class="bar w76"></span>
+              <span class="bar sm w90"></span>
+              <div class="svc-mockrow"><span class="chip lilac">Rebuilt</span><span class="bar sm w28"></span></div>
+              <span class="todo">Old theme retired</span>
+            </div>
+          </div>
+        </div>
+        <a class="svc-cta" href="#contact">Enquire
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+    </div>
+
+    <!-- HARD RULE §03b — support rows each carry a stroke-SVG glyph -->
+    <div class="support">
+      <div class="support-row reveal">
+        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg></span>
+        <h3>Local SEO</h3>
+        <p>Service pages, location pages and structured data, so you turn up where you actually work.</p>
+      </div>
+      <div class="support-row reveal">
+        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.2-2.9 7.7-7 9-4.1-1.3-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3>Hosting and management</h3>
+        <p>Hosting, security, updates, monitoring, email on your own domain — and one person to call when something needs doing.</p>
+      </div>
+      <div class="support-row reveal">
+        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <h3>Analytics and reporting</h3>
+        <p>Analytics, Search Console and a monthly report in plain English, so you know what the site is doing for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 04 WORK ==================== -->
+  <section class="wrap" id="work">
+    <div class="sechead mono">
+      <span class="idx">[04]</span>
+      <span class="lbl">// Selected work</span>
+      <span class="meta">20+ sites since 2019</span>
+    </div>
+
+    <!-- HARD RULE §04a — lead client with an abstract storefront mock -->
+    <article class="lead-work reveal">
+      <div class="canvas">
+        <div class="shop-mock" role="img" aria-label="Abstract mock of an online fabric shop with a buy control.">
+          <span class="tile"></span>
+          <span class="tile"></span>
+          <span class="tile"></span>
+          <span class="tile buy"><span class="chip">Add to basket</span></span>
+        </div>
+      </div>
+      <div class="info">
+        <span class="figure">5 yrs<small>Longest-standing client</small></span>
+        <h3>Cuddle Plush Fabrics</h3>
+        <p>eCommerce, fabrics. Five years and counting — one of the longest client relationships this studio has, and still shipping orders every week.</p>
+      </div>
+    </article>
+
+    <!-- HARD RULE §04b — every row carries a two-tone sector tile built from divs -->
+    <div class="work-index">
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#17265E">
+          <i style="left:8px;top:10px;width:28px;height:6px;background:#fff"></i>
+          <i style="left:8px;top:22px;width:16px;height:6px;background:rgba(255,255,255,.45)"></i>
+          <i style="left:8px;top:32px;width:22px;height:4px;background:#00D2D8"></i>
+        </span>
+        <div><span class="nm">Luna Landings</span> <span class="sc">Made-to-order</span></div>
+        <p class="out">Product configurator, automatic work orders, worldwide shipping.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#FF9BC8">
+          <i style="left:11px;top:11px;width:22px;height:22px;border:3px solid #101014;border-radius:50%"></i>
+          <i style="left:20px;top:20px;width:4px;height:4px;background:#101014;border-radius:50%"></i>
+        </span>
+        <div><span class="nm">Sanctuary Ida</span> <span class="sc">Yoga studio</span></div>
+        <p class="out">Students book and pay for classes online.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#00D2D8">
+          <i style="left:9px;top:9px;width:26px;height:18px;background:#101014"></i>
+          <i style="left:9px;top:31px;width:18px;height:5px;background:#101014"></i>
+        </span>
+        <div><span class="nm">Nicola Noble Tuition</span> <span class="sc">Tuition</span></div>
+        <p class="out">Moved classes online during Covid instead of closing.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#101014">
+          <i style="left:8px;top:8px;width:12px;height:12px;background:#D6006B"></i>
+          <i style="left:24px;top:8px;width:12px;height:12px;background:#00D2D8"></i>
+          <i style="left:8px;top:24px;width:12px;height:12px;background:#FF9BC8"></i>
+          <i style="left:24px;top:24px;width:12px;height:12px;background:#F3F3F1"></i>
+        </span>
+        <div><span class="nm">Mad Graphics</span> <span class="sc">Signage &amp; print</span></div>
+        <p class="out">A full rebuild, top to bottom.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#E3E3E0">
+          <i style="left:6px;top:16px;width:32px;height:12px;background:#101014"></i>
+          <i style="left:11px;top:26px;width:8px;height:8px;background:#F3F3F1;border-radius:50%"></i>
+          <i style="left:25px;top:26px;width:8px;height:8px;background:#F3F3F1;border-radius:50%"></i>
+        </span>
+        <div><span class="nm">DCH Automotive</span> <span class="sc">Automotive</span></div>
+        <p class="out">A credible presence from a standing start.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#17265E">
+          <i style="left:10px;top:6px;width:4px;height:32px;background:#F3F3F1"></i>
+          <i style="left:30px;top:6px;width:4px;height:32px;background:#F3F3F1"></i>
+          <i style="left:6px;top:16px;width:32px;height:4px;background:#00D2D8"></i>
+        </span>
+        <div><span class="nm">Colossus Scaffolding</span> <span class="sc">Scaffolding</span></div>
+        <p class="out">First enquiry from Google within three weeks of launch.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#D6006B">
+          <i style="left:14px;top:7px;width:6px;height:16px;background:#fff;transform:skewX(-14deg)"></i>
+          <i style="left:22px;top:21px;width:6px;height:16px;background:#fff;transform:skewX(-14deg)"></i>
+        </span>
+        <div><span class="nm">DJ Fox Electrical</span> <span class="sc">Electrical</span></div>
+        <p class="out">A 20-plus page site, live at djfoxelectrical.com.</p>
+      </div>
+
+      <div class="work-row reveal">
+        <span class="sector-tile" aria-hidden="true" style="background:#101014">
+          <i style="left:6px;top:14px;width:20px;height:14px;background:#F3F3F1"></i>
+          <i style="left:26px;top:19px;width:12px;height:9px;background:#00D2D8"></i>
+          <i style="left:10px;top:29px;width:6px;height:6px;background:#F3F3F1;border-radius:50%"></i>
+          <i style="left:28px;top:29px;width:6px;height:6px;background:#F3F3F1;border-radius:50%"></i>
+        </span>
+        <div><span class="nm">Bexhill Removals</span> <span class="sc">Removals</span></div>
+        <p class="out">Design approved on the first presentation, no revisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 05 PROCESS ==================== -->
+  <section class="wrap" id="process">
+    <div class="sechead mono">
+      <span class="idx">[05]</span>
+      <span class="lbl">// How it goes</span>
+      <span class="meta">Four steps</span>
+    </div>
+
+    <!-- HARD RULE §05 — each step has a purpose-built mock, no repeated device -->
+    <div class="step reveal">
+      <div class="txt">
+        <div class="step-head"><span class="n">01</span><h3>A conversation</h3></div>
+        <p>A call, or a few messages. Nothing to fill in, nothing to prepare, no brief to write. I ask the questions.</p>
+      </div>
+      <div class="canvas">
+        <div class="bubbles" role="img" aria-label="Abstract message thread between you and the studio.">
+          <span class="bub"><span class="bar sm w90"></span></span>
+          <span class="bub them"><span class="bar sm w76"></span></span>
+          <span class="bub"><span class="bar sm w64"></span></span>
+          <span class="bub them"><span class="bar sm w52"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="txt">
+        <div class="step-head"><span class="n">02</span><h3>I write it and design it</h3></div>
+        <p>Words, structure, images, colour — all handled here. You do not need to know what to say about your own business; that is my job.</p>
+      </div>
+      <div class="canvas">
+        <div class="wire" role="img" aria-label="Wireframe layout in progress with placeholder image blocks.">
+          <div class="col">
+            <span class="hatch"></span>
+            <span class="bar sm w90"></span>
+            <span class="bar sm w64"></span>
+          </div>
+          <div class="col">
+            <span class="bar w76"></span>
+            <span class="bar sm w90"></span>
+            <span class="hatch"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="txt">
+        <div class="step-head"><span class="n">03</span><h3>You look at it</h3></div>
+        <p>Unlimited revisions while it is being built. Say what you don't like in plain English and it changes.</p>
+      </div>
+      <div class="canvas">
+        <div class="review" role="img" aria-label="Review checklist with three items ticked off and one still open.">
+          <span class="review-line done"><span class="tick"></span><span class="bar sm w76"></span></span>
+          <span class="review-line done"><span class="tick"></span><span class="bar sm w90"></span></span>
+          <span class="review-line done"><span class="tick"></span><span class="bar sm w64"></span></span>
+          <span class="review-line"><span class="tick"></span><span class="bar sm w52"></span></span>
+          <span class="todo">Make the header bigger</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="txt">
+        <div class="step-head"><span class="n">04</span><h3>It goes live, and stays live</h3></div>
+        <p>Hosting, updates, security and monitoring from then on. When you want something changed in two years' time, you message the same person.</p>
+      </div>
+      <div class="canvas">
+        <div class="stack" role="img" aria-label="Site live badge with an uptime line.">
+          <span class="bar sm w76"></span>
+          <span class="bar sm w52"></span>
+          <div class="live-badge"><span class="t">Site live</span><span class="m">monitored</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 06 PRICING ==================== -->
+  <section class="wrap pricing" id="pricing">
+    <div class="sechead mono">
+      <span class="idx">[06]</span>
+      <span class="lbl">// What it costs</span>
+      <span class="meta">Printed, not quoted</span>
+    </div>
+
+    <h2 class="reveal" style="margin-bottom:22px">Two ways to pay<br><span class="tone-2">for exactly the same site.</span></h2>
+
+    <div class="pricing-inner">
+      <input class="tier" type="radio" name="tier" id="t1">
+      <input class="tier" type="radio" name="tier" id="t2" checked>
+      <input class="tier" type="radio" name="tier" id="t3">
+
+      <!-- vertical selector, never columns -->
+      <div class="tier-list">
+        <label class="tier-row" for="t1">
+          <span>
+            <span class="nm">Starter</span>
+            <span class="sub">£995 upfront + £15/mo · or £45/mo</span>
+          </span>
+          <span class="mark" aria-hidden="true"></span>
+        </label>
+        <label class="tier-row" for="t2">
+          <span>
+            <span class="nm">Professional <span class="pop">Most popular</span></span>
+            <span class="sub">£1,995 upfront + £25/mo · or £75/mo</span>
+          </span>
+          <span class="mark" aria-hidden="true"></span>
+        </label>
+        <label class="tier-row" for="t3">
+          <span>
+            <span class="nm">Growth</span>
+            <span class="sub">£3,495 upfront + £50/mo · or £125/mo</span>
+          </span>
+          <span class="mark" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="tier-panels">
+        <div class="tier-panel" data-tier="1">
+          <span class="panel-tag">Starter</span>
+          <div class="panel-h">
+            <span class="price"><sup>£</sup>995 <span class="u">+ £15/mo</span></span>
+            <span class="alt-price">or £45/mo, nothing upfront</span>
+            <span class="pages">Up to 20 pages</span>
+          </div>
+          <ul class="incl">
+            <li><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M8 20h8"/></svg>Custom design, built around your business</li>
+            <li><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>Local SEO: service pages, location pages, structured data</li>
+            <li><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.2-2.9 7.7-7 9-4.1-1.3-7-4.8-7-9V6z"/></svg>Hosting, SSL, security updates, uptime monitoring</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>Contact form and email on your own domain</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2"/><path d="M20 4v5h-5"/></svg>Unlimited revisions while it is being built</li>
+          </ul>
+          <div class="zero-chip"><span class="k">Pay-monthly option</span><span class="v">£0 due today</span></div>
+          <p class="price-note">24-month minimum on the pay-monthly option. Full mechanics on the <a href="#pricing">pricing page</a>.</p>
+        </div>
+
+        <div class="tier-panel" data-tier="2">
+          <span class="panel-tag">Professional — most popular</span>
+          <div class="panel-h">
+            <span class="price"><sup>£</sup>1,995 <span class="u">+ £25/mo</span></span>
+            <span class="alt-price">or £75/mo, nothing upfront</span>
+            <span class="pages">Up to 50 pages</span>
+          </div>
+          <ul class="incl">
+            <li><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M8 20h8"/></svg>Everything in Starter, at a larger scale</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Analytics, Search Console and monthly reporting</li>
+            <li><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8h14M5 16h14"/></svg>A deeper set of service and location pages</li>
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>Faster turnaround on changes once you are live</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2"/><path d="M20 4v5h-5"/></svg>Unlimited revisions while it is being built</li>
+          </ul>
+          <div class="zero-chip"><span class="k">Pay-monthly option</span><span class="v">£0 due today</span></div>
+          <p class="price-note">24-month minimum on the pay-monthly option. Full mechanics on the <a href="#pricing">pricing page</a>.</p>
+        </div>
+
+        <div class="tier-panel" data-tier="3">
+          <span class="panel-tag">Growth</span>
+          <div class="panel-h">
+            <span class="price"><sup>£</sup>3,495 <span class="u">+ £50/mo</span></span>
+            <span class="alt-price">or £125/mo, nothing upfront</span>
+            <span class="pages">Up to 100 pages</span>
+          </div>
+          <ul class="incl">
+            <li><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M8 20h8"/></svg>Everything in Professional, at full scale</li>
+            <li><svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/><path d="M9 10h6M9 14h4"/></svg>An online shop, or a large content site</li>
+            <li><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 10l-4 4 1 6-5-2.8L7 20l1-6-4-4 5.5-1.5z"/></svg>Priority on the queue for new pages and changes</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Analytics, Search Console and monthly reporting</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2"/><path d="M20 4v5h-5"/></svg>Unlimited revisions while it is being built</li>
+          </ul>
+          <div class="zero-chip"><span class="k">Pay-monthly option</span><span class="v">£0 due today</span></div>
+          <p class="price-note">24-month minimum on the pay-monthly option. Full mechanics on the <a href="#pricing">pricing page</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07 WORDS ==================== -->
+  <section class="wrap" id="words">
+    <div class="sechead mono">
+      <span class="idx">[07]</span>
+      <span class="lbl">// In their words</span>
+      <span class="meta">Verbatim</span>
+    </div>
+
+    <!-- HARD RULE §07 — each quote carries a two-tone monogram tile -->
+    <div class="quotes">
+      <figure class="quote reveal">
+        <span class="mono-tile" aria-hidden="true"><span>CP</span></span>
+        <div>
+          <blockquote>“Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.”</blockquote>
+          <cite>Sarah — Cuddle Plush Fabrics</cite>
+        </div>
+      </figure>
+      <figure class="quote reveal">
+        <span class="mono-tile" aria-hidden="true" style="background:#D6006B"><span>NN</span></span>
+        <div>
+          <blockquote>“I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.”</blockquote>
+          <cite>Nicola — Nicola Noble Tuition</cite>
+        </div>
+      </figure>
+      <figure class="quote reveal">
+        <span class="mono-tile" aria-hidden="true" style="background:#00D2D8"><span style="color:#101014">SI</span></span>
+        <div>
+          <blockquote>“My yoga students love that they can book and pay for my classes on my website.”</blockquote>
+          <cite>Molly — Sanctuary Ida</cite>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================== 08 REACH ==================== -->
+  <section class="wrap reach" id="reach">
+    <div class="sechead mono" style="grid-column:1/-1">
+      <span class="idx">[08]</span>
+      <span class="lbl">// Where I work</span>
+      <span class="meta">East Sussex &amp; UK-wide</span>
+    </div>
+
+    <!-- HARD RULE §08 — inline SVG node diagram, one full-colour node -->
+    <div class="reach-map reveal">
+      <svg viewBox="0 -6 340 196" role="img" aria-label="Diagram of the studio in Polegate connected to Eastbourne, Hailsham, Lewes, Seaford, Brighton, Hove and Uckfield, with a dashed arc indicating UK-wide work.">
+        <g stroke="#A6A6B0" stroke-width="1" fill="none">
+          <path d="M170 118 L60 92"/><path d="M170 118 L104 48"/><path d="M170 118 L206 56"/>
+          <path d="M170 118 L268 78"/><path d="M170 118 L246 140"/><path d="M170 118 L96 152"/>
+          <path d="M170 118 L296 128"/>
+        </g>
+        <g stroke="#101014" stroke-width="1.4" stroke-dasharray="5 5" fill="none">
+          <path d="M14 162 A 178 178 0 0 1 326 162"/>
+        </g>
+        <g fill="#101014" font-family="DM Mono, monospace" font-size="9" letter-spacing="0.06em">
+          <circle cx="60" cy="92" r="4" fill="#101014"/><text x="26" y="82">HAILSHAM</text>
+          <circle cx="104" cy="48" r="4" fill="#101014"/><text x="76" y="38">LEWES</text>
+          <circle cx="206" cy="56" r="4" fill="#101014"/><text x="184" y="46">UCKFIELD</text>
+          <circle cx="268" cy="78" r="4" fill="#101014"/><text x="246" y="68">BRIGHTON</text>
+          <circle cx="296" cy="128" r="4" fill="#101014"/><text x="284" y="150">HOVE</text>
+          <circle cx="246" cy="140" r="4" fill="#101014"/><text x="222" y="162">SEAFORD</text>
+          <circle cx="96" cy="152" r="4" fill="#101014"/><text x="58" y="172">EASTBOURNE</text>
+          <text x="128" y="14" fill="#55555E">— AND UK-WIDE —</text>
+        </g>
+        <g>
+          <circle cx="170" cy="118" r="13" fill="none" stroke="#D6006B" stroke-width="1.5"/>
+          <circle cx="170" cy="118" r="7" fill="#D6006B"/>
+          <text x="146" y="146" font-family="DM Mono, monospace" font-size="10" fill="#D6006B" letter-spacing="0.08em">POLEGATE</text>
+        </g>
+      </svg>
+    </div>
+
+    <div>
+      <p class="lede reveal" style="margin-top:22px">The studio is in Polegate and a good number of clients are within half an hour of it. The rest are not, and it has never mattered — the whole thing runs on conversation.</p>
+      <ul class="reach-list">
+        <li class="home">Polegate</li><li>Eastbourne</li><li>Hailsham</li><li>Lewes</li>
+        <li>Seaford</li><li>Brighton</li><li>Hove</li><li>Uckfield</li><li>UK-wide</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 09 CONTACT ==================== -->
+  <section class="wrap" id="contact">
+    <div class="sechead mono">
+      <span class="idx">[09]</span>
+      <span class="lbl">// Start something</span>
+      <span class="meta">Mon–Fri 9:00–17:30</span>
+    </div>
+
+    <h2 class="reveal" style="margin-bottom:14px">Tell me what your<br><span class="tone-2">business actually does.</span></h2>
+    <p class="lede reveal" style="margin-bottom:26px">That is genuinely the whole starting point. Pick whichever of these you'd rather use.</p>
+
+    <!-- HARD RULE §09 — channel tiles, each an inline stroke SVG -->
+    <div class="channels">
+      <a class="channel reveal" href="tel:07395063764">
+        <span class="g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg></span>
+        <span><span class="k">Phone</span><br><span class="v">07395 063764</span></span>
+        <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="channel reveal" href="mailto:mail@digitalconsultingservices.co.uk">
+        <span class="g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
+        <span><span class="k">Email</span><br><span class="v">mail@digitalconsultingservices.co.uk</span></span>
+        <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="channel reveal" href="#contact">
+        <span class="g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z"/></svg></span>
+        <span><span class="k">Free quote</span><br><span class="v">Send me a few lines</span></span>
+        <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="channel reveal" href="#reach">
+        <span class="g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <span><span class="k">Studio</span><br><span class="v">Chaucer Business Park, Polegate</span></span>
+        <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <p class="reassure">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-8-8" stroke-linecap="round"/><path d="M9 12l2.5 2.5L21 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Free and without obligation. You'll get a reply within one working day, from the person who would build it.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logotype" href="#top">digital consulting<b>services</b></a>
+    <div class="fgrid">
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">A new website</a></li>
+          <li><a href="#services">An online shop</a></li>
+          <li><a href="#services">Fixing your site</a></li>
+          <li><a href="#services">Local SEO</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#work">Selected work</a></li>
+          <li><a href="#process">How it goes</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#reach">Where I work</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:07395063764">07395 063764</a></li>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Studio address</h4>
+        <ul>
+          <li>Unit H3, Chaucer Business Park</li>
+          <li>Dittons Road, Polegate</li>
+          <li>East Sussex BN26 6QH</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2019–2026 Digital Consulting Services</span>
+      <span>Mon–Fri 9:00–17:30 · Sat by appointment</span>
+      <span>Prototype — direction 67 “Dock”</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================================
+     The checkbox and the sheet are direct children of <body>, siblings of the
+     dock. The sheet is NEVER nested inside the dock — that is the containing
+     block trap. The checkbox means it opens with JavaScript disabled.
+============================================================================ -->
+<input type="checkbox" id="menu-open" aria-hidden="true" tabindex="-1">
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="sheet-top">
+    <span class="logotype" style="color:var(--paper)">digital consulting<b>services</b></span>
+    <label class="sheet-close" for="menu-open" role="button" tabindex="0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      Close
+    </label>
+  </div>
+  <nav class="sheet-nav" aria-label="Main">
+    <a href="#services"><span class="n">01</span> Services</a>
+    <a href="#pricing"><span class="n">02</span> Pricing</a>
+    <a href="#work"><span class="n">03</span> Work</a>
+    <a href="#process"><span class="n">04</span> Process</a>
+    <a href="#reach"><span class="n">05</span> Reach</a>
+    <a href="#contact"><span class="n">06</span> Contact</a>
+  </nav>
+  <div class="sheet-foot">
+    <span>Polegate, East Sussex · working UK-wide</span>
+    <a href="tel:07395063764">07395 063764</a>
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+  </div>
+</div>
+
+<nav class="dock" id="dock" aria-label="Quick navigation">
+  <a class="dock-item" href="#work" data-target="work">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M9 3h6v3H9z"/></svg>
+    Work
+  </a>
+  <a class="dock-item" href="#process" data-target="process">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.5 12h7"/></svg>
+    Process
+  </a>
+  <a class="dock-item cta" href="#contact">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>
+    Get a quote
+  </a>
+  <a class="dock-item" href="#pricing" data-target="pricing">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 12h8"/></svg>
+    Pricing
+  </a>
+  <label class="dock-item" for="menu-open" id="menu-btn" role="button" tabindex="0" aria-controls="sheet">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    Menu
+  </label>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- latched reveals. Transform only; nothing is ever hidden. ---- */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---- dock active state. Degrades to "no item highlighted". ---- */
+  if ('IntersectionObserver' in window) {
+    var items = {};
+    document.querySelectorAll('.dock-item[data-target]').forEach(function (a) {
+      items[a.getAttribute('data-target')] = a;
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var a = items[e.target.id];
+        if (!a) return;
+        if (e.isIntersecting) {
+          Object.keys(items).forEach(function (k) { items[k].classList.remove('is-active'); });
+          a.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    ['work', 'process', 'pricing'].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) spy.observe(s);
+    });
+  }
+
+  /* ---- menu sheet: keyboard affordances on top of the checkbox. ---- */
+  var box = document.getElementById('menu-open');
+  var sheet = document.getElementById('sheet');
+  function setOpen(v) { box.checked = v; document.body.style.overflow = v ? 'hidden' : ''; }
+  document.querySelectorAll('label[for="menu-open"]').forEach(function (l) {
+    l.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setOpen(!box.checked); }
+    });
+  });
+  box.addEventListener('change', function () { setOpen(box.checked); });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && box.checked) setOpen(false);
+  });
+  sheet.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setOpen(false); });
+  });
+})();
+</script>
+</body>
+</html>

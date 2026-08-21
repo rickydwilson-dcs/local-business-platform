@@ -1,0 +1,705 @@
+<title>Framer Component Sweep</title>
+<style>
+  :root {
+    --paper:   #F1F2EE;
+    --surface: #FFFFFF;
+    --sunken:  #E7E9E3;
+    --ink:     #16191A;
+    --muted:   #6C716B;
+    --faint:   #9AA098;
+    --rule:    #D8DBD3;
+    --accent:  #C6E82B;
+    --accent-ink: #16191A;
+    --flag:    #B4432E;
+    --shadow: 0 1px 2px rgba(20,25,20,.05), 0 8px 24px -12px rgba(20,25,20,.18);
+
+    --display: "Avenir Next Condensed", "Oswald", "Helvetica Neue", system-ui, sans-serif;
+    --body: Charter, "Iowan Old Style", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #121412;
+      --surface: #1A1D19;
+      --sunken:  #232722;
+      --ink:     #ECEEE6;
+      --muted:   #9BA298;
+      --faint:   #6E756B;
+      --rule:    #2E332C;
+      --accent:  #C6E82B;
+      --accent-ink: #16191A;
+      --flag:    #E0785F;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #121412;
+    --surface: #1A1D19;
+    --sunken:  #232722;
+    --ink:     #ECEEE6;
+    --muted:   #9BA298;
+    --faint:   #6E756B;
+    --rule:    #2E332C;
+    --accent:  #C6E82B;
+    --accent-ink: #16191A;
+    --flag:    #E0785F;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px 96px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---- masthead ---- */
+  .masthead { padding: 72px 0 40px; border-bottom: 2px solid var(--ink); }
+  .masthead h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -.005em;
+    font-size: clamp(44px, 9vw, 104px);
+    line-height: .92;
+    margin: 14px 0 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    margin: 22px 0 0;
+    max-width: 60ch;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 8px 28px;
+    margin-top: 28px;
+    font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: .05em; color: var(--faint);
+  }
+
+  h2 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1.02;
+    letter-spacing: .005em;
+    margin: 0;
+  }
+  section { padding-top: 68px; }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sec-note { max-width: 62ch; color: var(--muted); margin: 14px 0 30px; }
+
+  /* ---- thesis ---- */
+  .thesis {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--accent);
+    padding: 30px 32px;
+    box-shadow: var(--shadow);
+  }
+  .thesis p { margin: 0 0 14px; max-width: 66ch; }
+  .thesis p:last-child { margin-bottom: 0; }
+  .recipe {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: clamp(20px, 3vw, 30px);
+    line-height: 1.16;
+    letter-spacing: .01em;
+    margin: 0 0 18px;
+    max-width: 26ch;
+  }
+  .hl { background: var(--accent); color: var(--accent-ink); padding: 0 .18em; }
+
+  /* ---- fork ---- */
+  .fork { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .fork-card { background: var(--surface); border: 1px solid var(--rule); padding: 24px; }
+  .fork-card.b { background: var(--sunken); border-radius: 0; }
+  .fork-card h3 {
+    font-family: var(--display); text-transform: uppercase; font-size: 21px;
+    margin: 10px 0 10px; letter-spacing: .01em;
+  }
+  .fork-card p { margin: 0 0 10px; font-size: 15px; color: var(--muted); }
+  .fork-card .who { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: .04em; }
+
+  /* ---- component index ---- */
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; }
+  th, td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); font-weight: 400;
+    background: var(--sunken);
+  }
+  td { font-size: 14.5px; }
+  tr:last-child td { border-bottom: 0; }
+  td .src { font-family: var(--mono); font-size: 12px; }
+
+  /* ---- entries ---- */
+  .entry {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  .entry-head {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 22px 26px 18px;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .rank {
+    font-family: var(--mono); font-size: 12px; color: var(--faint);
+    padding-top: 7px; min-width: 26px; font-variant-numeric: tabular-nums;
+  }
+  .titles { flex: 1 1 260px; min-width: 0; }
+  .titles h3 {
+    font-family: var(--display); text-transform: uppercase; font-weight: 700;
+    font-size: 27px; line-height: 1.05; margin: 0 0 4px; letter-spacing: .01em;
+  }
+  .titles a { color: var(--muted); font-family: var(--mono); font-size: 12.5px; text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .titles a:hover, .titles a:focus-visible { color: var(--ink); border-bottom-color: var(--ink); }
+  .badges { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+  .badge {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
+    padding: 5px 9px; border: 1px solid var(--rule); color: var(--muted); white-space: nowrap;
+  }
+  .badge.conv { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .badge.verified { border-color: var(--ink); color: var(--ink); }
+  .entry-body { padding: 20px 26px 24px; }
+  .why { margin: 0 0 18px; max-width: 68ch; }
+  .take { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .take li { position: relative; padding-left: 16px; font-size: 15px; max-width: 72ch; }
+  .take li::before {
+    content: ""; position: absolute; left: 0; top: .48em;
+    width: 3px; height: 1.06em; background: var(--accent);
+  }
+  .take strong { font-family: var(--display); text-transform: uppercase; font-weight: 700; letter-spacing: .02em; font-size: 15px; }
+  .caveat {
+    margin: 18px 0 0; padding: 12px 15px; background: var(--sunken);
+    font-size: 14px; color: var(--muted); max-width: 70ch;
+  }
+  .caveat b { color: var(--flag); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+  /* ---- mobile evidence ---- */
+  .ev { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .ev-card { background: var(--surface); border: 1px solid var(--rule); padding: 22px 24px; }
+  .ev-card .verdict {
+    font-family: var(--display); text-transform: uppercase; font-size: 19px;
+    margin: 8px 0 10px; line-height: 1.1;
+  }
+  .ev-card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+  .trap { border-left: 4px solid var(--flag); padding: 16px 20px; background: var(--surface); margin-bottom: 12px; }
+  .trap h4 { font-family: var(--display); text-transform: uppercase; font-size: 17px; margin: 0 0 6px; letter-spacing: .02em; }
+  .trap p { margin: 0; font-size: 14.5px; color: var(--muted); max-width: 74ch; }
+
+  .gaps { background: var(--sunken); padding: 26px 30px; }
+  .gaps ul { margin: 0; padding-left: 20px; }
+  .gaps li { margin-bottom: 9px; font-size: 15px; color: var(--muted); }
+  .gaps li:last-child { margin-bottom: 0; }
+  .gaps b { color: var(--ink); }
+
+  a:focus-visible, .titles a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">DCS homepage redesign · gallery research · 20 Aug 2026</div>
+    <h1>Framer Component Sweep</h1>
+    <p class="standfirst">Six agents swept the Framer community gallery for component craft that survives a small
+      business site — and for layouts built for a phone rather than reflowed onto one.</p>
+    <div class="meta-row">
+      <span>6 SEGMENTS</span>
+      <span>~450 TILES SKIMMED</span>
+      <span>78 SITES OPENED</span>
+      <span>18 SHORTLISTED</span>
+      <span>4 MEASURED AT 390PX</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><h2>The one finding</h2></div>
+    <p class="sec-note">Three agents, working separately in different categories, reverse-engineered the same
+      construction for the in-card UI mock — the thing your prototypes don't have. It is not an illustration
+      budget. It is a rule.</p>
+    <div class="thesis">
+      <p class="recipe">A flat <span class="hl">tinted</span> canvas. Grey skeleton bars for the text that
+        doesn't matter. <span class="hl">Exactly one</span> element in full colour — the thing the caption is about.</p>
+      <p>Never white, never a real screenshot, never more than one saturated element per card. It is roughly twenty
+        lines of CSS, it costs nothing to maintain, and it never dates the way a product screenshot does.</p>
+      <p>The corollary matters as much: <strong>real screenshots are reserved for full-bleed slabs, never put inside a
+        card.</strong> I confirmed why at 390px — on Billow's phone layout the abstract skeleton mock stays perfectly
+        legible while the real screenshot directly above it collapses into a grey smudge. The recipe isn't only an
+        aesthetic choice; it is what makes a card survive a phone.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>A fork you should settle first</h2></div>
+    <p class="sec-note">The sweep did not converge on one answer. Two coherent positions emerged independently, and
+      they lead to different homepages. Worth deciding before anyone builds anything.</p>
+    <div class="fork">
+      <div class="fork-card">
+        <div class="who">POSITION A — SOFT SURFACE</div>
+        <h3>Better cards</h3>
+        <p>Rounded 20–24px, soft shadow, off-white ground, white cards, a mock inside each one. This is the
+          default-studio.com world and most of the SaaS segment.</p>
+        <p><strong>Argument:</strong> familiar, warm, forgiving of mixed content quality, and the mock recipe above
+          gives every card something to hold.</p>
+      </div>
+      <div class="fork-card b">
+        <div class="who">POSITION B — FLAT / ANTI-CARD</div>
+        <h3>Fewer cards</h3>
+        <p>Zero radius, no shadow, flat colour blocks or no container at all — captions sitting directly on the page
+          ground, sections divided by hairlines instead of boxes.</p>
+        <p><strong>Argument:</strong> four separate agents landed here without prompting. A flat card is often worse
+          than no card, so "not elevated" may be solved by removing container chrome rather than decorating it.</p>
+      </div>
+    </div>
+    <p class="sec-note" style="margin-top:22px">Position B's advocates: <strong>Poch Studio</strong> (vertical hairlines
+      replace service cards), <strong>Numenu</strong> (square corners, no shadow, still reads expensive),
+      <strong>Trowel Craft</strong> (flat zero-radius colour blocks), <strong>Mimo</strong> and <strong>Planhat</strong>
+      (mock on a tinted canvas, caption below on bare ground, no container).</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Best in class, by component</h2></div>
+    <p class="sec-note">If you'd rather assemble than adopt — the strongest single execution of each thing DCS needs.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Go to</th><th>What makes it good</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Pricing (mobile-safe)</strong></td><td class="src">onmoon.fr</td><td>A vertical selector list driving one detail panel — not three columns. Verified intact at 390px.</td></tr>
+          <tr><td><strong>Pricing (retainer + project)</strong></td><td class="src">midu.design</td><td>Two plan cards, then reassurance strips <em>outside</em> the cards, then a separate horizontal project card. Matches a PAYG-plus-project offer.</td></tr>
+          <tr><td><strong>Pricing (objection-led)</strong></td><td class="src">bureaudimanche.com</td><td>Each tier opens with the customer's own objection in quotes, not a feature blurb. Featured plan raised with a 1.5px border rather than inverted to dark.</td></tr>
+          <tr><td><strong>Service cards</strong></td><td class="src">trowelcraft.com.au</td><td>Flat colour blocks, each with its own full-width <em>Enquire now</em> footer bar. Three services, three conversion points.</td></tr>
+          <tr><td><strong>Service cards (no container)</strong></td><td class="src">mimohq.com</td><td>Tinted canvas + one floating white fragment, caption below on bare page ground.</td></tr>
+          <tr><td><strong>Problem framing</strong></td><td class="src">risefromwithin.com.au</td><td>A checklist of one-line pill cards, each naming a problem the visitor recognises in themselves — not a feature.</td></tr>
+          <tr><td><strong>Process / how it works</strong></td><td class="src">composio.dev</td><td>Sticky numbered index rail; the active row highlights as its panel scrolls. Reads as one table, not four cards.</td></tr>
+          <tr><td><strong>Process (with photos)</strong></td><td class="src">lumenda.de</td><td>Duotone-treated photo inside a numbered step card — makes uncontrolled client photography look deliberate.</td></tr>
+          <tr><td><strong>Contact</strong></td><td class="src">hochzeitsreisen-hannover.de</td><td>Four channel tiles, a pre-qualifying select, and "free &amp; without obligation · reply within 24h" under the button.</td></tr>
+          <tr><td><strong>Lead capture for trades</strong></td><td class="src">trowelcraft.com.au</td><td>Photo-upload dropzone — "send us a picture of the job". Better than any amount of form styling.</td></tr>
+          <tr><td><strong>Audience switcher</strong></td><td class="src">billow.so</td><td>Outlined persona pill tabs swapping the content below. The obvious fit for trades / salons / garages / firms.</td></tr>
+          <tr><td><strong>Trust &amp; credentials</strong></td><td class="src">risefromwithin.com.au</td><td>Cards built around the real accreditation seal artwork. Maps onto Gas Safe, NICEIC, Checkatrade.</td></tr>
+          <tr><td><strong>Testimonials</strong></td><td class="src">noceanrecruitment.com</td><td>Large italic serif quote carrying the client's own logo instead of a stock headshot.</td></tr>
+          <tr><td><strong>Persistent CTA</strong></td><td class="src">karolinahess.com</td><td>Bottom-pinned floating pill nav — thumb-reachable by construction, not by media query.</td></tr>
+          <tr><td><strong>Scarcity / availability</strong></td><td class="src">midu.design</td><td>A live "1/5 slots for July" counter built into the nav pill, so it is always on screen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>The shortlist</h2></div>
+    <p class="sec-note">Twelve, strongest first. A green badge means more than one agent surfaced it independently —
+      the closest thing to an objective signal this exercise produced.</p>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">01</div>
+        <div class="titles">
+          <h3>Trowel Craft</h3>
+          <a href="https://trowelcraft.com.au/">trowelcraft.com.au</a>
+        </div>
+        <div class="badges">
+          <span class="badge conv">3 agents</span>
+          <span class="badge verified">Mobile verified</span>
+          <span class="badge">Trades</span>
+        </div>
+      </div>
+      <div class="entry-body">
+        <p class="why">A Melbourne family plaster-repair firm — almost exactly a DCS client — and the most
+          component-confident thing in the entire sweep. Three agents found it separately from three different
+          categories. It is also the clearest argument for Position B.</p>
+        <ul class="take">
+          <li><strong>Service cards</strong> — flat chartreuse, zero radius, condensed title top, copy bottom, then a
+            1px rule and a full-width <em>Enquire now</em> bar as the card's own footer.</li>
+          <li><strong>Nav</strong> — links split 2/2 around a black hexagonal seal that overhangs below the bar.</li>
+          <li><strong>Contact</strong> — photo-upload dropzone: "send us a picture of the job".</li>
+          <li><strong>Testimonial</strong> — full-bleed owner portrait, giant condensed quote, hand-drawn ellipse badge.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          The hero headline is ~35% white over a busy photo with no scrim — it fails contrast on desktop and is
+          genuinely illegible at 390px, which I confirmed. Its standards carousel wheel-jacks the scroll and never
+          releases. Its stat row is an animated count-up showing wrong figures mid-animation.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">02</div>
+        <div class="titles">
+          <h3>Billow</h3>
+          <a href="https://www.billow.so/">billow.so</a>
+        </div>
+        <div class="badges">
+          <span class="badge conv">3 agents</span>
+          <span class="badge verified">Mobile verified</span>
+        </div>
+      </div>
+      <div class="entry-body">
+        <p class="why">The cleanest single example of the in-card mock recipe, and it sells to service businesses
+          rather than engineers. This is the reference to hand a developer.</p>
+        <ul class="take">
+          <li><strong>Getting-started cards</strong> — skeleton bars with one bar tinted blue, plus one full-colour
+            element floating over it: an <em>AI Import</em> pill, a <em>2 min</em> badge, a <em>£14,000</em> tooltip.</li>
+          <li><strong>Persona pill tabs</strong> — outlined, active gets a coloured border and text.</li>
+          <li><strong>Eyebrow chips</strong> with a leading icon labelling every section, giving the page rhythm.</li>
+          <li><strong>FAQ accordion</strong> with a tinted square plus-button, and honest "Soon / On roadmap" chips.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Heavy display serif plus soft gradient blobs — a look, not a neutral system, and the blobs will cost paint
+          performance on cheap Android. Nearly everything is centred, which flattens hierarchy. Its count-up is the
+          false-figure trap.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">03</div>
+        <div class="titles">
+          <h3>Onmoon</h3>
+          <a href="https://onmoon.fr/">onmoon.fr</a>
+        </div>
+        <div class="badges">
+          <span class="badge verified">Mobile verified</span>
+          <span class="badge">Best pricing</span>
+        </div>
+      </div>
+      <div class="entry-body">
+        <p class="why">The answer to "pricing dies on mobile", and the one component I was able to prove rather than
+          infer. At 390px it is three stacked rows that work perfectly — no columns to squeeze, no horizontal scroll,
+          no table.</p>
+        <ul class="take">
+          <li><strong>Pricing as a vertical selector</strong> — a list of plan rows driving one detail panel. Active row
+            tinted with a filled black tick; inactive rows carry an outlined circular arrow. "Best seller" sits inline
+            as a small pill.</li>
+          <li><strong>Persistent circular call button</strong> pinned bottom-right — the right CTA for a trade.</li>
+          <li><strong>Scroll-linked method rail</strong> that fills with colour as you pass week chips.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Its booking widget uses a fake-scarcity countdown. That's a dark pattern — take the pricing selector, leave
+          the timer.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">04</div>
+        <div class="titles">
+          <h3>Luna UI</h3>
+          <a href="https://lunaui.co/">lunaui.co</a>
+        </div>
+        <div class="badges"><span class="badge">Same business as DCS</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">Sells websites on a monthly retainer — the same offer DCS sells. Worth studying for how it
+          structures a retainer commercially, not just visually.</p>
+        <ul class="take">
+          <li><strong>Pricing without tiers</strong> — one retainer card (with a "cancel anytime · 7-day notice"
+            micro-line) plus one wide card whose right half is a "common projects" from-price list.</li>
+          <li><strong>Before/after slider</strong> as a draggable card inside the services bento.</li>
+          <li><strong>Workspace mock</strong> — layer tree, breakpoint bar, property panel, two labelled multiplayer cursors.</li>
+          <li><strong>Testimonial tied to the actual project</strong>, with a ←/→ counter.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Black starfield ground with low-contrast body copy. Take the component structure, invert the palette.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">05</div>
+        <div class="titles">
+          <h3>Mimo</h3>
+          <a href="https://mimohq.com/">mimohq.com</a>
+        </div>
+        <div class="badges"><span class="badge">UK buyer</span><span class="badge">Position B</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">Sells to UK professional-services firms — roughly your buyer — and solves the
+          "card that isn't icon + heading + paragraph" problem with the least engineering of anything found.</p>
+        <ul class="take">
+          <li><strong>No card at all</strong> — a tinted canvas with a faint dotted grid holds one floating white
+            fragment; heading, description and a <em>Explore →</em> link sit outside and below it on the page ground.</li>
+          <li><strong>The fragments are just lists</strong> — a task checklist, a category list, three payable rows each
+            with a small action button and a role chip. Each maps onto a DCS story.</li>
+          <li><strong>Announcement bar</strong> — dark full-bleed strip above the nav, one line, dismissible.</li>
+          <li><strong>CTA slab</strong> in a single deep colour with a <em>tonal</em> button rather than white.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          The hero lifestyle photo does no work, and there's a lot of dead vertical space under the captions at 1440px.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">06</div>
+        <div class="titles">
+          <h3>Midu Studio</h3>
+          <a href="https://midu.design/">midu.design</a>
+        </div>
+        <div class="badges"><span class="badge">Closest structural twin</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">A studio selling retainers and projects — the same two-shaped offer as DCS — with the pricing
+          composition to match.</p>
+        <ul class="take">
+          <li><strong>Three-tier composition</strong> — two plan cards with a 3D keycap breaking the top-right corner,
+            then two full-width reassurance strips <em>outside</em> the cards, then a separate horizontal project card
+            at a "from" price with 50/50 terms.</li>
+          <li><strong>Availability counter in the nav</strong> — "1/5 slots for July" always on screen.</li>
+          <li><strong>Service cards</strong> using a 1px rule and a 12px <em>Info</em> micro-label above the paragraph,
+            deliberately offset column to column.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">07</div>
+        <div class="titles">
+          <h3>Bureau Dimanche</h3>
+          <a href="https://bureaudimanche.com/">bureaudimanche.com</a>
+        </div>
+        <div class="badges"><span class="badge">Solo studio · SMEs</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">A one-person studio selling to small businesses. Its pricing does something none of the others
+          do — it leads with the customer's words instead of yours.</p>
+        <ul class="take">
+          <li><strong>Objection-led pricing</strong> — each tier opens with the client's own quoted objection
+            ("we need a brand identity") rather than a feature blurb.</li>
+          <li><strong>Featured plan raised with a 1.5px border</strong>, not inverted to dark — a quieter way to signal
+            the recommended option.</li>
+          <li><strong>Non-repeating tiers</strong> — tiers 2 and 3 open with "everything in 1/2", so nothing repeats.</li>
+          <li><strong>Bottom-centre floating contact pill</strong> with circular mail and calendar buttons; doubles as
+            the mobile CTA.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">08</div>
+        <div class="titles">
+          <h3>Delphi</h3>
+          <a href="https://www.delphi.ai/">delphi.ai</a>
+        </div>
+        <div class="badges"><span class="badge">Widest component set</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">Five genuinely different card shapes that still read as one system, and warm rather than cold —
+          the best evidence that a component system can have range without fragmenting.</p>
+        <ul class="take">
+          <li><strong>Pricing on a staircase</strong> — each tier's top edge sits ~30px lower than the one left of it;
+            full-width pill CTA under the price, above the feature list; only one tier gets a filled button.</li>
+          <li><strong>A bespoke icon per feature row</strong> instead of repeated ticks — the single cheapest way to kill
+            the templated-checklist feel.</li>
+          <li><strong>Persona tab switcher</strong> as plain text, active in the accent — no pill, no underline.</li>
+          <li><strong>Numbered steps</strong> with the numeral inline on the title's baseline, not floating above it.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          The display serif reads "wellness brand" unless paired with much plainer body copy, and the two-clause
+          headline mannerism repeats in every section.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">09</div>
+        <div class="titles">
+          <h3>Rise from Within</h3>
+          <a href="https://risefromwithin.com.au/">risefromwithin.com.au</a>
+        </div>
+        <div class="badges"><span class="badge conv">2 agents</span><span class="badge">Real small practice</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">Included for one component that reframes the whole services problem: it sells by naming what's
+          wrong with the visitor, not what's good about the business.</p>
+        <ul class="take">
+          <li><strong>Symptom checklist</strong> — white one-line pill cards flanking a central image, each naming a
+            problem the visitor recognises in themselves.</li>
+          <li><strong>Credential cards</strong> built around the real accreditation seal artwork.</li>
+          <li><strong>Chevron-notched process strip.</strong></li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Obviously AI-generated stock photography, which cheapens the whole page. Take the structure, not the imagery.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">10</div>
+        <div class="titles">
+          <h3>Reiseservice Jeremias</h3>
+          <a href="https://hochzeitsreisen-hannover.de/">hochzeitsreisen-hannover.de</a>
+        </div>
+        <div class="badges"><span class="badge conv">2 agents</span><span class="badge">Local service business</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">A one-woman travel consultancy in a small German town — the closest thing in the sweep to an
+          actual DCS client doing everything right. Warm cream and serif, a deliberate counterpoint to the tech look.</p>
+        <ul class="take">
+          <li><strong>Contact block</strong> — four channel tiles, a pre-qualifying select, and "free &amp; without
+            obligation · reply within 24 hours" under the button. The most directly liftable thing found.</li>
+          <li><strong>The price is the button</strong> — service cards make the from-price a full-width pill CTA.</li>
+          <li><strong>Testimonials carrying town and year</strong> — local proof, not generic praise.</li>
+          <li><strong>Portrait with a floating 5-star card</strong> overlapping its corner.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Its own services trio is a plain icon + heading + paragraph — the one weak component on the page. Skip it.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">11</div>
+        <div class="titles">
+          <h3>Ballpark</h3>
+          <a href="https://ballparkhq.com/">ballparkhq.com</a>
+        </div>
+        <div class="badges"><span class="badge conv">2 agents</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">The most complete set of components on a single page, and the best demonstration that restraint
+          is what reads as expensive.</p>
+        <ul class="take">
+          <li><strong>Overlapping pricing cards</strong> at different vertical offsets, one physically covering the
+            other's edge. No prices — the CTA is "book a demo", which is DCS's bespoke-work situation exactly.</li>
+          <li><strong>3×3 capability grid</strong> where each tile holds a mini-UI and the caption is a single plain
+            sentence — no heading weight, no paragraph.</li>
+          <li><strong>Announcement bar as a separate floating pill</strong> above the nav.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          Several tiles are dense enough to need a simpler phone variant rather than scaling.</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <div class="rank">12</div>
+        <div class="titles">
+          <h3>Huehaus</h3>
+          <a href="https://huehaus.design/">huehaus.design</a>
+        </div>
+        <div class="badges"><span class="badge conv">2 agents</span><span class="badge">Most elevated feel</span></div>
+      </div>
+      <div class="entry-body">
+        <p class="why">The strongest answer to "make it feel elevated" that doesn't rely on soft shadows — it uses
+          shape and colour instead.</p>
+        <ul class="take">
+          <li><strong>Chamfered corner</strong> — a 45° cut on the panel's top-left holding the section label.</li>
+          <li><strong>Three-cell spec strip</strong> answering what / how long / how much
+            ("starting @ 4k → see pricing ↗") — pre-qualifies the enquiry.</li>
+          <li><strong>Pricing as full-bleed solid colour tiles</strong> with outlined mono category chips — a fresh
+            alternative to inverting the middle plan.</li>
+        </ul>
+        <div class="caveat"><b>Reservations</b>
+          The pixel-mosaic scroll intro is spectacle and heavy.</div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>The mobile pass</h2></div>
+    <p class="sec-note">You said mobile was the worse of the two problems, so it got its own pass rather than a glance.
+      A note on method, because it changes how much weight these carry: <strong>only these four were measured.</strong>
+      Every other mobile remark in this document is a structural inference by an agent that never saw a phone
+      viewport.</p>
+    <div class="ev">
+      <div class="ev-card">
+        <div class="eyebrow">Trowel Craft</div>
+        <div class="verdict">Stacks cleanly</div>
+        <p>Service cards become full-width blocks and each keeps its own <em>Enquire now</em> footer bar, so every
+          service stays a thumb-reachable conversion point. But the hero headline is illegible over the photo — worse
+          on the phone than on desktop.</p>
+      </div>
+      <div class="ev-card">
+        <div class="eyebrow">Onmoon</div>
+        <div class="verdict">Best in class</div>
+        <p>Pricing survives intact because it was never columns. Three stacked selector rows, active one tinted with a
+          filled tick, "Best seller" inline, plus a persistent circular call button. This is the pattern to copy.</p>
+      </div>
+      <div class="ev-card">
+        <div class="eyebrow">Billow</div>
+        <div class="verdict">Proves the recipe</div>
+        <p>The abstract skeleton mock stays legible at 390px while the real product screenshot above it becomes a grey
+          smudge. Direct evidence for "abstract mock in cards, screenshots only full-bleed".</p>
+      </div>
+      <div class="ev-card">
+        <div class="eyebrow">All Framer sites</div>
+        <div class="verdict">Reveal gating is the risk</div>
+        <p>Scroll-reveal animations don't fire on programmatic scroll — pages render as blank white viewports. Whatever
+          we take, take the layout and not the animation policy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Traps found</h2></div>
+    <p class="sec-note">Things worth not copying, several of which confirm problems already in your notes.</p>
+    <div class="trap">
+      <h4>Animated count-ups publishing false figures</h4>
+      <p>Found on Billow, Lumenda, Trowel Craft, ReadyToLaunch and Resolve Healthware — the last two ship
+        <em>frozen</em> counters permanently reading "0+ years of design experience". This is the exact trap already in
+        your project memory. If we use a count-up, the true value must be the authored markup and the animation purely
+        decorative.</p>
+    </div>
+    <div class="trap">
+      <h4>Scroll-reveal gating that blanks the page</h4>
+      <p>The single most common flaw across all six sweeps. Litefirm and Planhat render as blank white until each block
+        scrolls in. On a slow connection or a failed script this is a white page, and it is a plausible part of why
+        "mobile was dreadful" on the prototypes too.</p>
+    </div>
+    <div class="trap">
+      <h4>Wheel-jacking and fake scarcity</h4>
+      <p>Trowel Craft's standards carousel captures the scroll and never releases it. Onmoon's booking widget runs a
+        fake countdown timer. Both are worth naming so they aren't absorbed along with the good parts.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>What this didn't cover</h2></div>
+    <div class="gaps">
+      <ul>
+        <li><b>Coverage is a sample, not a census.</b> The gallery holds ~12,000 sites behind a virtualised infinite
+          scroll. We skimmed roughly 450 tiles and opened 78. Treat this as a good sample, not the best of the gallery.</li>
+        <li><b>The Awards tab doesn't exist.</b> It renders as a disabled "coming soon" button and its URL 404s — I sent
+          an agent after something that isn't there. Framer also offers only Trending and Newest sorts, with no
+          most-liked option, and Featured caps at 12 per sort.</li>
+        <li><b>Only four sites were measured at 390px.</b> Everything else labelled "mobile" is inference from
+          construction.</li>
+        <li><b>Hover, cursor and menu behaviour is largely unassessed.</b> No mobile menus were opened and few accordions
+          exercised — a real hole given that behaviour was half the original brief.</li>
+        <li><b>No footer worth stealing was found</b> in the SaaS segment, and no pricing components exist at all in the
+          portfolio segment.</li>
+        <li><b>One agent's detailed findings were lost</b> to a blocked file write and only its summary survives; the
+          Landing Page file is thinner than the other five. Two domains were blocked by browser permissions, and several
+          promising sites — notably <span style="font-family:var(--mono);font-size:13px">flighty.com</span>, likely the
+          best mobile craft in the SaaS pool — were never opened.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>

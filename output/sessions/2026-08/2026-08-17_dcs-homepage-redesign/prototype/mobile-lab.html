@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DCS — Mobile lab · five mobile passes on direction 52</title>
+<meta name="description" content="Five different mobile UX treatments of the DCS homepage (direction 52), side by side, with the measurements behind each one.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F3F1; --bone:#E3E3E0; --ink:#101014; --graphite:#1B1B20;
+  --chalk:#F3F3F1; --ash:#55555E; --smoke:#A6A6B0;
+  --rule-light:rgba(16,16,20,.14); --rule-dark:rgba(243,243,241,.20);
+  --ultra:#D6006B; --plum:#17265E; --lilac:#FF9BC8; --acid:#00D2D8;
+  --font:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --font-body:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --gut:clamp(1.25rem,3vw,3rem);
+  --max:1500px;
+  --snap:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font);font-weight:500;
+  font-size:1rem;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+p,h1,h2,h3,ul,ol,dl,figure,table{margin:0}
+a{color:inherit}
+.wrap{width:100%;max-width:var(--max);margin:auto;padding-inline:var(--gut)}
+.body{font-family:var(--font-body);font-weight:500}
+.label{
+  font-family:var(--font-body);font-weight:500;
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+}
+.num{font-feature-settings:"tnum" 0}
+
+/* ---------- masthead ---------- */
+.top{background:var(--ink);color:var(--chalk);padding-block:clamp(2.5rem,7vw,5rem) clamp(2.5rem,6vw,4rem)}
+.top .rule{display:block;height:12px;width:clamp(80px,10vw,150px);background:var(--ultra);margin-bottom:clamp(1.25rem,2.5vw,2rem)}
+.top .kick{color:var(--smoke);margin-bottom:1rem}
+h1{
+  font-size:clamp(2.4rem,7.6vw,5.5rem);font-weight:900;
+  letter-spacing:-.045em;line-height:.92;text-transform:uppercase;
+  margin-bottom:clamp(1.25rem,2.5vw,2rem);
+}
+h1 .hl{background:var(--ultra);color:#fff;padding-inline:.18em;margin-inline:-.06em}
+.top .lead{
+  font-family:var(--font-body);font-weight:500;
+  font-size:clamp(.9375rem,1.25vw,1.125rem);line-height:1.6;
+  color:var(--chalk);max-width:62ch;
+}
+.top .lead + .lead{margin-top:1rem;color:var(--smoke)}
+
+/* ---------- the numbers ---------- */
+.scoreboard{
+  margin-top:clamp(2rem,4vw,3rem);
+  display:grid;gap:1px;background:var(--rule-dark);
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border:1px solid var(--rule-dark);
+}
+.score{background:var(--ink);padding:1.1rem 1.2rem}
+.score dt{font-family:var(--font-body);font-weight:500;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--smoke);margin-bottom:.5rem}
+.score dd{margin:0;font-size:clamp(1.5rem,2.6vw,2.15rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.score dd small{display:block;font-size:.75rem;font-weight:500;letter-spacing:0;color:var(--smoke);margin-top:.4rem;font-family:var(--font-body)}
+.score--win dd{color:var(--acid)}
+.score--bad dd{color:var(--lilac)}
+
+
+/* ---------- the sync control ---------- */
+.sync{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  margin-bottom:1.25rem;
+}
+.sync__lab{
+  font-family:var(--font-body);font-weight:500;font-size:.6875rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--smoke);
+  margin-right:.4rem;
+}
+.sync button{
+  font-family:var(--font-body);font-weight:500;
+  font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.45rem .7rem;min-height:34px;
+  background:transparent;color:var(--chalk);
+  border:1px solid var(--rule-dark);cursor:pointer;
+  transition:background-color .16s linear,color .16s linear,border-color .16s linear;
+}
+.sync button:hover{border-color:var(--acid);color:var(--acid)}
+.sync button[aria-pressed="true"]{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+.sync[hidden]{display:none}
+.sync__warn{
+  font-family:var(--font-body);font-weight:500;font-size:.75rem;
+  color:var(--lilac);margin-bottom:1.25rem;
+}
+
+/* ---------- the rack of phones ---------- */
+.rack{background:var(--graphite);color:var(--chalk);padding-block:clamp(2.25rem,5vw,3.5rem)}
+.rack__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.75rem 1.5rem;margin-bottom:1.5rem}
+.rack__head h2{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase}
+.rack__head p{font-family:var(--font-body);font-weight:500;font-size:.8125rem;color:var(--smoke)}
+.shelf{
+  display:flex;gap:1.25rem;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;scroll-padding-inline:var(--gut);
+  margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) 1rem;
+  scrollbar-width:thin;
+}
+.phone{flex:0 0 auto;scroll-snap-align:start;width:262px}
+.phone__label{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.7rem}
+.phone__tag{
+  display:inline-grid;place-items:center;min-width:30px;height:22px;padding-inline:.4rem;
+  background:var(--ultra);color:#fff;
+  font-family:var(--font-body);font-weight:500;font-size:.6875rem;letter-spacing:.1em;
+}
+.phone--base .phone__tag{background:var(--smoke);color:var(--ink)}
+.phone__name{font-size:.9375rem;font-weight:800;letter-spacing:-.01em;text-transform:uppercase}
+.phone__frame{
+  position:relative;width:262px;height:566px;overflow:hidden;
+  background:var(--ink);border:1px solid var(--rule-dark);
+}
+.phone__frame iframe{
+  position:absolute;top:0;left:0;
+  width:390px;height:844px;border:0;
+  transform:scale(.6718);transform-origin:top left;
+}
+.phone__meta{
+  margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.3rem .8rem;
+  font-family:var(--font-body);font-weight:500;font-size:.6875rem;
+  letter-spacing:.06em;color:var(--smoke);
+}
+.phone__meta b{font-weight:500;color:var(--chalk)}
+.phone__open{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:.7rem;
+  font-family:var(--font-body);font-weight:500;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--chalk);text-decoration:none;
+  border-bottom:2px solid var(--acid);padding-bottom:.15rem;
+}
+.phone__open:hover{color:var(--acid)}
+
+/* ---------- the case for each pass ---------- */
+.cases{padding-block:clamp(2.5rem,6vw,4.5rem)}
+.cases>.wrap>h2{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:1.5rem}
+.case{
+  display:grid;gap:clamp(1.25rem,3vw,2.5rem);
+  grid-template-columns:minmax(0,1fr);
+  padding-block:clamp(1.75rem,3.5vw,2.75rem);
+  border-top:1px solid var(--rule-light);
+}
+@media (min-width:900px){ .case{grid-template-columns:minmax(0,7rem) minmax(0,1.15fr) minmax(0,1fr)} }
+.case__id{display:flex;align-items:flex-start;gap:.7rem}
+.case__no{
+  display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;
+  font-family:var(--font-body);font-weight:500;font-size:.875rem;letter-spacing:.06em;
+  background:var(--ink);color:var(--chalk);
+}
+.case--1 .case__no{background:var(--ultra);color:#fff}
+.case--2 .case__no{background:var(--plum);color:#fff}
+.case--3 .case__no{background:var(--acid);color:var(--ink)}
+.case--4 .case__no{background:var(--lilac);color:var(--ink)}
+.case--5 .case__no{background:var(--ink);color:var(--chalk)}
+.case h3{font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:900;letter-spacing:-.035em;line-height:1;text-transform:uppercase;margin-bottom:.5rem}
+.case__doctrine{font-family:var(--font-body);font-weight:500;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);margin-bottom:1rem}
+.case p{font-family:var(--font-body);font-weight:500;font-size:.9375rem;line-height:1.6;color:var(--ash)}
+.case p + p{margin-top:.85rem}
+.case p strong{font-weight:500;color:var(--ink)}
+.case__moves{margin-top:1rem;padding-left:0;list-style:none}
+.case__moves li{
+  font-family:var(--font-body);font-weight:500;font-size:.875rem;line-height:1.5;
+  padding:.5rem 0 .5rem 1.4rem;position:relative;border-bottom:1px solid var(--rule-light);
+}
+.case__moves li:last-child{border-bottom:0}
+.case__moves li::before{content:"";position:absolute;left:0;top:1.05em;width:8px;height:8px;background:var(--ultra)}
+.trade{
+  margin-top:1.1rem;padding:.9rem 1.1rem;background:var(--bone);
+  font-family:var(--font-body);font-weight:500;font-size:.875rem;line-height:1.5;
+}
+.trade b{display:block;font-weight:500;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:.4rem}
+.case__stats{display:grid;gap:1px;background:var(--rule-light);border:1px solid var(--rule-light);margin-top:1.1rem}
+.case__stats div{background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.6rem .9rem}
+.case__stats dt{font-family:var(--font-body);font-weight:500;font-size:.75rem;letter-spacing:.08em;color:var(--ash)}
+.case__stats dd{margin:0;font-weight:800;font-size:.9375rem;letter-spacing:-.01em}
+.case__cta{
+  display:inline-flex;align-items:center;gap:.7rem;margin-top:1.1rem;
+  min-height:46px;padding:.7rem 1.2rem;background:var(--ink);color:var(--chalk);
+  font-family:var(--font-body);font-weight:500;font-size:.8125rem;letter-spacing:.08em;
+  text-decoration:none;transition:background-color .18s linear;
+}
+.case__cta:hover{background:var(--ultra);color:#fff}
+
+/* ---------- shared fixes + how to judge ---------- */
+.notes{background:var(--bone);padding-block:clamp(2.5rem,5vw,4rem)}
+.notes h2{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:1.25rem}
+.notegrid{display:grid;gap:clamp(1.5rem,3vw,2.5rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.notegrid h3{font-size:1.0625rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.6rem}
+.notegrid p,.notegrid li{font-family:var(--font-body);font-weight:500;font-size:.875rem;line-height:1.55;color:var(--ash)}
+.notegrid ol{padding-left:1.15rem;display:grid;gap:.5rem}
+.notegrid p + p{margin-top:.7rem}
+.pill{display:inline-block;background:var(--acid);color:var(--ink);padding:.1rem .45rem;font-family:var(--font-body);font-weight:500;font-size:.8125rem}
+
+footer{background:var(--ink);color:var(--smoke);padding-block:2rem}
+footer p{font-family:var(--font-body);font-weight:500;font-size:.8125rem;line-height:1.6}
+footer a{color:var(--chalk)}
+
+:focus-visible{outline:3px solid var(--ultra);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="rule" aria-hidden="true"></span>
+    <p class="label kick">Direction 52 · mobile lab · 19 August 2026</p>
+    <h1>Five ways to fix<br><span class="hl">the phone.</span></h1>
+    <p class="lead">Direction 52 is settled on the desktop — every section fits one viewport, the
+    colour and type decisions are made. The phone was never designed. It inherited the desktop
+    grid collapsed to one column, which is why it reads as 16,077 pixels of identical boxes.</p>
+    <p class="lead">These are five different arguments about what to do about that. Each one changes
+    the phone only. Below 861px the layout is rebuilt; at 861px and above every one of them is
+    byte-for-byte the page you already approved — measured, not assumed, at six desktop sizes.</p>
+
+    <dl class="scoreboard">
+      <div class="score score--bad"><dt>Safe-area handling</dt><dd class="num">0<small>the bottom bar sits under the home indicator</small></dd></div>
+      <div class="score score--bad"><dt>Hover rules on touch</dt><dd class="num">24<small>fire on tap, then latch</small></dd></div>
+      <div class="score score--bad"><dt>Hero hierarchy</dt><dd class="num">1.8<small>:1 display to body. Desktop is 7:1</small></dd></div>
+      <div class="score score--win"><dt>Detector findings</dt><dd class="num">51&rarr;24<small>flat-type-hierarchy eliminated</small></dd></div>
+      <div class="score score--win"><dt>Desktop drift</dt><dd class="num">0<small>px across 6 sizes, all 5 passes</small></dd></div>
+    </dl>
+  </div>
+</header>
+
+<section class="rack" aria-labelledby="rack-h">
+  <div class="wrap">
+    <div class="rack__head">
+      <h2 id="rack-h">Side by side</h2>
+      <p>Live pages at 390×844, scaled to fit. Scroll inside a phone. Scroll the rack sideways.</p>
+    </div>
+
+    <div class="sync" id="sync" hidden>
+      <span class="sync__lab">Jump every phone to</span>
+    </div>
+    <p class="sync__warn" id="syncwarn" hidden>Section sync needs the pages served over http —
+    open this lab from its deployed URL rather than a local file and the buttons appear.</p>
+
+    <div class="shelf">
+
+      <article class="phone phone--base">
+        <p class="phone__label"><span class="phone__tag">Now</span><span class="phone__name">Baseline</span></p>
+        <div class="phone__frame"><iframe src="home-52-poster-indigo.html" title="Baseline — direction 52 as it stands" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">16,077px</b></span><span><b>51 findings</b></span></p>
+        <a class="phone__open" href="home-52-poster-indigo.html">Open full &rarr;</a>
+      </article>
+
+      <article class="phone">
+        <p class="phone__label"><span class="phone__tag">M1</span><span class="phone__name">Swipe</span></p>
+        <div class="phone__frame"><iframe src="home-52-m1-swipe.html" title="M1 Swipe" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">12,490px</b></span><span><b>&minus;22%</b></span></p>
+        <a class="phone__open" href="home-52-m1-swipe.html">Open full &rarr;</a>
+      </article>
+
+      <article class="phone">
+        <p class="phone__label"><span class="phone__tag">M2</span><span class="phone__name">Screens</span></p>
+        <div class="phone__frame"><iframe src="home-52-m2-screens.html" title="M2 Screens" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">21,229px</b></span><span><b>23 fitted screens</b></span></p>
+        <a class="phone__open" href="home-52-m2-screens.html">Open full &rarr;</a>
+      </article>
+
+      <article class="phone">
+        <p class="phone__label"><span class="phone__tag">M3</span><span class="phone__name">Dense</span></p>
+        <div class="phone__frame"><iframe src="home-52-m3-compact.html" title="M3 Compact" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">14,268px</b></span><span><b>&minus;11%</b></span></p>
+        <a class="phone__open" href="home-52-m3-compact.html">Open full &rarr;</a>
+      </article>
+
+      <article class="phone">
+        <p class="phone__label"><span class="phone__tag">M4</span><span class="phone__name">Editorial</span></p>
+        <div class="phone__frame"><iframe src="home-52-m4-editorial.html" title="M4 Editorial" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">18,117px</b></span><span><b>+13%</b></span></p>
+        <a class="phone__open" href="home-52-m4-editorial.html">Open full &rarr;</a>
+      </article>
+
+      <article class="phone">
+        <p class="phone__label"><span class="phone__tag">M5</span><span class="phone__name">Bento</span></p>
+        <div class="phone__frame"><iframe src="home-52-m5-bento.html" title="M5 Bento" loading="lazy"></iframe></div>
+        <p class="phone__meta"><span>Height <b class="num">13,400px</b></span><span><b>&minus;17%</b></span></p>
+        <a class="phone__open" href="home-52-m5-bento.html">Open full &rarr;</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="cases" aria-labelledby="cases-h">
+  <div class="wrap">
+    <h2 id="cases-h">What each one argues</h2>
+
+    <article class="case case--1">
+      <div class="case__id"><span class="case__no">M1</span></div>
+      <div>
+        <h3>Swipe</h3>
+        <p class="case__doctrine">Doctrine &middot; card decks for peer sets</p>
+        <p>Nine work tiles read one per row is 2.6 screens of identical rectangles, and the reader
+        loses that it was ever a set. A rail keeps the set as one object and puts a counter on it,
+        so you know there are nine without scrolling to find out.</p>
+        <p><strong>What measurement changed here.</strong> The first version made everything a rail,
+        including the claim cards and the testimonials. 16px DM Mono is ~9.6px a character, so a
+        390px phone tops out near 36 characters <em>even full width</em> &mdash; any card narrower
+        than the screen falls under the 35-character floor. Rails are now reserved for sets whose
+        cards carry short text; anything with a paragraph in it stays full measure.</p>
+        <ul class="case__moves">
+          <li>Rails: work tiles, sectors, price tiers &mdash; label-and-a-line content</li>
+          <li>Stacked: claims, testimonials, services &mdash; paragraph content</li>
+          <li>Progress rule and an <span class="pill">n / 9</span> readout under every rail</li>
+          <li>The recommended price tier leads its rail</li>
+        </ul>
+      </div>
+      <div>
+        <div class="trade"><b>The trade</b>Horizontal scroll inside a vertical page is a pattern some
+        people never discover, and ui-ux-pro-max flags it under <code>gesture-conflicts</code>. The
+        counter, the peek and <code>scroll-snap-stop</code> pay for it &mdash; but it is the thing
+        to judge on a real handset.</div>
+        <dl class="case__stats">
+          <div><dt>Page height</dt><dd class="num">13,092px (&minus;19%)</dd></div>
+          <div><dt>Body text</dt><dd class="num">16px throughout</dd></div>
+          <div><dt>Touch targets under 44px</dt><dd class="num">0</dd></div>
+          <div><dt>Sector section</dt><dd class="num">2,295px &rarr; one screen</dd></div>
+        </dl>
+        <a class="case__cta" href="home-52-m1-swipe.html">Open M1 Swipe &rarr;</a>
+      </div>
+    </article>
+
+    <article class="case case--2">
+      <div class="case__id"><span class="case__no">M2</span></div>
+      <div>
+        <h3>Screens</h3>
+        <p class="case__doctrine">Doctrine &middot; one idea per screen</p>
+        <p>No horizontal regions at all. Every long set is cut into pages sized to the visible band
+        &mdash; the viewport minus the top bar minus the bottom action bar, 718px &mdash; and each
+        page is centred and snapped. The section heading is pulled into the top of its own first
+        page rather than costing a screen of its own.</p>
+        <p>Page one of a chapter carries fewer items than the pages after it, because it is also
+        carrying the heading. Those counts come from measurement: at 16px body they had to come
+        down from the 15px version.</p>
+        <ul class="case__moves">
+          <li>23 pages, every one measured against the 718px band</li>
+          <li>Snap set to proximity, not mandatory &mdash; it guides, it does not trap</li>
+          <li>A <span class="pill">2 of 3</span> marker so a split chapter reads as one</li>
+          <li>nth-child colour systems frozen before splitting, or the palette resets per page</li>
+        </ul>
+      </div>
+      <div>
+        <div class="trade"><b>The trade</b>The longest pass at 21,357px &mdash; a third more than
+        the baseline. It does not make the page shorter; it makes every stopping point deliberate.
+        Worth it only if you believe fitted screens beat fewer of them.</div>
+        <dl class="case__stats">
+          <div><dt>Page height</dt><dd class="num">21,357px (+33%)</dd></div>
+          <div><dt>Fitted screens</dt><dd class="num">23 of 23</dd></div>
+          <div><dt>Body text</dt><dd class="num">16px throughout</dd></div>
+          <div><dt>Touch targets under 44px</dt><dd class="num">0</dd></div>
+        </dl>
+        <a class="case__cta" href="home-52-m2-screens.html">Open M2 Screens &rarr;</a>
+      </div>
+    </article>
+
+    <article class="case case--3">
+      <div class="case__id"><span class="case__no">M3</span></div>
+      <div>
+        <h3>Dense</h3>
+        <p class="case__doctrine">Doctrine &middot; progressive disclosure + a tight rhythm</p>
+        <p><strong>This pass was rebuilt, and its name changed.</strong> The first version got its
+        height by shrinking type to 11&ndash;14px and putting prose into two-up columns. That is the
+        <code>readable-font-size</code> and <code>line-length-control</code> violation the audit
+        flagged, and it is the single biggest reason it read as cheap.</p>
+        <p>Type is not a compression device. The compression now comes from three legitimate places
+        instead: the tight end of the 8pt scale rather than the loose end, six services folded into
+        an accordion, and shorter media crops &mdash; which cost no words at all.</p>
+        <ul class="case__moves">
+          <li>Services become a disclosure list &mdash; six titles on one screen, copy one tap away</li>
+          <li>Claim index becomes an inline prefix instead of its own stacked row</li>
+          <li>Spacing drops from the 24/32 tier to the 8/16 tier, same scale</li>
+          <li>Every sentence stays at 16px and at full measure</li>
+        </ul>
+      </div>
+      <div>
+        <div class="trade"><b>The trade</b>Only &minus;8% now, against &minus;28% for the version
+        that broke the type rules. That is the honest price of the fix: most of the old saving was
+        borrowed from legibility.</div>
+        <dl class="case__stats">
+          <div><dt>Page height</dt><dd class="num">14,738px (&minus;8%)</dd></div>
+          <div><dt>Services section</dt><dd class="num">1,570px &rarr; one screen</dd></div>
+          <div><dt>Body text</dt><dd class="num">16px throughout</dd></div>
+          <div><dt>Touch targets under 44px</dt><dd class="num">0</dd></div>
+        </dl>
+        <a class="case__cta" href="home-52-m3-compact.html">Open M3 Dense &rarr;</a>
+      </div>
+    </article>
+
+    <article class="case case--4">
+      <div class="case__id"><span class="case__no">M4</span></div>
+      <div>
+        <h3>Editorial</h3>
+        <p class="case__doctrine">Doctrine &middot; the printed spread</p>
+        <p>This pass does not try to make the page shorter. It argues the real problem is not length
+        but <strong>rhythm</strong>: every element the same width, every gap the same size, so
+        nothing signals what matters. A magazine is also long; it does not read long, because it
+        alternates.</p>
+        <p><strong>Measurement changed this one's mind too.</strong> Its original argument was that
+        the type ramp should go <em>up</em>. It cannot: an 18px mono body in the 350px column a
+        390px phone allows yields 32 characters, under the floor. 16px yields 36, which is the most
+        this face can give on this screen. So the generosity now comes from space, leading and
+        full-bleed media &mdash; not from size.</p>
+        <ul class="case__moves">
+          <li>Every image and colour field breaks the gutter and runs edge to edge</li>
+          <li>Sector captions alternate left and right down the column</li>
+          <li>Claim numerals ghosted at display scale into the field behind them</li>
+          <li>Leading at 1.65 and the 32/48 spacing tier carry the reading feel</li>
+        </ul>
+      </div>
+      <div>
+        <div class="trade"><b>The trade</b>18,752px, 17% longer than the baseline it replaces.
+        Everything about it bets that a phone visitor who is interested will read, and one who is
+        not was leaving anyway.</div>
+        <dl class="case__stats">
+          <div><dt>Page height</dt><dd class="num">18,752px (+17%)</dd></div>
+          <div><dt>Body / leading</dt><dd class="num">16px / 1.65</dd></div>
+          <div><dt>Full-bleed elements</dt><dd class="num">claims, work, quotes, all media</dd></div>
+          <div><dt>Touch targets under 44px</dt><dd class="num">0</dd></div>
+        </dl>
+        <a class="case__cta" href="home-52-m4-editorial.html">Open M4 Editorial &rarr;</a>
+      </div>
+    </article>
+
+    <article class="case case--5">
+      <div class="case__id"><span class="case__no">M5</span></div>
+      <div>
+        <h3>Bento</h3>
+        <p class="case__doctrine">Doctrine &middot; pick and reveal</p>
+        <p>M1 spends the horizontal axis, M2 the vertical, M3 density. This one spends
+        <strong>interaction</strong>. Where a set is a list of options the reader only wants one of
+        at a time &mdash; six sectors, two ways to pay &mdash; it becomes a picker, and the set
+        costs the height of one item instead of six.</p>
+        <p><strong>The mosaic half did not survive its own rule.</strong> Two-up work tiles were kept
+        on the grounds that a label and a name fit a half column. They do &mdash; but the
+        descriptive line under them measured 16 characters, less than half the floor, and it was
+        the worst measure anywhere in these five. Cutting the line is not an option, so the mosaic
+        went and the pass now stands on the pickers, which were the part that worked.</p>
+        <ul class="case__moves">
+          <li>Six sectors become a tab strip &mdash; arrow keys, roving tabindex, real tabpanels</li>
+          <li>Pricing becomes an <span class="pill">Option A / Option B</span> toggle over one table</li>
+          <li>Tab targets raised to 44px; labels read out of the existing markup</li>
+          <li>Everything with a paragraph in it takes the full measure</li>
+        </ul>
+      </div>
+      <div>
+        <div class="trade"><b>The trade</b>The honest one: the six sectors are no longer all visible
+        at once, and a visitor who does not tap sees one. The strip names all six without opening
+        any, which is the mitigation, but it is a real reduction in what a passive scroll shows.</div>
+        <dl class="case__stats">
+          <div><dt>Page height</dt><dd class="num">13,926px (&minus;13%)</dd></div>
+          <div><dt>Sector section</dt><dd class="num">2,295px &rarr; one screen</dd></div>
+          <div><dt>Body text</dt><dd class="num">16px throughout</dd></div>
+          <div><dt>Touch targets under 44px</dt><dd class="num">0</dd></div>
+        </dl>
+        <a class="case__cta" href="home-52-m5-bento.html">Open M5 Bento &rarr;</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="notes" aria-labelledby="notes-h">
+  <div class="wrap">
+    <h2 id="notes-h">The foundation all five share</h2>
+    <div class="notegrid">
+
+      <div>
+        <h3>Four defects on a real phone</h3>
+        <p><strong>No safe-area handling anywhere.</strong> The viewport meta had no
+        <code>viewport-fit=cover</code>, so <code>env(safe-area-inset-*)</code> resolved to zero and
+        the fixed bottom action bar sat under the iPhone home indicator &mdash; both its controls
+        partly untappable on every notched device. Invisible in an emulator, which is why it
+        survived this long.</p>
+        <p><strong>24 hover rules, no <code>hover:hover</code> query.</strong> On touch, hover fires
+        on tap and then <em>latches</em> until you tap elsewhere: the work tiles invert and stay
+        inverted.</p>
+        <p><strong>Every browser surface was default</strong> &mdash; selection, caret, scrollbar,
+        focus ring, underline offset. They belong to no design system and are the cheapest tell
+        that a page was assembled rather than built. All now themed from the palette.</p>
+        <p><strong>Type and touch.</strong> 15px body against a 16px floor; targets under 44px; no
+        <code>touch-action</code>, so every tap on the page paid roughly 300ms.</p>
+      </div>
+
+      <div>
+        <h3>Two patterns the craft floor bans</h3>
+        <p><strong>The eyebrow above a heading.</strong> Eleven of them, plus the hero's. On a 390px
+        screen the hero eyebrow measured 88px tall against an 87px headline &mdash; a label
+        outweighing the thing it introduces. The heading carries its own weight.</p>
+        <p><strong>Section numbers where the sequence carries nothing.</strong> The four process
+        steps are a real sequence and keep theirs. The three claims, six services and four "you
+        skip" items are unordered, and their numerals were furniture.</p>
+        <p>Both still ship on desktop, where the heading rail gives them room to work. This is a
+        mobile composition decision, not a content change &mdash; no sentence, figure or caption
+        was removed anywhere.</p>
+        <p><strong>The hero was rebuilt.</strong> Its display type is now sized from the longest
+        unbreakable word: at 13.5vw <em>PROFESSIONAL</em> measured 400px inside a 350px column, and
+        <code>overflow-x:clip</code> was silently cutting it. One primary action; the call button
+        became a link because it duplicated the bar that carries the number permanently.</p>
+      </div>
+
+      <div>
+        <h3>What the measurements decided</h3>
+        <p>16px DM Mono runs ~9.6px a character, so a 390px phone tops out near <strong>36
+        characters even full width</strong>. Three consequences, applied rather than argued around:
+        two-up text columns are impossible (they give ~17); rails only work for cards carrying short
+        text; and M4's original "bigger type" thesis is dead &mdash; 18px yields 32 characters,
+        under the floor.</p>
+        <ol>
+          <li><strong>Desktop drift zero</strong> at 1920&times;1080, 1440&times;900, 1440&times;810,
+          1366&times;768, 1366&times;690 and 1280&times;720.</li>
+          <li><strong>Detector: 51 findings &rarr; 22&ndash;27</strong>, all warnings.
+          <code>flat-type-hierarchy</code> eliminated in all five; <code>cramped-padding</code> 35
+          &rarr; 11&ndash;15. What remains is inherited desktop design.</li>
+          <li>No faux bold; the mobile nav is untouched and still opens full-viewport; no horizontal
+          overflow at 320&ndash;860.</li>
+        </ol>
+        <p><strong>Still open:</strong> 1366&times;768 overflows on the desktop baseline, before any
+        of this. All five inherit it identically.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>DCS homepage redesign · mobile lab · <a href="index.html">back to the full prototype index</a>
+    · <a href="home-52-poster-indigo.html">the chosen direction</a></p>
+  </div>
+</footer>
+
+
+<script>
+/* Scrolls all six phones to the same section at once, so the passes are
+   compared at the same point in the page instead of six different heros.
+   Needs same-origin iframes, which means a served URL — over file:// each
+   document is an opaque origin and contentDocument throws. The control
+   hides itself and says so rather than rendering dead buttons. */
+(function(){
+  var SECTIONS = [
+    ['Hero','#top'], ['Offer','[aria-labelledby="offer-h"]'], ['Services','#services'],
+    ['Work','#work'], ['Sectors','[aria-labelledby="sectors-h"]'],
+    ['Process','[aria-labelledby="process-h"]'], ['Pricing','#pricing'],
+    ['Words','[aria-labelledby="words-h"]'], ['Person','#person'],
+    ['Final','[aria-labelledby="final-h"]']
+  ];
+  var frames = [].slice.call(document.querySelectorAll('.phone__frame iframe'));
+  var host = document.getElementById('sync');
+  var warn = document.getElementById('syncwarn');
+
+  function reachable(f){
+    try { return !!(f.contentDocument && f.contentDocument.body); } catch (e) { return false; }
+  }
+
+  function init(){
+    if (!frames.some(reachable)) { warn.hidden = false; return; }
+    var btns = SECTIONS.map(function(s){
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = s[0]; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', function(){
+        frames.forEach(function(f){
+          if (!reachable(f)) return;
+          var el = f.contentDocument.querySelector(s[1]);
+          if (el) f.contentWindow.scrollTo({top: el.offsetTop, behavior:'smooth'});
+        });
+        btns.forEach(function(o){ o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      });
+      host.appendChild(b);
+      return b;
+    });
+    host.hidden = false;
+    btns[0].setAttribute('aria-pressed','true');
+  }
+
+  var pending = frames.length;
+  frames.forEach(function(f){
+    if (f.contentDocument && f.contentDocument.readyState === 'complete') { if(!--pending) init(); }
+    else f.addEventListener('load', function(){ if (!--pending) init(); });
+  });
+  // lazy iframes below the fold may never fire; fall back on a timer
+  setTimeout(function(){ if (host.hidden && warn.hidden) init(); }, 4000);
+})();
+</script>
+</body>
+</html>

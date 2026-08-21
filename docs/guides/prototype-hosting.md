@@ -90,6 +90,16 @@ explicitly. Left to auto-detection Vercel resolves output as _"`public` if it ex
 **These projects are deliberately not git-linked.** A connected Vercel project rebuilds on every
 monorepo push unless it carries an `ignoreCommand`. Ad-hoc `vercel deploy` avoids that entirely.
 
+**`.svg` inside a session folder is gitignored, and it is easy to miss.** `output/.gitignore`
+carries `sessions/**/*.svg` alongside the PNG/JPEG/video rules added in August 2026. SVG is a
+text format, so it does not read as part of an image deny-list — a vector written into
+`output/sessions/**/` will be silently absent from a commit that looks like it included it. This
+is correct for prototype artwork, which belongs on R2. But if the SVG is a brand asset rather
+than a prototype asset, put it in the site's `public/` directory, which is tracked normally.
+Hit in August 2026 with the DCS mark: the copy under `prototype/assets/` never committed, and
+`sites/dcs/public/dcs-mark.svg` is the tracked source of truth. Check with
+`git check-ignore -v <path>` rather than trusting `git status`, which simply says nothing.
+
 ---
 
 ## Access

@@ -69,7 +69,7 @@ analytics and reporting.
 
 Two ways to pay for the same site. Upfront: £995 + £15/mo (Starter), £1,995 + £25/mo
 (Professional), £3,495 + £50/mo (Growth). Or pay monthly with nothing upfront: £45 / £75 /
-£125 per month, twelve-month minimum. Tiers differ on ongoing service level, not build
+£125 per month, 24-month minimum. Tiers differ on ongoing service level, not build
 quality.
 
 ## Proof
