@@ -8,6 +8,26 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ## 2026-08-21
 
+### Infrastructure
+
+- **A docs-only commit could reach staging but could never be promoted to `main`.** Two
+  individually-correct policies deadlocked. `e2e-tests.yml` carried
+  `paths-ignore: output/**, docs/**, **/*.md` on its `push` trigger, so a
+  documentation-or-prototypes-only commit produced **no workflow run at all**. The promotion gate
+  (`scripts/verify-staging-e2e.ts`) requires a push-triggered `e2e-tests.yml` run concluding
+  `success` for the exact commit being promoted, and it fails closed by design — "I could not prove
+  it is green" is treated as "it is not green". With no run to find, the required check
+  `Verify promoted commit passed staging E2E` failed and branch protection blocked the merge, with
+  no override flag anywhere (the gate was deliberately built without one, having closed three
+  earlier bypass holes). Hit while promoting the round-7 prototypes.
+- **Fixed by removing `paths-ignore` from the `push` trigger only.** The jobs already scope
+  themselves by branch with `if:` conditions, so the cost is one smoke run on a docs push, and the
+  promoted commit is now genuinely E2E-tested rather than merely unblocked. `pull_request` keeps its
+  filter — the verifier already ignores PR-triggered runs, so it was never the problem. The
+  alternative (teaching the gate to accept a legitimately-skipped run) was rejected because it
+  weakens the guarantee the gate exists to provide. A comment on the trigger records why, so the
+  filter is not re-added without changing the gate to match.
+
 ### Documentation
 
 - **A monospaced body face corrupts a comma'd price on its own — `tabular-nums` is not the only

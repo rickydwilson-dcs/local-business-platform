@@ -1,12 +1,18 @@
 name: E2E Tests
 
 on:
+  # NOTE: deliberately no `paths-ignore` on push. It used to skip output/**, docs/**
+  # and **/*.md, which meant a docs-or-prototypes-only commit produced NO workflow run
+  # at all. The promotion gate (scripts/verify-staging-e2e.ts) requires a push-triggered
+  # e2e-tests.yml run concluding "success" for the exact commit being promoted, and it
+  # fails closed — "I could not prove it is green" is treated as "it is not green".
+  # The two policies deadlocked: any docs-only change could reach staging but could
+  # never be promoted to main. Fixed 2026-08-21 by always creating the run on push;
+  # the jobs below already scope themselves by branch with `if:`, so the cost is one
+  # smoke run on a docs push, and the promoted commit is genuinely tested rather than
+  # merely unblocked. Do not re-add paths-ignore here without also changing the gate.
   push:
     branches: [develop, staging, main]
-    paths-ignore:
-      - 'output/**'
-      - 'docs/**'
-      - '**/*.md'
   pull_request:
     branches: [develop, staging, main]
     paths-ignore:
