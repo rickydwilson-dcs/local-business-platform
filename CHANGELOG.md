@@ -6,6 +6,53 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-21
+
+### Documentation
+
+- **A monospaced body face corrupts a comma'd price on its own — `tabular-nums` is not the only
+  way in.** The CSS Syntax rule in [CLAUDE.md](CLAUDE.md) warned only about
+  `font-variant-numeric: tabular-nums`. Setting prices in DM Mono reproduced the identical
+  `£1 , 995` failure with no `tnum` anywhere in the stylesheet: every glyph in a mono face occupies
+  one cell, so the comma takes a full digit advance regardless. This matters because DM Mono is the
+  chosen DCS body face, making it a live risk rather than a hypothetical. The rule now says to
+  resolve **both** `font-variant-numeric` and `font-family` up the ancestor chain, and to keep
+  comma'd figures on the grotesk. Found by rendering, not by review — the markup looks correct
+  either way. (Direction 52 had already anticipated this in a code comment; the house rule had not.)
+
+### Research
+
+- **Two sweeps of the Framer ecosystem, distilled into a prototype brief**
+  (`output/sessions/2026-08/2026-08-20_framer-gallery-research/prototype-brief.md`). Round one
+  covered the community gallery (~450 tiles skimmed, 78 sites opened) and answered "the components
+  weren't elevated"; round two covered all 159 agency marketplace templates (85 demos opened) and
+  answered "engaging yet functional animation". The brief carries a motion policy, a component
+  vocabulary, mobile rules and three paste-ready direction briefs.
+- **The dominant defect in that whole design world is content held at `opacity: 0` until an
+  IntersectionObserver fires.** Nine of twenty-seven demos in one batch showed a blank screen on
+  arrival; paid templates at $49–$129 render nothing at all. It is a content-visibility bug, not a
+  layout bug, and it degrades worst on slow connections and small screens — so it is a plausible
+  contributor to the "dreadful mobile" complaint against the earlier DCS prototypes. The house
+  acceptance test that came out of it: **screenshot the page with JavaScript disabled; if that is
+  not a complete document, the build is wrong.**
+- **Animated count-ups are ruled out for DCS**, not merely handled carefully. Twelve were caught
+  mid-flight publishing false figures (`0+ years of experience`, `Awards 0`, one frozen permanently
+  at `01+ projects delivered`). Every figure is authored static text from here on.
+
+### Sites
+
+- **DCS gains twelve research-led homepage prototypes** (`home-57` … `home-68`) in
+  `output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/`, built to
+  `build-spec-round7.md` and registered in that folder's `index.html`. Twelve deliberately divergent
+  directions — spec sheet, poster, quiet, trade blocks, editorial masthead, workbench, index rail,
+  Swiss grid, warm local, chamfer, dock, selector — each shaped by a different design skill so they
+  diverge by construction. The binding constraint this round was that **no section may be text and
+  colour alone**: every section carries an abstract div-built UI mock, an inline SVG diagram, a
+  hatched wireframe placeholder or a duotone photo plate. `home-64` is the only one using real R2
+  photography; the other eleven are self-contained and work offline.
+
+---
+
 ## 2026-08-19
 
 ### Documentation
