@@ -32,7 +32,11 @@ verdict, DESIGN.md, and every shipping raster carrying its provenance.
   --r:clamp(20px,3vw,44px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:84px}
+/* scroll-padding-top was 84px, which landed a jumped-to section's top BELOW the
+   nav's ground probe (bar height x 0.62, ~50px) — so the bar kept the previous
+   section's colour and the page never read as one block. 0 lands the section
+   fully pinned, with the probe inside it. */
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--f);font-weight:400;
   -webkit-font-smoothing:antialiased}
 ::selection{background:var(--magenta);color:#fff}
