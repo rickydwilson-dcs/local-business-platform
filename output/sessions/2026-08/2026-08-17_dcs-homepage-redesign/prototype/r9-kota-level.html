@@ -413,6 +413,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .detail__l div{display:flex;gap:11px;align-items:flex-start;font-size:15px;opacity:.9}
 .detail__l svg{width:15px;height:15px;flex:none;margin-top:4px;color:var(--aqua)}
 .detail .btn{margin-top:26px}
+.upnote{display:block;margin-top:14px;font-size:14px;font-weight:600;line-height:1.45;
+  border:1px solid currentColor;border-radius:14px;padding:11px 15px;opacity:.85}
 .swap{animation:swap .45s cubic-bezier(.16,1,.3,1)}
 @keyframes swap{from{transform:translateY(8px)}to{transform:translateY(0)}}
 
@@ -939,15 +941,19 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       <div class="price">
         <div class="tiers" role="tablist" aria-label="Plans">
           <button class="tier" role="tab" aria-selected="true" data-k="starter">
-            <span><span class="tier__n">Starter</span><span class="tier__s">A proper site, done properly</span></span>
+            <span><span class="tier__n">Starter</span><span class="tier__s">Up to 5 pages</span></span>
             <span class="tier__f" data-fig></span>
           </button>
           <button class="tier" role="tab" aria-selected="false" data-k="pro">
-            <span><span class="tier__n">Professional</span><span class="tier__s">Most small businesses land here</span></span>
+            <span><span class="tier__n">Professional</span><span class="tier__s">Up to 20 pages &middot; most land here</span></span>
             <span class="tier__f" data-fig></span>
           </button>
           <button class="tier" role="tab" aria-selected="false" data-k="growth">
-            <span><span class="tier__n">Growth</span><span class="tier__s">Bigger sites and online stores</span></span>
+            <span><span class="tier__n">Growth</span><span class="tier__s">Up to 100 pages</span></span>
+            <span class="tier__f" data-fig></span>
+          </button>
+          <button class="tier" role="tab" aria-selected="false" data-k="ecom">
+            <span><span class="tier__n">eCommerce</span><span class="tier__s">Online store &middot; upfront only</span></span>
             <span class="tier__f" data-fig></span>
           </button>
         </div>
@@ -1029,21 +1035,32 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       name:'Starter',
       upfront:{fig:'\u00A3750', sub:'+ \u00A310/mo', head:'\u00A3750 upfront, then \u00A310 a month'},
       monthly:{fig:'\u00A345', sub:'per month',      head:'\u00A345 a month, nothing upfront'},
-      p:'A complete, professional site for a business that needs to look credible and be found. Everything designed and written for you.',
+      p:'Up to five pages. A complete, professional site for a business that needs to look credible and be found \u2014 everything designed and written for you.',
       l:['Bespoke design \u2014 no template','Local SEO built in','Hosting, SSL and security','Changes handled by me']},
     pro:{
       name:'Professional',
       upfront:{fig:'\u00A31,495', sub:'+ \u00A315/mo', head:'\u00A31,495 upfront, then \u00A315 a month'},
       monthly:{fig:'\u00A385',    sub:'per month',      head:'\u00A385 a month, nothing upfront'},
-      p:'The one most small businesses land on. More pages, more depth, and the service and location pages that make Google take you seriously.',
+      p:'Up to twenty pages, and the one most small businesses land on. Room for the service and location pages that make Google take you seriously.',
       l:['Everything in Starter, plus:','Service and location pages','Structured data throughout','Monthly reporting in plain English']},
     growth:{
       name:'Growth',
       upfront:{fig:'\u00A32,995', sub:'+ \u00A325/mo', head:'\u00A32,995 upfront, then \u00A325 a month'},
       monthly:{fig:'\u00A3150',   sub:'per month',      head:'\u00A3150 a month, nothing upfront'},
-      p:'For bigger sites and online stores \u2014 products to load, payments to take, and more moving parts to look after.',
-      l:['Everything in Professional, plus:','Online store, built and loaded','Payments and delivery set up','Priority support']}
+      p:'Up to a hundred pages \u2014 every service you offer, in every town you cover, each with a page of its own.',
+      l:['Everything in Professional, plus:','Every service in every town','Content planned and built out','Priority support']},
+    /* Upfront only. A store is built, loaded and handed over, so there is no
+       pay-monthly path for it; both modes therefore carry the same figure and
+       the monthly mode says why. */
+    ecom:{
+      name:'eCommerce',
+      upfrontOnly:true,
+      upfront:{fig:'From \u00A32,995', sub:'+ \u00A350/mo', head:'From \u00A32,995 upfront, then \u00A350 a month'},
+      monthly:{fig:'From \u00A32,995', sub:'upfront only',   head:'From \u00A32,995 upfront, then \u00A350 a month'},
+      p:'An online store, built and loaded. Products, payments, delivery and the order flow \u2014 set up and handed over working. Priced from, because a catalogue of fifty is not a catalogue of five thousand.',
+      l:['Everything in Growth, plus:','Store built and products loaded','Payments and delivery set up','Stock and orders handled']}
   };
+  var UPFRONT_ONLY_NOTE = 'Pay monthly isn\u2019t available for online stores \u2014 a store is built, loaded and handed over, so it is always an upfront project.';
   var NOTE = {
     upfront:'Own it outright, then a small monthly fee to keep it running.',
     monthly:'Nothing to pay upfront. 24-month minimum, then it rolls on monthly.'
@@ -1062,7 +1079,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     modeBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.mode===mode ? 'true':'false'); });
     paynote.textContent=NOTE[mode];
     var T=TIERS[tier], d=T[mode];
-    detail.innerHTML='<div class="detail__h">'+d.head+'</div><p class="detail__p">'+T.p+'</p><div class="detail__l">'+
+    var only = (T.upfrontOnly && mode==='monthly') ? '<span class="upnote">'+UPFRONT_ONLY_NOTE+'</span>' : '';
+    detail.innerHTML='<div class="detail__h">'+d.head+'</div>'+only+'<p class="detail__p">'+T.p+'</p><div class="detail__l">'+
       T.l.map(function(x){return '<div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>'+x+'</span></div>';}).join('')+
       '</div><a class="btn" href="#end">Get a free quote</a>';
     if(!reduce){ detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap'); }
@@ -1084,6 +1102,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           '<span class="tcard__s">' + tabs.filter(function(t){return t.dataset.k===k})[0].querySelector('.tier__s').textContent + '</span></span>' +
           '<span class="tcard__f">' + d.fig + '<small>' + d.sub + '</small></span>' +
         '</div>' +
+        ((T.upfrontOnly && mode==='monthly') ? '<span class="upnote">'+UPFRONT_ONLY_NOTE+'</span>' : '') +
         '<p class="tcard__p">' + T.p + '</p>' +
         '<ul class="tcard__l">' + T.l.map(function(x){
           return '<li>' + TICK + '<span>' + x + '</span></li>'; }).join('') + '</ul>' +
