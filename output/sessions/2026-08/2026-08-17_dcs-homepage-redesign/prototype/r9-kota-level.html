@@ -250,15 +250,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
    a page otherwise built from full-bleed colour and display type, so it read as
    a different design. Here the video IS the ground, and the panels stack exactly
    like the service cards below — one motion vocabulary for the whole page. */
-.windex{margin-top:clamp(30px,4.6vh,54px);display:flex;flex-wrap:wrap;gap:10px}
-.windex a{display:inline-flex;align-items:baseline;gap:10px;
-  border:1.5px solid rgba(14,14,18,.26);border-radius:100px;padding:12px 18px;
-  font-weight:600;font-size:15px;letter-spacing:-.01em;
-  transition:background-color .35s ease,color .35s ease,border-color .35s ease}
-.windex a:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.windex em{font-style:normal;opacity:.55;font-weight:500;font-size:13px}
-.windex a:hover em{opacity:.72}
-
 .wstack{position:relative;z-index:1;
   /* Sticky clamps an element's MARGIN box inside its containing block, so a
      bottom margin buys the last panel no room to pin — panels 1-4 get their
@@ -286,8 +277,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .wpanel::after{content:"";position:absolute;inset:0;z-index:1;
   background:linear-gradient(to top,rgba(6,6,10,.93) 0%,rgba(6,6,10,.58) 44%,rgba(6,6,10,.12) 80%)}
 .wpanel>*{position:relative;z-index:2}
-.wpanel__n{font-weight:800;letter-spacing:-.04em;line-height:.92;
-  font-size:clamp(2.4rem,7.4vw,6.4rem);max-width:14ch}
+/* type spec is h2's, verbatim — the client name and "You do you." are peers in
+   the hierarchy and were reading at different sizes. Mirror every h2 breakpoint
+   below, including the max-height one, or they drift apart again on short screens. */
+.wpanel__n{font-weight:800;letter-spacing:-.034em;line-height:.9;
+  font-size:clamp(2.2rem,6.6vw,6.2rem);max-width:14ch}
 .wpanel__d{margin-top:16px;max-width:44ch;line-height:1.5;opacity:.9;
   font-size:clamp(1rem,1.15vw,1.15rem)}
 .wpanel__r{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -433,6 +427,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
 @media (max-height:900px){
   h2{font-size:clamp(1.9rem,4.4vw,3.5rem)}
+  .wpanel__n{font-size:clamp(1.9rem,4.4vw,3.5rem)}
   .panel{padding-top:clamp(70px,8vh,96px);padding-bottom:clamp(28px,4vh,48px)}
   .svc{padding:clamp(9px,1.5vh,15px) 0}
   .svc__n{font-size:clamp(1.15rem,2.2vw,1.7rem)}
@@ -540,7 +535,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .tier:hover{background:none}
   .svccard__l:hover{gap:9px}
   .wpanel__l:hover{gap:9px}
-  .windex a:hover{background:none;color:inherit;border-color:rgba(14,14,18,.26)}
   .big:hover{border-bottom-color:rgba(255,255,255,.3)}
   .menu__nav a:hover span{transform:none;color:inherit}
   .paytoggle button:hover{opacity:.6}
@@ -600,10 +594,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .res{color:#5A5A66}
 
   /* work */
-  .windex{gap:8px;margin-top:28px}
-  .windex a{font-size:16px;padding:13px 17px;flex:1 1 100%}
-  .windex em{margin-left:auto;font-size:14px}
-  .wpanel__n{font-size:min(11vw,2.9rem);max-width:none}
+  .wpanel__n{font-size:clamp(2rem,8.6vw,2.4rem);line-height:.94;max-width:none}
   .wpanel__d{font-size:16px;max-width:none}
   .wpanel__ix{top:calc(84px + env(safe-area-inset-top))}
   .wpanel{margin-bottom:22vh}
@@ -760,19 +751,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
   <div class="stack">
 
-    <!-- Chapter opener. Naming all four here is what buys back the one thing the
-         full-bleed stack loses against a pill selector: you learn how many
-         projects there are before you start scrolling through them. -->
+    <!-- Chapter opener. Heading and lead only — the client index that used to
+         sit here was removed at Ricky's request. -->
     <section class="panel p--white" id="work" data-ground="white">
       <h2 class="res">You do you.<br>I&rsquo;ve got this.</h2>
       <p class="lead">No clue? No problem. No judgement.</p>
-      <nav class="windex" aria-label="Projects">
-        <a href="#work-1">The Clothing Kings <em>Custom apparel</em></a>
-        <a href="#work-2">Cuddle Plush Fabrics <em>Specialist fabric</em></a>
-        <a href="#work-3">NP Racing <em>Race team</em></a>
-        <a href="#work-4">SM Commercial <em>Upholstery &amp; fabrication</em></a>
-        <a href="#work-5">Colossus Scaffolding <em>Scaffolding</em></a>
-      </nav>
     </section>
 
     <div class="wstack">
