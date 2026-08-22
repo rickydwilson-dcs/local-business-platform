@@ -1,16 +1,19 @@
 # DCS homepage — round 9 — handoff
 
-**Status:** in-progress — the round-9 prototype now has an authored mobile layer, a redesigned
-client-work section, and a fifth client. Committed, pushed and promoted to `staging`; **PR #59 is
-open into `main` and awaiting a human merge**. The new video asset is **gitignored** so it still
-exists only on this machine.
-**Branch:** `develop`, level with `origin/develop`.
-**Commits promoted:** 3 — `789b65ef` (pricing corrections), `18b9eca3` (round 9 prototype),
-`e90d30e0` (mobile layer + work section + 5th client + two CSS rules in CLAUDE.md/CHANGELOG.md).
-**Staging:** `32c1d557`, all green — CI, E2E Tests, Regression Watchdog.
-**PR into main:** https://github.com/rickydwilson-dcs/local-business-platform/pull/59 — the required
-`Verify promoted commit passed staging E2E` check **passed**. Do not re-open or re-push it; if it has
-since merged, `main` already has all of the above.
+**Status:** shipped to production, with one gap. The round-9 prototype has an authored mobile layer,
+a redesigned client-work section and a fifth client. **Merged to `main`** via PR #59
+(`ae61e2b1`, merged 2026-08-22T17:31:53Z by rickydwilson-dcs); all post-merge main runs green — CI,
+Production Quality Gate, Regression Watchdog (E2E correctly skipped, it scopes by branch and the
+promotion gate had already verified staging E2E for that commit). Assets are on R2 and the prototype
+is deployed. **The remaining gap is that nobody has opened it on a real handset yet** — see
+What was NOT done.
+**Branch:** `develop`, level with `origin/develop`, **2 commits ahead of `staging` and `main`**:
+`621ddc99` (handoff correction) and `1d74e295` (R2 upload + publish). Both are documentation and
+prototype files with no site code; they can ride the next promotion.
+**In production:** `789b65ef` (pricing corrections), `18b9eca3` (round 9 prototype), `e90d30e0`
+(mobile layer + work section + 5th client + two CSS rules in CLAUDE.md/CHANGELOG.md).
+**Live prototype:** https://2026-08-17-dcs-homepage-redesign.vercel.app/r9-kota-level
+(options lab at `/r9-worklab`). Public — verified 200, no auth wall.
 **Working tree:** clean for this work. Two pre-existing untracked items are not ours and must stay
 out of any commit: `supabase/`, `output/sessions/codex-peer-review/.../openrouter-response.json`.
 
@@ -123,15 +126,14 @@ see Traps). All five `.wpanel`s carry `data-ground="ink"`.
 
 ## What was NOT done
 
-- **Never opened on a real handset.** Everything is Chrome in a fixed-width iframe. Safe-area insets
-  (`env(safe-area-inset-*)`, added this session with `viewport-fit=cover`) are _specifically_ the
-  thing an emulator cannot check — the prior mobile round recorded that exact defect surviving
-  because it is invisible outside a notched device.
-- **Not merged to `main`.** PR #59 is open and green but unmerged — a human owns that merge.
-- **The prototype is not deployed anywhere.** It has only ever run on a local
-  `python3 -m http.server 4321`. `tools/publish-prototype.ts` has not been run, which is why nothing
-  has been seen on a real phone.
-- **The new video is gitignored** and will vanish on a fresh clone. It cost 10 credits.
+- **🔴 Never opened on a real handset — this is now the only open verification gap.** Everything was
+  Chrome in a fixed-width iframe. Two things are _structurally_ untestable there and both were
+  deliberately built on assumption: `env(safe-area-inset-*)` (the prior mobile round recorded that
+  exact defect surviving review because it is invisible outside a notched device), and the
+  `lvh`-vs-`svh` choice, since all four viewport units resolve identically in a desktop iframe.
+  The prototype is now on a public URL precisely so this can be closed — open
+  https://2026-08-17-dcs-homepage-redesign.vercel.app/r9-kota-level on a phone.
+- **Two commits sit on `develop` only** — `621ddc99` and `1d74e295`. Not a problem, just not promoted.
 - **`r9-worklab.html` still shows four clients**, not five, and its Option A pill rail has a known
   unfixed defect (below). It is a decision record for a decision already made; left deliberately.
 - **The pill reel's rail defect is unfixed.** Ricky reported it: on a 390px screen the selected pill
@@ -219,26 +221,15 @@ python3 -m http.server 4321
 
 Then, in priority order:
 
-1. **Preserve the videos — they are gitignored and cost real money:**
-   ```bash
-   npx tsx tools/upload-prototype-assets.ts \
-     output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype
-   ```
-2. **Commit this session's work** (nothing is committed):
-   ```bash
-   git add output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/r9-kota-level.html \
-           output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/mobile-frame.html \
-           output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/r9-worklab.html \
-           output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/HANDOFF.md
-   ```
-   Do **not** `git add -A` — `supabase/` and the codex `openrouter-response.json` are unrelated.
-3. **Deploy the prototype so it can be seen on a real phone** — the one remaining unverified thing
-   that matters:
-   ```bash
-   npx tsx tools/publish-prototype.ts \
-     output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype --project dcs-prototypes
-   ```
-4. **Push, then promote** per `CLAUDE.md` (develop → staging → main), verifying CI with `gh run watch`.
+1. **Open the live prototype on a real phone** — the only remaining verification gap:
+   https://2026-08-17-dcs-homepage-redesign.vercel.app/r9-kota-level
+   Check specifically what an emulator cannot: that content clears the notch and home indicator, and
+   that no strip of the next section leaks at a section boundary when the URL bar retracts.
+2. **Promote the two outstanding `develop` commits** whenever convenient, via `/deploy.changes`.
+3. Re-run the desktop-drift check if anything further is changed — see Assumed, not verified.
+
+Already done, do **not** repeat: `tools/upload-prototype-assets.ts` (48 objects on R2, all verified 200) and `tools/publish-prototype.ts` (deployed to the existing linked project
+`2026-08-17-dcs-homepage-redesign` — do not pass `--project`, it would create a second one).
 
 Tuning knobs, if length is the objection (mobile is 22.3 screens, up from 9,067px/10.7 at the start
 of this session):
