@@ -34,7 +34,7 @@ verdict, DESIGN.md, and every shipping raster carrying its provenance.
      much copy sits below it, which put the first line anywhere from 93px to
      311px across the page. Roughly 64px of clear air under the fixed bar at
      both breakpoints. */
-  --head-anchor:clamp(140px,20vh,200px);
+  --head-anchor:clamp(96px,13vh,200px);
   --r:clamp(20px,3vw,44px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -116,9 +116,9 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .hire:hover svg{transform:translateX(4px)}
 
 /* ============ hero ============ */
-.hero{min-height:100svh;display:grid;align-content:center;position:relative;
+.hero{min-height:100svh;display:grid;align-content:start;position:relative;
   background:var(--ink);color:#fff;
-  padding:clamp(148px,20vh,232px) var(--pad) clamp(44px,6vh,78px)}
+  padding:var(--head-anchor) var(--pad) clamp(44px,6vh,78px)}
 .hero__head{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);
   column-gap:clamp(28px,4vw,68px);align-items:last baseline}
 h1{font-weight:800;letter-spacing:-.038em;line-height:1.02;
@@ -337,7 +337,9 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
 /* ============ services: one card per service, each stacking over the last ============ */
 .svcstack{position:relative;z-index:1;padding:0 var(--pad) 12vh}
-.svccard{position:sticky;top:calc(clamp(76px,10vh,94px) + var(--i) * 10px);
+.svccard{--card-top:calc(clamp(76px,10vh,94px) + var(--i) * 10px);
+  --card-gap:clamp(12px,1.6vh,20px);
+  position:sticky;top:var(--card-top);
   height:min(80vh,720px);border-radius:26px;overflow:hidden;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);
   margin-bottom:16vh;box-shadow:0 -26px 70px -46px rgba(14,14,18,.62)}
@@ -347,7 +349,15 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .svccard--white{background:var(--white);color:var(--ink)}
 .svccard--navy{background:var(--navy);color:#fff}
 .svccard--aqua{background:var(--aqua);color:var(--ink)}
-.svccard__body{padding:clamp(24px,3.4vw,58px);display:grid;align-content:center;gap:clamp(12px,1.6vh,20px)}
+/* Cards pin at a fanned offset, so each one needs its own compensation to put
+   its TITLE on the shared heading anchor: subtract the card's own sticky top
+   plus the eyebrow line and the grid gap that sit above the title. Floored at
+   0 because on very short viewports the fan pushes the lower cards past the
+   anchor, and negative padding would drop the declaration entirely. */
+.svccard__body{display:grid;align-content:start;gap:var(--card-gap);
+  padding:max(0px,calc(var(--head-anchor) - var(--card-top) - 16px - var(--card-gap)))
+          clamp(24px,3.4vw,58px) clamp(24px,3.4vw,58px)}
+.svccard__ix{line-height:16px}
 .svccard__ix{font-size:12.5px;font-weight:700;letter-spacing:.13em;opacity:.55}
 .svccard__t{font-weight:800;letter-spacing:-.038em;line-height:.94;
   font-size:clamp(1.9rem,4.4vw,4rem)}
@@ -454,11 +464,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   border-bottom:2px solid rgba(255,255,255,.3);padding-bottom:5px;transition:border-color .35s ease}
 .big:hover{border-bottom-color:var(--aqua)}
 
-@media (max-height:900px){
-  /* Short screens compress the anchor rather than abandoning it — the tallest
-     section (#end) runs 626px of content, so 96px keeps it inside a 725px
-     viewport while every heading still starts at the same height. */
-  :root{--head-anchor:clamp(96px,13vh,130px)}
+/* 1040, not 900: the process section runs ~891px of content at its base sizing,
+   which does not fit a 901-1030px viewport — the common laptop range once
+   browser chrome is subtracted. A sticky full-viewport panel hides anything
+   below the fold, so that content was unreachable rather than merely cramped. */
+@media (max-height:1040px){
   h2{font-size:clamp(1.9rem,4.4vw,3.5rem)}
   .wpanel__n{font-size:clamp(1.9rem,4.4vw,3.5rem)}
   .panel{padding-bottom:clamp(28px,4vh,48px)}
@@ -594,8 +604,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
      shrunk to 36.8px in a column that carries 60. Sized here from the longest
      unbreakable word ("professional"), and dropped to the foot of the screen so
      the fold reads as a poster rather than a header with space under it. ---- */
-  .hero{min-height:100lvh;align-content:center;
-    padding-top:calc(96px + env(safe-area-inset-top));
+  .hero{min-height:100lvh;align-content:start;
+    padding-top:calc(var(--head-anchor) + env(safe-area-inset-top));
     padding-bottom:calc(clamp(26px,4svh,44px) + env(safe-area-inset-bottom))}
   h1{font-size:clamp(2.6rem,14.3vw,3.9rem);letter-spacing:-.042em}
   .hero__head{gap:20px}
@@ -638,8 +648,9 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
      card stacking over it and you never saw a whole one. ---- */
   .svccard{height:calc(100svh - 118px);min-height:0;
     grid-template-rows:auto minmax(0,1fr);
-    top:calc(72px + var(--i) * 6px);margin-bottom:11vh}
-  .svccard__body{padding:26px 22px 22px;gap:11px;align-content:start}
+    --card-top:calc(72px + var(--i) * 6px);top:var(--card-top);margin-bottom:11vh}
+  .svccard__body{--card-gap:11px;gap:var(--card-gap);align-content:start;
+    padding:max(0px,calc(var(--head-anchor) - var(--card-top) - 16px - var(--card-gap))) 22px 22px}
   .svccard__ix{font-size:12px;letter-spacing:.12em;opacity:.6;margin-bottom:2px}
   .svccard__t{font-size:min(8.8vw,2.15rem);line-height:.98}
   .svccard__d{font-size:16px;line-height:1.45;max-width:none}
