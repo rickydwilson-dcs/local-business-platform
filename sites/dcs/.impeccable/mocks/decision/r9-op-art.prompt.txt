@@ -1,0 +1,14 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the frame edge to edge. A UI render, not a photo of a screen, no device mockup, no browser chrome. Real legible typography, no lorem ipsum. No stock photos of people. Invent no review scores, star ratings, awards, client logos, statistics, prices or lead times.
+CRITICAL PALETTE BAN: absolutely no cream, no beige, no sepia, no off-white paper, no ochre, no terracotta, no muted earth tones, no warm parchment, no thin architectural hairlines on pale grounds. This must read as a contemporary DESIGN AGENCY, not an architecture practice. High contrast, saturated, confident, kinetic.
+
+The page is a Bridget Riley op-art field. Ground: pure optical white. Across it, a hard PURE BLACK wave field — thick undulating bands whose amplitude swells and compresses across the width, engineered so the eye cannot find a repeat. Zero grey anywhere: every pixel is either pure black or pure white, except the single spot colour below.
+
+One electric magenta (#D6006B) intervention only: a solid magenta rectangle button, bottom left of the type block, white text reading "Get a free quote".
+
+Upper left, sitting in a clear white channel carved out of the wave: an enormous, very bold, extremely tight-tracked grotesk headline in pure black, three lines, reading "Websites as professional as you are." Beneath it one short line of black body text. The wave bands bend and part around the type block as if the type has displaced them.
+
+Top bar: a small black square monogram containing a white letter D, beside it "digital consulting" over "services" in small black type; minimal nav Services, Portfolio, Pricing, About in black.
+
+Bottom right: small black monospaced caps "POLEGATE, EAST SUSSEX · EST. 2019".
+
+Mood: optical, kinetic, standing still yet clearly moving. Confident, graphic, Swiss-modern-gone-electric. No gradients, no shadows, no photographs, no grey.

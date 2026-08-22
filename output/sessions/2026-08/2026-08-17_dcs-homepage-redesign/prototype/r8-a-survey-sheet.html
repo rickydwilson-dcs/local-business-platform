@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DCS — The Survey Sheet (round 8 preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/*
+THESIS: The page is one continuous surveyed sheet the visitor travels across, Polegate outward to
+UK-wide, every client a surveyed point. Refuses the agency-poster arrangement rounds 1-7 shipped.
+OWN-WORLD: Map paper, navy 1km grid, ochre contour linework that draws itself, a real sheet key,
+magenta reserved for the triangulation pillar alone. Schibsted Grotesk sets everything that reads;
+DM Mono is confined to labels, grid references and comma-free figures.
+STORY: This person surveys before building; the coverage is real and the craft is visible.
+FIRST VIEWPORT: Sheet fills the frame. Headline sits IN the paper, left, contours drawing around it.
+Sheet key bottom-left carries the services. Scale bar right. Magenta pillar marks Polegate and is
+the primary action. The sheet never stops drifting.
+FORM: candidate 6 of 7; seed key bfad1816.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the
+verdict, DESIGN.md, and every shipping raster carrying its provenance.
+*/
+:root{
+  --paper:#F3F3F1; --ink:#14161C; --navy:#17265E;
+  --grid:rgba(23,38,94,.16); --grid-strong:rgba(23,38,94,.30);
+  --contour:#C4703A; --magenta:#D6006B; --aqua:#00D2D8;
+  --ash:#5A5F6E;
+  --sans:'Schibsted Grotesk',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+  --z:0; /* 0 = 1:25 000, 1 = 1:250 000 */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--magenta);color:var(--paper)}
+:focus-visible{outline:2px solid var(--magenta);outline-offset:3px}
+body::-webkit-scrollbar{width:10px}
+body::-webkit-scrollbar-track{background:rgba(23,38,94,.06)}
+body::-webkit-scrollbar-thumb{background:var(--navy)}
+
+/* ---------- sheet ground ---------- */
+.sheet{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--paper)}
+.sheet__grid{
+  position:absolute;inset:-10%;
+  background-image:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px),
+    linear-gradient(to right,var(--grid-strong) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid-strong) 1px,transparent 1px);
+  background-size:
+    calc(46px + var(--z)*38px) calc(46px + var(--z)*38px),
+    calc(46px + var(--z)*38px) calc(46px + var(--z)*38px),
+    calc(230px + var(--z)*190px) calc(230px + var(--z)*190px),
+    calc(230px + var(--z)*190px) calc(230px + var(--z)*190px);
+  transition:background-size .45s cubic-bezier(.16,1,.3,1);
+}
+.sheet__contours{position:absolute;inset:0;width:100%;height:100%}
+.sheet__contours path{fill:none;stroke:var(--contour);stroke-width:1.15;opacity:.5}
+.sheet__contours .c-fill{fill:var(--contour);opacity:.05;stroke:none}
+
+/* ---------- nav ---------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
+  justify-content:space-between;gap:24px;padding:14px 32px;
+  border-bottom:1px solid var(--grid-strong);background:rgba(243,243,241,.88);backdrop-filter:blur(6px)}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+.brand svg{width:26px;height:26px;flex:none}
+.brand b{display:block;font-weight:400;font-size:12.5px;line-height:1.22;letter-spacing:.005em}
+.brand b span{font-weight:700}
+.bar nav{display:flex;gap:26px}
+.bar nav a{font-size:13px;color:var(--ash);text-decoration:none;letter-spacing:.01em;
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.bar nav a:hover{color:var(--navy);border-bottom-color:var(--contour)}
+.bar .ref{font-family:var(--mono);font-size:11px;color:var(--ash);letter-spacing:.06em}
+
+/* ---------- hero ---------- */
+.wrap{position:relative;z-index:10}
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:96px 32px 26px;max-width:1500px;margin:0 auto}
+.hero__mid{display:grid;align-content:center;max-width:940px}
+h1{font-size:clamp(2.7rem,6.4vw,5.6rem);font-weight:800;line-height:.96;letter-spacing:-.035em;text-wrap:balance}
+h1 .thin{font-weight:400;color:var(--ash)}
+.lede{margin-top:26px;max-width:56ch;font-size:clamp(1.02rem,1.35vw,1.24rem);line-height:1.5;color:#31363F}
+.actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* triangulation pillar = primary action */
+.pillar{position:relative;display:inline-flex;align-items:center;gap:12px;
+  background:var(--magenta);color:var(--paper);text-decoration:none;
+  font-weight:700;font-size:15px;letter-spacing:.005em;padding:15px 24px 15px 20px;border:none;cursor:pointer;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)}
+.pillar svg{width:17px;height:17px}
+.pillar::after{content:"";position:absolute;inset:0;border:1px solid var(--magenta);
+  transform:translate(6px,6px);transition:transform .35s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.pillar:hover{transform:translate(-2px,-2px);box-shadow:0 10px 22px -12px rgba(214,0,107,.75)}
+.pillar:hover::after{transform:translate(10px,10px)}
+.ghost{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--navy);
+  text-decoration:none;border-bottom:1px solid var(--grid-strong);padding-bottom:3px;transition:border-color .25s,gap .25s}
+.ghost:hover{border-bottom-color:var(--navy);gap:15px}
+
+/* ---------- sheet key ---------- */
+.hero__foot{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.key{border-top:1px solid var(--navy);padding-top:10px;min-width:340px}
+.key__h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--navy);margin-bottom:8px}
+.key__row{display:flex;align-items:center;gap:12px;padding:5px 6px 5px 0;cursor:default;
+  border-bottom:1px solid rgba(23,38,94,.09);transition:background .2s,padding-left .25s}
+.key__row:last-child{border-bottom:none}
+.key__row:hover{background:rgba(196,112,58,.10);padding-left:7px}
+.key__row svg{width:19px;height:19px;flex:none;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.key__row:hover svg{transform:scale(1.22)}
+.key__row span{font-size:13.5px;color:#31363F}
+.key__row i{margin-left:auto;font-family:var(--mono);font-size:10.5px;font-style:normal;color:var(--ash)}
+
+/* scale bar */
+.scale{text-align:right}
+.scale__fig{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;color:var(--navy);margin-bottom:7px;
+  display:block;min-height:15px}
+.scale__bar{display:flex;height:9px;width:190px;border:1px solid var(--navy);margin-left:auto}
+.scale__bar i{flex:1;background:var(--navy)}
+.scale__bar i:nth-child(even){background:transparent}
+.scale__note{margin-top:7px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ash)}
+
+/* ---------- panel two ---------- */
+.panel{min-height:100svh;padding:110px 32px;max-width:1500px;margin:0 auto;display:grid;align-content:center}
+h2{font-size:clamp(1.9rem,3.6vw,3.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;max-width:20ch}
+.panel .lede{margin-top:20px}
+.points{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;
+  background:var(--grid-strong);border:1px solid var(--grid-strong)}
+.pt{background:var(--paper);padding:20px 18px 22px;position:relative}
+.pt__dot{width:11px;height:11px;border:1.6px solid var(--magenta);border-radius:50%;position:relative;margin-bottom:14px}
+.pt__dot::after{content:"";position:absolute;inset:2.4px;background:var(--magenta);border-radius:50%}
+.pt__n{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;color:var(--ash);display:block;margin-bottom:5px}
+.pt__t{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.pt__s{margin-top:6px;font-size:13px;color:var(--ash);line-height:1.4}
+
+/* ---------- motion (armed only when welcome) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .sheet__contours path{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+    animation:draw 2.6s cubic-bezier(.22,1,.28,1) forwards}
+  .sheet__contours path:nth-child(2){animation-delay:.16s}
+  .sheet__contours path:nth-child(3){animation-delay:.32s}
+  .sheet__contours path:nth-child(4){animation-delay:.48s}
+  .sheet__contours path:nth-child(5){animation-delay:.64s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .sheet{animation:drift 34s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-14px,-9px,0)}}
+
+  h1,.lede,.actions{animation:rise .95s cubic-bezier(.16,1,.3,1) both}
+  .lede{animation-delay:.09s}.actions{animation-delay:.18s}
+  @keyframes rise{from{transform:translateY(13px)}to{transform:translateY(0)}}
+
+  .pt{transform:translateY(14px);transition:transform .7s cubic-bezier(.16,1,.3,1)}
+  .pt.in{transform:translateY(0)}
+  .pt__dot{transform:scale(.4);transition:transform .55s cubic-bezier(.34,1.56,.64,1) .12s}
+  .pt.in .pt__dot{transform:scale(1)}
+}
+
+@media (max-width:820px){
+  .bar{padding:11px 18px}.bar nav,.bar .ref{display:none}
+  .hero{padding:82px 18px 20px}
+  .hero__foot{flex-direction:column;align-items:stretch;gap:26px}
+  .key{min-width:0}
+  .scale{text-align:left}.scale__bar{margin-left:0;width:150px}
+  .panel{padding:80px 18px}
+  .points{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet" aria-hidden="true">
+  <div class="sheet__grid"></div>
+  <svg class="sheet__contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <path class="c-fill" d="M980,300 C1120,250 1290,320 1330,430 C1370,540 1270,650 1140,660 C1010,670 920,590 930,480 C940,390 950,330 980,300 Z"/>
+    <path d="M905,262 C1075,196 1300,286 1352,424 C1404,562 1286,704 1124,714 C962,724 852,620 866,486 C878,372 872,300 905,262"/>
+    <path d="M948,306 C1092,254 1268,330 1310,438 C1352,546 1256,660 1128,668 C1000,676 906,596 918,490 C928,400 924,340 948,306"/>
+    <path d="M992,350 C1108,310 1240,372 1272,456 C1304,540 1226,624 1122,628 C1018,632 946,568 956,486 C964,420 972,376 992,350"/>
+    <path d="M1036,396 C1122,368 1210,414 1232,474 C1254,534 1198,588 1122,590 C1046,592 994,548 1000,490 C1006,444 1022,414 1036,396"/>
+    <path d="M-40,690 C160,640 300,742 470,726 C640,710 720,624 900,646"/>
+  </svg>
+</div>
+
+<header class="bar">
+  <a class="brand" href="#">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="1.6" y="1.6" width="28.8" height="28.8" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M10 8.6h5.6c4.5 0 7.6 3 7.6 7.4s-3.1 7.4-7.6 7.4H10V8.6Z" stroke="currentColor" stroke-width="1.7"/>
+    </svg>
+    <b>digital consulting<br><span>services</span></b>
+  </a>
+  <nav>
+    <a href="#">Services</a><a href="#">Portfolio</a><a href="#">Pricing</a><a href="#">About</a>
+  </nav>
+  <span class="ref">TQ 5804 &middot; POLEGATE</span>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="hero__mid">
+      <h1>Websites as professional<br>as you are.<br><span class="thin">Surveyed before they're built.</span></h1>
+      <p class="lede">Designed, written, built, hosted and looked after by one person. You have one
+        conversation &mdash; everything after that is my job. Work that stands next to what London
+        studios put out, for a fraction of the cost.</p>
+      <div class="actions">
+        <a class="pillar" href="#">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 2.6 18 17H2L10 2.6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            <circle cx="10" cy="12.4" r="1.9" fill="currentColor"/>
+          </svg>
+          Get a free quote
+        </a>
+        <a class="ghost" href="#panel">See the work &darr;</a>
+      </div>
+    </div>
+
+    <div class="hero__foot">
+      <div class="key">
+        <div class="key__h">KEY</div>
+        <div class="key__row"><svg viewBox="0 0 20 20" fill="none"><rect x="2.5" y="4" width="15" height="12" stroke="#17265E" stroke-width="1.5"/><path d="M2.5 7.5h15" stroke="#17265E" stroke-width="1.5"/></svg><span>Website design</span><i>01</i></div>
+        <div class="key__row"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="6.6" stroke="#C4703A" stroke-width="1.5"/><path d="M3.4 10h13.2M10 3.4c3 3.6 3 9.6 0 13.2M10 3.4c-3 3.6-3 9.6 0 13.2" stroke="#C4703A" stroke-width="1.2"/></svg><span>Local SEO</span><i>02</i></div>
+        <div class="key__row"><svg viewBox="0 0 20 20" fill="none"><path d="M10 3.2 16.4 7v6L10 16.8 3.6 13V7L10 3.2Z" stroke="#17265E" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Ongoing management</span><i>03</i></div>
+        <div class="key__row"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" stroke="#00A8AD" stroke-width="1.5"/><path d="m3 5 7 5.6L17 5" stroke="#00A8AD" stroke-width="1.5"/></svg><span>eCommerce</span><i>04</i></div>
+      </div>
+
+      <div class="scale">
+        <span class="scale__fig" id="scaleFig">1:25 000</span>
+        <div class="scale__bar"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="scale__note">EST. 2019 &middot; POLEGATE, EAST SUSSEX &middot; UK&#8209;WIDE</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel">
+    <h2>Twenty&#8209;plus businesses, surveyed and built.</h2>
+    <p class="lede">Fabrics, tuition, yoga, signage, automotive, property, scaffolding, removals.
+      Trades are a big part of it &mdash; never the whole of it.</p>
+    <div class="points">
+      <div class="pt"><div class="pt__dot"></div><span class="pt__n">TQ 5804</span><div class="pt__t">Cuddle Plush Fabrics</div><div class="pt__s">eCommerce &middot; client since 2021</div></div>
+      <div class="pt"><div class="pt__dot"></div><span class="pt__n">TQ 6002</span><div class="pt__t">Sanctuary Ida</div><div class="pt__s">Yoga bookings and payments</div></div>
+      <div class="pt"><div class="pt__dot"></div><span class="pt__n">TQ 5910</span><div class="pt__t">Mad Graphics</div><div class="pt__s">Signage and print &middot; full rebuild</div></div>
+      <div class="pt"><div class="pt__dot"></div><span class="pt__n">TQ 6104</span><div class="pt__t">Colossus Scaffolding</div><div class="pt__s">First enquiry within three weeks</div></div>
+      <div class="pt"><div class="pt__dot"></div><span class="pt__n">TQ 5701</span><div class="pt__t">Luna Landings</div><div class="pt__s">Made&#8209;to&#8209;order with a configurator</div></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* contour path lengths -> draw-on */
+  document.querySelectorAll('.sheet__contours path:not(.c-fill)').forEach(function(p){
+    var L = Math.ceil(p.getTotalLength());
+    p.style.setProperty('--len', L);
+  });
+
+  if (reduce) return;
+
+  /* scroll-linked zoom: grid opens out, scale steps between two authored literals */
+  var root = document.documentElement, fig = document.getElementById('scaleFig'), last = '1:25 000', tick;
+  function onScroll(){
+    var h = window.innerHeight || 1;
+    var z = Math.min(1, Math.max(0, window.scrollY / h));
+    root.style.setProperty('--z', z.toFixed(3));
+    var next = z > .55 ? '1:250 000' : '1:25 000';
+    if (next !== last){ last = next; flip(fig, next); }
+  }
+  /* character cascade on the scale change - the value is authored, never counted up */
+  function flip(el, text){
+    clearInterval(tick);
+    var i = 0, from = el.textContent, n = Math.max(from.length, text.length);
+    tick = setInterval(function(){
+      i++;
+      el.textContent = text.slice(0, i) + from.slice(i, n);
+      if (i >= n){ clearInterval(tick); el.textContent = text; }
+    }, 26);
+  }
+  addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, {passive:true});
+  onScroll();
+
+  /* latched reveals */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var els = [].slice.call(e.target.querySelectorAll('.pt'));
+      els.forEach(function(el,i){ setTimeout(function(){ el.classList.add('in'); }, i*85); });
+      io.unobserve(e.target);
+    });
+  }, {threshold:.25});
+  document.querySelectorAll('.points').forEach(function(n){ io.observe(n); });
+})();
+</script>
+</body>
+</html>

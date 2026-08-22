@@ -1,0 +1,13 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the entire frame edge to edge. This is a UI render, not a photograph of a screen, not a device mockup, not a laptop on a desk. No browser chrome. Real legible typography. No lorem ipsum. No stock photography of people. Do not invent any review scores, star ratings, award badges, client logos or statistics.
+
+The page is an Ordnance Survey map sheet that happens to be a website. Ground: off-white map paper (#F3F3F1) overlaid with a fine navy survey grid of 1km squares at low opacity, plus heavier navy grid lines every fifth square. Across the right half, concentric ochre-brown contour lines (#C4703A) describe a hill, drawn as fine 1px linework with a faint ochre tint fill in the innermost ring.
+
+Top bar on a hairline: a small outlined square monogram containing a letter D, beside it "digital consulting" over "services" in small type; centred minimal navigation reading Services, Portfolio, Pricing, About; at the far right a monospaced grid reference "TQ 5804 · POLEGATE".
+
+Left two-thirds, vertically centred: an enormous, tightly tracked, very bold grotesk headline in near-black reading "Websites as professional as you are." and beneath it, in the same size but light weight and grey, "Surveyed before they're built." Below that a single short paragraph of grey body text. Below that a saturated magenta (#D6006B) rectangular button with white text "Get a free quote" and a small triangle triangulation-pillar icon, with a thin magenta outline offset down-right behind it; beside it a quiet underlined text link "See the work".
+
+Bottom left: a map KEY panel above a navy hairline, small monospaced heading "KEY", then four rows, each a small finely-drawn cartographic symbol followed by a service name — "Website design", "Local SEO", "Ongoing management", "eCommerce" — with a small monospaced numeral at the right of each row.
+
+Bottom right: a segmented black-and-white cartographic scale bar, with monospaced "1:25 000" above it and small monospaced text below reading "EST. 2019 · POLEGATE, EAST SUSSEX · UK-WIDE".
+
+Mood: engineered, precise, generous white space, the quiet authority of a printed survey sheet. Absolutely no gradients, no glows, no drop shadows, no rounded cards, no photographs.

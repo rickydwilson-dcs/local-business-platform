@@ -1,0 +1,13 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the entire frame edge to edge. This is a UI render, not a photograph of a screen, not a device mockup, not a laptop on a desk. No browser chrome. Real legible typography. No lorem ipsum. No stock photography of people. Do not invent any review scores, star ratings, award badges, client logos or statistics.
+
+The page is a letterpress forme locking up in a chase. Ground: warm off-white rag paper (#EFEAE0) with a subtle fibrous tooth. A heavy deep-black ink field occupies the lower right third, printed with visible impression and slightly imperfect ink coverage at the edges.
+
+Top bar: a small outlined square D monogram with "digital consulting" over "services"; minimal navigation Services, Portfolio, Pricing, About; at the far right small letterspaced type reading "EST. 1919 TRADE, 2019 ONLINE".
+
+Left and centre: a very large headline set as if in metal type, tight, in dense black with visible ink impression, reading "Websites as professional as you are." One word is printed in saturated magenta (#D6006B) as a second-colour run, slightly out of register. Below it a short paragraph of body text in a clean grotesk. Below that a solid black rectangular button with paper-white text "Get a free quote".
+
+Around the composition, the furniture of a chase: fine steel rules boxing the type, corner quoins drawn as small mechanical brackets at the outer corners, and thin registration crosshair marks in magenta and navy at the top-left and bottom-right edges.
+
+Lower left: a specimen-sheet strip listing services as four lines of letterpressed type — "Website design", "Local SEO", "Ongoing management", "eCommerce" — each with a small hairline rule beneath.
+
+Mood: a jobbing printer's shop, ink and metal and paper, craft you can feel. Warm but disciplined. No gradients, no glows, no rounded cards, no photographs.

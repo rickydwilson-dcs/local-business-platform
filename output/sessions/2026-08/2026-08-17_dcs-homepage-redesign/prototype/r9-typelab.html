@@ -1,0 +1,61 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>DCS — type options</title>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;800&family=Familjen+Grotesk:wght@400;500;700&family=Archivo:wght@400;500;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@800,500&f[]=switzer@500,800&f[]=general-sans@500,700&f[]=bespoke-sans@500,700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E0E12;--magenta:#D6006B;--aqua:#00D2D8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:#fff;padding:44px clamp(20px,4vw,64px) 100px;
+  font-family:'Schibsted Grotesk',system-ui,sans-serif}
+h1{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.intro{color:rgba(255,255,255,.6);max-width:70ch;line-height:1.5;margin-bottom:44px;font-size:15.5px}
+.spec{border-top:1px solid rgba(255,255,255,.16);padding:34px 0 40px}
+.spec__meta{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:18px}
+.spec__n{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--aqua)}
+.spec__note{font-size:13.5px;color:rgba(255,255,255,.52)}
+.disp{line-height:1.02;margin-bottom:14px}
+.disp b{display:block;font-weight:800}
+.disp .plate{display:inline-block;background:var(--magenta);color:#fff;padding:0 .1em .04em}
+.disp .dim{color:rgba(255,255,255,.44)}
+.body{max-width:56ch;line-height:1.55;color:rgba(255,255,255,.78);font-size:15.5px}
+.px{font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;letter-spacing:.04em}
+
+.f-schibsted .disp,.f-schibsted .body{font-family:'Schibsted Grotesk',sans-serif}
+.f-clash .disp{font-family:'Clash Display',sans-serif}.f-clash .body{font-family:'Switzer',sans-serif}
+.f-cabinet .disp{font-family:'Cabinet Grotesk',sans-serif}.f-cabinet .body{font-family:'Switzer',sans-serif}
+.f-switzer .disp,.f-switzer .body{font-family:'Switzer',sans-serif}
+.f-general .disp,.f-general .body{font-family:'General Sans',sans-serif}
+.f-bespoke .disp,.f-bespoke .body{font-family:'Bespoke Sans',sans-serif}
+.f-familjen .disp,.f-familjen .body{font-family:'Familjen Grotesk',sans-serif}
+.f-archivo .disp,.f-archivo .body{font-family:'Archivo',sans-serif}
+.f-bricolage .disp,.f-bricolage .body{font-family:'Bricolage Grotesque',sans-serif}
+</style></head><body>
+<h1>Type options — the hero line, at hero scale</h1>
+<p class="intro">Same words, same size, same colour. Judge the display face first: it carries the
+page. Body sample underneath is what a paragraph would feel like. Clash and Cabinet are display-only
+designs, so they're paired with Switzer for body.</p>
+<div id="out"></div>
+<script>
+const FONTS=[
+ ['schibsted','Schibsted Grotesk','Google · the current face. Neutral Nordic grotesk, tight tracking, engineered.', '-.045em','7.4vw'],
+ ['clash','Clash Display + Switzer','Fontshare · display face with real character; slightly condensed, confident.','-.03em','7.6vw'],
+ ['cabinet','Cabinet Grotesk + Switzer','Fontshare · quirky grotesk, tall x-height, distinctive g and a.','-.035em','7.4vw'],
+ ['switzer','Switzer','Fontshare · Helvetica-adjacent, extremely clean, very well drawn.','-.04em','7.4vw'],
+ ['general','General Sans','Fontshare · neutral workhorse, a touch geometric, unfussy.','-.035em','7.4vw'],
+ ['bespoke','Bespoke Sans','Fontshare · squarish grotesk with flat sides; industrial edge.','-.035em','7.3vw'],
+ ['familjen','Familjen Grotesk','Google · Swedish grotesk, characterful, less common than Inter/Poppins.','-.035em','7.4vw'],
+ ['archivo','Archivo','Google · sturdy American grotesk, sits well at huge sizes.','-.038em','7.2vw'],
+ ['bricolage','Bricolage Grotesque','Google · deliberately irregular, editorial, opinionated.','-.03em','7.2vw'],
+];
+document.getElementById('out').innerHTML=FONTS.map(([k,name,note,ls,size])=>`
+<section class="spec f-${k}">
+  <div class="spec__meta"><span class="spec__n">${name}</span><span class="spec__note">${note}</span></div>
+  <div class="disp" style="font-size:clamp(2rem,${size},6.6rem);letter-spacing:${ls}">
+    <b><span class="plate">Websites</span> as</b><b>professional</b><b class="dim">as you.</b>
+  </div>
+  <p class="body">Designed, written, built, hosted and looked after by one person. Work that stands
+  next to what London studios put out, for a fraction of the cost. &pound;1,495 &middot; 24 months.</p>
+  <p class="px">letter-spacing ${ls}</p>
+</section>`).join('');
+</script>
+</body></html>
