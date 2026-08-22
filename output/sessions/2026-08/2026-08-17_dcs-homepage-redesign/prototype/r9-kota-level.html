@@ -135,7 +135,16 @@ h1 .dim{color:rgba(255,255,255,.44)}
 .btn--ghost:hover{border-color:var(--ink);box-shadow:none}
 
 /* ============ stacking panels ============ */
-.stack{position:relative}
+/* The rounded top corners of each stacking section are cut out of its own
+   background, so whatever they reveal is whatever paints behind them. .stack
+   holds the hero's ink so the FIRST panel's corners read as the hero rather
+   than as the body's paper. */
+.stack{position:relative;background:var(--ink)}
+.cornerfill{position:sticky;top:0;height:var(--r);margin-bottom:calc(var(--r) * -1)}
+.cf--ink{background:var(--ink)}
+.cf--white{background:var(--white)}
+.cf--magenta{background:var(--magenta)}
+.cf--aqua{background:var(--aqua)}
 .panel{position:sticky;top:0;min-height:100svh;padding:clamp(84px,10vh,140px) var(--pad) clamp(40px,6vh,80px);
   border-radius:var(--r) var(--r) 0 0;display:grid;align-content:center;overflow:hidden}
 .panel::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;
@@ -259,7 +268,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
      which is what the containing block resolves to. Only in-flow content after
      the panel creates room, hence the ::after tail below. flow-root stops the
      margin collapsing out; the ink ground matches data-ground="ink". */
-  display:flow-root;background:var(--ink)}
+  display:flow-root;background:var(--white)}
 /* one viewport of in-flow tail: gives the last panel a full screen of hold, and
    it un-pins at exactly the scroll position where #services' top edge enters
    from below, so the handover is seamless rather than leaving an ink void. */
@@ -789,6 +798,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
     <!-- Chapter opener. Heading and lead only — the client index that used to
          sit here was removed at Ricky's request. -->
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
+
     <section class="panel p--white" id="work" data-ground="white">
       <h2 class="res">You do you.<br>I&rsquo;ve got this.</h2>
       <p class="lead">No clue? No problem. No judgement.</p>
@@ -844,6 +855,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
         <div class="wpanel__r"><span class="wchip">Scaffolding</span></div>
       </article>
     </div>
+
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
 
     <section class="panel p--magenta" id="services" data-ground="magenta">
       <h2 class="res">Everything a small business <br>actually needs online.</h2>
@@ -922,6 +935,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </article>
     </section>
 
+    <div class="cornerfill cf--magenta" aria-hidden="true"></div>
+
     <section class="panel p--ink" data-ground="ink">
       <h2 class="res">A quick chat.<br>I do the rest.</h2>
       <div class="steps">
@@ -931,6 +946,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
         <div class="step"><span class="step__r"></span><span class="step__k">04</span><div><div class="step__t">I look after it</div><p class="step__b">Hosting, security, updates, changes. It keeps working and you keep working.</p></div></div>
       </div>
     </section>
+
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
 
     <section class="panel p--white" id="pricing" data-ground="white">
       <h2 class="res">Two ways to pay<br>for the same site.</h2>
@@ -967,6 +984,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </div>
     </section>
 
+    <div class="cornerfill cf--white" aria-hidden="true"></div>
+
     <section class="panel p--magenta" id="faq" data-ground="magenta">
       <h2 class="res">Questions I get asked<br>before people say yes.</h2>
       <div class="qa">
@@ -991,10 +1010,14 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </div>
     </section>
 
+    <div class="cornerfill cf--magenta" aria-hidden="true"></div>
+
     <section class="panel p--aqua" data-ground="aqua">
       <p class="quote res">“My phone started ringing within two weeks of the site going live. Ricky handled everything — I didn't have to do a thing.”</p>
       <p class="quote__a">Mark H. <span>· Electrician, Brighton</span></p>
     </section>
+
+    <div class="cornerfill cf--aqua" aria-hidden="true"></div>
 
     <section class="panel p--navy end" id="end" data-ground="navy">
       <div class="end__main">
