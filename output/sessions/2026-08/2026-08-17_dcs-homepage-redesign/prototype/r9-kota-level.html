@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Digital Consulting Services — Websites as professional as you</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,7 +199,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     padding:clamp(16px,1.5vw,24px)}
   .cards--2 .card__s>span{transform:none;max-width:none;margin:0}
 }
-}
 
 /* awaiting footage: a designed box, never blank space */
 .slot{position:absolute;inset:0;display:grid;place-content:center;gap:9px;justify-items:center;
@@ -245,6 +244,62 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .mock__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .mock__cell{aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,.16)}
 .mock__cell.on{background:var(--aqua)}
+
+/* ============ work: chapter opener + full-bleed client panels ============ */
+/* Replaces the 2x2 bordered card grid. That grid was the only card treatment on
+   a page otherwise built from full-bleed colour and display type, so it read as
+   a different design. Here the video IS the ground, and the panels stack exactly
+   like the service cards below — one motion vocabulary for the whole page. */
+.windex{margin-top:clamp(30px,4.6vh,54px);display:flex;flex-wrap:wrap;gap:10px}
+.windex a{display:inline-flex;align-items:baseline;gap:10px;
+  border:1.5px solid rgba(14,14,18,.26);border-radius:100px;padding:12px 18px;
+  font-weight:600;font-size:15px;letter-spacing:-.01em;
+  transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+.windex a:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.windex em{font-style:normal;opacity:.55;font-weight:500;font-size:13px}
+.windex a:hover em{opacity:.72}
+
+.wstack{position:relative;z-index:1;
+  /* Sticky clamps an element's MARGIN box inside its containing block, so a
+     bottom margin buys the last panel no room to pin — panels 1-4 get their
+     room from following siblings, and panel 5 has none. Measured: 0px of pin
+     vs 840-3940px for its siblings. Padding here is outside every child's
+     margin box. Padding does not work either — it is outside the content box,
+     which is what the containing block resolves to. Only in-flow content after
+     the panel creates room, hence the ::after tail below. flow-root stops the
+     margin collapsing out; the ink ground matches data-ground="ink". */
+  display:flow-root;background:var(--ink)}
+/* one viewport of in-flow tail: gives the last panel a full screen of hold, and
+   it un-pins at exactly the scroll position where #services' top edge enters
+   from below, so the handover is seamless rather than leaving an ink void. */
+.wstack::after{content:"";display:block;height:100lvh}
+.wpanel:last-child{margin-bottom:0}
+.wpanel{position:sticky;top:0;height:100lvh;overflow:hidden;color:#fff;
+  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:end;
+  padding:clamp(60px,8vh,110px) var(--pad) clamp(36px,6vh,72px);
+  /* the copy is bottom-aligned, which is the edge the next panel arrives from.
+     Without this the description is covered ~300px in and is never read. */
+  margin-bottom:26vh}
+.wpanel video,.wpanel img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0}
+/* scrim: the copy sits on live footage, so contrast cannot be left to the clip */
+.wpanel::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(6,6,10,.93) 0%,rgba(6,6,10,.58) 44%,rgba(6,6,10,.12) 80%)}
+.wpanel>*{position:relative;z-index:2}
+.wpanel__n{font-weight:800;letter-spacing:-.04em;line-height:.92;
+  font-size:clamp(2.4rem,7.4vw,6.4rem);max-width:14ch}
+.wpanel__d{margin-top:16px;max-width:44ch;line-height:1.5;opacity:.9;
+  font-size:clamp(1rem,1.15vw,1.15rem)}
+.wpanel__r{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.wchip{border:1px solid rgba(255,255,255,.5);border-radius:100px;padding:7px 14px;
+  font-weight:600;font-size:14px;letter-spacing:.02em;opacity:.9}
+.wpanel__l{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:16px;
+  border-bottom:1.5px solid rgba(255,255,255,.5);padding:14px 0 11px;
+  transition:gap .35s cubic-bezier(.16,1,.3,1)}
+.wpanel__l:hover{gap:15px}
+/* must clear the fixed bar; in the options lab there was no bar to clear */
+.wpanel__ix{position:absolute;top:clamp(96px,13vh,124px);left:var(--pad);z-index:2;
+  font-size:12.5px;font-weight:700;letter-spacing:.13em;opacity:.75}
 
 /* ============ work ============ */
 .work{display:grid;margin-top:clamp(34px,5vh,58px);border-top:1px solid rgba(14,14,18,.14)}
@@ -452,6 +507,195 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .row,.svc,.step{transform:translateY(18px);transition:transform .8s cubic-bezier(.16,1,.3,1),padding-left .45s cubic-bezier(.16,1,.3,1),background .35s ease}
   .in .row,.in .svc,.in .step{transform:translateY(0)}
 }
+
+/* ==================================================================
+   MOBILE — authored, not reflowed.
+   Everything below is inside a width or pointer query, so the desktop
+   composition renders byte-identical. Doctrine carried over from the
+   earlier mobile round (mobile-lab.html): 16px prose floor, 44px touch
+   targets, display type sized from the longest unbreakable word, and no
+   eyebrow allowed to outweigh the heading it introduces.
+   ================================================================== */
+
+/* Both of these are mobile-only compositions. They must be off by default or
+   they render on the desktop, which this layer is not allowed to touch. */
+.hero__m,.tiercards{display:none}
+
+/* ---- touch: hover effects fire on tap and then latch until you tap
+   elsewhere. 27 hover rules in this sheet; this neutralises the ones that
+   change position, colour or scale, so a tap never leaves a stuck state. --- */
+@media (hover:none){
+  a,button,summary{-webkit-tap-highlight-color:rgba(214,0,107,.16);touch-action:manipulation}
+  .burger:hover{background:none;color:inherit}
+  .bar nav a:hover::after{transform:scaleX(0)}
+  .hire:hover,.btn:hover,.card:hover,.cards--2 .card:hover{transform:none;box-shadow:none}
+  .btn:hover svg,.hire:hover svg{transform:none}
+  .card:hover::before{transform:scaleX(0)}
+  .card:hover .card__well img,.card:hover .card__well video,
+  .svccard:hover .svccard__well img,.svccard:hover .svccard__well video{transform:none}
+  .cards--2 .card:hover .card__t{color:inherit}
+  .row:hover::after{transform:scaleY(0)}
+  .row:hover .row__n,.row:hover .row__m{color:inherit}
+  .svc:hover,.qa summary:hover,.tier:hover{padding-left:0}
+  .tier:hover{background:none}
+  .svccard__l:hover{gap:9px}
+  .wpanel__l:hover{gap:9px}
+  .windex a:hover{background:none;color:inherit;border-color:rgba(14,14,18,.26)}
+  .big:hover{border-bottom-color:rgba(255,255,255,.3)}
+  .menu__nav a:hover span{transform:none;color:inherit}
+  .paytoggle button:hover{opacity:.6}
+  .paytoggle button[aria-pressed="true"]:hover{opacity:1}
+}
+
+@media (max-width:900px){
+  /* safe area: the bar and every full-bleed edge must clear the notch and
+     the home indicator, which viewport-fit=cover now exposes. */
+  :root{--pad:max(20px,env(safe-area-inset-left),env(safe-area-inset-right))}
+  .bar{padding-top:max(10px,env(safe-area-inset-top));padding-bottom:10px}
+  .menu{padding-bottom:max(30px,env(safe-area-inset-bottom))}
+
+  /* 44px touch floor */
+  .burger{width:44px;height:44px}
+  .hire{padding:14px 20px 14px 23px;font-size:15px}
+  .mark{padding:9px 0}
+  .svccard__l{padding:13px 0;font-size:16px}
+  .qa summary{padding-top:16px;padding-bottom:16px}
+  .end__nav a{padding:13px 0}
+
+  /* ---- hero: the desktop is a wall of type at viewport scale. At 390 it had
+     shrunk to 36.8px in a column that carries 60. Sized here from the longest
+     unbreakable word ("professional"), and dropped to the foot of the screen so
+     the fold reads as a poster rather than a header with space under it. ---- */
+  .hero{min-height:100lvh;align-content:center;
+    padding-top:calc(96px + env(safe-area-inset-top));
+    padding-bottom:calc(clamp(26px,4svh,44px) + env(safe-area-inset-bottom))}
+  h1{font-size:clamp(2.6rem,14.3vw,3.9rem);letter-spacing:-.042em}
+  .hero__head{gap:20px}
+  .hero__sub{text-align:left;font-size:16px;line-height:1.5;max-width:34ch;
+    color:rgba(255,255,255,.78)}
+  .hero__m{display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+    margin-top:clamp(24px,4svh,40px)}
+  .hero__m .btn{padding:17px 27px;font-size:16px}
+  .hero__m2{font-size:16px;font-weight:600;color:rgba(255,255,255,.78);
+    border-bottom:1.5px solid rgba(255,255,255,.34);padding:13px 0}
+
+  /* ---- panels: the sticky stack is a large-screen affordance, but the thesis
+     is colour as a wall you hit, so on a phone each panel owns the whole view.
+     lvh, not svh: svh is the SMALLEST viewport, so when mobile browser chrome
+     retracts the section would be shorter than the screen and leak a strip of
+     the next colour — exactly the failure this is meant to prevent.
+     The +110px is dwell. At exactly 100lvh the all-one-colour state lasts the
+     65px the fixed bar overlaps, which is one frame at flick speed; the extra
+     gives ~175px of scroll where the view is genuinely a single colour. ---- */
+  .panel{min-height:calc(100lvh + 110px)}
+  h2{font-size:clamp(2rem,8.6vw,2.4rem);line-height:.94;max-width:none}
+  .lead{font-size:16px;margin-top:16px;max-width:none}
+  /* this heading is the only one whose authored break rags badly at 390 */
+  #services h2 br{display:none}
+
+  /* a reveal that has not fired yet must still be legible — IntersectionObserver
+     lags on a phone mid-flick, and the rest state was 1.5:1 on magenta. */
+  .p--ink .res,.p--magenta .res,.p--navy .res{color:rgba(255,255,255,.72)}
+  .p--aqua .res{color:rgba(14,14,18,.66)}
+  .res{color:#5A5A66}
+
+  /* work */
+  .windex{gap:8px;margin-top:28px}
+  .windex a{font-size:16px;padding:13px 17px;flex:1 1 100%}
+  .windex em{margin-left:auto;font-size:14px}
+  .wpanel__n{font-size:min(11vw,2.9rem);max-width:none}
+  .wpanel__d{font-size:16px;max-width:none}
+  .wpanel__ix{top:calc(84px + env(safe-area-inset-top))}
+  .wpanel{margin-bottom:22vh}
+
+  /* ---- services: one card, one screen, under the bar. Previously the card was
+     min-height:70vh with a 230px well, so the image was always clipped by the
+     card stacking over it and you never saw a whole one. ---- */
+  .svccard{height:calc(100svh - 118px);min-height:0;
+    grid-template-rows:auto minmax(0,1fr);
+    top:calc(72px + var(--i) * 6px);margin-bottom:11vh}
+  .svccard__body{padding:26px 22px 22px;gap:11px;align-content:start}
+  .svccard__ix{font-size:12px;letter-spacing:.12em;opacity:.6;margin-bottom:2px}
+  .svccard__t{font-size:min(8.8vw,2.15rem);line-height:.98}
+  .svccard__d{font-size:16px;line-height:1.45;max-width:none}
+  .svccard__well{min-height:0}
+
+  /* process */
+  .steps{margin-top:28px}
+  .step{grid-template-columns:38px 1fr;gap:14px;padding:16px 0}
+  .step__k{font-size:1.05rem}
+  .step__t{font-size:1.25rem}
+  .step__b{font-size:16px;margin-top:6px;max-width:none}
+
+  /* ---- pricing: the desktop tablist + detail pane collapses to a picker whose
+     panel is off-screen, so a tap reads as nothing happening. Three whole cards
+     instead; the monthly/upfront toggle still drives all of them. ---- */
+  .price{display:block}
+  .price .tiers,.price .detail{display:none}
+  .tiercards{display:grid;gap:14px;margin-top:28px}
+  .payhead{gap:14px}
+  .paytoggle{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .paytoggle button{padding:14px 12px;font-size:15px}
+  .paynote{font-size:15px;line-height:1.45}
+  .tcard{position:relative;border:1px solid rgba(14,14,18,.2);border-radius:18px;
+    padding:22px 20px;display:grid;gap:12px;background:#F7F6F4}
+  .tcard--rec{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tcard__b{position:absolute;top:-10px;left:20px;background:var(--magenta);color:#fff;
+    font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    padding:5px 11px;border-radius:100px}
+  .tcard__h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .tcard__n{display:block;font-weight:700;font-size:1.4rem;letter-spacing:-.028em}
+  .tcard__s{display:block;font-size:14.5px;opacity:.7;margin-top:3px}
+  .tcard__f{font-weight:800;font-size:1.75rem;letter-spacing:-.03em;
+    white-space:nowrap;text-align:right;line-height:1}
+  .tcard__f small{display:block;font-size:12.5px;font-weight:500;opacity:.62;margin-top:4px}
+  .tcard__p{font-size:16px;line-height:1.45;opacity:.82}
+  .tcard__l{display:grid;gap:8px;list-style:none}
+  .tcard__l li{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.45}
+  .tcard__l svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--magenta)}
+  .tcard--rec .tcard__l svg{color:var(--aqua)}
+  .tcard .btn{margin-top:4px;justify-content:center;padding:16px 24px}
+  .tcard--rec .btn{background:var(--aqua);color:var(--ink)}
+
+  /* questions */
+  .qa summary{font-size:1.08rem;gap:14px}
+  .qa__a p{font-size:16px;max-width:none}
+
+  /* quote */
+  .quote{font-size:min(8.4vw,2.2rem);line-height:1.06;max-width:none}
+  .quote__a{font-size:16px}
+
+  /* ---- contact: the email measured 365px in a 350px column and sat 5px off the
+     screen edge. Both details become full-width rows here, which fixes the
+     measure and the 44px target in the same move. ---- */
+  .end{padding-top:clamp(96px,13svh,140px);
+    padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  .end__main{gap:22px}
+  .big{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    width:100%;min-width:0;font-size:min(4.9vw,1.15rem);letter-spacing:-.02em;
+    padding:15px 0;border-bottom:1px solid rgba(255,255,255,.28);
+    /* the address is one 36-character unbreakable token; without this it forces
+       the grid column wider than the screen and gets silently clipped. */
+    overflow-wrap:anywhere;line-height:1.25}
+  .big::after{content:"";flex:none;width:9px;height:9px;
+    border-right:2px solid var(--aqua);border-bottom:2px solid var(--aqua);
+    transform:rotate(-45deg)}
+  .end__foot{display:grid;gap:10px;font-size:13.5px;line-height:1.45}
+  .end__nav{gap:16px}
+}
+
+@media (max-width:360px){
+  .big{font-size:4.4vw;gap:10px}
+  .big::after{display:none}
+  .hero__m{gap:14px}
+}
+
+@media (max-width:900px) and (prefers-reduced-motion:no-preference){
+  /* the headline is the page's one piece of hero motion; keep it, but a phone
+     assembles a bigger glyph so the blur has to come down or it reads as blur. */
+  h1 .ch{animation-duration:.72s}
+  @keyframes ch{from{transform:translateY(.34em);filter:blur(5px)}to{transform:translateY(0);filter:blur(0)}}
+}
 </style>
 </head>
 <body>
@@ -504,56 +748,86 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       <p class="hero__sub">Designed, written, built, hosted and looked after by one person.
         Work that stands next to what London studios put out, for a fraction of the cost.</p>
     </div>
+    <!-- Mobile only. Desktop keeps its persistent top-right pill as the single
+         action; on a phone that pill is a thumb-stretch, so the fold gets its own. -->
+    <div class="hero__m">
+      <a class="btn" href="#end">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hero__m2" href="#work">See the work</a>
+    </div>
   </section>
 
 
   <div class="stack">
 
-    <section class="worksec" id="work" data-ground="white">
+    <!-- Chapter opener. Naming all four here is what buys back the one thing the
+         full-bleed stack loses against a pill selector: you learn how many
+         projects there are before you start scrolling through them. -->
+    <section class="panel p--white" id="work" data-ground="white">
       <h2 class="res">You do you.<br>I&rsquo;ve got this.</h2>
       <p class="lead">No clue? No problem. No judgement.</p>
-
-      <div class="cards cards--2">
-        <a class="card" href="#end">
-          <span class="card__t">The Clothing Kings</span>
-          <div class="card__well">
-            <span class="card__tag">Custom apparel</span>
-            <video src="assets/video/the-clothing-kings.mp4" poster="assets/video/the-clothing-kings.jpg" muted loop playsinline autoplay preload="metadata"></video>
-            <span class="card__s"><span>A workwear store where the price changes with the job &mdash; embroidery or vinyl, front, back or sleeve &mdash; and the customer uploads their logo at checkout.</span></span>
-          </div>
-        </a>
-
-        <a class="card" href="#end">
-          <span class="card__t">Cuddle Plush Fabrics</span>
-          <div class="card__well">
-            <span class="card__tag">Specialist fabric</span>
-            <video src="assets/video/cuddle-plush-fabrics.mp4" poster="assets/video/cuddle-plush-fabrics.jpg" muted loop playsinline autoplay preload="metadata"></video>
-            <span class="card__s"><span>With me since 2014. Products now load automatically from their wholesalers&rsquo; sites, and backorders are handled &mdash; so a catalogue that size stays accurate without anyone keying it in.</span></span>
-          </div>
-        </a>
-
-        <a class="card" href="https://npracingbsb.co.uk" target="_blank" rel="noopener">
-          <span class="card__t">NP Racing &mdash; npracingbsb.co.uk</span>
-          <div class="card__well">
-            <span class="card__tag">Race team</span>
-            <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4" muted loop playsinline autoplay preload="metadata"></video>
-            <span class="card__s"><span>A British Superbike team site carrying race reports, rider profiles and season gallery, updated through the racing calendar.</span></span>
-          </div>
-        </a>
-
-        <a class="card" href="https://www.smcommercial.uk" target="_blank" rel="noopener">
-          <span class="card__t">SM Commercial &mdash; smcommercial.uk</span>
-          <div class="card__well">
-            <span class="card__tag">Upholstery &amp; fabrication</span>
-            <video src="assets/video/sm-commercial.mp4" poster="assets/video/sm-commercial.jpg" muted loop playsinline autoplay preload="metadata"></video>
-            <span class="card__s"><span>Bespoke commercial upholstery and fabrication since 2009. A portfolio built to win enquiries for custom work rather than to sell products.</span></span>
-          </div>
-        </a>
-      </div>
+      <nav class="windex" aria-label="Projects">
+        <a href="#work-1">The Clothing Kings <em>Custom apparel</em></a>
+        <a href="#work-2">Cuddle Plush Fabrics <em>Specialist fabric</em></a>
+        <a href="#work-3">NP Racing <em>Race team</em></a>
+        <a href="#work-4">SM Commercial <em>Upholstery &amp; fabrication</em></a>
+        <a href="#work-5">Colossus Scaffolding <em>Scaffolding</em></a>
+      </nav>
     </section>
 
+    <div class="wstack">
+      <article class="wpanel" id="work-1" data-ground="ink">
+        <span class="wpanel__ix">01 / 05</span>
+        <video src="assets/video/the-clothing-kings.mp4" poster="assets/video/the-clothing-kings.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <h3 class="wpanel__n">The Clothing Kings</h3>
+        <p class="wpanel__d">A workwear store where the price changes with the job &mdash; embroidery
+          or vinyl, front, back or sleeve &mdash; and the customer uploads their logo at checkout.</p>
+        <div class="wpanel__r"><span class="wchip">Custom apparel</span></div>
+      </article>
+
+      <article class="wpanel" id="work-2" data-ground="ink">
+        <span class="wpanel__ix">02 / 05</span>
+        <video src="assets/video/cuddle-plush-fabrics.mp4" poster="assets/video/cuddle-plush-fabrics.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <h3 class="wpanel__n">Cuddle Plush Fabrics</h3>
+        <p class="wpanel__d">With me since 2014. Products now load automatically from their
+          wholesalers&rsquo; sites, and backorders are handled &mdash; so a catalogue that size stays
+          accurate without anyone keying it in.</p>
+        <div class="wpanel__r"><span class="wchip">Specialist fabric</span></div>
+      </article>
+
+      <article class="wpanel" id="work-3" data-ground="ink">
+        <span class="wpanel__ix">03 / 05</span>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4" poster="assets/video/np-racing.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <h3 class="wpanel__n">NP Racing</h3>
+        <p class="wpanel__d">A British Superbike team site carrying race reports, rider profiles and
+          season gallery, updated through the racing calendar.</p>
+        <div class="wpanel__r"><span class="wchip">Race team</span>
+          <a class="wpanel__l" href="https://npracingbsb.co.uk" target="_blank" rel="noopener">npracingbsb.co.uk &rarr;</a></div>
+      </article>
+
+      <article class="wpanel" id="work-4" data-ground="ink">
+        <span class="wpanel__ix">04 / 05</span>
+        <video src="assets/video/sm-commercial.mp4" poster="assets/video/sm-commercial.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <h3 class="wpanel__n">SM Commercial</h3>
+        <p class="wpanel__d">Bespoke commercial upholstery and fabrication since 2009. A portfolio
+          built to win enquiries for custom work rather than to sell products.</p>
+        <div class="wpanel__r"><span class="wchip">Upholstery &amp; fabrication</span>
+          <a class="wpanel__l" href="https://www.smcommercial.uk" target="_blank" rel="noopener">smcommercial.uk &rarr;</a></div>
+      </article>
+
+      <article class="wpanel" id="work-5" data-ground="ink">
+        <span class="wpanel__ix">05 / 05</span>
+        <video src="assets/video/colossus-scaffolding.mp4" poster="assets/video/colossus-scaffolding.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <h3 class="wpanel__n">Colossus Scaffolding</h3>
+        <p class="wpanel__d">78 pages of localised content, every image generated rather than
+          photographed. They came with a logo, a few Instagram posts and a list of nearby towns.
+          First enquiry inside two weeks.</p>
+        <div class="wpanel__r"><span class="wchip">Scaffolding</span></div>
+      </article>
+    </div>
+
     <section class="panel p--magenta" id="services" data-ground="magenta">
-      <h2 class="res">Everything a small business<br>actually needs online.</h2>
+      <h2 class="res">Everything a small business <br>actually needs online.</h2>
       <p class="lead">Six things. You need some of them, not all of them &mdash; and I'll tell you which.</p>
     </section>
 
@@ -664,6 +938,10 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           </button>
         </div>
         <div class="detail" id="detail" role="tabpanel"></div>
+        <!-- Mobile pricing. The desktop picker is a two-pane tablist; in one
+             column the detail pane lands off-screen and a tap looks like it did
+             nothing. On a phone each tier becomes a whole card instead. -->
+        <div class="tiercards" id="tiercards"></div>
       </div>
     </section>
 
@@ -774,6 +1052,30 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       T.l.map(function(x){return '<div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>'+x+'</span></div>';}).join('')+
       '</div><a class="btn" href="#end">Get a free quote</a>';
     if(!reduce){ detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap'); }
+    paintCards();
+  }
+
+  /* Mobile pricing. Same TIERS object, same pay-mode; rendered as three whole
+     cards because a picker whose detail pane is off-screen reads as broken. */
+  var tiercards = document.getElementById('tiercards');
+  var TICK = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function paintCards(){
+    tiercards.innerHTML = Object.keys(TIERS).map(function(k){
+      var T = TIERS[k], d = T[k === 'rec' ? mode : mode];
+      var rec = k === 'pro';
+      return '<article class="tcard' + (rec ? ' tcard--rec' : '') + '">' +
+        (rec ? '<span class="tcard__b">Most popular</span>' : '') +
+        '<div class="tcard__h">' +
+          '<span><span class="tcard__n">' + T.name + '</span>' +
+          '<span class="tcard__s">' + tabs.filter(function(t){return t.dataset.k===k})[0].querySelector('.tier__s').textContent + '</span></span>' +
+          '<span class="tcard__f">' + d.fig + '<small>' + d.sub + '</small></span>' +
+        '</div>' +
+        '<p class="tcard__p">' + T.p + '</p>' +
+        '<ul class="tcard__l">' + T.l.map(function(x){
+          return '<li>' + TICK + '<span>' + x + '</span></li>'; }).join('') + '</ul>' +
+        '<a class="btn" href="#end">Get a free quote</a>' +
+      '</article>';
+    }).join('');
   }
   tabs.forEach(function(t){ t.addEventListener('click', function(){ tier=t.dataset.k; paint(); }); });
   modeBtns.forEach(function(b){ b.addEventListener('click', function(){ mode=b.dataset.mode; paint(); }); });
