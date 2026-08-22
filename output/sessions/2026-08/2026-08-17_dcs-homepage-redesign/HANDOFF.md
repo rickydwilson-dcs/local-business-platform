@@ -1,20 +1,18 @@
 # DCS homepage — round 9 — handoff
 
 **Status:** in-progress — the round-9 prototype now has an authored mobile layer, a redesigned
-client-work section, and a fifth client. All of it is **uncommitted**, unpushed and undeployed, and
-the new video asset is **gitignored** so it exists only on this machine.
-**Branch:** `develop`, **2 commits ahead of `origin/develop`** (base `03ef16d6`). **Not pushed.**
-**Commits:** 2 — `789b65ef` (pricing page corrections), `18b9eca3` (round 9 prototype). **Nothing
-from this session is in either of them.**
-**Working tree:** 1 modified + 2 new, all this session's work:
-
-```
- M prototype/r9-kota-level.html      ← mobile layer, work-section redesign, 5th client
- ?? prototype/mobile-frame.html      ← 390px preview harness (new)
- ?? prototype/r9-worklab.html        ← work-section options lab (new, decision record)
-```
-
-Pre-existing, unrelated, do not commit: `supabase/`, `output/sessions/codex-peer-review/.../openrouter-response.json`.
+client-work section, and a fifth client. Committed, pushed and promoted to `staging`; **PR #59 is
+open into `main` and awaiting a human merge**. The new video asset is **gitignored** so it still
+exists only on this machine.
+**Branch:** `develop`, level with `origin/develop`.
+**Commits promoted:** 3 — `789b65ef` (pricing corrections), `18b9eca3` (round 9 prototype),
+`e90d30e0` (mobile layer + work section + 5th client + two CSS rules in CLAUDE.md/CHANGELOG.md).
+**Staging:** `32c1d557`, all green — CI, E2E Tests, Regression Watchdog.
+**PR into main:** https://github.com/rickydwilson-dcs/local-business-platform/pull/59 — the required
+`Verify promoted commit passed staging E2E` check **passed**. Do not re-open or re-push it; if it has
+since merged, `main` already has all of the above.
+**Working tree:** clean for this work. Two pre-existing untracked items are not ours and must stay
+out of any commit: `supabase/`, `output/sessions/codex-peer-review/.../openrouter-response.json`.
 
 **Supersedes** the previous version of this file, committed at `18b9eca3` and recoverable with
 `git show 18b9eca3:output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/HANDOFF.md`. Read it for
@@ -129,8 +127,10 @@ see Traps). All five `.wpanel`s carry `data-ground="ink"`.
   (`env(safe-area-inset-*)`, added this session with `viewport-fit=cover`) are _specifically_ the
   thing an emulator cannot check — the prior mobile round recorded that exact defect surviving
   because it is invisible outside a notched device.
-- **Nothing committed.** The whole session is in the working tree.
-- **Nothing pushed or deployed.** The two existing commits still exist only on this machine.
+- **Not merged to `main`.** PR #59 is open and green but unmerged — a human owns that merge.
+- **The prototype is not deployed anywhere.** It has only ever run on a local
+  `python3 -m http.server 4321`. `tools/publish-prototype.ts` has not been run, which is why nothing
+  has been seen on a real phone.
 - **The new video is gitignored** and will vanish on a fresh clone. It cost 10 credits.
 - **`r9-worklab.html` still shows four clients**, not five, and its Option A pill rail has a known
   unfixed defect (below). It is a decision record for a decision already made; left deliberately.
