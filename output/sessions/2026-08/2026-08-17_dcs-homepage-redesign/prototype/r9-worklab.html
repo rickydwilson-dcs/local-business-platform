@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DCS — work section, three options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/*
+Three replacements for the client-work section of r9-kota-level.html.
+The brief: the current 2x2 bordered white cards are the only card grid on a page
+otherwise built from full-bleed colour walls and display type — they read as a
+different design language. All three below speak the page's language instead.
+Same tokens, same family, same palette, same videos.
+*/
+:root{
+  --ink:#0E0E12; --paper:#ECEBE9; --white:#fff;
+  --magenta:#D6006B; --aqua:#00D2D8; --navy:#17265E; --grey:#70707B;
+  --f:'Archivo',system-ui,-apple-system,sans-serif;
+  --pad:clamp(20px,4.4vw,76px);
+  --r:clamp(20px,3vw,44px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--f);font-weight:400;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--magenta);color:#fff}
+:focus-visible{outline:3px solid var(--magenta);outline-offset:4px}
+img,video{display:block;max-width:100%}
+
+/* ---------- lab furniture (not part of any option) ---------- */
+.lab{padding:clamp(28px,5vw,64px) var(--pad);background:var(--ink);color:#fff}
+.lab h1{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:800;letter-spacing:-.035em;line-height:1}
+.lab p{margin-top:14px;max-width:62ch;opacity:.78;line-height:1.55;font-size:16px}
+.tag{display:inline-block;background:var(--magenta);color:#fff;font-size:11.5px;font-weight:700;
+  letter-spacing:.11em;text-transform:uppercase;padding:6px 12px;border-radius:100px}
+.sep{padding:clamp(22px,3.4vw,40px) var(--pad);background:var(--paper);border-top:1px solid rgba(14,14,18,.14)}
+.sep h2{font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;letter-spacing:-.03em;margin-top:12px}
+.sep p{margin-top:10px;max-width:70ch;line-height:1.55;font-size:16px;opacity:.8}
+.sep .why{margin-top:12px;font-size:15px;line-height:1.55;max-width:70ch;opacity:.72}
+.sep b{font-weight:700;opacity:1}
+
+/* =====================================================================
+   OPTION A — PILL REEL
+   The ask: Kota's brand-to-build mechanic. Pills name the set, one panel
+   at a time, the whole ground hard-cuts to that client's colour so the
+   section behaves like every other colour wall on the page.
+   ===================================================================== */
+.reel{min-height:100lvh;padding:clamp(84px,10vh,120px) var(--pad) clamp(40px,6vh,72px);
+  display:grid;align-content:start;gap:clamp(22px,3vh,40px);
+  background:var(--ink);color:#fff;border-radius:var(--r) var(--r) 0 0;
+  transition:background-color .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1)}
+.reel[data-c="1"]{background:var(--magenta)}
+.reel[data-c="2"]{background:var(--navy)}
+.reel[data-c="3"]{background:var(--aqua);color:var(--ink)}
+.reel__top{display:grid;gap:clamp(16px,2.2vh,26px)}
+.eyebrow{font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;opacity:.6}
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{position:relative;overflow:hidden;border:1.5px solid currentColor;background:none;color:inherit;
+  font:inherit;font-weight:600;font-size:15px;padding:13px 20px;border-radius:100px;cursor:pointer;
+  white-space:nowrap;opacity:.62;transition:opacity .3s ease,background-color .35s ease,color .35s ease}
+.pill:hover{opacity:1}
+.pill[aria-selected="true"]{opacity:1;background:currentColor}
+.pill[aria-selected="true"] .pill__t{color:var(--ink)}
+.reel[data-c="2"] .pill[aria-selected="true"] .pill__t,
+.reel[data-c="1"] .pill[aria-selected="true"] .pill__t{color:var(--ink)}
+.reel[data-c="3"] .pill[aria-selected="true"] .pill__t{color:#fff}
+.pill__t{position:relative;z-index:2;transition:color .3s ease}
+/* progress fill: the pill is also the timer, as on the reference */
+.pill__p{position:absolute;inset:0;z-index:1;background:currentColor;opacity:.18;
+  transform:scaleX(0);transform-origin:0 50%}
+.pill[aria-selected="true"] .pill__p{transform:scaleX(1);transition:transform 6s linear}
+.reel__body{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  gap:clamp(24px,3.6vw,60px);align-items:center}
+.reel__txt{display:grid;gap:clamp(12px,1.6vh,20px);align-content:center}
+.reel__n{font-weight:800;letter-spacing:-.04em;line-height:.92;font-size:clamp(2.3rem,6.4vw,5.4rem)}
+.reel__d{max-width:38ch;font-size:clamp(1rem,1.15vw,1.15rem);line-height:1.5;opacity:.84}
+.reel__meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:14px}
+.chip{border:1px solid currentColor;border-radius:100px;padding:6px 13px;opacity:.7;
+  font-weight:600;letter-spacing:.02em}
+.reel__l{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:16px;
+  border-bottom:1.5px solid currentColor;padding:13px 0 12px;align-self:start;
+  transition:gap .35s cubic-bezier(.16,1,.3,1)}
+.reel__l:hover{gap:15px}
+.reel__well{position:relative;aspect-ratio:16/10;border-radius:clamp(14px,1.6vw,22px);
+  overflow:hidden;background:rgba(0,0,0,.28)}
+.reel__well video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
+  opacity:0;transition:opacity .5s ease}
+.reel__well video.on{opacity:1}
+.reel__count{font-size:13px;letter-spacing:.1em;font-weight:700;opacity:.6}
+
+/* =====================================================================
+   OPTION B — FULL-BLEED STACK
+   No new interaction at all: each client becomes one more sticky
+   full-viewport panel, exactly like the six service cards. The video is
+   the ground, not a thumbnail in a box.
+   ===================================================================== */
+.bstack{position:relative;background:var(--paper)}
+.bpanel{position:sticky;top:0;height:100lvh;overflow:hidden;
+  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:end;
+  padding:clamp(60px,8vh,110px) var(--pad) clamp(36px,6vh,72px);color:#fff}
+.bpanel video,.bpanel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.bpanel::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(6,6,10,.92) 0%,rgba(6,6,10,.55) 42%,rgba(6,6,10,.12) 78%)}
+.bpanel>*{position:relative;z-index:2}
+.bpanel__n{font-weight:800;letter-spacing:-.04em;line-height:.92;
+  font-size:clamp(2.4rem,7.4vw,6.4rem);max-width:14ch}
+.bpanel__d{margin-top:16px;max-width:44ch;font-size:clamp(1rem,1.15vw,1.15rem);line-height:1.5;opacity:.88}
+.bpanel__r{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:14px}
+.bpanel__r .chip{opacity:.85}
+.bpanel__l{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:16px;
+  border-bottom:1.5px solid rgba(255,255,255,.5);padding:13px 0 12px;transition:gap .35s cubic-bezier(.16,1,.3,1)}
+.bpanel__l:hover{gap:15px}
+.bpanel__ix{position:absolute;top:clamp(26px,4vh,48px);left:var(--pad);z-index:2;
+  font-size:12.5px;font-weight:700;letter-spacing:.13em;opacity:.72}
+
+/* =====================================================================
+   OPTION C — INDEX + REVEAL
+   The agency index: client names as a list at display scale, the video
+   revealed by the active row. Revives the .row treatment already sitting
+   unused in the r9 stylesheet.
+   ===================================================================== */
+.index{min-height:100lvh;background:var(--ink);color:#fff;
+  padding:clamp(84px,10vh,120px) var(--pad) clamp(40px,6vh,72px);
+  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:center;gap:clamp(20px,3vh,34px)}
+.ilist{display:grid;border-top:1px solid rgba(255,255,255,.24)}
+.irow{position:relative;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+  padding:clamp(16px,2.6vh,30px) 4px;border-bottom:1px solid rgba(255,255,255,.24);
+  cursor:pointer;transition:padding-left .45s cubic-bezier(.16,1,.3,1)}
+.irow:hover,.irow.on{padding-left:16px}
+.irow__n{font-weight:800;font-size:clamp(1.5rem,4.4vw,3.6rem);letter-spacing:-.036em;line-height:1;
+  transition:color .35s ease}
+.irow.on .irow__n{color:var(--aqua)}
+.irow__m{font-size:14px;opacity:.62;text-align:right;font-weight:600;letter-spacing:.02em}
+/* desktop: one pinned well on the right that swaps; mobile: inline reveal */
+.iwell{position:relative;aspect-ratio:16/10;border-radius:clamp(14px,1.6vw,22px);overflow:hidden;
+  background:#15161C;margin-top:clamp(18px,2.6vh,30px)}
+.iwell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .45s ease}
+.iwell video.on{opacity:1}
+.iwell__c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(16px,2vw,26px);
+  background:linear-gradient(to top,rgba(6,6,10,.92),rgba(6,6,10,0));
+  font-size:16px;line-height:1.45}
+/* the measure is constrained on the text, never on the gradient box — putting
+   max-width on the box leaves a hard vertical seam where the gradient stops */
+.iwell__c span{display:block;max-width:52ch}
+@media (min-width:901px){
+  .index{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+  .index__h{grid-column:1/-1}
+  .iwell{margin-top:0}
+}
+
+/* ---------- shared headings ---------- */
+.h2{font-weight:800;letter-spacing:-.034em;line-height:.92;font-size:clamp(2rem,5.4vw,4.4rem);max-width:17ch}
+.lead{margin-top:16px;max-width:52ch;font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.5;opacity:.82}
+
+/* ---------- MOBILE ---------- */
+@media (hover:none){
+  a,button{touch-action:manipulation}
+  .pill:hover,.irow:hover{opacity:inherit}
+  .irow:hover{padding-left:0}
+  .reel__l:hover,.bpanel__l:hover{gap:9px}
+}
+@media (max-width:900px){
+  .reel{padding-top:clamp(72px,9vh,100px)}
+  .reel__body{grid-template-columns:1fr;gap:22px;align-items:start}
+  .reel__txt{order:2}
+  .reel__well{order:1;aspect-ratio:16/11}
+  .reel__n{font-size:min(11vw,2.9rem)}
+  .reel__d{font-size:16px;max-width:none}
+  /* pills become a snap rail: label-only content, so a rail is legitimate
+     here where it would not be for anything carrying a paragraph */
+  .pills{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);
+    padding-bottom:4px}
+  .pills::-webkit-scrollbar{display:none}
+  .pill{scroll-snap-align:start;flex:none}
+  .bpanel{align-content:end}
+  .bpanel__n{font-size:min(11vw,2.9rem)}
+  .bpanel__d{font-size:16px}
+  .index{align-content:start}
+  .irow__n{font-size:min(8.4vw,2.2rem)}
+  .irow{grid-template-columns:1fr;gap:6px}
+  .irow__m{text-align:left}
+  .iwell{aspect-ratio:16/11}
+  .h2{font-size:min(9vw,2.5rem)}
+  .lead{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="lab">
+  <span class="tag">Work section · three options</span>
+  <h1 style="margin-top:16px">The card grid is the odd one out.</h1>
+  <p>Every other section of the page is a full-bleed colour wall carrying display type. The client
+    work is the one place built from bordered white boxes with a heading tab on top, which is why it
+    reads as a different design. All three options below drop the box and speak the page's own
+    language. Same four clients, same videos, same palette, same family. Each is shown live — resize
+    the window or open on a phone to see both breakpoints.</p>
+</header>
+
+<!-- ============================ OPTION A ============================ -->
+<section class="sep">
+  <span class="tag">Option A</span>
+  <h2>Pill reel</h2>
+  <p>The mechanic you pointed at. Pills name the whole set so you know there are four without
+    scrolling; selecting one hard-cuts the entire ground to that client's colour, so the section
+    becomes another colour wall rather than an island. The active pill is also the timer.</p>
+  <p class="why"><b>Argues:</b> the set stays one object, and the section earns its place in the
+    colour rhythm — ink, magenta, navy, aqua as you move through the four.
+    <b>Trade:</b> a passive scroller who never taps sees one client, not four.</p>
+</section>
+
+<section class="reel" id="reel" data-c="0">
+  <div class="reel__top">
+    <span class="eyebrow">Selected work</span>
+    <div class="pills" role="tablist" aria-label="Clients">
+      <button class="pill" role="tab" aria-selected="true"  data-i="0"><span class="pill__p"></span><span class="pill__t">The Clothing Kings</span></button>
+      <button class="pill" role="tab" aria-selected="false" data-i="1"><span class="pill__p"></span><span class="pill__t">Cuddle Plush Fabrics</span></button>
+      <button class="pill" role="tab" aria-selected="false" data-i="2"><span class="pill__p"></span><span class="pill__t">NP Racing</span></button>
+      <button class="pill" role="tab" aria-selected="false" data-i="3"><span class="pill__p"></span><span class="pill__t">SM Commercial</span></button>
+    </div>
+  </div>
+  <div class="reel__body">
+    <div class="reel__txt" role="tabpanel">
+      <h2 class="reel__n" id="rn">The Clothing Kings</h2>
+      <p class="reel__d" id="rd"></p>
+      <div class="reel__meta"><span class="chip" id="rc"></span><span class="reel__count" id="rk"></span></div>
+      <a class="reel__l" id="rl" href="#">See the site &rarr;</a>
+    </div>
+    <div class="reel__well" id="rw"></div>
+  </div>
+</section>
+
+<!-- ============================ OPTION B ============================ -->
+<section class="sep">
+  <span class="tag">Option B</span>
+  <h2>Full-bleed stack</h2>
+  <p>No new interaction to learn. Each client becomes one more sticky full-viewport panel, identical
+    in behaviour to the six service cards further down the page — except the video <em>is</em> the
+    ground rather than a thumbnail inside a box. The most congruent of the three by definition:
+    it is the page's existing move, applied to different content.</p>
+  <p class="why"><b>Argues:</b> one motion vocabulary for the whole page.
+    <b>Trade:</b> four more full screens of length, and the work no longer reads as a set — you meet
+    the clients one at a time with no sense of how many there are.</p>
+</section>
+
+<div class="bstack">
+  <article class="bpanel">
+    <span class="bpanel__ix">01 / 04</span>
+    <video src="assets/video/the-clothing-kings.mp4" poster="assets/video/the-clothing-kings.jpg" muted loop playsinline autoplay preload="metadata"></video>
+    <h2 class="bpanel__n">The Clothing Kings</h2>
+    <p class="bpanel__d">A workwear store where the price changes with the job &mdash; embroidery or
+      vinyl, front, back or sleeve &mdash; and the customer uploads their logo at checkout.</p>
+    <div class="bpanel__r"><span class="chip">Custom apparel</span></div>
+  </article>
+  <article class="bpanel">
+    <span class="bpanel__ix">02 / 04</span>
+    <video src="assets/video/cuddle-plush-fabrics.mp4" poster="assets/video/cuddle-plush-fabrics.jpg" muted loop playsinline autoplay preload="metadata"></video>
+    <h2 class="bpanel__n">Cuddle Plush Fabrics</h2>
+    <p class="bpanel__d">With me since 2014. Products now load automatically from their wholesalers'
+      sites, and backorders are handled &mdash; so a catalogue that size stays accurate without
+      anyone keying it in.</p>
+    <div class="bpanel__r"><span class="chip">Specialist fabric</span></div>
+  </article>
+  <article class="bpanel">
+    <span class="bpanel__ix">03 / 04</span>
+    <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4" poster="assets/video/np-racing.jpg" muted loop playsinline autoplay preload="metadata"></video>
+    <h2 class="bpanel__n">NP Racing</h2>
+    <p class="bpanel__d">A British Superbike team site carrying race reports, rider profiles and
+      season gallery, updated through the racing calendar.</p>
+    <div class="bpanel__r"><span class="chip">Race team</span>
+      <a class="bpanel__l" href="https://npracingbsb.co.uk" target="_blank" rel="noopener">npracingbsb.co.uk &rarr;</a></div>
+  </article>
+  <article class="bpanel">
+    <span class="bpanel__ix">04 / 04</span>
+    <video src="assets/video/sm-commercial.mp4" poster="assets/video/sm-commercial.jpg" muted loop playsinline autoplay preload="metadata"></video>
+    <h2 class="bpanel__n">SM Commercial</h2>
+    <p class="bpanel__d">Bespoke commercial upholstery and fabrication since 2009. A portfolio built
+      to win enquiries for custom work rather than to sell products.</p>
+    <div class="bpanel__r"><span class="chip">Upholstery &amp; fabrication</span>
+      <a class="bpanel__l" href="https://www.smcommercial.uk" target="_blank" rel="noopener">smcommercial.uk &rarr;</a></div>
+  </article>
+</div>
+
+<!-- ============================ OPTION C ============================ -->
+<section class="sep">
+  <span class="tag">Option C</span>
+  <h2>Index &amp; reveal</h2>
+  <p>The agency index. All four names sit as display type in one list, so the set is legible at a
+    glance and costs a fraction of a screen; the video belongs to whichever row is active. On
+    desktop the well is pinned beside the list and swaps; on a phone the list is the whole
+    interface and the well sits under it. This revives the <code>.row</code> treatment already
+    sitting unused in the r9 stylesheet.</p>
+  <p class="why"><b>Argues:</b> the shortest of the three, and the only one where all four names are
+    readable without any interaction. <b>Trade:</b> the video is smaller than in A or B, so the work
+    itself is less of the picture.</p>
+</section>
+
+<section class="index" id="index">
+  <div class="index__h">
+    <h2 class="h2">You do you.<br>I&rsquo;ve got this.</h2>
+    <p class="lead">No clue? No problem. No judgement.</p>
+  </div>
+  <div class="ilist" id="ilist">
+    <div class="irow on" data-i="0"><span class="irow__n">The Clothing Kings</span><span class="irow__m">Custom apparel</span></div>
+    <div class="irow" data-i="1"><span class="irow__n">Cuddle Plush Fabrics</span><span class="irow__m">Specialist fabric</span></div>
+    <div class="irow" data-i="2"><span class="irow__n">NP Racing</span><span class="irow__m">npracingbsb.co.uk</span></div>
+    <div class="irow" data-i="3"><span class="irow__n">SM Commercial</span><span class="irow__m">smcommercial.uk</span></div>
+  </div>
+  <div class="iwell" id="iwell"><div class="iwell__c" id="iwellc"></div></div>
+</section>
+
+<footer class="lab" style="border-radius:var(--r) var(--r) 0 0">
+  <p style="opacity:.6;font-size:14px">DCS homepage · work-section options · sits alongside
+    <a href="r9-kota-level.html" style="text-decoration:underline">r9-kota-level.html</a></p>
+</footer>
+
+<script>
+(function(){
+var CLIENTS=[
+ {n:'The Clothing Kings', c:'Custom apparel',
+  d:'A workwear store where the price changes with the job — embroidery or vinyl, front, back or sleeve — and the customer uploads their logo at checkout.',
+  v:'assets/video/the-clothing-kings.mp4', p:'assets/video/the-clothing-kings.jpg', u:null},
+ {n:'Cuddle Plush Fabrics', c:'Specialist fabric',
+  d:'With me since 2014. Products now load automatically from their wholesalers’ sites, and backorders are handled — so a catalogue that size stays accurate without anyone keying it in.',
+  v:'assets/video/cuddle-plush-fabrics.mp4', p:'assets/video/cuddle-plush-fabrics.jpg', u:null},
+ {n:'NP Racing', c:'Race team',
+  d:'A British Superbike team site carrying race reports, rider profiles and season gallery, updated through the racing calendar.',
+  v:'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4', p:'assets/video/np-racing.jpg', u:'https://npracingbsb.co.uk'},
+ {n:'SM Commercial', c:'Upholstery & fabrication',
+  d:'Bespoke commercial upholstery and fabrication since 2009. A portfolio built to win enquiries for custom work rather than to sell products.',
+  v:'assets/video/sm-commercial.mp4', p:'assets/video/sm-commercial.jpg', u:'https://www.smcommercial.uk'}
+];
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function makeVideos(host){
+  return CLIENTS.map(function(c,i){
+    var v=document.createElement('video');
+    v.src=c.v; v.poster=c.p; v.muted=true; v.loop=true; v.playsInline=true;
+    v.autoplay=true; v.preload='metadata'; v.setAttribute('aria-hidden','true');
+    if(i===0) v.className='on';
+    host.appendChild(v); return v;
+  });
+}
+
+/* ---------- Option A ---------- */
+var reel=document.getElementById('reel'), rw=document.getElementById('rw');
+var rVids=makeVideos(rw);
+var pills=[].slice.call(reel.querySelectorAll('.pill'));
+var ai=0, timer=null;
+function paintA(i,user){
+  ai=i; var c=CLIENTS[i];
+  reel.dataset.c=String(i);
+  document.getElementById('rn').textContent=c.n;
+  document.getElementById('rd').textContent=c.d;
+  document.getElementById('rc').textContent=c.c;
+  document.getElementById('rk').textContent='0'+(i+1)+' / 0'+CLIENTS.length;
+  var l=document.getElementById('rl');
+  if(c.u){ l.href=c.u; l.target='_blank'; l.rel='noopener'; l.style.display='';
+           l.textContent=c.u.replace(/^https?:\/\/(www\.)?/,'')+' →'; }
+  else { l.style.display='none'; }
+  pills.forEach(function(p,j){ p.setAttribute('aria-selected', j===i?'true':'false');
+    var bar=p.querySelector('.pill__p');
+    if(j!==i){ bar.style.transition='none'; bar.style.transform='scaleX(0)'; }
+    else { bar.style.transition='none'; bar.style.transform='scaleX(0)'; void bar.offsetWidth;
+           bar.style.transition=''; bar.style.transform=''; }
+  });
+  rVids.forEach(function(v,j){ v.classList.toggle('on', j===i); });
+  if(user) restartA();
+}
+function restartA(){ clearInterval(timer); if(reduce) return;
+  timer=setInterval(function(){ paintA((ai+1)%CLIENTS.length,false); }, 6000); }
+pills.forEach(function(p){ p.addEventListener('click', function(){ paintA(+p.dataset.i,true); }); });
+reel.addEventListener('keydown', function(e){
+  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+  var d=e.key==='ArrowRight'?1:-1; var n=(ai+d+CLIENTS.length)%CLIENTS.length;
+  paintA(n,true); pills[n].focus(); e.preventDefault();
+});
+paintA(0,false); restartA();
+/* only run the reel's timer while it is on screen */
+new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(e.isIntersecting) restartA(); else clearInterval(timer); }); },{threshold:.25}).observe(reel);
+
+/* ---------- Option C ---------- */
+var iwell=document.getElementById('iwell'), iwellc=document.getElementById('iwellc');
+var cVids=CLIENTS.map(function(c,i){
+  var v=document.createElement('video');
+  v.src=c.v; v.poster=c.p; v.muted=true; v.loop=true; v.playsInline=true;
+  v.autoplay=true; v.preload='metadata'; v.setAttribute('aria-hidden','true');
+  if(i===0) v.className='on';
+  iwell.insertBefore(v, iwellc); return v;
+});
+var rows=[].slice.call(document.querySelectorAll('.irow'));
+function paintC(i){
+  rows.forEach(function(r,j){ r.classList.toggle('on', j===i); });
+  cVids.forEach(function(v,j){ v.classList.toggle('on', j===i); });
+  iwellc.innerHTML='<span></span>';iwellc.firstChild.textContent=CLIENTS[i].d;
+}
+rows.forEach(function(r){
+  var i=+r.dataset.i;
+  r.addEventListener('mouseenter', function(){ if(matchMedia('(hover:hover)').matches) paintC(i); });
+  r.addEventListener('click', function(){ paintC(i); });
+});
+paintC(0);
+})();
+</script>
+</body>
+</html>

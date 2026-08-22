@@ -6,6 +6,33 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-22
+
+### Documentation
+
+- **`position: sticky` takes its room to pin only from in-flow content after the element — a bottom
+  margin and container padding both give it nothing.** Found while building the DCS work-section
+  stack, where the last of five sticky panels never pinned. The two obvious fixes were tried and
+  both measured **0px of pin** against 840–3940px for the sibling panels: a `margin-bottom` on the
+  panel fails because the spec clamps the element's _margin box_ against the containing block, so
+  its own margin is part of what is being constrained; `padding-bottom` on the container fails
+  because padding sits outside the content box, and the content box is what the containing block
+  resolves to. Earlier panels only appear to work because they get their room from the panels that
+  follow them, which means **the last item in any sticky stack is the one that silently fails** —
+  and it fails by looking almost right, scrolling away a little early rather than visibly breaking.
+  The rule in [CLAUDE.md](CLAUDE.md) now records the mechanism, the `::after` fix, and the way to
+  verify it: sample `getBoundingClientRect().top` across the scroll range, since a pinned element
+  holds `top: 0` and an unpinned one moves 1:1 with scroll.
+- **`svh` is the wrong unit for a section that must always cover the viewport; `lvh` is the right
+  one.** `svh` is the _smallest_ viewport height — browser chrome expanded — so a `100svh` section
+  becomes shorter than the screen the instant a mobile URL bar retracts, leaking a strip of the next
+  section exactly when it is meant to be full-bleed. The trap is that this is **untestable in a
+  desktop browser or an iframe harness**, where `vh`, `svh`, `lvh` and `dvh` all resolve to the same
+  number, so it cannot be caught by looking and has to be applied by construction. Recorded in
+  CLAUDE.md's CSS Syntax rules alongside the sticky finding.
+
+---
+
 ## 2026-08-21
 
 ### Infrastructure

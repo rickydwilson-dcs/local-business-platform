@@ -1,0 +1,13 @@
+Render as a flat, pixel-crisp desktop website homepage screenshot, landscape 16:9, viewed straight on, filling the entire frame edge to edge. This is a UI render, not a photograph of a screen, not a device mockup, not a laptop on a desk. No browser chrome. Real legible typography. No lorem ipsum. No stock photography of people. Do not invent any review scores, star ratings, award badges, client logos or statistics.
+
+The page is a single continuous custody line threading an entire document. Ground: off-white (#F3F3F1). One unbroken magenta (#D6006B) ribbon-like line, about 3px wide, enters at the top left, sweeps in long smooth folds across and down the whole composition, and runs off the bottom edge — never interrupted.
+
+At intervals along the line, small navy circular nodes mark stages, each labelled in small navy type on a hairline leader: "One conversation", "I write the content", "I design and build it", "It goes live", "I look after it". The first four segments of the line are drawn solid; the final segment, running off the bottom edge, is drawn as a fine hairline of the same magenta to signal that it continues indefinitely.
+
+Upper left, clear of the line: a large tightly-tracked bold grotesk headline in near-black reading "Websites as professional as you are." with a short grey paragraph beneath, and a magenta rectangular button reading "Get a free quote".
+
+Top bar: small outlined square D monogram with "digital consulting" over "services"; minimal navigation Services, Portfolio, Pricing, About; far right small monospaced "POLEGATE, EAST SUSSEX".
+
+Lower right, set quietly against the ground: small monospaced caps reading "EST. 2019 · UK-WIDE".
+
+Mood: archival precision without museum dust — one honest unbroken line telling the whole story. Enormous calm white space. No gradients, no glows, no rounded cards, no photographs, no timeline arrowheads.
