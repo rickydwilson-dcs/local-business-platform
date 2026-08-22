@@ -266,16 +266,29 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .wstack::after{content:"";display:block;height:100lvh}
 .wpanel:last-child{margin-bottom:0}
 .wpanel{position:sticky;top:0;height:100lvh;overflow:hidden;color:#fff;
-  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:end;
-  padding:clamp(60px,8vh,110px) var(--pad) clamp(36px,6vh,72px);
+  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:center;
+  /* equal block padding: align-content centres within the content box, so
+     unequal top/bottom padding leaves the copy visibly off-centre. */
+  padding:clamp(60px,8vh,110px) var(--pad);
   /* the copy is bottom-aligned, which is the edge the next panel arrives from.
      Without this the description is covered ~300px in and is never read. */
   margin-bottom:26vh}
 .wpanel video,.wpanel img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;z-index:0}
-/* scrim: the copy sits on live footage, so contrast cannot be left to the clip */
+/* Scrim. The copy sits on live footage, so contrast cannot be left to the clip:
+   sized so that even against a pure-white frame white text clears 4.5:1, which
+   needs ~.55 alpha minimum. The old gradient was bottom-weighted for
+   bottom-aligned text; centring moved the copy into its weakest band. This one
+   is strongest through the middle, where the text now is. */
 .wpanel::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(to top,rgba(6,6,10,.93) 0%,rgba(6,6,10,.58) 44%,rgba(6,6,10,.12) 80%)}
+  background:linear-gradient(to bottom,rgba(6,6,10,.42) 0%,rgba(6,6,10,.72) 32%,
+    rgba(6,6,10,.74) 68%,rgba(6,6,10,.46) 100%)}
+/* On desktop the copy is a narrow left column, so weight it horizontally
+   instead — that keeps far more of the footage readable as footage. */
+@media (min-width:901px){
+  .wpanel::after{background:linear-gradient(to right,rgba(6,6,10,.86) 0%,
+    rgba(6,6,10,.76) 42%,rgba(6,6,10,.30) 72%,rgba(6,6,10,.14) 100%)}
+}
 .wpanel>*{position:relative;z-index:2}
 /* type spec is h2's, verbatim — the client name and "You do you." are peers in
    the hierarchy and were reading at different sizes. Mirror every h2 breakpoint
@@ -307,6 +320,16 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .row__n{font-weight:700;font-size:clamp(1.4rem,3.4vw,2.9rem);letter-spacing:-.032em}
 .row__m{font-size:14.5px;color:#5E5E68;text-align:right;font-weight:500}
 .row__m em{font-style:normal;display:block;font-size:12px;letter-spacing:.09em;text-transform:uppercase;opacity:.72;margin-top:3px}
+
+/* The services intro stays pinned while the six cards scroll over it, and
+   .svcstack is transparent with a ~94px gap between cards — so its heading kept
+   showing through those gaps long after the section had been read. Fade the
+   words out as the stack rises; the magenta ground stays, only the type goes.
+   Desktop only: below 901px .panel is relative, so the panel scrolls away and
+   there is nothing to bleed through. */
+@media (min-width:901px){
+  #services .res,#services .lead{opacity:var(--intro,1);will-change:opacity}
+}
 
 /* ============ services: one card per service, each stacking over the last ============ */
 .svcstack{position:relative;z-index:1;padding:0 var(--pad) 12vh}
@@ -1095,8 +1118,21 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     });
     if (bar.dataset.ground !== cur) bar.dataset.ground = cur;
   }
-  addEventListener('scroll', function(){ requestAnimationFrame(ground); }, {passive:true});
-  ground();
+  /* fade the services intro's type as the card stack rises over it */
+  var svcstack = document.querySelector('.svcstack');
+  var intro = document.getElementById('services');
+  function fadeIntro(){
+    if (!svcstack || !intro) return;
+    var vh = innerHeight, t = svcstack.getBoundingClientRect().top;
+    var p = (t - vh * 0.45) / (vh * 0.55);   // 1 below the fold -> 0 once 45% up
+    intro.style.setProperty('--intro', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+
+  addEventListener('scroll', function(){
+    requestAnimationFrame(function(){ ground(); fadeIntro(); });
+  }, {passive:true});
+  addEventListener('resize', fadeIntro, {passive:true});
+  ground(); fadeIntro();
 })();
 </script>
 </body>
