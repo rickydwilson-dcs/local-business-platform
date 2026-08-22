@@ -381,7 +381,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .step__b{margin-top:9px;max-width:50ch;opacity:.8;line-height:1.5;font-size:15.5px}
 
 /* ============ pricing ============ */
-.payhead{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:clamp(20px,3vh,34px)}
+.payhead{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .paytoggle{display:inline-flex;padding:4px;gap:4px;border-radius:100px;background:rgba(14,14,18,.075)}
 .paytoggle button{border:0;background:none;font:inherit;font-weight:600;font-size:14.5px;
   padding:10px 20px;border-radius:100px;cursor:pointer;color:inherit;opacity:.6;white-space:nowrap;
@@ -389,8 +389,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .paytoggle button[aria-pressed="true"]{background:var(--ink);color:#fff;opacity:1}
 .paytoggle button:hover{opacity:1}
 .tier__f small{display:block;font-size:12.5px;font-weight:500;opacity:.6;letter-spacing:0;margin-top:2px}
-.price{margin-top:clamp(30px,4.6vh,54px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+/* The toggle sits inside the left column, not above the whole grid, so the
+   detail pane starts level with the pills rather than with the first tier. */
+.price{margin-top:clamp(20px,3vh,34px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
   gap:clamp(22px,3.4vw,58px);align-items:start}
+.pricecol{display:grid;gap:clamp(30px,4.6vh,54px);align-content:start}
 .tiers{display:grid;border-top:1px solid rgba(14,14,18,.16)}
 .tier{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;width:100%;
   padding:clamp(15px,2.2vh,24px) 6px;border-bottom:1px solid rgba(14,14,18,.16);
@@ -401,11 +404,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .tier__n{display:block;font-weight:700;font-size:clamp(1.15rem,2.3vw,1.75rem);letter-spacing:-.028em}
 .tier__s{display:block;font-size:13px;opacity:.66;margin-top:2px}
 .tier__f{font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);letter-spacing:-.02em;white-space:nowrap}
-/* Top padding matches .tier's so the detail's heading sits on the same line as
-   the first tab's name — the boxes already aligned, the type inside them did
-   not. Grid rows so the CTA lands in the same place whichever tier is chosen. */
+/* Top padding matches the pill's own inner offset (4px track + 10px button) so
+   the detail's heading sits on the same line as the toggle labels. Grid rows so
+   the CTA lands in the same place whichever tier is chosen. */
 .detail{background:var(--ink);color:#fff;border-radius:calc(var(--r)*.7);
-  padding:clamp(15px,2.2vh,24px) clamp(22px,3vw,40px) clamp(22px,3vw,40px);
+  padding:14px clamp(22px,3vw,40px) clamp(22px,3vw,40px);
   position:sticky;top:120px;
   display:grid;grid-template-rows:auto auto 1fr auto;align-content:start}
 /* Reserve two lines for the head and two for the paragraph so every tier's
@@ -934,14 +937,15 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
     <section class="panel p--white" id="pricing" data-ground="white">
       <h2 class="res">Two ways to pay<br>for the same site.</h2>
-      <div class="payhead">
-        <div class="paytoggle" role="group" aria-label="How you'd like to pay">
-          <button type="button" data-mode="monthly" aria-pressed="true">Pay monthly</button>
-          <button type="button" data-mode="upfront" aria-pressed="false">Pay upfront</button>
-        </div>
-      </div>
       <div class="price">
-        <div class="tiers" role="tablist" aria-label="Plans">
+        <div class="pricecol">
+          <div class="payhead">
+            <div class="paytoggle" role="group" aria-label="How you'd like to pay">
+              <button type="button" data-mode="monthly" aria-pressed="true">Pay monthly</button>
+              <button type="button" data-mode="upfront" aria-pressed="false">Pay upfront</button>
+            </div>
+          </div>
+          <div class="tiers" role="tablist" aria-label="Plans">
           <button class="tier" role="tab" aria-selected="true" data-k="starter">
             <span><span class="tier__n">Starter</span><span class="tier__s">Up to 5 pages</span></span>
             <span class="tier__f" data-fig></span>
@@ -958,6 +962,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
             <span><span class="tier__n">eCommerce</span><span class="tier__s">Online store &middot; upfront only</span></span>
             <span class="tier__f" data-fig></span>
           </button>
+          </div>
         </div>
         <div class="detail" id="detail" role="tabpanel"></div>
         <!-- Mobile pricing. The desktop picker is a two-pane tablist; in one
