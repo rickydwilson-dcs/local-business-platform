@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { PageShell } from '@platform/core-components';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -15,7 +16,17 @@ import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
  * layout — it carries its own r9 bar/menu/end-section furniture via
  * `HomeBody`/`HomeBehaviour` instead. See Phase 7 of
  * `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/yolo-brief.md`.
+ *
+ * Phase 8: until the inner pages are built out, `/` is the only URL search
+ * engines may index. Next.js merges metadata field-by-field down the segment
+ * tree, so this single `robots` declaration is inherited by all 14 routes in
+ * this group (none of them sets its own `robots`) without needing a per-page
+ * export. `app/page.tsx` sits outside this group and inherits nothing, so it
+ * stays indexable by default. See Phase 8 of the yolo-brief referenced above.
  */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <PageShell
