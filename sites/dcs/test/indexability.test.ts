@@ -217,13 +217,11 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
     }
 
     if (errors === 0) {
-      // eslint-disable-next-line no-console
       console.log(
         `PASS — ${pagePaths.length}/${pagePaths.length} URLs verified, 0 errors ` +
           `(1 indexable: /, ${noindexCount} noindex)`
       );
     } else {
-      // eslint-disable-next-line no-console
       console.log(
         `FAIL — ${pagePaths.length - errors}/${pagePaths.length} URLs verified, ${errors} errors: ${firstOffender}`
       );
@@ -260,7 +258,6 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
     // trailing slash) — match that exactly rather than assuming one.
     const expectedHomepageUrl = siteConfig.url;
 
-    // eslint-disable-next-line no-console
     console.log(
       allPageLocs.size === 1 && allPageLocs.has(expectedHomepageUrl)
         ? `PASS — 1/1 sitemap URLs verified, 0 errors (only ${expectedHomepageUrl})`

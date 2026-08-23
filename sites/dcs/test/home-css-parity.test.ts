@@ -311,7 +311,6 @@ describe('sites/dcs/styles/home-r9.css is a verbatim port of the r9 prototype st
       }
     }
 
-    // eslint-disable-next-line no-console
     console.log(
       `PASS — ${total}/${total} records, 0 errors (${comparedDeclarations} declarations compared)`
     );
