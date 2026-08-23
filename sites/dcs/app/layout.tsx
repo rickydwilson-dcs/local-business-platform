@@ -3,7 +3,7 @@ import { Space_Grotesk, Inter, Archivo, Poppins } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { SiteScrollReveal } from '@/components/site-scroll-reveal';
-import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
+import { DcsConsentManager } from '@/components/dcs-consent-manager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 
@@ -106,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col">
         {children}
 
-        <ConsentManager
+        <DcsConsentManager
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}
           config={{
             title: 'We value your privacy',

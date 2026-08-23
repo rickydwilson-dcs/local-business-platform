@@ -18,6 +18,7 @@
  */
 
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import { ChapterPanel } from './chapter-panel';
 import { SERVICES } from './home-data';
 import { HOME_ASSETS } from '@/lib/home-assets';
@@ -62,7 +63,13 @@ export function ServicesStack() {
                   preload="metadata"
                 />
               ) : (
-                <img src={HOME_ASSETS[svc.media.image].url} alt="" loading="lazy" />
+                <Image
+                  src={HOME_ASSETS[svc.media.image].url}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  loading="lazy"
+                />
               )}
             </div>
           </article>

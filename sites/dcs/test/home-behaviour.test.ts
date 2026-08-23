@@ -265,14 +265,12 @@ describe('verdict', () => {
     expect(total).toBeGreaterThan(0);
 
     if (errors === 0) {
-      // eslint-disable-next-line no-console
       console.log(
         `PASS — ${total}/${total} positions verified, 0 errors ` +
           `(grounds: ${fixture.groundsCovered.join(', ')}; ` +
           `${fixture.stickyLies} sticky rect divergences recorded)`
       );
     } else {
-      // eslint-disable-next-line no-console
       console.log(
         `FAIL — ${total - errors}/${total} positions verified, ${errors} errors: ${firstOffender}`
       );
