@@ -96,4 +96,16 @@ describe("validateAnalyticsEnv", () => {
 
     expect(() => validateAnalyticsEnv()).not.toThrow();
   });
+
+  it("does not require FEATURE_CONSENT_BANNER to match NEXT_PUBLIC_FEATURE_CONSENT_BANNER — regression test for the colossus-scaffolding/npracing-v1/v3 incident", () => {
+    // The server-side FEATURE_CONSENT_BANNER var is never read to gate any real behavior
+    // (only surfaced in the dev-only AnalyticsDebugPanel) — the banner's actual on/off
+    // switch is NEXT_PUBLIC_FEATURE_CONSENT_BANNER alone. Requiring the two to match was
+    // a false positive that broke three real, correctly-configured production builds.
+    process.env.NODE_ENV = "production";
+    process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER = "true";
+    // FEATURE_CONSENT_BANNER intentionally left unset — this is a valid, working config
+
+    expect(() => validateAnalyticsEnv()).not.toThrow();
+  });
 });

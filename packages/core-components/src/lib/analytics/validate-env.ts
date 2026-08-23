@@ -20,10 +20,18 @@ interface FlagPair {
   client: string;
 }
 
-// Flags with both a server-only and a NEXT_PUBLIC_ variant. The two must agree — a site
-// that means to turn a feature on needs to flip both, not just one.
+// Flags with both a server-only and a NEXT_PUBLIC_ variant, where the server variant
+// genuinely gates different behavior (proxy.ts's server-side tracking calls, or the
+// /api/analytics/track route's per-platform dispatch in analytics-route.ts) — the two
+// must agree, or one half of the feature silently does nothing.
+//
+// NEXT_PUBLIC_FEATURE_CONSENT_BANNER deliberately has no server-side pair checked here:
+// its server-only counterpart, FEATURE_CONSENT_BANNER, is never read to gate any real
+// behavior anywhere in the codebase — only surfaced in the dev-only AnalyticsDebugPanel.
+// The banner's actual on/off switch is the NEXT_PUBLIC_ variant alone. Requiring the two
+// to match was a false-positive check that broke real, correctly-configured sites; do
+// not re-add it without first confirming the server variant gates something.
 const FLAG_PAIRS: FlagPair[] = [
-  { server: "FEATURE_CONSENT_BANNER", client: "NEXT_PUBLIC_FEATURE_CONSENT_BANNER" },
   { server: "FEATURE_ANALYTICS_ENABLED", client: "NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED" },
   { server: "FEATURE_GA4_ENABLED", client: "NEXT_PUBLIC_FEATURE_GA4_ENABLED" },
   { server: "FEATURE_FACEBOOK_PIXEL", client: "NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL" },
@@ -41,13 +49,20 @@ interface CompanionRule {
 // mirrors the "set when enabling features above" grouping in sites/*/.env.example.
 const COMPANION_RULES: CompanionRule[] = [
   { whenFlag: "NEXT_PUBLIC_FEATURE_GA4_ENABLED", requires: ["NEXT_PUBLIC_GA_MEASUREMENT_ID"] },
-  { whenFlag: "FEATURE_SERVER_TRACKING", requires: ["GA4_API_SECRET"] },
+  // Not FEATURE_SERVER_TRACKING: that flag only controls whether proxy.ts fires a
+  // page-view POST to /api/analytics/track at all. GA4_API_SECRET is only actually
+  // read once inside that route, gated on FEATURE_GA4_ENABLED specifically
+  // (analytics-route.ts's `if (flags.FEATURE_GA4_ENABLED) { GA4Analytics.fromEnvironment() }`)
+  // — a site can legitimately run FEATURE_SERVER_TRACKING for Facebook/Google Ads alone,
+  // with GA4 server-tracking off, and never need this var.
+  { whenFlag: "FEATURE_GA4_ENABLED", requires: ["GA4_API_SECRET"] },
   { whenFlag: "NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL", requires: ["NEXT_PUBLIC_FACEBOOK_PIXEL_ID"] },
   { whenFlag: "FEATURE_FACEBOOK_PIXEL", requires: ["FACEBOOK_ACCESS_TOKEN"] },
-  {
-    whenFlag: "NEXT_PUBLIC_FEATURE_GOOGLE_ADS",
-    requires: ["NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID", "GOOGLE_ADS_CUSTOMER_ID"],
-  },
+  { whenFlag: "NEXT_PUBLIC_FEATURE_GOOGLE_ADS", requires: ["NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID"] },
+  // Matches analytics-route.ts's `if (flags.FEATURE_GOOGLE_ADS && data.conversion_action)` —
+  // the server variant specifically, not the client one (see the GA4_API_SECRET comment above
+  // for why that distinction matters).
+  { whenFlag: "FEATURE_GOOGLE_ADS", requires: ["GOOGLE_ADS_CUSTOMER_ID"] },
 ];
 
 function isTrue(name: string): boolean {
