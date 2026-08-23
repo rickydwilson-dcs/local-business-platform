@@ -413,7 +413,12 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .tier[aria-selected="true"]{background:var(--ink);color:var(--white);padding-left:14px}
 .tier__n{display:block;font-weight:700;font-size:clamp(1.15rem,2.3vw,1.75rem);letter-spacing:-.028em}
 .tier__s{display:block;font-size:13px;opacity:.66;margin-top:2px}
-.tier__f{font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);letter-spacing:-.02em;white-space:nowrap}
+/* right-aligned explicitly: the figure is inline text sitting above a block
+   <small>, so with the default left alignment it only lined up when the two
+   happened to be the same width — true for "£750" over "+ £10/mo", false for
+   "£45" over "per month", which sat 16px short. */
+.tier__f{font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);letter-spacing:-.02em;
+  white-space:nowrap;text-align:right}
 /* Top padding matches .tier's so the detail's heading sits on the same line as
    the first tab's name — the boxes already aligned, the type inside them did
    not. Grid rows so the CTA lands in the same place whichever tier is chosen. */
@@ -890,7 +895,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           <a class="svccard__l" href="#end">Sell online &rarr;</a>
         </div>
         <div class="svccard__well">
-          <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-fabric.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-fabric.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.jpg" muted loop playsinline autoplay preload="metadata"></video>
         </div>
       </article>
 

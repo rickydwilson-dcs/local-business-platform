@@ -3,7 +3,7 @@
   "bucket": "local-business-platform",
   "prefix": "prototypes/2026-08-17_dcs-homepage-redesign/",
   "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
-  "totalBytes": 19067971,
+  "totalBytes": 19835551,
   "assets": [
     {
       "relativePath": "assets/dcs-mark.svg",
@@ -299,6 +299,22 @@
       "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/cuddle-plush-fabrics.mp4",
       "contentType": "video/mp4",
       "bytes": 1147182,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/ecommerce-packing.jpg",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 43738,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/video/ecommerce-packing.mp4",
+      "key": "prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.mp4",
+      "contentType": "video/mp4",
+      "bytes": 723842,
       "archive": false
     },
     {
