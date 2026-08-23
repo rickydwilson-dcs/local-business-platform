@@ -1,0 +1,23 @@
+# CLI-triggered `vercel deploy` uploads from the repo root do not reliably
+# respect .gitignore (confirmed 2026-08-23: swept in 15,782 files vs. the
+# 3,367 git actually tracks). This restricts the upload to what the
+# dcs build (installCommand/buildCommand in sites/dcs/vercel.json) needs:
+# workspace source under sites/ and packages/, plus root manifests/config.
+# The Vercel-side installCommand reinstalls all deps itself, so none of
+# this repo's local node_modules or caches need to travel.
+
+node_modules
+.turbo
+.git
+.next
+output
+local-business-platform_venv
+playwright-report
+test-results
+.claude
+.agents
+.code-review-graph
+tasks
+supabase
+*.png
+*.tsbuildinfo

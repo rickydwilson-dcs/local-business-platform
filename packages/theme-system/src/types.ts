@@ -66,6 +66,13 @@ export interface ThemeConfig {
       /** Dark brand shade — gradient endpoints, dark section backgrounds (optional, theme-specific) */
       dark?: string;
     };
+    /**
+     * Arbitrary site-specific named colours that don't fit the brand/surface/
+     * semantic/overlay slots (e.g. a one-off design-system palette). Each key
+     * is emitted as `--color-{kebab-case key}` on the theme root selector.
+     * Optional — themes that don't set this get no extra variables.
+     */
+    custom?: Record<string, string>;
     surface: {
       /** Page background color */
       background: string;
@@ -348,6 +355,7 @@ export type DeepPartialThemeConfig = {
     surface?: Partial<ThemeConfig["colors"]["surface"]>;
     semantic?: Partial<ThemeConfig["colors"]["semantic"]>;
     overlay?: Partial<ThemeConfig["colors"]["overlay"]>;
+    custom?: Record<string, string>;
   };
   spacing?: Partial<ThemeConfig["spacing"]>;
   radii?: Partial<ThemeConfig["radii"]>;
@@ -439,6 +447,7 @@ export const ThemeConfigSchema = z.object({
       light: z.string().regex(/^rgba?\(/, "Must be a valid rgb/rgba color"),
       primary: z.string().regex(/^rgba?\(/, "Must be a valid rgb/rgba color"),
     }),
+    custom: z.record(z.string(), z.string()).optional(),
   }),
   spacing: z.object({
     xs: z.string(),

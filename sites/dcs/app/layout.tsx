@@ -1,11 +1,7 @@
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk, Inter } from 'next/font/google';
+import { Space_Grotesk, Inter, Archivo, Poppins } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
-import { PageShell } from '@platform/core-components';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
 import { SiteScrollReveal } from '@/components/site-scroll-reveal';
 import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
@@ -23,6 +19,20 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
   weight: ['400', '500', '600'],
+});
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['300'],
 });
 
 export const metadata: Metadata = {
@@ -65,7 +75,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html
+      lang="en-GB"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${archivo.variable} ${poppins.variable}`}
+    >
       <head>
         {/* Material Symbols — must be a <link>, not CSS @import, because
             Tailwind's @tailwind expansion buries @import url() mid-file
@@ -91,64 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <PageShell
-          header={
-            <SiteHeader
-              logoSrc="/logo.svg"
-              logoAlt="DCS Gardening & Landscaping"
-              logoText="DCS"
-              navItems={siteConfig.navigation.main}
-              ctaLabel={siteConfig.cta.primary.label}
-              ctaHref={siteConfig.cta.primary.href}
-              phone={PHONE_DISPLAY}
-              showPhone={siteConfig.cta.phone.show}
-            />
-          }
-          footer={
-            <SiteFooter
-              logoSrc="/logo.svg"
-              logoAlt="DCS Gardening & Landscaping"
-              logoText="DCS"
-              tagline={siteConfig.tagline}
-              copyright={siteConfig.footer.copyright}
-              navColumns={[
-                {
-                  heading: 'Services',
-                  links: siteConfig.services.map((s) => ({
-                    label: s.title,
-                    href: `/services/${s.slug}`,
-                  })),
-                },
-                {
-                  heading: 'Locations',
-                  links: ['Polegate', 'Eastbourne', 'Brighton', 'Hove', 'Lewes', 'Seaford'].map(
-                    (l) => ({
-                      label: l,
-                      href: `/locations/${l.toLowerCase()}`,
-                    })
-                  ),
-                },
-                {
-                  heading: 'Company',
-                  links: [
-                    { label: 'About', href: '/about' },
-                    { label: 'Portfolio', href: '/projects' },
-                    { label: 'Pricing', href: '/pricing' },
-                    { label: 'Blog', href: '/blog' },
-                    { label: 'Contact', href: '/contact' },
-                  ],
-                },
-              ]}
-              contact={{
-                phone: PHONE_DISPLAY,
-                email: BUSINESS_EMAIL,
-              }}
-              legal={{ privacyHref: '/privacy-policy' }}
-            />
-          }
-        >
-          {children}
-        </PageShell>
+        {children}
 
         <ConsentManager
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}

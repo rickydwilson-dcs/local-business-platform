@@ -11,10 +11,49 @@ web
 Existing codebase: Next.js 16 + React 19 + Tailwind 3.4, MDX content, theme tokens, deployed on
 Vercel from the `local-business-platform` monorepo. No animation library is currently installed.
 
-Current deliverable is a **self-contained standalone HTML prototype** under
-`output/sessions/`, chosen by Ricky over building directly in `sites/dcs`. The winning
-direction gets ported to React afterwards. Prototypes must therefore avoid anything that
-cannot survive that port (no build step, no CDN scripts, no proprietary scroll engine).
+The round-9 HTML prototype (`r9-kota-level.html`) was ported to React in `sites/dcs` on 2026-08-23.
+See `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/` for the port itself.
+
+## Homepage and route structure
+
+The homepage (`sites/dcs/app/page.tsx`) is a direct React port of `r9-kota-level.html`, carrying its
+own bar/menu/end-section chrome via `HomeBody`/`HomeBehaviour` rather than the shared site layout.
+
+To let it sit outside the standard chrome, the 14 existing inner routes (about, blog, contact,
+cookie-policy, locations, pricing, privacy-policy, projects, reviews, services and their dynamic
+`[slug]` children) were moved into an `app/(site)` route group, which carries the `PageShell` /
+`SiteHeader` / `SiteFooter` layout in `app/(site)/layout.tsx`. Route groups don't appear in the URL,
+so this is a code-organisation split only — every inner route's path is unchanged.
+
+### Homepage-only indexing
+
+Until the inner pages are rebuilt to the same standard as the new homepage, only `/` is indexable.
+`app/(site)/layout.tsx` declares a single `metadata.robots = { index: false, follow: false }`; Next.js
+merges metadata field-by-field down the segment tree, so all 14 inner routes inherit that `noindex`
+without any of them setting it themselves. `app/page.tsx` sits outside the `(site)` group and inherits
+nothing, so it stays indexable by default. The 14 routes were also dropped from `app/sitemap.ts`
+(commented out, not deleted) — a `noindex` page listed in a sitemap is a Search Console warning.
+
+`robots.txt` (`app/robots.ts`) deliberately stays permissive (`allow: '/'`) rather than adding a
+`Disallow` for the inner routes. A `Disallow` stops a crawler fetching the page at all, which means it
+never sees the `noindex` meta tag — `noindex` only works on pages a crawler is allowed to crawl. Using
+`robots.txt` to hide the unfinished routes would therefore leave them indexable by any engine that
+already had them in its index from a previous crawl.
+
+**To re-enable a section once it's ready:** add one line to that route's own `metadata` export, e.g.
+in `app/(site)/about/page.tsx`:
+
+```ts
+export const metadata: Metadata = {
+  // ...existing fields
+  robots: { index: true, follow: true },
+};
+```
+
+A page-level `robots` field overrides the group-level one inherited from `app/(site)/layout.tsx` for
+that page only. Then uncomment the matching entry in `app/sitemap.ts`. Do not remove the group-level
+`robots` declaration in the layout — that would re-index all 14 routes at once, including the ones
+still not ready.
 
 ## Users
 

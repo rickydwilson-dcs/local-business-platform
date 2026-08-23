@@ -34,7 +34,7 @@ test.describe('Smoke Tests - Page Load Only', () => {
   });
 
   test('sample service page loads', async ({ page }) => {
-    const response = await page.goto('/services/primary-service');
+    const response = await page.goto('/services/web-design');
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
   });
@@ -46,7 +46,7 @@ test.describe('Smoke Tests - Page Load Only', () => {
   });
 
   test('sample location page loads', async ({ page }) => {
-    const response = await page.goto('/locations/main-area');
+    const response = await page.goto('/locations/brighton');
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
   });

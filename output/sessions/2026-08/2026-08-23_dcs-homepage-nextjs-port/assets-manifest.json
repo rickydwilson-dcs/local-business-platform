@@ -1,0 +1,135 @@
+{
+  "generatedAt": "2026-08-23T10:56:52.277Z",
+  "bucket": "local-business-platform",
+  "sourcePrefix": "prototypes/2026-08-17_dcs-homepage-redesign/assets/",
+  "targetPrefix": "dcs/home/",
+  "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
+  "assets": [
+    {
+      "logicalName": "work-clothing-kings.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/the-clothing-kings.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/the-clothing-kings.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 583895
+    },
+    {
+      "logicalName": "work-clothing-kings.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/the-clothing-kings.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/the-clothing-kings.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 41390
+    },
+    {
+      "logicalName": "work-cuddle-plush.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/cuddle-plush-fabrics.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/cuddle-plush-fabrics.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 1147182
+    },
+    {
+      "logicalName": "work-cuddle-plush.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/cuddle-plush-fabrics.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/cuddle-plush-fabrics.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 36831
+    },
+    {
+      "logicalName": "work-np-racing.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 6256586
+    },
+    {
+      "logicalName": "work-np-racing.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/np-racing.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/np-racing.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 69121
+    },
+    {
+      "logicalName": "work-sm-commercial.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/sm-commercial.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/sm-commercial.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 685140
+    },
+    {
+      "logicalName": "work-sm-commercial.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/sm-commercial.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/sm-commercial.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 43381
+    },
+    {
+      "logicalName": "work-colossus.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/colossus-scaffolding.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 1476297
+    },
+    {
+      "logicalName": "work-colossus.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/colossus-scaffolding.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 71642
+    },
+    {
+      "logicalName": "work-ink.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/vid-ink.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 1366735
+    },
+    {
+      "logicalName": "work-ink.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-ink.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/poster-ink.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 18030
+    },
+    {
+      "logicalName": "work-ecommerce.video",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.mp4",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/ecommerce-packing.mp4",
+      "contentType": "video/mp4",
+      "contentLength": 723842
+    },
+    {
+      "logicalName": "work-ecommerce.poster",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/ecommerce-packing.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 43738
+    },
+    {
+      "logicalName": "web-phone-on-site",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/img/web/phone-on-site.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 217799
+    },
+    {
+      "logicalName": "web-laptop-store",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/laptop-store.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/img/web/laptop-store.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 175692
+    },
+    {
+      "logicalName": "web-abstract-mesh",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-mesh.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/img/web/abstract-mesh.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 108294
+    },
+    {
+      "logicalName": "web-sector-office",
+      "oldUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg",
+      "newUrl": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/img/web/sector-office.jpg",
+      "contentType": "image/jpeg",
+      "contentLength": 222590
+    }
+  ]
+}

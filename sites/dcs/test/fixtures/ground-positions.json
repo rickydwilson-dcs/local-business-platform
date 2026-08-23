@@ -1,0 +1,3614 @@
+{
+  "capturedAt": "2026-08-23T11:53:28.561Z",
+  "source": "output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/r9-kota-level.html",
+  "note": "Recorded from a real Chromium (Playwright/CDP) driving the real prototype over HTTP. `rects` are LIVE getBoundingClientRect values, which is exactly what the prototype ground() compares against its viewport-space probe point. `evidence[].layoutTop` is the static-neutralised layout position, recorded only to show the sticky divergence (Trap 4).",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "maxScroll": 17169,
+  "groundsCovered": ["aqua", "ink", "magenta", "navy", "white"],
+  "stickyLies": 130,
+  "positions": [
+    {
+      "scrollY": 0,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 900,
+          "bottom": 1800
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 1800,
+          "bottom": 2700
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 2934,
+          "bottom": 3834
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 4068,
+          "bottom": 4968
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 5202,
+          "bottom": 6102
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 6336,
+          "bottom": 7236
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 8136,
+          "bottom": 9036
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 13569,
+          "bottom": 14469
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 14469,
+          "bottom": 15369
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 15369,
+          "bottom": 16269
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 16269,
+          "bottom": 17169
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 17169,
+          "bottom": 18069
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": 0,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 900,
+          "layoutTop": 900,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 1800,
+          "layoutTop": 1800,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 2934,
+          "layoutTop": 2934,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 4068,
+          "layoutTop": 4068,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 5202,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 6336,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 8136,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 13569,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 14469,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 15369,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 16269,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 17169,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 736,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -736,
+          "bottom": 164
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 164,
+          "bottom": 1064
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 1064,
+          "bottom": 1964
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 2198,
+          "bottom": 3098
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 3332,
+          "bottom": 4232
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 4466,
+          "bottom": 5366
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 5600,
+          "bottom": 6500
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 7400,
+          "bottom": 8300
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 12833,
+          "bottom": 13733
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 13733,
+          "bottom": 14633
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 14633,
+          "bottom": 15533
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 15533,
+          "bottom": 16433
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 16433,
+          "bottom": 17333
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -736,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 164,
+          "layoutTop": 900,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 1064,
+          "layoutTop": 1800,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 2198,
+          "layoutTop": 2934,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 3332,
+          "layoutTop": 4068,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 4466,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 5600,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 7400,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 12833,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 13733,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 14633,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 15533,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 16433,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 858,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "white",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -858,
+          "bottom": 42
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 42,
+          "bottom": 942
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 942,
+          "bottom": 1842
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 2076,
+          "bottom": 2976
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 3210,
+          "bottom": 4110
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 4344,
+          "bottom": 5244
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 5478,
+          "bottom": 6378
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 7278,
+          "bottom": 8178
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 12711,
+          "bottom": 13611
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 13611,
+          "bottom": 14511
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 14511,
+          "bottom": 15411
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 15411,
+          "bottom": 16311
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 16311,
+          "bottom": 17211
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -858,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 42,
+          "layoutTop": 900,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 942,
+          "layoutTop": 1800,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 2076,
+          "layoutTop": 2934,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 3210,
+          "layoutTop": 4068,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 4344,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 5478,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 7278,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 12711,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 13611,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 14511,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 15411,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 16311,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 1717,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "white",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -1717,
+          "bottom": -817
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 83,
+          "bottom": 983
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 1217,
+          "bottom": 2117
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 2351,
+          "bottom": 3251
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 3485,
+          "bottom": 4385
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 4619,
+          "bottom": 5519
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 6419,
+          "bottom": 7319
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 11852,
+          "bottom": 12752
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 12752,
+          "bottom": 13652
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 13652,
+          "bottom": 14552
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 14552,
+          "bottom": 15452
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 15452,
+          "bottom": 16352
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -1717,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 83,
+          "layoutTop": 1800,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 1217,
+          "layoutTop": 2934,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 2351,
+          "layoutTop": 4068,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 3485,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 4619,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 6419,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 11852,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 12752,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 13652,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 14552,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 15452,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 1840,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -1840,
+          "bottom": -940
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 1094,
+          "bottom": 1994
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 2228,
+          "bottom": 3128
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 3362,
+          "bottom": 4262
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 4496,
+          "bottom": 5396
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 6296,
+          "bottom": 7196
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 11729,
+          "bottom": 12629
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 12629,
+          "bottom": 13529
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 13529,
+          "bottom": 14429
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 14429,
+          "bottom": 15329
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 15329,
+          "bottom": 16229
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -1840,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 1094,
+          "layoutTop": 2934,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 2228,
+          "layoutTop": 4068,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 3362,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 4496,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 6296,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 11729,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 12629,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 13529,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 14429,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 15329,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 4905,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -4905,
+          "bottom": -4005
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": 297,
+          "bottom": 1197
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": 1431,
+          "bottom": 2331
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 3231,
+          "bottom": 4131
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 8664,
+          "bottom": 9564
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 9564,
+          "bottom": 10464
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 10464,
+          "bottom": 11364
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 11364,
+          "bottom": 12264
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 12264,
+          "bottom": 13164
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -4905,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": 297,
+          "layoutTop": 5202,
+          "pinnedLie": false
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": 1431,
+          "layoutTop": 6336,
+          "pinnedLie": false
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 3231,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 8664,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 9564,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 10464,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 11364,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 12264,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 7971,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -7971,
+          "bottom": -7071
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -969,
+          "bottom": -69
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -969,
+          "bottom": -69
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -969,
+          "bottom": -69
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -969,
+          "bottom": -69
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -735,
+          "bottom": 165
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 165,
+          "bottom": 1065
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 5598,
+          "bottom": 6498
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 6498,
+          "bottom": 7398
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 7398,
+          "bottom": 8298
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 8298,
+          "bottom": 9198
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 9198,
+          "bottom": 10098
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -7971,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -969,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -969,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -969,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -969,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -735,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 165,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 5598,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 6498,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 7398,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 8298,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 9198,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 8094,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "magenta",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -8094,
+          "bottom": -7194
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -1092,
+          "bottom": -192
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -1092,
+          "bottom": -192
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -1092,
+          "bottom": -192
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -1092,
+          "bottom": -192
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -858,
+          "bottom": 42
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 42,
+          "bottom": 942
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 5475,
+          "bottom": 6375
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 6375,
+          "bottom": 7275
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 7275,
+          "bottom": 8175
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 8175,
+          "bottom": 9075
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 9075,
+          "bottom": 9975
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -8094,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -1092,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -1092,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -1092,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -1092,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -858,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 42,
+          "layoutTop": 8136,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 5475,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 6375,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 7275,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 8175,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 9075,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 11282,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "magenta",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -11282,
+          "bottom": -10382
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -4280,
+          "bottom": -3380
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -4280,
+          "bottom": -3380
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -4280,
+          "bottom": -3380
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -4280,
+          "bottom": -3380
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -4046,
+          "bottom": -3146
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 2287,
+          "bottom": 3187
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 3187,
+          "bottom": 4087
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 4087,
+          "bottom": 4987
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 4987,
+          "bottom": 5887
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 5887,
+          "bottom": 6787
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -11282,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -4280,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -4280,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -4280,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -4280,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -4046,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 2287,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 3187,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 4087,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 4987,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 5887,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 13490,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "magenta",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -13490,
+          "bottom": -12590
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -6488,
+          "bottom": -5588
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -6488,
+          "bottom": -5588
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -6488,
+          "bottom": -5588
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -6488,
+          "bottom": -5588
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -6254,
+          "bottom": -5354
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 79,
+          "bottom": 979
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 979,
+          "bottom": 1879
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 1879,
+          "bottom": 2779
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 2779,
+          "bottom": 3679
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 3679,
+          "bottom": 4579
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -13490,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -6488,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -6488,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -6488,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -6488,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -6254,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 79,
+          "layoutTop": 13569,
+          "pinnedLie": false
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 979,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 1879,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 2779,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 3679,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 13613,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -13613,
+          "bottom": -12713
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -6611,
+          "bottom": -5711
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -6611,
+          "bottom": -5711
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -6611,
+          "bottom": -5711
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -6611,
+          "bottom": -5711
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -6377,
+          "bottom": -5477
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 856,
+          "bottom": 1756
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 1756,
+          "bottom": 2656
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 2656,
+          "bottom": 3556
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 3556,
+          "bottom": 4456
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -13613,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -6611,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -6611,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -6611,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -6611,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -6377,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 856,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 1756,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 2656,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 3556,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 14348,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "ink",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -14348,
+          "bottom": -13448
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -7346,
+          "bottom": -6446
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -7346,
+          "bottom": -6446
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -7346,
+          "bottom": -6446
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -7346,
+          "bottom": -6446
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -7112,
+          "bottom": -6212
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 121,
+          "bottom": 1021
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 1021,
+          "bottom": 1921
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 1921,
+          "bottom": 2821
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 2821,
+          "bottom": 3721
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -14348,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -7346,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -7346,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -7346,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -7346,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -7112,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 121,
+          "layoutTop": 14469,
+          "pinnedLie": false
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 1021,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 1921,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 2821,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 14471,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "white",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -14471,
+          "bottom": -13571
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -7469,
+          "bottom": -6569
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -7469,
+          "bottom": -6569
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -7469,
+          "bottom": -6569
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -7469,
+          "bottom": -6569
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -7235,
+          "bottom": -6335
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 898,
+          "bottom": 1798
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 1798,
+          "bottom": 2698
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 2698,
+          "bottom": 3598
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -14471,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -7469,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -7469,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -7469,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -7469,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -7235,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 898,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 1798,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 2698,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 15207,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "white",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -15207,
+          "bottom": -14307
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -8205,
+          "bottom": -7305
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -8205,
+          "bottom": -7305
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -8205,
+          "bottom": -7305
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -8205,
+          "bottom": -7305
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -7971,
+          "bottom": -7071
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 162,
+          "bottom": 1062
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 1062,
+          "bottom": 1962
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 1962,
+          "bottom": 2862
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -15207,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -8205,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -8205,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -8205,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -8205,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -7971,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 162,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 1062,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 1962,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 15329,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "magenta",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -15329,
+          "bottom": -14429
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -8327,
+          "bottom": -7427
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -8327,
+          "bottom": -7427
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -8327,
+          "bottom": -7427
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -8327,
+          "bottom": -7427
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -8093,
+          "bottom": -7193
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 40,
+          "bottom": 940
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 940,
+          "bottom": 1840
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 1840,
+          "bottom": 2740
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -15329,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -8327,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -8327,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -8327,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -8327,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -8093,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 40,
+          "layoutTop": 15369,
+          "pinnedLie": false
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 940,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 1840,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 16188,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "magenta",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -16188,
+          "bottom": -15288
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -9186,
+          "bottom": -8286
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -9186,
+          "bottom": -8286
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -9186,
+          "bottom": -8286
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -9186,
+          "bottom": -8286
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -8952,
+          "bottom": -8052
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 81,
+          "bottom": 981
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 981,
+          "bottom": 1881
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -16188,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -9186,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -9186,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -9186,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -9186,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -8952,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 15369,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 81,
+          "layoutTop": 16269,
+          "pinnedLie": false
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 981,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 16311,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "aqua",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -16311,
+          "bottom": -15411
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -9309,
+          "bottom": -8409
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -9309,
+          "bottom": -8409
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -9309,
+          "bottom": -8409
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -9309,
+          "bottom": -8409
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -9075,
+          "bottom": -8175
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 858,
+          "bottom": 1758
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -16311,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -9309,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -9309,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -9309,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -9309,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -9075,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 15369,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 16269,
+          "pinnedLie": true
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 858,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 16678,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "aqua",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -16678,
+          "bottom": -15778
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -9676,
+          "bottom": -8776
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -9676,
+          "bottom": -8776
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -9676,
+          "bottom": -8776
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -9676,
+          "bottom": -8776
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -9442,
+          "bottom": -8542
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 491,
+          "bottom": 1391
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -16678,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -9676,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -9676,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -9676,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -9676,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -9442,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 15369,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 16269,
+          "pinnedLie": true
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 491,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 17046,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "aqua",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -17046,
+          "bottom": -16146
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -10044,
+          "bottom": -9144
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -10044,
+          "bottom": -9144
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -10044,
+          "bottom": -9144
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -10044,
+          "bottom": -9144
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -9810,
+          "bottom": -8910
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 123,
+          "bottom": 1023
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -17046,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -10044,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -10044,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -10044,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -10044,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -9810,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 15369,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 16269,
+          "pinnedLie": true
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 123,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    },
+    {
+      "scrollY": 17169,
+      "viewportHeight": 900,
+      "barHeight": 81,
+      "probeY": 50.22,
+      "liveGround": "navy",
+      "rects": [
+        {
+          "key": "section.hero#0",
+          "ground": "ink",
+          "top": -17169,
+          "bottom": -16269
+        },
+        {
+          "key": "work",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "work-1",
+          "ground": "ink",
+          "top": -10167,
+          "bottom": -9267
+        },
+        {
+          "key": "work-2",
+          "ground": "ink",
+          "top": -10167,
+          "bottom": -9267
+        },
+        {
+          "key": "work-3",
+          "ground": "ink",
+          "top": -10167,
+          "bottom": -9267
+        },
+        {
+          "key": "work-4",
+          "ground": "ink",
+          "top": -10167,
+          "bottom": -9267
+        },
+        {
+          "key": "work-5",
+          "ground": "ink",
+          "top": -9933,
+          "bottom": -9033
+        },
+        {
+          "key": "services",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "ground": "ink",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "pricing",
+          "ground": "white",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "faq",
+          "ground": "magenta",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "ground": "aqua",
+          "top": 0,
+          "bottom": 900
+        },
+        {
+          "key": "end",
+          "ground": "navy",
+          "top": 0,
+          "bottom": 900
+        }
+      ],
+      "evidence": [
+        {
+          "key": "section.hero#0",
+          "position": "relative",
+          "liveTop": -17169,
+          "layoutTop": 0,
+          "pinnedLie": false
+        },
+        {
+          "key": "work",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 900,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-1",
+          "position": "sticky",
+          "liveTop": -10167,
+          "layoutTop": 1800,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-2",
+          "position": "sticky",
+          "liveTop": -10167,
+          "layoutTop": 2934,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-3",
+          "position": "sticky",
+          "liveTop": -10167,
+          "layoutTop": 4068,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-4",
+          "position": "sticky",
+          "liveTop": -10167,
+          "layoutTop": 5202,
+          "pinnedLie": true
+        },
+        {
+          "key": "work-5",
+          "position": "sticky",
+          "liveTop": -9933,
+          "layoutTop": 6336,
+          "pinnedLie": true
+        },
+        {
+          "key": "services",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 8136,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--ink in#8",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 13569,
+          "pinnedLie": true
+        },
+        {
+          "key": "pricing",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 14469,
+          "pinnedLie": true
+        },
+        {
+          "key": "faq",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 15369,
+          "pinnedLie": true
+        },
+        {
+          "key": "section.panel p--aqua in#11",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 16269,
+          "pinnedLie": true
+        },
+        {
+          "key": "end",
+          "position": "sticky",
+          "liveTop": 0,
+          "layoutTop": 17169,
+          "pinnedLie": false
+        }
+      ]
+    }
+  ]
+}
