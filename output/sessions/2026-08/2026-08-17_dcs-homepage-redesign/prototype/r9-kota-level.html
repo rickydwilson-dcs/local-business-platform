@@ -32,7 +32,11 @@ verdict, DESIGN.md, and every shipping raster carrying its provenance.
   --r:clamp(20px,3vw,44px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:84px}
+/* scroll-padding-top was 84px, which landed a jumped-to section's top BELOW the
+   nav's ground probe (bar height x 0.62, ~50px) — so the bar kept the previous
+   section's colour and the page never read as one block. 0 lands the section
+   fully pinned, with the probe inside it. */
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--f);font-weight:400;
   -webkit-font-smoothing:antialiased}
 ::selection{background:var(--magenta);color:#fff}
@@ -135,7 +139,16 @@ h1 .dim{color:rgba(255,255,255,.44)}
 .btn--ghost:hover{border-color:var(--ink);box-shadow:none}
 
 /* ============ stacking panels ============ */
-.stack{position:relative}
+/* The rounded top corners of each stacking section are cut out of its own
+   background, so whatever they reveal is whatever paints behind them. .stack
+   holds the hero's ink so the FIRST panel's corners read as the hero rather
+   than as the body's paper. */
+.stack{position:relative;background:var(--ink)}
+.cornerfill{position:sticky;top:0;height:var(--r);margin-bottom:calc(var(--r) * -1)}
+.cf--ink{background:var(--ink)}
+.cf--white{background:var(--white)}
+.cf--magenta{background:var(--magenta)}
+.cf--aqua{background:var(--aqua)}
 .panel{position:sticky;top:0;min-height:100svh;padding:clamp(84px,10vh,140px) var(--pad) clamp(40px,6vh,80px);
   border-radius:var(--r) var(--r) 0 0;display:grid;align-content:center;overflow:hidden}
 .panel::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;
@@ -250,15 +263,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
    a page otherwise built from full-bleed colour and display type, so it read as
    a different design. Here the video IS the ground, and the panels stack exactly
    like the service cards below — one motion vocabulary for the whole page. */
-.windex{margin-top:clamp(30px,4.6vh,54px);display:flex;flex-wrap:wrap;gap:10px}
-.windex a{display:inline-flex;align-items:baseline;gap:10px;
-  border:1.5px solid rgba(14,14,18,.26);border-radius:100px;padding:12px 18px;
-  font-weight:600;font-size:15px;letter-spacing:-.01em;
-  transition:background-color .35s ease,color .35s ease,border-color .35s ease}
-.windex a:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.windex em{font-style:normal;opacity:.55;font-weight:500;font-size:13px}
-.windex a:hover em{opacity:.72}
-
 .wstack{position:relative;z-index:1;
   /* Sticky clamps an element's MARGIN box inside its containing block, so a
      bottom margin buys the last panel no room to pin — panels 1-4 get their
@@ -268,26 +272,42 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
      which is what the containing block resolves to. Only in-flow content after
      the panel creates room, hence the ::after tail below. flow-root stops the
      margin collapsing out; the ink ground matches data-ground="ink". */
-  display:flow-root;background:var(--ink)}
+  display:flow-root;background:var(--white)}
 /* one viewport of in-flow tail: gives the last panel a full screen of hold, and
    it un-pins at exactly the scroll position where #services' top edge enters
    from below, so the handover is seamless rather than leaving an ink void. */
 .wstack::after{content:"";display:block;height:100lvh}
 .wpanel:last-child{margin-bottom:0}
 .wpanel{position:sticky;top:0;height:100lvh;overflow:hidden;color:#fff;
-  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:end;
-  padding:clamp(60px,8vh,110px) var(--pad) clamp(36px,6vh,72px);
+  border-radius:var(--r) var(--r) 0 0;display:grid;align-content:center;
+  /* equal block padding: align-content centres within the content box, so
+     unequal top/bottom padding leaves the copy visibly off-centre. */
+  padding:clamp(60px,8vh,110px) var(--pad);
   /* the copy is bottom-aligned, which is the edge the next panel arrives from.
      Without this the description is covered ~300px in and is never read. */
   margin-bottom:26vh}
 .wpanel video,.wpanel img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;z-index:0}
-/* scrim: the copy sits on live footage, so contrast cannot be left to the clip */
+/* Scrim. The copy sits on live footage, so contrast cannot be left to the clip:
+   sized so that even against a pure-white frame white text clears 4.5:1, which
+   needs ~.55 alpha minimum. The old gradient was bottom-weighted for
+   bottom-aligned text; centring moved the copy into its weakest band. This one
+   is strongest through the middle, where the text now is. */
 .wpanel::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(to top,rgba(6,6,10,.93) 0%,rgba(6,6,10,.58) 44%,rgba(6,6,10,.12) 80%)}
+  background:linear-gradient(to bottom,rgba(6,6,10,.42) 0%,rgba(6,6,10,.72) 32%,
+    rgba(6,6,10,.74) 68%,rgba(6,6,10,.46) 100%)}
+/* On desktop the copy is a narrow left column, so weight it horizontally
+   instead — that keeps far more of the footage readable as footage. */
+@media (min-width:901px){
+  .wpanel::after{background:linear-gradient(to right,rgba(6,6,10,.86) 0%,
+    rgba(6,6,10,.76) 42%,rgba(6,6,10,.30) 72%,rgba(6,6,10,.14) 100%)}
+}
 .wpanel>*{position:relative;z-index:2}
-.wpanel__n{font-weight:800;letter-spacing:-.04em;line-height:.92;
-  font-size:clamp(2.4rem,7.4vw,6.4rem);max-width:14ch}
+/* type spec is h2's, verbatim — the client name and "You do you." are peers in
+   the hierarchy and were reading at different sizes. Mirror every h2 breakpoint
+   below, including the max-height one, or they drift apart again on short screens. */
+.wpanel__n{font-weight:800;letter-spacing:-.034em;line-height:.9;
+  font-size:clamp(2.2rem,6.6vw,6.2rem);max-width:14ch}
 .wpanel__d{margin-top:16px;max-width:44ch;line-height:1.5;opacity:.9;
   font-size:clamp(1rem,1.15vw,1.15rem)}
 .wpanel__r{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -313,6 +333,16 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .row__n{font-weight:700;font-size:clamp(1.4rem,3.4vw,2.9rem);letter-spacing:-.032em}
 .row__m{font-size:14.5px;color:#5E5E68;text-align:right;font-weight:500}
 .row__m em{font-style:normal;display:block;font-size:12px;letter-spacing:.09em;text-transform:uppercase;opacity:.72;margin-top:3px}
+
+/* The services intro stays pinned while the six cards scroll over it, and
+   .svcstack is transparent with a ~94px gap between cards — so its heading kept
+   showing through those gaps long after the section had been read. Fade the
+   words out as the stack rises; the magenta ground stays, only the type goes.
+   Desktop only: below 901px .panel is relative, so the panel scrolls away and
+   there is nothing to bleed through. */
+@media (min-width:901px){
+  #services .res,#services .lead{opacity:var(--intro,1);will-change:opacity}
+}
 
 /* ============ services: one card per service, each stacking over the last ============ */
 .svcstack{position:relative;z-index:1;padding:0 var(--pad) 12vh}
@@ -371,7 +401,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   transition:background-color .35s cubic-bezier(.16,1,.3,1),color .3s ease,opacity .3s ease}
 .paytoggle button[aria-pressed="true"]{background:var(--ink);color:#fff;opacity:1}
 .paytoggle button:hover{opacity:1}
-.paynote{font-size:14px;opacity:.62}
 .tier__f small{display:block;font-size:12.5px;font-weight:500;opacity:.6;letter-spacing:0;margin-top:2px}
 .price{margin-top:clamp(30px,4.6vh,54px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
   gap:clamp(22px,3.4vw,58px);align-items:start}
@@ -384,8 +413,24 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .tier[aria-selected="true"]{background:var(--ink);color:var(--white);padding-left:14px}
 .tier__n{display:block;font-weight:700;font-size:clamp(1.15rem,2.3vw,1.75rem);letter-spacing:-.028em}
 .tier__s{display:block;font-size:13px;opacity:.66;margin-top:2px}
-.tier__f{font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);letter-spacing:-.02em;white-space:nowrap}
-.detail{background:var(--ink);color:#fff;border-radius:calc(var(--r)*.7);padding:clamp(22px,3vw,40px);position:sticky;top:120px}
+/* right-aligned explicitly: the figure is inline text sitting above a block
+   <small>, so with the default left alignment it only lined up when the two
+   happened to be the same width — true for "£750" over "+ £10/mo", false for
+   "£45" over "per month", which sat 16px short. */
+.tier__f{font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);letter-spacing:-.02em;
+  white-space:nowrap;text-align:right}
+/* Top padding matches .tier's so the detail's heading sits on the same line as
+   the first tab's name — the boxes already aligned, the type inside them did
+   not. Grid rows so the CTA lands in the same place whichever tier is chosen. */
+.detail{background:var(--ink);color:#fff;border-radius:calc(var(--r)*.7);
+  padding:clamp(15px,2.2vh,24px) clamp(22px,3vw,40px) clamp(22px,3vw,40px);
+  position:sticky;top:120px;
+  display:grid;grid-template-rows:auto auto 1fr auto;align-content:start}
+/* Reserve two lines for the head and two for the paragraph so every tier's
+   panel is the same height without hard-coding one — only the eCommerce head
+   wraps to two lines, and that difference was the whole 39px spread. */
+.detail__h{min-height:2em}
+.detail__p{min-height:3em}
 .detail__h{font-weight:800;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.032em;line-height:1}
 .detail__p{margin-top:14px;opacity:.8;line-height:1.5;font-size:15.5px}
 .detail__l{margin-top:22px;display:grid;gap:9px}
@@ -431,8 +476,13 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   border-bottom:2px solid rgba(255,255,255,.3);padding-bottom:5px;transition:border-color .35s ease}
 .big:hover{border-bottom-color:var(--aqua)}
 
-@media (max-height:900px){
+/* 1040, not 900: the process section runs ~891px of content at its base sizing,
+   which does not fit a 901-1030px viewport — the common laptop range once
+   browser chrome is subtracted. A sticky full-viewport panel hides anything
+   below the fold, so that content was unreachable rather than merely cramped. */
+@media (max-height:1040px){
   h2{font-size:clamp(1.9rem,4.4vw,3.5rem)}
+  .wpanel__n{font-size:clamp(1.9rem,4.4vw,3.5rem)}
   .panel{padding-top:clamp(70px,8vh,96px);padding-bottom:clamp(28px,4vh,48px)}
   .svc{padding:clamp(9px,1.5vh,15px) 0}
   .svc__n{font-size:clamp(1.15rem,2.2vw,1.7rem)}
@@ -540,7 +590,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .tier:hover{background:none}
   .svccard__l:hover{gap:9px}
   .wpanel__l:hover{gap:9px}
-  .windex a:hover{background:none;color:inherit;border-color:rgba(14,14,18,.26)}
   .big:hover{border-bottom-color:rgba(255,255,255,.3)}
   .menu__nav a:hover span{transform:none;color:inherit}
   .paytoggle button:hover{opacity:.6}
@@ -600,10 +649,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .res{color:#5A5A66}
 
   /* work */
-  .windex{gap:8px;margin-top:28px}
-  .windex a{font-size:16px;padding:13px 17px;flex:1 1 100%}
-  .windex em{margin-left:auto;font-size:14px}
-  .wpanel__n{font-size:min(11vw,2.9rem);max-width:none}
+  .wpanel__n{font-size:clamp(2rem,8.6vw,2.4rem);line-height:.94;max-width:none}
   .wpanel__d{font-size:16px;max-width:none}
   .wpanel__ix{top:calc(84px + env(safe-area-inset-top))}
   .wpanel{margin-bottom:22vh}
@@ -636,7 +682,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .payhead{gap:14px}
   .paytoggle{width:100%;display:grid;grid-template-columns:1fr 1fr}
   .paytoggle button{padding:14px 12px;font-size:15px}
-  .paynote{font-size:15px;line-height:1.45}
   .tcard{position:relative;border:1px solid rgba(14,14,18,.2);border-radius:18px;
     padding:22px 20px;display:grid;gap:12px;background:#F7F6F4}
   .tcard--rec{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -745,7 +790,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
         <span class="ln" data-t="professional"></span>
         <span class="ln dim" data-t="as you."></span>
       </h1>
-      <p class="hero__sub">Designed, written, built, hosted and looked after by one person.
+      <p class="hero__sub">Designed, written, built, hosted and looked after by me.
         Work that stands next to what London studios put out, for a fraction of the cost.</p>
     </div>
     <!-- Mobile only. Desktop keeps its persistent top-right pill as the single
@@ -760,25 +805,19 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
   <div class="stack">
 
-    <!-- Chapter opener. Naming all four here is what buys back the one thing the
-         full-bleed stack loses against a pill selector: you learn how many
-         projects there are before you start scrolling through them. -->
+    <!-- Chapter opener. Heading and lead only — the client index that used to
+         sit here was removed at Ricky's request. -->
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
+
     <section class="panel p--white" id="work" data-ground="white">
       <h2 class="res">You do you.<br>I&rsquo;ve got this.</h2>
       <p class="lead">No clue? No problem. No judgement.</p>
-      <nav class="windex" aria-label="Projects">
-        <a href="#work-1">The Clothing Kings <em>Custom apparel</em></a>
-        <a href="#work-2">Cuddle Plush Fabrics <em>Specialist fabric</em></a>
-        <a href="#work-3">NP Racing <em>Race team</em></a>
-        <a href="#work-4">SM Commercial <em>Upholstery &amp; fabrication</em></a>
-        <a href="#work-5">Colossus Scaffolding <em>Scaffolding</em></a>
-      </nav>
     </section>
 
     <div class="wstack">
       <article class="wpanel" id="work-1" data-ground="ink">
         <span class="wpanel__ix">01 / 05</span>
-        <video src="assets/video/the-clothing-kings.mp4" poster="assets/video/the-clothing-kings.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/the-clothing-kings.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/the-clothing-kings.jpg" muted loop playsinline autoplay preload="metadata"></video>
         <h3 class="wpanel__n">The Clothing Kings</h3>
         <p class="wpanel__d">A workwear store where the price changes with the job &mdash; embroidery
           or vinyl, front, back or sleeve &mdash; and the customer uploads their logo at checkout.</p>
@@ -787,7 +826,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
       <article class="wpanel" id="work-2" data-ground="ink">
         <span class="wpanel__ix">02 / 05</span>
-        <video src="assets/video/cuddle-plush-fabrics.mp4" poster="assets/video/cuddle-plush-fabrics.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/cuddle-plush-fabrics.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/cuddle-plush-fabrics.jpg" muted loop playsinline autoplay preload="metadata"></video>
         <h3 class="wpanel__n">Cuddle Plush Fabrics</h3>
         <p class="wpanel__d">With me since 2014. Products now load automatically from their
           wholesalers&rsquo; sites, and backorders are handled &mdash; so a catalogue that size stays
@@ -797,7 +836,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
       <article class="wpanel" id="work-3" data-ground="ink">
         <span class="wpanel__ix">03 / 05</span>
-        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4" poster="assets/video/np-racing.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/videos/rider-spotlight-2026-08.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/np-racing.jpg" muted loop playsinline autoplay preload="metadata"></video>
         <h3 class="wpanel__n">NP Racing</h3>
         <p class="wpanel__d">A British Superbike team site carrying race reports, rider profiles and
           season gallery, updated through the racing calendar.</p>
@@ -807,7 +846,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
       <article class="wpanel" id="work-4" data-ground="ink">
         <span class="wpanel__ix">04 / 05</span>
-        <video src="assets/video/sm-commercial.mp4" poster="assets/video/sm-commercial.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/sm-commercial.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/sm-commercial.jpg" muted loop playsinline autoplay preload="metadata"></video>
         <h3 class="wpanel__n">SM Commercial</h3>
         <p class="wpanel__d">Bespoke commercial upholstery and fabrication since 2009. A portfolio
           built to win enquiries for custom work rather than to sell products.</p>
@@ -817,7 +856,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 
       <article class="wpanel" id="work-5" data-ground="ink">
         <span class="wpanel__ix">05 / 05</span>
-        <video src="assets/video/colossus-scaffolding.mp4" poster="assets/video/colossus-scaffolding.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/colossus-scaffolding.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/colossus-scaffolding.jpg" muted loop playsinline autoplay preload="metadata"></video>
         <h3 class="wpanel__n">Colossus Scaffolding</h3>
         <p class="wpanel__d">78 pages of localised content, every image generated rather than
           photographed. They came with a logo, a few Instagram posts and a list of nearby towns.
@@ -826,13 +865,15 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </article>
     </div>
 
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
+
     <section class="panel p--magenta" id="services" data-ground="magenta">
       <h2 class="res">Everything a small business <br>actually needs online.</h2>
       <p class="lead">Six things. You need some of them, not all of them &mdash; and I'll tell you which.</p>
     </section>
 
     <section class="svcstack">
-      <article class="svccard svccard--ink" style="--i:0" data-ground="ink">
+      <article class="svccard svccard--ink" style="--i:0">
         <div class="svccard__body">
           <span class="svccard__ix">01 &mdash; DESIGN</span>
           <h3 class="svccard__t">Website design</h3>
@@ -841,11 +882,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           <a class="svccard__l" href="#end">Start a project &rarr;</a>
         </div>
         <div class="svccard__well">
-          <video src="assets/video/vid-ink.mp4" poster="assets/video/poster-ink.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/vid-ink.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/poster-ink.jpg" muted loop playsinline autoplay preload="metadata"></video>
         </div>
       </article>
 
-      <article class="svccard svccard--magenta" style="--i:1" data-ground="magenta">
+      <article class="svccard svccard--magenta" style="--i:1">
         <div class="svccard__body">
           <span class="svccard__ix">02 &mdash; SELLING</span>
           <h3 class="svccard__t">eCommerce</h3>
@@ -854,11 +895,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           <a class="svccard__l" href="#end">Sell online &rarr;</a>
         </div>
         <div class="svccard__well">
-          <video src="assets/video/vid-fabric.mp4" poster="assets/video/poster-fabric.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <video src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.mp4" poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/video/ecommerce-packing.jpg" muted loop playsinline autoplay preload="metadata"></video>
         </div>
       </article>
 
-      <article class="svccard svccard--white" style="--i:2" data-ground="white">
+      <article class="svccard svccard--white" style="--i:2">
         <div class="svccard__body">
           <span class="svccard__ix">03 &mdash; BEING FOUND</span>
           <h3 class="svccard__t">Local SEO</h3>
@@ -866,10 +907,10 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
             start rather than bolted on later. A site nobody can find isn't worth having.</p>
           <a class="svccard__l" href="#end">Get found &rarr;</a>
         </div>
-        <div class="svccard__well"><img src="assets/img/web/phone-on-site.jpg" alt="" loading="lazy"></div>
+        <div class="svccard__well"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/phone-on-site.jpg" alt="" loading="lazy"></div>
       </article>
 
-      <article class="svccard svccard--navy" style="--i:3" data-ground="navy">
+      <article class="svccard svccard--navy" style="--i:3">
         <div class="svccard__body">
           <span class="svccard__ix">04 &mdash; LOOKING AFTER IT</span>
           <h3 class="svccard__t">Ongoing management</h3>
@@ -877,10 +918,10 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
             no dashboard to learn. You send a message; I make the change.</p>
           <a class="svccard__l" href="#end">See what's included &rarr;</a>
         </div>
-        <div class="svccard__well"><img src="assets/img/web/laptop-store.jpg" alt="" loading="lazy"></div>
+        <div class="svccard__well"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/laptop-store.jpg" alt="" loading="lazy"></div>
       </article>
 
-      <article class="svccard svccard--aqua" style="--i:4" data-ground="aqua">
+      <article class="svccard svccard--aqua" style="--i:4">
         <div class="svccard__body">
           <span class="svccard__ix">05 &mdash; KNOWING</span>
           <h3 class="svccard__t">Analytics &amp; reporting</h3>
@@ -888,10 +929,10 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
             came from, what they clicked, and what to do about it.</p>
           <a class="svccard__l" href="#end">See a sample report &rarr;</a>
         </div>
-        <div class="svccard__well"><img src="assets/img/web/abstract-mesh.jpg" alt="" loading="lazy"></div>
+        <div class="svccard__well"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/abstract-mesh.jpg" alt="" loading="lazy"></div>
       </article>
 
-      <article class="svccard svccard--white" style="--i:5" data-ground="white">
+      <article class="svccard svccard--white" style="--i:5">
         <div class="svccard__body">
           <span class="svccard__ix">06 &mdash; EVERY DAY</span>
           <h3 class="svccard__t">Business email</h3>
@@ -899,12 +940,14 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
             without losing anything. No more addresses ending in a provider's name.</p>
           <a class="svccard__l" href="#end">Sort my email &rarr;</a>
         </div>
-        <div class="svccard__well"><img src="assets/img/web/sector-office.jpg" alt="" loading="lazy"></div>
+        <div class="svccard__well"><img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-17_dcs-homepage-redesign/assets/img/web/sector-office.jpg" alt="" loading="lazy"></div>
       </article>
     </section>
 
+    <div class="cornerfill cf--magenta" aria-hidden="true"></div>
+
     <section class="panel p--ink" data-ground="ink">
-      <h2 class="res">You have one conversation.<br>I do the rest.</h2>
+      <h2 class="res">A quick chat.<br>I do the rest.</h2>
       <div class="steps">
         <div class="step"><span class="step__r"></span><span class="step__k">01</span><div><div class="step__t">We talk</div><p class="step__b">No brief needed, no copy to write, no idea of what you want required. I ask the questions.</p></div></div>
         <div class="step"><span class="step__r"></span><span class="step__k">02</span><div><div class="step__t">I write it</div><p class="step__b">The words, the structure, the pages. You don't have to know what to say about your own business.</p></div></div>
@@ -913,6 +956,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </div>
     </section>
 
+    <div class="cornerfill cf--ink" aria-hidden="true"></div>
+
     <section class="panel p--white" id="pricing" data-ground="white">
       <h2 class="res">Two ways to pay<br>for the same site.</h2>
       <div class="payhead">
@@ -920,20 +965,23 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
           <button type="button" data-mode="monthly" aria-pressed="true">Pay monthly</button>
           <button type="button" data-mode="upfront" aria-pressed="false">Pay upfront</button>
         </div>
-        <span class="paynote" id="paynote">Nothing to pay upfront. 24-month minimum, then it rolls on monthly.</span>
       </div>
       <div class="price">
         <div class="tiers" role="tablist" aria-label="Plans">
           <button class="tier" role="tab" aria-selected="true" data-k="starter">
-            <span><span class="tier__n">Starter</span><span class="tier__s">A proper site, done properly</span></span>
+            <span><span class="tier__n">Starter</span><span class="tier__s">Up to 5 pages</span></span>
             <span class="tier__f" data-fig></span>
           </button>
           <button class="tier" role="tab" aria-selected="false" data-k="pro">
-            <span><span class="tier__n">Professional</span><span class="tier__s">Most small businesses land here</span></span>
+            <span><span class="tier__n">Professional</span><span class="tier__s">Up to 20 pages &middot; most land here</span></span>
             <span class="tier__f" data-fig></span>
           </button>
           <button class="tier" role="tab" aria-selected="false" data-k="growth">
-            <span><span class="tier__n">Growth</span><span class="tier__s">Bigger sites and online stores</span></span>
+            <span><span class="tier__n">Growth</span><span class="tier__s">Up to 100 pages</span></span>
+            <span class="tier__f" data-fig></span>
+          </button>
+          <button class="tier" role="tab" aria-selected="false" data-k="ecom">
+            <span><span class="tier__n">eCommerce</span><span class="tier__s">Online store &middot; upfront only</span></span>
             <span class="tier__f" data-fig></span>
           </button>
         </div>
@@ -944,6 +992,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
         <div class="tiercards" id="tiercards"></div>
       </div>
     </section>
+
+    <div class="cornerfill cf--white" aria-hidden="true"></div>
 
     <section class="panel p--magenta" id="faq" data-ground="magenta">
       <h2 class="res">Questions I get asked<br>before people say yes.</h2>
@@ -969,15 +1019,19 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       </div>
     </section>
 
+    <div class="cornerfill cf--magenta" aria-hidden="true"></div>
+
     <section class="panel p--aqua" data-ground="aqua">
-      <p class="quote res">“My phone started ringing within two weeks of the site going live. Ricky handled everything — I didn't have to do a thing.”</p>
-      <p class="quote__a">Mark H. <span>· Electrician, Brighton</span></p>
+      <p class="quote res">“When I want something added I just text Ricky and it gets done. It’s so easy.”</p>
+      <p class="quote__a">Martin <span>· The Clothing Kings, Polegate</span></p>
     </section>
+
+    <div class="cornerfill cf--aqua" aria-hidden="true"></div>
 
     <section class="panel p--navy end" id="end" data-ground="navy">
       <div class="end__main">
         <h2 class="res">Let's talk about<br>your website.</h2>
-        <p class="lead">Free, and without obligation. I reply within one working day.</p>
+        <p class="lead">Free, and without obligation.</p>
         <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
         <div><a class="big" href="tel:+447395063764">07395 063764</a></div>
         <div class="hero__act"><a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
@@ -1015,27 +1069,32 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       name:'Starter',
       upfront:{fig:'\u00A3750', sub:'+ \u00A310/mo', head:'\u00A3750 upfront, then \u00A310 a month'},
       monthly:{fig:'\u00A345', sub:'per month',      head:'\u00A345 a month, nothing upfront'},
-      p:'A complete, professional site for a business that needs to look credible and be found. Everything designed and written for you.',
-      l:['Bespoke design \u2014 no template','Local SEO built in','Hosting, SSL and security','Changes handled by me']},
+      p:'Up to five pages, all designed and written for you. Everything a business needs to look credible and get found.',
+      l:['Bespoke design \u2014 no template','Local SEO built in','Hosting, SSL and security']},
     pro:{
       name:'Professional',
       upfront:{fig:'\u00A31,495', sub:'+ \u00A315/mo', head:'\u00A31,495 upfront, then \u00A315 a month'},
       monthly:{fig:'\u00A385',    sub:'per month',      head:'\u00A385 a month, nothing upfront'},
-      p:'The one most small businesses land on. More pages, more depth, and the service and location pages that make Google take you seriously.',
-      l:['Everything in Starter, plus:','Service and location pages','Structured data throughout','Monthly reporting in plain English']},
+      p:'Up to twenty pages, and the one most small businesses land on. Room for the pages Google takes seriously.',
+      l:['Everything in Starter, plus:','Service and location pages','Monthly plain-English reporting']},
     growth:{
       name:'Growth',
       upfront:{fig:'\u00A32,995', sub:'+ \u00A325/mo', head:'\u00A32,995 upfront, then \u00A325 a month'},
       monthly:{fig:'\u00A3150',   sub:'per month',      head:'\u00A3150 a month, nothing upfront'},
-      p:'For bigger sites and online stores \u2014 products to load, payments to take, and more moving parts to look after.',
-      l:['Everything in Professional, plus:','Online store, built and loaded','Payments and delivery set up','Priority support']}
-  };
-  var NOTE = {
-    upfront:'Own it outright, then a small monthly fee to keep it running.',
-    monthly:'Nothing to pay upfront. 24-month minimum, then it rolls on monthly.'
+      p:'Up to a hundred pages \u2014 every service you offer, in every town you cover, each with a page of its own.',
+      l:['Everything in Professional, plus:','Every service in every town','Priority support']},
+    /* Upfront only. There is no monthly detail because selecting this tier from
+       the monthly tab switches the tab, so that state is unreachable. */
+    ecom:{
+      name:'eCommerce',
+      upfrontOnly:true,
+      upfront:{fig:'From \u00A32,995', sub:'+ \u00A350/mo', head:'From \u00A32,995 upfront, then \u00A350 a month'},
+      monthly:{fig:'N/A', sub:'upfront only'},
+      p:'An online store, built and loaded. Products, payments and delivery set up and handed over working.',
+      l:['Store built and products loaded','Payments and delivery set up','Stock and orders handled']}
   };
   var mode='monthly', tier='starter';
-  var detail=document.getElementById('detail'), paynote=document.getElementById('paynote');
+  var detail=document.getElementById('detail');
   var tabs=[].slice.call(document.querySelectorAll('.tier'));
   var modeBtns=[].slice.call(document.querySelectorAll('.paytoggle button'));
 
@@ -1046,7 +1105,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
       t.setAttribute('aria-selected', t.dataset.k===tier ? 'true':'false');
     });
     modeBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.mode===mode ? 'true':'false'); });
-    paynote.textContent=NOTE[mode];
     var T=TIERS[tier], d=T[mode];
     detail.innerHTML='<div class="detail__h">'+d.head+'</div><p class="detail__p">'+T.p+'</p><div class="detail__l">'+
       T.l.map(function(x){return '<div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>'+x+'</span></div>';}).join('')+
@@ -1060,9 +1118,18 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   var tiercards = document.getElementById('tiercards');
   var TICK = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function paintCards(){
-    tiercards.innerHTML = Object.keys(TIERS).map(function(k){
+    renderCards();
+    tiercards.addEventListener('click', function(e){
+    var b = e.target.closest('[data-switch]');
+    if (!b) return;
+    mode = b.dataset.switch; paint();
+    b.closest('.tcard').scrollIntoView({block:'nearest'});
+  });
+  function renderCards(){
+  tiercards.innerHTML = Object.keys(TIERS).map(function(k){
       var T = TIERS[k], d = T[k === 'rec' ? mode : mode];
       var rec = k === 'pro';
+      var upOnly = T.upfrontOnly && mode === 'monthly';
       return '<article class="tcard' + (rec ? ' tcard--rec' : '') + '">' +
         (rec ? '<span class="tcard__b">Most popular</span>' : '') +
         '<div class="tcard__h">' +
@@ -1073,11 +1140,20 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
         '<p class="tcard__p">' + T.p + '</p>' +
         '<ul class="tcard__l">' + T.l.map(function(x){
           return '<li>' + TICK + '<span>' + x + '</span></li>'; }).join('') + '</ul>' +
-        '<a class="btn" href="#end">Get a free quote</a>' +
+        (upOnly
+          ? '<button type="button" class="btn" data-switch="upfront">See upfront pricing</button>'
+          : '<a class="btn" href="#end">Get a free quote</a>') +
       '</article>';
     }).join('');
   }
-  tabs.forEach(function(t){ t.addEventListener('click', function(){ tier=t.dataset.k; paint(); }); });
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){
+    tier = t.dataset.k;
+    /* there is no monthly price for a store, so move the reader to the tab
+       that can actually answer them rather than showing a dead N/A panel */
+    if (TIERS[tier].upfrontOnly && mode === 'monthly') mode = 'upfront';
+    paint();
+  }); });
   modeBtns.forEach(function(b){ b.addEventListener('click', function(){ mode=b.dataset.mode; paint(); }); });
   paint();
 
@@ -1102,6 +1178,32 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   menu.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
 
+  /* In-page links cannot use native anchor navigation here. Every panel is
+     position:sticky with no bound, so once you are past it the browser still
+     sees it pinned at top:0 — getBoundingClientRect and offsetTop BOTH report
+     the pinned position, and the jump moves nowhere at all. Measured from the
+     footer: every menu and footer link left the scroll on 14392.
+     Reading the layout position means neutralising sticky for one synchronous
+     measurement; there is no paint between, so nothing flickers. */
+  function layoutTop(el){
+    var prev = el.style.position;
+    el.style.position = 'static';
+    var y = el.getBoundingClientRect().top + window.scrollY;
+    el.style.position = prev;
+    return y;
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (id.length < 2) return;
+    var t = document.querySelector(id);
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: layoutTop(t), behavior: reduce ? 'auto' : 'smooth' });
+    history.replaceState(null, '', id);
+  });
+
   var bar = document.getElementById('bar');
   var grounds = [].slice.call(document.querySelectorAll('main [data-ground]'));
   function ground(){
@@ -1112,8 +1214,21 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     });
     if (bar.dataset.ground !== cur) bar.dataset.ground = cur;
   }
-  addEventListener('scroll', function(){ requestAnimationFrame(ground); }, {passive:true});
-  ground();
+  /* fade the services intro's type as the card stack rises over it */
+  var svcstack = document.querySelector('.svcstack');
+  var intro = document.getElementById('services');
+  function fadeIntro(){
+    if (!svcstack || !intro) return;
+    var vh = innerHeight, t = svcstack.getBoundingClientRect().top;
+    var p = (t - vh * 0.45) / (vh * 0.55);   // 1 below the fold -> 0 once 45% up
+    intro.style.setProperty('--intro', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+
+  addEventListener('scroll', function(){
+    requestAnimationFrame(function(){ ground(); fadeIntro(); });
+  }, {passive:true});
+  addEventListener('resize', fadeIntro, {passive:true});
+  ground(); fadeIntro();
 })();
 </script>
 </body>
