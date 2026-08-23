@@ -219,7 +219,9 @@ added (it rewrites relative paths to R2 URLs as a side effect, which is how new 
    the copy already tripled that window, so it is now largely redundant.
 4. **Do The Clothing Kings, Cuddle Plush and Colossus have live URLs?**
 5. **Fix the loop seams?** Ping-pong encode or a crossfade; costs no credits either way.
-6. **Port to React in `sites/dcs`, or keep iterating in HTML?** Unanswered since the last handoff and
-   more expensive to defer with every round.
+6. **Port to React in `sites/dcs`, or keep iterating in HTML?** Answered 2026-08-23: ported. See
+   `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/` — `r9-kota-level.html` is now the
+   Next.js homepage at `sites/dcs/app/page.tsx`, with the 14 existing inner routes moved into an
+   `app/(site)` route group so the homepage could sit outside it with its own layout/behaviour.
 7. **Is `r9-kota-level.html` the direction?** Ricky has art-directed it across two long sessions and
    made many specific calls, which reads as acceptance, but he has never said so.
