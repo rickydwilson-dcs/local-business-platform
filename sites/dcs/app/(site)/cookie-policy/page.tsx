@@ -9,7 +9,8 @@ import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs } from '@platform/core-components';
+import { LegalHero } from '@/components/legal/legal-hero';
+import { LegalToc, type LegalTocItem } from '@/components/legal/legal-toc';
 
 export const metadata: Metadata = {
   title: `Cookie Policy | ${siteConfig.business.name}`,
@@ -19,8 +20,73 @@ export const metadata: Metadata = {
   },
 };
 
+const TOC_ITEMS: LegalTocItem[] = [
+  { id: 'what-are-cookies', label: 'What Are Cookies?' },
+  { id: 'how-we-use', label: 'How We Use Cookies' },
+  { id: 'cookie-categories', label: 'Cookie Categories' },
+  { id: 'managing-cookies', label: 'Managing Your Cookies' },
+  { id: 'third-party', label: 'Third-Party Cookies' },
+  { id: 'contact', label: 'Contact Us' },
+];
+
+interface CookieRow {
+  name: string;
+  purpose: string;
+  duration: string;
+}
+
+function CookieTable({ rows }: { rows: CookieRow[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm border-collapse">
+        <thead>
+          <tr className="border-b border-surface-border">
+            <th className="py-3 pr-4 text-left font-semibold text-surface-foreground">Cookie</th>
+            <th className="py-3 pr-4 text-left font-semibold text-surface-foreground">Purpose</th>
+            <th className="py-3 text-left font-semibold text-surface-foreground">Duration</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-surface-border">
+          {rows.map((row) => (
+            <tr key={row.name}>
+              <td className="py-3 pr-4 font-mono text-xs text-surface-foreground">{row.name}</td>
+              <td className="py-3 pr-4 text-surface-muted-foreground">{row.purpose}</td>
+              <td className="py-3 text-surface-muted-foreground">{row.duration}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const NECESSARY_COOKIES: CookieRow[] = [
+  { name: 'cookie_consent', purpose: 'Stores your cookie preferences', duration: '1 year' },
+  {
+    name: 'csrf_token',
+    purpose: 'Security token for form submissions',
+    duration: 'Session',
+  },
+];
+
+const ANALYTICS_COOKIES: CookieRow[] = [
+  { name: '_ga', purpose: 'Google Analytics — distinguishes users', duration: '2 years' },
+  { name: '_ga_*', purpose: 'Google Analytics — stores session state', duration: '2 years' },
+];
+
+const MARKETING_COOKIES: CookieRow[] = [
+  { name: '_fbp', purpose: 'Facebook Pixel — tracks conversions', duration: '90 days' },
+  { name: 'gclid', purpose: 'Google Ads — tracks ad clicks', duration: '90 days' },
+];
+
+const BROWSER_SETTINGS = [
+  { browser: 'Chrome', path: 'Settings > Privacy and Security > Cookies' },
+  { browser: 'Firefox', path: 'Options > Privacy & Security > Cookies' },
+  { browser: 'Safari', path: 'Preferences > Privacy > Cookies' },
+  { browser: 'Edge', path: 'Settings > Privacy, Search, and Services > Cookies' },
+];
+
 export default function CookiePolicyPage() {
-  const breadcrumbItems = [{ name: 'Cookie Policy', href: '/cookie-policy', current: true }];
   const lastUpdated = new Date().toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -28,81 +94,42 @@ export default function CookiePolicyPage() {
   });
 
   return (
-    <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+    <div className="font-body">
+      <LegalHero title="Cookie Policy" current="Cookie Policy" lastUpdated={lastUpdated} />
 
-      <div className="min-h-screen bg-surface-background">
-        <article className="section-standard">
-          <div className="container-standard max-w-4xl">
-            <h1 className="heading-hero mb-4">Cookie Policy</h1>
-            <p className="text-surface-muted-foreground mb-8">Last updated: {lastUpdated}</p>
+      <div className="bg-surface-background">
+        <div className="max-w-[1200px] mx-auto px-6 py-16">
+          <div className="lg:grid lg:grid-cols-[220px_1fr] lg:gap-16">
+            <aside className="hidden lg:block">
+              <LegalToc items={TOC_ITEMS} />
+            </aside>
 
-            {/* Table of Contents */}
-            <div className="bg-surface-subtle rounded-lg p-6 mb-12">
-              <h2 className="text-lg font-semibold mb-4">Contents</h2>
-              <ol className="list-decimal list-inside space-y-2 text-brand-primary">
-                <li>
-                  <a href="#what-are-cookies" className="hover:underline">
-                    What Are Cookies?
-                  </a>
-                </li>
-                <li>
-                  <a href="#how-we-use" className="hover:underline">
-                    How We Use Cookies
-                  </a>
-                </li>
-                <li>
-                  <a href="#cookie-categories" className="hover:underline">
-                    Cookie Categories
-                  </a>
-                </li>
-                <li>
-                  <a href="#managing-cookies" className="hover:underline">
-                    Managing Your Cookies
-                  </a>
-                </li>
-                <li>
-                  <a href="#third-party" className="hover:underline">
-                    Third-Party Cookies
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="hover:underline">
-                    Contact Us
-                  </a>
-                </li>
-              </ol>
-            </div>
-
-            <div className="prose prose-lg max-w-none">
+            <article className="max-w-[680px]">
               {/* What Are Cookies */}
-              <section id="what-are-cookies" className="mb-12">
+              <section id="what-are-cookies" className="scroll-mt-24 mb-14">
                 <h2 className="text-2xl font-bold text-surface-foreground mb-4">
                   1. What Are Cookies?
                 </h2>
-                <p className="text-surface-muted-foreground mb-4">
+                <p className="text-surface-muted-foreground leading-relaxed mb-4">
                   Cookies are small text files that are stored on your device when you visit a
                   website. They help websites remember your preferences and improve your browsing
                   experience.
                 </p>
-                <p className="text-surface-muted-foreground">
+                <p className="text-surface-muted-foreground leading-relaxed">
                   Cookies can be &quot;session&quot; cookies (deleted when you close your browser)
                   or &quot;persistent&quot; cookies (remain until they expire or you delete them).
                 </p>
               </section>
 
               {/* How We Use Cookies */}
-              <section id="how-we-use" className="mb-12">
+              <section id="how-we-use" className="scroll-mt-24 mb-14">
                 <h2 className="text-2xl font-bold text-surface-foreground mb-4">
                   2. How We Use Cookies
                 </h2>
-                <p className="text-surface-muted-foreground mb-4">We use cookies to:</p>
-                <ul className="list-disc list-inside space-y-2 text-surface-muted-foreground">
+                <p className="text-surface-muted-foreground leading-relaxed mb-4">
+                  We use cookies to:
+                </p>
+                <ul className="list-disc list-outside pl-5 space-y-2 text-surface-muted-foreground leading-relaxed">
                   <li>Remember your cookie consent preferences</li>
                   <li>Understand how you use our website</li>
                   <li>Improve our website performance</li>
@@ -112,188 +139,86 @@ export default function CookiePolicyPage() {
               </section>
 
               {/* Cookie Categories */}
-              <section id="cookie-categories" className="mb-12">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">
+              <section id="cookie-categories" className="scroll-mt-24 mb-14">
+                <h2 className="text-2xl font-bold text-surface-foreground mb-6">
                   3. Cookie Categories
                 </h2>
 
-                {/* Necessary Cookies */}
-                <div className="mb-8">
-                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary mb-4">
-                    <h3 className="font-semibold text-surface-foreground">Necessary Cookies</h3>
-                    <p className="text-surface-muted-foreground text-sm">
+                <div className="space-y-10">
+                  <div>
+                    <h3 className="font-semibold text-surface-foreground mb-1">
+                      Necessary Cookies
+                    </h3>
+                    <p className="text-surface-muted-foreground text-sm mb-4">
                       Required for the website to function. Cannot be disabled.
                     </p>
+                    <CookieTable rows={NECESSARY_COOKIES} />
                   </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-sm">
-                      <thead>
-                        <tr className="bg-surface-subtle">
-                          <th className="border border-surface-border p-2 text-left">Cookie</th>
-                          <th className="border border-surface-border p-2 text-left">Purpose</th>
-                          <th className="border border-surface-border p-2 text-left">Duration</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            cookie_consent
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Stores your cookie preferences
-                          </td>
-                          <td className="border border-surface-border p-2">1 year</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            csrf_token
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Security token for form submissions
-                          </td>
-                          <td className="border border-surface-border p-2">Session</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
 
-                {/* Analytics Cookies */}
-                <div className="mb-8">
-                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary mb-4">
-                    <h3 className="font-semibold text-surface-foreground">Analytics Cookies</h3>
-                    <p className="text-surface-muted-foreground text-sm">
+                  <div>
+                    <h3 className="font-semibold text-surface-foreground mb-1">
+                      Analytics Cookies
+                    </h3>
+                    <p className="text-surface-muted-foreground text-sm mb-4">
                       Help us understand how visitors use our website.
                     </p>
+                    <CookieTable rows={ANALYTICS_COOKIES} />
                   </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-sm">
-                      <thead>
-                        <tr className="bg-surface-subtle">
-                          <th className="border border-surface-border p-2 text-left">Cookie</th>
-                          <th className="border border-surface-border p-2 text-left">Purpose</th>
-                          <th className="border border-surface-border p-2 text-left">Duration</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            _ga
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Google Analytics - distinguishes users
-                          </td>
-                          <td className="border border-surface-border p-2">2 years</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            _ga_*
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Google Analytics - stores session state
-                          </td>
-                          <td className="border border-surface-border p-2">2 years</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
 
-                {/* Marketing Cookies */}
-                <div className="mb-8">
-                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary mb-4">
-                    <h3 className="font-semibold text-surface-foreground">Marketing Cookies</h3>
-                    <p className="text-surface-muted-foreground text-sm">
+                  <div>
+                    <h3 className="font-semibold text-surface-foreground mb-1">
+                      Marketing Cookies
+                    </h3>
+                    <p className="text-surface-muted-foreground text-sm mb-4">
                       Used to deliver relevant advertisements and track campaign effectiveness.
                     </p>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-sm">
-                      <thead>
-                        <tr className="bg-surface-subtle">
-                          <th className="border border-surface-border p-2 text-left">Cookie</th>
-                          <th className="border border-surface-border p-2 text-left">Purpose</th>
-                          <th className="border border-surface-border p-2 text-left">Duration</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            _fbp
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Facebook Pixel - tracks conversions
-                          </td>
-                          <td className="border border-surface-border p-2">90 days</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-surface-border p-2 font-mono text-xs">
-                            gclid
-                          </td>
-                          <td className="border border-surface-border p-2">
-                            Google Ads - tracks ad clicks
-                          </td>
-                          <td className="border border-surface-border p-2">90 days</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <CookieTable rows={MARKETING_COOKIES} />
                   </div>
                 </div>
               </section>
 
               {/* Managing Cookies */}
-              <section id="managing-cookies" className="mb-12">
+              <section id="managing-cookies" className="scroll-mt-24 mb-14">
                 <h2 className="text-2xl font-bold text-surface-foreground mb-4">
                   4. Managing Your Cookies
                 </h2>
-                <p className="text-surface-muted-foreground mb-4">
+                <p className="text-surface-muted-foreground leading-relaxed mb-6">
                   You can control cookies through several methods:
                 </p>
 
-                <h3 className="text-lg font-semibold text-surface-foreground mt-6 mb-3">
-                  Consent Banner
-                </h3>
-                <p className="text-surface-muted-foreground mb-4">
+                <h3 className="font-semibold text-surface-foreground mb-2">Consent Banner</h3>
+                <p className="text-surface-muted-foreground leading-relaxed mb-6">
                   When you first visit our site, you can choose which cookie categories to accept
                   using our consent banner.
                 </p>
 
-                <h3 className="text-lg font-semibold text-surface-foreground mt-6 mb-3">
-                  Browser Settings
-                </h3>
-                <p className="text-surface-muted-foreground mb-4">
+                <h3 className="font-semibold text-surface-foreground mb-2">Browser Settings</h3>
+                <p className="text-surface-muted-foreground leading-relaxed mb-3">
                   Most browsers allow you to manage cookies through their settings:
                 </p>
-                <ul className="list-disc list-inside space-y-2 text-surface-muted-foreground mb-4">
-                  <li>
-                    <strong>Chrome:</strong> Settings &gt; Privacy and Security &gt; Cookies
-                  </li>
-                  <li>
-                    <strong>Firefox:</strong> Options &gt; Privacy &amp; Security &gt; Cookies
-                  </li>
-                  <li>
-                    <strong>Safari:</strong> Preferences &gt; Privacy &gt; Cookies
-                  </li>
-                  <li>
-                    <strong>Edge:</strong> Settings &gt; Privacy, Search, and Services &gt; Cookies
-                  </li>
+                <ul className="space-y-1.5 text-surface-muted-foreground text-sm mb-4">
+                  {BROWSER_SETTINGS.map((row) => (
+                    <li key={row.browser}>
+                      <strong className="text-surface-foreground">{row.browser}:</strong> {row.path}
+                    </li>
+                  ))}
                 </ul>
-                <p className="text-surface-muted-foreground">
+                <p className="text-surface-muted-foreground text-sm">
                   Note: Blocking all cookies may affect website functionality.
                 </p>
               </section>
 
               {/* Third-Party Cookies */}
-              <section id="third-party" className="mb-12">
+              <section id="third-party" className="scroll-mt-24 mb-14">
                 <h2 className="text-2xl font-bold text-surface-foreground mb-4">
                   5. Third-Party Cookies
                 </h2>
-                <p className="text-surface-muted-foreground mb-4">
+                <p className="text-surface-muted-foreground leading-relaxed mb-6">
                   Some cookies are placed by third-party services we use:
                 </p>
-                <div className="space-y-4">
-                  <div className="bg-surface-subtle rounded-lg p-4">
-                    <h3 className="font-semibold text-surface-foreground">Google Analytics</h3>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="bg-surface-card border border-surface-border rounded-[20px] p-5">
+                    <h3 className="font-semibold text-surface-foreground mb-1">Google Analytics</h3>
                     <p className="text-sm text-surface-muted-foreground">
                       Website analytics to understand visitor behaviour.{' '}
                       <a
@@ -306,8 +231,8 @@ export default function CookiePolicyPage() {
                       </a>
                     </p>
                   </div>
-                  <div className="bg-surface-subtle rounded-lg p-4">
-                    <h3 className="font-semibold text-surface-foreground">Facebook Pixel</h3>
+                  <div className="bg-surface-card border border-surface-border rounded-[20px] p-5">
+                    <h3 className="font-semibold text-surface-foreground mb-1">Facebook Pixel</h3>
                     <p className="text-sm text-surface-muted-foreground">
                       Advertising and conversion tracking.{' '}
                       <a
@@ -324,9 +249,9 @@ export default function CookiePolicyPage() {
               </section>
 
               {/* Contact */}
-              <section id="contact" className="mb-12">
+              <section id="contact" className="scroll-mt-24">
                 <h2 className="text-2xl font-bold text-surface-foreground mb-4">6. Contact Us</h2>
-                <p className="text-surface-muted-foreground mb-4">
+                <p className="text-surface-muted-foreground leading-relaxed mb-4">
                   If you have questions about our use of cookies, please contact us at{' '}
                   <a
                     href={`mailto:${BUSINESS_EMAIL}`}
@@ -336,7 +261,7 @@ export default function CookiePolicyPage() {
                   </a>
                   .
                 </p>
-                <p className="text-surface-muted-foreground">
+                <p className="text-surface-muted-foreground leading-relaxed">
                   For more information about how we handle your personal data, please see our{' '}
                   <Link href="/privacy-policy" className="text-brand-primary hover:underline">
                     Privacy Policy
@@ -344,10 +269,10 @@ export default function CookiePolicyPage() {
                   .
                 </p>
               </section>
-            </div>
+            </article>
           </div>
-        </article>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

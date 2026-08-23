@@ -381,10 +381,8 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
     expect(recordsChecked).toBeGreaterThan(0);
 
     if (errors === 0) {
-      // eslint-disable-next-line no-console
       console.log(`PASS — ${total}/${total} records, 0 errors`);
     } else {
-      // eslint-disable-next-line no-console
       console.log(`FAIL — ${total - errors}/${total} records, ${errors} errors: ${firstOffender}`);
     }
     expect(errors, `first offending record: ${firstOffender}`).toBe(0);

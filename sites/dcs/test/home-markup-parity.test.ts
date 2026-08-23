@@ -203,7 +203,6 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
       `classes present in the live prototype and styled by home-r9.css, but absent from the render:\n${missing.join(', ')}`
     ).toEqual([]);
 
-    // eslint-disable-next-line no-console
     console.log(`PASS — ${compared}/${compared} classes compared, 0 errors`);
   });
 
@@ -231,12 +230,10 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
     expect(compared).toBeGreaterThan(0);
 
     if (errors === 0) {
-      // eslint-disable-next-line no-console
       console.log(
         `PASS — ${compared}/${compared} classes compared, ${renderedElementCount} rendered elements, 0 errors`
       );
     } else {
-      // eslint-disable-next-line no-console
       console.log(
         `FAIL — ${compared - errors}/${compared} classes compared, ${errors} errors: ${firstOffender}`
       );

@@ -101,3 +101,6 @@ output/batch-*.json*
 
 # Claude Code scheduled-task lock — process-local, churns every session
 .claude/scheduled_tasks.lock
+
+# Supabase CLI local link cache — pooler connection string, project ref, org ID
+supabase/.temp/

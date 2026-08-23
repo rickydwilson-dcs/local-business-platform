@@ -91,6 +91,12 @@ Consent banner automatically hides on:
 
 This prevents the banner from blocking access to policy information.
 
+### Site-Specific Presentation Forks
+
+`ConsentManager` is a shared component, but its visual design doesn't have to be. `sites/dcs/components/dcs-consent-manager.tsx` is a presentation-only fork: same consent state machine, storage, `useFocusTrap` hook and event dispatch as the shared component, restyled as a floating card with DCS's own brand colors instead of the shared full-width footer bar. Restyling one site's banner means forking the component into that site's own `components/` directory and swapping the import in its `layout.tsx` — never editing the shared `ConsentManager` for a single site's look, since every other site imports it too. This mirrors the same divergence pattern already used for `Header`/`Footer` (see "Self-contained sites" in root `CLAUDE.md`), just scoped to one component instead of a whole site.
+
+A fork worth copying deliberately: initial keyboard/screen-reader focus goes to a non-interactive heading (`tabIndex={-1}`) inside the dialog, not to Accept or Reject. Parking focus on either button means a stray Enter right after the banner appears — a leftover keypress, a habitual screen-reader gesture — fires a real consent decision with no deliberate choice. Focusing a neutral element still moves focus into the dialog (so screen readers announce it and keyboard users aren't trapped tabbing through content behind the backdrop blur), without arming either action.
+
 ## GA4 Integration
 
 ### Initialization
