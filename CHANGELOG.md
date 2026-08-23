@@ -8,6 +8,22 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ## 2026-08-23
 
+### Sites
+
+- **DCS homepage ported from HTML prototype to Next.js/React, with a route group split to carry it.**
+  The round-9 hand-built prototype (`r9-kota-level.html`, refined over two long art-direction
+  sessions) is now `sites/dcs/app/page.tsx`, measured against the prototype at 1440x900 and 390x844
+  for pixel parity. To let the homepage carry its own bar/menu/end-section chrome instead of the
+  site's standard header/footer, the 14 existing inner routes (about, blog, contact, cookie-policy,
+  locations, pricing, privacy-policy, projects, reviews, services and their dynamic children) moved
+  into an `app/(site)` route group — a code-organisation change only, no URLs changed. Until those
+  inner pages are rebuilt to the new homepage's standard, only `/` is indexable: `app/(site)/layout.tsx`
+  sets `noindex` once for the whole group rather than per page, `robots.txt` stays permissive on
+  purpose (a `Disallow` would stop crawlers reading the `noindex` tag at all), and re-enabling a
+  section is a one-line `robots` override on that page plus uncommenting its sitemap entry. Also
+  added: an unlinked Terms & Conditions page. See
+  `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/` and `sites/dcs/PRODUCT.md`.
+
 ### Documentation
 
 - **A sticky section makes in-page anchor links do nothing, and neither the DOM nor the console

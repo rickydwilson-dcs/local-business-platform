@@ -1,13 +1,18 @@
 # DCS homepage — round 9 — handoff
 
-**Status:** in-progress — the prototype has been art-directed hard across two sessions and is
-deployed for review. **20 commits sit on `develop` that are not on `staging` or `main`**; a promotion
-run is the immediate next step. Nothing is blocked.
-**Branch:** `develop`, level with `origin/develop` — everything is pushed.
+**Status:** in-progress — the prototype is art-directed, deployed for review, and **fully promoted
+to production**. Nothing is blocked and nothing is pending promotion. The one open item is that it
+has never been opened on a real handset.
+**Branch:** `develop`, level with `origin/develop`. `develop`, `staging` and `main` all carry the
+same work — 0 commits outstanding between them at the time of writing.
 **Working tree:** clean for this work. Two pre-existing untracked items are not ours and must stay
 out of any commit: `supabase/`, `output/sessions/codex-peer-review/.../openrouter-response.json`.
-**In production (`main`):** the round-9 prototype as of PR #59 / `ae61e2b1`, merged 2026-08-22.
-Everything since is on `develop` only.
+**In production (`main` = `5a598045`):** everything below, via PR #60, merged 2026-08-23T07:33:20Z
+by rickydwilson-dcs. That promotion changed exactly six files — four under `output/sessions/` plus
+`CLAUDE.md` and `CHANGELOG.md` — and **no site, package, script, tool or workflow file at all**,
+which is why CI, Production Quality Gate and the Regression Watchdog produced no runs for it. Their
+`paths-ignore` filters excluded the change set; they were not skipped gates, and no production site
+redeployed.
 **Live prototype:** https://2026-08-17-dcs-homepage-redesign.vercel.app/r9-kota-level — verified
 HTTP 200 on 2026-08-23. Public, no auth wall. Options lab at `/r9-worklab`.
 
@@ -99,8 +104,6 @@ Every figure below was measured today, in a same-origin iframe at the stated vie
 ## What was NOT done
 
 - **Never opened on a real handset.** See above. Everything is Chrome in a fixed-width iframe.
-- **Not promoted.** 20 commits are on `develop` only. `staging` and `main` are both at the PR #59
-  state.
 - **`r9-worklab.html` still shows four clients**, not five, and its Option A pill rail still has the
   defect Ricky reported — the selected pill does not scroll into view at 390px. He chose Option B,
   so it was never fixed. It is a decision record, deliberately left.
@@ -191,9 +194,7 @@ python3 -m http.server 4321
    https://2026-08-17-dcs-homepage-redesign.vercel.app/r9-kota-level
    Check specifically what an emulator cannot: content clearing the notch and home indicator, and
    whether any strip of the next section leaks at a boundary when the URL bar retracts.
-2. **Promote the 20 commits** — `/deploy.changes` (develop -> staging -> PR into `main`; `main` is
-   protected, so the run stops at the PR).
-3. Re-publish after any further edit:
+2. Re-publish after any further edit:
    ```bash
    npx tsx tools/publish-prototype.ts \
      output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype
@@ -218,7 +219,9 @@ added (it rewrites relative paths to R2 URLs as a side effect, which is how new 
    the copy already tripled that window, so it is now largely redundant.
 4. **Do The Clothing Kings, Cuddle Plush and Colossus have live URLs?**
 5. **Fix the loop seams?** Ping-pong encode or a crossfade; costs no credits either way.
-6. **Port to React in `sites/dcs`, or keep iterating in HTML?** Unanswered since the last handoff and
-   more expensive to defer with every round.
+6. **Port to React in `sites/dcs`, or keep iterating in HTML?** Answered 2026-08-23: ported. See
+   `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/` — `r9-kota-level.html` is now the
+   Next.js homepage at `sites/dcs/app/page.tsx`, with the 14 existing inner routes moved into an
+   `app/(site)` route group so the homepage could sit outside it with its own layout/behaviour.
 7. **Is `r9-kota-level.html` the direction?** Ricky has art-directed it across two long sessions and
    made many specific calls, which reads as acceptance, but he has never said so.

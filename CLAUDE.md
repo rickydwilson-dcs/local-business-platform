@@ -121,6 +121,7 @@ The theme system exists so sites can be re-branded without touching component co
 - E2E tests in CI use `next start` (pre-built), not `next dev`. New Relic is disabled in CI.
 - Pre-push hook runs only `type-check` (~3s). Full build runs in CI.
 - Every site's `next.config.ts` CSP `script-src` must gate `'unsafe-eval'` behind `process.env.NODE_ENV === 'development'` (see `docs/standards/security.md`'s CSP Notes) — omitting it entirely breaks `next dev`'s webpack HMR/React Refresh runtime, which evaluates code as strings, throwing an `EvalError` on load that silently kills all client-side interactivity (buttons, forms) while the page still renders and looks fine. Production correctly omits it. A site copied from `base-template` inherits this correctly; don't hand-roll a CSP header without it.
+- A site copied from `base-template` inherits a CSP with **no `media-src` directive**. CSP falls back to `default-src 'self'` for `<video>`, so the first `<video>` element anyone adds is silently blocked — no console error visible until you check, just an empty box where the clip should be. Add `media-src 'self' https://*.r2.dev;` (or the site's actual media host) alongside the existing `img-src`. Verified against the real emitted header, not assumed: `sites/dcs/next.config.ts` was fixed this way in August 2026, and `sites/dcs/test/csp.test.ts` imports the real `headers()` array from `next.config.ts` and asserts the actual emitted CSP string in both `development` and `production` — a hand-written copy of the header would not have caught the gap.
 
 ---
 

@@ -1,87 +1,78 @@
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { SiteHomePage } from "@/components/pages/HomePage";
-import { siteConfig } from "@/site.config";
-import { getLocations } from "@/lib/content";
-import { absUrl } from "@/lib/site";
-import { getLocalBusinessSchema } from "@/lib/schema";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { Metadata } from 'next';
+// Must stay above the r9 import: it rolls the app-wide base layer back to the
+// browser-default environment the verbatim-ported stylesheet was authored
+// against. See the file header for the three declarations and what they cost.
+import '@/styles/home-r9-reset.css';
+import '@/styles/home-r9.css';
+import { HomeBody } from '@/components/home/home-body';
+import { siteConfig } from '@/site.config';
+import { absUrl } from '@/lib/site';
+import { getLocalBusinessSchema } from '@/lib/schema';
+
+const HOME_TITLE = 'Digital Consulting Services — Websites as professional as you';
+const HOME_DESCRIPTION =
+  'Designed, written, built, hosted and looked after by me. Work that stands next to what London studios put out, for a fraction of the cost.';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-  description:
-    "Bespoke websites for electricians, plumbers, scaffolders, and builders. Built-in local SEO. Fully managed.",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   openGraph: {
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      "Bespoke websites for electricians, plumbers, scaffolders, and builders. Built-in local SEO. Fully managed.",
-    url: absUrl("/"),
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: absUrl('/'),
     siteName: siteConfig.name,
     images: [
       {
-        url: absUrl("/logo.svg"),
+        url: absUrl('/logo.svg'),
         width: 1200,
         height: 630,
-        alt: `${siteConfig.business.name} - ${siteConfig.tagline}`,
+        alt: HOME_TITLE,
       },
     ],
-    locale: "en_GB",
-    type: "website",
+    locale: 'en_GB',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      "Bespoke websites for electricians, plumbers, scaffolders, and builders. Built-in local SEO. Fully managed.",
-    images: [absUrl("/logo.svg")],
+    card: 'summary_large_image',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [absUrl('/logo.svg')],
   },
   alternates: {
-    canonical: absUrl("/"),
+    canonical: absUrl('/'),
   },
 };
 
-export default async function HomePage() {
-  const locations = await getLocations();
-
+export default function HomePage() {
   const localBusinessSchema = getLocalBusinessSchema();
 
   const webSiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": absUrl("/#website"),
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': absUrl('/#website'),
     name: siteConfig.business.name,
-    url: absUrl("/"),
+    url: absUrl('/'),
     description: siteConfig.tagline,
     publisher: {
-      "@id": absUrl("/#organization"),
+      '@id': absUrl('/#organization'),
     },
-    inLanguage: "en-GB",
+    inLanguage: 'en-GB',
   };
 
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
-        name: "Home",
-        item: absUrl("/"),
+        name: 'Home',
+        item: absUrl('/'),
       },
     ],
   };
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
-  const schemaNodes = (
+  return (
     <>
       <script
         type="application/ld+json"
@@ -95,32 +86,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <HomeBody />
     </>
-  );
-
-  return (
-    <SiteHomePage
-      siteConfig={siteSummary}
-      heroHeadline="Websites That Get Tradespeople More Jobs"
-      heroSubheading="Bespoke websites for electricians, plumbers, scaffolders, and builders. Built-in local SEO. Fully managed."
-      services={siteConfig.services.map((s) => ({
-        slug: s.slug,
-        title: s.title,
-        description: s.description,
-      }))}
-      locations={locations.map((l) => ({
-        slug: l.slug,
-        title: l.title,
-        description: l.description,
-      }))}
-      testimonials={(siteConfig.testimonials ?? []).map((t, i) => ({
-        slug: `testimonial-${i + 1}`,
-        name: t.name,
-        rating: 5,
-        body: t.quote,
-        platform: t.trade,
-      }))}
-      schemaNodes={schemaNodes}
-    />
   );
 }
