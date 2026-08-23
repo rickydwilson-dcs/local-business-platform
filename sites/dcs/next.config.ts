@@ -10,6 +10,9 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  // Next's automatic trailing-slash redirect runs before custom redirects() and would
+  // intercept every old WordPress URL (all trailing-slash) before our redirect map sees it.
+  skipTrailingSlashRedirect: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   // Enable experimental features for better performance
   experimental: {
@@ -71,6 +74,61 @@ const nextConfig: NextConfig = {
   },
   // Ensure static exports work correctly
   trailingSlash: false,
+  // Redirect map from the old WordPress site (see output/sessions/2026-08/2026-08-23_dcs-site-cutover/cutover-plan.md)
+  // No catch-all: Next.js runs redirects before routing, so a /(.*) source would swallow real pages.
+  async redirects() {
+    const projectRedirects = [
+      ['cuddle-plush-fabrics', 'cuddle-plush-fabrics'],
+      ['silvero-homes', 'silvero-homes'],
+      ['nicola-noble-tuition', 'nicola-noble-tuition'],
+      ['dch-automotive', 'dch-automotive'],
+      ['luna-landings', 'luna-landings'],
+      ['sanctuary-ida', 'sanctuary-ida'],
+      ['the-clothing-kings', 'the-clothing-kings'],
+      ['bexhill-removals', 'bexhill-removals'],
+    ].flatMap(([oldSlug, newSlug]) => [
+      { source: `/our-work/${oldSlug}`, destination: `/projects/${newSlug}`, permanent: true },
+      { source: `/our-work/${oldSlug}/`, destination: `/projects/${newSlug}`, permanent: true },
+    ]);
+
+    const toHome = [
+      '/our-work',
+      '/news',
+      '/blog/what-you-need-to-know-about-seo',
+      '/blog/why-are-fast-sites-important',
+      '/blog/featured_item',
+      '/examples',
+    ];
+    const ourWorkNoCounterpart = [
+      'mad-group-marketing',
+      'absorbent-mats',
+      'curtain-drop',
+      'bunnies-bunches-and-bows',
+    ];
+    const blogFeaturedChildren = [
+      'sanctuary-ida',
+      'nicola-noble-tuition',
+      'cuddle-plush-fabrics',
+      'luna-landings',
+      'curtain-drop',
+      'absorbent-mats',
+    ];
+    const homeSources = [
+      ...toHome,
+      ...ourWorkNoCounterpart.map((slug) => `/our-work/${slug}`),
+      ...blogFeaturedChildren.map((slug) => `/blog/featured_item/${slug}`),
+      '/blog/category/tips',
+      '/blog/featured_item_category/ecommerce',
+    ].flatMap((source) => [source, `${source}/`]);
+
+    return [
+      { source: '/privacy-policy/', destination: '/privacy-policy', permanent: true },
+      { source: '/contact-us', destination: '/contact', permanent: true },
+      { source: '/contact-us/', destination: '/contact', permanent: true },
+      ...projectRedirects,
+      ...homeSources.map((source) => ({ source, destination: '/', permanent: true })),
+    ];
+  },
   // Security headers for production
   async headers() {
     // CSP script-src: unsafe-inline required for Next.js hydration
