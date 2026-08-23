@@ -43,6 +43,15 @@ export function generateCssVariables(config: ThemeConfig): Record<string, string
   vars["--color-overlay-light"] = config.colors.overlay.light;
   vars["--color-overlay-primary"] = config.colors.overlay.primary;
 
+  // Custom Colors — arbitrary site-specific palette entries, keyed as
+  // --color-{kebab-case key} (e.g. "onPrimary" -> --color-on-primary)
+  if (config.colors.custom) {
+    for (const [key, value] of Object.entries(config.colors.custom)) {
+      const kebabKey = key.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+      vars[`--color-${kebabKey}`] = value;
+    }
+  }
+
   // Spacing
   vars["--spacing-xs"] = config.spacing.xs;
   vars["--spacing-sm"] = config.spacing.sm;

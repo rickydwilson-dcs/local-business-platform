@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk, Inter } from 'next/font/google';
+import { Space_Grotesk, Inter, Archivo, Poppins } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
@@ -23,6 +23,20 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
   weight: ['400', '500', '600'],
+});
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['300'],
 });
 
 export const metadata: Metadata = {
@@ -65,7 +79,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html
+      lang="en-GB"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${archivo.variable} ${poppins.variable}`}
+    >
       <head>
         {/* Material Symbols — must be a <link>, not CSS @import, because
             Tailwind's @tailwind expansion buries @import url() mid-file
