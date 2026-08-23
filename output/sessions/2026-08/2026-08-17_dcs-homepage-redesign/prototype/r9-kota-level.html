@@ -1022,8 +1022,8 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     <div class="cornerfill cf--magenta" aria-hidden="true"></div>
 
     <section class="panel p--aqua" data-ground="aqua">
-      <p class="quote res">“My phone started ringing within two weeks of the site going live. Ricky handled everything — I didn't have to do a thing.”</p>
-      <p class="quote__a">Mark H. <span>· Electrician, Brighton</span></p>
+      <p class="quote res">“When I want something added I just text Ricky and it gets done. It’s so easy.”</p>
+      <p class="quote__a">Martin <span>· The Clothing Kings, Polegate</span></p>
     </section>
 
     <div class="cornerfill cf--aqua" aria-hidden="true"></div>
@@ -1177,6 +1177,32 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   burger.addEventListener('click', function(){ setMenu(menu.hidden); });
   menu.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
+
+  /* In-page links cannot use native anchor navigation here. Every panel is
+     position:sticky with no bound, so once you are past it the browser still
+     sees it pinned at top:0 — getBoundingClientRect and offsetTop BOTH report
+     the pinned position, and the jump moves nowhere at all. Measured from the
+     footer: every menu and footer link left the scroll on 14392.
+     Reading the layout position means neutralising sticky for one synchronous
+     measurement; there is no paint between, so nothing flickers. */
+  function layoutTop(el){
+    var prev = el.style.position;
+    el.style.position = 'static';
+    var y = el.getBoundingClientRect().top + window.scrollY;
+    el.style.position = prev;
+    return y;
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (id.length < 2) return;
+    var t = document.querySelector(id);
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: layoutTop(t), behavior: reduce ? 'auto' : 'smooth' });
+    history.replaceState(null, '', id);
+  });
 
   var bar = document.getElementById('bar');
   var grounds = [].slice.call(document.querySelectorAll('main [data-ground]'));
