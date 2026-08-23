@@ -1,0 +1,85 @@
+/**
+ * Homepage-only neutraliser for the app-wide base layer.
+ *
+ * `styles/home-r9.css` is a verbatim port of the r9 prototype's stylesheet
+ * (asserted rule-for-rule by `test/home-css-parity.test.ts`). The prototype is
+ * a standalone HTML file whose only reset is `*{box-sizing:border-box;
+ * margin:0;padding:0}` — it was authored against browser defaults for
+ * everything else, so it never needed to state the values below.
+ *
+ * The Next.js app is not that environment. `app/globals.css` pulls in Tailwind
+ * Preflight plus the solaris theme's own base rules, and three of those
+ * declarations reach elements the ported stylesheet deliberately leaves alone.
+ * Measured against the prototype at 1440x900 and 390x844 (Phase 10), they were
+ * the whole of the layout delta:
+ *
+ *   1. Preflight's `html{line-height:1.5}` inherits everywhere the port does
+ *      not set `line-height`, so ~150 elements computed `24px` (1.5 x 16px)
+ *      where the prototype computes `normal`. That is not cosmetic: it
+ *      inflated `.tiers` by 66px, `.steps` by 46px and `.tier__f` by 15px, and
+ *      pushed every following element down by the accumulated difference.
+ *   2. The solaris base rule `h1,h2,...{font-family:var(--font-space-grotesk)}`
+ *      won on the homepage because the port sets no font-family on headings —
+ *      they are meant to inherit Archivo from `body`. The hero headline was
+ *      rendering in Space Grotesk, 27.6px narrower than the prototype's line.
+ *      The r9 thesis is "one grotesk family at every size, no second face", so
+ *      this was the single most visible break in the port.
+ *   3. Preflight's `button,input,optgroup,select,textarea{font-family:inherit;
+ *      font-size:100%;line-height:inherit}` overrides the UA control font the
+ *      prototype's unstyled controls actually use.
+ *   4. `app/globals.css`'s `body{overflow-x:hidden}` was the worst of them, and
+ *      the only one no static snapshot could have caught. `overflow-x` anything
+ *      other than `visible` or `clip` makes the element a scroll container, and
+ *      `position:sticky` sticks to its nearest scrollport — so every sticky
+ *      panel on this page was sticking to `<body>`, which never scrolls,
+ *      instead of to the viewport. Measured: all five work panels pinned for
+ *      0px where the prototype pins them for 5200/4080/2960/1800/920px, and
+ *      the nav ground fell through to its `paper` fallback at every scroll
+ *      position inside the pinned sections because no panel rect covered the
+ *      probe any more. The page still rendered correctly at rest, which is why
+ *      this survived to Phase 10. The r9 stylesheet deliberately uses
+ *      `html{overflow-x:clip}` — `clip` does NOT create a scroll container —
+ *      and that rule is what protects this page from horizontal overflow, so
+ *      restoring `body{overflow:visible}` loses nothing.
+ *
+ * Fixing this by patching the affected selectors in `home-r9.css` would have
+ * meant rewriting the ported rules themselves — breaking both the verbatim-port
+ * contract and the test that enforces it — to work around a collision that is
+ * not in those rules at all. This file restores the environment the port was
+ * written against instead, and is imported ONLY by `app/page.tsx`, so it is
+ * emitted in the homepage's stylesheet and does not reach the 14 routes in the
+ * `(site)` group. It must be imported BEFORE `home-r9.css`.
+ *
+ * `revert` rather than literal values on the controls: it rolls the cascade
+ * back to the user-agent origin, which is exactly the state the prototype's
+ * controls are in, without this file having to hardcode one browser's UA
+ * numbers (Chrome's `13.3333px Arial`).
+ */
+
+html {
+  line-height: normal;
+}
+
+/* Not cosmetic: see point 4 above. This is what lets the work panels pin. */
+body {
+  overflow: visible;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: revert;
+  font-size: revert;
+  line-height: revert;
+}

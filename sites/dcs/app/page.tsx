@@ -1,4 +1,8 @@
 import type { Metadata } from 'next';
+// Must stay above the r9 import: it rolls the app-wide base layer back to the
+// browser-default environment the verbatim-ported stylesheet was authored
+// against. See the file header for the three declarations and what they cost.
+import '@/styles/home-r9-reset.css';
 import '@/styles/home-r9.css';
 import { HomeBody } from '@/components/home/home-body';
 import { siteConfig } from '@/site.config';
