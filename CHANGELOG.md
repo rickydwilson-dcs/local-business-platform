@@ -24,6 +24,24 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   added: an unlinked Terms & Conditions page. See
   `output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/` and `sites/dcs/PRODUCT.md`.
 
+- **Cookie consent banner redesigned as a floating ink/fuchsia card, scoped to DCS only.** The
+  shared `ConsentManager` in `packages/core-components` renders as a full-width footer bar on all 6
+  sites that use it; DCS's brand direction (ink background, fuchsia keyline, pill buttons matching
+  the homepage "Hire me" CTA) needed a different look without touching the other 5 sites'
+  banners. `sites/dcs/components/dcs-consent-manager.tsx` forks the presentation only — same
+  consent state machine, storage and focus-trap hook — and `layout.tsx` swaps the import; the
+  shared component itself is untouched. Along the way, initial keyboard/screen-reader focus moved
+  off both action buttons and onto a non-interactive heading instead: parking focus on Accept or
+  Reject means a stray Enter right when the banner appears fires a real consent decision with no
+  deliberate choice, in either direction. See "Site-Specific Presentation Forks" in
+  [docs/standards/analytics.md](docs/standards/analytics.md).
+- **WordPress cutover redirect map added to `sites/dcs/next.config.ts`.** Maps old WordPress URLs
+  (project pages under `/our-work`, blog/news, orphaned category pages) to their `/projects`
+  equivalents or home, ahead of the real domain cutover. `skipTrailingSlashRedirect` is set because
+  Next's automatic trailing-slash redirect runs _before_ custom `redirects()` and would intercept
+  every old WordPress URL (all trailing-slash) before the redirect map ever saw them. See
+  `output/sessions/2026-08/2026-08-23_dcs-site-cutover/cutover-plan.md`.
+
 ### Documentation
 
 - **A sticky section makes in-page anchor links do nothing, and neither the DOM nor the console
