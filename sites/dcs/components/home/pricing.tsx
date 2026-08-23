@@ -26,6 +26,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { usePrefersReducedMotion } from './home-behaviour';
 import { TIERS, type TierKey } from './home-data';
 
 type Mode = 'monthly' | 'upfront';
@@ -57,16 +58,13 @@ function CheckIcon({ hidden }: { hidden?: boolean }) {
 export function Pricing() {
   const [mode, setMode] = useState<Mode>('monthly');
   const [tier, setTier] = useState<TierKey>('starter');
-  const [reducedMotion, setReducedMotion] = useState(false);
+  // Phase 6: one shared one-shot read of the media query for the whole
+  // homepage, rather than a second copy of it here. Same semantics as before
+  // (SSR default false — motion armed — corrected on hydration), and the same
+  // semantics as the prototype's single `var reduce = matchMedia(...).matches`.
+  const reducedMotion = usePrefersReducedMotion();
   const [swapKey, setSwapKey] = useState(0);
   const mounted = useRef(false);
-
-  useEffect(() => {
-    // Client-safe read of prefers-reduced-motion; SSR default is false
-    // (motion armed), corrected on hydration — matches the prototype's own
-    // `var reduce = matchMedia(...).matches` read at script-execution time.
-    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
 
   useEffect(() => {
     if (!mounted.current) {

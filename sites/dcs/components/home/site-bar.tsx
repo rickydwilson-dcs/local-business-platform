@@ -5,12 +5,15 @@
  * trigger. Ported class-name for class-name from `.bar` in
  * `output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/r9-kota-level.html`.
  *
- * `data-ground="ink"` is the prototype's server-rendered default (the hero
- * that sits under the bar on load is on an ink ground) — the live
- * scroll-tracking that swaps this value per section is Phase 6's job, not
- * this component's. This file only needs to be a Client Component because
- * that future behaviour module attaches to this same DOM node; the markup
- * below is otherwise static.
+ * `data-ground` starts at `"ink"` — the prototype's server-rendered default,
+ * since the hero sitting under the bar on load is on an ink ground. From
+ * Phase 6 the live value comes from `HomeBehaviour`'s context, written by the
+ * rAF-driven ground tracker; the initial context value is the same `"ink"`, so
+ * hydration is a no-op.
+ *
+ * The burger's `aria-expanded`/`aria-label` and its click handler are likewise
+ * driven from that context rather than from imperative DOM writes, so the
+ * open/closed state has exactly one owner.
  *
  * Per Trap 11 (see root CLAUDE.md and the yolo-brief's Traps section), this
  * component must never render `.menu` as a descendant — `.menu` lives in
@@ -18,9 +21,13 @@
  * Phase 7 furniture wrapper.
  */
 
+import { useHomeBehaviour } from './home-behaviour';
+
 export function SiteBar() {
+  const { ground, menuOpen, toggleMenu } = useHomeBehaviour();
+
   return (
-    <header className="bar" id="bar" data-ground="ink">
+    <header className="bar" id="bar" data-ground={ground}>
       <a className="mark" href="#top" aria-label="Digital Consulting Services, home">
         <svg
           className="mark__svg"
@@ -58,12 +65,16 @@ export function SiteBar() {
             />
           </svg>
         </a>
+        {/* No `type` attribute — the prototype's burger has none
+            (r9-kota-level.html:762) and there is no form on the page. */}
         <button
           className="burger"
           id="burger"
-          aria-expanded="false"
+          aria-expanded={menuOpen}
           aria-controls="menu"
-          aria-label="Open menu"
+          // Exactly the prototype's two label strings (r9-kota-level.html:1172).
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          onClick={toggleMenu}
         >
           <span></span>
           <span></span>

@@ -22,6 +22,7 @@
 import { ChapterPanel } from './chapter-panel';
 import { EndSection } from './end-section';
 import { Hero } from './hero';
+import { HomeBehaviour } from './home-behaviour';
 import { MobileMenu } from './mobile-menu';
 import { Pricing } from './pricing';
 import { Questions } from './questions';
@@ -33,7 +34,12 @@ import { WorkStack } from './work-stack';
 
 export function HomeBody() {
   return (
-    <>
+    // `HomeBehaviour` (Phase 6) is the client boundary that runs the
+    // prototype's scroll and interaction script. Everything below it is passed
+    // as `children` from this Server Component, so its state changes only
+    // re-render the components that actually read its context (`SiteBar`,
+    // `MobileMenu`) — not this whole tree.
+    <HomeBehaviour>
       <SiteBar />
       <MobileMenu />
 
@@ -78,6 +84,6 @@ export function HomeBody() {
           </ChapterPanel>
         </div>
       </main>
-    </>
+    </HomeBehaviour>
   );
 }

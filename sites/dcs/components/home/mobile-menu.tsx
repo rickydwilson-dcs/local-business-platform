@@ -1,5 +1,6 @@
 'use client';
 
+import { useHomeBehaviour } from './home-behaviour';
 import { CONTACT } from './home-data';
 
 /**
@@ -25,15 +26,29 @@ import { CONTACT } from './home-data';
  *   </>
  *
  * and must not place either inside a wrapper that carries `transform` or
- * `backdrop-filter`. The open/close toggle (`hidden` attribute,
- * `aria-expanded` on the burger) is Phase 6's behaviour-module job — this
- * component only builds the static markup shell, `hidden` by default to
- * match the prototype's server-rendered state before any JS runs.
+ * `backdrop-filter`. The open/close state lives in `HomeBehaviour`'s context
+ * (Phase 6) and drives the `hidden` attribute from React rather than being
+ * toggled imperatively; the SSR value is `hidden`, matching the prototype's
+ * server-rendered state before any JS runs.
+ *
+ * Clicking any link inside closes the overlay, exactly as the prototype does
+ * (r9-kota-level.html:1178). The scroll to the anchor's target is NOT done
+ * here — the document-level interception in `home-behaviour.tsx` owns it for
+ * every in-page link on the page, menu or not.
  */
 
 export function MobileMenu() {
+  const { menuOpen, setMenuOpen } = useHomeBehaviour();
+
   return (
-    <div className="menu" id="menu" hidden>
+    <div
+      className="menu"
+      id="menu"
+      hidden={!menuOpen}
+      onClick={(event) => {
+        if ((event.target as Element).closest('a')) setMenuOpen(false);
+      }}
+    >
       <nav className="menu__nav">
         <a href="#work">
           <span>Work</span>
