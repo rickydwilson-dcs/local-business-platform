@@ -5,19 +5,19 @@
  * Individual blog post page with MDX content rendering.
  */
 
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteBlogPostPage } from "@/components/pages/BlogPostPage";
-import { getBlogPosts, getBlogPost, calculateReadingTime } from "@/lib/content";
-import { getImageUrl } from "@/lib/image";
-import { absUrl } from "@/lib/site";
-import { loadMdx } from "@/lib/mdx";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteBlogPostPage } from '@/components/pages/BlogPostPage';
+import { getBlogPosts, getBlogPost, calculateReadingTime } from '@/lib/content';
+import { getImageUrl } from '@/lib/image';
+import { absUrl } from '@/lib/site';
+import { loadMdx } from '@/lib/mdx';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type Params = { slug: string };
@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!post) {
     return {
-      title: "Article Not Found",
-      description: "The requested blog article could not be found.",
+      title: 'Article Not Found',
+      description: 'The requested blog article could not be found.',
     };
   }
 
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       description: frontmatter.description,
       url: absUrl(`/blog/${slug}`),
       siteName: siteConfig.business.name,
-      type: "article",
+      type: 'article',
       publishedTime: frontmatter.date,
       authors: [frontmatter.author.name],
       images: frontmatter.heroImage
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         : undefined,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.description,
       images: frontmatter.heroImage ? [getImageUrl(frontmatter.heroImage)] : undefined,
@@ -85,12 +85,12 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   }
 
   const { frontmatter, content: rawContent } = post;
-  const { content: mdxContent } = await loadMdx({ baseDir: "blog", slug });
+  const { content: mdxContent } = await loadMdx({ baseDir: 'blog', slug });
   const allPosts = await getBlogPosts();
   const readingTime = frontmatter.readingTime || calculateReadingTime(rawContent);
 
   const breadcrumbItems = [
-    { name: "Blog", href: "/blog" },
+    { name: 'Blog', href: '/blog' },
     { name: frontmatter.title, href: `/blog/${slug}`, current: true },
   ];
 
@@ -122,38 +122,38 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
     <Schema
       org={{
         name: siteConfig.business.name,
-        url: "/",
-        logo: "/logo.svg",
+        url: '/',
+        logo: '/logo.svg',
       }}
       breadcrumbs={[
-        { name: "Home", url: "/" },
-        { name: "Blog", url: "/blog" },
+        { name: 'Home', url: '/' },
+        { name: 'Blog', url: '/blog' },
         { name: frontmatter.title, url: `/blog/${slug}` },
       ]}
       article={{
-        "@type": "BlogPosting",
-        "@id": absUrl(`/blog/${slug}#article`),
+        '@type': 'BlogPosting',
+        '@id': absUrl(`/blog/${slug}#article`),
         headline: frontmatter.title,
         description: frontmatter.description,
         image: frontmatter.heroImage ? getImageUrl(frontmatter.heroImage) : undefined,
         datePublished: frontmatter.date,
         dateModified: frontmatter.date,
         author: {
-          "@type": "Person",
+          '@type': 'Person',
           name: frontmatter.author.name,
           jobTitle: frontmatter.author.role,
         },
         publisher: {
-          "@type": "Organization",
+          '@type': 'Organization',
           name: siteConfig.business.name,
           logo: {
-            "@type": "ImageObject",
-            url: absUrl("/logo.svg"),
+            '@type': 'ImageObject',
+            url: absUrl('/logo.svg'),
           },
         },
         mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": absUrl(`/blog/${slug}`),
+          '@type': 'WebPage',
+          '@id': absUrl(`/blog/${slug}`),
         },
       }}
     />

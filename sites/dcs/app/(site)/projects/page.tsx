@@ -5,26 +5,26 @@
  * Portfolio of completed projects.
  */
 
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteProjectsPage } from "@/components/pages/ProjectsPage";
-import { getProjects } from "@/lib/content";
-import { absUrl } from "@/lib/site";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteProjectsPage } from '@/components/pages/ProjectsPage';
+import { getProjects } from '@/lib/content';
+import { absUrl } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
-  description: `View our portfolio of completed websites. See how we've helped tradespeople across ${siteConfig.serviceAreas.join(", ")} get more jobs online.`,
-  keywords: ["portfolio", "case studies", "web design examples", "tradesperson websites"],
+  description: `View our portfolio of completed websites. See how we've helped tradespeople across ${siteConfig.serviceAreas.join(', ')} get more jobs online.`,
+  keywords: ['portfolio', 'case studies', 'web design examples', 'tradesperson websites'],
   openGraph: {
     title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
     description: `View our portfolio of completed websites for local tradespeople.`,
-    url: "/projects",
-    type: "website",
+    url: '/projects',
+    type: 'website',
   },
 };
 
@@ -58,17 +58,17 @@ export default async function ProjectsPage() {
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: "/",
-          logo: "/logo.svg",
+          url: '/',
+          logo: '/logo.svg',
         }}
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Portfolio", url: "/projects" },
+          { name: 'Home', url: '/' },
+          { name: 'Portfolio', url: '/projects' },
         ]}
         webpage={{
-          "@type": "CollectionPage",
-          "@id": absUrl("/projects#collection"),
-          url: absUrl("/projects"),
+          '@type': 'CollectionPage',
+          '@id': absUrl('/projects#collection'),
+          url: absUrl('/projects'),
           name: `${siteConfig.business.name} Portfolio`,
           description: `Portfolio of completed websites for local tradespeople.`,
         }}

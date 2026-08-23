@@ -5,26 +5,26 @@
  * Displays all available services.
  */
 
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteServicesPage } from "@/components/pages/ServicesPage";
-import { getServices } from "@/lib/content";
-import { absUrl } from "@/lib/site";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteServicesPage } from '@/components/pages/ServicesPage';
+import { getServices } from '@/lib/content';
+import { absUrl } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: `Our Services | ${siteConfig.business.name}`,
   description: `Professional web design and digital services offered by ${siteConfig.business.name}. Quality work, competitive prices, and excellent customer service.`,
-  keywords: ["services", "web design", "local SEO", "website management"],
+  keywords: ['services', 'web design', 'local SEO', 'website management'],
   openGraph: {
     title: `Our Services | ${siteConfig.business.name}`,
     description: `Professional services offered by ${siteConfig.business.name}.`,
-    url: "/services",
-    type: "website",
+    url: '/services',
+    type: 'website',
   },
 };
 
@@ -55,17 +55,17 @@ export default async function ServicesPage() {
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: "/",
-          logo: "/logo.svg",
+          url: '/',
+          logo: '/logo.svg',
         }}
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
         ]}
         webpage={{
-          "@type": "CollectionPage",
-          "@id": absUrl("/services#collection"),
-          url: absUrl("/services"),
+          '@type': 'CollectionPage',
+          '@id': absUrl('/services#collection'),
+          url: absUrl('/services'),
           name: `${siteConfig.business.name} Services`,
           description: `Professional services offered by ${siteConfig.business.name}.`,
         }}

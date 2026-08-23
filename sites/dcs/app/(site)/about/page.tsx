@@ -4,18 +4,18 @@
  * Uses site page template driven from siteConfig.
  */
 
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { SiteAboutPage } from "@/components/pages/AboutPage";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
-import { absUrl } from "@/lib/site";
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { SiteAboutPage } from '@/components/pages/AboutPage';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
+import { absUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: `About Us | ${siteConfig.business.name}`,
   description: `Learn about ${siteConfig.business.name} — established ${siteConfig.credentials.yearEstablished}. ${siteConfig.tagline}.`,
   alternates: {
-    canonical: absUrl("/about"),
+    canonical: absUrl('/about'),
   },
 };
 

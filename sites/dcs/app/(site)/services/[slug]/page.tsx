@@ -5,17 +5,17 @@
  * Individual service page with MDX content rendering.
  */
 
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema, type FAQItem, type AboutContent } from "@platform/core-components";
-import { SiteServiceDetailPage } from "@/components/pages/ServiceDetailPage";
-import { getServices, getService } from "@/lib/content";
-import { loadMdx } from "@/lib/mdx";
-import { getImageUrl } from "@/lib/image";
-import { absUrl } from "@/lib/site";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
+import { SiteServiceDetailPage } from '@/components/pages/ServiceDetailPage';
+import { getServices, getService } from '@/lib/content';
+import { loadMdx } from '@/lib/mdx';
+import { getImageUrl } from '@/lib/image';
+import { absUrl } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 /** Service frontmatter shape */
 interface ServiceFrontmatter {
@@ -31,7 +31,7 @@ interface ServiceFrontmatter {
   about?: AboutContent;
 }
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type Params = { slug: string };
@@ -47,8 +47,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!result) {
     return {
-      title: "Service Not Found",
-      description: "The requested service could not be found.",
+      title: 'Service Not Found',
+      description: 'The requested service could not be found.',
     };
   }
 
@@ -76,10 +76,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
             },
           ]
         : undefined,
-      type: "website",
+      type: 'website',
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: fm.title,
       description,
       images: heroImage ? [getImageUrl(heroImage)] : undefined,
@@ -99,13 +99,13 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   }
 
   const fm = result.frontmatter as ServiceFrontmatter;
-  const { content: mdxContent } = await loadMdx({ baseDir: "services", slug });
+  const { content: mdxContent } = await loadMdx({ baseDir: 'services', slug });
 
   const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
 
   const breadcrumbItems = [
-    { name: "Services", href: "/services" },
+    { name: 'Services', href: '/services' },
     { name: fm.title, href: `/services/${slug}`, current: true },
   ];
 
@@ -123,19 +123,19 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
     <Schema
       org={{
         name: siteConfig.business.name,
-        url: "/",
-        logo: "/logo.svg",
+        url: '/',
+        logo: '/logo.svg',
       }}
       breadcrumbs={[
-        { name: "Home", url: "/" },
-        { name: "Services", url: "/services" },
+        { name: 'Home', url: '/' },
+        { name: 'Services', url: '/services' },
         { name: fm.title, url: `/services/${slug}` },
       ]}
       service={{
         id: `/services/${slug}#service`,
         url: `/services/${slug}`,
         name: fm.title,
-        description: fm.description || "",
+        description: fm.description || '',
         serviceType: fm.title,
         areaServed: siteConfig.serviceAreas,
       }}

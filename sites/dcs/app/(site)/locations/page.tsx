@@ -5,26 +5,26 @@
  * Displays all service area locations.
  */
 
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteLocationsPage } from "@/components/pages/LocationsPage";
-import { getLocations } from "@/lib/content";
-import { absUrl } from "@/lib/site";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteLocationsPage } from '@/components/pages/LocationsPage';
+import { getLocations } from '@/lib/content';
+import { absUrl } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: `Service Areas | Locations | ${siteConfig.business.name}`,
-  description: `${siteConfig.business.name} serves tradespeople across ${siteConfig.serviceAreas.join(", ")}. Find our services in your area.`,
-  keywords: ["locations", "service areas", "web design", ...siteConfig.serviceAreas],
+  description: `${siteConfig.business.name} serves tradespeople across ${siteConfig.serviceAreas.join(', ')}. Find our services in your area.`,
+  keywords: ['locations', 'service areas', 'web design', ...siteConfig.serviceAreas],
   openGraph: {
     title: `Service Areas | ${siteConfig.business.name}`,
     description: `${siteConfig.business.name} serves tradespeople across multiple locations.`,
-    url: "/locations",
-    type: "website",
+    url: '/locations',
+    type: 'website',
   },
 };
 
@@ -55,17 +55,17 @@ export default async function LocationsPage() {
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: "/",
-          logo: "/logo.svg",
+          url: '/',
+          logo: '/logo.svg',
         }}
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Locations", url: "/locations" },
+          { name: 'Home', url: '/' },
+          { name: 'Locations', url: '/locations' },
         ]}
         webpage={{
-          "@type": "CollectionPage",
-          "@id": absUrl("/locations#collection"),
-          url: absUrl("/locations"),
+          '@type': 'CollectionPage',
+          '@id': absUrl('/locations#collection'),
+          url: absUrl('/locations'),
           name: `${siteConfig.business.name} Service Areas`,
           description: `${siteConfig.business.name} serves tradespeople across multiple locations.`,
         }}

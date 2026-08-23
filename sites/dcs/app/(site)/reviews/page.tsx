@@ -5,32 +5,32 @@
  * Customer testimonials and reviews with aggregate rating display.
  */
 
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteReviewsPage } from "@/components/pages/ReviewsPage";
-import { getTestimonials, calculateAggregateRating } from "@/lib/content";
-import { absUrl } from "@/lib/site";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteReviewsPage } from '@/components/pages/ReviewsPage';
+import { getTestimonials, calculateAggregateRating } from '@/lib/content';
+import { absUrl } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: `Customer Reviews | What Our Clients Say | ${siteConfig.business.name}`,
   description: `Read what tradespeople say about ${siteConfig.business.name}. Trusted by electricians, plumbers, scaffolders, and builders across the UK.`,
   keywords: [
-    "reviews",
-    "testimonials",
-    "customer reviews",
-    "client testimonials",
-    "tradesperson websites",
+    'reviews',
+    'testimonials',
+    'customer reviews',
+    'client testimonials',
+    'tradesperson websites',
   ],
   openGraph: {
-    title: "Customer Reviews | What Our Clients Say",
+    title: 'Customer Reviews | What Our Clients Say',
     description: `Read what tradespeople say about ${siteConfig.business.name}.`,
-    url: "/reviews",
-    type: "website",
+    url: '/reviews',
+    type: 'website',
   },
 };
 
@@ -65,25 +65,25 @@ export default async function ReviewsPage() {
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: "/",
-          logo: "/logo.svg",
+          url: '/',
+          logo: '/logo.svg',
         }}
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Reviews", url: "/reviews" },
+          { name: 'Home', url: '/' },
+          { name: 'Reviews', url: '/reviews' },
         ]}
         webpage={{
-          "@type": "WebPage",
-          "@id": absUrl("/reviews#webpage"),
-          url: absUrl("/reviews"),
-          name: "Customer Reviews",
+          '@type': 'WebPage',
+          '@id': absUrl('/reviews#webpage'),
+          url: absUrl('/reviews'),
+          name: 'Customer Reviews',
           description: `Read what tradespeople say about ${siteConfig.business.name}.`,
         }}
         aggregateRating={
           count > 0
             ? {
-                "@type": "AggregateRating",
-                "@id": absUrl("/reviews#aggregaterating"),
+                '@type': 'AggregateRating',
+                '@id': absUrl('/reviews#aggregaterating'),
                 ratingValue: average,
                 bestRating: 5,
                 worstRating: 1,

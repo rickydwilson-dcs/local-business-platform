@@ -5,19 +5,19 @@
  * Individual project page with MDX content rendering.
  */
 
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import type { SiteConfigSummary } from "@platform/core-components";
-import { Schema } from "@platform/core-components";
-import { SiteProjectDetailPage } from "@/components/pages/ProjectDetailPage";
-import { getProjects, getProject } from "@/lib/content";
-import { getImageUrl } from "@/lib/image";
-import { absUrl } from "@/lib/site";
-import { loadMdx } from "@/lib/mdx";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY } from "@/lib/contact-info";
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
+import { SiteProjectDetailPage } from '@/components/pages/ProjectDetailPage';
+import { getProjects, getProject } from '@/lib/content';
+import { getImageUrl } from '@/lib/image';
+import { absUrl } from '@/lib/site';
+import { loadMdx } from '@/lib/mdx';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type Params = { slug: string };
@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!project) {
     return {
-      title: "Project Not Found",
-      description: "The requested project could not be found.",
+      title: 'Project Not Found',
+      description: 'The requested project could not be found.',
     };
   }
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       description: frontmatter.description,
       url: absUrl(`/projects/${slug}`),
       siteName: siteConfig.business.name,
-      type: "article",
+      type: 'article',
       ...(frontmatter.heroImage && {
         images: [
           {
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       }),
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.description,
       ...(frontmatter.heroImage && { images: [getImageUrl(frontmatter.heroImage)] }),
@@ -82,10 +82,10 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
   }
 
   const { frontmatter } = project;
-  const { content: mdxContent } = await loadMdx({ baseDir: "projects", slug });
+  const { content: mdxContent } = await loadMdx({ baseDir: 'projects', slug });
 
   const breadcrumbItems = [
-    { name: "Portfolio", href: "/projects" },
+    { name: 'Portfolio', href: '/projects' },
     { name: frontmatter.title, href: `/projects/${slug}`, current: true },
   ];
 
@@ -118,17 +118,17 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: "/",
-          logo: "/logo.svg",
+          url: '/',
+          logo: '/logo.svg',
         }}
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Portfolio", url: "/projects" },
+          { name: 'Home', url: '/' },
+          { name: 'Portfolio', url: '/projects' },
           { name: frontmatter.title, url: `/projects/${slug}` },
         ]}
         webpage={{
-          "@type": "WebPage",
-          "@id": absUrl(`/projects/${slug}#webpage`),
+          '@type': 'WebPage',
+          '@id': absUrl(`/projects/${slug}#webpage`),
           url: absUrl(`/projects/${slug}`),
           name: frontmatter.title,
           description: frontmatter.description,
