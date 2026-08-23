@@ -41,6 +41,29 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   Next's automatic trailing-slash redirect runs _before_ custom `redirects()` and would intercept
   every old WordPress URL (all trailing-slash) before the redirect map ever saw them. See
   `output/sessions/2026-08/2026-08-23_dcs-site-cutover/cutover-plan.md`.
+- **DCS's GA4 Realtime showed nothing after go-live, with zero errors anywhere — root cause was a missing pair of `NEXT_PUBLIC_` env vars, not a code bug.**
+  `FEATURE_ANALYTICS_ENABLED` and `FEATURE_GA4_ENABLED` were set in Vercel, but their
+  `NEXT_PUBLIC_` client-side counterparts were never created — `Analytics.tsx` reads the
+  `NEXT_PUBLIC_` variant directly in the browser, so the whole component silently returned
+  `null` before ever loading `gtag.js`. Confirmed by inspecting the live deployment's
+  serialized client props directly (no Vercel dashboard access needed): `gaId` was a real,
+  correctly-configured measurement ID the entire time, which is what ruled out every other
+  explanation first. Along the way, a live CSP audit turned up three more blocked domains —
+  GA4's regional collect endpoint (`region1.analytics.google.com`), the doubleclick
+  conversion-linking beacon (`stats.g.doubleclick.net`), and the Google Ads remarketing pixel
+  (`www.google.co.uk/ads/ga-audiences`) — none of which are covered by `*.google-analytics.com`
+  alone.
+- **Added a build-time guard so this class of mismatch fails the deploy instead of shipping silently.**
+  `validateAnalyticsEnv()` (`packages/core-components/src/lib/analytics/validate-env.ts`) checks
+  that every server/`NEXT_PUBLIC_` feature-flag pair agrees, and that a flag-gated companion
+  value (GA measurement ID, GA4 API secret, Facebook Pixel ID/token, Google Ads customer ID) is
+  a real value rather than a leftover `.env.example` placeholder. Throws in production builds,
+  warns in dev. Wired into all 6 sites using this pattern (`dcs`, `base-template`,
+  `colossus-scaffolding`, `dch-automotive`, `mad-graphics`, `npracing-v1`, `npracing-v3`) — while
+  testing the rollout, it also caught the same `FEATURE_CONSENT_BANNER` mismatch already sitting
+  in three other sites' local `.env.local` files (harmless there since `.env.local` never reaches
+  Vercel, but the same drift worth tidying up). See "Build-Time Validation" in
+  [docs/standards/analytics.md](docs/standards/analytics.md).
 
 ### Documentation
 
