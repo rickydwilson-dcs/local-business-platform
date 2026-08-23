@@ -31,7 +31,10 @@ GDPR, PECR, and ICO compliant implementation.
 Every feature flag exists as **two separate variables**, read by different code: a
 server-only variant (`proxy.ts`, the analytics API route) and a `NEXT_PUBLIC_` variant
 (client components — `Analytics.tsx`, `ConsentManager.tsx`). Setting only one half is a
-silent no-op, not an error — see "Build-Time Validation" below.
+silent no-op, not an error — see "Build-Time Validation" below. The one exception is
+`FEATURE_CONSENT_BANNER` (server): it's never read to gate any real behavior — only
+surfaced in the dev-only `AnalyticsDebugPanel` — so the banner's actual on/off switch is
+`NEXT_PUBLIC_FEATURE_CONSENT_BANNER` alone, and the two are **not** required to match.
 
 ```bash
 # Feature Flags — server-side (proxy.ts / analytics API route)
@@ -51,11 +54,11 @@ NEXT_PUBLIC_FEATURE_GOOGLE_ADS=false
 
 # Companion values — required once the matching flag above is true
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX   # NEXT_PUBLIC_FEATURE_GA4_ENABLED
-GA4_API_SECRET=                              # FEATURE_SERVER_TRACKING
+GA4_API_SECRET=                              # FEATURE_GA4_ENABLED (server) — not FEATURE_SERVER_TRACKING
 NEXT_PUBLIC_FACEBOOK_PIXEL_ID=                # NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL
 FACEBOOK_ACCESS_TOKEN=                        # FEATURE_FACEBOOK_PIXEL
 NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID=           # NEXT_PUBLIC_FEATURE_GOOGLE_ADS
-GOOGLE_ADS_CUSTOMER_ID=                       # NEXT_PUBLIC_FEATURE_GOOGLE_ADS
+GOOGLE_ADS_CUSTOMER_ID=                       # FEATURE_GOOGLE_ADS (server)
 ```
 
 ### Build-Time Validation
@@ -75,6 +78,15 @@ turns that class of misconfiguration into a build failure instead of a silent, h
 debugging session. Wired into all 6 sites that use this pattern (`dcs`, `base-template`,
 `colossus-scaffolding`, `dch-automotive`, `mad-graphics`, `npracing-v1`, `npracing-v3`) —
 `dj-fox-electrical` and `showcase` don't use analytics/consent at all.
+
+**Only check what the code actually reads.** The first version of this validator paired
+`FEATURE_CONSENT_BANNER`/`NEXT_PUBLIC_FEATURE_CONSENT_BANNER` and required `GA4_API_SECRET`
+whenever `FEATURE_SERVER_TRACKING` was on — both looked reasonable by naming convention, but
+neither matched what the code actually does, and both broke real, correctly-configured
+production builds (`colossus-scaffolding`, `npracing-v1`, `npracing-v3`) within an hour of
+rollout. Before adding a new pair or companion rule here, grep for where the server-side var
+is actually read (`flags.FEATURE_X` in `analytics-route.ts`/`proxy.ts`) — if nothing reads it
+to branch on real behavior, it isn't a pair, however parallel the names look.
 
 ## Consent Management
 
