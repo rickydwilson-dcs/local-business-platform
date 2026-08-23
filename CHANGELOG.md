@@ -6,6 +6,24 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-23
+
+### Documentation
+
+- **A sticky section makes in-page anchor links do nothing, and neither the DOM nor the console
+  says so.** Found on the DCS homepage prototype, where every burger-menu and footer link left the
+  scroll exactly where it was. Both `getBoundingClientRect()` and `offsetTop` report a sticky
+  element's _pinned_ position rather than its layout position, so once the reader is past an
+  unbounded `position: sticky` section the browser still sees the target at `top: 0` and scrolls
+  nowhere — measured at 14392 for all nine links, with `offsetTop` returning 14391 for every
+  section on the page. The trap is that the hrefs are correct, nothing throws, and it **only
+  reproduces from below the target**: an earlier check of the same menu passed because it happened
+  to run from the top of the page. [CLAUDE.md](CLAUDE.md) now records the symptom, why the obvious
+  measurements lie, and the fix — neutralise `position` for one synchronous read to get the layout
+  offset, then scroll there manually.
+
+---
+
 ## 2026-08-22
 
 ### Documentation
