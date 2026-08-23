@@ -1,5 +1,11 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
+import { validateAnalyticsEnv } from "@platform/core-components/lib/analytics/validate-env";
+
+// Fails the build (production) or warns (dev) when a server/NEXT_PUBLIC_ feature-flag
+// pair is mismatched, or a flag is on without its required companion var — see
+// packages/core-components/src/lib/analytics/validate-env.ts.
+validateAnalyticsEnv();
 
 // Next.js 16 with Turbopack requires plugins as strings (not imported functions)
 const withMDX = createMDX({

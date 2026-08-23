@@ -28,20 +28,65 @@ GDPR, PECR, and ICO compliant implementation.
 
 ### Environment Variables
 
-```bash
-# Feature Flags (Server-Side)
-FEATURE_CONSENT_BANNER=true          # Shows/hides consent banner
-FEATURE_ANALYTICS_ENABLED=true       # Enables analytics system
-FEATURE_GA4_ENABLED=true             # Google Analytics 4
-FEATURE_SERVER_TRACKING=true         # Server-side tracking
-FEATURE_FACEBOOK_PIXEL=false         # Facebook/Meta Pixel
-FEATURE_GOOGLE_ADS=false             # Google Ads tracking
+Every feature flag exists as **two separate variables**, read by different code: a
+server-only variant (`proxy.ts`, the analytics API route) and a `NEXT_PUBLIC_` variant
+(client components — `Analytics.tsx`, `ConsentManager.tsx`). Setting only one half is a
+silent no-op, not an error — see "Build-Time Validation" below. The one exception is
+`FEATURE_CONSENT_BANNER` (server): it's never read to gate any real behavior — only
+surfaced in the dev-only `AnalyticsDebugPanel` — so the banner's actual on/off switch is
+`NEXT_PUBLIC_FEATURE_CONSENT_BANNER` alone, and the two are **not** required to match.
 
-# Public Variables (Client-Side)
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_FACEBOOK_PIXEL_ID=
-NEXT_PUBLIC_GOOGLE_ADS_ID=
+```bash
+# Feature Flags — server-side (proxy.ts / analytics API route)
+FEATURE_CONSENT_BANNER=true
+FEATURE_ANALYTICS_ENABLED=true
+FEATURE_GA4_ENABLED=true
+FEATURE_SERVER_TRACKING=true         # server-only — no NEXT_PUBLIC_ counterpart
+FEATURE_FACEBOOK_PIXEL=false
+FEATURE_GOOGLE_ADS=false
+
+# Feature Flags — client-side (Analytics.tsx / ConsentManager.tsx)
+NEXT_PUBLIC_FEATURE_CONSENT_BANNER=true
+NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED=true
+NEXT_PUBLIC_FEATURE_GA4_ENABLED=true
+NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL=false
+NEXT_PUBLIC_FEATURE_GOOGLE_ADS=false
+
+# Companion values — required once the matching flag above is true
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX   # NEXT_PUBLIC_FEATURE_GA4_ENABLED
+GA4_API_SECRET=                              # FEATURE_GA4_ENABLED (server) — not FEATURE_SERVER_TRACKING
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=                # NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL
+FACEBOOK_ACCESS_TOKEN=                        # FEATURE_FACEBOOK_PIXEL
+NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID=           # NEXT_PUBLIC_FEATURE_GOOGLE_ADS
+GOOGLE_ADS_CUSTOMER_ID=                       # FEATURE_GOOGLE_ADS (server)
 ```
+
+### Build-Time Validation
+
+`validateAnalyticsEnv()` (`packages/core-components/src/lib/analytics/validate-env.ts`)
+runs at the top of every site's `next.config.ts` and checks the pairing above: every
+server/`NEXT_PUBLIC_` flag pair must agree, and a flag-gated companion value must be set
+to a real value rather than a leftover `.env.example` placeholder. It throws in
+production builds (failing the Vercel deploy loudly) and only warns in `next dev`, since
+local `.env.local` files intentionally carry flags off.
+
+This exists because of a real incident: DCS had `FEATURE_ANALYTICS_ENABLED` and
+`FEATURE_GA4_ENABLED` set in Vercel, but their `NEXT_PUBLIC_` counterparts were never
+created. Nothing threw, nothing logged an error — GA4 Realtime just stayed empty, and it
+took manually inspecting the live build's client bundle to find the gap. The validator
+turns that class of misconfiguration into a build failure instead of a silent, hours-long
+debugging session. Wired into all 6 sites that use this pattern (`dcs`, `base-template`,
+`colossus-scaffolding`, `dch-automotive`, `mad-graphics`, `npracing-v1`, `npracing-v3`) —
+`dj-fox-electrical` and `showcase` don't use analytics/consent at all.
+
+**Only check what the code actually reads.** The first version of this validator paired
+`FEATURE_CONSENT_BANNER`/`NEXT_PUBLIC_FEATURE_CONSENT_BANNER` and required `GA4_API_SECRET`
+whenever `FEATURE_SERVER_TRACKING` was on — both looked reasonable by naming convention, but
+neither matched what the code actually does, and both broke real, correctly-configured
+production builds (`colossus-scaffolding`, `npracing-v1`, `npracing-v3`) within an hour of
+rollout. Before adding a new pair or companion rule here, grep for where the server-side var
+is actually read (`flags.FEATURE_X` in `analytics-route.ts`/`proxy.ts`) — if nothing reads it
+to branch on real behavior, it isn't a pair, however parallel the names look.
 
 ## Consent Management
 

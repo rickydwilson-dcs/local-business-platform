@@ -1,5 +1,12 @@
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
+import { validateAnalyticsEnv } from '@platform/core-components/lib/analytics/validate-env';
+
+// Fails the build (production) or warns (dev) when a server/NEXT_PUBLIC_ feature-flag
+// pair is mismatched, or a flag is on without its required companion var — see
+// packages/core-components/src/lib/analytics/validate-env.ts for the incident this
+// was written to catch.
+validateAnalyticsEnv();
 
 // Next.js 16 with Turbopack requires plugins as strings (not imported functions)
 const withMDX = createMDX({
@@ -179,7 +186,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co; media-src 'self' https://*.r2.dev; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live; frame-ancestors 'none';`,
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co www.google.co.uk; media-src 'self' https://*.r2.dev; connect-src 'self' *.google-analytics.com *.analytics.google.com *.g.doubleclick.net *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live; frame-ancestors 'none';`,
           },
           // HSTS - enforce HTTPS for 1 year, include subdomains, allow preload
           {
