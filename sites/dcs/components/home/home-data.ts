@@ -345,13 +345,13 @@ export const CONTACT = {
   email: BUSINESS_EMAIL,
   mailtoHref: `mailto:${BUSINESS_EMAIL}`,
   /**
-   * MISMATCH: contact-info.ts's formatPhoneDisplay() computes "07383 666 268"
+   * MISMATCH: contact-info.ts's formatPhoneDisplay() computes "07748 148 082"
    * (5+3+3 digit grouping, two spaces) from site.config.ts's business.phone.
    * The prototype's original number displayed as "07395 063764" (5+6
    * grouping, one space) — kept here in that grouping after the number
    * changed (2026-08-24), rather than switching to the factory's grouping.
    */
-  phoneDisplay: '07383 666268',
+  phoneDisplay: '07748 148082',
   /** Derived from site.config.ts's business.phone via PHONE_SCHEMA. */
   phoneHref: `tel:${PHONE_SCHEMA}`,
   /**
