@@ -10,6 +10,27 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **NP Racing: fixed missing favicon and audited image compression across every page.**
+  `sites/npracing-v1` had `app/icon.png`/`app/apple-icon.png` (Next's metadata-icon convention)
+  but no `favicon.ico` — Chrome always requests `/favicon.ico` directly regardless of the
+  generated `<link>` tags, so that request 404'd on every load. Added `app/favicon.ico`
+  (16/32/48/64px, generated from the existing `icon.png`), matching the favicon-in-Git exception
+  already carved out in [docs/standards/images.md](docs/standards/images.md). Separately, a
+  Lighthouse pass flagged two homepage images for insufficient compression; every `<Image>` on the
+  site was audited and an explicit `quality` prop applied by role — `65` for photographic content
+  (hero, team/rider/product photos, gallery tiles, article hero images) and `50` for the small
+  repeating sponsor-marquee logos — while brand-logo assets (header/footer/mobile-nav, the
+  single-logo sponsor showcase page) and the gallery lightbox's full-screen view were left at
+  Next's default so text/edges and zoomed detail stay sharp. A CSP console warning reported
+  alongside these (`script-src` blocking `eval`) turned out to be harmless: traced to Zod
+  4.1.12's `allowsEval` feature probe (`node_modules/zod/v4/core/util.js`), a try/caught
+  `new Function("")` call Zod uses to decide whether it can use its JIT-compiled fast validator
+  before falling back gracefully — the site's CSP correctly omits `unsafe-eval` in production, so
+  no code change was needed. Note for future work: `next.config.ts`'s quality comment says hero
+  images should use `80` (copied verbatim from `base-template` at bootstrap, never actually
+  applied anywhere), but the home hero was set to `65` here per the Lighthouse finding — these are
+  in tension if that comment reflects real policy rather than template boilerplate.
+
 - **DCS homepage work panels: pill chips replaced with outbound links to every client site.**
   Previously only NP Racing and SM Commercial linked out from the "You do you" work stack; the
   other three panels (The Clothing Kings, Cuddle Plush Fabrics, Colossus Scaffolding) showed a

@@ -57,6 +57,7 @@ export function NewsDetailPage({ article, body }: NewsDetailPageProps) {
             width={article.heroImage.width}
             height={article.heroImage.height}
             sizes="(min-width: 1024px) 52rem, 100vw"
+            quality={65}
             className="mt-8 w-full rounded-card border border-surface-card-border object-cover"
           />
         )}
