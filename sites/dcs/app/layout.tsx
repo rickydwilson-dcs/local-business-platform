@@ -6,6 +6,7 @@ import { SiteScrollReveal } from '@/components/site-scroll-reveal';
 import { DcsConsentManager } from '@/components/dcs-consent-manager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
+import { MaterialSymbolsFont } from '@/components/material-symbols-font';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -80,14 +81,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${inter.variable} ${archivo.variable} ${poppins.variable}`}
     >
       <head>
-        {/* Material Symbols — must be a <link>, not CSS @import, because
-            Tailwind's @tailwind expansion buries @import url() mid-file
-            and the browser ignores it per CSS spec. */}
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- false positive: this is the App Router root layout (app/layout.tsx), the App Router equivalent of pages/_document.js, so it already loads for every page */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-        />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
           <>
@@ -104,6 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen flex flex-col">
+        <MaterialSymbolsFont />
         {children}
 
         <DcsConsentManager

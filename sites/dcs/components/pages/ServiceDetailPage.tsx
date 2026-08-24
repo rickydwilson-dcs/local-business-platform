@@ -1,5 +1,5 @@
-import type { ServiceDetailPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
 export function SiteServiceDetailPage({
   siteConfig,
@@ -81,7 +81,7 @@ export function SiteServiceDetailPage({
                           className="material-symbols-outlined text-xl leading-none mt-0.5 flex-shrink-0"
                           style={{
                             fontVariationSettings: "'FILL' 1",
-                            color: "var(--color-success, #16a34a)",
+                            color: 'var(--color-success, #16a34a)',
                           }}
                           aria-hidden="true"
                         >
@@ -109,7 +109,7 @@ export function SiteServiceDetailPage({
 
                   {siteConfig.cta.phone.show && (
                     <Link
-                      href={`tel:${siteConfig.phone}`}
+                      href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                       className="flex items-center gap-2 text-white font-semibold font-body mb-4 hover:text-white/80 transition-colors"
                     >
                       <span

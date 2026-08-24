@@ -19,6 +19,32 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   verify the two links the r9 prototype already had (NP Racing, SM Commercial) verbatim against the
   frozen prototype file — the three new links postdate that freeze and are sanity-checked instead.
 
+- **DCS Lighthouse mobile performance raised from 85 to 93 (desktop 94 to 100); accessibility to
+  100 on both.** Measured against a real production build — the dev server had been giving a false
+  SEO reading, since `robots.ts` intentionally blocks crawling outside production. The real issues:
+  7 background videos on the homepage carried `autoPlay`, which forces a real fetch even with
+  `preload="metadata"`, so all 9.7MB downloaded immediately regardless of scroll position — now
+  gated behind an `IntersectionObserver` (`components/home/lazy-video.tsx`), cutting the page to
+  ~700KB. The Material Symbols Google Fonts stylesheet was a render-blocking `<link>` in the root
+  layout, loaded on every page including ones that use none of its icons — now loaded after mount
+  (`components/material-symbols-font.tsx`). The site header/footer logo was a 189KB PNG wrapped in
+  an SVG tag; swapped for the real vector already sitting in `public/`. Several WCAG AA color-contrast
+  failures on the magenta/aqua service cards and on scroll-reveal headings caught at their too-dim
+  rest state were also fixed, plus the logo link's accessible name, which didn't match its visible
+  text. See `CLAUDE.md`'s new Performance subsection for the two reusable gotchas (eager video
+  fetch, render-blocking third-party stylesheets) and `sites/dcs/PRODUCT.md` for how the homepage's
+  prototype-fidelity tests handle a legitimate post-port style change.
+
+- **DCS business phone number updated to +44 7383 666268**, and a pre-existing bug fixed alongside
+  it: the four live page templates that render `tel:` links from `siteConfig.phone`
+  (`components/pages/{Contact,LocationDetail,ServiceDetail,Services}Page.tsx`, wired from
+  `app/(site)/{contact,locations/[slug],services/[slug],services}/page.tsx`) built the href directly
+  from the space-formatted display string instead of stripping whitespace first, producing an
+  invalid `tel:` URI — `site-header.tsx`/`site-footer.tsx` already did this correctly, and the page
+  templates now match. `components/pages/HomePage.tsx` had the same bug but is dead code (no route
+  imports it — the live homepage is `components/home/*`); fixed for consistency while touching the
+  file, not because it was user-facing.
+
 ## 2026-08-23
 
 ### Sites

@@ -32,7 +32,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <PageShell
       header={
         <SiteHeader
-          logoSrc="/logo.svg"
+          logoSrc="/logo_black_vector_cropped.svg"
           logoAlt="DCS Gardening & Landscaping"
           logoText="DCS"
           navItems={siteConfig.navigation.main}
@@ -44,7 +44,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       }
       footer={
         <SiteFooter
-          logoSrc="/logo.svg"
+          logoSrc="/logo_white_vector_cropped.svg"
           logoAlt="DCS Gardening & Landscaping"
           logoText="DCS"
           tagline={siteConfig.tagline}

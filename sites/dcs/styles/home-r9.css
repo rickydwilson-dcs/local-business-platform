@@ -152,13 +152,13 @@ h1 .dim{color:rgba(255,255,255,.44)}
 .p--aqua::before{background:var(--ink)}
 .p--navy{background:var(--navy);color:#fff}
 h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,6.6vw,6.2rem);max-width:17ch}
-.lead{margin-top:22px;max-width:52ch;font-size:clamp(1rem,1.28vw,1.2rem);line-height:1.5;opacity:.82}
+.lead{margin-top:22px;max-width:52ch;font-size:clamp(1rem,1.28vw,1.2rem);line-height:1.5;opacity:.94}
 .eyeless{font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;opacity:.55;margin-bottom:26px}
 
 /* resolve grey -> ink */
 .res{color:var(--grey);transition:color 1s cubic-bezier(.16,1,.3,1)}
-.p--ink .res,.p--magenta .res,.p--navy .res{color:rgba(255,255,255,.34)}
-.p--aqua .res{color:rgba(14,14,18,.34)}
+.p--ink .res,.p--magenta .res,.p--navy .res{color:rgba(255,255,255,.72)}
+.p--aqua .res{color:rgba(14,14,18,.66)}
 .in .res{color:currentColor}
 
 /* ============ cards ============ */
@@ -345,10 +345,10 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .svccard--navy{background:var(--navy);color:#fff}
 .svccard--aqua{background:var(--aqua);color:var(--ink)}
 .svccard__body{padding:clamp(24px,3.4vw,58px);display:grid;align-content:center;gap:clamp(12px,1.6vh,20px)}
-.svccard__ix{font-size:12.5px;font-weight:700;letter-spacing:.13em;opacity:.55}
+.svccard__ix{font-size:12.5px;font-weight:700;letter-spacing:.13em;opacity:.97}
 .svccard__t{font-weight:800;letter-spacing:-.038em;line-height:.94;
   font-size:clamp(1.9rem,4.4vw,4rem)}
-.svccard__d{max-width:34ch;font-size:clamp(.98rem,1.16vw,1.16rem);line-height:1.5;opacity:.84}
+.svccard__d{max-width:34ch;font-size:clamp(.98rem,1.16vw,1.16rem);line-height:1.5;opacity:.97}
 .svccard__l{margin-top:6px;display:inline-flex;align-items:center;gap:9px;align-self:start;
   font-weight:600;font-size:15px;border-bottom:1.5px solid currentColor;padding-bottom:3px;
   transition:gap .35s cubic-bezier(.16,1,.3,1)}
@@ -443,7 +443,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 .qa__a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)}
 .qa details[open] .qa__a{grid-template-rows:1fr}
 .qa__a>div{overflow:hidden}
-.qa__a p{max-width:62ch;padding:0 4px clamp(14px,2vh,22px);opacity:.8;line-height:1.55;font-size:15.5px}
+.qa__a p{max-width:62ch;padding:0 4px clamp(14px,2vh,22px);opacity:.97;line-height:1.55;font-size:15.5px}
 
 /* ============ quote ============ */
 .quote{font-weight:700;letter-spacing:-.036em;line-height:1.02;font-size:clamp(1.8rem,5.4vw,4.6rem);max-width:19ch}
@@ -630,10 +630,11 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   /* this heading is the only one whose authored break rags badly at 390 */
   #services h2 br{display:none}
 
-  /* a reveal that has not fired yet must still be legible — IntersectionObserver
-     lags on a phone mid-flick, and the rest state was 1.5:1 on magenta. */
-  .p--ink .res,.p--magenta .res,.p--navy .res{color:rgba(255,255,255,.72)}
-  .p--aqua .res{color:rgba(14,14,18,.66)}
+  /* Legible-rest-state colors now live unscoped (see "resolve grey -> ink"
+     above) — the 1.5:1-on-magenta bug this was tracking was never actually
+     mobile-only, it's how any headless render (this Lighthouse audit
+     included) catches a heading before its scroll-reveal IntersectionObserver
+     has fired, at any viewport width. */
   .res{color:#5A5A66}
 
   /* work */
@@ -649,7 +650,7 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
     grid-template-rows:auto minmax(0,1fr);
     top:calc(72px + var(--i) * 6px);margin-bottom:11vh}
   .svccard__body{padding:26px 22px 22px;gap:11px;align-content:start}
-  .svccard__ix{font-size:12px;letter-spacing:.12em;opacity:.6;margin-bottom:2px}
+  .svccard__ix{font-size:12px;letter-spacing:.12em;opacity:.97;margin-bottom:2px}
   .svccard__t{font-size:min(8.8vw,2.15rem);line-height:.98}
   .svccard__d{font-size:16px;line-height:1.45;max-width:none}
   .svccard__well{min-height:0}

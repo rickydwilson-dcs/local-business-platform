@@ -203,6 +203,67 @@ const ALLOWLIST: AllowlistEntry[] = [
     prototypeValue: '#70707B',
     portValue: 'var(--color-grey)',
   },
+  // 2026-08-24: real WCAG AA color-contrast failures on the magenta/aqua
+  // panels (Lighthouse accessibility audit) — dimmed white/ink text on
+  // vivid backgrounds fell as low as 2.46:1 against the 4.5:1 minimum for
+  // body text. Opacity raised just enough to clear 4.5:1 with a small
+  // margin; verified by re-running Lighthouse (accessibility 96 -> 100).
+  {
+    context: '',
+    selector: '.lead',
+    property: 'opacity',
+    prototypeValue: '.82',
+    portValue: '.94',
+  },
+  {
+    context: '',
+    selector: '.svccard__ix',
+    property: 'opacity',
+    prototypeValue: '.55',
+    portValue: '.97',
+  },
+  {
+    context: '@media (max-width:900px)',
+    selector: '.svccard__ix',
+    property: 'opacity',
+    prototypeValue: '.6',
+    portValue: '.97',
+  },
+  {
+    context: '',
+    selector: '.svccard__d',
+    property: 'opacity',
+    prototypeValue: '.84',
+    portValue: '.97',
+  },
+  {
+    context: '',
+    selector: '.qa__a p',
+    property: 'opacity',
+    prototypeValue: '.8',
+    portValue: '.97',
+  },
+  // Same audit: headings/quotes carrying `.res` (the scroll-reveal fade)
+  // measured 1.51:1-2.92:1 against the 3:1 large-text minimum at rest,
+  // before their IntersectionObserver-driven reveal fires — the exact bug
+  // already documented and fixed for mobile-only below; this raises the
+  // same rest-state colors for every viewport since Lighthouse's headless
+  // render (like a real user mid-scroll) can catch below-the-fold text in
+  // that state at any width, not just <=900px.
+  {
+    context: '',
+    selector: '.p--ink .res,.p--magenta .res,.p--navy .res',
+    property: 'color',
+    prototypeValue: 'rgba(255,255,255,.34)',
+    portValue: 'rgba(255,255,255,.72)',
+  },
+  {
+    context: '',
+    selector: '.p--aqua .res',
+    property: 'color',
+    prototypeValue: 'rgba(14,14,18,.34)',
+    portValue: 'rgba(14,14,18,.66)',
+  },
 ];
 
 function findAllowlistEntry(
@@ -231,6 +292,17 @@ const REMOVED_RULES: RemovedRuleEntry[] = [
   // 2026-08-24: the work-panel pill/chip UI was dropped in favour of an
   // outbound link on every panel — see CHANGELOG.md 2026-08-24.
   { context: '', selector: '.wchip' },
+  // 2026-08-24 (same Lighthouse accessibility pass as the ALLOWLIST .res
+  // entries above): these two rules were a mobile-only (<=900px) override of
+  // the base .res rest-state colors, needed only because the base values
+  // were then too dim to be legible. Now that the base values themselves
+  // carry the fix, the mobile-only override is a no-op duplicate and was
+  // folded away rather than left duplicating the (now-identical) base rule.
+  {
+    context: '@media (max-width:900px)',
+    selector: '.p--ink .res,.p--magenta .res,.p--navy .res',
+  },
+  { context: '@media (max-width:900px)', selector: '.p--aqua .res' },
 ];
 
 function isRemovedRule(r: Rule): boolean {
@@ -358,24 +430,29 @@ describe('sites/dcs/styles/home-r9.css is a verbatim port of the r9 prototype st
     );
   });
 
-  it('the allow-list itself is accurate: every entry appears in both :root blocks with the documented values', () => {
-    const rootRule = prototypeRules.find((r) => r.context === '' && r.selector === ':root');
-    const portRootRule = portRules.find((r) => r.context === '' && r.selector === ':root');
-    expect(rootRule, 'prototype has no top-level :root rule').toBeDefined();
-    expect(portRootRule, 'port has no top-level :root rule').toBeDefined();
-
+  it("the allow-list itself is accurate: every entry's rule exists in both files with the documented values", () => {
     for (const entry of ALLOWLIST) {
-      const protoDecl = rootRule!.declarations.find((d) => d.property === entry.property);
-      const portDecl = portRootRule!.declarations.find((d) => d.property === entry.property);
-      expect(protoDecl, `prototype :root missing "${entry.property}"`).toBeDefined();
-      expect(portDecl, `port :root missing "${entry.property}"`).toBeDefined();
+      const protoRule = prototypeRules.find(
+        (r) => r.context === entry.context && r.selector === entry.selector
+      );
+      const portRule = portRules.find(
+        (r) => r.context === entry.context && r.selector === entry.selector
+      );
+      const where = entry.context ? `${entry.context} > ${entry.selector}` : entry.selector;
+      expect(protoRule, `prototype has no rule "${where}"`).toBeDefined();
+      expect(portRule, `port has no rule "${where}"`).toBeDefined();
+
+      const protoDecl = protoRule!.declarations.find((d) => d.property === entry.property);
+      const portDecl = portRule!.declarations.find((d) => d.property === entry.property);
+      expect(protoDecl, `prototype "${where}" missing "${entry.property}"`).toBeDefined();
+      expect(portDecl, `port "${where}" missing "${entry.property}"`).toBeDefined();
       expect(
         protoDecl!.value,
-        `prototype :root "${entry.property}" does not match the documented before-value`
+        `prototype "${where}" "${entry.property}" does not match the documented before-value`
       ).toBe(entry.prototypeValue);
       expect(
         portDecl!.value,
-        `port :root "${entry.property}" does not match the documented after-value`
+        `port "${where}" "${entry.property}" does not match the documented after-value`
       ).toBe(entry.portValue);
     }
   });

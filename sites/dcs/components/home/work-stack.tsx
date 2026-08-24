@@ -14,6 +14,7 @@
  */
 
 import { ChapterPanel } from './chapter-panel';
+import { LazyVideo } from './lazy-video';
 import { WORK } from './home-data';
 import { HOME_ASSETS } from '@/lib/home-assets';
 
@@ -33,15 +34,7 @@ export function WorkStack() {
         {WORK.map((item, i) => (
           <article className="wpanel" id={`work-${i + 1}`} data-ground="ink" key={item.name}>
             <span className="wpanel__ix">{item.index}</span>
-            <video
-              src={HOME_ASSETS[item.video].url}
-              poster={HOME_ASSETS[item.poster].url}
-              muted
-              loop
-              playsInline
-              autoPlay
-              preload="metadata"
-            />
+            <LazyVideo src={HOME_ASSETS[item.video].url} poster={HOME_ASSETS[item.poster].url} />
             <h3 className="wpanel__n">{item.name}</h3>
             <p className="wpanel__d">{item.description}</p>
             <div className="wpanel__r">

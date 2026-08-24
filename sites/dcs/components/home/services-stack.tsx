@@ -20,6 +20,7 @@
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { ChapterPanel } from './chapter-panel';
+import { LazyVideo } from './lazy-video';
 import { SERVICES } from './home-data';
 import { HOME_ASSETS } from '@/lib/home-assets';
 
@@ -53,14 +54,9 @@ export function ServicesStack() {
             </div>
             <div className="svccard__well">
               {svc.media.kind === 'video' ? (
-                <video
+                <LazyVideo
                   src={HOME_ASSETS[svc.media.video].url}
                   poster={HOME_ASSETS[svc.media.poster].url}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  preload="metadata"
                 />
               ) : (
                 <Image

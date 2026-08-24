@@ -1,8 +1,8 @@
-import type { ContactPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { ContactPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
 const inputClass =
-  "border border-surface-card-border rounded-[10px] px-4 py-3 w-full font-body text-surface-foreground bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand-primary";
+  'border border-surface-card-border rounded-[10px] px-4 py-3 w-full font-body text-surface-foreground bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand-primary';
 
 export function SiteContactPage({ siteConfig }: ContactPageTemplateProps) {
   return (
@@ -79,7 +79,7 @@ export function SiteContactPage({ siteConfig }: ContactPageTemplateProps) {
                     htmlFor="contact-phone"
                     className="block text-sm font-semibold font-headline text-surface-foreground mb-1.5"
                   >
-                    Phone{" "}
+                    Phone{' '}
                     <span className="text-surface-muted-foreground font-normal">(optional)</span>
                   </label>
                   <input
@@ -139,7 +139,7 @@ export function SiteContactPage({ siteConfig }: ContactPageTemplateProps) {
                       Phone
                     </p>
                     <Link
-                      href={`tel:${siteConfig.phone}`}
+                      href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                       className="text-brand-primary font-body hover:underline"
                     >
                       {siteConfig.phoneDisplay}
@@ -161,10 +161,10 @@ export function SiteContactPage({ siteConfig }: ContactPageTemplateProps) {
                       Email
                     </p>
                     <Link
-                      href={`mailto:info@${siteConfig.name.toLowerCase().replace(/\s+/g, "")}.co.uk`}
+                      href={`mailto:info@${siteConfig.name.toLowerCase().replace(/\s+/g, '')}.co.uk`}
                       className="text-brand-primary font-body hover:underline"
                     >
-                      {`info@${siteConfig.name.toLowerCase().replace(/\s+/g, "")}.co.uk`}
+                      {`info@${siteConfig.name.toLowerCase().replace(/\s+/g, '')}.co.uk`}
                     </Link>
                   </div>
                 </div>
