@@ -35,8 +35,9 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   fetch, render-blocking third-party stylesheets) and `sites/dcs/PRODUCT.md` for how the homepage's
   prototype-fidelity tests handle a legitimate post-port style change.
 
-- **DCS business phone number updated to +44 7383 666268**, and a pre-existing bug fixed alongside
-  it: the four live page templates that render `tel:` links from `siteConfig.phone`
+- **DCS business phone number updated, twice, to a final value of +44 7748 148082** (briefly
+  +44 7383 666268 earlier the same day), and a pre-existing bug fixed alongside the first change:
+  the four live page templates that render `tel:` links from `siteConfig.phone`
   (`components/pages/{Contact,LocationDetail,ServiceDetail,Services}Page.tsx`, wired from
   `app/(site)/{contact,locations/[slug],services/[slug],services}/page.tsx`) built the href directly
   from the space-formatted display string instead of stripping whitespace first, producing an

@@ -298,8 +298,8 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
     // diverge from the frozen prototype file — this checks the current
     // value's shape instead of prototype fidelity.
     it('phone display and href use the current site.config.ts number', () => {
-      expect(CONTACT.phoneDisplay).toBe('07383 666268');
-      expect(CONTACT.phoneHref).toBe('tel:+447383666268');
+      expect(CONTACT.phoneDisplay).toBe('07748 148082');
+      expect(CONTACT.phoneHref).toBe('tel:+447748148082');
     });
 
     it("address matches the prototype's literal footer text (documented mismatch vs formatAddressSingleLine())", () => {

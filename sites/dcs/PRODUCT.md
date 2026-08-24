@@ -197,7 +197,7 @@ motion should be pushed before it becomes hostile.
 ## Brand Commitments
 
 Name: Digital Consulting Services. Legal: Digital Consulting Services Ltd.
-Phone +44 7383 666268 · mail@digitalconsultingservices.co.uk ·
+Phone +44 7748 148082 · mail@digitalconsultingservices.co.uk ·
 Unit H3, Chaucer Business Park, Dittons Road, Polegate, East Sussex, BN26 6QH.
 
 **Voice** — plain-spoken, no jargon, no agency-speak. Confident, not apologetic. Personal: "I" is
