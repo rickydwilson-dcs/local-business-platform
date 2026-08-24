@@ -96,6 +96,7 @@ function Track({ hidden }: { hidden?: boolean }) {
               alt={sponsor.name}
               width={sponsor.width}
               height={sponsor.height}
+              quality={50}
               className="h-14 w-auto object-contain sm:h-16"
             />
             <span className="sr-only"> (opens {sponsor.name} in a new tab)</span>

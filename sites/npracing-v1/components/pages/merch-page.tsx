@@ -51,6 +51,7 @@ export function MerchPage({ products, retailerName, retailerUrl }: MerchPageProp
                       width={product.image.width}
                       height={product.image.height}
                       sizes="(min-width: 1280px) 20rem, (min-width: 640px) 45vw, 100vw"
+                      quality={65}
                       className="h-full w-full object-cover"
                     />
                   </div>
