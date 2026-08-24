@@ -4,8 +4,9 @@ import * as path from 'path';
 
 /**
  * Proves `styles/home-r9.css` is a verbatim port of the r9 prototype's
- * <style> block, except for two documented classes of edit (font-stack vars,
- * palette vars). Reads the REAL prototype file live on every run — this is
+ * <style> block, except for three documented classes of edit (font-stack
+ * vars, palette vars, and rules intentionally removed after the prototype
+ * was frozen). Reads the REAL prototype file live on every run — this is
  * not a snapshot of it — so drift in either file is caught immediately.
  *
  * The CSS "parser" below is deliberately minimal: it tracks brace depth to
@@ -214,6 +215,28 @@ function findAllowlistEntry(
   );
 }
 
+/**
+ * Rules present in the prototype but intentionally dropped from the port
+ * entirely (not a changed value — the whole rule no longer exists), because
+ * a product decision made after the prototype was frozen removed the UI it
+ * styled. Each entry records why, so a future removal has to be deliberate
+ * and documented the same way.
+ */
+interface RemovedRuleEntry {
+  context: string;
+  selector: string;
+}
+
+const REMOVED_RULES: RemovedRuleEntry[] = [
+  // 2026-08-24: the work-panel pill/chip UI was dropped in favour of an
+  // outbound link on every panel — see CHANGELOG.md 2026-08-24.
+  { context: '', selector: '.wchip' },
+];
+
+function isRemovedRule(r: Rule): boolean {
+  return REMOVED_RULES.some((e) => e.context === r.context && e.selector === r.selector);
+}
+
 describe('sites/dcs/styles/home-r9.css is a verbatim port of the r9 prototype stylesheet', () => {
   const html = fs.readFileSync(PROTOTYPE_PATH, 'utf-8');
   const prototypeCss = extractStyleBlock(html);
@@ -221,22 +244,26 @@ describe('sites/dcs/styles/home-r9.css is a verbatim port of the r9 prototype st
 
   const prototypeRules = parseCss(prototypeCss);
   const portRules = parseCss(portCss);
+  // The comparison set below excludes REMOVED_RULES from the prototype side,
+  // so a rule intentionally dropped from the port doesn't shift every
+  // subsequent positional comparison out of alignment.
+  const comparableProtoRules = prototypeRules.filter((r) => !isRemovedRule(r));
 
   it('parses a non-trivial number of rules from both the prototype and the port', () => {
     expect(prototypeRules.length).toBeGreaterThan(0);
     expect(portRules.length).toBeGreaterThan(0);
   });
 
-  it('has the same rule count, in the same document order, as the prototype', () => {
+  it('has the same rule count as the prototype, minus the documented removed rules, in the same document order', () => {
     expect(
       portRules.length,
-      `prototype has ${prototypeRules.length} rules, port has ${portRules.length} — a rule was added, removed, or split differently`
-    ).toBe(prototypeRules.length);
+      `prototype has ${prototypeRules.length} rules (${comparableProtoRules.length} after removed-rule allowances), port has ${portRules.length} — a rule was added, removed, or split differently`
+    ).toBe(comparableProtoRules.length);
   });
 
-  it('every selector present in the prototype is present in the port, and vice versa', () => {
+  it('every selector present in the prototype is present in the port, and vice versa, aside from documented removals', () => {
     const key = (r: Rule) => `${r.context}|${r.selector}`;
-    const protoKeys = new Set(prototypeRules.map(key));
+    const protoKeys = new Set(comparableProtoRules.map(key));
     const portKeys = new Set(portRules.map(key));
 
     const missingFromPort = [...protoKeys].filter((k) => !portKeys.has(k));
@@ -250,14 +277,29 @@ describe('sites/dcs/styles/home-r9.css is a verbatim port of the r9 prototype st
       missingFromPrototype,
       `Selectors in port but not in prototype:\n${missingFromPrototype.join('\n')}`
     ).toEqual([]);
+
+    // Sanity-check REMOVED_RULES itself: every entry must be real (present in
+    // the actual prototype) and actually gone from the port — otherwise the
+    // allowance is either stale or hiding an unrelated selector mismatch.
+    for (const removed of REMOVED_RULES) {
+      const k = `${removed.context}|${removed.selector}`;
+      expect(
+        new Set(prototypeRules.map(key)).has(k),
+        `REMOVED_RULES entry "${removed.selector}" does not appear in the prototype — stale allowance`
+      ).toBe(true);
+      expect(
+        new Set(portRules.map(key)).has(k),
+        `REMOVED_RULES entry "${removed.selector}" still appears in the port — remove it or drop the allowance`
+      ).toBe(false);
+    }
   });
 
   it('every rule matches selector, context and declarations byte-for-byte except the documented allow-list', () => {
-    const total = prototypeRules.length;
+    const total = comparableProtoRules.length;
     let comparedDeclarations = 0;
 
     for (let i = 0; i < total; i++) {
-      const protoRule = prototypeRules[i]!;
+      const protoRule = comparableProtoRules[i]!;
       const portRule = portRules[i]!;
 
       expect(

@@ -6,6 +6,19 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-24
+
+### Sites
+
+- **DCS homepage work panels: pill chips replaced with outbound links to every client site.**
+  Previously only NP Racing and SM Commercial linked out from the "You do you" work stack; the
+  other three panels (The Clothing Kings, Cuddle Plush Fabrics, Colossus Scaffolding) showed a
+  pill-shaped chip label (e.g. "Specialist fabric") instead. All five panels now link to the live
+  client site, and the chip UI (`WorkItem.chip`, the `.wchip` CSS rule) was removed rather than
+  left dormant. `sites/dcs/test/home-data.test.ts`'s prototype-fidelity check was narrowed to only
+  verify the two links the r9 prototype already had (NP Racing, SM Commercial) verbatim against the
+  frozen prototype file — the three new links postdate that freeze and are sanity-checked instead.
+
 ## 2026-08-23
 
 ### Sites

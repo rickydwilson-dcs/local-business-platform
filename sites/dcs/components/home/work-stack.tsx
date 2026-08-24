@@ -8,9 +8,9 @@
  * root CLAUDE.md's sticky-stack trap) lives in the already-committed
  * `styles/home-r9.css` and is CSS-only; nothing here replicates it.
  *
- * Only NP Racing and SM Commercial carry an outbound link in the prototype
- * (`WorkItem.link` is optional in `home-data.ts` for exactly this reason);
- * the other three panels render `.wpanel__r` with just the chip.
+ * All five panels carry an outbound link to the live client site (the
+ * prototype's pill chips have been dropped in favour of a link on every
+ * panel).
  */
 
 import { ChapterPanel } from './chapter-panel';
@@ -45,12 +45,9 @@ export function WorkStack() {
             <h3 className="wpanel__n">{item.name}</h3>
             <p className="wpanel__d">{item.description}</p>
             <div className="wpanel__r">
-              <span className="wchip">{item.chip}</span>
-              {item.link && (
-                <a className="wpanel__l" href={item.link.href} target="_blank" rel="noopener">
-                  {item.link.label}
-                </a>
-              )}
+              <a className="wpanel__l" href={item.link.href} target="_blank" rel="noopener">
+                {item.link.label}
+              </a>
             </div>
           </article>
         ))}
