@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export interface SiteFooterProps {
   logoText?: string;
@@ -12,7 +12,7 @@ export interface SiteFooterProps {
 }
 
 export function SiteFooter({
-  logoText = "DCS",
+  logoText = 'DCS',
   logoSrc,
   logoAlt,
   tagline,
@@ -22,7 +22,7 @@ export function SiteFooter({
   copyright,
 }: SiteFooterProps) {
   return (
-    <footer style={{ background: "#2a2e20" }} className="text-white py-16 sm:py-20">
+    <footer style={{ background: '#2a2e20' }} className="text-white py-16 sm:py-20">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Top grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
@@ -35,11 +35,12 @@ export function SiteFooter({
                 alt={logoAlt ?? logoText}
                 width={140}
                 height={48}
+                loading="lazy"
                 style={{
-                  height: "36px",
-                  width: "auto",
-                  objectFit: "contain",
-                  filter: "brightness(0) invert(1)",
+                  height: '36px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)',
                 }}
               />
             ) : (
@@ -50,7 +51,7 @@ export function SiteFooter({
             {tagline && (
               <p
                 className="text-sm leading-relaxed max-w-[280px]"
-                style={{ color: "rgba(255,255,255,0.7)" }}
+                style={{ color: 'rgba(255,255,255,0.7)' }}
               >
                 {tagline}
               </p>
@@ -69,7 +70,7 @@ export function SiteFooter({
                     <Link
                       href={link.href}
                       className="text-sm transition-colors"
-                      style={{ color: "rgba(255,255,255,0.7)" }}
+                      style={{ color: 'rgba(255,255,255,0.7)' }}
                     >
                       {link.label}
                     </Link>
@@ -85,11 +86,11 @@ export function SiteFooter({
               <h3 className="font-heading text-xs font-semibold uppercase tracking-widest text-white mb-4">
                 Contact
               </h3>
-              <div className="space-y-2 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <div className="space-y-2 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {contact.phone && (
                   <div>
                     <Link
-                      href={`tel:${contact.phone.replace(/\s/g, "")}`}
+                      href={`tel:${contact.phone.replace(/\s/g, '')}`}
                       className="transition-colors hover:text-white"
                     >
                       {contact.phone}
@@ -114,11 +115,9 @@ export function SiteFooter({
         {/* Bottom bar */}
         <div
           className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
-          style={{ borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}
+          style={{ borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
         >
-          <p>
-            {copyright ?? `© ${new Date().getFullYear()} ${logoText}. All rights reserved.`}
-          </p>
+          <p>{copyright ?? `© ${new Date().getFullYear()} ${logoText}. All rights reserved.`}</p>
 
           {legal && (
             <div className="flex gap-6">

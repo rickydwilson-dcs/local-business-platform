@@ -32,7 +32,13 @@ export function WorkStack() {
 
       <div className="wstack">
         {WORK.map((item, i) => (
-          <article className="wpanel" id={`work-${i + 1}`} data-ground="ink" key={item.name}>
+          <article
+            className="wpanel"
+            id={`work-${i + 1}`}
+            data-ground="ink"
+            key={item.name}
+            style={{ backgroundColor: 'var(--ink)' }}
+          >
             <span className="wpanel__ix">{item.index}</span>
             <LazyVideo src={HOME_ASSETS[item.video].url} poster={HOME_ASSETS[item.poster].url} />
             <h3 className="wpanel__n">{item.name}</h3>
