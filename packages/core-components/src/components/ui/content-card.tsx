@@ -92,6 +92,7 @@ export function ContentCard({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover group-hover:scale-110 transition-transform duration-300"
+              quality={58}
             />
           </div>
         )}

@@ -202,7 +202,7 @@ export function BlogPostHero(props: ContentHeroProps) {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="rounded-2xl shadow-lg w-full object-cover"
                 priority
-                quality={65}
+                quality={72}
               />
             ) : (
               <div className="relative h-[400px] bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 rounded-2xl shadow-lg flex items-center justify-center">

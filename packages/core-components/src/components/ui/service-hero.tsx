@@ -107,7 +107,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="rounded-2xl shadow-lg w-full object-cover"
                 priority
-                quality={65}
+                quality={72}
               />
             ) : (
               <div className="relative h-[400px] bg-surface-subtle rounded-2xl shadow-lg flex items-center justify-center">
@@ -125,7 +125,9 @@ export function ServiceHero(props: ServiceHeroProps) {
                     />
                   </svg>
                   <span className="text-lg font-medium">Service Hero Image</span>
-                  <p className="text-sm text-surface-secondary mt-2">Professional service photography</p>
+                  <p className="text-sm text-surface-secondary mt-2">
+                    Professional service photography
+                  </p>
                 </div>
               </div>
             )}

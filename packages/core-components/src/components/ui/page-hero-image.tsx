@@ -63,7 +63,7 @@ export function PageHeroImage({
           className="object-cover"
           priority
           sizes="100vw"
-          quality={70}
+          quality={72}
         />
       </div>
 
@@ -112,9 +112,7 @@ export function PageHeroImage({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h1>
 
           {/* Subtitle */}
-          {subtitle && (
-            <p className="text-lg md:text-xl text-white/90 font-medium">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-lg md:text-xl text-white/90 font-medium">{subtitle}</p>}
         </div>
       </div>
     </section>

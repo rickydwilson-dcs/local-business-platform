@@ -93,6 +93,7 @@ export function ServiceHero({
             width={600}
             height={500}
             sizes="(max-width: 768px) 100vw, 50vw"
+            quality={58}
             className="rounded-lg shadow-lg w-full"
           />
         )}
@@ -116,6 +117,7 @@ export function Gallery({ images }: GalleryProps) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover hover:scale-105 transition-transform duration-300"
+            quality={58}
           />
         </div>
       ))}
@@ -171,7 +173,10 @@ export function FAQ({ items }: FAQProps) {
   return (
     <div className="space-y-6 mb-16">
       {items.map((item, i) => (
-        <div key={i} className="bg-surface-card border border-surface-subtle rounded-lg p-6 shadow-sm">
+        <div
+          key={i}
+          className="bg-surface-card border border-surface-subtle rounded-lg p-6 shadow-sm"
+        >
           <h3 className="text-lg font-semibold text-surface-foreground mb-3">{item.question}</h3>
           <p className="text-surface-foreground">{item.answer}</p>
         </div>

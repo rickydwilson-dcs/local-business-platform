@@ -1,7 +1,7 @@
 # Image Standards
 
-**Version:** 1.4.0
-**Last Updated:** 2026-08-03
+**Version:** 1.5.0
+**Last Updated:** 2026-08-24
 **Scope:** All sites in local-business-platform
 
 ---
@@ -36,13 +36,37 @@ Design-prototype assets under `output/sessions/**/prototype/assets/` follow this
 
 ### 3. Quality Settings
 
-Use centralized quality settings from `/lib/image-config.ts`:
+There is no centralized quality-config module — a `/lib/image-config.ts` used to exist but was
+never imported anywhere and was removed in August 2026. The real source of truth is the shared
+UI components in `packages/core-components/src/components/{ui,composable}/*` and
+`src/components/mdx/mdx-components.tsx`: every `<Image>` there sets an explicit inline `quality`
+prop by role, and a new site (cut from `sites/base-template`, which composes its pages from
+these shared components) inherits sensible defaults automatically the moment it's built —
+no import or setup step required.
 
-```typescript
-export const DEFAULT_IMAGE_QUALITY = 65; // Content images
-export const HIGH_QUALITY = 80; // Hero images
-export const LOW_QUALITY = 50; // Thumbnails
+```tsx
+quality={45} // Thumbnails — small grid tiles, e.g. certificate-gallery.tsx
+quality={58} // Content images — cards, galleries, MDX inline images (the default)
+quality={72} // Hero images — full-bleed or priority-loaded hero photography
 ```
+
+A site is free to override these inline once it customizes a component or goes fully
+self-contained (see `sites/npracing-v1`, which hardcodes `quality={65}`/`quality={50}` directly
+in its own page components rather than through core-components) — that's expected, not a bug.
+What matters is that the _starting point_ a new site inherits is sensible, since per-site tuning
+happens after that anyway.
+
+Two categories are deliberately left at Next's implicit default (no `quality` prop at all,
+i.e. 75): brand-logo images (headers, footers, mobile nav — sharp edges/text lose more to
+compression than they gain in file size) and full-screen lightbox/zoom views (the detail a user
+zoomed in to see shouldn't be the thing that's compressed).
+
+Every site's `next.config.ts` must list whatever quality values are actually used across the
+platform in `images.qualities` — Next.js 15 throws a runtime error if an `<Image>` requests a
+`quality` value not in that array. The current allow-list is `[45, 50, 58, 65, 72, 75, 80]`: 45/58/72
+are the live defaults above, 75 is Next's own implicit default, and 50/65/80 are kept for sites
+with older inline overrides (e.g. npracing-v1) that predate this scheme. Adding a new quality
+value anywhere means adding it to every site's `qualities` array too.
 
 ## R2 Configuration
 
@@ -85,7 +109,7 @@ const r2BaseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
   alt="Professional scaffolding services in Brighton"
   width={1920}
   height={1080}
-  quality={80}
+  quality={72}
   priority={true}
   sizes="100vw"
 />;
@@ -99,7 +123,7 @@ const r2BaseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
   alt="Residential scaffolding installation"
   width={800}
   height={600}
-  quality={65}
+  quality={58}
   sizes="(max-width: 768px) 100vw, 50vw"
 />
 ```
@@ -112,7 +136,7 @@ const r2BaseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
   alt="Access scaffolding service thumbnail"
   width={300}
   height={200}
-  quality={50}
+  quality={45}
   sizes="300px"
 />
 ```
@@ -258,14 +282,14 @@ export function getImageUrl(path: string): string {
 
 ## What NOT to Do
 
-| Anti-Pattern         | Why It's Wrong    | Correct Approach           |
-| -------------------- | ----------------- | -------------------------- |
-| `<img>` tags         | No optimization   | Use `next/image`           |
-| Missing width/height | Layout shift      | Always set dimensions      |
-| Hardcoded R2 URLs    | Not portable      | Use environment variable   |
-| Images in Git        | Repository bloat  | Store in R2                |
-| Missing alt text     | Accessibility/SEO | Always add descriptive alt |
-| Hardcoded quality    | Inconsistent      | Use centralized config     |
+| Anti-Pattern               | Why It's Wrong    | Correct Approach                                      |
+| -------------------------- | ----------------- | ----------------------------------------------------- |
+| `<img>` tags               | No optimization   | Use `next/image`                                      |
+| Missing width/height       | Layout shift      | Always set dimensions                                 |
+| Hardcoded R2 URLs          | Not portable      | Use environment variable                              |
+| Images in Git              | Repository bloat  | Store in R2                                           |
+| Missing alt text           | Accessibility/SEO | Always add descriptive alt                            |
+| Unrecognized quality value | Runtime error     | Add it to every site's `images.qualities` array first |
 
 ## Uploading to R2
 
@@ -353,7 +377,7 @@ Before completing any image work:
 - [ ] Image stored in R2 (not Git)
 - [ ] Using `next/image` component
 - [ ] Width and height set explicitly
-- [ ] Quality from centralized config
+- [ ] Explicit `quality` prop set by role (45 thumbnail / 58 content / 72 hero), or deliberately omitted for a brand-logo or lightbox image
 - [ ] Descriptive alt text included (not just `{title}`)
 - [ ] Title attribute included for SEO
 - [ ] Responsive sizes configured

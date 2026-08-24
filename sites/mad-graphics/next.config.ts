@@ -71,9 +71,12 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Cache images for 90 days (allows in-place image updates to propagate)
     minimumCacheTTL: 60 * 60 * 24 * 90, // 90 days
-    // Allowed quality values for Image component quality prop
-    // 50 = thumbnails, 65 = content images, 75 = default, 80 = hero images
-    qualities: [50, 65, 75, 80],
+    // Allowed quality values for Image component quality prop.
+    // Live defaults set by shared components in packages/core-components: 45 = thumbnails,
+    // 58 = content images, 72 = hero images. 75 is Next's own implicit default for any
+    // Image with no explicit quality prop. 50/65/80 are kept for sites with older inline
+    // overrides (e.g. npracing-v1) predating this scheme -- see docs/standards/images.md.
+    qualities: [45, 50, 58, 65, 72, 75, 80],
   },
   // Ensure static exports work correctly
   trailingSlash: false,

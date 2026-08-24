@@ -71,6 +71,7 @@ export function LargeFeatureCards({
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"
+                    quality={58}
                   />
                 </div>
               )}
@@ -121,7 +122,9 @@ export function LargeFeatureCards({
         {/* Bottom CTA */}
         {showBottomCTA && (
           <div className="text-center mt-16 pt-8 border-t border-surface-subtle">
-            <h3 className="text-xl font-semibold text-surface-foreground mb-4">Ready to Get Started?</h3>
+            <h3 className="text-xl font-semibold text-surface-foreground mb-4">
+              Ready to Get Started?
+            </h3>
             <p className="text-surface-foreground mb-6 max-w-2xl mx-auto">
               Contact our expert team to discuss your project requirements and get a tailored quote.
             </p>
