@@ -55,6 +55,30 @@ that page only. Then uncomment the matching entry in `app/sitemap.ts`. Do not re
 `robots` declaration in the layout — that would re-index all 14 routes at once, including the ones
 still not ready.
 
+### Prototype-fidelity tests will fail on a legitimate homepage content/style change
+
+`test/home-data.test.ts` and `test/home-css-parity.test.ts` assert that `components/home/home-data.ts`
+and `styles/home-r9.css` are byte-for-byte transcriptions of the frozen prototype file
+(`output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/prototype/r9-kota-level.html`) — they were
+written to catch transcription typos during the initial port, not to gate future edits. Any deliberate
+copy or style change made _after_ the port (a new phone number, a color-contrast fix, a removed UI
+element) will fail these tests, because the value now legitimately diverges from that historical
+snapshot. This is expected, not a regression — fix the test, not the change:
+
+- A changed string in `home-data.ts` (e.g. `CONTACT.phoneDisplay`): remove or replace the
+  `checkedString(...)` fidelity assertion for that field with a direct value check, in both the
+  per-block `describe` and the independent `allStrings` recount in the "mandatory verdict line" test —
+  both must be updated, or the recount re-flags the same field.
+- A changed declaration in `home-r9.css` (e.g. an `opacity` value): add an entry to `ALLOWLIST` in
+  `home-css-parity.test.ts` recording both the old and new value, with a comment explaining why.
+- A rule removed from `home-r9.css` entirely: add an entry to `REMOVED_RULES` with the selector and
+  its `@media` context (rules are compared _by position_, so a removed rule must be excluded from the
+  prototype side or every subsequent rule shifts out of alignment).
+
+Both allow-list mechanisms are self-verifying — each has its own test asserting every entry is real
+(present in the prototype with the documented before-value, and either changed or absent in the port)
+— so a stale or fabricated entry fails loudly rather than silently weakening the test.
+
 ## Users
 
 **Small owner-run businesses across every sector** — typically 1–20 people, where the owner makes
