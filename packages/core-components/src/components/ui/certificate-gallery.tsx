@@ -41,6 +41,7 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
               className="object-cover"
               loading="lazy"
+              quality={45}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           </div>

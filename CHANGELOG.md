@@ -8,6 +8,10 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ## 2026-08-24
 
+### Platform
+
+- **Image quality standard closed the gap between documentation and reality: `packages/core-components`'s shared UI components now set a live, consistent `quality` prop (45 thumbnail / 58 content / 72 hero) on every `<Image>`, and every site built from `sites/base-template` inherits it automatically at build time — no import or setup step required.** This follows directly from the NP Racing audit below, which surfaced that `docs/standards/images.md` documented one set of values (65/80/50) while the actual `image-config.ts` module it pointed to held a different set (58/72/45) and, worse, was never imported by any site — every site just hardcoded quality inline, same as NP Racing now does. Removed `image-config.ts` rather than keep reconciling two sources of truth; the shared components are now the only source. Five components had also independently drifted to their own ad-hoc values (65/70/75); all normalized. Every site's `next.config.ts` `images.qualities` allow-list was extended to include the new values, since Next.js throws a runtime error if an `<Image>` requests a `quality` not in that array — this touches all 8 sites' configs even though most of them don't directly consume the changed components today. See [docs/standards/images.md](docs/standards/images.md) and `packages/core-components/CHANGELOG.md`.
+
 ### Sites
 
 - **NP Racing: fixed missing favicon and audited image compression across every page.**

@@ -75,6 +75,7 @@ export function ServiceCards({
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        quality={58}
                       />
                     </div>
                   ) : (
@@ -124,7 +125,9 @@ export function ServiceCards({
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-surface-foreground mb-3">{card.title}</h3>
 
-                  <p className="text-surface-foreground text-sm leading-relaxed mb-4">{card.description}</p>
+                  <p className="text-surface-foreground text-sm leading-relaxed mb-4">
+                    {card.description}
+                  </p>
 
                   {/* Features List */}
                   <ul className="space-y-2 mb-6">

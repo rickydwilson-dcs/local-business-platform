@@ -104,6 +104,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={58}
                   />
                 </div>
               )}
