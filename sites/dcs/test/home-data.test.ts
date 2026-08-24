@@ -123,20 +123,27 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
       expect(WORK).toHaveLength(5);
     });
 
-    it('every field appears verbatim in the prototype, and only NP Racing / SM Commercial carry a link', () => {
+    it('index/name/description appear verbatim in the prototype; all 5 items carry a link', () => {
+      // The pill chips have been dropped from the design and NP Racing / SM
+      // Commercial's outbound links have been extended to all five panels —
+      // the new links (theclothingkings.co.uk, cuddleplushfabrics.co.uk,
+      // colossus-scaffolding.co.uk) postdate the r9 prototype freeze, so
+      // only the two links the prototype already had are checked against it.
+      const PROTOTYPE_LINKS = new Set(['NP Racing', 'SM Commercial']);
       for (const item of WORK) {
         checkedString(item.index, `WORK[${item.name}].index`);
         checkedString(item.name, `WORK[${item.name}].name`);
         checkedString(item.description, `WORK[${item.name}].description`);
-        checkedString(item.chip, `WORK[${item.name}].chip`);
-        if (item.link) {
+        if (PROTOTYPE_LINKS.has(item.name)) {
           checkedString(item.link.label, `WORK[${item.name}].link.label`);
           checkedString(item.link.href, `WORK[${item.name}].link.href`);
+        } else {
+          expect(item.link.href, `WORK[${item.name}].link.href`).toMatch(/^https:\/\/(www\.)?/);
         }
       }
 
       const withLinks = WORK.filter((w) => w.link).map((w) => w.name);
-      expect(withLinks.sort()).toEqual(['NP Racing', 'SM Commercial'].sort());
+      expect(withLinks.sort()).toEqual(WORK.map((w) => w.name).sort());
     });
   });
 
@@ -306,14 +313,14 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
     let firstOffender = '';
 
     const allStrings: Array<{ value: string; label: string }> = [];
+    const PROTOTYPE_WORK_LINKS = new Set(['NP Racing', 'SM Commercial']);
     for (const item of WORK) {
       allStrings.push(
         { value: item.index, label: `WORK.${item.name}.index` },
         { value: item.name, label: `WORK.${item.name}.name` },
-        { value: item.description, label: `WORK.${item.name}.description` },
-        { value: item.chip, label: `WORK.${item.name}.chip` }
+        { value: item.description, label: `WORK.${item.name}.description` }
       );
-      if (item.link) {
+      if (PROTOTYPE_WORK_LINKS.has(item.name)) {
         allStrings.push(
           { value: item.link.label, label: `WORK.${item.name}.link.label` },
           { value: item.link.href, label: `WORK.${item.name}.link.href` }
