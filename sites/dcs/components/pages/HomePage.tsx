@@ -1,31 +1,31 @@
-import type { HomePageTemplateProps, TestimonialSummary } from "@platform/core-components";
-import Link from "next/link";
+import type { HomePageTemplateProps, TestimonialSummary } from '@platform/core-components';
+import Link from 'next/link';
 
 export interface SiteHomePageProps extends HomePageTemplateProps {
   testimonials?: TestimonialSummary[];
 }
 
 const defaultStats = [
-  { value: "10+ Years", label: "In Business", icon: "history" },
-  { value: "500+", label: "Happy Clients", icon: "sentiment_satisfied" },
-  { value: "5-Star", label: "Rated Service", icon: "star" },
+  { value: '10+ Years', label: 'In Business', icon: 'history' },
+  { value: '500+', label: 'Happy Clients', icon: 'sentiment_satisfied' },
+  { value: '5-Star', label: 'Rated Service', icon: 'star' },
 ];
 
 const serviceIcons: Record<string, string> = {
-  default: "build_circle",
-  garden: "yard",
-  cleaning: "cleaning_services",
-  electrical: "bolt",
-  plumbing: "plumbing",
-  painting: "format_paint",
-  landscaping: "nature",
+  default: 'build_circle',
+  garden: 'yard',
+  cleaning: 'cleaning_services',
+  electrical: 'bolt',
+  plumbing: 'plumbing',
+  painting: 'format_paint',
+  landscaping: 'nature',
 };
 
 function resolveServiceIcon(title: string, provided?: string): string {
   if (provided) return provided;
   const lower = title.toLowerCase();
   for (const [key, icon] of Object.entries(serviceIcons)) {
-    if (key !== "default" && lower.includes(key)) return icon;
+    if (key !== 'default' && lower.includes(key)) return icon;
   }
   return serviceIcons.default;
 }
@@ -44,7 +44,7 @@ export function SiteHomePage({
     siteConfig.stats && siteConfig.stats.length > 0
       ? siteConfig.stats.map((s, i) => ({
           ...s,
-          icon: s.icon ?? defaultStats[i]?.icon ?? "check_circle",
+          icon: s.icon ?? defaultStats[i]?.icon ?? 'check_circle',
         }))
       : defaultStats;
 
@@ -68,7 +68,7 @@ export function SiteHomePage({
               <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-surface-foreground mb-6 leading-[1.1]">
                 {heroHeadline ?? (
                   <>
-                    Professional services you can{" "}
+                    Professional services you can{' '}
                     <span className="text-brand-primary">count on.</span>
                   </>
                 )}
@@ -87,7 +87,7 @@ export function SiteHomePage({
                 </Link>
                 {siteConfig.cta.phone.show && (
                   <Link
-                    href={`tel:${siteConfig.phone}`}
+                    href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                     className="flex items-center justify-center gap-2 border-2 border-brand-primary text-brand-primary px-8 py-4 rounded-xl text-base font-bold hover:bg-brand-primary/10 transition-colors text-center"
                   >
                     <span
@@ -109,12 +109,12 @@ export function SiteHomePage({
                   >
                     location_on
                   </span>
-                  Serving{" "}
+                  Serving{' '}
                   {locations
                     .slice(0, 3)
                     .map((l) => l.title)
-                    .join(", ")}
-                  {locations.length > 3 ? ` +${locations.length - 3} more` : ""}
+                    .join(', ')}
+                  {locations.length > 3 ? ` +${locations.length - 3} more` : ''}
                 </p>
               )}
             </div>
@@ -122,7 +122,7 @@ export function SiteHomePage({
             {/* Right panel — 40% — geometric shapes */}
             <div
               className="hidden lg:flex lg:w-[40%] relative items-center justify-center overflow-hidden rounded-bl-[60px]"
-              style={{ background: "rgba(97,163,186,0.1)" }}
+              style={{ background: 'rgba(97,163,186,0.1)' }}
             >
               {/* Decorative geo shapes — styled via globals.css / site CSS */}
               <div className="solaris-geo-shape solaris-geo-1" />
@@ -149,7 +149,7 @@ export function SiteHomePage({
                 </p>
                 <p className="text-xs text-surface-muted-foreground mt-1 font-body">
                   {siteConfig.address.city}
-                  {siteConfig.address.county ? `, ${siteConfig.address.county}` : ""}
+                  {siteConfig.address.county ? `, ${siteConfig.address.county}` : ''}
                 </p>
               </div>
             </div>
@@ -276,19 +276,19 @@ export function SiteHomePage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {[
               {
-                icon: "handyman",
-                title: "No DIY hassle",
-                body: "Skip the weekend YouTube tutorials. We arrive fully equipped and get the job done right first time.",
+                icon: 'handyman',
+                title: 'No DIY hassle',
+                body: 'Skip the weekend YouTube tutorials. We arrive fully equipped and get the job done right first time.',
               },
               {
-                icon: "search",
-                title: "Built for Google",
-                body: "Our sites rank locally so when your neighbours search, they find us — and we find you more business.",
+                icon: 'search',
+                title: 'Built for Google',
+                body: 'Our sites rank locally so when your neighbours search, they find us — and we find you more business.',
               },
               {
-                icon: "price_check",
-                title: "Fixed pricing",
-                body: "No surprise invoices. You get a clear quote upfront and pay exactly that. No hidden extras.",
+                icon: 'price_check',
+                title: 'Fixed pricing',
+                body: 'No surprise invoices. You get a clear quote upfront and pay exactly that. No hidden extras.',
               },
             ].map((feature, index) => (
               <div
@@ -387,7 +387,7 @@ export function SiteHomePage({
             Ready to get more enquiries?
           </h2>
           <p className="text-lg text-[var(--color-surface-foreground)]/80 font-body mb-10 max-w-xl mx-auto">
-            Let&rsquo;s get your business in front of the right customers in{" "}
+            Let&rsquo;s get your business in front of the right customers in{' '}
             {siteConfig.address.city}.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -399,7 +399,7 @@ export function SiteHomePage({
             </Link>
             {siteConfig.cta.phone.show && (
               <Link
-                href={`tel:${siteConfig.phone}`}
+                href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                 className="flex items-center justify-center gap-2 border-2 border-[var(--color-surface-foreground)] text-[var(--color-surface-foreground)] px-10 py-4 rounded-xl text-base font-bold hover:bg-black/10 transition-colors font-body"
               >
                 <span className="material-symbols-outlined text-xl leading-none" aria-hidden="true">

@@ -168,7 +168,7 @@ export const siteConfig: SiteConfig = {
     name: 'Digital Consulting Services',
     legalName: 'Digital Consulting Services Ltd',
     type: 'ProfessionalService',
-    phone: '+44 7395 063764',
+    phone: '+44 7383 666268',
     email: 'mail@digitalconsultingservices.co.uk',
     address: {
       street: 'Unit H3, Chaucer Business Park, Dittons Road',
@@ -212,7 +212,7 @@ export const siteConfig: SiteConfig = {
     },
     phone: {
       show: true,
-      label: 'Call 07395 063764',
+      label: 'Call 07383 666268',
     },
   },
 
@@ -301,7 +301,7 @@ export const siteConfig: SiteConfig = {
       slogan: 'Websites that get local tradespeople more jobs',
       foundingDate: '2019',
       email: 'mail@digitalconsultingservices.co.uk',
-      telephone: '+447395063764',
+      telephone: '+447383666268',
       address: {
         streetAddress: 'Unit H3, Chaucer Business Park, Dittons Road',
         addressLocality: 'Polegate',

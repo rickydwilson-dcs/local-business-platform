@@ -293,10 +293,13 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
       expect(CONTACT.email).toBe('mail@digitalconsultingservices.co.uk');
     });
 
-    it("phone display and href match the prototype's literal text (documented mismatch vs formatPhoneDisplay())", () => {
-      checkedString(CONTACT.phoneDisplay, 'CONTACT.phoneDisplay');
-      checkedString(CONTACT.phoneHref, 'CONTACT.phoneHref');
-      expect(decodedPrototype).toContain('tel:+447395063764');
+    // The business phone number changed after the initial prototype port
+    // (2026-08-24), so CONTACT.phoneDisplay/phoneHref now intentionally
+    // diverge from the frozen prototype file — this checks the current
+    // value's shape instead of prototype fidelity.
+    it('phone display and href use the current site.config.ts number', () => {
+      expect(CONTACT.phoneDisplay).toBe('07383 666268');
+      expect(CONTACT.phoneHref).toBe('tel:+447383666268');
     });
 
     it("address matches the prototype's literal footer text (documented mismatch vs formatAddressSingleLine())", () => {
@@ -373,7 +376,10 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
       { value: QUOTE.author, label: 'QUOTE.author' },
       { value: QUOTE.context, label: 'QUOTE.context' },
       { value: CONTACT.email, label: 'CONTACT.email' },
-      { value: CONTACT.phoneDisplay, label: 'CONTACT.phoneDisplay' },
+      // CONTACT.phoneDisplay is deliberately excluded: the business phone
+      // number changed after the prototype port (2026-08-24), so it no
+      // longer appears in the frozen prototype file — see the CONTACT
+      // describe block above for the check that replaced it.
       { value: CONTACT.address, label: 'CONTACT.address' }
     );
 
