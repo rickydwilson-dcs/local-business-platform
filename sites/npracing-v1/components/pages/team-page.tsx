@@ -41,6 +41,7 @@ export function TeamPage({ members }: TeamPageProps) {
                       width={member.image.width}
                       height={member.image.height}
                       sizes="(min-width: 1024px) 20rem, (min-width: 640px) 30vw, 45vw"
+                      quality={65}
                       className="h-full w-full object-cover object-top"
                     />
                   </div>

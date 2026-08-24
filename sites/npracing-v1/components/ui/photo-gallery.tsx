@@ -38,6 +38,7 @@ export function PhotoGallery({ items }: PhotoGalleryProps) {
                 width={item.width}
                 height={item.height}
                 sizes="(min-width: 640px) 33vw, 50vw"
+                quality={65}
                 className={TILE_CLASSES}
               />
             ) : (
@@ -48,6 +49,7 @@ export function PhotoGallery({ items }: PhotoGalleryProps) {
                   width={640}
                   height={480}
                   sizes="(min-width: 640px) 33vw, 50vw"
+                  quality={65}
                   className={TILE_CLASSES}
                 />
                 <span

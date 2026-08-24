@@ -208,6 +208,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             fill
             priority
             sizes="100vw"
+            quality={65}
             className="object-cover object-[60%_40%]"
           />
           <div className="hero-scrim" aria-hidden="true" />
@@ -254,6 +255,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             width={1000}
             height={1250}
             sizes="(min-width: 1024px) 40rem, 100vw"
+            quality={65}
             className="aspect-square w-full rounded-card border border-surface-card-border object-cover"
           />
 
@@ -399,6 +401,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
               width={700}
               height={700}
               sizes="(min-width: 1024px) 420px, (min-width: 768px) 340px, 280px"
+              quality={65}
               className="pointer-events-none relative z-10 order-first aspect-[3/2] w-64 self-center rotate-6 object-cover mix-blend-multiply transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:rotate-0 group-hover:scale-110 sm:w-80 md:absolute md:right-8 md:top-1/2 md:order-none md:w-80 md:-translate-y-1/2 md:self-auto lg:right-12 lg:w-[26rem]"
             />
             <div className="relative z-10 md:max-w-[26rem]">

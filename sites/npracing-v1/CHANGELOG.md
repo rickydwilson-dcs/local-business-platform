@@ -4,6 +4,18 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-24
+
+### Bugs
+
+- Fixed a missing `favicon.ico`. `app/icon.png`/`app/apple-icon.png` (Next's metadata-icon files) were already present, but Chrome always requests `/favicon.ico` directly regardless of the generated `<link>` tags, so that request 404'd on every load. Added `app/favicon.ico` (16/32/48/64px, generated from `icon.png`).
+
+### Performance
+
+- Audited every `<Image>` on the site against a Lighthouse pass that flagged two homepage images for insufficient compression, and applied an explicit `quality` prop by role across all pages: `65` for photographic content (hero, team/rider/product photos, gallery tiles, article hero images) and `50` for the small repeating sponsor-marquee logos. Brand-logo assets (header/footer/mobile-nav, the single-logo sponsor showcase page) and the gallery lightbox's full-screen view were left at the default so text/edges and zoomed detail stay sharp. A CSP console warning reported alongside these (`script-src` blocking `eval`) is harmless — traced to Zod 4.1.12's `allowsEval` feature probe, which the site's CSP correctly leaves blocked in production; no code change needed.
+
+---
+
 ## 2026-08-15
 
 ### Content
