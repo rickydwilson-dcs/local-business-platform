@@ -1,5 +1,5 @@
-import type { LocationDetailPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { LocationDetailPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
 export function SiteLocationDetailPage({
   siteConfig,
@@ -78,7 +78,7 @@ export function SiteLocationDetailPage({
 
                   {siteConfig.cta.phone.show && (
                     <Link
-                      href={`tel:${siteConfig.phone}`}
+                      href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                       className="flex items-center gap-2 text-white font-semibold font-body mb-4 hover:text-white/80 transition-colors"
                     >
                       <span

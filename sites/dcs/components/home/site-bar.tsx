@@ -28,15 +28,13 @@ export function SiteBar() {
 
   return (
     <header className="bar" id="bar" data-ground={ground}>
-      <a className="mark" href="#top" aria-label="Digital Consulting Services, home">
+      <a className="mark" href="#top">
         <svg
           className="mark__svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 530 254"
-          role="img"
-          aria-label="DCS"
+          aria-hidden="true"
         >
-          <title>DCS</title>
           {/* Geometry is Ricky's logo_black_vector_cropped.svg, unchanged. Only
               the fill is swapped to currentColor so one file serves every
               ground. Copied verbatim from the prototype — do not re-trace,
@@ -51,6 +49,7 @@ export function SiteBar() {
           <span>digital consulting</span>
           <span>services</span>
         </span>
+        <span className="sr-only"> (home)</span>
       </a>
       <div className="bar__r">
         <a className="hire" href="#end">

@@ -1,21 +1,21 @@
-import type { ServicesPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { ServicesPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
 const serviceIcons: Record<string, string> = {
-  default: "build_circle",
-  garden: "yard",
-  cleaning: "cleaning_services",
-  electrical: "bolt",
-  plumbing: "plumbing",
-  painting: "format_paint",
-  landscaping: "nature",
+  default: 'build_circle',
+  garden: 'yard',
+  cleaning: 'cleaning_services',
+  electrical: 'bolt',
+  plumbing: 'plumbing',
+  painting: 'format_paint',
+  landscaping: 'nature',
 };
 
 function resolveServiceIcon(title: string, provided?: string): string {
   if (provided) return provided;
   const lower = title.toLowerCase();
   for (const [key, icon] of Object.entries(serviceIcons)) {
-    if (key !== "default" && lower.includes(key)) return icon;
+    if (key !== 'default' && lower.includes(key)) return icon;
   }
   return serviceIcons.default;
 }
@@ -129,7 +129,7 @@ export function SiteServicesPage({ siteConfig, services }: ServicesPageTemplateP
             </Link>
             {siteConfig.cta.phone.show && (
               <Link
-                href={`tel:${siteConfig.phone}`}
+                href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                 className="flex items-center justify-center gap-2 border-2 border-white text-white px-10 py-4 rounded-xl text-base font-bold hover:bg-white/10 transition-colors font-body"
               >
                 <span className="material-symbols-outlined text-xl leading-none" aria-hidden="true">
