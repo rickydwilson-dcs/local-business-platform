@@ -29,9 +29,8 @@ export interface WorkItem {
   index: string;
   name: string;
   description: string;
-  chip: string;
-  /** Only NP Racing and SM Commercial have outbound links in the prototype. */
-  link?: WorkLink;
+  /** All five work items carry an outbound link to the live site. */
+  link: WorkLink;
   video: HomeAssetName;
   poster: HomeAssetName;
 }
@@ -42,7 +41,7 @@ export const WORK: WorkItem[] = [
     name: 'The Clothing Kings',
     description:
       'A workwear store where the price changes with the job — embroidery or vinyl, front, back or sleeve — and the customer uploads their logo at checkout.',
-    chip: 'Custom apparel',
+    link: { label: 'theclothingkings.co.uk →', href: 'https://www.theclothingkings.co.uk' },
     video: 'work-clothing-kings.video',
     poster: 'work-clothing-kings.poster',
   },
@@ -51,7 +50,7 @@ export const WORK: WorkItem[] = [
     name: 'Cuddle Plush Fabrics',
     description:
       'With me since 2014. Products now load automatically from their wholesalers’ sites, and backorders are handled — so a catalogue that size stays accurate without anyone keying it in.',
-    chip: 'Specialist fabric',
+    link: { label: 'cuddleplushfabrics.co.uk →', href: 'https://www.cuddleplushfabrics.co.uk' },
     video: 'work-cuddle-plush.video',
     poster: 'work-cuddle-plush.poster',
   },
@@ -60,7 +59,6 @@ export const WORK: WorkItem[] = [
     name: 'NP Racing',
     description:
       'A British Superbike team site carrying race reports, rider profiles and season gallery, updated through the racing calendar.',
-    chip: 'Race team',
     link: { label: 'npracingbsb.co.uk →', href: 'https://npracingbsb.co.uk' },
     video: 'work-np-racing.video',
     poster: 'work-np-racing.poster',
@@ -70,7 +68,6 @@ export const WORK: WorkItem[] = [
     name: 'SM Commercial',
     description:
       'Bespoke commercial upholstery and fabrication since 2009. A portfolio built to win enquiries for custom work rather than to sell products.',
-    chip: 'Upholstery & fabrication',
     link: { label: 'smcommercial.uk →', href: 'https://www.smcommercial.uk' },
     video: 'work-sm-commercial.video',
     poster: 'work-sm-commercial.poster',
@@ -80,7 +77,7 @@ export const WORK: WorkItem[] = [
     name: 'Colossus Scaffolding',
     description:
       '78 pages of localised content, every image generated rather than photographed. They came with a logo, a few Instagram posts and a list of nearby towns. First enquiry inside two weeks.',
-    chip: 'Scaffolding',
+    link: { label: 'colossus-scaffolding.co.uk →', href: 'https://www.colossus-scaffolding.co.uk' },
     video: 'work-colossus.video',
     poster: 'work-colossus.poster',
   },
