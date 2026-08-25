@@ -68,6 +68,7 @@ export function ComposableHeroSection({
             sizes="100vw"
             className="object-cover"
             priority
+            quality={72}
           />
         )}
         <div
@@ -260,6 +261,7 @@ export function ComposableHeroSection({
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
+                quality={72}
               />
             </div>
           )}

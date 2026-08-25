@@ -6,7 +6,17 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-25
+
+### Platform
+
+- **Root-caused and fixed a CSP `eval`-blocked console warning on NP Racing, traced to Zod shipping in the client bundle for no reason.** `components/ui/gallery-lightbox.tsx` (`"use client"`) imported `useFocusTrap` from the bare `@platform/core-components` barrel instead of a subpath. `packages/core-components` has no `sideEffects: false`, so webpack couldn't tree-shake the barrel import — it pulled in the entire module graph behind `src/index.ts`, including the Zod-dependent `lib/content-schemas.ts`, and Zod's internal `allowsEval` CSP self-test then tripped the browser's eval-blocked warning on every page load. DCS never showed this warning because none of its client components import the barrel at all — only Server Components do there, which never reach the browser. Added a `./hooks/*` subpath export to `packages/core-components/package.json` and switched the import; verified by rebuilding and confirming Zod's fingerprint is gone from every file in `.next/static/chunks`. `packages/core-components/CLAUDE.md`'s import rule rewritten to explain _why_ (not just _that_) barrel imports are unsafe from `"use client"` files, and to fix a stale animation-import path in the same section (`/src/components/animation` doesn't match the real `package.json` export). See `packages/core-components/CHANGELOG.md`.
+
 ## 2026-08-24
+
+### Platform
+
+- **Image quality standard closed the gap between documentation and reality: `packages/core-components`'s shared UI components now set a live, consistent `quality` prop (45 thumbnail / 58 content / 72 hero) on every `<Image>`, and every site built from `sites/base-template` inherits it automatically at build time — no import or setup step required.** This follows directly from the NP Racing audit below, which surfaced that `docs/standards/images.md` documented one set of values (65/80/50) while the actual `image-config.ts` module it pointed to held a different set (58/72/45) and, worse, was never imported by any site — every site just hardcoded quality inline, same as NP Racing now does. Removed `image-config.ts` rather than keep reconciling two sources of truth; the shared components are now the only source. Five components had also independently drifted to their own ad-hoc values (65/70/75); all normalized. Every site's `next.config.ts` `images.qualities` allow-list was extended to include the new values, since Next.js throws a runtime error if an `<Image>` requests a `quality` not in that array — this touches all 8 sites' configs even though most of them don't directly consume the changed components today. See [docs/standards/images.md](docs/standards/images.md) and `packages/core-components/CHANGELOG.md`.
 
 ### Sites
 

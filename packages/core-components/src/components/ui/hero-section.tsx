@@ -97,7 +97,7 @@ export function HeroSection(props: HeroSectionProps) {
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={65}
+                  quality={72}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -115,7 +115,9 @@ export function HeroSection(props: HeroSectionProps) {
                       />
                     </svg>
                     <span className="text-lg font-medium">Hero Image</span>
-                    <p className="text-sm text-surface-secondary mt-2">Professional service photography</p>
+                    <p className="text-sm text-surface-secondary mt-2">
+                      Professional service photography
+                    </p>
                   </div>
                 </div>
               )}

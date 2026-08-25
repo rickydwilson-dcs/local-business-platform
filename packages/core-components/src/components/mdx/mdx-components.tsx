@@ -233,6 +233,7 @@ const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
           alt={alt}
           width={width}
           height={height}
+          quality={58}
           className="w-full h-auto object-cover"
         />
       </div>
@@ -339,6 +340,7 @@ export function createMdxComponentsMap(): MDXComponents {
           alt={alt}
           width={w}
           height={h}
+          quality={58}
           {...rest}
           className="rounded-xl"
         />

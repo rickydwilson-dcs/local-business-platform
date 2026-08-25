@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useFocusTrap } from '@platform/core-components';
+import { useFocusTrap } from '@platform/core-components/hooks/useFocusTrap';
 import type { GalleryItem } from './photo-gallery';
 
 interface GalleryLightboxProps {

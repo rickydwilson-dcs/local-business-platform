@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-25
+
+### Bugs
+
+- Actually fixed the CSP `eval`-blocked console warning noted as harmless on 2026-08-24 — it was harmless (Zod's `allowsEval` probe was always caught internally), but it also shouldn't have been happening at all: `components/ui/gallery-lightbox.tsx` imported `useFocusTrap` from the bare `@platform/core-components` barrel instead of a subpath, which dragged the entire shared package — including Zod-dependent content-schema code — into this site's client bundle for no reason. Switched to `@platform/core-components/hooks/useFocusTrap` (a new subpath added to the package). Verified by rebuilding and confirming Zod no longer appears anywhere in `.next/static/chunks`. See `packages/core-components/CHANGELOG.md`.
+
 ## 2026-08-24
 
 ### Bugs

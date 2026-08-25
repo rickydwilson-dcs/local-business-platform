@@ -80,6 +80,7 @@ export function ServiceShowcase({
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover"
+                          quality={58}
                         />
                       ) : (
                         <div className="h-full bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
@@ -211,6 +212,7 @@ export function ServiceShowcase({
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        quality={58}
                       />
                     </div>
                   ) : (
@@ -260,7 +262,9 @@ export function ServiceShowcase({
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-surface-foreground mb-3">{service.title}</h3>
+                  <h3 className="text-xl font-bold text-surface-foreground mb-3">
+                    {service.title}
+                  </h3>
 
                   <p className="text-surface-foreground text-sm leading-relaxed mb-4">
                     {service.description}
