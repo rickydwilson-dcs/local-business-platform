@@ -11,7 +11,7 @@ export function SiteLocationDetailPage({
   const locationName = frontmatter.hero?.title || frontmatter.title;
 
   return (
-    <div className="min-h-screen font-body">
+    <div className="min-h-screen font-sans">
       {schemaNodes}
 
       {/* ─── Standalone breadcrumb (above hero) ──────────────────────────────── */}
@@ -39,13 +39,16 @@ export function SiteLocationDetailPage({
       </nav>
 
       {/* ─── Hero ────────────────────────────────────────────────────────────── */}
-      <header className="bg-brand-primary py-16 md:py-24">
+      <header className="bg-brand-primary py-20 md:py-28">
         <div className="max-w-[1200px] mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-white mb-4 leading-[1.1] max-w-3xl">
+          <span className="inline-block mb-5 text-xs md:text-sm font-extrabold uppercase tracking-[0.14em] text-white/70">
+            Service Area
+          </span>
+          <h1 className="text-5xl md:text-6xl xl:text-7xl font-extrabold font-heading text-white mb-5 leading-[0.95] tracking-[-0.03em] max-w-3xl">
             {locationName}
           </h1>
           {(frontmatter.hero?.description || frontmatter.description) && (
-            <p className="text-lg md:text-xl text-white/80 font-body leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl text-white/80 font-sans leading-relaxed max-w-2xl">
               {frontmatter.hero?.description || frontmatter.description}
             </p>
           )}
@@ -58,7 +61,7 @@ export function SiteLocationDetailPage({
           <div className="grid lg:grid-cols-3 gap-12">
             {/* ── Left: MDX prose content ──────────────────────────────────── */}
             <div className="lg:col-span-2">
-              <div className="prose prose-lg max-w-none prose-headings:font-headline prose-headings:text-surface-foreground prose-a:text-brand-primary">
+              <div className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:font-extrabold prose-headings:tracking-[-0.02em] prose-headings:text-surface-foreground prose-a:text-brand-primary">
                 {mdxContent}
               </div>
             </div>
@@ -67,11 +70,14 @@ export function SiteLocationDetailPage({
             <aside className="lg:col-span-1">
               <div className="sticky top-8 space-y-6">
                 {/* CTA card */}
-                <div className="bg-brand-primary text-white rounded-[20px] p-6">
-                  <h3 className="font-headline font-bold text-xl mb-2">
+                <div className="bg-brand-primary text-white rounded-[18px] p-6">
+                  <span className="inline-block mb-3 text-xs font-extrabold uppercase tracking-[0.14em] text-white/60">
+                    Get Started
+                  </span>
+                  <h3 className="font-heading font-extrabold text-xl mb-2 tracking-[-0.02em] leading-tight">
                     Get your website in {frontmatter.title}
                   </h3>
-                  <p className="text-white/80 text-sm font-body mb-5 leading-relaxed">
+                  <p className="text-white/80 text-sm font-sans mb-5 leading-relaxed">
                     {siteConfig.name} helps local tradespeople in {frontmatter.title} get found
                     online and win more enquiries.
                   </p>
@@ -79,7 +85,7 @@ export function SiteLocationDetailPage({
                   {siteConfig.cta.phone.show && (
                     <Link
                       href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                      className="flex items-center gap-2 text-white font-semibold font-body mb-4 hover:text-white/80 transition-colors"
+                      className="flex items-center gap-2 text-white font-semibold font-sans mb-4 hover:text-white/80 transition-colors"
                     >
                       <span
                         className="material-symbols-outlined text-xl leading-none"
@@ -93,7 +99,7 @@ export function SiteLocationDetailPage({
 
                   <Link
                     href="/contact"
-                    className="block w-full bg-white text-brand-primary text-center px-6 py-3 rounded-xl font-bold font-body text-sm hover:bg-white/90 transition-colors"
+                    className="block w-full bg-white text-brand-primary text-center px-6 py-3 rounded-full font-bold font-sans text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                   >
                     {siteConfig.cta.primary.label}
                   </Link>
@@ -101,8 +107,8 @@ export function SiteLocationDetailPage({
 
                 {/* FAQ accordion */}
                 {frontmatter.faqs && frontmatter.faqs.length > 0 && (
-                  <div className="bg-surface-card rounded-[20px] border border-surface-card-border p-6">
-                    <h3 className="font-headline font-bold text-lg text-surface-foreground mb-4">
+                  <div className="bg-surface-card rounded-[18px] border border-surface-card-border p-6">
+                    <h3 className="font-heading font-extrabold text-lg text-surface-foreground mb-4 tracking-[-0.02em]">
                       Common questions
                     </h3>
                     <div className="space-y-2">
@@ -112,7 +118,7 @@ export function SiteLocationDetailPage({
                           className="group border border-surface-card-border rounded-xl overflow-hidden"
                         >
                           <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-surface-muted transition-colors">
-                            <span className="font-semibold text-sm text-surface-foreground font-body leading-snug">
+                            <span className="font-semibold text-sm text-surface-foreground font-sans leading-snug">
                               {faq.question}
                             </span>
                             <span
@@ -122,7 +128,7 @@ export function SiteLocationDetailPage({
                               expand_more
                             </span>
                           </summary>
-                          <div className="px-4 pb-4 text-sm text-surface-muted-foreground font-body leading-relaxed">
+                          <div className="px-4 pb-4 text-sm text-surface-muted-foreground font-sans leading-relaxed">
                             {faq.answer}
                           </div>
                         </details>
@@ -140,16 +146,16 @@ export function SiteLocationDetailPage({
       <section className="bg-brand-accent py-16">
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-surface-foreground mb-2 tracking-[-0.02em] leading-[1.05]">
               Ready to get more enquiries from {frontmatter.title}?
             </h2>
-            <p className="text-surface-foreground/70 font-body">
+            <p className="text-surface-foreground/70 font-sans">
               Let {siteConfig.name} build you a website that wins local customers.
             </p>
           </div>
           <Link
             href="/contact"
-            className="flex-shrink-0 bg-brand-primary text-white px-10 py-4 rounded-xl text-base font-bold font-body shadow-lg hover:opacity-90 transition-opacity text-center"
+            className="flex-shrink-0 bg-brand-primary text-white px-10 py-4 rounded-full text-base font-bold font-sans shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_-16px_rgba(214,0,107,0.8)] text-center"
           >
             Get in Touch
           </Link>

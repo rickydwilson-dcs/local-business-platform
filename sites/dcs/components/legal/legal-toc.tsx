@@ -10,7 +10,7 @@ export interface LegalTocItem {
  */
 export function LegalToc({ items }: { items: LegalTocItem[] }) {
   return (
-    <nav aria-label="Table of contents" className="lg:sticky lg:top-28">
+    <nav aria-label="Table of contents" className="lg:sticky lg:top-28 font-sans">
       <p className="text-xs font-semibold uppercase tracking-wider text-surface-muted-foreground mb-3">
         On this page
       </p>

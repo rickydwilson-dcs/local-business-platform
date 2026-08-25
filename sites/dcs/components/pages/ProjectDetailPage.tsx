@@ -1,5 +1,10 @@
 import type { ProjectDetailPageTemplateProps } from '@platform/core-components';
+import Image from 'next/image';
 import Link from 'next/link';
+
+function isResolvableImageSrc(src?: string): src is string {
+  return !!src && (src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://'));
+}
 
 export function SiteProjectDetailPage({
   frontmatter,
@@ -7,7 +12,7 @@ export function SiteProjectDetailPage({
   breadcrumbs,
 }: ProjectDetailPageTemplateProps) {
   return (
-    <div className="min-h-screen font-body">
+    <div className="min-h-screen font-sans">
       {/* ─── Breadcrumb ──────────────────────────────────────────────────────── */}
       <nav aria-label="Breadcrumb" className="max-w-[1200px] mx-auto px-6 pt-5 pb-2">
         <ol className="flex items-center gap-1.5 text-sm text-surface-muted-foreground flex-wrap">
@@ -33,7 +38,7 @@ export function SiteProjectDetailPage({
       </nav>
 
       {/* ─── Hero ────────────────────────────────────────────────────────────── */}
-      <header className="bg-brand-primary py-16 md:py-24">
+      <header className="bg-brand-secondary py-16 md:py-24">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="max-w-3xl">
             {frontmatter.tags && frontmatter.tags.length > 0 && (
@@ -41,18 +46,18 @@ export function SiteProjectDetailPage({
                 {frontmatter.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full font-body"
+                    className="bg-brand-accent/15 text-brand-accent text-xs font-semibold px-2.5 py-1 rounded-full font-sans"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             )}
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-white mb-4 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-heading text-white mb-4 leading-[1.1]">
               {frontmatter.title}
             </h1>
             {frontmatter.date && (
-              <time dateTime={frontmatter.date} className="text-white/70 text-sm font-body">
+              <time dateTime={frontmatter.date} className="text-white/70 text-sm font-sans">
                 {frontmatter.date}
               </time>
             )}
@@ -60,18 +65,38 @@ export function SiteProjectDetailPage({
         </div>
       </header>
 
+      {/* ─── Hero image ──────────────────────────────────────────────────────── */}
+      {isResolvableImageSrc(frontmatter.heroImage) && (
+        <div className="bg-surface-background">
+          <div className="max-w-[1200px] mx-auto px-6 -mt-10 md:-mt-14">
+            <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-lg bg-surface-muted">
+              <Image
+                src={frontmatter.heroImage}
+                alt={`${frontmatter.title} — hero image`}
+                width={1200}
+                height={675}
+                quality={58}
+                priority
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ─── Content Area ────────────────────────────────────────────────────── */}
       <section className="bg-surface-background py-16">
         <div className="max-w-3xl mx-auto px-6">
           {/* MDX prose */}
-          <div className="prose prose-lg max-w-none prose-headings:font-headline prose-headings:text-surface-foreground prose-a:text-brand-primary prose-strong:text-surface-foreground">
+          <div className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-surface-foreground prose-a:text-brand-primary prose-strong:text-surface-foreground">
             {mdxContent}
           </div>
 
           {/* Results / outcomes */}
           {frontmatter.outcomes && frontmatter.outcomes.length > 0 && (
             <div className="mt-12">
-              <h2 className="text-2xl font-bold font-headline text-surface-foreground mb-6">
+              <h2 className="text-2xl font-bold font-heading text-surface-foreground mb-6">
                 Results
               </h2>
               <ul className="space-y-3 list-none m-0 p-0">
@@ -96,7 +121,7 @@ export function SiteProjectDetailPage({
                         />
                       </svg>
                     </span>
-                    <span className="text-surface-foreground font-body leading-relaxed">
+                    <span className="text-surface-foreground font-sans leading-relaxed">
                       {outcome}
                     </span>
                   </li>
@@ -111,16 +136,16 @@ export function SiteProjectDetailPage({
       <section className="bg-brand-accent py-16">
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold font-heading text-surface-foreground mb-2">
               Like what you see? Let&apos;s talk.
             </h2>
-            <p className="text-surface-foreground/70 font-body">
+            <p className="text-surface-foreground/70 font-sans">
               We&apos;ll build you a site that wins more work.
             </p>
           </div>
           <Link
             href="/contact"
-            className="flex-shrink-0 bg-brand-primary text-white px-10 py-4 rounded-xl text-base font-bold font-body shadow-lg hover:opacity-90 transition-opacity text-center"
+            className="flex-shrink-0 bg-brand-primary text-white px-10 py-4 rounded-xl text-base font-bold font-sans shadow-lg hover:opacity-90 transition-opacity text-center"
           >
             Get in Touch
           </Link>
