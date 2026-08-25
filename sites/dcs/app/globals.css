@@ -228,7 +228,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 3px;
-  background: var(--color-brand-primary, #61A3BA);
+  background: var(--color-brand-primary, #D6006B);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s var(--ease-out);
@@ -246,7 +246,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   position: absolute;
   bottom: -3px; left: 0;
   width: 0; height: 2px;
-  background: var(--color-brand-primary, #61A3BA);
+  background: var(--color-brand-primary, #D6006B);
   transition: width 0.3s var(--ease-out);
   border-radius: 2px;
 }
@@ -261,7 +261,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 }
 .solaris-geo-1 {
   width: 270px; height: 270px;
-  background: var(--color-brand-primary, #61A3BA);
+  background: var(--color-brand-primary, #D6006B);
   opacity: 0.35;
   top: 8%; left: 5%;
   animation: fadeSlideUp 0.7s var(--ease-out) 0.6s both,
@@ -269,7 +269,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 }
 .solaris-geo-2 {
   width: 170px; height: 170px;
-  background: var(--color-brand-accent, #D2DE32);
+  background: var(--color-brand-accent, #00D2D8);
   opacity: 0.7;
   top: 0; right: 8%;
   transform: rotate(14deg);
@@ -278,7 +278,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 }
 .solaris-geo-3 {
   width: 130px; height: 130px;
-  background: #A2C579;
+  background: var(--color-success, #2E9E5B);
   opacity: 0.5;
   bottom: 12%; left: 22%;
   transform: rotate(-9deg);
@@ -287,7 +287,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 }
 .solaris-geo-4 {
   width: 75px; height: 75px;
-  border: 3px solid var(--color-brand-accent, #D2DE32);
+  border: 3px solid var(--color-brand-accent, #00D2D8);
   background: transparent;
   bottom: 26%; right: 6%;
   transform: rotate(22deg);
