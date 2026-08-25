@@ -23,7 +23,11 @@ import type { ComponentRegistry, DeepPartialThemeConfig } from '@platform/theme-
  * etc). The theme system's Zod schema requires 6-digit hex, so those are
  * flattened here against the #0a0a0a page background:
  *   ink-soft  .66 -> #A4A3A0   (surface.secondaryForeground / mutedForeground)
- *   ink-faint .40 -> #676765   (surface.tertiaryForeground)
+ *   ink-faint .40 -> #8A8985   (surface.tertiaryForeground — bumped from the
+ *     prototype's literal #676765 in August 2026: that value only cleared
+ *     3.49:1 against #0a0a0a, failing WCAG AA's 4.5:1 for normal text.
+ *     #8A8985 clears 4.5:1 against every surface shade this token appears
+ *     on (background/card/subtle/muted), worst case 4.92:1 on muted #1b1b1b.)
  *   line      .14 -> #2B2B2A   (surface.cardBorder)
  *   line-2    .08 -> #1D1D1C   (surface.subtleBorder)
  *
@@ -46,7 +50,7 @@ export const themeConfig: DeepPartialThemeConfig = {
       background: '#0A0A0A',
       foreground: '#F3F2EE',
       secondaryForeground: '#A4A3A0',
-      tertiaryForeground: '#676765',
+      tertiaryForeground: '#8A8985',
       muted: '#1B1B1B',
       mutedForeground: '#A4A3A0',
       card: '#111111',
