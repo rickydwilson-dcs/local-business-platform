@@ -277,11 +277,20 @@ const BlogAuthorSchema = z.object({
 });
 
 export const BlogCategory = z.enum([
+  // Original generic categories
   "industry-tips",
   "how-to-guide",
   "case-study",
   "seasonal",
   "news",
+  // DCS ("marketing to tradespeople") categories — added 2026-08-25
+  "local-seo",
+  "getting-found-online",
+  "website-design",
+  "website-content",
+  "industry-guides",
+  "costs-and-value",
+  "business-tools",
 ]);
 
 export const BlogFrontmatterSchema = z.object({

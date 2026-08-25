@@ -41,7 +41,7 @@ interface ValidationResult {
 function validateFile(
   filePath: string,
   schema: ZodSchema,
-  type: "service" | "location"
+  type: "service" | "location" | "blog" | "project"
 ): ValidationResult {
   const fileName = path.basename(filePath);
 
@@ -85,7 +85,7 @@ function validateFile(
 function validateDirectory(
   dirPath: string,
   schema: ZodSchema,
-  type: "service" | "location"
+  type: "service" | "location" | "blog" | "project"
 ): ValidationResult[] {
   const files = fs
     .readdirSync(dirPath)
@@ -148,13 +148,34 @@ function printResults(results: ValidationResult[], type: string): boolean {
 /**
  * Main execution
  */
+/**
+ * Local DCS project frontmatter shape — deliberately NOT the shared
+ * ProjectFrontmatterSchema from core-components, which requires fields
+ * (projectType, location, completionDate, etc.) that don't apply to DCS's
+ * simpler content/projects/*.mdx case-study format.
+ */
+const DcsProjectFrontmatterSchema = z.object({
+  title: z.string().min(5, "Project title must be at least 5 characters"),
+  description: z.string().min(20, "Description must be at least 20 characters"),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD format"),
+  tags: z
+    .array(z.string().min(2, "Tag must be at least 2 characters"))
+    .min(1, "At least 1 tag required"),
+  outcomes: z
+    .array(z.string().min(10, "Outcome must be at least 10 characters"))
+    .min(1, "At least 1 outcome required"),
+  heroImage: z.string().optional(),
+});
+
 async function main() {
   const args = process.argv.slice(2);
-  const mode = args[0] || "all"; // 'all', 'services', or 'locations'
+  const mode = args[0] || "all"; // 'all', 'services', 'locations', 'blog', or 'project'
 
   const contentDir = path.join(process.cwd(), "content");
   const servicesDir = path.join(contentDir, "services");
   const locationsDir = path.join(contentDir, "locations");
+  const blogDir = path.join(contentDir, "blog");
+  const projectsDir = path.join(contentDir, "projects");
 
   // Import content-schemas from the canonical source in core-components
   const schemasPath = path.join(
@@ -167,7 +188,8 @@ async function main() {
     "lib",
     "content-schemas"
   );
-  const { ServiceFrontmatterSchema, LocationFrontmatterSchema } = await import(schemasPath);
+  const { ServiceFrontmatterSchema, LocationFrontmatterSchema, BlogFrontmatterSchema } =
+    await import(schemasPath);
 
   let allValid = true;
 
@@ -197,6 +219,42 @@ async function main() {
     const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema, "location");
     const locationsValid = printResults(locationResults, "Locations");
     allValid = allValid && locationsValid;
+  }
+
+  // Validate blog posts
+  if (mode === "blog") {
+    if (!fs.existsSync(blogDir)) {
+      console.error(`${colors.red}Error: Blog directory not found: ${blogDir}${colors.reset}`);
+      process.exit(1);
+    }
+
+    const blogResults = validateDirectory(blogDir, BlogFrontmatterSchema, "blog");
+    const blogValid = printResults(blogResults, "Blog");
+    allValid = allValid && blogValid;
+  } else if (mode === "all" && fs.existsSync(blogDir)) {
+    // Not every site has content/blog/ — only validate it in "all" mode when present.
+    const blogResults = validateDirectory(blogDir, BlogFrontmatterSchema, "blog");
+    const blogValid = printResults(blogResults, "Blog");
+    allValid = allValid && blogValid;
+  }
+
+  // Validate projects (DCS-local shape, not the shared ProjectFrontmatterSchema)
+  if (mode === "project") {
+    if (!fs.existsSync(projectsDir)) {
+      console.error(
+        `${colors.red}Error: Projects directory not found: ${projectsDir}${colors.reset}`
+      );
+      process.exit(1);
+    }
+
+    const projectResults = validateDirectory(projectsDir, DcsProjectFrontmatterSchema, "project");
+    const projectsValid = printResults(projectResults, "Projects");
+    allValid = allValid && projectsValid;
+  } else if (mode === "all" && fs.existsSync(projectsDir)) {
+    // Not every site has content/projects/ — only validate it in "all" mode when present.
+    const projectResults = validateDirectory(projectsDir, DcsProjectFrontmatterSchema, "project");
+    const projectsValid = printResults(projectResults, "Projects");
+    allValid = allValid && projectsValid;
   }
 
   // Exit with appropriate code
