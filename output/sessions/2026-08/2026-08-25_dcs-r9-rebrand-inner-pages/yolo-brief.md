@@ -853,7 +853,7 @@ This writes a wrap-up summary to the session folder. **Do not skip it.**
 ## Completed
 
 **Date:** 2026-08-25
-**Status:** All 7 implementation phases executed successfully (Phase 0 pre-flight, Phase 6 verification-only — no commit)
+**Status:** All 7 implementation phases executed successfully (Phase 0 pre-flight, Phase 6 verification-only — no commit) — **then rejected on visual-design grounds and ARCHIVED, not merged.** Branch renamed `archive/dcs-r9-inner-pages-v1-2026-08-25`. See the post-review note at the top of `session-wrap-up.md` in this folder for what's salvageable vs. what needs a real redesign pass.
 
 Rebuilt DCS's shared header/footer and all 14 inner routes against a newly-promoted r9 theme-token set (magenta/aqua/navy/ink/paper via `colors.brand.*`/`colors.surface.*`), added conditional `heroImage` rendering to the blog and project templates, reclassified the NP Racing PageSpeed post as a project case study, fixed a `BlogCategory` schema/enum drift and added missing blog/project content validation, and shipped real R2-hosted hero images for all 20 remaining blog posts (2 live client screenshots + 7 reusable r9-branded category graphics). The `robots: { index: false, follow: false }` export was confirmed byte-for-byte unchanged from `develop` throughout.
 

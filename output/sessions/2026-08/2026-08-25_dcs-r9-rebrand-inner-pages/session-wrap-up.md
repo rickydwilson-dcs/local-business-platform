@@ -2,8 +2,24 @@
 
 **Date:** 2026-08-25
 **Session folder:** output/sessions/2026-08/2026-08-25_dcs-r9-rebrand-inner-pages/
-**Branch:** feature/dcs-r9-rebrand-inner-pages
-**Status:** Completed
+**Branch:** ~~feature/dcs-r9-rebrand-inner-pages~~ → renamed `archive/dcs-r9-inner-pages-v1-2026-08-25`
+**Status:** Completed, then **ARCHIVED — do not merge**
+
+> **2026-08-25, post-review:** Ricky reviewed the live pages and rejected the visual result —
+> "utterly horrible - not one thing has picked up any of the design cues other than colours."
+> The WCAG-validated r9 **tokens** (Phase 1) are correct; every **component rebuild** (Phases
+> 2–3, plus the Phase 7 category graphics) only applied the colour palette and missed the
+> actual r9 design language (typography treatment, spacing rhythm, motion, layout patterns).
+> This branch is preserved as a reference snapshot, not a base to build on. A future redesign
+> needs a real design pass (or Impeccable/Stitch-driven visual iteration against actual
+> screenshots of the r9 language), not a text-described-tokens rebuild. See the root-cause
+> note in `MEMORY.md` → `feedback_visual_rebuild_needs_visual_reference.md`.
+>
+> The **non-visual work** on this branch — the NP Racing → project reclassification (Phase 4),
+> the `BlogCategory` schema fix and new blog/project content validation (Phase 5), and the
+> `heroImage` frontmatter/rendering convention fix — has nothing to do with the rejected visual
+> design and may still be worth cherry-picking onto a clean branch later. Ricky deferred that
+> decision rather than doing it now ("we may or may not want to keep some of the content").
 
 ## Goal
 
