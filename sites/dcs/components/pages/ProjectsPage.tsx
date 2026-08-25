@@ -1,10 +1,7 @@
 import type { ProjectsPageTemplateProps } from '@platform/core-components';
 import Image from 'next/image';
 import Link from 'next/link';
-
-function isResolvableImageSrc(src?: string): src is string {
-  return !!src && (src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://'));
-}
+import { getImageUrl, isValidImagePath } from '@/lib/image';
 
 export function SiteProjectsPage({ projects }: ProjectsPageTemplateProps) {
   return (
@@ -34,10 +31,10 @@ export function SiteProjectsPage({ projects }: ProjectsPageTemplateProps) {
                 <li key={project.slug}>
                   <article className="bg-surface-card rounded-[20px] shadow-md border border-surface-card-border overflow-hidden transition-transform hover:-translate-y-1 flex flex-col h-full">
                     {/* Thumbnail */}
-                    {isResolvableImageSrc(project.heroImage) && (
+                    {isValidImagePath(project.heroImage) && (
                       <div className="relative w-full aspect-[4/3] overflow-hidden bg-surface-muted">
                         <Image
-                          src={project.heroImage}
+                          src={getImageUrl(project.heroImage)}
                           alt={`${project.title} — thumbnail`}
                           width={400}
                           height={300}

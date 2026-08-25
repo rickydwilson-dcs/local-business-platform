@@ -1,10 +1,7 @@
 import type { BlogPageTemplateProps } from '@platform/core-components';
 import Image from 'next/image';
 import Link from 'next/link';
-
-function isResolvableImageSrc(src?: string): src is string {
-  return !!src && (src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://'));
-}
+import { getImageUrl, isValidImagePath } from '@/lib/image';
 
 export function SiteBlogPage({ posts }: BlogPageTemplateProps) {
   return (
@@ -40,10 +37,10 @@ export function SiteBlogPage({ posts }: BlogPageTemplateProps) {
                   className="bg-surface-card rounded-[20px] shadow-md border border-surface-card-border overflow-hidden transition-transform hover:-translate-y-1"
                 >
                   {/* Thumbnail */}
-                  {isResolvableImageSrc(post.heroImage) && (
+                  {isValidImagePath(post.heroImage) && (
                     <div className="relative w-full aspect-[4/3] overflow-hidden bg-surface-muted">
                       <Image
-                        src={post.heroImage}
+                        src={getImageUrl(post.heroImage)}
                         alt={`${post.title} — thumbnail`}
                         width={400}
                         height={300}

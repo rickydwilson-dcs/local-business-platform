@@ -1,10 +1,7 @@
 import type { BlogPostPageTemplateProps, BlogPostSummary } from '@platform/core-components';
 import Image from 'next/image';
 import Link from 'next/link';
-
-function isResolvableImageSrc(src?: string): src is string {
-  return !!src && (src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://'));
-}
+import { getImageUrl, isValidImagePath } from '@/lib/image';
 
 export function SiteBlogPostPage({
   frontmatter,
@@ -64,12 +61,12 @@ export function SiteBlogPostPage({
       </header>
 
       {/* ─── Hero image ──────────────────────────────────────────────────────── */}
-      {isResolvableImageSrc(frontmatter.heroImage) && (
+      {isValidImagePath(frontmatter.heroImage) && (
         <div className="bg-surface-background">
           <div className="max-w-[1200px] mx-auto px-6 -mt-10 md:-mt-14">
             <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-lg bg-surface-muted">
               <Image
-                src={frontmatter.heroImage}
+                src={getImageUrl(frontmatter.heroImage)}
                 alt={`${frontmatter.title} — hero image`}
                 width={1200}
                 height={675}
