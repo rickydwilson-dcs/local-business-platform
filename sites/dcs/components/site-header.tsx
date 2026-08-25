@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export interface SiteHeaderProps {
   logoText?: string;
@@ -11,33 +11,45 @@ export interface SiteHeaderProps {
   showPhone?: boolean;
 }
 
+/**
+ * r9 rebrand of the inner-page header. Visual language (magenta CTA pill
+ * with arrow, circular two-bar burger, underline-on-hover nav links, dark
+ * fullscreen mobile nav) is lifted from the r9 homepage bar/menu
+ * (`sites/dcs/components/home/site-bar.tsx`, `home/mobile-menu.tsx`,
+ * `styles/home-r9.css`) but rebuilt against theme tokens (`bg-brand-primary`,
+ * `text-surface-foreground`, etc.) rather than the homepage's hardcoded r9
+ * hex/CSS-var treatment, since this header renders across 14+ routes, not a
+ * single scroll-tracked page — there is no "ground" to track, so it always
+ * renders on the paper/ink pairing (`surface.background`/`surface.foreground`).
+ *
+ * Mobile menu CSS trap (see root CLAUDE.md): the `fixed inset-0` overlay
+ * below is a SIBLING of `<header>`, not a descendant — `<header>` carries
+ * `backdrop-blur-md`, and nesting the overlay inside it would make the
+ * header's own box (not the viewport) the containing block for the overlay's
+ * `fixed` positioning. Keep it a sibling, or portal it, if this is ever
+ * restructured.
+ */
 export function SiteHeader({
-  logoText = "DCS",
+  logoText = 'DCS',
   logoSrc,
   logoAlt,
   navItems,
-  ctaLabel = "Get in touch",
-  ctaHref = "#contact",
+  ctaLabel = 'Get in touch',
+  ctaHref = '#contact',
   phone,
   showPhone = true,
 }: SiteHeaderProps) {
   return (
     <>
       <header
-        id="solaris-header"
-        className="sticky top-0 z-[100] border-b border-surface-card-border"
-        style={{
-          background: "rgba(240,247,250,0.85)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-        }}
+        id="dcs-header"
+        className="sticky top-0 z-[100] border-b border-surface-card-border bg-surface-background/90 backdrop-blur-md transition-shadow duration-300"
       >
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1200px] mx-auto">
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
           {/* Logo */}
           <Link
             href="/"
-            className="font-heading text-2xl font-bold tracking-tight"
-            style={{ color: "#4a8fa8" }}
+            className="flex items-center font-heading text-2xl font-semibold tracking-tight text-surface-foreground"
           >
             {logoSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -46,7 +58,7 @@ export function SiteHeader({
                 alt={logoAlt ?? logoText}
                 width={140}
                 height={48}
-                style={{ height: "40px", width: "auto", objectFit: "contain" }}
+                style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
               />
             ) : (
               logoText
@@ -54,23 +66,22 @@ export function SiteHeader({
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="solaris-nav-link font-heading text-sm font-medium"
-                style={{ color: "#3d4235" }}
+                className="group relative py-1 font-sans text-sm font-medium text-surface-foreground/75 transition-colors hover:text-surface-foreground"
               >
                 {item.label}
+                <span className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] origin-left scale-x-0 bg-brand-primary transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
 
             {showPhone && phone && (
               <Link
-                href={`tel:${phone.replace(/\s/g, "")}`}
-                className="font-heading text-sm font-medium"
-                style={{ color: "#3d4235" }}
+                href={`tel:${phone.replace(/\s/g, '')}`}
+                className="font-sans text-sm font-medium text-surface-foreground/75 transition-colors hover:text-surface-foreground"
               >
                 {phone}
               </Link>
@@ -78,56 +89,51 @@ export function SiteHeader({
 
             <Link
               href={ctaHref}
-              className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold font-heading text-white transition-colors"
-              style={{
-                background: "#61A3BA",
-                borderRadius: "10px",
-              }}
+              className="group inline-flex items-center gap-2 rounded-full bg-brand-primary px-6 py-2.5 font-sans text-sm font-semibold text-on-brand-primary transition-transform duration-300 hover:-translate-y-0.5"
             >
               {ctaLabel}
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                <path
+                  d="M2 8h11M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </Link>
           </nav>
 
           {/* Mobile hamburger */}
           <button
-            id="solaris-hamburger"
-            className="lg:hidden p-2"
+            id="dcs-hamburger"
+            className="group grid h-11 w-11 place-content-center gap-1.5 rounded-full border-[1.4px] border-surface-foreground/30 text-surface-foreground transition-colors duration-300 hover:border-brand-primary hover:bg-brand-primary hover:text-on-brand-primary lg:hidden"
             aria-label="Open menu"
             aria-expanded="false"
-            aria-controls="solaris-mobile-menu"
+            aria-controls="dcs-mobile-menu"
           >
-            <span className="flex flex-col justify-center gap-1.5 w-6 h-5">
-              <span
-                className="block h-0.5 w-6 rounded-sm transition-transform duration-300"
-                style={{ background: "#2a2e20" }}
-              />
-              <span
-                className="block h-0.5 w-6 rounded-sm transition-opacity duration-300"
-                style={{ background: "#2a2e20" }}
-              />
-              <span
-                className="block h-0.5 w-6 rounded-sm transition-transform duration-300"
-                style={{ background: "#2a2e20" }}
-              />
-            </span>
+            <span className="block h-[1.6px] w-4 bg-current transition-transform duration-300 group-aria-expanded:translate-y-[3.3px] group-aria-expanded:rotate-45" />
+            <span className="block h-[1.6px] w-4 bg-current transition-transform duration-300 group-aria-expanded:-translate-y-[3.3px] group-aria-expanded:-rotate-45" />
           </button>
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay — sibling of <header>, see file-level note above */}
       <div
-        id="solaris-mobile-menu"
-        className="fixed inset-0 z-[200] flex flex-col lg:hidden"
-        style={{ background: "#F0F7FA", display: "none" }}
+        id="dcs-mobile-menu"
+        className="fixed inset-0 z-[200] hidden flex-col bg-surface-background lg:hidden"
       >
-        <div
-          className="flex items-center justify-between px-6 py-4 border-b"
-          style={{ borderColor: "#d4e8f0" }}
-        >
+        <div className="flex items-center justify-between border-b border-surface-card-border px-6 py-4">
           <Link
             href="/"
-            className="font-heading text-2xl font-bold tracking-tight"
-            style={{ color: "#4a8fa8" }}
+            className="flex items-center font-heading text-2xl font-semibold tracking-tight text-surface-foreground"
           >
             {logoSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -136,16 +142,15 @@ export function SiteHeader({
                 alt={logoAlt ?? logoText}
                 width={140}
                 height={48}
-                style={{ height: "40px", width: "auto", objectFit: "contain" }}
+                style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
               />
             ) : (
               logoText
             )}
           </Link>
           <button
-            id="solaris-mobile-close"
-            className="p-2 rounded-lg border-2 transition-colors"
-            style={{ borderColor: "#61A3BA", color: "#61A3BA" }}
+            id="dcs-mobile-close"
+            className="rounded-full border-[1.4px] border-brand-primary p-2 text-brand-primary transition-colors"
             aria-label="Close menu"
           >
             <svg
@@ -164,36 +169,30 @@ export function SiteHeader({
           </button>
         </div>
 
-        <nav className="flex flex-col px-6 py-12 gap-8 flex-1 overflow-y-auto">
+        <nav className="flex flex-1 flex-col justify-center gap-6 overflow-y-auto bg-surface-inverse px-6 py-12 text-surface-inverse-foreground">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="solaris-mobile-link text-xl font-semibold font-heading text-center"
-              style={{ color: "#2a2e20" }}
+              className="text-center font-heading text-3xl font-extrabold tracking-tight transition-colors hover:text-brand-accent"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="p-6 space-y-4 flex-shrink-0">
+        <div className="flex-shrink-0 space-y-4 bg-surface-inverse p-6 text-surface-inverse-foreground">
           {showPhone && phone && (
             <Link
-              href={`tel:${phone.replace(/\s/g, "")}`}
-              className="block text-center text-2xl font-bold font-heading"
-              style={{ color: "#2a2e20" }}
+              href={`tel:${phone.replace(/\s/g, '')}`}
+              className="block text-center font-heading text-2xl font-bold"
             >
               {phone}
             </Link>
           )}
           <Link
             href={ctaHref}
-            className="block w-full text-center py-4 px-6 font-bold text-lg font-heading text-white transition-colors"
-            style={{
-              background: "#61A3BA",
-              borderRadius: "10px",
-            }}
+            className="block w-full rounded-full bg-brand-primary px-6 py-4 text-center font-sans text-lg font-bold text-on-brand-primary transition-transform hover:-translate-y-0.5"
           >
             {ctaLabel}
           </Link>
@@ -205,15 +204,15 @@ export function SiteHeader({
         dangerouslySetInnerHTML={{
           __html: `
 (function(){
-  var header = document.getElementById('solaris-header');
-  var hamburger = document.getElementById('solaris-hamburger');
-  var mobileMenu = document.getElementById('solaris-mobile-menu');
-  var mobileClose = document.getElementById('solaris-mobile-close');
+  var header = document.getElementById('dcs-header');
+  var hamburger = document.getElementById('dcs-hamburger');
+  var mobileMenu = document.getElementById('dcs-mobile-menu');
+  var mobileClose = document.getElementById('dcs-mobile-close');
 
   if (header) {
     window.addEventListener('scroll', function() {
       if (window.scrollY > 10) {
-        header.style.boxShadow = '0 2px 20px rgba(42,46,32,0.08)';
+        header.style.boxShadow = '0 2px 20px rgba(14,14,18,0.08)';
       } else {
         header.style.boxShadow = 'none';
       }

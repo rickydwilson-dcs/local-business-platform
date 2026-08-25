@@ -11,6 +11,13 @@ export interface SiteFooterProps {
   copyright?: string;
 }
 
+/**
+ * r9 rebrand of the inner-page footer. Uses the same dark-surface pairing
+ * (`bg-surface-inverse` / `text-surface-inverse-foreground`) that
+ * `site-header.tsx`'s mobile nav panel already established for this rebrand,
+ * plus `text-brand-accent` (aqua) for headings/hover and `bg-brand-primary`
+ * (magenta) for the top signature line — all theme tokens, no hardcoded hex.
+ */
 export function SiteFooter({
   logoText = 'DCS',
   logoSrc,
@@ -22,10 +29,13 @@ export function SiteFooter({
   copyright,
 }: SiteFooterProps) {
   return (
-    <footer style={{ background: '#2a2e20' }} className="text-white py-16 sm:py-20">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <footer className="bg-surface-inverse text-surface-inverse-foreground">
+      {/* Signature line */}
+      <div className="h-[3px] bg-brand-primary" />
+
+      <div className="max-w-[1200px] mx-auto px-6 py-16 sm:py-20">
         {/* Top grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-14">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             {logoSrc ? (
@@ -37,22 +47,19 @@ export function SiteFooter({
                 height={48}
                 loading="lazy"
                 style={{
-                  height: '36px',
+                  height: '40px',
                   width: 'auto',
                   objectFit: 'contain',
                   filter: 'brightness(0) invert(1)',
                 }}
               />
             ) : (
-              <span className="block font-heading text-xl font-bold text-white mb-3">
+              <span className="block font-heading text-2xl font-bold tracking-tight mb-3">
                 {logoText}
               </span>
             )}
             {tagline && (
-              <p
-                className="text-sm leading-relaxed max-w-[280px]"
-                style={{ color: 'rgba(255,255,255,0.7)' }}
-              >
+              <p className="mt-4 max-w-[280px] font-sans text-sm leading-relaxed text-surface-inverse-foreground/70">
                 {tagline}
               </p>
             )}
@@ -61,16 +68,15 @@ export function SiteFooter({
           {/* Nav columns */}
           {navColumns.map((col) => (
             <div key={col.heading}>
-              <h3 className="font-heading text-xs font-semibold uppercase tracking-widest text-white mb-4">
+              <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-brand-accent mb-4">
                 {col.heading}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm transition-colors"
-                      style={{ color: 'rgba(255,255,255,0.7)' }}
+                      className="font-sans text-sm text-surface-inverse-foreground/70 transition-colors hover:text-brand-accent"
                     >
                       {link.label}
                     </Link>
@@ -83,15 +89,15 @@ export function SiteFooter({
           {/* Contact column */}
           {contact && (contact.email || contact.phone) && (
             <div>
-              <h3 className="font-heading text-xs font-semibold uppercase tracking-widest text-white mb-4">
+              <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-brand-accent mb-4">
                 Contact
               </h3>
-              <div className="space-y-2 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <div className="space-y-2.5 font-sans text-sm text-surface-inverse-foreground/70">
                 {contact.phone && (
                   <div>
                     <Link
                       href={`tel:${contact.phone.replace(/\s/g, '')}`}
-                      className="transition-colors hover:text-white"
+                      className="transition-colors hover:text-brand-accent"
                     >
                       {contact.phone}
                     </Link>
@@ -101,7 +107,7 @@ export function SiteFooter({
                   <div>
                     <Link
                       href={`mailto:${contact.email}`}
-                      className="transition-colors hover:text-white"
+                      className="transition-colors hover:text-brand-accent"
                     >
                       {contact.email}
                     </Link>
@@ -113,26 +119,29 @@ export function SiteFooter({
         </div>
 
         {/* Bottom bar */}
-        <div
-          className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
-          style={{ borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
-        >
+        <div className="border-t border-surface-inverse-foreground/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs text-surface-inverse-foreground/60">
           <p>{copyright ?? `© ${new Date().getFullYear()} ${logoText}. All rights reserved.`}</p>
 
           {legal && (
             <div className="flex gap-6">
               {legal.privacyHref && (
-                <Link href={legal.privacyHref} className="transition-colors hover:text-white">
+                <Link
+                  href={legal.privacyHref}
+                  className="transition-colors hover:text-brand-accent"
+                >
                   Privacy Policy
                 </Link>
               )}
               {legal.termsHref && (
-                <Link href={legal.termsHref} className="transition-colors hover:text-white">
+                <Link href={legal.termsHref} className="transition-colors hover:text-brand-accent">
                   Terms
                 </Link>
               )}
               {legal.cookiesHref && (
-                <Link href={legal.cookiesHref} className="transition-colors hover:text-white">
+                <Link
+                  href={legal.cookiesHref}
+                  className="transition-colors hover:text-brand-accent"
+                >
                   Cookies
                 </Link>
               )}
