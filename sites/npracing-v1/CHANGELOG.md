@@ -10,6 +10,10 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 - Actually fixed the CSP `eval`-blocked console warning noted as harmless on 2026-08-24 — it was harmless (Zod's `allowsEval` probe was always caught internally), but it also shouldn't have been happening at all: `components/ui/gallery-lightbox.tsx` imported `useFocusTrap` from the bare `@platform/core-components` barrel instead of a subpath, which dragged the entire shared package — including Zod-dependent content-schema code — into this site's client bundle for no reason. Switched to `@platform/core-components/hooks/useFocusTrap` (a new subpath added to the package). Verified by rebuilding and confirming Zod no longer appears anywhere in `.next/static/chunks`. See `packages/core-components/CHANGELOG.md`.
 
+### Accessibility
+
+- Fixed a Lighthouse low-contrast failure that hit every "faint eyebrow label" on the site — the marquee ticker, the footer's TEAM/MORE/GET IN TOUCH headings, the footer copyright and "Digital Consulting Services" credit link, stat-strip labels, and contact-page labels. All of them share one token, `surface.tertiaryForeground` (`theme.config.ts`), which at `#676765` only reached 3.49:1 against the `#0A0A0A` body background — below WCAG AA's 4.5:1 minimum for normal-size text (12–14px, bold/uppercase doesn't qualify as WCAG "large text"). Brightened it to `#8A8985`, which clears 4.5:1 against every surface shade the token appears on (worst case 4.92:1 against the `#1B1B1B` muted panel background), while staying visibly a step darker than `secondaryForeground` so the label hierarchy is unchanged.
+
 ## 2026-08-24
 
 ### Bugs

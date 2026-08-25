@@ -12,6 +12,10 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 - **Root-caused and fixed a CSP `eval`-blocked console warning on NP Racing, traced to Zod shipping in the client bundle for no reason.** `components/ui/gallery-lightbox.tsx` (`"use client"`) imported `useFocusTrap` from the bare `@platform/core-components` barrel instead of a subpath. `packages/core-components` has no `sideEffects: false`, so webpack couldn't tree-shake the barrel import — it pulled in the entire module graph behind `src/index.ts`, including the Zod-dependent `lib/content-schemas.ts`, and Zod's internal `allowsEval` CSP self-test then tripped the browser's eval-blocked warning on every page load. DCS never showed this warning because none of its client components import the barrel at all — only Server Components do there, which never reach the browser. Added a `./hooks/*` subpath export to `packages/core-components/package.json` and switched the import; verified by rebuilding and confirming Zod's fingerprint is gone from every file in `.next/static/chunks`. `packages/core-components/CLAUDE.md`'s import rule rewritten to explain _why_ (not just _that_) barrel imports are unsafe from `"use client"` files, and to fix a stale animation-import path in the same section (`/src/components/animation` doesn't match the real `package.json` export). See `packages/core-components/CHANGELOG.md`.
 
+### Sites
+
+- **NP Racing: fixed a site-wide low-contrast accessibility failure flagged by Lighthouse.** `surface.tertiaryForeground` (`theme.config.ts`) — the "faint eyebrow label" color used for the marquee ticker, footer headings, footer credit link, stat-strip labels, and contact-page labels — only reached 3.49:1 against the page's `#0A0A0A` background, below WCAG AA's 4.5:1 minimum for normal text. Brightened it from `#676765` to `#8A8985`, which clears 4.5:1 against every surface shade the token is used on (4.68–4.92:1 across background/card/subtle/muted) while staying visibly a step darker than `secondaryForeground`. One token change fixed every failing element, since they all trace back to it.
+
 ## 2026-08-24
 
 ### Platform
