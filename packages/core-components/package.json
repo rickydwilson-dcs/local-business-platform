@@ -16,7 +16,8 @@
     "./components/animation": "./src/components/animation/index.ts",
     "./components/composable": "./src/components/composable/index.ts",
     "./components/*": "./src/components/*/index.tsx",
-    "./lib/*": "./src/lib/*.ts"
+    "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": "./src/hooks/*.ts"
   },
   "scripts": {
     "lint": "eslint src/",
