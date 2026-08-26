@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     images: [
       {
-        url: '/logo.svg',
+        url: '/social-share.png',
         width: 1200,
         height: 630,
         alt: siteConfig.name,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/logo.svg'],
+    images: ['/social-share.png'],
   },
 };
 
