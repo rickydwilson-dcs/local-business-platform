@@ -1,0 +1,72 @@
+---
+title: "A Fast Team Needs a Fast Website"
+slug: "a-fast-team-needs-a-fast-website"
+description: "NP Racing's British Superbike homepage runs full race footage and still scores a perfect 100 on Google PageSpeed — every category, mobile and desktop. Here's what that takes to build."
+date: "2026-08-25"
+author:
+  name: "Ricky Wilson"
+  role: "Founder, Digital Consulting Services"
+category: "website-design"
+tags:
+  - "website-performance"
+  - "case-study"
+  - "web-design"
+  - "core-web-vitals"
+featured: true
+readingTime: 6
+excerpt: "We ran NP Racing's British Superbike homepage — video hero and all — through Google's own speed test. It came back a perfect 100, on mobile and desktop. Here's why that's harder than it sounds, and why it matters."
+---
+
+# A Fast Team Needs a Fast Website
+
+A British Superbike team doesn't win races by being careful. Every part of the operation — the bike, the pit crew, the data — is built to shave off tenths of a second, because tenths of a second is the difference between a podium and an also-ran.
+
+So when we built the [NP Racing](https://www.npracingbsb.co.uk/) website, "good enough" was never on the table. The homepage opens with race footage — full-bleed, high-motion, the kind of thing that usually wrecks a site's performance score. We wanted to know exactly how it held up under real scrutiny, so we ran it through [Google PageSpeed Insights](https://pagespeed.web.dev/), the same tool Google uses to judge how fast a page actually feels to a real visitor.
+
+Here's what came back — and you don't have to take our word for it. [See the live report yourself](https://pagespeed.web.dev/analysis/https-www-npracingbsb-co-uk/ob99o8iwxi?form_factor=mobile), straight from Google, unedited.
+
+## The numbers
+
+**Mobile:**
+
+| Metric | Score |
+|---|---|
+| Performance | 100 |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+**Desktop:**
+
+| Metric | Score |
+|---|---|
+| Performance | 100 |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+For the technically minded: the mobile Largest Contentful Paint — the point at which the biggest, most important thing on the page has actually loaded — comes in at 1.8 seconds. Desktop does it in 0.4 seconds. Total Blocking Time, which measures how much the page gets in the way of someone trying to actually use it, is 0 milliseconds on both. Layout shift — the page jumping around while you're trying to read it — is zero. On both.
+
+Those aren't "good for a small business site" numbers. Those are perfect, full stop.
+
+## Why video usually ruins this
+
+Here's the part most people don't know: a homepage video is one of the easiest ways to quietly wreck your site's performance, and most businesses never find out until someone tells them.
+
+The problem isn't the video itself — it's how it's loaded. Left to its own devices, a browser will start fetching a background video the moment the page mounts, even if that section sits below the fold and the visitor never scrolls anywhere near it. We've seen homepages that were shipping ten megabytes of video the instant someone landed on the page, before they'd even had a chance to see anything. On a mobile connection, that's the difference between a site that feels instant and one that feels broken.
+
+The fix isn't complicated, but it does have to be done properly. The video's poster frame — a single static image — loads first. The actual video file only starts downloading once that section is genuinely about to come into view, and playback only starts once it's actually visible. Get that sequencing right and a visitor sees a fast, polished page from the first frame, with video that feels seamless rather than like something the page is straining under.
+
+That's the difference between a site that *looks* fast in a screenshot and one that *is* fast when a real person on a real phone, on a real connection, actually opens it.
+
+## Speed is a trust signal, not a vanity metric
+
+There's a reason we're not just showing you a nice-looking homepage — we're showing you a score from an independent, external tool that anyone can run for themselves. Google built PageSpeed Insights to measure exactly what a visitor experiences: how quickly the page becomes visible, how quickly it becomes usable, and how stable it feels while that's happening. It's the same signal Google's own search ranking takes into account.
+
+For a business that lives and dies on people trusting it enough to hand over a phone number or a job, that matters more than it sounds like it should. A slow, janky site reads as amateur even when the business behind it isn't. A fast, stable one does the opposite — it signals that someone cared enough to get the details right, before the visitor has read a single word of copy.
+
+That's the same instinct that goes into every trade website we build on this platform: proper image compression, lazy-loaded assets, clean markup, and a build pipeline that treats performance as a requirement, not an afterthought. NP Racing's homepage just happens to be a particularly demanding test case — video, motion, a genuinely content-heavy page — and it still comes back with a perfect score.
+
+A fast team needs a fast website. We think every business does.
+
+*Want to see how your own site scores? [Get in touch](/contact) and we'll take a look — no obligation, just an honest read on where it stands.*

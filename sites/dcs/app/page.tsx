@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: absUrl('/logo.svg'),
+        url: absUrl('/social-share.png'),
         width: 1200,
         height: 630,
         alt: HOME_TITLE,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: [absUrl('/logo.svg')],
+    images: [absUrl('/social-share.png')],
   },
   alternates: {
     canonical: absUrl('/'),

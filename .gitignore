@@ -78,6 +78,8 @@ Thumbs.db
 !sites/npracing-v1/app/apple-icon.png
 !sites/npracing-v3/app/icon.png
 !sites/npracing-v3/app/apple-icon.png
+# DCS OG/Twitter share-card image — required as a literal file for og:image metadata
+!sites/dcs/public/social-share.png
 !sites/dch-automotive/public/viezu/**
 
 # Temporary files

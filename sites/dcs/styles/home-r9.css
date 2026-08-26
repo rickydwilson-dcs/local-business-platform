@@ -525,11 +525,6 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
 /* ============ motion, armed only when welcome ============ */
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media (prefers-reduced-motion:no-preference){
-  .js .plate{transform:scaleX(0)}
-  .js .hero .plate{animation:plate .78s cubic-bezier(.16,1,.3,1) .1s forwards}
-  @keyframes plate{to{transform:scaleX(1)}}
-  h1 .ch{animation:ch .9s cubic-bezier(.16,1,.3,1) both}
-  @keyframes ch{from{transform:translateY(0.42em);filter:blur(7px)}to{transform:translateY(0);filter:blur(0)}}
   .hero__sub,.hero__act,  .hero__sub{animation-delay:.5s}.hero__act{animation-delay:.6s}  @keyframes up{from{transform:translateY(15px)}to{transform:translateY(0)}}
   .card{transform:translateY(20px)}
   .in .card{transform:translateY(0)}
@@ -724,9 +719,3 @@ h2{font-weight:800;letter-spacing:-.034em;line-height:.9;font-size:clamp(2.2rem,
   .hero__m{gap:14px}
 }
 
-@media (max-width:900px) and (prefers-reduced-motion:no-preference){
-  /* the headline is the page's one piece of hero motion; keep it, but a phone
-     assembles a bigger glyph so the blur has to come down or it reads as blur. */
-  h1 .ch{animation-duration:.72s}
-  @keyframes ch{from{transform:translateY(.34em);filter:blur(5px)}to{transform:translateY(0);filter:blur(0)}}
-}
