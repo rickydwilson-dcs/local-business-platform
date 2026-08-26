@@ -1,0 +1,13 @@
+A racing team doesn't survive on "good enough." Neither should your website. 🏍️
+
+We built @npracingbsb's homepage — full race footage, high-motion hero, the works — and ran it through Google's own PageSpeed Insights.
+
+100 on mobile. 100 on desktop. Every category, perfect.
+
+Most sites choke the second you add video. Ours don't — because performance isn't an afterthought, it's part of the build, from how images are compressed to exactly when that footage loads.
+
+A fast team needs a fast website. Yours included.
+
+👉 Link in bio to read the full breakdown — and to see what your own site scores.
+
+#WebDesign #SmallBusinessWebsite #WebPerformance #PageSpeedInsights #CoreWebVitals #BritishSuperbike #TradeBusiness #WebsiteThatWorks #DigitalConsultingServices #SiteSpeed

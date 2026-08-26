@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>DCS x NP Racing — PageSpeed graphic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E0E12;
+    --paper: #ECEBE9;
+    --white: #ffffff;
+    --magenta: #D6006B;
+    --aqua: #00D2D8;
+    --navy: #17265E;
+    --grey: #70707B;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    width: 1080px;
+    background: var(--ink);
+    font-family: 'Archivo', system-ui, sans-serif;
+    color: var(--paper);
+  }
+  .page {
+    width: 1080px;
+    padding: 76px 84px 60px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .top-row {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+    color: var(--paper);
+  }
+  .brand .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--aqua);
+  }
+  .headline {
+    margin-top: 44px;
+    font-weight: 900;
+    font-size: 68px;
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+    max-width: 860px;
+    color: var(--white);
+  }
+  .headline .accent { color: var(--magenta); }
+  .subhead {
+    margin-top: 22px;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--grey);
+    max-width: 700px;
+  }
+  .subhead b { color: var(--paper); font-weight: 600; }
+
+  .cols {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .col {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .colhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .colhead .label {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .colhead .badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 8px 12px;
+  }
+  .ring-wrap {
+    position: relative;
+    width: 122px; height: 122px;
+  }
+  .ring-wrap svg { width: 122px; height: 122px; transform: rotate(-90deg); }
+  .ring-track { fill: none; stroke: rgba(255,255,255,0.10); stroke-width: 9; }
+  .ring-fill {
+    fill: none; stroke: var(--aqua); stroke-width: 9; stroke-linecap: round;
+    stroke-dasharray: 339.29;
+    transition: stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1);
+  }
+  .ring-value {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    font-variant-numeric: proportional-nums;
+    color: var(--white);
+  }
+  .tile-label {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  .metrics {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .metric .v {
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+    font-variant-numeric: proportional-nums;
+  }
+  .metric .k {
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .footer {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    color: var(--grey);
+    position: relative;
+    z-index: 2;
+  }
+  .footer .verified {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer .verified .check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--aqua);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer .verified .check svg { width: 11px; height: 11px; }
+  .footer .site {
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .footer .site .accent {
+    color: var(--magenta);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <div class="brand"><span class="dot"></span>digital consulting services</div>
+    </div>
+
+    <div class="headline">A fast team needs<br/>a <span class="accent">fast</span> website.</div>
+    <div class="subhead">
+      <b>NP Racing's</b> British Superbike homepage — full race-footage hero,
+      high motion, the works — tested live on Google PageSpeed Insights.
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <div class="colhead">
+          <div class="label">Mobile</div>
+          <div class="badge">Perfect 100</div>
+        </div>
+        <div class="tiles" id="mobile-tiles">
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Performance</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Accessibility</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Best Practices</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">SEO</div></div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="v">1.8s</div><div class="k">LCP</div></div>
+          <div class="metric"><div class="v">0ms</div><div class="k">TBT</div></div>
+          <div class="metric"><div class="v">0</div><div class="k">CLS</div></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="colhead">
+          <div class="label">Desktop</div>
+          <div class="badge">Perfect 100</div>
+        </div>
+        <div class="tiles" id="desktop-tiles">
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Performance</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Accessibility</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">Best Practices</div></div>
+          <div class="tile" data-score="100"><div class="ring-wrap"><svg viewBox="0 0 128 128"><circle class="ring-track" cx="64" cy="64" r="54"/><circle class="ring-fill" cx="64" cy="64" r="54"/></svg><div class="ring-value">0</div></div><div class="tile-label">SEO</div></div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="v">0.4s</div><div class="k">LCP</div></div>
+          <div class="metric"><div class="v">0ms</div><div class="k">TBT</div></div>
+          <div class="metric"><div class="v">0</div><div class="k">CLS</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="verified">
+        <span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#0E0E12" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Verified via pagespeed.web.dev &middot; 25 Aug 2026
+      </div>
+      <div class="site"><span class="accent">np</span>racingbsb.co.uk</div>
+    </div>
+  </div>
+
+<script>
+  const CIRC = 339.29;
+  function animateTile(tile, delay) {
+    const score = parseInt(tile.dataset.score, 10);
+    const fill = tile.querySelector('.ring-fill');
+    const valueEl = tile.querySelector('.ring-value');
+    const offset = CIRC * (1 - score / 100);
+    setTimeout(() => {
+      fill.style.strokeDashoffset = offset;
+      const start = performance.now();
+      const dur = 1200;
+      function step(now) {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        valueEl.textContent = Math.round(eased * score);
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  document.querySelectorAll('.ring-fill').forEach(f => { f.style.strokeDashoffset = CIRC; });
+
+  const mobileTiles = document.querySelectorAll('#mobile-tiles .tile');
+  const desktopTiles = document.querySelectorAll('#desktop-tiles .tile');
+  mobileTiles.forEach((t, i) => animateTile(t, 200 + i * 150));
+  desktopTiles.forEach((t, i) => animateTile(t, 500 + i * 150));
+</script>
+</body>
+</html>

@@ -6,6 +6,13 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-26
+
+### Sites
+
+- **DCS: replaced the SVG `og:image`/`twitter:image` with a real PNG share card, fixing broken link previews in Outlook and iMessage.** Both the root layout's default and the homepage's override pointed at `logo.svg`; SVG isn't reliably supported by link-preview crawlers, so unsupported-format fallback behaviour was pulling in an unrelated project photo from further down the page instead. Added a 1200×630 PNG (`sites/dcs/public/social-share.png`) matching the homepage hero's look — logo/wordmark lockup, magenta-plated headline — and pointed `app/layout.tsx` and `app/page.tsx` at it. `.gitignore`'s blanket raster-image rule (images normally go through R2) gained a named exception for this file, following the same pattern already used for NP Racing's favicons: a small, required, file-convention asset is simpler committed directly than routed through R2.
+- **DCS: removed the hero headline's per-character reveal animation as a Core Web Vitals experiment.** PSI mobile reported LCP at 3.2s against a 1.7s FCP; the H1's per-character blur/translateY stagger (`h1 .ch` in `styles/home-r9.css`) held the last character in a blurred, offset state for up to ~1.35s after the animation started (delay formula `lineIndex*0.14 + i*0.028`, 0.9s duration each), with a further 0.78s scaleX reveal on the "Websites" plate — a span of time that lines up closely with the FCP-to-LCP gap. Removed both animations so the headline (likely the LCP element) renders in its final state immediately; a follow-up PSI run will confirm whether this was the actual cause.
+
 ## 2026-08-25
 
 ### Platform
