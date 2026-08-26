@@ -303,6 +303,38 @@ const REMOVED_RULES: RemovedRuleEntry[] = [
     selector: '.p--ink .res,.p--magenta .res,.p--navy .res',
   },
   { context: '@media (max-width:900px)', selector: '.p--aqua .res' },
+  // 2026-08-26: removed the hero's per-character blur/translateY reveal and
+  // the "Websites" plate's scaleX slide-in as a Core Web Vitals experiment —
+  // PSI mobile reported LCP 3.2s against FCP 1.7s, and the animation's own
+  // timing (last character finishes ~1.35s after start) accounts for nearly
+  // all of that gap. See CHANGELOG.md 2026-08-26.
+  { context: '@media (prefers-reduced-motion:no-preference)', selector: '.js .plate' },
+  { context: '@media (prefers-reduced-motion:no-preference)', selector: '.js .hero .plate' },
+  {
+    context: '@media (prefers-reduced-motion:no-preference) > @keyframes plate',
+    selector: 'to',
+  },
+  { context: '@media (prefers-reduced-motion:no-preference)', selector: 'h1 .ch' },
+  {
+    context: '@media (prefers-reduced-motion:no-preference) > @keyframes ch',
+    selector: 'from',
+  },
+  { context: '@media (prefers-reduced-motion:no-preference) > @keyframes ch', selector: 'to' },
+  // Same removal: the mobile-only (<=900px) override that shortened the
+  // reveal's duration/blur for smaller viewports is gone with it — there's
+  // no reveal left to tune.
+  {
+    context: '@media (max-width:900px) and (prefers-reduced-motion:no-preference)',
+    selector: 'h1 .ch',
+  },
+  {
+    context: '@media (max-width:900px) and (prefers-reduced-motion:no-preference) > @keyframes ch',
+    selector: 'from',
+  },
+  {
+    context: '@media (max-width:900px) and (prefers-reduced-motion:no-preference) > @keyframes ch',
+    selector: 'to',
+  },
 ];
 
 function isRemovedRule(r: Rule): boolean {
