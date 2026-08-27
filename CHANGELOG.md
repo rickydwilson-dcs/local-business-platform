@@ -6,6 +6,12 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-27
+
+### Platform
+
+- **Fixed `turbo-ignore` silently building every push on `mad-graphics`, `colossus-scaffolding`, `dj-fox-electrical`, and `dch-automotive`, regardless of relevance.** `turbo-ignore` diffs against the SHA of each project's own last successful deployment, but Vercel's shallow git clone only reaches back ~10 commits; for these less-frequently-deployed sites that SHA routinely fell outside the shallow clone, producing "Previous deployment ... is unreachable" and a fail-open "build anyway" — confirmed live via build logs, and reproduced with a literal zero-file empty commit still triggering a full `mad-graphics` build. Added `--fallback=HEAD^1` (Vercel's documented pattern) to every site's `ignoreCommand`, including the three not currently exhibiting the symptom, since any site can hit the same wall after a quiet enough stretch. Verified with real historical commits in isolated worktrees: a DCS-only commit correctly reports "not affected" for `colossus-scaffolding`, while an earlier `packages/core-components` change correctly reports "affects" it.
+
 ## 2026-08-26
 
 ### Sites
