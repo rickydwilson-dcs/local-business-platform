@@ -2,5 +2,5 @@
   "framework": "nextjs",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "buildCommand": "cd ../.. && pnpm build --filter @platform/dcs",
-  "ignoreCommand": "cd ../.. && npx turbo-ignore @platform/dcs"
+  "ignoreCommand": "cd ../.. && npx turbo-ignore @platform/dcs --fallback=HEAD^1"
 }
