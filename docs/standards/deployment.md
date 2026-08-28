@@ -240,6 +240,7 @@ Every site's `vercel.json` must follow this exact pattern:
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd ../.. && pnpm turbo run build --filter=<site-name>",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "ignoreCommand": "cd ../.. && npx turbo-ignore <site-name> --fallback=HEAD^1",
   "framework": "nextjs"
 }
 ```
@@ -247,7 +248,7 @@ Every site's `vercel.json` must follow this exact pattern:
 Rules:
 
 - Do NOT set `outputDirectory` — Vercel resolves `.next` relative to `rootDirectory` automatically. Setting it causes double-pathing (e.g., `sites/foo/sites/foo/.next`).
-- Do NOT use `ignoreCommand` or `turbo-ignore` — Vercel's native monorepo detection handles build skipping. The `turbo-ignore` package is deprecated.
+- MUST set `ignoreCommand` using `turbo-ignore <site-name> --fallback=HEAD^1`. **Vercel has no automatic skip-if-unaffected behaviour** — `rootDirectory` only scopes _where_ a project builds from, not _whether_ it builds. This was correctly set up, then mistakenly removed platform-wide in April 2026 on the belief that Vercel's native monorepo detection handled it; it doesn't, and every project rebuilt on every push until it was restored and verified against live deployment timestamps in August 2026. `turbo-ignore` itself is not deprecated (only its CLI output nudges toward `turbo query affected` as a future Turborepo-native replacement — a deliberate future migration, not a reason to drop the guard). The `--fallback=HEAD^1` is load-bearing too: Vercel's shallow git clone can put an infrequently-deployed site's last-deployed SHA out of reach, and without the fallback `turbo-ignore` fails open to building unconditionally rather than skipping — see CLAUDE.md's Vercel Monorepo Configuration section for the full incident writeup.
 - The `buildCommand` uses `cd ../..` to run from monorepo root, then filters to the specific site.
 
 ### Environment Variable Propagation
@@ -297,18 +298,18 @@ Wrong (scans node_modules, 18+ min builds):
 
 ## What NOT to Do
 
-| Anti-Pattern                            | Why It's Wrong                  | Correct Approach                           |
-| --------------------------------------- | ------------------------------- | ------------------------------------------ |
-| Deploy directly to main                 | Skips quality gates             | develop → staging → main                   |
-| Deploy all sites at once                | High risk                       | Phased rollout                             |
-| Skip pre-deployment checks              | May break production            | Always run checks                          |
-| Ignore monitoring alerts                | Miss problems                   | Monitor 30 min post-deploy                 |
-| Force push to main                      | Bypass protections              | Never force push                           |
-| Set outputDirectory in site vercel.json | Double-paths with rootDirectory | Omit it; Vercel resolves automatically     |
-| Use turbo-ignore / ignoreCommand        | Deprecated package              | Use Vercel native monorepo detection       |
-| Use `theme()` in CSS files              | CSS parser panic                | Use `var(--color-*)` custom properties     |
-| Use `**` globs for packages/themes      | Scans node_modules (18+ min)    | Use scoped globs: `themes/*/*.{ext}`       |
-| Omit env vars from turbo.json           | Stale cached builds             | Add every build-affecting var to env array |
+| Anti-Pattern                            | Why It's Wrong                  | Correct Approach                            |
+| --------------------------------------- | ------------------------------- | ------------------------------------------- |
+| Deploy directly to main                 | Skips quality gates             | develop → staging → main                    |
+| Deploy all sites at once                | High risk                       | Phased rollout                              |
+| Skip pre-deployment checks              | May break production            | Always run checks                           |
+| Ignore monitoring alerts                | Miss problems                   | Monitor 30 min post-deploy                  |
+| Force push to main                      | Bypass protections              | Never force push                            |
+| Set outputDirectory in site vercel.json | Double-paths with rootDirectory | Omit it; Vercel resolves automatically      |
+| Omit `ignoreCommand` / turbo-ignore     | Every site rebuilds every push  | Set `turbo-ignore <name> --fallback=HEAD^1` |
+| Use `theme()` in CSS files              | CSS parser panic                | Use `var(--color-*)` custom properties      |
+| Use `**` globs for packages/themes      | Scans node_modules (18+ min)    | Use scoped globs: `themes/*/*.{ext}`        |
+| Omit env vars from turbo.json           | Stale cached builds             | Add every build-affecting var to env array  |
 
 ## Deployment Checklist
 
