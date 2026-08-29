@@ -2,15 +2,20 @@
 
 **Status:** in-progress. Research complete and synthesised; four homepage prototypes plus one project
 page built and reviewed with Ricky; direction chosen and revised once. Blocked on client-supplied
-photography before the next meaningful design step. Nothing has been published, deployed, or committed.
+photography before the next meaningful design step. **Committed, but not pushed and not published.**
 
-**Branch:** `develop`. **No commits were made for this work.** The three commits at the tip
-(`d62bad55`, `f1baaf90`, `105e08bd` — turbo-ignore fixes) belong to a different session and are
-unrelated to DPM.
+**Branch:** `develop`. **Committed at `80efe32a`** — "docs(dpm): DPM Autobody discovery, research and
+homepage prototypes", 48 files, 12,247 insertions, 2026-08-29. **Not pushed.** No feature branch was
+used, deliberately: this touches `output/` only, so nothing CI builds or deploys. The commits below it
+(`d62bad55`, `f1baaf90`, `105e08bd` — turbo-ignore fixes) belong to a different session.
 
-**Working tree:** the entire session folder is **untracked** — `git status` shows one line,
-`?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/`. **Nothing here would survive a fresh
-clone.** See Traps.
+**Working tree:** clean for this folder. Note a `lint-staged` prettier hook reformatted the markdown
+during the commit — tables and emphasis markers differ from what was authored; the content is unchanged.
+
+**What is NOT in git:** every image and video (2.1 GB), and `research/screenshots/` entirely — the
+latter now ignored via a rule added to `output/.gitignore` in the same commit, because its
+`report.json` dumps describe screenshots that are themselves ignored. Regenerate with
+`capture-site.mts`. Assets belong in R2.
 
 **Client:** DPM Autobody, Berwick, East Sussex. Director David Pearce-Martin, 01323 552827,
 info@dpmautobody.co.uk. Concours classic car restoration; everything hand-crafted in house except
@@ -122,7 +127,7 @@ paint code), `project-p1800.html` says so rather than inventing it — keep that
 
 ## What was NOT done
 
-- **Nothing is committed.** No branch, no commit, no push. The whole folder is untracked.
+- **Not pushed.** Committed locally at `80efe32a` only; `git push` has not been run.
 - **Nothing is published.** Assets are not on R2; no prototype is on Vercel. David has **not seen any
   of this** — every review so far has been Ricky's, on local `file://` URLs.
 - **The client rationale document is not written.** It is `BACKLOG.md` item 1 and the next real
@@ -155,9 +160,11 @@ followed or changed. The cookie banner was set to **decline optional cookies**.
 
 ## Traps
 
-- **The whole session folder is untracked and never committed.** 2.1 GB of it is gitignored binaries,
-  but the ~40 markdown/HTML/script files are the actual work product and exist only on this machine.
-  If preserving them matters, commit the text files before anything else.
+- **The commit exists only on this machine until someone pushes.** `80efe32a` is on local `develop`.
+- **`prototype/assets/**`is committed as *text only*** — the MANIFEST, README, and generation scripts
+are in git; the 14 AI plates, 3 clips and 14 real DPM photographs are not. A fresh clone gets
+prototypes whose`<img>`tags all 404. Re-run`prototype/assets/art-direction/runall.zsh` (75
+  Higgsfield credits) for the AI plates; the real P1800 slides must be re-fetched or re-supplied.
 - **`output/.gitignore` denies all binaries across `sessions/**`by design.**`git add` will silently
   skip every image and video. That is correct — assets belong in R2 — but do not "fix" it.
 - **`research/reference-teardown.md` is superseded and contains two wrong claims** about Thornton.
