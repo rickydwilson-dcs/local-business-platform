@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPM Autobody — Wet Coat (Direction B prototype)</title>
+<meta name="description" content="Direction B prototype for DPM Autobody, Berwick, East Sussex. Concours paintwork and coachwork.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<style>
+/* ============================================================================
+   DPM Autobody — Direction B, "Wet Coat".
+   The site is a painted surface. Scroll moves the light, not the camera.
+
+   The travelling highlight is a CSS fake, not a shader:
+   one photographic plate, graded LIT, with two ground-coloured veils sliding
+   apart on transform only. What you see inside the gap is the photograph's own
+   reflection igniting — never a white shape painted over the top.
+   ========================================================================= */
+
+/* @property lets the per-project accent transition when the site re-skins. */
+@property --accent     { syntax: '<color>'; inherits: true; initial-value: #C7BBA1; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #D8CBAE; }
+
+:root {
+  /* Ground */
+  --ground:  #0B0B0C;
+  --surface: #141416;
+  --bone:    #E8E4DC;
+  --bone-dim:#A8A399;   /* 7.8:1 on ground */
+  --hair:    rgba(232,228,220,0.14);
+  --hair-2:  rgba(232,228,220,0.07);
+
+  /* House accent, before any car claims the page */
+  --accent:     #C7BBA1;
+  --accent-ink: #D8CBAE;
+
+  /* The veil that hides the unlit paint */
+  --veil: rgba(11,11,12,0.945);
+  --falloff: clamp(220px, 44%, 760px);
+
+  /* Highlight geometry, written by rAF */
+  --bl: -200vw;
+  --br:  200vw;
+  --bc:  50%;
+
+  --page: min(1360px, 100% - 3rem);
+  --ease: cubic-bezier(0.22, 0.68, 0.16, 1);
+
+  --fs-body: clamp(1.0625rem, 0.44vw + 0.98rem, 1.25rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+
+::selection { background: var(--accent-ink); color: #0B0B0C; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- Type ---------------------------------------------------------------- */
+
+h1, h2, h3 {
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.034em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.h-hero  { font-size: clamp(2.75rem, 7.6vw, 6.75rem); }   /* 44 → 108px */
+.h-major { font-size: clamp(2rem, 4.6vw, 4rem); }         /* 32 → 64px  */
+.h-proj  { font-size: clamp(1.75rem, 3.4vw, 3.125rem); }  /* 28 → 50px  */
+
+.prose {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.62;
+  color: #CFCAC1;
+  max-width: 24em;          /* measured: worst line 75 cpl at 1440, 63 at 390 */
+  margin: 0 0 1.15em;
+}
+.prose strong { font-weight: 500; color: var(--bone); }
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0;
+}
+.label--accent { color: var(--accent-ink); }
+
+.lede {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.875rem);
+  line-height: 1.45;
+  color: #D6D1C8;
+  max-width: 24em;
+  margin: 0;
+}
+
+/* --- Page furniture ------------------------------------------------------ */
+
+.grain {
+  position: fixed; inset: 0; z-index: 60;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.15rem max(1.5rem, calc((100vw - 1360px) / 2));
+  background: linear-gradient(to bottom, rgba(11,11,12,0.94) 0%, rgba(11,11,12,0.72) 55%, rgba(11,11,12,0) 100%);
+}
+.wordmark {
+  font-size: 0.8125rem; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  text-decoration: none; color: var(--bone);
+  white-space: nowrap;
+}
+.wordmark span { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+.masthead nav { margin-left: auto; display: flex; gap: 1.75rem; }
+.masthead nav a {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+.tel {
+  margin-left: auto;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--bone); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.2rem;
+  transition: border-color 400ms var(--ease);
+  white-space: nowrap;
+}
+.tel:hover { border-bottom-color: var(--accent-ink); }
+.masthead nav + .tel { margin-left: 0; }
+
+/* Scroll "light meter" — the only chrome that moves */
+.rail {
+  position: fixed; right: 1.5rem; top: 22vh; bottom: 22vh; z-index: 30;
+  width: 1px; background: var(--hair-2);
+  pointer-events: none;
+}
+.rail__travel { position: absolute; inset: 0; }
+.rail__dot {
+  position: absolute; left: -1px; top: 0;
+  width: 3px; height: 44px;
+  background: var(--accent-ink);
+  transform: translate3d(0, var(--railY, 0px), 0);
+  will-change: transform;
+  transition: background-color 700ms var(--ease);
+}
+
+/* The honesty label. Persistent, opaque, unmissable. */
+.provenance {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 55;
+  /* moves to the right gutter on desktop, where nothing is set */
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.4rem 0.7rem;
+  background: #0B0B0C;
+  border: 1px solid var(--hair);
+  color: var(--bone-dim);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+}
+.provenance b { color: var(--bone); font-weight: 500; }
+.provenance a { color: var(--bone-dim); text-decoration-color: var(--hair); text-underline-offset: 2px; }
+.provenance a:hover { color: var(--bone); }
+@media (min-width: 30rem) { .provenance { white-space: nowrap; } }
+
+/* --- The panel: one plate, two veils, one specular core ------------------- */
+
+.track { position: relative; }
+
+.stage {
+  position: sticky; top: 0;
+  height: 100lvh;
+  overflow: clip;
+  isolation: isolate;
+}
+.track__room { height: 150lvh; }          /* real in-flow room, so sticky pins */
+.track__room--long { height: 210lvh; }
+
+.plate {
+  position: absolute; inset: 0;
+  margin: 0;
+  overflow: clip;
+}
+.plate img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(1.06) contrast(1.05);
+}
+
+.veil {
+  position: absolute; top: -14%; bottom: -14%;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 2;
+}
+.veil--l {
+  left: -100%;
+  transform: translate3d(var(--bl), 0, 0) skewX(-9deg);
+  background: linear-gradient(to left, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+.veil--r {
+  left: 100%;
+  transform: translate3d(calc(var(--br) - 100%), 0, 0) skewX(-9deg);
+  background: linear-gradient(to right, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+
+/* The wet spike: additive, narrow, warm. Rides the centre of the band. */
+.spec {
+  position: absolute; top: -8%; bottom: -8%; left: 0;
+  width: clamp(200px, 30%, 520px);
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform: translate3d(var(--bc), 0, 0) translateX(-50%);
+  background: linear-gradient(100deg,
+      rgba(255,248,235,0) 0%,
+      rgba(255,248,235,0.05) 34%,
+      rgba(255,250,240,0.16) 50%,
+      rgba(255,248,235,0.05) 66%,
+      rgba(255,248,235,0) 100%);
+}
+
+/* A permanent horizon shade so the plate never sits as a flat rectangle */
+.plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.58) 0%, rgba(11,11,12,0) 24%, rgba(11,11,12,0) 54%, rgba(11,11,12,0.86) 100%),
+    linear-gradient(104deg, rgba(11,11,12,0.74) 0%, rgba(11,11,12,0.42) 30%, rgba(11,11,12,0.06) 56%, rgba(11,11,12,0) 72%),
+    radial-gradient(135% 95% at 52% 46%, rgba(11,11,12,0) 40%, rgba(11,11,12,0.52) 100%);
+}
+
+/* The whole car, arriving only at the end */
+.resolve {
+  position: absolute; inset: 0; z-index: 5;
+  opacity: var(--reveal, 0);
+  transform: scale(calc(1.05 - 0.05 * var(--reveal, 0)));
+  will-change: opacity, transform;
+}
+.resolve img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.resolve::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0.05) 30%, rgba(11,11,12,0.15) 60%, rgba(11,11,12,0.88) 100%);
+}
+
+/* Content laid over a stage */
+.stage__over {
+  position: absolute; inset: 0; z-index: 10;
+  display: grid; align-content: end;
+  width: var(--page); margin-inline: auto;
+  padding-bottom: clamp(6.5rem, 8vh, 7rem);
+  pointer-events: none;
+}
+.stage__over > * { pointer-events: auto; }
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero__inner {
+  position: absolute; inset: 0; z-index: 10;
+  width: var(--page); margin-inline: auto;
+  display: grid; align-content: center;
+  padding-top: 4rem;
+}
+.hero h1 { margin: 0.6rem 0 1.6rem; max-width: 14ch; }
+.hero__foot {
+  position: absolute; left: 0; right: 0; bottom: clamp(6.5rem, 7vh, 5.5rem);
+  display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline;
+}
+.hint { display: flex; align-items: center; gap: 0.75rem; }
+.hint::before {
+  content: ''; width: clamp(28px, 5vw, 64px); height: 1px;
+  background: linear-gradient(to right, var(--accent-ink), rgba(232,228,220,0));
+  transition: background 700ms var(--ease);
+}
+
+/* --- Sections ------------------------------------------------------------ */
+
+.band { width: var(--page); margin-inline: auto; }
+
+.section-head {
+  display: grid; gap: 1.25rem;
+  padding: clamp(6rem, 14vh, 11rem) 0 clamp(2.5rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+
+.rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
+
+/* Identity block — the auction-lot register, never a card */
+.identity {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--hair);
+}
+.identity > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.identity dt {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-top: 0.28rem;
+}
+.identity dd {
+  margin: 0;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
+  color: var(--bone);
+}
+
+.swatch {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+}
+.swatch i {
+  width: 2.25rem; height: 1.15rem;
+  background: var(--accent);
+  border: 1px solid var(--hair);
+  transition: background-color 700ms var(--ease);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(2.5rem, 6vh, 4rem) 0 clamp(5rem, 11vh, 8rem);
+}
+
+.project-index {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 200;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+
+.stage__tag {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  background: rgba(11,11,12,0.86);
+  border: 1px solid var(--hair);
+  padding: 0.45rem 0.75rem;
+  justify-self: start;
+  margin-bottom: 1.25rem;
+}
+
+/* Statement */
+.statement { padding: clamp(7rem, 18vh, 14rem) 0 clamp(6rem, 14vh, 11rem); }
+.statement__cols {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+/* Contact */
+.contact { position: relative; overflow: clip; }
+.contact__plate { position: absolute; inset: 0; }
+.contact__plate img { width: 100%; height: 100%; object-fit: cover; }
+.contact__plate::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.92) 0%, rgba(11,11,12,0.55) 46%, rgba(11,11,12,0.96) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.92) 0%, rgba(11,11,12,0.72) 42%, rgba(11,11,12,0.34) 78%, rgba(11,11,12,0.5) 100%);
+}
+.contact__inner {
+  position: relative; z-index: 2;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(6rem, 16vh, 12rem) 0 clamp(6rem, 14vh, 10rem);
+}
+.contact__rows {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  border-top: 1px solid var(--hair);
+}
+.contact__rows a, .contact__rows p {
+  display: block; margin: 0;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  text-decoration: none;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  transition: color 400ms var(--ease);
+}
+.contact__rows a:hover { color: var(--accent-ink); }
+.contact__rows small {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 0.4rem;
+}
+
+/* Footer */
+.colophon {
+  width: var(--page); margin-inline: auto;
+  padding: clamp(3rem, 8vh, 5rem) 0 8rem;
+  border-top: 1px solid var(--hair-2);
+  display: grid; gap: 1.5rem;
+}
+.note {
+  border: 1px solid var(--hair);
+  padding: 1.15rem 1.25rem;
+  max-width: 30em;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--bone-dim);
+}
+.note b { color: var(--bone); font-weight: 500; }
+.note p { margin: 0 0 0.7em; }
+.note p:last-child { margin-bottom: 0; }
+
+.caption {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0.9rem 0 0;
+}
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--bone); color: #0B0B0C;
+  padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- Wider viewports ----------------------------------------------------- */
+
+@media (min-width: 48rem) {
+  .provenance { left: auto; right: 3.25rem; bottom: 1.25rem; }
+  .stage__over { padding-bottom: clamp(3.5rem, 8vh, 7rem); }
+}
+
+@media (min-width: 60rem) {
+  .hero__foot { bottom: clamp(3rem, 7vh, 5.5rem); }
+  .identity > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .project-grid { grid-template-columns: 5.5rem minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+  .statement__cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+  .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
+  .contact__rows > * { border-bottom: none; }
+  .hero__inner { padding-top: 0; }
+}
+
+@media (max-width: 47.99rem) {
+  .masthead nav { display: none; }
+  .rail { display: none; }
+  :root { --falloff: clamp(130px, 52%, 340px); }
+  .spec { width: clamp(150px, 46%, 320px); }
+}
+
+/* --- Reduced motion: one well-lit still, nothing lost --------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --bl: -300vw; --br: 300vw; }
+  .veil, .spec { display: none; }
+  .plate::after {
+    background:
+      linear-gradient(to bottom, rgba(11,11,12,0.62) 0%, rgba(11,11,12,0) 30%, rgba(11,11,12,0.88) 100%),
+      linear-gradient(104deg, rgba(11,11,12,0.7) 0%, rgba(11,11,12,0.36) 32%, rgba(11,11,12,0) 62%);
+  }
+  .resolve { opacity: 1; transform: none; position: relative; }
+  .track__room, .track__room--long { height: 0; }
+  .stage { position: relative; height: 78lvh; }
+  .project-01 .stage { height: auto; }
+  .project-01 .plate { position: relative; height: 62lvh; }
+  .project-01 .resolve { height: 78lvh; }
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <a class="wordmark" href="#top">DPM<span>&nbsp;·&nbsp;</span>Autobody</a>
+  <nav aria-label="Primary">
+    <a href="#work">Work</a>
+    <a href="#paint">Paint</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="tel" href="tel:+441323552827">01323 552827</a>
+</header>
+
+<div class="rail" aria-hidden="true"><div class="rail__travel"><div class="rail__dot"></div></div></div>
+
+<aside class="provenance">
+  Imagery: <b>AI-generated art direction</b> — not DPM's work. <a href="#imagery">Detail</a>
+</aside>
+
+<main id="main">
+
+<!-- ===================== 1. HERO ===================== -->
+<section class="track hero" id="top" data-sheen data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="hero-h">
+  <div class="stage">
+    <figure class="plate">
+      <img src="assets/art-direction/web/b-paint-reflection-03.jpg"
+           width="2400" height="1021" fetchpriority="high" decoding="async"
+           alt="AI-generated art-direction plate: a single soft highlight travelling unbroken along the rear wing of a dark, deeply polished car.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </figure>
+    <div class="hero__inner">
+      <p class="label label--accent">DPM Autobody &nbsp;·&nbsp; Berwick, East Sussex</p>
+      <h1 class="h-hero" id="hero-h">Artists of Automotive Restoration</h1>
+      <p class="lede">Concours paintwork and coachwork, hand-built under one roof on the edge of the Downs.</p>
+      <div class="hero__foot">
+        <p class="label hint">Scroll to move the light</p>
+        <p class="label">Paint first &nbsp;·&nbsp; Restoration second</p>
+      </div>
+    </div>
+  </div>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ===================== 2. SELECTED WORK ===================== -->
+<div class="band" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="section-head" id="work">
+    <h2 class="h-major">Selected&nbsp;work</h2>
+    <p class="prose">Three cars. Each one takes the site's colour from its own paint code, so the
+      page you are reading is the shade the car was sprayed.</p>
+  </div>
+</div>
+
+<!-- --- Project 01 — the resolve --- -->
+<section class="track project-01" data-sheen data-resolve
+         data-accent="#1F5C3A" data-ink="#4E9E72"
+         style="--accent:#1F5C3A; --accent-ink:#4E9E72;"
+         aria-labelledby="p1-h">
+  <div class="stage">
+    <figure class="plate">
+      <img src="assets/art-direction/web/b-paint-shutline-04.jpg"
+           width="2400" height="1600" loading="lazy" decoding="async"
+           alt="AI-generated art-direction plate: the shut line between door and wing on a black car, chrome waistrail catching a single point of light.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </figure>
+    <div class="resolve">
+      <img src="assets/art-direction/web/d-daylight-barn-09.jpg"
+           width="2400" height="1600" loading="lazy" decoding="async"
+           alt="AI-generated art-direction plate: a British Racing Green Jaguar XK150 roadster on gravel outside a Sussex flint barn under soft overcast light.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag"><span class="label label--accent">01</span><span class="label">Jaguar XK150 S Roadster &nbsp;·&nbsp; 1959</span></span>
+      <h3 class="h-proj" id="p1-h">Eleven gaps, re-cut by hand.</h3>
+    </div>
+  </div>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<div class="band" data-accent="#1F5C3A" data-ink="#4E9E72" style="--accent:#1F5C3A; --accent-ink:#4E9E72;">
+  <div class="project-grid">
+    <p class="project-index" aria-hidden="true">01</p>
+    <div>
+      <p class="prose">The body came off a rotisserie straight and came back to us anything but.
+        Every shut line on this car was opened, leaded and re-cut to a gap we set ourselves —
+        <strong>tighter than Browns Lane ever managed</strong> — before a drop of colour went near it.</p>
+      <p class="prose">Colour is the original BC.6, mixed in-house against a door-shut sample that had
+        never seen sun. Ten coats, flatted four times, polished by hand over three days.</p>
+    </div>
+    <dl class="identity">
+      <div><dt>Marque</dt><dd>Jaguar</dd></div>
+      <div><dt>Model</dt><dd>XK150 S 3.4 Roadster</dd></div>
+      <div><dt>Year</dt><dd>1959</dd></div>
+      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>British Racing Green &nbsp;·&nbsp; BC.6</span></dd></div>
+      <div><dt>System</dt><dd>Epoxy primer, polyester filler, two-pack colour, clear over base</dd></div>
+      <div><dt>In our hands</dt><dd>Nineteen months</dd></div>
+      <div><dt>Hours in paint</dt><dd>410</dd></div>
+      <div><dt>Out of house</dt><dd>Engine build; trim</dd></div>
+    </dl>
+  </div>
+  <hr class="rule">
+</div>
+
+<!-- --- Project 02 --- -->
+<section class="track" data-sheen
+         data-accent="#8E2A22" data-ink="#E2685C"
+         style="--accent:#8E2A22; --accent-ink:#E2685C;"
+         aria-labelledby="p2-h">
+  <div class="stage">
+    <figure class="plate">
+      <img src="assets/art-direction/web/b-paint-macro-02.jpg"
+           width="2400" height="1600" loading="lazy" decoding="async"
+           alt="AI-generated art-direction plate: macro of a deep red metallic panel, the flake igniting where two body lines meet.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </figure>
+    <div class="stage__over">
+      <span class="stage__tag"><span class="label label--accent">02</span><span class="label">Austin-Healey Sprite Mk II &nbsp;·&nbsp; 1962</span></span>
+      <h3 class="h-proj" id="p2-h">Flake laid so it only shows in low sun.</h3>
+    </div>
+  </div>
+  <div class="track__room"></div>
+</section>
+
+<div class="band" data-accent="#8E2A22" data-ink="#E2685C" style="--accent:#8E2A22; --accent-ink:#E2685C;">
+  <div class="project-grid">
+    <p class="project-index" aria-hidden="true">02</p>
+    <div>
+      <p class="prose">A small car that had been painted four times before it reached us, each coat
+        hiding the one below. We took it back to bare steel and started again.</p>
+      <p class="prose">The owner wanted the factory Tartan Red but with the depth a modern clear
+        allows. <strong>Colour over a ground coat, flake in the mid, six coats of clear.</strong>
+        In flat light it reads as a solid. At six in the morning it does something else.</p>
+    </div>
+    <dl class="identity">
+      <div><dt>Marque</dt><dd>Austin-Healey</dd></div>
+      <div><dt>Model</dt><dd>Sprite Mk II</dd></div>
+      <div><dt>Year</dt><dd>1962</dd></div>
+      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Tartan Red &nbsp;·&nbsp; over silver ground</span></dd></div>
+      <div><dt>In our hands</dt><dd>Eleven months</dd></div>
+      <div><dt>Panels replaced</dt><dd>Both sills; nearside rear wing; boot floor</dd></div>
+    </dl>
+  </div>
+  <div style="padding-bottom: clamp(3rem, 8vh, 6rem)">
+    <figure style="margin:0">
+      <img src="assets/art-direction/web/d-daylight-road-08.jpg"
+           width="2400" height="1021" loading="lazy" decoding="async"
+           style="width:100%;height:auto"
+           alt="AI-generated art-direction plate: a red Austin-Healey Sprite parked on an empty chalk-downland lane in low winter sun.">
+      <figcaption class="caption">Finished, off-site, in daylight &nbsp;·&nbsp; AI art direction, not DPM's work</figcaption>
+    </figure>
+  </div>
+  <hr class="rule">
+</div>
+
+<!-- --- Project 03 --- -->
+<section class="track" data-sheen
+         data-accent="#3E5F86" data-ink="#8FB4D9"
+         style="--accent:#3E5F86; --accent-ink:#8FB4D9;"
+         aria-labelledby="p3-h">
+  <div class="stage">
+    <figure class="plate">
+      <img src="assets/art-direction/web/b-paint-flake-15.jpg"
+           width="2400" height="1355" loading="lazy" decoding="async"
+           alt="AI-generated art-direction plate: extreme close-up of silver-blue metallic paint, individual flakes catching low sun across a curved panel.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </figure>
+    <div class="stage__over">
+      <span class="stage__tag"><span class="label label--accent">03</span><span class="label">Jaguar E-type Series 1 &nbsp;·&nbsp; In the booth</span></span>
+      <h3 class="h-proj" id="p3-h">Still wet. No finished photograph yet.</h3>
+    </div>
+  </div>
+  <div class="track__room"></div>
+</section>
+
+<div class="band" data-accent="#3E5F86" data-ink="#8FB4D9" style="--accent:#3E5F86; --accent-ink:#8FB4D9;">
+  <div class="project-grid">
+    <p class="project-index" aria-hidden="true">03</p>
+    <div>
+      <p class="prose">This car is in the booth as you read this, which is why there is no picture of
+        it on a lawn. <strong>We would rather show you the surface than borrow someone else's
+        finished photograph.</strong></p>
+      <p class="prose">Opalescent Silver Blue is the hardest colour Jaguar ever specified to match,
+        because it shifts through green on the shoulder of a wing. It is mixed here, sprayed here
+        and judged here, under the same lamps every time.</p>
+    </div>
+    <dl class="identity">
+      <div><dt>Marque</dt><dd>Jaguar</dd></div>
+      <div><dt>Model</dt><dd>E-type Series 1 4.2 Fixed Head</dd></div>
+      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Opalescent Silver Blue</span></dd></div>
+      <div><dt>Stage</dt><dd>Colour on; flatting before clear</dd></div>
+      <div><dt>Expected out</dt><dd>Spring</dd></div>
+    </dl>
+  </div>
+</div>
+
+<!-- ===================== 3. WHAT WE DO ===================== -->
+<div class="band statement" id="paint" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <p class="label label--accent">What we do</p>
+  <h2 class="h-major" style="margin-top:1rem; max-width:18ch">Paint is the last thing done to a car and the first thing anyone sees.</h2>
+  <div class="statement__cols">
+    <div>
+      <p class="prose">Most restoration shops treat paint as the finish. We treat it as the reason.
+        Everything that happens before it — the metal, the lead, the gaps, the primer, the flatting —
+        exists so that the surface has somewhere true to sit.</p>
+      <p class="prose">It is why other restorers send their cars here to be sprayed, including one of
+        the best-known names in the country.</p>
+    </div>
+    <div>
+      <p class="prose"><strong>Everything is hand-crafted in house.</strong> Panel work, lead loading,
+        filler, primer, colour, flatting, polishing — all of it happens in Berwick, by the same four
+        pairs of hands, on the same floor.</p>
+      <p class="prose">Two things go out: engines go to an engine builder, trim goes to a trimmer. We
+        say so plainly because everyone else's "full in-house restoration" means the same thing and
+        does not admit it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 4. CONTACT ===================== -->
+<section class="contact" id="contact" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
+  <div class="contact__plate">
+    <img src="assets/art-direction/web/d-daylight-rear-10.jpg"
+         width="2400" height="1600" loading="lazy" decoding="async"
+         alt="AI-generated art-direction plate: a dark green MGB roadster on gravel in front of a Georgian house at golden hour.">
+  </div>
+  <div class="contact__inner">
+    <p class="label label--accent">Enquiries</p>
+    <h2 class="h-major" id="contact-h" style="margin-top:1rem; max-width:16ch">Bring us the car you are not willing to compromise on.</h2>
+    <div class="contact__rows">
+      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
+      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
+      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
+    </div>
+    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for David Pearce-Martin. He will
+      want to see the car before he quotes on it, and he will tell you if it is not worth doing.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <p class="label">DPM Autobody &nbsp;·&nbsp; Berwick, East Sussex &nbsp;·&nbsp; 01323 552827</p>
+    <div class="note" id="imagery">
+      <p><b>Imagery notice.</b> Every photograph and every car on this page is
+        <b>AI-generated art direction</b>, produced to show the light, crop and register we would
+        commission. None of it is DPM Autobody's work, and none of it shows a car DPM has restored.
+        On a live site each plate is replaced one-for-one with commissioned photography.</p>
+      <p><b>Prototype notes.</b> Direction B, "Wet Coat" — one of three art directions under
+        consideration. Cars, chassis details, durations and hours are illustrative, not DPM records.
+        The third-party paintwork credential in "What we do" is deliberately left unnamed until that
+        client confirms they are happy to be named.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+
+  /* ---------------------------------------------------------------------
+     In-page anchors.
+     A sticky element reports its PINNED position, so never measure one.
+     Every anchor target here is a normal-flow element, and we scroll to its
+     document offset explicitly rather than trusting native behaviour.
+     ------------------------------------------------------------------- */
+  var HEADER = 0;
+  function headerHeight() {
+    var h = document.querySelector('.masthead');
+    return h ? h.getBoundingClientRect().height : 0;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      /* Neutralise sticky for one synchronous measurement. No paint happens
+         between these three statements. */
+      var prev = el.style.position;
+      el.style.position = 'static';
+      var y = el.getBoundingClientRect().top + window.scrollY - headerHeight() - 8;
+      el.style.position = prev;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce.matches ? 'auto' : 'smooth' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    });
+  });
+
+  if (reduce.matches) return;   /* static, well-lit page — nothing below runs */
+
+  /* ---------------------------------------------------------------------
+     The travelling light.
+     Two ground-coloured veils slide apart on transform only; the lit band is
+     the gap between them. Nothing is painted over the photograph.
+     ------------------------------------------------------------------- */
+  var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
+    return {
+      track: track,
+      stage: track.querySelector('.stage'),
+      resolve: track.querySelector('.resolve'),
+      accent: track.getAttribute('data-accent'),
+      ink: track.getAttribute('data-ink'),
+      live: false
+    };
+  });
+
+  var rail = document.querySelector('.rail');
+  var railDot = document.querySelector('.rail__dot');
+  var ticking = false;
+  var liveCount = 0;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var p = panels.find(function (x) { return x.track === e.target; });
+      if (!p) return;
+      if (p.live !== e.isIntersecting) {
+        p.live = e.isIntersecting;
+        liveCount += e.isIntersecting ? 1 : -1;
+      }
+    });
+    schedule();
+  }, { rootMargin: '25% 0px 25% 0px' });
+
+  panels.forEach(function (p) { io.observe(p.track); });
+
+  /* The site re-skins itself car by car: whichever panel owns the middle of
+     the screen hands its paint code to the page chrome. */
+  var skinned = [].slice.call(document.querySelectorAll('[data-accent]'));
+  var inMiddle = [];
+
+  var skin = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var i = inMiddle.indexOf(e.target);
+      if (e.isIntersecting && i === -1) inMiddle.push(e.target);
+      if (!e.isIntersecting && i !== -1) inMiddle.splice(i, 1);
+    });
+    if (!inMiddle.length) return;
+    /* nearest to the middle of the screen wins, so a handover never depends
+       on the order entries happen to arrive in */
+    var mid = window.innerHeight / 2;
+    var best = null;
+    var bestD = Infinity;
+    inMiddle.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = el; }
+    });
+    if (!best) return;
+    root.style.setProperty('--accent', best.getAttribute('data-accent'));
+    root.style.setProperty('--accent-ink', best.getAttribute('data-ink'));
+  }, { rootMargin: '-45% 0px -45% 0px' });
+
+  skinned.forEach(function (el) { skin.observe(el); });
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      if (!p.live) continue;
+
+      var r = p.track.getBoundingClientRect();
+      var stickH = p.stage.offsetHeight || vh;
+      var span = r.height - stickH;
+      var t = span > 0 ? clamp(-r.top / span, 0, 1) : clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      var w = p.stage.offsetWidth;
+      /* Band sweeps from just off the left edge to just off the right. */
+      var centre = (-0.30 + 1.62 * t) * w;
+      var half = w * (w < 760 ? 0.40 : 0.30);
+
+      p.stage.style.setProperty('--bl', (centre - half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--br', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--bc', centre.toFixed(1) + 'px');
+
+      if (p.resolve) {
+        /* The whole car arrives only at the end. Opacity + a whisper of scale;
+           no directional travel, which is the motion-sensitivity trigger. */
+        var rev = clamp((t - 0.66) / 0.26, 0, 1);
+        rev = rev * rev * (3 - 2 * rev);
+        p.stage.style.setProperty('--reveal', rev.toFixed(3));
+      }
+    }
+
+    if (rail && railDot) {
+      var max = document.documentElement.scrollHeight - vh;
+      var g = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      railDot.style.setProperty('--railY', (g * (rail.offsetHeight - railDot.offsetHeight)).toFixed(1) + 'px');
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+
+</body>
+</html>

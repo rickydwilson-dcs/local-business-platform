@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPM Autobody — The Restoration Register</title>
+<meta name="description" content="DPM Autobody, Berwick, East Sussex. Concours restoration and paintwork, documented lot by lot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   DPM AUTOBODY — DIRECTION A, "THE CATALOGUE"
+   Ground is paper, not black. The homepage is an index of lots.
+   Palette  paper #F4F1EA · ink #16150F · rule #C9C3B4 · oxide #7B2631
+   Type     Newsreader (opsz 6–72) display · Inter spec tables + captions
+   Motion   near-zero: cross-fades and one sticky plate column
+   ───────────────────────────────────────────────────────────── */
+
+:root{
+  --paper:      #F4F1EA;
+  --paper-deep: #EDE9DF;
+  --ink:        #16150F;
+  --ink-soft:   #5C574A;   /* 6.3:1 on paper */
+  --rule:       #C9C3B4;
+  --rule-fine:  #DCD6C7;
+  --oxide:      #7B2631;   /* 8.6:1 on paper — lot numbers and awards ONLY */
+
+  --serif: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* five steps, real contrast: 12 · 14 · 19 · ~30 · ~104 */
+  --t-micro: 0.75rem;
+  --t-small: 0.9375rem;
+  --t-body:  1.1875rem;
+  --t-title: clamp(1.375rem, 1.05rem + 1.35vw, 1.9375rem);
+  --t-head:  clamp(1.75rem, 1.2rem + 2.35vw, 3rem);
+  --t-disp:  clamp(2.75rem, 1rem + 7.5vw, 6.5rem);
+
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --head-h: 3.5rem;
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --fade: 380ms;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  font-size:var(--t-body);
+  line-height:1.62;
+  font-variant-numeric:normal;      /* never tabular — £1,995 must not become £1 , 995 */
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; }
+
+::selection{ background:#DED6C2; color:var(--ink); }
+
+:where(a,button,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--oxide);
+  outline-offset:3px;
+  border-radius:1px;
+}
+
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+.wrap{ max-width:82rem; margin-inline:auto; padding-inline:var(--gutter); }
+.measure{ max-width:25em; }
+.measure-wide{ max-width:28em; }
+
+/* paper tooth — fixed, pointer-events none, never on a scrolling container */
+.grain{
+  position:fixed; inset:0; z-index:60; pointer-events:none;
+  opacity:.038; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+
+/* ── labels, rules, shared bits ───────────────────────────── */
+.label{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  line-height:1.4;
+  margin:0;
+}
+.label--oxide{ color:var(--oxide); }
+.rule{ border:0; border-top:1px solid var(--rule); margin:0; }
+.rule--double{ border:0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); height:3px; margin:0; }
+
+.skip{
+  position:absolute; left:var(--gutter); top:-4rem; z-index:80;
+  background:var(--ink); color:var(--paper); padding:.6rem 1rem;
+  font-family:var(--sans); font-size:var(--t-small); text-decoration:none;
+  transition:top 160ms var(--ease);
+}
+.skip:focus{ top:.5rem; }
+
+/* ── masthead ─────────────────────────────────────────────── */
+.masthead{
+  position:sticky; top:0; z-index:40;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+.masthead__inner{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  min-height:var(--head-h);
+}
+.wordmark{
+  font-family:var(--sans); font-weight:600;
+  font-size:var(--t-small); letter-spacing:.22em; text-transform:uppercase;
+  text-decoration:none; margin:0; white-space:nowrap;
+}
+.wordmark span{ font-weight:300; letter-spacing:.14em; color:var(--ink-soft); }
+.mast-nav{ display:flex; gap:clamp(.9rem,2vw,2rem); align-items:center; }
+.mast-nav a{
+  font-family:var(--sans); font-size:var(--t-micro); font-weight:400;
+  letter-spacing:.13em; text-transform:uppercase; text-decoration:none;
+  color:var(--ink-soft); padding-block:.35rem;
+  border-bottom:1px solid transparent;
+  transition:color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.mast-nav a:hover{ color:var(--ink); border-bottom-color:var(--rule); }
+.mast-nav .tel{ color:var(--ink); }
+.mast-nav .tel{ white-space:nowrap; }
+@media (max-width:52rem){ .mast-nav a:not(.tel){ display:none; } }
+@media (max-width:30rem){
+  .wordmark span{ display:none; }
+  .wordmark{ letter-spacing:.16em; }
+}
+
+/* ── opening: type only, no hero image ────────────────────── */
+.opening{
+  min-height:calc(100lvh - var(--head-h));
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding-block:clamp(2.5rem,7vh,5rem) clamp(1.5rem,4vh,2.5rem);
+}
+.opening__top{ display:flex; flex-wrap:wrap; gap:.5rem 2rem; justify-content:space-between; }
+.opening__mid{ padding-block:clamp(2rem,6vh,4.5rem); }
+h1{
+  font-family:var(--serif);
+  font-variation-settings:"opsz" 72,"wght" 300;
+  font-weight:300;
+  font-size:var(--t-disp);
+  line-height:.98;
+  letter-spacing:-.022em;
+  margin:0 0 clamp(1.25rem,3vh,2rem);
+  max-width:14ch;
+  text-wrap:balance;
+}
+h1 em{
+  font-style:italic;
+  font-weight:300;
+  font-variation-settings:"opsz" 72,"wght" 300;
+}
+.thesis{
+  font-size:clamp(1.1875rem,1.05rem + .5vw,1.5rem);
+  line-height:1.45;
+  color:var(--ink);
+  margin:0;
+  max-width:26em;
+  text-wrap:pretty;
+}
+.thesis + .thesis{ margin-top:1.1rem; font-size:var(--t-body); color:var(--ink-soft); max-width:27em; }
+
+/* front matter — four facts, no images */
+.frontmatter{
+  display:grid; gap:0;
+  grid-template-columns:1fr;
+  border-top:1px solid var(--rule);
+  margin:0;
+}
+@media (min-width:44rem){ .frontmatter{ grid-template-columns:repeat(4,1fr); } }
+.frontmatter div{
+  padding:1rem 0 0;
+  border-bottom:1px solid var(--rule-fine);
+  padding-bottom:1rem;
+}
+@media (min-width:44rem){
+  .frontmatter div{ border-bottom:0; padding-right:1.5rem; }
+  .frontmatter div + div{ border-left:1px solid var(--rule-fine); padding-left:1.5rem; }
+}
+.frontmatter dt{ margin:0 0 .45rem; }
+.frontmatter dd{
+  margin:0; font-family:var(--sans); font-size:var(--t-small);
+  font-weight:400; line-height:1.5; color:var(--ink);
+}
+
+/* ── section furniture ────────────────────────────────────── */
+section{ scroll-margin-top:calc(var(--head-h) + 1rem); }
+.section{ padding-block:clamp(3.5rem,9vh,7rem); }
+.section__head{
+  display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
+  gap:.75rem 2rem; padding-bottom:clamp(1.5rem,3vh,2.5rem);
+}
+h2{
+  font-family:var(--serif);
+  font-variation-settings:"opsz" 48,"wght" 300;
+  font-weight:300;
+  font-size:var(--t-head); line-height:1.06; letter-spacing:-.018em;
+  margin:.35rem 0 0; max-width:18ch;
+}
+h3{
+  font-family:var(--serif);
+  font-variation-settings:"opsz" 36,"wght" 400;
+  font-weight:400;
+  font-size:var(--t-title); line-height:1.15; letter-spacing:-.012em;
+  margin:0;
+}
+h4{
+  font-family:var(--sans); font-size:var(--t-micro); font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);
+  margin:0 0 1rem;
+}
+p{ margin:0 0 1.15em; text-wrap:pretty; }
+p:last-child{ margin-bottom:0; }
+
+/* ── the index of lots ────────────────────────────────────── */
+.index-grid{ display:grid; grid-template-columns:1fr; gap:0; }
+@media (min-width:62rem){
+  .index-grid{ grid-template-columns:minmax(0,38%) minmax(0,1fr); gap:clamp(2rem,4vw,4.5rem); }
+}
+
+.plate-col{ display:none; }
+@media (min-width:62rem){
+  .plate-col{
+    display:block;
+    position:sticky;                    /* bounded by the grid — releases normally */
+    top:calc(var(--head-h) + 2.5rem);
+    align-self:start;
+  }
+}
+.plate-stack{ position:relative; aspect-ratio:3/2; background:var(--paper-deep); }
+.plate-stack > *{
+  position:absolute; inset:0;
+  opacity:0; visibility:hidden;
+  transition:opacity var(--fade) var(--ease), visibility 0s linear var(--fade);
+}
+.plate-stack > [data-active]{
+  opacity:1; visibility:visible;
+  transition:opacity var(--fade) var(--ease), visibility 0s;
+}
+.plate-stack img{ width:100%; height:100%; object-fit:cover; }
+.plate-withheld{
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  gap:.75rem; text-align:center; padding:2rem;
+  border:1px solid var(--rule); background:var(--paper);
+}
+.plate-withheld p{
+  font-family:var(--sans); font-size:var(--t-small); color:var(--ink-soft);
+  max-width:24em; margin:0; line-height:1.55;
+}
+.plate-caption{
+  display:flex; justify-content:space-between; gap:1rem;
+  padding-top:.7rem; margin-top:.7rem; border-top:1px solid var(--rule-fine);
+}
+.plate-caption span{ font-family:var(--sans); font-size:var(--t-micro); color:var(--ink-soft); letter-spacing:.06em; }
+.plate-caption .ai{ font-style:italic; letter-spacing:.02em; white-space:nowrap; }
+
+.lots{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.lot{ border-bottom:1px solid var(--rule-fine); }
+.lot:last-child{ border-bottom:1px solid var(--rule); }
+.lot-link{
+  display:grid;
+  grid-template-columns:3.25rem minmax(0,1fr) 1.25rem;
+  gap:0 clamp(.75rem,2vw,1.75rem);
+  align-items:start;
+  padding:clamp(1.15rem,2.4vh,1.7rem) 0;
+  text-decoration:none;
+  transition:background-color 200ms var(--ease);
+}
+@media (min-width:62rem){ .lot-link{ grid-template-columns:4rem minmax(0,1fr) 1.5rem; } }
+.lot-link:hover{ background:var(--paper-deep); }
+.lot-link:hover .lot-title{ text-decoration:underline; text-underline-offset:.18em; text-decoration-thickness:1px; text-decoration-color:var(--rule); }
+.lot-no{
+  font-family:var(--serif);
+  font-variation-settings:"opsz" 44,"wght" 300;
+  font-size:clamp(1.5rem,1.1rem + 1.4vw,2.125rem);
+  line-height:1; color:var(--oxide);
+  letter-spacing:-.02em;
+  padding-top:.1em;
+}
+.lot-meta{
+  display:block; font-family:var(--sans); font-size:var(--t-micro);
+  letter-spacing:.15em; text-transform:uppercase; color:var(--ink-soft);
+  margin-bottom:.4rem;
+}
+.lot-title{ margin:0 0 .35rem; }
+.lot-epithet{
+  display:block; font-style:italic;
+  font-variation-settings:"opsz" 20,"wght" 300;
+  font-size:1.0625rem; line-height:1.5; color:var(--ink);
+  max-width:26em; margin-bottom:.5rem;
+}
+.lot-facts{
+  display:block; font-family:var(--sans); font-size:var(--t-small);
+  color:var(--ink-soft); line-height:1.5;
+}
+.lot-go{
+  font-family:var(--sans); font-size:1rem; color:var(--ink-soft);
+  justify-self:end; padding-top:.35rem;
+  transition:color 200ms var(--ease), transform 200ms var(--ease);
+}
+.lot-link:hover .lot-go{ color:var(--oxide); transform:translateX(2px); }
+.index-note{
+  font-family:var(--sans); font-size:var(--t-small); color:var(--ink-soft);
+  max-width:27em; margin:1.5rem 0 0; line-height:1.55;
+}
+
+/* ── the specimen lot ─────────────────────────────────────── */
+.lot-full{ border-top:1px solid var(--rule); padding-top:clamp(2rem,5vh,3.5rem); }
+.epithet-line{
+  font-family:var(--serif); font-style:italic;
+  font-variation-settings:"opsz" 28,"wght" 300;
+  font-size:clamp(1.0625rem,1rem + .35vw,1.25rem);
+  color:var(--ink-soft); margin:0 0 .6rem; max-width:25em;
+}
+.lot-full h3{
+  font-variation-settings:"opsz" 60,"wght" 300;
+  font-size:clamp(1.875rem,1.2rem + 2.6vw,3.25rem);
+  letter-spacing:-.02em; line-height:1.04; max-width:16ch;
+  margin-bottom:.6rem;
+}
+.coachwork{ font-family:var(--sans); font-size:var(--t-small); color:var(--ink-soft); letter-spacing:.06em; margin:0 0 2rem; }
+
+figure{ margin:0; }
+.figure-main{ margin-block:clamp(1.5rem,4vh,2.75rem); }
+figcaption{
+  display:flex; flex-wrap:wrap; gap:.35rem 1.25rem; justify-content:space-between;
+  font-family:var(--sans); font-size:var(--t-micro); color:var(--ink-soft);
+  letter-spacing:.05em; line-height:1.5;
+  padding-top:.7rem; margin-top:.7rem; border-top:1px solid var(--rule-fine);
+}
+figcaption .ai{ font-style:italic; }
+
+.lot-cols{ display:grid; grid-template-columns:1fr; gap:clamp(2.5rem,6vh,4rem) clamp(2rem,4vw,4.5rem); }
+@media (min-width:62rem){ .lot-cols{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); } }
+.block + .block{ margin-top:clamp(2.5rem,6vh,4rem); }
+
+/* identity table */
+.table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+table{ border-collapse:collapse; width:100%; min-width:20rem; font-family:var(--sans); font-size:var(--t-small); font-variant-numeric:normal; }
+caption{ text-align:left; font-family:var(--sans); font-size:var(--t-micro); color:var(--ink-soft); letter-spacing:.16em; text-transform:uppercase; padding-bottom:.75rem; }
+th,td{ text-align:left; padding:.6rem 1rem .6rem 0; border-bottom:1px solid var(--rule-fine); vertical-align:top; line-height:1.5; }
+th{ font-weight:400; color:var(--ink-soft); letter-spacing:.05em; width:11rem; white-space:nowrap; }
+td{ color:var(--ink); }
+tr:last-child th, tr:last-child td{ border-bottom:1px solid var(--rule); }
+/* a spec table has no room for two columns on a phone — stack the rows */
+@media (max-width:34rem){
+  table, tbody, tr, th, td{ display:block; width:auto; }
+  tr{ border-bottom:1px solid var(--rule-fine); padding:.7rem 0; }
+  tr:last-child{ border-bottom:1px solid var(--rule); }
+  th{ white-space:normal; border-bottom:0; padding:0 0 .15rem; letter-spacing:.13em; text-transform:uppercase; font-size:var(--t-micro); }
+  td{ border-bottom:0; padding:0; }
+  tr:last-child th, tr:last-child td{ border-bottom:0; }
+}
+.flag{ color:var(--oxide); }
+
+/* intervention ladder */
+.ladder{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.ladder li{
+  display:grid; grid-template-columns:1fr; gap:.2rem;
+  padding:.85rem 0; border-bottom:1px solid var(--rule-fine);
+}
+@media (min-width:34rem){ .ladder li{ grid-template-columns:9.5rem minmax(0,1fr); gap:0 1.5rem; } }
+.ladder time{
+  font-family:var(--sans); font-size:var(--t-micro); letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-soft); padding-top:.28em;
+}
+.ladder p{ margin:0; max-width:31em; font-family:var(--sans); font-size:var(--t-small); line-height:1.55; }
+.ladder .hand{ color:var(--ink-soft); }
+
+/* itemised originality */
+.items{ list-style:none; margin:0; padding:0; }
+.items li{
+  font-family:var(--sans); font-size:var(--t-small); line-height:1.55; max-width:31em;
+  padding:.5rem 0 .5rem 1.1rem; border-bottom:1px solid var(--rule-fine); position:relative;
+}
+.items li::before{ content:"—"; position:absolute; left:0; color:var(--rule); }
+.items .src{ color:var(--ink-soft); }
+
+/* hands */
+.hands{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.hands li{ padding:.9rem 0; border-bottom:1px solid var(--rule-fine); }
+.hands b{
+  display:block; font-family:var(--serif); font-weight:400;
+  font-variation-settings:"opsz" 24,"wght" 400;
+  font-size:1.125rem; line-height:1.3;
+}
+.hands span{ font-family:var(--sans); font-size:var(--t-small); color:var(--ink-soft); }
+.hands .out{ color:var(--oxide); }
+
+/* documentation index */
+.docs{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.docs li{
+  display:flex; flex-wrap:wrap; gap:.2rem 1.25rem; justify-content:space-between;
+  font-family:var(--sans); font-size:var(--t-small); line-height:1.55;
+  padding:.7rem 0; border-bottom:1px solid var(--rule-fine);
+}
+.docs .extent{ color:var(--ink-soft); white-space:nowrap; }
+
+.award{
+  font-family:var(--sans); font-size:var(--t-micro); letter-spacing:.14em;
+  text-transform:uppercase; color:var(--oxide); border:1px solid var(--oxide);
+  padding:.4rem .7rem; display:inline-block; margin-top:1.25rem;
+}
+
+/* two plates side by side */
+.plates-pair{ display:grid; grid-template-columns:1fr; gap:clamp(1.5rem,3vw,2.5rem); margin-top:clamp(2.5rem,6vh,4rem); }
+@media (min-width:44rem){ .plates-pair{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); align-items:end; } }
+.plates-pair .aside{ align-self:end; }
+.plates-pair .aside p{
+  font-family:var(--sans); font-size:var(--t-small); color:var(--ink-soft);
+  line-height:1.55; max-width:27em; margin:0;
+}
+/* a full-width plate between chapters */
+.plate-band{ border-top:1px solid var(--rule); padding-block:clamp(2.5rem,6vh,4rem); }
+
+/* ── workshop statement ───────────────────────────────────── */
+.workshop{ background:var(--paper-deep); border-block:1px solid var(--rule); }
+.workshop-grid{ display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vh,3rem) clamp(2rem,4vw,5rem); }
+@media (min-width:62rem){ .workshop-grid{ grid-template-columns:minmax(0,34rem) minmax(0,24rem); } }
+.disciplines{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.disciplines li{
+  font-family:var(--sans); font-size:var(--t-small); line-height:1.5; max-width:30em;
+  padding:.5rem 0; border-bottom:1px solid var(--rule-fine); color:var(--ink);
+}
+.disciplines li.out{ color:var(--oxide); }
+
+/* ── contact ──────────────────────────────────────────────── */
+.contact-grid{ display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vh,3rem) clamp(2rem,4vw,5rem); }
+@media (min-width:52rem){ .contact-grid{ grid-template-columns:minmax(0,30rem) minmax(0,26rem); } }
+.contact-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--rule); }
+.contact-list > div{ padding:.85rem 0; border-bottom:1px solid var(--rule-fine); }
+.contact-list dt{ margin:0 0 .3rem; }
+.contact-list dd{ margin:0; font-family:var(--sans); font-size:1rem; }
+.contact-list a{ text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:1px; }
+.contact-list a:hover{ border-bottom-color:var(--oxide); color:var(--oxide); }
+.big-tel{
+  font-family:var(--serif); font-variation-settings:"opsz" 48,"wght" 300;
+  font-size:clamp(1.75rem,1.2rem + 2vw,2.75rem); letter-spacing:-.015em;
+  text-decoration:none; display:inline-block; line-height:1.1;
+  border-bottom:1px solid var(--rule);
+}
+.big-tel:hover{ color:var(--oxide); border-bottom-color:var(--oxide); }
+
+/* ── footer + the honest label ────────────────────────────── */
+footer{ border-top:1px solid var(--rule); padding-block:clamp(2.5rem,6vh,4rem) clamp(2rem,5vh,3rem); }
+.disclosure{
+  border:1px solid var(--oxide);
+  padding:clamp(1.1rem,2.5vw,1.75rem);
+  max-width:34em;
+}
+.disclosure p{
+  font-family:var(--sans); font-size:var(--t-small); line-height:1.6;
+  color:var(--ink); margin:0; max-width:27em;
+}
+.disclosure p + p{ margin-top:.7rem; color:var(--ink-soft); }
+.colophon{
+  display:flex; flex-wrap:wrap; gap:.5rem 2rem; justify-content:space-between;
+  margin-top:clamp(2rem,4vh,3rem); padding-top:1.25rem; border-top:1px solid var(--rule-fine);
+}
+.colophon p{ font-family:var(--sans); font-size:var(--t-micro); color:var(--ink-soft); letter-spacing:.06em; margin:0; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.001ms !important; scroll-behavior:auto !important;
+  }
+  .plate-stack > *{ transition:none; }
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to the index of lots</a>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="wordmark" href="#top">DPM Autobody <span>— Berwick</span></a>
+    <nav class="mast-nav" aria-label="Sections">
+      <a href="#index">Index of lots</a>
+      <a href="#lot-01">Lot 01</a>
+      <a href="#workshop">The workshop</a>
+      <a class="tel" href="tel:+441323552827">01323 552827</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── 1 · Opening: type only. No hero image. ───────────── -->
+  <section class="wrap opening" id="top" aria-labelledby="page-title">
+    <div class="opening__top">
+      <p class="label">The Restoration Register · Volume Four</p>
+      <p class="label">Restoration and paintwork · Berwick, East Sussex</p>
+    </div>
+
+    <div class="opening__mid">
+      <h1 id="page-title">Artists of <em>Automotive</em> Restoration</h1>
+      <p class="thesis measure-wide">Eight cars are recorded here. Each one is a lot: what it was, what
+        we found, what we kept, what we replaced, and the name of the person whose hands did it.</p>
+      <p class="thesis measure">There is no gallery on this page and no photograph above this line.
+        A restoration is a document before it is a picture.</p>
+    </div>
+
+    <dl class="frontmatter">
+      <div>
+        <dt class="label">In this volume</dt>
+        <dd>Eight lots, 1954 to 1968. Five complete, three in the shop.</dd>
+      </div>
+      <div>
+        <dt class="label">Made here</dt>
+        <dd>Metal, panel, preparation, paint, flatting, polish, assembly.</dd>
+      </div>
+      <div>
+        <dt class="label">Not made here</dt>
+        <dd>Engine building and trimming. Both subcontracted, both named on the lot.</dd>
+      </div>
+      <div>
+        <dt class="label">Enquiries</dt>
+        <dd>David Pearce-Martin, Director. 01323 552827.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <hr class="rule--double">
+
+  <!-- ── 2 · The index of lots ────────────────────────────── -->
+  <section class="wrap section" id="index" aria-labelledby="index-title">
+    <div class="section__head">
+      <h2 id="index-title">The index of lots</h2>
+      <p class="label">Nos. 01–08 · Recorded 2023–2026</p>
+    </div>
+
+    <div class="index-grid">
+      <!-- sticky plate column: desktop only, bounded by the grid -->
+      <div class="plate-col" aria-hidden="true">
+        <div class="plate-stack" id="plate-stack">
+          <figure data-plate="01" data-active>
+            <img src="assets/art-direction/web/a-catalogue-profile-05.jpg" width="2400" height="1600"
+                 alt="" loading="lazy" decoding="async">
+          </figure>
+          <figure data-plate="02">
+            <img src="assets/art-direction/web/d-daylight-barn-09.jpg" width="2400" height="1600"
+                 alt="" loading="lazy" decoding="async">
+          </figure>
+          <figure data-plate="03">
+            <img src="assets/art-direction/web/a-catalogue-three-quarter-06.jpg" width="2400" height="1600"
+                 alt="" loading="lazy" decoding="async">
+          </figure>
+          <div data-plate="04" class="plate-withheld">
+            <p class="label">Plate withheld</p>
+            <p>The owner declines photography. Two plates are held on file and are not for publication.</p>
+          </div>
+          <figure data-plate="05">
+            <img src="assets/art-direction/web/d-daylight-road-08.jpg" width="2400" height="1021"
+                 alt="" loading="lazy" decoding="async">
+          </figure>
+          <div data-plate="06" class="plate-withheld">
+            <p class="label">Plate not yet made</p>
+            <p>The car is photographed on collection. Until then this entry carries its file only.</p>
+          </div>
+          <figure data-plate="07">
+            <img src="assets/art-direction/web/d-daylight-rear-10.jpg" width="2400" height="1600"
+                 alt="" loading="lazy" decoding="async">
+          </figure>
+          <div data-plate="08" class="plate-withheld">
+            <p class="label">In the booth</p>
+            <p>Colour is mixed and not yet signed off by the owner. No plate is made before it is.</p>
+          </div>
+        </div>
+        <p class="plate-caption">
+          <span id="plate-label">Lot 01 · Jaguar XK120 Fixed Head Coupé</span>
+          <span class="ai">AI plate — art direction only</span>
+        </p>
+      </div>
+
+      <!-- the list -->
+      <div>
+        <ol class="lots">
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="01">
+              <span class="lot-no" aria-hidden="true">01</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 01. </span>1954 · Jaguar · Complete</span>
+                <h3 class="lot-title">XK120 Fixed Head Coupé</h3>
+                <span class="lot-epithet">Bare metal twice. The second time was ours.</span>
+                <span class="lot-facts">British Racing Green · Fifteen months · 84 plates · Shown in full below</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="02">
+              <span class="lot-no" aria-hidden="true">02</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 02. </span>1958 · Jaguar · Complete</span>
+                <h3 class="lot-title">XK150 3.4 Roadster</h3>
+                <span class="lot-epithet">Recovered from a flint barn at Alfriston, February 2019. It had not moved since 1981.</span>
+                <span class="lot-facts">Suede Green · Twenty-six months · 210 plates</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="03">
+              <span class="lot-no" aria-hidden="true">03</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 03. </span>1966 · Aston Martin · Complete</span>
+                <h3 class="lot-title">DB6 Vantage</h3>
+                <span class="lot-epithet">Returned to its delivery colour after forty-one years in white.</span>
+                <span class="lot-facts">Dubonnet Rosso · Nineteen months · 156 plates</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="04">
+              <span class="lot-no" aria-hidden="true">04</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 04. </span>1963 · Bentley · Complete</span>
+                <h3 class="lot-title">S3 Continental, coachwork by Mulliner Park Ward</h3>
+                <span class="lot-epithet">Twenty-two coats. Flatted between every one of them.</span>
+                <span class="lot-facts">Shell Grey over Velvet Green · Thirty-one months · Plates withheld by the owner</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="05">
+              <span class="lot-no" aria-hidden="true">05</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 05. </span>1959 · Austin-Healey · Complete</span>
+                <h3 class="lot-title">Sprite Mk I</h3>
+                <span class="lot-epithet">Nine reds mixed and rejected before the tenth was signed off.</span>
+                <span class="lot-facts">Cherry Red · Eleven months · 96 plates</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="06">
+              <span class="lot-no" aria-hidden="true">06</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 06. </span>1968 · Volvo · In the shop</span>
+                <h3 class="lot-title">P1800 S</h3>
+                <span class="lot-epithet">Two owners. One respray. No filler anywhere in the shell — which we did not expect.</span>
+                <span class="lot-facts">White, to be confirmed · In preparation · Plate not yet made</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="07">
+              <span class="lot-no" aria-hidden="true">07</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 07. </span>1965 · MG · Complete</span>
+                <h3 class="lot-title">MGB Roadster</h3>
+                <span class="lot-epithet">Not a restoration. The correction of somebody else's.</span>
+                <span class="lot-facts">British Racing Green · Nine months · 74 plates</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li class="lot">
+            <a class="lot-link" href="#lot-01" data-lot="08">
+              <span class="lot-no" aria-hidden="true">08</span>
+              <span>
+                <span class="lot-meta"><span class="sr-only">Lot 08. </span>1962 · Austin-Healey · In the booth</span>
+                <h3 class="lot-title">3000 Mk II BJ7</h3>
+                <span class="lot-epithet">Six weeks on the shut lines alone, before a drop of colour was mixed.</span>
+                <span class="lot-facts">Healey Blue over Old English White · In the booth · Colour not signed off</span>
+              </span>
+              <span class="lot-go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ol>
+
+        <p class="index-note">In the built site each lot opens its own page, running to eighty or more
+          plates and the complete file. In this prototype every entry resolves to Lot 01, set out in
+          full below so the pattern is legible.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ── 3 · The specimen lot, in full ────────────────────── -->
+  <section class="wrap section" id="lot-01" aria-labelledby="lot01-title">
+    <div class="section__head">
+      <h2>The pattern, in full</h2>
+      <p class="label label--oxide">Lot 01</p>
+    </div>
+
+    <div class="lot-full">
+      <p class="epithet-line">“BRG 214”, the ex-Winterbourne car, off the road from 1979 and rebuilt to
+        its 1954 delivery specification.</p>
+      <h3 id="lot01-title">1954 Jaguar XK120 Fixed Head Coupé</h3>
+      <p class="coachwork">Coachwork by Jaguar Cars Ltd, Browns Lane · Restored at Berwick, March 2023 to June 2024</p>
+
+      <p class="measure">The car arrived on a trailer with its bonnet in the boot and forty-five years
+        of standing water in both sills. What follows is the whole of it: every intervention with a
+        date against it, everything we kept, everything we could not, and who did which part.</p>
+
+      <figure class="figure-main">
+        <img src="assets/art-direction/web/a-catalogue-profile-05.jpg" width="2400" height="1600"
+             alt="Dark green fixed-head coupé photographed in full side profile against a plain paper sweep, with wire wheels and chrome brightwork."
+             loading="lazy" decoding="async">
+        <figcaption>
+          <span>Plate 1 of 84 · Side elevation, paper sweep, single soft source</span>
+          <span class="ai">AI-generated art-direction plate — not DPM's work</span>
+        </figcaption>
+      </figure>
+
+      <div class="lot-cols">
+        <div>
+          <!-- identity block -->
+          <div class="block">
+            <div class="table-scroll">
+              <table>
+                <caption>Identity</caption>
+                <tbody>
+                  <tr><th scope="row">Chassis no.</th><td>S679384</td></tr>
+                  <tr><th scope="row">Engine no.</th><td>F2618-8S <span class="flag">(see note)</span></td></tr>
+                  <tr><th scope="row">Gearbox no.</th><td>JL21455</td></tr>
+                  <tr><th scope="row">Body no.</th><td>F3141</td></tr>
+                  <tr><th scope="row">Registration</th><td>BRG 214</td></tr>
+                  <tr><th scope="row">Colour</th><td>British Racing Green</td></tr>
+                  <tr><th scope="row">Colour code</th><td>Mixed to the retained 1954 factory card, not to a modern equivalent</td></tr>
+                  <tr><th scope="row">Paint system</th><td>Two-pack over epoxy primer. Eleven coats of colour, three of clear</td></tr>
+                  <tr><th scope="row">First registered</th><td>9 September 1954, Coventry</td></tr>
+                  <tr><th scope="row">In the shop</th><td>15 months, of which 6 weeks on panel gaps</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="index-note"><strong>Note on the engine.</strong> The unit fitted is not the one
+              recorded on the Heritage Certificate. It was substituted in 1971 by a previous owner and
+              we have not replaced it. We say so here rather than in a footnote.</p>
+          </div>
+
+          <!-- originality -->
+          <div class="block">
+            <h4>Originality, itemised</h4>
+            <p class="label" style="margin-bottom:.6rem">Retained</p>
+            <ul class="items">
+              <li>Original chassis frame, straight and unrepaired <span class="src">— checked on a jig, Bexhill</span></li>
+              <li>Original bulkhead and scuttle</li>
+              <li>Original doors, bonnet and boot lid, all matched to the shell</li>
+              <li>Original data plate and body number tag</li>
+              <li>The 1954 paint mixing card, found taped inside the spare-wheel well</li>
+            </ul>
+            <p class="label" style="margin:1.5rem 0 .6rem">Replaced, and why</p>
+            <ul class="items">
+              <li>Both sills — new sections wheeled here from flat sheet <span class="src">— the originals had no sound metal left to weld to</span></li>
+              <li>Both floors <span class="src">— corroded through at the seat mounts</span></li>
+              <li>Offside rear wing, lower third <span class="src">— stress-hardened by a 1980s repair</span></li>
+            </ul>
+            <p class="label" style="margin:1.5rem 0 .6rem">Renewed</p>
+            <ul class="items">
+              <li>All brightwork re-plated to the original pattern <span class="src">— per factory drawings held by the marque club</span></li>
+              <li>Screen and door rubbers, new old stock where obtainable</li>
+            </ul>
+            <p class="award">Class award · Sussex Concours d'Élégance, 2024</p>
+          </div>
+        </div>
+
+        <div>
+          <!-- intervention ladder -->
+          <div class="block">
+            <h4>Intervention</h4>
+            <ol class="ladder">
+              <li><time datetime="2023-03">March 2023</time>
+                <p>Car received from the owner, Petworth. 1,140 photographs made before a single part was removed.</p></li>
+              <li><time datetime="2023-04">April 2023</time>
+                <p>Body lifted from the chassis. Shell chemically stripped off site and returned bare.</p></li>
+              <li><time datetime="2023-05">May – August 2023</time>
+                <p>Sills, floors and the offside rear wing section made here on the wheeling machine and let in.
+                  <span class="hand">Dave, Polegate.</span></p></li>
+              <li><time datetime="2023-09">September 2023</time>
+                <p>Shut lines and panel gaps set, door by door, six weeks.
+                  <span class="hand">Ellis, Hailsham.</span></p></li>
+              <li><time datetime="2023-10">October 2023</time>
+                <p>Bare-metal etch, epoxy primer, four coats of surfacer flatted to 800 grit between each.
+                  <span class="hand">Paul, Eastbourne.</span></p></li>
+              <li><time datetime="2024-01">January 2024</time>
+                <p>Colour laid: eleven coats of British Racing Green, mixed to the retained card.
+                  <span class="hand">Paul, Eastbourne.</span></p></li>
+              <li><time datetime="2024-02">February 2024</time>
+                <p>Flatted to 3000 grit and machine-polished over three days.
+                  <span class="hand">Paul, Eastbourne.</span></p></li>
+              <li><time datetime="2024-04">April 2024</time>
+                <p>Engine rebuilt off site. <span class="hand">Hodgson &amp; Fry, Ashford — subcontracted, we do not build engines.</span></p></li>
+              <li><time datetime="2024-05">May 2024</time>
+                <p>Trim cut and stitched off site to the retained pattern. <span class="hand">Bexhill Coach Trimming, Bexhill-on-Sea — subcontracted.</span></p></li>
+              <li><time datetime="2024-06">June 2024</time>
+                <p>Assembled, set up, road-tested over 240 miles and returned to the owner.
+                  <span class="hand">Dave, Ellis and Paul.</span></p></li>
+            </ol>
+          </div>
+
+          <!-- hands -->
+          <div class="block">
+            <h4>Hands</h4>
+            <ul class="hands">
+              <li><b>Dave Pearce-Martin</b> <span>Polegate · Metal shaping, wheeling, lead loading</span></li>
+              <li><b>Ellis</b> <span>Hailsham · Panel fit, shut lines, preparation</span></li>
+              <li><b>Paul</b> <span>Eastbourne · Paint, colour matching, flatting and polish</span></li>
+              <li><b>Hodgson &amp; Fry</b> <span class="out">Ashford, Kent · Engine build — subcontracted</span></li>
+              <li><b>Bexhill Coach Trimming</b> <span class="out">Bexhill-on-Sea · Trim — subcontracted</span></li>
+            </ul>
+          </div>
+
+          <!-- documentation index -->
+          <div class="block">
+            <h4>The file</h4>
+            <ul class="docs">
+              <li><span>Box file — invoices, correspondence, parts receipts</span><span class="extent">412 pages</span></li>
+              <li><span>Photographs, dated and captioned, on two drives</span><span class="extent">3,140 frames</span></li>
+              <li><span>Jaguar Heritage Certificate, issued 11 May 2023</span><span class="extent">1 sheet</span></li>
+              <li><span>Original 1954 paint mixing card, photographed at 1:1</span><span class="extent">Retained</span></li>
+              <li><span>Colour batch records, by tin</span><span class="extent">16 litres</span></li>
+              <li><span>Plates made for this lot, of which two appear here</span><span class="extent">84</span></li>
+              <li><span>Weight of the file as handed over</span><span class="extent">2.1 kg</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="plates-pair">
+        <figure>
+          <img src="assets/art-direction/web/a-catalogue-detail-07.jpg" width="2400" height="2400"
+               alt="Macro view of a chrome bonnet badge sitting proud of deep green lacquer, the paint reflecting the badge's outline."
+               loading="lazy" decoding="async">
+          <figcaption>
+            <span>Plate 47 · Bonnet badge, raking light</span>
+            <span class="ai">AI plate</span>
+          </figcaption>
+        </figure>
+        <div class="aside">
+          <p><strong>Eighty-four plates were made for this car</strong> and two of them are here. The
+            rest — the bare shell on the rotisserie, the wing section on the buck, the card held against
+            the flatted panel — run in sequence on the lot's own page, in the order the work happened.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- a full-width plate between chapters -->
+  <div class="wrap plate-band">
+    <figure>
+      <img src="assets/art-direction/web/d-daylight-road-08.jpg" width="2400" height="1021"
+           alt="Red open two-seater parked on a narrow country lane in low winter sun, bare hedges either side and downland behind."
+           loading="lazy" decoding="async">
+      <figcaption>
+        <span>Lot 05 · 1959 Austin-Healey Sprite Mk I, on the lane above Alciston, photographed on collection</span>
+        <span class="ai">AI-generated art-direction plate — not DPM's work</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- ── 4 · What DPM does. Short, and under the lots. ────── -->
+  <section class="workshop" id="workshop" aria-labelledby="workshop-title">
+    <div class="wrap section">
+      <div class="section__head">
+        <h2 id="workshop-title">The workshop</h2>
+        <p class="label">Berwick, East Sussex</p>
+      </div>
+
+      <div class="workshop-grid">
+        <div class="measure">
+          <p>DPM Autobody is a restoration and paint shop at Berwick, in East Sussex. It has one booth,
+            one wheeling machine and a small number of people who have worked together a long time.</p>
+          <p>Everything a car needs is made and finished here, with two exceptions: engines are built
+            elsewhere and trim is cut and stitched elsewhere. Both are subcontracted to people we name
+            on the lot they belong to, because a claim you cannot check is not worth making.</p>
+          <p>What we are actually known for is paint. Some of the cars that leave this shop wear another
+            restorer's name on the badge; that arrangement is theirs to disclose rather than ours, and
+            it is why the paint sections above are the longest part of every file.</p>
+          <p>Cars are taken on one or two at a time. There is no waiting list to join, only a
+            conversation to have.</p>
+        </div>
+
+        <div>
+          <h4>Made here</h4>
+          <ul class="disciplines">
+            <li>Metal shaping and wheeling from flat sheet</li>
+            <li>Panel fabrication and repair sections</li>
+            <li>Lead loading</li>
+            <li>Shut lines and panel gaps</li>
+            <li>Preparation, priming and flatting</li>
+            <li>Two-pack and cellulose paint</li>
+            <li>Colour matching to retained factory cards</li>
+            <li>Flatting and machine polishing</li>
+            <li>Assembly, set-up and road test</li>
+            <li class="out">Engine building — subcontracted</li>
+            <li class="out">Trimming — subcontracted</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5 · Contact ──────────────────────────────────────── -->
+  <section class="wrap section" id="contact" aria-labelledby="contact-title">
+    <div class="section__head">
+      <h2 id="contact-title">Enquiries</h2>
+      <p class="label">Answered by David</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="measure">
+        <p>Tell us the marque, the year, and what the car is for — a concours lawn, a road, or a
+          twenty-year sleep put right. That is usually enough to know whether we are the right shop,
+          and we will say if we are not.</p>
+        <p><a class="big-tel" href="tel:+441323552827">01323&nbsp;552827</a></p>
+      </div>
+
+      <dl class="contact-list">
+        <div>
+          <dt class="label">Email</dt>
+          <dd><a href="mailto:info@dpmautobody.co.uk">info@dpmautobody.co.uk</a></dd>
+        </div>
+        <div>
+          <dt class="label">Workshop</dt>
+          <dd>Berwick, East Sussex. Visits by appointment — there is usually a car in pieces.</dd>
+        </div>
+        <div>
+          <dt class="label">Director</dt>
+          <dd>David Pearce-Martin</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="disclosure">
+    <p><strong>A note on the photography on this page.</strong> Every photograph here is AI-generated
+      art direction, made for this prototype. None of it is DPM Autobody's work and none of these cars
+      is a DPM car. The plates exist to show the light, the crop and the register we would commission —
+      they are placeholders for a real shoot and are replaced one for one when it happens.</p>
+    <p>The lots, chassis numbers, dates, names and figures on this page are likewise invented to
+      demonstrate the format. Dave, Ellis and Paul are real; the cars attributed to them here are not.</p>
+  </div>
+
+  <div class="colophon">
+    <p>DPM Autobody · Berwick, East Sussex · 01323 552827 · info@dpmautobody.co.uk</p>
+    <p>Direction A — “The Catalogue” · Prototype, August 2026 · Set in Newsreader and Inter</p>
+  </div>
+</footer>
+
+<script>
+/* The only script on the page. It cross-fades the sticky plate column
+   to match the lot the reader is looking at. Nothing else moves. */
+(function () {
+  var stack = document.getElementById('plate-stack');
+  if (!stack) return;
+
+  var labelEl  = document.getElementById('plate-label');
+  var links    = Array.prototype.slice.call(document.querySelectorAll('.lot-link[data-lot]'));
+  var plates   = {};
+  Array.prototype.forEach.call(stack.children, function (el) { plates[el.getAttribute('data-plate')] = el; });
+
+  var titles = {};
+  links.forEach(function (a) {
+    var t = a.querySelector('.lot-title');
+    var y = (a.querySelector('.lot-meta').textContent.match(/\d{4}/) || [''])[0];
+    titles[a.getAttribute('data-lot')] = 'Lot ' + a.getAttribute('data-lot') + ' · ' + y + ' ' + (t ? t.textContent.trim() : '');
+  });
+
+  var current = '01';
+  function show(id) {
+    if (id === current || !plates[id]) return;
+    if (plates[current]) plates[current].removeAttribute('data-active');
+    plates[id].setAttribute('data-active', '');
+    if (labelEl && titles[id]) labelEl.textContent = titles[id];
+    current = id;
+  }
+
+  links.forEach(function (a) {
+    var id = a.getAttribute('data-lot');
+    a.addEventListener('pointerenter', function () { show(id); });
+    a.addEventListener('focus', function () { show(id); });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) show(e.target.getAttribute('data-lot'));
+      });
+    }, { rootMargin: '-46% 0px -46% 0px', threshold: 0 });
+    links.forEach(function (a) { io.observe(a); });
+  }
+})();
+</script>
+</body>
+</html>

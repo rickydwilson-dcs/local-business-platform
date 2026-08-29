@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPM Autobody — Artists of Automotive Restoration</title>
+<meta name="description" content="Concours classic car restoration and paintwork by hand in Berwick, East Sussex. A working journal by Dave, Ellis and Paul.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..600&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..500&display=swap" rel="stylesheet">
+
+<style>
+/* ───────────────────────────────────────────────────────────────
+   DPM AUTOBODY — Direction C, "The Green Room"
+   Prototype. Deep olive ground, brass, bone; Newsreader + Inter.
+   Contrast measured, not eyeballed:
+     bone   #DFDDD6 on green  8.00:1
+     cream  #EFEAE3 on green  9.09:1
+     brass  #AC7E37 on green  3.00:1  → rules and marks only, never text
+     brassL #CFA55F on green  4.76:1  → all brass TEXT on the green ground
+     brassD #7E5A20 on cream  5.21:1  → all brass TEXT on the cream ground
+     ink    #2A3626 on cream 10.61:1
+     mute   #4E5549 on cream  6.45:1
+     mute   #C2BFB5 on green  5.91:1
+   ─────────────────────────────────────────────────────────────── */
+
+:root{
+  --green:#32412E;
+  --green-deep:#293522;
+  --cream:#EFEAE3;
+  --bone:#DFDDD6;
+  --bone-mute:#C2BFB5;
+  --brass:#AC7E37;      /* hairlines, rules, non-text marks */
+  --brass-light:#CFA55F;/* brass text on green */
+  --brass-deep:#7E5A20; /* brass text on cream */
+  --ink:#2A3626;
+  --ink-mute:#4E5549;
+  --oxblood:#180000;
+  --rule-cream:#D3CCC0;
+
+  --serif:"Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Type scale — six steps, no more */
+  --t-display:clamp(2.5rem, 8.4vw, 4.125rem); /* 40 → 66px */
+  --t-head:clamp(1.75rem, 3.4vw, 2.375rem);   /* 28 → 38px */
+  --t-sub:clamp(1.3125rem, 2.1vw, 1.625rem);  /* 21 → 26px */
+  --t-body:1.25rem;                           /* 20px */
+  --t-small:0.9375rem;                        /* 15px */
+  --t-micro:0.75rem;                          /* 12px */
+
+  --measure:25rem;   /* 400px — measured at 61 cpl mean, 74 max */
+  --gut:clamp(1.5rem, 5vw, 6rem);
+  --page:84rem;
+
+  --ease:cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--green);
+  color:var(--bone);
+  font-family:var(--serif);
+  font-size:var(--t-body);
+  line-height:1.66;
+  font-optical-sizing:auto;
+  font-variation-settings:"opsz" 20,"wght" 380;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:400}
+p{margin:0 0 1.25em}
+p:last-child{margin-bottom:0}
+
+/* Focus — brass, always visible, never removed */
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--brass-light);
+  outline-offset:4px;
+  border-radius:2px;
+}
+.on-cream a:focus-visible{outline-color:var(--brass-deep)}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:80;
+  background:var(--cream);color:var(--ink);
+  font-family:var(--sans);font-size:var(--t-small);
+  padding:.75rem 1.25rem;
+}
+.skip:focus{left:1rem;top:1rem}
+
+/* Film grain — fixed, pointer-events none, never on a scrolling box */
+.grain{
+  position:fixed;inset:0;z-index:60;pointer-events:none;
+  opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Shared type roles ─────────────────────────────────────── */
+.label{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:var(--brass-light);
+}
+.on-cream .label{color:var(--brass-deep)}
+
+.display{
+  font-family:var(--serif);
+  font-size:var(--t-display);
+  font-variation-settings:"opsz" 72,"wght" 250;
+  line-height:1.04;
+  letter-spacing:-0.005em;
+}
+.head{
+  font-family:var(--serif);
+  font-size:var(--t-head);
+  font-variation-settings:"opsz" 40,"wght" 300;
+  line-height:1.14;
+  letter-spacing:-0.004em;
+}
+.sub{
+  font-family:var(--serif);
+  font-size:var(--t-sub);
+  font-variation-settings:"opsz" 28,"wght" 380;
+  line-height:1.26;
+}
+.prose{max-width:var(--measure)}
+.prose p{font-variation-settings:"opsz" 20,"wght" 380}
+.small{
+  font-family:var(--sans);
+  font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380;
+  line-height:1.6;
+}
+
+.wrap{
+  width:100%;                /* flex-column children: margin-inline:auto
+                                collapses an item to max-content without this */
+  max-width:var(--page);
+  margin-inline:auto;
+  padding-inline:var(--gut);
+}
+
+/* ── Reveal: one type only, real stagger, few elements ─────── */
+[data-reveal]{
+  opacity:0;
+  transform:translate3d(0,22px,0);
+  transition:opacity 1s var(--ease), transform 1.1s var(--ease);
+  transition-delay:calc(var(--i, 0) * 110ms);
+  will-change:opacity, transform;
+}
+[data-reveal].is-in{opacity:1;transform:none;will-change:auto}
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none;transition-delay:0s}
+  html{scroll-behavior:auto}
+  .cue__stem{animation:none !important}
+}
+
+/* ── 1. The green field ────────────────────────────────────── */
+.field{
+  min-height:100lvh;              /* lvh, never svh */
+  display:flex;flex-direction:column;
+  padding-block:clamp(1.5rem,3.5vh,2.5rem) clamp(1.5rem,4vh,3rem);
+  position:relative;
+  background:
+    radial-gradient(120% 80% at 12% 0%, #3A4A34 0%, rgba(58,74,52,0) 62%),
+    var(--green);
+}
+.masthead{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.mark{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 600;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--brass-light);
+  text-decoration:none;
+}
+.masthead__meta{color:var(--bone-mute)}
+
+.field__body{
+  flex:1;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-block:clamp(3rem,9vh,6rem);
+}
+.field__rule{
+  width:clamp(3rem,7vw,5.5rem);
+  height:1px;background:var(--brass);
+  margin-bottom:clamp(1.75rem,4vh,2.75rem);
+}
+h1.display{max-width:8.6em;color:var(--cream)}
+.field__stand{
+  max-width:var(--measure);
+  margin-top:clamp(2rem,4.5vh,3rem);
+  color:var(--bone);
+  font-variation-settings:"opsz" 20,"wght" 340;
+}
+.field__names{
+  margin-top:1.75rem;
+  color:var(--bone-mute);
+}
+.field__names strong{
+  color:var(--brass-light);
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 500;
+  letter-spacing:.16em;text-transform:uppercase;
+}
+
+.field__foot{
+  display:flex;flex-wrap:wrap;gap:1.5rem 2rem;
+  align-items:flex-end;justify-content:space-between;
+}
+.field__contents{
+  margin:0;color:var(--bone-mute);text-align:right;
+  border-top:1px solid var(--brass);padding-top:.85rem;
+}
+@media (max-width:719px){
+  .field__contents{text-align:left}
+}
+.cue{
+  display:flex;align-items:center;gap:.9rem;
+  color:var(--bone-mute);text-decoration:none;
+  width:max-content;
+}
+.cue:hover .cue__stem{transform:scaleY(1.35)}
+.cue__stem{
+  display:block;width:1px;height:42px;background:var(--brass);
+  transform-origin:top;
+  transition:transform .7s var(--ease);
+  animation:breathe 5.5s var(--ease) infinite;
+}
+@keyframes breathe{0%,100%{transform:scaleY(.6)}50%{transform:scaleY(1)}}
+
+/* ── Floating index (fixed; centred with left/right, NOT transform) ── */
+.index{
+  position:fixed;z-index:50;
+  left:0;right:0;margin-inline:auto;width:max-content;max-width:calc(100% - 1.5rem);
+  bottom:1.25rem;                 /* thumb reach on phones */
+  display:flex;gap:clamp(.5rem,2vw,1.5rem);align-items:center;
+  padding:.6rem clamp(.75rem,2vw,1.25rem);
+  border-radius:999px;
+  background:rgba(29,38,25,.82);
+  border:1px solid rgba(172,126,55,.34);
+  box-shadow:inset 0 1px 0 rgba(223,221,214,.08);
+  backdrop-filter:blur(14px) saturate(1.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  opacity:0;visibility:hidden;
+  transform:translate3d(0,14px,0);
+  transition:opacity .6s var(--ease), transform .6s var(--ease), visibility 0s linear .6s;
+}
+.index.is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+@media (min-width:720px){                 /* detached pill, off the top edge */
+  .index{bottom:auto;top:1.25rem;transform:translate3d(0,-14px,0)}
+  .index.is-on{transform:none}
+}
+.index a{
+  font-family:var(--sans);font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bone);text-decoration:none;
+  padding:.5rem .35rem;min-height:44px;display:flex;align-items:center;
+  transition:color .35s var(--ease);
+}
+.index a:hover{color:var(--brass-light)}
+@media (max-width:430px){
+  .index a{font-size:.6875rem;letter-spacing:.1em;padding-inline:.2rem}
+}
+@media (prefers-reduced-motion: reduce){.index{transition:none}}
+
+/* ── Section shells ────────────────────────────────────────── */
+.on-cream{background:var(--cream);color:var(--ink)}
+.on-cream .head,.on-cream .display{color:var(--ink)}
+.on-green{background:var(--green)}
+section{scroll-margin-top:5.5rem}
+.band{padding-block:clamp(4.5rem,11vh,8.5rem)}
+.band--tight{padding-block:clamp(3.5rem,8vh,6rem)}
+
+.section-head{
+  display:grid;gap:1.25rem;
+  padding-bottom:clamp(2.5rem,6vh,4rem);
+  border-bottom:1px solid var(--rule-cream);
+  margin-bottom:clamp(2.5rem,6vh,4rem);
+}
+.on-green .section-head{border-bottom:0;padding-bottom:0}
+.section-head__note{
+  max-width:var(--measure);color:var(--ink-mute);
+  font-variation-settings:"opsz" 20,"wght" 380;
+}
+.on-green .section-head__note{color:var(--bone-mute)}
+@media (min-width:900px){
+  .section-head{
+    grid-template-columns:minmax(0,1fr) minmax(0,28rem);
+    align-items:end;gap:3rem;
+  }
+  .section-head__title{grid-column:1}
+}
+
+/* ── 2. The journal ────────────────────────────────────────── */
+.entry{
+  padding-block:clamp(3rem,7vh,5rem);
+  border-top:1px solid var(--rule-cream);
+}
+.entry:first-of-type{border-top:0;padding-top:0}
+.entry__meta{
+  display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:baseline;
+  margin-bottom:1.5rem;
+}
+.entry__meta .sep{color:var(--rule-cream)}
+@media (max-width:719px){.entry__meta .sep{display:none}}
+.entry__date{color:var(--ink-mute);font-family:var(--sans);font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 400;letter-spacing:.1em;text-transform:uppercase}
+.entry h3{
+  font-size:var(--t-sub);
+  font-variation-settings:"opsz" 28,"wght" 330;
+  line-height:1.2;max-width:24ch;
+  color:var(--oxblood);
+}
+.entry__byline{
+  margin-top:1.5rem;display:flex;align-items:center;gap:.85rem;
+  color:var(--ink-mute);
+}
+.entry__initial{
+  width:2.25rem;height:2.25rem;flex:none;
+  border:1px solid var(--brass);border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--serif);font-size:.9375rem;
+  font-variation-settings:"opsz" 14,"wght" 400;
+  color:var(--brass-deep);
+}
+.entry__byline b{
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 500;color:var(--ink)}
+.entry__byline span{font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380}
+.entry__body{margin-top:2rem}
+
+.plate{margin:0}
+.plate img{width:100%;background:#20281D}
+.plate figcaption{
+  margin-top:.9rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:baseline;
+  color:var(--ink-mute);
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380;
+  max-width:38rem;
+}
+.on-green .plate figcaption{color:var(--bone-mute)}
+.tag{
+  font-family:var(--sans);font-size:.6875rem;
+  font-variation-settings:"opsz" 14,"wght" 500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brass-deep);
+  border:1px solid rgba(126,90,32,.4);
+  border-radius:999px;padding:.15rem .5rem;white-space:nowrap;
+}
+.on-green .tag{color:var(--brass-light);border-color:rgba(207,165,95,.4)}
+
+@media (min-width:900px){
+  .entry__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,9fr);gap:clamp(2rem,4vw,4.5rem);align-items:start}
+  .entry--flip .entry__grid{grid-template-columns:minmax(0,9fr) minmax(0,7fr)}
+  .entry--flip .entry__text{order:2}
+  .entry--flip .plate{order:1}
+  .entry__body{margin-top:2rem}
+  .entry--wide .entry__grid{grid-template-columns:minmax(0,1fr);gap:clamp(2rem,4vw,3rem)}
+  .entry--wide .plate{margin-top:0}
+}
+.plate{margin-top:2.25rem}
+@media (min-width:900px){.plate{margin-top:.4rem}}
+
+/* ── 3. The stage set ──────────────────────────────────────── */
+.stages{list-style:none;margin:0;padding:0;max-width:62rem}
+.stage{
+  display:grid;gap:.35rem 1.75rem;
+  padding-block:1.5rem;
+  border-top:1px solid rgba(172,126,55,.26);
+  align-items:baseline;
+}
+.stage:last-child{border-bottom:1px solid rgba(172,126,55,.26)}
+.stage__n{
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 400;
+  color:var(--brass-light);letter-spacing:.08em;
+}
+.stage__name{
+  font-family:var(--serif);font-size:var(--t-sub);
+  font-variation-settings:"opsz" 28,"wght" 320;
+  line-height:1.2;color:var(--cream);
+}
+.stage__note{color:var(--bone-mute);max-width:26rem}
+.stage__time{
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380;
+  color:var(--bone-mute);white-space:nowrap;text-align:right;
+}
+@media (min-width:760px){
+  .stage{grid-template-columns:3.5rem minmax(0,15rem) minmax(0,1fr) auto}
+  .stage__n{grid-row:span 1}
+}
+
+/* ── 4. Materials index ────────────────────────────────────── */
+.materials{
+  list-style:none;margin:0;padding:0;
+  display:grid;gap:clamp(1.5rem,3vw,2.5rem);
+  grid-template-columns:minmax(0,1fr);
+}
+@media (min-width:560px){.materials{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.materials{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.swatch{
+  display:block;                 /* inline span ignores width:100% */
+  width:100%;height:clamp(4.5rem,9vw,7.5rem);
+  border:1px solid rgba(42,54,38,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+  margin-bottom:.85rem;
+}
+.material h3{
+  font-family:var(--serif);font-size:1.0625rem;
+  font-variation-settings:"opsz" 16,"wght" 460;
+  line-height:1.3;color:var(--oxblood);
+}
+.material p{
+  margin:.4rem 0 0;
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380;
+  color:var(--ink-mute);line-height:1.55;
+}
+
+/* ── 5. Tool portrait ──────────────────────────────────────── */
+.tool__plate img{width:100%}
+@media (min-width:960px){
+  .tool{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,8fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+  .tool__text{padding-block:1rem}
+}
+.tool__text .prose{margin-top:1.75rem;color:var(--bone)}
+.tool__text .prose p{font-variation-settings:"opsz" 20,"wght" 360}
+
+/* ── 6. Contact ────────────────────────────────────────────── */
+.contact__grid{display:grid;gap:clamp(2.5rem,5vw,4rem)}
+@media (min-width:860px){.contact__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
+.lines a{
+  font-family:var(--serif);font-size:var(--t-sub);
+  font-variation-settings:"opsz" 28,"wght" 330;
+  color:var(--cream);text-decoration:none;
+  border-bottom:1px solid rgba(172,126,55,.5);
+  padding-bottom:.15rem;
+  display:inline-block;min-height:44px;
+  transition:border-color .4s var(--ease), color .4s var(--ease);
+}
+.lines a:hover{color:var(--brass-light);border-bottom-color:var(--brass-light)}
+.people{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:1rem}
+.people li{display:flex;gap:1rem;align-items:baseline;color:var(--bone-mute)}
+.people b{
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 500;
+  color:var(--brass-light);letter-spacing:.06em;
+  min-width:4.5rem;flex:none;
+}
+
+/* ── Footer + the honesty label ────────────────────────────── */
+.foot{
+  background:var(--green-deep);
+  padding-block:clamp(3rem,7vh,4.5rem) calc(clamp(3rem,7vh,4.5rem) + 4.5rem);
+  border-top:1px solid rgba(172,126,55,.3);
+}
+.disclosure{
+  border:1px solid rgba(172,126,55,.45);
+  padding:clamp(1.25rem,3vw,1.75rem);
+  max-width:36rem;
+  display:grid;gap:.75rem;
+}
+.disclosure strong{font-variation-settings:"opsz" 15,"wght" 620}
+.disclosure p{
+  margin:0;max-width:28rem;color:var(--bone);
+  font-family:var(--sans);font-size:var(--t-small);
+  font-variation-settings:"opsz" 15,"wght" 380;
+  line-height:1.6;
+}
+.foot__base{
+  margin-top:clamp(2rem,5vh,3rem);
+  display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;
+  color:var(--bone-mute);
+  font-family:var(--sans);font-size:var(--t-micro);
+  font-variation-settings:"opsz" 14,"wght" 380;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="index" id="index" aria-label="Sections">
+  <a href="#journal">Journal</a>
+  <a href="#stages">Stages</a>
+  <a href="#materials">Materials</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ═══ 1. THE GREEN FIELD — type only, no photograph ═══ -->
+<header class="field">
+  <div class="wrap masthead">
+    <a class="mark" href="#main">DPM Autobody</a>
+    <p class="small masthead__meta" style="margin:0">Berwick, East Sussex</p>
+  </div>
+
+  <div class="wrap field__body" id="main">
+    <div class="field__rule" data-reveal style="--i:0"></div>
+    <h1 class="display" data-reveal style="--i:1">Artists of Automotive Restoration</h1>
+    <p class="field__stand" data-reveal style="--i:2">
+      Concours restoration and paintwork, by hand. Everything a car needs is
+      done inside this building except the engine and the trim — and the
+      paint is done here for other people's cars too.
+    </p>
+    <p class="field__names small" data-reveal style="--i:3">
+      <strong>The bench</strong>&nbsp;&nbsp;Dave &middot; Ellis &middot; Paul
+    </p>
+  </div>
+
+  <div class="wrap field__foot">
+    <a class="cue small" href="#journal" data-reveal style="--i:4">
+      <span class="cue__stem" aria-hidden="true"></span>
+      <span>The journal &mdash; what we did this month</span>
+    </a>
+    <p class="small field__contents" data-reveal style="--i:5">
+      Four entries &middot; Nine stages &middot; Twelve materials &middot; One tool
+    </p>
+  </div>
+</header>
+
+<!-- ═══ 2. THE JOURNAL ═══ -->
+<main>
+<section class="on-cream band" id="journal" aria-labelledby="journal-h">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div class="section-head__title">
+        <p class="label" data-reveal>The journal</p>
+        <h2 class="head" id="journal-h" data-reveal style="--i:1; margin-top:1rem">
+          Written by the man who did it
+        </h2>
+      </div>
+      <p class="section-head__note" data-reveal style="--i:2">
+        Every entry here is signed. Nobody writes about a job they did not
+        stand in front of. It runs behind real life, so some months are thin.
+      </p>
+    </div>
+
+    <!-- Entry 01 -->
+    <article class="entry" data-reveal>
+      <div class="entry__grid">
+        <div class="entry__text">
+          <div class="entry__meta">
+            <span class="entry__date">21 August 2026</span>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="entry__date">Stage 09 &mdash; Out in the daylight</span>
+          </div>
+          <h3>She went home on Tuesday, in the rain</h3>
+          <div class="entry__byline">
+            <span class="entry__initial" aria-hidden="true">D</span>
+            <span><b>Dave</b> <span>&mdash; paint and finish</span></span>
+          </div>
+          <div class="entry__body prose">
+            <p>
+              The Sprite went back to Kent on Tuesday morning, on the back of a
+              trailer, in the rain. Nine months and two weeks with us. I would
+              have liked it to leave in the sun, but you take the day you get.
+            </p>
+            <p>
+              I walked round it twice before it went up the ramps. That is not
+              for the owner's benefit, it is for mine — once it has gone I
+              cannot do anything about what I have missed. There is a spot low
+              on the nearside rear quarter, behind the wheel, where the
+              reflection breaks about a millimetre earlier than it does on the
+              other side. Nobody will ever see it. I will know it is there for
+              years.
+            </p>
+            <p>
+              He rang on Thursday to say he had had it out on the lanes above
+              Alfriston. That is the part of the job that pays for the rest of
+              it.
+            </p>
+          </div>
+        </div>
+
+        <figure class="plate">
+          <img src="assets/art-direction/web/d-daylight-road-08.jpg"
+               width="2400" height="1021" loading="lazy" decoding="async"
+               alt="A red 1960s British roadster with a brown hood, parked on a narrow chalk lane between bare hedges, low winter sun across the paintwork and downland behind.">
+          <figcaption>
+            <span class="tag">AI art direction</span>
+            <span>The light we want, and the road we want it on. Not a photograph of a DPM car.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- Entry 02 -->
+    <article class="entry entry--flip" data-reveal>
+      <div class="entry__grid">
+        <div class="entry__text">
+          <div class="entry__meta">
+            <span class="entry__date">7 August 2026</span>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="entry__date">Stage 08 &mdash; Clear, cut and polish</span>
+          </div>
+          <h3>The last two thousandths of an inch</h3>
+          <div class="entry__byline">
+            <span class="entry__initial" aria-hidden="true">P</span>
+            <span><b>Paul</b> <span>&mdash; colour, mixing, polish</span></span>
+          </div>
+          <div class="entry__body prose">
+            <p>
+              Cutting back is the stage everybody thinks is polishing. It is
+              not. Polishing is what you do at the end to a surface that is
+              already flat. Cutting is taking the top off the clear until it
+              is flat, and there is not very much of it to take.
+            </p>
+            <p>
+              Four coats of clear went on this one. I will take maybe two
+              thousandths of an inch back off with a 1500 and then a 3000, and
+              that still leaves plenty. Take too much and you are through to
+              the base, the panel goes back in the booth, and you have cost
+              everybody a fortnight. So you go slowly and you keep the pad
+              moving.
+            </p>
+            <p>
+              The machine does the work. The skill is knowing when to stop, and
+              the honest answer is that you feel it through the pad before you
+              see it in the panel.
+            </p>
+          </div>
+        </div>
+
+        <figure class="plate">
+          <img src="assets/art-direction/web/c-hands-polish-14.jpg"
+               width="2400" height="1600" loading="lazy" decoding="async"
+               alt="Gloved hands working a dual-action machine polisher across the wet black lacquer of a car's rear wing, the reflection of the workshop bending along the panel.">
+          <figcaption>
+            <span class="tag">AI art direction</span>
+            <span>Hands, not faces. The panel, not the room.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- Entry 03 — the difficulty beat -->
+    <article class="entry" data-reveal>
+      <div class="entry__grid">
+        <div class="entry__text">
+          <div class="entry__meta">
+            <span class="entry__date">19 July 2026</span>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="entry__date">Stage 06 &mdash; Primer, and the guide coat</span>
+          </div>
+          <h3>The guide coat found what my eye did not</h3>
+          <div class="entry__byline">
+            <span class="entry__initial" aria-hidden="true">E</span>
+            <span><b>Ellis</b> <span>&mdash; metalwork and prep</span></span>
+          </div>
+          <div class="entry__body prose">
+            <p>
+              A guide coat is a mist of black over grey primer. You flat it
+              back with a block and wherever the black stays, the panel is low.
+              It is the cheapest tool in the shop and it is the only one that
+              has never once flattered me.
+            </p>
+            <p>
+              The offside front wing came up clean, then held a black line
+              about six inches long running with the crown of the arch. I went
+              again with a finer grade and it was still there. So it was not
+              the primer. It was the metal underneath.
+            </p>
+            <p>
+              What was under it was a repair somebody had done properly —
+              properly for 1974 — in lead, and a fair amount of it, and the
+              lead had moved. That is three weeks we had not planned for. Back
+              to bare metal, the lead out, a small let-in piece welded and
+              planished, and then the primer started again from the beginning.
+            </p>
+            <p>
+              I would rather find it there than watch it come up in the clear
+              coat six weeks later. I am not going to pretend it was a good
+              Tuesday.
+            </p>
+          </div>
+        </div>
+
+        <figure class="plate">
+          <img src="assets/art-direction/web/c-hands-flatting-11.jpg"
+               width="2400" height="1600" loading="lazy" decoding="async"
+               alt="Two blue-gloved hands wet-flatting a grey primered wing with rubber blocks, water and slurry running off the panel in the dark of the workshop.">
+          <figcaption>
+            <span class="tag">AI art direction</span>
+            <span>Wet flatting, both blocks working. Synthetic image, not DPM's work.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- Entry 04 — second difficulty beat -->
+    <article class="entry entry--flip" data-reveal>
+      <div class="entry__grid">
+        <div class="entry__text">
+          <div class="entry__meta">
+            <span class="entry__date">28 June 2026</span>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="entry__date">Stage 07 &mdash; Colour, decided in daylight</span>
+          </div>
+          <h3>Two greens, and neither of them was hers</h3>
+          <div class="entry__byline">
+            <span class="entry__initial" aria-hidden="true">P</span>
+            <span><b>Paul</b> <span>&mdash; colour, mixing, polish</span></span>
+          </div>
+          <div class="entry__body prose">
+            <p>
+              The plate on the bulkhead said one green. The car, wherever we
+              could still find original paint on it, was a different one. Both
+              are correct for the year, which is no help at all.
+            </p>
+            <p>
+              We sprayed out cards of each and held them against the bare wing
+              in the doorway, because the light in the booth will lie to you
+              and daylight will not. Under the booth lamps the factory code
+              read almost blue. Outside it was fine. That difference is the
+              whole reason this bit gets done standing in the yard with the
+              door open.
+            </p>
+            <p>
+              In the end we used neither. There was a strip of untouched
+              original under the boot seal, about the width of a finger, and we
+              matched to that. It is a shade warmer than the code. It is what
+              left the factory on this car, which turns out to be a different
+              question from what left the factory that year.
+            </p>
+          </div>
+        </div>
+
+        <figure class="plate">
+          <img src="assets/art-direction/web/c-hands-colour-12.jpg"
+               width="2400" height="1600" loading="lazy" decoding="async"
+               alt="A hand fanning a set of sprayed metal colour chips against the bare hand-formed aluminium wing of a car, held in the daylight of an open workshop door.">
+          <figcaption>
+            <span class="tag">AI art direction</span>
+            <span>Cards against bare metal, in the doorway. Synthetic image.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ 3. THE STAGE SET ═══ -->
+<section class="on-green band" id="stages" aria-labelledby="stages-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__title">
+        <p class="label" data-reveal>The nine stages</p>
+        <h2 class="head" id="stages-h" data-reveal style="--i:1; margin-top:1rem; color:var(--cream)">
+          What a car goes through here
+        </h2>
+      </div>
+      <p class="section-head__note" data-reveal style="--i:2">
+        These are our names for them, not the trade's. The shortest car we have
+        finished took seven months. The one in the far bay has been here
+        thirty-one months and is not finished yet.
+      </p>
+    </div>
+
+    <ol class="stages">
+      <li class="stage" data-reveal style="--i:0">
+        <span class="stage__n">01</span>
+        <span class="stage__name">In, and photographed as she came</span>
+        <span class="stage__note small">Every panel, every gap, every bit of rot, before a spanner touches it.</span>
+        <span class="stage__time">1 day</span>
+      </li>
+      <li class="stage" data-reveal style="--i:1">
+        <span class="stage__n">02</span>
+        <span class="stage__name">Off it comes</span>
+        <span class="stage__note small">Strip to a shell. Bagged, labelled, shelved. Nothing goes in a box unmarked.</span>
+        <span class="stage__time">1&ndash;2 weeks</span>
+      </li>
+      <li class="stage" data-reveal style="--i:2">
+        <span class="stage__n">03</span>
+        <span class="stage__name">Down to what is really there</span>
+        <span class="stage__note small">Media blast or chemical strip, then the conversation nobody enjoys.</span>
+        <span class="stage__time">2&ndash;3 weeks</span>
+      </li>
+      <li class="stage" data-reveal style="--i:3">
+        <span class="stage__n">04</span>
+        <span class="stage__name">Metal first</span>
+        <span class="stage__note small">Panels made, let in, welded, planished. This is where the time goes.</span>
+        <span class="stage__time">3 weeks &ndash; 5 months</span>
+      </li>
+      <li class="stage" data-reveal style="--i:4">
+        <span class="stage__n">05</span>
+        <span class="stage__name">Straight before shiny</span>
+        <span class="stage__note small">Block work over bare metal. If it needs filler to look right, it is not right.</span>
+        <span class="stage__time">3&ndash;6 weeks</span>
+      </li>
+      <li class="stage" data-reveal style="--i:5">
+        <span class="stage__n">06</span>
+        <span class="stage__name">Primer, and the guide coat</span>
+        <span class="stage__note small">Etch, epoxy, high-build. Then black mist and a long block, twice.</span>
+        <span class="stage__time">2&ndash;4 weeks</span>
+      </li>
+      <li class="stage" data-reveal style="--i:6">
+        <span class="stage__n">07</span>
+        <span class="stage__name">Colour, decided in daylight</span>
+        <span class="stage__note small">Spray-out cards judged outside the booth, against the car's own metal.</span>
+        <span class="stage__time">2 days</span>
+      </li>
+      <li class="stage" data-reveal style="--i:7">
+        <span class="stage__n">08</span>
+        <span class="stage__name">Clear, cut and polish</span>
+        <span class="stage__note small">Four coats, a week to harden, then back to flat by hand and machine.</span>
+        <span class="stage__time">2&ndash;3 weeks</span>
+      </li>
+      <li class="stage" data-reveal style="--i:8">
+        <span class="stage__n">09</span>
+        <span class="stage__name">Out in the daylight</span>
+        <span class="stage__note small">Built back up, gaps set, then pushed outside and walked round twice.</span>
+        <span class="stage__time">2&ndash;4 weeks</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ 4. MATERIALS INDEX ═══ -->
+<section class="on-cream band" id="materials" aria-labelledby="materials-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__title">
+        <p class="label" data-reveal>Materials index</p>
+        <h2 class="head" id="materials-h" data-reveal style="--i:1; margin-top:1rem">
+          What goes on, in the order it goes on
+        </h2>
+      </div>
+      <p class="section-head__note" data-reveal style="--i:2">
+        Swatches are indicative, mixed for this page rather than sprayed out.
+        Period colour names are the manufacturers' own.
+      </p>
+    </div>
+
+    <ul class="materials">
+      <li class="material" data-reveal style="--i:0">
+        <span class="swatch" style="background:#6E7A63" aria-hidden="true"></span>
+        <h3>Etch primer</h3>
+        <p>Goes straight onto clean bare steel. Thin, and it bites.</p>
+      </li>
+      <li class="material" data-reveal style="--i:1">
+        <span class="swatch" style="background:#8C8F8A" aria-hidden="true"></span>
+        <h3>Two-pack epoxy primer</h3>
+        <p>The barrier coat. Everything above it depends on this one being right.</p>
+      </li>
+      <li class="material" data-reveal style="--i:2">
+        <span class="swatch" style="background:#B9B4A8" aria-hidden="true"></span>
+        <h3>High-build primer</h3>
+        <p>Sprayed to be taken off again. What is left is a flat panel.</p>
+      </li>
+      <li class="material" data-reveal style="--i:3">
+        <span class="swatch" style="background:#1B1B19" aria-hidden="true"></span>
+        <h3>Guide coat, black</h3>
+        <p>A mist you cut through. The stage-06 entry is about this.</p>
+      </li>
+      <li class="material" data-reveal style="--i:4">
+        <span class="swatch" style="background:#9A9EA1" aria-hidden="true"></span>
+        <h3>Lead loading</h3>
+        <p>Tinman's solder, wiped with a wooden paddle and tallow. Period-correct.</p>
+      </li>
+      <li class="material" data-reveal style="--i:5">
+        <span class="swatch" style="background:#EDE7D8" aria-hidden="true"></span>
+        <h3>Old English White</h3>
+        <p>Warmer than anybody expects it to be, and wrong in a modern white.</p>
+      </li>
+      <li class="material" data-reveal style="--i:6">
+        <span class="swatch" style="background:#7C8B6A" aria-hidden="true"></span>
+        <h3>Almond Green</h3>
+        <p>Reads grey in the booth and green in the yard. Judge it outside.</p>
+      </li>
+      <li class="material" data-reveal style="--i:7">
+        <span class="swatch" style="background:#14351F" aria-hidden="true"></span>
+        <h3>British Racing Green</h3>
+        <p>Not one colour. There are a dozen and the owner always has a view.</p>
+      </li>
+      <li class="material" data-reveal style="--i:8">
+        <span class="swatch" style="background:#A8B6C4" aria-hidden="true"></span>
+        <h3>Opalescent Silver Blue</h3>
+        <p>Early metallic. Blotches if the gun is wrong, so the gun is not wrong.</p>
+      </li>
+      <li class="material" data-reveal style="--i:9">
+        <span class="swatch" style="background:#A81F17" aria-hidden="true"></span>
+        <h3>Signal Red</h3>
+        <p>The hardest colour in the shop to lay flat and the fastest to fade.</p>
+      </li>
+      <li class="material" data-reveal style="--i:10">
+        <span class="swatch" style="background:#E4E0D6" aria-hidden="true"></span>
+        <h3>Two-pack clear</h3>
+        <p>Colourless out of the gun. Everything you read as depth is this.</p>
+      </li>
+      <li class="material" data-reveal style="--i:11">
+        <span class="swatch" style="background:#C6BFAE" aria-hidden="true"></span>
+        <h3>Compound and finishing polish</h3>
+        <p>Coarse then fine then nothing. Stopping is the skilled part.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ 5. TOOL PORTRAIT ═══ -->
+<section class="on-green band" id="tool" aria-labelledby="tool-h">
+  <div class="wrap tool">
+    <figure class="plate tool__plate" data-reveal style="margin-top:0">
+      <img src="assets/art-direction/web/c-tool-gun-13.jpg"
+           width="2400" height="1796" loading="lazy" decoding="async"
+           alt="An old suction-feed spray gun with a brass air cap ring, spattered with blue and orange paint, standing on a paint-marked wooden bench beside brushes and a glass jar of thinners.">
+      <figcaption>
+        <span class="tag">AI art direction</span>
+        <span>A tool portrait in the register we would commission. Synthetic image.</span>
+      </figcaption>
+    </figure>
+
+    <div class="tool__text">
+      <p class="label" data-reveal>Tool portrait &mdash; number one</p>
+      <h2 class="head" id="tool-h" data-reveal style="--i:1; margin-top:1rem; color:var(--cream)">
+        The gun I keep for the small stuff
+      </h2>
+      <div class="prose" data-reveal style="--i:2">
+        <p>
+          Suction feed, older than anybody in the building, and the brass ring
+          on the air cap is polished because of hands rather than because
+          anybody polished it. It came out of a shop in Eastbourne that shut in
+          the eighties.
+        </p>
+        <p>
+          We have newer guns. They atomise better and they waste far less
+          material. This one gets used on the small work — a filler surround,
+          the inside of a door shut, anywhere the pattern needs to be tight and
+          I want to feel the trigger rather than trust it.
+        </p>
+        <p>
+          You can hear when it is right. There is a note the air makes when the
+          fluid and the fan are balanced, and when it is wrong it spits and
+          tells you before the panel does.
+        </p>
+        <p>
+          It gets stripped and the passages cleaned every time it is used,
+          which is about the only thing in this workshop that has never once
+          been left until the morning.
+        </p>
+      </div>
+      <p class="small" data-reveal style="--i:3; margin-top:1.75rem; color:var(--bone-mute)">
+        &mdash; Dave
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. CONTACT ═══ -->
+<section class="on-green band band--tight" id="contact" aria-labelledby="contact-h"
+         style="border-top:1px solid rgba(172,126,55,.28)">
+  <div class="wrap contact__grid">
+    <div>
+      <p class="label" data-reveal>Bring us a car</p>
+      <h2 class="head" id="contact-h" data-reveal style="--i:1; margin-top:1rem; color:var(--cream)">
+        We take four or five cars a year
+      </h2>
+      <p class="prose small" data-reveal style="--i:2; margin-top:1.5rem; color:var(--bone-mute)">
+        Ring and ask for whoever is nearest the phone. If it is a paint-only
+        job for another restorer, say so at the start — we do a fair amount of
+        that and it books differently.
+      </p>
+      <ul class="people" data-reveal style="--i:3">
+        <li><b>Dave</b> <span>Paint and finish</span></li>
+        <li><b>Ellis</b> <span>Metalwork and prep</span></li>
+        <li><b>Paul</b> <span>Colour, mixing, polish</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="lines" data-reveal style="--i:2">
+        <li><a href="tel:+441323552827">01323 552827</a></li>
+        <li><a href="mailto:info@dpmautobody.co.uk">info@dpmautobody.co.uk</a></li>
+      </ul>
+      <p class="small" data-reveal style="--i:3; margin-top:2rem; color:var(--bone-mute)">
+        DPM Autobody<br>
+        Berwick, East Sussex<br>
+        Director: David Pearce-Martin
+      </p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══ FOOTER — the honesty label ═══ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="disclosure">
+      <p class="label" style="color:var(--brass-light)">Please read &mdash; about the photography</p>
+      <p>
+        <strong>Every photograph on this page is AI-generated art direction. None of
+        it shows DPM Autobody's cars, DPM Autobody's workshop, or DPM Autobody's
+        work.</strong> The images exist to show the light, the crop and the register we
+        would commission from a photographer, and they would be replaced
+        one-for-one by a real shoot before anything like this went live.
+      </p>
+      <p>
+        The journal entries, stage names, durations and materials on this page
+        are placeholder copy written for the prototype, not statements by DPM.
+      </p>
+    </div>
+
+    <div class="foot__base">
+      <span>DPM Autobody &mdash; prototype, Direction C &ldquo;The Green Room&rdquo;</span>
+      <span>Not a live website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('[data-reveal]');
+
+  /* The green field is above the fold in its entirety: reveal it on load,
+     or its last elements sit outside the observer root and never appear. */
+  var hero = document.querySelectorAll('.field [data-reveal]');
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      hero.forEach(function (el) { el.classList.add('is-in'); });
+    });
+  });
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    items.forEach(function (el) { if (!el.closest('.field')) io.observe(el); });
+  }
+
+  /* Floating index appears once the green field is behind you.
+     Nothing on this page is position:sticky, so native anchor
+     scrolling works from any scroll position. */
+  var field = document.querySelector('.field');
+  var index = document.getElementById('index');
+  if (field && index) {
+    new IntersectionObserver(function (entries) {
+      index.classList.toggle('is-on', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(field);
+  }
+})();
+</script>
+</body>
+</html>

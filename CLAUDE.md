@@ -277,7 +277,10 @@ URLs; the prototypes then deploy to Vercel so they are reviewable from a URL rat
 `file://` path. Two commands, in order — `tools/upload-prototype-assets.ts` then
 `tools/publish-prototype.ts`. `output/.gitignore`'s `!sessions/**` line had been overriding the
 root `.gitignore`'s image rules, which let 117MB of unreferenced PNGs become stageable in August
-2026; an explicit binary deny-list now sits below it. See
+2026; an explicit binary deny-list now sits below it. A later rule ignores
+`sessions/**/screenshots/` outright rather than just its binaries — a capture dump also contains a
+machine-generated `report.json` describing screenshots nobody else can see, so the whole directory
+goes and the conclusions live in the teardown markdown instead. See
 [docs/guides/prototype-hosting.md](docs/guides/prototype-hosting.md).
 
 See [output/README.md](output/README.md) for details.
