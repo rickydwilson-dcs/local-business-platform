@@ -1,0 +1,1841 @@
+<!doctype html>
+<html lang="en-GB" data-build="annotated">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPM Autobody — homepage (working copy, with notes)</title>
+<meta name="description" content="Concours restoration and paintwork on classic and performance cars. Berwick, East Sussex.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<style>
+/* ============================================================================
+   DPM Autobody — Direction D, "The Register".
+   Shared stylesheet for the homepage and the P1800 project page.
+
+   THE DEVICE. One photographic plate, graded LIT, with two ground-coloured
+   veils sliding apart on transform only. What ignites inside the gap is the
+   photograph's own reflection — never a white shape painted over the top.
+   The veil is deliberately NOT opaque (0.74): the panel stays legible when
+   unlit, so the effect reads as a sweep of light over a visible car rather
+   than a reveal out of black. That was the client's first note.
+
+   TIMING. The band travels the full width in exactly one viewport of scroll
+   (.track__room: 100lvh against a 100lvh sticky stage), and it starts already
+   biting the left edge, so the first 200px of scroll visibly moves it.
+
+   ACCENT. Scroll position alone re-skins the page from the car you are in.
+   No hover, no click, nothing to discover, nothing to latch. (The previous
+   build's paint-index chips applied on pointerenter and reverted on
+   pointerleave, so clicking one appeared to do nothing at all. Deleted.)
+
+   Contrast, measured not eyeballed, against ground #0B0B0C:
+     bone      #E8E4DC  15.52:1
+     bone-dim  #A8A399   7.84:1
+     house ink #D8CBAE  12.25:1
+     candy ink #E4776C   6.70:1
+     green ink #4E9E72   6.05:1
+     blue ink  #8FB4D9   9.09:1
+   Worst case is candy ink on the raised panel #1A1A1D at 5.92:1. All AA.
+
+   No tabular-nums and no monospaced face appears anywhere on either page.
+   They carry "1,300 hours", "2,000 photographs" and "57,000 views", and a
+   tabular or mono figure renders those as "1 , 300".
+   ========================================================================= */
+
+@property --accent     { syntax: '<color>'; inherits: true; initial-value: #A61C24; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #E4776C; }
+
+:root {
+  /* Ground */
+  --ground:  #0B0B0C;
+  --surface: #141416;
+  --panel:   #1A1A1D;
+  --bone:    #E8E4DC;
+  --bone-dim:#A8A399;
+  --hair:    rgba(232,228,220,0.14);
+  --hair-2:  rgba(232,228,220,0.07);
+
+  /* The car owns the page from the first pixel */
+  --accent:     #A61C24;
+  --accent-ink: #E4776C;
+
+  /* House accent, for the parts that belong to no car */
+  --house:     #C7BBA1;
+  --house-ink: #D8CBAE;
+
+  /* The veil that shades — not hides — the unlit paint */
+  --veil: rgba(11,11,12,0.74);
+  --falloff: clamp(180px, 30%, 460px);
+
+  /* Highlight geometry, written by rAF */
+  --bl: -200vw;
+  --br:  200vw;
+  --bc:  50%;
+
+  /* Typeface, in one place.
+     The heading face is under review — see ../type-study.html, which drives
+     these two variables and nothing else, so a decision there is a two-line
+     change here. */
+  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-text:    'Newsreader', ui-serif, Georgia, serif;
+
+  --page: min(1360px, 100% - 3rem);
+  --ease: cubic-bezier(0.22, 0.68, 0.16, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --fs-body: clamp(1.0625rem, 0.44vw + 0.98rem, 1.25rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Explicit, and load-bearing: every comma'd figure on this page inherits
+     from here. Never tabular, never mono. */
+  font-variant-numeric: normal;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 0; }
+
+::selection { background: var(--accent-ink); color: #0B0B0C; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- Type ---------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.034em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* The height term only bites on a viewport that is wide AND short — a 13"
+   laptop with the browser not maximised, where three lines at 7.6vw plus the
+   lede plus the foot's reserved band do not fit and the lede ran under the
+   foot. At 1440x900 and above, 7.6vw still wins and nothing changes. */
+.h-hero  { font-size: clamp(2.75rem, min(7.6vw, 12vh), 6.75rem); }
+.h-major { font-size: clamp(2rem, 4.6vw, 4rem); }
+.h-lot   { font-size: clamp(1.75rem, 3.4vw, 3.125rem); }
+.h-sub   { font-size: clamp(1.375rem, 2.1vw, 1.9375rem); line-height: 1.08; }
+
+.prose {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.62;
+  color: #CFCAC1;
+  max-width: 22.6em;
+  margin: 0 0 1.15em;
+  font-variant-numeric: normal;
+}
+.prose:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; color: var(--bone); }
+.prose em { font-style: italic; color: var(--bone); }
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0;
+}
+.label--accent { color: var(--accent-ink); }
+
+.lede {
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.875rem);
+  line-height: 1.45;
+  color: #D6D1C8;
+  max-width: 23em;
+  margin: 0;
+}
+
+/* Any figure with a thousands comma lives in here. Proportional, always. */
+.fig { font-variant-numeric: normal; font-family: inherit; font-style: inherit; }
+
+/* --- Page furniture ------------------------------------------------------ */
+
+.grain {
+  position: fixed; inset: 0; z-index: 60;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding: 1.15rem max(1.5rem, calc((100vw - 1360px) / 2)) 2.5rem;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.96) 0%, rgba(11,11,12,0.9) 40%, rgba(11,11,12,0.62) 72%, rgba(11,11,12,0) 100%);
+}
+.wordmark {
+  font-size: 0.8125rem; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  text-decoration: none; color: var(--bone);
+  white-space: nowrap;
+}
+.wordmark span { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+.masthead nav { margin-left: auto; display: flex; gap: clamp(0.9rem, 1.8vw, 1.75rem); }
+.masthead nav a {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+.tel {
+  margin-left: auto;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--bone); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.2rem;
+  transition: border-color 400ms var(--ease);
+  white-space: nowrap;
+}
+.tel:hover { border-bottom-color: var(--accent-ink); }
+.masthead nav + .tel { margin-left: 0; }
+
+/* Back-to-homepage, on the project page. Always in the masthead, and
+   repeated at the foot of the page. */
+.back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding: 0.35rem 0 0.25rem;
+  white-space: nowrap;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.back::before { content: '\2190'; font-size: 0.875rem; letter-spacing: 0; }
+.back:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+/* Phone contents pill. Centred with left/right + margin-inline, never a
+   transform — a transform makes it the containing block for fixed children. */
+.pill {
+  position: fixed; z-index: 45;
+  left: 0; right: 0; margin-inline: auto; width: max-content;
+  max-width: calc(100% - 1.5rem);
+  bottom: 1rem;
+  display: flex; gap: 0.15rem; align-items: center;
+  padding: 0.2rem 0.5rem;
+  background: rgba(11,11,12,0.9);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(232,228,220,0.08);
+  opacity: 0; visibility: hidden;
+  transition: opacity 500ms var(--ease), visibility 0s linear 500ms;
+}
+.pill.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.pill a {
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone); text-decoration: none;
+  padding: 0 0.45rem; min-height: 44px;
+  display: flex; align-items: center;
+}
+/* The masthead nav and the floating pill hand over to each other, so exactly
+   one is visible at any width. The handover has to happen where the masthead
+   still FITS: it is nowrap, and the project page's six-item nav needs 873px
+   with the logo at its current size. At the old 48rem (768px) handover the
+   masthead overflowed across a 105px band that lands squarely on an iPad in
+   portrait. 56rem gives it headroom. */
+@media (min-width: 56rem) { .pill { display: none; } }
+
+/* Scroll "light meter" — the only chrome that moves */
+.rail {
+  position: fixed; right: 1.5rem; top: 22vh; bottom: 22vh; z-index: 30;
+  width: 1px; background: var(--hair-2);
+  pointer-events: none;
+}
+.rail__dot {
+  position: absolute; left: -1px; top: 0;
+  width: 3px; height: 44px;
+  background: var(--accent-ink);
+  transform: translate3d(0, var(--railY, 0px), 0);
+  will-change: transform;
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The plate: one photograph, two veils, one specular core -------------- */
+
+.track { position: relative; }
+
+.stage {
+  position: sticky; top: 0;
+  height: 100lvh;                 /* lvh, never svh */
+  overflow: clip;
+  isolation: isolate;
+  margin: 0;
+}
+/* Real in-flow content AFTER the sticky element, inside its containing block.
+   Neither its own margin nor the container's padding would give it any room.
+   100lvh of room against a 100lvh stage = the light crosses the frame in
+   exactly one viewport of scrolling. */
+.track__room       { height: 100lvh; }
+.track__room--long { height: 150lvh; }   /* only where a resolve follows the light */
+
+.plate { position: absolute; inset: 0; overflow: clip; }
+.plate img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+
+.veil {
+  position: absolute; top: -14%; bottom: -14%;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 2;
+  /* The veils dissolve as the finished car arrives, so the resolve never
+     crossfades against a hard diagonal veil edge — the light opens out into
+     the photograph instead of wiping across it. */
+  opacity: calc(1 - var(--reveal, 0));
+}
+.veil--l {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tl, var(--bl)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to left, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+.veil--r {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tr, var(--br)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to right, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+
+/* The wet spike: additive, narrow, warm. Rides the centre of the band. */
+.spec {
+  position: absolute; top: -8%; bottom: -8%; left: 0;
+  width: clamp(190px, 26%, 460px);
+  /* Above .plate::after, deliberately. `screen` blends with whatever is
+     painted below it, so with the horizon shade on top the highlight was
+     being darkened by it and the band stopped reading below the waistline. */
+  z-index: 4;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+  opacity: calc(1 - var(--reveal, 0));
+  transform: translate3d(var(--bc), 0, 0) translateX(-50%);
+  /* Peak pulled back from 0.30. Now that the specular sits above the horizon
+     shade it is no longer fighting it, and at the old strength it blew the
+     panel it crossed to white — which hides the colour the band is supposed to
+     be revealing. The light should show the paint, not replace it. */
+  background: linear-gradient(100deg,
+      rgba(255,248,235,0) 0%,
+      rgba(255,248,235,0.05) 34%,
+      rgba(255,250,240,0.20) 50%,
+      rgba(255,248,235,0.05) 66%,
+      rgba(255,248,235,0) 100%);
+}
+
+/* A horizon shade so the plate never sits as a flat rectangle.
+   The bottom stop is the one that matters and it was too strong: 0.82 rising
+   from 60% put the whole lower two-fifths of the frame in the dark, which on
+   the hero is everything below the chrome waistline — the paint. It now starts
+   at 72% and tops out at 0.6, which still carries the caption. */
+.plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0) 26%, rgba(11,11,12,0) 72%, rgba(11,11,12,0.6) 100%),
+    radial-gradient(165% 130% at 50% 46%, rgba(11,11,12,0) 66%, rgba(11,11,12,0.26) 100%);
+}
+
+/* The whole car, arriving only at the end */
+.resolve {
+  position: absolute; inset: 0; z-index: 5;
+  opacity: var(--reveal, 0);
+  /* Where a second stop follows, the first one also scales UP as it goes, so
+     the change reads as pushing through the detail rather than as a straight
+     dissolve. A dissolve between a frame-filling badge and a wide shot of a
+     car is a double exposure, and it looks like one. */
+  transform: scale(calc(1.05 - 0.05 * var(--reveal, 0) + 0.14 * var(--reveal2, 0)));
+  will-change: opacity, transform;
+}
+/* Second stop, for the one section that resolves macro → detail → wide */
+.resolve--2 { z-index: 6; opacity: var(--reveal2, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0))); }
+.resolve img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+}
+.resolve::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.44) 0%, rgba(11,11,12,0.02) 28%, rgba(11,11,12,0.14) 56%, rgba(11,11,12,0.88) 100%);
+}
+/* The nearside front corner of slide-01, where DPM painted the registration
+   out in white. Shaded down so it is not the thing you look at. */
+.resolve--plate-out::after {
+  background:
+    radial-gradient(62% 52% at 4% 82%, rgba(11,11,12,0.95) 0%, rgba(11,11,12,0.66) 34%, rgba(11,11,12,0.2) 66%, rgba(11,11,12,0) 88%),
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0.03) 30%, rgba(11,11,12,0.16) 58%, rgba(11,11,12,0.9) 100%);
+}
+
+/* Content laid over a stage */
+.stage__over {
+  position: absolute; inset: 0; z-index: 10;
+  display: grid; align-content: end;
+  width: var(--page); margin-inline: auto;
+  padding-bottom: clamp(9.5rem, 20vh, 11rem);
+  pointer-events: none;
+}
+.stage__over > * { pointer-events: auto; }
+
+.stage__tag {
+  display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  background: rgba(11,11,12,0.86);
+  border: 1px solid var(--hair);
+  padding: 0.45rem 0.75rem;
+  justify-self: start;
+  margin-bottom: 1.25rem;
+}
+
+/* Every photograph gets a caption sitting with it, saying what the car is and
+   what the shot shows. On a resolving stage the caption crossfades with the
+   picture, so the words on screen always describe the frame on screen. Both
+   states occupy the same grid cell, so nothing reflows. */
+.stage__cap {
+  position: absolute; z-index: 11;
+  left: 0; right: 0; bottom: clamp(4.75rem, 8vh, 5.25rem);
+  width: var(--page); margin-inline: auto;
+  display: grid;
+  font-size: 0.8125rem; line-height: 1.5;
+  color: var(--bone-dim);
+  pointer-events: none;
+}
+.stage__cap > * { grid-area: 1 / 1; pointer-events: auto; }
+.stage__cap-line {
+  display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; align-items: baseline;
+  max-width: 44em;
+  align-self: end;
+  transition: opacity 220ms linear;
+}
+/* Steeper than the picture's own crossfade (x1.9, offset 0.9), so that at any
+   paused scroll position one caption is legible and the other is at most 0.1.
+   Stopping mid-transition used to print both sets of words on top of each
+   other. */
+.stage__cap-line--macro { opacity: calc(1 - var(--reveal, 0) * 1.9); }
+.stage__cap-line--mid   { opacity: min(calc(var(--reveal, 0) * 1.9 - 0.9), calc(1 - var(--reveal2, 0) * 1.9)); }
+.stage__cap-line--wide  { opacity: calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9); }
+.stage__cap b { color: var(--bone); font-weight: 500; }
+@media (min-width: 48rem) {
+  .stage__cap { bottom: clamp(2rem, 4vh, 3rem); }
+  .stage__over { padding-bottom: clamp(9rem, 18vh, 10.5rem); }
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+/* The light travels under the copy. Give the copy its own ground rather than
+   darkening the whole plate, which would put the light out. z-index is
+   negative inside this layer's own stacking context, so it sits behind the
+   text and still above the photograph. */
+.hero__inner::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: -14vh -34vw -14vh -40vw;
+  /* The wash that keeps the hero copy legible. It has to die sooner than it
+     used to: at 0.66 across the middle of the frame it was putting the whole
+     centre of the photograph — the paint below the waistline — behind a grey
+     sheet. It now falls to a fifth by the middle and is gone by two-thirds,
+     which still carries the headline and the lede over their own darker
+     corner of the plate. */
+  background: linear-gradient(101deg,
+      rgba(11,11,12,0.92) 20%,
+      rgba(11,11,12,0.62) 34%,
+      rgba(11,11,12,0.22) 50%,
+      rgba(11,11,12,0) 68%);
+}
+.stage__over::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto -30vw -14vh -40vw; height: 66%;
+  background: linear-gradient(to top,
+      rgba(11,11,12,0.94) 20%,
+      rgba(11,11,12,0.66) 52%,
+      rgba(11,11,12,0) 100%);
+}
+
+.hero__inner {
+  position: absolute; inset: 0; z-index: 10;
+  width: var(--page); margin-inline: auto;
+  /* `safe end` rather than `center`: the copy hangs off the foot's reserved
+     band, so the space above the headline grows with the viewport instead of
+     the block drifting up into the masthead. `safe` is load-bearing — plain
+     `end` (like plain `center`) spills past the padding edge when the content
+     is taller than the box, which is how the label ended up 35px UNDER the
+     masthead at 1113x744. With `safe` it falls back to start instead. */
+  display: grid; align-content: safe end;
+  padding-top: clamp(7rem, 15vh, 11rem);
+  /* Reserve the foot of the phone viewport for the caption, which is pinned
+     there and can run to four lines. The copy centres in what is left. */
+  padding-bottom: 15rem;
+}
+/* The foot is absolutely positioned against the bottom of the stage, so the
+   centred copy above it has to be told the band is taken. Without this the
+   lede's last line runs under the foot on any viewport short enough
+   that the three-line headline and the foot both want the middle — 1341x896
+   was the first one tried and it collided. */
+/* Tuned against the measured matrix in HANDOFF, not by eye. Too large and the
+   copy floats up under the masthead; too small and the lede runs into the
+   foot. This is the value that keeps a positive gap at both ends across every
+   viewport from 360x780 to 1728x1080. */
+@media (min-width: 48rem) { .hero__inner { padding-bottom: clamp(12.5rem, 27vh, 18rem); } }
+.hero h1 { margin: 0.6rem 0 1.6rem; max-width: 14ch; }
+
+/* The copy carries its own ground rather than the plate being dimmed to give
+   it one. A wash broad enough to sit behind a 650px lede is also broad enough
+   to grey out the middle of the photograph, which is where the paint is; a
+   shadow costs the picture nothing. Two radii: a wide one to lift the type off
+   a bright band, a tight one for edge definition on chrome. */
+.hero__inner .label,
+.hero__inner h1,
+.hero__inner .lede {
+  text-shadow: 0 1px 28px rgba(11,11,12,0.94), 0 1px 4px rgba(11,11,12,0.7);
+}
+/* In flow on a phone, where the caption can run to five lines and there is no
+   room to stack two absolutely positioned blocks above it. */
+.hero__foot {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; align-items: baseline;
+}
+/* The height condition matters as much as the width one. Pinning the foot to
+   the bottom of the stage only works if there is room above it for a
+   three-line headline and a two-line lede; below about 736px there is not, and
+   the lede ran under the foot (1280x640). Under that height the foot goes back
+   into flow beneath the copy, exactly as it does on a phone, where an overlap
+   is impossible by construction. */
+@media (min-width: 48rem) and (min-height: 44rem) {
+  .hero__foot { position: absolute; left: 0; right: 0; margin-top: 0; bottom: clamp(8.5rem, 21vh, 13rem); }
+}
+/* The hero foot used to open with a line telling the visitor to scroll. That
+   is the page narrating its own interaction, which is the same category of
+   meta-copy as everything else stripped on 29 August, so it is gone. The rule
+   it carried stays, on whatever label is left. */
+.hero__foot .label:first-child { display: flex; align-items: center; gap: 0.75rem; }
+.hero__foot .label:first-child::before {
+  content: ''; width: clamp(28px, 5vw, 64px); height: 1px; flex: none;
+  background: linear-gradient(to right, var(--accent-ink), rgba(232,228,220,0));
+  transition: background 700ms var(--ease);
+}
+
+/* --- Section shells ------------------------------------------------------ */
+
+.band { width: var(--page); margin-inline: auto; }
+.band[id], section[id] { scroll-margin-top: 5.5rem; }
+
+/* THE BOUNDARY. The client could not tell where one section stopped and the
+   next started, so every kept section now opens with the same three things,
+   in the same place, at the same size: a rule across the full measure, a
+   lettered mark that inherits the car's accent, and a kind. Scrolling past
+   one is unmistakable. */
+.chapter {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0 1.25rem;
+  padding-top: clamp(5.5rem, 13vh, 10rem);
+  border-top: 1px solid var(--hair);
+  position: relative;
+}
+.chapter::before {
+  content: ''; position: absolute; top: -2px; left: 0;
+  width: clamp(3.5rem, 8vw, 6rem); height: 3px;
+  background: var(--accent-ink);
+  transition: background-color 700ms var(--ease);
+}
+.chapter__mark {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 200; letter-spacing: -0.02em; line-height: 1;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.chapter__kind {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.chapter + .section-head { padding-top: clamp(1.75rem, 4vh, 2.75rem); border-top: 0; }
+
+.section-head {
+  display: grid; gap: 1.25rem;
+  padding: clamp(6rem, 14vh, 11rem) 0 clamp(2.5rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.section-head--flush { border-top: 0; }
+
+.rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
+
+/* Credit tags. Two cases, and they never look alike. */
+.credit {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  white-space: nowrap;
+}
+.credit--dpm { color: var(--bone); border: 1px solid var(--hair); }
+.credit--dpm::before { content: ''; width: 5px; height: 5px; background: var(--accent-ink); }
+.credit--ai  { color: #E3C88A; border: 1px dashed rgba(227,200,138,0.55); }
+.credit--copy{ color: var(--bone-dim); border: 1px dashed var(--hair); }
+
+.caption {
+  margin: 0.85rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline;
+  font-size: 0.8125rem; line-height: 1.55;
+  color: var(--bone-dim);
+  max-width: 44em;
+}
+.caption b { color: var(--bone); font-weight: 500; }
+
+/* A figure and its caption share one container and one rule, so the binding
+   is structural rather than a matter of proximity. */
+.bound {
+  border-top: 1px solid var(--hair);
+  padding-top: 1rem;
+  margin: 0;
+}
+.bound > img { width: 100%; height: auto; }
+.bound > figcaption { padding-top: 0.85rem; }
+
+/* --- Link out to a project page ------------------------------------------ */
+
+.golink {
+  display: inline-flex; align-items: center; gap: 0.9rem;
+  min-height: 44px;
+  padding: 0.55rem 0.35rem 0.55rem 0;
+  text-decoration: none;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone);
+  border-bottom: 1px solid var(--accent-ink);
+  transition: color 400ms var(--ease), border-color 700ms var(--ease), gap 500ms var(--ease-out);
+}
+.golink::after {
+  content: ''; width: 0.5em; height: 0.5em; flex: none;
+  border-top: 1px solid var(--accent-ink);
+  border-right: 1px solid var(--accent-ink);
+  transform: rotate(45deg);
+  transition: border-color 700ms var(--ease);
+}
+.golink:hover { gap: 1.4rem; color: var(--accent-ink); }
+.golink--dead {
+  color: var(--bone-dim);
+  border-bottom-style: dashed;
+  border-bottom-color: var(--hair);
+  cursor: not-allowed;
+}
+.golink--dead::after { border-color: var(--hair); }
+.golink--dead:hover { gap: 0.9rem; color: var(--bone-dim); }
+
+/* --- The register (identity block) --------------------------------------- */
+
+.register {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0; margin: 0;
+  border-top: 1px solid var(--hair);
+}
+.register > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.register dt {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-top: 0.28rem;
+}
+.register dd {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.register dd b { font-weight: 500; }
+
+.swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
+.swatch i {
+  width: 2.25rem; height: 1.15rem;
+  background: var(--accent);
+  border: 1px solid var(--hair);
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The owner's specification ------------------------------------------- */
+
+.spec-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.spec-list li {
+  display: grid; gap: 0.3rem 1.75rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.spec-list__n {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.spec-list__name {
+  font-family: var(--font-text);
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.spec-list__note { font-size: 0.875rem; line-height: 1.6; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 48rem) {
+  .spec-list li { grid-template-columns: 3.5rem minmax(0, 17rem) minmax(0, 1fr); }
+}
+
+/* --- The plaque ---------------------------------------------------------- */
+
+.plaque { position: relative; margin-block: clamp(3rem, 8vh, 6rem); }
+.plaque__img { position: relative; height: clamp(56lvh, 72vw, 86lvh); overflow: clip; }
+.plaque__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 44%;
+  transform: scale(1.03);
+  filter: saturate(1.06) contrast(1.02) brightness(1.1);
+}
+.plaque__img::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 18%, rgba(11,11,12,0.18) 42%, rgba(11,11,12,0.68) 62%, rgba(11,11,12,0.93) 80%, rgba(11,11,12,0.99) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.38) 0%, rgba(11,11,12,0) 30%);
+}
+.plaque__line {
+  position: absolute; left: 0; right: 0; z-index: 2;
+  bottom: clamp(1.75rem, 4.5vh, 3.25rem);
+  width: var(--page); margin-inline: auto;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.3125rem, 2.5vw, 2.125rem);
+  line-height: 1.26;
+  color: var(--bone);
+  margin: 0 auto;
+  text-wrap: balance;
+  font-variant-numeric: normal;
+  text-shadow: 0 1px 24px rgba(11,11,12,0.9);
+}
+.plaque__line span { display: block; max-width: 17em; }
+.plaque__line b { font-weight: 400; }
+.plaque__note {
+  width: var(--page); margin-inline: auto;
+  padding-top: clamp(1.75rem, 4vh, 2.75rem);
+  border-top: 1px solid var(--hair);
+  margin-top: clamp(1.5rem, 3vh, 2rem);
+}
+.plaque__note .caption { margin: 0 0 0.9rem; }
+
+/* --- Grids --------------------------------------------------------------- */
+
+.grid {
+  display: grid; gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+@media (min-width: 34rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.grid figure { background: var(--surface); border-top: 1px solid var(--hair-2); padding-top: 0.75rem; }
+.grid img { width: 100%; height: auto; }
+.grid figcaption {
+  padding: 0.7rem 0 0;
+  font-size: 0.8125rem; line-height: 1.5; color: var(--bone-dim);
+  max-width: 44em;
+}
+.grid figcaption b { color: var(--bone); font-weight: 500; }
+.grid--wide { grid-column: 1 / -1; }
+
+/* --- The log ------------------------------------------------------------- */
+
+.entry {
+  padding-block: clamp(2.75rem, 7vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.entry__meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center;
+  margin-bottom: 1.35rem;
+}
+.entry__date {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.entry h3 { max-width: 22ch; color: var(--bone); }
+.entry__by {
+  margin-top: 1.35rem;
+  display: flex; align-items: center; gap: 0.85rem;
+  color: var(--bone-dim);
+  font-size: 0.875rem;
+}
+.entry__initial {
+  width: 2.25rem; height: 2.25rem; flex: none;
+  border: 1px solid var(--accent-ink);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease), border-color 700ms var(--ease);
+}
+.entry__by b { color: var(--bone); font-weight: 500; }
+.entry__body { margin-top: 1.75rem; }
+@media (min-width: 62rem) {
+  .entry__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 9fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  .entry__body { margin-top: 0; }
+}
+.entry figure { margin-top: 2.25rem; }
+.entry figure img { width: 100%; }
+
+/* --- Stages -------------------------------------------------------------- */
+
+.stages { list-style: none; margin: 0; padding: 0; max-width: 68rem; }
+.stages li {
+  display: grid; gap: 0.35rem 1.75rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.stages li:last-child { border-bottom: 1px solid var(--hair-2); }
+.stages__n { font-size: 0.8125rem; color: var(--accent-ink); letter-spacing: 0.1em; transition: color 700ms var(--ease); }
+.stages__name {
+  font-family: var(--font-text);
+  font-size: clamp(1.1875rem, 1.8vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.stages__note { font-size: 0.875rem; line-height: 1.55; color: var(--bone-dim); max-width: 30em; }
+.stages__time { font-size: 0.8125rem; color: var(--bone-dim); white-space: nowrap; }
+@media (min-width: 62rem) {
+  .stages li { grid-template-columns: 3rem minmax(0, 15rem) minmax(0, 1fr) auto; }
+  .stages__time { text-align: right; }
+}
+
+/* --- Paint specification (project page only; never a chart) --------------- */
+
+.paintspec {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+@media (min-width: 60rem) { .paintspec { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.paintspec__swatch {
+  height: clamp(9rem, 22vw, 15rem);
+  background: linear-gradient(104deg, #4A0D12 0%, var(--accent) 42%, #D84A46 58%, var(--accent) 72%, #3A0A0E 100%);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+/* --- What DPM does ------------------------------------------------------- */
+
+.does {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+@media (min-width: 60rem) { .does { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.inout { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.inout li {
+  display: grid; gap: 0.2rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.inout__name { font-family: var(--font-text); font-size: 1.0625rem; font-weight: 300; color: var(--bone); }
+.inout__where { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); }
+.inout li[data-out] .inout__where { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+/* --- Proof --------------------------------------------------------------- */
+
+/* --- Testimonials --------------------------------------------------------
+   Both quotes here are real and attributable. There are only two because only
+   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
+   login wall. The layout is built for two rather than padded out to a grid of
+   three with invented ones.
+   ------------------------------------------------------------------------ */
+
+.says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
+
+.say { display: grid; gap: 1.15rem; }
+.say blockquote {
+  margin: 0;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.5rem);
+  line-height: 1.34;
+  color: var(--bone);
+  max-width: 19em;
+  text-wrap: pretty;
+  font-variant-numeric: normal;
+}
+.say--sub blockquote {
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 1.1vw + 0.9rem, 1.625rem);
+  line-height: 1.44;
+  color: #CFCAC1;
+  max-width: 24em;
+}
+.say__by {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.say__by b { color: var(--bone); font-weight: 500; }
+.say__by::before {
+  content: ''; width: clamp(28px, 4vw, 52px); height: 1px; flex: none;
+  background: var(--accent-ink);
+  transition: background 700ms var(--ease);
+}
+
+.proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.proof li {
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  border-bottom: 1px solid var(--hair-2);
+  display: grid; gap: 0.5rem;
+}
+.proof__fig {
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1; letter-spacing: -0.01em;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.proof__what { font-size: 0.9375rem; line-height: 1.55; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 60rem) {
+  .proof li { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: baseline; }
+}
+
+/* --- Two-column prose ---------------------------------------------------- */
+
+.cols {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+}
+@media (min-width: 60rem) { .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* --- Contact ------------------------------------------------------------- */
+
+.contact { position: relative; overflow: clip; }
+.contact__plate { position: absolute; inset: 0; }
+.contact__plate img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 62% 46%;
+  transform: scale(1.08);
+  filter: brightness(1.14) saturate(1.06);
+}
+.contact__plate::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.5) 46%, rgba(11,11,12,0.94) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.93) 0%, rgba(11,11,12,0.72) 44%, rgba(11,11,12,0.3) 80%, rgba(11,11,12,0.5) 100%);
+}
+.contact__inner {
+  position: relative; z-index: 2;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(5.5rem, 15vh, 11rem) 0 clamp(5rem, 12vh, 9rem);
+}
+.contact__rows {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  border-top: 1px solid var(--hair);
+}
+.contact__rows a, .contact__rows p {
+  display: block; margin: 0;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  text-decoration: none;
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 2vw, 1.625rem);
+  transition: color 400ms var(--ease);
+  font-variant-numeric: normal;
+}
+.contact__rows a:hover { color: var(--accent-ink); }
+.contact__rows small {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 0.4rem;
+}
+@media (min-width: 60rem) {
+  .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
+  .contact__rows > * { border-bottom: none; }
+}
+
+
+/* --- The mark ------------------------------------------------------------
+   DPM have no vector artwork; the best copy of the wordmark that exists
+   anywhere is a 1955x849 PNG on their own Wix site. `tools/trace-logo.mjs`
+   traces that raster's alpha channel to closed polygons, which is what
+   `#dpm-mark` below is. It is polygonal, not Bezier: crisp at any size a
+   browser renders, and not something to hand a signwriter. It fills with
+   currentColor so it can be recoloured per surface.
+   ------------------------------------------------------------------------ */
+
+.wordmark {
+  display: block; color: var(--bone); text-decoration: none;
+  transition: color 400ms var(--ease);
+}
+/* Sized so the hairline AUTOBODY line still resolves: it is roughly an eighth
+   of the lockup's height, so anything under ~2.75rem overall renders it at
+   sub-pixel stroke widths on a 1x display. */
+.wordmark svg { display: block; height: clamp(2.75rem, 4.6vw, 3.5rem); width: auto; }
+.wordmark:hover { color: var(--bone); }
+
+.footmark { color: var(--bone-dim); display: block; }
+.footmark svg { display: block; height: clamp(3.25rem, 8vw, 5rem); width: auto; }
+
+/* The working copy has to be unmistakable at a glance, because the whole
+   point of two builds is that one of them is safe to send and one is not. */
+.buildflag {
+  position: fixed; z-index: 70; left: 0; bottom: 0;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #E3C88A; color: #16150F;
+  font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+}
+.buildflag a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+/* The contents pill is centred at bottom:1rem and about 44px tall. Below the
+   nav handover the flag would sit straight through it, so it moves up. */
+@media (max-width: 55.99rem) { .buildflag { bottom: 4.5rem; } }
+
+/* --- Footer -------------------------------------------------------------- */
+
+.colophon {
+  width: var(--page); margin-inline: auto;
+  padding: clamp(3rem, 8vh, 5rem) 0 8rem;
+  border-top: 1px solid var(--hair-2);
+  display: grid; gap: 1.5rem;
+}
+.note {
+  border: 1px solid var(--hair);
+  padding: 1.15rem 1.25rem;
+  max-width: 29em;
+  font-size: 0.8125rem;
+  line-height: 1.62;
+  color: var(--bone-dim);
+}
+.note b { color: var(--bone); font-weight: 500; }
+.note p { margin: 0 0 0.75em; }
+.note p:last-child { margin-bottom: 0; }
+.note h2 { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 0.9rem; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--bone); color: #0B0B0C;
+  padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- Wider viewports ----------------------------------------------------- */
+
+@media (min-width: 60rem) {
+  .register > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
+  .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+}
+
+@media (max-width: 55.99rem) {
+  .masthead nav { display: none; }
+  .masthead nav + .tel { margin-left: auto; }
+  .masthead .back { margin-left: auto; }
+}
+
+@media (max-width: 47.99rem) {
+  .rail { display: none; }
+  :root { --falloff: clamp(120px, 36%, 260px); }
+  .spec { width: clamp(150px, 46%, 320px); }
+  .chapter { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+/* --- Reduced motion: one well-lit photograph, nothing lost ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  /* The previous build hid .veil and .spec and left the graded-down plate
+     behind, so Reduce Motion delivered a near-black rectangle. The plate is
+     graded FOR the veil; with no veil it has to be graded back up, and the
+     vignette that shaped the travelling band has to go with it. */
+  :root { --bl: -300vw; --br: 300vw; }
+  .veil, .spec { display: none; }
+  .plate img {
+    filter: saturate(1.12) contrast(1.02) brightness(1.34) !important;
+  }
+  .plate::after {
+    background:
+      linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 24%, rgba(11,11,12,0) 58%, rgba(11,11,12,0.8) 100%) !important;
+  }
+  .resolve { opacity: 1; transform: none; position: relative; }
+  .resolve--2 { opacity: 1; }
+  .track__room, .track__room--long { height: 0; }
+  .stage { position: relative; height: 78lvh; }
+  .has-resolve .stage { height: auto; }
+  .has-resolve .plate { position: relative; height: 58lvh; }
+  .has-resolve .resolve { height: 74lvh; }
+  .has-resolve .stage__over { position: absolute; inset: auto 0 0 0; }
+  /* Both caption states are simply printed, one under the other. */
+  .stage__cap { position: relative; bottom: auto; padding-top: 0.9rem; gap: 0.35rem; }
+  .stage__cap > * { grid-area: auto; }
+  .stage__cap-line { opacity: 1 !important; }
+  /* The hero is the one stage whose copy has to sit ON a photograph. At
+     100lvh two absolutely positioned blocks clear each other; at the shorter
+     static height they do not, so the foot goes back into flow and the
+     caption is pinned to the bottom of the frame it describes. Where the hero
+     resolves, only the resolved frame is shown — a headline straddling the
+     seam between two stacked pictures is worse than either. */
+  .hero .stage { height: 86lvh; }
+  .hero.has-resolve .stage { height: 86lvh; }
+  .hero.has-resolve .plate { display: none; }
+  .hero.has-resolve .resolve { position: absolute; inset: 0; height: auto; }
+  .hero.has-resolve .stage__cap-line--macro { display: none; }
+  .hero .hero__inner { position: absolute; padding: 5.5rem 0 9rem; }
+  .hero .hero__foot { position: static; margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+  .hero .stage__cap {
+    position: absolute; bottom: clamp(1.5rem, 3vh, 2.5rem);
+    padding-top: 0;
+  }
+
+  .pill { display: none; }
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="dpm-mark" viewBox="0 0 1158 577"><path fill="currentColor" fill-rule="evenodd" d="M6.0 1.0L5.0 2.0L5.0 252.0L6.0 253.0L48.0 253.0L49.0 252.0L49.0 46.0L50.0 45.0L118.0 45.0L118.0 46.0L132.0 46.0L132.0 47.0L140.0 47.0L140.0 48.0L145.0 48.0L145.0 49.0L150.0 49.0L150.0 50.0L162.0 52.0L162.0 53.0L174.0 56.0L178.0 59.0L181.0 59.0L181.0 60.0L195.0 66.0L196.0 68.0L202.0 70.0L203.0 72.0L205.0 72.0L206.0 74.0L208.0 74.0L209.0 76.0L214.0 78.0L216.0 81.0L218.0 81.0L221.0 85.0L223.0 85.0L228.0 91.0L230.0 91.0L240.0 101.0L240.0 103.0L246.0 108.0L246.0 110.0L250.0 113.0L250.0 115.0L253.0 117.0L253.0 119.0L255.0 120.0L255.0 122.0L257.0 123.0L257.0 125.0L261.0 129.0L262.0 133.0L264.0 134.0L264.0 136.0L265.0 136.0L265.0 138.0L266.0 138.0L266.0 140.0L267.0 140.0L267.0 142.0L268.0 142.0L268.0 144.0L269.0 144.0L269.0 146.0L272.0 150.0L272.0 153.0L275.0 157.0L275.0 160.0L276.0 160.0L276.0 163.0L277.0 163.0L277.0 166.0L278.0 166.0L278.0 169.0L279.0 169.0L279.0 172.0L280.0 172.0L280.0 175.0L281.0 175.0L283.0 187.0L284.0 187.0L284.0 193.0L285.0 193.0L285.0 199.0L286.0 199.0L286.0 209.0L287.0 209.0L287.0 237.0L286.0 237.0L286.0 247.0L285.0 247.0L284.0 260.0L283.0 260.0L280.0 276.0L279.0 276.0L278.0 282.0L276.0 284.0L275.0 290.0L274.0 290.0L274.0 292.0L271.0 296.0L271.0 299.0L270.0 299.0L268.0 305.0L266.0 306.0L263.0 314.0L261.0 315.0L260.0 319.0L258.0 320.0L256.0 325.0L253.0 327.0L253.0 329.0L250.0 331.0L250.0 333.0L245.0 337.0L245.0 339.0L229.0 355.0L227.0 355.0L223.0 360.0L221.0 360.0L214.0 367.0L210.0 368.0L208.0 371.0L206.0 371.0L203.0 374.0L197.0 376.0L196.0 378.0L194.0 378.0L194.0 379.0L192.0 379.0L192.0 380.0L190.0 380.0L190.0 381.0L188.0 381.0L184.0 384.0L181.0 384.0L177.0 387.0L174.0 387.0L174.0 388.0L171.0 388.0L169.0 390.0L159.0 392.0L159.0 393.0L156.0 393.0L156.0 394.0L143.0 396.0L143.0 397.0L137.0 397.0L137.0 398.0L129.0 398.0L129.0 399.0L114.0 399.0L114.0 400.0L109.0 401.0L109.0 444.0L110.0 445.0L137.0 445.0L137.0 444.0L153.0 443.0L153.0 442.0L163.0 441.0L163.0 440.0L171.0 439.0L171.0 438.0L174.0 438.0L174.0 437.0L177.0 437.0L177.0 436.0L181.0 436.0L183.0 434.0L186.0 434.0L186.0 433.0L194.0 431.0L198.0 428.0L201.0 428.0L201.0 427.0L213.0 422.0L214.0 420.0L220.0 418.0L221.0 416.0L225.0 415.0L226.0 413.0L228.0 413.0L229.0 411.0L231.0 411.0L235.0 407.0L237.0 407.0L239.0 404.0L241.0 404.0L243.0 401.0L245.0 401.0L248.0 397.0L250.0 397.0L256.0 390.0L258.0 390.0L273.0 375.0L273.0 373.0L280.0 367.0L280.0 365.0L283.0 363.0L283.0 361.0L286.0 359.0L286.0 357.0L289.0 355.0L289.0 353.0L291.0 352.0L291.0 350.0L293.0 349.0L293.0 347.0L297.0 343.0L297.0 341.0L300.0 338.0L301.0 334.0L303.0 333.0L303.0 331.0L304.0 331.0L304.0 329.0L305.0 329.0L305.0 327.0L306.0 327.0L306.0 325.0L307.0 325.0L307.0 323.0L308.0 323.0L308.0 321.0L309.0 321.0L309.0 319.0L310.0 319.0L310.0 317.0L311.0 317.0L311.0 315.0L314.0 311.0L316.0 303.0L318.0 301.0L318.0 298.0L319.0 298.0L319.0 295.0L320.0 295.0L320.0 292.0L321.0 292.0L321.0 289.0L322.0 289.0L322.0 286.0L323.0 286.0L323.0 282.0L324.0 282.0L324.0 278.0L325.0 278.0L325.0 274.0L326.0 274.0L326.0 270.0L327.0 270.0L328.0 259.0L329.0 259.0L330.0 240.0L331.0 240.0L331.0 207.0L330.0 207.0L330.0 196.0L329.0 196.0L329.0 188.0L328.0 188.0L326.0 172.0L325.0 172.0L325.0 168.0L324.0 168.0L324.0 164.0L323.0 164.0L323.0 160.0L322.0 160.0L319.0 148.0L318.0 148.0L316.0 140.0L315.0 140.0L315.0 138.0L312.0 134.0L312.0 131.0L311.0 131.0L307.0 121.0L305.0 120.0L303.0 114.0L301.0 113.0L300.0 109.0L298.0 108.0L297.0 104.0L295.0 103.0L295.0 101.0L291.0 97.0L291.0 95.0L288.0 93.0L288.0 91.0L282.0 85.0L282.0 83.0L278.0 80.0L278.0 78.0L269.0 70.0L269.0 68.0L263.0 62.0L261.0 62.0L252.0 52.0L250.0 52.0L242.0 44.0L240.0 44.0L238.0 41.0L236.0 41.0L235.0 39.0L233.0 39.0L232.0 37.0L230.0 37.0L226.0 33.0L222.0 32.0L218.0 28.0L216.0 28.0L216.0 27.0L214.0 27.0L214.0 26.0L212.0 26.0L212.0 25.0L210.0 25.0L210.0 24.0L208.0 24.0L208.0 23.0L206.0 23.0L206.0 22.0L204.0 22.0L204.0 21.0L202.0 21.0L198.0 18.0L195.0 18.0L191.0 15.0L188.0 15.0L186.0 13.0L183.0 13.0L183.0 12.0L180.0 12.0L180.0 11.0L177.0 11.0L177.0 10.0L174.0 10.0L174.0 9.0L171.0 9.0L171.0 8.0L168.0 8.0L168.0 7.0L164.0 7.0L164.0 6.0L160.0 6.0L160.0 5.0L156.0 5.0L156.0 4.0L151.0 4.0L151.0 3.0L136.0 2.0L136.0 1.0ZM350.0 1.0L348.0 3.0L348.0 134.0L349.0 135.0L392.0 135.0L393.0 134.0L393.0 48.0L394.0 47.0L522.0 47.0L522.0 48.0L531.0 48.0L531.0 49.0L543.0 50.0L543.0 51.0L547.0 51.0L547.0 52.0L551.0 52.0L551.0 53.0L555.0 53.0L555.0 54.0L564.0 56.0L566.0 58.0L569.0 58.0L569.0 59.0L581.0 64.0L582.0 66.0L586.0 67.0L591.0 72.0L593.0 72.0L596.0 76.0L598.0 76.0L603.0 81.0L603.0 83.0L608.0 87.0L608.0 89.0L611.0 91.0L611.0 93.0L615.0 97.0L615.0 99.0L616.0 99.0L616.0 101.0L617.0 101.0L617.0 103.0L618.0 103.0L618.0 105.0L619.0 105.0L619.0 107.0L622.0 111.0L624.0 121.0L625.0 121.0L625.0 125.0L626.0 125.0L627.0 140.0L628.0 140.0L627.0 168.0L626.0 168.0L624.0 181.0L623.0 181.0L622.0 187.0L620.0 189.0L620.0 192.0L619.0 192.0L617.0 198.0L615.0 199.0L614.0 203.0L612.0 204.0L610.0 209.0L607.0 211.0L607.0 213.0L595.0 225.0L593.0 225.0L591.0 228.0L589.0 228.0L587.0 231.0L583.0 232.0L582.0 234.0L580.0 234.0L580.0 235.0L578.0 235.0L578.0 236.0L576.0 236.0L576.0 237.0L574.0 237.0L574.0 238.0L572.0 238.0L568.0 241.0L565.0 241.0L563.0 243.0L560.0 243.0L560.0 244.0L557.0 244.0L557.0 245.0L554.0 245.0L554.0 246.0L541.0 248.0L541.0 249.0L536.0 249.0L536.0 250.0L528.0 250.0L528.0 251.0L350.0 251.0L348.0 253.0L348.0 443.0L349.0 444.0L393.0 444.0L394.0 443.0L394.0 298.0L395.0 297.0L524.0 297.0L524.0 296.0L536.0 296.0L536.0 295.0L543.0 295.0L543.0 294.0L549.0 294.0L549.0 293.0L554.0 293.0L554.0 292.0L558.0 292.0L558.0 291.0L563.0 291.0L563.0 290.0L566.0 290.0L566.0 289.0L570.0 289.0L570.0 288.0L582.0 285.0L582.0 284.0L587.0 283.0L591.0 280.0L594.0 280.0L594.0 279.0L602.0 276.0L603.0 274.0L607.0 273.0L608.0 271.0L612.0 270.0L617.0 265.0L622.0 263.0L626.0 258.0L628.0 258.0L641.0 245.0L641.0 243.0L646.0 239.0L646.0 237.0L648.0 236.0L648.0 234.0L650.0 233.0L650.0 231.0L654.0 227.0L655.0 223.0L657.0 222.0L657.0 220.0L658.0 220.0L658.0 218.0L659.0 218.0L659.0 216.0L662.0 212.0L662.0 209.0L664.0 207.0L664.0 204.0L665.0 204.0L665.0 201.0L667.0 199.0L667.0 195.0L668.0 195.0L668.0 192.0L669.0 192.0L671.0 177.0L672.0 177.0L672.0 170.0L673.0 170.0L673.0 157.0L674.0 157.0L673.0 129.0L672.0 129.0L672.0 122.0L671.0 122.0L671.0 117.0L670.0 117.0L668.0 105.0L667.0 105.0L666.0 99.0L664.0 97.0L664.0 94.0L663.0 94.0L657.0 80.0L655.0 79.0L654.0 75.0L652.0 74.0L650.0 69.0L647.0 67.0L647.0 65.0L644.0 63.0L644.0 61.0L639.0 57.0L639.0 55.0L628.0 44.0L626.0 44.0L622.0 39.0L620.0 39.0L614.0 33.0L612.0 33.0L608.0 29.0L604.0 28.0L603.0 26.0L595.0 23.0L594.0 21.0L592.0 21.0L590.0 19.0L587.0 19.0L587.0 18.0L585.0 18.0L581.0 15.0L578.0 15.0L576.0 13.0L573.0 13.0L573.0 12.0L570.0 12.0L570.0 11.0L567.0 11.0L567.0 10.0L563.0 10.0L563.0 9.0L560.0 9.0L560.0 8.0L548.0 6.0L548.0 5.0L530.0 3.0L530.0 2.0L510.0 2.0L510.0 1.0ZM696.0 1.0L696.0 2.0L693.0 3.0L693.0 443.0L694.0 444.0L738.0 444.0L739.0 443.0L739.0 91.0L741.0 91.0L744.0 94.0L744.0 96.0L750.0 101.0L750.0 103.0L755.0 107.0L755.0 109.0L760.0 113.0L760.0 115.0L765.0 119.0L765.0 121.0L771.0 126.0L771.0 128.0L776.0 132.0L776.0 134.0L782.0 139.0L782.0 141.0L787.0 145.0L787.0 147.0L792.0 151.0L792.0 153.0L798.0 158.0L798.0 160.0L803.0 164.0L803.0 166.0L808.0 170.0L808.0 172.0L814.0 177.0L814.0 179.0L819.0 183.0L819.0 185.0L830.0 196.0L830.0 198.0L835.0 202.0L835.0 204.0L840.0 208.0L840.0 210.0L846.0 215.0L846.0 217.0L852.0 222.0L852.0 224.0L857.0 228.0L857.0 230.0L868.0 241.0L868.0 243.0L873.0 247.0L873.0 249.0L884.0 260.0L884.0 262.0L889.0 266.0L889.0 268.0L894.0 272.0L894.0 274.0L900.0 279.0L900.0 281.0L902.0 283.0L932.0 283.0L934.0 281.0L934.0 279.0L938.0 276.0L938.0 274.0L947.0 265.0L947.0 263.0L951.0 260.0L951.0 258.0L955.0 255.0L955.0 253.0L959.0 250.0L959.0 248.0L963.0 245.0L963.0 243.0L967.0 240.0L967.0 238.0L971.0 235.0L971.0 233.0L975.0 230.0L975.0 228.0L979.0 225.0L979.0 223.0L983.0 220.0L983.0 218.0L987.0 215.0L987.0 213.0L991.0 210.0L991.0 208.0L995.0 205.0L995.0 203.0L999.0 200.0L999.0 198.0L1003.0 195.0L1003.0 193.0L1007.0 190.0L1007.0 188.0L1011.0 185.0L1011.0 183.0L1015.0 180.0L1015.0 178.0L1020.0 174.0L1020.0 172.0L1024.0 169.0L1024.0 167.0L1028.0 164.0L1028.0 162.0L1032.0 159.0L1032.0 157.0L1036.0 154.0L1036.0 152.0L1040.0 149.0L1040.0 147.0L1048.0 139.0L1048.0 137.0L1052.0 134.0L1052.0 132.0L1056.0 129.0L1056.0 127.0L1060.0 124.0L1060.0 122.0L1064.0 119.0L1064.0 117.0L1068.0 114.0L1068.0 112.0L1072.0 109.0L1072.0 107.0L1076.0 104.0L1076.0 102.0L1080.0 99.0L1080.0 97.0L1084.0 94.0L1084.0 92.0L1089.0 88.0L1089.0 86.0L1093.0 83.0L1093.0 81.0L1097.0 78.0L1097.0 76.0L1101.0 73.0L1101.0 71.0L1109.0 63.0L1109.0 61.0L1111.0 59.0L1113.0 59.0L1113.0 252.0L1114.0 253.0L1156.0 253.0L1157.0 252.0L1157.0 3.0L1155.0 1.0L1153.0 1.0L1153.0 2.0L1100.0 2.0L1095.0 7.0L1095.0 9.0L1091.0 12.0L1091.0 14.0L1087.0 17.0L1087.0 19.0L1083.0 22.0L1083.0 24.0L1078.0 28.0L1078.0 30.0L1074.0 33.0L1074.0 35.0L1071.0 37.0L1071.0 39.0L1066.0 43.0L1066.0 45.0L1062.0 48.0L1062.0 50.0L1058.0 53.0L1058.0 55.0L1054.0 58.0L1054.0 60.0L1050.0 63.0L1050.0 65.0L1046.0 68.0L1046.0 70.0L1042.0 73.0L1042.0 75.0L1038.0 78.0L1038.0 80.0L1034.0 83.0L1034.0 85.0L1030.0 88.0L1030.0 90.0L1026.0 93.0L1026.0 95.0L1021.0 99.0L1021.0 101.0L1017.0 104.0L1017.0 106.0L1013.0 109.0L1013.0 111.0L1009.0 114.0L1009.0 116.0L1005.0 119.0L1005.0 121.0L1001.0 124.0L1001.0 126.0L997.0 129.0L997.0 131.0L993.0 134.0L993.0 136.0L989.0 139.0L989.0 141.0L985.0 144.0L985.0 146.0L981.0 149.0L981.0 151.0L977.0 154.0L977.0 156.0L973.0 159.0L973.0 161.0L968.0 165.0L968.0 167.0L960.0 175.0L960.0 177.0L957.0 179.0L957.0 181.0L952.0 185.0L952.0 187.0L948.0 190.0L948.0 192.0L944.0 195.0L944.0 197.0L940.0 200.0L940.0 202.0L936.0 205.0L936.0 207.0L932.0 210.0L932.0 212.0L928.0 215.0L928.0 217.0L924.0 220.0L924.0 222.0L919.0 226.0L919.0 228.0L916.0 231.0L914.0 231.0L910.0 227.0L910.0 225.0L906.0 222.0L906.0 220.0L901.0 216.0L901.0 214.0L892.0 205.0L892.0 203.0L888.0 200.0L888.0 198.0L883.0 194.0L883.0 192.0L879.0 189.0L879.0 187.0L875.0 184.0L875.0 182.0L870.0 178.0L870.0 176.0L866.0 173.0L866.0 171.0L861.0 167.0L861.0 165.0L857.0 162.0L857.0 160.0L853.0 157.0L853.0 155.0L843.0 145.0L843.0 143.0L839.0 140.0L839.0 138.0L835.0 135.0L835.0 133.0L830.0 129.0L830.0 127.0L821.0 118.0L821.0 116.0L817.0 113.0L817.0 111.0L813.0 108.0L813.0 106.0L808.0 102.0L808.0 100.0L804.0 97.0L804.0 95.0L799.0 91.0L799.0 89.0L795.0 86.0L795.0 84.0L791.0 81.0L791.0 79.0L781.0 69.0L781.0 67.0L777.0 64.0L777.0 62.0L773.0 59.0L773.0 57.0L768.0 53.0L768.0 51.0L764.0 48.0L764.0 46.0L759.0 42.0L759.0 40.0L755.0 37.0L755.0 35.0L750.0 31.0L750.0 29.0L742.0 21.0L742.0 19.0L737.0 15.0L737.0 13.0L733.0 10.0L733.0 8.0L727.0 2.0L722.0 2.0L722.0 1.0L718.0 1.0L718.0 2.0ZM15.0 489.0L15.0 490.0L12.0 490.0L12.0 491.0L10.0 491.0L9.0 493.0L7.0 493.0L5.0 495.0L5.0 497.0L2.0 500.0L2.0 504.0L1.0 504.0L1.0 575.0L2.0 576.0L7.0 576.0L8.0 575.0L8.0 537.0L9.0 536.0L91.0 536.0L92.0 537.0L92.0 575.0L93.0 576.0L98.0 576.0L100.0 574.0L100.0 507.0L99.0 507.0L99.0 501.0L98.0 501.0L97.0 497.0L92.0 492.0L90.0 492.0L88.0 490.0L85.0 490.0L85.0 489.0ZM153.0 489.0L152.0 490.0L152.0 563.0L153.0 563.0L153.0 566.0L155.0 567.0L155.0 569.0L159.0 573.0L161.0 573.0L163.0 575.0L166.0 575.0L166.0 576.0L236.0 576.0L236.0 575.0L239.0 575.0L239.0 574.0L243.0 573.0L248.0 568.0L249.0 563.0L250.0 563.0L250.0 490.0L249.0 489.0L244.0 489.0L243.0 490.0L243.0 562.0L238.0 568.0L234.0 568.0L234.0 569.0L167.0 569.0L167.0 568.0L164.0 568.0L160.0 564.0L160.0 561.0L159.0 561.0L159.0 490.0L158.0 489.0ZM304.0 489.0L303.0 490.0L303.0 495.0L304.0 496.0L347.0 496.0L348.0 497.0L348.0 575.0L349.0 576.0L354.0 576.0L355.0 575.0L355.0 497.0L356.0 496.0L400.0 496.0L401.0 495.0L401.0 490.0L400.0 489.0ZM466.0 489.0L466.0 490.0L462.0 490.0L462.0 491.0L458.0 492.0L454.0 496.0L454.0 498.0L452.0 499.0L452.0 502.0L451.0 502.0L451.0 563.0L452.0 563.0L452.0 566.0L454.0 567.0L454.0 569.0L458.0 573.0L460.0 573.0L462.0 575.0L465.0 575.0L465.0 576.0L535.0 576.0L535.0 575.0L538.0 575.0L538.0 574.0L542.0 573.0L546.0 569.0L546.0 567.0L548.0 566.0L548.0 563.0L549.0 563.0L549.0 502.0L548.0 502.0L546.0 496.0L542.0 492.0L540.0 492.0L538.0 490.0L535.0 490.0L535.0 489.0ZM603.0 489.0L602.0 490.0L602.0 575.0L603.0 576.0L686.0 576.0L686.0 575.0L689.0 575.0L689.0 574.0L693.0 573.0L697.0 569.0L697.0 567.0L699.0 565.0L699.0 562.0L700.0 562.0L700.0 543.0L699.0 543.0L698.0 538.0L694.0 534.0L694.0 531.0L697.0 529.0L697.0 527.0L699.0 525.0L699.0 522.0L700.0 522.0L700.0 503.0L699.0 503.0L699.0 500.0L698.0 500.0L698.0 498.0L696.0 497.0L695.0 494.0L693.0 494.0L691.0 491.0L686.0 490.0L686.0 489.0ZM767.0 489.0L767.0 490.0L761.0 491.0L755.0 497.0L755.0 499.0L753.0 501.0L753.0 505.0L752.0 505.0L752.0 561.0L753.0 561.0L753.0 565.0L756.0 568.0L756.0 570.0L758.0 572.0L760.0 572.0L761.0 574.0L766.0 575.0L766.0 576.0L836.0 576.0L836.0 575.0L842.0 574.0L848.0 568.0L848.0 566.0L850.0 564.0L850.0 559.0L851.0 559.0L851.0 506.0L850.0 506.0L850.0 501.0L849.0 501.0L848.0 497.0L843.0 492.0L841.0 492.0L839.0 490.0L836.0 490.0L836.0 489.0ZM904.0 489.0L903.0 490.0L903.0 575.0L904.0 576.0L987.0 576.0L987.0 575.0L990.0 575.0L990.0 574.0L994.0 573.0L999.0 568.0L1000.0 563.0L1001.0 563.0L1001.0 502.0L1000.0 502.0L1000.0 499.0L998.0 498.0L998.0 496.0L994.0 492.0L992.0 492.0L990.0 490.0L987.0 490.0L987.0 489.0ZM1049.0 489.0L1049.0 492.0L1058.0 500.0L1058.0 502.0L1077.0 520.0L1077.0 522.0L1097.0 542.0L1097.0 575.0L1098.0 576.0L1104.0 576.0L1105.0 575.0L1105.0 542.0L1106.0 542.0L1106.0 540.0L1124.0 523.0L1124.0 521.0L1153.0 492.0L1153.0 489.0L1144.0 490.0L1138.0 496.0L1138.0 498.0L1118.0 517.0L1118.0 519.0L1102.0 535.0L1099.0 535.0L1099.0 533.0L1081.0 516.0L1081.0 514.0L1064.0 498.0L1064.0 496.0L1058.0 490.0ZM16.0 496.0L84.0 496.0L84.0 497.0L87.0 497.0L92.0 503.0L92.0 528.0L91.0 529.0L9.0 529.0L8.0 528.0L8.0 506.0L9.0 506.0L9.0 502.0L11.0 501.0L11.0 499.0L16.0 497.0ZM466.0 496.0L534.0 496.0L534.0 497.0L537.0 497.0L541.0 501.0L541.0 504.0L542.0 504.0L542.0 562.0L541.0 562.0L541.0 564.0L537.0 568.0L534.0 568.0L534.0 569.0L466.0 569.0L466.0 568.0L463.0 568.0L459.0 564.0L459.0 561.0L458.0 561.0L458.0 504.0L459.0 504.0L460.0 500.0L463.0 497.0L466.0 497.0ZM609.0 496.0L685.0 496.0L685.0 497.0L689.0 498.0L692.0 502.0L692.0 505.0L693.0 505.0L693.0 521.0L692.0 521.0L691.0 525.0L688.0 528.0L685.0 528.0L685.0 529.0L614.0 529.0L613.0 530.0L613.0 535.0L614.0 536.0L685.0 536.0L685.0 537.0L687.0 537.0L691.0 540.0L692.0 545.0L693.0 545.0L693.0 560.0L692.0 560.0L691.0 565.0L689.0 567.0L685.0 568.0L685.0 569.0L609.0 569.0L608.0 568.0L608.0 497.0ZM767.0 496.0L836.0 496.0L836.0 497.0L838.0 497.0L843.0 503.0L843.0 563.0L841.0 564.0L841.0 566.0L836.0 568.0L836.0 569.0L767.0 569.0L767.0 568.0L763.0 567.0L760.0 563.0L760.0 502.0ZM911.0 496.0L986.0 496.0L986.0 497.0L989.0 497.0L994.0 503.0L994.0 562.0L993.0 562.0L993.0 564.0L989.0 568.0L986.0 568.0L986.0 569.0L911.0 569.0L910.0 568.0L910.0 497.0Z"/></symbol>
+</svg>
+
+<p class="buildflag">Working copy &mdash; carries notes. <a href="../client/index.html">Client version</a></p>
+
+<header class="masthead">
+  <a class="wordmark" href="#top" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+  <nav aria-label="Primary">
+    <a href="#work">The work</a>
+    <a href="#workshop">The workshop</a>
+    <a href="#proof">Proof</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="tel" href="tel:+441323552827">01323 552827</a>
+</header>
+
+<nav class="pill" id="pill" aria-label="Contents">
+  <a href="#work">Work</a>
+  <a href="#workshop">Workshop</a>
+  <a href="#proof">Proof</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
+
+<main id="main">
+
+<!-- ═════════════════ HERO ═════════════════ -->
+<section class="track hero" id="top" data-sheen data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="hero-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+           width="1280" height="853" fetchpriority="high" decoding="async"
+           style="--pz:1.34; --po:40% 56%; --pbri:1.34; --psat:1.22; --pcon:1.04"
+           alt="Close on the rear wing of the Candy Red Volvo P1800: bare winter trees mirrored unbroken along the panel above a chrome waistline strip.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="hero__inner">
+      <p class="label label--accent">Concours restoration &nbsp;·&nbsp; Berwick, East Sussex</p>
+      <h1 class="h-hero" id="hero-h">Artists of Automotive Restoration</h1>
+      <p class="lede">Not a slogan. It is engraved on the plaque we rivet into every car
+        before it leaves.</p>
+      <div class="hero__foot">
+        <p class="label">Bare metal to finished paint &nbsp;·&nbsp; One workshop</p>
+      </div>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Volvo P1800, Candy Red.</b> The rear wing &mdash; bare winter trees mirrored the
+          full length of it. A reflection only stays straight on a straight panel.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room"></div>
+</section>
+
+<!-- ═════════════════ 01 · VOLVO P1800 ═════════════════ -->
+<div class="band" id="work" data-accent="#A61C24" data-ink="#E4776C">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">01</span>
+    <span class="chapter__kind">Lot 01 &nbsp;·&nbsp; Finished and delivered</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Volvo&nbsp;P1800<br>Candy&nbsp;Red</h2>
+    <div>
+      <p class="prose">A year in the workshop and <strong class="fig">1,300</strong> hours of
+        labour, to five changes the owner specified himself. It left on a transporter with a
+        riveted plaque carrying chassis <span class="fig">26282</span>, a file of over
+        <strong class="fig">2,000</strong> photographs, and a thirty-seven-minute film of its own
+        rebuild.</p>
+      <p class="prose">It is the most completely documented car we have finished. All of it &mdash;
+        the owner&rsquo;s specification, the log, the underside, the paint &mdash; is on a page of
+        its own.</p>
+      <p style="margin:1.75rem 0 0"><a class="golink" href="volvo-p1800.html">The full record of Lot 01</a></p>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">Real, verbatim</span>
+    <span>Every figure in this paragraph is DPM&rsquo;s own, published by them about this car:
+      Candy Red, a year, <span class="fig">1,300</span> hours, the five specified changes, over
+      <span class="fig">2,000</span> photographs, chassis <span class="fig">26282</span>, and the
+      37:32 film. Nothing has been added to them.</span>
+  </p>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="ltr" data-rev="0.56,0.84"
+         data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="lot1-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg"
+           width="1280" height="853" loading="lazy" decoding="async"
+           style="--pz:1.5; --po:48% 50%; --pbri:1.32; --psat:1.16; --pcon:1.04"
+           alt="Macro on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve resolve--plate-out">
+      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+           width="1280" height="853" loading="lazy" decoding="async"
+           style="--pz:1.09; --po:54% 45%"
+           alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">Lot 01</span>
+        <span class="label">Volvo P1800 &nbsp;·&nbsp; Chassis 26282</span>
+        <span class="credit credit--dpm">DPM Autobody</span>
+      </span>
+      <h3 class="h-lot" id="lot1-h">A year in the building. Thirteen hundred hours in the hands.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the P1800, close.</b> Chrome wing mirror and A-pillar, the flank
+          behind them carrying the reflection of a hedge line.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the same P1800, whole.</b> On a lane in flat winter
+          daylight, the morning it went on the transporter. The registration was painted out of
+          the original photograph by DPM, not by us.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 02 · BENTLEY S3 CONTINENTAL ═════════════════ -->
+<div class="band" data-accent="#2A3D63" data-ink="#8FB4D9">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">02</span>
+    <span class="chapter__kind">Lot 02 &nbsp;·&nbsp; Finished and delivered</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Bentley S3<br>Continental</h2>
+    <div>
+      <p class="prose">A Continental gives you the longest unbroken panels we ever paint, and
+        near-black gives you nowhere to put a mistake. There is a chrome waistrail that runs the
+        whole length of the car, and either it is straight along every inch of the door and the
+        wing or it is not.</p>
+      <p class="prose">Look at the shut line as the light crosses it. The gap is even top to
+        bottom, and the reflection carries across it without stepping. All of that is settled in
+        bare metal, long before there is any colour to look at.</p>
+      <p class="prose">A second S3 is on the jig now.</p>
+      <p style="margin:1.75rem 0 0">
+        <a class="golink golink--dead" href="#" role="link" data-indicative="Not built for the prototype. On a live site this opens the Bentley's own record, in the same form as Lot 01." aria-describedby="say-2">The full record of Lot 02</a>
+        <span class="caption" id="say-2" hidden></span>
+      </p>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">Real work, real photograph</span>
+    <span>The 1963 Bentley S3 Continental is DPM&rsquo;s own restoration &mdash; there is a
+      sixteen-minute film of it on DPM TV, and a teaser cut. All three plates below are crops of
+      the single 4032&times;3024 photograph DPM publish on their own site, which is why the light
+      matches across them. No hours, chassis number or coat count are claimed here, because DPM
+      have never published any for this car.</span>
+  </p>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.38,0.58" data-rev2="0.74,0.88"
+         data-accent="#2A3D63" data-ink="#8FB4D9" aria-labelledby="lot2-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="../assets/dpm-work/bentley-s3/shutline.jpg"
+           width="1500" height="900" loading="lazy" decoding="async"
+           style="--pz:1.28; --po:52% 48%; --pbri:1.5; --psat:1.06; --pcon:1.02"
+           alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="../assets/dpm-work/bentley-s3/front.jpg"
+           width="1400" height="1050" loading="lazy" decoding="async"
+           style="--pz:1.04; --po:46% 52%"
+           alt="The Bentley's chrome radiator shell, winged-B mascot and twin headlamps, with the near-black front wing curving away behind them.">
+    </div>
+    <div class="resolve resolve--2">
+      <img src="../assets/dpm-work/bentley-s3/whole.jpg"
+           width="2400" height="1351" loading="lazy" decoding="async"
+           style="--pz:1.05; --po:40% 52%"
+           alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">Lot 02</span>
+        <span class="label">Bentley S3 Continental &nbsp;·&nbsp; 1963</span>
+        <span class="credit credit--dpm">DPM Autobody</span>
+      </span>
+      <h3 class="h-lot" id="lot2-h">Twelve feet of panel, and nowhere to hide.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the shut line, close.</b> Door to rear wing, with the chrome
+          waistrail carrying through it. Follow the rail across the gap: it does not step, and the
+          reflection under it does not kink.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--mid">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the radiator, the mascot and the wing.</b> Chrome is unforgiving in
+          a way paint is not: it magnifies whatever is under it instead of filling it.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; and then the car, whole.</b> Photographed on the yard in
+          summer daylight, the day it was signed off. This is a phone file in hard midday sun with
+          a van at the edge of frame &mdash; it is real, and it is exactly the shot the commissioned
+          photography is meant to replace.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 03 · JAGUAR, ASTON MARTIN SEA GREEN ═════════════════ -->
+<div class="band" data-accent="#1F5C3A" data-ink="#4E9E72">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">03</span>
+    <span class="chapter__kind">Lot 03 &nbsp;·&nbsp; In the booth</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Jaguar<br>Aston Martin Sea&nbsp;Green</h2>
+    <div>
+      <p class="prose">The owner wanted a colour from another marque entirely. Aston Martin Sea
+        Green goes down looking almost grey under the booth lamps, and only turns green when it is
+        dry and the light starts moving across it.</p>
+      <p class="prose">Mixed here, sprayed here, judged here, under the same lamps every time. The
+        strip light overhead runs as one unbroken highlight from the front wing to the door, and
+        that unbroken run is the only proof there is that a panel underneath is straight.</p>
+      <p class="prose">This car is still in our hands, so its record stops at the paint. We would
+        rather show you the surface as it is than wait until there is a finished photograph to
+        show you.</p>
+      <p style="margin:1.75rem 0 0">
+        <a class="golink golink--dead" href="#" role="link" data-indicative="Not built for the prototype. On a live site this opens the Jaguar's own record, in the same form as Lot 01." aria-describedby="say-3">The full record of Lot 03</a>
+        <span class="caption" id="say-3" hidden></span>
+      </p>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">Real work, frames from DPM&rsquo;s own film</span>
+    <span>This is the car Ricky called &ldquo;the green jag&rdquo;. Both plates below are frames
+      pulled from DPM&rsquo;s own film &ldquo;Full Custom Classic Jaguar Prep and Paint&rdquo;, at
+      1080p, with the action camera&rsquo;s barrel distortion corrected. The colour name is
+      DPM&rsquo;s own, captioned on their video. The model is deliberately not named on the page:
+      DPM never state it, and the body is not identified from the footage with enough certainty to
+      print it. <b>Rights caveat:</b> David&rsquo;s 28 August email cleared the P1800 film, which
+      his brother&rsquo;s firm produced. It said nothing about this one. Ask before these frames go
+      anywhere public.</span>
+  </p>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="ltr" data-rev="0.50,0.84"
+         data-accent="#1F5C3A" data-ink="#4E9E72" aria-labelledby="lot3-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="../assets/dpm-work/jaguar-sea-green/panels.jpg"
+           width="1440" height="907" loading="lazy" decoding="async"
+           style="--pz:1.22; --po:44% 52%; --pbri:1.34; --psat:1.12; --pcon:1.04"
+           alt="Bonnet, wing and door of the Jaguar in Aston Martin Sea Green, the booth strip light running as one unbroken highlight down each panel in turn.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="../assets/dpm-work/jaguar-sea-green/booth.jpg"
+           width="1780" height="999" loading="lazy" decoding="async"
+           style="--pz:1.06; --po:44% 54%"
+           alt="The Jaguar in the spray booth in Aston Martin Sea Green, a painter in a respirator working along the rear wing, the DPM signwriting on the wall behind.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">Lot 03</span>
+        <span class="label">Jaguar &nbsp;·&nbsp; Aston Martin Sea Green</span>
+        <span class="credit credit--dpm">DPM Autobody</span>
+      </span>
+      <h3 class="h-lot" id="lot3-h">Mixed here. Sprayed here. Judged here.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; wing, bonnet and door.</b> One strip light, one highlight, running
+          from panel to panel without breaking. Metallic green is the least forgiving colour there
+          is for hiding a low spot.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the same car, in the booth.</b> Colour going down, under our own
+          lamps, in our own building. This is as far as the record goes for now.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 04 · THE WORKSHOP ═════════════════ -->
+<div class="band" id="workshop" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">04</span>
+    <span class="chapter__kind">The workshop</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">What we do,<br>and what goes out</h2>
+    <p class="prose">Bare-metal restoration and concours paint on classic and performance cars, in
+      one building in Berwick, East Sussex. Panel work, lead loading, filler, primer, colour,
+      flatting and polishing &mdash; all of it by the same hands, on the same floor.</p>
+  </div>
+  <div class="does">
+    <div>
+      <p class="prose">A restoration here starts with the car photographed exactly as it arrived,
+        and ends with a plaque riveted into the engine bay carrying its chassis number. Between
+        those two things sits a file that the owner keeps: every panel, every gap, every decision,
+        photographed as it happened.</p>
+      <p class="prose">Two things leave the building. We would rather list them than let
+        &ldquo;full in-house restoration&rdquo; quietly cover them.</p>
+    </div>
+    <ul class="inout">
+      <li><span class="inout__name">Panel work, fabrication, welding</span><span class="inout__where">In house</span></li>
+      <li><span class="inout__name">Lead loading and metal finishing</span><span class="inout__where">In house</span></li>
+      <li><span class="inout__name">Primer, block work, guide coats</span><span class="inout__where">In house</span></li>
+      <li><span class="inout__name">Colour mixing and spraying</span><span class="inout__where">In house</span></li>
+      <li><span class="inout__name">Flatting, cutting and polishing</span><span class="inout__where">In house</span></li>
+      <li><span class="inout__name">Photographic record of the build</span><span class="inout__where">In house</span></li>
+      <li data-out><span class="inout__name">Engine building</span><span class="inout__where">Out of house</span></li>
+      <li data-out><span class="inout__name">Trim and upholstery</span><span class="inout__where">Out of house</span></li>
+    </ul>
+  </div>
+  <p class="caption">
+    <span class="credit credit--copy">First-draft copy</span>
+    <span>The in-house / out-of-house split is drawn from DPM&rsquo;s own public description of
+      the business and from what David said on 26 August. The wording is ours and is a first pass
+      for David to correct &mdash; particularly the eight rows, which should be his list, not
+      ours.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 05 · WHAT CUSTOMERS SAY ═════════════════ -->
+<div class="band" id="proof" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">05</span>
+    <span class="chapter__kind">In their words</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">What the people<br>who own them say</h2>
+  </div>
+
+  <div class="says">
+    <figure class="say">
+      <blockquote>&ldquo;Sorted a previously bodged repair from a large accident repair place, to a
+        standard better than out of the factory. An absolute pleasure to deal with.&rdquo;</blockquote>
+      <figcaption class="say__by"><b>Liam Hunt</b> <span>Recommendation on Facebook</span></figcaption>
+    </figure>
+
+    <figure class="say say--sub">
+      <blockquote>&ldquo;Great quality of work to a very high standard. I&rsquo;m very fussy and
+        they are spot on &mdash; got my business from now on.&rdquo;</blockquote>
+      <figcaption class="say__by"><b>Craig Mayhew</b> <span>Recommendation on Facebook</span></figcaption>
+    </figure>
+
+    <figure class="say say--sub">
+      <blockquote>&ldquo;Sigh of relief that it&rsquo;s this far now. Next after polish is to
+        rebuild it without scratching it.&rdquo;</blockquote>
+      <figcaption class="say__by"><b>Chris Bulmer</b> <span>Following his own car through the shop</span></figcaption>
+    </figure>
+  </div>
+
+  <p class="caption">
+    <span class="credit credit--dpm">All three real, all attributable</span>
+    <span>Liam Hunt (8 February 2017) and Craig Mayhew (6 October 2016) are verbatim Facebook
+      recommendations &mdash; Ricky read all six reachable ones out of his own logged-in session on
+      29 August, because Facebook serves the review cards to an automated context as unhydrated
+      placeholders. All six are transcribed in <code>research/facebook-reviews.md</code>. Chris
+      Bulmer&rsquo;s is a real comment on DPM&rsquo;s &ldquo;final paint&rdquo; post of 19 August
+      2026. Trims are minimal and marked in that file; nothing is reworded.</span>
+    <span class="credit credit--copy">Read this before adding more</span>
+    <span><b>Every one of DPM&rsquo;s visible reviews is a repair or modification customer, and the
+      newest is from September 2020.</b> Not one is a restoration client. The recurring praise is
+      speed and service &mdash; &ldquo;quick turn around&rdquo;, &ldquo;short notice&rdquo;,
+      &ldquo;went out of his way&rdquo; &mdash; which is the register of a good local bodyshop and
+      the opposite of what a concours buyer wants to hear. These two were chosen because they are
+      the only ones that talk about <b>standard</b> rather than speed, and Liam Hunt&rsquo;s
+      &ldquo;better than out of the factory&rdquo; is a customer independently saying what DPM say
+      about themselves. Do not pad this section with the others.</span>
+    <span class="credit credit--copy">Deliberately not on the page</span>
+    <span>Three things were <b>cut from this section on 29 August</b> at Ricky&rsquo;s call, all
+      the same fault &mdash; the page arguing for its own evidence instead of letting it stand:
+      the &ldquo;100% recommended, 24 reviews&rdquo; figure with its line about twenty-four being
+      a small number; a note explaining why a public comment is worth more than a testimonial; and
+      the standfirst &ldquo;Not written by us, and not edited into shape.&rdquo; Pre-emptively
+      defending your own proof is what a shop does when it is worried. The quotes carry the
+      section on their own. Do not put any of them back.</span>
+    <span class="credit credit--copy">Still needed</span>
+    <span>Three or four written lines from actual restoration clients. David has the phone numbers,
+      and no amount of mining Facebook substitutes for it. <b>Nobody quoted has been asked</b> —
+      these are public posts, but quoting a customer on their restorer&rsquo;s own site is
+      DPM&rsquo;s permission to seek, not ours.</span>
+  </p>
+
+  <div class="cols" style="margin-top:clamp(3.5rem,9vh,5.5rem)">
+    <p class="prose"><strong>One of the best-known restoration houses in the country sends its
+      cars here to be painted.</strong> We do other people&rsquo;s paintwork, under other
+      people&rsquo;s names, on cars you have very probably already seen. It is the part of this
+      business our name is not on.</p>
+    <p class="prose">There is a thirty-seven-minute film of the Volvo P1800 rebuild on our own
+      channel, start to finish. And we show at the NEC Classic Motor Show, where a car is judged by
+      the people standing in front of it.</p>
+  </div>
+
+  <p style="margin:clamp(2.5rem,6vh,3.5rem) 0 0"><a class="golink" href="volvo-p1800.html">One car, documented in full</a></p>
+
+  <p class="caption">
+    <span class="credit credit--copy">Open with David</span>
+    <span>The paint-for-other-restorers claim is real and it is the strongest thing DPM have, but
+      the house is <b>not named</b> here because permission has not been asked for. Getting it
+      turns that paragraph into the single best sentence on the site. The 37:32 film&rsquo;s
+      rights sit with the production company, so a live site links to it rather than embedding it
+      until that is settled.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 06 · CONTACT ═════════════════ -->
+<section class="contact" id="contact" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
+  <div class="contact__plate">
+    <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+         width="1280" height="853" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="contact__inner">
+    <div class="chapter" style="border-top-color:var(--hair)">
+      <span class="chapter__mark" aria-hidden="true">06</span>
+      <span class="chapter__kind">Enquiries</span>
+    </div>
+    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
+      are not willing to compromise on.</h2>
+    <div class="contact__rows">
+      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
+      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
+      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
+    </div>
+    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
+      Pearce-Martin</strong>. He would rather see a car than quote from photographs of one, so
+      the first conversation usually ends with a date to bring it over. Dave, Ellis and Paul are
+      who you will meet when you do.</p>
+    <p class="caption">
+      <span class="credit credit--dpm">DPM Autobody</span>
+      <span>Background: the Candy Red P1800&rsquo;s rear wing again, held at low contrast so it
+        sits behind the type rather than competing with it.</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <a class="footmark" href="#top" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+    <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
+    <div class="note" id="imagery">
+      <h2>Working notes &mdash; not in the client version</h2>
+      <p><b>Every photograph on this page is DPM&rsquo;s own, of DPM&rsquo;s own work.</b> The
+        AI art-direction plates that stood in for Lots 02 and 03 in the previous build have been
+        replaced by the real Bentley S3 Continental and the Sea Green Jaguar. Nothing synthetic
+        appears on this page any more.</p>
+      <p><b>Rights are still open.</b> These images are DPM&rsquo;s to license, but on cars this
+        identifiable the owners have a say too, and nobody has been asked. That is a gate on
+        going live, not on showing David.</p>
+      <p><b>The copy is a first pass at customer-facing wording, not final.</b> The figures are
+        DPM&rsquo;s own; the sentences around them are ours. Everything on this page is meant to
+        be read aloud to David and corrected, especially the workshop list and the Bentley
+        paragraph, where we are describing work we have only seen photographs of.</p>
+      <p><b>The mark is traced, not redrawn.</b> DPM have no vector artwork; this SVG is traced
+        from the 1955&times;849 PNG on their own site and is a stopgap until real artwork exists.
+        See <a href="../type-study.html">the type study</a> for how it sits against the
+        headline faces under consideration.</p>
+      <p><b>Still to come:</b> a commissioned shoot &mdash; one finished car in daylight away from
+        the workshop is the single biggest gap in the whole library, and the Bentley plate above
+        is the proof of it.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+
+  /* ---------------------------------------------------------------------
+     In-page anchors.
+     A sticky element reports its PINNED position, not its layout position,
+     so once you are below one, native anchor navigation has nowhere to go
+     and silently does nothing. Neutralise position for one synchronous
+     measurement — no paint happens between these three statements — and
+     scroll to the real document offset ourselves.
+     ------------------------------------------------------------------- */
+  function headerHeight() {
+    var h = document.querySelector('.masthead');
+    return h ? h.getBoundingClientRect().height : 0;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      var prev = el.style.position;
+      el.style.position = 'static';
+      var y = el.getBoundingClientRect().top + window.scrollY - headerHeight() - 8;
+      el.style.position = prev;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce.matches ? 'auto' : 'smooth' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    });
+  });
+
+  /* Links that stand where a real project page will go. They latch a state
+     rather than reverting the moment the pointer leaves — which is exactly
+     what the deleted paint-index chips got wrong. */
+  document.querySelectorAll('[data-indicative]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var say = a.getAttribute('data-indicative');
+      var out = document.getElementById(a.getAttribute('aria-describedby'));
+      a.setAttribute('aria-disabled', 'true');
+      if (out) { out.textContent = say; out.hidden = false; }
+    });
+  });
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  /* ---------------------------------------------------------------------
+     The page re-skins itself car by car, from scroll position alone.
+     Whichever band owns the middle of the screen hands its paint code to
+     the chrome. There is nothing to hover and nothing to click: the
+     previous build's swatch chips applied on pointerenter and reverted on
+     pointerleave, so a click appeared to do nothing at all.
+     A colour change is not motion, so this runs with motion reduced too.
+     ------------------------------------------------------------------- */
+  var inMiddle = [];
+  function paint(accent, ink) {
+    if (!accent || !ink) return;
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--accent-ink', ink);
+  }
+  function applySkin() {
+    if (!inMiddle.length) return;
+    var mid = window.innerHeight / 2, best = null, bestD = Infinity;
+    inMiddle.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = el; }
+    });
+    if (best) paint(best.getAttribute('data-accent'), best.getAttribute('data-ink'));
+  }
+  var skin = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var i = inMiddle.indexOf(e.target);
+      if (e.isIntersecting && i === -1) inMiddle.push(e.target);
+      if (!e.isIntersecting && i !== -1) inMiddle.splice(i, 1);
+    });
+    applySkin();
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('[data-accent]').forEach(function (el) { skin.observe(el); });
+
+  /* Phone contents pill, once the hero is behind you. */
+  var pill = document.getElementById('pill');
+  var hero = document.getElementById('top');
+  if (pill && hero) {
+    new IntersectionObserver(function (entries) {
+      pill.classList.toggle('is-on', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  if (reduce.matches) return;   /* static, well-lit page — nothing below runs */
+
+  /* ---------------------------------------------------------------------
+     The travelling light.
+     Two ground-coloured veils slide apart on transform only; the lit band
+     is the gap between them. Nothing is painted over the photograph.
+
+     Geometry, and the client's two notes about it:
+       · The band starts already biting the left (or right) edge, so the
+         panel reads as LIT on arrival rather than as a black screen.
+       · Progress is eased out, so the first 200px of scroll produce the
+         largest movement and the sweep has paid off inside one viewport.
+     ------------------------------------------------------------------- */
+  var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
+    var rev = (track.getAttribute('data-rev') || '0.58,0.86').split(',').map(Number);
+    var rev2 = (track.getAttribute('data-rev2') || '').split(',').map(Number);
+    return {
+      track: track,
+      stage: track.querySelector('.stage'),
+      resolve: track.querySelector('.resolve'),
+      resolve2: track.querySelector('.resolve--2'),
+      rtl: track.getAttribute('data-dir') === 'rtl',
+      rev: rev,
+      rev2: rev2.length === 2 && !isNaN(rev2[0]) ? rev2 : null,
+      live: false
+    };
+  });
+
+  var rail = document.querySelector('.rail');
+  var railDot = document.querySelector('.rail__dot');
+  var ticking = false;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var p = panels.find(function (x) { return x.track === e.target; });
+      if (p) p.live = e.isIntersecting;
+    });
+    schedule();
+  }, { rootMargin: '25% 0px 25% 0px' });
+
+  panels.forEach(function (p) { io.observe(p.track); });
+
+  function smooth(x) { return x * x * (3 - 2 * x); }
+
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      if (!p.live || !p.stage) continue;
+
+      var r = p.track.getBoundingClientRect();
+      var stickH = p.stage.offsetHeight || vh;
+      var span = r.height - stickH;
+      var t = span > 0 ? clamp(-r.top / span, 0, 1) : clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      /* Eased so the payoff is prompt without being frantic. */
+      var e = 1 - Math.pow(1 - t, 1.6);
+
+      var w = p.stage.offsetWidth;
+      var centre = (p.rtl ? (1.35 - 1.45 * e) : (-0.10 + 1.45 * e)) * w;
+      var half = w * (w < 760 ? 0.42 : 0.34);
+
+      /* The veils are 300% wide; --tl / --tr place them so their gradient
+         edges land exactly on the band, and so neither can ever run out of
+         cloth at the far side of the frame. */
+      p.stage.style.setProperty('--bl', (centre - half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--br', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tl', (centre - half - 3 * w).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tr', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--bc', centre.toFixed(1) + 'px');
+
+      if (p.resolve) {
+        /* The car arrives only at the end. Opacity and a whisper of scale;
+           no directional travel, which is the motion trigger. */
+        p.stage.style.setProperty('--reveal',
+          smooth(clamp((t - p.rev[0]) / (p.rev[1] - p.rev[0]), 0, 1)).toFixed(3));
+      }
+      if (p.resolve2 && p.rev2) {
+        p.stage.style.setProperty('--reveal2',
+          smooth(clamp((t - p.rev2[0]) / (p.rev2[1] - p.rev2[0]), 0, 1)).toFixed(3));
+      }
+    }
+
+    if (rail && railDot) {
+      var max = document.documentElement.scrollHeight - vh;
+      var g = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      railDot.style.setProperty('--railY', (g * (rail.offsetHeight - railDot.offsetHeight)).toFixed(1) + 'px');
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+
+</body>
+</html>

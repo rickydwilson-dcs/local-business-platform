@@ -1,0 +1,1813 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volvo P1800, Candy Red — Lot 01 — DPM Autobody (Direction D prototype)</title>
+<meta name="description" content="The full record of the Candy Red Volvo P1800 restored by DPM Autobody: a year, 1,300 hours, five owner-specified changes, chassis 26282.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<style>
+/* ============================================================================
+   DPM Autobody — Direction D, "The Register".
+   Shared stylesheet for the homepage and the P1800 project page.
+
+   THE DEVICE. One photographic plate, graded LIT, with two ground-coloured
+   veils sliding apart on transform only. What ignites inside the gap is the
+   photograph's own reflection — never a white shape painted over the top.
+   The veil is deliberately NOT opaque (0.74): the panel stays legible when
+   unlit, so the effect reads as a sweep of light over a visible car rather
+   than a reveal out of black. That was the client's first note.
+
+   TIMING. The band travels the full width in exactly one viewport of scroll
+   (.track__room: 100lvh against a 100lvh sticky stage), and it starts already
+   biting the left edge, so the first 200px of scroll visibly moves it.
+
+   ACCENT. Scroll position alone re-skins the page from the car you are in.
+   No hover, no click, nothing to discover, nothing to latch. (The previous
+   build's paint-index chips applied on pointerenter and reverted on
+   pointerleave, so clicking one appeared to do nothing at all. Deleted.)
+
+   Contrast, measured not eyeballed, against ground #0B0B0C:
+     bone      #E8E4DC  15.52:1
+     bone-dim  #A8A399   7.84:1
+     house ink #D8CBAE  12.25:1
+     candy ink #E4776C   6.70:1
+     green ink #4E9E72   6.05:1
+     blue ink  #8FB4D9   9.09:1
+   Worst case is candy ink on the raised panel #1A1A1D at 5.92:1. All AA.
+
+   No tabular-nums and no monospaced face appears anywhere on either page.
+   They carry "1,300 hours", "2,000 photographs" and "57,000 views", and a
+   tabular or mono figure renders those as "1 , 300".
+   ========================================================================= */
+
+@property --accent     { syntax: '<color>'; inherits: true; initial-value: #A61C24; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #E4776C; }
+
+:root {
+  /* Ground */
+  --ground:  #0B0B0C;
+  --surface: #141416;
+  --panel:   #1A1A1D;
+  --bone:    #E8E4DC;
+  --bone-dim:#A8A399;
+  --hair:    rgba(232,228,220,0.14);
+  --hair-2:  rgba(232,228,220,0.07);
+
+  /* The car owns the page from the first pixel */
+  --accent:     #A61C24;
+  --accent-ink: #E4776C;
+
+  /* House accent, for the parts that belong to no car */
+  --house:     #C7BBA1;
+  --house-ink: #D8CBAE;
+
+  /* The veil that shades — not hides — the unlit paint */
+  --veil: rgba(11,11,12,0.74);
+  --falloff: clamp(180px, 30%, 460px);
+
+  /* Highlight geometry, written by rAF */
+  --bl: -200vw;
+  --br:  200vw;
+  --bc:  50%;
+
+  --page: min(1360px, 100% - 3rem);
+  --ease: cubic-bezier(0.22, 0.68, 0.16, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --fs-body: clamp(1.0625rem, 0.44vw + 0.98rem, 1.25rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Explicit, and load-bearing: every comma'd figure on this page inherits
+     from here. Never tabular, never mono. */
+  font-variant-numeric: normal;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 0; }
+
+::selection { background: var(--accent-ink); color: #0B0B0C; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- Type ---------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.034em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.h-hero  { font-size: clamp(2.75rem, 7.6vw, 6.75rem); }
+.h-major { font-size: clamp(2rem, 4.6vw, 4rem); }
+.h-lot   { font-size: clamp(1.75rem, 3.4vw, 3.125rem); }
+.h-sub   { font-size: clamp(1.375rem, 2.1vw, 1.9375rem); line-height: 1.08; }
+
+.prose {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.62;
+  color: #CFCAC1;
+  max-width: 22.6em;
+  margin: 0 0 1.15em;
+  font-variant-numeric: normal;
+}
+.prose:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; color: var(--bone); }
+.prose em { font-style: italic; color: var(--bone); }
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0;
+}
+.label--accent { color: var(--accent-ink); }
+
+.lede {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.875rem);
+  line-height: 1.45;
+  color: #D6D1C8;
+  max-width: 23em;
+  margin: 0;
+}
+
+/* Any figure with a thousands comma lives in here. Proportional, always. */
+.fig { font-variant-numeric: normal; font-family: inherit; font-style: inherit; }
+
+/* --- Page furniture ------------------------------------------------------ */
+
+.grain {
+  position: fixed; inset: 0; z-index: 60;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding: 1.15rem max(1.5rem, calc((100vw - 1360px) / 2)) 2.5rem;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.96) 0%, rgba(11,11,12,0.9) 40%, rgba(11,11,12,0.62) 72%, rgba(11,11,12,0) 100%);
+}
+.wordmark {
+  font-size: 0.8125rem; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  text-decoration: none; color: var(--bone);
+  white-space: nowrap;
+}
+.wordmark span { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+.masthead nav { margin-left: auto; display: flex; gap: clamp(0.9rem, 1.8vw, 1.75rem); }
+.masthead nav a {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+.tel {
+  margin-left: auto;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--bone); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.2rem;
+  transition: border-color 400ms var(--ease);
+  white-space: nowrap;
+}
+.tel:hover { border-bottom-color: var(--accent-ink); }
+.masthead nav + .tel { margin-left: 0; }
+
+/* Back-to-homepage, on the project page. Always in the masthead, and
+   repeated at the foot of the page. */
+.back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding: 0.35rem 0 0.25rem;
+  white-space: nowrap;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.back::before { content: '\2190'; font-size: 0.875rem; letter-spacing: 0; }
+.back:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+/* Phone contents pill. Centred with left/right + margin-inline, never a
+   transform — a transform makes it the containing block for fixed children. */
+.pill {
+  position: fixed; z-index: 45;
+  left: 0; right: 0; margin-inline: auto; width: max-content;
+  max-width: calc(100% - 1.5rem);
+  bottom: 1rem;
+  display: flex; gap: 0.15rem; align-items: center;
+  padding: 0.2rem 0.5rem;
+  background: rgba(11,11,12,0.9);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(232,228,220,0.08);
+  opacity: 0; visibility: hidden;
+  transition: opacity 500ms var(--ease), visibility 0s linear 500ms;
+}
+.pill.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.pill a {
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone); text-decoration: none;
+  padding: 0 0.45rem; min-height: 44px;
+  display: flex; align-items: center;
+}
+@media (min-width: 48rem) { .pill { display: none; } }
+
+/* Scroll "light meter" — the only chrome that moves */
+.rail {
+  position: fixed; right: 1.5rem; top: 22vh; bottom: 22vh; z-index: 30;
+  width: 1px; background: var(--hair-2);
+  pointer-events: none;
+}
+.rail__dot {
+  position: absolute; left: -1px; top: 0;
+  width: 3px; height: 44px;
+  background: var(--accent-ink);
+  transform: translate3d(0, var(--railY, 0px), 0);
+  will-change: transform;
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The plate: one photograph, two veils, one specular core -------------- */
+
+.track { position: relative; }
+
+.stage {
+  position: sticky; top: 0;
+  height: 100lvh;                 /* lvh, never svh */
+  overflow: clip;
+  isolation: isolate;
+  margin: 0;
+}
+/* Real in-flow content AFTER the sticky element, inside its containing block.
+   Neither its own margin nor the container's padding would give it any room.
+   100lvh of room against a 100lvh stage = the light crosses the frame in
+   exactly one viewport of scrolling. */
+.track__room       { height: 100lvh; }
+.track__room--long { height: 150lvh; }   /* only where a resolve follows the light */
+
+.plate { position: absolute; inset: 0; overflow: clip; }
+.plate img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+
+.veil {
+  position: absolute; top: -14%; bottom: -14%;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 2;
+  /* The veils dissolve as the finished car arrives, so the resolve never
+     crossfades against a hard diagonal veil edge — the light opens out into
+     the photograph instead of wiping across it. */
+  opacity: calc(1 - var(--reveal, 0));
+}
+.veil--l {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tl, var(--bl)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to left, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+.veil--r {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tr, var(--br)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to right, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+
+/* The wet spike: additive, narrow, warm. Rides the centre of the band. */
+.spec {
+  position: absolute; top: -8%; bottom: -8%; left: 0;
+  width: clamp(190px, 26%, 460px);
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+  opacity: calc(1 - var(--reveal, 0));
+  transform: translate3d(var(--bc), 0, 0) translateX(-50%);
+  background: linear-gradient(100deg,
+      rgba(255,248,235,0) 0%,
+      rgba(255,248,235,0.06) 34%,
+      rgba(255,250,240,0.30) 50%,
+      rgba(255,248,235,0.06) 66%,
+      rgba(255,248,235,0) 100%);
+}
+
+/* A horizon shade so the plate never sits as a flat rectangle. Much lighter
+   than the previous build: the floor of the frame has to stay legible. */
+.plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0) 26%, rgba(11,11,12,0) 60%, rgba(11,11,12,0.82) 100%),
+    radial-gradient(160% 125% at 50% 44%, rgba(11,11,12,0) 60%, rgba(11,11,12,0.32) 100%);
+}
+
+/* The whole car, arriving only at the end */
+.resolve {
+  position: absolute; inset: 0; z-index: 5;
+  opacity: var(--reveal, 0);
+  /* Where a second stop follows, the first one also scales UP as it goes, so
+     the change reads as pushing through the detail rather than as a straight
+     dissolve. A dissolve between a frame-filling badge and a wide shot of a
+     car is a double exposure, and it looks like one. */
+  transform: scale(calc(1.05 - 0.05 * var(--reveal, 0) + 0.14 * var(--reveal2, 0)));
+  will-change: opacity, transform;
+}
+/* Second stop, for the one section that resolves macro → detail → wide */
+.resolve--2 { z-index: 6; opacity: var(--reveal2, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0))); }
+.resolve img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+}
+.resolve::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.44) 0%, rgba(11,11,12,0.02) 28%, rgba(11,11,12,0.14) 56%, rgba(11,11,12,0.88) 100%);
+}
+/* The nearside front corner of slide-01, where DPM painted the registration
+   out in white. Shaded down so it is not the thing you look at. */
+.resolve--plate-out::after {
+  background:
+    radial-gradient(62% 52% at 4% 82%, rgba(11,11,12,0.95) 0%, rgba(11,11,12,0.66) 34%, rgba(11,11,12,0.2) 66%, rgba(11,11,12,0) 88%),
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0.03) 30%, rgba(11,11,12,0.16) 58%, rgba(11,11,12,0.9) 100%);
+}
+
+/* Content laid over a stage */
+.stage__over {
+  position: absolute; inset: 0; z-index: 10;
+  display: grid; align-content: end;
+  width: var(--page); margin-inline: auto;
+  padding-bottom: clamp(9.5rem, 20vh, 11rem);
+  pointer-events: none;
+}
+.stage__over > * { pointer-events: auto; }
+
+.stage__tag {
+  display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  background: rgba(11,11,12,0.86);
+  border: 1px solid var(--hair);
+  padding: 0.45rem 0.75rem;
+  justify-self: start;
+  margin-bottom: 1.25rem;
+}
+
+/* Every photograph gets a caption sitting with it, saying what the car is and
+   what the shot shows. On a resolving stage the caption crossfades with the
+   picture, so the words on screen always describe the frame on screen. Both
+   states occupy the same grid cell, so nothing reflows. */
+.stage__cap {
+  position: absolute; z-index: 11;
+  left: 0; right: 0; bottom: clamp(4.75rem, 8vh, 5.25rem);
+  width: var(--page); margin-inline: auto;
+  display: grid;
+  font-size: 0.8125rem; line-height: 1.5;
+  color: var(--bone-dim);
+  pointer-events: none;
+}
+.stage__cap > * { grid-area: 1 / 1; pointer-events: auto; }
+.stage__cap-line {
+  display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; align-items: baseline;
+  max-width: 44em;
+  align-self: end;
+  transition: opacity 220ms linear;
+}
+/* Steeper than the picture's own crossfade (x1.9, offset 0.9), so that at any
+   paused scroll position one caption is legible and the other is at most 0.1.
+   Stopping mid-transition used to print both sets of words on top of each
+   other. */
+.stage__cap-line--macro { opacity: calc(1 - var(--reveal, 0) * 1.9); }
+.stage__cap-line--mid   { opacity: min(calc(var(--reveal, 0) * 1.9 - 0.9), calc(1 - var(--reveal2, 0) * 1.9)); }
+.stage__cap-line--wide  { opacity: calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9); }
+.stage__cap b { color: var(--bone); font-weight: 500; }
+@media (min-width: 48rem) {
+  .stage__cap { bottom: clamp(2rem, 4vh, 3rem); }
+  .stage__over { padding-bottom: clamp(9rem, 18vh, 10.5rem); }
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+/* The light travels under the copy. Give the copy its own ground rather than
+   darkening the whole plate, which would put the light out. z-index is
+   negative inside this layer's own stacking context, so it sits behind the
+   text and still above the photograph. */
+.hero__inner::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: -14vh -34vw -14vh -40vw;
+  background: linear-gradient(101deg,
+      rgba(11,11,12,0.93) 22%,
+      rgba(11,11,12,0.66) 50%,
+      rgba(11,11,12,0.2) 74%,
+      rgba(11,11,12,0) 90%);
+}
+.stage__over::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto -30vw -14vh -40vw; height: 66%;
+  background: linear-gradient(to top,
+      rgba(11,11,12,0.94) 20%,
+      rgba(11,11,12,0.66) 52%,
+      rgba(11,11,12,0) 100%);
+}
+
+.hero__inner {
+  position: absolute; inset: 0; z-index: 10;
+  width: var(--page); margin-inline: auto;
+  display: grid; align-content: center;
+  padding-top: 4rem;
+  /* Reserve the foot of the phone viewport for the caption, which is pinned
+     there and can run to four lines. The copy centres in what is left. */
+  padding-bottom: 15rem;
+}
+@media (min-width: 48rem) { .hero__inner { padding-bottom: 0; } }
+.hero h1 { margin: 0.6rem 0 1.6rem; max-width: 14ch; }
+/* In flow on a phone, where the caption can run to five lines and there is no
+   room to stack two absolutely positioned blocks above it. */
+.hero__foot {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; align-items: baseline;
+}
+@media (min-width: 48rem) {
+  .hero__foot { position: absolute; left: 0; right: 0; margin-top: 0; bottom: clamp(11rem, 21vh, 13rem); }
+}
+.hint { display: flex; align-items: center; gap: 0.75rem; }
+.hint::before {
+  content: ''; width: clamp(28px, 5vw, 64px); height: 1px;
+  background: linear-gradient(to right, var(--accent-ink), rgba(232,228,220,0));
+  transition: background 700ms var(--ease);
+}
+.hint--still { display: none; }
+
+/* --- Section shells ------------------------------------------------------ */
+
+.band { width: var(--page); margin-inline: auto; }
+.band[id], section[id] { scroll-margin-top: 5.5rem; }
+
+/* THE BOUNDARY. The client could not tell where one section stopped and the
+   next started, so every kept section now opens with the same three things,
+   in the same place, at the same size: a rule across the full measure, a
+   lettered mark that inherits the car's accent, and a kind. Scrolling past
+   one is unmistakable. */
+.chapter {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0 1.25rem;
+  padding-top: clamp(5.5rem, 13vh, 10rem);
+  border-top: 1px solid var(--hair);
+  position: relative;
+}
+.chapter::before {
+  content: ''; position: absolute; top: -2px; left: 0;
+  width: clamp(3.5rem, 8vw, 6rem); height: 3px;
+  background: var(--accent-ink);
+  transition: background-color 700ms var(--ease);
+}
+.chapter__mark {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 200; letter-spacing: -0.02em; line-height: 1;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.chapter__kind {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.chapter + .section-head { padding-top: clamp(1.75rem, 4vh, 2.75rem); border-top: 0; }
+
+.section-head {
+  display: grid; gap: 1.25rem;
+  padding: clamp(6rem, 14vh, 11rem) 0 clamp(2.5rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.section-head--flush { border-top: 0; }
+
+.rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
+
+/* Credit tags. Two cases, and they never look alike. */
+.credit {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  white-space: nowrap;
+}
+.credit--dpm { color: var(--bone); border: 1px solid var(--hair); }
+.credit--dpm::before { content: ''; width: 5px; height: 5px; background: var(--accent-ink); }
+.credit--ai  { color: #E3C88A; border: 1px dashed rgba(227,200,138,0.55); }
+.credit--copy{ color: var(--bone-dim); border: 1px dashed var(--hair); }
+
+.caption {
+  margin: 0.85rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline;
+  font-size: 0.8125rem; line-height: 1.55;
+  color: var(--bone-dim);
+  max-width: 44em;
+}
+.caption b { color: var(--bone); font-weight: 500; }
+
+/* A figure and its caption share one container and one rule, so the binding
+   is structural rather than a matter of proximity. */
+.bound {
+  border-top: 1px solid var(--hair);
+  padding-top: 1rem;
+  margin: 0;
+}
+.bound > img { width: 100%; height: auto; }
+.bound > figcaption { padding-top: 0.85rem; }
+
+/* --- Link out to a project page ------------------------------------------ */
+
+.golink {
+  display: inline-flex; align-items: center; gap: 0.9rem;
+  min-height: 44px;
+  padding: 0.55rem 0.35rem 0.55rem 0;
+  text-decoration: none;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone);
+  border-bottom: 1px solid var(--accent-ink);
+  transition: color 400ms var(--ease), border-color 700ms var(--ease), gap 500ms var(--ease-out);
+}
+.golink::after {
+  content: ''; width: 0.5em; height: 0.5em; flex: none;
+  border-top: 1px solid var(--accent-ink);
+  border-right: 1px solid var(--accent-ink);
+  transform: rotate(45deg);
+  transition: border-color 700ms var(--ease);
+}
+.golink:hover { gap: 1.4rem; color: var(--accent-ink); }
+.golink--dead {
+  color: var(--bone-dim);
+  border-bottom-style: dashed;
+  border-bottom-color: var(--hair);
+  cursor: not-allowed;
+}
+.golink--dead::after { border-color: var(--hair); }
+.golink--dead:hover { gap: 0.9rem; color: var(--bone-dim); }
+
+/* --- The register (identity block) --------------------------------------- */
+
+.register {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0; margin: 0;
+  border-top: 1px solid var(--hair);
+}
+.register > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.register dt {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-top: 0.28rem;
+}
+.register dd {
+  margin: 0;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.register dd b { font-weight: 500; }
+
+.swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
+.swatch i {
+  width: 2.25rem; height: 1.15rem;
+  background: var(--accent);
+  border: 1px solid var(--hair);
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The owner's specification ------------------------------------------- */
+
+.spec-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.spec-list li {
+  display: grid; gap: 0.3rem 1.75rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.spec-list__n {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.spec-list__name {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.spec-list__note { font-size: 0.875rem; line-height: 1.6; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 48rem) {
+  .spec-list li { grid-template-columns: 3.5rem minmax(0, 17rem) minmax(0, 1fr); }
+}
+
+/* --- The plaque ---------------------------------------------------------- */
+
+.plaque { position: relative; margin-block: clamp(3rem, 8vh, 6rem); }
+.plaque__img { position: relative; height: clamp(56lvh, 72vw, 86lvh); overflow: clip; }
+.plaque__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 44%;
+  transform: scale(1.03);
+  filter: saturate(1.06) contrast(1.02) brightness(1.1);
+}
+.plaque__img::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 18%, rgba(11,11,12,0.18) 42%, rgba(11,11,12,0.68) 62%, rgba(11,11,12,0.93) 80%, rgba(11,11,12,0.99) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.38) 0%, rgba(11,11,12,0) 30%);
+}
+.plaque__line {
+  position: absolute; left: 0; right: 0; z-index: 2;
+  bottom: clamp(1.75rem, 4.5vh, 3.25rem);
+  width: var(--page); margin-inline: auto;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.3125rem, 2.5vw, 2.125rem);
+  line-height: 1.26;
+  color: var(--bone);
+  margin: 0 auto;
+  text-wrap: balance;
+  font-variant-numeric: normal;
+  text-shadow: 0 1px 24px rgba(11,11,12,0.9);
+}
+.plaque__line span { display: block; max-width: 17em; }
+.plaque__line b { font-weight: 400; }
+.plaque__note {
+  width: var(--page); margin-inline: auto;
+  padding-top: clamp(1.75rem, 4vh, 2.75rem);
+  border-top: 1px solid var(--hair);
+  margin-top: clamp(1.5rem, 3vh, 2rem);
+}
+.plaque__note .caption { margin: 0 0 0.9rem; }
+
+/* --- Grids --------------------------------------------------------------- */
+
+.grid {
+  display: grid; gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+@media (min-width: 34rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.grid figure { background: var(--surface); border-top: 1px solid var(--hair-2); padding-top: 0.75rem; }
+.grid img { width: 100%; height: auto; }
+.grid figcaption {
+  padding: 0.7rem 0 0;
+  font-size: 0.8125rem; line-height: 1.5; color: var(--bone-dim);
+  max-width: 44em;
+}
+.grid figcaption b { color: var(--bone); font-weight: 500; }
+.grid--wide { grid-column: 1 / -1; }
+
+/* --- The log ------------------------------------------------------------- */
+
+.entry {
+  padding-block: clamp(2.75rem, 7vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.entry__meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center;
+  margin-bottom: 1.35rem;
+}
+.entry__date {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.entry h3 { max-width: 22ch; color: var(--bone); }
+.entry__by {
+  margin-top: 1.35rem;
+  display: flex; align-items: center; gap: 0.85rem;
+  color: var(--bone-dim);
+  font-size: 0.875rem;
+}
+.entry__initial {
+  width: 2.25rem; height: 2.25rem; flex: none;
+  border: 1px solid var(--accent-ink);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-size: 0.9375rem;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease), border-color 700ms var(--ease);
+}
+.entry__by b { color: var(--bone); font-weight: 500; }
+.entry__body { margin-top: 1.75rem; }
+@media (min-width: 62rem) {
+  .entry__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 9fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  .entry__body { margin-top: 0; }
+}
+.entry figure { margin-top: 2.25rem; }
+.entry figure img { width: 100%; }
+
+/* --- Stages -------------------------------------------------------------- */
+
+.stages { list-style: none; margin: 0; padding: 0; max-width: 68rem; }
+.stages li {
+  display: grid; gap: 0.35rem 1.75rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.stages li:last-child { border-bottom: 1px solid var(--hair-2); }
+.stages__n { font-size: 0.8125rem; color: var(--accent-ink); letter-spacing: 0.1em; transition: color 700ms var(--ease); }
+.stages__name {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-size: clamp(1.1875rem, 1.8vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.stages__note { font-size: 0.875rem; line-height: 1.55; color: var(--bone-dim); max-width: 30em; }
+.stages__time { font-size: 0.8125rem; color: var(--bone-dim); white-space: nowrap; }
+@media (min-width: 62rem) {
+  .stages li { grid-template-columns: 3rem minmax(0, 15rem) minmax(0, 1fr) auto; }
+  .stages__time { text-align: right; }
+}
+
+/* --- Paint specification (project page only; never a chart) --------------- */
+
+.paintspec {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+@media (min-width: 60rem) { .paintspec { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.paintspec__swatch {
+  height: clamp(9rem, 22vw, 15rem);
+  background: linear-gradient(104deg, #4A0D12 0%, var(--accent) 42%, #D84A46 58%, var(--accent) 72%, #3A0A0E 100%);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+/* --- What DPM does ------------------------------------------------------- */
+
+.does {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+@media (min-width: 60rem) { .does { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.inout { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.inout li {
+  display: grid; gap: 0.2rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.inout__name { font-family: 'Newsreader', ui-serif, Georgia, serif; font-size: 1.0625rem; font-weight: 300; color: var(--bone); }
+.inout__where { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); }
+.inout li[data-out] .inout__where { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+/* --- Proof --------------------------------------------------------------- */
+
+.proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.proof li {
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  border-bottom: 1px solid var(--hair-2);
+  display: grid; gap: 0.5rem;
+}
+.proof__fig {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1; letter-spacing: -0.01em;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.proof__what { font-size: 0.9375rem; line-height: 1.55; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 60rem) {
+  .proof li { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: baseline; }
+}
+
+/* --- Two-column prose ---------------------------------------------------- */
+
+.cols {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+}
+@media (min-width: 60rem) { .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* --- Contact ------------------------------------------------------------- */
+
+.contact { position: relative; overflow: clip; }
+.contact__plate { position: absolute; inset: 0; }
+.contact__plate img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 62% 46%;
+  transform: scale(1.08);
+  filter: brightness(1.14) saturate(1.06);
+}
+.contact__plate::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.5) 46%, rgba(11,11,12,0.94) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.93) 0%, rgba(11,11,12,0.72) 44%, rgba(11,11,12,0.3) 80%, rgba(11,11,12,0.5) 100%);
+}
+.contact__inner {
+  position: relative; z-index: 2;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(5.5rem, 15vh, 11rem) 0 clamp(5rem, 12vh, 9rem);
+}
+.contact__rows {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  border-top: 1px solid var(--hair);
+}
+.contact__rows a, .contact__rows p {
+  display: block; margin: 0;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  text-decoration: none;
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 2vw, 1.625rem);
+  transition: color 400ms var(--ease);
+  font-variant-numeric: normal;
+}
+.contact__rows a:hover { color: var(--accent-ink); }
+.contact__rows small {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 0.4rem;
+}
+@media (min-width: 60rem) {
+  .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
+  .contact__rows > * { border-bottom: none; }
+}
+
+/* --- Footer -------------------------------------------------------------- */
+
+.colophon {
+  width: var(--page); margin-inline: auto;
+  padding: clamp(3rem, 8vh, 5rem) 0 8rem;
+  border-top: 1px solid var(--hair-2);
+  display: grid; gap: 1.5rem;
+}
+.note {
+  border: 1px solid var(--hair);
+  padding: 1.15rem 1.25rem;
+  max-width: 29em;
+  font-size: 0.8125rem;
+  line-height: 1.62;
+  color: var(--bone-dim);
+}
+.note b { color: var(--bone); font-weight: 500; }
+.note p { margin: 0 0 0.75em; }
+.note p:last-child { margin-bottom: 0; }
+.note h2 { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 0.9rem; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--bone); color: #0B0B0C;
+  padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- Wider viewports ----------------------------------------------------- */
+
+@media (min-width: 60rem) {
+  .register > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
+  .hero__inner { padding-top: 0; }
+  .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+}
+
+@media (max-width: 47.99rem) {
+  .masthead nav { display: none; }
+  .masthead nav + .tel { margin-left: auto; }
+  .rail { display: none; }
+  :root { --falloff: clamp(120px, 36%, 260px); }
+  .spec { width: clamp(150px, 46%, 320px); }
+  .chapter { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+/* --- Reduced motion: one well-lit photograph, nothing lost ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  /* The previous build hid .veil and .spec and left the graded-down plate
+     behind, so Reduce Motion delivered a near-black rectangle. The plate is
+     graded FOR the veil; with no veil it has to be graded back up, and the
+     vignette that shaped the travelling band has to go with it. */
+  :root { --bl: -300vw; --br: 300vw; }
+  .veil, .spec { display: none; }
+  .plate img {
+    filter: saturate(1.12) contrast(1.02) brightness(1.34) !important;
+  }
+  .plate::after {
+    background:
+      linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 24%, rgba(11,11,12,0) 58%, rgba(11,11,12,0.8) 100%) !important;
+  }
+  .resolve { opacity: 1; transform: none; position: relative; }
+  .resolve--2 { opacity: 1; }
+  .track__room, .track__room--long { height: 0; }
+  .stage { position: relative; height: 78lvh; }
+  .has-resolve .stage { height: auto; }
+  .has-resolve .plate { position: relative; height: 58lvh; }
+  .has-resolve .resolve { height: 74lvh; }
+  .has-resolve .stage__over { position: absolute; inset: auto 0 0 0; }
+  /* Both caption states are simply printed, one under the other. */
+  .stage__cap { position: relative; bottom: auto; padding-top: 0.9rem; gap: 0.35rem; }
+  .stage__cap > * { grid-area: auto; }
+  .stage__cap-line { opacity: 1 !important; }
+  /* The hero is the one stage whose copy has to sit ON a photograph. At
+     100lvh two absolutely positioned blocks clear each other; at the shorter
+     static height they do not, so the foot goes back into flow and the
+     caption is pinned to the bottom of the frame it describes. Where the hero
+     resolves, only the resolved frame is shown — a headline straddling the
+     seam between two stacked pictures is worse than either. */
+  .hero .stage { height: 86lvh; }
+  .hero.has-resolve .stage { height: 86lvh; }
+  .hero.has-resolve .plate { display: none; }
+  .hero.has-resolve .resolve { position: absolute; inset: 0; height: auto; }
+  .hero.has-resolve .stage__cap-line--macro { display: none; }
+  .hero .hero__inner { position: absolute; padding: 5.5rem 0 9rem; }
+  .hero .hero__foot { position: static; margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+  .hero .stage__cap {
+    position: absolute; bottom: clamp(1.5rem, 3vh, 2.5rem);
+    padding-top: 0;
+  }
+
+  .pill { display: none; }
+  .hint--move { display: none; }
+  .hint--still { display: inline; }
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <a class="wordmark" href="direction-d-register.html">DPM<span>&nbsp;·&nbsp;</span>Autobody</a>
+  <a class="back" href="direction-d-register.html">All work</a>
+  <nav aria-label="Primary">
+    <a href="#register">Register</a>
+    <a href="#spec">Specification</a>
+    <a href="#detail">Detail</a>
+    <a href="#log">Log</a>
+    <a href="#stages">Stages</a>
+    <a href="#paint">Paint</a>
+  </nav>
+  <a class="tel" href="tel:+441323552827">01323 552827</a>
+</header>
+
+<nav class="pill" id="pill" aria-label="Contents">
+  <a href="direction-d-register.html">Home</a>
+  <a href="#register">Register</a>
+  <a href="#detail">Detail</a>
+  <a href="#log">Log</a>
+  <a href="#stages">Stages</a>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
+
+<main id="main">
+
+<!-- ═════════════════ HERO ═════════════════ -->
+<section class="track hero has-resolve" id="top" data-sheen data-dir="ltr" data-rev="0.58,0.86"
+         aria-labelledby="hero-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg"
+           width="1280" height="853" fetchpriority="high" decoding="async"
+           style="--pz:1.6; --po:42% 52%; --pbri:1.34; --psat:1.18; --pcon:1.04"
+           alt="Macro on the P1800's nearside headlamp: a polished chrome ring and lens, with the deep Candy Red front wing curving away behind it.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+           width="1280" height="853" decoding="async"
+           style="--pz:1.06; --po:50% 48%"
+           alt="The rear three-quarter of the Candy Red Volvo P1800 in low sun, bare trees mirrored the full length of the rear wing above the chrome waistline.">
+    </div>
+    <div class="hero__inner">
+      <p class="label label--accent">Lot 01 &nbsp;·&nbsp; The record</p>
+      <h1 class="h-hero" id="hero-h">Volvo P1800, Candy Red</h1>
+      <p class="lede">A year in the workshop. <span class="fig">1,300</span> hours of labour.
+        Chassis <span class="fig">26282</span>.</p>
+      <div class="hero__foot">
+        <p class="label hint"><span class="hint--move">Scroll. The light moves; the car does not.</span><span class="hint--still">The register begins below.</span></p>
+        <p class="label"><a href="direction-d-register.html" style="text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:.2rem">&larr;&nbsp; Back to the homepage</a></p>
+      </div>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the P1800's nearside headlamp.</b> Chrome ring, lens, and the Candy
+          Red front wing curving away behind it.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span><b>Above &mdash; the rear three-quarter, whole.</b> This is the photograph the
+          homepage opens on as an abstract; here it is, entire. Bare winter trees mirrored the
+          full length of the rear wing.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 01 · THE REGISTER ═════════════════ -->
+<div class="band" id="register">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">01</span>
+    <span class="chapter__kind">The register</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">One car,<br>documented in full</h2>
+    <p class="prose">Documented the way an auction house documents one: what it is, what was asked
+      for, how long it took, who signed it. Every photograph on this page is <strong>DPM's own, of
+      DPM's own work</strong>, and every figure comes from what DPM published about this car.</p>
+  </div>
+  <div class="lot-two">
+    <div>
+      <p class="prose">DPM wrote the entry for this car themselves, on the day it went on the
+        transporter. It is already a lot record &mdash; the colour, the duration, the labour, the
+        list of what the owner asked for, and the size of the photographic file that backs it up.
+        Nothing here has been improved on.</p>
+      <p class="prose">There is also a thirty-seven-minute film of the restoration with
+        <span class="fig">57,000</span> views. One car, and DPM already hold more documentary
+        evidence for it than the three restoration houses we studied publish for their entire
+        back catalogues.</p>
+    </div>
+    <dl class="register">
+      <div><dt>Marque</dt><dd>Volvo</dd></div>
+      <div><dt>Model</dt><dd>P1800</dd></div>
+      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Candy Red</span></dd></div>
+      <div><dt>In our hands</dt><dd>A year</dd></div>
+      <div><dt>Labour</dt><dd><b class="fig">1,300</b> hours</dd></div>
+      <div><dt>Chassis</dt><dd class="fig">26282</dd></div>
+      <div><dt>Photographic file</dt><dd>Over <b class="fig">2,000</b> photographs</dd></div>
+      <div><dt>Film</dt><dd>37 minutes 32 seconds &nbsp;·&nbsp; DPM TV</dd></div>
+      <div><dt>Signed</dt><dd>Riveted plaque, chassis <span class="fig">26282</span></dd></div>
+    </dl>
+  </div>
+  <p class="caption" style="margin-top:clamp(1.5rem,4vh,2.5rem)">
+    <span class="credit credit--dpm">DPM Autobody</span>
+    <span>Every value in this register is taken from DPM's own published record of this car.
+      Nothing has been added to it.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 02 · THE SPECIFICATION ═════════════════ -->
+<div class="band" id="spec">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">02</span>
+    <span class="chapter__kind">The owner's specification</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">What the owner<br>asked for</h2>
+    <p class="prose">Five changes, in DPM's own words. A concours restoration is not always a
+      return to standard &mdash; more often it is a considered argument with the factory, and the
+      argument belongs in the record.</p>
+  </div>
+  <ol class="spec-list">
+    <li>
+      <span class="spec-list__n">i</span>
+      <span class="spec-list__name">Candy Red colour</span>
+      <span class="spec-list__note">A translucent colour laid over a metallic base. It reads
+        black in shadow and lights to a deep red where the sun catches it &mdash; which is why
+        this page is built around a light you can move.</span>
+    </li>
+    <li>
+      <span class="spec-list__n">ii</span>
+      <span class="spec-list__name">Wire wheel conversion</span>
+      <span class="spec-list__note">Splined hubs in place of the factory bolt pattern, and a
+        chrome wire wheel at each corner.</span>
+    </li>
+    <li>
+      <span class="spec-list__n">iii</span>
+      <span class="spec-list__name">Power steering conversion</span>
+      <span class="spec-list__note">The one change on this list the owner feels rather than
+        sees.</span>
+    </li>
+    <li>
+      <span class="spec-list__n">iv</span>
+      <span class="spec-list__name">Smoothed chrome bumpers</span>
+      <span class="spec-list__note">Over-riders and their fixings removed, the shells filled,
+        levelled and re-plated. Chrome shows every thousandth you leave behind.</span>
+    </li>
+    <li>
+      <span class="spec-list__n">v</span>
+      <span class="spec-list__name">Lowered</span>
+      <span class="spec-list__note">Ride height set down from standard, which resets every
+        panel gap and arch line you have just spent months getting right.</span>
+    </li>
+  </ol>
+  <p class="caption">
+    <span class="credit credit--dpm">DPM Autobody</span>
+    <span>The five headings are DPM's own list, verbatim.</span>
+    <span class="credit credit--copy">Prototype copy</span>
+    <span>The notes beside them were written for this page.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 03 · THE PLAQUE ═════════════════ -->
+<div class="band" id="plaque">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">03</span>
+    <span class="chapter__kind">The signature</span>
+  </div>
+</div>
+<figure class="plaque">
+  <div class="plaque__img">
+    <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg"
+         width="1280" height="853" loading="lazy" decoding="async"
+         alt="A brushed metal plaque riveted to the Candy Red rocker cover in the engine bay. It is engraved: Restored By DPM Autobody, Artists of Automotive Restoration, Chassis No 26282.">
+    <p class="plaque__line"><span>Restored&nbsp;By <b>DPM&nbsp;Autobody</b>. Artists of Automotive
+      Restoration. Chassis&nbsp;No: <i class="fig">26282</i>.</span></p>
+  </div>
+  <figcaption class="plaque__note">
+    <p class="caption">
+      <span class="credit credit--dpm">DPM Autobody</span>
+      <span><b>Above &mdash; the plaque itself,</b> riveted to the rocker cover in this car's
+        engine bay. The words on the photograph are the words engraved on it.</span>
+    </p>
+    <p class="prose">The headline on the homepage is not a line written for DPM. It is engraved on
+      the plaque they rivet into the engine bay of every car they finish, under the chassis
+      number, where only the next restorer will ever read it. That is the whole business in one
+      object &mdash; and it is the reason this direction is called the Register.</p>
+  </figcaption>
+</figure>
+
+<!-- ═════════════════ 04 · THE CAR, IN DETAIL ═════════════════ -->
+<div class="band" id="detail">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">04</span>
+    <span class="chapter__kind">The car, in detail</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Paint and chrome,<br>because that is what is bought</h2>
+    <p class="prose">The photographs are DPM's own and were taken at <span class="fig">1280</span>
+      pixels wide &mdash; the ceiling of the platform they were published on, and the single
+      clearest argument for commissioning a proper shoot.</p>
+  </div>
+  <div class="grid">
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="A chrome wire wheel and eared spinner on the P1800, spokes bright against the dark tyre.">
+      <figcaption><b>Wire wheel and eared spinner.</b> Specification item&nbsp;ii, on the car.
+        DPM Autobody's photograph of their own work.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="The P1800's nearside headlamp: a polished chrome ring, the lens, and the deep Candy Red front wing curving away behind it.">
+      <figcaption><b>Headlamp, chrome ring and front wing.</b> The same frame this page opens on,
+        uncropped. DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="The P1800 dashboard: four round instruments in a brushed metal binnacle, a slim steering wheel rim and toggle switches below.">
+      <figcaption><b>Instruments and binnacle.</b> Interior, as delivered. DPM Autobody's
+        photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="A close view of the P1800's grey vinyl seat facing, fluted, with the Volvo roundel embossed into the panel.">
+      <figcaption><b>Seat facing, roundel embossed.</b> Trim is one of the two things that go out
+        of house. DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure class="grid--wide">
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="Close on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
+      <figcaption><b>Wing mirror, A-pillar, and the reflection running behind them.</b> A
+        reflection only stays straight on a panel that is straight, so this image is not
+        decoration &mdash; it is evidence. DPM Autobody's photograph of their own work.</figcaption>
+    </figure>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">DPM Autobody</span>
+    <span>All five photographs above are DPM's own, of the Candy Red P1800.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 05 · UNDERNEATH ═════════════════ -->
+<div class="band" id="under">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">05</span>
+    <span class="chapter__kind">Concours evidence</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Underneath,<br>which is where it is judged</h2>
+    <p class="prose">A concours car is judged on its back as well as its face. These are the
+      photographs a restoration house shows last and a judge asks for first, so they sit here
+      &mdash; inside the record, below the paint, doing the job they are actually for.</p>
+  </div>
+  <div class="grid grid--3">
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="The P1800 engine bay complete: red-painted rocker cover and inner wings, blue and yellow air filters, plug leads dressed and routed.">
+      <figcaption><b>Engine bay, finished and dressed.</b> The plaque in section 03 is riveted to
+        the rocker cover in this frame. DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="Twin SU carburettors on the P1800 with blue and yellow Volvo-marked air filter housings.">
+      <figcaption><b>Twin carburettors, filters as supplied.</b> Engine building is the other
+        thing that goes out of house. DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="The factory Volvo identification plate riveted to the P1800's painted inner wing, stamped and unpainted.">
+      <figcaption><b>The factory plate, left as found.</b> Provenance is not something you
+        repaint. DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="The underside of the P1800 on a lift: painted floors, exhaust, rear suspension and a yellow damper, all clean and finished.">
+      <figcaption><b>Floors, exhaust and rear suspension, on the lift.</b> DPM Autobody's
+        photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="Underbody detail of the P1800: a red painted floor pan with copper brake pipe runs and clean fixings.">
+      <figcaption><b>Pipe runs and fixings, underbody.</b> DPM Autobody's photograph.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg" width="1280" height="853"
+           loading="lazy" decoding="async"
+           alt="A coil spring and yellow damper in the P1800's suspension, photographed from beneath the car.">
+      <figcaption><b>Spring and damper.</b> And, in the ride height, specification item&nbsp;v.
+        DPM Autobody's photograph.</figcaption>
+    </figure>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">DPM Autobody</span>
+    <span>Six photographs, DPM's own. Six of the fourteen images DPM published for this car are
+      of its underside and engine bay. That ratio is not a mistake in their edit &mdash; it is
+      what concours documentation looks like.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 06 · THE LOG ═════════════════ -->
+<div class="band" id="log">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">06</span>
+    <span class="chapter__kind">The log</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Four entries,<br>each signed by the man who did the work</h2>
+    <p class="prose">Nobody writes about a job they did not stand in front of, and the difficult
+      weeks stay in &mdash; a restoration story with no problem in it is an advertisement.</p>
+  </div>
+
+  <article class="entry">
+    <div class="entry__grid">
+      <header class="entry__head">
+        <div class="entry__meta">
+          <span class="entry__date">Stage 09 &mdash; Out in the daylight</span>
+          <span class="credit credit--copy">Indicative</span>
+        </div>
+        <h3 class="h-sub">We photographed it more than we painted it</h3>
+        <div class="entry__by">
+          <span class="entry__initial" aria-hidden="true">D</span>
+          <span><b>Dave</b> &mdash; paint and finish</span>
+        </div>
+      </header>
+      <div class="entry__main">
+        <div class="entry__body">
+          <p class="prose">Over <span class="fig">2,000</span> photographs went into the file for
+            this one car. Not for the website. For the owner, and for whoever has it in forty
+            years and wants to know what is underneath the paint before they cut into it.</p>
+          <p class="prose">People assume the photographs are the marketing and the car is the
+            work. It is the other way round. The photographs are the only part of the job that
+            survives after the next owner has had it repainted by somebody else.</p>
+          <p class="prose">I walked round it twice before it went up the ramps onto the
+            transporter. That is not for the owner's benefit, it is for mine. Once it has gone
+            I cannot do anything about what I have missed.</p>
+        </div>
+        <figure class="bound">
+          <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg" width="1280" height="853"
+               loading="lazy" decoding="async"
+               alt="The completed Candy Red Volvo P1800 photographed from the front three-quarter on a lane in flat winter daylight.">
+          <figcaption class="caption">
+            <span class="credit credit--dpm">DPM Autobody</span>
+            <span><b>The frame Dave is describing:</b> the finished P1800 on the lane, the morning
+              it went on the transporter. The registration has been painted out of the original
+              photograph by DPM, not by us.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry__grid">
+      <header class="entry__head">
+        <div class="entry__meta">
+          <span class="entry__date">Stage 07 &mdash; Colour, decided in daylight</span>
+          <span class="credit credit--copy">Indicative</span>
+        </div>
+        <h3 class="h-sub">Candy is the one you cannot go back into</h3>
+        <div class="entry__by">
+          <span class="entry__initial" aria-hidden="true">P</span>
+          <span><b>Paul</b> &mdash; colour, mixing, polish</span>
+        </div>
+      </header>
+      <div class="entry__main">
+        <div class="entry__body">
+          <p class="prose">A candy is a see-through colour over a metallic ground. The depth you
+            are looking at is not pigment, it is distance &mdash; light going down through the
+            colour, off the base, and back out at you.</p>
+          <p class="prose">Which means the colour is built by how much you put on, not by what is
+            in the tin. Two extra passes on one wing and that wing is a shade darker than the one
+            next to it, for ever. <strong>You cannot blend into a candy and you cannot spot-repair
+            one.</strong> If you get it wrong on a door you do the whole side again.</p>
+          <p class="prose">So it is done in one go, same gun, same pressure, same distance, same
+            speed of arm, every panel, and nobody talks to you while you are doing it.</p>
+        </div>
+        <figure class="bound">
+          <img src="assets/art-direction/web/c-hands-colour-12.jpg" width="2400" height="1600"
+               loading="lazy" decoding="async"
+               alt="A hand fanning a set of sprayed metal colour chips against the bare hand-formed wing of a car, held in the daylight of an open workshop door.">
+          <figcaption class="caption">
+            <span class="credit credit--ai">AI art direction</span>
+            <span><b>Not a photograph of this car.</b> A synthetic image standing beside Paul's
+              entry to show the light and crop we would commission for colour selection. Not DPM's
+              work and not their hands.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry__grid">
+      <header class="entry__head">
+        <div class="entry__meta">
+          <span class="entry__date">Stage 04 &mdash; Metal first</span>
+          <span class="credit credit--copy">Indicative</span>
+        </div>
+        <h3 class="h-sub">The bumper came back from the platers with a shadow in it</h3>
+        <div class="entry__by">
+          <span class="entry__initial" aria-hidden="true">E</span>
+          <span><b>Ellis</b> &mdash; metalwork and prep</span>
+        </div>
+      </header>
+      <div class="entry__main">
+        <div class="entry__body">
+          <p class="prose">Smoothing a bumper is mostly making holes disappear. The over-rider
+            fixings come out, the slots get filled, and then the shell has to be levelled by hand
+            until there is nothing left to find.</p>
+          <p class="prose">Chrome does not hide work. It magnifies it. Paint sits on a panel and
+            fills a little; plating goes on in microns and follows every single thing underneath
+            it, and then polishes it up so it catches the light.</p>
+          <p class="prose">The first one came back from the platers looking right in the workshop
+            and wrong in the doorway. Held up to daylight there was a soft dark band about four
+            inches long across the face of it, where I had taken a whisker too much out and left
+            a hollow you could not feel with a thumb. Nothing measured it. The sky measured it.</p>
+          <p class="prose">Stripped, filled again, levelled with a long file rather than a block
+            this time, and back to the platers. Three weeks. <strong>I would rather find it in the
+            doorway than have the owner find it on a lawn at a show.</strong> It was not a good
+            fortnight and I am not going to write it up as one.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry__grid">
+      <header class="entry__head">
+        <div class="entry__meta">
+          <span class="entry__date">Stage 05 &mdash; Straight before shiny</span>
+          <span class="credit credit--copy">Indicative</span>
+        </div>
+        <h3 class="h-sub">Nothing over looked. Nothing left untouched.</h3>
+        <div class="entry__by">
+          <span class="entry__initial" aria-hidden="true">D</span>
+          <span><b>Dave</b> &mdash; paint and finish</span>
+        </div>
+      </header>
+      <div class="entry__main">
+        <div class="entry__body">
+          <p class="prose">That is the line we already write under our own photographs, and it is
+            not a boast, it is a working rule. It means that if a panel is off the car anyway, it
+            gets done properly, even when nobody is ever going to look at it.</p>
+          <p class="prose">Thirteen hundred hours is not one heroic month. It is a year of
+            afternoons where the visible progress is that a gap is now the same at the top as it
+            is at the bottom.</p>
+          <p class="prose">People ask what takes the time. The honest answer is that the last
+            five per cent of a car takes about a third of it, and there is no way of buying your
+            way past that bit.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <hr class="rule">
+</div>
+
+<!-- ═════════════════ 07 · NINE STAGES ═════════════════ -->
+<div class="band" id="stages">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">07</span>
+    <span class="chapter__kind">How a car goes through</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Nine stages</h2>
+    <p class="prose">These are our names for them, not the trade's. Durations are the range across
+      the cars in the shop, not a quotation for yours.</p>
+  </div>
+  <ol class="stages">
+    <li><span class="stages__n">01</span><span class="stages__name">In, and photographed as she came</span><span class="stages__note">Every panel, every gap, every bit of rot, before a spanner touches it.</span><span class="stages__time">1 day</span></li>
+    <li><span class="stages__n">02</span><span class="stages__name">Off it comes</span><span class="stages__note">Strip to a shell. Bagged, labelled, shelved. Nothing goes in a box unmarked.</span><span class="stages__time">1&ndash;2 weeks</span></li>
+    <li><span class="stages__n">03</span><span class="stages__name">Down to what is really there</span><span class="stages__note">Media blast or chemical strip, then the conversation nobody enjoys.</span><span class="stages__time">2&ndash;3 weeks</span></li>
+    <li><span class="stages__n">04</span><span class="stages__name">Metal first</span><span class="stages__note">Panels made, let in, welded, planished. This is where the time goes.</span><span class="stages__time">3 weeks &ndash; 5 months</span></li>
+    <li><span class="stages__n">05</span><span class="stages__name">Straight before shiny</span><span class="stages__note">Block work over bare metal. If it needs filler to look right, it is not right.</span><span class="stages__time">3&ndash;6 weeks</span></li>
+    <li><span class="stages__n">06</span><span class="stages__name">Primer, and the guide coat</span><span class="stages__note">Etch, epoxy, high-build. Then black mist and a long block, twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
+    <li><span class="stages__n">07</span><span class="stages__name">Colour, decided in daylight</span><span class="stages__note">Spray-out cards judged outside the booth, against the car's own metal.</span><span class="stages__time">2 days</span></li>
+    <li><span class="stages__n">08</span><span class="stages__name">Clear, cut and polish</span><span class="stages__note">Coats on, a week to harden, then back to flat by hand and machine.</span><span class="stages__time">2&ndash;3 weeks</span></li>
+    <li><span class="stages__n">09</span><span class="stages__name">Out in the daylight</span><span class="stages__note">Built back up, gaps set, plaque riveted in, then pushed outside and walked round twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
+  </ol>
+  <p class="caption">
+    <span class="credit credit--copy">Prototype copy</span>
+    <span>Stage names and durations written for this page. They would be replaced with DPM's own.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 08 · THE PAINT ═════════════════ -->
+<div class="band" id="paint">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">08</span>
+    <span class="chapter__kind">The paint on this car</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Candy Red,<br>and what that actually means</h2>
+    <p class="prose">This is a specification for one car, not a chart of swatches. The homepage
+      takes its colour from whichever car you are looking at; the colour itself is described
+      here, where it is a fact about the P1800 rather than a demonstration.</p>
+  </div>
+  <div class="paintspec">
+    <div>
+      <div class="paintspec__swatch" role="img"
+           aria-label="A rendering of Candy Red as it behaves in light: nearly black at the edges of the panel, deepening to red, and lifting to a bright translucent red where a highlight crosses it."></div>
+      <p class="caption">
+        <span class="credit credit--copy">Prototype copy</span>
+        <span><b>A rendering, not a spray-out.</b> Mixed in CSS to show the behaviour DPM describe
+          &mdash; black in shadow, deep red in sun. A live site would carry a photograph of a real
+          spray-out card instead.</span>
+      </p>
+    </div>
+    <div>
+      <dl class="register">
+        <div><dt>Colour</dt><dd><b>Candy Red</b> &mdash; DPM's own name for it, first item on the owner's list</dd></div>
+        <div><dt>System</dt><dd>Candy: a translucent colour laid over a metallic ground</dd></div>
+        <div><dt>Where the depth comes from</dt><dd>Not pigment. Light travelling down through the colour, off the base, and back out</dd></div>
+        <div><dt>How the colour is set</dt><dd>By the number of passes, not by what is in the tin</dd></div>
+        <div><dt>Number of coats</dt><dd>Not published. It would be a real figure in DPM's file for this car</dd></div>
+        <div><dt>Manufacturer and code</dt><dd>Not published</dd></div>
+        <div><dt>Repairable</dt><dd>No. A candy cannot be blended into, and cannot be spot-repaired</dd></div>
+      </dl>
+      <p class="caption">
+        <span class="credit credit--dpm">DPM Autobody</span>
+        <span>&ldquo;Candy Red colour&rdquo; is DPM's own wording, verbatim from their list of the
+          five changes.</span>
+        <span class="credit credit--copy">Prototype copy</span>
+        <span>The description of how a candy system behaves was written for this page. Where a
+          value is not in DPM's published record, this table says so rather than inventing one.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════════ 09 · ENQUIRIES ═════════════════ -->
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="contact__plate">
+    <img src="assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+         width="1280" height="853" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="contact__inner">
+    <div class="chapter" style="border-top-color:var(--hair)">
+      <span class="chapter__mark" aria-hidden="true">09</span>
+      <span class="chapter__kind">Enquiries</span>
+    </div>
+    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
+      are not willing to compromise on.</h2>
+    <div class="contact__rows">
+      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
+      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
+      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
+    </div>
+    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
+      Pearce-Martin</strong>. He will want to see the car before he quotes on it, and he will
+      tell you if it is not worth doing. The bench is Dave, Ellis and Paul.</p>
+    <p style="margin-top:clamp(2.5rem,6vh,3.5rem)"><a class="golink" href="direction-d-register.html">Back to the homepage</a></p>
+    <p class="caption">
+      <span class="credit credit--dpm">DPM Autobody</span>
+      <span>Background: this car's rear wing again, held at low contrast so it sits behind the
+        type rather than competing with it.</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <p class="label">DPM Autobody &nbsp;·&nbsp; Berwick, East Sussex &nbsp;·&nbsp; 01323 552827</p>
+    <p><a class="back" href="direction-d-register.html">Back to the homepage</a></p>
+    <div class="note" id="imagery">
+      <h2>Please read &mdash; about the photography and the copy</h2>
+      <p><b>The Volvo P1800 photographs are real.</b> All fourteen are DPM Autobody's own
+        photographs of DPM Autobody's own work, published by them. They are used here with that
+        credit and are not licensed for a live public site until DPM &mdash; and, on a car this
+        identifiable, its owner &mdash; confirm.</p>
+      <p><b>The P1800 figures are real.</b> Candy Red, a year, <span class="fig">1,300</span>
+        hours, the five specified changes, over <span class="fig">2,000</span> photographs and
+        chassis <span class="fig">26282</span> all come from DPM's own published record and the
+        plaque in the engine bay. Nothing has been added to them, and where a value is not in
+        that record &mdash; the number of coats, the paint code &mdash; section 08 says so.</p>
+      <p><b>One plate on this page is synthetic.</b> The colour-chip image beside Paul's log entry
+        is AI art direction, marked in its own caption. It is not DPM's work and not their hands,
+        and on a live site it is replaced one-for-one by a real shoot.</p>
+      <p><b>Copy marked &ldquo;Indicative&rdquo; or &ldquo;Prototype copy&rdquo; was written for
+        this page</b> &mdash; the four log entries, the nine stage names and durations, and the
+        notes beside the owner's specification and the paint. One line is not ours:
+        &ldquo;Nothing over looked. Nothing left untouched&rdquo; is DPM's own, written under
+        their own photographs.</p>
+      <p><b>Prototype notes.</b> This page was split out of the Direction D homepage after the
+        client review of 28 August 2026, which found the homepage was carrying a project page's
+        worth of depth. Everything here used to live there.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+
+  /* ---------------------------------------------------------------------
+     In-page anchors.
+     A sticky element reports its PINNED position, not its layout position,
+     so once you are below one, native anchor navigation has nowhere to go
+     and silently does nothing. Neutralise position for one synchronous
+     measurement — no paint happens between these three statements — and
+     scroll to the real document offset ourselves.
+     ------------------------------------------------------------------- */
+  function headerHeight() {
+    var h = document.querySelector('.masthead');
+    return h ? h.getBoundingClientRect().height : 0;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      var prev = el.style.position;
+      el.style.position = 'static';
+      var y = el.getBoundingClientRect().top + window.scrollY - headerHeight() - 8;
+      el.style.position = prev;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce.matches ? 'auto' : 'smooth' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    });
+  });
+
+  /* Links that stand where a real project page will go. They latch a state
+     rather than reverting the moment the pointer leaves — which is exactly
+     what the deleted paint-index chips got wrong. */
+  document.querySelectorAll('[data-indicative]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var say = a.getAttribute('data-indicative');
+      var out = document.getElementById(a.getAttribute('aria-describedby'));
+      a.setAttribute('aria-disabled', 'true');
+      if (out) { out.textContent = say; out.hidden = false; }
+    });
+  });
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  /* ---------------------------------------------------------------------
+     The page re-skins itself car by car, from scroll position alone.
+     Whichever band owns the middle of the screen hands its paint code to
+     the chrome. There is nothing to hover and nothing to click: the
+     previous build's swatch chips applied on pointerenter and reverted on
+     pointerleave, so a click appeared to do nothing at all.
+     A colour change is not motion, so this runs with motion reduced too.
+     ------------------------------------------------------------------- */
+  var inMiddle = [];
+  function paint(accent, ink) {
+    if (!accent || !ink) return;
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--accent-ink', ink);
+  }
+  function applySkin() {
+    if (!inMiddle.length) return;
+    var mid = window.innerHeight / 2, best = null, bestD = Infinity;
+    inMiddle.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = el; }
+    });
+    if (best) paint(best.getAttribute('data-accent'), best.getAttribute('data-ink'));
+  }
+  var skin = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var i = inMiddle.indexOf(e.target);
+      if (e.isIntersecting && i === -1) inMiddle.push(e.target);
+      if (!e.isIntersecting && i !== -1) inMiddle.splice(i, 1);
+    });
+    applySkin();
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('[data-accent]').forEach(function (el) { skin.observe(el); });
+
+  /* Phone contents pill, once the hero is behind you. */
+  var pill = document.getElementById('pill');
+  var hero = document.getElementById('top');
+  if (pill && hero) {
+    new IntersectionObserver(function (entries) {
+      pill.classList.toggle('is-on', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  if (reduce.matches) return;   /* static, well-lit page — nothing below runs */
+
+  /* ---------------------------------------------------------------------
+     The travelling light.
+     Two ground-coloured veils slide apart on transform only; the lit band
+     is the gap between them. Nothing is painted over the photograph.
+
+     Geometry, and the client's two notes about it:
+       · The band starts already biting the left (or right) edge, so the
+         panel reads as LIT on arrival rather than as a black screen.
+       · Progress is eased out, so the first 200px of scroll produce the
+         largest movement and the sweep has paid off inside one viewport.
+     ------------------------------------------------------------------- */
+  var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
+    var rev = (track.getAttribute('data-rev') || '0.58,0.86').split(',').map(Number);
+    var rev2 = (track.getAttribute('data-rev2') || '').split(',').map(Number);
+    return {
+      track: track,
+      stage: track.querySelector('.stage'),
+      resolve: track.querySelector('.resolve'),
+      resolve2: track.querySelector('.resolve--2'),
+      rtl: track.getAttribute('data-dir') === 'rtl',
+      rev: rev,
+      rev2: rev2.length === 2 && !isNaN(rev2[0]) ? rev2 : null,
+      live: false
+    };
+  });
+
+  var rail = document.querySelector('.rail');
+  var railDot = document.querySelector('.rail__dot');
+  var ticking = false;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var p = panels.find(function (x) { return x.track === e.target; });
+      if (p) p.live = e.isIntersecting;
+    });
+    schedule();
+  }, { rootMargin: '25% 0px 25% 0px' });
+
+  panels.forEach(function (p) { io.observe(p.track); });
+
+  function smooth(x) { return x * x * (3 - 2 * x); }
+
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      if (!p.live || !p.stage) continue;
+
+      var r = p.track.getBoundingClientRect();
+      var stickH = p.stage.offsetHeight || vh;
+      var span = r.height - stickH;
+      var t = span > 0 ? clamp(-r.top / span, 0, 1) : clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      /* Eased so the payoff is prompt without being frantic. */
+      var e = 1 - Math.pow(1 - t, 1.6);
+
+      var w = p.stage.offsetWidth;
+      var centre = (p.rtl ? (1.35 - 1.45 * e) : (-0.10 + 1.45 * e)) * w;
+      var half = w * (w < 760 ? 0.42 : 0.34);
+
+      /* The veils are 300% wide; --tl / --tr place them so their gradient
+         edges land exactly on the band, and so neither can ever run out of
+         cloth at the far side of the frame. */
+      p.stage.style.setProperty('--bl', (centre - half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--br', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tl', (centre - half - 3 * w).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tr', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--bc', centre.toFixed(1) + 'px');
+
+      if (p.resolve) {
+        /* The car arrives only at the end. Opacity and a whisper of scale;
+           no directional travel, which is the motion trigger. */
+        p.stage.style.setProperty('--reveal',
+          smooth(clamp((t - p.rev[0]) / (p.rev[1] - p.rev[0]), 0, 1)).toFixed(3));
+      }
+      if (p.resolve2 && p.rev2) {
+        p.stage.style.setProperty('--reveal2',
+          smooth(clamp((t - p.rev2[0]) / (p.rev2[1] - p.rev2[0]), 0, 1)).toFixed(3));
+      }
+    }
+
+    if (rail && railDot) {
+      var max = document.documentElement.scrollHeight - vh;
+      var g = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      railDot.style.setProperty('--railY', (g * (rail.offsetHeight - railDot.offsetHeight)).toFixed(1) + 'px');
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+
+</body>
+</html>
