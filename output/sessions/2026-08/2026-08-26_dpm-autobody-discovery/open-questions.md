@@ -41,21 +41,61 @@
    ~~Which Instagram handle?~~ **RESOLVED:** `@dpm_autobody`, confirmed from their own site footer and
    publicly reachable — 4,777 followers, 1,732 posts.
 2. **Logo.** ~~Do we have a true vector?~~ **RESOLVED — and the answer is no:** the logo is a raster
-   PNG. A vector redraw is needed before any hero use. Ask whether an original AI/EPS exists from
-   whoever drew it; if not, we redraw.
+   PNG (1955×849, on their Wix site, and it does at least carry a clean alpha channel).
+   **Partly mitigated 2026-08-29:** `tools/trace-logo.mjs` traces that alpha to closed polygons and
+   the resulting SVG is in the masthead and footer of both prototype builds. It measures **1.9%
+   different from the source raster** — invisible on a screen at any size, and _not_ a redraw:
+   the curves are short straight segments rather than Béziers, so it is wrong to hand to a
+   signwriter, an embroiderer, or anyone making a physical plaque.
+   **Still to ask David:** does an original AI/EPS exist from whoever drew it? Also worth asking
+   what the two faces are — "DPM" is a wide geometric sans and "AUTOBODY" a thin rounded techno
+   face; naming them would let us set the wordmark as live text instead of artwork. If no original
+   exists, budget a proper redraw.
    2b. **`@rpautomotivephotography` already shot three DPM cars at NEC 2023.** Who are they, what's the
    relationship, and do they still hold those files? Cheapest possible route to hero-grade imagery.
 3. **Insurance & accident repair** — keep it, demote it to a quiet secondary page, or drop it? It
    dilutes the concours message but may be real income.
 4. **Naming Halcyon.** DPM does their paintwork. Are Halcyon happy to be named publicly? Same question
    for any other trade clients — a named client list would be the single strongest proof on the site.
+   4b. **Customer testimonials — now the biggest content gap, and the cheapest to close.**
+   The homepage's proof section was rebuilt on 29 August as a testimonial section at Ricky's
+   direction. It carries **two real, attributable quotes and no invented ones**:
+   - Kylie Stevens, verbatim Facebook recommendation, 6 September 2020.
+   - Chris Bulmer, real comment on DPM's "final paint" post of 19 August 2026, following his own
+     car through the shop. Two emoji and an opening "Well done" trimmed; nothing else changed.
+
+   **Six of the 24 Facebook recommendations were recovered on 29 August** — Ricky read them out of
+   his own logged-in session, because Facebook serves the review cards to an automated context as
+   33 unhydrated "Facebook" placeholders and obfuscates the one that does render. All six are
+   transcribed verbatim in `research/facebook-reviews.md`.
+
+   **The finding that matters is not the count.** Every visible review is a **repair or
+   modification customer**, and **the newest is September 2020** — the whole corpus predates the
+   concours work the site is built around. The recurring praise is speed and service: "quick turn
+   around", "short notice", "went out of his way". That is the register of a good local bodyshop
+   and the opposite of what a concours buyer wants to hear, so most of them would work _against_
+   the positioning if quoted.
+
+   The two on the page are the only two that talk about **standard** rather than speed — Liam Hunt's
+   "to a standard better than out of the factory" (which is a customer independently saying what
+   DPM say about themselves) and Craig Mayhew's "I'm very fussy and they are spot on".
+   → **The action is unchanged and now better evidenced.** David asks three or four **restoration**
+   clients for a short written line. Mining Facebook further will not help; the eighteen unrecovered
+   reviews are from the same era and the same kind of customer. Nobody quoted has been asked, and
+   quoting a customer on their restorer's site is a permission question that is DPM's to ask.
+
 5. **Video — TIME-CRITICAL.** David's new shoot is imminent and we must brief it _before_ it happens,
    not after. We need: silent b-roll, slow reflection-travelling moves across panels, at least one
    **exterior daylight** scene, shot 4K, delivered as a 10–15s seamless loop with a clean poster frame.
    Their existing 57s hero film is 1920×1080 / 24fps, colour-graded and properly shot — so the
    capability is there; it just needs directing at what the website needs.
    Also: **rights to the YouTube "DPM TV" films sit with the production company, not DPM.** Confirm
-   who owns what before we plan to use any of it.
+   who owns what before we plan to use any of it. David's 28 August email cleared **the P1800 film
+   specifically** — his brother's firm produced it — but says nothing about the other 28 videos.
+   **This is now live, not hypothetical:** the Lot 03 plates in the prototype are frames from
+   `3bcai_euCy4`, "Full Custom Classic Jaguar Prep and Paint". It looks like in-house action-camera
+   footage rather than a production-company piece, but that is an inference from the footage, not
+   something anyone has confirmed. **Ask before those frames go anywhere public.**
 
 ## Non-blocking — useful, can follow
 
