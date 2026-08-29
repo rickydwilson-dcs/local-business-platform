@@ -2,7 +2,9 @@
 
 This folder stores session artifacts, context, and documentation. The `sessions/` subfolder is **tracked in git** for team visibility, while other contents (generated images, batch files) remain **gitignored**.
 
-**Binaries inside `sessions/` are gitignored too.** `output/.gitignore` allows `sessions/**` through, which for a long time also overrode the root `.gitignore`'s image rules — that is how 117MB of unreferenced PNGs from a design session became stageable in August 2026. An explicit deny-list for images, video and `.impeccable/` now sits below the allow rules. Design-prototype assets belong in Cloudflare R2, not here; see [Prototype Hosting](../docs/guides/prototype-hosting.md). If you add a new allow rule to `output/.gitignore`, re-check the deny-list still wins with `git check-ignore --no-index -v <path>`.
+**Binaries inside `sessions/` are gitignored too.** `output/.gitignore` allows `sessions/**` through, which for a long time also overrode the root `.gitignore`'s image rules — that is how 117MB of unreferenced PNGs from a design session became stageable in August 2026. An explicit deny-list for images, video and `.impeccable/` now sits below the allow rules, plus a
+rule ignoring `sessions/**/screenshots/` entirely — reference-capture dumps carry a generated
+`report.json` alongside the images, and it is worthless without them. Design-prototype assets belong in Cloudflare R2, not here; see [Prototype Hosting](../docs/guides/prototype-hosting.md). If you add a new allow rule to `output/.gitignore`, re-check the deny-list still wins with `git check-ignore --no-index -v <path>`.
 
 ## Purpose
 
