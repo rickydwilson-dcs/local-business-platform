@@ -1,0 +1,169 @@
+{
+  "slug": "2026-08-26_dpm-autobody-discovery",
+  "bucket": "local-business-platform",
+  "prefix": "prototypes/2026-08-26_dpm-autobody-discovery/",
+  "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
+  "totalBytes": 4684139,
+  "assets": [
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 260030,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 204094,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 120930,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 112665,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 129843,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 171005,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 205731,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 274096,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 174476,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 160696,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 176266,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 228322,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 186846,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 157825,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/bentley-s3/front.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/front.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/front.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 319471,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/bentley-s3/shutline.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 254928,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/bentley-s3/whole.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 862887,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/jaguar-sea-green/booth.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 169239,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/jaguar-sea-green/panels.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/panels.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/panels.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 142310,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/workshop/spray-gun.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/spray-gun.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/spray-gun.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 372479,
+      "archive": false
+    }
+  ]
+}

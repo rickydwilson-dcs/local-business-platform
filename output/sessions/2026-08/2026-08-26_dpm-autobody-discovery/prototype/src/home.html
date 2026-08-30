@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
 <style>
 /* ============================================================================
-   DPM Autobody — Direction D, "The Register".
+   DPM Autobody — Direction D, "The Register". The section it was named after is
+   called "The record" on the page since 2026-08-30: "Register" read as a verb in
+   the nav. The direction keeps its original name; the section does not.
    Shared stylesheet for the homepage and the P1800 project page.
 
    THE DEVICE. One photographic plate, graded LIT, with two ground-coloured
@@ -666,34 +668,34 @@ h1, h2, h3, h4 {
 .golink--dead::after { border-color: var(--hair); }
 .golink--dead:hover { gap: 0.9rem; color: var(--bone-dim); }
 
-/* --- The register (identity block) --------------------------------------- */
+/* --- The record (identity block) ----------------------------------------- */
 
-.register {
+.record {
   display: grid; grid-template-columns: minmax(0, 1fr);
   gap: 0; margin: 0;
   border-top: 1px solid var(--hair);
 }
-.register > div {
+.record > div {
   display: grid;
   grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
   gap: 1.5rem;
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--hair-2);
 }
-.register dt {
+.record dt {
   font-size: 0.6875rem; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--bone-dim);
   padding-top: 0.28rem;
 }
-.register dd {
+.record dd {
   margin: 0;
   font-family: var(--font-text);
   font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
   color: var(--bone);
   font-variant-numeric: normal;
 }
-.register dd b { font-weight: 500; }
+.record dd b { font-weight: 500; }
 
 .swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
 .swatch i {
@@ -1078,7 +1080,7 @@ h1, h2, h3, h4 {
 /* --- Wider viewports ----------------------------------------------------- */
 
 @media (min-width: 60rem) {
-  .register > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
 }
@@ -1184,7 +1186,7 @@ h1, h2, h3, h4 {
 <section class="track hero" id="top" data-sheen data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="hero-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
            width="1280" height="853" fetchpriority="high" decoding="async"
            style="--pz:1.34; --po:40% 56%; --pbri:1.34; --psat:1.22; --pcon:1.04"
            alt="Close on the rear wing of the Candy Red Volvo P1800: bare winter trees mirrored unbroken along the panel above a chrome waistline strip.">
@@ -1245,7 +1247,7 @@ h1, h2, h3, h4 {
          data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="lot1-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg"
            width="1280" height="853" loading="lazy" decoding="async"
            style="--pz:1.5; --po:48% 50%; --pbri:1.32; --psat:1.16; --pcon:1.04"
            alt="Macro on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
@@ -1254,7 +1256,7 @@ h1, h2, h3, h4 {
       <div class="spec"></div>
     </div>
     <div class="resolve resolve--plate-out">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
            width="1280" height="853" loading="lazy" decoding="async"
            style="--pz:1.09; --po:54% 45%"
            alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
@@ -1323,7 +1325,7 @@ h1, h2, h3, h4 {
          data-accent="#2A3D63" data-ink="#8FB4D9" aria-labelledby="lot2-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-work/bentley-s3/shutline.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg"
            width="1500" height="900" loading="lazy" decoding="async"
            style="--pz:1.28; --po:52% 48%; --pbri:1.5; --psat:1.06; --pcon:1.02"
            alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
@@ -1332,13 +1334,13 @@ h1, h2, h3, h4 {
       <div class="spec"></div>
     </div>
     <div class="resolve">
-      <img src="../assets/dpm-work/bentley-s3/front.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/front.jpg"
            width="1400" height="1050" loading="lazy" decoding="async"
            style="--pz:1.04; --po:46% 52%"
            alt="The Bentley's chrome radiator shell, winged-B mascot and twin headlamps, with the near-black front wing curving away behind them.">
     </div>
     <div class="resolve resolve--2">
-      <img src="../assets/dpm-work/bentley-s3/whole.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
            style="--pz:1.05; --po:40% 52%"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
@@ -1418,7 +1420,7 @@ h1, h2, h3, h4 {
          data-accent="#1F5C3A" data-ink="#4E9E72" aria-labelledby="lot3-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-work/jaguar-sea-green/panels.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/panels.jpg"
            width="1440" height="907" loading="lazy" decoding="async"
            style="--pz:1.22; --po:44% 52%; --pbri:1.34; --psat:1.12; --pcon:1.04"
            alt="Bonnet, wing and door of the Jaguar in Aston Martin Sea Green, the booth strip light running as one unbroken highlight down each panel in turn.">
@@ -1427,7 +1429,7 @@ h1, h2, h3, h4 {
       <div class="spec"></div>
     </div>
     <div class="resolve">
-      <img src="../assets/dpm-work/jaguar-sea-green/booth.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg"
            width="1780" height="999" loading="lazy" decoding="async"
            style="--pz:1.06; --po:44% 54%"
            alt="The Jaguar in the spray booth in Aston Martin Sea Green, a painter in a respirator working along the rear wing, the DPM signwriting on the wall behind.">
@@ -1510,32 +1512,48 @@ h1, h2, h3, h4 {
 
   <div class="says">
     <figure class="say">
-      <blockquote>&ldquo;Sorted a previously bodged repair from a large accident repair place, to a
-        standard better than out of the factory. An absolute pleasure to deal with.&rdquo;</blockquote>
+      <blockquote>&ldquo;If you need something doing Dave is your man. Sorted a previously bodged
+        repair from a large accident repair place, to a standard better than out of the factory!
+        Absolute pleasure to deal with.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Liam Hunt</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
 
     <figure class="say say--sub">
-      <blockquote>&ldquo;Great quality of work to a very high standard. I&rsquo;m very fussy and
-        they are spot on &mdash; got my business from now on.&rdquo;</blockquote>
+      <blockquote>&ldquo;Excellent service, great quality of work to a very high standard and
+        always a quick turnaround. I&rsquo;m very fussy and they are spot on, got my business from
+        now on.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Craig Mayhew</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
 
     <figure class="say say--sub">
-      <blockquote>&ldquo;Sigh of relief that it&rsquo;s this far now. Next after polish is to
-        rebuild it without scratching it.&rdquo;</blockquote>
+      <blockquote>&ldquo;&hellip; Sigh of relief that it&rsquo;s this far now. Next after polish
+        is to rebuild it without scratching it.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Chris Bulmer</b> <span>Following his own car through the shop</span></figcaption>
     </figure>
   </div>
 
   <p class="caption" data-note>
     <span class="credit credit--dpm">All three real, all attributable</span>
-    <span>Liam Hunt (8 February 2017) and Craig Mayhew (6 October 2016) are verbatim Facebook
-      recommendations &mdash; Ricky read all six reachable ones out of his own logged-in session on
-      29 August, because Facebook serves the review cards to an automated context as unhydrated
-      placeholders. All six are transcribed in <code>research/facebook-reviews.md</code>. Chris
-      Bulmer&rsquo;s is a real comment on DPM&rsquo;s &ldquo;final paint&rdquo; post of 19 August
-      2026. Trims are minimal and marked in that file; nothing is reworded.</span>
+    <span>Liam Hunt (8 February 2017) and Craig Mayhew (6 October 2016) are Facebook
+      recommendations, now quoted <b>in full and verbatim</b> &mdash; Ricky read all six reachable
+      ones out of his own logged-in session on 29 August, because Facebook serves the review cards
+      to an automated context as unhydrated placeholders. All six are transcribed in
+      <code>research/facebook-reviews.md</code>. Chris Bulmer&rsquo;s is a real comment on
+      DPM&rsquo;s &ldquo;final paint&rdquo; post of 19 August 2026; its opening &ldquo;Well
+      done&rdquo; and two emoji were trimmed, and the cut is now marked with a leading ellipsis. The
+      exact original was never transcribed &mdash; re-read the post before treating it as
+      verbatim.</span>
+    <span class="credit credit--copy">Corrected 30 August &mdash; this note used to be wrong</span>
+    <span>Until 30 August both recommendations were <b>silently trimmed</b> and this note claimed
+      they were verbatim and that &ldquo;nothing is reworded&rdquo;. Neither was true. Liam
+      Hunt&rsquo;s lost its opening sentence, its exclamation mark, and had <i>Absolute</i> reworded
+      to <i>An absolute</i>. Craig Mayhew&rsquo;s lost &ldquo;Excellent service&rdquo; and
+      &mdash; the reason it was cut &mdash; <b>&ldquo;and always a quick turnaround&rdquo;</b>,
+      because speed is the register of a good local bodyshop and works against the concours
+      positioning. That is a real editorial argument and it is not a licence to alter a named
+      man&rsquo;s words without saying so. Both are now in full. <b>If the turnaround clause is
+      genuinely unusable, cut it with an ellipsis or drop the quote &mdash; do not reword
+      it.</b></span>
     <span class="credit credit--copy">Read this before adding more</span>
     <span><b>Every one of DPM&rsquo;s visible reviews is a repair or modification customer, and the
       newest is from September 2020.</b> Not one is a restoration client. The recurring praise is
@@ -1585,7 +1603,7 @@ h1, h2, h3, h4 {
 <!-- ═════════════════ 06 · CONTACT ═════════════════ -->
 <section class="contact" id="contact" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
   <div class="contact__plate">
-    <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
          width="1280" height="853" loading="lazy" decoding="async" alt="">
   </div>
   <div class="contact__inner">

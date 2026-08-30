@@ -106,5 +106,17 @@ a wide-but-short window does not set it at 104px and push the lede through the f
   `font-variant-numeric: normal` explicitly for that reason. See the root `CLAUDE.md`.
 - **The mark is traced, not redrawn.** 1.9% different from the source raster: invisible on screen,
   wrong for a signwriter. Real vector artwork from DPM is still an open item.
-- **Nothing has been published.** No R2 upload, no Vercel deploy, no `r2.dev` or `vercel.app` URL in
-  any page. David has not seen any of this.
+- **The client build is published; nothing else is.** https://dpm-autobody.vercel.app serves
+  `client/index.html` at the root and `client/volvo-p1800.html` at `/volvo-p1800`. The annotated
+  build, the three rejected directions, the superseded D and the type study are **not** deployed —
+  every other path 404s. Republish with `./prototype/publish.zsh` from the monorepo root; it
+  re-uploads, rebuilds and re-stages, so never deploy by hand. The alias is public but
+  `noindex, nofollow` both as a meta tag and as an `X-Robots-Tag` header.
+- **`src/` now references R2, not local files.** The two source files carry absolute
+  `pub-….r2.dev` URLs, so `client/` and `annotated/` inherit them on every build and a fresh clone
+  renders correctly with no local assets. Local review therefore needs a network connection. The
+  local `assets/` tree is still there and still authoritative — `make-plates.zsh` rebuilds it — but
+  nothing reads it any more except the superseded directions.
+- **Only 20 of the 70 asset files are on R2**, the ones these two pages reference. The 137MB of AI
+  art-direction plates was deliberately left local; it belongs to rejected work and has no business
+  on a public CDN. `assets-manifest.json` records exactly what went up.
