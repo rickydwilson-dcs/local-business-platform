@@ -21,9 +21,9 @@ sitting untracked in the tree and was committed at Ricky's instruction.
 No feature branch was used, deliberately — but note `de95b22e` touches `tools/` and
 `docs/`, so this is no longer an `output/`-only change.
 
-**Working tree: clean for this session folder** — verified with
-`git status --porcelain output/sessions/2026-08/2026-08-26_dpm-autobody-discovery`, which returns
-nothing. Assets are absent from git by design, not by omission (see Traps).
+**Working tree: clean, whole repo** — `git status --porcelain` returns nothing (2026-08-30).
+Assets are absent from git by design, not by omission (see Traps). `node prototype/build.mjs` also
+leaves the tree clean, so both builds are reproducible from the committed `src/`.
 
 **A `lint-staged` prettier hook reformats markdown on commit.** Tables get re-padded and long lines
 reflowed; content is unchanged. It has twice mangled a bracketed editorial note inside a blockquote
@@ -108,10 +108,14 @@ the monorepo.
     character-for-character, checked by parsing page and transcript. Separately, section 01 **"The
     register" became "The record"**: the word was ours, not DPM's, and as the project page's first
     nav item it read as a verb. DPM's own word is "portfolio" — added to `interview-david.md` §D.
+22. **Video rights settled and everything committed** (08-30). Ricky's standing instruction: treat
+    **all DPM Instagram and YouTube video as DPM's to use however they wish**, which closed the
+    Jaguar-film question and unblocked `BACKLOG.md` item 3. Then five commits — see the header. The
+    last of them corrects a stale claim in this file, not the code.
 
 ---
 
-## Current state — verified 2026-08-29
+## Current state — verified 2026-08-30
 
 Everything below was checked by running something, not recalled.
 
@@ -139,14 +143,27 @@ Everything below was checked by running something, not recalled.
 | `prototype/project-p1800.html`        | **Superseded.** Kept, do not edit.                              |
 | `prototype/direction-a/b/c-*.html`    | Historical. A rejected by the client 27 August.                 |
 
-Verified today, all by running it:
+Outside `prototype/`, the two documents that drive what happens next:
 
-- `node prototype/build.mjs` → **"no marker attributes survived into either build"**.
-- **85 references across 6 pages, 0 broken** (link/asset check over the built HTML).
-- All 6 pages close `</html>`.
+| File                 | What it is                                                                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interview-david.md` | **The next deliverable.** Every invented block, paired with the question that replaces it. Section A is the disclosure to say out loud. Not yet run. |
+| `BACKLOG.md`         | Item 1 client rationale · item 2b the interview · **item 3 the workshop/contact page split** (new, 30 August).                                       |
+
+Re-run on 2026-08-30, all by running it, not recalled:
+
+- `node prototype/build.mjs` → **"no marker attributes survived into either build"**, and the tree
+  stays clean afterwards — the committed builds match what `src/` generates.
 - `measure-hero.mts` → **OK, every gap positive at every size**; worst gaps logo→label 38px,
-  lede→foot 24px, foot→caption 77px.
-- Client build **meta-language 0, self-reference 0** on both pages.
+  lede→foot 24px, foot→caption 77px. Unchanged by the 30 August copy edits.
+- **26 R2 references across the two published pages, 0 broken** — every one fetched with HEAD.
+- Client build **meta-language 0** on both pages, checked against _rendered text_ with styles,
+  scripts and comments stripped. A plain `grep` over the raw HTML returns false positives (9 and 17)
+  from CSS comments and class names — do not use one to make this claim.
+- Both Facebook quotes match `research/facebook-reviews.md` **character-for-character**, checked by
+  parsing the page and the transcript and comparing, not by eye.
+- All 8 in-page anchors on the project page resolve to an `id` that exists exactly once. Nav reads
+  **Record**; no `#register` remains.
 - `src/`, `client/` and `annotated/` now carry **absolute `pub-….r2.dev` URLs** (26 references per
   page). The five superseded directions still hold relative `assets/` paths, correctly — they point
   at the AI plates, which were never uploaded.
@@ -297,6 +314,21 @@ Chrome, nothing posted / liked / followed / changed:
 
 ## Traps
 
+- **Do not trust this file's git claims — re-run them.** Three commits were described here as
+  unpushed across two revisions of this handoff; all three were on `origin/main` the whole time, and
+  the claim was repeated to Ricky three times on 30 August before anyone checked. `git fetch origin`
+  then `git log --oneline origin/develop..HEAD`, or `git branch -r --contains <sha>`.
+- **Do not `grep` the raw HTML to check the client build for meta-language.** It returns 9 and 17
+  hits that are all CSS comments, class names and attributes. Strip `<style>`, `<script>`, comments
+  and tags first and search the rendered text — which returns zero. The false positive looks exactly
+  like a real leak.
+- **The annotated build's own notes have been wrong before.** Until 30 August the testimonial note
+  asserted the two quotes were verbatim with "nothing reworded", and neither was true. Treat a
+  `data-note` as a claim to check, not as provenance.
+- **`.record` is the CSS class as well as the section.** The 30 August rename moved `#register` →
+  `#record`, `.register` → `.record` and the nav label. Two prose uses of "register" survive in
+  `src/home.html` and are correct — they are the linguistic sense, "the register of a good local
+  bodyshop". Do not sweep them up in a find-and-replace.
 - **Republish with `prototype/publish.zsh`, never by hand.** It uploads, rebuilds, stages and
   deploys in the one order that works. Deploying the `prototype/` folder directly would put the
   annotated build — which names the copy we invented — and the rejected directions on David's URL.
