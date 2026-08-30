@@ -7,11 +7,19 @@ customer-facing wording, DPM's logo has been traced to vector and put in the mas
 a type study for the headline-face question. **The client build is now published at
 https://dpm-autobody.vercel.app and is ready to send; David has not been sent it yet.**
 
-**Branch:** `develop`. **Committed** — this handoff ships inside the commit that added the
-two-build prototype. Three commits sit on `develop` and **all three are unpushed**:
-`80efe32a` (discovery, research, first prototypes), `c2a79ec8` (a handoff correction), and this
-one. `git log --oneline origin/main..HEAD` returns exactly those three. No feature branch was used,
-deliberately: this touches `output/` only, so nothing CI builds or deploys.
+**Branch:** `develop`. **Committed, and the earlier work is already on `origin/main`.**
+`80efe32a`, `c2a79ec8` and `6c9e0162` were described here as unpushed; **they are not** — all three
+are contained in both `origin/develop` and `origin/main`, checked with `git branch -r --contains`
+on 2026-08-30. That claim survived two handoff revisions by being copied forward rather than
+re-run; verify push state against `origin`, not against this file.
+
+**Four commits from 30 August are unpushed** — `de95b22e` (publish tooling fix), `2c30f394` (the
+DPM session: publish, testimonials, the rename, `interview-david.md`), `e165f166` (an unrelated ops
+note) and `3d5ef428` (two unrelated DCS sessions). The last two are unrelated work that had been
+sitting untracked in the tree and was committed at Ricky's instruction.
+
+No feature branch was used, deliberately — but note `de95b22e` touches `tools/` and
+`docs/`, so this is no longer an `output/`-only change.
 
 **Working tree: clean for this session folder** — verified with
 `git status --porcelain output/sessions/2026-08/2026-08-26_dpm-autobody-discovery`, which returns
@@ -223,9 +231,9 @@ paint code), the page says "in this car's file" rather than inventing it — kee
 
 ## What was NOT done
 
-- **Nothing is pushed.** All three commits exist only on this machine. `git push` has not been
-  run, and per `CLAUDE.md` the promotion path is develop → staging → main. **This is the single
-  biggest risk here.**
+- **The four commits of 30 August are not pushed.** `git push` has not been run and was not asked
+  for; per `CLAUDE.md` the promotion path is develop → staging → main. Everything before them is
+  already on `origin/main`.
 - **The URL has not been sent to David.** It is live and verified, but publishing it and sending it
   are separate acts, and the second has not happened. Before it does, read the invented-copy trap
   below — three blocks put first-person words in the mouths of Dave, Paul and Ellis, and the client
@@ -360,12 +368,13 @@ The logo survives anyway because it is **inlined into the HTML** as a`<symbol>`.
 
 ## Next step
 
-**1. Push, when Ricky says so.** Three commits sit unpushed on `develop`. Pushing is
-outward-facing and has not been authorised.
+**1. Push, when Ricky says so.** Four commits sit unpushed on `develop`. Pushing is
+outward-facing and has not been authorised. Check the real state rather than trusting this file.
 
 ```bash
 cd /Users/rickywilson/Sites/local-business-platform
-git log --oneline origin/main..HEAD   # expect exactly three
+git fetch origin
+git log --oneline origin/develop..HEAD   # expect four, dated 30 August
 git push origin develop
 ```
 
