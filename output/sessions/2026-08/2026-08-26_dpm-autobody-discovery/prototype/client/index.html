@@ -1082,6 +1082,17 @@ h1, h2, h3, h4 {
   .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  /* Below 60rem, "cover" is always height-matched against this landscape
+     photo (no vertical crop room exists — the box is narrower, in aspect
+     terms, than the image at every mobile/tablet width), so the only real
+     lever is panning the horizontal window onto the cabin/roofline rather
+     than the front wheel arch (the --pp set inline on .lot2-whole). From
+     60rem up, box and image aspect are close enough that cover crops
+     vertically instead, so here the fix is the opposite lever: an explicit
+     zoom + a raised transform-origin, which pans the crop UP to clear
+     headroom above the roof and pushes the wheel down under the caption
+     text instead of dead-centre behind the "Twelve feet of panel" heading. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.3; --po: 46% 22%; }
 }
 
 @media (max-width: 55.99rem) {
@@ -1186,7 +1197,7 @@ h1, h2, h3, h4 {
     <div class="plate">
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
            width="1280" height="853" fetchpriority="high" decoding="async"
-           style="--pz:1.34; --po:40% 56%; --pbri:1.34; --psat:1.22; --pcon:1.04"
+           style="--pz:1; --pbri:1.1; --psat:1.15; --pcon:1.18"
            alt="Close on the rear wing of the Candy Red Volvo P1800: bare winter trees mirrored unbroken along the panel above a chrome waistline strip.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
@@ -1215,7 +1226,7 @@ h1, h2, h3, h4 {
 <div class="band" id="work" data-accent="#A61C24" data-ink="#E4776C">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">01</span>
-    <span class="chapter__kind">Lot 01 &nbsp;·&nbsp; Finished and delivered</span>
+    <span class="chapter__kind">No. 01 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Volvo&nbsp;P1800<br>Candy&nbsp;Red</h2>
@@ -1228,7 +1239,7 @@ h1, h2, h3, h4 {
       <p class="prose">It is the most completely documented car we have finished. All of it &mdash;
         the owner&rsquo;s specification, the log, the underside, the paint &mdash; is on a page of
         its own.</p>
-      <p style="margin:1.75rem 0 0"><a class="golink" href="volvo-p1800.html">The full record of Lot 01</a></p>
+      <p style="margin:1.75rem 0 0"><a class="golink" href="volvo-p1800.html">The full record of the P1800</a></p>
     </div>
   </div>
 </div>
@@ -1253,7 +1264,7 @@ h1, h2, h3, h4 {
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 01</span>
+        <span class="label label--accent">No. 01</span>
         <span class="label">Volvo P1800 &nbsp;·&nbsp; Chassis 26282</span>
       </span>
       <h3 class="h-lot" id="lot1-h">A year in the building. Thirteen hundred hours in the hands.</h3>
@@ -1276,7 +1287,7 @@ h1, h2, h3, h4 {
 <div class="band" data-accent="#2A3D63" data-ink="#8FB4D9">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">02</span>
-    <span class="chapter__kind">Lot 02 &nbsp;·&nbsp; Finished and delivered</span>
+    <span class="chapter__kind">No. 02 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Bentley S3<br>Continental</h2>
@@ -1314,12 +1325,13 @@ h1, h2, h3, h4 {
     <div class="resolve resolve--2">
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
-           style="--pz:1.05; --po:40% 52%"
+           class="lot2-whole"
+           style="--pz:1; --po:50% 50%; --pp:58% 50%"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 02</span>
+        <span class="label label--accent">No. 02</span>
         <span class="label">Bentley S3 Continental &nbsp;·&nbsp; 1963</span>
       </span>
       <h3 class="h-lot" id="lot2-h">Twelve feet of panel, and nowhere to hide.</h3>
@@ -1347,7 +1359,7 @@ h1, h2, h3, h4 {
 <div class="band" data-accent="#1F5C3A" data-ink="#4E9E72">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">03</span>
-    <span class="chapter__kind">Lot 03 &nbsp;·&nbsp; In the booth</span>
+    <span class="chapter__kind">No. 03 &nbsp;·&nbsp; In the booth</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Jaguar<br>Aston Martin Sea&nbsp;Green</h2>
@@ -1385,7 +1397,7 @@ h1, h2, h3, h4 {
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 03</span>
+        <span class="label label--accent">No. 03</span>
         <span class="label">Jaguar &nbsp;·&nbsp; Aston Martin Sea Green</span>
       </span>
       <h3 class="h-lot" id="lot3-h">Mixed here. Sprayed here. Judged here.</h3>
