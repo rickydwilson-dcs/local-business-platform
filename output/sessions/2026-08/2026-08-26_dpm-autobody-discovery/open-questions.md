@@ -14,6 +14,9 @@
   hero work (finished car in daylight off-site at low sun; paint macro under raking light; matched
   before/afters from a fixed mark) is still needed. Say this plainly to David rather than letting the
   iCloud link read as "job done".
+- ~~Who owns any DPM video?~~ **Settled 2026-08-30 (Ricky): all Instagram and YouTube video is
+  DPM's to use as they wish.** The email below cleared the P1800 film specifically; the standing
+  instruction now covers the rest.
 - ~~Who owns the P1800 film?~~ **Cleared, and better than expected.** _"my brother was the production
   firm that produced the p1800 video. He also has quite a lot of other footage we could probably use"_.
   So the rights are effectively in the family, **and there is an unseen footage library**.
@@ -89,9 +92,11 @@
    **exterior daylight** scene, shot 4K, delivered as a 10–15s seamless loop with a clean poster frame.
    Their existing 57s hero film is 1920×1080 / 24fps, colour-graded and properly shot — so the
    capability is there; it just needs directing at what the website needs.
-   Also: **rights to the YouTube "DPM TV" films sit with the production company, not DPM.** Confirm
-   who owns what before we plan to use any of it. David's 28 August email cleared **the P1800 film
-   specifically** — his brother's firm produced it — but says nothing about the other 28 videos.
+   ~~Also: **rights to the YouTube "DPM TV" films sit with the production company, not DPM.**~~
+   **Resolved by Ricky, 2026-08-30:** treat **every DPM Instagram and YouTube video as DPM's to use
+   however they wish**. That covers all 29 DPM TV films and the Instagram cuts, not just the P1800
+   film David cleared by email on 28 August. It does **not** extend to third-party photography —
+   the `@rpautomotivephotography` NEC files are still a separate licence question.
    **This is now live, not hypothetical:** the Lot 03 plates in the prototype are frames from
    `3bcai_euCy4`, "Full Custom Classic Jaguar Prep and Paint". It looks like in-house action-camera
    footage rather than a production-company piece, but that is an inference from the footage, not

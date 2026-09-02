@@ -40,6 +40,33 @@ function sanitiseProjectName(slug: string): string {
 }
 
 /**
+ * Matches "assets/ and "../assets/ at any depth — a page in a subdirectory climbs
+ * to reach the shared assets/ tree, and a check anchored on a bare "assets/ passes
+ * such a page while every one of its images 404s on Vercel.
+ */
+const ASSET_REF = /(["'])(?:\.\.\/)*assets\//;
+
+/**
+ * Every HTML page under the prototype directory, recursively. The two-build
+ * pattern (src/ -> client/ + annotated/) keeps the real pages one level down, so
+ * a top-level-only scan checks nothing that matters.
+ */
+function findHtml(dir: string, prototypeDir: string): string[] {
+  const out: string[] = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith(".") || entry.name === "node_modules") continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (path.relative(prototypeDir, full) === "assets") continue;
+      out.push(...findHtml(full, prototypeDir));
+    } else if (entry.name.endsWith(".html")) {
+      out.push(full);
+    }
+  }
+  return out.sort();
+}
+
+/**
  * Refuse to deploy prototypes whose assets are still relative. They would 404 on
  * Vercel, because assets are deliberately excluded from the upload.
  */
@@ -52,14 +79,14 @@ function preflight(prototypeDir: string): string[] {
     );
   }
 
-  const htmlFiles = fs.readdirSync(prototypeDir).filter((f) => f.endsWith(".html"));
+  const htmlFiles = findHtml(prototypeDir, prototypeDir);
   if (htmlFiles.length === 0) {
     problems.push("No HTML files found in the prototype directory.");
   }
 
-  const stillRelative = htmlFiles.filter((f) =>
-    /(["'])assets\//.test(fs.readFileSync(path.join(prototypeDir, f), "utf-8"))
-  );
+  const stillRelative = htmlFiles
+    .filter((f) => ASSET_REF.test(fs.readFileSync(f, "utf-8")))
+    .map((f) => path.relative(prototypeDir, f));
   if (stillRelative.length) {
     problems.push(
       `${stillRelative.length} file(s) still reference relative assets/ paths, which will 404: ${stillRelative

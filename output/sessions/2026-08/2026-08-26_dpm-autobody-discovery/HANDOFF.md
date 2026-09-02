@@ -4,17 +4,26 @@
 **two generated builds from one source** — a clean client version and an annotated working version.
 The two invented cars have been replaced with real DPM work, all copy is a first pass at
 customer-facing wording, DPM's logo has been traced to vector and put in the masthead, and there is
-a type study for the headline-face question. **Nothing is published and David has seen none of it.**
+a type study for the headline-face question. **The client build is now published at
+https://dpm-autobody.vercel.app and is ready to send; David has not been sent it yet.**
 
-**Branch:** `develop`. **Committed** — this handoff ships inside the commit that added the
-two-build prototype. Three commits sit on `develop` and **all three are unpushed**:
-`80efe32a` (discovery, research, first prototypes), `c2a79ec8` (a handoff correction), and this
-one. `git log --oneline origin/main..HEAD` returns exactly those three. No feature branch was used,
-deliberately: this touches `output/` only, so nothing CI builds or deploys.
+**Branch:** `develop`. **Committed, and the earlier work is already on `origin/main`.**
+`80efe32a`, `c2a79ec8` and `6c9e0162` were described here as unpushed; **they are not** — all three
+are contained in both `origin/develop` and `origin/main`, checked with `git branch -r --contains`
+on 2026-08-30. That claim survived two handoff revisions by being copied forward rather than
+re-run; verify push state against `origin`, not against this file.
 
-**Working tree: clean for this session folder** — verified with
-`git status --porcelain output/sessions/2026-08/2026-08-26_dpm-autobody-discovery`, which returns
-nothing. Assets are absent from git by design, not by omission (see Traps).
+**Four commits from 30 August are unpushed** — `de95b22e` (publish tooling fix), `2c30f394` (the
+DPM session: publish, testimonials, the rename, `interview-david.md`), `e165f166` (an unrelated ops
+note) and `3d5ef428` (two unrelated DCS sessions). The last two are unrelated work that had been
+sitting untracked in the tree and was committed at Ricky's instruction.
+
+No feature branch was used, deliberately — but note `de95b22e` touches `tools/` and
+`docs/`, so this is no longer an `output/`-only change.
+
+**Working tree: clean, whole repo** — `git status --porcelain` returns nothing (2026-08-30).
+Assets are absent from git by design, not by omission (see Traps). `node prototype/build.mjs` also
+leaves the tree clean, so both builds are reproducible from the committed `src/`.
 
 **A `lint-staged` prettier hook reformats markdown on commit.** Tables get re-padded and long lines
 reflowed; content is unchanged. It has twice mangled a bracketed editorial note inside a blockquote
@@ -90,10 +99,23 @@ the monorepo.
     (Ricky's own logged-in session) and transcribed to `research/facebook-reviews.md`.
 19. **Three blocks cut from the testimonial section** at Ricky's call — the 100%/24 figure, the
     note explaining why a public comment counts, and the standfirst. All the same fault as (4).
+20. **The client build published** (08-29 pm) to https://dpm-autobody.vercel.app. Ricky's scope
+    call: David gets the two clean pages and nothing else. Fixing the shared publish tooling was a
+    prerequisite — see Traps.
+21. **Testimonials restored to verbatim and the section renamed** (08-30). Liam Hunt's and Craig
+    Mayhew's Facebook recommendations had been silently trimmed — and the annotated note wrongly
+    claimed they were verbatim with "nothing reworded". Both now match `research/facebook-reviews.md`
+    character-for-character, checked by parsing page and transcript. Separately, section 01 **"The
+    register" became "The record"**: the word was ours, not DPM's, and as the project page's first
+    nav item it read as a verb. DPM's own word is "portfolio" — added to `interview-david.md` §D.
+22. **Video rights settled and everything committed** (08-30). Ricky's standing instruction: treat
+    **all DPM Instagram and YouTube video as DPM's to use however they wish**, which closed the
+    Jaguar-film question and unblocked `BACKLOG.md` item 3. Then five commits — see the header. The
+    last of them corrects a stale claim in this file, not the code.
 
 ---
 
-## Current state — verified 2026-08-29
+## Current state — verified 2026-08-30
 
 Everything below was checked by running something, not recalled.
 
@@ -111,23 +133,46 @@ Everything below was checked by running something, not recalled.
 | `prototype/client/volvo-p1800.html`   | Generated.                                                      |
 | `prototype/annotated/*.html`          | Generated. Same pages + notes + a yellow "working copy" flag.   |
 | `prototype/type-study.html`           | Standalone. The headline-face question, with the mark in frame. |
-| `prototype/index.html`                | Chooser. **Hand-edited, not generated.**                        |
+| `prototype/index.html`                | Chooser. **Hand-edited, not generated.** Not deployed.          |
+| `prototype/publish.zsh`               | **The only way to publish.** Upload → rebuild → stage → deploy. |
+| `prototype/assets-manifest.json`      | What went to R2: 20 files, 4.5MB. Written by the upload tool.   |
+| `prototype/.publish/`                 | Generated staging dir, gitignored. The deployed payload.        |
 | `prototype/measure-hero.mts`          | Hero geometry check, 20 viewports, exits non-zero on overlap.   |
 | `prototype/shoot-hero.mts`            | Hero frames at 4 scroll positions, for before/after comparison. |
 | `prototype/direction-d-register.html` | **Superseded.** Kept, do not edit.                              |
 | `prototype/project-p1800.html`        | **Superseded.** Kept, do not edit.                              |
 | `prototype/direction-a/b/c-*.html`    | Historical. A rejected by the client 27 August.                 |
 
-Verified today, all by running it:
+Outside `prototype/`, the two documents that drive what happens next:
 
-- `node prototype/build.mjs` → **"no marker attributes survived into either build"**.
-- **85 references across 6 pages, 0 broken** (link/asset check over the built HTML).
-- All 6 pages close `</html>`.
+| File                 | What it is                                                                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interview-david.md` | **The next deliverable.** Every invented block, paired with the question that replaces it. Section A is the disclosure to say out loud. Not yet run. |
+| `BACKLOG.md`         | Item 1 client rationale · item 2b the interview · **item 3 the workshop/contact page split** (new, 30 August).                                       |
+
+Re-run on 2026-08-30, all by running it, not recalled:
+
+- `node prototype/build.mjs` → **"no marker attributes survived into either build"**, and the tree
+  stays clean afterwards — the committed builds match what `src/` generates.
 - `measure-hero.mts` → **OK, every gap positive at every size**; worst gaps logo→label 38px,
-  lede→foot 24px, foot→caption 77px.
-- Client build **meta-language 0, self-reference 0** on both pages.
-- **No `r2.dev` or `vercel.app` URL in any HTML page** — grepped. The only hit repo-wide is
-  `prototype/README.md` line 109, which is the sentence saying nothing is published.
+  lede→foot 24px, foot→caption 77px. Unchanged by the 30 August copy edits.
+- **26 R2 references across the two published pages, 0 broken** — every one fetched with HEAD.
+- Client build **meta-language 0** on both pages, checked against _rendered text_ with styles,
+  scripts and comments stripped. A plain `grep` over the raw HTML returns false positives (9 and 17)
+  from CSS comments and class names — do not use one to make this claim.
+- Both Facebook quotes match `research/facebook-reviews.md` **character-for-character**, checked by
+  parsing the page and the transcript and comparing, not by eye.
+- All 8 in-page anchors on the project page resolve to an `id` that exists exactly once. Nav reads
+  **Record**; no `#register` remains.
+- `src/`, `client/` and `annotated/` now carry **absolute `pub-….r2.dev` URLs** (26 references per
+  page). The five superseded directions still hold relative `assets/` paths, correctly — they point
+  at the AI plates, which were never uploaded.
+- Live deployment checked by fetching it, not by trusting the CLI: `/` and `/volvo-p1800` return
+  **200 and are byte-identical to the local `client/` build** (sha256 match on both). All 8 images
+  on the homepage return 200 `image/jpeg` from R2. `X-Robots-Tag: noindex, nofollow` is served.
+  `/annotated`, `/client`, `/type-study`, `/direction-a-catalogue`, `/src/home` and
+  `/assets-manifest.json` all **404**. No `buildflag` element and no `data-note`/`data-client`
+  attribute survives into the served page.
 
 ### The three cars are all real DPM work
 
@@ -194,23 +239,36 @@ paint code), the page says "in this car's file" rather than inventing it — kee
 - **Whether the builds hold up on a real phone.** Geometry is measured in headless Chromium at
   phone viewports; nobody has opened it on a handset.
 - Google Business Profile photos were never checked — bot-blocked during the audit. Still unknown.
-- **The Jaguar film's rights.** David's 28 August email cleared the P1800 film (his brother's firm
-  produced it) and said nothing about the other 28 videos. The Lot 03 plates come from
-  `3bcai_euCy4`. It looks like in-house action-camera footage, but that is an inference.
+- ~~The Jaguar film's rights.~~ **Settled by Ricky, 2026-08-30:** every DPM Instagram and YouTube
+  video is to be treated as DPM's to use however they wish. The Lot 03 plates (`3bcai_euCy4`) and
+  the workshop film are therefore both usable. Recorded as Ricky's standing instruction rather than
+  as something verified with the production company — noted here so it is traceable, not re-opened.
 
 ---
 
 ## What was NOT done
 
-- **Nothing is pushed.** All three commits exist only on this machine. `git push` has not been
-  run, and per `CLAUDE.md` the promotion path is develop → staging → main. **This is the single
-  biggest risk here.**
-- **Nothing is published.** Assets are not on R2; no prototype is on Vercel. **David has not seen
-  any of this** — every review so far has been Ricky's, on `file://` or `127.0.0.1:8899`.
+- **The four commits of 30 August are not pushed.** `git push` has not been run and was not asked
+  for; per `CLAUDE.md` the promotion path is develop → staging → main. Everything before them is
+  already on `origin/main`.
+- **The URL has not been sent to David.** It is live and verified, but publishing it and sending it
+  are separate acts, and the second has not happened. Before it does, read the invented-copy trap
+  below — three blocks put first-person words in the mouths of Dave, Paul and Ellis, and the client
+  build carries no label saying so.
+- **Nobody has opened the deployed pages in a real browser.** Verification was HTTP-level: status
+  codes, byte-identity against the local build, image fetches, headers. That proves the right bytes
+  are being served, not that the page looks right on David's phone.
+- **Only the client build is published.** The annotated build is not on any URL, so Ricky's
+  talk-track is still `file://` or `127.0.0.1:8899` only.
 - **The type study has not been decided.** `type-study.html` presents the question and a view;
   nobody has chosen. Until they do the prototype stays on Archivo.
-- **The copy has not been read back to David.** It is a first pass, and three blocks put words in
-  real people's mouths (see Traps).
+- **The copy has not been read back to David, and the interview that does it has not been run.**
+  `interview-david.md` (2026-08-30) inventories every invented block and pairs it with the question
+  that replaces it. Deliberately **not** applied as edits: Ricky's call is that David sees the
+  sections and is told they are being rewritten.
+- **Nothing invented has been removed.** The four log entries, the nine stage names and durations,
+  the glosses under the owner's specification, and six claims on the homepage are all still live at
+  https://dpm-autobody.vercel.app. That is a decision, not an oversight.
 - **The client rationale document is not written.** `BACKLOG.md` item 1, and the next real
   deliverable. Framing and the resolved tension are already specified there.
 - **The iCloud photo link has not arrived.** David confirmed on 08-28 he will send it. Playbook:
@@ -234,8 +292,16 @@ paint code), the page says "in this car's file" rather than inventing it — kee
 
 ## Live-data changes already applied
 
-**None.** No production system was written to. No site deployed, no DNS touched, no R2 upload, no
-Vercel project created, no commit pushed. The only external spend was 75 Higgsfield credits.
+**Two, both on 2026-08-29, both at Ricky's explicit instruction.** No DNS touched, no commit pushed,
+no monorepo site deployed. External spend remains 75 Higgsfield credits.
+
+1. **20 objects uploaded to Cloudflare R2** under
+   `prototypes/2026-08-26_dpm-autobody-discovery/assets/` in the `local-business-platform` bucket
+   — 4.5MB, `public, max-age=300`. All are DPM's own photographs of DPM's own work. The 137MB of AI
+   art-direction plates was deliberately **not** uploaded. `assets-manifest.json` is the record.
+2. **A new Vercel project `dpm-autobody`** created under `ricky-wilsons-projects` and deployed to
+   production, aliased to `https://dpm-autobody.vercel.app`. Not git-linked, so it never rebuilds on
+   a monorepo push. Payload is 182.7KB of HTML — two pages, no assets.
 
 Three read-only outward-facing actions, all at Ricky's explicit instruction, all in his own logged-in
 Chrome, nothing posted / liked / followed / changed:
@@ -248,6 +314,34 @@ Chrome, nothing posted / liked / followed / changed:
 
 ## Traps
 
+- **Do not trust this file's git claims — re-run them.** Three commits were described here as
+  unpushed across two revisions of this handoff; all three were on `origin/main` the whole time, and
+  the claim was repeated to Ricky three times on 30 August before anyone checked. `git fetch origin`
+  then `git log --oneline origin/develop..HEAD`, or `git branch -r --contains <sha>`.
+- **Do not `grep` the raw HTML to check the client build for meta-language.** It returns 9 and 17
+  hits that are all CSS comments, class names and attributes. Strip `<style>`, `<script>`, comments
+  and tags first and search the rendered text — which returns zero. The false positive looks exactly
+  like a real leak.
+- **The annotated build's own notes have been wrong before.** Until 30 August the testimonial note
+  asserted the two quotes were verbatim with "nothing reworded", and neither was true. Treat a
+  `data-note` as a claim to check, not as provenance.
+- **`.record` is the CSS class as well as the section.** The 30 August rename moved `#register` →
+  `#record`, `.register` → `.record` and the nav label. Two prose uses of "register" survive in
+  `src/home.html` and are correct — they are the linguistic sense, "the register of a good local
+  bodyshop". Do not sweep them up in a find-and-replace.
+- **Republish with `prototype/publish.zsh`, never by hand.** It uploads, rebuilds, stages and
+  deploys in the one order that works. Deploying the `prototype/` folder directly would put the
+  annotated build — which names the copy we invented — and the rejected directions on David's URL.
+- **The shared publish tooling was broken for this folder's shape and failed silently.** Both
+  `tools/upload-prototype-assets.ts` and `tools/publish-prototype.ts` scanned only top-level HTML
+  and matched only `"assets/`, never `"../assets/`. This session's real pages are one level down and
+  climb to reach `assets/`, so the rewrite skipped them, `publish-prototype.ts` excluded `assets/`
+  from the upload, and **its pre-flight passed anyway because it was reading the wrong files** — the
+  deploy would have succeeded with every image 404ing. Both are fixed (recursive scan, `../` aware)
+  and both now take `--pages`. If you touch either, keep the recursion.
+- **The rewrite must land on `src/`, not on `client/`.** Rewriting a generated build is undone by
+  the next `node build.mjs`. `publish.zsh` passes `--pages src/home.html,src/volvo-p1800.html` for
+  exactly this reason.
 - **Edit `prototype/src/`, never `client/` or `annotated/`.** They are overwritten on every
   `node prototype/build.mjs`. Hand-editing a build is silently lost on the next run.
 - **The client build has no label on the invented copy, by design.** Three blocks are ours, not
@@ -306,12 +400,13 @@ The logo survives anyway because it is **inlined into the HTML** as a`<symbol>`.
 
 ## Next step
 
-**1. Push, when Ricky says so.** Three commits sit unpushed on `develop`. Pushing is
-outward-facing and has not been authorised.
+**1. Push, when Ricky says so.** Four commits sit unpushed on `develop`. Pushing is
+outward-facing and has not been authorised. Check the real state rather than trusting this file.
 
 ```bash
 cd /Users/rickywilson/Sites/local-business-platform
-git log --oneline origin/main..HEAD   # expect exactly three
+git fetch origin
+git log --oneline origin/develop..HEAD   # expect four, dated 30 August
 git push origin develop
 ```
 
@@ -347,12 +442,22 @@ first, then report the three counts that decide the design: how many files are *
 many are a **finished car in daylight away from the workshop**; how many show **paint under
 directional light**.
 
-**7. To publish for David** (needs Ricky's explicit go-ahead — outward-facing, not yet given):
+**7. Republish after any change to `src/`** — one command, from the monorepo root. It re-uploads
+(skipping unchanged objects), regenerates both builds, re-stages the client pages and redeploys to
+the same URL.
 
 ```bash
-npx tsx tools/upload-prototype-assets.ts   # check what it sweeps first — 137 MB of AI PNG is now unreferenced
-npx tsx tools/publish-prototype.ts
+./output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/publish.zsh
 ```
+
+**8. Run the interview before sending the URL** — `interview-david.md`, written 2026-08-30 and not
+yet run. It lists every block on the two pages that is ours rather than DPM's, with the question that
+replaces each. Ricky's call: the invented copy **stays on the page for now** so David sees what the
+sections do, and the interview is how he is told. Section A is the disclosure to say out loud first.
+
+**9. Send David the URL** — https://dpm-autobody.vercel.app — when the copy caveat has been decided.
+It is live, public and `noindex`. Sending it is a separate act from publishing it and has not been
+done. Say out loud that the log entries, stage names and two side notes are ours, not his staff's.
 
 ---
 
@@ -362,16 +467,19 @@ npx tsx tools/publish-prototype.ts
   serif, with the caveat that it might clash with the mark. `type-study.html` is built to answer it;
   nobody has. The page's own view: Instrument Serif, Libre Caslon Display or simply promoting
   Newsreader all survive the mark; the Didones do not.
-- **Publish the prototypes to Vercel for David?** Deliberately not done — deploying is
-  outward-facing. Needs Ricky's explicit go-ahead.
+- ~~**Publish the prototypes to Vercel for David?**~~ **Answered 2026-08-29:** yes, but the client
+  build only. Live at https://dpm-autobody.vercel.app. The open part is now whether the annotated
+  build should get its own unlisted URL so Ricky can talk from the notes on a second screen — it was
+  offered and not taken, and is a five-minute change to `publish.zsh` if wanted.
 - **Can we quote Liam Hunt, Craig Mayhew and Chris Bulmer?** All three are public posts, but
   quoting a customer on their restorer's own site is DPM's permission to seek. Nobody has asked.
 - **Will David get three or four restoration testimonials?** `open-questions.md` item 4b, and the
   cheapest content win left on the site.
 - **Is the Bentley a drophead?** The photograph shows a fabric roof, up. `asset-audit-dpm.md` calls
   it a Drophead; the page says only "Bentley S3 Continental" and does not commit. Ask David.
-- **Who owns the Jaguar film?** The P1800 film is cleared; this one is not. The Lot 03 plates depend
-  on it.
+- ~~**Who owns the Jaguar film?**~~ **Answered 2026-08-30 (Ricky):** treat all DPM Instagram and
+  YouTube video as theirs to use freely. Lot 03 is unblocked, and so is the workshop film behind
+  `BACKLOG.md` item 3.
 - **Insurance and accident repair** — keep, demote to a quiet secondary page, or drop? Off-positioning
   for concours but may be real revenue. Never answered by David.
 - **Halcyon naming permission.** Their paintwork credential is the strongest proof DPM has.

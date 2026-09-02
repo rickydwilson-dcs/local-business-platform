@@ -4,6 +4,14 @@ Plan for our own email setup, client domain/email management, and business autom
 
 ---
 
+## Google Cloud / OAuth — Account Separation
+
+**Do not create Google Cloud projects or OAuth clients for platform work under the personal `hello@rickyai.co.uk` account.** If/when the platform needs Google OAuth (e.g. a "Sign in with Google" flow, or a GSC API integration needing user-context auth rather than a service account — see `tasks/platform/backlog.md`'s GSC Indexing Monitor item), set it up under a Google Cloud project owned by `webmaster@digitalconsultingservices.co.uk` instead.
+
+Background: in August 2026, Google flagged an inactive OAuth client in a `colossus-scaffolding` GCP project under `hello@rickyai.co.uk`, unused for 5+ months and slated for auto-deletion. A repo-wide search confirmed nothing in `local-business-platform` uses OAuth anywhere — no `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET`, no NextAuth, no `googleapis` dependency in any `package.json`. It was almost certainly a leftover from the early "legacy colossus-scaffolding" test site (removed in commit `0ababe87`). Decision: let it auto-delete rather than migrate it — there was nothing live to move.
+
+---
+
 ## Our Email Setup
 
 ### Current State
