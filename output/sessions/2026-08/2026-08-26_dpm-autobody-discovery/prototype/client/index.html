@@ -1112,17 +1112,21 @@ h1, h2, h3, h4 {
   .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
-  /* Below 60rem, "cover" is always height-matched against this landscape
-     photo (no vertical crop room exists — the box is narrower, in aspect
-     terms, than the image at every mobile/tablet width), so the only real
-     lever is panning the horizontal window onto the cabin/roofline rather
-     than the front wheel arch (the --pp set inline on .lot2-whole). From
-     60rem up, box and image aspect are close enough that cover crops
-     vertically instead, so here the fix is the opposite lever: an explicit
-     zoom + a raised transform-origin, which pans the crop UP to clear
-     headroom above the roof and pushes the wheel down under the caption
-     text instead of dead-centre behind the "Twelve feet of panel" heading. */
-  .lot2-whole { --pp: 50% 50%; --pz: 1.3; --po: 46% 22%; }
+  /* The masthead is fixed, gradient-backed, and sits on top of every sticky
+     stage (z-index 40 vs the stage's own content) — its ~114px is never
+     actually free real estate, no matter how much "headroom" a crop shows
+     above the roof. On a near-black car especially, a dark roofline sitting
+     in that zone visually merges with the masthead's own dark gradient and
+     reads as cropped-off even though it technically isn't. So below 60rem
+     the fix isn't just panning horizontally onto the cabin (the --pp set
+     inline on .lot2-whole) — it's also enough extra zoom, with the
+     transform-origin pulled down, to push the roofline/glass out of frame
+     entirely and land on the chrome waistrail instead, which reads cleanly
+     even under the gradient. From 60rem up the same two levers apply, just
+     tuned separately since cover crops vertically there instead of by
+     panning — see the inline mobile values for the vertical-crop-room
+     case's equivalent reasoning. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.42; --po: 46% 48%; }
   /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
   .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
 }
@@ -1261,17 +1265,6 @@ h1, h2, h3, h4 {
     <span class="chapter__mark" aria-hidden="true">01</span>
     <span class="chapter__kind">No. 01 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
-  <figure class="section-hero">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
-         width="1280" height="853" loading="lazy" decoding="async"
-         class="lot1-intro"
-         style="--pz:1.3; --po:75% 2%; --pbri:1.06; --psat:1.16; --pcon:1.1"
-         alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
-    <figcaption class="caption">
-      <span><b>Volvo P1800, Candy Red.</b> Finished and delivered, before the details that
-        follow show what went into it.</span>
-    </figcaption>
-  </figure>
   <div class="section-head">
     <h2 class="h-major">Volvo&nbsp;P1800<br>Candy&nbsp;Red</h2>
     <div>
@@ -1376,7 +1369,7 @@ h1, h2, h3, h4 {
     <div class="plate">
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg"
            width="1500" height="900" loading="lazy" decoding="async"
-           style="--pz:1.28; --po:52% 48%; --pbri:1.5; --psat:1.06; --pcon:1.02"
+           style="--pz:1.42; --po:52% 60%; --pbri:1.5; --psat:1.06; --pcon:1.02"
            alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
@@ -1392,7 +1385,7 @@ h1, h2, h3, h4 {
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
            class="lot2-whole"
-           style="--pz:1; --po:50% 50%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
+           style="--pz:1.45; --po:58% 65%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
     </div>
     <div class="stage__over">
