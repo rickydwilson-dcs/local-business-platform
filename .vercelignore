@@ -5,10 +5,22 @@
 # workspace source under sites/ and packages/, plus root manifests/config.
 # The Vercel-side installCommand reinstalls all deps itself, so none of
 # this repo's local node_modules or caches need to travel.
+#
+# `.git` is deliberately NOT excluded here, even though it's ~266MB. Every
+# site's ignoreCommand (`npx turbo-ignore <site> --fallback=HEAD^1`) needs a
+# real `.git` directory to diff against — .vercelignore is applied to every
+# build's clone (git-push-triggered included), not just CLI deploys, before
+# ignoreCommand runs. With `.git` excluded, turbo-ignore's `--dry=json` call
+# failed with "Unable to query SCM: not a Git repository" on literally every
+# push, and turbo-ignore fails OPEN on any error — so every project rebuilt
+# unconditionally on every push to every branch from 2026-08-23 onward, no
+# matter what changed. Confirmed via live build logs (see PR #74's deploys)
+# before restoring this. The occasional oversized CLI-triggered upload is a
+# far cheaper trade-off than an unconditional full-monorepo rebuild on every
+# single push.
 
 node_modules
 .turbo
-.git
 .next
 output
 local-business-platform_venv
