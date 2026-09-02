@@ -29,7 +29,7 @@ import { z } from 'zod';
 // content was silently added/removed/duplicated without deliberate review.
 const EXPECTED_COUNTS: Record<string, number> = {
   merch: 10,
-  news: 2,
+  news: 3,
   brand: 1,
 };
 
