@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Colossus Scaffolding — New Website from Scratch | Digital Consulting Services</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.crumb{position:relative;z-index:2;padding:clamp(90px,12vh,124px) var(--pad) 0;font-size:13.5px}
+.crumb a{opacity:.6}
+.crumb a:hover{opacity:1;color:var(--aqua)}
+.crumb span{opacity:.35;margin:0 8px}
+.chero{background:var(--ink);color:#fff;padding-bottom:0}
+.chero__head{padding:20px var(--pad) clamp(36px,5vh,56px);max-width:70ch}
+.chero__well{position:relative;aspect-ratio:16/8;overflow:hidden}
+.chero__well video{width:100%;height:100%;object-fit:cover}
+.facts{display:flex;flex-wrap:wrap;gap:clamp(22px,3vw,48px);padding:clamp(28px,4vh,44px) var(--pad);
+  background:var(--white);color:var(--ink);border-bottom:1px solid rgba(14,14,18,.12)}
+.facts div{display:grid;gap:3px}
+.facts b{font-weight:800;font-size:15.5px;letter-spacing:-.01em}
+.facts span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;opacity:.55}
+.body{max-width:74ch;margin:0 auto;padding:clamp(56px,8vh,88px) var(--pad)}
+.body h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-top:clamp(40px,6vh,60px)}
+.body h2:first-child{margin-top:0}
+.body p{margin-top:16px;font-size:16.5px;line-height:1.7;opacity:.86}
+.outcomes{background:var(--paper);padding:clamp(48px,7vh,72px) var(--pad)}
+.outcomes-inner{max-width:74ch;margin:0 auto}
+.related{padding:clamp(56px,8vh,84px) var(--pad);background:var(--white)}
+.related h3{margin-bottom:6px}
+.related .lead{margin-top:0;margin-bottom:0;max-width:60ch}
+.related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2vw,30px);margin-top:clamp(28px,4vh,40px)}
+.related-grid a{display:block;border:1px solid var(--ink);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;
+  transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.related-grid a:hover{transform:translateY(-3px)}
+.related-grid .rw{aspect-ratio:16/10;background:var(--navy);position:relative;overflow:hidden}
+.related-grid .rw img,.related-grid .rw video{width:100%;height:100%;object-fit:cover}
+.related-grid .rt{padding:16px 18px;font-weight:700;border-top:1px solid var(--ink)}
+.related-grid .rt small{display:block;font-weight:500;opacity:.55;font-size:12px;margin-top:2px}
+@media (max-width:820px){.related-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="project-list.html">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="#">Services</a>
+    <a href="#">Pricing</a>
+    <a href="project-list.html">Portfolio</a>
+    <a href="#">Blog</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="#end">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+<section class="chero" data-ground="ink" id="hero">
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="project-list.html">Portfolio</a><span>/</span><span style="opacity:.85">Colossus Scaffolding</span>
+  </nav>
+  <div class="chero__head">
+    <div class="eyeless" style="color:rgba(255,255,255,.55)">Scaffolding &middot; East Sussex</div>
+    <h1>Colossus Scaffolding</h1>
+    <p class="lead" style="color:rgba(255,255,255,.78)">New website from scratch, September 2024 — a 30-page build that
+      won an East Sussex scaffolding contractor its first cold enquiry inside three weeks of launch.</p>
+  </div>
+  <div class="chero__well">
+    <video autoplay muted loop playsinline poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.jpg">
+      <source src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<section class="facts" data-ground="white" id="facts">
+  <div><b>Scaffolding</b><span>Sector</span></div>
+  <div><b>East Sussex</b><span>Location</span></div>
+  <div><b>September 2024</b><span>Launched</span></div>
+  <div><b>30 pages</b><span>Site size</span></div>
+  <div><b>colossus-scaffolding.co.uk</b><span>Live at</span></div>
+</section>
+
+<article class="body">
+  <h2>The Challenge</h2>
+  <p>The team at Colossus were excellent at their trade. The problem was perception. Colossus Scaffolding had a solid
+    reputation built entirely through word of mouth — no website at all, not even a basic holding page. When a
+    commercial client — a developer, a construction firm, a property manager — searches for a scaffolding contractor,
+    they're making a judgement call based on what they find online. No website signals the opposite of established
+    and insured, regardless of how good the actual work is.</p>
+  <p>Beyond winning commercial contracts, there was the long-term opportunity of organic search traffic. Dozens of
+    people in East Sussex search for scaffolding services every month, and Colossus weren't appearing for any of
+    them — free enquiries going to competitors every single day.</p>
+
+  <h2>The Solution</h2>
+  <p>We built Colossus a 30-page website on the DCS platform, using the Vega theme in navy blue — professional, clean,
+    and well-suited to a trade contractor audience. The structure was planned to serve two goals at once: look
+    credible to potential clients, and rank in Google for the searches that matter.</p>
+  <p>On the service side: dedicated pages for residential, commercial, new build, hire and event scaffolding, each
+    explaining the process before a client has even made contact. On the location side: pages for every main town and
+    area across East Sussex where Colossus works — Eastbourne, Hastings, Bexhill, Lewes, Seaford, Hailsham and more —
+    each targeting the local search terms for that area. That's the architecture that makes local SEO work: search
+    engines can see clearly who you are, what you do, and exactly where you do it.</p>
+  <p>We also set up Google Business Profile, added proper Schema.org markup for a local contractor, and submitted the
+    site to Google Search Console on launch day.</p>
+
+  <h2>The Results</h2>
+  <p>Within three weeks, Colossus received their first enquiry via the website contact form — a residential customer
+    in Eastbourne who had found them through Google. Not a referral, not a repeat customer. A cold lead, from the
+    internet, for the first time.</p>
+  <p>Within a few months the site was appearing in Google Maps results for scaffolding searches across East Sussex.
+    Colossus now has the professional presence needed to pursue larger commercial work — when a developer or property
+    manager looks them up, they find a well-presented site that clearly explains capability, service area and how to
+    get in touch.</p>
+</article>
+
+<section class="outcomes" data-ground="paper">
+  <div class="outcomes-inner">
+    <h3 style="margin-bottom:20px">In short</h3>
+    <div class="detail__l">
+      <div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> First Google enquiry within 3 weeks of launch</div>
+      <div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 30-page site covering all service and location areas</div>
+      <div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Now appearing in Google Maps for scaffolding searches in East Sussex</div>
+      <div><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Winning larger commercial contracts with a credible online presence</div>
+    </div>
+  </div>
+</section>
+
+<section class="related" data-ground="white">
+  <h3>More like this</h3>
+  <p class="lead">Two more from the trades &amp; contractors side of the portfolio.</p>
+  <div class="related-grid">
+    <a href="project-list.html">
+      <div class="rw"><video muted loop playsinline poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/the-clothing-kings.jpg"></video></div>
+      <div class="rt">DJ Fox Electrical <small>Trades &amp; Contractors — 20+ page build</small></div>
+    </a>
+    <a href="project-list.html">
+      <div class="rw" style="position:relative">
+        <div class="slot"><span class="slot__i"></span><span class="slot__t">Awaiting footage</span></div>
+      </div>
+      <div class="rt">DCH Automotive <small>Trades &amp; Contractors — trade launch</small></div>
+    </a>
+  </div>
+</section>
+
+<section class="end" style="background:var(--navy);color:#fff;padding:clamp(80px,11vh,120px) var(--pad) clamp(40px,6vh,64px)" data-ground="navy" id="end">
+  <div class="eyeless" style="color:rgba(255,255,255,.6)">Start a project</div>
+  <h2 style="max-width:16ch">Want a result<br>like this?</h2>
+  <p class="lead" style="color:rgba(255,255,255,.78)">Whatever the business, the process is the same: I ask the
+    questions, write the content, build it, and show you how it works.</p>
+  <div style="margin-top:32px">
+    <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="end__foot">
+    <span>&copy; Digital Consulting Services</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex</span>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  var bar = document.getElementById('bar');
+  var sections = Array.from(document.querySelectorAll('[data-ground]')).filter(function(s){return s!==bar});
+  function update(){
+    var probe = 40, current = sections[0];
+    for (var i=0;i<sections.length;i++){
+      var r = sections[i].getBoundingClientRect();
+      if (r.top <= probe) current = sections[i];
+    }
+    bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  document.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

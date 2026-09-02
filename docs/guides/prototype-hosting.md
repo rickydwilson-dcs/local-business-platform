@@ -46,6 +46,27 @@ npx tsx tools/upload-prototype-assets.ts <prototype-dir>
 npx tsx tools/publish-prototype.ts <prototype-dir> [--project <name>]
 ```
 
+### Publishing only some of the pages
+
+`--pages` narrows the job to the pages actually going out, and uploads only the assets
+those pages reference:
+
+```bash
+npx tsx tools/upload-prototype-assets.ts <prototype-dir> \
+  --pages src/home.html,src/volvo-p1800.html --dry-run
+```
+
+Reach for it whenever a session has accumulated superseded work. The DPM Autobody session
+carries 137MB of AI art-direction plates referenced only by directions the client has
+already rejected; unscoped, all of it would have gone to a public CDN. The dry run reports
+what it is leaving behind (`Not uploaded: 50 files, 139.0 MB`), so the exclusion is a
+number you check rather than an assumption.
+
+**Point it at the source, not the build.** In a two-build session (`src/` → `client/` +
+`annotated/`) the rewrite must land on `src/`, because regenerating the builds would
+otherwise overwrite the rewritten URLs with relative paths again. Rewrite `src/`, then
+re-run the generator, and both builds carry the R2 URLs and stay correct across rebuilds.
+
 ### What `upload-prototype-assets.ts` does
 
 - Uploads everything under `assets/` to `prototypes/<session-slug>/assets/…`, mirroring the
@@ -70,6 +91,19 @@ Only after that gate passes should you delete the local masters.
 ---
 
 ## Traps this encodes
+
+**Both tools scan HTML recursively, and match `../assets/` as well as `assets/`.** They did
+neither until August 2026, and the combination was a silent failure with no error anywhere.
+A two-build session keeps its real pages one level down (`client/index.html`), and those
+pages climb to reach the shared tree — so the rewrite skipped them, `publish-prototype.ts`
+wrote a `.vercelignore` excluding `assets/`, and its pre-flight passed because it was only
+reading top-level files. The deploy then succeeded and every image on the page 404'd. If you
+add a check to either tool, walk the tree; the pages that matter are rarely at the top level.
+
+**Generator scripts living beside their output are skipped, not uploaded.** `make-plates.zsh`
+and `gen.sh` sit inside `assets/` by design, next to the plates they build. They are on
+`SKIP_EXTENSIONS` with the `.md`/`.json` entries — without that the unknown-extension guard
+(correctly loud about a real asset it cannot type) aborts the entire run on a shell script.
 
 **Cache-Control is overridden on purpose.** `R2Client` defaults to
 `public, max-age=31536000, immutable`. Overwriting an R2 key does not bust the CDN cache, so a
@@ -113,9 +147,17 @@ anything sensitive behind it.
 
 ## Live prototype sites
 
-| Session                            | Project          | URL                               |
-| ---------------------------------- | ---------------- | --------------------------------- |
-| `2026-08-17_dcs-homepage-redesign` | `dcs-prototypes` | https://dcs-prototypes.vercel.app |
+| Session                             | Project          | URL                               |
+| ----------------------------------- | ---------------- | --------------------------------- |
+| `2026-08-17_dcs-homepage-redesign`  | `dcs-prototypes` | https://dcs-prototypes.vercel.app |
+| `2026-08-26_dpm-autobody-discovery` | `dpm-autobody`   | https://dpm-autobody.vercel.app   |
+
+The DPM deployment is the **client build only** — two pages, flattened so the homepage is the
+site root. The annotated build, the rejected directions and the type study are deliberately not
+on it, and `prototype/publish.zsh` in that session encodes the staging so it stays that way on
+every republish. Serving one build out of a multi-build folder is the general pattern: stage the
+pages you mean to send into their own directory and point `publish-prototype.ts` at that,
+rather than deploying the folder and relying on nobody guessing a URL.
 
 The project name defaults to the sanitised session slug; the DCS session pins `dcs-prototypes`
 via `--project`. Use a distinct name per session so they do not overwrite each other.

@@ -11,7 +11,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
 <style>
 /* ============================================================================
-   DPM Autobody — Direction D, "The Register".
+   DPM Autobody — Direction D, "The Register". The section it was named after is
+   called "The record" on the page since 2026-08-30: "Register" read as a verb in
+   the nav. The direction keeps its original name; the section does not.
    Shared stylesheet for the homepage and the P1800 project page.
 
    THE DEVICE. One photographic plate, graded LIT, with two ground-coloured
@@ -303,6 +305,7 @@ h1, h2, h3, h4 {
    exactly one viewport of scrolling. */
 .track__room       { height: 100lvh; }
 .track__room--long { height: 150lvh; }   /* only where a resolve follows the light */
+.track__room--xlong { height: 210lvh; }  /* wide → detail → detail → wide: four stages need more room than two */
 
 .plate { position: absolute; inset: 0; overflow: clip; }
 .plate img {
@@ -388,8 +391,16 @@ h1, h2, h3, h4 {
   transform: scale(calc(1.05 - 0.05 * var(--reveal, 0) + 0.14 * var(--reveal2, 0)));
   will-change: opacity, transform;
 }
-/* Second stop, for the one section that resolves macro → detail → wide */
-.resolve--2 { z-index: 6; opacity: var(--reveal2, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0))); }
+/* Second stop, for sections that resolve macro → detail → wide */
+.resolve--2 {
+  z-index: 6; opacity: var(--reveal2, 0);
+  /* Pushed further by --reveal3 exactly as .resolve is pushed by --reveal2 above:
+     where a third stop follows, this one also has to keep pushing through
+     rather than sit still while resolve--3 dissolves over it. */
+  transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0) + 0.14 * var(--reveal3, 0)));
+}
+/* Third stop: the closing wide shot, for sections that land wide → detail → detail → wide. */
+.resolve--3 { z-index: 7; opacity: var(--reveal3, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal3, 0))); }
 .resolve img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -397,7 +408,7 @@ h1, h2, h3, h4 {
   object-position: var(--pp, 50% 50%);
   transform: scale(var(--pz, 1));
   transform-origin: var(--po, 50% 50%);
-  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+  filter: saturate(var(--rsat, 1.04)) contrast(var(--rcon, 1.02)) brightness(var(--rbri, 1.04));
 }
 .resolve::after {
   content: ''; position: absolute; inset: 0;
@@ -456,7 +467,11 @@ h1, h2, h3, h4 {
    other. */
 .stage__cap-line--macro { opacity: calc(1 - var(--reveal, 0) * 1.9); }
 .stage__cap-line--mid   { opacity: min(calc(var(--reveal, 0) * 1.9 - 0.9), calc(1 - var(--reveal2, 0) * 1.9)); }
-.stage__cap-line--wide  { opacity: calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9); }
+/* --wide used to be the last stop, so it only ever climbed to 1. Sections
+   with a fourth (--wide2) stop need it to hand back off, the same way
+   --mid hands off to it above. */
+.stage__cap-line--wide  { opacity: min(calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9), calc(1 - var(--reveal3, 0) * 1.9)); }
+.stage__cap-line--wide2 { opacity: calc(var(--reveal3, 0) * 1.9 - 0.9); }
 .stage__cap b { color: var(--bone); font-weight: 500; }
 @media (min-width: 48rem) {
   .stage__cap { bottom: clamp(2rem, 4vh, 3rem); }
@@ -665,34 +680,34 @@ h1, h2, h3, h4 {
 .golink--dead::after { border-color: var(--hair); }
 .golink--dead:hover { gap: 0.9rem; color: var(--bone-dim); }
 
-/* --- The register (identity block) --------------------------------------- */
+/* --- The record (identity block) ----------------------------------------- */
 
-.register {
+.record {
   display: grid; grid-template-columns: minmax(0, 1fr);
   gap: 0; margin: 0;
   border-top: 1px solid var(--hair);
 }
-.register > div {
+.record > div {
   display: grid;
   grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
   gap: 1.5rem;
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--hair-2);
 }
-.register dt {
+.record dt {
   font-size: 0.6875rem; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--bone-dim);
   padding-top: 0.28rem;
 }
-.register dd {
+.record dd {
   margin: 0;
   font-family: var(--font-text);
   font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
   color: var(--bone);
   font-variant-numeric: normal;
 }
-.register dd b { font-weight: 500; }
+.record dd b { font-weight: 500; }
 
 .swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
 .swatch i {
@@ -1077,9 +1092,30 @@ h1, h2, h3, h4 {
 /* --- Wider viewports ----------------------------------------------------- */
 
 @media (min-width: 60rem) {
-  .register > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  /* Below 60rem, "cover" is always height-matched against this landscape
+     photo (no vertical crop room exists — the box is narrower, in aspect
+     terms, than the image at every mobile/tablet width), so the only real
+     lever is panning the horizontal window onto the cabin/roofline rather
+     than the front wheel arch (the --pp set inline on .lot2-whole). From
+     60rem up, box and image aspect are close enough that cover crops
+     vertically instead, so here the fix is the opposite lever: an explicit
+     zoom + a raised transform-origin, which pans the crop UP to clear
+     headroom above the roof and pushes the wheel down under the caption
+     text instead of dead-centre behind the "Twelve feet of panel" heading. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.3; --po: 46% 22%; }
+  /* The closing wide shot (resolve--3): same photo, same zoom level as the
+     opening one above (both have to read as equally "wide" — a tighter
+     second shot stops feeling like a return to the whole car and starts
+     reading as another detail), angled toward the grille rather than
+     centred so the return doesn't feel like a literal repeat. */
+  .lot2-whole-2 { --pp: 44% 55%; --pz: 1.3; --po: 38% 35%; }
+  /* Same two-lever split as .lot2-whole, applied to the P1800's opening and
+     closing wide shots (both slide-01, cropped differently for variety). */
+  .lot1-whole   { --pp: 55% 40%; --pz: 1.22; --po: 60% 40%; }
+  .lot1-whole-2 { --pp: 50% 45%; --pz: 1.3;  --po: 40% 30%; }
 }
 
 @media (max-width: 55.99rem) {
@@ -1182,10 +1218,11 @@ h1, h2, h3, h4 {
 <section class="track hero" id="top" data-sheen data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="hero-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
            width="1280" height="853" fetchpriority="high" decoding="async"
-           style="--pz:1.34; --po:40% 56%; --pbri:1.34; --psat:1.22; --pcon:1.04"
-           alt="Close on the rear wing of the Candy Red Volvo P1800: bare winter trees mirrored unbroken along the panel above a chrome waistline strip.">
+           class="hero-plate"
+           style="--pz:1.22; --po:60% 40%; --pp:58% 38%; --pbri:1.05; --psat:1.18; --pcon:1.12"
+           alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
       <div class="spec"></div>
@@ -1201,8 +1238,8 @@ h1, h2, h3, h4 {
     </div>
     <figcaption class="stage__cap">
       <span class="stage__cap-line stage__cap-line--macro">
-        <span><b>Volvo P1800, Candy Red.</b> The rear wing &mdash; bare winter trees mirrored the
-          full length of it. A reflection only stays straight on a straight panel.</span>
+        <span><b>Volvo P1800, Candy Red.</b> Front three-quarter, on chrome wire wheels, the
+          morning it went on the transporter.</span>
       </span>
     </figcaption>
   </figure>
@@ -1213,7 +1250,7 @@ h1, h2, h3, h4 {
 <div class="band" id="work" data-accent="#A61C24" data-ink="#E4776C">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">01</span>
-    <span class="chapter__kind">Lot 01 &nbsp;·&nbsp; Finished and delivered</span>
+    <span class="chapter__kind">No. 01 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Volvo&nbsp;P1800<br>Candy&nbsp;Red</h2>
@@ -1226,55 +1263,77 @@ h1, h2, h3, h4 {
       <p class="prose">It is the most completely documented car we have finished. All of it &mdash;
         the owner&rsquo;s specification, the log, the underside, the paint &mdash; is on a page of
         its own.</p>
-      <p style="margin:1.75rem 0 0"><a class="golink" href="volvo-p1800.html">The full record of Lot 01</a></p>
+      <p style="margin:1.75rem 0 0"><a class="golink" href="volvo-p1800.html">The full record of the P1800</a></p>
     </div>
   </div>
 </div>
 
-<section class="track has-resolve" data-sheen data-dir="ltr" data-rev="0.56,0.84"
+<section class="track has-resolve" data-sheen data-dir="ltr" data-rev="0.22,0.38" data-rev2="0.50,0.66" data-rev3="0.78,0.94"
          data-accent="#A61C24" data-ink="#E4776C" aria-labelledby="lot1-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
            width="1280" height="853" loading="lazy" decoding="async"
-           style="--pz:1.5; --po:48% 50%; --pbri:1.32; --psat:1.16; --pcon:1.04"
-           alt="Macro on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
+           class="lot1-whole"
+           style="--pz:1.15; --po:56% 42%; --pp:55% 40%; --pbri:1.06; --psat:1.16; --pcon:1.1"
+           alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
       <div class="spec"></div>
     </div>
-    <div class="resolve resolve--plate-out">
-      <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+    <div class="resolve">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg"
            width="1280" height="853" loading="lazy" decoding="async"
-           style="--pz:1.09; --po:54% 45%"
+           style="--pz:1.5; --po:48% 50%; --rbri:1.32; --rsat:1.16; --rcon:1.04"
+           alt="Macro on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
+    </div>
+    <div class="resolve resolve--2">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+           width="1280" height="853" loading="lazy" decoding="async"
+           style="--pz:1.5; --po:42% 56%; --rbri:1.1; --rsat:1.15; --rcon:1.14"
+           alt="Close on the rear wing of the Candy Red Volvo P1800: bare winter trees mirrored unbroken along the panel above a chrome waistline strip.">
+    </div>
+    <div class="resolve resolve--3">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+           width="1280" height="853" loading="lazy" decoding="async"
+           class="lot1-whole-2"
+           style="--pz:1.09; --po:54% 45%; --pp:35% 50%"
            alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 01</span>
+        <span class="label label--accent">No. 01</span>
         <span class="label">Volvo P1800 &nbsp;·&nbsp; Chassis 26282</span>
       </span>
       <h3 class="h-lot" id="lot1-h">A year in the building. Thirteen hundred hours in the hands.</h3>
     </div>
     <figcaption class="stage__cap">
       <span class="stage__cap-line stage__cap-line--macro">
+        <span><b>Volvo P1800, Candy Red.</b> Finished and delivered, before the details that
+          follow show what went into it.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--mid">
         <span><b>Above &mdash; the P1800, close.</b> Chrome wing mirror and A-pillar, the flank
           behind them carrying the reflection of a hedge line.</span>
       </span>
       <span class="stage__cap-line stage__cap-line--wide">
+        <span><b>Above &mdash; the rear wing, close.</b> Bare winter trees mirrored unbroken along
+          the panel, above the chrome waistline strip.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide2">
         <span><b>Above &mdash; the same P1800, whole.</b> On a lane in flat winter
           daylight, the morning it went on the transporter.</span>
       </span>
     </figcaption>
   </figure>
-  <div class="track__room track__room--long"></div>
+  <div class="track__room track__room--xlong"></div>
 </section>
 
 <!-- ═════════════════ 02 · BENTLEY S3 CONTINENTAL ═════════════════ -->
 <div class="band" data-accent="#2A3D63" data-ink="#8FB4D9">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">02</span>
-    <span class="chapter__kind">Lot 02 &nbsp;·&nbsp; Finished and delivered</span>
+    <span class="chapter__kind">No. 02 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Bentley S3<br>Continental</h2>
@@ -1291,61 +1350,73 @@ h1, h2, h3, h4 {
   </div>
 </div>
 
-<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.38,0.58" data-rev2="0.74,0.88"
+<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.22,0.38" data-rev2="0.50,0.66" data-rev3="0.78,0.94"
          data-accent="#2A3D63" data-ink="#8FB4D9" aria-labelledby="lot2-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-work/bentley-s3/shutline.jpg"
-           width="1500" height="900" loading="lazy" decoding="async"
-           style="--pz:1.28; --po:52% 48%; --pbri:1.5; --psat:1.06; --pcon:1.02"
-           alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
+           width="2400" height="1351" loading="lazy" decoding="async"
+           class="lot2-whole"
+           style="--pz:1; --po:50% 50%; --pp:58% 50%; --pbri:1.02; --psat:1.06; --pcon:1.08"
+           alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
       <div class="spec"></div>
     </div>
     <div class="resolve">
-      <img src="../assets/dpm-work/bentley-s3/front.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg"
+           width="1500" height="900" loading="lazy" decoding="async"
+           style="--pz:1.28; --po:52% 48%"
+           alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
+    </div>
+    <div class="resolve resolve--2">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/front.jpg"
            width="1400" height="1050" loading="lazy" decoding="async"
            style="--pz:1.04; --po:46% 52%"
            alt="The Bentley's chrome radiator shell, winged-B mascot and twin headlamps, with the near-black front wing curving away behind them.">
     </div>
-    <div class="resolve resolve--2">
-      <img src="../assets/dpm-work/bentley-s3/whole.jpg"
+    <div class="resolve resolve--3">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
-           style="--pz:1.05; --po:40% 52%"
+           class="lot2-whole-2"
+           style="--pz:1; --po:40% 55%; --pp:40% 50%"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 02</span>
+        <span class="label label--accent">No. 02</span>
         <span class="label">Bentley S3 Continental &nbsp;·&nbsp; 1963</span>
       </span>
       <h3 class="h-lot" id="lot2-h">Twelve feet of panel, and nowhere to hide.</h3>
     </div>
     <figcaption class="stage__cap">
       <span class="stage__cap-line stage__cap-line--macro">
+        <span><b>The Bentley S3 Continental, whole.</b> Out on the yard in summer daylight,
+          before the panels that follow show what it took to get there.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--mid">
         <span><b>Above &mdash; the shut line, close.</b> Door to rear wing, with the chrome
           waistrail carrying through it. Follow the rail across the gap: it does not step, and the
           reflection under it does not kink.</span>
       </span>
-      <span class="stage__cap-line stage__cap-line--mid">
+      <span class="stage__cap-line stage__cap-line--wide">
         <span><b>Above &mdash; the radiator, the mascot and the wing.</b> Chrome is unforgiving in
           a way paint is not: it magnifies whatever is under it instead of filling it.</span>
       </span>
-      <span class="stage__cap-line stage__cap-line--wide">
+      <span class="stage__cap-line stage__cap-line--wide2">
         <span><b>Above &mdash; and then the car, whole.</b> Photographed on the yard in
           summer daylight, the day it was signed off.</span>
       </span>
     </figcaption>
   </figure>
-  <div class="track__room track__room--long"></div>
+  <div class="track__room track__room--xlong"></div>
 </section>
 
 <!-- ═════════════════ 03 · JAGUAR, ASTON MARTIN SEA GREEN ═════════════════ -->
 <div class="band" data-accent="#1F5C3A" data-ink="#4E9E72">
   <div class="chapter">
     <span class="chapter__mark" aria-hidden="true">03</span>
-    <span class="chapter__kind">Lot 03 &nbsp;·&nbsp; In the booth</span>
+    <span class="chapter__kind">No. 03 &nbsp;·&nbsp; In the booth</span>
   </div>
   <div class="section-head">
     <h2 class="h-major">Jaguar<br>Aston Martin Sea&nbsp;Green</h2>
@@ -1367,7 +1438,7 @@ h1, h2, h3, h4 {
          data-accent="#1F5C3A" data-ink="#4E9E72" aria-labelledby="lot3-h">
   <figure class="stage">
     <div class="plate">
-      <img src="../assets/dpm-work/jaguar-sea-green/panels.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/panels.jpg"
            width="1440" height="907" loading="lazy" decoding="async"
            style="--pz:1.22; --po:44% 52%; --pbri:1.34; --psat:1.12; --pcon:1.04"
            alt="Bonnet, wing and door of the Jaguar in Aston Martin Sea Green, the booth strip light running as one unbroken highlight down each panel in turn.">
@@ -1376,14 +1447,14 @@ h1, h2, h3, h4 {
       <div class="spec"></div>
     </div>
     <div class="resolve">
-      <img src="../assets/dpm-work/jaguar-sea-green/booth.jpg"
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg"
            width="1780" height="999" loading="lazy" decoding="async"
            style="--pz:1.06; --po:44% 54%"
            alt="The Jaguar in the spray booth in Aston Martin Sea Green, a painter in a respirator working along the rear wing, the DPM signwriting on the wall behind.">
     </div>
     <div class="stage__over">
       <span class="stage__tag">
-        <span class="label label--accent">Lot 03</span>
+        <span class="label label--accent">No. 03</span>
         <span class="label">Jaguar &nbsp;·&nbsp; Aston Martin Sea Green</span>
       </span>
       <h3 class="h-lot" id="lot3-h">Mixed here. Sprayed here. Judged here.</h3>
@@ -1449,20 +1520,22 @@ h1, h2, h3, h4 {
 
   <div class="says">
     <figure class="say">
-      <blockquote>&ldquo;Sorted a previously bodged repair from a large accident repair place, to a
-        standard better than out of the factory. An absolute pleasure to deal with.&rdquo;</blockquote>
+      <blockquote>&ldquo;If you need something doing Dave is your man. Sorted a previously bodged
+        repair from a large accident repair place, to a standard better than out of the factory!
+        Absolute pleasure to deal with.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Liam Hunt</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
 
     <figure class="say say--sub">
-      <blockquote>&ldquo;Great quality of work to a very high standard. I&rsquo;m very fussy and
-        they are spot on &mdash; got my business from now on.&rdquo;</blockquote>
+      <blockquote>&ldquo;Excellent service, great quality of work to a very high standard and
+        always a quick turnaround. I&rsquo;m very fussy and they are spot on, got my business from
+        now on.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Craig Mayhew</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
 
     <figure class="say say--sub">
-      <blockquote>&ldquo;Sigh of relief that it&rsquo;s this far now. Next after polish is to
-        rebuild it without scratching it.&rdquo;</blockquote>
+      <blockquote>&ldquo;&hellip; Sigh of relief that it&rsquo;s this far now. Next after polish
+        is to rebuild it without scratching it.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Chris Bulmer</b> <span>Following his own car through the shop</span></figcaption>
     </figure>
   </div>
@@ -1485,7 +1558,7 @@ h1, h2, h3, h4 {
 <!-- ═════════════════ 06 · CONTACT ═════════════════ -->
 <section class="contact" id="contact" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
   <div class="contact__plate">
-    <img src="../assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
+    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
          width="1280" height="853" loading="lazy" decoding="async" alt="">
   </div>
   <div class="contact__inner">
@@ -1626,14 +1699,17 @@ h1, h2, h3, h4 {
   var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
     var rev = (track.getAttribute('data-rev') || '0.58,0.86').split(',').map(Number);
     var rev2 = (track.getAttribute('data-rev2') || '').split(',').map(Number);
+    var rev3 = (track.getAttribute('data-rev3') || '').split(',').map(Number);
     return {
       track: track,
       stage: track.querySelector('.stage'),
       resolve: track.querySelector('.resolve'),
       resolve2: track.querySelector('.resolve--2'),
+      resolve3: track.querySelector('.resolve--3'),
       rtl: track.getAttribute('data-dir') === 'rtl',
       rev: rev,
       rev2: rev2.length === 2 && !isNaN(rev2[0]) ? rev2 : null,
+      rev3: rev3.length === 2 && !isNaN(rev3[0]) ? rev3 : null,
       live: false
     };
   });
@@ -1692,6 +1768,10 @@ h1, h2, h3, h4 {
       if (p.resolve2 && p.rev2) {
         p.stage.style.setProperty('--reveal2',
           smooth(clamp((t - p.rev2[0]) / (p.rev2[1] - p.rev2[0]), 0, 1)).toFixed(3));
+      }
+      if (p.resolve3 && p.rev3) {
+        p.stage.style.setProperty('--reveal3',
+          smooth(clamp((t - p.rev3[0]) / (p.rev3[1] - p.rev3[0]), 0, 1)).toFixed(3));
       }
     }
 
