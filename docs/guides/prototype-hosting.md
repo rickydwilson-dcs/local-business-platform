@@ -152,12 +152,14 @@ anything sensitive behind it.
 | `2026-08-17_dcs-homepage-redesign`  | `dcs-prototypes` | https://dcs-prototypes.vercel.app |
 | `2026-08-26_dpm-autobody-discovery` | `dpm-autobody`   | https://dpm-autobody.vercel.app   |
 
-The DPM deployment is the **client build only** — two pages, flattened so the homepage is the
-site root. The annotated build, the rejected directions and the type study are deliberately not
-on it, and `prototype/publish.zsh` in that session encodes the staging so it stays that way on
-every republish. Serving one build out of a multi-build folder is the general pattern: stage the
-pages you mean to send into their own directory and point `publish-prototype.ts` at that,
-rather than deploying the folder and relying on nobody guessing a URL.
+The DPM deployment is the **client build only** — four pages (home, the Volvo P1800 detail page,
+and, since 3 September, standalone Workshop and Contact pages split off the homepage), flattened
+so the homepage is the site root. The annotated build, the rejected directions and the type study
+are deliberately not on it, and `prototype/publish.zsh` in that session encodes the staging so it
+stays that way on every republish. Serving one build out of a multi-build folder is the general
+pattern: stage the pages you mean to send into their own directory and point
+`publish-prototype.ts` at that, rather than deploying the folder and relying on nobody guessing a
+URL.
 
 The project name defaults to the sanitised session slug; the DCS session pins `dcs-prototypes`
 via `--project`. Use a distinct name per session so they do not overwrite each other.

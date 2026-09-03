@@ -1112,17 +1112,18 @@ h1, h2, h3, h4 {
   .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
-  /* Below 60rem, "cover" is always height-matched against this landscape
-     photo (no vertical crop room exists — the box is narrower, in aspect
-     terms, than the image at every mobile/tablet width), so the only real
-     lever is panning the horizontal window onto the cabin/roofline rather
-     than the front wheel arch (the --pp set inline on .lot2-whole). From
-     60rem up, box and image aspect are close enough that cover crops
-     vertically instead, so here the fix is the opposite lever: an explicit
-     zoom + a raised transform-origin, which pans the crop UP to clear
-     headroom above the roof and pushes the wheel down under the caption
-     text instead of dead-centre behind the "Twelve feet of panel" heading. */
-  .lot2-whole { --pp: 50% 50%; --pz: 1.3; --po: 46% 22%; }
+  /* The masthead is fixed, gradient-backed, and sits on top of every sticky
+     stage (z-index 40 vs the stage's own content), so its ~114px is never
+     actually free — a dark roofline sitting there blends into the
+     masthead's own dark gradient on a near-black car. But this is the
+     slider's payoff "whole car" shot, and CSS transform:scale(s) crops the
+     SAME fraction (1 - 1/s) off every edge regardless of aspect or origin —
+     the first attempt here (--pz:1.42, ~30% off every edge) traded away
+     enough of the car's length and the roofline itself to stop reading as
+     a wide shot at all. --pz:1.2 crops a lighter ~17% per edge: real but
+     modest relief, not a full fix — the roofline still sits close to the
+     top, just with a little more clearance than the unmodified crop had. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.2; --po: 46% 38%; }
   /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
   .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
 }
@@ -1206,18 +1207,18 @@ h1, h2, h3, h4 {
   <a class="wordmark" href="#top" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
   <nav aria-label="Primary">
     <a href="#work">The work</a>
-    <a href="#workshop">The workshop</a>
+    <a href="workshop.html">The workshop</a>
     <a href="#proof">Proof</a>
-    <a href="#contact">Contact</a>
+    <a href="contact.html">Contact</a>
   </nav>
   <a class="tel" href="tel:+441323552827">01323 552827</a>
 </header>
 
 <nav class="pill" id="pill" aria-label="Contents">
   <a href="#work">Work</a>
-  <a href="#workshop">Workshop</a>
+  <a href="workshop.html">Workshop</a>
   <a href="#proof">Proof</a>
-  <a href="#contact">Contact</a>
+  <a href="contact.html">Contact</a>
 </nav>
 
 <div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
@@ -1263,18 +1264,6 @@ h1, h2, h3, h4 {
     <span class="chapter__mark" aria-hidden="true">01</span>
     <span class="chapter__kind">No. 01 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
-  <figure class="section-hero">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
-         width="1280" height="853" loading="lazy" decoding="async"
-         class="lot1-intro"
-         style="--pz:1.3; --po:75% 2%; --pbri:1.06; --psat:1.16; --pcon:1.1"
-         alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
-    <figcaption class="caption">
-      <span class="credit credit--dpm">DPM Autobody</span>
-      <span><b>Volvo P1800, Candy Red.</b> Finished and delivered, before the details that
-        follow show what went into it.</span>
-    </figcaption>
-  </figure>
   <div class="section-head">
     <h2 class="h-major">Volvo&nbsp;P1800<br>Candy&nbsp;Red</h2>
     <div>
@@ -1404,7 +1393,7 @@ h1, h2, h3, h4 {
     <div class="plate">
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/shutline.jpg"
            width="1500" height="900" loading="lazy" decoding="async"
-           style="--pz:1.28; --po:52% 48%; --pbri:1.5; --psat:1.06; --pcon:1.02"
+           style="--pz:1.42; --po:52% 60%; --pbri:1.5; --psat:1.06; --pcon:1.02"
            alt="The shut line between the Bentley's door and rear wing in near-black paint, with a chrome waistrail running straight through it and the sky reflected below.">
       <div class="veil veil--l"></div>
       <div class="veil veil--r"></div>
@@ -1420,7 +1409,7 @@ h1, h2, h3, h4 {
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
            class="lot2-whole"
-           style="--pz:1; --po:50% 50%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
+           style="--pz:1.1; --po:60% 45%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
     </div>
     <div class="stage__over">
@@ -1535,51 +1524,10 @@ h1, h2, h3, h4 {
   <div class="track__room track__room--long"></div>
 </section>
 
-<!-- ═════════════════ 04 · THE WORKSHOP ═════════════════ -->
-<div class="band" id="workshop" data-accent="#C7BBA1" data-ink="#D8CBAE">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">04</span>
-    <span class="chapter__kind">The workshop</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">What we do,<br>and what goes out</h2>
-    <p class="prose">Bare-metal restoration and concours paint on classic and performance cars, in
-      one building in Berwick, East Sussex. Panel work, lead loading, filler, primer, colour,
-      flatting and polishing &mdash; all of it by the same hands, on the same floor.</p>
-  </div>
-  <div class="does">
-    <div>
-      <p class="prose">A restoration here starts with the car photographed exactly as it arrived,
-        and ends with a plaque riveted into the engine bay carrying its chassis number. Between
-        those two things sits a file that the owner keeps: every panel, every gap, every decision,
-        photographed as it happened.</p>
-      <p class="prose">Two things leave the building. We would rather list them than let
-        &ldquo;full in-house restoration&rdquo; quietly cover them.</p>
-    </div>
-    <ul class="inout">
-      <li><span class="inout__name">Panel work, fabrication, welding</span><span class="inout__where">In house</span></li>
-      <li><span class="inout__name">Lead loading and metal finishing</span><span class="inout__where">In house</span></li>
-      <li><span class="inout__name">Primer, block work, guide coats</span><span class="inout__where">In house</span></li>
-      <li><span class="inout__name">Colour mixing and spraying</span><span class="inout__where">In house</span></li>
-      <li><span class="inout__name">Flatting, cutting and polishing</span><span class="inout__where">In house</span></li>
-      <li><span class="inout__name">Photographic record of the build</span><span class="inout__where">In house</span></li>
-      <li data-out><span class="inout__name">Engine building</span><span class="inout__where">Out of house</span></li>
-      <li data-out><span class="inout__name">Trim and upholstery</span><span class="inout__where">Out of house</span></li>
-    </ul>
-  </div>
-  <p class="caption">
-    <span class="credit credit--copy">First-draft copy</span>
-    <span>The in-house / out-of-house split is drawn from DPM&rsquo;s own public description of
-      the business and from what David said on 26 August. The wording is ours and is a first pass
-      for David to correct &mdash; particularly the eight rows, which should be his list, not
-      ours.</span>
-  </p>
-</div>
-
-<!-- ═════════════════ 05 · WHAT CUSTOMERS SAY ═════════════════ -->
+<!-- ═════════════════ 04 · WHAT CUSTOMERS SAY ═════════════════ -->
 <div class="band" id="proof" data-accent="#C7BBA1" data-ink="#D8CBAE">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">05</span>
+    <span class="chapter__mark" aria-hidden="true">04</span>
     <span class="chapter__kind">In their words</span>
   </div>
   <div class="section-head">
@@ -1676,36 +1624,6 @@ h1, h2, h3, h4 {
   </p>
 </div>
 
-<!-- ═════════════════ 06 · CONTACT ═════════════════ -->
-<section class="contact" id="contact" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
-  <div class="contact__plate">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
-         width="1280" height="853" loading="lazy" decoding="async" alt="">
-  </div>
-  <div class="contact__inner">
-    <div class="chapter" style="border-top-color:var(--hair)">
-      <span class="chapter__mark" aria-hidden="true">06</span>
-      <span class="chapter__kind">Enquiries</span>
-    </div>
-    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
-      are not willing to compromise on.</h2>
-    <div class="contact__rows">
-      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
-      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
-      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
-    </div>
-    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
-      Pearce-Martin</strong>. He would rather see a car than quote from photographs of one, so
-      the first conversation usually ends with a date to bring it over. Dave, Ellis and Paul are
-      who you will meet when you do.</p>
-    <p class="caption">
-      <span class="credit credit--dpm">DPM Autobody</span>
-      <span>Background: the Candy Red P1800&rsquo;s rear wing again, held at low contrast so it
-        sits behind the type rather than competing with it.</span>
-    </p>
-  </div>
-</section>
-
 </main>
 
 <footer>
@@ -1723,8 +1641,12 @@ h1, h2, h3, h4 {
         going live, not on showing David.</p>
       <p><b>The copy is a first pass at customer-facing wording, not final.</b> The figures are
         DPM&rsquo;s own; the sentences around them are ours. Everything on this page is meant to
-        be read aloud to David and corrected, especially the workshop list and the Bentley
-        paragraph, where we are describing work we have only seen photographs of.</p>
+        be read aloud to David and corrected, especially the Bentley paragraph, where we are
+        describing work we have only seen photographs of.</p>
+      <p><b>The Workshop and Contact sections moved to their own pages on 3 September</b>
+        &mdash; <a href="workshop.html">workshop.html</a> and <a href="contact.html">contact.html</a>,
+        off this scroll, at Ricky&rsquo;s call. The workshop page also carries DPM&rsquo;s own
+        &ldquo;NEW WORKSHOP OF DREAMS!&rdquo; film and a still pulled from it.</p>
       <p><b>The mark is traced, not redrawn.</b> DPM have no vector artwork; this SVG is traced
         from the 1955&times;849 PNG on their own site and is a stopgap until real artwork exists.
         See <a href="../type-study.html">the type study</a> for how it sits against the
