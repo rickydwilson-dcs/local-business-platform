@@ -1113,20 +1113,17 @@ h1, h2, h3, h4 {
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
   /* The masthead is fixed, gradient-backed, and sits on top of every sticky
-     stage (z-index 40 vs the stage's own content) — its ~114px is never
-     actually free real estate, no matter how much "headroom" a crop shows
-     above the roof. On a near-black car especially, a dark roofline sitting
-     in that zone visually merges with the masthead's own dark gradient and
-     reads as cropped-off even though it technically isn't. So below 60rem
-     the fix isn't just panning horizontally onto the cabin (the --pp set
-     inline on .lot2-whole) — it's also enough extra zoom, with the
-     transform-origin pulled down, to push the roofline/glass out of frame
-     entirely and land on the chrome waistrail instead, which reads cleanly
-     even under the gradient. From 60rem up the same two levers apply, just
-     tuned separately since cover crops vertically there instead of by
-     panning — see the inline mobile values for the vertical-crop-room
-     case's equivalent reasoning. */
-  .lot2-whole { --pp: 50% 50%; --pz: 1.42; --po: 46% 48%; }
+     stage (z-index 40 vs the stage's own content), so its ~114px is never
+     actually free — a dark roofline sitting there blends into the
+     masthead's own dark gradient on a near-black car. But this is the
+     slider's payoff "whole car" shot, and CSS transform:scale(s) crops the
+     SAME fraction (1 - 1/s) off every edge regardless of aspect or origin —
+     the first attempt here (--pz:1.42, ~30% off every edge) traded away
+     enough of the car's length and the roofline itself to stop reading as
+     a wide shot at all. --pz:1.2 crops a lighter ~17% per edge: real but
+     modest relief, not a full fix — the roofline still sits close to the
+     top, just with a little more clearance than the unmodified crop had. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.2; --po: 46% 38%; }
   /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
   .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
 }
@@ -1412,7 +1409,7 @@ h1, h2, h3, h4 {
       <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
            width="2400" height="1351" loading="lazy" decoding="async"
            class="lot2-whole"
-           style="--pz:1.45; --po:58% 65%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
+           style="--pz:1.1; --po:60% 45%; --pp:58% 50%; --rbri:1.02; --rsat:1.06; --rcon:1.08"
            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
     </div>
     <div class="stage__over">
