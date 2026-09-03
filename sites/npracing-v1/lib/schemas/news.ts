@@ -13,6 +13,8 @@ export const newsHeroImageSchema = z.object({
   alt: z.string().min(1, 'heroImage.alt is required'),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
+  // Photo credit shown under the hero image, e.g. "Gary Smith / GPS Photography".
+  credit: z.string().min(1).optional(),
 });
 
 export const newsFrontmatterSchema = z

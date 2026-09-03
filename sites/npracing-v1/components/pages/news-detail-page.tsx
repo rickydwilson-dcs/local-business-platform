@@ -51,15 +51,22 @@ export function NewsDetailPage({ article, body }: NewsDetailPageProps) {
         </header>
 
         {article.heroImage && (
-          <Image
-            src={getImageUrl(article.heroImage.src)}
-            alt={article.heroImage.alt}
-            width={article.heroImage.width}
-            height={article.heroImage.height}
-            sizes="(min-width: 1024px) 52rem, 100vw"
-            quality={65}
-            className="mt-8 w-full rounded-card border border-surface-card-border object-cover"
-          />
+          <figure className="mt-8">
+            <Image
+              src={getImageUrl(article.heroImage.src)}
+              alt={article.heroImage.alt}
+              width={article.heroImage.width}
+              height={article.heroImage.height}
+              sizes="(min-width: 1024px) 52rem, 100vw"
+              quality={65}
+              className="w-full rounded-card border border-surface-card-border object-cover"
+            />
+            {article.heroImage.credit && (
+              <figcaption className="mt-2 text-right text-xs text-surface-tertiary-foreground">
+                Photo: {article.heroImage.credit}
+              </figcaption>
+            )}
+          </figure>
         )}
 
         <div className="prose-grid-box mt-10">{body}</div>

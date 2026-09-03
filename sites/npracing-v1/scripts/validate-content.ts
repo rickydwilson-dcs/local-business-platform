@@ -29,7 +29,7 @@ import { z } from 'zod';
 // content was silently added/removed/duplicated without deliberate review.
 const EXPECTED_COUNTS: Record<string, number> = {
   merch: 10,
-  news: 3,
+  news: 4,
   brand: 1,
 };
 
@@ -222,7 +222,7 @@ function main() {
     allValid = validateCountedType(contentDir, 'merch', MerchFrontmatterSchema) && allValid;
   }
 
-  // Validate news (exactly 2 records expected)
+  // Validate news (exactly 4 records expected)
   if (mode === 'all' || mode === 'news') {
     allValid = validateCountedType(contentDir, 'news', newsFrontmatterSchema) && allValid;
   }
