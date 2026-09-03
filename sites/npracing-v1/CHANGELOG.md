@@ -4,6 +4,13 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-09-03
+
+### Content
+
+- Added photo credits for Gary Smith / GPS Photography across the News section. `lib/schemas/news.ts`'s `newsHeroImageSchema` gained an optional `credit` field, rendered as a small caption under the hero image on the article detail page (`components/pages/news-detail-page.tsx`); the existing `ImageWithCaption` MDX component's `caption` prop covers gallery images, so no component changes were needed there. Applied the credit to all three existing race-report heroes and to all 7 gallery images in the Cadwell Park report.
+- Added a new backdated news article, "A Day at Donington: Where the Race Family Started" (`content/news/donington-park-race-family-story.mdx`, `publishedAt: 2026-06-03`), with a hero image and 16-photo gallery — all 17 images credited to Gary Smith / GPS Photography. Photos were resized from full camera originals (5472×3648 and similar) to fit within 2048px and re-compressed to JPEG q82 before upload to R2, matching the site's existing image convention.
+
 ## 2026-08-25
 
 ### Bugs
