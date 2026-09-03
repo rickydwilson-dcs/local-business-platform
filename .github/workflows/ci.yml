@@ -57,6 +57,14 @@ jobs:
       - name: Run Tests
         run: pnpm test
 
+      - name: Deployment safety checks (.vercelignore vs git-tracked files)
+        # `tools/` is not a pnpm workspace member, so `pnpm test` (turbo run test)
+        # never reaches tools/__tests__/ — this step is the only thing that runs
+        # it. Scoped to the single file on purpose: the shared config's include
+        # glob also covers 13 other long-dormant tools tests, and resurrecting
+        # those is a separate decision, not a side effect of this guard.
+        run: npx vitest run --config tools/__tests__/vitest.config.ts tools/__tests__/vercel-ignore-tracked-files.test.ts
+
       - name: Watchdog fault-injection harness
         # Proves the regression watchdog's gate turns a check red for each
         # deploy failure class (missing/empty/fabricated results, zero tests,

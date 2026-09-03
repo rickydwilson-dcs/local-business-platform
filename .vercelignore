@@ -31,5 +31,29 @@ test-results
 .code-review-graph
 tasks
 supabase
-*.png
 *.tsbuildinfo
+
+# `*.png` is deliberately NOT listed here. It matched 17 git-TRACKED files that
+# live inside site package directories (colossus-scaffolding's 12 Playwright
+# visual baselines, sites/dcs/public/social-share.png, and the npracing v1/v3
+# app/icon.png + app/apple-icon.png). .vercelignore is applied to the build's
+# working tree before ignoreCommand runs, so those tracked files were deleted
+# from disk while still present in git's index. turbo-ignore's filter
+# `<pkg>...[<sha>]` sets include_uncommitted, which makes turbo additionally run
+# `git ls-files --others --modified` — and a tracked file deleted without
+# `git rm` reports as modified. Every affected package therefore looked "changed"
+# on every single build, so colossus, dcs, npracing-v1 and npracing-v3 rebuilt on
+# every push regardless of what the commit touched (24 confirmed needless builds
+# in six commits). Sites with no tracked PNG inside their own package dir
+# (dj-fox-electrical, dch-automotive, mad-graphics) correctly skipped throughout,
+# which is what isolated the cause.
+#
+# The rule also stripped those PNGs from the production build output: DCS's
+# og:image 404'd (breaking every link preview) and the npracing sites shipped no
+# icon.png/apple-icon.png, while sibling .svg/.ico files in the same directories
+# served fine.
+#
+# It was never load-bearing anyway: 101 of the 118 tracked PNGs live under
+# `output`, which is already excluded wholesale above. Do not re-add a bare
+# `*.png`. Any new pattern here MUST match zero git-tracked files — enforced by
+# tools/__tests__/vercel-ignore-tracked-files.test.ts.
