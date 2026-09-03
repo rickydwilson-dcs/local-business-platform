@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-build="annotated">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-client>Volvo P1800, Candy Red — DPM Autobody</title>
-<title data-note>Volvo P1800 record (working copy, with notes)</title>
-<meta name="description" content="The full record of the Candy Red Volvo P1800 restored by DPM Autobody: a year, 1,300 hours, five owner-specified changes, chassis 26282.">
+<title>DPM Autobody — contact page (working copy, with notes)</title>
+<meta name="description" content="Get in touch with DPM Autobody — concours restoration and paintwork, Berwick, East Sussex. By appointment.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -400,7 +399,7 @@ h1, h2, h3, h4 {
   object-position: var(--pp, 50% 50%);
   transform: scale(var(--pz, 1));
   transform-origin: var(--po, 50% 50%);
-  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+  filter: saturate(var(--rsat, 1.04)) contrast(var(--rcon, 1.02)) brightness(var(--rbri, 1.04));
 }
 .resolve::after {
   content: ''; position: absolute; inset: 0;
@@ -637,6 +636,36 @@ h1, h2, h3, h4 {
 }
 .bound > img { width: 100%; height: auto; }
 .bound > figcaption { padding-top: 0.85rem; }
+
+/* The section's own establishing shot — the wide car photo that opens each
+   finished-car section, ahead of the title and prose. Contained inside the
+   text column rather than full-bleed like .plate, so it needs its own crop
+   treatment rather than .plate's. A fixed aspect-ratio means the box shape
+   — and so the crop — is identical at every viewport width, unlike the
+   full-viewport-height sticky stage the slider uses below, whose aspect
+   changes with the window. The slider's own closing shot returns to this
+   same photograph, but in that full-bleed box, so it needs its own,
+   separately tuned crop rather than reusing these values verbatim. */
+.section-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: clip;
+  margin: clamp(1.75rem, 4vh, 2.75rem) 0 clamp(2rem, 5vh, 3rem);
+}
+.section-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+.section-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0) 55%, rgba(11,11,12,0.34) 100%);
+}
+.section-hero + .caption { margin-top: -0.25rem; }
 
 /* --- Link out to a project page ------------------------------------------ */
 
@@ -891,6 +920,47 @@ h1, h2, h3, h4 {
 
 /* --- Proof --------------------------------------------------------------- */
 
+/* --- Testimonials --------------------------------------------------------
+   Both quotes here are real and attributable. There are only two because only
+   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
+   login wall. The layout is built for two rather than padded out to a grid of
+   three with invented ones.
+   ------------------------------------------------------------------------ */
+
+.says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
+
+.say { display: grid; gap: 1.15rem; }
+.say blockquote {
+  margin: 0;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.5rem);
+  line-height: 1.34;
+  color: var(--bone);
+  max-width: 19em;
+  text-wrap: pretty;
+  font-variant-numeric: normal;
+}
+.say--sub blockquote {
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 1.1vw + 0.9rem, 1.625rem);
+  line-height: 1.44;
+  color: #CFCAC1;
+  max-width: 24em;
+}
+.say__by {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.say__by b { color: var(--bone); font-weight: 500; }
+.say__by::before {
+  content: ''; width: clamp(28px, 4vw, 52px); height: 1px; flex: none;
+  background: var(--accent-ink);
+  transition: background 700ms var(--ease);
+}
+
 .proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
 .proof li {
   padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
@@ -1042,6 +1112,20 @@ h1, h2, h3, h4 {
   .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  /* The masthead is fixed, gradient-backed, and sits on top of every sticky
+     stage (z-index 40 vs the stage's own content), so its ~114px is never
+     actually free — a dark roofline sitting there blends into the
+     masthead's own dark gradient on a near-black car. But this is the
+     slider's payoff "whole car" shot, and CSS transform:scale(s) crops the
+     SAME fraction (1 - 1/s) off every edge regardless of aspect or origin —
+     the first attempt here (--pz:1.42, ~30% off every edge) traded away
+     enough of the car's length and the roofline itself to stop reading as
+     a wide shot at all. --pz:1.2 crops a lighter ~17% per edge: real but
+     modest relief, not a full fix — the roofline still sits close to the
+     top, just with a little more clearance than the unmodified crop had. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.2; --po: 46% 38%; }
+  /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
+  .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
 }
 
 @media (max-width: 55.99rem) {
@@ -1117,7 +1201,7 @@ h1, h2, h3, h4 {
   <symbol id="dpm-mark" viewBox="0 0 1158 577"><path fill="currentColor" fill-rule="evenodd" d="M6.0 1.0L5.0 2.0L5.0 252.0L6.0 253.0L48.0 253.0L49.0 252.0L49.0 46.0L50.0 45.0L118.0 45.0L118.0 46.0L132.0 46.0L132.0 47.0L140.0 47.0L140.0 48.0L145.0 48.0L145.0 49.0L150.0 49.0L150.0 50.0L162.0 52.0L162.0 53.0L174.0 56.0L178.0 59.0L181.0 59.0L181.0 60.0L195.0 66.0L196.0 68.0L202.0 70.0L203.0 72.0L205.0 72.0L206.0 74.0L208.0 74.0L209.0 76.0L214.0 78.0L216.0 81.0L218.0 81.0L221.0 85.0L223.0 85.0L228.0 91.0L230.0 91.0L240.0 101.0L240.0 103.0L246.0 108.0L246.0 110.0L250.0 113.0L250.0 115.0L253.0 117.0L253.0 119.0L255.0 120.0L255.0 122.0L257.0 123.0L257.0 125.0L261.0 129.0L262.0 133.0L264.0 134.0L264.0 136.0L265.0 136.0L265.0 138.0L266.0 138.0L266.0 140.0L267.0 140.0L267.0 142.0L268.0 142.0L268.0 144.0L269.0 144.0L269.0 146.0L272.0 150.0L272.0 153.0L275.0 157.0L275.0 160.0L276.0 160.0L276.0 163.0L277.0 163.0L277.0 166.0L278.0 166.0L278.0 169.0L279.0 169.0L279.0 172.0L280.0 172.0L280.0 175.0L281.0 175.0L283.0 187.0L284.0 187.0L284.0 193.0L285.0 193.0L285.0 199.0L286.0 199.0L286.0 209.0L287.0 209.0L287.0 237.0L286.0 237.0L286.0 247.0L285.0 247.0L284.0 260.0L283.0 260.0L280.0 276.0L279.0 276.0L278.0 282.0L276.0 284.0L275.0 290.0L274.0 290.0L274.0 292.0L271.0 296.0L271.0 299.0L270.0 299.0L268.0 305.0L266.0 306.0L263.0 314.0L261.0 315.0L260.0 319.0L258.0 320.0L256.0 325.0L253.0 327.0L253.0 329.0L250.0 331.0L250.0 333.0L245.0 337.0L245.0 339.0L229.0 355.0L227.0 355.0L223.0 360.0L221.0 360.0L214.0 367.0L210.0 368.0L208.0 371.0L206.0 371.0L203.0 374.0L197.0 376.0L196.0 378.0L194.0 378.0L194.0 379.0L192.0 379.0L192.0 380.0L190.0 380.0L190.0 381.0L188.0 381.0L184.0 384.0L181.0 384.0L177.0 387.0L174.0 387.0L174.0 388.0L171.0 388.0L169.0 390.0L159.0 392.0L159.0 393.0L156.0 393.0L156.0 394.0L143.0 396.0L143.0 397.0L137.0 397.0L137.0 398.0L129.0 398.0L129.0 399.0L114.0 399.0L114.0 400.0L109.0 401.0L109.0 444.0L110.0 445.0L137.0 445.0L137.0 444.0L153.0 443.0L153.0 442.0L163.0 441.0L163.0 440.0L171.0 439.0L171.0 438.0L174.0 438.0L174.0 437.0L177.0 437.0L177.0 436.0L181.0 436.0L183.0 434.0L186.0 434.0L186.0 433.0L194.0 431.0L198.0 428.0L201.0 428.0L201.0 427.0L213.0 422.0L214.0 420.0L220.0 418.0L221.0 416.0L225.0 415.0L226.0 413.0L228.0 413.0L229.0 411.0L231.0 411.0L235.0 407.0L237.0 407.0L239.0 404.0L241.0 404.0L243.0 401.0L245.0 401.0L248.0 397.0L250.0 397.0L256.0 390.0L258.0 390.0L273.0 375.0L273.0 373.0L280.0 367.0L280.0 365.0L283.0 363.0L283.0 361.0L286.0 359.0L286.0 357.0L289.0 355.0L289.0 353.0L291.0 352.0L291.0 350.0L293.0 349.0L293.0 347.0L297.0 343.0L297.0 341.0L300.0 338.0L301.0 334.0L303.0 333.0L303.0 331.0L304.0 331.0L304.0 329.0L305.0 329.0L305.0 327.0L306.0 327.0L306.0 325.0L307.0 325.0L307.0 323.0L308.0 323.0L308.0 321.0L309.0 321.0L309.0 319.0L310.0 319.0L310.0 317.0L311.0 317.0L311.0 315.0L314.0 311.0L316.0 303.0L318.0 301.0L318.0 298.0L319.0 298.0L319.0 295.0L320.0 295.0L320.0 292.0L321.0 292.0L321.0 289.0L322.0 289.0L322.0 286.0L323.0 286.0L323.0 282.0L324.0 282.0L324.0 278.0L325.0 278.0L325.0 274.0L326.0 274.0L326.0 270.0L327.0 270.0L328.0 259.0L329.0 259.0L330.0 240.0L331.0 240.0L331.0 207.0L330.0 207.0L330.0 196.0L329.0 196.0L329.0 188.0L328.0 188.0L326.0 172.0L325.0 172.0L325.0 168.0L324.0 168.0L324.0 164.0L323.0 164.0L323.0 160.0L322.0 160.0L319.0 148.0L318.0 148.0L316.0 140.0L315.0 140.0L315.0 138.0L312.0 134.0L312.0 131.0L311.0 131.0L307.0 121.0L305.0 120.0L303.0 114.0L301.0 113.0L300.0 109.0L298.0 108.0L297.0 104.0L295.0 103.0L295.0 101.0L291.0 97.0L291.0 95.0L288.0 93.0L288.0 91.0L282.0 85.0L282.0 83.0L278.0 80.0L278.0 78.0L269.0 70.0L269.0 68.0L263.0 62.0L261.0 62.0L252.0 52.0L250.0 52.0L242.0 44.0L240.0 44.0L238.0 41.0L236.0 41.0L235.0 39.0L233.0 39.0L232.0 37.0L230.0 37.0L226.0 33.0L222.0 32.0L218.0 28.0L216.0 28.0L216.0 27.0L214.0 27.0L214.0 26.0L212.0 26.0L212.0 25.0L210.0 25.0L210.0 24.0L208.0 24.0L208.0 23.0L206.0 23.0L206.0 22.0L204.0 22.0L204.0 21.0L202.0 21.0L198.0 18.0L195.0 18.0L191.0 15.0L188.0 15.0L186.0 13.0L183.0 13.0L183.0 12.0L180.0 12.0L180.0 11.0L177.0 11.0L177.0 10.0L174.0 10.0L174.0 9.0L171.0 9.0L171.0 8.0L168.0 8.0L168.0 7.0L164.0 7.0L164.0 6.0L160.0 6.0L160.0 5.0L156.0 5.0L156.0 4.0L151.0 4.0L151.0 3.0L136.0 2.0L136.0 1.0ZM350.0 1.0L348.0 3.0L348.0 134.0L349.0 135.0L392.0 135.0L393.0 134.0L393.0 48.0L394.0 47.0L522.0 47.0L522.0 48.0L531.0 48.0L531.0 49.0L543.0 50.0L543.0 51.0L547.0 51.0L547.0 52.0L551.0 52.0L551.0 53.0L555.0 53.0L555.0 54.0L564.0 56.0L566.0 58.0L569.0 58.0L569.0 59.0L581.0 64.0L582.0 66.0L586.0 67.0L591.0 72.0L593.0 72.0L596.0 76.0L598.0 76.0L603.0 81.0L603.0 83.0L608.0 87.0L608.0 89.0L611.0 91.0L611.0 93.0L615.0 97.0L615.0 99.0L616.0 99.0L616.0 101.0L617.0 101.0L617.0 103.0L618.0 103.0L618.0 105.0L619.0 105.0L619.0 107.0L622.0 111.0L624.0 121.0L625.0 121.0L625.0 125.0L626.0 125.0L627.0 140.0L628.0 140.0L627.0 168.0L626.0 168.0L624.0 181.0L623.0 181.0L622.0 187.0L620.0 189.0L620.0 192.0L619.0 192.0L617.0 198.0L615.0 199.0L614.0 203.0L612.0 204.0L610.0 209.0L607.0 211.0L607.0 213.0L595.0 225.0L593.0 225.0L591.0 228.0L589.0 228.0L587.0 231.0L583.0 232.0L582.0 234.0L580.0 234.0L580.0 235.0L578.0 235.0L578.0 236.0L576.0 236.0L576.0 237.0L574.0 237.0L574.0 238.0L572.0 238.0L568.0 241.0L565.0 241.0L563.0 243.0L560.0 243.0L560.0 244.0L557.0 244.0L557.0 245.0L554.0 245.0L554.0 246.0L541.0 248.0L541.0 249.0L536.0 249.0L536.0 250.0L528.0 250.0L528.0 251.0L350.0 251.0L348.0 253.0L348.0 443.0L349.0 444.0L393.0 444.0L394.0 443.0L394.0 298.0L395.0 297.0L524.0 297.0L524.0 296.0L536.0 296.0L536.0 295.0L543.0 295.0L543.0 294.0L549.0 294.0L549.0 293.0L554.0 293.0L554.0 292.0L558.0 292.0L558.0 291.0L563.0 291.0L563.0 290.0L566.0 290.0L566.0 289.0L570.0 289.0L570.0 288.0L582.0 285.0L582.0 284.0L587.0 283.0L591.0 280.0L594.0 280.0L594.0 279.0L602.0 276.0L603.0 274.0L607.0 273.0L608.0 271.0L612.0 270.0L617.0 265.0L622.0 263.0L626.0 258.0L628.0 258.0L641.0 245.0L641.0 243.0L646.0 239.0L646.0 237.0L648.0 236.0L648.0 234.0L650.0 233.0L650.0 231.0L654.0 227.0L655.0 223.0L657.0 222.0L657.0 220.0L658.0 220.0L658.0 218.0L659.0 218.0L659.0 216.0L662.0 212.0L662.0 209.0L664.0 207.0L664.0 204.0L665.0 204.0L665.0 201.0L667.0 199.0L667.0 195.0L668.0 195.0L668.0 192.0L669.0 192.0L671.0 177.0L672.0 177.0L672.0 170.0L673.0 170.0L673.0 157.0L674.0 157.0L673.0 129.0L672.0 129.0L672.0 122.0L671.0 122.0L671.0 117.0L670.0 117.0L668.0 105.0L667.0 105.0L666.0 99.0L664.0 97.0L664.0 94.0L663.0 94.0L657.0 80.0L655.0 79.0L654.0 75.0L652.0 74.0L650.0 69.0L647.0 67.0L647.0 65.0L644.0 63.0L644.0 61.0L639.0 57.0L639.0 55.0L628.0 44.0L626.0 44.0L622.0 39.0L620.0 39.0L614.0 33.0L612.0 33.0L608.0 29.0L604.0 28.0L603.0 26.0L595.0 23.0L594.0 21.0L592.0 21.0L590.0 19.0L587.0 19.0L587.0 18.0L585.0 18.0L581.0 15.0L578.0 15.0L576.0 13.0L573.0 13.0L573.0 12.0L570.0 12.0L570.0 11.0L567.0 11.0L567.0 10.0L563.0 10.0L563.0 9.0L560.0 9.0L560.0 8.0L548.0 6.0L548.0 5.0L530.0 3.0L530.0 2.0L510.0 2.0L510.0 1.0ZM696.0 1.0L696.0 2.0L693.0 3.0L693.0 443.0L694.0 444.0L738.0 444.0L739.0 443.0L739.0 91.0L741.0 91.0L744.0 94.0L744.0 96.0L750.0 101.0L750.0 103.0L755.0 107.0L755.0 109.0L760.0 113.0L760.0 115.0L765.0 119.0L765.0 121.0L771.0 126.0L771.0 128.0L776.0 132.0L776.0 134.0L782.0 139.0L782.0 141.0L787.0 145.0L787.0 147.0L792.0 151.0L792.0 153.0L798.0 158.0L798.0 160.0L803.0 164.0L803.0 166.0L808.0 170.0L808.0 172.0L814.0 177.0L814.0 179.0L819.0 183.0L819.0 185.0L830.0 196.0L830.0 198.0L835.0 202.0L835.0 204.0L840.0 208.0L840.0 210.0L846.0 215.0L846.0 217.0L852.0 222.0L852.0 224.0L857.0 228.0L857.0 230.0L868.0 241.0L868.0 243.0L873.0 247.0L873.0 249.0L884.0 260.0L884.0 262.0L889.0 266.0L889.0 268.0L894.0 272.0L894.0 274.0L900.0 279.0L900.0 281.0L902.0 283.0L932.0 283.0L934.0 281.0L934.0 279.0L938.0 276.0L938.0 274.0L947.0 265.0L947.0 263.0L951.0 260.0L951.0 258.0L955.0 255.0L955.0 253.0L959.0 250.0L959.0 248.0L963.0 245.0L963.0 243.0L967.0 240.0L967.0 238.0L971.0 235.0L971.0 233.0L975.0 230.0L975.0 228.0L979.0 225.0L979.0 223.0L983.0 220.0L983.0 218.0L987.0 215.0L987.0 213.0L991.0 210.0L991.0 208.0L995.0 205.0L995.0 203.0L999.0 200.0L999.0 198.0L1003.0 195.0L1003.0 193.0L1007.0 190.0L1007.0 188.0L1011.0 185.0L1011.0 183.0L1015.0 180.0L1015.0 178.0L1020.0 174.0L1020.0 172.0L1024.0 169.0L1024.0 167.0L1028.0 164.0L1028.0 162.0L1032.0 159.0L1032.0 157.0L1036.0 154.0L1036.0 152.0L1040.0 149.0L1040.0 147.0L1048.0 139.0L1048.0 137.0L1052.0 134.0L1052.0 132.0L1056.0 129.0L1056.0 127.0L1060.0 124.0L1060.0 122.0L1064.0 119.0L1064.0 117.0L1068.0 114.0L1068.0 112.0L1072.0 109.0L1072.0 107.0L1076.0 104.0L1076.0 102.0L1080.0 99.0L1080.0 97.0L1084.0 94.0L1084.0 92.0L1089.0 88.0L1089.0 86.0L1093.0 83.0L1093.0 81.0L1097.0 78.0L1097.0 76.0L1101.0 73.0L1101.0 71.0L1109.0 63.0L1109.0 61.0L1111.0 59.0L1113.0 59.0L1113.0 252.0L1114.0 253.0L1156.0 253.0L1157.0 252.0L1157.0 3.0L1155.0 1.0L1153.0 1.0L1153.0 2.0L1100.0 2.0L1095.0 7.0L1095.0 9.0L1091.0 12.0L1091.0 14.0L1087.0 17.0L1087.0 19.0L1083.0 22.0L1083.0 24.0L1078.0 28.0L1078.0 30.0L1074.0 33.0L1074.0 35.0L1071.0 37.0L1071.0 39.0L1066.0 43.0L1066.0 45.0L1062.0 48.0L1062.0 50.0L1058.0 53.0L1058.0 55.0L1054.0 58.0L1054.0 60.0L1050.0 63.0L1050.0 65.0L1046.0 68.0L1046.0 70.0L1042.0 73.0L1042.0 75.0L1038.0 78.0L1038.0 80.0L1034.0 83.0L1034.0 85.0L1030.0 88.0L1030.0 90.0L1026.0 93.0L1026.0 95.0L1021.0 99.0L1021.0 101.0L1017.0 104.0L1017.0 106.0L1013.0 109.0L1013.0 111.0L1009.0 114.0L1009.0 116.0L1005.0 119.0L1005.0 121.0L1001.0 124.0L1001.0 126.0L997.0 129.0L997.0 131.0L993.0 134.0L993.0 136.0L989.0 139.0L989.0 141.0L985.0 144.0L985.0 146.0L981.0 149.0L981.0 151.0L977.0 154.0L977.0 156.0L973.0 159.0L973.0 161.0L968.0 165.0L968.0 167.0L960.0 175.0L960.0 177.0L957.0 179.0L957.0 181.0L952.0 185.0L952.0 187.0L948.0 190.0L948.0 192.0L944.0 195.0L944.0 197.0L940.0 200.0L940.0 202.0L936.0 205.0L936.0 207.0L932.0 210.0L932.0 212.0L928.0 215.0L928.0 217.0L924.0 220.0L924.0 222.0L919.0 226.0L919.0 228.0L916.0 231.0L914.0 231.0L910.0 227.0L910.0 225.0L906.0 222.0L906.0 220.0L901.0 216.0L901.0 214.0L892.0 205.0L892.0 203.0L888.0 200.0L888.0 198.0L883.0 194.0L883.0 192.0L879.0 189.0L879.0 187.0L875.0 184.0L875.0 182.0L870.0 178.0L870.0 176.0L866.0 173.0L866.0 171.0L861.0 167.0L861.0 165.0L857.0 162.0L857.0 160.0L853.0 157.0L853.0 155.0L843.0 145.0L843.0 143.0L839.0 140.0L839.0 138.0L835.0 135.0L835.0 133.0L830.0 129.0L830.0 127.0L821.0 118.0L821.0 116.0L817.0 113.0L817.0 111.0L813.0 108.0L813.0 106.0L808.0 102.0L808.0 100.0L804.0 97.0L804.0 95.0L799.0 91.0L799.0 89.0L795.0 86.0L795.0 84.0L791.0 81.0L791.0 79.0L781.0 69.0L781.0 67.0L777.0 64.0L777.0 62.0L773.0 59.0L773.0 57.0L768.0 53.0L768.0 51.0L764.0 48.0L764.0 46.0L759.0 42.0L759.0 40.0L755.0 37.0L755.0 35.0L750.0 31.0L750.0 29.0L742.0 21.0L742.0 19.0L737.0 15.0L737.0 13.0L733.0 10.0L733.0 8.0L727.0 2.0L722.0 2.0L722.0 1.0L718.0 1.0L718.0 2.0ZM15.0 489.0L15.0 490.0L12.0 490.0L12.0 491.0L10.0 491.0L9.0 493.0L7.0 493.0L5.0 495.0L5.0 497.0L2.0 500.0L2.0 504.0L1.0 504.0L1.0 575.0L2.0 576.0L7.0 576.0L8.0 575.0L8.0 537.0L9.0 536.0L91.0 536.0L92.0 537.0L92.0 575.0L93.0 576.0L98.0 576.0L100.0 574.0L100.0 507.0L99.0 507.0L99.0 501.0L98.0 501.0L97.0 497.0L92.0 492.0L90.0 492.0L88.0 490.0L85.0 490.0L85.0 489.0ZM153.0 489.0L152.0 490.0L152.0 563.0L153.0 563.0L153.0 566.0L155.0 567.0L155.0 569.0L159.0 573.0L161.0 573.0L163.0 575.0L166.0 575.0L166.0 576.0L236.0 576.0L236.0 575.0L239.0 575.0L239.0 574.0L243.0 573.0L248.0 568.0L249.0 563.0L250.0 563.0L250.0 490.0L249.0 489.0L244.0 489.0L243.0 490.0L243.0 562.0L238.0 568.0L234.0 568.0L234.0 569.0L167.0 569.0L167.0 568.0L164.0 568.0L160.0 564.0L160.0 561.0L159.0 561.0L159.0 490.0L158.0 489.0ZM304.0 489.0L303.0 490.0L303.0 495.0L304.0 496.0L347.0 496.0L348.0 497.0L348.0 575.0L349.0 576.0L354.0 576.0L355.0 575.0L355.0 497.0L356.0 496.0L400.0 496.0L401.0 495.0L401.0 490.0L400.0 489.0ZM466.0 489.0L466.0 490.0L462.0 490.0L462.0 491.0L458.0 492.0L454.0 496.0L454.0 498.0L452.0 499.0L452.0 502.0L451.0 502.0L451.0 563.0L452.0 563.0L452.0 566.0L454.0 567.0L454.0 569.0L458.0 573.0L460.0 573.0L462.0 575.0L465.0 575.0L465.0 576.0L535.0 576.0L535.0 575.0L538.0 575.0L538.0 574.0L542.0 573.0L546.0 569.0L546.0 567.0L548.0 566.0L548.0 563.0L549.0 563.0L549.0 502.0L548.0 502.0L546.0 496.0L542.0 492.0L540.0 492.0L538.0 490.0L535.0 490.0L535.0 489.0ZM603.0 489.0L602.0 490.0L602.0 575.0L603.0 576.0L686.0 576.0L686.0 575.0L689.0 575.0L689.0 574.0L693.0 573.0L697.0 569.0L697.0 567.0L699.0 565.0L699.0 562.0L700.0 562.0L700.0 543.0L699.0 543.0L698.0 538.0L694.0 534.0L694.0 531.0L697.0 529.0L697.0 527.0L699.0 525.0L699.0 522.0L700.0 522.0L700.0 503.0L699.0 503.0L699.0 500.0L698.0 500.0L698.0 498.0L696.0 497.0L695.0 494.0L693.0 494.0L691.0 491.0L686.0 490.0L686.0 489.0ZM767.0 489.0L767.0 490.0L761.0 491.0L755.0 497.0L755.0 499.0L753.0 501.0L753.0 505.0L752.0 505.0L752.0 561.0L753.0 561.0L753.0 565.0L756.0 568.0L756.0 570.0L758.0 572.0L760.0 572.0L761.0 574.0L766.0 575.0L766.0 576.0L836.0 576.0L836.0 575.0L842.0 574.0L848.0 568.0L848.0 566.0L850.0 564.0L850.0 559.0L851.0 559.0L851.0 506.0L850.0 506.0L850.0 501.0L849.0 501.0L848.0 497.0L843.0 492.0L841.0 492.0L839.0 490.0L836.0 490.0L836.0 489.0ZM904.0 489.0L903.0 490.0L903.0 575.0L904.0 576.0L987.0 576.0L987.0 575.0L990.0 575.0L990.0 574.0L994.0 573.0L999.0 568.0L1000.0 563.0L1001.0 563.0L1001.0 502.0L1000.0 502.0L1000.0 499.0L998.0 498.0L998.0 496.0L994.0 492.0L992.0 492.0L990.0 490.0L987.0 490.0L987.0 489.0ZM1049.0 489.0L1049.0 492.0L1058.0 500.0L1058.0 502.0L1077.0 520.0L1077.0 522.0L1097.0 542.0L1097.0 575.0L1098.0 576.0L1104.0 576.0L1105.0 575.0L1105.0 542.0L1106.0 542.0L1106.0 540.0L1124.0 523.0L1124.0 521.0L1153.0 492.0L1153.0 489.0L1144.0 490.0L1138.0 496.0L1138.0 498.0L1118.0 517.0L1118.0 519.0L1102.0 535.0L1099.0 535.0L1099.0 533.0L1081.0 516.0L1081.0 514.0L1064.0 498.0L1064.0 496.0L1058.0 490.0ZM16.0 496.0L84.0 496.0L84.0 497.0L87.0 497.0L92.0 503.0L92.0 528.0L91.0 529.0L9.0 529.0L8.0 528.0L8.0 506.0L9.0 506.0L9.0 502.0L11.0 501.0L11.0 499.0L16.0 497.0ZM466.0 496.0L534.0 496.0L534.0 497.0L537.0 497.0L541.0 501.0L541.0 504.0L542.0 504.0L542.0 562.0L541.0 562.0L541.0 564.0L537.0 568.0L534.0 568.0L534.0 569.0L466.0 569.0L466.0 568.0L463.0 568.0L459.0 564.0L459.0 561.0L458.0 561.0L458.0 504.0L459.0 504.0L460.0 500.0L463.0 497.0L466.0 497.0ZM609.0 496.0L685.0 496.0L685.0 497.0L689.0 498.0L692.0 502.0L692.0 505.0L693.0 505.0L693.0 521.0L692.0 521.0L691.0 525.0L688.0 528.0L685.0 528.0L685.0 529.0L614.0 529.0L613.0 530.0L613.0 535.0L614.0 536.0L685.0 536.0L685.0 537.0L687.0 537.0L691.0 540.0L692.0 545.0L693.0 545.0L693.0 560.0L692.0 560.0L691.0 565.0L689.0 567.0L685.0 568.0L685.0 569.0L609.0 569.0L608.0 568.0L608.0 497.0ZM767.0 496.0L836.0 496.0L836.0 497.0L838.0 497.0L843.0 503.0L843.0 563.0L841.0 564.0L841.0 566.0L836.0 568.0L836.0 569.0L767.0 569.0L767.0 568.0L763.0 567.0L760.0 563.0L760.0 502.0ZM911.0 496.0L986.0 496.0L986.0 497.0L989.0 497.0L994.0 503.0L994.0 562.0L993.0 562.0L993.0 564.0L989.0 568.0L986.0 568.0L986.0 569.0L911.0 569.0L910.0 568.0L910.0 497.0Z"/></symbol>
 </svg>
 
-<p class="buildflag" data-note>Working copy &mdash; carries notes. <a href="../client/volvo-p1800.html">Client version</a></p>
+<p class="buildflag">Working copy &mdash; carries notes. <a href="../client/contact.html">Client version</a></p>
 
 <header class="masthead">
   <a class="wordmark" href="index.html" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
@@ -1126,7 +1210,6 @@ h1, h2, h3, h4 {
     <a href="index.html#work">The work</a>
     <a href="workshop.html">The workshop</a>
     <a href="index.html#proof">Proof</a>
-    <a href="contact.html">Contact</a>
   </nav>
   <a class="tel" href="tel:+441323552827">01323 552827</a>
 </header>
@@ -1136,560 +1219,20 @@ h1, h2, h3, h4 {
   <a href="index.html#work">Work</a>
   <a href="workshop.html">Workshop</a>
   <a href="index.html#proof">Proof</a>
-  <a href="contact.html">Contact</a>
 </nav>
 
 <div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
 
 <main id="main">
-
-<!-- ═════════════════ HERO ═════════════════ -->
-<section class="track hero has-resolve" id="top" data-sheen data-dir="ltr" data-rev="0.58,0.86"
-         aria-labelledby="hero-h">
-  <figure class="stage">
-    <div class="plate">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg"
-           width="1280" height="853" fetchpriority="high" decoding="async"
-           style="--pz:1.6; --po:42% 52%; --pbri:1.34; --psat:1.18; --pcon:1.04"
-           alt="Macro on the P1800's nearside headlamp: a polished chrome ring and lens, with the deep Candy Red front wing curving away behind it.">
-      <div class="veil veil--l"></div>
-      <div class="veil veil--r"></div>
-      <div class="spec"></div>
-    </div>
-    <div class="resolve">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
-           width="1280" height="853" decoding="async"
-           style="--pz:1.06; --po:50% 48%"
-           alt="The rear three-quarter of the Candy Red Volvo P1800 in low sun, bare trees mirrored the full length of the rear wing above the chrome waistline.">
-    </div>
-    <div class="hero__inner">
-      <p class="label label--accent">No. 01 &nbsp;·&nbsp; The record</p>
-      <h1 class="h-hero" id="hero-h">Volvo P1800, Candy Red</h1>
-      <p class="lede">A year in the workshop. <span class="fig">1,300</span> hours of labour.
-        Chassis <span class="fig">26282</span>.</p>
-      <div class="hero__foot">
-        <p class="label"><a href="index.html" style="text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:.2rem">&larr;&nbsp; Back to the homepage</a></p>
-      </div>
-    </div>
-    <figcaption class="stage__cap">
-      <span class="stage__cap-line stage__cap-line--macro">
-        <span class="credit credit--dpm" data-note>DPM Autobody</span>
-        <span><b>Above &mdash; the P1800's nearside headlamp.</b> Chrome ring, lens, and the Candy
-          Red front wing curving away behind it.</span>
-      </span>
-      <span class="stage__cap-line stage__cap-line--wide">
-        <span class="credit credit--dpm" data-note>DPM Autobody</span>
-        <span><b>Above &mdash; the rear three-quarter, whole.</b> Bare winter trees mirrored the
-          full length of the rear wing, unbroken from the door shut to the tail.</span>
-      </span>
-    </figcaption>
-  </figure>
-  <div class="track__room track__room--long"></div>
-</section>
-
-<!-- ═════════════════ 01 · THE RECORD ═════════════════ -->
-<div class="band" id="record">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">01</span>
-    <span class="chapter__kind">The record</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">One car,<br>documented in full</h2>
-    <p class="prose">Documented the way an auction house documents one: what it is, what was
-      asked for, how long it took, who signed it. Every owner gets this, whether or not it ever
-      appears on a website.</p>
-  </div>
-  <div class="lot-two">
-    <div>
-      <p class="prose">We wrote this entry on the day the car went on the transporter: the
-        colour, the time it took, the hours in it, the list of what the owner asked for, and the
-        size of the photographic file that backs all of it up.</p>
-      <p class="prose">There is also a thirty-seven-minute film of the restoration, start to
-        finish. Most of what is below has never been on a website before &mdash; it lived in the
-        owner&rsquo;s file, which is where it matters.</p>
-    </div>
-    <dl class="record">
-      <div><dt>Marque</dt><dd>Volvo</dd></div>
-      <div><dt>Model</dt><dd>P1800</dd></div>
-      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Candy Red</span></dd></div>
-      <div><dt>In our hands</dt><dd>A year</dd></div>
-      <div><dt>Labour</dt><dd><b class="fig">1,300</b> hours</dd></div>
-      <div><dt>Chassis</dt><dd class="fig">26282</dd></div>
-      <div><dt>Photographic file</dt><dd>Over <b class="fig">2,000</b> photographs</dd></div>
-      <div><dt>Film</dt><dd>37 minutes 32 seconds &nbsp;·&nbsp; DPM TV</dd></div>
-      <div><dt>Signed</dt><dd>Riveted plaque, chassis <span class="fig">26282</span></dd></div>
-    </dl>
-  </div>
-  <p class="caption" data-note style="margin-top:clamp(1.5rem,4vh,2.5rem)">
-    <span class="credit credit--dpm">Real, verbatim</span>
-    <span>Every value here is taken from DPM&rsquo;s own published record of this car
-      and from the plaque in the engine bay. Nothing has been added to it. One car and DPM already
-      hold more documentary evidence for it than any of the three reference restoration houses
-      publish for a whole back catalogue &mdash; which is the argument for building the site around
-      the record rather than around the shop.</span>
-  </p>
-</div>
-
-<!-- ═════════════════ 02 · THE SPECIFICATION ═════════════════ -->
-<div class="band" id="spec">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">02</span>
-    <span class="chapter__kind">The owner's specification</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">What the owner<br>asked for</h2>
-    <p class="prose">Five changes, exactly as the owner listed them. A concours restoration is
-      not always a return to standard &mdash; more often it is a considered argument with the
-      factory, and the argument belongs in the record.</p>
-  </div>
-  <ol class="spec-list">
-    <li>
-      <span class="spec-list__n">i</span>
-      <span class="spec-list__name">Candy Red colour</span>
-      <span class="spec-list__note">A translucent colour laid over a metallic base. It reads
-        black in shadow and lifts to a deep red where the sun catches it, so the car is never
-        quite the same colour twice.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">ii</span>
-      <span class="spec-list__name">Wire wheel conversion</span>
-      <span class="spec-list__note">Splined hubs in place of the factory bolt pattern, and a
-        chrome wire wheel at each corner.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">iii</span>
-      <span class="spec-list__name">Power steering conversion</span>
-      <span class="spec-list__note">The one change on this list the owner feels rather than
-        sees.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">iv</span>
-      <span class="spec-list__name">Smoothed chrome bumpers</span>
-      <span class="spec-list__note">Over-riders and their fixings removed, the shells filled,
-        levelled and re-plated. Chrome shows every thousandth you leave behind.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">v</span>
-      <span class="spec-list__name">Lowered</span>
-      <span class="spec-list__note">Ride height set down from standard, which resets every
-        panel gap and arch line you have just spent months getting right.</span>
-    </li>
-  </ol>
-  <p class="caption" data-note>
-    <span class="credit credit--dpm">Real, verbatim</span>
-    <span>The five headings are DPM&rsquo;s own list, word for word.</span>
-    <span class="credit credit--copy">First-draft copy</span>
-    <span>The notes beside them are ours, and are a first pass for David to correct.</span>
-  </p>
-</div>
-
-<!-- ═════════════════ 03 · THE PLAQUE ═════════════════ -->
-<div class="band" id="plaque">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">03</span>
-    <span class="chapter__kind">The signature</span>
-  </div>
-</div>
-<figure class="plaque">
-  <div class="plaque__img">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg"
-         width="1280" height="853" loading="lazy" decoding="async"
-         alt="A brushed metal plaque riveted to the Candy Red rocker cover in the engine bay. It is engraved: Restored By DPM Autobody, Artists of Automotive Restoration, Chassis No 26282.">
-    <p class="plaque__line"><span>Restored&nbsp;By <b>DPM&nbsp;Autobody</b>. Artists of Automotive
-      Restoration. Chassis&nbsp;No: <i class="fig">26282</i>.</span></p>
-  </div>
-  <figcaption class="plaque__note">
-    <p class="caption">
-      <span class="credit credit--dpm" data-note>DPM Autobody</span>
-      <span><b>Above &mdash; the plaque itself,</b> riveted to the rocker cover in this car's
-        engine bay. The words on the photograph are the words engraved on it.</span>
-    </p>
-    <p class="prose">This goes into the engine bay of every car that leaves here, under the
-      chassis number, where nobody will read it until somebody opens the car up in forty
-      years&rsquo; time. It is not a badge for the owner. It is a signature for whoever comes
-      next.</p>
-  </figcaption>
-</figure>
-
-<!-- ═════════════════ 04 · THE CAR, IN DETAIL ═════════════════ -->
-<div class="band" id="detail">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">04</span>
-    <span class="chapter__kind">The car, in detail</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Paint and chrome,<br>because that is what is bought</h2>
-    <p class="prose">Paint and chrome are what an owner actually buys, and they are the two
-      things a photograph either proves or fails to. These are ours, taken as the car was
-      finished.</p>
-    <p class="caption" data-note>
-      <span class="credit credit--dpm">Real</span>
-      <span>All five are DPM&rsquo;s own photographs of their own work, but they came off a
-        platform that caps at <span class="fig">1,280</span> pixels wide. The originals on
-        David&rsquo;s phone and camera are much larger &mdash; the cap is Instagram&rsquo;s, not
-        his. Getting the originals is the cheapest quality win available on this page.</span>
-    </p>
-  </div>
-  <div class="grid">
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A chrome wire wheel and eared spinner on the P1800, spokes bright against the dark tyre.">
-      <figcaption><b>Wire wheel and eared spinner.</b> Specification item&nbsp;ii, on the
-        car.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800's nearside headlamp: a polished chrome ring, the lens, and the deep Candy Red front wing curving away behind it.">
-      <figcaption><b>Headlamp, chrome ring and front wing,</b> uncropped.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800 dashboard: four round instruments in a brushed metal binnacle, a slim steering wheel rim and toggle switches below.">
-      <figcaption><b>Instruments and binnacle.</b> Interior, as delivered.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A close view of the P1800's grey vinyl seat facing, fluted, with the Volvo roundel embossed into the panel.">
-      <figcaption><b>Seat facing, roundel embossed.</b> Trim is one of the two things that go out
-        of house.</figcaption>
-    </figure>
-    <figure class="grid--wide">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Close on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
-      <figcaption><b>Wing mirror, A-pillar, and the reflection running behind them.</b> A
-        reflection only stays straight on a panel that is straight, so this is not decoration
-        &mdash; it is the evidence.</figcaption>
-    </figure>
-  </div>
-
-</div>
-
-<!-- ═════════════════ 05 · UNDERNEATH ═════════════════ -->
-<div class="band" id="under">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">05</span>
-    <span class="chapter__kind">Concours evidence</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Underneath,<br>which is where it is judged</h2>
-    <p class="prose">A concours car is judged on its back as well as its face. These are the
-      photographs a restoration house shows last and a judge asks for first, so they sit here
-      &mdash; inside the record, below the paint, doing the job they are actually for.</p>
-  </div>
-  <div class="grid grid--3">
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800 engine bay complete: red-painted rocker cover and inner wings, blue and yellow air filters, plug leads dressed and routed.">
-      <figcaption><b>Engine bay, finished and dressed.</b> The plaque in section 03 is riveted to
-        the rocker cover in this frame.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Twin SU carburettors on the P1800 with blue and yellow Volvo-marked air filter housings.">
-      <figcaption><b>Twin carburettors, filters as supplied.</b> Engine building is the other
-        thing that goes out of house.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The factory Volvo identification plate riveted to the P1800's painted inner wing, stamped and unpainted.">
-      <figcaption><b>The factory plate, left as found.</b> Provenance is not something you
-        repaint.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The underside of the P1800 on a lift: painted floors, exhaust, rear suspension and a yellow damper, all clean and finished.">
-      <figcaption><b>Floors, exhaust and rear suspension, on the lift.</b></figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Underbody detail of the P1800: a red painted floor pan with copper brake pipe runs and clean fixings.">
-      <figcaption><b>Pipe runs and fixings, underbody.</b></figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A coil spring and yellow damper in the P1800's suspension, photographed from beneath the car.">
-      <figcaption><b>Spring and damper.</b> And, in the ride height, specification
-        item&nbsp;v.</figcaption>
-    </figure>
-  </div>
-  <p class="caption" data-note>
-    <span class="credit credit--dpm">Real</span>
-    <span>Six of the fourteen images DPM published for this car are of its underside and engine
-      bay. That ratio is not an accident in their edit &mdash; it is what concours documentation
-      looks like, and it is why this section exists at all.</span>
-  </p>
-</div>
-
-<!-- ═════════════════ 06 · THE LOG ═════════════════ -->
-<div class="band" id="log">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">06</span>
-    <span class="chapter__kind">The log</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Four entries,<br>each signed by the man who did the work</h2>
-    <p class="prose">Nobody writes about a job they did not stand in front of, and the
-      difficult weeks stay in &mdash; a restoration story with no problem in it is an
-      advertisement.</p>
-    <p class="caption" data-note>
-      <span class="credit credit--copy">First-draft copy &mdash; needs sign-off</span>
-      <span><b>All four entries below are written by us, in the voice we think Dave, Paul and
-        Ellis would use.</b> They are a first pass, meant to be read back to the three of them and
-        either corrected or replaced with their own words. Ellis&rsquo;s bumper story in
-        particular describes an incident we invented to show what an honest entry sounds like
-        &mdash; nothing like it should go live unless it actually happened. Say this out loud when
-        walking David through the client version, where the entries carry no such label.</span>
-    </p>
-  </div>
-
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 09 &mdash; Out in the daylight</span>
-          <span class="credit credit--copy" data-note>Draft &mdash; unsigned</span>
-        </div>
-        <h3 class="h-sub">We photographed it more than we painted it</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">D</span>
-          <span><b>Dave</b> &mdash; paint and finish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">Over <span class="fig">2,000</span> photographs went into the file for
-            this one car. Not for the website. For the owner, and for whoever has it in forty
-            years and wants to know what is underneath the paint before they cut into it.</p>
-          <p class="prose">People assume the photographs are the marketing and the car is the
-            work. It is the other way round. The photographs are the only part of the job that
-            survives after the next owner has had it repainted by somebody else.</p>
-          <p class="prose">I walked round it twice before it went up the ramps onto the
-            transporter. That is not for the owner's benefit, it is for mine. Once it has gone
-            I cannot do anything about what I have missed.</p>
-        </div>
-        <figure class="bound">
-          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg" width="1280" height="853"
-               loading="lazy" decoding="async"
-               alt="The completed Candy Red Volvo P1800 photographed from the front three-quarter on a lane in flat winter daylight.">
-          <figcaption class="caption">
-            <span class="credit credit--dpm" data-note>DPM Autobody</span>
-            <span data-client><b>The frame Dave is describing:</b> the finished P1800 on the lane,
-              the morning it went on the transporter.</span>
-            <span data-note><b>The frame Dave is describing:</b> the finished P1800 on the lane,
-              the morning it went on the transporter. The registration was painted out of the
-              original photograph by DPM, not by us.</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 07 &mdash; Colour, decided in daylight</span>
-          <span class="credit credit--copy" data-note>Draft &mdash; unsigned</span>
-        </div>
-        <h3 class="h-sub">Candy is the one you cannot go back into</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">P</span>
-          <span><b>Paul</b> &mdash; colour, mixing, polish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">A candy is a see-through colour over a metallic ground. The depth you
-            are looking at is not pigment, it is distance &mdash; light going down through the
-            colour, off the base, and back out at you.</p>
-          <p class="prose">Which means the colour is built by how much you put on, not by what is
-            in the tin. Two extra passes on one wing and that wing is a shade darker than the one
-            next to it, for ever. <strong>You cannot blend into a candy and you cannot spot-repair
-            one.</strong> If you get it wrong on a door you do the whole side again.</p>
-          <p class="prose">So it is done in one go, same gun, same pressure, same distance, same
-            speed of arm, every panel, and nobody talks to you while you are doing it.</p>
-        </div>
-        <figure class="bound">
-          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/spray-gun.jpg" width="2400" height="1350"
-               loading="lazy" decoding="async"
-               alt="A gloved hand holding a gravity-fed spray gun in the booth, the DPM Paint Shop signwriting soft in the background.">
-          <figcaption class="caption">
-            <span class="credit credit--dpm" data-note>DPM Autobody</span>
-            <span><b>The gun, the cup, and the last decision of the day.</b> Same gun, same
-              pressure, same distance, every panel.</span>
-            <span data-note>Frame from DPM&rsquo;s own 57-second craft film, which they run as the
-              hero on their current site. Real camera, colour-graded, 3840&times;2160. It replaces
-              the AI colour-chip plate that stood here in the previous build.</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 04 &mdash; Metal first</span>
-          <span class="credit credit--copy" data-note>Draft &mdash; unsigned</span>
-        </div>
-        <h3 class="h-sub">The bumper came back from the platers with a shadow in it</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">E</span>
-          <span><b>Ellis</b> &mdash; metalwork and prep</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">Smoothing a bumper is mostly making holes disappear. The over-rider
-            fixings come out, the slots get filled, and then the shell has to be levelled by hand
-            until there is nothing left to find.</p>
-          <p class="prose">Chrome does not hide work. It magnifies it. Paint sits on a panel and
-            fills a little; plating goes on in microns and follows every single thing underneath
-            it, and then polishes it up so it catches the light.</p>
-          <p class="prose">The first one came back from the platers looking right in the workshop
-            and wrong in the doorway. Held up to daylight there was a soft dark band about four
-            inches long across the face of it, where I had taken a whisker too much out and left
-            a hollow you could not feel with a thumb. Nothing measured it. The sky measured it.</p>
-          <p class="prose">Stripped, filled again, levelled with a long file rather than a block
-            this time, and back to the platers. Three weeks. <strong>I would rather find it in the
-            doorway than have the owner find it on a lawn at a show.</strong> It was not a good
-            fortnight and I am not going to write it up as one.</p>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 05 &mdash; Straight before shiny</span>
-          <span class="credit credit--copy" data-note>Draft &mdash; unsigned</span>
-        </div>
-        <h3 class="h-sub">Nothing over looked. Nothing left untouched.</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">D</span>
-          <span><b>Dave</b> &mdash; paint and finish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">That is the line we already write under our own photographs, and it is
-            not a boast, it is a working rule. It means that if a panel is off the car anyway, it
-            gets done properly, even when nobody is ever going to look at it.</p>
-          <p class="prose">Thirteen hundred hours is not one heroic month. It is a year of
-            afternoons where the visible progress is that a gap is now the same at the top as it
-            is at the bottom.</p>
-          <p class="prose">People ask what takes the time. The honest answer is that the last
-            five per cent of a car takes about a third of it, and there is no way of buying your
-            way past that bit.</p>
-        </div>
-      </div>
-    </div>
-  </article>
-  <hr class="rule">
-</div>
-
-<!-- ═════════════════ 07 · NINE STAGES ═════════════════ -->
-<div class="band" id="stages">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">07</span>
-    <span class="chapter__kind">How a car goes through</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Nine stages</h2>
-    <p class="prose">These are our names for them, not the trade's. Durations are the range across
-      the cars in the shop, not a quotation for yours.</p>
-  </div>
-  <ol class="stages">
-    <li><span class="stages__n">01</span><span class="stages__name">In, and photographed as she came</span><span class="stages__note">Every panel, every gap, every bit of rot, before a spanner touches it.</span><span class="stages__time">1 day</span></li>
-    <li><span class="stages__n">02</span><span class="stages__name">Off it comes</span><span class="stages__note">Strip to a shell. Bagged, labelled, shelved. Nothing goes in a box unmarked.</span><span class="stages__time">1&ndash;2 weeks</span></li>
-    <li><span class="stages__n">03</span><span class="stages__name">Down to what is really there</span><span class="stages__note">Media blast or chemical strip, then the conversation nobody enjoys.</span><span class="stages__time">2&ndash;3 weeks</span></li>
-    <li><span class="stages__n">04</span><span class="stages__name">Metal first</span><span class="stages__note">Panels made, let in, welded, planished. This is where the time goes.</span><span class="stages__time">3 weeks &ndash; 5 months</span></li>
-    <li><span class="stages__n">05</span><span class="stages__name">Straight before shiny</span><span class="stages__note">Block work over bare metal. If it needs filler to look right, it is not right.</span><span class="stages__time">3&ndash;6 weeks</span></li>
-    <li><span class="stages__n">06</span><span class="stages__name">Primer, and the guide coat</span><span class="stages__note">Etch, epoxy, high-build. Then black mist and a long block, twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
-    <li><span class="stages__n">07</span><span class="stages__name">Colour, decided in daylight</span><span class="stages__note">Spray-out cards judged outside the booth, against the car's own metal.</span><span class="stages__time">2 days</span></li>
-    <li><span class="stages__n">08</span><span class="stages__name">Clear, cut and polish</span><span class="stages__note">Coats on, a week to harden, then back to flat by hand and machine.</span><span class="stages__time">2&ndash;3 weeks</span></li>
-    <li><span class="stages__n">09</span><span class="stages__name">Out in the daylight</span><span class="stages__note">Built back up, gaps set, plaque riveted in, then pushed outside and walked round twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
-  </ol>
-  <p class="caption" data-note>
-    <span class="credit credit--copy">First-draft copy &mdash; needs sign-off</span>
-    <span>All nine stage names and every duration are ours, not DPM&rsquo;s. The shape is right
-      and the ranges are plausible, but they are guesses dressed as facts and David has to replace
-      them before this goes anywhere near a live site.</span>
-  </p>
-</div>
-
-<!-- ═════════════════ 08 · THE PAINT ═════════════════ -->
-<div class="band" id="paint">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">08</span>
-    <span class="chapter__kind">The paint on this car</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Candy Red,<br>and what that actually means</h2>
-    <p class="prose">A specification for one car, not a chart of swatches. Candy is the
-      reason this car photographs the way it does, and the reason it could not be repaired if
-      anybody ever kerbs it.</p>
-  </div>
-  <div class="paintspec">
-    <div>
-      <div class="paintspec__swatch" role="img"
-           aria-label="A rendering of Candy Red as it behaves in light: nearly black at the edges of the panel, deepening to red, and lifting to a bright translucent red where a highlight crosses it."></div>
-      <p class="caption">
-        <span><b>Black in shadow, deep red in sun.</b> That is the whole of what a candy does, and
-          it is why the car looks like two different colours in the photographs above.</span>
-        <span class="credit credit--copy" data-note>Placeholder</span>
-        <span data-note>This swatch is mixed in CSS, not photographed. A live site carries a
-          photograph of the real spray-out card instead &mdash; ask David whether it still
-          exists.</span>
-      </p>
-    </div>
-    <div>
-      <dl class="record">
-        <div><dt>Colour</dt><dd><b>Candy Red</b> &mdash; our name for it, first item on the owner&rsquo;s list</dd></div>
-        <div><dt>System</dt><dd>Candy: a translucent colour laid over a metallic ground</dd></div>
-        <div><dt>Where the depth comes from</dt><dd>Not pigment. Light travelling down through the colour, off the base, and back out</dd></div>
-        <div><dt>How the colour is set</dt><dd>By the number of passes, not by what is in the tin</dd></div>
-        <div><dt>Number of coats</dt><dd>In this car&rsquo;s file</dd></div>
-        <div><dt>Manufacturer and code</dt><dd>In this car&rsquo;s file</dd></div>
-        <div><dt>Repairable</dt><dd>No. A candy cannot be blended into, and cannot be spot-repaired</dd></div>
-      </dl>
-      <p class="caption" data-note>
-        <span class="credit credit--dpm">Real, verbatim</span>
-        <span>&ldquo;Candy Red colour&rdquo; is DPM&rsquo;s own wording, word for word from their
-          list of the five changes.</span>
-        <span class="credit credit--copy">First-draft copy</span>
-        <span>The description of how a candy system behaves is ours. The last two rows say
-          &ldquo;in this car&rsquo;s file&rdquo; because DPM have never published the coat count or
-          the paint code &mdash; they will know both. Ask, and print the real values; do not invent
-          them.</span>
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- ═════════════════ 09 · ENQUIRIES ═════════════════ -->
-<section class="contact" id="contact" aria-labelledby="contact-h">
+<!-- ═════════════════ CONTACT ═════════════════ -->
+<section class="contact" id="top" data-accent="#C7BBA1" data-ink="#D8CBAE" aria-labelledby="contact-h">
   <div class="contact__plate">
     <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
-         width="1280" height="853" loading="lazy" decoding="async" alt="">
+         width="1280" height="853" fetchpriority="high" decoding="async" alt="">
   </div>
   <div class="contact__inner">
-    <div class="chapter" style="border-top-color:var(--hair)">
-      <span class="chapter__mark" aria-hidden="true">09</span>
+    <div class="chapter" style="border-top-color:var(--hair); padding-top:clamp(5.5rem,13vh,10rem)">
+      <span class="chapter__mark" aria-hidden="true">01</span>
       <span class="chapter__kind">Enquiries</span>
     </div>
     <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
@@ -1703,11 +1246,10 @@ h1, h2, h3, h4 {
       Pearce-Martin</strong>. He would rather see a car than quote from photographs of one, so
       the first conversation usually ends with a date to bring it over. Dave, Ellis and Paul are
       who you will meet when you do.</p>
-    <p style="margin-top:clamp(2.5rem,6vh,3.5rem)"><a class="golink" href="index.html">Back to the homepage</a></p>
-    <p class="caption" data-note>
-      <span class="credit credit--dpm" data-note>DPM Autobody</span>
-      <span>Background: this car&rsquo;s rear wing again, held at low contrast so it sits behind
-        the type rather than competing with it.</span>
+    <p class="caption">
+      <span class="credit credit--dpm">DPM Autobody</span>
+      <span>Background: the Candy Red P1800&rsquo;s rear wing, held at low contrast so it
+        sits behind the type rather than competing with it.</span>
     </p>
   </div>
 </section>
@@ -1719,25 +1261,15 @@ h1, h2, h3, h4 {
     <a class="footmark" href="index.html" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
     <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
     <p><a class="back" href="index.html">Back to the homepage</a></p>
-    <div class="note" id="imagery" data-note>
+    <div class="note" id="imagery">
       <h2>Working notes &mdash; not in the client version</h2>
-      <p><b>Every photograph here is real.</b> All fourteen P1800 frames are DPM Autobody&rsquo;s
-        own photographs of their own work, and the spray-gun frame beside Paul&rsquo;s entry is
-        from their own 57-second craft film. The AI colour-chip plate that used to sit there has
-        gone. Nothing synthetic remains on this page.</p>
-      <p><b>The figures are real.</b> Candy Red, a year, <span class="fig">1,300</span> hours, the
-        five specified changes, over <span class="fig">2,000</span> photographs and chassis
-        <span class="fig">26282</span> all come from DPM&rsquo;s own published record and the
-        plaque in the engine bay. Nothing has been added.</p>
-      <p><b>Three blocks of copy are ours and are not signed off.</b> The four log entries, the
-        nine stage names and their durations, and the notes beside the owner&rsquo;s specification
-        and the paint. The log entries put first-person words in the mouths of three real,
-        named men &mdash; they are a demonstration of the form, not a transcript, and the client
-        version carries no label saying so. Say it out loud when you walk David through it.</p>
-      <p><b>Rights are still open.</b> These are DPM&rsquo;s images to license, but on a car this
-        identifiable its owner has a say too, and nobody has been asked.</p>
-      <p><b>One line here is not ours:</b> &ldquo;Nothing over looked. Nothing left untouched&rdquo;
-        is DPM&rsquo;s own, written under their own photographs.</p>
+      <p><b>This page is new, split off the homepage on 3 September.</b> The Contact section
+        (formerly chapter 06 on the homepage) moved here unedited.</p>
+      <p><b>Rights are still open</b> on the background photograph, as they were on the homepage:
+        it is DPM&rsquo;s to license, but on a car this identifiable the owner has a say too, and
+        nobody has been asked. That is a gate on going live, not on showing David.</p>
+      <p><b>The copy is a first pass at customer-facing wording, not final.</b> Meant to be read
+        aloud to David and corrected before this goes live.</p>
     </div>
   </div>
 </footer>

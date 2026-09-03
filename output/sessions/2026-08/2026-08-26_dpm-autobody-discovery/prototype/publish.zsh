@@ -6,9 +6,9 @@
 # A/B/C/D are rejected or superseded work — none of it is deployed, and the 137MB
 # of AI art-direction plates they reference is never uploaded.
 #
-# The deployment is therefore built from a staging directory holding only the two
-# client pages, flattened so the homepage is the site root. They already link to
-# each other as siblings, so nothing needs rewriting.
+# The deployment is therefore built from a staging directory holding only the
+# four client pages, flattened so the homepage is the site root. They already
+# link to each other as siblings, so nothing needs rewriting.
 #
 #   ./prototype/publish.zsh            # run from the monorepo root
 set -euo pipefail
@@ -21,11 +21,11 @@ PROJECT=dpm-autobody
 cd $ROOT
 
 # 1. Assets -> R2, and rewrite src/ (not the builds — they are regenerated).
-#    Scoped to the two published pages so the superseded directions' plates stay
-#    local. Idempotent: already-uploaded objects are skipped, rewritten refs
-#    no longer match.
+#    Scoped to the four published pages so the superseded directions' plates
+#    stay local. Idempotent: already-uploaded objects are skipped, rewritten
+#    refs no longer match.
 npx tsx tools/upload-prototype-assets.ts $PROTO \
-  --pages src/home.html,src/volvo-p1800.html
+  --pages src/home.html,src/volvo-p1800.html,src/workshop.html,src/contact.html
 
 # 2. Regenerate both builds so client/ and annotated/ carry the R2 URLs.
 node $PROTO/build.mjs
@@ -34,6 +34,8 @@ node $PROTO/build.mjs
 rm -rf $STAGE && mkdir -p $STAGE
 cp $PROTO/client/index.html        $STAGE/index.html
 cp $PROTO/client/volvo-p1800.html  $STAGE/volvo-p1800.html
+cp $PROTO/client/workshop.html     $STAGE/workshop.html
+cp $PROTO/client/contact.html      $STAGE/contact.html
 cp $PROTO/assets-manifest.json     $STAGE/assets-manifest.json
 
 # X-Robots-Tag as well as the pages' own noindex meta: the copy is unsigned-off
