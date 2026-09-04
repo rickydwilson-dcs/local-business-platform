@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Fraunces:opsz,wght@9..144,300..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
 <style>
 /* ============================================================================
    DPM Autobody — Direction D, "The Register". The section it was named after is
@@ -81,6 +81,7 @@
      these two variables and nothing else, so a decision there is a two-line
      change here. */
   --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
   --font-text:    'Newsreader', ui-serif, Georgia, serif;
 
   --page: min(1360px, 100% - 3rem);
@@ -125,7 +126,7 @@ a { color: inherit; }
 /* --- Type ---------------------------------------------------------------- */
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-weight: 300;
   letter-spacing: -0.034em;
   line-height: 0.98;
