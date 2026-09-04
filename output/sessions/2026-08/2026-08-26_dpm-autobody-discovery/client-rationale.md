@@ -219,9 +219,6 @@ One question rather than five: are you happy with restoration only?
   market, and most of your regional peers have none.
 - **Questions and answers**, for a buyer who has never commissioned a restoration.
 
-One thing not to build: pages targeting "classic car restoration Eastbourne". Of 30 sites almost
-nobody does, and the ones that get found are found on the marque and the model.
-
 ## 11. What we need from you, in order
 
 1. Brief the video shoot before it happens.
@@ -272,8 +269,6 @@ Every figure in this document came from opening the page and measuring it, in Au
   and the newest of those is September 2020.
 - **§10, the one shop that lets an owner watch their own build.** Arkonik, through a client portal.
   Richards of England publishes a per-chassis build diary as the public equivalent.
-- **§10, location pages.** Across the 30 sites read for content types, effectively none run
-  location-plus-service pages. The category is found on marque and model.
 
 ---
 

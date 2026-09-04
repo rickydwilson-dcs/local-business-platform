@@ -218,13 +218,21 @@ Absent or near-absent across the whole sweep. Omitting these is not a competitiv
 
 - **Pricing or rate cards** (4/30). One useful data point exists — White's Bodyworks publishes a £20k
   average project value — but the category norm is contact-for-quote.
-- **Location + service SEO pages** (~0/30). This is a correction to our platform default: **marque and
-  model specificity is this category's SEO lever, not geography.** Build "Bentley S3 paintwork", not
-  "classic car restoration Eastbourne".
 - **Cars for sale / inventory** (19/30) and **parts** (12/30) — a dealer/broker business model, not
   DPM's.
 - Podcasts (0/30), multi-language (0/30), sustainability (0/30), client login portals, merchandise.
 - Certification marks — see §1.
+
+**Corrected 2026-09-04 (Ricky's challenge).** An earlier version of this list included
+**location + service SEO pages** (~0/30) and told us to build on marque and model instead of
+geography. That was a category error: 0 of 30 competitors doing something is evidence about
+_competitors_, not about _search demand_. Unoccupied ground can mean no demand, or it can mean
+nobody has bothered, and a navigation sweep cannot tell those apart. Deciding this properly needs
+keyword volumes, Search Console data, or a live test. Ricky's further point stands on its own:
+answer engines have to retrieve _something_ for "who restores classic cars near Eastbourne", which
+may make an unoccupied local page more attractive rather than less. **Location pages are an open
+question, not a thing to avoid.** The safe finding, and all this research supports, is the narrow
+one: _the swept competitors rank on marque and model, and almost none of them run location pages._
 
 ---
 
