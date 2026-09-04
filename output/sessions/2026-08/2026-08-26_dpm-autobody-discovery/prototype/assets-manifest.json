@@ -3,7 +3,7 @@
   "bucket": "local-business-platform",
   "prefix": "prototypes/2026-08-26_dpm-autobody-discovery/",
   "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
-  "totalBytes": 4684139,
+  "totalBytes": 4873371,
   "assets": [
     {
       "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
@@ -163,6 +163,14 @@
       "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/spray-gun.jpg",
       "contentType": "image/jpeg",
       "bytes": 372479,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-workshop-video/hero-still.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-workshop-video/hero-still.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-workshop-video/hero-still.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 189232,
       "archive": false
     }
   ]
