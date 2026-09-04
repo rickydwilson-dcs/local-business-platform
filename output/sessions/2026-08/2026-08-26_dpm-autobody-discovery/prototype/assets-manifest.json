@@ -3,8 +3,392 @@
   "bucket": "local-business-platform",
   "prefix": "prototypes/2026-08-26_dpm-autobody-discovery/",
   "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
-  "totalBytes": 4873371,
+  "totalBytes": 150587919,
   "assets": [
+    {
+      "relativePath": "assets/art-direction/a-catalogue-detail-07.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-detail-07.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-detail-07.png",
+      "contentType": "image/png",
+      "bytes": 6064045,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/a-catalogue-profile-05.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-profile-05.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-profile-05.png",
+      "contentType": "image/png",
+      "bytes": 5750739,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/a-catalogue-three-quarter-06.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-three-quarter-06.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/a-catalogue-three-quarter-06.png",
+      "contentType": "image/png",
+      "bytes": 6527246,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/b-paint-flake-15.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-flake-15.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-flake-15.png",
+      "contentType": "image/png",
+      "bytes": 7552126,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/b-paint-macro-02.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-macro-02.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-macro-02.png",
+      "contentType": "image/png",
+      "bytes": 6849751,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/b-paint-reflection-03.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-reflection-03.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-reflection-03.png",
+      "contentType": "image/png",
+      "bytes": 5295538,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/b-paint-shutline-04.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-shutline-04.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/b-paint-shutline-04.png",
+      "contentType": "image/png",
+      "bytes": 4878732,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/c-hands-colour-12.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-colour-12.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-colour-12.png",
+      "contentType": "image/png",
+      "bytes": 6625093,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/c-hands-flatting-11.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-flatting-11.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-flatting-11.png",
+      "contentType": "image/png",
+      "bytes": 6740316,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/c-hands-polish-14.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-polish-14.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-hands-polish-14.png",
+      "contentType": "image/png",
+      "bytes": 6867823,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/c-tool-gun-13.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-tool-gun-13.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/c-tool-gun-13.png",
+      "contentType": "image/png",
+      "bytes": 6384514,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/d-daylight-barn-09.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-barn-09.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-barn-09.png",
+      "contentType": "image/png",
+      "bytes": 8756817,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/d-daylight-rear-10.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-rear-10.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-rear-10.png",
+      "contentType": "image/png",
+      "bytes": 8243744,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/d-daylight-road-08.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-road-08.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/d-daylight-road-08.png",
+      "contentType": "image/png",
+      "bytes": 8772092,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/vid-b-wetcoat.mp4",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-b-wetcoat.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-b-wetcoat.mp4",
+      "contentType": "video/mp4",
+      "bytes": 4996186,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/vid-c-hands.mp4",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-c-hands.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-c-hands.mp4",
+      "contentType": "video/mp4",
+      "bytes": 8603687,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/vid-d-daylight.mp4",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-d-daylight.mp4",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/vid-d-daylight.mp4",
+      "contentType": "video/mp4",
+      "bytes": 23277486,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/a-catalogue-detail-07.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-detail-07.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-detail-07.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 981057,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/a-catalogue-profile-05.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-profile-05.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-profile-05.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 533126,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/a-catalogue-three-quarter-06.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-three-quarter-06.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/a-catalogue-three-quarter-06.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 639015,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/b-paint-flake-15.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-flake-15.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-flake-15.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 747166,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/b-paint-macro-02.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-macro-02.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-macro-02.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 893653,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/b-paint-reflection-03.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-reflection-03.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-reflection-03.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 225207,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/b-paint-shutline-04.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-shutline-04.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/b-paint-shutline-04.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 442229,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/c-hands-colour-12.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-colour-12.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-colour-12.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 717571,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/c-hands-flatting-11.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-flatting-11.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-flatting-11.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 765393,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/c-hands-polish-14.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-polish-14.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-hands-polish-14.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 844614,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/c-tool-gun-13.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-tool-gun-13.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/c-tool-gun-13.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 769911,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/d-daylight-barn-09.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-barn-09.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-barn-09.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 1552945,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/d-daylight-rear-10.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-rear-10.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-rear-10.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 1467507,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/art-direction/web/d-daylight-road-08.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-road-08.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/art-direction/web/d-daylight-road-08.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 985515,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/brand/dpm-logo-bone.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo-bone.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo-bone.png",
+      "contentType": "image/png",
+      "bytes": 10586,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/brand/dpm-logo-dark.png",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo-dark.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo-dark.png",
+      "contentType": "image/png",
+      "bytes": 88607,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/brand/dpm-logo.svg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo.svg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/brand/dpm-logo.svg",
+      "contentType": "image/svg+xml",
+      "bytes": 15037,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-01.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-01.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-01.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 178579,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-02.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-02.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-02.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 139436,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-03.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-03.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-03.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 75938,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-04.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-04.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-04.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 70949,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-05.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-05.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-05.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 83798,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-06.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-06.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-06.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 116088,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-07.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-07.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-07.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 133611,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-08.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-08.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-08.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 188848,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-09.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-09.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-09.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 118323,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-10.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-10.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-10.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 105311,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-11.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-11.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-11.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 117199,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-12.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-12.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-12.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 156631,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-13.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-13.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-13.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 126269,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/slide-14.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-14.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/slide-14.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 104653,
+      "archive": false
+    },
     {
       "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
       "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
@@ -155,6 +539,22 @@
       "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/panels.jpg",
       "contentType": "image/jpeg",
       "bytes": 142310,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/jaguar-sea-green/polish.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/polish.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/polish.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 88320,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/dpm-work/workshop/booth-flank.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/booth-flank.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/booth-flank.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 45521,
       "archive": false
     },
     {
