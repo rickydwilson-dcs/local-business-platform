@@ -27,6 +27,10 @@ sessions/**/*.svg
 sessions/**/*.mp4
 sessions/**/*.webm
 sessions/**/*.mov
+sessions/**/*.heic
+sessions/**/*.HEIC
+sessions/**/*.aae
+sessions/**/*.zip
 sessions/**/.impeccable/
 sessions/**/.DS_Store
 

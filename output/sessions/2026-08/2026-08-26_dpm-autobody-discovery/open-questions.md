@@ -54,8 +54,12 @@
    what the two faces are — "DPM" is a wide geometric sans and "AUTOBODY" a thin rounded techno
    face; naming them would let us set the wordmark as live text instead of artwork. If no original
    exists, budget a proper redraw.
-   2b. **`@rpautomotivephotography` already shot three DPM cars at NEC 2023.** Who are they, what's the
-   relationship, and do they still hold those files? Cheapest possible route to hero-grade imagery.
+   ~~2b. **`@rpautomotivephotography` already shot three DPM cars at NEC 2023.** Who are they, what's
+   the relationship?~~ **RESOLVED 2026-09-04 (Ricky).** Rachel, of RP Automotive Photography. She is
+   a friend and a DCS client (DCS built her site), she is SM Trimming's partner, and SM Trimming do
+   DPM's trim work. **She is also the person who introduced Ricky to DPM in the first place.** So the
+   cheapest route to hero-grade imagery runs through an existing relationship on both sides. Still
+   open: does she still hold the NEC 2023 files, and on what licence.
 3. **Insurance & accident repair** — keep it, demote it to a quiet secondary page, or drop it? It
    dilutes the concours message but may be real income.
 4. **Naming Halcyon.** DPM does their paintwork. Are Halcyon happy to be named publicly? Same question
