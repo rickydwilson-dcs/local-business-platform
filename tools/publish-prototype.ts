@@ -209,14 +209,20 @@ function main() {
         installCommand: null,
         outputDirectory: ".",
         cleanUrls: true,
-        trailingSlash: false,
+        // trailingSlash must be true. With cleanUrls a subdirectory page like
+        // client/index.html serves at /client — but false leaves that URL
+        // without a trailing slash, so the browser resolves any relative link
+        // on that page (e.g. "volvo-p1800.html") against "/", not "/client/",
+        // producing a 404 at /volvo-p1800 instead of /client/volvo-p1800.
+        // true serves it as /client/, which resolves relative links correctly.
+        trailingSlash: true,
       },
       null,
       2
     ) + "\n",
     "utf-8"
   );
-  console.log("⚙️  Wrote vercel.json (static, no build, cleanUrls).");
+  console.log("⚙️  Wrote vercel.json (static, no build, cleanUrls, trailing slash).");
 
   // Assets live on R2; excluding them keeps the upload deterministic rather than
   // depending on .gitignore inference, and keeps the payload to HTML alone.
