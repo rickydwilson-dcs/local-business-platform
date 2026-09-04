@@ -13,9 +13,9 @@ random token so the URL cannot be guessed. The root page lists nothing.
 
 **Live documents**
 
-| Client       | Document                         | Path                      |
-| ------------ | -------------------------------- | ------------------------- |
-| DPM Autobody | Why the DPM site looks like this | `/dpm-autobody/fdec4278/` |
+| Client       | Document             | Path                      |
+| ------------ | -------------------- | ------------------------- |
+| DPM Autobody | Your new site design | `/dpm-autobody/fdec4278/` |
 
 **Deploy**
 

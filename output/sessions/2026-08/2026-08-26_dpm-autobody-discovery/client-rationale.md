@@ -1,4 +1,4 @@
-# DPM Autobody: why the site looks like this
+# Your new site design
 
 **For David Pearce-Martin. Prepared by Ricky Wilson, September 2026.**
 The prototype is at dpm-autobody.vercel.app. Your work is already far ahead of how your current
