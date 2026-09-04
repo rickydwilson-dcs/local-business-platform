@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>Why the DPM site looks like this</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Poppins:wght@300&display=swap">
+<style>
+  /* DCS r9 brand, committed to one world: ink ground, paper type, magenta accent.
+     Single-theme by choice, so every colour is painted explicitly and the page
+     holds whatever ground the viewer's host paints behind it. */
+  :root {
+    --paper:        #0E0E12;   /* the ground */
+    --panel:        #17171C;   /* lifted surface */
+    --panel-sunk:   #08080B;   /* recessed surface */
+    --ink:          #ECEBE9;   /* type */
+    --ink-soft:     #B7B7BE;
+    --ink-mute:     #8B8B95;
+    --rule:         #2E2E36;
+    --rule-strong:  #45454F;
+
+    --accent:       #D6006B;   /* brand magenta: rules, edges, display */
+    --accent-text:  #FF4D96;   /* lifted magenta: links and small type, for contrast on ink */
+    --accent-soft:  #D6006B24;
+    --navy:         #17265E;
+    --aqua:         #00D2D8;
+
+    --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: var(--sans);
+    --logo:  "Poppins", var(--sans);
+    --mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --measure: 66ch;
+    --rail: 5.5rem;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(1.5rem, 4vw, 4.5rem) clamp(1.25rem, 5vw, 3rem) 6rem;
+  }
+
+  .wrap {
+    max-width: calc(var(--rail) + var(--measure) + 2.5rem);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 5vw, 4rem);
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  /* DCS lockup: the mark, a hairline, the wordmark in Poppins 300 lowercase */
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .lockup svg { height: 30px; width: auto; display: block; flex: none; }
+  .lockup .wordmark {
+    font-family: var(--logo);
+    font-weight: 300;
+    text-transform: lowercase;
+    font-size: 12.5px;
+    line-height: 1.18;
+    letter-spacing: 0.004em;
+    white-space: nowrap;
+    padding-left: 0.85rem;
+    border-left: 1px solid currentColor;
+    opacity: 0.92;
+  }
+  .lockup .wordmark span { display: block; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 6.2vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.032em;
+    text-wrap: balance;
+    margin: 0;
+    max-width: 22ch;
+  }
+
+  .sheen-rule {
+    height: 3px;
+    border: 0;
+    margin: 0;
+    background: var(--accent);
+    transform-origin: left center;
+    animation: wipe 0.9s cubic-bezier(.22,.61,.36,1) 0.1s both;
+  }
+
+  @keyframes wipe {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheen-rule { animation: none; }
+  }
+
+  .standfirst {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(1.12rem, 2.4vw, 1.34rem);
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  /* the document's own front matter, set as an identity block */
+  .identity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border-block: 1px solid var(--rule);
+    margin: 0;
+  }
+  .identity > div {
+    background: var(--paper);
+    padding: 0.85rem 0 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-inline: 0.9rem;
+  }
+  .identity > div:first-child { padding-inline-start: 0; }
+  .identity dt {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .identity dd {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .identity a { color: var(--accent-text); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  /* ---------- sections ---------- */
+
+  section {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: 2.5rem;
+    align-items: start;
+  }
+
+  .num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    padding-top: 0.55rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.4rem;
+    min-width: 0;
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.4vw, 1.95rem);
+    line-height: 1.14;
+    letter-spacing: -0.024em;
+    text-wrap: balance;
+    margin: 0;
+    max-width: 26ch;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    letter-spacing: 0.002em;
+    margin: 1.1rem 0 0;
+    color: var(--ink);
+    max-width: 44ch;
+  }
+
+  p { margin: 0; max-width: var(--measure); }
+
+  .lead { font-size: 1.06rem; }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  a { color: var(--accent-text); }
+
+  /* claim: a single sentence that carries a section */
+  .claim {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(1.28rem, 3vw, 1.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.026em;
+    color: var(--ink);
+    max-width: 30ch;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ---------- the disclosure panel: the one thing to say out loud ---------- */
+  .disclosure {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 14px 14px 0;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: var(--measure);
+  }
+  .disclosure p { max-width: 58ch; }
+
+  /* ---------- itemised lists ---------- */
+
+  ol.items, ul.plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+  ol.items { counter-reset: item; gap: 0; max-width: var(--measure); }
+  ol.items > li {
+    counter-increment: item;
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    column-gap: 0.9rem;
+    padding: 1.05rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  ol.items > li:first-child { border-top: 0; padding-top: 0.35rem; }
+  ol.items > li::before {
+    content: counter(item, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent-text);
+    padding-top: 0.34rem;
+    font-variant-numeric: tabular-nums;
+  }
+  ol.items .it-title {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.18rem;
+  }
+  ol.items .it-body { color: var(--ink-soft); display: block; }
+
+  /* the 7.x lists are one run of ten items split across two headings */
+  ol.items.from-4 { counter-reset: item 3; }
+
+  ul.plain { gap: 1.05rem; max-width: var(--measure); }
+  ul.plain > li {
+    display: grid;
+    grid-template-columns: 0.75rem minmax(0, 1fr);
+    column-gap: 0.85rem;
+  }
+  ul.plain > li::before {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--rule-strong);
+    margin-top: 0.62rem;
+  }
+  ul.plain .it-title { font-weight: 600; }
+
+  /* worked example: a specimen of the thing being asked for */
+  .specimen {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.75;
+    font-variant-numeric: tabular-nums;
+    background: var(--panel-sunk);
+    border-left: 2px solid var(--rule-strong);
+    border-radius: 0 10px 10px 0;
+    color: var(--ink-soft);
+    margin: 0.75rem 0;
+    padding: 0.85rem 1rem;
+    overflow-x: auto;
+    white-space: pre;
+    max-width: 100%;
+  }
+  .specimen b { color: var(--ink); font-weight: 500; }
+
+  ul.candidates {
+    list-style: none;
+    margin: 0.55rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: var(--ink-soft);
+  }
+  ul.candidates > li { padding-left: 0.9rem; border-left: 1px solid var(--rule); }
+  ul.candidates .cand { font-weight: 600; color: var(--ink); }
+
+  .sub-label {  .note {
+    font-size: 0.93rem;
+    color: var(--ink-mute);
+    max-width: 58ch;
+  }
+
+  /* ---------- notes: apparatus, set smaller and quieter than the argument ---------- */
+  .notes {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: 2.5rem;
+    align-items: start;
+  }
+  .notes-body {
+    border-top: 1px solid var(--rule);
+    padding-top: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    min-width: 0;
+  }
+  .notes-intro { font-size: 0.93rem; color: var(--ink-mute); max-width: 58ch; }
+  dl.sources {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    column-gap: 1.25rem;
+    max-width: var(--measure);
+  }
+  dl.sources dt {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--accent-text);
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--rule);
+  }
+  dl.sources dd {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    padding: 0.85rem 0 0.9rem;
+    border-top: 1px solid var(--rule);
+  }
+  dl.sources dd b { color: var(--ink); font-weight: 600; }
+  dl.sources dd a { overflow-wrap: anywhere; }
+  @media (max-width: 720px) {
+    .notes { grid-template-columns: 1fr; }
+    .notes-body { border-top: 0; }
+    dl.sources { grid-template-columns: 1fr; }
+    dl.sources dt { border-top: 1px solid var(--rule); padding-top: 0.8rem; }
+    dl.sources dd { border-top: 0; padding-top: 0.25rem; }
+  }
+
+  /* ---------- appendix: the site list, packed into columns ---------- */
+  .site-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .group-head {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin: 0.6rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+    max-width: none;
+  }
+  ul.sites {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 0.3rem 1.75rem;
+  }
+  ul.sites > li { font-size: 0.86rem; line-height: 1.45; }
+  ul.sites a { text-decoration-thickness: 1px; text-underline-offset: 2px; overflow-wrap: anywhere; }
+  .nolink { color: var(--ink-soft); }
+  .site-note { color: var(--ink-mute); font-size: 0.8rem; }
+  .site-note::before { content: " · "; }
+
+  footer {  :focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    section { grid-template-columns: 1fr; row-gap: 0.5rem; }
+    .num { border-top: 1px solid var(--rule); padding-bottom: 0.15rem; }
+    .body { border-top: 0; padding-top: 0; }
+    .identity > div:first-child { padding-inline-start: 0.9rem; }
+  }
+</style>
+<style>
+  html { color-scheme: dark; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="lockup">
+      <svg viewBox="0 0 530 254" fill="none" role="img" aria-label="Digital Consulting Services">
+        <path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z" />
+      </svg>
+      <span class="wordmark"><span>digital consulting</span><span>services</span></span>
+    </div>
+    <div class="eyebrow">Client rationale</div>
+    <h1>Why the DPM site looks like this</h1>
+    <hr class="sheen-rule">
+    <p class="standfirst">Your work is already far ahead of how your current website portrays it.
+      This is the argument behind every decision in the prototype, and what would make it
+      stronger.</p>
+    <dl class="identity">
+      <div><dt>Prepared for</dt><dd>David Pearce-Martin</dd></div>
+      <div><dt>Prepared by</dt><dd>Ricky Wilson</dd></div>
+      <div><dt>Date</dt><dd>September 2026</dd></div>
+      <div><dt>Prototype</dt><dd><a href="https://dpm-autobody.vercel.app">dpm-autobody.vercel.app</a></dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <div class="num">01</div>
+    <div class="body">
+      <h2>What you asked for</h2>
+      <p class="lead">Your brief was to elevate the website. We took that to mean aspirational: a site
+        that reflects the world of the people who own these cars, and the standard of the work that
+        leaves your workshop. You sent three sites you admire, Eagle, P&amp;K Thornton and
+        Halcyon.</p>
+      <p>The people who commission this work are buying a standard, and you already have 1,732
+        Instagram posts doing a different job well. So what is the website for?</p>
+      <p>I've watched every series of Fast N' Loud (well, until Aaron left, because it went a bit
+        downhill after that), and Gas Monkey is the clearest way I can put the answer. Most of an episode is the shop: the crew, the argument over the budget, the part that
+        turns up wrong, the scramble before the deadline. Then the last few minutes are the car,
+        finished, out of the workshop, shot somewhere else, and it feels different on purpose. The
+        build is the people. The reveal is the car.</p>
+      <p class="claim">Your Instagram is the build. The website is the reveal.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">02</div>
+    <div class="body">
+      <h2>What we did</h2>
+      <p>We took your three reference sites apart page by page, and audited your own library: every
+        reachable photograph, the 1,732 posts, the current site, the Facebook reviews. Then we widened
+        it, because three sites is a small sample to bet a brand on: roughly 80 sites in all, including
+        12 UK restoration houses, 14 UK paint specialists, 13 US concours shops, and live lots at
+        Gooding and Bonhams.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">03</div>
+    <div class="body">
+      <h2>What we found</h2>
+      <p><strong>All three are beautifully photographed, and their websites don't yet do that
+        photography justice.</strong> Halcyon's homepage is 30.7MB, 86% of it one hero video. That is
+        slow to load on a phone, and Google takes loading speed into account when it decides who to
+        show. Eagle's largest text anywhere is 26px. The pictures are doing the work on their
+        own.</p>
+      <p>That split the job. Art direction is a photography commission and costs money. The website
+        itself is where we can put real distance between you and the field: what we build will be well
+        ahead of anything else on offer in this trade.</p>
+      <p><strong>All three point at documented restoration, and none of them shows it.</strong>
+        Thornton's page describes digital documentation and links to nothing. Halcyon's Collection has no car pages.
+        Neither shows a before and after. Nor does the wider set: across roughly 80 sites, not one
+        publishes a proper record of a single car. The best presentation of a classic car anywhere is
+        the auction lot page, and nobody in this trade has borrowed it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">04</div>
+    <div class="body">
+      <h2>The proposition</h2>
+      <p class="claim">One car, one record.</p>
+      <p>Most restoration sites are a list of what a workshop can do, with a gallery. Yours is built
+        the other way round: every car you finish gets a page of its own, documented the way an auction
+        house documents a lot. On the evidence of 80 sites, that ground is unoccupied.</p>
+      <p>It also means the site grows with the work. Every car you finish adds a record, so the site is
+        worth more in two years than on the day it launches.</p>
+      <p>That needs two levels. The homepage carries a chosen few, and a separate archive holds every
+        car you have finished, so the homepage stays the same length while the archive fills up behind
+        it. Three decisions follow.</p>
+
+      <h3>4.1 &nbsp;The site is about craftsmanship. Instagram is about the craftspeople.</h3>
+      <p>The same split as the show. Instagram is where the people are: the day to day, Dave and Ellis
+        and Paul, the car that came in this morning. Live, frequent, 4,777 followers, captions that are
+        genuinely well written.</p>
+      <p>The website is where the standard is, and the evidence for it. Slower, fewer words, permanent.
+        That is the elevation you asked for, with Instagram carrying the personality it already carries
+        well.</p>
+
+      <h3>4.2 &nbsp;We lead on paint and finish</h3>
+      <p>Engines and trim go out of house. Panel, metal, prep, colour, flatting and polish stay in.</p>
+      <p>One of the best-known restoration houses in the country sends its cars to you to be painted.
+        Nobody in your reference set can say anything of the kind, and right now the website can only
+        hint at it.</p>
+      <p>Of 13 paint specialists we could check properly, one uses photography to prove a finish, and
+        macro and raking light appear on none of them. The visual argument of the site is surface, and
+        almost nobody is making it.</p>
+
+      <h3>4.3 &nbsp;The owner's file becomes the thing you sell</h3>
+      <p>You rivet a plaque into the engine bay of every car that leaves, carrying the chassis number
+        and the words Artists of Automotive Restoration. That is a signature. It says these cars were
+        authored, and it goes where nobody will read it for forty years.</p>
+      <p>The P1800 also left with over 2,000 photographs, and there is a 37 minute film of its rebuild
+        on DPM TV. The photographs are in the owner's file, the film is on YouTube, and none of it is
+        gathered anywhere a prospective customer would think to look. The website is the same claim as
+        the plaque, made where a customer can see it.</p>
+      <p>One business in 80 sells documentation as something a customer receives: Aston Martin Works
+        call it Assured Provenance. Give yours a name and it becomes part of what someone is
+        buying.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">05</div>
+    <div class="body">
+      <h2>How that shows up in the prototype</h2>
+      <ul class="plain">
+        <li><span><span class="it-title">The homepage carries a selection,</span> numbered like lots.
+          Three at the moment. No slider, no service grid.</span></li>
+        <li><span><span class="it-title">The Jaguar is unfinished and published anyway,</span> its
+          record stopping at the paint.</span></li>
+        <li><span><span class="it-title">The P1800 page is the auction lot page, done for a
+          restorer.</span> Identity block, your five changes, the plaque, paint and chrome, the
+          underside where it's judged, then the log.</span></li>
+        <li><span><span class="it-title">The log is signed.</span> Of 12 UK restoration houses, two
+          name an individual against specific work.</span></li>
+        <li><span><span class="it-title">The photographs are doing an argument,</span> like the Bentley
+          shut line with the waistrail carrying straight across it.</span></li>
+        <li><span><span class="it-title">The workshop page lists what goes out of house,</span> which
+          makes the rest of the list believable.</span></li>
+        <li><span><span class="it-title">The archive is still to build.</span> The
+          prototype has three cars and the homepage holds all three. Once there are ten, they need
+          somewhere of their own to live.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">06</div>
+    <div class="body">
+      <h2>One thing to say out loud first</h2>
+      <div class="disclosure">
+        <p>Some words on the prototype are ours, written to show what a section does. The four log
+          entries and the nine stage durations are our phrasing in Dave's, Paul's and Ellis's mouths,
+          and one describes an invented incident. Two Facebook quotes are real but trimmed. All of it
+          gets replaced with your words when we sit down.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">07</div>
+    <div class="body">
+      <h2>What would make it more solid</h2>
+
+      <div class="sub-label">Proof: what other people say about your work</div>
+      <p>Everything on the site today is DPM talking about DPM. Three things would change that, and
+        all three are asks of other people rather than of you.</p>
+      <ol class="items">
+        <li><span>
+          <span class="it-title">Three or four lines from restoration clients</span>
+          <span class="it-body">Your 24 Facebook recommendations are warm, and they are repair
+          customers praising speed, the newest we could read from September 2020. Restoration clients talking about
+          standard is what this site can use.</span>
+        </span></li>
+        <li><span>
+          <span class="it-title">Concours entries and placings, with dates</span>
+          <span class="it-body"><a href="https://www.ckl.co.uk/">CKL Developments</a> in Battle published <a href="https://www.ckl.co.uk/blog-1-1/best-in-show-at-2026-royal-automobile-club-concours">a
+          dated page</a> for the 1953 Jaguar C-type they restored, which took Best in Show at the 2026
+          Royal Automobile Club Concours. Named car, named event, named date. Anything of yours that
+          has been judged is worth stating the same way.</span>
+        </span></li>
+        <li><span>
+          <span class="it-title">Permission to name Halcyon</span>
+          <span class="it-body">A strong credential as it stands, and a much stronger one if we can
+          use the name.</span>
+        </span></li>
+      </ol>
+
+      <div class="sub-label">Distance: the material that separates you from the field</div>
+      <ol class="items from-4" start="4">
+        <li><span>
+          <span class="it-title">A name for the owner's file</span>
+          <span class="it-body">One business in 80 sells documentation as something a customer
+          receives. Three candidates, and I'd take the first.</span>
+          <ul class="candidates">
+            <li><span class="cand">The Chassis File.</span> Ties the document to the plaque, which
+              already carries the chassis number.</li>
+            <li><span class="cand">The Build Record.</span> Plainest of the three, and says exactly
+              what it is.</li>
+            <li><span class="cand">The Owner's File.</span> What it already is, in your own words.</li>
+          </ul>
+        </span></li>
+        <li><div>
+          <span class="it-title">Dated stages</span>
+          <span class="it-body">The log currently reads as a finished account. With dates it becomes a
+          record that can grow while the car is still with you, which is the one thing nobody in this
+          category offers.</span>
+<pre class="specimen">Now        Stage 04 · Metal first · Ellis
+<b>With date  Stage 04 · Metal first · 11 March 2026 · Ellis, metalwork and prep</b></pre>
+          <span class="it-body">If you have dates for the P1800, we can build it now. If not, it's
+          worth logging on the next car.</span>
+        </div></li>
+        <li><div>
+          <span class="it-title">A shooting order for every car</span>
+          <span class="it-body">Auction houses order a gallery the same way every time, and it is what
+          makes 50 photographs readable instead of a pile.</span>
+<pre class="specimen"><b>01-06</b>  Exterior: three-quarter front and rear, both flanks, head on
+<b>07-12</b>  Engine bay
+<b>13-18</b>  Interior
+<b>19-24</b>  Underside, on the lift
+<b>25+</b>    Details: shut lines, chrome, badges, wheels</pre>
+          <span class="it-body">Free while the car is with you, unrecoverable once it has gone.</span>
+        </div></li>
+        <li><span>
+          <span class="it-title">Before and after, done properly</span>
+          <span class="it-body">No site in the paint sweep has any, nor do the three you sent. Matched
+          pairs from a fixed mark, same angle, same light. Your library is 80% strip-down and prep, so
+          you are better placed for this than anyone.</span>
+        </span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">08</div>
+    <div class="body">
+      <h2>Photography</h2>
+      <p class="lead">This is the one thing on the list we won't be doing. Photography isn't our gig,
+        and the people who can do it are already around you. Your brother's firm shot the P1800 film.
+        And Rachel at RP Automotive Photography already photographed three of your cars at the NEC in
+        2023, and she is the one who introduced us in the first place.</p>
+      <p>The gap is worth naming precisely, so whoever picks it up knows what to aim at. You have a
+        deep library of the build: shells, primer, masking, the work itself. What it doesn't have yet
+        is the reveal, a finished car in daylight away from the workshop, which is what all three of
+        your reference sites lead with.</p>
+      <p>Three frames would change the site.</p>
+      <ol class="items">
+        <li><span>
+          <span class="it-title">A finished car in daylight, off site, at low sun</span>
+          <span class="it-body">The frame the site is missing.</span>
+        </span></li>
+        <li><span>
+          <span class="it-title">Paint under raking light, close</span>
+          <span class="it-body">Where the argument in 4.2 lives.</span>
+        </span></li>
+        <li><span>
+          <span class="it-title">Matched before and afters from a fixed mark</span>
+          <span class="it-body">On the next car in.</span>
+        </span></li>
+      </ol>
+      <p>Same goes for the film. Brief the shoot before it happens: silent footage, slow moves across
+        a reflection, one scene outdoors in daylight, 4K, delivered as a short loop with a clean still
+        frame.</p>
+      <p class="note">One separate thing on assets. The logo is worth redrawing as a true vector at
+        some point. Ours traces well enough for screen, and a signwriter or a plaque needs the real
+        thing.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">09</div>
+    <div class="body">
+      <h2>Choices we've made for you</h2>
+      <p>A few calls we took rather than putting them to you, because the site needed an answer to
+        build against.</p>
+      <ul class="plain">
+        <li><span><span class="it-title">Restoration and paint lead the site.</span> No servicing or
+          general repair section. Every credible UK site in this tier keeps the two apart, and mixing
+          them pulls the price signal down.</span></li>
+        <li><span><span class="it-title">Insurance and accident work is off the site for now.</span>
+          Reversible, and there are good ways to bring it back if that revenue matters.</span></li>
+        <li><span><span class="it-title">Paint and finish carry the visual argument.</span>
+          See 4.2.</span></li>
+      </ul>
+      <p>One question rather than five: are you happy with restoration only?</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">10</div>
+    <div class="body">
+      <h2>Later</h2>
+      <ul class="plain">
+        <li><span><span class="it-title">A living record,</span> the stage log updating while the car
+          is with you. One site in 30 offers it.</span></li>
+        <li><span><span class="it-title">A results page,</span> dated and by event.</span></li>
+        <li><span><span class="it-title">The films.</span> You have 29 and the site mentions one.
+          Video is a named section at the top of the market, and most of your regional peers have
+          none.</span></li>
+        <li><span><span class="it-title">Questions and answers,</span> for a buyer who has never
+          commissioned a restoration.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">11</div>
+    <div class="body">
+      <h2>What we need from you, in order</h2>
+      <ol class="items">
+        <li><span><span class="it-title">Brief the video shoot before it happens.</span></span></li>
+        <li><span><span class="it-title">Sit down so the prototype's words become yours.</span></span></li>
+        <li><span><span class="it-title">Ask three or four restoration clients for a line.</span></span></li>
+        <li><span><span class="it-title">Concours entries and placings, with dates.</span></span></li>
+        <li><span><span class="it-title">Ask Halcyon whether they're happy to be named.</span></span></li>
+        <li><span><span class="it-title">Confirm you're happy with restoration only.</span></span></li>
+        <li><span><span class="it-title">Talk to Rachel about the three frames in section 8.</span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="notes">
+    <div class="num">Notes</div>
+    <div class="notes-body">
+      <h2>Notes and sources</h2>
+      <p class="notes-intro">Every figure here came from opening the page and measuring it, in August
+        and September 2026. Where something could not be verified it is not in the document.</p>
+      <dl class="sources">
+        <dt>The sweep</dt>
+        <dd>12 UK restoration houses, 14 UK paint and bodywork specialists, 13 US concours shops, 30
+          further sites read for the content types they carry, and live auction lots at Gooding, RM
+          Sotheby's, Bonhams, Broad Arrow and Collecting Cars.</dd>
+
+        <dt>3 · Halcyon</dt>
+        <dd>halcyon.works homepage measured at 30.7MB across 240 requests, 86% of it a single 26.9MB
+          hero video.</dd>
+
+        <dt>3 · Eagle</dt>
+        <dd>eaglegb.com. The largest type anywhere on the site is 26px.</dd>
+
+        <dt>3 · Thornton</dt>
+        <dd>thorntonrestorations.com. The restoration page states that each project is digitally
+          documented at every stage, and links to no archive.</dd>
+
+        <dt>3 · The record</dt>
+        <dd>The closest anyone gets to a per-car record. <b>Bridge Classic Cars</b> runs a blog diary
+          per car. <b>Tolman Engineering</b> writes a build narrative naming specific problems and
+          fixes. <b>Rare Drive</b> posts 62 sequential photographs with no text. <b>Motion
+          Products</b> gives an owner's name and a chassis number with no scope of work. <b>Paul
+          Russell and Company</b> publishes none.</dd>
+
+        <dt>4.2 · Surface</dt>
+        <dd>The one site that photographs a finish as proof: <b>Hilton &amp; Moss</b>,
+          hiltonandmoss.com, on their Mercedes 300SL Gullwing project page, where panels are shot so
+          that what reflects in them shows the panel line is true. Across the same set, no site uses
+          macro or raking light at all.</dd>
+
+        <dt>4.2 · Proof in words</dt>
+        <dd>How the trade proves quality without photography. <b>Peacock Prestige</b> counts the labour
+          ("hand-flatted between coatings, hundreds of man hours"). <b>Envisage</b> quotes a tolerance
+          of ±0.2mm. <b>Hilton &amp; Moss</b> name the paint brand and code.</dd>
+
+        <dt>4.3 · The file</dt>
+        <dd>Documentation as a named product: <b>Aston Martin Works</b>, astonmartinworks.com,
+          "Assured Provenance". The only instance found.</dd>
+
+        <dt>5 · Named hands</dt>
+        <dd>Naming an individual against specific work: <b>Bridge Classic Cars</b> and <b>Envisage
+          Group</b>, out of 12 UK restoration houses.</dd>
+
+        <dt>7 · Concours</dt>
+        <dd><b>CKL Developments</b>, Marley Lane, Battle, East Sussex. "1953 Jaguar C-type restored by
+          CKL wins Best in Show" at the 2026 Royal Automobile Club Concours, Woodcote Park, judged by
+          a panel including Ian Callum, Peter Stevens and Richard Hammond. Dated 15 July, read on
+          4 September 2026:
+          <a href="https://www.ckl.co.uk/blog-1-1/best-in-show-at-2026-royal-automobile-club-concours">ckl.co.uk/blog-1-1/best-in-show-at-2026-royal-automobile-club-concours</a></dd>
+
+        <dt>10 · Video</dt>
+        <dd>CKL carries Videos in its top-level navigation. <b>TEC Automotive</b>, <b>Jentree Classic
+          Cars</b>, <b>British &amp; Classic</b> and <b>Country Classic Cars</b> carry none.</dd>
+
+        <dt>7, 8 · Your library</dt>
+        <dd>Audited from @dpm_autobody in August 2026, 1,732 posts and 4,777 followers at the time.
+          Facebook shows "100% recommend (24 reviews)"; six were recovered verbatim and the newest of
+          those is September 2020.</dd>
+
+        <dt>10 · Live builds</dt>
+        <dd>The one shop that lets an owner watch their own build: <b>Arkonik</b>, through a client
+          portal. <b>Richards of England</b> publishes a per-chassis build diary as the public
+          equivalent.</dd>
+
+      </dl>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="num">Sites</div>
+    <div class="notes-body">
+      <h2>Appendix: every site we looked at</h2>
+      <p class="notes-intro">77 businesses and auction houses, read between 26 August and 4 September
+        2026. A few appear in more than one group in our own notes and are listed once here. Four
+        blocked automated reading and were covered from search results only; two are marked where the
+        site itself was unavailable.</p>
+      <div class="site-group">
+        <h3 class="group-head">The three you sent</h3>
+        <ul class="sites">
+          <li><a href="https://eaglegb.com">Eagle</a></li>
+          <li><a href="https://thorntonrestorations.com">P&amp;K Thornton Restorations</a></li>
+          <li><a href="https://halcyon.works">Halcyon</a></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">UK restoration houses</h3>
+        <ul class="sites">
+          <li><a href="https://rswilliams.co.uk">RS Williams</a></li>
+          <li><a href="https://dkeng.co.uk">DK Engineering</a></li>
+          <li><a href="https://astonmartinworks.com">Aston Martin Works</a></li>
+          <li><a href="https://bridgeclassiccars.co.uk">Bridge Classic Cars</a></li>
+          <li><a href="https://nicholasmee.co.uk">Nicholas Mee &amp; Co</a></li>
+          <li><a href="https://envisagegroupltd.com">Envisage Group</a></li>
+          <li><a href="https://mototechnique.com">Moto Technique</a></li>
+          <li><a href="https://tecauto.co.uk">TEC Automotive</a><span class="site-note">East Sussex</span></li>
+          <li><a href="https://jentreeclassiccars.co.uk">Jentree Classic Cars</a><span class="site-note">East Sussex</span></li>
+          <li><a href="https://britishandclassic.co.uk">British &amp; Classic</a></li>
+          <li><a href="https://country-classic-cars.co.uk">Country Classic Cars</a></li>
+          <li><a href="https://classic-motor-cars.co.uk">Classic Motor Cars (CMC)</a><span class="site-note">site was down when we looked</span></li>
+          <li><span class="nolink">Woodham Mortimer</span><span class="site-note">domain has lapsed</span></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">Paint, bodywork and coachbuilding</h3>
+        <ul class="sites">
+          <li><a href="https://ckl.co.uk">CKL Developments</a><span class="site-note">Battle, East Sussex</span></li>
+          <li><a href="https://kingswellcoachworks.co.uk">Kingswell Coachworks</a><span class="site-note">Battle, East Sussex</span></li>
+          <li><a href="https://whitesbodyworks.com">White's Bodyworks</a><span class="site-note">West Sussex</span></li>
+          <li><a href="https://hiltonandmoss.com">Hilton &amp; Moss</a></li>
+          <li><a href="https://pa-wood.co.uk">P&amp;A Wood</a></li>
+          <li><a href="https://gtoengineering.com">GTO Engineering</a></li>
+          <li><a href="https://paul-stephens.com">Paul Stephens</a></li>
+          <li><a href="https://rogerbrayrestoration.com">Roger Bray Restoration</a></li>
+          <li><a href="https://topazdetailing.com">Topaz Detailing</a></li>
+          <li><a href="https://peacockprestige.com">Peacock Prestige</a></li>
+          <li><a href="https://autorestorations.co.nz">Auto Restorations</a><span class="site-note">New Zealand</span></li>
+          <li><a href="https://crosthwaiteandgardiner.com">Crosthwaite &amp; Gardiner</a><span class="site-note">blocked our reader</span></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">US concours shops</h3>
+        <ul class="sites">
+          <li><a href="https://paulrussell.com">Paul Russell and Company</a></li>
+          <li><a href="https://automotiverestorations.com">Automotive Restorations / Vintage Racing Services</a></li>
+          <li><a href="https://mpi-ferrari.com">Motion Products (MPI)</a></li>
+          <li><a href="https://lavinerestorations.com">LaVine Restorations</a></li>
+          <li><a href="https://whitepost.com">White Post Restorations</a></li>
+          <li><a href="https://hjeltnessrestoration.com">Hjeltness Restoration</a></li>
+          <li><a href="https://raredrive.com">Rare Drive</a></li>
+          <li><a href="https://legendarymotorcar.com">Legendary Motorcar</a></li>
+          <li><a href="https://rmsothebys.com">RM Auto Restoration</a></li>
+          <li><a href="https://canepa.com">Canepa</a><span class="site-note">blocked our reader</span></li>
+          <li><a href="https://motorcarstudio.com">Motorcar Studio</a><span class="site-note">blocked our reader</span></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">Marque specialists, swept for the content they carry</h3>
+        <ul class="sites">
+          <li><a href="https://etypeuk.com">E-Type UK</a><span class="site-note">Jaguar</span></li>
+          <li><a href="https://etypeamerica.com">E-Type America</a><span class="site-note">Jaguar</span></li>
+          <li><a href="https://jaguarv12etype.com">Stew Jones Restoration</a><span class="site-note">Jaguar</span></li>
+          <li><a href="https://westridingindependent.co.uk">West Riding</a><span class="site-note">Jaguar, Ford</span></li>
+          <li><a href="https://astonengineering.co.uk">Aston Engineering</a><span class="site-note">Aston Martin</span></li>
+          <li><a href="https://richardsofengland.com">Richards of England</a><span class="site-note">Aston Martin</span></li>
+          <li><a href="https://historika.co.uk">Historika</a><span class="site-note">Porsche</span></li>
+          <li><a href="https://classicporscheresto.com">Classic Porsche Restoration</a><span class="site-note">Porsche</span></li>
+          <li><a href="https://vintagecarworks.com">Vintage Car Works</a><span class="site-note">Porsche</span></li>
+          <li><a href="https://theslshop.com">SLSHOP</a><span class="site-note">Mercedes-Benz</span></li>
+          <li><a href="https://vantagemotorworks.com">Vantage Motorworks</a><span class="site-note">Rolls-Royce, Bentley</span></li>
+          <li><a href="https://alfaworkshop.co.uk">The Alfa Workshop</a><span class="site-note">Alfa Romeo</span></li>
+          <li><a href="https://alficina.com">Alficina</a><span class="site-note">Italian marques</span></li>
+          <li><a href="https://classicminirestorations.co.uk">The Mini Restoration Company</a><span class="site-note">Mini</span></li>
+          <li><a href="https://kingsleydefenders.co.uk">Kingsley Defenders</a><span class="site-note">Land Rover</span></li>
+          <li><a href="https://arkonik.com">Arkonik</a><span class="site-note">Land Rover</span></li>
+          <li><a href="https://twisted.co/automotive">Twisted Automotive</a><span class="site-note">Land Rover</span></li>
+          <li><a href="https://concoursclassics.co.uk">Concours Classics</a></li>
+          <li><a href="https://classiccarlab.com">Classic Car Lab</a></li>
+          <li><a href="https://stevesautorestorations.com">Steve's Auto Restorations</a><span class="site-note">US</span></li>
+          <li><a href="https://mannsrestoration.com">Manns Restoration</a><span class="site-note">US</span></li>
+          <li><a href="https://restorationsltd.com">Restorations Limited</a><span class="site-note">US</span></li>
+          <li><a href="https://csautorestorations.com">Cornerstone Automotive Restorations</a><span class="site-note">US</span></li>
+          <li><a href="https://superiorqualityrides.com">Superior Quality Rides</a><span class="site-note">US</span></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">Auction houses, read at the level of a single lot</h3>
+        <ul class="sites">
+          <li><a href="https://goodingco.com">Gooding &amp; Company</a></li>
+          <li><a href="https://rmsothebys.com">RM Sotheby's</a></li>
+          <li><a href="https://bonhams.com">Bonhams Cars</a></li>
+          <li><a href="https://broadarrowauctions.com">Broad Arrow Auctions</a></li>
+          <li><a href="https://collectingcars.com">Collecting Cars</a></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">Restomod and coachbuild brands</h3>
+        <ul class="sites">
+          <li><a href="https://singervehicledesign.com">Singer Vehicle Design</a></li>
+          <li><a href="https://theondesign.com">Theon Design</a></li>
+          <li><a href="https://tolmanengineering.co.uk">Tolman Engineering</a></li>
+          <li><a href="https://everrati.com">Everrati</a></li>
+          <li><a href="https://guntherwerks.com">Guntherwerks</a></li>
+          <li><a href="https://aresatelier.com">Ares Atelier</a></li>
+          <li><a href="https://alfaholics.com">Alfaholics</a><span class="site-note">blocked our reader</span></li>
+        </ul>
+      </div>
+      <div class="site-group">
+        <h3 class="group-head">Outside the trade</h3>
+        <ul class="sites">
+          <li><a href="https://rwsmithwatches.com">Roger W. Smith, watchmaker</a></li>
+          <li><span class="nolink">Anderson &amp; Sheppard, Savile Row</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer></div>
+
+</body>
+</html>
