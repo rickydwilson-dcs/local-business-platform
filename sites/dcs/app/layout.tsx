@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk, Inter, Archivo, Poppins } from 'next/font/google';
+import { Archivo, Poppins } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { SiteScrollReveal } from '@/components/site-scroll-reveal';
@@ -7,20 +7,6 @@ import { DcsConsentManager } from '@/components/dcs-consent-manager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 import { MaterialSymbolsFont } from '@/components/material-symbols-font';
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  weight: ['400', '500', '600'],
-});
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -76,10 +62,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en-GB"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${archivo.variable} ${poppins.variable}`}
-    >
+    <html lang="en-GB" className={`${archivo.variable} ${poppins.variable}`}>
       <head>
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (

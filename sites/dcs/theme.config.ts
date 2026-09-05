@@ -49,8 +49,8 @@ export const themeConfig: DeepPartialThemeConfig = {
   },
   typography: {
     fontFamily: {
-      sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-      heading: ['var(--font-space-grotesk)', 'Space Grotesk', 'system-ui', 'sans-serif'],
+      sans: ['var(--font-archivo)', 'Archivo', 'system-ui', 'sans-serif'],
+      heading: ['var(--font-archivo)', 'Archivo', 'system-ui', 'sans-serif'],
     },
   },
 };
