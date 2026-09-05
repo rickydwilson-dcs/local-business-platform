@@ -76,6 +76,13 @@
     gap: clamp(2.75rem, 5vw, 4rem);
   }
 
+  /* the sections, the notes and the appendix are the document proper */
+  .doc {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 5vw, 4rem);
+  }
+
   /* ---------- masthead ---------- */
 
   .masthead { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -476,6 +483,7 @@
     </dl>
   </header>
 
+  <main class="doc">
   <section>
     <div class="num">01</div>
     <div class="body">
@@ -973,6 +981,8 @@
       </div>
     </div>
   </div>
+  </main>
+
   <footer></div>
 
 </body>
