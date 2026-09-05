@@ -5,10 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="referrer" content="no-referrer">
+<link rel="preload" href="/fonts/archivo-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/poppins-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* self-hosted, latin subset, same origin — no third-party request on the critical path */
+  @font-face {
+    font-family: "Archivo";
+    src: url("/fonts/archivo-latin-var.woff2") format("woff2");
+    font-weight: 100 900;  /* variable: one file covers every weight the page uses */
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/poppins-300-latin.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
 <title>DPM Autobody site design</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Poppins:wght@300&display=swap">
 <style>
   /* DCS r9 brand, committed to one world: ink ground, paper type, magenta accent.
      Single-theme by choice, so every colour is painted explicitly and the page
