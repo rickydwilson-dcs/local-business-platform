@@ -1,1 +1,3 @@
 .publish/
+.vercel
+.env*.local

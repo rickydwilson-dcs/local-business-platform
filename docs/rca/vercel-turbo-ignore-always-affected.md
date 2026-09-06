@@ -1,6 +1,6 @@
 # RCA: turbo-ignore reports every site as "affected" inside Vercel, but "not affected" locally on the identical commit
 
-**Date:** 2026-09-03 **Status:** Fixed (applied 2026-09-03, not yet deployed) **Slug:** `vercel-turbo-ignore-always-affected`
+**Date:** 2026-09-03 **Status:** Fixed and verified in production (2026-09-04) **Slug:** `vercel-turbo-ignore-always-affected`
 
 ## Symptom
 
@@ -253,7 +253,46 @@ Verification actually run:
 - Positive controls under the fixed file: `app/layout.tsx` edit → colossus affected; `@platform/theme-system` edit → colossus, dcs **and** dj-fox all affected (dependency fan-out intact). A `@platform/core-components` edit correctly leaves dcs unaffected — dcs depends only on `theme-system`.
 - `ci.yml` parses; prettier clean.
 
-**Still outstanding:** gate (b)'s production half — `/social-share.png`, `/icon.png` and `/apple-icon.png` must return 200 after the first deploy carrying this change, and an unrelated push must log `⏭ Ignoring the change` for the four sites. Neither can be confirmed until it ships.
+### Deployed and verified in production — 2026-09-04
+
+Promoted `develop` → `staging` → `main` (`ce525bf8`, PR #76). All CI, E2E and
+Regression Watchdog checks green; the new CI step ran and passed in real CI.
+
+**Skip behaviour restored (the reported symptom).** On both the develop push
+(`a608519c`) and the staging merge (`6a7f7745`), all four sites were `CANCELED`
+where they would previously have built. Colossus's log:
+
+```
+Removed 1209 ignored files defined in .vercelignore      (was 1226 — the 17 PNGs now survive)
+≫  Found previous deployment ("d431077b…") for "colossus-scaffolding" on branch "staging"
+≫  This project and its dependencies are not affected
+⏭ Ignoring the change
+```
+
+Correctness confirmed in both directions: npracing-v1 still _built_ for its own
+content commits, and only skipped for the commits that genuinely did not touch it.
+
+**Trap found during rollout — the assets do not self-heal.** With turbo-ignore
+working correctly, the sites that needed a rebuild to restore their stripped PNGs
+were precisely the ones it now (correctly) refused to rebuild — dcs's production
+deploy at `ce525bf8` logged "This project and its dependencies are not affected"
+and cancelled, leaving the 404s in place. Fixing the cause does not repair the
+already-published output; that needs one forced build per affected site.
+
+Resolved with `vercel redeploy <last-production-deployment>`, which empirically
+**does** bypass the Ignored Build Step (verified by observing it build rather than
+cancel — Vercel's docs do not state this either way, so it was tested, not assumed):
+
+| Site                 | Action                                              | Result                                                               |
+| -------------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
+| dcs                  | `vercel redeploy`                                   | `/social-share.png` **200**; homepage `og:image` resolves end-to-end |
+| npracing-v1          | none needed — self-healed via its own content build | `/icon.png`, `/apple-icon.png` **200**                               |
+| npracing-v3          | `vercel redeploy`                                   | `/icon.png`, `/apple-icon.png` **200**                               |
+| colossus-scaffolding | none needed                                         | its 12 PNGs are Playwright baselines, never shipped                  |
+
+Gate (b) is now fully satisfied.
+
+**Superseded note:** gate (b)'s production half — `/social-share.png`, `/icon.png` and `/apple-icon.png` must return 200 after the first deploy carrying this change, and an unrelated push must log `⏭ Ignoring the change` for the four sites. Neither can be confirmed until it ships.
 
 ## Original remediation plan (as investigated)
 

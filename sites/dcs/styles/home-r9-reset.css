@@ -24,6 +24,9 @@
  *      rendering in Space Grotesk, 27.6px narrower than the prototype's line.
  *      The r9 thesis is "one grotesk family at every size, no second face", so
  *      this was the single most visible break in the port.
+ *      Superseded 2026-09-05: Space Grotesk and Inter were dropped from the site
+ *      entirely and the base rules now resolve to Archivo, so this override is
+ *      belt-and-braces rather than load-bearing. Left in place deliberately.
  *   3. Preflight's `button,input,optgroup,select,textarea{font-family:inherit;
  *      font-size:100%;line-height:inherit}` overrides the UA control font the
  *      prototype's unstyled controls actually use.

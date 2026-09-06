@@ -208,7 +208,18 @@ function main() {
         buildCommand: null,
         installCommand: null,
         outputDirectory: ".",
-        cleanUrls: true,
+        // cleanUrls is deliberately OFF. It makes every non-index page also
+        // serve at a directory-shaped URL (client/volvo-p1800.html -> both
+        // /client/volvo-p1800 and, with trailingSlash, /client/volvo-p1800/),
+        // and a page's own relative links (e.g. "contact.html") then resolve
+        // *inside* that pseudo-directory instead of its real sibling folder —
+        // 404ing at /client/volvo-p1800/contact instead of /client/contact.
+        // trailingSlash:true only fixes this one level deep (index pages);
+        // any linked-to page one level further down breaks the same way again.
+        // These prototypes are internal review links, not public SEO URLs, so
+        // literal .html paths — which resolve correctly against the real file
+        // tree regardless of nesting — are more robust than the cosmetic win.
+        cleanUrls: false,
         trailingSlash: false,
       },
       null,
@@ -216,7 +227,7 @@ function main() {
     ) + "\n",
     "utf-8"
   );
-  console.log("⚙️  Wrote vercel.json (static, no build, cleanUrls).");
+  console.log("⚙️  Wrote vercel.json (static, no build, literal .html paths).");
 
   // Assets live on R2; excluding them keeps the upload deterministic rather than
   // depending on .gitignore inference, and keeps the payload to HTML alone.

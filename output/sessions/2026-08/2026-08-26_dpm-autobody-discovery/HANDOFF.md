@@ -1,41 +1,43 @@
 # DPM Autobody — new client discovery, research and prototypes — handoff
 
-**Status:** in-progress. Research complete and synthesised. The chosen direction now exists as
-**two generated builds from one source** — a clean client version and an annotated working version.
-The two invented cars have been replaced with real DPM work, all copy is a first pass at
-customer-facing wording, DPM's logo has been traced to vector and put in the masthead, and there is
-a type study for the headline-face question. **The client build is now published at
-https://dpm-autobody.vercel.app and is ready to send; David has not been sent it yet.**
+**Status:** in-progress. The 2026-09-05 morning contact-page/design-polish pass **is already
+committed** (`243e0eee`, 07:11:57 that morning) — verified via `git show --stat`, correcting an
+earlier draft of this file that (wrongly, trusting a prior handoff's prose instead of re-checking
+git) claimed it was still uncommitted. What actually remains uncommitted is the much larger
+afternoon/evening addition on top of it: a new real testimonial, a corrected factual error, and an
+entire second "documented car" page for a customer's Jaguar E-type. **All of it is live** at
+`https://dpm-autobody.vercel.app`, verified directly against the deployed URLs with `curl`, not just
+trusted from the publish script's own output. **None of the evening work is committed to git.** That
+is the single most important thing in this file — see Working tree below.
 
-**Branch:** `develop`. **Committed, and the earlier work is already on `origin/main`.**
-`80efe32a`, `c2a79ec8` and `6c9e0162` were described here as unpushed; **they are not** — all three
-are contained in both `origin/develop` and `origin/main`, checked with `git branch -r --contains`
-on 2026-08-30. That claim survived two handoff revisions by being copied forward rather than
-re-run; verify push state against `origin`, not against this file.
+**Branch:** `develop`, from `main`. Last commit: `243e0eee` ("feat(dpm-autobody): redesign contact
+page, fix hero lighting, unify nav"), 2026-09-05 07:11:57 — this **is** the morning session's work,
+already shipped, not a baseline it sits on top of. `git log origin/main..HEAD` shows 14 commits ahead
+of `main` (mixed DPM and unrelated `dcs`/`docs-site` work from other sessions), `243e0eee` among
+them. **Only the evening session's work (below) is still uncommitted.**
 
-**Four commits from 30 August are unpushed** — `de95b22e` (publish tooling fix), `2c30f394` (the
-DPM session: publish, testimonials, the rename, `interview-david.md`), `e165f166` (an unrelated ops
-note) and `3d5ef428` (two unrelated DCS sessions). The last two are unrelated work that had been
-sitting untracked in the tree and was committed at Ricky's instruction.
+**Working tree:** dirty. Confirmed via `git status --porcelain` on 2026-09-06:
 
-No feature branch was used, deliberately — but note `de95b22e` touches `tools/` and
-`docs/`, so this is no longer an `output/`-only change.
+```
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/annotated/index.html
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/assets-manifest.json
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/publish.zsh
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/home.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/create-client-document-skill.md
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/annotated/etype-941pvo.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/assets/etype-941pvo/
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/etype-941pvo.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/etype-941pvo.html
+```
 
-**Working tree: clean, whole repo** — `git status --porcelain` returns nothing (2026-08-30).
-Assets are absent from git by design, not by omission (see Traps). `node prototype/build.mjs` also
-leaves the tree clean, so both builds are reproducible from the committed `src/`.
-
-**A `lint-staged` prettier hook reformats markdown on commit.** Tables get re-padded and long lines
-reflowed; content is unchanged. It has twice mangled a bracketed editorial note inside a blockquote
-into a nested quote — keep such notes outside the quote.
-
-Unrelated and **not ours** — leave alone: `tasks/operations/google-workspace.md` (modified),
-`output/sessions/2026-08-25_dcs-npracing-pagespeed-post/`,
-`output/sessions/2026-08/2026-08-26_dcs-projects-pages/`.
+Not modified this session: `prototype/src/{workshop,contact}.html` (untouched since the 2026-09-04
+commit) and `prototype/src/volvo-p1800.html` (read for reference only, never edited).
+`create-client-document-skill.md` is unrelated leftover from an earlier session — see the previous
+handoff's note, still unexamined, still out of scope here.
 
 **Client:** DPM Autobody, Berwick, East Sussex. Director David Pearce-Martin, 01323 552827,
-info@dpmautobody.co.uk. Concours classic car restoration; everything hand-crafted in house except
-engine building and trimming; their real speciality is **paintwork** — they do Halcyon Cars' paint.
+info@dpmautobody.co.uk. Concours classic car restoration; paintwork is their real speciality.
 Existing site `dpmautobody.co.uk` is Wix.
 
 ---
@@ -44,444 +46,302 @@ Existing site `dpmautobody.co.uk` is Wix.
 
 Ricky won DPM as a client on 2026-08-26. David asked for a website whose appearance "matches the
 level of works we do", naming three reference sites: eaglegb.com, thorntonrestorations.com,
-halcyon.works. The job is to research, position, and prototype homepage options before any build in
-the monorepo.
+halcyon.works. **Read `synthesis.md` first** — it is the argument; the four teardowns in `research/`
+are the evidence.
 
-**Four user decisions constrain everything downstream. Do not re-litigate them.**
+**Five user decisions constrain everything downstream. Do not re-litigate them:**
 
 1. **Project the lifestyle of the people who drive these machines, not the personality of the shop.**
-   Ricky, 2026-08-26. David describes himself as "not the most elegant man"; the clientele own
-   concours cars. Process appears as _evidence_, art-directed — never as the shop's self-image.
-   Full reasoning in `positioning.md`.
-2. **Three editorial axes**, Ricky 2026-08-27: more hands / less faces · more paint / less mechanics ·
-   more finished items / less process.
-3. **Two builds, one source**, Ricky 2026-08-29: David gets a clean page; Ricky gets the same page
-   plus the notes to talk from. Both generated, never hand-maintained.
-4. **The page must never narrate itself.** Ricky, 2026-08-29, applied three separate times in one
-   session — to the scroll hint, to "which is a harder room than a website", and to the
-   testimonials' standfirst and stats. **No copy about the design, the medium, or why the evidence
-   counts.** Anything that reads as the site arguing for itself gets cut.
-
-**Read `synthesis.md` first.** It is the argument; the four teardowns in `research/` are the evidence.
-
----
-
-## Actions taken
-
-`80efe32a` and `c2a79ec8` cover steps 1–10. Steps 11–19 are in the commit this handoff ships in.
-
-1. **Discovery** (08-26): audited the live Wix site, first-pass read of the three references.
-2. **Deep research**, five parallel agents: teardowns of Halcyon, Eagle and Thornton; an audit of
-   DPM's own imagery; research into the tier above the reference set. ~2,600 lines in `research/`.
-3. **`synthesis.md`** — the research turned into a design brief with three art directions.
-4. **Art direction** (08-27): 14 AI stills + 3 clips via the Higgsfield CLI.
-5. **Three prototypes** built by parallel agents. Reviewed with Ricky.
-6. **Client verdict** (08-27): A rejected; B's imagery/interactions and C's log/register liked.
-7. **Real photography retrieved** — 14 slides of the Candy Red Volvo P1800 from Instagram.
-8. **Direction D "The Register"** built (08-28) — the B+C merge.
-9. **Plate-redaction tooling** built (`tools/plate-redact/`).
-10. **D revised** (08-29 am) and split into homepage + project page.
-11. **Split into two builds** (08-29 pm). `prototype/src/` is the only editable copy; `build.mjs`
-    generates `client/` and `annotated/`. Notes marked with `data-note` / `data-client`.
-12. **The invented cars replaced with real DPM work.** Enumerated DPM TV's 29 videos with `yt-dlp`,
-    identified "the green jag" as their Custom Classic Jaguar in **Aston Martin Sea Green**, and
-    found the finished **1963 Bentley S3 Continental** already on DPM's own site at 4032×3024.
-    Built `assets/dpm-work/make-plates.zsh` to cut eight plates from those two sources.
-13. **All copy rewritten as first-pass customer-facing wording.**
-14. **The DPM logo traced to vector.** `tools/trace-logo.mjs` — marching squares over the PNG's
-    alpha channel, RDP-simplified. Inlined as an SVG `<symbol>` in the masthead and footer.
-15. **Type study built** (`prototype/type-study.html`) for the serif-headline question.
-16. **Hero light re-balanced** after Ricky's note that the band sat too high and the paint below
-    the chrome trim could not be read. Four separate causes — see Traps.
-17. **Hero vertical fit fixed and instrumented.** `measure-hero.mts` checks three gaps across 20
-    viewports; four latent collisions found and fixed.
-18. **Proof section rebuilt as testimonials.** Six of DPM's 24 Facebook recommendations recovered
-    (Ricky's own logged-in session) and transcribed to `research/facebook-reviews.md`.
-19. **Three blocks cut from the testimonial section** at Ricky's call — the 100%/24 figure, the
-    note explaining why a public comment counts, and the standfirst. All the same fault as (4).
-20. **The client build published** (08-29 pm) to https://dpm-autobody.vercel.app. Ricky's scope
-    call: David gets the two clean pages and nothing else. Fixing the shared publish tooling was a
-    prerequisite — see Traps.
-21. **Testimonials restored to verbatim and the section renamed** (08-30). Liam Hunt's and Craig
-    Mayhew's Facebook recommendations had been silently trimmed — and the annotated note wrongly
-    claimed they were verbatim with "nothing reworded". Both now match `research/facebook-reviews.md`
-    character-for-character, checked by parsing page and transcript. Separately, section 01 **"The
-    register" became "The record"**: the word was ours, not DPM's, and as the project page's first
-    nav item it read as a verb. DPM's own word is "portfolio" — added to `interview-david.md` §D.
-22. **Video rights settled and everything committed** (08-30). Ricky's standing instruction: treat
-    **all DPM Instagram and YouTube video as DPM's to use however they wish**, which closed the
-    Jaguar-film question and unblocked `BACKLOG.md` item 3. Then five commits — see the header. The
-    last of them corrects a stale claim in this file, not the code.
+   Ricky, 2026-08-26. Process appears as _evidence_, art-directed — never as the shop's self-image.
+2. **Three editorial axes**, Ricky 2026-08-27: more hands / less faces · more paint / less mechanics
+   · more finished items / less process.
+3. **Two builds, one source**, Ricky 2026-08-29: David gets a clean page (`prototype/client/`);
+   Ricky gets the same page plus the notes to talk from (`prototype/annotated/`). Both generated
+   from `prototype/src/` via `node prototype/build.mjs` — **never hand-edit the generated builds.**
+   Marking convention (see the comment at the top of `build.mjs`): `data-note` = annotated build
+   only; `data-client` = client build only; unmarked = both.
+4. **The page must never narrate itself.** No copy about the design, the medium, why the evidence
+   counts, or its own section structure ("see section 05", "the quote above"). This was violated
+   twice in tonight's new page and had to be caught and fixed — see Actions taken.
+5. **Number plates are redacted, house style is a blank sampled-colour fill, not a blur.** Where that
+   can't be done reliably to someone else's photograph, exclude the frame instead of guessing at an
+   edit — see the E-type gallery note below.
 
 ---
 
-## Current state — verified 2026-08-30
+## Actions taken, 2026-09-05 morning (contact page polish) — already committed as `243e0eee`
 
-Everything below was checked by running something, not recalled.
+Brief summary — this was fully covered in the previous handoff and is now superseded by the larger
+work below. Nothing here was touched again tonight, and it is already committed and pushed as part
+of `develop`'s normal history, not part of tonight's commit:
 
-### Prototypes — two generated builds from one source
+1. Contact page redesign: new heading, mocked enquiry form (`onsubmit="return false"`, no backend,
+   deliberately not operational).
+2. Contact hero and workshop hero: rebalanced vignette lighting so the car's right-hand side isn't
+   dark on both pages.
+3. Removed redundant numbered chapter marks; gave the contact page a plain eyebrow-label header
+   instead.
+4. Desktop nav made consistent across all four pages (each page used to omit the link to itself).
+5. Footer: added a socials row (Instagram/Facebook/YouTube) and a "Built by
+   digitalconsultingservices.co.uk" credit line to all four pages.
 
-**Read `prototype/README.md` before touching anything in that folder.** Short version: edit
-`prototype/src/`, run `node prototype/build.mjs`, never hand-edit `client/` or `annotated/`.
+Traps carried forward unchanged from that session: always publish via `prototype/publish.zsh`, never
+`tools/publish-prototype.ts` directly; the `--accent`/`--accent-ink` CSS custom properties read as
+the default red (not the car's house tan) if inspected via a fresh `javascript_tool` call immediately
+after navigating in the Claude-in-Chrome environment — this is a testing-tool artifact (the
+`IntersectionObserver`'s first firing is deferred until a real scroll event happens), not a site bug;
+do a small scroll before trusting a colour reading taken that way.
 
-| File                                  | Status                                                          |
-| ------------------------------------- | --------------------------------------------------------------- |
-| `prototype/src/home.html`             | **Source of truth**, homepage. Edit this.                       |
-| `prototype/src/volvo-p1800.html`      | **Source of truth**, project page. Edit this.                   |
-| `prototype/build.mjs`                 | Generates both. Throws if a marker attribute leaks through.     |
-| `prototype/client/index.html`         | **Generated. What David sees.**                                 |
-| `prototype/client/volvo-p1800.html`   | Generated.                                                      |
-| `prototype/annotated/*.html`          | Generated. Same pages + notes + a yellow "working copy" flag.   |
-| `prototype/type-study.html`           | Standalone. The headline-face question, with the mark in frame. |
-| `prototype/index.html`                | Chooser. **Hand-edited, not generated.** Not deployed.          |
-| `prototype/publish.zsh`               | **The only way to publish.** Upload → rebuild → stage → deploy. |
-| `prototype/assets-manifest.json`      | What went to R2: 20 files, 4.5MB. Written by the upload tool.   |
-| `prototype/.publish/`                 | Generated staging dir, gitignored. The deployed payload.        |
-| `prototype/measure-hero.mts`          | Hero geometry check, 20 viewports, exits non-zero on overlap.   |
-| `prototype/shoot-hero.mts`            | Hero frames at 4 scroll positions, for before/after comparison. |
-| `prototype/direction-d-register.html` | **Superseded.** Kept, do not edit.                              |
-| `prototype/project-p1800.html`        | **Superseded.** Kept, do not edit.                              |
-| `prototype/direction-a/b/c-*.html`    | Historical. A rejected by the client 27 August.                 |
+---
 
-Outside `prototype/`, the two documents that drive what happens next:
+## Actions taken, 2026-09-05 evening (new testimonial + E-type project page)
 
-| File                 | What it is                                                                                                                                           |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interview-david.md` | **The next deliverable.** Every invented block, paired with the question that replaces it. Section A is the disclosure to say out loud. Not yet run. |
-| `BACKLOG.md`         | Item 1 client rationale · item 2b the interview · **item 3 the workshop/contact page split** (new, 30 August).                                       |
+David forwarded a message from Mark Antwis — owner of a 1962 Jaguar E-type Series 1 3.8 FHC (941
+PVO) and a 1974 Aston Martin V8, both worked on by DPM — with a link to his own site
+(`etypefhcseries1.com`) and a PDF of a nine-page feature on the E-type restoration in the E-Type
+Owners Club Magazine, April 2026 ("A Promise Kept"). David's own words: the owner said the images and
+magazine material are "free to use", **but he would like to approve [the write-up] before it's
+launched.** Ricky's instruction: "Pull whatever you want to create what we want on the website, and
+then David will later get the owner to approve it" — then, once images were confirmed separately as
+cleared: "we are allowed to use the images. we just need the 'article' signed off once written."
 
-Re-run on 2026-08-30, all by running it, not recalled:
+1. **Added a new lead testimonial to the homepage `#proof` section** (`prototype/src/home.html`).
+   Quote, transcribed verbatim from page 22 of the magazine PDF: _"I had interviewed many body shops
+   for the painting of my concours-winning Aston Martin. The only person I would trust with the
+   E-type was the man who had laid down that paint with such astonishingly beautiful results."_ —
+   Mark Antwis. This is the first real, published, attributable statement from an actual restoration
+   client the site has had (the section's own working note had flagged this as "still needed" since
+   29 August). Chris Bulmer's weaker Facebook comment was retired to make room, keeping the section
+   at three quotes.
+2. **Added a small awards/proof list** beneath the quotes: the Aston Martin V8's AMOC Sandringham
+   Concours win (92%, class winner outright) and the E-type's hour count.
+3. **Caught and corrected a factual error, twice** (see below) — the Aston Martin's Sandringham win
+   is **2024, not 2023**. The magazine's first-person narrative (page 16) says "2023"; Mark Antwis's
+   own `/the-restorers-profile` page states 2024 in running text and shows two photographed event
+   badges dated 2024. A photographed badge outranks a magazine writer's two-years-later recollection,
+   so both the homepage and the new E-type page were corrected to 2024, with the discrepancy
+   documented in an annotated-only note on each.
+4. **Built a full second "documented car" page**, `prototype/src/etype-941pvo.html`, matching
+   `volvo-p1800.html`'s scroll-driven hero/veil mechanism and chapter/record/grid/plaque system,
+   retinted to the car's Opalescent Silver Blue. Sections: the record (identity block), a
+   forty-seven-year provenance story (the Bray family, 1978–2017, then Mark Antwis's 2017 auction
+   win), the build (DPM's panel/paint work, with a scroll-stage from primer-flatting to finished
+   paint), a plaque carrying the trust quote, a 9-image finished-car daylight gallery, and the Aston
+   Martin V8 tie-in. Built by a forked background agent (this session inherited full context), then
+   reviewed and corrected in the foreground.
+5. **Downloaded 17 real images** from `etypefhcseries1.com` (a Lovable-built SPA — image URLs are
+   only discoverable via a rendered-DOM query, not from raw HTML) into
+   `prototype/assets/etype-941pvo/{gallery,metalwork,astonmartin}/`, documented in a `SOURCES.md` in
+   that folder recording the exact source filename and use for each. Three gallery images with a
+   legible "941 PVO" plate were **excluded outright, not redacted** — no reliable way was found to
+   apply the site's blank-sampled-fill plate-redaction style to a third party's photograph without
+   risking a visibly botched edit.
+6. **Added `etype-941pvo.html` to `prototype/publish.zsh`**, both the R2 upload `--pages` flag and
+   the client-build `cp` staging list. This was not optional — the build script processes every file
+   in `src/` automatically, but `publish.zsh` only ships pages it's explicitly told about, so a new
+   page that isn't added there builds correctly and silently never deploys.
+7. **Added a "No. 04" teaser lot to the homepage** linking to the new page, in the same scroll-stage
+   style as the existing three lots, with a real (not `golink--dead`) link.
+8. **Fixed a factual/logical error the user caught after the first publish**: the new page's contact
+   section originally said the E-type "is not one we can show you in the workshop... but the Volvo
+   and the cars still on the jig are." **This was wrong** — the Volvo P1800 is also a finished,
+   delivered customer car (its own page says "interior, as delivered" and shows it photographed on a
+   lane, not at the workshop), so it has gone home too, exactly like the E-type. DPM doesn't hold on
+   to any car once it's restored. Corrected to: _"This E-type went home to its owner once we were
+   done, like every finished car does. What you can see at the workshop is whatever's on the jig
+   today."_ — with a data-note recording the correction and why.
+9. **Consolidated the two-hour-count display after the user objected to showing both**: the E-type
+   page's `.proof` list originally showed both DPM's own 440-hour figure (panel work only) and the
+   magazine's 450-hour figure (the whole job) side by side, client-visible. User: "choose eher 440 or
+   450 - dpnt show noth[both]." Now shows **450 only**, matching the homepage's own figure; the
+   440-vs-450 discrepancy is preserved but moved into an annotated-only note.
+10. **Removed self-narrating copy the user flagged as "not public facing"**: the new page originally
+    had several client-visible sentences that talked about the page itself rather than stating facts
+    — "Everything on this page traces back to that feature or to his own site... never to a record
+    DPM published", "It is also the sentence that explains why this page exists at all", and two raw
+    "See section 05" / "the plaque quote above" cross-references. All were rewritten as plain
+    statements of fact (the underlying sourcing reasoning was preserved, just moved into
+    annotated-only `data-note` blocks) — this is the same category of violation as the self-narrating
+    copy cut from the homepage on 29 August (rule 4 above).
+11. **Published three times** (`prototype/publish.zsh`) — once after the initial testimonial-only
+    addition, once after the full E-type page was built, once after the three corrections above. Each
+    publish was verified live with `curl` against `https://dpm-autobody.vercel.app`, not just trusted
+    from the script's own output.
 
-- `node prototype/build.mjs` → **"no marker attributes survived into either build"**, and the tree
-  stays clean afterwards — the committed builds match what `src/` generates.
-- `measure-hero.mts` → **OK, every gap positive at every size**; worst gaps logo→label 38px,
-  lede→foot 24px, foot→caption 77px. Unchanged by the 30 August copy edits.
-- **26 R2 references across the two published pages, 0 broken** — every one fetched with HEAD.
-- Client build **meta-language 0** on both pages, checked against _rendered text_ with styles,
-  scripts and comments stripped. A plain `grep` over the raw HTML returns false positives (9 and 17)
-  from CSS comments and class names — do not use one to make this claim.
-- Both Facebook quotes match `research/facebook-reviews.md` **character-for-character**, checked by
-  parsing the page and the transcript and comparing, not by eye.
-- All 8 in-page anchors on the project page resolve to an `id` that exists exactly once. Nav reads
-  **Record**; no `#register` remains.
-- `src/`, `client/` and `annotated/` now carry **absolute `pub-….r2.dev` URLs** (26 references per
-  page). The five superseded directions still hold relative `assets/` paths, correctly — they point
-  at the AI plates, which were never uploaded.
-- Live deployment checked by fetching it, not by trusting the CLI: `/` and `/volvo-p1800` return
-  **200 and are byte-identical to the local `client/` build** (sha256 match on both). All 8 images
-  on the homepage return 200 `image/jpeg` from R2. `X-Robots-Tag: noindex, nofollow` is served.
-  `/annotated`, `/client`, `/type-study`, `/direction-a-catalogue`, `/src/home` and
-  `/assets-manifest.json` all **404**. No `buildflag` element and no `data-note`/`data-client`
-  attribute survives into the served page.
+---
 
-### The three cars are all real DPM work
+## Current state — verified 2026-09-05/06
 
-The invented Jaguar XK150 and Jaguar E-type are gone.
+### Live deployment
 
-| Lot | Car                                | Imagery                                                          |
-| --- | ---------------------------------- | ---------------------------------------------------------------- |
-| 01  | Volvo P1800, Candy Red             | 14 frames from DPM's own Instagram. Unchanged.                   |
-| 02  | **1963 Bentley S3 Continental**    | Three crops of the 4032×3024 photograph on DPM's own site.       |
-| 03  | **Jaguar, Aston Martin Sea Green** | Frames from DPM's own film, lens-corrected. Ricky's "green jag". |
+Confirmed by fetching the live URLs directly, not from the publish script's own output:
 
-**Nothing on the client or annotated builds is AI.** The AI plates survive only in directions
-A, B, C and the superseded D.
-
-Lot 02 claims **no** hours, chassis number or coat count, because DPM have never published any for
-that car. Lot 03 does **not** name the model, because DPM never state it and the body is not
-identifiable from the footage with enough certainty to print. **Do not "improve" either of these.**
-
-### Assets
-
-- `prototype/assets/dpm-work/` — **2.2 MB, 8 files.** Three Bentley crops, three Sea Green Jaguar
-  frames, two workshop frames. `make-plates.zsh` names every source and crop and rebuilds the lot.
-- `prototype/assets/brand/` — **116 KB, 3 files.** `dpm-logo.svg` (traced, 15,037 bytes, 16
-  contours, 1,258 points) plus trimmed transparent PNGs in bone and dark.
-- `prototype/assets/dpm-instagram/DU2rgo5DXqC/` — **4.1 MB, 28 files.** The real P1800 photographs,
-  1280×853 (Instagram's ceiling), plus `web/` copies and DPM's verbatim caption.
-- `prototype/assets/art-direction/` — **137 MB, 31 files.** The AI plates. **Referenced only by the
-  superseded directions now.**
-- `research/screenshots/` — **~2.0 GB** of reference captures. Gitignored. Safe to delete.
-
-### The P1800 — the worked example. All facts are DPM's own, verbatim from their caption
-
-Candy Red · a year-long restoration · **1,300 hours of labour** · client changes: Candy Red colour,
-wire wheel conversion, power steering conversion, smoothed chrome bumpers, lowered · "a full
-restoration portfolio with **over 2000 photos**" · chassis **26282** from the riveted plaque ·
-a 37:32 film, "The Volvo P1800 Restoration", **57k views**, on their YouTube "DPM TV".
-
-**Do not embellish these or invent additional ones.** Where a value was never published (coat count,
-paint code), the page says "in this car's file" rather than inventing it — keep that.
-
-### Verified by eye, not just asserted
-
-- The plaque in `slide-10.jpg` is engraved "Restored By DPM AUTOBODY" with "ARTISTS O…" along the
-  bottom edge — cropped and enlarged to confirm. The tagline is already in the cars.
-- The plate detector returns the real number plate as **rank-1 at 0.87** on the P1800 whole-car shot.
-- The traced logo renders correctly in bone at both masthead (~103×52px) and footer (~161×80px)
-  scale, and measures **1.9% of ink different** from the source raster.
-- The re-balanced hero shows Candy Red with visible lustre below the chrome waistline at four
-  scroll positions — before/after frames compared via `shoot-hero.mts`.
-
-### Tooling — working
-
-- `prototype/build.mjs` — the two-build generator.
-- `prototype/measure-hero.mts` and `shoot-hero.mts` — **run from the monorepo root**, with the
-  folder served on :8899.
-- `tools/trace-logo.mjs` — raster → SVG. `EPS` env var sets tolerance (default 0.8).
-- `prototype/assets/dpm-work/make-plates.zsh` — rebuilds all eight real-work plates.
-- `research/tools/capture-site.mts` — headless Playwright capture. **Run from the monorepo root.**
-- `tools/plate-redact/` — propose → confirm → apply. Venv verified (`cv2 5.0.0`).
-- Higgsfield CLI authenticated; **772.85 credits** remaining.
+- `https://dpm-autobody.vercel.app/index.html` — 200. Contains the Mark Antwis testimonial, the
+  corrected "AMOC Sandringham Concours, 2024" line (not 2023), and a link to `etype-941pvo.html`.
+  Grep-verified: `grep -c "440 hrs\|450 hrs"` etc. were checked at each stage; the internal
+  approval-gate/sourcing notes (`data-note`) do **not** leak into the client build.
+- `https://dpm-autobody.vercel.app/etype-941pvo.html` — 200. Verified: shows **450 hrs** only (not
+  both 440 and 450), shows the corrected workshop/jig sentence, contains zero instances of the
+  self-narrating phrases cut in fix #10 above, and all 17 downloaded images resolve at their R2 URLs
+  (spot-checked two directly, both 200).
+- R2: 36 objects total under `prototypes/2026-08-26_dpm-autobody-discovery/assets/` (up from 21
+  before tonight), all verified 200 with correct content-type by the publish script's own
+  verification pass.
 
 ### Unverified / assumed
 
-- **Whether the builds hold up on a real phone.** Geometry is measured in headless Chromium at
-  phone viewports; nobody has opened it on a handset.
-- Google Business Profile photos were never checked — bot-blocked during the audit. Still unknown.
-- ~~The Jaguar film's rights.~~ **Settled by Ricky, 2026-08-30:** every DPM Instagram and YouTube
-  video is to be treated as DPM's to use however they wish. The Lot 03 plates (`3bcai_euCy4`) and
-  the workshop film are therefore both usable. Recorded as Ricky's standing instruction rather than
-  as something verified with the production company — noted here so it is traceable, not re-opened.
+- **Nothing has been shown to Mark Antwis.** The images are cleared per David's relayed message, but
+  the written page has not been — that gate is documented prominently in an annotated-only note on
+  the new page (`#signoff`), but it is only as good as someone actually reading it before the URL
+  goes anywhere beyond this review.
+- The magazine's own "440 hours" vs "450 hours" figures measure genuinely different scopes (panel
+  work alone vs. the whole job) — both are believed accurate to their sources, neither has been
+  independently checked against DPM's own records.
+- The E-type page's HTML comment for the contact section says `09 · ENQUIRIES` but the actual visible
+  chapter mark reads `06` — a harmless cosmetic mismatch between a code comment and the rendered
+  number, not user-visible as a bug, not fixed tonight. See Traps.
+- Everything already flagged unverified in earlier handoffs and not re-touched tonight: the DB6
+  Instagram-highlight identity, real-phone rendering, Google Business Profile photos, whether David
+  has seen tonight's changes yet.
 
 ---
 
 ## What was NOT done
 
-- **The four commits of 30 August are not pushed.** `git push` has not been run and was not asked
-  for; per `CLAUDE.md` the promotion path is develop → staging → main. Everything before them is
-  already on `origin/main`.
-- **The URL has not been sent to David.** It is live and verified, but publishing it and sending it
-  are separate acts, and the second has not happened. Before it does, read the invented-copy trap
-  below — three blocks put first-person words in the mouths of Dave, Paul and Ellis, and the client
-  build carries no label saying so.
-- **Nobody has opened the deployed pages in a real browser.** Verification was HTTP-level: status
-  codes, byte-identity against the local build, image fetches, headers. That proves the right bytes
-  are being served, not that the page looks right on David's phone.
-- **Only the client build is published.** The annotated build is not on any URL, so Ricky's
-  talk-track is still `file://` or `127.0.0.1:8899` only.
-- **The type study has not been decided.** `type-study.html` presents the question and a view;
-  nobody has chosen. Until they do the prototype stays on Archivo.
-- **The copy has not been read back to David, and the interview that does it has not been run.**
-  `interview-david.md` (2026-08-30) inventories every invented block and pairs it with the question
-  that replaces it. Deliberately **not** applied as edits: Ricky's call is that David sees the
-  sections and is told they are being rewritten.
-- **Nothing invented has been removed.** The four log entries, the nine stage names and durations,
-  the glosses under the owner's specification, and six claims on the homepage are all still live at
-  https://dpm-autobody.vercel.app. That is a decision, not an oversight.
-- **The client rationale document is not written.** `BACKLOG.md` item 1, and the next real
-  deliverable. Framing and the resolved tension are already specified there.
-- **The iCloud photo link has not arrived.** David confirmed on 08-28 he will send it. Playbook:
-  `inbox/WHEN-THE-ICLOUD-LINK-ARRIVES.md` — follow it, it encodes decisions easy to get wrong.
-- **The plate-redaction tool has never been run over a real batch** — one single-image test only.
-- **David's brother's footage library has not been inventoried.** Could remove part of the video
-  commission.
-- **No monorepo site exists.** No `sites/dpm-autobody`, no theme, no MDX. Still prototype only.
-- **The video shoot has not been briefed**, and it is time-critical — `synthesis.md` §6.
-- **The Bentley video was never downloaded.** YouTube rate-limited it after the Jaguar film came
-  down. Not needed — all three Bentley plates are crops of the one stills photograph — but if a
-  fourth is wanted, `JpztIam_ARE` is the 16-minute feature and `web_safari` format 96 is the way in.
-- **The remaining 18 Facebook reviews were not recovered**, and chasing them is not worth it — see
-  Traps.
-- Direction D has been reviewed twice by Ricky, never by David. The "does the resolve device
-  survive three repetitions" question is still open — it holds _only_ because Lot 03 breaks the
-  pattern by not resolving to a finished car. **That is now true for a real reason:** the Sea Green
-  Jaguar is genuinely still in the booth.
+- **DPM's own real photography still is not in `prototype/src/home.html`/`workshop.html`.** This was
+  flagged as the priority next step in the previous two handoffs and remains completely untouched —
+  tonight's work added a _different_ car's (the E-type owner's own) photography to a _new_ page; it
+  did not touch the long-standing gap in DPM's own curated library making it onto the existing pages.
+  Only 2 of 29 curated R2 images (`dpm-autobody/photography/`) are live, both in superseded direction
+  pages, not the real site.
+- **The contact form is still not operational** (unchanged, was always intentional).
+- **The E-type page's `09`/`06` chapter-numbering comment mismatch** (see above) — cosmetic, not
+  fixed.
+- **The video** at `etypefhcseries1.com/videos/colour-coat-in-booth.mp4` ("the colour coat going on
+  in the booth") was found but deliberately not downloaded or embedded — the still frame
+  (`metalwork/painted-shell.jpg`) covers the same beat and video adds a size/hosting decision that
+  wasn't necessary tonight.
+- **The NEC 2024 reunion photo** from the magazine (Mark Antwis and another man, with a "DPM"
+  branded show-stand visible behind them, page 22) was deliberately left out of the new page — could
+  not positively identify the second man beyond inference, so it wasn't captioned or used.
+- **Two Aston Martin enamel event-badge photographs** were seen on `etypefhcseries1.com` but not
+  downloaded — judged to be small logo-like crops rather than photographs; their dated text is
+  already transcribed into the page's copy and notes instead.
+- **`interview-david.md` has still not been run**, and the URL has still not been sent to David for
+  this specific new content (unchanged from every previous handoff).
+- **Today's work is not committed to git** (see Working tree above) — carried forward from the
+  previous handoff, now with substantially more uncommitted content on top.
+- **`create-client-document-skill.md`** — still present, untracked, still not investigated by this
+  session.
 
 ---
 
 ## Live-data changes already applied
 
-**Two, both on 2026-08-29, both at Ricky's explicit instruction.** No DNS touched, no commit pushed,
-no monorepo site deployed. External spend remains 75 Higgsfield credits.
+**2026-09-05, all at Ricky's explicit instruction ("publish.zsh" / "publish" before each deploy):**
 
-1. **20 objects uploaded to Cloudflare R2** under
-   `prototypes/2026-08-26_dpm-autobody-discovery/assets/` in the `local-business-platform` bucket
-   — 4.5MB, `public, max-age=300`. All are DPM's own photographs of DPM's own work. The 137MB of AI
-   art-direction plates was deliberately **not** uploaded. `assets-manifest.json` is the record.
-2. **A new Vercel project `dpm-autobody`** created under `ricky-wilsons-projects` and deployed to
-   production, aliased to `https://dpm-autobody.vercel.app`. Not git-linked, so it never rebuilds on
-   a monorepo push. Payload is 182.7KB of HTML — two pages, no assets.
+1. **Three Vercel deploys to the existing `dpm-autobody` project**, each superseding the last, ending
+   at the current live state described above.
+2. **15 new objects uploaded to R2** (the 17 downloaded E-type images minus 2 that ended up unused —
+   `astonmartin/sandringham.jpg` and `metalwork/side-flatted.jpg` were downloaded but are not
+   referenced by any published page, so the upload script correctly skipped them as unreferenced).
+   All existing 21 objects from before tonight were unchanged and skipped.
 
-Three read-only outward-facing actions, all at Ricky's explicit instruction, all in his own logged-in
-Chrome, nothing posted / liked / followed / changed:
+There is no rollback command for either — reverting means re-editing `prototype/src/{home,
+etype-941pvo}.html` back to their pre-tonight state and re-running `publish.zsh`. The pre-tonight
+state is fully recoverable from git (`243e0eee`) for `home.html`; `etype-941pvo.html` did not exist
+before tonight and would simply need deleting from `src/`, `publish.zsh`, and the R2 assets folder.
 
-1. Read DPM's public Instagram post and saved 14 images (08-27).
-2. Read DPM's Facebook reviews page (08-29). Cookie banner set to **decline optional cookies**.
-3. Downloaded two DPM TV videos with `yt-dlp` (08-29) for frame extraction.
+Everything from previous handoffs' live-data sections (the 29 curated photography objects, the
+Vercel project itself) still stands and is unchanged by tonight's work.
 
 ---
 
 ## Traps
 
-- **Do not trust this file's git claims — re-run them.** Three commits were described here as
-  unpushed across two revisions of this handoff; all three were on `origin/main` the whole time, and
-  the claim was repeated to Ricky three times on 30 August before anyone checked. `git fetch origin`
-  then `git log --oneline origin/develop..HEAD`, or `git branch -r --contains <sha>`.
-- **Do not `grep` the raw HTML to check the client build for meta-language.** It returns 9 and 17
-  hits that are all CSS comments, class names and attributes. Strip `<style>`, `<script>`, comments
-  and tags first and search the rendered text — which returns zero. The false positive looks exactly
-  like a real leak.
-- **The annotated build's own notes have been wrong before.** Until 30 August the testimonial note
-  asserted the two quotes were verbatim with "nothing reworded", and neither was true. Treat a
-  `data-note` as a claim to check, not as provenance.
-- **`.record` is the CSS class as well as the section.** The 30 August rename moved `#register` →
-  `#record`, `.register` → `.record` and the nav label. Two prose uses of "register" survive in
-  `src/home.html` and are correct — they are the linguistic sense, "the register of a good local
-  bodyshop". Do not sweep them up in a find-and-replace.
-- **Republish with `prototype/publish.zsh`, never by hand.** It uploads, rebuilds, stages and
-  deploys in the one order that works. Deploying the `prototype/` folder directly would put the
-  annotated build — which names the copy we invented — and the rejected directions on David's URL.
-- **The shared publish tooling was broken for this folder's shape and failed silently.** Both
-  `tools/upload-prototype-assets.ts` and `tools/publish-prototype.ts` scanned only top-level HTML
-  and matched only `"assets/`, never `"../assets/`. This session's real pages are one level down and
-  climb to reach `assets/`, so the rewrite skipped them, `publish-prototype.ts` excluded `assets/`
-  from the upload, and **its pre-flight passed anyway because it was reading the wrong files** — the
-  deploy would have succeeded with every image 404ing. Both are fixed (recursive scan, `../` aware)
-  and both now take `--pages`. If you touch either, keep the recursion.
-- **The rewrite must land on `src/`, not on `client/`.** Rewriting a generated build is undone by
-  the next `node build.mjs`. `publish.zsh` passes `--pages src/home.html,src/volvo-p1800.html` for
-  exactly this reason.
-- **Edit `prototype/src/`, never `client/` or `annotated/`.** They are overwritten on every
-  `node prototype/build.mjs`. Hand-editing a build is silently lost on the next run.
-- **The client build has no label on the invented copy, by design.** Three blocks are ours, not
-  DPM's: the four log entries on the P1800 page, the nine stage names and their durations, and the
-  notes beside the owner's specification and the paint. **The log entries put first-person words in
-  the mouths of Dave, Paul and Ellis — three real, named men — and Ellis's bumper story describes an
-  incident invented to demonstrate the form.** The annotated build flags all of it loudly. Say it
-  out loud when walking David through the client version; he will otherwise assume his own staff
-  wrote it.
-- **Do not put the testimonial section's cut blocks back.** The 100%/24 figure, the note explaining
-  why a public comment beats a testimonial, and the standfirst were all cut on 29 August. They read
-  as the page arguing for its own evidence. Recorded in the annotated build too.
-- **Do not mine Facebook for more reviews.** Six of 24 were recovered. **Every one is a repair or
-  modification customer and the newest is September 2020** — the corpus praises speed and service
-  ("quick turn around", "short notice"), which is the register of a good local bodyshop and the
-  opposite of the concours positioning. The two on the page are the only two that talk about
-  _standard_. Read `research/facebook-reviews.md` before touching this section.
-- **The hero's light was re-balanced and the four reasons are load-bearing.** `.plate::after`'s
-  bottom stop was 0.82 rising from 60%, putting the paint in the dark; `.spec` sat at z-index 3
-  _under_ that shade, so its `screen` blend was being darkened by the gradient crushing the bottom;
-  `.hero__inner::before` held 0.66 across the middle of the plate; and the hero image was scaled
-  1.55× from a 1280px source — both an upscale and a crop that pushed the panel below the trim out
-  of frame. The copy now carries a `text-shadow` instead of the plate being dimmed to give it one.
-- **The hero's vertical fit is tuned against `measure-hero.mts`, not by eye.** Re-run it after
-  touching the hero's padding, `.hero__foot`'s `bottom`, the `min-height: 44rem` that pins it, the
-  `.h-hero` size, or the masthead logo height. Four bugs it caught that are invisible at one window
-  size: a `@media (min-width: 60rem)` rule was zeroing `.hero__inner`'s top padding; plain
-  `align-content: end` spills past the padding edge on overflow, so it must be `safe end`; below
-  ~704px tall the pinned foot cannot clear a three-line headline and must go back into flow; and
-  the headline needs a `min(7.6vw, 12vh)` cap or a wide-but-short window pushes the lede through
-  the foot.
-- **`output/.gitignore` denies all binaries across `sessions/**`by design** — including`.svg`.
-`git add`silently skips every image, video and the traced logo. That is correct; do not "fix" it.
-The logo survives anyway because it is **inlined into the HTML** as a`<symbol>`.
-- **`research/reference-teardown.md` is superseded and contains two wrong claims** about Thornton.
-  Use `teardown-thornton.md`.
-- **`research/asset-audit-dpm.md` carries a dated correction at the end.** Its headline claim — "not
-  one photograph of a finished car in daylight away from the workshop" — was **disproved**; the
-  Bentley photograph is exactly that, and is now Lot 02. Its scarcity argument still stands.
-- **The 1080/1280px ceiling is Instagram's, not the source's.** David's originals are camera and
-  phone files.
-- **Resolution was never the real constraint — light and composition were.** When the iCloud link
-  arrives, the temptation is to treat the photography problem as solved. It is not.
-- **`capture-site.mts`, `measure-hero.mts` and `shoot-hero.mts` must run from the monorepo root** —
-  `@playwright/test` only resolves there under pnpm.
-- **Do not use a helper function inside `page.evaluate()` in a `.mts` file** — tsx compiles it with
-  esbuild's `__name` wrapper, which does not exist in the page and throws. Pass a string instead.
-- **Only `web_safari` (format 96) serves DPM TV at 1080p** without a PO token. `android` silently
-  falls back to 640×360; `tv` and `ios` refuse.
-- **Facebook will not serve the reviews to automation.** 33 unhydrated `Facebook` placeholders and
-  zero-width-joiner obfuscation on the one card that renders. A human must copy them.
-- **Do not name Halcyon in any client-facing artefact yet.** Permission has not been given. The
-  prototypes state the credential without the name — keep that.
+Everything in previous handoffs' Traps sections still applies and was not re-verified tonight except
+where noted: always use `prototype/publish.zsh`, never `tools/publish-prototype.ts` directly; edit
+`prototype/src/`, never `client/`/`annotated/` directly; `cleanUrls` must stay off; HEIC dimension
+detection needs `sips`, not `magick identify`.
+
+- **A new page needs adding to `publish.zsh` in two places, or it silently never deploys.** The build
+  script (`build.mjs`) picks up every file in `src/` automatically, so a forgotten new page will
+  build correctly into `client/`/`annotated/` and look completely fine locally — the failure is
+  invisible until you check the live URL and find a 404. `etype-941pvo.html` is now correctly wired
+  in; the next new page won't be, by default.
+- **The `--accent`/`--accent-ink` CSS custom properties read as the default red, not the car's house
+  colour, if inspected via a fresh `javascript_tool` call immediately after navigating in the
+  Claude-in-Chrome environment.** Confirmed again as a testing-tool artifact, not a site bug — do a
+  small scroll before trusting a colour reading taken this way.
+- **`.plate::after`'s radial-gradient vignette is duplicated per-page**, not shared. The workshop
+  hero's lighting fix from the morning session does not apply to `home.html`'s or
+  `volvo-p1800.html`'s `.plate` sections, which still use the old centred vignette.
+- **The E-type page's contact-section chapter number comment says `09`, the rendered mark says `06`.**
+  Harmless, but if a future session adds more sections to that page and tries to number relative to
+  the comment rather than the actual rendered marks, it will produce a visible duplicate or gap.
+- **Two downloaded images are orphaned**: `prototype/assets/etype-941pvo/astonmartin/sandringham.jpg`
+  and `.../metalwork/side-flatted.jpg` exist on disk and are documented in `SOURCES.md` as
+  intentional spares, but are not referenced by any HTML and were correctly skipped by the last R2
+  upload. Don't be alarmed that they're "missing" from the live site — they were never meant to be
+  live yet.
 
 ---
 
 ## Next step
 
-**1. Push, when Ricky says so.** Four commits sit unpushed on `develop`. Pushing is
-outward-facing and has not been authorised. Check the real state rather than trusting this file.
+**1. Commit tonight's work to git.** The morning contact-page polish is already committed
+(`243e0eee`, pushed to `origin/develop`) — only tonight's testimonial/E-type additions are still
+uncommitted. This should happen before more work stacks on top, per the project's standard
+`develop → staging → main` workflow (see `.claude/deploy.md`: staircase promotion, `staging → main`
+gated by a PR since `main` is protected).
+
+**2. Get DPM's own real photography into `prototype/src/home.html` and `workshop.html`.** Unchanged
+priority from every previous handoff — tonight's work did not touch this gap, it only added a
+different car's photography to a new page.
+
+```bash
+cat output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/research/photography-manifest.json
+cat output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/research/asset-audit-dpm.md
+```
+
+**3. After any `src/` edit, always rebuild and republish with the real script:**
 
 ```bash
 cd /Users/rickywilson/Sites/local-business-platform
-git fetch origin
-git log --oneline origin/develop..HEAD   # expect four, dated 30 August
-git push origin develop
-```
-
-**2. Serve it to look at anything.** `file://` works for the pages but not for the tooling.
-
-```bash
-cd output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype
-python3 -m http.server 8899 --bind 127.0.0.1
-# http://127.0.0.1:8899/            the chooser
-# http://127.0.0.1:8899/client/     what David sees
-# http://127.0.0.1:8899/type-study.html
-```
-
-**3. After editing `prototype/src/`, always:**
-
-```bash
 node output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/build.mjs
-npx tsx output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/measure-hero.mts
-```
-
-**4. Rebuild assets after a fresh clone** (they are gitignored):
-
-```bash
-./output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/assets/dpm-work/make-plates.zsh
-```
-
-**5. Write the client rationale** — `BACKLOG.md` item 1, framed on Ricky's three axes with the cost
-of each named honestly, resolving the stated tension: _process is the proof, the finished car is the
-promise._
-
-**6. When the iCloud link arrives**, follow `inbox/WHEN-THE-ICLOUD-LINK-ARRIVES.md` exactly. Triage
-first, then report the three counts that decide the design: how many files are **above 1280px**; how
-many are a **finished car in daylight away from the workshop**; how many show **paint under
-directional light**.
-
-**7. Republish after any change to `src/`** — one command, from the monorepo root. It re-uploads
-(skipping unchanged objects), regenerates both builds, re-stages the client pages and redeploys to
-the same URL.
-
-```bash
 ./output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/publish.zsh
 ```
 
-**8. Run the interview before sending the URL** — `interview-david.md`, written 2026-08-30 and not
-yet run. It lists every block on the two pages that is ours rather than DPM's, with the question that
-replaces each. Ricky's call: the invented copy **stays on the page for now** so David sees what the
-sections do, and the interview is how he is told. Section A is the disclosure to say out loud first.
+**4. Get David to take the new E-type page/testimonial back to Mark Antwis for sign-off** before it
+is shown or promoted to anyone beyond this review — this is the single open gate on everything built
+tonight, and it is documented in an annotated-only note on the page itself
+(`prototype/src/etype-941pvo.html`, `id="signoff"`), which means it will not be visible to anyone
+looking only at the client build or the live URL.
 
-**9. Send David the URL** — https://dpm-autobody.vercel.app — when the copy caveat has been decided.
-It is live, public and `noindex`. Sending it is a separate act from publishing it and has not been
-done. Say out loud that the log entries, stage names and two side notes are ours, not his staff's.
+**5. Everything from earlier handoffs' remaining Next Step items, still open:** prune the raw 35GB
+photography library; decide the Jaguar/Austin-Healey fictional sections in the superseded direction
+pages; run `interview-david.md`; resolve the type-study (Fraunces) question; resolve whether the
+Bentley/documentary photography gaps need more material from David or the commissioned shoot; extend
+the nav-consistency and hero-lightening fixes to `home.html`/`volvo-p1800.html`'s other `.plate`
+sections if full consistency is wanted; decide whether the mobile pill nav should get the same
+`is-active` treatment as the desktop nav.
 
 ---
 
 ## Open questions
 
-- **Serif or grotesque for the headline?** Ricky's instinct on 29 August was that the site wants a
-  serif, with the caveat that it might clash with the mark. `type-study.html` is built to answer it;
-  nobody has. The page's own view: Instrument Serif, Libre Caslon Display or simply promoting
-  Newsreader all survive the mark; the Didones do not.
-- ~~**Publish the prototypes to Vercel for David?**~~ **Answered 2026-08-29:** yes, but the client
-  build only. Live at https://dpm-autobody.vercel.app. The open part is now whether the annotated
-  build should get its own unlisted URL so Ricky can talk from the notes on a second screen — it was
-  offered and not taken, and is a five-minute change to `publish.zsh` if wanted.
-- **Can we quote Liam Hunt, Craig Mayhew and Chris Bulmer?** All three are public posts, but
-  quoting a customer on their restorer's own site is DPM's permission to seek. Nobody has asked.
-- **Will David get three or four restoration testimonials?** `open-questions.md` item 4b, and the
-  cheapest content win left on the site.
-- **Is the Bentley a drophead?** The photograph shows a fabric roof, up. `asset-audit-dpm.md` calls
-  it a Drophead; the page says only "Bentley S3 Continental" and does not commit. Ask David.
-- ~~**Who owns the Jaguar film?**~~ **Answered 2026-08-30 (Ricky):** treat all DPM Instagram and
-  YouTube video as theirs to use freely. Lot 03 is unblocked, and so is the workshop film behind
-  `BACKLOG.md` item 3.
-- **Insurance and accident repair** — keep, demote to a quiet secondary page, or drop? Off-positioning
-  for concours but may be real revenue. Never answered by David.
-- **Halcyon naming permission.** Their paintwork credential is the strongest proof DPM has.
-- Remaining items in `open-questions.md` — DPM still hold no true vector logo (the traced SVG is a
-  stopgap, not a redraw), and the NEC listing still carries DPM's old address and phone number.
+Everything open in earlier handoffs is still open and unchanged (Fraunces/type-study, where new
+DB6/Porsche photography should live, the Bentley/documentary gaps, the DB6 Instagram-highlight
+identity, quoting named reviewers, three vs. four testimonials — **partially answered tonight, see
+below** — the Bentley drophead question, Halcyon naming permission, insurance/accident-repair page
+treatment, whether the contact form should be wired up). New tonight:
+
+- **"Three or four testimonials" is now "four, with three restoration-adjacent" or "keep at three
+  with the new one leading"** — depends on how you read it: the homepage still shows three quotes
+  (Mark Antwis leading, then Liam Hunt, Craig Mayhew), plus a separate two-row awards/proof list. The
+  original ask ("David has the phone numbers") for more _actual restoration client_ quotes beyond
+  this one is still open.
+- **Should the E-type page's video** (`colour-coat-in-booth.mp4`) be pulled in later, and if so,
+  hosted where — R2 alongside the images, or linked out to the owner's own site?
+- **Should the two orphaned downloaded images** (Aston Martin second angle, E-type side-flatted shot)
+  be wired into the page for a richer treatment, or deleted as genuinely unused?
