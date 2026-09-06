@@ -1,40 +1,44 @@
 # DPM Autobody — new client discovery, research and prototypes — handoff
 
-**Status:** in-progress. This session (2026-09-05) did a focused round of contact-page/design polish
-on the already-published prototype: rebuilt the contact page (heading, mocked enquiry form, viewport
-layout), removed redundant chapter numbers, lightened two hero photos where the car was reading too
-dark, made the desktop nav consistent across pages, and added a socials row + build credit to every
-footer. **All of it is live and verified on the client URL** (`https://dpm-autobody.vercel.app`) via
-direct `curl`, not just trusted from the publish script's own output. **None of it is committed to
-git yet** — see Working tree below, this is the single most important thing in this file.
+**Status:** in-progress. The 2026-09-05 morning contact-page/design-polish pass **is already
+committed** (`243e0eee`, 07:11:57 that morning) — verified via `git show --stat`, correcting an
+earlier draft of this file that (wrongly, trusting a prior handoff's prose instead of re-checking
+git) claimed it was still uncommitted. What actually remains uncommitted is the much larger
+afternoon/evening addition on top of it: a new real testimonial, a corrected factual error, and an
+entire second "documented car" page for a customer's Jaguar E-type. **All of it is live** at
+`https://dpm-autobody.vercel.app`, verified directly against the deployed URLs with `curl`, not just
+trusted from the publish script's own output. **None of the evening work is committed to git.** That
+is the single most important thing in this file — see Working tree below.
 
-**Branch:** `develop`, from `main`. Last commit touching this session folder: `d70f9578`
-("docs(dpm-autobody): retitle the rationale so it cannot be read as self-reference"), 2026-09-04.
-That commit and everything before it is pushed to `origin/develop` (`git log origin/develop..HEAD`
-is empty as of session start). **Nothing from today's session is committed.**
+**Branch:** `develop`, from `main`. Last commit: `243e0eee` ("feat(dpm-autobody): redesign contact
+page, fix hero lighting, unify nav"), 2026-09-05 07:11:57 — this **is** the morning session's work,
+already shipped, not a baseline it sits on top of. `git log origin/main..HEAD` shows 14 commits ahead
+of `main` (mixed DPM and unrelated `dcs`/`docs-site` work from other sessions), `243e0eee` among
+them. **Only the evening session's work (below) is still uncommitted.**
 
-**Working tree:** dirty. This session's own changes:
+**Working tree:** dirty. Confirmed via `git status --porcelain` on 2026-09-06:
 
-- Modified: `prototype/src/{home,workshop,volvo-p1800,contact}.html` (all four — see Actions taken)
-- Modified (generated, via `build.mjs`): `prototype/annotated/*.html`, `prototype/client/*.html`
-- Modified: `HANDOFF.md` (this file)
+```
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/annotated/index.html
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/assets-manifest.json
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/publish.zsh
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/home.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/create-client-document-skill.md
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/annotated/etype-941pvo.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/assets/etype-941pvo/
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/etype-941pvo.html
+?? output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/etype-941pvo.html
+```
 
-Also present, **not part of this session's work and not investigated**:
-
-- `create-client-document-skill.md` (untracked, new) — a prompt for building a `client-document`
-  Claude Code skill, referencing this session's own `client-rationale.md` as its worked example.
-  This looks like it was written to hand to a separate session/agent to build a reusable skill; a
-  skill named `client-document` is in fact now available in this Claude Code install, so it's
-  plausible that work already happened elsewhere. Not touched, not verified, out of scope here.
-
-The previous handoff's note about `client-rationale.md` and `research/expansion/*.md` being
-"uncommitted, not understood" **no longer applies** — `git status` shows those files clean now,
-so they were committed in one of the four commits between the previous handoff and this one
-(most likely `d70f9578` or `12f6273d`).
+Not modified this session: `prototype/src/{workshop,contact}.html` (untouched since the 2026-09-04
+commit) and `prototype/src/volvo-p1800.html` (read for reference only, never edited).
+`create-client-document-skill.md` is unrelated leftover from an earlier session — see the previous
+handoff's note, still unexamined, still out of scope here.
 
 **Client:** DPM Autobody, Berwick, East Sussex. Director David Pearce-Martin, 01323 552827,
-info@dpmautobody.co.uk. Concours classic car restoration; paintwork is their real speciality — they
-do Halcyon Cars' paint. Existing site `dpmautobody.co.uk` is Wix.
+info@dpmautobody.co.uk. Concours classic car restoration; paintwork is their real speciality.
+Existing site `dpmautobody.co.uk` is Wix.
 
 ---
 
@@ -42,12 +46,10 @@ do Halcyon Cars' paint. Existing site `dpmautobody.co.uk` is Wix.
 
 Ricky won DPM as a client on 2026-08-26. David asked for a website whose appearance "matches the
 level of works we do", naming three reference sites: eaglegb.com, thorntonrestorations.com,
-halcyon.works. The job is to research, position, and prototype homepage options before any build in
-the monorepo. **Read `synthesis.md` first** — it is the argument; the four teardowns in `research/`
+halcyon.works. **Read `synthesis.md` first** — it is the argument; the four teardowns in `research/`
 are the evidence.
 
-**Five user decisions constrain everything downstream. Do not re-litigate them** (unchanged since
-the previous handoff, repeated here because they're easy to lose):
+**Five user decisions constrain everything downstream. Do not re-litigate them:**
 
 1. **Project the lifestyle of the people who drive these machines, not the personality of the shop.**
    Ricky, 2026-08-26. Process appears as _evidence_, art-directed — never as the shop's self-image.
@@ -56,202 +58,253 @@ the previous handoff, repeated here because they're easy to lose):
 3. **Two builds, one source**, Ricky 2026-08-29: David gets a clean page (`prototype/client/`);
    Ricky gets the same page plus the notes to talk from (`prototype/annotated/`). Both generated
    from `prototype/src/` via `node prototype/build.mjs` — **never hand-edit the generated builds.**
-4. **The page must never narrate itself.** No copy about the design, the medium, or why the evidence
-   counts.
-5. **Number plates are redacted, house style is a blank sampled-colour fill, not a blur.**
+   Marking convention (see the comment at the top of `build.mjs`): `data-note` = annotated build
+   only; `data-client` = client build only; unmarked = both.
+4. **The page must never narrate itself.** No copy about the design, the medium, why the evidence
+   counts, or its own section structure ("see section 05", "the quote above"). This was violated
+   twice in tonight's new page and had to be caught and fixed — see Actions taken.
+5. **Number plates are redacted, house style is a blank sampled-colour fill, not a blur.** Where that
+   can't be done reliably to someone else's photograph, exclude the frame instead of guessing at an
+   edit — see the E-type gallery note below.
 
 ---
 
-## Actions taken this session (2026-09-05)
+## Actions taken, 2026-09-05 morning (contact page polish) — already committed as `243e0eee`
 
-All of these are edits to `prototype/src/*.html` only, rebuilt via `build.mjs`, then published via
-`prototype/publish.zsh`. Each step below was verified live with `curl` against
-`https://dpm-autobody.vercel.app` before moving to the next — not just visually in a local preview.
+Brief summary — this was fully covered in the previous handoff and is now superseded by the larger
+work below. Nothing here was touched again tonight, and it is already committed and pushed as part
+of `develop`'s normal history, not part of tonight's commit:
 
-1. **Contact page: new heading + mocked enquiry form.** Replaced the old headline ("Bring us the car
-   you are not willing to compromise on" — read as ad copy, off-voice) with "Tell us about the car."
-   Added a form capturing name, email, phone, make & model, year, type of work needed (select), and
-   free-text notes. **The form is a visual mock only** — `onsubmit="return false"`, no backend —
-   flagged both in the UI (a `data-note`-only line, annotated build only) and in the footer's working
-   notes. Wiring it to a real inbox is an explicit open decision, not done here.
-2. **Contact page hero: lightened the right side of the background photo.** The original gradient
-   darkened the whole right edge (where the P1800's rear wing sits) as heavily as the text side on
-   the left. Rebalanced both the vertical and horizontal veil layers — the two multiply together in
-   CSS, so a strong bottom-of-frame vertical fade was cancelling out any horizontal lightening no
-   matter how light the right stop was set. Added `text-shadow` to the heading/lede/contact-rows so
-   legibility no longer depends on the photo itself being dark (mirrors the `.hero__inner` pattern
-   used elsewhere on the site).
-3. **Contact page and homepage: removed the numbered chapter marks.** The large standalone "01/02/03"
-   digit next to each section's kind label was redundant — homepage sections already carry the
-   number in the kind label text itself ("No. 01 · Finished and delivered"). Removed the
-   `.chapter__mark` span (and its CSS) from all four homepage chapters and replaced the contact
-   page's whole numbered-chapter-box header treatment with a plain `workshop.html`-style eyebrow
-   label (`<p class="label label--accent">Enquiries · Berwick, East Sussex</p>`) — no rule, no
-   number.
-4. **Contact page: split into two full-viewport sections.** The header (heading, lede, phone/email/
-   workshop rows) now fills and is bottom-anchored within the first `100lvh`; the enquiry form moved
-   into its own `.contact-form` section below the fold, sized and padded to fit inside the _next_
-   viewport without also needing a further scroll (verified via `getBoundingClientRect()` in-browser
-   at a 714px-tall test viewport: form section height 728px against a 714px viewport, ~14px
-   overflow, masthead clearance +14px — a real but small tolerance, not a guarantee at every
-   possible window size).
-5. **Workshop page hero: lightened the right side too.** Same class of issue as #2, on the aerial
-   `.plate` image. The vignette (`radial-gradient(...at 50% 46%,...)`) was dead-centred, darkening
-   the yard/vehicles on the right exactly as much as the hedgerow on the left. Shifted the centre to
-   `62% 46%` and reduced the outer stop from `0.26` to `0.22`, so the clean zone reaches further into
-   the workshop itself. Scoped to `workshop.html` only — confirmed by grep that it's the only file
-   with exactly one `.plate` instance (home.html and volvo-p1800.html have several `.plate` sections
-   sharing the same class, so the same edit there would need per-section scoping, not a global one).
-6. **Desktop nav made consistent across all four pages.** Previously each page's nav _omitted_ the
-   link to itself (workshop.html had no "The workshop" link, contact.html had no "Contact" link),
-   which meant the set of nav items visibly changed depending which page you were on. Restored the
-   missing item on `workshop.html` and `contact.html`, and added a new `.masthead nav a.is-active`
-   CSS rule (bold + underlined in the accent colour) to all four files' stylesheets, applied via
-   `class="is-active" aria-current="page"` on the item matching the current page. Home and the P1800
-   page needed no `is-active` change — none of the four nav destinations is literally "home" or "the
-   P1800 page" itself. **The mobile "pill" nav has the identical disappearing-item pattern and was
-   deliberately left untouched** — the user's request was specifically about the desktop menu.
-7. **Footer: added a socials row (bottom-right) and a "Built by" credit (centred), on all four
-   pages.** Instagram, Facebook and YouTube icons/links — handles verified from this session's own
-   research files, not guessed: `research/asset-audit-dpm.md` confirms `@dpm_autobody` was "confirmed
-   authoritatively from the site's own footer link, not guessed"; `research/facebook-reviews.md`
-   sources `facebook.com/dpmautobody`; `prototype/assets/dpm-instagram/DU2rgo5DXqC/README.md` gives
-   the YouTube channel `UC3ZpDFw1FbgXrMy5CCONqyw`. Restructured `.colophon` into a `.colophon__row`
-   (existing logo/address/back-link stack on the left, new `.colophon__socials` on the right,
-   bottom-aligned) plus a new `.credit-line` (`Built by digitalconsultingservices.co.uk`, linked,
-   centred) as the colophon's last child — deliberately _inside_ `.colophon`, not a `<footer>`
-   sibling, so it inherits the same `8rem` bottom padding already reserved for the mobile contents
-   pill rather than adding a second block of trailing space.
+1. Contact page redesign: new heading, mocked enquiry form (`onsubmit="return false"`, no backend,
+   deliberately not operational).
+2. Contact hero and workshop hero: rebalanced vignette lighting so the car's right-hand side isn't
+   dark on both pages.
+3. Removed redundant numbered chapter marks; gave the contact page a plain eyebrow-label header
+   instead.
+4. Desktop nav made consistent across all four pages (each page used to omit the link to itself).
+5. Footer: added a socials row (Instagram/Facebook/YouTube) and a "Built by
+   digitalconsultingservices.co.uk" credit line to all four pages.
 
-**A discovery, not a fix — no code changed because of it:** while testing #2 and #5 live in the
-automated browser, the CSS-driven car-accent repaint (`--accent`/`--accent-ink`, set via
-`IntersectionObserver` against `[data-accent]`) appeared to stay on the default red instead of the
-page's house tan. Isolated this to a **testing-environment artifact** — the automated tab defers the
-observer's very first firing until an actual scroll event occurs (confirmed identically on
-`workshop.html`, completely untouched by this session, so it isn't a regression). A real visitor's
-browser fires the observer immediately on load; nothing here needed changing. Worth remembering if
-a future session sees the same "wrong colour" symptom in this tooling and is tempted to "fix" it.
+Traps carried forward unchanged from that session: always publish via `prototype/publish.zsh`, never
+`tools/publish-prototype.ts` directly; the `--accent`/`--accent-ink` CSS custom properties read as
+the default red (not the car's house tan) if inspected via a fresh `javascript_tool` call immediately
+after navigating in the Claude-in-Chrome environment — this is a testing-tool artifact (the
+`IntersectionObserver`'s first firing is deferred until a real scroll event happens), not a site bug;
+do a small scroll before trusting a colour reading taken that way.
 
 ---
 
-## Current state — verified 2026-09-05
+## Actions taken, 2026-09-05 evening (new testimonial + E-type project page)
+
+David forwarded a message from Mark Antwis — owner of a 1962 Jaguar E-type Series 1 3.8 FHC (941
+PVO) and a 1974 Aston Martin V8, both worked on by DPM — with a link to his own site
+(`etypefhcseries1.com`) and a PDF of a nine-page feature on the E-type restoration in the E-Type
+Owners Club Magazine, April 2026 ("A Promise Kept"). David's own words: the owner said the images and
+magazine material are "free to use", **but he would like to approve [the write-up] before it's
+launched.** Ricky's instruction: "Pull whatever you want to create what we want on the website, and
+then David will later get the owner to approve it" — then, once images were confirmed separately as
+cleared: "we are allowed to use the images. we just need the 'article' signed off once written."
+
+1. **Added a new lead testimonial to the homepage `#proof` section** (`prototype/src/home.html`).
+   Quote, transcribed verbatim from page 22 of the magazine PDF: _"I had interviewed many body shops
+   for the painting of my concours-winning Aston Martin. The only person I would trust with the
+   E-type was the man who had laid down that paint with such astonishingly beautiful results."_ —
+   Mark Antwis. This is the first real, published, attributable statement from an actual restoration
+   client the site has had (the section's own working note had flagged this as "still needed" since
+   29 August). Chris Bulmer's weaker Facebook comment was retired to make room, keeping the section
+   at three quotes.
+2. **Added a small awards/proof list** beneath the quotes: the Aston Martin V8's AMOC Sandringham
+   Concours win (92%, class winner outright) and the E-type's hour count.
+3. **Caught and corrected a factual error, twice** (see below) — the Aston Martin's Sandringham win
+   is **2024, not 2023**. The magazine's first-person narrative (page 16) says "2023"; Mark Antwis's
+   own `/the-restorers-profile` page states 2024 in running text and shows two photographed event
+   badges dated 2024. A photographed badge outranks a magazine writer's two-years-later recollection,
+   so both the homepage and the new E-type page were corrected to 2024, with the discrepancy
+   documented in an annotated-only note on each.
+4. **Built a full second "documented car" page**, `prototype/src/etype-941pvo.html`, matching
+   `volvo-p1800.html`'s scroll-driven hero/veil mechanism and chapter/record/grid/plaque system,
+   retinted to the car's Opalescent Silver Blue. Sections: the record (identity block), a
+   forty-seven-year provenance story (the Bray family, 1978–2017, then Mark Antwis's 2017 auction
+   win), the build (DPM's panel/paint work, with a scroll-stage from primer-flatting to finished
+   paint), a plaque carrying the trust quote, a 9-image finished-car daylight gallery, and the Aston
+   Martin V8 tie-in. Built by a forked background agent (this session inherited full context), then
+   reviewed and corrected in the foreground.
+5. **Downloaded 17 real images** from `etypefhcseries1.com` (a Lovable-built SPA — image URLs are
+   only discoverable via a rendered-DOM query, not from raw HTML) into
+   `prototype/assets/etype-941pvo/{gallery,metalwork,astonmartin}/`, documented in a `SOURCES.md` in
+   that folder recording the exact source filename and use for each. Three gallery images with a
+   legible "941 PVO" plate were **excluded outright, not redacted** — no reliable way was found to
+   apply the site's blank-sampled-fill plate-redaction style to a third party's photograph without
+   risking a visibly botched edit.
+6. **Added `etype-941pvo.html` to `prototype/publish.zsh`**, both the R2 upload `--pages` flag and
+   the client-build `cp` staging list. This was not optional — the build script processes every file
+   in `src/` automatically, but `publish.zsh` only ships pages it's explicitly told about, so a new
+   page that isn't added there builds correctly and silently never deploys.
+7. **Added a "No. 04" teaser lot to the homepage** linking to the new page, in the same scroll-stage
+   style as the existing three lots, with a real (not `golink--dead`) link.
+8. **Fixed a factual/logical error the user caught after the first publish**: the new page's contact
+   section originally said the E-type "is not one we can show you in the workshop... but the Volvo
+   and the cars still on the jig are." **This was wrong** — the Volvo P1800 is also a finished,
+   delivered customer car (its own page says "interior, as delivered" and shows it photographed on a
+   lane, not at the workshop), so it has gone home too, exactly like the E-type. DPM doesn't hold on
+   to any car once it's restored. Corrected to: _"This E-type went home to its owner once we were
+   done, like every finished car does. What you can see at the workshop is whatever's on the jig
+   today."_ — with a data-note recording the correction and why.
+9. **Consolidated the two-hour-count display after the user objected to showing both**: the E-type
+   page's `.proof` list originally showed both DPM's own 440-hour figure (panel work only) and the
+   magazine's 450-hour figure (the whole job) side by side, client-visible. User: "choose eher 440 or
+   450 - dpnt show noth[both]." Now shows **450 only**, matching the homepage's own figure; the
+   440-vs-450 discrepancy is preserved but moved into an annotated-only note.
+10. **Removed self-narrating copy the user flagged as "not public facing"**: the new page originally
+    had several client-visible sentences that talked about the page itself rather than stating facts
+    — "Everything on this page traces back to that feature or to his own site... never to a record
+    DPM published", "It is also the sentence that explains why this page exists at all", and two raw
+    "See section 05" / "the plaque quote above" cross-references. All were rewritten as plain
+    statements of fact (the underlying sourcing reasoning was preserved, just moved into
+    annotated-only `data-note` blocks) — this is the same category of violation as the self-narrating
+    copy cut from the homepage on 29 August (rule 4 above).
+11. **Published three times** (`prototype/publish.zsh`) — once after the initial testimonial-only
+    addition, once after the full E-type page was built, once after the three corrections above. Each
+    publish was verified live with `curl` against `https://dpm-autobody.vercel.app`, not just trusted
+    from the script's own output.
+
+---
+
+## Current state — verified 2026-09-05/06
 
 ### Live deployment
 
-All four pages return 200 and carry every change above, confirmed by fetching
-`https://dpm-autobody.vercel.app/{index,workshop,contact,volvo-p1800}.html` directly and grepping
-for the specific markers (`class="contact-form"`, `class="is-active"`, `colophon__socials`,
-`digitalconsultingservices.co.uk`, the `radial-gradient(165% 130% at 62% 46%` string, and the
-absence of `chapter__mark` on `index.html`). The deploy history for this session, most recent first:
+Confirmed by fetching the live URLs directly, not from the publish script's own output:
 
-1. Contact page redesign (heading + form) — published, then...
-2. Chapter-number removal + viewport split — published, then...
-3. Hero lightening (contact + workshop) + nav consistency + footer socials/credit — **published
-   last, this is the current live state.**
-
-Each publish went through `prototype/publish.zsh` (never `tools/publish-prototype.ts` directly against
-`prototype/` — see Traps in the previous handoff, still binding). R2 asset upload step reported
-"skip (unchanged)" for all 21 objects every time this session — **no new images were uploaded**, only
-HTML/CSS changed.
+- `https://dpm-autobody.vercel.app/index.html` — 200. Contains the Mark Antwis testimonial, the
+  corrected "AMOC Sandringham Concours, 2024" line (not 2023), and a link to `etype-941pvo.html`.
+  Grep-verified: `grep -c "440 hrs\|450 hrs"` etc. were checked at each stage; the internal
+  approval-gate/sourcing notes (`data-note`) do **not** leak into the client build.
+- `https://dpm-autobody.vercel.app/etype-941pvo.html` — 200. Verified: shows **450 hrs** only (not
+  both 440 and 450), shows the corrected workshop/jig sentence, contains zero instances of the
+  self-narrating phrases cut in fix #10 above, and all 17 downloaded images resolve at their R2 URLs
+  (spot-checked two directly, both 200).
+- R2: 36 objects total under `prototypes/2026-08-26_dpm-autobody-discovery/assets/` (up from 21
+  before tonight), all verified 200 with correct content-type by the publish script's own
+  verification pass.
 
 ### Unverified / assumed
 
-- The 728px-vs-714px form-fit tolerance (~14px) was measured at one specific test viewport
-  (1568×777 minus browser chrome). It has not been checked across a matrix of real device heights —
-  if the enquiry form needs to reliably fit one screen on every common laptop/phone height, that
-  needs a proper pass, not just the one data point taken here.
-- Whether David has seen any of today's changes — no indication this session that the URL has been
-  sent to him (this was already open in the previous handoff too).
-- Everything already flagged unverified in the previous handoff (30 Aug / 4 Sep) and not re-touched
-  this session — the DB6 Instagram-highlight identity, the Bentley/Porsche/XK120 highlights being
-  unrelated older projects, real-phone rendering, Google Business Profile photos, David's brother's
-  footage library.
+- **Nothing has been shown to Mark Antwis.** The images are cleared per David's relayed message, but
+  the written page has not been — that gate is documented prominently in an annotated-only note on
+  the new page (`#signoff`), but it is only as good as someone actually reading it before the URL
+  goes anywhere beyond this review.
+- The magazine's own "440 hours" vs "450 hours" figures measure genuinely different scopes (panel
+  work alone vs. the whole job) — both are believed accurate to their sources, neither has been
+  independently checked against DPM's own records.
+- The E-type page's HTML comment for the contact section says `09 · ENQUIRIES` but the actual visible
+  chapter mark reads `06` — a harmless cosmetic mismatch between a code comment and the rendered
+  number, not user-visible as a bug, not fixed tonight. See Traps.
+- Everything already flagged unverified in earlier handoffs and not re-touched tonight: the DB6
+  Instagram-highlight identity, real-phone rendering, Google Business Profile photos, whether David
+  has seen tonight's changes yet.
 
 ---
 
 ## What was NOT done
 
-- **The real photography still is not in `prototype/src/`.** This was the previous handoff's
-  headline "next step" and is still true: only 2 of the 29 curated R2 images
-  (`dpm-autobody/photography/`) are live, and both are in _superseded_ direction pages, not the real
-  site. `src/home.html` and `src/volvo-p1800.html` still run on the original 14 Instagram slides.
-  This session did not touch that — see Next step below, it's unchanged from before.
-- **The contact form is not operational.** No backend, no email delivery. This was explicit and
-  intentional per the user's own framing this session ("doesn't need to be operational, just want it
-  mocked up") — flagging it here so it isn't mistaken for an oversight later.
-- **The Bentley and P1800-documentary photography gaps** (no finished-car daylight material for
-  either) are unchanged — still needs either more material from David or the commissioned shoot.
-- **The raw 35GB photography library** in `inbox/photography/` is still unpruned (zip + extracted
-  copy sitting side by side per album).
-- **The type-study.html serif/grotesque question** is still not formally resolved (Fraunces was
-  chosen live/casually on 4 September, per the previous handoff).
-- **`interview-david.md` has still not been run**, and the URL has still not been sent to David.
-- **Today's work is not committed to git** (see Working tree above) — this is new since the previous
-  handoff, which had a clean tree.
-- **The mobile "pill" nav's disappearing-item pattern was left as-is**, matching the desktop nav's
-  old (now-fixed) behaviour. Not asked for, not fixed. If the user wants nav consistency to extend to
-  mobile too, that's a fresh, small piece of work: `.pill` markup + no CSS `.is-active` equivalent
-  exists for it yet.
-- **`create-client-document-skill.md`** — present in this session folder, untracked, not written by
-  this session, not investigated (see Working tree above).
+- **DPM's own real photography still is not in `prototype/src/home.html`/`workshop.html`.** This was
+  flagged as the priority next step in the previous two handoffs and remains completely untouched —
+  tonight's work added a _different_ car's (the E-type owner's own) photography to a _new_ page; it
+  did not touch the long-standing gap in DPM's own curated library making it onto the existing pages.
+  Only 2 of 29 curated R2 images (`dpm-autobody/photography/`) are live, both in superseded direction
+  pages, not the real site.
+- **The contact form is still not operational** (unchanged, was always intentional).
+- **The E-type page's `09`/`06` chapter-numbering comment mismatch** (see above) — cosmetic, not
+  fixed.
+- **The video** at `etypefhcseries1.com/videos/colour-coat-in-booth.mp4` ("the colour coat going on
+  in the booth") was found but deliberately not downloaded or embedded — the still frame
+  (`metalwork/painted-shell.jpg`) covers the same beat and video adds a size/hosting decision that
+  wasn't necessary tonight.
+- **The NEC 2024 reunion photo** from the magazine (Mark Antwis and another man, with a "DPM"
+  branded show-stand visible behind them, page 22) was deliberately left out of the new page — could
+  not positively identify the second man beyond inference, so it wasn't captioned or used.
+- **Two Aston Martin enamel event-badge photographs** were seen on `etypefhcseries1.com` but not
+  downloaded — judged to be small logo-like crops rather than photographs; their dated text is
+  already transcribed into the page's copy and notes instead.
+- **`interview-david.md` has still not been run**, and the URL has still not been sent to David for
+  this specific new content (unchanged from every previous handoff).
+- **Today's work is not committed to git** (see Working tree above) — carried forward from the
+  previous handoff, now with substantially more uncommitted content on top.
+- **`create-client-document-skill.md`** — still present, untracked, still not investigated by this
+  session.
 
 ---
 
 ## Live-data changes already applied
 
-**This session, 2026-09-05, all at Ricky's explicit instruction (asked "publish.zsh" / "yes" before
-each deploy):**
+**2026-09-05, all at Ricky's explicit instruction ("publish.zsh" / "publish" before each deploy):**
 
 1. **Three Vercel deploys to the existing `dpm-autobody` project**, each superseding the last, ending
-   at the current live state described above. No intermediate exposure incidents this session (unlike
-   4 September's) — `publish.zsh` was used correctly throughout, from the first edit.
-2. **No new R2 uploads** — the asset-upload step of `publish.zsh` ran each time but found all 21
-   objects unchanged and skipped them.
+   at the current live state described above.
+2. **15 new objects uploaded to R2** (the 17 downloaded E-type images minus 2 that ended up unused —
+   `astonmartin/sandringham.jpg` and `metalwork/side-flatted.jpg` were downloaded but are not
+   referenced by any published page, so the upload script correctly skipped them as unreferenced).
+   All existing 21 objects from before tonight were unchanged and skipped.
 
-Everything from the previous handoff's live-data section (the 29 curated photography objects, the
-Vercel project itself) still stands and is unchanged by this session.
+There is no rollback command for either — reverting means re-editing `prototype/src/{home,
+etype-941pvo}.html` back to their pre-tonight state and re-running `publish.zsh`. The pre-tonight
+state is fully recoverable from git (`243e0eee`) for `home.html`; `etype-941pvo.html` did not exist
+before tonight and would simply need deleting from `src/`, `publish.zsh`, and the R2 assets folder.
+
+Everything from previous handoffs' live-data sections (the 29 curated photography objects, the
+Vercel project itself) still stands and is unchanged by tonight's work.
 
 ---
 
 ## Traps
 
-**Everything in the previous handoff's Traps section still applies and was not re-verified this
-session except where noted below** — in particular: always use `prototype/publish.zsh`, never
-`tools/publish-prototype.ts` directly against `prototype/`; edit `prototype/src/`, never `client/`/
-`annotated/` directly; `cleanUrls` must stay off in `tools/publish-prototype.ts`; HEIC dimension
-detection needs `sips`, not `magick identify`, on this machine.
+Everything in previous handoffs' Traps sections still applies and was not re-verified tonight except
+where noted: always use `prototype/publish.zsh`, never `tools/publish-prototype.ts` directly; edit
+`prototype/src/`, never `client/`/`annotated/` directly; `cleanUrls` must stay off; HEIC dimension
+detection needs `sips`, not `magick identify`.
 
-- **The `--accent`/`--accent-ink` CSS custom properties will read as the default red, not the car's
-  house tan, if you inspect them via a fresh `javascript_tool` call immediately after navigating in
-  this Claude-in-Chrome environment.** This is a testing-tool artifact (the `IntersectionObserver`'s
-  first firing is deferred until a real scroll event happens in this specific automated-tab context),
-  not a site bug — confirmed identical behaviour on `workshop.html`, untouched by this session. Do a
-  small scroll (`window.scrollTo(0,1)` then back to `0`, or a real mouse-wheel scroll) before trusting
-  a colour reading taken this way. Do not "fix" the site's IntersectionObserver code in response to
-  seeing red — it is correct.
-- **`.plate::after`'s radial-gradient vignette is duplicated per-page**, not shared — each of the
-  four HTML files carries its own full copy of the site's CSS. The workshop hero fix (`at 62% 46%`)
-  is scoped to `workshop.html` only and does **not** apply to `home.html`'s or `volvo-p1800.html`'s
-  `.plate` sections, which still use the old `at 50% 46%` centre. If those need the same "lighter on
-  the right" treatment, it has to be applied separately, and — unlike workshop.html — those two files
-  have _multiple_ `.plate` sections sharing one class, so the fix would need scoping per-section
-  (an inline style override or a new modifier class), not a single global edit.
+- **A new page needs adding to `publish.zsh` in two places, or it silently never deploys.** The build
+  script (`build.mjs`) picks up every file in `src/` automatically, so a forgotten new page will
+  build correctly into `client/`/`annotated/` and look completely fine locally — the failure is
+  invisible until you check the live URL and find a 404. `etype-941pvo.html` is now correctly wired
+  in; the next new page won't be, by default.
+- **The `--accent`/`--accent-ink` CSS custom properties read as the default red, not the car's house
+  colour, if inspected via a fresh `javascript_tool` call immediately after navigating in the
+  Claude-in-Chrome environment.** Confirmed again as a testing-tool artifact, not a site bug — do a
+  small scroll before trusting a colour reading taken this way.
+- **`.plate::after`'s radial-gradient vignette is duplicated per-page**, not shared. The workshop
+  hero's lighting fix from the morning session does not apply to `home.html`'s or
+  `volvo-p1800.html`'s `.plate` sections, which still use the old centred vignette.
+- **The E-type page's contact-section chapter number comment says `09`, the rendered mark says `06`.**
+  Harmless, but if a future session adds more sections to that page and tries to number relative to
+  the comment rather than the actual rendered marks, it will produce a visible duplicate or gap.
+- **Two downloaded images are orphaned**: `prototype/assets/etype-941pvo/astonmartin/sandringham.jpg`
+  and `.../metalwork/side-flatted.jpg` exist on disk and are documented in `SOURCES.md` as
+  intentional spares, but are not referenced by any HTML and were correctly skipped by the last R2
+  upload. Don't be alarmed that they're "missing" from the live site — they were never meant to be
+  live yet.
 
 ---
 
 ## Next step
 
-**Unchanged from the previous handoff — this session did design polish, not the photography
-integration work, which is still the priority:**
+**1. Commit tonight's work to git.** The morning contact-page polish is already committed
+(`243e0eee`, pushed to `origin/develop`) — only tonight's testimonial/E-type additions are still
+uncommitted. This should happen before more work stacks on top, per the project's standard
+`develop → staging → main` workflow (see `.claude/deploy.md`: staircase promotion, `staging → main`
+gated by a PR since `main` is protected).
 
-**1. Get the real photography into `prototype/src/`.**
+**2. Get DPM's own real photography into `prototype/src/home.html` and `workshop.html`.** Unchanged
+priority from every previous handoff — tonight's work did not touch this gap, it only added a
+different car's photography to a new page.
 
 ```bash
 cat output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/research/photography-manifest.json
 cat output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/research/asset-audit-dpm.md
 ```
 
-**2. After any `src/` edit, always rebuild and republish with the real script:**
+**3. After any `src/` edit, always rebuild and republish with the real script:**
 
 ```bash
 cd /Users/rickywilson/Sites/local-business-platform
@@ -259,33 +312,36 @@ node output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/build.m
 ./output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/publish.zsh
 ```
 
-**3. Commit today's session's changes to git.** Nothing from 2026-09-05 is committed yet — the
-working tree currently holds all of it uncommitted (see Working tree above). This should happen
-before much more work stacks on top, per the project's standard `develop → staging → main` workflow.
+**4. Get David to take the new E-type page/testimonial back to Mark Antwis for sign-off** before it
+is shown or promoted to anyone beyond this review — this is the single open gate on everything built
+tonight, and it is documented in an annotated-only note on the page itself
+(`prototype/src/etype-941pvo.html`, `id="signoff"`), which means it will not be visible to anyone
+looking only at the client build or the live URL.
 
-**4. Decide whether to extend the nav-consistency and hero-lightening fixes to the other two pages**
-(`home.html`, `volvo-p1800.html`) — the mobile pill nav still has the old disappearing-item pattern,
-and those two pages' other `.plate` sections still use the dead-centred vignette. Neither was asked
-for this session; both are candidates if the user wants full consistency.
-
-**5. Everything from the previous handoff's remaining Next Step items, still open:** prune the raw
-35GB photography library; decide the Jaguar/Austin-Healey fictional sections in the superseded
-direction pages; run `interview-david.md` before sending the URL to David; decide the type-study
-question; resolve whether the Bentley/documentary gaps need more photography from David or the
-commissioned shoot.
+**5. Everything from earlier handoffs' remaining Next Step items, still open:** prune the raw 35GB
+photography library; decide the Jaguar/Austin-Healey fictional sections in the superseded direction
+pages; run `interview-david.md`; resolve the type-study (Fraunces) question; resolve whether the
+Bentley/documentary photography gaps need more material from David or the commissioned shoot; extend
+the nav-consistency and hero-lightening fixes to `home.html`/`volvo-p1800.html`'s other `.plate`
+sections if full consistency is wanted; decide whether the mobile pill nav should get the same
+`is-active` treatment as the desktop nav.
 
 ---
 
 ## Open questions
 
-Everything open in the previous handoff (4 September) is still open and unchanged — the Fraunces/
-type-study question, where new DB6/Porsche photography should live (upgrade the P1800 page vs. new
-project pages), whether the Bentley/documentary gaps get closed by David or the commissioned shoot,
-whether the DB6 Instagram highlight is confirmed the same car, quoting named reviewers, three vs.
-four testimonials, the Bentley drophead question, Halcyon naming permission, insurance/accident
-repair page treatment. Nothing new was opened this session beyond:
+Everything open in earlier handoffs is still open and unchanged (Fraunces/type-study, where new
+DB6/Porsche photography should live, the Bentley/documentary gaps, the DB6 Instagram-highlight
+identity, quoting named reviewers, three vs. four testimonials — **partially answered tonight, see
+below** — the Bentley drophead question, Halcyon naming permission, insurance/accident-repair page
+treatment, whether the contact form should be wired up). New tonight:
 
-- **Should the contact form be wired up**, and to what (Formspree, a serverless function, something
-  else this platform standardises on)? Flagged as a mock deliberately this session; not decided.
-- **Should the mobile pill nav and the other two pages' hero vignettes get the same treatment** as
-  today's fixes? See Next step #4.
+- **"Three or four testimonials" is now "four, with three restoration-adjacent" or "keep at three
+  with the new one leading"** — depends on how you read it: the homepage still shows three quotes
+  (Mark Antwis leading, then Liam Hunt, Craig Mayhew), plus a separate two-row awards/proof list. The
+  original ask ("David has the phone numbers") for more _actual restoration client_ quotes beyond
+  this one is still open.
+- **Should the E-type page's video** (`colour-coat-in-booth.mp4`) be pulled in later, and if so,
+  hosted where — R2 alongside the images, or linked out to the owner's own site?
+- **Should the two orphaned downloaded images** (Aston Martin second angle, E-type side-flatted shot)
+  be wired into the page for a richer treatment, or deleted as genuinely unused?

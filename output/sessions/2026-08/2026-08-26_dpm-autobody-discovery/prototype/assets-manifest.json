@@ -3,7 +3,7 @@
   "bucket": "local-business-platform",
   "prefix": "prototypes/2026-08-26_dpm-autobody-discovery/",
   "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
-  "totalBytes": 4873371,
+  "totalBytes": 15000562,
   "assets": [
     {
       "relativePath": "assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg",
@@ -171,6 +171,126 @@
       "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-workshop-video/hero-still.jpg",
       "contentType": "image/jpeg",
       "bytes": 189232,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/astonmartin/trophy.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/astonmartin/trophy.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/astonmartin/trophy.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 962831,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/badge.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/badge.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/badge.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 485048,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/bonnet-above.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-above.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-above.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 616585,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/bonnet-underside.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-underside.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-underside.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 634123,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/cockpit.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/cockpit.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/cockpit.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 509953,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/door-mirror.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/door-mirror.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/door-mirror.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 436482,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/engine-bay.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/engine-bay.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/engine-bay.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 816104,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/filler-cap.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/filler-cap.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/filler-cap.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 465204,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/front.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 883990,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/headlight.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/headlight.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/headlight.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 589547,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/rear-brick.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/rear-brick.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/rear-brick.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 1003500,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/side-profile.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/side-profile.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/side-profile.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 801910,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/gallery/windscreen.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/windscreen.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/windscreen.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 704696,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/metalwork/flatting.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/flatting.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/flatting.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 304923,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/etype-941pvo/metalwork/painted-shell.jpg",
+      "key": "prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/painted-shell.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/painted-shell.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 912295,
       "archive": false
     }
   ]

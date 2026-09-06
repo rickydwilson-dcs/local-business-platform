@@ -921,10 +921,13 @@ h1, h2, h3, h4 {
 /* --- Proof --------------------------------------------------------------- */
 
 /* --- Testimonials --------------------------------------------------------
-   Both quotes here are real and attributable. There are only two because only
-   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
-   login wall. The layout is built for two rather than padded out to a grid of
-   three with invented ones.
+   All three quotes are real and attributable. The lead quote (5 September) is
+   the first from an actual restoration client, published and citable — see
+   its. The two Facebook recommendations are the only ones reachable
+   without a login (23 of DPM's 24 sit behind one); the layout is built for
+   three rather than padded out further with invented ones. The .proof list
+   right below carries two related facts (the Aston Martin award, the E-type
+   hour count) rather than crowding a fourth quote into the .says grid.
    ------------------------------------------------------------------------ */
 
 .says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
@@ -1559,7 +1562,73 @@ h1, h2, h3, h4 {
   <div class="track__room track__room--long"></div>
 </section>
 
-<!-- ═════════════════ 04 · WHAT CUSTOMERS SAY ═════════════════ -->
+<!-- ═════════════════ 04 · JAGUAR E-TYPE, 941 PVO ═════════════════ -->
+<div class="band" data-accent="#3C5563" data-ink="#A3BFCE">
+  <div class="chapter">
+    <span class="chapter__kind">No. 04 &nbsp;·&nbsp; A customer&rsquo;s own car</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Jaguar E-Type<br>941&nbsp;PVO</h2>
+    <div>
+      <p class="prose">Not one of ours. The owner did the mechanicals and metalwork himself and
+        sent us the bodyshell for panel finishing and paint &mdash; then wrote nine pages about it
+        for the E-Type Owners Club Magazine.</p>
+      <p class="prose">He came to us because of a different car first: his own concours-winning
+        Aston Martin V8, which we painted the year before.</p>
+      <p style="margin:1.75rem 0 0"><a class="golink" href="etype-941pvo.html">The full record of the E-type</a></p>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">New 5 September, not yet cleared for launch</span>
+    <span>Sourced entirely from the owner&rsquo;s own site and the magazine PDF David forwarded
+      &mdash; see <code>etype-941pvo.html</code>&rsquo;s own footer note for the full sourcing and
+      the owner-approval gate this whole car still sits behind.</span>
+  </p>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.50,0.84"
+         data-accent="#3C5563" data-ink="#A3BFCE" aria-labelledby="lot4-teaser-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/headlight.jpg"
+           width="1920" height="1275" loading="lazy" decoding="async"
+           style="--pz:1.3; --po:46% 50%; --pbri:1.28; --psat:1.1; --pcon:1.04"
+           alt="Macro on the E-type's front bumper and headlight, chrome against Opalescent Silver Blue.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/side-profile.jpg"
+           width="1824" height="1211" loading="lazy" decoding="async"
+           style="--pz:1.05; --po:50% 50%"
+           alt="The finished Jaguar E-type 941 PVO, side profile, in Opalescent Silver Blue, in daylight.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">No. 04</span>
+        <span class="label">Jaguar E-Type &nbsp;·&nbsp; 941 PVO</span>
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+      </span>
+      <h3 class="h-lot" id="lot4-teaser-h">He trusted us with the Aston. Then the E-type.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; headlight and bumper, close.</b> Chrome against Opalescent Silver
+          Blue.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; the same car, whole.</b> Photographed by its owner after eight years
+          of restoration.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 05 · WHAT CUSTOMERS SAY ═════════════════ -->
 <div class="band" id="proof" data-accent="#C7BBA1" data-ink="#D8CBAE">
   <div class="chapter">
     <span class="chapter__kind">In their words</span>
@@ -1570,6 +1639,13 @@ h1, h2, h3, h4 {
 
   <div class="says">
     <figure class="say">
+      <blockquote>&ldquo;I had interviewed many body shops for the painting of my concours-winning
+        Aston Martin. The only person I would trust with the E-type was the man who had laid down
+        that paint with such astonishingly beautiful results.&rdquo;</blockquote>
+      <figcaption class="say__by"><b>Mark Antwis</b> <span>E-Type Owners Club Magazine, April 2026</span></figcaption>
+    </figure>
+
+    <figure class="say say--sub">
       <blockquote>&ldquo;If you need something doing Dave is your man. Sorted a previously bodged
         repair from a large accident repair place, to a standard better than out of the factory!
         Absolute pleasure to deal with.&rdquo;</blockquote>
@@ -1582,13 +1658,57 @@ h1, h2, h3, h4 {
         now on.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Craig Mayhew</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
-
-    <figure class="say say--sub">
-      <blockquote>&ldquo;&hellip; Sigh of relief that it&rsquo;s this far now. Next after polish
-        is to rebuild it without scratching it.&rdquo;</blockquote>
-      <figcaption class="say__by"><b>Chris Bulmer</b> <span>Following his own car through the shop</span></figcaption>
-    </figure>
   </div>
+
+  <ul class="proof" style="margin-top:clamp(2.5rem,6vh,4rem)">
+    <li>
+      <span class="proof__fig">92%</span>
+      <span class="proof__what">Class win outright, AMOC Sandringham Concours, 2024 &mdash; his
+        Aston Martin V8. We painted that car too, which is why he came back to us for the E-type.</span>
+    </li>
+    <li>
+      <span class="proof__fig">450 hrs</span>
+      <span class="proof__what">Panel gapping, levelling and final paint on the E-type above, bare
+        shell to Opalescent Silver Blue, three months in our own booth.</span>
+    </li>
+  </ul>
+
+  <p class="caption">
+    <span class="credit credit--dpm">New 5 September &mdash; the restoration client the &ldquo;Still
+      needed&rdquo; note below asked for</span>
+    <span>Mark Antwis owns 941 PVO, a matching-numbers 1962 E-type Series 1 3.8 FHC, and the 1974
+      Aston Martin V8 referenced above. His own site (<code>etypefhcseries1.com</code>) documents the
+      E-type restoration in full and names DPM on its <code>/metalwork</code> page
+      (&ldquo;restoration specialists DPM Autobody, for a further 440 hours of panel gapping,
+      levelling and flatting&rdquo;). The quote is transcribed verbatim from page 22 of a nine-page
+      feature on the car in the E-Type Owners Club Magazine, April 2026 (PDF supplied by David,
+      2026-09-05).</span>
+    <span class="credit credit--copy">Not yet cleared &mdash; do not treat as launch-ready</span>
+    <span>David forwarded this with the owner&rsquo;s message that we are &ldquo;free to use&rdquo;
+      it, <b>but he would like to approve before it is launched</b>. That sign-off has not happened.
+      David still needs to go back to Mark Antwis before this is shown to anyone outside this
+      review.</span>
+    <span class="credit credit--copy">Two hour-counts, two different scopes</span>
+    <span>DPM&rsquo;s own metalwork-page caption on his site says <b>440 hours</b> for the panel
+      work alone; the magazine piece says <b>450 hours</b> and three months for the whole job (panel
+      work through primer, colour, lacquer and polish). Both are used above in the sense each source
+      meant &mdash; they are not inconsistent, just measuring different scopes.</span>
+    <span class="credit credit--copy">Corrected 5 September &mdash; the year was wrong</span>
+    <span>This row originally said <b>2023</b>, taken from the magazine narrator&rsquo;s own
+      recollection on page 16 (&ldquo;winning the AMOC Sandringham Concours in 2023&rdquo;). His own
+      site&rsquo;s <code>/the-restorers-profile</code> page states <b>2024</b> in running text, and
+      shows two photographed event badges dated 2024 (&ldquo;AMOC 1st place Newport Pagnell 8cyl
+      Spring Concours Sandringham 2024&rdquo;; &ldquo;AMOC Concours d&rsquo;Elegance Hampton Court
+      Palace 2024&rdquo;). A photographed badge outranks a magazine writer&rsquo;s memory of the
+      date two years after the fact, so this now reads 2024. See the fuller writeup on
+      <code>etype-941pvo.html</code> for both sources side by side.</span>
+    <span class="credit credit--copy">Cut to make room</span>
+    <span>Chris Bulmer&rsquo;s comment (&ldquo;&hellip;Sigh of relief&hellip;&rdquo;) is retired to
+      keep this section at three quotes, matching the design note below. It was the weakest of the
+      three &mdash; a customer&rsquo;s own comment on his own build post, not really a statement about
+      DPM&rsquo;s work &mdash; and the new quote takes the lead spot because it is the first written,
+      published, attributable statement from an actual restoration client.</span>
+  </p>
 
   <p class="caption">
     <span class="credit credit--dpm">All three real, all attributable</span>
@@ -1634,6 +1754,11 @@ h1, h2, h3, h4 {
       and no amount of mining Facebook substitutes for it. <b>Nobody quoted has been asked</b> —
       these are public posts, but quoting a customer on their restorer&rsquo;s own site is
       DPM&rsquo;s permission to seek, not ours.</span>
+    <span class="credit credit--copy">Partly answered &mdash; 5 September</span>
+    <span>One arrived, see the new lead quote below and its note. Still only <b>one</b>, and it came
+      to us unsolicited via David rather than something asked for &mdash; the original ask
+      (&ldquo;three or four&rdquo;, &ldquo;David has the phone numbers&rdquo;) stands for the
+      rest.</span>
   </p>
 
   <div class="cols" style="margin-top:clamp(3.5rem,9vh,5.5rem)">

@@ -21,11 +21,14 @@ PROJECT=dpm-autobody
 cd $ROOT
 
 # 1. Assets -> R2, and rewrite src/ (not the builds — they are regenerated).
-#    Scoped to the four published pages so the superseded directions' plates
+#    Scoped to the five published pages so the superseded directions' plates
 #    stay local. Idempotent: already-uploaded objects are skipped, rewritten
 #    refs no longer match.
+#    etype-941pvo.html added 5 September — a new page needs adding here AND to
+#    the cp list below, or it is silently built but never deployed: this flag
+#    is what scopes the R2 upload, and step 3 is what actually ships the file.
 npx tsx tools/upload-prototype-assets.ts $PROTO \
-  --pages src/home.html,src/volvo-p1800.html,src/workshop.html,src/contact.html
+  --pages src/home.html,src/volvo-p1800.html,src/etype-941pvo.html,src/workshop.html,src/contact.html
 
 # 2. Regenerate both builds so client/ and annotated/ carry the R2 URLs.
 node $PROTO/build.mjs
@@ -34,6 +37,7 @@ node $PROTO/build.mjs
 rm -rf $STAGE && mkdir -p $STAGE
 cp $PROTO/client/index.html        $STAGE/index.html
 cp $PROTO/client/volvo-p1800.html  $STAGE/volvo-p1800.html
+cp $PROTO/client/etype-941pvo.html $STAGE/etype-941pvo.html
 cp $PROTO/client/workshop.html     $STAGE/workshop.html
 cp $PROTO/client/contact.html      $STAGE/contact.html
 cp $PROTO/assets-manifest.json     $STAGE/assets-manifest.json
