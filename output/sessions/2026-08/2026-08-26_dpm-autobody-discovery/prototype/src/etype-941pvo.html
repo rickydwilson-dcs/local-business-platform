@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-client>Jaguar E-Type, 941 PVO — DPM Autobody</title>
+<title data-note>E-type 941 PVO record (working copy, with notes)</title>
+<meta name="description" content="A customer's own restoration: DPM Autobody's panel work and paint on Mark Antwis's 1962 Jaguar E-Type Series 1, featured in the E-Type Owners Club Magazine.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Fraunces:opsz,wght@9..144,300..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<style>
+/* ============================================================================
+   DPM Autobody — the E-type 941 PVO record. Same shared stylesheet, device and
+   chapter system as index.html and volvo-p1800.html (see that file's own head
+   comment for the full mechanical description of the veil/reveal device — it
+   is unchanged here, only retinted).
+
+   THE DIFFERENCE FROM THE OTHER TWO RECORDS. This is not DPM's own car. It
+   belongs to Mark Antwis, who did the mechanical and metalwork restoration
+   himself and sent the bodyshell to DPM for panel finishing and paint — the
+   E-type equivalent of a sub-contract, not a full commission. Every fact on
+   this page traces to either etypefhcseries1.com (Mark's own site) or the
+   E-Type Owners Club Magazine, April 2026 (the PDF David forwarded), never to
+   DPM's own published record, because DPM has not published one for this car.
+   See the footer note for the full sourcing table and the one date this page
+   corrects from the magazine's own account.
+
+   ACCENT. Opalescent Silver Blue, computed rather than eyeballed against
+   ground #0B0B0C using the WCAG relative-luminance formula (not run through a
+   contrast-checker tool, but the same method one uses):
+     accent-ink #A3BFCE on #0B0B0C  ≈ 10.2:1
+     accent-ink #A3BFCE on #1A1A1D  ≈  9.0:1 (worst case, raised panel)
+   Both clear AAA. The colour itself is closer to the dusty, slightly grey-lit
+   blue visible in the magazine photography than a cleaner sky blue would be —
+   matched by eye against the source images, not against a paint code, because
+   no paint code has been published for this car.
+   ========================================================================= */
+
+@property --accent     { syntax: '<color>'; inherits: true; initial-value: #3C5563; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #A3BFCE; }
+
+:root {
+  --ground:  #0B0B0C;
+  --surface: #141416;
+  --panel:   #1A1A1D;
+  --bone:    #E8E4DC;
+  --bone-dim:#A8A399;
+  --hair:    rgba(232,228,220,0.14);
+  --hair-2:  rgba(232,228,220,0.07);
+
+  --accent:     #3C5563;
+  --accent-ink: #A3BFCE;
+
+  --house:     #C7BBA1;
+  --house-ink: #D8CBAE;
+
+  --veil: rgba(11,11,12,0.74);
+  --falloff: clamp(180px, 30%, 460px);
+
+  --bl: -200vw;
+  --br:  200vw;
+  --bc:  50%;
+
+  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
+  --font-text:    'Newsreader', ui-serif, Georgia, serif;
+
+  --page: min(1360px, 100% - 3rem);
+  --ease: cubic-bezier(0.22, 0.68, 0.16, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --fs-body: clamp(1.0625rem, 0.44vw + 0.98rem, 1.25rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: normal;
+}
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 0; }
+::selection { background: var(--accent-ink); color: #0B0B0C; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; border-radius: 2px; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  letter-spacing: -0.034em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+.h-hero  { font-size: clamp(2.75rem, min(7.6vw, 12vh), 6.75rem); }
+.h-major { font-size: clamp(2rem, 4.6vw, 4rem); }
+.h-lot   { font-size: clamp(1.75rem, 3.4vw, 3.125rem); }
+.h-sub   { font-size: clamp(1.375rem, 2.1vw, 1.9375rem); line-height: 1.08; }
+
+.prose {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.62;
+  color: #CFCAC1;
+  max-width: 22.6em;
+  margin: 0 0 1.15em;
+  font-variant-numeric: normal;
+}
+.prose:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; color: var(--bone); }
+.prose em { font-style: italic; color: var(--bone); }
+
+.label {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); margin: 0;
+}
+.label--accent { color: var(--accent-ink); }
+
+.lede {
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.875rem);
+  line-height: 1.45;
+  color: #D6D1C8;
+  max-width: 23em;
+  margin: 0;
+}
+.fig { font-variant-numeric: normal; font-family: inherit; font-style: inherit; }
+
+.grain {
+  position: fixed; inset: 0; z-index: 60;
+  pointer-events: none; opacity: 0.42; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding: 1.15rem max(1.5rem, calc((100vw - 1360px) / 2)) 2.5rem;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.96) 0%, rgba(11,11,12,0.9) 40%, rgba(11,11,12,0.62) 72%, rgba(11,11,12,0) 100%);
+}
+.wordmark { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; color: var(--bone); white-space: nowrap; }
+.wordmark span { color: var(--accent-ink); transition: color 700ms var(--ease); }
+.masthead nav { margin-left: auto; display: flex; gap: clamp(0.9rem, 1.8vw, 1.75rem); }
+.masthead nav a {
+  font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none; padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+.masthead nav a.is-active { color: var(--bone); font-weight: 700; border-bottom-color: var(--accent-ink); }
+.tel {
+  margin-left: auto; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+  color: var(--bone); text-decoration: none; border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.2rem; transition: border-color 400ms var(--ease); white-space: nowrap;
+}
+.tel:hover { border-bottom-color: var(--accent-ink); }
+.masthead nav + .tel { margin-left: 0; }
+.back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hair);
+  padding: 0.35rem 0 0.25rem; white-space: nowrap;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.back::before { content: '\2190'; font-size: 0.875rem; letter-spacing: 0; }
+.back:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+.pill {
+  position: fixed; z-index: 45; left: 0; right: 0; margin-inline: auto; width: max-content;
+  max-width: calc(100% - 1.5rem); bottom: 1rem;
+  display: flex; gap: 0.15rem; align-items: center; padding: 0.2rem 0.5rem;
+  background: rgba(11,11,12,0.9); border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(232,228,220,0.08);
+  opacity: 0; visibility: hidden;
+  transition: opacity 500ms var(--ease), visibility 0s linear 500ms;
+}
+.pill.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.pill a {
+  font-size: 0.625rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone); text-decoration: none; padding: 0 0.45rem; min-height: 44px;
+  display: flex; align-items: center;
+}
+@media (min-width: 56rem) { .pill { display: none; } }
+
+.rail { position: fixed; right: 1.5rem; top: 22vh; bottom: 22vh; z-index: 30; width: 1px; background: var(--hair-2); pointer-events: none; }
+.rail__dot {
+  position: absolute; left: -1px; top: 0; width: 3px; height: 44px;
+  background: var(--accent-ink);
+  transform: translate3d(0, var(--railY, 0px), 0);
+  will-change: transform; transition: background-color 700ms var(--ease);
+}
+
+.track { position: relative; }
+.stage { position: sticky; top: 0; height: 100lvh; overflow: clip; isolation: isolate; margin: 0; }
+.track__room       { height: 100lvh; }
+.track__room--long { height: 150lvh; }
+
+.plate { position: absolute; inset: 0; overflow: clip; }
+.plate img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1)); transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+
+.veil { position: absolute; top: -14%; bottom: -14%; width: 100%; pointer-events: none; will-change: transform; z-index: 2; opacity: calc(1 - var(--reveal, 0)); }
+.veil--l { left: 0; width: 300%; transform: translate3d(var(--tl, var(--bl)), 0, 0) skewX(-9deg); background: linear-gradient(to left, rgba(11,11,12,0) 0, var(--veil) var(--falloff)); backface-visibility: hidden; }
+.veil--r { left: 0; width: 300%; transform: translate3d(var(--tr, var(--br)), 0, 0) skewX(-9deg); background: linear-gradient(to right, rgba(11,11,12,0) 0, var(--veil) var(--falloff)); backface-visibility: hidden; }
+
+.spec {
+  position: absolute; top: -8%; bottom: -8%; left: 0;
+  width: clamp(190px, 26%, 460px); z-index: 4; pointer-events: none;
+  mix-blend-mode: screen; will-change: transform; opacity: calc(1 - var(--reveal, 0));
+  transform: translate3d(var(--bc), 0, 0) translateX(-50%);
+  background: linear-gradient(100deg, rgba(255,248,235,0) 0%, rgba(255,248,235,0.05) 34%, rgba(255,250,240,0.20) 50%, rgba(255,248,235,0.05) 66%, rgba(255,248,235,0) 100%);
+}
+.plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0) 26%, rgba(11,11,12,0) 72%, rgba(11,11,12,0.6) 100%),
+    radial-gradient(165% 130% at 50% 46%, rgba(11,11,12,0) 66%, rgba(11,11,12,0.26) 100%);
+}
+.resolve {
+  position: absolute; inset: 0; z-index: 5; opacity: var(--reveal, 0);
+  transform: scale(calc(1.05 - 0.05 * var(--reveal, 0) + 0.14 * var(--reveal2, 0)));
+  will-change: opacity, transform;
+}
+.resolve--2 { z-index: 6; opacity: var(--reveal2, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0))); }
+.resolve img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1)); transform-origin: var(--po, 50% 50%);
+  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+}
+.resolve::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,11,12,0.44) 0%, rgba(11,11,12,0.02) 28%, rgba(11,11,12,0.14) 56%, rgba(11,11,12,0.88) 100%); }
+
+.stage__over {
+  position: absolute; inset: 0; z-index: 10; display: grid; align-content: end;
+  width: var(--page); margin-inline: auto; padding-bottom: clamp(9.5rem, 20vh, 11rem);
+  pointer-events: none;
+}
+.stage__over > * { pointer-events: auto; }
+.stage__tag {
+  display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  background: rgba(11,11,12,0.86); border: 1px solid var(--hair);
+  padding: 0.45rem 0.75rem; justify-self: start; margin-bottom: 1.25rem;
+}
+.stage__cap {
+  position: absolute; z-index: 11; left: 0; right: 0; bottom: clamp(4.75rem, 8vh, 5.25rem);
+  width: var(--page); margin-inline: auto; display: grid;
+  font-size: 0.8125rem; line-height: 1.5; color: var(--bone-dim); pointer-events: none;
+}
+.stage__cap > * { grid-area: 1 / 1; pointer-events: auto; }
+.stage__cap-line { display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; align-items: baseline; max-width: 44em; align-self: end; transition: opacity 220ms linear; }
+.stage__cap-line--macro { opacity: calc(1 - var(--reveal, 0) * 1.9); }
+.stage__cap-line--mid   { opacity: min(calc(var(--reveal, 0) * 1.9 - 0.9), calc(1 - var(--reveal2, 0) * 1.9)); }
+.stage__cap-line--wide  { opacity: calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9); }
+.stage__cap b { color: var(--bone); font-weight: 500; }
+@media (min-width: 48rem) { .stage__cap { bottom: clamp(2rem, 4vh, 3rem); } .stage__over { padding-bottom: clamp(9rem, 18vh, 10.5rem); } }
+
+.hero__inner::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: -14vh -34vw -14vh -40vw;
+  background: linear-gradient(101deg, rgba(11,11,12,0.92) 20%, rgba(11,11,12,0.62) 34%, rgba(11,11,12,0.22) 50%, rgba(11,11,12,0) 68%);
+}
+.stage__over::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto -30vw -14vh -40vw; height: 66%;
+  background: linear-gradient(to top, rgba(11,11,12,0.94) 20%, rgba(11,11,12,0.66) 52%, rgba(11,11,12,0) 100%);
+}
+.hero__inner {
+  position: absolute; inset: 0; z-index: 10; width: var(--page); margin-inline: auto;
+  display: grid; align-content: safe end;
+  padding-top: clamp(7rem, 15vh, 11rem); padding-bottom: 15rem;
+}
+@media (min-width: 48rem) { .hero__inner { padding-bottom: clamp(12.5rem, 27vh, 18rem); } }
+.hero h1 { margin: 0.6rem 0 1.6rem; max-width: 17ch; }
+.hero__inner .label, .hero__inner h1, .hero__inner .lede { text-shadow: 0 1px 28px rgba(11,11,12,0.94), 0 1px 4px rgba(11,11,12,0.7); }
+.hero__foot { margin-top: clamp(2rem, 5vh, 3rem); display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; align-items: baseline; }
+@media (min-width: 48rem) and (min-height: 44rem) { .hero__foot { position: absolute; left: 0; right: 0; margin-top: 0; bottom: clamp(8.5rem, 21vh, 13rem); } }
+.hero__foot .label:first-child { display: flex; align-items: center; gap: 0.75rem; }
+.hero__foot .label:first-child::before { content: ''; width: clamp(28px, 5vw, 64px); height: 1px; flex: none; background: linear-gradient(to right, var(--accent-ink), rgba(232,228,220,0)); transition: background 700ms var(--ease); }
+
+.band { width: var(--page); margin-inline: auto; }
+.band[id], section[id] { scroll-margin-top: 5.5rem; }
+.chapter {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0 1.25rem;
+  padding-top: clamp(5.5rem, 13vh, 10rem); border-top: 1px solid var(--hair); position: relative;
+}
+.chapter::before { content: ''; position: absolute; top: -2px; left: 0; width: clamp(3.5rem, 8vw, 6rem); height: 3px; background: var(--accent-ink); transition: background-color 700ms var(--ease); }
+.chapter__mark { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 200; letter-spacing: -0.02em; line-height: 1; color: var(--accent-ink); transition: color 700ms var(--ease); }
+.chapter__kind { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone-dim); }
+.chapter + .section-head { padding-top: clamp(1.75rem, 4vh, 2.75rem); border-top: 0; }
+.section-head { display: grid; gap: 1.25rem; padding: clamp(6rem, 14vh, 11rem) 0 clamp(2.5rem, 6vh, 4.5rem); border-top: 1px solid var(--hair-2); }
+.section-head--flush { border-top: 0; }
+.rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
+
+.credit { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.625rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.16rem 0.5rem; white-space: nowrap; }
+.credit--dpm { color: var(--bone); border: 1px solid var(--hair); }
+.credit--dpm::before { content: ''; width: 5px; height: 5px; background: var(--accent-ink); }
+.credit--ai  { color: #E3C88A; border: 1px dashed rgba(227,200,138,0.55); }
+.credit--copy{ color: var(--bone-dim); border: 1px dashed var(--hair); }
+
+.caption { margin: 0.85rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline; font-size: 0.8125rem; line-height: 1.55; color: var(--bone-dim); max-width: 44em; }
+.caption b { color: var(--bone); font-weight: 500; }
+.bound { border-top: 1px solid var(--hair); padding-top: 1rem; margin: 0; }
+.bound > img { width: 100%; height: auto; }
+.bound > figcaption { padding-top: 0.85rem; }
+
+.golink {
+  display: inline-flex; align-items: center; gap: 0.9rem; min-height: 44px; padding: 0.55rem 0.35rem 0.55rem 0;
+  text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone); border-bottom: 1px solid var(--accent-ink);
+  transition: color 400ms var(--ease), border-color 700ms var(--ease), gap 500ms var(--ease-out);
+}
+.golink::after { content: ''; width: 0.5em; height: 0.5em; flex: none; border-top: 1px solid var(--accent-ink); border-right: 1px solid var(--accent-ink); transform: rotate(45deg); transition: border-color 700ms var(--ease); }
+.golink:hover { gap: 1.4rem; color: var(--accent-ink); }
+
+.record { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; border-top: 1px solid var(--hair); }
+.record > div { display: grid; grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr); gap: 1.5rem; padding: 0.85rem 0; border-bottom: 1px solid var(--hair-2); }
+.record dt { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); padding-top: 0.28rem; }
+.record dd { margin: 0; font-family: var(--font-text); font-size: 1.0625rem; font-weight: 300; line-height: 1.5; color: var(--bone); font-variant-numeric: normal; }
+.record dd b { font-weight: 500; }
+.swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
+.swatch i { width: 2.25rem; height: 1.15rem; background: var(--accent); border: 1px solid var(--hair); transition: background-color 700ms var(--ease); }
+
+.plaque { position: relative; margin-block: clamp(3rem, 8vh, 6rem); }
+.plaque__img { position: relative; height: clamp(56lvh, 72vw, 86lvh); overflow: clip; }
+.plaque__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; transform: scale(1.03); filter: saturate(1.06) contrast(1.02) brightness(1.1); }
+.plaque__img::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 18%, rgba(11,11,12,0.18) 42%, rgba(11,11,12,0.68) 62%, rgba(11,11,12,0.93) 80%, rgba(11,11,12,0.99) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.38) 0%, rgba(11,11,12,0) 30%);
+}
+.plaque__line {
+  position: absolute; left: 0; right: 0; z-index: 2; bottom: clamp(1.75rem, 4.5vh, 3.25rem);
+  width: var(--page); margin-inline: auto;
+  font-family: var(--font-text); font-weight: 200; font-size: clamp(1.3125rem, 2.5vw, 2.125rem);
+  line-height: 1.26; color: var(--bone); margin: 0 auto; text-wrap: balance;
+  font-variant-numeric: normal; text-shadow: 0 1px 24px rgba(11,11,12,0.9);
+}
+.plaque__line span { display: block; max-width: 26em; }
+.plaque__line b { font-weight: 400; }
+.plaque__note { width: var(--page); margin-inline: auto; padding-top: clamp(1.75rem, 4vh, 2.75rem); border-top: 1px solid var(--hair); margin-top: clamp(1.5rem, 3vh, 2rem); }
+.plaque__note .caption { margin: 0 0 0.9rem; }
+
+.grid { display: grid; gap: clamp(1rem, 2.2vw, 1.75rem); grid-template-columns: minmax(0, 1fr); padding-bottom: clamp(2rem, 5vh, 3.5rem); }
+@media (min-width: 34rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.grid figure { background: var(--surface); border-top: 1px solid var(--hair-2); padding-top: 0.75rem; }
+.grid img { width: 100%; height: auto; }
+.grid figcaption { padding: 0.7rem 0 0; font-size: 0.8125rem; line-height: 1.5; color: var(--bone-dim); max-width: 44em; }
+.grid figcaption b { color: var(--bone); font-weight: 500; }
+.grid--wide { grid-column: 1 / -1; }
+
+.proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.proof li { padding: clamp(1.5rem, 3.5vh, 2.25rem) 0; border-bottom: 1px solid var(--hair-2); display: grid; gap: 0.5rem; }
+.proof__fig { font-family: var(--font-text); font-weight: 200; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1; letter-spacing: -0.01em; color: var(--bone); font-variant-numeric: normal; }
+.proof__what { font-size: 0.9375rem; line-height: 1.55; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 60rem) { .proof li { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: baseline; } }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); padding-top: clamp(2.5rem, 6vh, 4rem); }
+@media (min-width: 60rem) { .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.pairing { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+@media (min-width: 60rem) { .pairing { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.pairing img { width: 100%; height: auto; border: 1px solid var(--hair); }
+
+.contact { position: relative; overflow: clip; }
+.contact__plate { position: absolute; inset: 0; }
+.contact__plate img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transform: scale(1.08); filter: brightness(1.14) saturate(1.06); }
+.contact__plate::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.5) 46%, rgba(11,11,12,0.94) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.93) 0%, rgba(11,11,12,0.72) 44%, rgba(11,11,12,0.3) 80%, rgba(11,11,12,0.5) 100%);
+}
+.contact__inner { position: relative; z-index: 2; width: var(--page); margin-inline: auto; padding: clamp(5.5rem, 15vh, 11rem) 0 clamp(5rem, 12vh, 9rem); }
+.contact__rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); }
+.contact__rows a, .contact__rows p {
+  display: block; margin: 0; padding: 1.15rem 0; border-bottom: 1px solid var(--hair-2);
+  text-decoration: none; font-family: var(--font-text); font-weight: 300;
+  font-size: clamp(1.1875rem, 2vw, 1.625rem); transition: color 400ms var(--ease); font-variant-numeric: normal;
+}
+.contact__rows a:hover { color: var(--accent-ink); }
+.contact__rows small { display: block; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bone-dim); margin-bottom: 0.4rem; }
+@media (min-width: 60rem) { .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); } .contact__rows > * { border-bottom: none; } }
+
+.wordmark { display: block; color: var(--bone); text-decoration: none; transition: color 400ms var(--ease); }
+.wordmark svg { display: block; height: clamp(2.75rem, 4.6vw, 3.5rem); width: auto; }
+.wordmark:hover { color: var(--bone); }
+.footmark { color: var(--bone-dim); display: block; }
+.footmark svg { display: block; height: clamp(3.25rem, 8vw, 5rem); width: auto; }
+
+.buildflag {
+  position: fixed; z-index: 70; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #E3C88A; color: #16150F; font-size: 0.625rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.4rem 0.8rem;
+}
+.buildflag a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 55.99rem) { .buildflag { bottom: 4.5rem; } }
+
+.colophon { width: var(--page); margin-inline: auto; padding: clamp(3rem, 8vh, 5rem) 0 8rem; border-top: 1px solid var(--hair-2); display: grid; gap: 1.5rem; }
+.colophon__row { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; justify-content: space-between; align-items: flex-end; }
+.colophon__info { display: grid; gap: 1.5rem; }
+.colophon__socials { display: flex; gap: 0.75rem; align-items: center; }
+.colophon__socials a { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; flex: none; color: var(--bone-dim); border: 1px solid var(--hair); transition: color 400ms var(--ease), border-color 400ms var(--ease); }
+.colophon__socials a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.colophon__socials svg { width: 1.05rem; height: 1.05rem; display: block; fill: currentColor; }
+.credit-line { margin-top: 0.5rem; padding-top: clamp(1.5rem, 4vh, 2.25rem); border-top: 1px solid var(--hair-2); text-align: center; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-dim); }
+.credit-line a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hair); padding-bottom: 0.15rem; transition: color 400ms var(--ease), border-color 400ms var(--ease); }
+.credit-line a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
+.note { border: 1px solid var(--hair); padding: 1.15rem 1.25rem; max-width: 34em; font-size: 0.8125rem; line-height: 1.62; color: var(--bone-dim); }
+.note b { color: var(--bone); font-weight: 500; }
+.note p { margin: 0 0 0.75em; }
+.note p:last-child { margin-bottom: 0; }
+.note h2 { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 0.9rem; }
+/* This page's note carries the loudest single fact in the file — the owner
+   sign-off gate — so it gets its own emphatic variant rather than sharing the
+   quiet grey of routine working notes. */
+.note--gate { border-color: var(--accent-ink); max-width: 44em; }
+.note--gate h2 { color: var(--bone); }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--bone); color: #0B0B0C; padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500; }
+.skip:focus { left: 1rem; top: 1rem; }
+
+@media (min-width: 60rem) {
+  .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
+}
+@media (max-width: 55.99rem) { .masthead nav { display: none; } .masthead nav + .tel { margin-left: auto; } .masthead .back { margin-left: auto; } }
+@media (max-width: 47.99rem) { .rail { display: none; } :root { --falloff: clamp(120px, 36%, 260px); } .spec { width: clamp(150px, 46%, 320px); } .chapter { grid-template-columns: auto minmax(0, 1fr); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --bl: -300vw; --br: 300vw; }
+  .veil, .spec { display: none; }
+  .plate img { filter: saturate(1.12) contrast(1.02) brightness(1.34) !important; }
+  .plate::after { background: linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 24%, rgba(11,11,12,0) 58%, rgba(11,11,12,0.8) 100%) !important; }
+  .resolve { opacity: 1; transform: none; position: relative; }
+  .resolve--2 { opacity: 1; }
+  .track__room, .track__room--long { height: 0; }
+  .stage { position: relative; height: 78lvh; }
+  .has-resolve .stage { height: auto; }
+  .has-resolve .plate { position: relative; height: 58lvh; }
+  .has-resolve .resolve { height: 74lvh; }
+  .has-resolve .stage__over { position: absolute; inset: auto 0 0 0; }
+  .stage__cap { position: relative; bottom: auto; padding-top: 0.9rem; gap: 0.35rem; }
+  .stage__cap > * { grid-area: auto; }
+  .stage__cap-line { opacity: 1 !important; }
+  .hero .stage { height: 86lvh; }
+  .hero.has-resolve .stage { height: 86lvh; }
+  .hero.has-resolve .plate { display: none; }
+  .hero.has-resolve .resolve { position: absolute; inset: 0; height: auto; }
+  .hero.has-resolve .stage__cap-line--macro { display: none; }
+  .hero .hero__inner { position: absolute; padding: 5.5rem 0 9rem; }
+  .hero .hero__foot { position: static; margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+  .hero .stage__cap { position: absolute; bottom: clamp(1.5rem, 3vh, 2.5rem); padding-top: 0; }
+  .pill { display: none; }
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="dpm-mark" viewBox="0 0 1158 577"><path fill="currentColor" fill-rule="evenodd" d="M6.0 1.0L5.0 2.0L5.0 252.0L6.0 253.0L48.0 253.0L49.0 252.0L49.0 46.0L50.0 45.0L118.0 45.0L118.0 46.0L132.0 46.0L132.0 47.0L140.0 47.0L140.0 48.0L145.0 48.0L145.0 49.0L150.0 49.0L150.0 50.0L162.0 52.0L162.0 53.0L174.0 56.0L178.0 59.0L181.0 59.0L181.0 60.0L195.0 66.0L196.0 68.0L202.0 70.0L203.0 72.0L205.0 72.0L206.0 74.0L208.0 74.0L209.0 76.0L214.0 78.0L216.0 81.0L218.0 81.0L221.0 85.0L223.0 85.0L228.0 91.0L230.0 91.0L240.0 101.0L240.0 103.0L246.0 108.0L246.0 110.0L250.0 113.0L250.0 115.0L253.0 117.0L253.0 119.0L255.0 120.0L255.0 122.0L257.0 123.0L257.0 125.0L261.0 129.0L262.0 133.0L264.0 134.0L264.0 136.0L265.0 136.0L265.0 138.0L266.0 138.0L266.0 140.0L267.0 140.0L267.0 142.0L268.0 142.0L268.0 144.0L269.0 144.0L269.0 146.0L272.0 150.0L272.0 153.0L275.0 157.0L275.0 160.0L276.0 160.0L276.0 163.0L277.0 163.0L277.0 166.0L278.0 166.0L278.0 169.0L279.0 169.0L279.0 172.0L280.0 172.0L280.0 175.0L281.0 175.0L283.0 187.0L284.0 187.0L284.0 193.0L285.0 193.0L285.0 199.0L286.0 199.0L286.0 209.0L287.0 209.0L287.0 237.0L286.0 237.0L286.0 247.0L285.0 247.0L284.0 260.0L283.0 260.0L280.0 276.0L279.0 276.0L278.0 282.0L276.0 284.0L275.0 290.0L274.0 290.0L274.0 292.0L271.0 296.0L271.0 299.0L270.0 299.0L268.0 305.0L266.0 306.0L263.0 314.0L261.0 315.0L260.0 319.0L258.0 320.0L256.0 325.0L253.0 327.0L253.0 329.0L250.0 331.0L250.0 333.0L245.0 337.0L245.0 339.0L229.0 355.0L227.0 355.0L223.0 360.0L221.0 360.0L214.0 367.0L210.0 368.0L208.0 371.0L206.0 371.0L203.0 374.0L197.0 376.0L196.0 378.0L194.0 378.0L194.0 379.0L192.0 379.0L192.0 380.0L190.0 380.0L190.0 381.0L188.0 381.0L184.0 384.0L181.0 384.0L177.0 387.0L174.0 387.0L174.0 388.0L171.0 388.0L169.0 390.0L159.0 392.0L159.0 393.0L156.0 393.0L156.0 394.0L143.0 396.0L143.0 397.0L137.0 397.0L137.0 398.0L129.0 398.0L129.0 399.0L114.0 399.0L114.0 400.0L109.0 401.0L109.0 444.0L110.0 445.0L137.0 445.0L137.0 444.0L153.0 443.0L153.0 442.0L163.0 441.0L163.0 440.0L171.0 439.0L171.0 438.0L174.0 438.0L174.0 437.0L177.0 437.0L177.0 436.0L181.0 436.0L183.0 434.0L186.0 434.0L186.0 433.0L194.0 431.0L198.0 428.0L201.0 428.0L201.0 427.0L213.0 422.0L214.0 420.0L220.0 418.0L221.0 416.0L225.0 415.0L226.0 413.0L228.0 413.0L229.0 411.0L231.0 411.0L235.0 407.0L237.0 407.0L239.0 404.0L241.0 404.0L243.0 401.0L245.0 401.0L248.0 397.0L250.0 397.0L256.0 390.0L258.0 390.0L273.0 375.0L273.0 373.0L280.0 367.0L280.0 365.0L283.0 363.0L283.0 361.0L286.0 359.0L286.0 357.0L289.0 355.0L289.0 353.0L291.0 352.0L291.0 350.0L293.0 349.0L293.0 347.0L297.0 343.0L297.0 341.0L300.0 338.0L301.0 334.0L303.0 333.0L303.0 331.0L304.0 331.0L304.0 329.0L305.0 329.0L305.0 327.0L306.0 327.0L306.0 325.0L307.0 325.0L307.0 323.0L308.0 323.0L308.0 321.0L309.0 321.0L309.0 319.0L310.0 319.0L310.0 317.0L311.0 317.0L311.0 315.0L314.0 311.0L316.0 303.0L318.0 301.0L318.0 298.0L319.0 298.0L319.0 295.0L320.0 295.0L320.0 292.0L321.0 292.0L321.0 289.0L322.0 289.0L322.0 286.0L323.0 286.0L323.0 282.0L324.0 282.0L324.0 278.0L325.0 278.0L325.0 274.0L326.0 274.0L326.0 270.0L327.0 270.0L328.0 259.0L329.0 259.0L330.0 240.0L331.0 240.0L331.0 207.0L330.0 207.0L330.0 196.0L329.0 196.0L329.0 188.0L328.0 188.0L326.0 172.0L325.0 172.0L325.0 168.0L324.0 168.0L324.0 164.0L323.0 164.0L323.0 160.0L322.0 160.0L319.0 148.0L318.0 148.0L316.0 140.0L315.0 140.0L315.0 138.0L312.0 134.0L312.0 131.0L311.0 131.0L307.0 121.0L305.0 120.0L303.0 114.0L301.0 113.0L300.0 109.0L298.0 108.0L297.0 104.0L295.0 103.0L295.0 101.0L291.0 97.0L291.0 95.0L288.0 93.0L288.0 91.0L282.0 85.0L282.0 83.0L278.0 80.0L278.0 78.0L269.0 70.0L269.0 68.0L263.0 62.0L261.0 62.0L252.0 52.0L250.0 52.0L242.0 44.0L240.0 44.0L238.0 41.0L236.0 41.0L235.0 39.0L233.0 39.0L232.0 37.0L230.0 37.0L226.0 33.0L222.0 32.0L218.0 28.0L216.0 28.0L216.0 27.0L214.0 27.0L214.0 26.0L212.0 26.0L212.0 25.0L210.0 25.0L210.0 24.0L208.0 24.0L208.0 23.0L206.0 23.0L206.0 22.0L204.0 22.0L204.0 21.0L202.0 21.0L198.0 18.0L195.0 18.0L191.0 15.0L188.0 15.0L186.0 13.0L183.0 13.0L183.0 12.0L180.0 12.0L180.0 11.0L177.0 11.0L177.0 10.0L174.0 10.0L174.0 9.0L171.0 9.0L171.0 8.0L168.0 8.0L168.0 7.0L164.0 7.0L164.0 6.0L160.0 6.0L160.0 5.0L156.0 5.0L156.0 4.0L151.0 4.0L151.0 3.0L136.0 2.0L136.0 1.0ZM350.0 1.0L348.0 3.0L348.0 134.0L349.0 135.0L392.0 135.0L393.0 134.0L393.0 48.0L394.0 47.0L522.0 47.0L522.0 48.0L531.0 48.0L531.0 49.0L543.0 50.0L543.0 51.0L547.0 51.0L547.0 52.0L551.0 52.0L551.0 53.0L555.0 53.0L555.0 54.0L564.0 56.0L566.0 58.0L569.0 58.0L569.0 59.0L581.0 64.0L582.0 66.0L586.0 67.0L591.0 72.0L593.0 72.0L596.0 76.0L598.0 76.0L603.0 81.0L603.0 83.0L608.0 87.0L608.0 89.0L611.0 91.0L611.0 93.0L615.0 97.0L615.0 99.0L616.0 99.0L616.0 101.0L617.0 101.0L617.0 103.0L618.0 103.0L618.0 105.0L619.0 105.0L619.0 107.0L622.0 111.0L624.0 121.0L625.0 121.0L625.0 125.0L626.0 125.0L627.0 140.0L628.0 140.0L627.0 168.0L626.0 168.0L624.0 181.0L623.0 181.0L622.0 187.0L620.0 189.0L620.0 192.0L619.0 192.0L617.0 198.0L615.0 199.0L614.0 203.0L612.0 204.0L610.0 209.0L607.0 211.0L607.0 213.0L595.0 225.0L593.0 225.0L591.0 228.0L589.0 228.0L587.0 231.0L583.0 232.0L582.0 234.0L580.0 234.0L580.0 235.0L578.0 235.0L578.0 236.0L576.0 236.0L576.0 237.0L574.0 237.0L574.0 238.0L572.0 238.0L568.0 241.0L565.0 241.0L563.0 243.0L560.0 243.0L560.0 244.0L557.0 244.0L557.0 245.0L554.0 245.0L554.0 246.0L541.0 248.0L541.0 249.0L536.0 249.0L536.0 250.0L528.0 250.0L528.0 251.0L350.0 251.0L348.0 253.0L348.0 443.0L349.0 444.0L393.0 444.0L394.0 443.0L394.0 298.0L395.0 297.0L524.0 297.0L524.0 296.0L536.0 296.0L536.0 295.0L543.0 295.0L543.0 294.0L549.0 294.0L549.0 293.0L554.0 293.0L554.0 292.0L558.0 292.0L558.0 291.0L563.0 291.0L563.0 290.0L566.0 290.0L566.0 289.0L570.0 289.0L570.0 288.0L582.0 285.0L582.0 284.0L587.0 283.0L591.0 280.0L594.0 280.0L594.0 279.0L602.0 276.0L603.0 274.0L607.0 273.0L608.0 271.0L612.0 270.0L617.0 265.0L622.0 263.0L626.0 258.0L628.0 258.0L641.0 245.0L641.0 243.0L646.0 239.0L646.0 237.0L648.0 236.0L648.0 234.0L650.0 233.0L650.0 231.0L654.0 227.0L655.0 223.0L657.0 222.0L657.0 220.0L658.0 220.0L658.0 218.0L659.0 218.0L659.0 216.0L662.0 212.0L662.0 209.0L664.0 207.0L664.0 204.0L665.0 204.0L665.0 201.0L667.0 199.0L667.0 195.0L668.0 195.0L668.0 192.0L669.0 192.0L671.0 177.0L672.0 177.0L672.0 170.0L673.0 170.0L673.0 157.0L674.0 157.0L673.0 129.0L672.0 129.0L672.0 122.0L671.0 122.0L671.0 117.0L670.0 117.0L668.0 105.0L667.0 105.0L666.0 99.0L664.0 97.0L664.0 94.0L663.0 94.0L657.0 80.0L655.0 79.0L654.0 75.0L652.0 74.0L650.0 69.0L647.0 67.0L647.0 65.0L644.0 63.0L644.0 61.0L639.0 57.0L639.0 55.0L628.0 44.0L626.0 44.0L622.0 39.0L620.0 39.0L614.0 33.0L612.0 33.0L608.0 29.0L604.0 28.0L603.0 26.0L595.0 23.0L594.0 21.0L592.0 21.0L590.0 19.0L587.0 19.0L587.0 18.0L585.0 18.0L581.0 15.0L578.0 15.0L576.0 13.0L573.0 13.0L573.0 12.0L570.0 12.0L570.0 11.0L567.0 11.0L567.0 10.0L563.0 10.0L563.0 9.0L560.0 9.0L560.0 8.0L548.0 6.0L548.0 5.0L530.0 3.0L530.0 2.0L510.0 2.0L510.0 1.0ZM696.0 1.0L696.0 2.0L693.0 3.0L693.0 443.0L694.0 444.0L738.0 444.0L739.0 443.0L739.0 91.0L741.0 91.0L744.0 94.0L744.0 96.0L750.0 101.0L750.0 103.0L755.0 107.0L755.0 109.0L760.0 113.0L760.0 115.0L765.0 119.0L765.0 121.0L771.0 126.0L771.0 128.0L776.0 132.0L776.0 134.0L782.0 139.0L782.0 141.0L787.0 145.0L787.0 147.0L792.0 151.0L792.0 153.0L798.0 158.0L798.0 160.0L803.0 164.0L803.0 166.0L808.0 170.0L808.0 172.0L814.0 177.0L814.0 179.0L819.0 183.0L819.0 185.0L830.0 196.0L830.0 198.0L835.0 202.0L835.0 204.0L840.0 208.0L840.0 210.0L846.0 215.0L846.0 217.0L852.0 222.0L852.0 224.0L857.0 228.0L857.0 230.0L868.0 241.0L868.0 243.0L873.0 247.0L873.0 249.0L884.0 260.0L884.0 262.0L889.0 266.0L889.0 268.0L894.0 272.0L894.0 274.0L900.0 279.0L900.0 281.0L902.0 283.0L932.0 283.0L934.0 281.0L934.0 279.0L938.0 276.0L938.0 274.0L947.0 265.0L947.0 263.0L951.0 260.0L951.0 258.0L955.0 255.0L955.0 253.0L959.0 250.0L959.0 248.0L963.0 245.0L963.0 243.0L967.0 240.0L967.0 238.0L971.0 235.0L971.0 233.0L975.0 230.0L975.0 228.0L979.0 225.0L979.0 223.0L983.0 220.0L983.0 218.0L987.0 215.0L987.0 213.0L991.0 210.0L991.0 208.0L995.0 205.0L995.0 203.0L999.0 200.0L999.0 198.0L1003.0 195.0L1003.0 193.0L1007.0 190.0L1007.0 188.0L1011.0 185.0L1011.0 183.0L1015.0 180.0L1015.0 178.0L1020.0 174.0L1020.0 172.0L1024.0 169.0L1024.0 167.0L1028.0 164.0L1028.0 162.0L1032.0 159.0L1032.0 157.0L1036.0 154.0L1036.0 152.0L1040.0 149.0L1040.0 147.0L1048.0 139.0L1048.0 137.0L1052.0 134.0L1052.0 132.0L1056.0 129.0L1056.0 127.0L1060.0 124.0L1060.0 122.0L1064.0 119.0L1064.0 117.0L1068.0 114.0L1068.0 112.0L1072.0 109.0L1072.0 107.0L1076.0 104.0L1076.0 102.0L1080.0 99.0L1080.0 97.0L1084.0 94.0L1084.0 92.0L1089.0 88.0L1089.0 86.0L1093.0 83.0L1093.0 81.0L1097.0 78.0L1097.0 76.0L1101.0 73.0L1101.0 71.0L1109.0 63.0L1109.0 61.0L1111.0 59.0L1113.0 59.0L1113.0 252.0L1114.0 253.0L1156.0 253.0L1157.0 252.0L1157.0 3.0L1155.0 1.0L1153.0 1.0L1153.0 2.0L1100.0 2.0L1095.0 7.0L1095.0 9.0L1091.0 12.0L1091.0 14.0L1087.0 17.0L1087.0 19.0L1083.0 22.0L1083.0 24.0L1078.0 28.0L1078.0 30.0L1074.0 33.0L1074.0 35.0L1071.0 37.0L1071.0 39.0L1066.0 43.0L1066.0 45.0L1062.0 48.0L1062.0 50.0L1058.0 53.0L1058.0 55.0L1054.0 58.0L1054.0 60.0L1050.0 63.0L1050.0 65.0L1046.0 68.0L1046.0 70.0L1042.0 73.0L1042.0 75.0L1038.0 78.0L1038.0 80.0L1034.0 83.0L1034.0 85.0L1030.0 88.0L1030.0 90.0L1026.0 93.0L1026.0 95.0L1021.0 99.0L1021.0 101.0L1017.0 104.0L1017.0 106.0L1013.0 109.0L1013.0 111.0L1009.0 114.0L1009.0 116.0L1005.0 119.0L1005.0 121.0L1001.0 124.0L1001.0 126.0L997.0 129.0L997.0 131.0L993.0 134.0L993.0 136.0L989.0 139.0L989.0 141.0L985.0 144.0L985.0 146.0L981.0 149.0L981.0 151.0L977.0 154.0L977.0 156.0L973.0 159.0L973.0 161.0L968.0 165.0L968.0 167.0L960.0 175.0L960.0 177.0L957.0 179.0L957.0 181.0L952.0 185.0L952.0 187.0L948.0 190.0L948.0 192.0L944.0 195.0L944.0 197.0L940.0 200.0L940.0 202.0L936.0 205.0L936.0 207.0L932.0 210.0L932.0 212.0L928.0 215.0L928.0 217.0L924.0 220.0L924.0 222.0L919.0 226.0L919.0 228.0L916.0 231.0L914.0 231.0L910.0 227.0L910.0 225.0L906.0 222.0L906.0 220.0L901.0 216.0L901.0 214.0L892.0 205.0L892.0 203.0L888.0 200.0L888.0 198.0L883.0 194.0L883.0 192.0L879.0 189.0L879.0 187.0L875.0 184.0L875.0 182.0L870.0 178.0L870.0 176.0L866.0 173.0L866.0 171.0L861.0 167.0L861.0 165.0L857.0 162.0L857.0 160.0L853.0 157.0L853.0 155.0L843.0 145.0L843.0 143.0L839.0 140.0L839.0 138.0L835.0 135.0L835.0 133.0L830.0 129.0L830.0 127.0L821.0 118.0L821.0 116.0L817.0 113.0L817.0 111.0L813.0 108.0L813.0 106.0L808.0 102.0L808.0 100.0L804.0 97.0L804.0 95.0L799.0 91.0L799.0 89.0L795.0 86.0L795.0 84.0L791.0 81.0L791.0 79.0L781.0 69.0L781.0 67.0L777.0 64.0L777.0 62.0L773.0 59.0L773.0 57.0L768.0 53.0L768.0 51.0L764.0 48.0L764.0 46.0L759.0 42.0L759.0 40.0L755.0 37.0L755.0 35.0L750.0 31.0L750.0 29.0L742.0 21.0L742.0 19.0L737.0 15.0L737.0 13.0L733.0 10.0L733.0 8.0L727.0 2.0L722.0 2.0L722.0 1.0L718.0 1.0L718.0 2.0ZM15.0 489.0L15.0 490.0L12.0 490.0L12.0 491.0L10.0 491.0L9.0 493.0L7.0 493.0L5.0 495.0L5.0 497.0L2.0 500.0L2.0 504.0L1.0 504.0L1.0 575.0L2.0 576.0L7.0 576.0L8.0 575.0L8.0 537.0L9.0 536.0L91.0 536.0L92.0 537.0L92.0 575.0L93.0 576.0L98.0 576.0L100.0 574.0L100.0 507.0L99.0 507.0L99.0 501.0L98.0 501.0L97.0 497.0L92.0 492.0L90.0 492.0L88.0 490.0L85.0 490.0L85.0 489.0ZM153.0 489.0L152.0 490.0L152.0 563.0L153.0 563.0L153.0 566.0L155.0 567.0L155.0 569.0L159.0 573.0L161.0 573.0L163.0 575.0L166.0 575.0L166.0 576.0L236.0 576.0L236.0 575.0L239.0 575.0L239.0 574.0L243.0 573.0L248.0 568.0L249.0 563.0L250.0 563.0L250.0 490.0L249.0 489.0L244.0 489.0L243.0 490.0L243.0 562.0L238.0 568.0L234.0 568.0L234.0 569.0L167.0 569.0L167.0 568.0L164.0 568.0L160.0 564.0L160.0 561.0L159.0 561.0L159.0 490.0L158.0 489.0ZM304.0 489.0L303.0 490.0L303.0 495.0L304.0 496.0L347.0 496.0L348.0 497.0L348.0 575.0L349.0 576.0L354.0 576.0L355.0 575.0L355.0 497.0L356.0 496.0L400.0 496.0L401.0 495.0L401.0 490.0L400.0 489.0ZM466.0 489.0L466.0 490.0L462.0 490.0L462.0 491.0L458.0 492.0L454.0 496.0L454.0 498.0L452.0 499.0L452.0 502.0L451.0 502.0L451.0 563.0L452.0 563.0L452.0 566.0L454.0 567.0L454.0 569.0L458.0 573.0L460.0 573.0L462.0 575.0L465.0 575.0L465.0 576.0L535.0 576.0L535.0 575.0L538.0 575.0L538.0 574.0L542.0 573.0L546.0 569.0L546.0 567.0L548.0 566.0L548.0 563.0L549.0 563.0L549.0 502.0L548.0 502.0L546.0 496.0L542.0 492.0L540.0 492.0L538.0 490.0L535.0 490.0L535.0 489.0ZM603.0 489.0L602.0 490.0L602.0 575.0L603.0 576.0L686.0 576.0L686.0 575.0L689.0 575.0L689.0 574.0L693.0 573.0L697.0 569.0L697.0 567.0L699.0 565.0L699.0 562.0L700.0 562.0L700.0 543.0L699.0 543.0L698.0 538.0L694.0 534.0L694.0 531.0L697.0 529.0L697.0 527.0L699.0 525.0L699.0 522.0L700.0 522.0L700.0 503.0L699.0 503.0L699.0 500.0L698.0 500.0L698.0 498.0L696.0 497.0L695.0 494.0L693.0 494.0L691.0 491.0L686.0 490.0L686.0 489.0ZM767.0 489.0L767.0 490.0L761.0 491.0L755.0 497.0L755.0 499.0L753.0 501.0L753.0 505.0L752.0 505.0L752.0 561.0L753.0 561.0L753.0 565.0L756.0 568.0L756.0 570.0L758.0 572.0L760.0 572.0L761.0 574.0L766.0 575.0L766.0 576.0L836.0 576.0L836.0 575.0L842.0 574.0L848.0 568.0L848.0 566.0L850.0 564.0L850.0 559.0L851.0 559.0L851.0 506.0L850.0 506.0L850.0 501.0L849.0 501.0L848.0 497.0L843.0 492.0L841.0 492.0L839.0 490.0L836.0 490.0L836.0 489.0ZM904.0 489.0L903.0 490.0L903.0 575.0L904.0 576.0L987.0 576.0L987.0 575.0L990.0 575.0L990.0 574.0L994.0 573.0L999.0 568.0L1000.0 563.0L1001.0 563.0L1001.0 502.0L1000.0 502.0L1000.0 499.0L998.0 498.0L998.0 496.0L994.0 492.0L992.0 492.0L990.0 490.0L987.0 490.0L987.0 489.0ZM1049.0 489.0L1049.0 492.0L1058.0 500.0L1058.0 502.0L1077.0 520.0L1077.0 522.0L1097.0 542.0L1097.0 575.0L1098.0 576.0L1104.0 576.0L1105.0 575.0L1105.0 542.0L1106.0 542.0L1106.0 540.0L1124.0 523.0L1124.0 521.0L1153.0 492.0L1153.0 489.0L1144.0 490.0L1138.0 496.0L1138.0 498.0L1118.0 517.0L1118.0 519.0L1102.0 535.0L1099.0 535.0L1099.0 533.0L1081.0 516.0L1081.0 514.0L1064.0 498.0L1064.0 496.0L1058.0 490.0ZM16.0 496.0L84.0 496.0L84.0 497.0L87.0 497.0L92.0 503.0L92.0 528.0L91.0 529.0L9.0 529.0L8.0 528.0L8.0 506.0L9.0 506.0L9.0 502.0L11.0 501.0L11.0 499.0L16.0 497.0ZM466.0 496.0L534.0 496.0L534.0 497.0L537.0 497.0L541.0 501.0L541.0 504.0L542.0 504.0L542.0 562.0L541.0 562.0L541.0 564.0L537.0 568.0L534.0 568.0L534.0 569.0L466.0 569.0L466.0 568.0L463.0 568.0L459.0 564.0L459.0 561.0L458.0 561.0L458.0 504.0L459.0 504.0L460.0 500.0L463.0 497.0L466.0 497.0ZM609.0 496.0L685.0 496.0L685.0 497.0L689.0 498.0L692.0 502.0L692.0 505.0L693.0 505.0L693.0 521.0L692.0 521.0L691.0 525.0L688.0 528.0L685.0 528.0L685.0 529.0L614.0 529.0L613.0 530.0L613.0 535.0L614.0 536.0L685.0 536.0L685.0 537.0L687.0 537.0L691.0 540.0L692.0 545.0L693.0 545.0L693.0 560.0L692.0 560.0L691.0 565.0L689.0 567.0L685.0 568.0L685.0 569.0L609.0 569.0L608.0 568.0L608.0 497.0ZM767.0 496.0L836.0 496.0L836.0 497.0L838.0 497.0L843.0 503.0L843.0 563.0L841.0 564.0L841.0 566.0L836.0 568.0L836.0 569.0L767.0 569.0L767.0 568.0L763.0 567.0L760.0 563.0L760.0 502.0ZM911.0 496.0L986.0 496.0L986.0 497.0L989.0 497.0L994.0 503.0L994.0 562.0L993.0 562.0L993.0 564.0L989.0 568.0L986.0 568.0L986.0 569.0L911.0 569.0L910.0 568.0L910.0 497.0Z"/></symbol>
+</svg>
+
+<p class="buildflag" data-note>Working copy &mdash; carries notes. <a href="../client/etype-941pvo.html">Client version</a></p>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+  <a class="back" href="index.html">All work</a>
+  <nav aria-label="Primary">
+    <a href="index.html#work">The work</a>
+    <a href="workshop.html">The workshop</a>
+    <a href="index.html#proof">Proof</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a class="tel" href="tel:+441323552827">01323 552827</a>
+</header>
+
+<nav class="pill" id="pill" aria-label="Contents">
+  <a href="index.html">Home</a>
+  <a href="index.html#work">Work</a>
+  <a href="workshop.html">Workshop</a>
+  <a href="index.html#proof">Proof</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
+
+<main id="main">
+
+<!-- ═════════════════ HERO ═════════════════ -->
+<section class="track hero has-resolve" id="top" data-sheen data-dir="ltr" data-rev="0.58,0.86" aria-labelledby="hero-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/badge.jpg"
+           width="1920" height="1275" fetchpriority="high" decoding="async"
+           style="--pz:1.7; --po:48% 46%; --pbri:1.1; --psat:1.14; --pcon:1.08"
+           alt="Macro on the Jaguar script badge, raised chrome letters on Opalescent Silver Blue bodywork.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg"
+           width="1824" height="1211" decoding="async"
+           style="--pz:1.05; --po:50% 55%"
+           alt="The finished E-type 941 PVO, front three-quarter, in Opalescent Silver Blue, photographed by a brick wall in daylight.">
+    </div>
+    <div class="hero__inner">
+      <p class="label label--accent">No. 04 &nbsp;·&nbsp; A customer&rsquo;s own car</p>
+      <h1 class="h-hero" id="hero-h">Jaguar E-Type, 941&nbsp;PVO</h1>
+      <p class="lede">Eight years of restoration. Not ours &mdash; <span class="fig">450</span>
+        hours of it were.</p>
+      <div class="hero__foot">
+        <p class="label"><a href="index.html" style="text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:.2rem">&larr;&nbsp; Back to the homepage</a></p>
+      </div>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; the Jaguar script,</b> raised chrome on Opalescent Silver Blue.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; the finished car, whole.</b> Photographed by its owner, Mark Antwis,
+          after eight years of restoration.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 01 · THE RECORD ═════════════════ -->
+<div class="band" id="record">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">01</span>
+    <span class="chapter__kind">The record</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">A car we did not<br>build alone</h2>
+    <p class="prose">This one is not DPM&rsquo;s restoration. It belongs to Mark Antwis, who did
+      the mechanical rebuild and the metalwork himself and sent us the bodyshell for finishing and
+      paint &mdash; the way a restorer sometimes hands one part of a job to the people they trust
+      most with it.</p>
+  </div>
+  <div class="lot-two" style="display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2rem,4vw,4.5rem)">
+    <div>
+      <p class="prose">He wrote the story himself for the E-Type Owners Club Magazine &mdash; nine
+        pages, April 2026, headlined &ldquo;A Promise Kept&rdquo;.</p>
+      <p class="prose">He came to us because of a different car first &mdash; his own Aston Martin
+        V8, which we painted the year before.</p>
+    </div>
+    <dl class="record">
+      <div><dt>Marque</dt><dd>Jaguar</dd></div>
+      <div><dt>Model</dt><dd>E-type Series 1, 3.8 Fixed Head Coup&eacute;</dd></div>
+      <div><dt>Built</dt><dd>1962 &mdash; the <span class="fig">787th</span> FHC made</dd></div>
+      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Opalescent Silver Blue</span></dd></div>
+      <div><dt>Registration</dt><dd class="fig">941 PVO</dd></div>
+      <div><dt>Owner &amp; restorer</dt><dd>Mark Antwis</dd></div>
+      <div><dt>DPM&rsquo;s part</dt><dd>Panel gapping, levelling, flatting and paint</dd></div>
+      <div><dt>Published in</dt><dd>E-Type Owners Club Magazine, April 2026 (9 pages)</dd></div>
+    </dl>
+  </div>
+  <p class="caption" data-note style="margin-top:clamp(1.5rem,4vh,2.5rem)">
+    <span class="credit credit--dpm">Sourced, not DPM&rsquo;s own record</span>
+    <span>Every value above comes from Mark Antwis&rsquo;s own site (<code>etypefhcseries1.com</code>)
+      or the magazine PDF David forwarded on 2026-09-05. &ldquo;787th FHC made&rdquo; is from the
+      magazine, page 15 (&ldquo;I was the fourth [bidder], and very pleased, owner of the 787th
+      fixed-head coupe built&rdquo;).</span>
+    <span class="credit credit--copy">Cut from the visible copy &mdash; 5 September</span>
+    <span>This section used to add, in plain body text, that &ldquo;everything on this page traces
+      back to that feature or to his own site&hellip; never to a record DPM published&rdquo;. Ricky
+      caught it: that is the page talking about its own sourcing rather than just stating facts, the
+      same category of self-narration cut from the homepage on 29 August. The sourcing itself is
+      unchanged and is still documented in notes like this one &mdash; it just no longer appears as
+      body copy a visitor would read.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 02 · A FORTY-SEVEN-YEAR PROMISE ═════════════════ -->
+<div class="band" id="provenance">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">02</span>
+    <span class="chapter__kind">Provenance</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">A forty-seven-year<br>promise</h2>
+    <div>
+      <p class="prose">Brian Bray bought 941 PVO in 1978 for &pound;410, with his nine-year-old son
+        Matthew, as its third owner. It was already sixteen years old and needed a full restoration.
+        The engine was rebuilt, the body stripped and sand-blasted &mdash; and then, as families and
+        decades do, the project stalled. It sat dismantled in boxes for the best part of forty
+        years.</p>
+      <p class="prose">By 2017 Brian had retired to a farm in Leicestershire and Matthew was
+        forty-eight. Reluctantly, the family decided to sell, and the car went under the hammer at
+        H&amp;H Auctions, Duxford, on 29 March 2017. Mark Antwis was the fourth bidder and the
+        winner.</p>
+      <p class="prose">He already had a Ferrari 308 and a self-restored Aston Martin V8 in the
+        workshop; the E-type completed what he calls his &ldquo;dreamed-of stable of classics&rdquo;.
+        His method, in his own words: <em>&ldquo;conserving and restoring rather than replacing&rdquo;</em>.</p>
+    </div>
+  </div>
+  <p class="caption" data-note>
+    <span class="credit credit--dpm">Sourced from the magazine</span>
+    <span>The whole of this section is drawn from the E-Type Owners Club Magazine feature, pages
+      15&ndash;16 &mdash; the &pound;410 purchase price, the auction date and venue, and the direct
+      quote on his restoration method are all taken from the PDF, not paraphrased from memory. There
+      is no photograph of the barn-find car or the auction available to this page: the only images of
+      that stage of the story are print-magazine scans, not separate image files, so none are used
+      here.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ 03 · THE BUILD ═════════════════ -->
+<div class="band" id="build">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">03</span>
+    <span class="chapter__kind">The build</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">He trusted us<br>with the Aston.<br>Then the E-type.</h2>
+    <p class="prose">Mark did the mechanicals and the metalwork himself &mdash; four hundred and
+      twenty hours on the metalwork alone, by his own account. The shell and panels came to us for
+      what came next.</p>
+  </div>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.50,0.84"
+         data-accent="#3C5563" data-ink="#A3BFCE" aria-labelledby="lot4-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/flatting.jpg"
+           width="1600" height="1200" loading="lazy" decoding="async"
+           style="--pz:1.2; --po:50% 48%; --pbri:1.3; --psat:1.02; --pcon:1.05"
+           alt="A bodyshop technician flatting the rear of the E-type's body shell in grey primer, preparing the surface for paint.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/metalwork/painted-shell.jpg"
+           width="1920" height="1440" loading="lazy" decoding="async"
+           style="--pz:1.05; --po:48% 45%"
+           alt="The completed E-type body shell freshly painted in Opalescent Silver Blue, gleaming under workshop lights.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">No. 04</span>
+        <span class="label">Jaguar E-Type &nbsp;·&nbsp; Panel work and paint</span>
+        <span class="credit credit--dpm" data-note>DPM Autobody, from the owner&rsquo;s own record</span>
+      </span>
+      <h3 class="h-lot" id="lot4-h">Primer, then Opalescent Silver Blue.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; flatting the shell in primer.</b> The stage before any colour goes
+          on: panel gapping, levelling and flatting, by hand.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; the same shell, finished.</b> Opalescent Silver Blue, gleaming under
+          our own workshop lights.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<div class="band">
+  <ul class="proof" style="margin-top:clamp(2rem,5vh,3rem)">
+    <li>
+      <span class="proof__fig">450 hrs</span>
+      <span class="proof__what">Panel work through primer, colour, five coats of lacquer and
+        machine polish &mdash; the magazine&rsquo;s figure for the whole job, over three months.</span>
+    </li>
+  </ul>
+  <p class="caption" data-note>
+    <span class="credit credit--copy">Two sources, one shown &mdash; 5 September</span>
+    <span>Our own <span class="fig">/metalwork</span> page gives 440 hours for the panel work alone
+      (before any primer); the magazine gives 450 hours for the whole job through to final polish.
+      Both are real, but showing both figures side by side on a client-facing page read as the site
+      arguing with itself over which number to believe, rather than as evidence. 450 is shown because
+      it is the more complete measurement (matches home.html&rsquo;s <span class="fig">#proof</span>
+      row); 440 is not hidden, it is just here rather than on the page.</span>
+    <span class="credit credit--copy">Finish, as described on the owner&rsquo;s own site</span>
+    <span>&ldquo;Primer application, additional flatting and levelling, followed by colour coat
+      application in Opalescent Silver Blue and five full lacquer coats, completed with machine
+      polishing&rdquo; &mdash; paraphrased from <code>etypefhcseries1.com/metalwork</code>, not a
+      direct quote, and no coat count is published for the colour coat itself, only the lacquer.
+      Do not assert a colour-coat number this page has not seen.</span>
+  </p>
+</div>
+
+<!-- ═════════════════ THE TRUST ═════════════════ -->
+<figure class="plaque">
+  <div class="plaque__img">
+    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/side-profile.jpg"
+         width="1824" height="1211" loading="lazy" decoding="async"
+         alt="The finished E-type in Opalescent Silver Blue, side profile, in daylight.">
+    <p class="plaque__line"><span>&ldquo;I had interviewed many body shops for the painting of my
+      concours-winning Aston Martin. The only person I would trust with the E-type was the man who
+      had laid down that paint with such astonishingly beautiful results.&rdquo;</span></p>
+  </div>
+  <figcaption class="plaque__note">
+    <p class="caption">
+      <span class="credit credit--dpm" data-note>Mark Antwis</span>
+      <span><b>E-Type Owners Club Magazine, April 2026, page 22.</b> Transcribed verbatim. This is
+        the sentence that put David&rsquo;s name on a page he did not write, for a car DPM does not
+        own.</span>
+    </p>
+    <p class="prose">The E-type job did not come from a stranger finding us. It came from a repeat
+      customer &mdash; his first car with us was the Aston Martin V8 that won at Sandringham.</p>
+  </figcaption>
+</figure>
+
+<!-- ═════════════════ 04 · FINISHED, IN DAYLIGHT ═════════════════ -->
+<div class="band" id="finished">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">04</span>
+    <span class="chapter__kind">Finished, in daylight</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">The car,<br>as its owner sees it</h2>
+    <p class="prose">Every image below is the owner&rsquo;s own photograph of his finished car,
+      outdoors, in daylight.</p>
+    <p class="caption" data-note>
+      <span class="credit credit--dpm">Owner&rsquo;s photographs, curated</span>
+      <span>Twelve of the roughly fifty-seven images in Mark Antwis&rsquo;s own gallery
+        (<code>etypefhcseries1.com/finished-car-gallery</code>) are used here, chosen for variety
+        across exterior, interior, engine bay and detail &mdash; not all fifty-seven, matching how
+        the Volvo P1800 record uses a curated set rather than everything DPM has. <b>Three gallery
+        images that show a legible &ldquo;941 PVO&rdquo; plate were deliberately excluded</b> rather
+        than used and redacted: this page has no reliable way to apply the site&rsquo;s
+        blank-sampled-fill house style to someone else&rsquo;s photograph without risking a visibly
+        botched edit, and simply not using those three frames was the safer call.</span>
+    </p>
+  </div>
+  <div class="grid grid--3">
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/rear-brick.jpg" width="1824" height="1368" loading="lazy" decoding="async"
+           alt="The finished E-type, rear three-quarter, against a brick wall.">
+      <figcaption><b>Rear three-quarter,</b> against a brick wall.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-above.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The E-type's bonnet and windscreen, seen from above, showing the long louvred bonnet.">
+      <figcaption><b>Bonnet and windscreen,</b> from above.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/door-mirror.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The driver's door, wing mirror and chrome door handle of the E-type.">
+      <figcaption><b>Door, mirror and handle,</b> chrome against Opalescent Silver Blue.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/windscreen.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="Looking through the E-type's windscreen at the wood-rimmed steering wheel and wiper arms.">
+      <figcaption><b>Wood-rimmed wheel,</b> through the screen.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/cockpit.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The E-type cockpit, gear lever, handbrake and instrument panel.">
+      <figcaption><b>Gear lever, handbrake, instruments.</b> New trim by Aldridge Trimming.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/headlight.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The E-type's front bumper and headlight, chrome detail.">
+      <figcaption><b>Headlight and bumper,</b> chrome detail.</figcaption>
+    </figure>
+    <figure class="grid--wide">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/engine-bay.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The E-type engine bay, polished cam covers and triple SU carburettors.">
+      <figcaption><b>Engine bay, finished and dressed.</b> Polished cam covers, triple SU
+        carburettors &mdash; mechanical work Mark did himself.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/bonnet-underside.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="The underside of the E-type's bonnet, painted in Opalescent Silver Blue with louvre detail.">
+      <figcaption><b>Bonnet underside,</b> painted, not left in primer.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/filler-cap.jpg" width="1920" height="1275" loading="lazy" decoding="async"
+           alt="Close-up of the E-type's petrol filler cap.">
+      <figcaption><b>Filler cap,</b> close.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ═════════════════ 05 · THE OTHER CAR ═════════════════ -->
+<div class="band" id="astonmartin">
+  <div class="chapter">
+    <span class="chapter__mark" aria-hidden="true">05</span>
+    <span class="chapter__kind">The other car</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">The Aston Martin<br>that came first</h2>
+    <p class="prose">Before the E-type, Mark restored a 1974 Aston Martin V8 himself, nut-and-bolt,
+      from a bare shell &mdash; and sent it to David for the same thing: paint.</p>
+  </div>
+  <div class="pairing">
+    <figure>
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/astonmartin/trophy.jpg" width="1368" height="1824" loading="lazy" decoding="async"
+           alt="Mark Antwis holding the winner's trophy and a glass of champagne beside his Aston Martin V8 at the AMOC Sandringham Concours.">
+      <figcaption class="caption">
+        <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+        <span>Mark Antwis with the class-winner&rsquo;s trophy, AMOC Sandringham Concours 2024.</span>
+      </figcaption>
+    </figure>
+    <div>
+      <dl class="record">
+        <div><dt>Car</dt><dd>1974 Aston Martin AMV8, Pentland Blue</dd></div>
+        <div><dt>Restored by</dt><dd>Mark Antwis, nut-and-bolt, from bare shell</dd></div>
+        <div><dt>Paint</dt><dd>David and DPM Autobody</dd></div>
+        <div><dt>AMOC Sandringham Concours, 2024</dt><dd>Class winner &mdash; <b class="fig">92%</b>,
+          best in class, Newport Pagnell 8-cylinder</dd></div>
+        <div><dt>AMOC Hampton Court, 2024</dt><dd>Commended by the judges for the standard of
+          restoration and originality</dd></div>
+      </dl>
+      <p class="caption" data-note style="margin-top:0.85rem">
+        <span class="credit credit--copy">The date this page corrects</span>
+        <span>The magazine&rsquo;s own narrative (page 16) says this was won &ldquo;in 2023&rdquo;.
+          Mark&rsquo;s own site (<code>/the-restorers-profile</code>) states 2024 in running text
+          and shows two photographed event badges dated 2024. A photographed badge outranks a
+          writer&rsquo;s memory of a date two years after the fact &mdash; this page, and the
+          corresponding row on the homepage, both now read 2024. If David or Mark say otherwise,
+          that outranks both.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════════ 09 · ENQUIRIES ═════════════════ -->
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="contact__plate">
+    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg"
+         width="1824" height="1211" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="contact__inner">
+    <div class="chapter" style="border-top-color:var(--hair)">
+      <span class="chapter__mark" aria-hidden="true">06</span>
+      <span class="chapter__kind">Enquiries</span>
+    </div>
+    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:18ch">Bring us the car you
+      are not willing to compromise on.</h2>
+    <div class="contact__rows">
+      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
+      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
+      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
+    </div>
+    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
+      Pearce-Martin</strong>. This E-type went home to its owner once we were done, like every
+      finished car does. What you can see at the workshop is whatever&rsquo;s on the jig
+      today.</p>
+    <p class="caption" data-note>
+      <span class="credit credit--copy">Corrected 5 September &mdash; the original line didn&rsquo;t
+        hold up</span>
+      <span>This used to say &ldquo;the Volvo and the cars still on the jig are&rdquo; can be seen at
+        the workshop. Ricky caught it: the Volvo P1800 is also a finished, delivered customer car
+        (see its own page &mdash; &ldquo;interior, as delivered,&rdquo; photographed on a lane, not
+        at the workshop), so it&rsquo;s gone home too, the same as this E-type. DPM don&rsquo;t hold
+        on to cars once they&rsquo;re restored. Only work still in progress is actually there to
+        see.</span>
+    </p>
+    <p style="margin-top:clamp(2.5rem,6vh,3.5rem)"><a class="golink" href="index.html">Back to the homepage</a></p>
+    <p class="caption" data-note>
+      <span class="credit credit--dpm" data-note>Owner&rsquo;s photograph</span>
+      <span>Background: the finished E-type, front three-quarter, held at low contrast so it sits
+        behind the type rather than competing with it.</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <div class="colophon__row">
+      <div class="colophon__info">
+        <a class="footmark" href="index.html" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+    <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
+    <p><a class="back" href="index.html">Back to the homepage</a></p>
+      </div>
+      <nav class="colophon__socials" aria-label="DPM Autobody on social media">
+        <a href="https://www.instagram.com/dpm_autobody/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15A4.9 4.9 0 0 0 2.53 5.45c-.25.64-.42 1.37-.47 2.43C2.01 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 21.99 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77A4.9 4.9 0 0 0 18.55 2.53c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.2 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.36.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.2 1.5-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.36.14-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.2-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.14-.36-.3-.88-.34-1.86C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.98.2-1.5.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.36-.14.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 0 0 10.3 5.15 5.15 0 0 0 0-10.3zm0 8.5a3.35 3.35 0 1 1 0-6.7 3.35 3.35 0 0 1 0 6.7zm5.35-8.7a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/dpmautobody/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.4h2.8l.42-3.28h-3.22V8.19c0-.95.26-1.6 1.63-1.6h1.74V3.66C16.56 3.6 15.53 3.5 14.32 3.5c-2.53 0-4.26 1.54-4.26 4.38v2.44H7.25v3.28h2.81V22h3.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95C2 8.93 2 12 2 12s0 3.07.42 4.81a2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95C22 15.07 22 12 22 12s0-3.07-.42-4.81zM9.9 15.2V8.8L15.6 12l-5.7 3.2z"/></svg>
+        </a>
+      </nav>
+    </div>
+    <div class="note note--gate" id="signoff" data-note>
+      <h2>The one thing to know before this goes anywhere</h2>
+      <p><b>The owner has cleared the images.</b> David&rsquo;s 2026-09-05 email relayed Mark
+        Antwis&rsquo;s own words: the photographs and the magazine material are &ldquo;free to
+        use&rdquo;.</p>
+      <p><b>He has not cleared the writing.</b> Mark asked to approve the article once it is
+        written, before anything built from it launches. Everything on this page &mdash; the
+        headings, the framing, the sentence pairing his Aston Martin win to the E-type job &mdash;
+        is DPM&rsquo;s own first-draft writing, not his, and none of it has been shown to him yet.
+        David still has to take this page (or a summary of what it says) back to Mark before it is
+        shown to anyone outside this review.</p>
+    </div>
+    <div class="note" id="imagery" data-note>
+      <h2>Working notes &mdash; not in the client version</h2>
+      <p><b>No image on this page is DPM&rsquo;s own.</b> Every photograph is Mark Antwis&rsquo;s,
+        taken from <code>etypefhcseries1.com</code> and downloaded directly (full list and exact
+        source URLs in <code>prototype/assets/etype-941pvo/</code>) &mdash; twelve of roughly
+        fifty-seven finished-gallery images, three of DPM&rsquo;s own process work from the
+        <code>/metalwork</code> page, and two Aston Martin V8 images from
+        <code>/the-restorers-profile</code>. Three finished-gallery frames that show a legible
+        registration plate were excluded rather than redacted &mdash; see the note in section 04.</p>
+      <p><b>The hour counts are both real and both attributed</b> &mdash; 440 (DPM&rsquo;s own site,
+        panel work only) and 450 (the magazine, the whole job) &mdash; printed side by side rather
+        than reconciled into one number, because they are not measuring the same thing.</p>
+      <p><b>One date is corrected from the magazine&rsquo;s own account:</b> the Aston Martin&rsquo;s
+        Sandringham win is 2024, not the 2023 the magazine narrator recalls two years after the
+        event &mdash; see section 05&rsquo;s note.</p>
+      <p><b>The log/first-person-entry device used on the Volvo P1800 page is deliberately not used
+        here.</b> That page puts invented words in the mouths of DPM&rsquo;s own named staff, which
+        is a demonstration of a form for a car DPM restored. This page is about someone else&rsquo;s
+        car and someone else&rsquo;s words; inventing quotes in Mark Antwis&rsquo;s voice would be a
+        different and worse thing to get wrong than inventing them in Dave&rsquo;s. Everything quoted
+        here is sourced, not written.</p>
+    </div>
+      <p class="credit-line">Built by <a href="https://digitalconsultingservices.co.uk" target="_blank" rel="noopener">digitalconsultingservices.co.uk</a></p>
+</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+
+  function headerHeight() {
+    var h = document.querySelector('.masthead');
+    return h ? h.getBoundingClientRect().height : 0;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      var prev = el.style.position;
+      el.style.position = 'static';
+      var y = el.getBoundingClientRect().top + window.scrollY - headerHeight() - 8;
+      el.style.position = prev;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce.matches ? 'auto' : 'smooth' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    });
+  });
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  var inMiddle = [];
+  function paint(accent, ink) {
+    if (!accent || !ink) return;
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--accent-ink', ink);
+  }
+  function applySkin() {
+    if (!inMiddle.length) return;
+    var mid = window.innerHeight / 2, best = null, bestD = Infinity;
+    inMiddle.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = el; }
+    });
+    if (best) paint(best.getAttribute('data-accent'), best.getAttribute('data-ink'));
+  }
+  var skin = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var i = inMiddle.indexOf(e.target);
+      if (e.isIntersecting && i === -1) inMiddle.push(e.target);
+      if (!e.isIntersecting && i !== -1) inMiddle.splice(i, 1);
+    });
+    applySkin();
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('[data-accent]').forEach(function (el) { skin.observe(el); });
+
+  var pill = document.getElementById('pill');
+  var hero = document.getElementById('top');
+  if (pill && hero) {
+    new IntersectionObserver(function (entries) {
+      pill.classList.toggle('is-on', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  if (reduce.matches) return;
+
+  var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
+    var rev = (track.getAttribute('data-rev') || '0.58,0.86').split(',').map(Number);
+    var rev2 = (track.getAttribute('data-rev2') || '').split(',').map(Number);
+    return {
+      track: track,
+      stage: track.querySelector('.stage'),
+      resolve: track.querySelector('.resolve'),
+      resolve2: track.querySelector('.resolve--2'),
+      rtl: track.getAttribute('data-dir') === 'rtl',
+      rev: rev,
+      rev2: rev2.length === 2 && !isNaN(rev2[0]) ? rev2 : null,
+      live: false
+    };
+  });
+
+  var rail = document.querySelector('.rail');
+  var railDot = document.querySelector('.rail__dot');
+  var ticking = false;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var p = panels.find(function (x) { return x.track === e.target; });
+      if (p) p.live = e.isIntersecting;
+    });
+    schedule();
+  }, { rootMargin: '25% 0px 25% 0px' });
+
+  panels.forEach(function (p) { io.observe(p.track); });
+
+  function smooth(x) { return x * x * (3 - 2 * x); }
+
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      if (!p.live || !p.stage) continue;
+
+      var r = p.track.getBoundingClientRect();
+      var stickH = p.stage.offsetHeight || vh;
+      var span = r.height - stickH;
+      var t = span > 0 ? clamp(-r.top / span, 0, 1) : clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      var e = 1 - Math.pow(1 - t, 1.6);
+
+      var w = p.stage.offsetWidth;
+      var centre = (p.rtl ? (1.35 - 1.45 * e) : (-0.10 + 1.45 * e)) * w;
+      var half = w * (w < 760 ? 0.42 : 0.34);
+
+      p.stage.style.setProperty('--bl', (centre - half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--br', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tl', (centre - half - 3 * w).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tr', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--bc', centre.toFixed(1) + 'px');
+
+      if (p.resolve) {
+        p.stage.style.setProperty('--reveal',
+          smooth(clamp((t - p.rev[0]) / (p.rev[1] - p.rev[0]), 0, 1)).toFixed(3));
+      }
+      if (p.resolve2 && p.rev2) {
+        p.stage.style.setProperty('--reveal2',
+          smooth(clamp((t - p.rev2[0]) / (p.rev2[1] - p.rev2[0]), 0, 1)).toFixed(3));
+      }
+    }
+
+    if (rail && railDot) {
+      var max = document.documentElement.scrollHeight - vh;
+      var g = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      railDot.style.setProperty('--railY', (g * (rail.offsetHeight - railDot.offsetHeight)).toFixed(1) + 'px');
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+
+</body>
+</html>

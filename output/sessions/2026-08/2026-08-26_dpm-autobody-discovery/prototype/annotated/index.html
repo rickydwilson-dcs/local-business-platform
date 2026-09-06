@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Fraunces:opsz,wght@9..144,300..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
 <style>
 /* ============================================================================
    DPM Autobody — Direction D, "The Register". The section it was named after is
@@ -81,6 +81,7 @@
      these two variables and nothing else, so a decision there is a two-line
      change here. */
   --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
   --font-text:    'Newsreader', ui-serif, Georgia, serif;
 
   --page: min(1360px, 100% - 3rem);
@@ -125,7 +126,7 @@ a { color: inherit; }
 /* --- Type ---------------------------------------------------------------- */
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-weight: 300;
   letter-spacing: -0.034em;
   line-height: 0.98;
@@ -213,6 +214,14 @@ h1, h2, h3, h4 {
   transition: color 400ms var(--ease), border-color 400ms var(--ease);
 }
 .masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+/* The current page's own nav item stays in the list rather than vanishing
+   from it — it just marks itself, so the set of items never shifts between
+   pages. */
+.masthead nav a.is-active {
+  color: var(--bone);
+  font-weight: 700;
+  border-bottom-color: var(--accent-ink);
+}
 
 .tel {
   margin-left: auto;
@@ -564,15 +573,12 @@ h1, h2, h3, h4 {
 .band[id], section[id] { scroll-margin-top: 5.5rem; }
 
 /* THE BOUNDARY. The client could not tell where one section stopped and the
-   next started, so every kept section now opens with the same three things,
-   in the same place, at the same size: a rule across the full measure, a
-   lettered mark that inherits the car's accent, and a kind. Scrolling past
-   one is unmistakable. */
+   next started, so every kept section now opens with the same two things, in
+   the same place, at the same size: a rule across the full measure and a
+   kind. Scrolling past one is unmistakable. (The numbered mark this used to
+   carry alongside the kind was dropped 4 September — redundant with the "No.
+   01" etc. already sitting in the kind label itself where a number matters.) */
 .chapter {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 0 1.25rem;
   padding-top: clamp(5.5rem, 13vh, 10rem);
   border-top: 1px solid var(--hair);
   position: relative;
@@ -582,12 +588,6 @@ h1, h2, h3, h4 {
   width: clamp(3.5rem, 8vw, 6rem); height: 3px;
   background: var(--accent-ink);
   transition: background-color 700ms var(--ease);
-}
-.chapter__mark {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 200; letter-spacing: -0.02em; line-height: 1;
-  color: var(--accent-ink);
-  transition: color 700ms var(--ease);
 }
 .chapter__kind {
   font-size: 0.6875rem; font-weight: 500;
@@ -921,10 +921,13 @@ h1, h2, h3, h4 {
 /* --- Proof --------------------------------------------------------------- */
 
 /* --- Testimonials --------------------------------------------------------
-   Both quotes here are real and attributable. There are only two because only
-   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
-   login wall. The layout is built for two rather than padded out to a grid of
-   three with invented ones.
+   All three quotes are real and attributable. The lead quote (5 September) is
+   the first from an actual restoration client, published and citable — see
+   its. The two Facebook recommendations are the only ones reachable
+   without a login (23 of DPM's 24 sit behind one); the layout is built for
+   three rather than padded out further with invented ones. The .proof list
+   right below carries two related facts (the Aston Martin award, the E-type
+   hour count) rather than crowding a fourth quote into the .says grid.
    ------------------------------------------------------------------------ */
 
 .says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
@@ -1086,6 +1089,45 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--hair-2);
   display: grid; gap: 1.5rem;
 }
+
+/* --- Footer: socials (bottom-right) + build credit (centred), 4 September --
+   .colophon__row keeps the existing logo/address/back-link stack on the
+   left and puts the social row on the right, bottom-aligned against
+   whichever side is taller. The build credit sits as the colophon's own
+   last child (not a sibling of <footer>) so it inherits the same 8rem
+   bottom padding already reserved for the phone contents pill, rather than
+   adding a second block of trailing space below it. */
+.colophon__row {
+  display: flex; flex-wrap: wrap; gap: 1.5rem 2rem;
+  justify-content: space-between; align-items: flex-end;
+}
+.colophon__info { display: grid; gap: 1.5rem; }
+.colophon__socials { display: flex; gap: 0.75rem; align-items: center; }
+.colophon__socials a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.25rem; height: 2.25rem; flex: none;
+  color: var(--bone-dim);
+  border: 1px solid var(--hair);
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.colophon__socials a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.colophon__socials svg { width: 1.05rem; height: 1.05rem; display: block; fill: currentColor; }
+.credit-line {
+  margin-top: 0.5rem;
+  padding-top: clamp(1.5rem, 4vh, 2.25rem);
+  border-top: 1px solid var(--hair-2);
+  text-align: center;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.credit-line a {
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.15rem;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.credit-line a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 .note {
   border: 1px solid var(--hair);
   padding: 1.15rem 1.25rem;
@@ -1138,7 +1180,6 @@ h1, h2, h3, h4 {
   .rail { display: none; }
   :root { --falloff: clamp(120px, 36%, 260px); }
   .spec { width: clamp(150px, 46%, 320px); }
-  .chapter { grid-template-columns: auto minmax(0, 1fr); }
 }
 
 /* --- Reduced motion: one well-lit photograph, nothing lost ---------------- */
@@ -1261,7 +1302,6 @@ h1, h2, h3, h4 {
 <!-- ═════════════════ 01 · VOLVO P1800 ═════════════════ -->
 <div class="band" id="work" data-accent="#A61C24" data-ink="#E4776C">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">01</span>
     <span class="chapter__kind">No. 01 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <div class="section-head">
@@ -1345,7 +1385,6 @@ h1, h2, h3, h4 {
 <!-- ═════════════════ 02 · BENTLEY S3 CONTINENTAL ═════════════════ -->
 <div class="band" data-accent="#2A3D63" data-ink="#8FB4D9">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">02</span>
     <span class="chapter__kind">No. 02 &nbsp;·&nbsp; Finished and delivered</span>
   </div>
   <figure class="section-hero">
@@ -1447,7 +1486,6 @@ h1, h2, h3, h4 {
 <!-- ═════════════════ 03 · JAGUAR, ASTON MARTIN SEA GREEN ═════════════════ -->
 <div class="band" data-accent="#1F5C3A" data-ink="#4E9E72">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">03</span>
     <span class="chapter__kind">No. 03 &nbsp;·&nbsp; In the booth</span>
   </div>
   <div class="section-head">
@@ -1524,10 +1562,75 @@ h1, h2, h3, h4 {
   <div class="track__room track__room--long"></div>
 </section>
 
-<!-- ═════════════════ 04 · WHAT CUSTOMERS SAY ═════════════════ -->
+<!-- ═════════════════ 04 · JAGUAR E-TYPE, 941 PVO ═════════════════ -->
+<div class="band" data-accent="#3C5563" data-ink="#A3BFCE">
+  <div class="chapter">
+    <span class="chapter__kind">No. 04 &nbsp;·&nbsp; A customer&rsquo;s own car</span>
+  </div>
+  <div class="section-head">
+    <h2 class="h-major">Jaguar E-Type<br>941&nbsp;PVO</h2>
+    <div>
+      <p class="prose">Not one of ours. The owner did the mechanicals and metalwork himself and
+        sent us the bodyshell for panel finishing and paint &mdash; then wrote nine pages about it
+        for the E-Type Owners Club Magazine.</p>
+      <p class="prose">He came to us because of a different car first: his own concours-winning
+        Aston Martin V8, which we painted the year before.</p>
+      <p style="margin:1.75rem 0 0"><a class="golink" href="etype-941pvo.html">The full record of the E-type</a></p>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="credit credit--dpm">New 5 September, not yet cleared for launch</span>
+    <span>Sourced entirely from the owner&rsquo;s own site and the magazine PDF David forwarded
+      &mdash; see <code>etype-941pvo.html</code>&rsquo;s own footer note for the full sourcing and
+      the owner-approval gate this whole car still sits behind.</span>
+  </p>
+</div>
+
+<section class="track has-resolve" data-sheen data-dir="rtl" data-rev="0.50,0.84"
+         data-accent="#3C5563" data-ink="#A3BFCE" aria-labelledby="lot4-teaser-h">
+  <figure class="stage">
+    <div class="plate">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/headlight.jpg"
+           width="1920" height="1275" loading="lazy" decoding="async"
+           style="--pz:1.3; --po:46% 50%; --pbri:1.28; --psat:1.1; --pcon:1.04"
+           alt="Macro on the E-type's front bumper and headlight, chrome against Opalescent Silver Blue.">
+      <div class="veil veil--l"></div>
+      <div class="veil veil--r"></div>
+      <div class="spec"></div>
+    </div>
+    <div class="resolve">
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/side-profile.jpg"
+           width="1824" height="1211" loading="lazy" decoding="async"
+           style="--pz:1.05; --po:50% 50%"
+           alt="The finished Jaguar E-type 941 PVO, side profile, in Opalescent Silver Blue, in daylight.">
+    </div>
+    <div class="stage__over">
+      <span class="stage__tag">
+        <span class="label label--accent">No. 04</span>
+        <span class="label">Jaguar E-Type &nbsp;·&nbsp; 941 PVO</span>
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+      </span>
+      <h3 class="h-lot" id="lot4-teaser-h">He trusted us with the Aston. Then the E-type.</h3>
+    </div>
+    <figcaption class="stage__cap">
+      <span class="stage__cap-line stage__cap-line--macro">
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; headlight and bumper, close.</b> Chrome against Opalescent Silver
+          Blue.</span>
+      </span>
+      <span class="stage__cap-line stage__cap-line--wide">
+        <span class="credit credit--dpm">Owner&rsquo;s photograph</span>
+        <span><b>Above &mdash; the same car, whole.</b> Photographed by its owner after eight years
+          of restoration.</span>
+      </span>
+    </figcaption>
+  </figure>
+  <div class="track__room track__room--long"></div>
+</section>
+
+<!-- ═════════════════ 05 · WHAT CUSTOMERS SAY ═════════════════ -->
 <div class="band" id="proof" data-accent="#C7BBA1" data-ink="#D8CBAE">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">04</span>
     <span class="chapter__kind">In their words</span>
   </div>
   <div class="section-head">
@@ -1536,6 +1639,13 @@ h1, h2, h3, h4 {
 
   <div class="says">
     <figure class="say">
+      <blockquote>&ldquo;I had interviewed many body shops for the painting of my concours-winning
+        Aston Martin. The only person I would trust with the E-type was the man who had laid down
+        that paint with such astonishingly beautiful results.&rdquo;</blockquote>
+      <figcaption class="say__by"><b>Mark Antwis</b> <span>E-Type Owners Club Magazine, April 2026</span></figcaption>
+    </figure>
+
+    <figure class="say say--sub">
       <blockquote>&ldquo;If you need something doing Dave is your man. Sorted a previously bodged
         repair from a large accident repair place, to a standard better than out of the factory!
         Absolute pleasure to deal with.&rdquo;</blockquote>
@@ -1548,13 +1658,57 @@ h1, h2, h3, h4 {
         now on.&rdquo;</blockquote>
       <figcaption class="say__by"><b>Craig Mayhew</b> <span>Recommendation on Facebook</span></figcaption>
     </figure>
-
-    <figure class="say say--sub">
-      <blockquote>&ldquo;&hellip; Sigh of relief that it&rsquo;s this far now. Next after polish
-        is to rebuild it without scratching it.&rdquo;</blockquote>
-      <figcaption class="say__by"><b>Chris Bulmer</b> <span>Following his own car through the shop</span></figcaption>
-    </figure>
   </div>
+
+  <ul class="proof" style="margin-top:clamp(2.5rem,6vh,4rem)">
+    <li>
+      <span class="proof__fig">92%</span>
+      <span class="proof__what">Class win outright, AMOC Sandringham Concours, 2024 &mdash; his
+        Aston Martin V8. We painted that car too, which is why he came back to us for the E-type.</span>
+    </li>
+    <li>
+      <span class="proof__fig">450 hrs</span>
+      <span class="proof__what">Panel gapping, levelling and final paint on the E-type above, bare
+        shell to Opalescent Silver Blue, three months in our own booth.</span>
+    </li>
+  </ul>
+
+  <p class="caption">
+    <span class="credit credit--dpm">New 5 September &mdash; the restoration client the &ldquo;Still
+      needed&rdquo; note below asked for</span>
+    <span>Mark Antwis owns 941 PVO, a matching-numbers 1962 E-type Series 1 3.8 FHC, and the 1974
+      Aston Martin V8 referenced above. His own site (<code>etypefhcseries1.com</code>) documents the
+      E-type restoration in full and names DPM on its <code>/metalwork</code> page
+      (&ldquo;restoration specialists DPM Autobody, for a further 440 hours of panel gapping,
+      levelling and flatting&rdquo;). The quote is transcribed verbatim from page 22 of a nine-page
+      feature on the car in the E-Type Owners Club Magazine, April 2026 (PDF supplied by David,
+      2026-09-05).</span>
+    <span class="credit credit--copy">Not yet cleared &mdash; do not treat as launch-ready</span>
+    <span>David forwarded this with the owner&rsquo;s message that we are &ldquo;free to use&rdquo;
+      it, <b>but he would like to approve before it is launched</b>. That sign-off has not happened.
+      David still needs to go back to Mark Antwis before this is shown to anyone outside this
+      review.</span>
+    <span class="credit credit--copy">Two hour-counts, two different scopes</span>
+    <span>DPM&rsquo;s own metalwork-page caption on his site says <b>440 hours</b> for the panel
+      work alone; the magazine piece says <b>450 hours</b> and three months for the whole job (panel
+      work through primer, colour, lacquer and polish). Both are used above in the sense each source
+      meant &mdash; they are not inconsistent, just measuring different scopes.</span>
+    <span class="credit credit--copy">Corrected 5 September &mdash; the year was wrong</span>
+    <span>This row originally said <b>2023</b>, taken from the magazine narrator&rsquo;s own
+      recollection on page 16 (&ldquo;winning the AMOC Sandringham Concours in 2023&rdquo;). His own
+      site&rsquo;s <code>/the-restorers-profile</code> page states <b>2024</b> in running text, and
+      shows two photographed event badges dated 2024 (&ldquo;AMOC 1st place Newport Pagnell 8cyl
+      Spring Concours Sandringham 2024&rdquo;; &ldquo;AMOC Concours d&rsquo;Elegance Hampton Court
+      Palace 2024&rdquo;). A photographed badge outranks a magazine writer&rsquo;s memory of the
+      date two years after the fact, so this now reads 2024. See the fuller writeup on
+      <code>etype-941pvo.html</code> for both sources side by side.</span>
+    <span class="credit credit--copy">Cut to make room</span>
+    <span>Chris Bulmer&rsquo;s comment (&ldquo;&hellip;Sigh of relief&hellip;&rdquo;) is retired to
+      keep this section at three quotes, matching the design note below. It was the weakest of the
+      three &mdash; a customer&rsquo;s own comment on his own build post, not really a statement about
+      DPM&rsquo;s work &mdash; and the new quote takes the lead spot because it is the first written,
+      published, attributable statement from an actual restoration client.</span>
+  </p>
 
   <p class="caption">
     <span class="credit credit--dpm">All three real, all attributable</span>
@@ -1600,6 +1754,11 @@ h1, h2, h3, h4 {
       and no amount of mining Facebook substitutes for it. <b>Nobody quoted has been asked</b> —
       these are public posts, but quoting a customer on their restorer&rsquo;s own site is
       DPM&rsquo;s permission to seek, not ours.</span>
+    <span class="credit credit--copy">Partly answered &mdash; 5 September</span>
+    <span>One arrived, see the new lead quote below and its note. Still only <b>one</b>, and it came
+      to us unsolicited via David rather than something asked for &mdash; the original ask
+      (&ldquo;three or four&rdquo;, &ldquo;David has the phone numbers&rdquo;) stands for the
+      rest.</span>
   </p>
 
   <div class="cols" style="margin-top:clamp(3.5rem,9vh,5.5rem)">
@@ -1628,8 +1787,23 @@ h1, h2, h3, h4 {
 
 <footer>
   <div class="colophon">
-    <a class="footmark" href="#top" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+    <div class="colophon__row">
+      <div class="colophon__info">
+        <a class="footmark" href="#top" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
     <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
+      </div>
+      <nav class="colophon__socials" aria-label="DPM Autobody on social media">
+        <a href="https://www.instagram.com/dpm_autobody/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15A4.9 4.9 0 0 0 2.53 5.45c-.25.64-.42 1.37-.47 2.43C2.01 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 21.99 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77A4.9 4.9 0 0 0 18.55 2.53c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.2 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.36.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.2 1.5-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.36.14-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.2-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.14-.36-.3-.88-.34-1.86C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.98.2-1.5.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.36-.14.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 0 0 10.3 5.15 5.15 0 0 0 0-10.3zm0 8.5a3.35 3.35 0 1 1 0-6.7 3.35 3.35 0 0 1 0 6.7zm5.35-8.7a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/dpmautobody/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.4h2.8l.42-3.28h-3.22V8.19c0-.95.26-1.6 1.63-1.6h1.74V3.66C16.56 3.6 15.53 3.5 14.32 3.5c-2.53 0-4.26 1.54-4.26 4.38v2.44H7.25v3.28h2.81V22h3.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95C2 8.93 2 12 2 12s0 3.07.42 4.81a2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95C22 15.07 22 12 22 12s0-3.07-.42-4.81zM9.9 15.2V8.8L15.6 12l-5.7 3.2z"/></svg>
+        </a>
+      </nav>
+    </div>
     <div class="note" id="imagery">
       <h2>Working notes &mdash; not in the client version</h2>
       <p><b>Every photograph on this page is DPM&rsquo;s own, of DPM&rsquo;s own work.</b> The
@@ -1655,7 +1829,8 @@ h1, h2, h3, h4 {
         the workshop is the single biggest gap in the whole library, and the Bentley plate above
         is the proof of it.</p>
     </div>
-  </div>
+      <p class="credit-line">Built by <a href="https://digitalconsultingservices.co.uk" target="_blank" rel="noopener">digitalconsultingservices.co.uk</a></p>
+</div>
 </footer>
 
 <script>

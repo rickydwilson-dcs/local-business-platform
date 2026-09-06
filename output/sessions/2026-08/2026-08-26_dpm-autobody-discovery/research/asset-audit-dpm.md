@@ -353,3 +353,179 @@ Eagle-style 3×3 detail grid.
 public post URLs render fine headless, but **only the first two carousel slides load logged-out** —
 the rest sit behind a login wall and we do not go round it. So carousel-heavy accounts will always
 under-report from an anonymous crawl. Ask the client for the originals; that remains open question 1.
+
+---
+
+## CORRECTION — 2026-09-04
+
+**Open question 1 is answered — David sent the originals.** Six iCloud Shared Album links arrived
+covering six cars: P1800 red (documentary), candy red P1800 (best in show), Bentley S3 Continental,
+pink Aston Martin DB6, Porsche 356SC, and a Series 1 E-type. Downloaded as unmodified originals
+(~22GB, 8,554 files) into `inbox/photography/<car-name>/raw{.zip,}` — not committed, per policy.
+
+**Technical triage (exiftool, full population, not sampled):**
+
+| Album                  | Photos | Video                   | ≥3000px long edge | Date range           |
+| ---------------------- | ------ | ----------------------- | ----------------- | -------------------- |
+| Bentley S3 Continental | 1,987  | 1,330 (+295 .aae edits) | 1,983 (99.8%)     | Aug 2024 → Jan 2026  |
+| Candy red P1800        | 1,417  | 848                     | 1,325 (93.5%)     | Jan 2000\*→ Feb 2026 |
+| P1800 red documentary  | 1,442  | 325                     | 1,021 (70.8%)     | Dec 2023 → May 2025  |
+| Pink Aston DB6         | 602    | 344                     | 572 (95.0%)       | Feb 2023 → Sep 2024  |
+| Porsche 356SC          | 881    | 444                     | 843 (95.7%)       | Jan 2018\*→ Feb 2026 |
+| Series 1 E-type        | 536    | 40                      | 267 (49.8%)       | Jun 2023 → Jul 2024  |
+
+\* both early outliers are single-file camera-clock resets, not real capture dates — unverified, flag
+before trusting the full range.
+
+**This closes open question 4.** 87.5% of all stills are above the old 1280px Instagram ceiling —
+these are real 12MP+ phone originals. The AI-plate problem in the prototype is now largely solvable
+with real photography; see `prototype/assets/art-direction/MANIFEST.md` for what to swap.
+
+**The finished-car gap is not closed — it has a more precise shape now.** Full visual pass (every
+file, not sampled) on the two smallest/most-suspect albums:
+
+- **Series 1 E-type (536 photos, 100% reviewed):** zero finished, assembled cars. The set runs
+  metal fabrication → primer → paint booth, and stops at a **bare painted shell** — no glass, trim,
+  wheels or interior fitted. ~10–15 photos show that shell moved outdoors onto a paved forecourt in
+  real daylight (jack stands, blue sky, trees) — a genuine paint-under-real-light shot, just not of a
+  complete car. Zero before/after pairs, because the set never reaches "after."
+- **Bentley S3 Continental (1,987 photos, sampled across full range — start/middle/end sheets
+  consistent):** zero paint or colour of any kind. Every photo is bare-metal structural repair and
+  hand-fabrication (matches the client's own description, "everything hand made for this car"). This
+  may be intentional — a coachbuilding-process record rather than a gap — since the restoration
+  itself may not have reached paint as of the latest photo (Jan 2026). Worth asking David directly
+  rather than assuming.
+- Candy red P1800, P1800 documentary, Aston DB6 and Porsche 356SC now also given the full pass (every
+  file, all sheets) — see below.
+
+**Full visual pass — remaining four albums, completed 2026-09-04:**
+
+- **Candy red P1800 (1,417 photos) — the standout album.** Repeated outdoor daylight "quality check"
+  shots at every restoration stage (bare metal, white primer, finished candy red) against the DPM
+  building. Beyond that: the full-resolution originals of the already-known Instagram lakeside shoot,
+  plus — not previously known — a proper multi-angle photoshoot at what looks like the actual show
+  venue (car park, mature trees, moody overcast light: front 3/4, side profile, rear 3/4, two
+  distances). Genuine hero material exists here, at real resolution, not the 1280×853 Instagram crop.
+- **Pink Aston Martin DB6 (602 photos) — a complete before/after arc.** Green race livery on arrival
+  (damaged, race #335 — matches the Instagram highlight) → primer stages → pink primer outdoors in
+  daylight → **a fully finished, complete pink car (chrome, wire wheels, glass) shot outdoors** against
+  the DPM building, reveal-style. Background is the workshop wall, not "away from the workshop," but
+  it is a genuine finished-car daylight shot — the first of its kind found for this car.
+- **Porsche 356SC (881 photos) — one strong finished set.** Mostly indoor mechanical/structural
+  documentation (concours-grade, extensive), but includes a set of glossy black finished-car shots
+  outdoors, multiple angles, professional-quality composition and light.
+- **P1800 red documentary (1,442 photos) — never leaves the workshop.** Full arc from severe rot
+  repair through deep-red booth paint to a fully assembled, chrome-and-glass finished car — but every
+  stage, including the final one, is shot indoors under booth/showroom lighting. No outdoor or daylight
+  shot exists anywhere in this set. This is the same restoration as the 37-minute YouTube documentary
+  (see priority table) — the finished-car daylight shot for this car likely has to come from a proper
+  shoot, or does not yet exist in any medium DPM has supplied.
+
+**Confirmed: the two P1800 albums are two different cars, not one car under two names.** Direct
+full-resolution comparison of finished-car shots from each: candy red has a slat grille, a slim
+smoothed chrome bumper with integrated indicators, and chrome wire wheels fitted; the documentary car
+has a fine mesh grille, a thick chrome tube-style overrider bumper, and no wheels fitted at all (shell
+still on a rolling rotisserie cart) — plus a visibly less metallic, more traditional red. Grille
+pattern and bumper style are physical trim, not a lighting difference, so this rules out "same car,
+different light." Matches what Ricky's original link descriptions already implied (two separate
+shares) and matches the candy red car's own Instagram caption (wire wheel conversion, smoothed
+bumpers) against the mesh-grille/overrider-bumper documentary car.
+
+**Revised bottom line across all six cars:** four of six now have at least some genuine finished-car
+or finished-shell daylight material (candy red P1800, pink DB6, Porsche 356SC, and E-type's shell-only
+shots); two do not (Bentley S3 — restoration hasn't reached paint; P1800 documentary — finished but
+never photographed outside). This is a real, usable step up from the original "not one photograph of
+a finished car in daylight" finding, but it is not yet enough to retire the commissioned-shoot ask —
+most of what exists is a workshop-adjacent forecourt, not an "away from the workshop" location, and
+only the candy red P1800 has anything closer to a proper environmental shoot.
+
+**Instagram — the 8 Story Highlights flagged as "not opened" in the original audit are now opened.**
+Findings, `@dpm_autobody`:
+
+- **DB6 highlight (164w old):** very likely the _same car_ as our Aston DB6 download — green race
+  livery, race #335, front-end damage, arriving for repair. This is the pre-repaint state; matches
+  this doc's earlier note on the "OH OH 7" DB6 (crashed at the 2022 Carrera Panamericana). Worth
+  confirming with David and pairing with our own after/pink shots for a real before/after.
+  **Update the priority-car table's DB6 row with this cross-reference.**
+- **"Bentley part 2" (285w) and "Bentley Resto" (304w) highlights:** bare/primed convertible body,
+  paint-stripping. ~5.5–6 years old — well before our S3 Continental's Aug 2024–Jan 2026 window.
+  **Almost certainly a different, earlier Bentley project**, not the current client car. Don't
+  conflate the two in the prototype.
+- **"Jag XK120" highlight (355w):** a different, earlier Jaguar model — not the Series 1 E-type in
+  our download. Do not treat as the same car.
+- **"Porsche 356" highlight (346w):** a Story video that would not render a still frame in this
+  environment. The YouTube Porsche 356 Part 2 (149,334 views, already flagged in the priority table)
+  remains the stronger source for that car — pull stills from there instead.
+
+**Net effect on the ask list (§ above):** items 7 and 9 get sharper. Add explicitly: request more
+finished-car-daylight photography for all six cars, especially Bentley and E-type; ask whether the
+Instagram DB6 is the same car as the download; ask whether the Bentley restoration has reached paint
+yet, or whether "hand-made" bare-metal work is itself the story to tell for that car.
+
+## Curated shortlist — published to R2, 2026-09-04
+
+25 images selected from the full library (finished-car and finished-shell daylight shots, plus a
+handful of process/detail shots and the DB6 before state), redacted and published. **This is a curated
+set, not the full ~8,500-file library** — per Ricky's instruction, the raw originals stay local
+(`inbox/photography/`, gitignored) until a decision is made on deleting them to free disk space; only
+the shortlist below has left the machine.
+
+- **Redaction:** the existing `tools/plate-redact/` pipeline (house style: blank sampled-colour plate,
+  not blur — see that tool's README). Every plate-bearing image was hand-verified against a full-
+  resolution render before its box was marked reviewed; `apply.py`'s contact sheet confirms all 9
+  plate-bearing images are covered and the other 16 (no plate in frame) were correctly left untouched.
+  GPS/location EXIF stripped from all 25.
+- **R2 location:** `dpm-autobody/photography/<car-slug>/<filename>.jpg`, bucket per `.env.local`
+  `R2_BUCKET_NAME`. Manifest with every URL: `research/photography-manifest.json`. Upload script:
+  `tools/upload-photography.ts` (session-local, mirrors the repo's `tools/lib/r2-client.ts`
+  convention — not the prototype-asset tool, since these are real client assets, not prototype
+  scratch).
+- **Breakdown:** candy-red-p1800 (9: forecourt/lakeside/carpark daylight + 1 headlamp detail),
+  pink-aston-db6 (7: 4 finished outdoor + 3 before/green-race-liv), porsche-356sc (5: 2 finished +
+  headlamp detail + carpark + forecourt), series1-etype (4: painted-shell-in-daylight). Bentley S3 and
+  P1800 documentary contributed nothing — no qualifying daylight/finished material exists in either
+  per the full visual pass above.
+- **Not yet done:** these are not wired into `prototype/assets-manifest.json` or swapped into the
+  prototype HTML in place of the AI plates — that's a follow-up pass, not part of this upload.
+- **Bug found and fixed during this upload:** `sips`'s HEIC dimension-read silently failed in the
+  original processing script, so every HEIC-sourced image (carpark shots, before/shell shots, paint
+  booth shots) skipped its resize-to-2400px step and uploaded at full sensor resolution (up to
+  5712×4284, 8–15MB each). Fixed and all 14 affected files reprocessed and re-uploaded at the
+  intended size (1.7–4.9MB). Also pulled 4 additional candy red P1800 paint-booth reflection shots
+  (`paintbooth-01` through `04`) spotted during the original triage but not included in the first
+  upload — 29 assets total now, manifest updated.
+
+## Prototype swap — attempted 2026-09-04, mostly reverted
+
+Tried swapping the "missing asset" AI daylight/paint plates (`d-daylight-*`, `b-paint-*`) for the
+real candy red P1800 photography across the four direction pages. **Found a serious problem partway
+through and reverted most of it**: several sections aren't generic mood plates, they're built around
+fully invented car narratives with their own identity tables — Project 01 in `direction-b-wetcoat.html`
+has a spec table reading "Jaguar · XK150 S Roadster · British Racing Green · BC.6"; Project 02 has
+"Austin-Healey Sprite Mk II · Tartan Red"; `direction-d-register.html`'s Lot 02 section explicitly
+says "This car and all three of its photographs are invented for the prototype... They stand where a
+**second real record** will go." Splicing a real Volvo P1800 photo into a section captioned as a green
+Jaguar is a worse, more confusing state than the AI placeholder was — image and copy directly
+contradict each other.
+
+**What actually shipped (2 swaps, both verified live in-browser via a local preview server):**
+
+- `direction-b-wetcoat.html` hero — now `candy-red-p1800/paintbooth-01.jpg` (real). No car-specific
+  copy nearby to conflict with. The page's imagery-disclosure banner and footer notice were both
+  rewritten to say the hero is real DPM photography and everything else on the page is still AI.
+- `direction-a-catalogue.html` full-width plate-band (was captioned as a fictional "1959
+  Austin-Healey Sprite") — now `candy-red-p1800/lakeside-04.jpg` (real), recaptioned "Volvo P1800 —
+  restored by DPM Autobody, photographed on collection." Same fix applied to that page's footer
+  photography note.
+
+**What was reverted back to AI plates:** direction-a's plate-stack (3 images, tied to "Lot 01 ·
+Jaguar XK120"), direction-b's Project 01 (2 images, Jaguar XK150/BRG identity table). Never touched:
+direction-b's Project 02 (Austin-Healey/Tartan Red), direction-c's road plate, direction-d's three
+Jaguar XK150 plates — all still AI, unchanged.
+
+**Open question for whoever picks this up next:** the two options are (a) leave these Jaguar/
+Austin-Healey sections as invented placeholders until real second/third cars are ready, or (b)
+rewrite their identity tables to describe real DPM cars (Bentley S3, Aston DB6, Porsche 356SC,
+E-type) matched to whatever real photography exists for each — turning fiction into worked examples.
+Ricky chose to revert rather than rewrite copy in this session; that decision should be revisited
+once a direction is actually chosen and the four mood-board pages get merged into one.

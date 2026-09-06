@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Fraunces:opsz,wght@9..144,300..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
 <style>
 /* ============================================================================
    DPM Autobody — Direction D, "The Register". The section it was named after is
@@ -81,6 +81,7 @@
      these two variables and nothing else, so a decision there is a two-line
      change here. */
   --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
   --font-text:    'Newsreader', ui-serif, Georgia, serif;
 
   --page: min(1360px, 100% - 3rem);
@@ -125,7 +126,7 @@ a { color: inherit; }
 /* --- Type ---------------------------------------------------------------- */
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-weight: 300;
   letter-spacing: -0.034em;
   line-height: 0.98;
@@ -213,6 +214,14 @@ h1, h2, h3, h4 {
   transition: color 400ms var(--ease), border-color 400ms var(--ease);
 }
 .masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+/* The current page's own nav item stays in the list rather than vanishing
+   from it — it just marks itself, so the set of items never shifts between
+   pages. */
+.masthead nav a.is-active {
+  color: var(--bone);
+  font-weight: 700;
+  border-bottom-color: var(--accent-ink);
+}
 
 .tel {
   margin-left: auto;
@@ -991,7 +1000,12 @@ h1, h2, h3, h4 {
 
 /* --- Contact ------------------------------------------------------------- */
 
-.contact { position: relative; overflow: clip; }
+/* The page is now two screens: this hero (photo, headline, quick contact)
+   fills the first, and .contact-form below fills the next — the form no
+   longer shares the fold with the heading. Both use lvh, never svh (see the
+   project-wide rule on this): a section that must reliably cover the
+   viewport can't be sized off the browser-chrome-expanded measurement. */
+.contact { position: relative; overflow: clip; min-height: 100lvh; }
 .contact__plate { position: absolute; inset: 0; }
 .contact__plate img {
   width: 100%; height: 100%; object-fit: cover; object-position: 62% 46%;
@@ -1001,13 +1015,41 @@ h1, h2, h3, h4 {
 .contact__plate::after {
   content: ''; position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.5) 46%, rgba(11,11,12,0.94) 100%),
-    linear-gradient(to right, rgba(11,11,12,0.93) 0%, rgba(11,11,12,0.72) 44%, rgba(11,11,12,0.3) 80%, rgba(11,11,12,0.5) 100%);
+    /* Lightened top-to-bottom too, 4 September: the header no longer sits at
+       the top of the frame (it's anchored to the bottom third now), so there
+       is nothing left up there that needs the old heavy top veil, and the
+       old 0.94 bottom stop was overpowering the horizontal fade below no
+       matter how light the right edge was — the two multiply together, so a
+       near-opaque bottom band stayed near-opaque everywhere along it,
+       including the right. Legibility for the copy and the contact rows now
+       leans on their own text-shadow (below) rather than solely on the veil. */
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0.18) 40%, rgba(11,11,12,0.55) 100%),
+    /* Dark enough on the left to carry the copy and the form, but the right
+       now clears to almost nothing at the edge — the car's rear wing was
+       getting buried under the same veil meant only for the text side. */
+    linear-gradient(to right, rgba(11,11,12,0.88) 0%, rgba(11,11,12,0.68) 36%, rgba(11,11,12,0.26) 66%, rgba(11,11,12,0.04) 100%);
 }
+/* `safe end`, not `center` or plain `end` — the same reasoning as every other
+   hero__inner on this site: the block sits low in the frame, but never spills
+   past the masthead on a viewport too short for it. Pushed further down than
+   a typical hero because there is no footer band pinned below it competing
+   for room. */
 .contact__inner {
   position: relative; z-index: 2;
   width: var(--page); margin-inline: auto;
-  padding: clamp(5.5rem, 15vh, 11rem) 0 clamp(5rem, 12vh, 9rem);
+  min-height: 100lvh;
+  display: grid; align-content: safe end;
+  padding: clamp(7rem, 18vh, 12rem) 0 clamp(4rem, 10vh, 6rem);
+}
+/* Now that the plate veil above is lighter (so the car reads on the right),
+   the copy carries its own dark halo instead of leaning on the photo being
+   dark enough everywhere it might sit — same reasoning as .hero__inner
+   elsewhere on this site, just written locally since .contact__inner isn't
+   a .hero. */
+.contact__inner .label,
+.contact__inner h2,
+.contact__inner .lede {
+  text-shadow: 0 1px 24px rgba(11,11,12,0.92), 0 1px 4px rgba(11,11,12,0.7);
 }
 .contact__rows {
   display: grid; grid-template-columns: minmax(0, 1fr);
@@ -1025,7 +1067,9 @@ h1, h2, h3, h4 {
   font-size: clamp(1.1875rem, 2vw, 1.625rem);
   transition: color 400ms var(--ease);
   font-variant-numeric: normal;
+  text-shadow: 0 1px 18px rgba(11,11,12,0.9), 0 1px 3px rgba(11,11,12,0.7);
 }
+.contact__rows small { text-shadow: 0 1px 14px rgba(11,11,12,0.9); }
 .contact__rows a:hover { color: var(--accent-ink); }
 .contact__rows small {
   display: block;
@@ -1039,6 +1083,91 @@ h1, h2, h3, h4 {
   .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
   .contact__rows > * { border-bottom: none; }
 }
+
+/* --- Enquiry form section (mock only — see the working note in the footer)
+   Its own screen, below the hero's fold, on the plain ground rather than the
+   photograph — so the panel gets a real (not photo-legibility) background:
+   --surface, a shade up from --ground, same treatment as a .grid figure. */
+/* Top padding has to clear the fixed masthead the same way the hero's does —
+   this section starts exactly where the first viewport ends, so the
+   masthead's gradient sits over its top ~114px on every load, not only on
+   scroll. Kept far smaller than the hero's own clearance because there's no
+   headline competing for the same space. */
+.contact-form {
+  min-height: 100lvh;
+  display: grid; align-content: center;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(8rem, 18vh, 9.5rem) 0 clamp(2rem, 5vh, 3rem);
+}
+/* Sized to actually fit the fold below the hero, not just to look tidy: the
+   whole panel (head, six fields, submit) is kept under ~540px so it clears a
+   714px-tall window with the masthead's ~114px still subtracted. Every gap
+   below was tightened from the first draft for exactly this reason — loosen
+   any of them and re-check against a short viewport, not just a tall one. */
+.enquiry {
+  max-width: 34rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+.enquiry__head { margin-bottom: clamp(0.85rem, 2vh, 1.25rem); }
+.enquiry__head h3 { color: var(--bone); margin-top: 0.3rem; }
+.enquiry__grid {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+.enquiry__pair {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+@media (min-width: 30rem) {
+  .enquiry__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem 1.5rem; }
+}
+.field { display: grid; gap: 0.35rem; }
+.field label {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; font-weight: 300;
+  color: var(--bone);
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--hair);
+  padding: 0.5rem 0;
+  border-radius: 0;
+  outline: none;
+  font-variant-numeric: normal;
+  transition: border-color 300ms var(--ease);
+}
+.field select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0L5 6L10 0Z' fill='%23A8A399'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.15rem center;
+  padding-right: 1.25rem;
+}
+.field select option { background: var(--surface); color: var(--bone); }
+.field textarea { resize: vertical; min-height: 3.75rem; line-height: 1.5; }
+.field input::placeholder, .field textarea::placeholder { color: var(--bone-dim); opacity: 0.75; }
+.field input:focus, .field select:focus, .field textarea:focus { border-bottom-color: var(--accent-ink); }
+
+.enquiry__foot {
+  margin-top: clamp(1rem, 2.5vh, 1.5rem);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem;
+}
+.enquiry__submit {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 1.75rem;
+  background: var(--accent);
+  color: var(--ground);
+  border: none; cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  transition: background-color 700ms var(--ease), opacity 300ms var(--ease);
+}
+.enquiry__submit:hover { opacity: 0.86; }
+.enquiry__note { font-size: 0.75rem; line-height: 1.5; color: var(--bone-dim); max-width: 22em; }
 
 
 /* --- The mark ------------------------------------------------------------
@@ -1086,6 +1215,45 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--hair-2);
   display: grid; gap: 1.5rem;
 }
+
+/* --- Footer: socials (bottom-right) + build credit (centred), 4 September --
+   .colophon__row keeps the existing logo/address/back-link stack on the
+   left and puts the social row on the right, bottom-aligned against
+   whichever side is taller. The build credit sits as the colophon's own
+   last child (not a sibling of <footer>) so it inherits the same 8rem
+   bottom padding already reserved for the phone contents pill, rather than
+   adding a second block of trailing space below it. */
+.colophon__row {
+  display: flex; flex-wrap: wrap; gap: 1.5rem 2rem;
+  justify-content: space-between; align-items: flex-end;
+}
+.colophon__info { display: grid; gap: 1.5rem; }
+.colophon__socials { display: flex; gap: 0.75rem; align-items: center; }
+.colophon__socials a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.25rem; height: 2.25rem; flex: none;
+  color: var(--bone-dim);
+  border: 1px solid var(--hair);
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.colophon__socials a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.colophon__socials svg { width: 1.05rem; height: 1.05rem; display: block; fill: currentColor; }
+.credit-line {
+  margin-top: 0.5rem;
+  padding-top: clamp(1.5rem, 4vh, 2.25rem);
+  border-top: 1px solid var(--hair-2);
+  text-align: center;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.credit-line a {
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.15rem;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.credit-line a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 .note {
   border: 1px solid var(--hair);
   padding: 1.15rem 1.25rem;
@@ -1209,6 +1377,7 @@ h1, h2, h3, h4 {
     <a href="index.html#work">The work</a>
     <a href="workshop.html">The workshop</a>
     <a href="index.html#proof">Proof</a>
+    <a href="contact.html" class="is-active" aria-current="page">Contact</a>
   </nav>
   <a class="tel" href="tel:+441323552827">01323 552827</a>
 </header>
@@ -1230,32 +1399,95 @@ h1, h2, h3, h4 {
          width="1280" height="853" fetchpriority="high" decoding="async" alt="">
   </div>
   <div class="contact__inner">
-    <div class="chapter" style="border-top-color:var(--hair); padding-top:clamp(5.5rem,13vh,10rem)">
-      <span class="chapter__mark" aria-hidden="true">01</span>
-      <span class="chapter__kind">Enquiries</span>
-    </div>
-    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
-      are not willing to compromise on.</h2>
+    <p class="label label--accent">Enquiries &nbsp;·&nbsp; Berwick, East Sussex</p>
+    <h2 class="h-major" id="contact-h" style="margin-top:0.85rem; max-width:14ch">Tell us
+      about the car.</h2>
+    <p class="lede" style="margin-top:0.85rem">David would rather see it than quote from
+      photographs of one, so most enquiries end with a date to bring it in.</p>
     <div class="contact__rows">
       <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
       <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
       <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
     </div>
-    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
-      Pearce-Martin</strong>. He would rather see a car than quote from photographs of one, so
-      the first conversation usually ends with a date to bring it over. Dave, Ellis and Paul are
-      who you will meet when you do.</p>
   </div>
 </section>
+
+<div class="contact-form">
+    <form class="enquiry" novalidate onsubmit="return false">
+      <div class="enquiry__head">
+        <p class="label label--accent">Enquiry</p>
+        <h3 class="h-sub">A few details, and we&rsquo;ll call you back.</h3>
+      </div>
+      <div class="enquiry__grid">
+        <div class="enquiry__pair">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Jane Smith">
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="07&hellip; or 01323&hellip;">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" placeholder="jane@example.com">
+        </div>
+        <div class="enquiry__pair">
+          <div class="field">
+            <label for="f-car">Make &amp; model</label>
+            <input type="text" id="f-car" name="car" placeholder="e.g. Volvo P1800">
+          </div>
+          <div class="field">
+            <label for="f-year">Year</label>
+            <input type="text" inputmode="numeric" id="f-year" name="year" placeholder="e.g. 1968">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-work">What does it need?</label>
+          <select id="f-work" name="work">
+            <option value="">Not sure yet</option>
+            <option value="restoration">Full restoration</option>
+            <option value="paint">Paintwork &amp; respray</option>
+            <option value="bodywork">Bodywork &amp; panel repair</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-notes">Tell us about the car</label>
+          <textarea id="f-notes" name="notes" placeholder="Condition, history, what you&rsquo;re hoping for&hellip;"></textarea>
+        </div>
+      </div>
+      <div class="enquiry__foot">
+        <button type="submit" class="enquiry__submit">Send enquiry</button>
+      </div>
+    </form>
+</div>
 
 </main>
 
 <footer>
   <div class="colophon">
-    <a class="footmark" href="index.html" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
+    <div class="colophon__row">
+      <div class="colophon__info">
+        <a class="footmark" href="index.html" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 1158 577"><use href="#dpm-mark"/></svg></a>
     <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
     <p><a class="back" href="index.html">Back to the homepage</a></p>
-  </div>
+      </div>
+      <nav class="colophon__socials" aria-label="DPM Autobody on social media">
+        <a href="https://www.instagram.com/dpm_autobody/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15A4.9 4.9 0 0 0 2.53 5.45c-.25.64-.42 1.37-.47 2.43C2.01 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 21.99 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77A4.9 4.9 0 0 0 18.55 2.53c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.2 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.36.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.2 1.5-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.36.14-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.2-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.14-.36-.3-.88-.34-1.86C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.98.2-1.5.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.36-.14.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 0 0 10.3 5.15 5.15 0 0 0 0-10.3zm0 8.5a3.35 3.35 0 1 1 0-6.7 3.35 3.35 0 0 1 0 6.7zm5.35-8.7a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/dpmautobody/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.4h2.8l.42-3.28h-3.22V8.19c0-.95.26-1.6 1.63-1.6h1.74V3.66C16.56 3.6 15.53 3.5 14.32 3.5c-2.53 0-4.26 1.54-4.26 4.38v2.44H7.25v3.28h2.81V22h3.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95C2 8.93 2 12 2 12s0 3.07.42 4.81a2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95C22 15.07 22 12 22 12s0-3.07-.42-4.81zM9.9 15.2V8.8L15.6 12l-5.7 3.2z"/></svg>
+        </a>
+      </nav>
+    </div>
+      <p class="credit-line">Built by <a href="https://digitalconsultingservices.co.uk" target="_blank" rel="noopener">digitalconsultingservices.co.uk</a></p>
+</div>
 </footer>
 
 <script>
