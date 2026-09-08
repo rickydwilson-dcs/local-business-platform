@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en-GB" data-build="client">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Volvo P1800, Candy Red — DPM Autobody</title>
-<meta name="description" content="The full record of the Candy Red Volvo P1800 restored by DPM Autobody: a year, 1,300 hours, five owner-specified changes, chassis 26282.">
+<title data-client>DPM Autobody — Every restoration</title>
+<title data-note>DPM Autobody — build library prototype (Phase 0 design direction, working copy with notes)</title>
+<meta name="description" content="Every restoration DPM Autobody has completed, and every one currently in the workshop. Berwick, East Sussex.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -408,7 +409,7 @@ h1, h2, h3, h4 {
   object-position: var(--pp, 50% 50%);
   transform: scale(var(--pz, 1));
   transform-origin: var(--po, 50% 50%);
-  filter: saturate(1.04) contrast(1.02) brightness(1.04);
+  filter: saturate(var(--rsat, 1.04)) contrast(var(--rcon, 1.02)) brightness(var(--rbri, 1.04));
 }
 .resolve::after {
   content: ''; position: absolute; inset: 0;
@@ -612,6 +613,20 @@ h1, h2, h3, h4 {
 }
 .section-head--flush { border-top: 0; }
 
+/* The library page's own intro has 3 children (label, h1, lede), not the
+   usual h2+div pair .section-head's 2-column grid at >=60rem expects, and it
+   is the very first thing on the page, so it also needs more headroom than
+   the shared clamp(6rem,14vh,11rem) reliably clears: the masthead's real
+   footprint is ~114px (documented below, in the wide-viewport block), and
+   14vh alone drops under that on a short viewport. Force single column,
+   full-measure, and a safe fixed floor on the top padding. */
+.section-head--intro {
+  display: block;
+  padding-top: clamp(9rem, 16vh, 13rem);
+}
+.section-head--intro .h-major { margin-top: 0.85rem; }
+.section-head--intro .lede { margin-top: 1.5rem; }
+
 .rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
 
 /* Credit tags. Two cases, and they never look alike. */
@@ -645,6 +660,36 @@ h1, h2, h3, h4 {
 }
 .bound > img { width: 100%; height: auto; }
 .bound > figcaption { padding-top: 0.85rem; }
+
+/* The section's own establishing shot — the wide car photo that opens each
+   finished-car section, ahead of the title and prose. Contained inside the
+   text column rather than full-bleed like .plate, so it needs its own crop
+   treatment rather than .plate's. A fixed aspect-ratio means the box shape
+   — and so the crop — is identical at every viewport width, unlike the
+   full-viewport-height sticky stage the slider uses below, whose aspect
+   changes with the window. The slider's own closing shot returns to this
+   same photograph, but in that full-bleed box, so it needs its own,
+   separately tuned crop rather than reusing these values verbatim. */
+.section-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: clip;
+  margin: clamp(1.75rem, 4vh, 2.75rem) 0 clamp(2rem, 5vh, 3rem);
+}
+.section-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+.section-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0) 55%, rgba(11,11,12,0.34) 100%);
+}
+.section-hero + .caption { margin-top: -0.25rem; }
 
 /* --- Link out to a project page ------------------------------------------ */
 
@@ -899,6 +944,47 @@ h1, h2, h3, h4 {
 
 /* --- Proof --------------------------------------------------------------- */
 
+/* --- Testimonials --------------------------------------------------------
+   Both quotes here are real and attributable. There are only two because only
+   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
+   login wall. The layout is built for two rather than padded out to a grid of
+   three with invented ones.
+   ------------------------------------------------------------------------ */
+
+.says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
+
+.say { display: grid; gap: 1.15rem; }
+.say blockquote {
+  margin: 0;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.5rem);
+  line-height: 1.34;
+  color: var(--bone);
+  max-width: 19em;
+  text-wrap: pretty;
+  font-variant-numeric: normal;
+}
+.say--sub blockquote {
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 1.1vw + 0.9rem, 1.625rem);
+  line-height: 1.44;
+  color: #CFCAC1;
+  max-width: 24em;
+}
+.say__by {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.say__by b { color: var(--bone); font-weight: 500; }
+.say__by::before {
+  content: ''; width: clamp(28px, 4vw, 52px); height: 1px; flex: none;
+  background: var(--accent-ink);
+  transition: background 700ms var(--ease);
+}
+
 .proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
 .proof li {
   padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
@@ -929,7 +1015,12 @@ h1, h2, h3, h4 {
 
 /* --- Contact ------------------------------------------------------------- */
 
-.contact { position: relative; overflow: clip; }
+/* The page is now two screens: this hero (photo, headline, quick contact)
+   fills the first, and .contact-form below fills the next — the form no
+   longer shares the fold with the heading. Both use lvh, never svh (see the
+   project-wide rule on this): a section that must reliably cover the
+   viewport can't be sized off the browser-chrome-expanded measurement. */
+.contact { position: relative; overflow: clip; min-height: 100lvh; }
 .contact__plate { position: absolute; inset: 0; }
 .contact__plate img {
   width: 100%; height: 100%; object-fit: cover; object-position: 62% 46%;
@@ -939,13 +1030,41 @@ h1, h2, h3, h4 {
 .contact__plate::after {
   content: ''; position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.5) 46%, rgba(11,11,12,0.94) 100%),
-    linear-gradient(to right, rgba(11,11,12,0.93) 0%, rgba(11,11,12,0.72) 44%, rgba(11,11,12,0.3) 80%, rgba(11,11,12,0.5) 100%);
+    /* Lightened top-to-bottom too, 4 September: the header no longer sits at
+       the top of the frame (it's anchored to the bottom third now), so there
+       is nothing left up there that needs the old heavy top veil, and the
+       old 0.94 bottom stop was overpowering the horizontal fade below no
+       matter how light the right edge was — the two multiply together, so a
+       near-opaque bottom band stayed near-opaque everywhere along it,
+       including the right. Legibility for the copy and the contact rows now
+       leans on their own text-shadow (below) rather than solely on the veil. */
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0.18) 40%, rgba(11,11,12,0.55) 100%),
+    /* Dark enough on the left to carry the copy and the form, but the right
+       now clears to almost nothing at the edge — the car's rear wing was
+       getting buried under the same veil meant only for the text side. */
+    linear-gradient(to right, rgba(11,11,12,0.88) 0%, rgba(11,11,12,0.68) 36%, rgba(11,11,12,0.26) 66%, rgba(11,11,12,0.04) 100%);
 }
+/* `safe end`, not `center` or plain `end` — the same reasoning as every other
+   hero__inner on this site: the block sits low in the frame, but never spills
+   past the masthead on a viewport too short for it. Pushed further down than
+   a typical hero because there is no footer band pinned below it competing
+   for room. */
 .contact__inner {
   position: relative; z-index: 2;
   width: var(--page); margin-inline: auto;
-  padding: clamp(5.5rem, 15vh, 11rem) 0 clamp(5rem, 12vh, 9rem);
+  min-height: 100lvh;
+  display: grid; align-content: safe end;
+  padding: clamp(7rem, 18vh, 12rem) 0 clamp(4rem, 10vh, 6rem);
+}
+/* Now that the plate veil above is lighter (so the car reads on the right),
+   the copy carries its own dark halo instead of leaning on the photo being
+   dark enough everywhere it might sit — same reasoning as .hero__inner
+   elsewhere on this site, just written locally since .contact__inner isn't
+   a .hero. */
+.contact__inner .label,
+.contact__inner h2,
+.contact__inner .lede {
+  text-shadow: 0 1px 24px rgba(11,11,12,0.92), 0 1px 4px rgba(11,11,12,0.7);
 }
 .contact__rows {
   display: grid; grid-template-columns: minmax(0, 1fr);
@@ -963,7 +1082,9 @@ h1, h2, h3, h4 {
   font-size: clamp(1.1875rem, 2vw, 1.625rem);
   transition: color 400ms var(--ease);
   font-variant-numeric: normal;
+  text-shadow: 0 1px 18px rgba(11,11,12,0.9), 0 1px 3px rgba(11,11,12,0.7);
 }
+.contact__rows small { text-shadow: 0 1px 14px rgba(11,11,12,0.9); }
 .contact__rows a:hover { color: var(--accent-ink); }
 .contact__rows small {
   display: block;
@@ -977,6 +1098,91 @@ h1, h2, h3, h4 {
   .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
   .contact__rows > * { border-bottom: none; }
 }
+
+/* --- Enquiry form section (mock only — see the working note in the footer)
+   Its own screen, below the hero's fold, on the plain ground rather than the
+   photograph — so the panel gets a real (not photo-legibility) background:
+   --surface, a shade up from --ground, same treatment as a .grid figure. */
+/* Top padding has to clear the fixed masthead the same way the hero's does —
+   this section starts exactly where the first viewport ends, so the
+   masthead's gradient sits over its top ~114px on every load, not only on
+   scroll. Kept far smaller than the hero's own clearance because there's no
+   headline competing for the same space. */
+.contact-form {
+  min-height: 100lvh;
+  display: grid; align-content: center;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(8rem, 18vh, 9.5rem) 0 clamp(2rem, 5vh, 3rem);
+}
+/* Sized to actually fit the fold below the hero, not just to look tidy: the
+   whole panel (head, six fields, submit) is kept under ~540px so it clears a
+   714px-tall window with the masthead's ~114px still subtracted. Every gap
+   below was tightened from the first draft for exactly this reason — loosen
+   any of them and re-check against a short viewport, not just a tall one. */
+.enquiry {
+  max-width: 34rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+.enquiry__head { margin-bottom: clamp(0.85rem, 2vh, 1.25rem); }
+.enquiry__head h3 { color: var(--bone); margin-top: 0.3rem; }
+.enquiry__grid {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+.enquiry__pair {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+@media (min-width: 30rem) {
+  .enquiry__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem 1.5rem; }
+}
+.field { display: grid; gap: 0.35rem; }
+.field label {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; font-weight: 300;
+  color: var(--bone);
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--hair);
+  padding: 0.5rem 0;
+  border-radius: 0;
+  outline: none;
+  font-variant-numeric: normal;
+  transition: border-color 300ms var(--ease);
+}
+.field select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0L5 6L10 0Z' fill='%23A8A399'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.15rem center;
+  padding-right: 1.25rem;
+}
+.field select option { background: var(--surface); color: var(--bone); }
+.field textarea { resize: vertical; min-height: 3.75rem; line-height: 1.5; }
+.field input::placeholder, .field textarea::placeholder { color: var(--bone-dim); opacity: 0.75; }
+.field input:focus, .field select:focus, .field textarea:focus { border-bottom-color: var(--accent-ink); }
+
+.enquiry__foot {
+  margin-top: clamp(1rem, 2.5vh, 1.5rem);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem;
+}
+.enquiry__submit {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 1.75rem;
+  background: var(--accent);
+  color: var(--ground);
+  border: none; cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  transition: background-color 700ms var(--ease), opacity 300ms var(--ease);
+}
+.enquiry__submit:hover { opacity: 0.86; }
+.enquiry__note { font-size: 0.75rem; line-height: 1.5; color: var(--bone-dim); max-width: 22em; }
 
 
 /* --- The mark ------------------------------------------------------------
@@ -1091,6 +1297,20 @@ h1, h2, h3, h4 {
   .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
   .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
   .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  /* The masthead is fixed, gradient-backed, and sits on top of every sticky
+     stage (z-index 40 vs the stage's own content), so its ~114px is never
+     actually free — a dark roofline sitting there blends into the
+     masthead's own dark gradient on a near-black car. But this is the
+     slider's payoff "whole car" shot, and CSS transform:scale(s) crops the
+     SAME fraction (1 - 1/s) off every edge regardless of aspect or origin —
+     the first attempt here (--pz:1.42, ~30% off every edge) traded away
+     enough of the car's length and the roofline itself to stop reading as
+     a wide shot at all. --pz:1.2 crops a lighter ~17% per edge: real but
+     modest relief, not a full fix — the roofline still sits close to the
+     top, just with a little more clearance than the unmodified crop had. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.2; --po: 46% 38%; }
+  /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
+  .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
 }
 
 @media (max-width: 55.99rem) {
@@ -1155,6 +1375,90 @@ h1, h2, h3, h4 {
   .pill { display: none; }
   * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
 }
+
+/* --- The build library ----------------------------------------------------
+   The one page on the site whose job is to list many cars at once, so it is
+   the one page with the real risk of reading as a shop. The device against
+   that: a single numbered column, not a grid of equal boxes. A photograph
+   only appears where DPM's own photography already exists and has its own
+   page to back it up — everything still awaiting content gets no image at
+   all rather than a placeholder pretending to be one. An empty box reads as
+   broken; a text-only row reads as "not yet catalogued", which is the truth.
+   Runs on the same tokens, type and .golink/.chapter/.band as every other
+   page — nothing here invents a second visual language. ------------------- */
+
+.ledger { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+
+.ledger__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  padding: clamp(1.75rem, 4vh, 2.5rem) 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+@media (min-width: 40rem) {
+  .ledger__item--photo { grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+}
+
+.ledger__thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  background: var(--surface);
+}
+.ledger__thumb img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.05) brightness(1.1);
+}
+
+.ledger__n {
+  display: block;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.5rem;
+}
+
+.ledger__name {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: clamp(1.375rem, 1.7vw + 0.9rem, 1.875rem);
+  line-height: 1.1;
+  color: var(--bone);
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+
+.ledger__meta {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem;
+  font-size: 0.75rem; letter-spacing: 0.02em;
+  color: var(--bone-dim);
+  margin: 0 0 0.65rem;
+  font-variant-numeric: normal;
+}
+.ledger__meta b { color: var(--bone); font-weight: 500; }
+
+.ledger__note {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: 0.9375rem; line-height: 1.55;
+  color: #CFCAC1;
+  max-width: 42em;
+  margin: 0 0 0.85rem;
+  font-variant-numeric: normal;
+}
+
+.ledger__status {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0 0 0.65rem;
+}
+.ledger__status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--hair); }
+.ledger__status--live::before { background: var(--accent-ink); }
 </style>
 </head>
 <body>
@@ -1184,12 +1488,16 @@ h1, h2, h3, h4 {
     </g></symbol>
 </svg>
 
+<p class="buildflag" data-note>Working copy &mdash; carries notes. <a href="../client/library.html">Client version</a></p>
+<p class="buildflag" data-note>Phase 0 design prototype for the build-library page &mdash; see
+  <code>output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/session.md</code>. Not yet wired
+  into the other pages&rsquo; nav; that follows once a direction is approved.</p>
 
 <header class="masthead">
   <a class="wordmark" href="index.html" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 500 342"><use href="#dpm-mark"/></svg></a>
-  <a class="back" href="index.html">All work</a>
   <nav aria-label="Primary">
     <a href="index.html#work">The work</a>
+    <a href="library.html" class="is-active" aria-current="page">Every restoration</a>
     <a href="workshop.html">The workshop</a>
     <a href="index.html#proof">Proof</a>
     <a href="contact.html">Contact</a>
@@ -1199,9 +1507,8 @@ h1, h2, h3, h4 {
 
 <nav class="pill" id="pill" aria-label="Contents">
   <a href="index.html">Home</a>
-  <a href="index.html#work">Work</a>
-  <a href="workshop.html">Workshop</a>
-  <a href="index.html#proof">Proof</a>
+  <a href="#delivered">Delivered</a>
+  <a href="#in-progress">In the workshop</a>
   <a href="contact.html">Contact</a>
 </nav>
 
@@ -1209,496 +1516,215 @@ h1, h2, h3, h4 {
 
 <main id="main">
 
-<!-- ═════════════════ HERO ═════════════════ -->
-<section class="track hero has-resolve" id="top" data-sheen data-dir="ltr" data-rev="0.58,0.86"
-         aria-labelledby="hero-h">
-  <figure class="stage">
-    <div class="plate">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg"
-           width="1280" height="853" fetchpriority="high" decoding="async"
-           style="--pz:1.6; --po:42% 52%; --pbri:1.34; --psat:1.18; --pcon:1.04"
-           alt="Macro on the P1800's nearside headlamp: a polished chrome ring and lens, with the deep Candy Red front wing curving away behind it.">
-      <div class="veil veil--l"></div>
-      <div class="veil veil--r"></div>
-      <div class="spec"></div>
-    </div>
-    <div class="resolve">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
-           width="1280" height="853" decoding="async"
-           style="--pz:1.06; --po:50% 48%"
-           alt="The rear three-quarter of the Candy Red Volvo P1800 in low sun, bare trees mirrored the full length of the rear wing above the chrome waistline.">
-    </div>
-    <div class="hero__inner">
-      <p class="label label--accent">No. 01 &nbsp;·&nbsp; The record</p>
-      <h1 class="h-hero" id="hero-h">Volvo P1800, Candy Red</h1>
-      <p class="lede">A year in the workshop. <span class="fig">1,300</span> hours of labour.
-        Chassis <span class="fig">26282</span>.</p>
-      <div class="hero__foot">
-        <p class="label"><a href="index.html" style="text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:.2rem">&larr;&nbsp; Back to the homepage</a></p>
+<!-- ═════════════════ PAGE HEAD ═════════════════ -->
+<div class="band" id="top">
+  <div class="section-head section-head--intro">
+    <p class="label label--accent">Every restoration &nbsp;·&nbsp; Berwick, East Sussex</p>
+    <h1 class="h-major" style="max-width:17ch">Every car that&rsquo;s passed through the
+      workshop.</h1>
+    <p class="lede" style="max-width:34em">The homepage carries a rotating selection. This is
+      the whole record &mdash; finished and delivered, and still on the ramps right now.</p>
+  </div>
+</div>
+
+<!-- ═════════════════ DELIVERED ═════════════════ -->
+<div class="band" id="delivered" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="chapter">
+    <span class="chapter__kind">Finished and delivered</span>
+  </div>
+  <ul class="ledger">
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+             width="1280" height="853" loading="lazy" decoding="async"
+             alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
       </div>
-    </div>
-    <figcaption class="stage__cap">
-      <span class="stage__cap-line stage__cap-line--macro">
-        <span><b>Above &mdash; the P1800's nearside headlamp.</b> Chrome ring, lens, and the Candy
-          Red front wing curving away behind it.</span>
-      </span>
-      <span class="stage__cap-line stage__cap-line--wide">
-        <span><b>Above &mdash; the rear three-quarter, whole.</b> Bare winter trees mirrored the
-          full length of the rear wing, unbroken from the door shut to the tail.</span>
-      </span>
-    </figcaption>
-  </figure>
-  <div class="track__room track__room--long"></div>
-</section>
-
-<!-- ═════════════════ 01 · THE RECORD ═════════════════ -->
-<div class="band" id="record">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">01</span>
-    <span class="chapter__kind">The record</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">One car,<br>documented in full</h2>
-    <p class="prose">Documented the way an auction house documents one: what it is, what was
-      asked for, how long it took, who signed it. Every owner gets this, whether or not it ever
-      appears on a website.</p>
-  </div>
-  <div class="lot-two">
-    <div>
-      <p class="prose">We wrote this entry on the day the car went on the transporter: the
-        colour, the time it took, the hours in it, the list of what the owner asked for, and the
-        size of the photographic file that backs all of it up.</p>
-      <p class="prose">Most of what is below has never been on a website before &mdash; it lived
-        in the owner&rsquo;s file, which is where it matters.</p>
-    </div>
-    <dl class="record">
-      <div><dt>Marque</dt><dd>Volvo</dd></div>
-      <div><dt>Model</dt><dd>P1800</dd></div>
-      <div><dt>Colour</dt><dd><span class="swatch"><i aria-hidden="true"></i>Candy Red</span></dd></div>
-      <div><dt>In our hands</dt><dd>A year</dd></div>
-      <div><dt>Labour</dt><dd><b class="fig">1,300</b> hours</dd></div>
-      <div><dt>Chassis</dt><dd class="fig">26282</dd></div>
-      <div><dt>Photographic file</dt><dd>Over <b class="fig">2,000</b> photographs</dd></div>
-      <div><dt>Signed</dt><dd>Riveted plaque, chassis <span class="fig">26282</span></dd></div>
-    </dl>
-  </div>
-</div>
-
-<!-- ═════════════════ 02 · THE SPECIFICATION ═════════════════ -->
-<div class="band" id="spec">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">02</span>
-    <span class="chapter__kind">The owner's specification</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">What the owner<br>asked for</h2>
-    <p class="prose">Five changes, exactly as the owner listed them. A concours restoration is
-      not always a return to standard &mdash; more often it is a considered argument with the
-      factory, and the argument belongs in the record.</p>
-  </div>
-  <ol class="spec-list">
-    <li>
-      <span class="spec-list__n">i</span>
-      <span class="spec-list__name">Candy Red colour</span>
-      <span class="spec-list__note">A translucent colour laid over a metallic base. It reads
-        black in shadow and lifts to a deep red where the sun catches it, so the car is never
-        quite the same colour twice.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">ii</span>
-      <span class="spec-list__name">Wire wheel conversion</span>
-      <span class="spec-list__note">Splined hubs in place of the factory bolt pattern, and a
-        chrome wire wheel at each corner.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">iii</span>
-      <span class="spec-list__name">Power steering conversion</span>
-      <span class="spec-list__note">The one change on this list the owner feels rather than
-        sees.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">iv</span>
-      <span class="spec-list__name">Smoothed chrome bumpers</span>
-      <span class="spec-list__note">Over-riders and their fixings removed, the shells filled,
-        levelled and re-plated. Chrome shows every thousandth you leave behind.</span>
-    </li>
-    <li>
-      <span class="spec-list__n">v</span>
-      <span class="spec-list__name">Lowered</span>
-      <span class="spec-list__note">Ride height set down from standard, which resets every
-        panel gap and arch line you have just spent months getting right.</span>
-    </li>
-  </ol>
-</div>
-
-<!-- ═════════════════ 03 · THE PLAQUE ═════════════════ -->
-<div class="band" id="plaque">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">03</span>
-    <span class="chapter__kind">The signature</span>
-  </div>
-</div>
-<figure class="plaque">
-  <div class="plaque__img">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-10.jpg"
-         width="1280" height="853" loading="lazy" decoding="async"
-         alt="A brushed metal plaque riveted to the Candy Red rocker cover in the engine bay. It is engraved: Restored By DPM Autobody, Artists of Automotive Restoration, Chassis No 26282.">
-    <p class="plaque__line"><span>Restored&nbsp;By <b>DPM&nbsp;Autobody</b>. Artists of Automotive
-      Restoration. Chassis&nbsp;No: <i class="fig">26282</i>.</span></p>
-  </div>
-  <figcaption class="plaque__note">
-    <p class="caption">
-      <span><b>Above &mdash; the plaque itself,</b> riveted to the rocker cover in this car's
-        engine bay. The words on the photograph are the words engraved on it.</span>
-    </p>
-    <p class="prose">This goes into the engine bay of every car that leaves here, under the
-      chassis number, where nobody will read it until somebody opens the car up in forty
-      years&rsquo; time. It is not a badge for the owner. It is a signature for whoever comes
-      next.</p>
-  </figcaption>
-</figure>
-
-<!-- ═════════════════ 04 · THE CAR, IN DETAIL ═════════════════ -->
-<div class="band" id="detail">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">04</span>
-    <span class="chapter__kind">The car, in detail</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Paint and chrome,<br>because that is what is bought</h2>
-    <p class="prose">Paint and chrome are what an owner actually buys, and they are the two
-      things a photograph either proves or fails to. These are ours, taken as the car was
-      finished.</p>
-  </div>
-  <div class="grid">
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-02.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A chrome wire wheel and eared spinner on the P1800, spokes bright against the dark tyre.">
-      <figcaption><b>Wire wheel and eared spinner.</b> Specification item&nbsp;ii, on the
-        car.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-03.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800's nearside headlamp: a polished chrome ring, the lens, and the deep Candy Red front wing curving away behind it.">
-      <figcaption><b>Headlamp, chrome ring and front wing,</b> uncropped.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-06.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800 dashboard: four round instruments in a brushed metal binnacle, a slim steering wheel rim and toggle switches below.">
-      <figcaption><b>Instruments and binnacle.</b> Interior, as delivered.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-07.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A close view of the P1800's grey vinyl seat facing, fluted, with the Volvo roundel embossed into the panel.">
-      <figcaption><b>Seat facing, roundel embossed.</b> Trim is one of the two things that go out
-        of house.</figcaption>
-    </figure>
-    <figure class="grid--wide">
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-05.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Close on the P1800's chrome wing mirror and A-pillar, with bare trees mirrored down the Candy Red panel behind it.">
-      <figcaption><b>Wing mirror, A-pillar, and the reflection running behind them.</b> A
-        reflection only stays straight on a panel that is straight, so this is not decoration
-        &mdash; it is the evidence.</figcaption>
-    </figure>
-  </div>
-
-</div>
-
-<!-- ═════════════════ 05 · UNDERNEATH ═════════════════ -->
-<div class="band" id="under">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">05</span>
-    <span class="chapter__kind">Concours evidence</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Underneath,<br>which is where it is judged</h2>
-    <p class="prose">A concours car is judged on its back as well as its face. These are the
-      photographs a restoration house shows last and a judge asks for first, so they sit here
-      &mdash; inside the record, below the paint, doing the job they are actually for.</p>
-  </div>
-  <div class="grid grid--3">
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-08.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The P1800 engine bay complete: red-painted rocker cover and inner wings, blue and yellow air filters, plug leads dressed and routed.">
-      <figcaption><b>Engine bay, finished and dressed.</b> The plaque in section 03 is riveted to
-        the rocker cover in this frame.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-09.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Twin SU carburettors on the P1800 with blue and yellow Volvo-marked air filter housings.">
-      <figcaption><b>Twin carburettors, filters as supplied.</b> Engine building is the other
-        thing that goes out of house.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-11.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The factory Volvo identification plate riveted to the P1800's painted inner wing, stamped and unpainted.">
-      <figcaption><b>The factory plate, left as found.</b> Provenance is not something you
-        repaint.</figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-12.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="The underside of the P1800 on a lift: painted floors, exhaust, rear suspension and a yellow damper, all clean and finished.">
-      <figcaption><b>Floors, exhaust and rear suspension, on the lift.</b></figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-13.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="Underbody detail of the P1800: a red painted floor pan with copper brake pipe runs and clean fixings.">
-      <figcaption><b>Pipe runs and fixings, underbody.</b></figcaption>
-    </figure>
-    <figure>
-      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-14.jpg" width="1280" height="853"
-           loading="lazy" decoding="async"
-           alt="A coil spring and yellow damper in the P1800's suspension, photographed from beneath the car.">
-      <figcaption><b>Spring and damper.</b> And, in the ride height, specification
-        item&nbsp;v.</figcaption>
-    </figure>
-  </div>
-</div>
-
-<!-- ═════════════════ 06 · THE LOG ═════════════════ -->
-<div class="band" id="log">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">06</span>
-    <span class="chapter__kind">The log</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Four entries,<br>each signed by the man who did the work</h2>
-    <p class="prose">Nobody writes about a job they did not stand in front of, and the
-      difficult weeks stay in &mdash; a restoration story with no problem in it is an
-      advertisement.</p>
-  </div>
-
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 09 &mdash; Out in the daylight</span>
-        </div>
-        <h3 class="h-sub">We photographed it more than we painted it</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">D</span>
-          <span><b>Dave</b> &mdash; paint and finish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">Over <span class="fig">2,000</span> photographs went into the file for
-            this one car. Not for the website. For the owner, and for whoever has it in forty
-            years and wants to know what is underneath the paint before they cut into it.</p>
-          <p class="prose">People assume the photographs are the marketing and the car is the
-            work. It is the other way round. The photographs are the only part of the job that
-            survives after the next owner has had it repainted by somebody else.</p>
-          <p class="prose">I walked round it twice before it went up the ramps onto the
-            transporter. That is not for the owner's benefit, it is for mine. Once it has gone
-            I cannot do anything about what I have missed.</p>
-        </div>
-        <figure class="bound">
-          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg" width="1280" height="853"
-               loading="lazy" decoding="async"
-               alt="The completed Candy Red Volvo P1800 photographed from the front three-quarter on a lane in flat winter daylight.">
-          <figcaption class="caption">
-            <span><b>The frame Dave is describing:</b> the finished P1800 on the lane,
-              the morning it went on the transporter.</span>
-          </figcaption>
-        </figure>
+      <div>
+        <span class="ledger__n">No. 01</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Candy Red</h2>
+        <p class="ledger__meta"><b>Chassis 26282</b> &nbsp;·&nbsp; 1,300 hours &nbsp;·&nbsp; A year in the building
+          <span data-note style="display:block; margin-top:0.35rem; color:#E3C88A;">Unreconciled: David&rsquo;s
+            2026-09-08 email gives chassis 23925 for what reads as this same car (owner Tonja,
+            commissioned by Ahmet). Confirm which is correct before this figure is repeated anywhere else.</span></p>
+        <p class="ledger__note">Full body and paint, plus five changes the owner specified
+          himself &mdash; wire wheels, power steering, smoothed chrome bumpers, lowered. The
+          most completely documented car DPM have finished.</p>
+        <a class="golink" href="volvo-p1800.html">The full record of the P1800</a>
       </div>
-    </div>
-  </article>
+    </li>
 
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 07 &mdash; Colour, decided in daylight</span>
-        </div>
-        <h3 class="h-sub">Candy is the one you cannot go back into</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">P</span>
-          <span><b>Paul</b> &mdash; colour, mixing, polish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">A candy is a see-through colour over a metallic ground. The depth you
-            are looking at is not pigment, it is distance &mdash; light going down through the
-            colour, off the base, and back out at you.</p>
-          <p class="prose">Which means the colour is built by how much you put on, not by what is
-            in the tin. Two extra passes on one wing and that wing is a shade darker than the one
-            next to it, for ever. <strong>You cannot blend into a candy and you cannot spot-repair
-            one.</strong> If you get it wrong on a door you do the whole side again.</p>
-          <p class="prose">So it is done in one go, same gun, same pressure, same distance, same
-            speed of arm, every panel, and nobody talks to you while you are doing it.</p>
-        </div>
-        <figure class="bound">
-          <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/workshop/spray-gun.jpg" width="2400" height="1350"
-               loading="lazy" decoding="async"
-               alt="A gloved hand holding a gravity-fed spray gun in the booth, the DPM Paint Shop signwriting soft in the background.">
-          <figcaption class="caption">
-            <span><b>The gun, the cup, and the last decision of the day.</b> Same gun, same
-              pressure, same distance, every panel.</span>
-          </figcaption>
-        </figure>
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 02</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Red</h2>
+        <p class="ledger__meta">Over 1,300 hours in body and paint</p>
+        <p class="ledger__note">Full body restoration by DPM; mechanical and trim work done by
+          another firm.</p>
+        <p class="caption" data-note>
+          <span class="credit credit--copy">Not built for the prototype</span>
+          <span>Video bug to fix before this page exists: the P1800 currently live on the site
+            carries a video that belongs to <em>this</em> car, not the one it&rsquo;s attached
+            to. Identify which live page has it misattributed and correct that first &mdash;
+            see BACKLOG item 5.</span>
+        </p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-2"
+           data-indicative="Not built for the prototype. On a live site this opens this P1800's own record, in the same form as No. 01.">The full record of this P1800</a>
+        <span class="caption" id="lib-note-2" hidden></span>
       </div>
-    </div>
-  </article>
+    </li>
 
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 04 &mdash; Metal first</span>
-        </div>
-        <h3 class="h-sub">The bumper came back from the platers with a shadow in it</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">E</span>
-          <span><b>Ellis</b> &mdash; metalwork and prep</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">Smoothing a bumper is mostly making holes disappear. The over-rider
-            fixings come out, the slots get filled, and then the shell has to be levelled by hand
-            until there is nothing left to find.</p>
-          <p class="prose">Chrome does not hide work. It magnifies it. Paint sits on a panel and
-            fills a little; plating goes on in microns and follows every single thing underneath
-            it, and then polishes it up so it catches the light.</p>
-          <p class="prose">The first one came back from the platers looking right in the workshop
-            and wrong in the doorway. Held up to daylight there was a soft dark band about four
-            inches long across the face of it, where I had taken a whisker too much out and left
-            a hollow you could not feel with a thumb. Nothing measured it. The sky measured it.</p>
-          <p class="prose">Stripped, filled again, levelled with a long file rather than a block
-            this time, and back to the platers. Three weeks. <strong>I would rather find it in the
-            doorway than have the owner find it on a lawn at a show.</strong> It was not a good
-            fortnight and I am not going to write it up as one.</p>
-        </div>
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 03</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; pair, one client</h2>
+        <p class="ledger__meta">Two cars, one owner</p>
+        <p class="ledger__note">Both won show awards. Names and specific placings to follow
+          from the owner before this can be written up properly.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-3"
+           data-indicative="Not built for the prototype. Awards and show names still pending from the client.">The full record of the pair</a>
+        <span class="caption" id="lib-note-3" hidden></span>
       </div>
-    </div>
-  </article>
+    </li>
 
-  <article class="entry">
-    <div class="entry__grid">
-      <header class="entry__head">
-        <div class="entry__meta">
-          <span class="entry__date">Stage 05 &mdash; Straight before shiny</span>
-        </div>
-        <h3 class="h-sub">Nothing over looked. Nothing left untouched.</h3>
-        <div class="entry__by">
-          <span class="entry__initial" aria-hidden="true">D</span>
-          <span><b>Dave</b> &mdash; paint and finish</span>
-        </div>
-      </header>
-      <div class="entry__main">
-        <div class="entry__body">
-          <p class="prose">That is the line we already write under our own photographs, and it is
-            not a boast, it is a working rule. It means that if a panel is off the car anyway, it
-            gets done properly, even when nobody is ever going to look at it.</p>
-          <p class="prose">Thirteen hundred hours is not one heroic month. It is a year of
-            afternoons where the visible progress is that a gap is now the same at the top as it
-            is at the bottom.</p>
-          <p class="prose">People ask what takes the time. The honest answer is that the last
-            five per cent of a car takes about a third of it, and there is no way of buying your
-            way past that bit.</p>
-        </div>
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
+             width="2400" height="1351" loading="lazy" decoding="async"
+             alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
       </div>
-    </div>
-  </article>
-  <hr class="rule">
+      <div>
+        <span class="ledger__n">No. 04</span>
+        <h2 class="ledger__name">Bentley S3 Continental, 1963</h2>
+        <p class="ledger__note">A second S3 &mdash; a different car, a different year &mdash;
+          is in the workshop now. See No. 09, below.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-4"
+           data-indicative="Not built for the prototype. On a live site this opens the Bentley's own record, in the same form as No. 01.">The full record of the Bentley</a>
+        <span class="caption" id="lib-note-4" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg"
+             width="1500" height="900" loading="lazy" decoding="async"
+             alt="A Jaguar in Aston Martin Sea Green paint, in the spray booth.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 05</span>
+        <h2 class="ledger__name">Jaguar &mdash; Aston Martin Sea Green</h2>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-5"
+           data-indicative="Not built for the prototype. On a live site this opens the Jaguar's own record, in the same form as No. 01.">The full record of the Jaguar</a>
+        <span class="caption" id="lib-note-5" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg"
+             width="1600" height="1067" loading="lazy" decoding="async"
+             alt="Mark Antwis's Jaguar E-Type 941 PVO, front three-quarter.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 06</span>
+        <h2 class="ledger__name">Jaguar E-Type &mdash; 941 PVO</h2>
+        <p class="ledger__note">Series 1 3.8 FHC, owned by Mark Antwis. Featured over nine
+          pages in the E-Type Owners Club Magazine, April 2026.</p>
+        <a class="golink" href="etype-941pvo.html">The full record of the E-Type</a>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 07</span>
+        <h2 class="ledger__name">Porsche 356 SC</h2>
+        <p class="ledger__note">Full body restoration and a mechanical rebuild. The customer
+          refitted the engine and trim himself to complete the build. Finished with some
+          subtle modifications.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-7"
+           data-indicative="Not built for the prototype. Photography received 2026-09-08, not yet reviewed or plate-redacted.">The full record of the 356</a>
+        <span class="caption" id="lib-note-7" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 08</span>
+        <h2 class="ledger__name">Aston Martin DB6 &mdash; the pink one</h2>
+        <p class="ledger__meta">Crashed at La Carrera Panamericana, 2022</p>
+        <p class="ledger__note">DPM repaired the body, including a new door fabricated in
+          house, then finished the car in pink at the owner&rsquo;s request &mdash; to stand
+          out at the next race. Due to race again.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-8"
+           data-indicative="Not built for the prototype. Photography received 2026-09-08, not yet reviewed or plate-redacted.">The full record of the DB6</a>
+        <span class="caption" id="lib-note-8" hidden></span>
+      </div>
+    </li>
+
+  </ul>
 </div>
 
-<!-- ═════════════════ 07 · NINE STAGES ═════════════════ -->
-<div class="band" id="stages">
+<!-- ═════════════════ IN THE WORKSHOP NOW ═════════════════ -->
+<div class="band" id="in-progress" data-accent="#C7BBA1" data-ink="#D8CBAE">
   <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">07</span>
-    <span class="chapter__kind">How a car goes through</span>
+    <span class="chapter__kind">In the workshop now</span>
   </div>
-  <div class="section-head">
-    <h2 class="h-major">Nine stages</h2>
-    <p class="prose">These are our names for them, not the trade's. Durations are the range across
-      the cars in the shop, not a quotation for yours.</p>
-  </div>
-  <ol class="stages">
-    <li><span class="stages__n">01</span><span class="stages__name">In, and photographed as she came</span><span class="stages__note">Every panel, every gap, every bit of rot, before a spanner touches it.</span><span class="stages__time">1 day</span></li>
-    <li><span class="stages__n">02</span><span class="stages__name">Off it comes</span><span class="stages__note">Strip to a shell. Bagged, labelled, shelved. Nothing goes in a box unmarked.</span><span class="stages__time">1&ndash;2 weeks</span></li>
-    <li><span class="stages__n">03</span><span class="stages__name">Down to what is really there</span><span class="stages__note">Media blast or chemical strip, then the conversation nobody enjoys.</span><span class="stages__time">2&ndash;3 weeks</span></li>
-    <li><span class="stages__n">04</span><span class="stages__name">Metal first</span><span class="stages__note">Panels made, let in, welded, planished. This is where the time goes.</span><span class="stages__time">3 weeks &ndash; 5 months</span></li>
-    <li><span class="stages__n">05</span><span class="stages__name">Straight before shiny</span><span class="stages__note">Block work over bare metal. If it needs filler to look right, it is not right.</span><span class="stages__time">3&ndash;6 weeks</span></li>
-    <li><span class="stages__n">06</span><span class="stages__name">Primer, and the guide coat</span><span class="stages__note">Etch, epoxy, high-build. Then black mist and a long block, twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
-    <li><span class="stages__n">07</span><span class="stages__name">Colour, decided in daylight</span><span class="stages__note">Spray-out cards judged outside the booth, against the car's own metal.</span><span class="stages__time">2 days</span></li>
-    <li><span class="stages__n">08</span><span class="stages__name">Clear, cut and polish</span><span class="stages__note">Coats on, a week to harden, then back to flat by hand and machine.</span><span class="stages__time">2&ndash;3 weeks</span></li>
-    <li><span class="stages__n">09</span><span class="stages__name">Out in the daylight</span><span class="stages__note">Built back up, gaps set, plaque riveted in, then pushed outside and walked round twice.</span><span class="stages__time">2&ndash;4 weeks</span></li>
-  </ol>
-</div>
+  <ul class="ledger">
 
-<!-- ═════════════════ 08 · THE PAINT ═════════════════ -->
-<div class="band" id="paint">
-  <div class="chapter">
-    <span class="chapter__mark" aria-hidden="true">08</span>
-    <span class="chapter__kind">The paint on this car</span>
-  </div>
-  <div class="section-head">
-    <h2 class="h-major">Candy Red,<br>and what that actually means</h2>
-    <p class="prose">A specification for one car, not a chart of swatches. Candy is the
-      reason this car photographs the way it does, and the reason it could not be repaired if
-      anybody ever kerbs it.</p>
-  </div>
-  <div class="paintspec">
-    <div>
-      <div class="paintspec__swatch" role="img"
-           aria-label="A rendering of Candy Red as it behaves in light: nearly black at the edges of the panel, deepening to red, and lifting to a bright translucent red where a highlight crosses it."></div>
-      <p class="caption">
-        <span><b>Black in shadow, deep red in sun.</b> That is the whole of what a candy does, and
-          it is why the car looks like two different colours in the photographs above.</span>
-      </p>
-    </div>
-    <div>
-      <dl class="record">
-        <div><dt>Colour</dt><dd><b>Candy Red</b> &mdash; our name for it, first item on the owner&rsquo;s list</dd></div>
-        <div><dt>System</dt><dd>Candy: a translucent colour laid over a metallic ground</dd></div>
-        <div><dt>Where the depth comes from</dt><dd>Not pigment. Light travelling down through the colour, off the base, and back out</dd></div>
-        <div><dt>How the colour is set</dt><dd>By the number of passes, not by what is in the tin</dd></div>
-        <div><dt>Number of coats</dt><dd>In this car&rsquo;s file</dd></div>
-        <div><dt>Manufacturer and code</dt><dd>In this car&rsquo;s file</dd></div>
-        <div><dt>Repairable</dt><dd>No. A candy cannot be blended into, and cannot be spot-repaired</dd></div>
-      </dl>
-    </div>
-  </div>
-</div>
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 09</span>
+        <h2 class="ledger__name">Bentley S3, 1964</h2>
+        <p class="ledger__meta">Over 1,000 hours of hand-crafted metalwork to date</p>
+        <p class="ledger__note">All new panels made by hand, in house. The chassis is being
+          rebuilt now, ahead of mating it back to the body for final prep and paint. A
+          different car from the finished Continental at No. 04.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-9"
+           data-indicative="Not built for the prototype. In progress — will show before shots alongside the raw metalwork, per David's request.">Follow this restoration</a>
+        <span class="caption" id="lib-note-9" hidden></span>
+      </div>
+    </li>
 
-<!-- ═════════════════ 09 · ENQUIRIES ═════════════════ -->
-<section class="contact" id="contact" aria-labelledby="contact-h">
-  <div class="contact__plate">
-    <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-04.jpg"
-         width="1280" height="853" loading="lazy" decoding="async" alt="">
-  </div>
-  <div class="contact__inner">
-    <div class="chapter" style="border-top-color:var(--hair)">
-      <span class="chapter__mark" aria-hidden="true">09</span>
-      <span class="chapter__kind">Enquiries</span>
-    </div>
-    <h2 class="h-major" id="contact-h" style="margin-top:clamp(1.75rem,4vh,2.75rem); max-width:16ch">Bring us the car you
-      are not willing to compromise on.</h2>
-    <div class="contact__rows">
-      <a href="tel:+441323552827"><small>Telephone</small>01323 552827</a>
-      <a href="mailto:info@dpmautobody.co.uk"><small>Email</small>info@dpmautobody.co.uk</a>
-      <p><small>Workshop</small>Berwick, East Sussex<br>By appointment</p>
-    </div>
-    <p class="prose" style="margin-top:clamp(2.5rem,6vh,4rem)">Ask for <strong>David
-      Pearce-Martin</strong>. He would rather see a car than quote from photographs of one, so
-      the first conversation usually ends with a date to bring it over. Dave, Ellis and Paul are
-      who you will meet when you do.</p>
-    <p style="margin-top:clamp(2.5rem,6vh,3.5rem)"><a class="golink" href="index.html">Back to the homepage</a></p>
-  </div>
-</section>
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 10</span>
+        <h2 class="ledger__name">Volvo, model to be confirmed</h2>
+        <p class="ledger__note">A near-complete full restoration &mdash; unique, no other
+          example restored to this standard. Once owned by a well-known singer, name to be
+          confirmed by David.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-10"
+           data-indicative="Not built for the prototype. Model and previous owner still to be confirmed.">Follow this restoration</a>
+        <span class="caption" id="lib-note-10" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 11</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Pearl White</h2>
+        <p class="ledger__meta">Now in reassembly &nbsp;·&nbsp; 1,300 hours to date
+          <span data-note style="display:block; margin-top:0.35rem; color:#E3C88A;">Same figure as No. 01
+            and No. 02 &mdash; check this is a genuinely separate total before publishing all three.</span></p>
+        <p class="ledger__note">Every part refurbished, all new body panels, a custom pearl
+          white respray commissioned by the client, plus a single-piece bumper conversion and
+          power-steering conversion.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-11"
+           data-indicative="Not built for the prototype. In progress — will show before shots alongside reassembly, per David's request.">Follow this restoration</a>
+        <span class="caption" id="lib-note-11" hidden></span>
+      </div>
+    </li>
+
+  </ul>
+  <p class="caption" data-note style="margin-top:2rem;">
+    <span class="credit credit--copy">Not on this page yet</span>
+    <span>Aston Martin T. Green was removed at David&rsquo;s request (insufficient build
+      info). A car referred to as &ldquo;the 262&rdquo; may replace it once its chassis number
+      arrives &mdash; not added here until it does.</span>
+  </p>
+</div>
 
 </main>
 
@@ -1721,6 +1747,29 @@ h1, h2, h3, h4 {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95C2 8.93 2 12 2 12s0 3.07.42 4.81a2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95C22 15.07 22 12 22 12s0-3.07-.42-4.81zM9.9 15.2V8.8L15.6 12l-5.7 3.2z"/></svg>
         </a>
       </nav>
+    </div>
+    <div class="note" id="imagery" data-note>
+      <h2>Working notes &mdash; not in the client version</h2>
+      <p><b>This is a Phase 0 design prototype, not a build.</b> Its only job is to answer one
+        question: does a single numbered column, extending the same visual language as the
+        homepage and the P1800 page, avoid reading as a shop when it has to list a dozen cars at
+        once? Everything else &mdash; final copy, real photography for the eight new builds,
+        the exact set of cars, group order &mdash; is provisional. See
+        <code>output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/session.md</code> Phase 0.</p>
+      <p><b>No photograph on this page was fabricated.</b> Where DPM&rsquo;s own photography
+        already exists and has an approved page behind it (No. 01, 04, 05, 06), the row carries
+        a thumbnail. Every other row is deliberately text-only rather than carrying a placeholder
+        box &mdash; a grey box reads as broken, a text-only row reads as &ldquo;not yet
+        catalogued,&rdquo; which is the truth for those eight builds until their iCloud albums are
+        pulled and plate-redacted.</p>
+      <p><b>Two facts are flagged unreconciled, in the rows themselves</b> rather than silently
+        resolved: the P1800&rsquo;s chassis number (26282 on the plaque vs. 23925 from David&rsquo;s
+        2026-09-08 email) and the repeated &ldquo;1,300 hours&rdquo; figure across three separate
+        P1800s. Both need David&rsquo;s confirmation before any of these rows go live.</p>
+      <p><b>Not wired into the other pages&rsquo; navigation yet.</b> This page&rsquo;s own
+        masthead links to it and marks it active; the homepage, workshop and contact pages don&rsquo;t
+        yet link here. That&rsquo;s deliberate &mdash; nav wiring is a Phase 4 decision, once a
+        library-page direction is actually approved, not a Phase 0 one.</p>
     </div>
       <p class="credit-line">Built by <a href="https://digitalconsultingservices.co.uk" target="_blank" rel="noopener">digitalconsultingservices.co.uk</a></p>
 </div>
