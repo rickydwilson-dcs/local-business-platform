@@ -6,6 +6,16 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-11
+
+### Platform
+
+- **Documented a Tailwind arbitrary-breakpoint gotcha that silently hides content: `min-[Xrem]:`/`max-[Xrem]:` variants emit zero CSS against a `px`-based `screens` config.** Discovered building `sites/dpm-autobody`'s real pages — the primary nav was invisible on every page, with correct component code, correct data, and correct classes everywhere except this one. Tailwind treats a `rem` arbitrary value as "mixed units" against the platform's `px` screens and drops the variant with no build warning. Use a `px` arbitrary value or a named `screens` entry instead; verify by checking the compiled CSS for the expected `@media` rule, not just that the build succeeded. Added to root `CLAUDE.md`'s CSS Syntax section.
+
+### Sites
+
+- **DPM Autobody: shipped real pages** (header, footer, home, workshop, contact, library, and two individual build pages), replacing base-template's generic placeholders, on `develop`. A visual-fidelity gate against the approved static prototype took three rounds of fixes to clear — see `sites/dpm-autobody/CHANGELOG.md` for detail. The other 10 library builds, the homepage's featured-build rotation, the live contact form, and the workshop's video hero remain open, blocked on client-supplied content.
+
 ## 2026-08-27
 
 ### Platform

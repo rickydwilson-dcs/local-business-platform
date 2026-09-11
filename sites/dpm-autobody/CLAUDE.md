@@ -50,7 +50,10 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   (chassis numbers, owner names, in-progress vs. completed status) before real pages can be built.
   See `session.md` Phase 3.
 - **Homepage rotating-featured-build mechanism** — not built; the homepage currently shows a
-  static selection, not a client-editable rotation.
+  static selection. Confirmed 2026-09-11: this does **not** need a client-editable admin
+  capability — Ricky and Claude make homepage changes directly (editing config/frontmatter,
+  redeploying), David never touches it. Scope any implementation accordingly; no CMS/admin UI
+  work is needed here.
 - **Contact form is not wired up** — `site.config.ts`'s `features.contactForm` flag is still
   `false`.
 - **Workshop page's video hero** — not built; the film has not been delivered yet.
@@ -71,7 +74,9 @@ services/locations nav links and footer that no longer exist, and a real rewrite
 real header/footer first. `e2e/accessibility.full.spec.ts`, `performance.full.spec.ts` and
 `visual-regression.full.spec.ts` are still base-template's generic versions (opt-in via
 `E2E_FULL=1`, not CI-gated for this site) — not yet updated for DPM's real pages either.
-`e2e/smoke.spec.ts` was trimmed to the two routes that currently exist (`/`, `/contact`).
+`e2e/smoke.spec.ts` now covers all six real routes (`/`, `/contact`, `/workshop`, `/library`,
+`/builds/p1800-candy`, `/builds/etype-941pvo`) — extended from the original two (`/`, `/contact`)
+once the other routes were built.
 
 ## Vercel
 
