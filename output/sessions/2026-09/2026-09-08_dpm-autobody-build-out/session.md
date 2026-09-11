@@ -100,19 +100,23 @@ left dormant with generic placeholder content — DPM's approved design doesn't 
       `dch-automotive`'s known-good pattern) — confirmed by `cs-vercel-config-auditor`, 0 findings
 - [x] CSP `media-src` added for the planned video hero
 - [x] `pnpm install` run, lockfile updated and committed-ready (workspace member registered)
-- [x] New Vercel project **"dpm"** (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`), live at
-      `dpm-ecru.vercel.app` — separate from the `dpm-autobody.vercel.app` static-prototype project,
-      which is confirmed untouched (verified via the Vercel API: its production deployment is still
-      its own last publish, unrelated commit). **Naming note:** the obvious name `dpm-autobody` is
-      already taken by that prototype project, and Vercel project names are unique per team — the
-      first import attempt silently failed for this reason before the name was changed to `dpm`.
+- [x] New Vercel project, live at **`dpm-autobody.vercel.app`**, project name `dpm-autobody`
+      (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`). **Naming history:** the obvious name `dpm-autobody` was
+      already taken by the static-prototype project (live since 2026-08-29), and Vercel project
+      names are unique per team — the first import attempt under that name silently failed (no
+      error, just no-opped), so the new project was created as "dpm" instead. Ricky then asked
+      (2026-09-11) to resolve this properly rather than leave the mismatched name: both projects
+      were renamed via the Vercel API — prototype → **`dpm-autobody-proto`**
+      (`dpm-autobody-proto.vercel.app`, `prj_klLuFWkCXJblYnoQ0Hyg7gruvWF2`, confirmed still serving
+      the same static HTML, untouched otherwise), freeing `dpm-autobody` for this real site.
+      `prototype/publish.zsh`'s `PROJECT=` var updated to match. **New standing rule, added to root
+      `CLAUDE.md`'s Vercel section:** every prototype Vercel project must be named `<site>-proto`
+      from its first deploy, never the eventual production name.
 - [x] First deploy — READY, root directory `sites/dpm-autobody`, tracks `develop`.
-- [ ] `NEXT_PUBLIC_SITE_URL` env var — attempted to set it to `https://dpm-ecru.vercel.app` via the
-      Vercel dashboard so metadata/canonical URLs aren't stuck on the `localhost` fallback in
-      production; the edit did not visibly persist (row still showed "Added" not "Updated" after
-      several save attempts) and this was not worth further turns to chase. Low priority — it only
-      affects `metadataBase`/OG/canonical URLs, not functionality. Revisit next session, or set via
-      `vercel env add` CLI instead of the dashboard.
+- [x] `NEXT_PUBLIC_SITE_URL` env var — set to `https://dpm-autobody.vercel.app` via the Vercel API
+      (the dashboard UI's edit didn't persist after several attempts; the API `PATCH` on the env var
+      did), then picked up with a `vercel redeploy`. Confirmed correct in the live canonical URL,
+      OG tags, and sitemap after redeploy.
 
 ## Phase 2 — Content model
 

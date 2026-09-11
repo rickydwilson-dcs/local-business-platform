@@ -50,14 +50,17 @@ real header/footer first. `e2e/accessibility.full.spec.ts`, `performance.full.sp
 
 ## Vercel
 
-Live at `dpm-ecru.vercel.app`, project name **"dpm"** (not `dpm-autobody` — that name is already
-taken by the `dpm-autobody.vercel.app` static-prototype project, which is untouched and keeps
-serving the discovery-phase HTML prototype until this real site is ready to cut over). Root
-directory `sites/dpm-autobody`, tracks `develop`. `vercel.json` carries the standard
+Live at **`dpm-autobody.vercel.app`**, project name `dpm-autobody` (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`).
+Root directory `sites/dpm-autobody`, tracks `develop`. `vercel.json` carries the standard
 `ignoreCommand`/`turbo-ignore` guard — see root `CLAUDE.md`.
 
-`NEXT_PUBLIC_SITE_URL` is not yet set on the project (an attempt to set it via the dashboard didn't
-persist) — production currently falls back to the `http://localhost:3000` default in
-`site.config.ts`, which only affects `metadataBase`/OG/canonical URLs, not functionality. Set it to
-`https://dpm-ecru.vercel.app` (via `vercel env add` or the dashboard) before this URL is shared
-with anyone.
+**Naming history, 2026-09-11:** this project was first created as "dpm" because the obvious name
+`dpm-autobody` was already claimed by the discovery-phase static-prototype project (live since
+2026-08-29). Rather than leave that collision in place, both projects were renamed via the Vercel
+API: the prototype became **`dpm-autobody-proto`** (now at `dpm-autobody-proto.vercel.app`,
+`prj_klLuFWkCXJblYnoQ0Hyg7gruvWF2`), freeing `dpm-autobody` for this real site. See root
+`CLAUDE.md`'s Vercel section for the standing rule this produced: prototype projects must always be
+named `<site>-proto` from their first deploy. `prototype/publish.zsh`'s `PROJECT=` var was updated
+to match. `NEXT_PUBLIC_SITE_URL` is set correctly to `https://dpm-autobody.vercel.app` (set via the
+Vercel API, then a `vercel redeploy` to pick it up — the dashboard UI didn't persist the edit
+reliably) — canonical/OG URLs and the sitemap all confirmed correct after redeploy.

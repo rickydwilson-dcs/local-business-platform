@@ -16,7 +16,7 @@ set -euo pipefail
 PROTO=${0:a:h}
 ROOT=$(git -C $PROTO rev-parse --show-toplevel)   # the tools resolve from here
 STAGE=$PROTO/.publish
-PROJECT=dpm-autobody
+PROJECT=dpm-autobody-proto
 
 cd $ROOT
 
