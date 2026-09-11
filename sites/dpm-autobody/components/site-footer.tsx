@@ -33,11 +33,11 @@ export interface SiteFooterProps {
 // renders only whichever of these are actually populated in site.config.ts, never a
 // fabricated URL.
 const SOCIAL_ICONS = {
-  facebook: Facebook,
   instagram: Instagram,
+  facebook: Facebook,
+  youtube: Youtube,
   twitter: Twitter,
   linkedin: Linkedin,
-  youtube: Youtube,
 } as const;
 
 /**
@@ -119,7 +119,7 @@ export function SiteFooter({
               {'·'}
               {' '}
               <a href={`tel:${phoneTel}`} className="no-underline hover:text-brand-primary-hover">
-                {phoneDisplay}
+                <span className="whitespace-nowrap">{phoneDisplay}</span>
               </a>
               {' '}
               {'·'}

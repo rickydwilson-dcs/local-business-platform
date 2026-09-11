@@ -78,15 +78,26 @@ const contactFormOverrideClassName = [
   '[&_input:focus]:!ring-0 [&_input:focus]:!border-ink-neutral',
   '[&_select:focus]:!ring-0 [&_select:focus]:!border-ink-neutral',
   '[&_textarea:focus]:!ring-0 [&_textarea:focus]:!border-ink-neutral',
-  // Browsers do not inherit font-family/weight into form controls by default (UA
-  // stylesheet), so inputs/selects/textareas were rendering the browser's default
-  // sans-serif instead of this panel's real font-prose (Newsreader) family. Restore
-  // inheritance explicitly — `font-family`/`font-weight` only, not the `font` shorthand,
-  // so we don't also reset line-height/font-style to values that fight the py-2 sizing
-  // above.
-  '[&_input]:![font-family:inherit] [&_input]:![font-weight:inherit]',
-  '[&_select]:![font-family:inherit] [&_select]:![font-weight:inherit]',
-  '[&_textarea]:![font-family:inherit] [&_textarea]:![font-weight:inherit]',
+  // ROOT CAUSE (found on re-investigation): the previous version of this rule forced
+  // `font-family: inherit` / `font-weight: inherit` (with `!important`) on the fields,
+  // on the theory that the browser UA stylesheet was setting a default sans-serif that
+  // needed overriding. That diagnosis was wrong — Tailwind's own Preflight reset
+  // (`tailwindcss/src/css/preflight.css`) already sets `font-family: inherit` (and
+  // `font-weight: inherit`) on `button, input, optgroup, select, textarea` with plain,
+  // non-`!important` specificity, so the earlier override was a same-value no-op, not a
+  // fix — it was never losing a specificity fight, it just never needed to be there.
+  // The actual gap: `font-family: inherit` correctly inherits from this form's real
+  // ancestor chain (the `.enquiry` panel div → this section → `body`/`html`), and NONE
+  // of those set `font-prose` (Newsreader) — Tailwind's Preflight sets `html`'s base
+  // `font-family` to the configured `sans` stack (Archivo, see theme.config.ts), so
+  // "inherit" was faithfully inheriting Archivo, not Newsreader. There is no ancestor
+  // anywhere above the form that carries `font-prose`. Fix: apply the `font-prose`
+  // utility directly to the fields instead of inheriting — it only sets `font-family`
+  // (see tailwind.config.ts's `fontFamily.prose` extend), so line-height/font-style
+  // stay untouched exactly as intended by the original comment.
+  '[&_input]:!font-prose',
+  '[&_select]:!font-prose',
+  '[&_textarea]:!font-prose',
   // Select dropdown indicator: the component's own markup has no chevron hook (appearance
   // reset above strips the native one), so paint a solid triangle in ink-neutral (#D8CBAE,
   // this section's data-accent ink) as a background image, matching the reference's
@@ -164,7 +175,7 @@ export default function ContactPage() {
                 className={`block border-b border-surface-card-border py-[1.15rem] font-prose text-[clamp(1.1875rem,2vw,1.625rem)] font-light text-surface-foreground no-underline transition-colors duration-300 hover:text-brand-primary-hover min-[960px]:border-b-0 ${textShadowSoft}`}
               >
                 <small
-                  className={`mb-[0.4rem] block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
+                  className={`mb-[0.4rem] block font-sans text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
                 >
                   Telephone
                 </small>
@@ -175,7 +186,7 @@ export default function ContactPage() {
                 className={`block border-b border-surface-card-border py-[1.15rem] font-prose text-[clamp(1.1875rem,2vw,1.625rem)] font-light text-surface-foreground no-underline transition-colors duration-300 hover:text-brand-primary-hover min-[960px]:border-b-0 ${textShadowSoft}`}
               >
                 <small
-                  className={`mb-[0.4rem] block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
+                  className={`mb-[0.4rem] block font-sans text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
                 >
                   Email
                 </small>
@@ -185,7 +196,7 @@ export default function ContactPage() {
                 className={`m-0 border-b border-surface-card-border py-[1.15rem] font-prose text-[clamp(1.1875rem,2vw,1.625rem)] font-light text-surface-foreground min-[960px]:border-b-0 ${textShadowSoft}`}
               >
                 <small
-                  className={`mb-[0.4rem] block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
+                  className={`mb-[0.4rem] block font-sans text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${textShadowSoft}`}
                 >
                   Workshop
                 </small>

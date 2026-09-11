@@ -79,6 +79,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import type { Build } from '@/lib/content';
 import type { BuildCaption, BuildPhoto, BuildPhotoSection } from '@/lib/content-schemas';
+import { ADDRESS, BUSINESS_EMAIL, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 
 const TEXT_SHADOW_SOFT =
   '[text-shadow:0_1px_24px_rgba(11,11,12,0.92),0_1px_4px_rgba(11,11,12,0.7)]';
@@ -364,19 +365,23 @@ function groupEntries(nodes: MdNode[]): MdNode[] {
         ]
       : [node];
 
-    const children: MdNode[] = [carrier('bentryhead', head)];
     // A paragraph that is nothing but bold text is the entry's byline ("**Dave — paint and
-    // finish**"), which the prototype sets beside the title in the meta column.
+    // finish**"). The prototype nests it INSIDE the meta rail alongside the date and title
+    // (`header.entry__head` > `.entry__meta` + `.entry__by`, volvo-p1800.html ~L1483-1492), so it
+    // must be a child of `bentryhead` — not a sibling of it. As a sibling it became the SECOND
+    // child of the two-column `.entry__grid`, which put the attribution chip in the wide right
+    // column and wrapped the prose and photo onto row 2 of the narrow 5fr rail: the entry read as
+    // one ~464px column with ~62% of the row empty, instead of meta-left / prose-and-photo-right.
     const first = body[0];
     if (
       first?.type === 'paragraph' &&
       first.children?.length === 1 &&
       first.children[0].type === 'strong'
     ) {
-      children.push(inlineCarrier('bentryby', first.children[0].children ?? []));
+      head.push(inlineCarrier('bentryby', first.children[0].children ?? []));
       body.shift();
     }
-    children.push(carrier('bentrybody', body));
+    const children: MdNode[] = [carrier('bentryhead', head), carrier('bentrybody', body)];
     out.push(carrier('bentry', children));
   }
 
@@ -627,6 +632,128 @@ function PhotoSectionBlock({ section, no }: { section: BuildPhotoSection; no?: s
       )}
       <PhotoGrid photos={section.photos} columns={section.columns} />
     </div>
+  );
+}
+
+/**
+ * `section.contact` — the closing "Enquiries" band, the last chapter of both prototype pages
+ * (volvo-p1800.html §09, etype-941pvo.html §06). A full-bleed photographic plate under two
+ * stacked darkening gradients, then the chapter band, the display headline, a three-column
+ * contact strip, the "ask for" paragraph, and the link home. It sits INSIDE this page component,
+ * above app/layout.tsx's shared `SiteFooter`, exactly as the prototype's `<section class="contact">`
+ * sits inside `<main>` above its own `<footer class="colophon">`.
+ *
+ * WHERE EACH PIECE OF COPY COMES FROM — nothing here is invented:
+ *
+ *  - Headline, eyebrow and the "Ask for…" paragraph are transcribed from the prototype markup.
+ *    Both pages carry the identical headline; the paragraph's first sentence and its closing two
+ *    sentences are the P1800 page's (volvo-p1800.html ~L1695-1698), which are about the business
+ *    rather than about that one car, so they are correct on any build page. The E-type page's
+ *    middle sentences are car-specific ("This E-type went home to its owner…") and deliberately
+ *    are NOT generalised — carrying them would need a new per-build content field, and the
+ *    business-level wording says the same thing without asserting anything car-specific.
+ *
+ *  - Telephone and email are `lib/contact-info.ts` (i.e. `site.config.ts`'s `business`), NOT the
+ *    prototype's hardcoded strings, so this strip can never drift from the header, the footer and
+ *    the schema.org JSON-LD. The values agree today (01323 552827 / info@dpmautobody.co.uk); the
+ *    displayed phone is `PHONE_DISPLAY`'s grouping, which is what the rest of the site shows.
+ *
+ *  - The workshop line is `ADDRESS.locality`/`ADDRESS.region` — DPM has no confirmed street
+ *    address or postcode yet (both are empty and marked UNCONFIRMED in site.config.ts), and the
+ *    prototype's own line is "Berwick, East Sussex", which is what those two fields hold.
+ *    "By appointment" is the prototype's second line verbatim; `business.hours` is still all
+ *    `TBC`, so there is no real opening-hours source to prefer over it.
+ *
+ *  - "David Pearce-Martin" is DPM's director, named in this site's own CLAUDE.md as well as in
+ *    both prototype pages. There is no contact-person field in site.config.ts to read it from.
+ *
+ *  - The plate photograph is the build's own `heroImage`. The prototype hand-picks a different
+ *    whole-car frame per page (the P1800's `slide-04`, the E-type's `gallery/front`), and no rule
+ *    over `photoSections` reproduces both — first-photo matches the E-type and last-photo matches
+ *    the P1800. Rather than hardcode two slugs into a template used by every build, this reuses
+ *    the one photograph every build is guaranteed to have and which is already approved for this
+ *    page. It carries `alt=""`: it is decorative here, restating a photo the page has already
+ *    shown with real alt text.
+ */
+function EnquiriesSection({ fm, no }: { fm: Build; no: string }) {
+  const workshop = [ADDRESS.locality, ADDRESS.region].filter(Boolean).join(', ');
+  /** `.contact__rows a, .contact__rows p` — one hairline-ruled row each, Newsreader, light. */
+  const ROW = `m-0 block border-b ${HAIR_2} py-[1.15rem] font-prose text-[clamp(1.1875rem,2vw,1.625rem)] font-light text-surface-foreground no-underline [font-variant-numeric:normal] transition-colors duration-[400ms] min-[960px]:border-b-0`;
+  const ROW_LABEL =
+    'mb-[0.4rem] block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground';
+
+  return (
+    <section id="contact" aria-labelledby="build-contact-h" className="relative overflow-clip">
+      <div className="absolute inset-0">
+        {fm.heroImage && (
+          <Image
+            src={fm.heroImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="scale-[1.08] object-cover object-[50%_40%] brightness-[1.14] saturate-[1.06]"
+          />
+        )}
+        {/* `.contact__plate::after` — the prototype's two stacked scrims, in its own order. */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,11,12,0.86)_0%,rgba(11,11,12,0.5)_46%,rgba(11,11,12,0.94)_100%),linear-gradient(to_right,rgba(11,11,12,0.93)_0%,rgba(11,11,12,0.72)_44%,rgba(11,11,12,0.3)_80%,rgba(11,11,12,0.5)_100%)]" />
+      </div>
+
+      <div
+        className={`relative z-[2] ${PAGE} pb-[clamp(5rem,12vh,9rem)] pt-[clamp(5.5rem,15vh,11rem)]`}
+      >
+        <ChapterBand no={no} kind="Enquiries" />
+
+        <h2
+          id="build-contact-h"
+          className={`mt-[clamp(1.75rem,4vh,2.75rem)] mb-0 max-w-[18ch] font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-surface-foreground ${TEXT_SHADOW_SOFT}`}
+        >
+          Bring us the car you are not willing to compromise on.
+        </h2>
+
+        {/* `.contact__rows` — stacked and hairline-ruled below 60rem, three columns above it. */}
+        <div
+          className={`mt-[clamp(2.5rem,6vh,4rem)] grid border-t ${HAIR} min-[960px]:grid-cols-3 min-[960px]:gap-x-[clamp(2rem,4vw,4rem)]`}
+        >
+          {/* `PHONE_TEL` is digits only — the `tel:` scheme is added at the call site here, the
+              same way site-header.tsx and site-footer.tsx do it. */}
+          <a href={`tel:${PHONE_TEL}`} className={`${ROW} hover:text-[var(--build-accent-ink)]`}>
+            <small className={ROW_LABEL}>Telephone</small>
+            {PHONE_DISPLAY}
+          </a>
+          <a
+            href={`mailto:${BUSINESS_EMAIL}`}
+            className={`${ROW} break-words hover:text-[var(--build-accent-ink)]`}
+          >
+            <small className={ROW_LABEL}>Email</small>
+            {BUSINESS_EMAIL}
+          </a>
+          <p className={ROW}>
+            <small className={ROW_LABEL}>Workshop</small>
+            {workshop}
+            <br />
+            By appointment
+          </p>
+        </div>
+
+        <p className={`mt-[clamp(2.5rem,6vh,4rem)] mb-0 ${PROSE} ${TEXT_SHADOW_SOFT}`}>
+          Ask for{' '}
+          <strong className="font-medium text-surface-foreground">David Pearce-Martin</strong>. He
+          would rather see a car than quote from photographs of one, so the first conversation
+          usually ends with a date to bring it over. Dave, Ellis and Paul are who you will meet when
+          you do.
+        </p>
+
+        <p className="mt-[clamp(2.5rem,6vh,3.5rem)] mb-0">
+          <Link
+            href="/"
+            className={`inline-flex items-center gap-2 border-b border-[var(--build-accent-ink)] pb-[0.2rem] ${LABEL} text-surface-foreground no-underline transition-colors duration-300 hover:text-[var(--build-accent-ink)]`}
+          >
+            <span aria-hidden="true">&larr;</span>
+            Back to the homepage
+          </Link>
+        </p>
+      </div>
+    </section>
   );
 }
 
@@ -1106,6 +1233,15 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
       }
     }
   }
+  /**
+   * "Enquiries" is the last numbered chapter on both prototype pages, so it simply continues the
+   * sequence rather than carrying a number of its own — 09 on the P1800, which is exactly what
+   * volvo-p1800.html's own band reads. The E-type lands on 07 where its prototype reads 06,
+   * because this template gives its plaque chapter ("The trust") a numbered band and the
+   * prototype does not; continuing the sequence keeps the page internally consistent, which a
+   * hardcoded 06 would not.
+   */
+  const enquiriesNumber = String(counter + 1).padStart(2, '0');
 
   const accentStyle = {
     '--build-accent': fm.accent?.base ?? 'var(--color-brand-primary)',
@@ -1240,6 +1376,9 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
           </div>
         </div>
       )}
+
+      {/* ============ Enquiries — the page's closing chapter, above the shared footer ======= */}
+      <EnquiriesSection fm={fm} no={enquiriesNumber} />
     </div>
   );
 }

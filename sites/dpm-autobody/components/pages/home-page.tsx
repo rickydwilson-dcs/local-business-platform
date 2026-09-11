@@ -199,7 +199,32 @@ function Track({
           </div>
         )}
 
-        <div className="pointer-events-none absolute inset-0 z-10 mx-auto grid w-[min(1360px,100%-3rem)] content-end pb-[clamp(9.5rem,20vh,11rem)] md:pb-[clamp(9rem,18vh,10.5rem)]">
+        {/*
+          Bottom scrim behind the "no · label" pill and heading, sized in
+          `rem` from this box's own bottom edge — not `%` of the sticky
+          figure's full 100lvh height — for the same reason documented on the
+          Bentley "whole" figure's scrim further down this file: this
+          container is anchored to the bottom by a `pb-` in rem/vh-clamped
+          units, so its actual on-screen distance from the bottom stays
+          near-constant across viewport heights while a percentage stop does
+          not track it. Added after a Sept 2026 review found the P1800
+          panel's heading ("A year in the building. Thirteen hundred hours in
+          the hands.") landing on a bright chrome specular highlight in that
+          macro photo and measuring ~1.25:1 against WCAG AA's 4.5:1 — the
+          only protection here previously was a 28px-blur text-shadow on the
+          `<h3>`, which glows text edges but does not darken a large bright
+          area sitting behind a whole heading line.
+
+          This div is shared by all four `Track` calls (P1800, Bentley,
+          Jaguar/Aston Sea Green, E-type), so the fix is deliberately generic
+          — flat 0.92 alpha directly behind the text, fading out above so it
+          blends into the image rather than showing a hard edge — rather than
+          tuned to one panel's photo and left to fail against the next
+          differently-lit one. (The earlier Bentley fix below was scoped to
+          one one-off `<figure>`, not this shared component, which is why it
+          didn't also cover this case.)
+        */}
+        <div className="pointer-events-none absolute inset-0 z-10 mx-auto grid w-[min(1360px,100%-3rem)] content-end pb-[clamp(9.5rem,20vh,11rem)] before:pointer-events-none before:absolute before:inset-x-0 before:bottom-0 before:z-[-1] before:h-[clamp(18rem,38vh,24rem)] before:content-[''] before:[background:linear-gradient(to_top,rgba(11,11,12,0.92)_0,rgba(11,11,12,0.92)_11rem,rgba(11,11,12,0)_100%)] md:pb-[clamp(9rem,18vh,10.5rem)]">
           <span className="pointer-events-auto mb-5 inline-flex w-fit flex-wrap items-center gap-3 border border-surface-card-border bg-[rgba(11,11,12,0.86)] px-3 py-[0.45rem]">
             <span className="text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-brand-primary-hover">
               {no}
