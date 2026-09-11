@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 
 export interface SiteFooterProps {
@@ -28,17 +28,16 @@ export interface SiteFooterProps {
 
 // The prototype's real, approved colophon socials are Instagram/Facebook/YouTube (see
 // output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html
-// ~L1663-1673), but `site.config.ts`'s `business.socialMedia` only has a confirmed Facebook
-// URL — Instagram/YouTube handles exist per the client brief but were never given, so
-// site.config.ts deliberately leaves them unset rather than guessing. This footer renders
-// only whichever of these are actually populated in site.config.ts, never a fabricated URL.
-// (There is also no `youtube` field on `socialMedia` yet — add one there, not here, if/when
-// a real handle is confirmed.)
+// ~L1663-1673) — all three URLs are now populated in `site.config.ts`'s
+// `business.socialMedia`, transcribed verbatim from that approved markup. This footer
+// renders only whichever of these are actually populated in site.config.ts, never a
+// fabricated URL.
 const SOCIAL_ICONS = {
   facebook: Facebook,
   instagram: Instagram,
   twitter: Twitter,
   linkedin: Linkedin,
+  youtube: Youtube,
 } as const;
 
 /**
@@ -97,8 +96,8 @@ export function SiteFooter({
     );
 
   return (
-    <footer className="border-t border-surface-card-border bg-surface-background">
-      <div className="mx-auto grid w-full max-w-[1360px] gap-6 px-6 pb-32 pt-[clamp(3rem,8vh,5rem)]">
+    <footer className="bg-surface-background">
+      <div className="mx-auto grid w-[min(1360px,100%-3rem)] gap-6 border-t border-[rgba(232,228,220,0.07)] pb-32 pt-[clamp(3rem,8vh,5rem)]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="grid gap-6">
             <Link
@@ -133,8 +132,9 @@ export function SiteFooter({
               <p className="m-0">
                 <Link
                   href="/"
-                  className="border-b border-surface-card-border pb-[0.15rem] text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
+                  className="inline-flex items-center gap-2 border-b border-surface-card-border pb-[0.15rem] text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
                 >
+                  <span aria-hidden="true">&larr;</span>
                   Back to the homepage
                 </Link>
               </p>
@@ -159,7 +159,7 @@ export function SiteFooter({
           )}
         </div>
 
-        <p className="m-0 border-t border-surface-card-border pt-[clamp(1.5rem,4vh,2.25rem)] text-center text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-surface-muted-foreground">
+        <p className="m-0 border-t border-[rgba(232,228,220,0.07)] pt-[clamp(1.5rem,4vh,2.25rem)] text-center text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-surface-muted-foreground">
           &copy; {copyright}
           {builtBy && (
             <>

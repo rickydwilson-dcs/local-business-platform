@@ -101,6 +101,7 @@ export interface SiteConfig extends BaseSiteConfig {
       twitter?: string;
       instagram?: string;
       linkedin?: string;
+      youtube?: string;
     };
     geo?: {
       latitude: number;
@@ -185,9 +186,14 @@ export const siteConfig: SiteConfig = {
       sunday: 'TBC',
     },
     socialMedia: {
-      // Facebook handle confirmed in client-brief.md. Instagram/YouTube exist per the brief
-      // but no handle/URL was given — do not guess one.
+      // Facebook handle confirmed in client-brief.md. Instagram/YouTube URLs below are
+      // transcribed verbatim from the approved static prototype's own colophon markup
+      // (output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/
+      // library.html ~L1732-1740, repeated identically on every other prototype page) —
+      // not guessed.
       facebook: 'https://facebook.com/dpmautobody',
+      instagram: 'https://www.instagram.com/dpm_autobody/',
+      youtube: 'https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw',
     },
     // No geo omitted deliberately — no confirmed address to place a pin against yet.
   },

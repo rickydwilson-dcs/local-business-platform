@@ -73,11 +73,30 @@ const contactFormOverrideClassName = [
   // section's data-accent override (house/house-ink, i.e. `ink-neutral`), not the car-red
   // used on individual build pages.
   '[&_input]:!rounded-none [&_input]:!border-0 [&_input]:!border-b [&_input]:!border-surface-card-border [&_input]:!bg-transparent [&_input]:!px-0 [&_input]:!py-2',
-  '[&_select]:!rounded-none [&_select]:!border-0 [&_select]:!border-b [&_select]:!border-surface-card-border [&_select]:!bg-transparent [&_select]:!appearance-none [&_select]:!px-0 [&_select]:!py-2',
+  '[&_select]:!rounded-none [&_select]:!border-0 [&_select]:!border-b [&_select]:!border-surface-card-border [&_select]:!bg-transparent [&_select]:!appearance-none [&_select]:!pl-0 [&_select]:!pr-5 [&_select]:!py-2',
   '[&_textarea]:!rounded-none [&_textarea]:!border-0 [&_textarea]:!border-b [&_textarea]:!border-surface-card-border [&_textarea]:!bg-transparent [&_textarea]:!px-0 [&_textarea]:!py-2',
   '[&_input:focus]:!ring-0 [&_input:focus]:!border-ink-neutral',
   '[&_select:focus]:!ring-0 [&_select:focus]:!border-ink-neutral',
   '[&_textarea:focus]:!ring-0 [&_textarea:focus]:!border-ink-neutral',
+  // Browsers do not inherit font-family/weight into form controls by default (UA
+  // stylesheet), so inputs/selects/textareas were rendering the browser's default
+  // sans-serif instead of this panel's real font-prose (Newsreader) family. Restore
+  // inheritance explicitly — `font-family`/`font-weight` only, not the `font` shorthand,
+  // so we don't also reset line-height/font-style to values that fight the py-2 sizing
+  // above.
+  '[&_input]:![font-family:inherit] [&_input]:![font-weight:inherit]',
+  '[&_select]:![font-family:inherit] [&_select]:![font-weight:inherit]',
+  '[&_textarea]:![font-family:inherit] [&_textarea]:![font-weight:inherit]',
+  // Select dropdown indicator: the component's own markup has no chevron hook (appearance
+  // reset above strips the native one), so paint a solid triangle in ink-neutral (#D8CBAE,
+  // this section's data-accent ink) as a background image, matching the reference's
+  // underline-field chevron.
+  '[&_select]:!bg-[url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2012%208%27%3E%3Cpath%20fill=%27%23D8CBAE%27%20d=%27M0%200l6%208%206-8z%27/%3E%3C/svg%3E)]',
+  '[&_select]:!bg-no-repeat [&_select]:!bg-[right_center] [&_select]:![background-size:11px_7px]',
+  // Message textarea: the component hardcodes `rows={6}` with no prop to reduce it, so
+  // constrain the rendered box height directly — the reference's textarea reads roughly
+  // 2.2x shorter than the component's default.
+  '[&_textarea]:!h-[4.5rem]',
   // Note: the component's own error state applies a literal `border-error` class, which
   // the theme-system Tailwind plugin never defines as a border-color utility (it only
   // emits `.text-error`/`.bg-error`, and separately extends `colors.semantic.error` —
@@ -149,7 +168,7 @@ export default function ContactPage() {
                 >
                   Telephone
                 </small>
-                {PHONE_DISPLAY}
+                <span className="whitespace-nowrap">{PHONE_DISPLAY}</span>
               </a>
               <a
                 href={`mailto:${BUSINESS_EMAIL}`}
