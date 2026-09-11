@@ -1,6 +1,7 @@
 # Session: DPM Autobody — build-out from David's review meeting
 
-**Status:** Planning — not yet started
+**Status:** In progress — Phase 0 done, Phase 1 scaffold done (2026-09-11), Vercel project + real
+page components not yet built
 **Opened:** 2026-09-08
 **Client:** DPM Autobody (David Pearce-Martin), Berwick, East Sussex
 **Predecessor:** `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/` — read `synthesis.md`,
@@ -78,14 +79,30 @@ real site rather than more static prototype HTML — see the architecture-rule n
 point where DPM moves from "prototype for review" to "real site under active build," gated on Phase 0
 landing first so the library route is built against an approved design, not a guess.
 
-- [ ] `npx tsx tools/create-site-from-project.ts` from `base-template`, or manual copy — check which is
-      faster given there's no intake-system project file for DPM yet
-- [ ] Port the chosen design language (near-black ground, scroll-moved highlight, paint-code accent,
-      auction-lot-page structure, plus the approved library-page treatment from Phase 0) from the
-      static prototype into `theme.config.ts` + real components
-- [ ] `vercel.json` `ignoreCommand` present from day one (see root `CLAUDE.md` — every new site needs
-      this or it silently rebuilds on every unrelated push)
-- [ ] CSP `media-src` set for video (base-template's default CSP has none — see root `CLAUDE.md`)
+**Status: scaffold done, 2026-09-11.** `sites/dpm-autobody` exists, builds/type-checks/lints/tests
+clean, `cs-vercel-config-auditor` ran clean. Manual copy from `base-template` (Ricky's call — no
+intake-system project file exists for DPM, and step 2 rebuilds the pages wholesale anyway so the
+`create-site-from-project.ts` path wouldn't have saved anything). Real business facts from
+`client-brief.md` are in `site.config.ts`; genuinely unconfirmed facts (street address, postcode,
+hours, certifications) are marked `TBC` or omitted rather than invented — see that file's header
+comment and `sites/dpm-autobody/CLAUDE.md`. base-template's services/locations/blog/projects/reviews
+routes, content dirs, and page components were **deleted** at scaffold time (Ricky's call) rather than
+left dormant with generic placeholder content — DPM's approved design doesn't use any of them.
+
+- [x] Manual copy from `base-template` (not `create-site-from-project.ts` — no project file exists,
+      and it wouldn't have helped for a site this structurally different from the tradesperson
+      default anyway)
+- [x] Colors and fonts in `theme.config.ts` sourced from the approved prototype's real CSS custom
+      properties (`prototype/src/library.html`) — **not yet done:** the actual header/footer/home/
+      workshop/library/build-page components themselves, still base-template's generic placeholders.
+      That's the step-2 "recreate the HTML artefacts in Next.js" work, tracked below in Phase 2/3.
+- [x] `vercel.json` `ignoreCommand` present (`turbo-ignore dpm-autobody --fallback=HEAD^1`, matches
+      `dch-automotive`'s known-good pattern) — confirmed by `cs-vercel-config-auditor`, 0 findings
+- [x] CSP `media-src` added for the planned video hero
+- [x] `pnpm install` run, lockfile updated and committed-ready (workspace member registered)
+- [ ] New Vercel project for the real Next.js site (separate from the `dpm-autobody.vercel.app`
+      static-prototype project, which keeps serving as-is until cutover) — not yet created
+- [ ] First deploy — blocked on the above
 
 ## Phase 2 — Content model
 
