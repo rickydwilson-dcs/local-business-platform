@@ -6,14 +6,15 @@ import { absUrl } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
 import { PHONE_DISPLAY } from '@/lib/contact-info';
 
+const HOME_DESCRIPTION =
+  'Concours restoration and paintwork on classic and performance cars. Berwick, East Sussex.';
+
 export const metadata: Metadata = {
   title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-  description:
-    'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+  description: HOME_DESCRIPTION,
   openGraph: {
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+    title: `${siteConfig.business.name} | Artists of Automotive Restoration`,
+    description: HOME_DESCRIPTION,
     url: absUrl('/'),
     siteName: siteConfig.name,
     images: [
@@ -29,9 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+    title: `${siteConfig.business.name} | Artists of Automotive Restoration`,
+    description: HOME_DESCRIPTION,
     images: [absUrl('/logo.svg')],
   },
   alternates: {
