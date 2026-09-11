@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 
@@ -53,6 +56,21 @@ const SOCIAL_ICONS = {
  * /locations routes (site.config.ts's own `credentials.certifications` is `[]` and
  * `footer.showServices`/`showLocations` are both `false`, so this matches the real config,
  * not just the prototype).
+ *
+ * "Back to the homepage" link: the prototype's colophon carries `<p><a class="back"
+ * href="index.html">Back to the homepage</a></p>` right under the address line on every
+ * non-home page (workshop.html ~L1392; the home page's own footer omits it — you're already
+ * home). Rendered here as a real `/` link via `usePathname()`, shown only off the home route —
+ * hence this is a client component.
+ *
+ * Logo `priority`: the brand mark below was previously native-lazy-loaded (`next/image`'s
+ * default when `priority` isn't set). On a long page — `/library`'s 12-row ledger — the footer
+ * sits far enough below the fold that a screenshot taken without first scrolling captures it
+ * before the browser's lazy-load ever fires: reserved space (the `aspect-[500/342]` box), zero
+ * painted pixels. Confirmed live: `naturalWidth`/`complete` on the footer's `<img>` read `0`/
+ * `false` on initial load and `188`/`true` only once actually scrolled into view — the same
+ * `/logo.svg` request the header already makes `priority` (eager) for exactly this reason.
+ * `priority` here makes the footer mark load unconditionally, matching the header's treatment.
  */
 export function SiteFooter({
   siteName,
@@ -63,6 +81,9 @@ export function SiteFooter({
   copyright,
   builtBy,
 }: SiteFooterProps) {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   const socials = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>)
     .map((key) => ({ key, href: siteConfig.business.socialMedia[key], Icon: SOCIAL_ICONS[key] }))
     .filter(
@@ -85,7 +106,13 @@ export function SiteFooter({
               aria-label={siteName}
               className="relative block h-[clamp(4.875rem,12vw,7.5rem)] w-auto aspect-[500/342] text-surface-muted-foreground"
             >
-              <Image src="/logo.svg" alt={siteName} fill className="object-contain object-left" />
+              <Image
+                src="/logo.svg"
+                alt={siteName}
+                fill
+                priority
+                className="object-contain object-left"
+              />
             </Link>
             <p className="m-0 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground">
               {address.locality}, {address.region}
@@ -102,6 +129,16 @@ export function SiteFooter({
                 {email}
               </a>
             </p>
+            {!isHome && (
+              <p className="m-0">
+                <Link
+                  href="/"
+                  className="border-b border-surface-card-border pb-[0.15rem] text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
+                >
+                  Back to the homepage
+                </Link>
+              </p>
+            )}
           </div>
 
           {socials.length > 0 && (

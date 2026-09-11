@@ -177,7 +177,7 @@ function Track({
         className="sticky top-0 h-[100lvh] isolate overflow-clip"
         style={{ '--bl': '-200vw', '--br': '200vw', '--bc': '50%' } as Vars}
       >
-        <div className="absolute inset-0 overflow-clip after:pointer-events-none after:absolute after:inset-0 after:z-[3] after:content-[''] after:[background:linear-gradient(to_bottom,rgba(11,11,12,0.5)_0%,rgba(11,11,12,0)_26%,rgba(11,11,12,0)_72%,rgba(11,11,12,0.6)_100%),radial-gradient(165%_130%_at_50%_46%,rgba(11,11,12,0)_66%,rgba(11,11,12,0.26)_100%)]">
+        <div className="absolute inset-0 overflow-clip after:pointer-events-none after:absolute after:inset-0 after:z-[3] after:content-[''] after:[background:linear-gradient(to_bottom,rgba(11,11,12,0.5)_0%,rgba(11,11,12,0)_26%,rgba(11,11,12,0)_65%,rgba(11,11,12,0.88)_100%),radial-gradient(165%_130%_at_50%_46%,rgba(11,11,12,0)_66%,rgba(11,11,12,0.26)_100%)]">
           <LayerImage image={macro} filter="plate" />
           <Veils />
           <Spec />
@@ -252,7 +252,7 @@ function Chapter({ kind }: { kind: string }) {
 
 function Prose({ children }: { children: ReactNode }) {
   return (
-    <p className="max-w-[22.6em] font-sans text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-surface-muted-foreground [font-variant-numeric:normal] last:mb-0">
+    <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-surface-muted-foreground [font-variant-numeric:normal] last:mb-0">
       {children}
     </p>
   );
@@ -414,7 +414,24 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
             <Spec />
           </div>
 
-          <div className="pointer-events-none absolute inset-0 z-10 mx-auto grid w-[min(1360px,100%-3rem)] content-end pb-60 pt-28 before:pointer-events-none before:absolute before:-inset-x-[35vw] before:-inset-y-[14vh] before:z-[-1] before:content-[''] before:[background:linear-gradient(101deg,rgba(11,11,12,0.92)_20%,rgba(11,11,12,0.62)_34%,rgba(11,11,12,0.22)_50%,rgba(11,11,12,0)_68%)] md:pb-[clamp(12.5rem,27vh,18rem)]">
+          {/*
+            align-content MUST be `safe end`, not plain `end` (Tailwind's `content-end`
+            utility only emits the latter — this is an arbitrary-value override).
+            The prototype's `.hero__inner` rule (prototype/src/home.html ~L508-521) uses
+            `align-content: safe end` specifically because plain `end` does not fall back
+            when this stack (eyebrow + h1 + lede + link row) is taller than the 100lvh
+            box — on a wide-but-short viewport (a laptop with the browser not maximised,
+            or any height below ~900px where the `clamp()` heading size is still large)
+            the overflow spills off the TOP instead of the bottom, and the ancestor
+            figure's `overflow-clip` silently eats whatever crosses y=0 with no visible
+            edge. That's the exact mechanism behind a "headline truncated / lede entirely
+            missing on desktop" bug: confirmed by forcing overflow in a live DOM test
+            (shrinking the stage) — `align-content:end` pushed the eyebrow and most of the
+            h1 to negative `top` (clipped), while `safe end` falls back to start and keeps
+            everything in positive, visible space. See the prototype's own comment at that
+            line for the "1113x744" case this was originally fixed for.
+          */}
+          <div className="pointer-events-none absolute inset-0 z-10 mx-auto grid w-[min(1360px,100%-3rem)] [align-content:safe_end] pb-60 pt-28 before:pointer-events-none before:absolute before:-inset-x-[35vw] before:-inset-y-[14vh] before:z-[-1] before:content-[''] before:[background:linear-gradient(101deg,rgba(11,11,12,0.92)_20%,rgba(11,11,12,0.62)_34%,rgba(11,11,12,0.22)_50%,rgba(11,11,12,0)_68%)] md:pb-[clamp(12.5rem,27vh,18rem)]">
             <p className="pointer-events-auto m-0 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-brand-primary-hover [text-shadow:0_1px_28px_rgba(11,11,12,0.94)]">
               Concours restoration &nbsp;&middot;&nbsp; Berwick, East Sussex
             </p>
@@ -424,7 +441,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
             >
               Artists of Automotive Restoration
             </h1>
-            <p className="pointer-events-auto m-0 max-w-[23em] font-sans text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-surface-foreground/90 [font-variant-numeric:normal] [text-shadow:0_1px_28px_rgba(11,11,12,0.94)]">
+            <p className="pointer-events-auto m-0 max-w-[23em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-surface-foreground/90 [font-variant-numeric:normal] [text-shadow:0_1px_28px_rgba(11,11,12,0.94)]">
               Not a slogan. It is engraved on the plaque we rivet into every car before it leaves.
             </p>
             <div className="pointer-events-auto mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-3">
@@ -819,7 +836,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
 
         <div className="grid gap-[clamp(2.5rem,6vh,4rem)] border-t border-surface-card-border pt-[clamp(2rem,5vh,3rem)]">
           <figure className="grid gap-[1.15rem]">
-            <blockquote className="m-0 max-w-[19em] font-sans text-[clamp(1.5rem,2.4vw+0.6rem,2.5rem)] font-extralight leading-[1.34] text-surface-foreground [font-variant-numeric:normal] [text-wrap:pretty]">
+            <blockquote className="m-0 max-w-[19em] font-prose text-[clamp(1.5rem,2.4vw+0.6rem,2.5rem)] font-extralight leading-[1.34] text-surface-foreground [font-variant-numeric:normal] [text-wrap:pretty]">
               &ldquo;I had interviewed many body shops for the painting of my concours-winning Aston
               Martin. The only person I would trust with the E-type was the man who had laid down
               that paint with such astonishingly beautiful results.&rdquo;
@@ -831,7 +848,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
           </figure>
 
           <figure className="grid gap-[1.15rem]">
-            <blockquote className="m-0 max-w-[24em] font-sans text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
+            <blockquote className="m-0 max-w-[24em] font-prose text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
               &ldquo;&hellip;Panel alignment, gaps and paint finish absolutely amazing. Precise
               closing of doors, boot and bonnet on the money. After visiting other high end body
               shops I chose DPM Autobody, why because one visit to David&rsquo;s shop was all I
@@ -844,7 +861,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
           </figure>
 
           <figure className="grid gap-[1.15rem]">
-            <blockquote className="m-0 max-w-[24em] font-sans text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
+            <blockquote className="m-0 max-w-[24em] font-prose text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
               &ldquo;&hellip;Every panel was aligned meticulously, body lines flowed flawlessly, and
               their paint work which was over 2,000 hours was immaculate and pristine. The DPM team
               treated every detail with expert care, communicating clearly, listening attentively

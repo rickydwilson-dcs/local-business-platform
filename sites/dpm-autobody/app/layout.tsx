@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Archivo, Fraunces, Newsreader } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
@@ -8,6 +9,36 @@ import { SiteFooter } from '@/components/site-footer';
 import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
+
+/**
+ * Fonts — self-hosted via next/font/google (no external request to fonts.googleapis.com;
+ * matches the precedent in sites/dcs and sites/dj-fox-electrical). Mirrors the approved
+ * static prototype's `Archivo:wght@200..600&Fraunces:opsz,wght@9..144,300..600&
+ * Newsreader:opsz,wght@6..72,200..500` Google Fonts request — see theme.config.ts's file
+ * header comment for the full rationale and the sans/heading token remapping.
+ */
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+  display: 'swap',
+  weight: 'variable',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  weight: 'variable',
+  axes: ['opsz'],
+});
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
+  display: 'swap',
+  weight: 'variable',
+  axes: ['opsz'],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -45,7 +76,10 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html
+      lang="en-GB"
+      className={`${archivo.variable} ${fraunces.variable} ${newsreader.variable}`}
+    >
       <head>
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (

@@ -97,13 +97,13 @@ export default function WorkshopPage() {
               needing to be darkened. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-[-14%] inset-x-[-40%] z-0 bg-[linear-gradient(101deg,rgba(11,11,12,0.92)_20%,rgba(11,11,12,0.62)_34%,rgba(11,11,12,0.22)_50%,rgba(11,11,12,0)_68%)]"
+            className="pointer-events-none absolute inset-y-[-14%] inset-x-[-40%] z-0 bg-[linear-gradient(101deg,rgba(11,11,12,0.92)_20%,rgba(11,11,12,0.85)_40%,rgba(11,11,12,0.78)_59%,rgba(11,11,12,0)_78%)]"
           />
 
-          <div className="absolute inset-0 z-10 grid content-end px-6 pb-[15rem] pt-[clamp(7rem,15vh,11rem)] sm:pb-[clamp(12.5rem,27vh,18rem)]">
+          <div className="absolute inset-0 z-10 grid content-end px-6 pb-[15rem] pt-[clamp(7rem,15vh,11rem)] sm:pb-[clamp(8.5rem,21vh,13rem)]">
             <div className="mx-auto w-full max-w-[1360px]">
               <p
-                className={`mb-5 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-brand-primary-hover ${TEXT_SHADOW}`}
+                className={`mb-5 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-ink-neutral ${TEXT_SHADOW}`}
               >
                 The workshop&nbsp;&middot;&nbsp;Berwick, East Sussex
               </p>
@@ -114,7 +114,7 @@ export default function WorkshopPage() {
                 One building. Every stage of the work.
               </h1>
               <p
-                className={`mt-6 max-w-[23em] text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8] ${TEXT_SHADOW}`}
+                className={`mt-6 max-w-[23em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8] ${TEXT_SHADOW}`}
               >
                 Panel, paint, and everything between, on the same floor, by the same hands.
               </p>
@@ -122,10 +122,7 @@ export default function WorkshopPage() {
                 <p
                   className={`flex items-center gap-3 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground ${TEXT_SHADOW}`}
                 >
-                  <span
-                    aria-hidden
-                    className="h-px w-[clamp(28px,5vw,64px)] bg-brand-primary-hover"
-                  />
+                  <span aria-hidden className="h-px w-[clamp(28px,5vw,64px)] bg-ink-neutral" />
                   Bare metal to finished paint&nbsp;&middot;&nbsp;One workshop
                 </p>
               </div>
@@ -147,11 +144,11 @@ export default function WorkshopPage() {
         <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 border-t border-[rgba(232,228,220,0.14)] pt-[clamp(5.5rem,13vh,10rem)]">
           <span
             aria-hidden
-            className="absolute -top-0.5 left-0 h-[3px] w-[clamp(3.5rem,8vw,6rem)] bg-brand-secondary"
+            className="absolute -top-0.5 left-0 h-[3px] w-[clamp(3.5rem,8vw,6rem)] bg-ink-neutral"
           />
           <span
             aria-hidden
-            className="text-[clamp(1.75rem,3vw,2.5rem)] font-extralight leading-none tracking-[-0.02em] text-brand-secondary"
+            className="text-[clamp(1.75rem,3vw,2.5rem)] font-extralight leading-none tracking-[-0.02em] text-ink-neutral"
           >
             01
           </span>
@@ -160,13 +157,13 @@ export default function WorkshopPage() {
           </span>
         </div>
 
-        <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-[clamp(1.75rem,4vh,2.75rem)]">
+        <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-[clamp(1.75rem,4vh,2.75rem)] lg:grid-cols-2 lg:gap-16">
           <h2 className="font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-balance text-surface-foreground">
             What we do,
             <br />
             and what goes out
           </h2>
-          <p className="max-w-[22.6em] text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
+          <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
             Bare-metal restoration and concours paint on classic and performance cars, in one
             building in Berwick, East Sussex. Panel work, lead loading, filler, primer, colour,
             flatting and polishing &mdash; all of it by the same hands, on the same floor.
@@ -175,13 +172,13 @@ export default function WorkshopPage() {
 
         <div className="grid gap-8 pb-[clamp(3rem,8vh,5rem)] lg:grid-cols-2 lg:gap-16">
           <div className="space-y-[1.15em]">
-            <p className="max-w-[22.6em] text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
+            <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
               A restoration here starts with the car photographed exactly as it arrived, and ends
               with a plaque riveted into the engine bay carrying its chassis number. Between those
               two things sits a file that the owner keeps: every panel, every gap, every decision,
               photographed as it happened.
             </p>
-            <p className="max-w-[22.6em] text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
+            <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
               Two things leave the building. We would rather list them than let &ldquo;full in-house
               restoration&rdquo; quietly cover them.
             </p>
@@ -193,7 +190,9 @@ export default function WorkshopPage() {
                 key={name}
                 className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 border-b border-[rgba(232,228,220,0.07)] py-[0.8rem]"
               >
-                <span className="text-[1.0625rem] font-light text-surface-foreground">{name}</span>
+                <span className="font-prose text-[1.0625rem] font-light text-surface-foreground">
+                  {name}
+                </span>
                 <span className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-surface-muted-foreground">
                   In house
                 </span>
@@ -204,8 +203,10 @@ export default function WorkshopPage() {
                 key={name}
                 className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 border-b border-[rgba(232,228,220,0.07)] py-[0.8rem]"
               >
-                <span className="text-[1.0625rem] font-light text-surface-foreground">{name}</span>
-                <span className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-brand-primary-hover">
+                <span className="font-prose text-[1.0625rem] font-light text-surface-foreground">
+                  {name}
+                </span>
+                <span className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-ink-neutral">
                   Out of house
                 </span>
               </li>

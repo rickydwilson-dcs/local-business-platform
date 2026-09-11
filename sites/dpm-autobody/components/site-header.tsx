@@ -37,6 +37,11 @@ export interface SiteHeaderProps {
  * prototype's `<script>`). Replicated below with the same intersection-based show/hide;
  * falls back to a scroll-position heuristic on any route that doesn't render a `#top` hero
  * (this header is shared across every route, including ones later phases haven't built yet).
+ *
+ * "All work" back-link: the prototype's masthead carries `<a class="back" href="index.html">
+ * All work</a>` on every non-home page (workshop.html ~L1288, contact.html ~L1395), and never
+ * on the home page itself. Rendered here as a real `/` link, shown only when the current route
+ * isn't `/`.
  */
 export function SiteHeader({
   siteName,
@@ -69,6 +74,7 @@ export function SiteHeader({
   }, [pathname]);
 
   const isNavItemActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isHome = pathname === '/';
 
   return (
     <>
@@ -88,9 +94,19 @@ export function SiteHeader({
           />
         </Link>
 
+        {!isHome && (
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 whitespace-nowrap border-b border-surface-card-border pb-[0.25rem] pt-[0.35rem] text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-surface-foreground"
+          >
+            <span aria-hidden="true">&larr;</span>
+            All work
+          </Link>
+        )}
+
         <nav
           aria-label="Primary"
-          className="ml-auto hidden min-[56rem]:flex items-center gap-[clamp(0.9rem,1.8vw,1.75rem)]"
+          className="ml-auto hidden min-[896px]:flex items-center gap-[clamp(0.9rem,1.8vw,1.75rem)]"
         >
           {navigation.map((item) => {
             const active = isNavItemActive(item.href);
@@ -102,8 +118,8 @@ export function SiteHeader({
                 className={[
                   'whitespace-nowrap border-b py-[0.35rem] text-[0.6875rem] uppercase tracking-[0.2em] no-underline transition-colors duration-[400ms]',
                   active
-                    ? 'border-brand-primary-hover font-bold text-surface-foreground'
-                    : 'border-transparent font-medium text-surface-muted-foreground hover:border-brand-primary-hover hover:text-surface-foreground',
+                    ? 'border-ink-neutral font-bold text-surface-foreground'
+                    : 'border-transparent font-medium text-surface-muted-foreground hover:border-ink-neutral hover:text-surface-foreground',
                 ].join(' ')}
               >
                 {item.label}
@@ -115,7 +131,7 @@ export function SiteHeader({
         {showPhone && phoneDisplay && phoneTel && (
           <a
             href={`tel:${phoneTel}`}
-            className="ml-auto min-[56rem]:ml-0 whitespace-nowrap border-b border-surface-card-border pb-[0.2rem] text-xs font-medium tracking-[0.1em] text-surface-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover"
+            className="ml-auto min-[896px]:ml-0 whitespace-nowrap border-b border-surface-card-border pb-[0.2rem] text-xs font-medium tracking-[0.1em] text-surface-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover"
           >
             {phoneDisplay}
           </a>
@@ -131,7 +147,7 @@ export function SiteHeader({
           'fixed inset-x-0 bottom-4 z-[45] mx-auto flex w-max max-w-[calc(100%-1.5rem)]',
           'items-center gap-[0.15rem] border border-surface-card-border bg-[rgba(11,11,12,0.9)]',
           'px-2 py-[0.2rem] shadow-[inset_0_1px_0_rgba(232,228,220,0.08)]',
-          'transition-[opacity,visibility] duration-500 min-[56rem]:hidden',
+          'transition-[opacity,visibility] duration-500 min-[896px]:hidden',
           pillVisible ? 'visible opacity-100' : 'invisible opacity-0',
         ].join(' ')}
       >

@@ -117,7 +117,7 @@ function ChapterHeading({ children }: { children: React.ReactNode }) {
     <div className="relative border-t border-surface-card-border pt-[clamp(5.5rem,13vh,10rem)]">
       <span
         aria-hidden
-        className="absolute -top-0.5 left-0 h-[3px] w-[clamp(3.5rem,8vw,6rem)] bg-brand-secondary"
+        className="absolute -top-0.5 left-0 h-[3px] w-[clamp(3.5rem,8vw,6rem)] bg-ink-neutral"
       />
       <span className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-surface-muted-foreground">
         {children}
@@ -134,7 +134,7 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
 
   return (
     <li
-      className={`grid gap-4 border-b border-surface-card-border py-[clamp(1.75rem,4vh,2.5rem)] ${
+      className={`grid gap-4 border-b border-[rgba(232,228,220,0.07)] py-[clamp(1.75rem,4vh,2.5rem)] ${
         hasPhoto
           ? 'grid-cols-1 sm:grid-cols-[minmax(9rem,15rem)_minmax(0,1fr)] sm:items-start sm:gap-8'
           : 'grid-cols-1'
@@ -160,7 +160,7 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
           </span>
         )}
 
-        <span className="mb-2 block text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-brand-primary-hover">
+        <span className="mb-2 block text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-ink-neutral">
           No. {String(number).padStart(2, '0')}
         </span>
 
@@ -170,20 +170,21 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
 
         {segments.length > 0 && (
           <p className="mb-[0.65rem] flex flex-wrap items-baseline gap-x-[0.9rem] gap-y-[0.4rem] text-[0.75rem] tracking-[0.02em] text-surface-muted-foreground">
-            {segments.map((segment) => (
-              <span key={segment.text}>
+            {segments.map((segment, index) => (
+              <span key={segment.text} className="inline-flex items-baseline gap-x-[0.9rem]">
                 {segment.emphasize ? (
                   <strong className="font-medium text-surface-foreground">{segment.text}</strong>
                 ) : (
                   segment.text
                 )}
+                {index < segments.length - 1 && <span aria-hidden>&middot;</span>}
               </span>
             ))}
           </p>
         )}
 
         {build.scopeOfWork && (
-          <p className="mb-[0.85rem] max-w-[42em] text-[0.9375rem] font-light leading-[1.55] text-[#CFCAC1]">
+          <p className="mb-[0.85rem] max-w-[42em] font-prose text-[0.9375rem] font-light leading-[1.55] text-[#CFCAC1]">
             {build.scopeOfWork}
           </p>
         )}
@@ -191,12 +192,12 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
         {build.pageStatus === 'built' ? (
           <Link
             href={`/builds/${build.slug}`}
-            className="group inline-flex min-h-11 items-center gap-[0.9rem] border-b border-brand-primary-hover pb-[0.55rem] pt-[0.55rem] text-[0.75rem] font-medium uppercase tracking-[0.2em] text-surface-foreground transition-colors duration-300 hover:text-brand-primary-hover"
+            className="group inline-flex min-h-11 items-center gap-[0.9rem] border-b border-ink-neutral pb-[0.55rem] pt-[0.55rem] text-[0.75rem] font-medium uppercase tracking-[0.2em] text-surface-foreground transition-colors duration-300 hover:text-brand-primary-hover"
           >
             {label}
             <span
               aria-hidden
-              className={`${dotClasses} border-brand-primary-hover transition-transform duration-300 group-hover:translate-x-0.5`}
+              className={`${dotClasses} border-ink-neutral transition-transform duration-300 group-hover:translate-x-0.5`}
             />
           </Link>
         ) : (
@@ -230,14 +231,14 @@ export default async function LibraryPage() {
       <div className="bg-surface-background">
         <div className="mx-auto w-[min(1360px,100%-3rem)] pb-[clamp(4rem,10vh,6rem)]">
           {/* ── Page head ────────────────────────────────────────────────── */}
-          <div className="pt-[clamp(9rem,16vh,13rem)]">
-            <p className="m-0 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-brand-primary-hover">
+          <div className="pt-[clamp(9rem,16vh,13rem)] pb-[clamp(2.5rem,6vh,4.5rem)]">
+            <p className="m-0 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-ink-neutral">
               Every restoration &nbsp;&middot;&nbsp; {ADDRESS.locality}, {ADDRESS.region}
             </p>
             <h1 className="mt-[0.85rem] max-w-[17ch] text-balance font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-surface-foreground">
               Every car that&rsquo;s passed through the workshop.
             </h1>
-            <p className="mt-6 max-w-[34em] text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8]">
+            <p className="mt-6 max-w-[34em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8]">
               The homepage carries a rotating selection. This is the whole record &mdash; finished
               and delivered, and still on the ramps right now.
             </p>

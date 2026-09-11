@@ -47,6 +47,77 @@ const BuildImagePathSchema = z
     'Image path must start with / (local), be a full https:// URL, or a valid R2 path (site-name/...)'
   );
 
+/**
+ * A hex colour sampled from a real, verifiable source (a paint code, or the prototype's own
+ * per-page `--accent`/`data-accent` value) — never eyeballed here.
+ */
+const HexColourSchema = z
+  .string()
+  .regex(/^#[0-9a-fA-F]{6}$/, 'Colour must be a 6-digit hex value, e.g. #3C5563');
+
+/**
+ * Per-car accent pair, mirroring the prototype's per-page `--accent` / `--accent-ink` custom
+ * properties (and the `data-accent`/`data-ink` attributes its scroll script reads into them).
+ * Each documented-car page themes itself to that car's own paint rather than to the site-wide
+ * Volvo/candy red: `#3C5563`/`#A3BFCE` on etype-941pvo.html (Opalescent Silver Blue),
+ * `#A61C24`/`#E4776C` on volvo-p1800.html (Candy Red). Optional, and deliberately left unset
+ * for every build whose paint has no published/verified value — the page then falls back to the
+ * theme's brand tokens rather than showing an invented colour.
+ *
+ * `base` is the fill (swatch, paint-spec gradient); `ink` is the text/rule colour, which is the
+ * one the prototype's own head comment computes for WCAG contrast against the near-black ground.
+ */
+const BuildAccentSchema = z.object({
+  base: HexColourSchema,
+  ink: HexColourSchema,
+});
+
+/**
+ * A two-part caption: a bold lead-in and the regular continuation that follows it — the
+ * prototype's `<b>Above — the Jaguar script,</b> raised chrome on Opalescent Silver Blue.`
+ * shape, used on every `figcaption` in both documented-car pages (`.stage__cap`, `.caption`,
+ * `.grid figcaption`, `.plaque__note`). Split into two fields rather than stored as one string
+ * with markup so the copy stays plain text in frontmatter.
+ */
+const BuildCaptionSchema = z.object({
+  lead: z.string().min(1, 'Caption lead-in must not be empty when set'),
+  rest: z.string().optional(),
+});
+
+/**
+ * One real photograph: its URL plus the prototype's own `alt` text and `figcaption` copy.
+ * `wide` marks the prototype's `.grid--wide` entries, which span the full grid row.
+ */
+const BuildPhotoSchema = z.object({
+  src: BuildImagePathSchema,
+  alt: z.string().min(1, 'Photo alt text must not be empty when set').optional(),
+  caption: BuildCaptionSchema.optional(),
+  wide: z.boolean().optional(),
+});
+
+/** A grouped grid of photographs placed at a known point in the narrative — see `photoSections`. */
+const BuildPhotoSectionSchema = z.object({
+  /** 1-based ordinal of the MDX `##` section this grid follows. */
+  afterSection: z.number().int().min(1),
+  /** Chapter eyebrow ("Finished, in daylight"). Omit to append the grid with no new chapter band. */
+  kind: z.string().min(1).optional(),
+  /** The section's `h2`. Omit together with `kind` for an unheaded grid. */
+  title: z.string().min(1).optional(),
+  /** Lead paragraph under the heading. */
+  intro: z.string().min(1).optional(),
+  /** Three-up grid (the prototype's `.grid--3`) rather than the default two-up `.grid`. */
+  columns: z.union([z.literal(2), z.literal(3)]).optional(),
+  photos: z.array(BuildPhotoSchema).min(1, 'A photo section must contain at least one photo'),
+});
+
+/** See the `plaque` field comment. */
+const BuildPlaqueSchema = z.object({
+  image: BuildImagePathSchema,
+  alt: z.string().min(1, 'Plaque photo alt text must not be empty when set').optional(),
+  /** The attribution/source line under the photo. */
+  caption: BuildCaptionSchema.optional(),
+});
+
 export const BuildStatusSchema = z.enum(['completed', 'in-progress']);
 
 export const BuildPageStatusSchema = z.enum(['built', 'pending']);
@@ -121,7 +192,58 @@ export const BuildFrontmatterSchema = z.object({
 
   // --- Media ---------------------------------------------------------------------------------
   heroImage: BuildImagePathSchema.optional(),
-  galleryImages: z.array(BuildImagePathSchema).optional(),
+
+  /**
+   * The hero's own `figcaption`, transcribed from the prototype's `.stage__cap` line for the
+   * image `heroImage` actually points at. Optional: a build with no published caption for its
+   * hero photo simply renders none.
+   */
+  heroCaption: BuildCaptionSchema.optional(),
+
+  /** Alt text for `heroImage`, transcribed from the prototype's own `alt` attribute. */
+  heroImageAlt: z.string().min(1, 'Hero image alt text must not be empty when set').optional(),
+
+  /**
+   * Flat list of gallery photo URLs, or richer per-photo objects carrying the prototype's own
+   * real `alt` text and two-part `figcaption`. The bare-string form is kept so an existing or
+   * future caller can still pass a plain URL list.
+   */
+  galleryImages: z.array(z.union([BuildImagePathSchema, BuildPhotoSchema])).optional(),
+
+  /**
+   * Grouped photo sections, matching the prototype's real structure: each documented-car page
+   * interleaves its photo grids INTO the narrative rather than appending one gallery at the end
+   * (volvo-p1800.html has two — "The car, in detail" and the unheaded grid inside "Concours
+   * evidence"; etype-941pvo.html has one, "Finished, in daylight"). `afterSection` is the 1-based
+   * ordinal of the MDX body's `##` heading this grid belongs after, so the numbered chapter
+   * sequence on the rendered page matches the prototype's.
+   */
+  photoSections: z.array(BuildPhotoSectionSchema).optional(),
+
+  /**
+   * The full-bleed "plaque" treatment: a photo of the finished car (or of the engraved plaque
+   * itself) with a quote set over it, and an attribution note below — `<figure class="plaque">`
+   * in both prototype pages. The quote text is NOT duplicated here: it stays in the MDX body as
+   * a blockquote, which the page renders into this treatment when `plaque` is present.
+   */
+  plaque: BuildPlaqueSchema.optional(),
+
+  /**
+   * The `.paintspec` block (volvo-p1800.html only): a paint swatch set beside that section's
+   * spec table. `section` is the 1-based ordinal of the MDX `##` section it applies to;
+   * `swatchLabel` is the swatch's accessible description, transcribed from the prototype's own
+   * `aria-label`. The swatch colour is derived from `accent.base` — there is no separate colour
+   * field, so it can never disagree with the car's accent.
+   */
+  paintSpec: z
+    .object({
+      section: z.number().int().min(1),
+      swatchLabel: z.string().min(1, 'Paint swatch label must not be empty when set'),
+    })
+    .optional(),
+
+  /** Per-car accent pair — see BuildAccentSchema. */
+  accent: BuildAccentSchema.optional(),
 
   video: BuildVideoSchema.optional(),
 });
@@ -130,6 +252,9 @@ export const BuildFrontmatterSchema = z.object({
  * Type exports for TypeScript usage
  */
 export type BuildFrontmatter = z.infer<typeof BuildFrontmatterSchema>;
+export type BuildPhoto = z.infer<typeof BuildPhotoSchema>;
+export type BuildPhotoSection = z.infer<typeof BuildPhotoSectionSchema>;
+export type BuildCaption = z.infer<typeof BuildCaptionSchema>;
 export type BuildStatusValue = z.infer<typeof BuildStatusSchema>;
 export type BuildPageStatusValue = z.infer<typeof BuildPageStatusSchema>;
 export type BuildTypeValue = z.infer<typeof BuildTypeSchema>;

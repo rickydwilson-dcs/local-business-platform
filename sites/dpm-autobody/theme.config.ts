@@ -11,19 +11,61 @@ import type { ComponentRegistry, DeepPartialThemeConfig } from '@platform/theme-
  * real component usage yet — confirm against actual component behaviour when the real
  * header/footer/pages are built (see build-out session.md Phase 1/2).
  *
- * Not yet done: loading Archivo/Fraunces/Newsreader as real fonts (the platform's
- * typography.fontFamily schema only has sans/heading slots, no separate "display" slot —
- * Archivo, the prototype's display face, has nowhere to go yet without either extending
- * that schema or reusing one of the two existing slots). Components/pages themselves are
- * still base-template's generic placeholders, not the real ledger/register design.
+ * Fonts (2026-09-11 font-loading pass): the platform's shared `typography.fontFamily`
+ * schema only has sans/heading/mono slots — no separate "display" slot for Archivo, the
+ * prototype's grotesk. Rather than extend the shared ThemeConfig type (which every other
+ * site's theme.config.ts also depends on), the `sans` slot is repurposed here to carry
+ * Archivo (the prototype's actual nav/UI/label/caption/micro-copy face — NOT prose body
+ * copy) and `heading` carries Fraunces as before. Newsreader (the prototype's prose/lede
+ * paragraph face) has nowhere to go in the shared schema at all, so it's wired up as a
+ * site-local `font-prose` Tailwind utility in tailwind.config.ts instead — components that
+ * render lede/prose paragraph copy must apply `font-prose` explicitly; plain body text
+ * otherwise inherits `font-sans` (Archivo) via Tailwind Preflight. All three faces are
+ * loaded with next/font/google in app/layout.tsx (self-hosted, no external font request),
+ * matching the precedent already set by sites/dcs and sites/dj-fox-electrical. Fraunces and
+ * Newsreader both load `weight: 'variable'` with `axes: ['opsz']` so optical sizing behaves
+ * like the prototype's `Fraunces:opsz,wght@9..144,300..600` /
+ * `Newsreader:opsz,wght@6..72,200..500` Google Fonts requests (confirmed against
+ * next/font's google font-data.json — both fonts expose an `opsz` axis). Archivo loads
+ * `weight: 'variable'` with no extra axes (prototype requests `Archivo:wght@200..600`;
+ * Archivo has a `wdth` axis but the prototype doesn't use it).
+ *
+ * Components/pages themselves are still base-template's generic placeholders, not the
+ * real ledger/register design (separate, in-progress work by other agents).
  */
 export const themeConfig: DeepPartialThemeConfig = {
   colors: {
     brand: {
       primary: '#A61C24', // --accent, paint-code red
-      primaryHover: '#E4776C', // --accent-ink, the prototype's lighter accent variant
-      secondary: '#C7BBA1', // --house, sampled house-colour fill
-      accent: '#E4776C', // --accent-ink
+      primaryHover: '#E4776C', // --accent-ink, the candy-red variant used ONLY on the
+      // build/car pages whose paint code is this red (e.g. the E-type — see
+      // etype-941pvo.html's data-accent/data-ink attributes). Verified 2026-09-11 against
+      // every prototype page's embedded CSS custom properties (`--accent-ink: #E4776C` +
+      // per-page `data-accent`/`data-ink` attrs) — do NOT use this for generic eyebrow/
+      // CTA/nav-underline styling on non-build pages; see `custom.accentInkNeutral` below.
+      secondary: '#C7BBA1', // --house, sampled house-colour fill. Verified 2026-09-11
+      // against the prototype's actual `--house` custom property, which is #C7BBA1 on
+      // every page (home/workshop/contact/library/etype/volvo) — a reviewer's suggested
+      // correction to #D9CDB1 does not hold up against the source CSS and was not applied;
+      // that figure appears to be an eyeballed approximation of the separate `--house-ink`
+      // token (#D8CBAE, see `custom.accentInkNeutral` below), not `--house` itself.
+      accent: '#E4776C', // --accent-ink (candy variant, see primaryHover note above)
+    },
+    // Arbitrary site-specific token (emits --color-accent-ink-neutral). Use this — via the
+    // `text-ink-neutral` / `border-ink-neutral` / `bg-ink-neutral` Tailwind utilities added
+    // in tailwind.config.ts — for eyebrow labels, CTA text, and nav-underline colour on
+    // every page EXCEPT an individual build/car detail page (which should use its own car's
+    // paint ink, e.g. brand.primaryHover for the E-type's red). Verified 2026-09-11: home.html
+    // (outside its car-reveal "lot" sections), workshop.html, contact.html and library.html
+    // all set `data-accent="#C7BBA1" data-ink="#D8CBAE"` (the prototype's --house/--house-ink
+    // pair) on their top-level sections, which the page's scroll-linked script reads into the
+    // `--accent-ink` CSS custom property actually applied to eyebrow/nav-underline/CTA
+    // elements — i.e. the rendered colour on those pages is #D8CBAE (stone/cream), NOT the
+    // #E4776C candy-red that brand.primaryHover/accent resolve to. Do not confuse this with
+    // brand.secondary (#C7BBA1, --house itself, a fill colour) — this is the separate
+    // --house-ink token used for text/ink, not fill.
+    custom: {
+      accentInkNeutral: '#D8CBAE', // --house-ink
     },
     surface: {
       background: '#0B0B0C', // --ground
@@ -50,11 +92,15 @@ export const themeConfig: DeepPartialThemeConfig = {
 
   typography: {
     fontFamily: {
-      // --font-text (Newsreader) is the prototype's body copy face.
-      sans: ['Newsreader', 'ui-serif', 'Georgia', 'serif'],
-      // --font-heading (Fraunces) — still an open question per open-questions.md
-      // (type-study not yet resolved), used here as the current best-known value.
-      heading: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+      // --font-display (Archivo) — the prototype's nav/UI/label/caption/micro-copy grotesk.
+      // Repurposing the shared `sans` slot for this (see file header comment) rather than
+      // Newsreader, which the prototype actually uses for prose/lede body copy, not general
+      // UI text — see the site-local `font-prose` Tailwind extension for that.
+      // `--font-archivo` is set by next/font/google in app/layout.tsx.
+      sans: ['var(--font-archivo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      // --font-heading (Fraunces), loaded with its variable opsz axis via next/font/google
+      // in app/layout.tsx as `--font-fraunces`.
+      heading: ['var(--font-fraunces)', 'ui-serif', 'Georgia', 'serif'],
     },
   },
 
