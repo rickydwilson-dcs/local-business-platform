@@ -50,6 +50,14 @@ real header/footer first. `e2e/accessibility.full.spec.ts`, `performance.full.sp
 
 ## Vercel
 
-New Vercel project, separate from the `dpm-autobody.vercel.app` static prototype project (which
-keeps serving the discovery-phase HTML prototype until this real site is ready to cut over).
-`vercel.json` carries the standard `ignoreCommand`/`turbo-ignore` guard — see root `CLAUDE.md`.
+Live at `dpm-ecru.vercel.app`, project name **"dpm"** (not `dpm-autobody` — that name is already
+taken by the `dpm-autobody.vercel.app` static-prototype project, which is untouched and keeps
+serving the discovery-phase HTML prototype until this real site is ready to cut over). Root
+directory `sites/dpm-autobody`, tracks `develop`. `vercel.json` carries the standard
+`ignoreCommand`/`turbo-ignore` guard — see root `CLAUDE.md`.
+
+`NEXT_PUBLIC_SITE_URL` is not yet set on the project (an attempt to set it via the dashboard didn't
+persist) — production currently falls back to the `http://localhost:3000` default in
+`site.config.ts`, which only affects `metadataBase`/OG/canonical URLs, not functionality. Set it to
+`https://dpm-ecru.vercel.app` (via `vercel env add` or the dashboard) before this URL is shared
+with anyone.

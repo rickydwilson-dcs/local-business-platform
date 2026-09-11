@@ -100,9 +100,19 @@ left dormant with generic placeholder content — DPM's approved design doesn't 
       `dch-automotive`'s known-good pattern) — confirmed by `cs-vercel-config-auditor`, 0 findings
 - [x] CSP `media-src` added for the planned video hero
 - [x] `pnpm install` run, lockfile updated and committed-ready (workspace member registered)
-- [ ] New Vercel project for the real Next.js site (separate from the `dpm-autobody.vercel.app`
-      static-prototype project, which keeps serving as-is until cutover) — not yet created
-- [ ] First deploy — blocked on the above
+- [x] New Vercel project **"dpm"** (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`), live at
+      `dpm-ecru.vercel.app` — separate from the `dpm-autobody.vercel.app` static-prototype project,
+      which is confirmed untouched (verified via the Vercel API: its production deployment is still
+      its own last publish, unrelated commit). **Naming note:** the obvious name `dpm-autobody` is
+      already taken by that prototype project, and Vercel project names are unique per team — the
+      first import attempt silently failed for this reason before the name was changed to `dpm`.
+- [x] First deploy — READY, root directory `sites/dpm-autobody`, tracks `develop`.
+- [ ] `NEXT_PUBLIC_SITE_URL` env var — attempted to set it to `https://dpm-ecru.vercel.app` via the
+      Vercel dashboard so metadata/canonical URLs aren't stuck on the `localhost` fallback in
+      production; the edit did not visibly persist (row still showed "Added" not "Updated" after
+      several save attempts) and this was not worth further turns to chase. Low priority — it only
+      affects `metadataBase`/OG/canonical URLs, not functionality. Revisit next session, or set via
+      `vercel env add` CLI instead of the dashboard.
 
 ## Phase 2 — Content model
 
