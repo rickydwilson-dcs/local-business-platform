@@ -30,4 +30,28 @@ test.describe('Smoke Tests - Page Load Only', () => {
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
   });
+
+  test('workshop page loads', async ({ page }) => {
+    const response = await page.goto('/workshop');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
+
+  test('library page loads', async ({ page }) => {
+    const response = await page.goto('/library');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
+
+  test('build page: Volvo P1800 Candy Red loads', async ({ page }) => {
+    const response = await page.goto('/builds/p1800-candy');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
+
+  test('build page: Jaguar E-Type 941 PVO loads', async ({ page }) => {
+    const response = await page.goto('/builds/etype-941pvo');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
 });
