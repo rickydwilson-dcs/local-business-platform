@@ -101,6 +101,7 @@ export interface SiteConfig extends BaseSiteConfig {
       twitter?: string;
       instagram?: string;
       linkedin?: string;
+      youtube?: string;
     };
     geo?: {
       latitude: number;
@@ -185,19 +186,31 @@ export const siteConfig: SiteConfig = {
       sunday: 'TBC',
     },
     socialMedia: {
-      // Facebook handle confirmed in client-brief.md. Instagram/YouTube exist per the brief
-      // but no handle/URL was given — do not guess one.
+      // Facebook handle confirmed in client-brief.md. Instagram/YouTube URLs below are
+      // transcribed verbatim from the approved static prototype's own colophon markup
+      // (output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/
+      // library.html ~L1732-1740, repeated identically on every other prototype page) —
+      // not guessed.
       facebook: 'https://facebook.com/dpmautobody',
+      instagram: 'https://www.instagram.com/dpm_autobody/',
+      youtube: 'https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw',
     },
     // No geo omitted deliberately — no confirmed address to place a pin against yet.
   },
 
   navigation: {
-    // Matches the approved prototype's real page set (home / workshop / builds / contact) —
-    // no services, locations, blog, projects, reviews or about routes exist on this site.
+    // Matches the approved prototype's masthead nav exactly — see
+    // output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html
+    // ~L1269-1278 (and workshop.html/contact.html, which repeat the same 4-item set with the
+    // current page marked `is-active` rather than removed from the list). "The Work" and
+    // "Proof" are in-page anchors on the homepage (home-page.tsx has id="work" / id="proof");
+    // "The Workshop" and "Contact" are real routes. There is deliberately no nav entry for
+    // /library — the prototype's masthead only ever surfaces it via library.html's own extra
+    // self-referencing item, not from other pages.
     main: [
-      { label: 'Workshop', href: '/workshop' },
-      { label: 'Builds', href: '/library' },
+      { label: 'The Work', href: '/#work' },
+      { label: 'The Workshop', href: '/workshop' },
+      { label: 'Proof', href: '/#proof' },
       { label: 'Contact', href: '/contact' },
     ],
   },

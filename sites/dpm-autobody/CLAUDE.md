@@ -21,23 +21,48 @@ content directories, and their page components were deleted at scaffold time rat
 place with generic placeholder content. `site.config.ts`'s `services`/`serviceAreas` fields still
 exist but feed schema.org JSON-LD only — there is no `/services` or `/locations` route.
 
-## Current state (as of the 2026-09-11 scaffold)
+## Current state (as of the 2026-09-11 build-out)
 
-- **Scaffold only.** `app/page.tsx` / `components/pages/home-page.tsx` and `app/contact/page.tsx`
-  are still base-template's generic placeholder layouts, stripped of dead links to deleted routes
-  but not yet rebuilt with DPM's real design. The `/workshop` and `/library` routes referenced in
-  `site.config.ts`'s nav do not exist yet — that's the next pass.
+- **Real pages, ported and visually verified.** Header, footer, home, workshop, contact, library,
+  and two individual `/builds/[slug]` pages (P1800 Candy, E-type 941 PVO) are real React
+  components built from the approved static prototype — no longer base-template placeholders.
+  They went through a visual fidelity gate (Phase 7 of the build-out brief) that found extensive
+  drift on first pass and required three further rounds of fixes before landing. See
+  `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/yolo-brief.md`'s "Completed" section
+  for the full root-cause detail (missing webfonts, a Tailwind mixed-units breakpoint bug that made
+  the nav invisible, a genuinely missing "Enquiries" CTA section, and more) rather than repeating it
+  here.
 - **Colors and fonts in `theme.config.ts` are sourced from the approved static prototype**
   (`output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/library.html`'s CSS
-  custom properties) but the role-mapping (which token feeds primaryHover vs. secondary, etc.)
-  hasn't been verified against real component usage — see the comment block in that file.
+  custom properties); fonts now load via `next/font` and the role-mapping has been exercised by
+  real component usage across all shipped pages.
 - **Several real business facts are not yet confirmed by David**: exact street address/postcode,
-  opening hours, year established, certifications, Instagram/YouTube handles. Marked `TBC` or
-  omitted in `site.config.ts` rather than guessed — do not fill these in with plausible-sounding
-  values, ask David.
-- The real header/footer/homepage/workshop/library/build-page design (near-black ground,
-  auction-lot-page structure, paint-code accent) still needs to be ported from the static
-  prototype into real React components — see build-out `session.md` Phase 1 (remaining) onward.
+  opening hours, year established, certifications. Marked `TBC` or omitted in `site.config.ts`
+  rather than guessed — do not fill these in with plausible-sounding values, ask David. (Instagram
+  and YouTube handles were confirmed against the prototype source during the build-out and are now
+  live in the footer/social links.)
+
+### Still not done
+
+- **The other 10 builds in the library** have frontmatter only (photo-only or no body content yet)
+  — per the brief's own honesty-pattern scope decision, they were deliberately not given full pages
+  in this pass. They still need iCloud photo pulls, plate-redaction, and David's confirmations
+  (chassis numbers, owner names, in-progress vs. completed status) before real pages can be built.
+  See `session.md` Phase 3.
+- **Homepage rotating-featured-build mechanism** — not built; the homepage currently shows a
+  static selection, not a client-editable rotation.
+- **Contact form is not wired up** — `site.config.ts`'s `features.contactForm` flag is still
+  `false`.
+- **Workshop page's video hero** — not built; the film has not been delivered yet.
+- **Known MEDIUM/LOW visual-fidelity follow-ups**, deliberately left open to stop iterating past
+  diminishing returns (full list in the yolo-brief's "Completed" section): P1800 headline
+  line-breaks don't exactly match the prototype; the P1800 plaque photo and one E-type pairing
+  figure aren't full-bleed like the prototype; hero image crop/zoom differs slightly on a few
+  panels; a portrait "trophy" photo on the E-type page is center-cropped in a 3:2 box instead of
+  its natural aspect ratio (needs a content-schema change to carry real per-image intrinsic
+  dimensions); minor social-icon glyph style (outline vs. filled) mismatch; a scroll-progress rail
+  and film-grain overlay from the prototype were deliberately never ported (documented scope
+  decisions, not defects).
 
 ## Tests
 

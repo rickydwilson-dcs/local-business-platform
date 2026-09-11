@@ -37,6 +37,25 @@ const config: Config = {
           inverse: 'var(--color-surface-inverse)',
           'on-inverse': 'var(--color-surface-background)',
         },
+        // Site-local: the prototype's neutral "house ink" (#D8CBAE) used for eyebrow
+        // labels, CTA text, and nav-underline colour on every page except an individual
+        // build/car detail page — see theme.config.ts's colors.custom.accentInkNeutral
+        // comment for the full verification note. Backed by the CSS var the shared
+        // theme-system plugin already emits for any `colors.custom` entry
+        // (--color-accent-ink-neutral) — no shared ThemeConfig type change needed.
+        // Gives `text-ink-neutral`, `bg-ink-neutral`, `border-ink-neutral`, etc.
+        ink: {
+          neutral: 'var(--color-accent-ink-neutral)',
+        },
+      },
+      fontFamily: {
+        // Site-local: the prototype's Newsreader prose/lede paragraph face. Not part of
+        // the shared ThemeConfig fontFamily schema (sans/heading/mono only) — see
+        // theme.config.ts's file header comment. Apply `font-prose` explicitly to
+        // prose/lede paragraph copy; plain text otherwise inherits `font-sans` (Archivo)
+        // via Tailwind Preflight. Backed by `--font-newsreader`, set by next/font/google
+        // in app/layout.tsx.
+        prose: ['var(--font-newsreader)', 'ui-serif', 'Georgia', 'serif'],
       },
     },
   },

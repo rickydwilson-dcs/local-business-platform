@@ -1,5 +1,10 @@
+'use client';
+
+import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Award } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
+import { siteConfig } from '@/site.config';
 
 export interface SiteFooterProps {
   siteName: string;
@@ -21,177 +26,156 @@ export interface SiteFooterProps {
   builtBy?: { name: string; url: string };
 }
 
+// The prototype's real, approved colophon socials are Instagram/Facebook/YouTube (see
+// output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html
+// ~L1663-1673) — all three URLs are now populated in `site.config.ts`'s
+// `business.socialMedia`, transcribed verbatim from that approved markup. This footer
+// renders only whichever of these are actually populated in site.config.ts, never a
+// fabricated URL.
+const SOCIAL_ICONS = {
+  instagram: Instagram,
+  facebook: Facebook,
+  youtube: Youtube,
+  twitter: Twitter,
+  linkedin: Linkedin,
+} as const;
+
+/**
+ * SiteFooter — DPM Autobody colophon.
+ *
+ * Ported from the approved static prototype's `<footer>`/`.colophon` (see
+ * output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/index.html —
+ * CSS ~L1091-1152, markup ~L1657-1678): the real logo mark (muted), a single address/phone/
+ * email line, social icons, and a centred "Built by" credit line.
+ *
+ * `certifications`/`services`/`locations`/`totalServices`/`totalLocations`/`maxServices`/
+ * `maxLocations`/`showServices`/`showLocations` are accepted for interface compatibility
+ * with app/layout.tsx but intentionally unused: the approved design has no
+ * certification badges or services/locations columns, and DPM has no /services or
+ * /locations routes (site.config.ts's own `credentials.certifications` is `[]` and
+ * `footer.showServices`/`showLocations` are both `false`, so this matches the real config,
+ * not just the prototype).
+ *
+ * "Back to the homepage" link: the prototype's colophon carries `<p><a class="back"
+ * href="index.html">Back to the homepage</a></p>` right under the address line on every
+ * non-home page (workshop.html ~L1392; the home page's own footer omits it — you're already
+ * home). Rendered here as a real `/` link via `usePathname()`, shown only off the home route —
+ * hence this is a client component.
+ *
+ * Logo `priority`: the brand mark below was previously native-lazy-loaded (`next/image`'s
+ * default when `priority` isn't set). On a long page — `/library`'s 12-row ledger — the footer
+ * sits far enough below the fold that a screenshot taken without first scrolling captures it
+ * before the browser's lazy-load ever fires: reserved space (the `aspect-[500/342]` box), zero
+ * painted pixels. Confirmed live: `naturalWidth`/`complete` on the footer's `<img>` read `0`/
+ * `false` on initial load and `188`/`true` only once actually scrolled into view — the same
+ * `/logo.svg` request the header already makes `priority` (eager) for exactly this reason.
+ * `priority` here makes the footer mark load unconditionally, matching the header's treatment.
+ */
 export function SiteFooter({
   siteName,
-  tagline,
   phoneDisplay,
   phoneTel,
   email,
   address,
-  certifications,
-  services,
-  locations,
-  totalServices,
-  totalLocations,
-  maxServices,
-  maxLocations,
-  showServices,
-  showLocations,
   copyright,
   builtBy,
 }: SiteFooterProps) {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
+  const socials = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>)
+    .map((key) => ({ key, href: siteConfig.business.socialMedia[key], Icon: SOCIAL_ICONS[key] }))
+    .filter(
+      (
+        entry
+      ): entry is {
+        key: keyof typeof SOCIAL_ICONS;
+        href: string;
+        Icon: (typeof SOCIAL_ICONS)[keyof typeof SOCIAL_ICONS];
+      } => Boolean(entry.href)
+    );
+
   return (
-    <footer className="bg-surface-inverse text-white py-12 sm:py-16">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          {/* Column 1: About */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
-            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
-            {certifications.length > 0 && (
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                {certifications.slice(0, 3).map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                    {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
-                    ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
-                    )}
-                    <span>{cert.name}</span>
-                  </div>
-                ))}
-              </div>
+    <footer className="bg-surface-background">
+      <div className="mx-auto grid w-[min(1360px,100%-3rem)] gap-6 border-t border-[rgba(232,228,220,0.07)] pb-32 pt-[clamp(3rem,8vh,5rem)]">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="grid gap-6">
+            <Link
+              href="/"
+              aria-label={siteName}
+              className="relative block h-[clamp(4.875rem,12vw,7.5rem)] w-auto aspect-[500/342] text-surface-muted-foreground"
+            >
+              <Image
+                src="/logo.svg"
+                alt={siteName}
+                fill
+                priority
+                className="object-contain object-left"
+              />
+            </Link>
+            <p className="m-0 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground">
+              {address.locality}, {address.region}
+              {' '}
+              {'·'}
+              {' '}
+              <a href={`tel:${phoneTel}`} className="no-underline hover:text-brand-primary-hover">
+                <span className="whitespace-nowrap">{phoneDisplay}</span>
+              </a>
+              {' '}
+              {'·'}
+              {' '}
+              <a href={`mailto:${email}`} className="no-underline hover:text-brand-primary-hover">
+                {email}
+              </a>
+            </p>
+            {!isHome && (
+              <p className="m-0">
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 border-b border-surface-card-border pb-[0.15rem] text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
+                >
+                  <span aria-hidden="true">&larr;</span>
+                  Back to the homepage
+                </Link>
+              </p>
             )}
           </div>
 
-          {/* Column 2: Services */}
-          {showServices && services.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {services.map((service) => (
-                  <li key={service.slug}>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {service.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalServices > maxServices && (
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Services &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 3: Locations */}
-          {showLocations && locations.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {locations.map((location) => (
-                  <li key={location.slug}>
-                    <Link
-                      href={`/locations/${location.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {location.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalLocations > maxLocations && (
-                  <li>
-                    <Link
-                      href="/locations"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Locations &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 4: Contact */}
-          <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
-              <div className="flex items-center gap-2">
-                <Phone
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`tel:${phoneTel}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {phoneDisplay}
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`mailto:${email}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {email}
-                </Link>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
-                  aria-hidden="true"
-                />
-                <div className="leading-relaxed">
-                  <div>{address.locality}</div>
-                  <div>{address.region}</div>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
-                <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
-                  Privacy Policy
-                </Link>
-                <span className="mx-2 text-surface-muted-foreground">|</span>
-                <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
-                  Cookie Policy
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
-          <p>
-            &copy; {copyright}
-            {builtBy && (
-              <>
-                {' '}
-                | Built by{' '}
+          {socials.length > 0 && (
+            <nav aria-label={`${siteName} on social media`} className="flex items-center gap-3">
+              {socials.map(({ key, href, Icon }) => (
                 <a
-                  href={builtBy.url}
+                  key={key}
+                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-brand-primary transition-colors underline"
+                  aria-label={key.charAt(0).toUpperCase() + key.slice(1)}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center border border-surface-card-border text-surface-muted-foreground transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
                 >
-                  {builtBy.name}
+                  <Icon className="h-[1.05rem] w-[1.05rem]" aria-hidden="true" />
                 </a>
-              </>
-            )}
-          </p>
+              ))}
+            </nav>
+          )}
         </div>
+
+        <p className="m-0 border-t border-[rgba(232,228,220,0.07)] pt-[clamp(1.5rem,4vh,2.25rem)] text-center text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-surface-muted-foreground">
+          &copy; {copyright}
+          {builtBy && (
+            <>
+              {' '}
+              &middot; Built by{' '}
+              <a
+                href={builtBy.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-b border-surface-card-border pb-[0.15rem] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
+              >
+                {builtBy.name}
+              </a>
+            </>
+          )}
+        </p>
       </div>
     </footer>
   );
