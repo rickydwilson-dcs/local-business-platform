@@ -1,0 +1,1948 @@
+<!doctype html>
+<html lang="en-GB" data-build="client">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPM Autobody — Every restoration</title>
+<meta name="description" content="Every restoration DPM Autobody has completed, and every one currently in the workshop. Berwick, East Sussex.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200..600&family=Fraunces:opsz,wght@9..144,300..600&family=Newsreader:opsz,wght@6..72,200..500&display=swap">
+<style>
+/* ============================================================================
+   DPM Autobody — Direction D, "The Register". The section it was named after is
+   called "The record" on the page since 2026-08-30: "Register" read as a verb in
+   the nav. The direction keeps its original name; the section does not.
+   Shared stylesheet for the homepage and the P1800 project page.
+
+   THE DEVICE. One photographic plate, graded LIT, with two ground-coloured
+   veils sliding apart on transform only. What ignites inside the gap is the
+   photograph's own reflection — never a white shape painted over the top.
+   The veil is deliberately NOT opaque (0.74): the panel stays legible when
+   unlit, so the effect reads as a sweep of light over a visible car rather
+   than a reveal out of black. That was the client's first note.
+
+   TIMING. The band travels the full width in exactly one viewport of scroll
+   (.track__room: 100lvh against a 100lvh sticky stage), and it starts already
+   biting the left edge, so the first 200px of scroll visibly moves it.
+
+   ACCENT. Scroll position alone re-skins the page from the car you are in.
+   No hover, no click, nothing to discover, nothing to latch. (The previous
+   build's paint-index chips applied on pointerenter and reverted on
+   pointerleave, so clicking one appeared to do nothing at all. Deleted.)
+
+   Contrast, measured not eyeballed, against ground #0B0B0C:
+     bone      #E8E4DC  15.52:1
+     bone-dim  #A8A399   7.84:1
+     house ink #D8CBAE  12.25:1
+     candy ink #E4776C   6.70:1
+     green ink #4E9E72   6.05:1
+     blue ink  #8FB4D9   9.09:1
+   Worst case is candy ink on the raised panel #1A1A1D at 5.92:1. All AA.
+
+   No tabular-nums and no monospaced face appears anywhere on either page.
+   They carry "1,300 hours", "2,000 photographs" and "57,000 views", and a
+   tabular or mono figure renders those as "1 , 300".
+   ========================================================================= */
+
+@property --accent     { syntax: '<color>'; inherits: true; initial-value: #A61C24; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #E4776C; }
+
+:root {
+  /* Ground */
+  --ground:  #0B0B0C;
+  --surface: #141416;
+  --panel:   #1A1A1D;
+  --bone:    #E8E4DC;
+  --bone-dim:#A8A399;
+  --hair:    rgba(232,228,220,0.14);
+  --hair-2:  rgba(232,228,220,0.07);
+
+  /* The car owns the page from the first pixel */
+  --accent:     #A61C24;
+  --accent-ink: #E4776C;
+
+  /* House accent, for the parts that belong to no car */
+  --house:     #C7BBA1;
+  --house-ink: #D8CBAE;
+
+  /* The veil that shades — not hides — the unlit paint */
+  --veil: rgba(11,11,12,0.74);
+  --falloff: clamp(180px, 30%, 460px);
+
+  /* Highlight geometry, written by rAF */
+  --bl: -200vw;
+  --br:  200vw;
+  --bc:  50%;
+
+  /* Typeface, in one place.
+     The heading face is under review — see ../type-study.html, which drives
+     these two variables and nothing else, so a decision there is a two-line
+     change here. */
+  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
+  --font-text:    'Newsreader', ui-serif, Georgia, serif;
+
+  --page: min(1360px, 100% - 3rem);
+  --ease: cubic-bezier(0.22, 0.68, 0.16, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --fs-body: clamp(1.0625rem, 0.44vw + 0.98rem, 1.25rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--bone);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Explicit, and load-bearing: every comma'd figure on this page inherits
+     from here. Never tabular, never mono. */
+  font-variant-numeric: normal;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 0; }
+
+::selection { background: var(--accent-ink); color: #0B0B0C; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- Type ---------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  letter-spacing: -0.034em;
+  line-height: 0.98;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* The height term only bites on a viewport that is wide AND short — a 13"
+   laptop with the browser not maximised, where three lines at 7.6vw plus the
+   lede plus the foot's reserved band do not fit and the lede ran under the
+   foot. At 1440x900 and above, 7.6vw still wins and nothing changes. */
+.h-hero  { font-size: clamp(2.75rem, min(7.6vw, 12vh), 6.75rem); }
+.h-major { font-size: clamp(2rem, 4.6vw, 4rem); }
+.h-lot   { font-size: clamp(1.75rem, 3.4vw, 3.125rem); }
+.h-sub   { font-size: clamp(1.375rem, 2.1vw, 1.9375rem); line-height: 1.08; }
+
+.prose {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  line-height: 1.62;
+  color: #CFCAC1;
+  max-width: 22.6em;
+  margin: 0 0 1.15em;
+  font-variant-numeric: normal;
+}
+.prose:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; color: var(--bone); }
+.prose em { font-style: italic; color: var(--bone); }
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0;
+}
+.label--accent { color: var(--accent-ink); }
+
+.lede {
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.875rem);
+  line-height: 1.45;
+  color: #D6D1C8;
+  max-width: 23em;
+  margin: 0;
+}
+
+/* Any figure with a thousands comma lives in here. Proportional, always. */
+.fig { font-variant-numeric: normal; font-family: inherit; font-style: inherit; }
+
+/* --- Page furniture ------------------------------------------------------ */
+
+.grain {
+  position: fixed; inset: 0; z-index: 60;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+}
+
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding: 1.15rem max(1.5rem, calc((100vw - 1360px) / 2)) 2.5rem;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.96) 0%, rgba(11,11,12,0.9) 40%, rgba(11,11,12,0.62) 72%, rgba(11,11,12,0) 100%);
+}
+.wordmark {
+  font-size: 0.8125rem; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  text-decoration: none; color: var(--bone);
+  white-space: nowrap;
+}
+.wordmark span { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+.masthead nav { margin-left: auto; display: flex; gap: clamp(0.9rem, 1.8vw, 1.75rem); }
+.masthead nav a {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.masthead nav a:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+/* The current page's own nav item stays in the list rather than vanishing
+   from it — it just marks itself, so the set of items never shifts between
+   pages. */
+.masthead nav a.is-active {
+  color: var(--bone);
+  font-weight: 700;
+  border-bottom-color: var(--accent-ink);
+}
+
+.tel {
+  margin-left: auto;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--bone); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.2rem;
+  transition: border-color 400ms var(--ease);
+  white-space: nowrap;
+}
+.tel:hover { border-bottom-color: var(--accent-ink); }
+.masthead nav + .tel { margin-left: 0; }
+
+/* Back-to-homepage, on the project page. Always in the masthead, and
+   repeated at the foot of the page. */
+.back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding: 0.35rem 0 0.25rem;
+  white-space: nowrap;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.back::before { content: '\2190'; font-size: 0.875rem; letter-spacing: 0; }
+.back:hover { color: var(--bone); border-bottom-color: var(--accent-ink); }
+
+/* Phone contents pill. Centred with left/right + margin-inline, never a
+   transform — a transform makes it the containing block for fixed children. */
+.pill {
+  position: fixed; z-index: 45;
+  left: 0; right: 0; margin-inline: auto; width: max-content;
+  max-width: calc(100% - 1.5rem);
+  bottom: 1rem;
+  display: flex; gap: 0.15rem; align-items: center;
+  padding: 0.2rem 0.5rem;
+  background: rgba(11,11,12,0.9);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(232,228,220,0.08);
+  opacity: 0; visibility: hidden;
+  transition: opacity 500ms var(--ease), visibility 0s linear 500ms;
+}
+.pill.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.pill a {
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone); text-decoration: none;
+  padding: 0 0.45rem; min-height: 44px;
+  display: flex; align-items: center;
+}
+/* The masthead nav and the floating pill hand over to each other, so exactly
+   one is visible at any width. The handover has to happen where the masthead
+   still FITS: it is nowrap, and the project page's six-item nav needs 873px
+   with the logo at its current size. At the old 48rem (768px) handover the
+   masthead overflowed across a 105px band that lands squarely on an iPad in
+   portrait. 56rem gives it headroom. */
+@media (min-width: 56rem) { .pill { display: none; } }
+
+/* Scroll "light meter" — the only chrome that moves */
+.rail {
+  position: fixed; right: 1.5rem; top: 22vh; bottom: 22vh; z-index: 30;
+  width: 1px; background: var(--hair-2);
+  pointer-events: none;
+}
+.rail__dot {
+  position: absolute; left: -1px; top: 0;
+  width: 3px; height: 44px;
+  background: var(--accent-ink);
+  transform: translate3d(0, var(--railY, 0px), 0);
+  will-change: transform;
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The plate: one photograph, two veils, one specular core -------------- */
+
+.track { position: relative; }
+
+.stage {
+  position: sticky; top: 0;
+  height: 100lvh;                 /* lvh, never svh */
+  overflow: clip;
+  isolation: isolate;
+  margin: 0;
+}
+/* Real in-flow content AFTER the sticky element, inside its containing block.
+   Neither its own margin nor the container's padding would give it any room.
+   100lvh of room against a 100lvh stage = the light crosses the frame in
+   exactly one viewport of scrolling. */
+.track__room       { height: 100lvh; }
+.track__room--long { height: 150lvh; }   /* only where a resolve follows the light */
+
+.plate { position: absolute; inset: 0; overflow: clip; }
+.plate img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+
+.veil {
+  position: absolute; top: -14%; bottom: -14%;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 2;
+  /* The veils dissolve as the finished car arrives, so the resolve never
+     crossfades against a hard diagonal veil edge — the light opens out into
+     the photograph instead of wiping across it. */
+  opacity: calc(1 - var(--reveal, 0));
+}
+.veil--l {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tl, var(--bl)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to left, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+.veil--r {
+  left: 0; width: 300%;
+  transform: translate3d(var(--tr, var(--br)), 0, 0) skewX(-9deg);
+  background: linear-gradient(to right, rgba(11,11,12,0) 0, var(--veil) var(--falloff));
+  backface-visibility: hidden;
+}
+
+/* The wet spike: additive, narrow, warm. Rides the centre of the band. */
+.spec {
+  position: absolute; top: -8%; bottom: -8%; left: 0;
+  width: clamp(190px, 26%, 460px);
+  /* Above .plate::after, deliberately. `screen` blends with whatever is
+     painted below it, so with the horizon shade on top the highlight was
+     being darkened by it and the band stopped reading below the waistline. */
+  z-index: 4;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+  opacity: calc(1 - var(--reveal, 0));
+  transform: translate3d(var(--bc), 0, 0) translateX(-50%);
+  /* Peak pulled back from 0.30. Now that the specular sits above the horizon
+     shade it is no longer fighting it, and at the old strength it blew the
+     panel it crossed to white — which hides the colour the band is supposed to
+     be revealing. The light should show the paint, not replace it. */
+  background: linear-gradient(100deg,
+      rgba(255,248,235,0) 0%,
+      rgba(255,248,235,0.05) 34%,
+      rgba(255,250,240,0.20) 50%,
+      rgba(255,248,235,0.05) 66%,
+      rgba(255,248,235,0) 100%);
+}
+
+/* A horizon shade so the plate never sits as a flat rectangle.
+   The bottom stop is the one that matters and it was too strong: 0.82 rising
+   from 60% put the whole lower two-fifths of the frame in the dark, which on
+   the hero is everything below the chrome waistline — the paint. It now starts
+   at 72% and tops out at 0.6, which still carries the caption. */
+.plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0) 26%, rgba(11,11,12,0) 72%, rgba(11,11,12,0.6) 100%),
+    radial-gradient(165% 130% at 50% 46%, rgba(11,11,12,0) 66%, rgba(11,11,12,0.26) 100%);
+}
+
+/* The whole car, arriving only at the end */
+.resolve {
+  position: absolute; inset: 0; z-index: 5;
+  opacity: var(--reveal, 0);
+  /* Where a second stop follows, the first one also scales UP as it goes, so
+     the change reads as pushing through the detail rather than as a straight
+     dissolve. A dissolve between a frame-filling badge and a wide shot of a
+     car is a double exposure, and it looks like one. */
+  transform: scale(calc(1.05 - 0.05 * var(--reveal, 0) + 0.14 * var(--reveal2, 0)));
+  will-change: opacity, transform;
+}
+/* Second stop, for the one section that resolves macro → detail → wide */
+.resolve--2 { z-index: 6; opacity: var(--reveal2, 0); transform: scale(calc(1.06 - 0.06 * var(--reveal2, 0))); }
+.resolve img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--rsat, 1.04)) contrast(var(--rcon, 1.02)) brightness(var(--rbri, 1.04));
+}
+.resolve::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0.44) 0%, rgba(11,11,12,0.02) 28%, rgba(11,11,12,0.14) 56%, rgba(11,11,12,0.88) 100%);
+}
+/* The nearside front corner of slide-01, where DPM painted the registration
+   out in white. Shaded down so it is not the thing you look at. */
+.resolve--plate-out::after {
+  background:
+    radial-gradient(62% 52% at 4% 82%, rgba(11,11,12,0.95) 0%, rgba(11,11,12,0.66) 34%, rgba(11,11,12,0.2) 66%, rgba(11,11,12,0) 88%),
+    linear-gradient(to bottom, rgba(11,11,12,0.5) 0%, rgba(11,11,12,0.03) 30%, rgba(11,11,12,0.16) 58%, rgba(11,11,12,0.9) 100%);
+}
+
+/* Content laid over a stage */
+.stage__over {
+  position: absolute; inset: 0; z-index: 10;
+  display: grid; align-content: end;
+  width: var(--page); margin-inline: auto;
+  padding-bottom: clamp(9.5rem, 20vh, 11rem);
+  pointer-events: none;
+}
+.stage__over > * { pointer-events: auto; }
+
+.stage__tag {
+  display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  background: rgba(11,11,12,0.86);
+  border: 1px solid var(--hair);
+  padding: 0.45rem 0.75rem;
+  justify-self: start;
+  margin-bottom: 1.25rem;
+}
+
+/* Every photograph gets a caption sitting with it, saying what the car is and
+   what the shot shows. On a resolving stage the caption crossfades with the
+   picture, so the words on screen always describe the frame on screen. Both
+   states occupy the same grid cell, so nothing reflows. */
+.stage__cap {
+  position: absolute; z-index: 11;
+  left: 0; right: 0; bottom: clamp(4.75rem, 8vh, 5.25rem);
+  width: var(--page); margin-inline: auto;
+  display: grid;
+  font-size: 0.8125rem; line-height: 1.5;
+  color: var(--bone-dim);
+  pointer-events: none;
+}
+.stage__cap > * { grid-area: 1 / 1; pointer-events: auto; }
+.stage__cap-line {
+  display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; align-items: baseline;
+  max-width: 44em;
+  align-self: end;
+  transition: opacity 220ms linear;
+}
+/* Steeper than the picture's own crossfade (x1.9, offset 0.9), so that at any
+   paused scroll position one caption is legible and the other is at most 0.1.
+   Stopping mid-transition used to print both sets of words on top of each
+   other. */
+.stage__cap-line--macro { opacity: calc(1 - var(--reveal, 0) * 1.9); }
+.stage__cap-line--mid   { opacity: min(calc(var(--reveal, 0) * 1.9 - 0.9), calc(1 - var(--reveal2, 0) * 1.9)); }
+.stage__cap-line--wide  { opacity: calc(var(--reveal2, var(--reveal, 0)) * 1.9 - 0.9); }
+.stage__cap b { color: var(--bone); font-weight: 500; }
+@media (min-width: 48rem) {
+  .stage__cap { bottom: clamp(2rem, 4vh, 3rem); }
+  .stage__over { padding-bottom: clamp(9rem, 18vh, 10.5rem); }
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+/* The light travels under the copy. Give the copy its own ground rather than
+   darkening the whole plate, which would put the light out. z-index is
+   negative inside this layer's own stacking context, so it sits behind the
+   text and still above the photograph. */
+.hero__inner::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: -14vh -34vw -14vh -40vw;
+  /* The wash that keeps the hero copy legible. It has to die sooner than it
+     used to: at 0.66 across the middle of the frame it was putting the whole
+     centre of the photograph — the paint below the waistline — behind a grey
+     sheet. It now falls to a fifth by the middle and is gone by two-thirds,
+     which still carries the headline and the lede over their own darker
+     corner of the plate. */
+  background: linear-gradient(101deg,
+      rgba(11,11,12,0.92) 20%,
+      rgba(11,11,12,0.62) 34%,
+      rgba(11,11,12,0.22) 50%,
+      rgba(11,11,12,0) 68%);
+}
+.stage__over::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto -30vw -14vh -40vw; height: 66%;
+  background: linear-gradient(to top,
+      rgba(11,11,12,0.94) 20%,
+      rgba(11,11,12,0.66) 52%,
+      rgba(11,11,12,0) 100%);
+}
+
+.hero__inner {
+  position: absolute; inset: 0; z-index: 10;
+  width: var(--page); margin-inline: auto;
+  /* `safe end` rather than `center`: the copy hangs off the foot's reserved
+     band, so the space above the headline grows with the viewport instead of
+     the block drifting up into the masthead. `safe` is load-bearing — plain
+     `end` (like plain `center`) spills past the padding edge when the content
+     is taller than the box, which is how the label ended up 35px UNDER the
+     masthead at 1113x744. With `safe` it falls back to start instead. */
+  display: grid; align-content: safe end;
+  padding-top: clamp(7rem, 15vh, 11rem);
+  /* Reserve the foot of the phone viewport for the caption, which is pinned
+     there and can run to four lines. The copy centres in what is left. */
+  padding-bottom: 15rem;
+}
+/* The foot is absolutely positioned against the bottom of the stage, so the
+   centred copy above it has to be told the band is taken. Without this the
+   lede's last line runs under the foot on any viewport short enough
+   that the three-line headline and the foot both want the middle — 1341x896
+   was the first one tried and it collided. */
+/* Tuned against the measured matrix in HANDOFF, not by eye. Too large and the
+   copy floats up under the masthead; too small and the lede runs into the
+   foot. This is the value that keeps a positive gap at both ends across every
+   viewport from 360x780 to 1728x1080. */
+@media (min-width: 48rem) { .hero__inner { padding-bottom: clamp(12.5rem, 27vh, 18rem); } }
+.hero h1 { margin: 0.6rem 0 1.6rem; max-width: 14ch; }
+
+/* The copy carries its own ground rather than the plate being dimmed to give
+   it one. A wash broad enough to sit behind a 650px lede is also broad enough
+   to grey out the middle of the photograph, which is where the paint is; a
+   shadow costs the picture nothing. Two radii: a wide one to lift the type off
+   a bright band, a tight one for edge definition on chrome. */
+.hero__inner .label,
+.hero__inner h1,
+.hero__inner .lede {
+  text-shadow: 0 1px 28px rgba(11,11,12,0.94), 0 1px 4px rgba(11,11,12,0.7);
+}
+/* In flow on a phone, where the caption can run to five lines and there is no
+   room to stack two absolutely positioned blocks above it. */
+.hero__foot {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; align-items: baseline;
+}
+/* The height condition matters as much as the width one. Pinning the foot to
+   the bottom of the stage only works if there is room above it for a
+   three-line headline and a two-line lede; below about 736px there is not, and
+   the lede ran under the foot (1280x640). Under that height the foot goes back
+   into flow beneath the copy, exactly as it does on a phone, where an overlap
+   is impossible by construction. */
+@media (min-width: 48rem) and (min-height: 44rem) {
+  .hero__foot { position: absolute; left: 0; right: 0; margin-top: 0; bottom: clamp(8.5rem, 21vh, 13rem); }
+}
+/* The hero foot used to open with a line telling the visitor to scroll. That
+   is the page narrating its own interaction, which is the same category of
+   meta-copy as everything else stripped on 29 August, so it is gone. The rule
+   it carried stays, on whatever label is left. */
+.hero__foot .label:first-child { display: flex; align-items: center; gap: 0.75rem; }
+.hero__foot .label:first-child::before {
+  content: ''; width: clamp(28px, 5vw, 64px); height: 1px; flex: none;
+  background: linear-gradient(to right, var(--accent-ink), rgba(232,228,220,0));
+  transition: background 700ms var(--ease);
+}
+
+/* --- Section shells ------------------------------------------------------ */
+
+.band { width: var(--page); margin-inline: auto; }
+.band[id], section[id] { scroll-margin-top: 5.5rem; }
+
+/* THE BOUNDARY. The client could not tell where one section stopped and the
+   next started, so every kept section now opens with the same three things,
+   in the same place, at the same size: a rule across the full measure, a
+   lettered mark that inherits the car's accent, and a kind. Scrolling past
+   one is unmistakable. */
+.chapter {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0 1.25rem;
+  padding-top: clamp(5.5rem, 13vh, 10rem);
+  border-top: 1px solid var(--hair);
+  position: relative;
+}
+.chapter::before {
+  content: ''; position: absolute; top: -2px; left: 0;
+  width: clamp(3.5rem, 8vw, 6rem); height: 3px;
+  background: var(--accent-ink);
+  transition: background-color 700ms var(--ease);
+}
+.chapter__mark {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 200; letter-spacing: -0.02em; line-height: 1;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.chapter__kind {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.chapter + .section-head { padding-top: clamp(1.75rem, 4vh, 2.75rem); border-top: 0; }
+
+.section-head {
+  display: grid; gap: 1.25rem;
+  padding: clamp(6rem, 14vh, 11rem) 0 clamp(2.5rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.section-head--flush { border-top: 0; }
+
+/* The library page's own intro has 3 children (label, h1, lede), not the
+   usual h2+div pair .section-head's 2-column grid at >=60rem expects, and it
+   is the very first thing on the page, so it also needs more headroom than
+   the shared clamp(6rem,14vh,11rem) reliably clears: the masthead's real
+   footprint is ~114px (documented below, in the wide-viewport block), and
+   14vh alone drops under that on a short viewport. Force single column,
+   full-measure, and a safe fixed floor on the top padding. */
+.section-head--intro {
+  display: block;
+  padding-top: clamp(9rem, 16vh, 13rem);
+}
+.section-head--intro .h-major { margin-top: 0.85rem; }
+.section-head--intro .lede { margin-top: 1.5rem; }
+
+.rule { height: 1px; background: var(--hair-2); border: 0; margin: 0; }
+
+/* Credit tags. Two cases, and they never look alike. */
+.credit {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.625rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  white-space: nowrap;
+}
+.credit--dpm { color: var(--bone); border: 1px solid var(--hair); }
+.credit--dpm::before { content: ''; width: 5px; height: 5px; background: var(--accent-ink); }
+.credit--ai  { color: #E3C88A; border: 1px dashed rgba(227,200,138,0.55); }
+.credit--copy{ color: var(--bone-dim); border: 1px dashed var(--hair); }
+
+.caption {
+  margin: 0.85rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline;
+  font-size: 0.8125rem; line-height: 1.55;
+  color: var(--bone-dim);
+  max-width: 44em;
+}
+.caption b { color: var(--bone); font-weight: 500; }
+
+/* A figure and its caption share one container and one rule, so the binding
+   is structural rather than a matter of proximity. */
+.bound {
+  border-top: 1px solid var(--hair);
+  padding-top: 1rem;
+  margin: 0;
+}
+.bound > img { width: 100%; height: auto; }
+.bound > figcaption { padding-top: 0.85rem; }
+
+/* The section's own establishing shot — the wide car photo that opens each
+   finished-car section, ahead of the title and prose. Contained inside the
+   text column rather than full-bleed like .plate, so it needs its own crop
+   treatment rather than .plate's. A fixed aspect-ratio means the box shape
+   — and so the crop — is identical at every viewport width, unlike the
+   full-viewport-height sticky stage the slider uses below, whose aspect
+   changes with the window. The slider's own closing shot returns to this
+   same photograph, but in that full-bleed box, so it needs its own,
+   separately tuned crop rather than reusing these values verbatim. */
+.section-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: clip;
+  margin: clamp(1.75rem, 4vh, 2.75rem) 0 clamp(2rem, 5vh, 3rem);
+}
+.section-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--pp, 50% 50%);
+  transform: scale(var(--pz, 1));
+  transform-origin: var(--po, 50% 50%);
+  filter: saturate(var(--psat, 1.1)) contrast(var(--pcon, 1.06)) brightness(var(--pbri, 1.16));
+}
+.section-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,12,0) 55%, rgba(11,11,12,0.34) 100%);
+}
+.section-hero + .caption { margin-top: -0.25rem; }
+
+/* --- Link out to a project page ------------------------------------------ */
+
+.golink {
+  display: inline-flex; align-items: center; gap: 0.9rem;
+  min-height: 44px;
+  padding: 0.55rem 0.35rem 0.55rem 0;
+  text-decoration: none;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone);
+  border-bottom: 1px solid var(--accent-ink);
+  transition: color 400ms var(--ease), border-color 700ms var(--ease), gap 500ms var(--ease-out);
+}
+.golink::after {
+  content: ''; width: 0.5em; height: 0.5em; flex: none;
+  border-top: 1px solid var(--accent-ink);
+  border-right: 1px solid var(--accent-ink);
+  transform: rotate(45deg);
+  transition: border-color 700ms var(--ease);
+}
+.golink:hover { gap: 1.4rem; color: var(--accent-ink); }
+.golink--dead {
+  color: var(--bone-dim);
+  border-bottom-style: dashed;
+  border-bottom-color: var(--hair);
+  cursor: not-allowed;
+}
+.golink--dead::after { border-color: var(--hair); }
+.golink--dead:hover { gap: 0.9rem; color: var(--bone-dim); }
+
+/* --- The record (identity block) ----------------------------------------- */
+
+.record {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0; margin: 0;
+  border-top: 1px solid var(--hair);
+}
+.record > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15ch) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.record dt {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-top: 0.28rem;
+}
+.record dd {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; font-weight: 300; line-height: 1.5;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.record dd b { font-weight: 500; }
+
+.swatch { display: inline-flex; align-items: center; gap: 0.7rem; }
+.swatch i {
+  width: 2.25rem; height: 1.15rem;
+  background: var(--accent);
+  border: 1px solid var(--hair);
+  transition: background-color 700ms var(--ease);
+}
+
+/* --- The owner's specification ------------------------------------------- */
+
+.spec-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.spec-list li {
+  display: grid; gap: 0.3rem 1.75rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.spec-list__n {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease);
+}
+.spec-list__name {
+  font-family: var(--font-text);
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.spec-list__note { font-size: 0.875rem; line-height: 1.6; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 48rem) {
+  .spec-list li { grid-template-columns: 3.5rem minmax(0, 17rem) minmax(0, 1fr); }
+}
+
+/* --- The plaque ---------------------------------------------------------- */
+
+.plaque { position: relative; margin-block: clamp(3rem, 8vh, 6rem); }
+.plaque__img { position: relative; height: clamp(56lvh, 72vw, 86lvh); overflow: clip; }
+.plaque__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 44%;
+  transform: scale(1.03);
+  filter: saturate(1.06) contrast(1.02) brightness(1.1);
+}
+.plaque__img::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 18%, rgba(11,11,12,0.18) 42%, rgba(11,11,12,0.68) 62%, rgba(11,11,12,0.93) 80%, rgba(11,11,12,0.99) 100%),
+    linear-gradient(to right, rgba(11,11,12,0.38) 0%, rgba(11,11,12,0) 30%);
+}
+.plaque__line {
+  position: absolute; left: 0; right: 0; z-index: 2;
+  bottom: clamp(1.75rem, 4.5vh, 3.25rem);
+  width: var(--page); margin-inline: auto;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.3125rem, 2.5vw, 2.125rem);
+  line-height: 1.26;
+  color: var(--bone);
+  margin: 0 auto;
+  text-wrap: balance;
+  font-variant-numeric: normal;
+  text-shadow: 0 1px 24px rgba(11,11,12,0.9);
+}
+.plaque__line span { display: block; max-width: 17em; }
+.plaque__line b { font-weight: 400; }
+.plaque__note {
+  width: var(--page); margin-inline: auto;
+  padding-top: clamp(1.75rem, 4vh, 2.75rem);
+  border-top: 1px solid var(--hair);
+  margin-top: clamp(1.5rem, 3vh, 2rem);
+}
+.plaque__note .caption { margin: 0 0 0.9rem; }
+
+/* --- Grids --------------------------------------------------------------- */
+
+.grid {
+  display: grid; gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+@media (min-width: 34rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.grid figure { background: var(--surface); border-top: 1px solid var(--hair-2); padding-top: 0.75rem; }
+.grid img { width: 100%; height: auto; }
+.grid figcaption {
+  padding: 0.7rem 0 0;
+  font-size: 0.8125rem; line-height: 1.5; color: var(--bone-dim);
+  max-width: 44em;
+}
+.grid figcaption b { color: var(--bone); font-weight: 500; }
+.grid--wide { grid-column: 1 / -1; }
+
+/* --- The log ------------------------------------------------------------- */
+
+.entry {
+  padding-block: clamp(2.75rem, 7vh, 4.5rem);
+  border-top: 1px solid var(--hair-2);
+}
+.entry__meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center;
+  margin-bottom: 1.35rem;
+}
+.entry__date {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.entry h3 { max-width: 22ch; color: var(--bone); }
+.entry__by {
+  margin-top: 1.35rem;
+  display: flex; align-items: center; gap: 0.85rem;
+  color: var(--bone-dim);
+  font-size: 0.875rem;
+}
+.entry__initial {
+  width: 2.25rem; height: 2.25rem; flex: none;
+  border: 1px solid var(--accent-ink);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
+  color: var(--accent-ink);
+  transition: color 700ms var(--ease), border-color 700ms var(--ease);
+}
+.entry__by b { color: var(--bone); font-weight: 500; }
+.entry__body { margin-top: 1.75rem; }
+@media (min-width: 62rem) {
+  .entry__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 9fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  .entry__body { margin-top: 0; }
+}
+.entry figure { margin-top: 2.25rem; }
+.entry figure img { width: 100%; }
+
+/* --- Stages -------------------------------------------------------------- */
+
+.stages { list-style: none; margin: 0; padding: 0; max-width: 68rem; }
+.stages li {
+  display: grid; gap: 0.35rem 1.75rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--hair-2);
+  align-items: baseline;
+}
+.stages li:last-child { border-bottom: 1px solid var(--hair-2); }
+.stages__n { font-size: 0.8125rem; color: var(--accent-ink); letter-spacing: 0.1em; transition: color 700ms var(--ease); }
+.stages__name {
+  font-family: var(--font-text);
+  font-size: clamp(1.1875rem, 1.8vw, 1.5rem); font-weight: 300;
+  line-height: 1.2; color: var(--bone);
+}
+.stages__note { font-size: 0.875rem; line-height: 1.55; color: var(--bone-dim); max-width: 30em; }
+.stages__time { font-size: 0.8125rem; color: var(--bone-dim); white-space: nowrap; }
+@media (min-width: 62rem) {
+  .stages li { grid-template-columns: 3rem minmax(0, 15rem) minmax(0, 1fr) auto; }
+  .stages__time { text-align: right; }
+}
+
+/* --- Paint specification (project page only; never a chart) --------------- */
+
+.paintspec {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+@media (min-width: 60rem) { .paintspec { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.paintspec__swatch {
+  height: clamp(9rem, 22vw, 15rem);
+  background: linear-gradient(104deg, #4A0D12 0%, var(--accent) 42%, #D84A46 58%, var(--accent) 72%, #3A0A0E 100%);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+/* --- What DPM does ------------------------------------------------------- */
+
+.does {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+@media (min-width: 60rem) { .does { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.inout { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.inout li {
+  display: grid; gap: 0.2rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+.inout__name { font-family: var(--font-text); font-size: 1.0625rem; font-weight: 300; color: var(--bone); }
+.inout__where { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); }
+.inout li[data-out] .inout__where { color: var(--accent-ink); transition: color 700ms var(--ease); }
+
+/* --- Proof --------------------------------------------------------------- */
+
+/* --- Testimonials --------------------------------------------------------
+   Both quotes here are real and attributable. There are only two because only
+   two are reachable: 23 of DPM's 24 Facebook recommendations sit behind a
+   login wall. The layout is built for two rather than padded out to a grid of
+   three with invented ones.
+   ------------------------------------------------------------------------ */
+
+.says { display: grid; gap: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--hair); padding-top: clamp(2rem, 5vh, 3rem); }
+
+.say { display: grid; gap: 1.15rem; }
+.say blockquote {
+  margin: 0;
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.5rem);
+  line-height: 1.34;
+  color: var(--bone);
+  max-width: 19em;
+  text-wrap: pretty;
+  font-variant-numeric: normal;
+}
+.say--sub blockquote {
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 1.1vw + 0.9rem, 1.625rem);
+  line-height: 1.44;
+  color: #CFCAC1;
+  max-width: 24em;
+}
+.say__by {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.say__by b { color: var(--bone); font-weight: 500; }
+.say__by::before {
+  content: ''; width: clamp(28px, 4vw, 52px); height: 1px; flex: none;
+  background: var(--accent-ink);
+  transition: background 700ms var(--ease);
+}
+
+.proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.proof li {
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  border-bottom: 1px solid var(--hair-2);
+  display: grid; gap: 0.5rem;
+}
+.proof__fig {
+  font-family: var(--font-text);
+  font-weight: 200;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1; letter-spacing: -0.01em;
+  color: var(--bone);
+  font-variant-numeric: normal;
+}
+.proof__what { font-size: 0.9375rem; line-height: 1.55; color: var(--bone-dim); max-width: 34em; }
+@media (min-width: 60rem) {
+  .proof li { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: baseline; }
+}
+
+/* --- Two-column prose ---------------------------------------------------- */
+
+.cols {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+}
+@media (min-width: 60rem) { .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* --- Contact ------------------------------------------------------------- */
+
+/* The page is now two screens: this hero (photo, headline, quick contact)
+   fills the first, and .contact-form below fills the next — the form no
+   longer shares the fold with the heading. Both use lvh, never svh (see the
+   project-wide rule on this): a section that must reliably cover the
+   viewport can't be sized off the browser-chrome-expanded measurement. */
+.contact { position: relative; overflow: clip; min-height: 100lvh; }
+.contact__plate { position: absolute; inset: 0; }
+.contact__plate img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 62% 46%;
+  transform: scale(1.08);
+  filter: brightness(1.14) saturate(1.06);
+}
+.contact__plate::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    /* Lightened top-to-bottom too, 4 September: the header no longer sits at
+       the top of the frame (it's anchored to the bottom third now), so there
+       is nothing left up there that needs the old heavy top veil, and the
+       old 0.94 bottom stop was overpowering the horizontal fade below no
+       matter how light the right edge was — the two multiply together, so a
+       near-opaque bottom band stayed near-opaque everywhere along it,
+       including the right. Legibility for the copy and the contact rows now
+       leans on their own text-shadow (below) rather than solely on the veil. */
+    linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0.18) 40%, rgba(11,11,12,0.55) 100%),
+    /* Dark enough on the left to carry the copy and the form, but the right
+       now clears to almost nothing at the edge — the car's rear wing was
+       getting buried under the same veil meant only for the text side. */
+    linear-gradient(to right, rgba(11,11,12,0.88) 0%, rgba(11,11,12,0.68) 36%, rgba(11,11,12,0.26) 66%, rgba(11,11,12,0.04) 100%);
+}
+/* `safe end`, not `center` or plain `end` — the same reasoning as every other
+   hero__inner on this site: the block sits low in the frame, but never spills
+   past the masthead on a viewport too short for it. Pushed further down than
+   a typical hero because there is no footer band pinned below it competing
+   for room. */
+.contact__inner {
+  position: relative; z-index: 2;
+  width: var(--page); margin-inline: auto;
+  min-height: 100lvh;
+  display: grid; align-content: safe end;
+  padding: clamp(7rem, 18vh, 12rem) 0 clamp(4rem, 10vh, 6rem);
+}
+/* Now that the plate veil above is lighter (so the car reads on the right),
+   the copy carries its own dark halo instead of leaning on the photo being
+   dark enough everywhere it might sit — same reasoning as .hero__inner
+   elsewhere on this site, just written locally since .contact__inner isn't
+   a .hero. */
+.contact__inner .label,
+.contact__inner h2,
+.contact__inner .lede {
+  text-shadow: 0 1px 24px rgba(11,11,12,0.92), 0 1px 4px rgba(11,11,12,0.7);
+}
+.contact__rows {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  border-top: 1px solid var(--hair);
+}
+.contact__rows a, .contact__rows p {
+  display: block; margin: 0;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--hair-2);
+  text-decoration: none;
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.1875rem, 2vw, 1.625rem);
+  transition: color 400ms var(--ease);
+  font-variant-numeric: normal;
+  text-shadow: 0 1px 18px rgba(11,11,12,0.9), 0 1px 3px rgba(11,11,12,0.7);
+}
+.contact__rows small { text-shadow: 0 1px 14px rgba(11,11,12,0.9); }
+.contact__rows a:hover { color: var(--accent-ink); }
+.contact__rows small {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 0.4rem;
+}
+@media (min-width: 60rem) {
+  .contact__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 4vw, 4rem); }
+  .contact__rows > * { border-bottom: none; }
+}
+
+/* --- Enquiry form section (mock only — see the working note in the footer)
+   Its own screen, below the hero's fold, on the plain ground rather than the
+   photograph — so the panel gets a real (not photo-legibility) background:
+   --surface, a shade up from --ground, same treatment as a .grid figure. */
+/* Top padding has to clear the fixed masthead the same way the hero's does —
+   this section starts exactly where the first viewport ends, so the
+   masthead's gradient sits over its top ~114px on every load, not only on
+   scroll. Kept far smaller than the hero's own clearance because there's no
+   headline competing for the same space. */
+.contact-form {
+  min-height: 100lvh;
+  display: grid; align-content: center;
+  width: var(--page); margin-inline: auto;
+  padding: clamp(8rem, 18vh, 9.5rem) 0 clamp(2rem, 5vh, 3rem);
+}
+/* Sized to actually fit the fold below the hero, not just to look tidy: the
+   whole panel (head, six fields, submit) is kept under ~540px so it clears a
+   714px-tall window with the masthead's ~114px still subtracted. Every gap
+   below was tightened from the first draft for exactly this reason — loosen
+   any of them and re-check against a short viewport, not just a tall one. */
+.enquiry {
+  max-width: 34rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+.enquiry__head { margin-bottom: clamp(0.85rem, 2vh, 1.25rem); }
+.enquiry__head h3 { color: var(--bone); margin-top: 0.3rem; }
+.enquiry__grid {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+.enquiry__pair {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.9rem;
+}
+@media (min-width: 30rem) {
+  .enquiry__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem 1.5rem; }
+}
+.field { display: grid; gap: 0.35rem; }
+.field label {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; font-weight: 300;
+  color: var(--bone);
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--hair);
+  padding: 0.5rem 0;
+  border-radius: 0;
+  outline: none;
+  font-variant-numeric: normal;
+  transition: border-color 300ms var(--ease);
+}
+.field select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0L5 6L10 0Z' fill='%23A8A399'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.15rem center;
+  padding-right: 1.25rem;
+}
+.field select option { background: var(--surface); color: var(--bone); }
+.field textarea { resize: vertical; min-height: 3.75rem; line-height: 1.5; }
+.field input::placeholder, .field textarea::placeholder { color: var(--bone-dim); opacity: 0.75; }
+.field input:focus, .field select:focus, .field textarea:focus { border-bottom-color: var(--accent-ink); }
+
+.enquiry__foot {
+  margin-top: clamp(1rem, 2.5vh, 1.5rem);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem;
+}
+.enquiry__submit {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 1.75rem;
+  background: var(--accent);
+  color: var(--ground);
+  border: none; cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  transition: background-color 700ms var(--ease), opacity 300ms var(--ease);
+}
+.enquiry__submit:hover { opacity: 0.86; }
+.enquiry__note { font-size: 0.75rem; line-height: 1.5; color: var(--bone-dim); max-width: 22em; }
+
+
+/* --- The mark ------------------------------------------------------------
+   Real vector artwork as of 6 September (Pixelmator export, supplied by
+   Ricky), replacing the earlier polygonal trace of a 1955x849 PNG. Two fixed
+   colours, used exactly as supplied rather than flattened to currentColor:
+   #67635f for "DPM AUTOBODY", #c5cbca for the "Artists of Automotive
+   Restoration" line and the swash beneath it. Because the fill is now fixed
+   rather than currentColor, the mark no longer recolours per surface (no
+   hover-to-bone, no bone-dim in the footer) — see home.html's footer note
+   for the contrast reading against the masthead.
+   ------------------------------------------------------------------------ */
+
+.wordmark {
+  display: block; color: var(--bone); text-decoration: none;
+  transition: color 400ms var(--ease);
+}
+/* Sized so the hairline AUTOBODY line still resolves: it is roughly an eighth
+   of the lockup's height, so anything under ~2.75rem overall renders it at
+   sub-pixel stroke widths on a 1x display. */
+.wordmark svg { display: block; height: clamp(4.125rem, 6.9vw, 5.25rem); width: auto; }
+.wordmark:hover { color: var(--bone); }
+
+.footmark { color: var(--bone-dim); display: block; }
+.footmark svg { display: block; height: clamp(4.875rem, 12vw, 7.5rem); width: auto; }
+
+/* The working copy has to be unmistakable at a glance, because the whole
+   point of two builds is that one of them is safe to send and one is not. */
+.buildflag {
+  position: fixed; z-index: 70; left: 0; bottom: 0;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #E3C88A; color: #16150F;
+  font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+}
+.buildflag a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+/* The contents pill is centred at bottom:1rem and about 44px tall. Below the
+   nav handover the flag would sit straight through it, so it moves up. */
+@media (max-width: 55.99rem) { .buildflag { bottom: 4.5rem; } }
+
+/* --- Footer -------------------------------------------------------------- */
+
+.colophon {
+  width: var(--page); margin-inline: auto;
+  padding: clamp(3rem, 8vh, 5rem) 0 8rem;
+  border-top: 1px solid var(--hair-2);
+  display: grid; gap: 1.5rem;
+}
+
+/* --- Footer: socials (bottom-right) + build credit (centred), 4 September --
+   .colophon__row keeps the existing logo/address/back-link stack on the
+   left and puts the social row on the right, bottom-aligned against
+   whichever side is taller. The build credit sits as the colophon's own
+   last child (not a sibling of <footer>) so it inherits the same 8rem
+   bottom padding already reserved for the phone contents pill, rather than
+   adding a second block of trailing space below it. */
+.colophon__row {
+  display: flex; flex-wrap: wrap; gap: 1.5rem 2rem;
+  justify-content: space-between; align-items: flex-end;
+}
+.colophon__info { display: grid; gap: 1.5rem; }
+.colophon__socials { display: flex; gap: 0.75rem; align-items: center; }
+.colophon__socials a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.25rem; height: 2.25rem; flex: none;
+  color: var(--bone-dim);
+  border: 1px solid var(--hair);
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.colophon__socials a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.colophon__socials svg { width: 1.05rem; height: 1.05rem; display: block; fill: currentColor; }
+.credit-line {
+  margin-top: 0.5rem;
+  padding-top: clamp(1.5rem, 4vh, 2.25rem);
+  border-top: 1px solid var(--hair-2);
+  text-align: center;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.credit-line a {
+  color: var(--bone-dim); text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 0.15rem;
+  transition: color 400ms var(--ease), border-color 400ms var(--ease);
+}
+.credit-line a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
+.note {
+  border: 1px solid var(--hair);
+  padding: 1.15rem 1.25rem;
+  max-width: 29em;
+  font-size: 0.8125rem;
+  line-height: 1.62;
+  color: var(--bone-dim);
+}
+.note b { color: var(--bone); font-weight: 500; }
+.note p { margin: 0 0 0.75em; }
+.note p:last-child { margin-bottom: 0; }
+.note h2 { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 0.9rem; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--bone); color: #0B0B0C;
+  padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- Wider viewports ----------------------------------------------------- */
+
+@media (min-width: 60rem) {
+  .record > div { grid-template-columns: minmax(11rem, 18ch) minmax(0, 1fr); }
+  .section-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
+  .lot-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; }
+  /* The masthead is fixed, gradient-backed, and sits on top of every sticky
+     stage (z-index 40 vs the stage's own content), so its ~114px is never
+     actually free — a dark roofline sitting there blends into the
+     masthead's own dark gradient on a near-black car. But this is the
+     slider's payoff "whole car" shot, and CSS transform:scale(s) crops the
+     SAME fraction (1 - 1/s) off every edge regardless of aspect or origin —
+     the first attempt here (--pz:1.42, ~30% off every edge) traded away
+     enough of the car's length and the roofline itself to stop reading as
+     a wide shot at all. --pz:1.2 crops a lighter ~17% per edge: real but
+     modest relief, not a full fix — the roofline still sits close to the
+     top, just with a little more clearance than the unmodified crop had. */
+  .lot2-whole { --pp: 50% 50%; --pz: 1.2; --po: 46% 38%; }
+  /* Same two-lever split as .lot2-whole, for the P1800's closing wide shot. */
+  .lot1-whole { --pp: 50% 45%; --pz: 1.3; --po: 40% 30%; }
+}
+
+@media (max-width: 55.99rem) {
+  .masthead nav { display: none; }
+  .masthead nav + .tel { margin-left: auto; }
+  .masthead .back { margin-left: auto; }
+}
+
+@media (max-width: 47.99rem) {
+  .rail { display: none; }
+  :root { --falloff: clamp(120px, 36%, 260px); }
+  .spec { width: clamp(150px, 46%, 320px); }
+  .chapter { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+/* --- Reduced motion: one well-lit photograph, nothing lost ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  /* The previous build hid .veil and .spec and left the graded-down plate
+     behind, so Reduce Motion delivered a near-black rectangle. The plate is
+     graded FOR the veil; with no veil it has to be graded back up, and the
+     vignette that shaped the travelling band has to go with it. */
+  :root { --bl: -300vw; --br: 300vw; }
+  .veil, .spec { display: none; }
+  .plate img {
+    filter: saturate(1.12) contrast(1.02) brightness(1.34) !important;
+  }
+  .plate::after {
+    background:
+      linear-gradient(to bottom, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0) 24%, rgba(11,11,12,0) 58%, rgba(11,11,12,0.8) 100%) !important;
+  }
+  .resolve { opacity: 1; transform: none; position: relative; }
+  .resolve--2 { opacity: 1; }
+  .track__room, .track__room--long { height: 0; }
+  .stage { position: relative; height: 78lvh; }
+  .has-resolve .stage { height: auto; }
+  .has-resolve .plate { position: relative; height: 58lvh; }
+  .has-resolve .resolve { height: 74lvh; }
+  .has-resolve .stage__over { position: absolute; inset: auto 0 0 0; }
+  /* Both caption states are simply printed, one under the other. */
+  .stage__cap { position: relative; bottom: auto; padding-top: 0.9rem; gap: 0.35rem; }
+  .stage__cap > * { grid-area: auto; }
+  .stage__cap-line { opacity: 1 !important; }
+  /* The hero is the one stage whose copy has to sit ON a photograph. At
+     100lvh two absolutely positioned blocks clear each other; at the shorter
+     static height they do not, so the foot goes back into flow and the
+     caption is pinned to the bottom of the frame it describes. Where the hero
+     resolves, only the resolved frame is shown — a headline straddling the
+     seam between two stacked pictures is worse than either. */
+  .hero .stage { height: 86lvh; }
+  .hero.has-resolve .stage { height: 86lvh; }
+  .hero.has-resolve .plate { display: none; }
+  .hero.has-resolve .resolve { position: absolute; inset: 0; height: auto; }
+  .hero.has-resolve .stage__cap-line--macro { display: none; }
+  .hero .hero__inner { position: absolute; padding: 5.5rem 0 9rem; }
+  .hero .hero__foot { position: static; margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+  .hero .stage__cap {
+    position: absolute; bottom: clamp(1.5rem, 3vh, 2.5rem);
+    padding-top: 0;
+  }
+
+  .pill { display: none; }
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* --- The build library ----------------------------------------------------
+   The one page on the site whose job is to list many cars at once, so it is
+   the one page with the real risk of reading as a shop. The device against
+   that: a single numbered column, not a grid of equal boxes. A photograph
+   only appears where DPM's own photography already exists and has its own
+   page to back it up — everything still awaiting content gets no image at
+   all rather than a placeholder pretending to be one. An empty box reads as
+   broken; a text-only row reads as "not yet catalogued", which is the truth.
+   Runs on the same tokens, type and .golink/.chapter/.band as every other
+   page — nothing here invents a second visual language. ------------------- */
+
+.ledger { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+
+.ledger__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  padding: clamp(1.75rem, 4vh, 2.5rem) 0;
+  border-bottom: 1px solid var(--hair-2);
+}
+@media (min-width: 40rem) {
+  .ledger__item--photo { grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+}
+
+.ledger__thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  background: var(--surface);
+}
+.ledger__thumb img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.05) brightness(1.1);
+}
+
+.ledger__n {
+  display: block;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.5rem;
+}
+
+.ledger__name {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: clamp(1.375rem, 1.7vw + 0.9rem, 1.875rem);
+  line-height: 1.1;
+  color: var(--bone);
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+
+.ledger__meta {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem;
+  font-size: 0.75rem; letter-spacing: 0.02em;
+  color: var(--bone-dim);
+  margin: 0 0 0.65rem;
+  font-variant-numeric: normal;
+}
+.ledger__meta b { color: var(--bone); font-weight: 500; }
+
+.ledger__note {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: 0.9375rem; line-height: 1.55;
+  color: #CFCAC1;
+  max-width: 42em;
+  margin: 0 0 0.85rem;
+  font-variant-numeric: normal;
+}
+
+.ledger__status {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bone-dim);
+  margin: 0 0 0.65rem;
+}
+.ledger__status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--hair); }
+.ledger__status--live::before { background: var(--accent-ink); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="dpm-mark" viewBox="0 0 500 342"><g id="Group">
+        <path id="Path" fill="#c5cbca" stroke="none" d="M 499.5 274.400024 C 499.5 274 499.600006 273.799988 500 273.799988 L 500 273.5 L 496.5 273.5 L 496.5 273.799988 C 497 273.799988 497 274 497 274.400024 L 497 283.300018 L 488.600006 274.299988 C 488.5 274.200012 488.399994 274.099976 488.399994 274 C 488.399994 273.799988 488.600006 273.700012 488.899994 273.700012 L 488.899994 273.400024 L 484.799988 273.400024 L 484.799988 273.700012 C 485.200012 273.700012 485.299988 273.900024 485.299988 274.299988 L 485.299988 286.700012 C 485.299988 287.100006 485.299988 287.300018 484.799988 287.300018 L 484.799988 287.600006 L 488.200012 287.600006 L 488.200012 287.300018 C 487.799988 287.300018 487.700012 287.100006 487.700012 286.700012 L 487.700012 277.200012 L 496.399994 286.600006 C 496.700012 286.900024 496.799988 287 496.799988 287.100006 C 496.799988 287.200012 496.600006 287.300018 496.399994 287.300018 L 496.399994 287.600006 L 500 287.600006 L 500 287.300018 C 499.600006 287.300018 499.5 287.100006 499.5 286.700012 L 499.5 274.299988 Z M 473.899994 275.700012 C 476.899994 275.700012 479.200012 277.400024 479.200012 280.700012 C 479.200012 284 476.799988 285.700012 473.899994 285.700012 C 471 285.700012 468.600006 284 468.600006 280.700012 C 468.600006 277.400024 471 275.700012 473.899994 275.700012 M 473.899994 273.400024 C 469.399994 273.400024 465.799988 276 465.799988 280.700012 C 465.799988 285.400024 469.399994 288 473.899994 288 C 478.399994 288 482 285.400024 482 280.700012 C 482 276 478.399994 273.400024 473.899994 273.400024 M 462.5 274.400024 C 462.5 274 462.5 273.799988 463.200012 273.799988 L 463.200012 273.5 L 459 273.5 L 459 273.799988 C 459.600006 273.799988 459.700012 274 459.700012 274.400024 L 459.700012 286.800018 C 459.700012 287.200012 459.700012 287.400024 459 287.400024 L 459 287.700012 L 463.200012 287.700012 L 463.200012 287.400024 C 462.600006 287.400024 462.5 287.200012 462.5 286.800018 L 462.5 274.400024 Z M 451 275.799988 L 455.700012 275.799988 C 456.200012 275.799988 456.399994 276 456.399994 276.299988 L 456.700012 276.299988 L 456.700012 273.099976 L 456.399994 273.099976 C 456.399994 273.400024 456.200012 273.599976 455.700012 273.599976 L 443.600006 273.599976 C 443.100006 273.599976 442.899994 273.400024 442.899994 273.099976 L 442.600006 273.099976 L 442.600006 276.299988 L 442.899994 276.299988 C 442.899994 276 443.100006 275.799988 443.600006 275.799988 L 448.299988 275.799988 L 448.299988 286.800018 C 448.299988 287.200012 448.299988 287.400024 447.700012 287.400024 L 447.700012 287.700012 L 451.600006 287.700012 L 451.600006 287.400024 C 451.100006 287.400024 451 287.200012 451 286.800018 L 451 275.799988 Z M 430.5 287.700012 L 430.5 287.400024 C 430.299988 287.400024 430.200012 287.300018 430.200012 287.100006 C 430.200012 286.800018 430.5 286.5 431.600006 283.900024 L 438.299988 283.900024 C 439.600006 286.700012 439.799988 287 439.799988 287.200012 C 439.799988 287.400024 439.799988 287.400024 439.399994 287.400024 L 439.399994 287.700012 L 443.299988 287.700012 L 443.299988 287.400024 C 442.899994 287.400024 442.799988 287.300018 442.5 286.700012 L 436.899994 274.599976 C 436.899994 274.400024 436.700012 274.200012 436.700012 274.099976 C 436.700012 274 436.799988 273.799988 437.100006 273.799988 L 437.100006 273.5 L 432.899994 273.5 L 432.899994 273.799988 C 433.200012 273.799988 433.299988 273.900024 433.299988 274.200012 C 433.299988 274.5 433.200012 274.599976 433.100006 274.799988 L 427.799988 286.700012 C 427.5 287.300018 427.399994 287.400024 427.100006 287.400024 L 427.100006 287.700012 L 430.600006 287.700012 Z M 432.5 281.800018 L 434.799988 276.700012 L 437.100006 281.800018 L 432.5 281.800018 Z M 413.399994 275.799988 L 419.299988 275.799988 C 420.700012 275.799988 421.799988 276.299988 421.799988 277.599976 C 421.799988 278.900024 420.700012 279.400024 419.299988 279.400024 L 413.399994 279.400024 L 413.399994 275.900024 Z M 413.299988 281.700012 L 417.299988 281.700012 L 420.899994 286.800018 C 421.100006 287.100006 421.200012 287.200012 421.200012 287.300018 C 421.200012 287.400024 421.200012 287.5 420.899994 287.5 L 420.899994 287.800018 L 425.200012 287.800018 L 425.200012 287.5 C 424.799988 287.5 424.600006 287.300018 424.399994 286.900024 L 420.799988 281.800018 C 423.200012 281.400024 424.600006 280 424.600006 277.700012 C 424.600006 275.400024 422.799988 273.599976 419.399994 273.599976 L 410 273.599976 L 410 273.900024 C 410.5 273.900024 410.5 274.099976 410.5 274.5 L 410.5 286.900024 C 410.5 287.300018 410.5 287.5 410 287.5 L 410 287.800018 L 413.799988 287.800018 L 413.799988 287.5 C 413.299988 287.5 413.299988 287.300018 413.299988 286.900024 L 413.299988 281.700012 Z M 399.299988 275.700012 C 402.299988 275.700012 404.600006 277.400024 404.600006 280.700012 C 404.600006 284 402.200012 285.700012 399.299988 285.700012 C 396.399994 285.700012 394 284 394 280.700012 C 394 277.400024 396.399994 275.700012 399.299988 275.700012 M 399.299988 273.400024 C 394.799988 273.400024 391.200012 276 391.200012 280.700012 C 391.200012 285.400024 394.799988 288 399.299988 288 C 403.799988 288 407.399994 285.400024 407.399994 280.700012 C 407.399994 276 403.799988 273.400024 399.299988 273.400024 M 383.899994 275.799988 L 388.600006 275.799988 C 389.100006 275.799988 389.299988 276 389.299988 276.299988 L 389.600006 276.299988 L 389.600006 273.099976 L 389.299988 273.099976 C 389.299988 273.400024 389.100006 273.599976 388.600006 273.599976 L 376.5 273.599976 C 376 273.599976 375.799988 273.400024 375.799988 273.099976 L 375.5 273.099976 L 375.5 276.299988 L 375.799988 276.299988 C 375.799988 276 376 275.799988 376.5 275.799988 L 381.200012 275.799988 L 381.200012 286.800018 C 381.200012 287.200012 381.200012 287.400024 380.600006 287.400024 L 380.600006 287.700012 L 384.5 287.700012 L 384.5 287.400024 C 384 287.400024 383.899994 287.200012 383.899994 286.800018 L 383.899994 275.799988 Z M 373.399994 274.799988 L 373.100006 274.799988 C 373.100006 274.799988 373.100006 274.799988 372.700012 274.799988 C 372.299988 274.799988 370.100006 273.299988 366.700012 273.299988 C 363.299988 273.299988 359.5 274.700012 359.5 277.900024 C 359.5 284.400024 370.799988 279.600006 370.799988 283.400024 C 370.799988 287.200012 369.600006 285.5 366.100006 285.5 C 362.600006 285.5 361.100006 284.700012 361.100006 283.5 C 361.100006 282.300018 361.100006 283.300018 361.100006 283.200012 L 360.799988 283 L 359.200012 286.300018 L 359.5 286.300018 C 359.5 286.300018 359.700012 286.300018 359.799988 286.300018 C 360.200012 286.300018 361.600006 287.800018 366.299988 287.800018 C 371 287.800018 373.799988 285.800018 373.799988 283.300018 C 373.799988 276.299988 362.399994 280.900024 362.399994 277.700012 C 362.399994 274.5 363.700012 275.599976 366.700012 275.599976 C 369.700012 275.599976 371.700012 277 371.700012 277.200012 C 371.700012 277.400024 371.700012 277.400024 371.700012 277.5 L 372 277.700012 L 373.5 274.799988 Z M 343.299988 287.700012 L 356.100006 287.700012 C 356.600006 287.700012 356.799988 287.900024 356.799988 288.100006 L 357.100006 288.100006 L 357.100006 284.900024 L 356.799988 284.900024 C 356.799988 285.200012 356.600006 285.400024 356.100006 285.400024 L 346.600006 285.400024 L 346.600006 281.600006 L 352.700012 281.600006 C 352.899994 281.600006 353.100006 281.600006 353.200012 281.700012 C 353.299988 281.700012 353.399994 281.900024 353.399994 282 L 353.700012 282 L 353.700012 278.700012 L 353.399994 278.700012 C 353.399994 279 353.200012 279.200012 352.700012 279.200012 L 346.600006 279.200012 L 346.600006 275.700012 L 355.899994 275.700012 C 356.399994 275.700012 356.600006 275.900024 356.600006 276.200012 L 356.899994 276.200012 L 356.899994 273 L 356.600006 273 C 356.600006 273.299988 356.399994 273.400024 355.899994 273.400024 L 343.299988 273.400024 L 343.299988 273.700012 C 343.700012 273.700012 343.799988 273.900024 343.799988 274.299988 L 343.799988 286.700012 C 343.799988 287.100006 343.799988 287.300018 343.299988 287.300018 L 343.299988 287.600006 Z M 329.200012 275.799988 L 335.100006 275.799988 C 336.5 275.799988 337.600006 276.299988 337.600006 277.599976 C 337.600006 278.900024 336.5 279.400024 335.100006 279.400024 L 329.200012 279.400024 L 329.200012 275.900024 Z M 329.100006 281.700012 L 333.100006 281.700012 L 336.700012 286.800018 C 336.899994 287.100006 337 287.200012 337 287.300018 C 337 287.400024 337 287.5 336.700012 287.5 L 336.700012 287.800018 L 341 287.800018 L 341 287.5 C 340.600006 287.5 340.399994 287.300018 340.200012 286.900024 L 336.600006 281.800018 C 339 281.400024 340.399994 280 340.399994 277.700012 C 340.399994 275.400024 338.600006 273.599976 335.200012 273.599976 L 325.799988 273.599976 L 325.799988 273.900024 C 326.299988 273.900024 326.299988 274.099976 326.299988 274.5 L 326.299988 286.900024 C 326.299988 287.300018 326.299988 287.5 325.799988 287.5 L 325.799988 287.800018 L 329.600006 287.800018 L 329.600006 287.5 C 329.100006 287.5 329.100006 287.300018 329.100006 286.900024 L 329.100006 281.700012 Z M 302.100006 287.700012 L 314.899994 287.700012 C 315.399994 287.700012 315.600006 287.900024 315.600006 288.100006 L 315.899994 288.100006 L 315.899994 284.900024 L 315.600006 284.900024 C 315.600006 285.200012 315.399994 285.400024 314.899994 285.400024 L 305.399994 285.400024 L 305.399994 281.600006 L 311.5 281.600006 C 311.700012 281.600006 311.899994 281.600006 312 281.700012 C 312.100006 281.700012 312.200012 281.900024 312.200012 282 L 312.5 282 L 312.5 278.700012 L 312.200012 278.700012 C 312.200012 279 312 279.200012 311.5 279.200012 L 305.399994 279.200012 L 305.399994 275.700012 L 314.700012 275.700012 C 315.200012 275.700012 315.399994 275.900024 315.399994 276.200012 L 315.700012 276.200012 L 315.700012 273 L 315.399994 273 C 315.399994 273.299988 315.200012 273.400024 314.700012 273.400024 L 302.100006 273.400024 L 302.100006 273.700012 C 302.5 273.700012 302.600006 273.900024 302.600006 274.299988 L 302.600006 286.700012 C 302.600006 287.100006 302.600006 287.300018 302.100006 287.300018 L 302.100006 287.600006 Z M 296.299988 273.599976 L 296.299988 273.900024 C 296.5 273.900024 296.600006 274 296.600006 274.200012 C 296.600006 274.400024 296.399994 274.700012 296.299988 275 L 292.299988 284.100006 L 288.200012 275.099976 C 288 274.599976 287.799988 274.400024 287.799988 274.200012 C 287.799988 274 288 273.900024 288.200012 273.900024 L 288.200012 273.599976 L 284.100006 273.599976 L 284.100006 273.900024 C 284.600006 273.900024 284.700012 274.099976 285 274.599976 L 290.399994 286.700012 C 290.399994 286.900024 290.600006 287.100006 290.600006 287.300018 C 290.600006 287.5 290.600006 287.5 290.299988 287.5 L 290.299988 287.800018 L 294.100006 287.800018 L 294.100006 287.5 C 293.799988 287.5 293.700012 287.5 293.700012 287.200012 C 293.700012 286.900024 293.700012 286.900024 293.899994 286.700012 L 299.200012 274.700012 C 299.399994 274.200012 299.5 274 300 273.900024 L 300 273.599976 L 296.299988 273.599976 Z M 281.200012 274.400024 C 281.200012 274 281.299988 273.799988 281.899994 273.799988 L 281.899994 273.5 L 277.700012 273.5 L 277.700012 273.799988 C 278.299988 273.799988 278.399994 274 278.399994 274.400024 L 278.399994 286.800018 C 278.399994 287.200012 278.399994 287.400024 277.700012 287.400024 L 277.700012 287.700012 L 281.899994 287.700012 L 281.899994 287.400024 C 281.299988 287.400024 281.200012 287.200012 281.200012 286.800018 L 281.200012 274.400024 Z M 269.700012 275.799988 L 274.399994 275.799988 C 274.899994 275.799988 275.100006 276 275.100006 276.299988 L 275.399994 276.299988 L 275.399994 273.099976 L 275.100006 273.099976 C 275.100006 273.400024 274.899994 273.599976 274.399994 273.599976 L 262.299988 273.599976 C 261.799988 273.599976 261.600006 273.400024 261.600006 273.099976 L 261.299988 273.099976 L 261.299988 276.299988 L 261.600006 276.299988 C 261.600006 276 261.799988 275.799988 262.299988 275.799988 L 267 275.799988 L 267 286.800018 C 267 287.200012 267 287.400024 266.399994 287.400024 L 266.399994 287.700012 L 270.299988 287.700012 L 270.299988 287.400024 C 269.799988 287.400024 269.700012 287.200012 269.700012 286.800018 L 269.700012 275.799988 Z M 251.699997 275.700012 C 254.699997 275.700012 257 277.400024 257 280.700012 C 257 284 254.600006 285.700012 251.699997 285.700012 C 248.800003 285.700012 246.399994 284 246.399994 280.700012 C 246.399994 277.400024 248.800003 275.700012 251.699997 275.700012 M 251.699997 273.400024 C 247.199997 273.400024 243.600006 276 243.600006 280.700012 C 243.600006 285.400024 247.199997 288 251.699997 288 C 256.200012 288 259.799988 285.400024 259.799988 280.700012 C 259.799988 276 256.200012 273.400024 251.699997 273.400024 M 236.600006 273.599976 L 236.600006 273.900024 C 236.899994 273.900024 237.100006 273.900024 237.100006 274.200012 C 237.100006 274.5 237 274.5 236.899994 274.700012 L 232.600006 282.700012 L 228.699997 275.200012 C 228.399994 274.599976 228.300003 274.5 228.300003 274.299988 C 228.300003 274.099976 228.600006 273.900024 228.800003 273.900024 L 228.800003 273.599976 L 224.5 273.599976 L 224.5 273.900024 C 224.899994 273.900024 225 274.099976 225 274.5 L 225 286.900024 C 225 287.300018 225 287.5 224.5 287.5 L 224.5 287.800018 L 228 287.800018 L 228 287.5 C 227.5 287.5 227.399994 287.300018 227.399994 286.900024 L 227.399994 278.100006 L 227.399994 278.100006 L 232.399994 287.800018 L 232.699997 287.800018 L 237.699997 278.200012 L 237.699997 278.200012 L 237.699997 286.900024 C 237.699997 287.300018 237.699997 287.5 237.199997 287.5 L 237.199997 287.800018 L 240.899994 287.800018 L 240.899994 287.5 C 240.5 287.5 240.399994 287.300018 240.399994 286.900024 L 240.399994 274.5 C 240.399994 274.099976 240.399994 273.900024 240.899994 273.900024 L 240.899994 273.599976 L 236.600006 273.599976 Z M 213.699997 275.700012 C 216.699997 275.700012 219 277.400024 219 280.700012 C 219 284 216.600006 285.700012 213.699997 285.700012 C 210.800003 285.700012 208.399994 284 208.399994 280.700012 C 208.399994 277.400024 210.800003 275.700012 213.699997 275.700012 M 213.699997 273.400024 C 209.199997 273.400024 205.600006 276 205.600006 280.700012 C 205.600006 285.400024 209.199997 288 213.699997 288 C 218.199997 288 221.800003 285.400024 221.800003 280.700012 C 221.800003 276 218.199997 273.400024 213.699997 273.400024 M 198.399994 275.799988 L 203.100006 275.799988 C 203.600006 275.799988 203.800003 276 203.800003 276.299988 L 204.100006 276.299988 L 204.100006 273.099976 L 203.800003 273.099976 C 203.800003 273.400024 203.600006 273.599976 203.100006 273.599976 L 191 273.599976 C 190.5 273.599976 190.300003 273.400024 190.300003 273.099976 L 190 273.099976 L 190 276.299988 L 190.300003 276.299988 C 190.300003 276 190.5 275.799988 191 275.799988 L 195.699997 275.799988 L 195.699997 286.800018 C 195.699997 287.200012 195.699997 287.400024 195.100006 287.400024 L 195.100006 287.700012 L 199 287.700012 L 199 287.400024 C 198.5 287.400024 198.399994 287.200012 198.399994 286.800018 L 198.399994 275.799988 Z M 175.600006 274.400024 C 175.600006 274 175.600006 273.799988 176.199997 273.799988 L 176.199997 273.5 L 172.300003 273.5 L 172.300003 273.799988 C 172.800003 273.799988 172.800003 274 172.800003 274.400024 L 172.800003 282.900024 C 172.800003 286.600006 175.5 287.900024 179.899994 287.900024 C 184.300003 287.900024 187 286.700012 187 282.900024 L 187 274.400024 C 187 274 187 273.799988 187.5 273.799988 L 187.5 273.5 L 183.600006 273.5 L 183.600006 273.799988 C 184.100006 273.799988 184.199997 274 184.199997 274.400024 L 184.199997 282.400024 C 184.199997 284.700012 183.300003 285.5 179.800003 285.5 C 176.300003 285.5 175.399994 284.600006 175.399994 282.400024 L 175.399994 274.400024 Z M 158.300003 287.700012 L 158.300003 287.400024 C 158.100006 287.400024 158 287.300018 158 287.100006 C 158 286.800018 158.300003 286.5 159.399994 283.900024 L 166.100006 283.900024 C 167.399994 286.700012 167.600006 287 167.600006 287.200012 C 167.600006 287.400024 167.600006 287.400024 167.300003 287.400024 L 167.300003 287.700012 L 171.199997 287.700012 L 171.199997 287.400024 C 170.800003 287.400024 170.699997 287.300018 170.399994 286.700012 L 164.800003 274.599976 C 164.800003 274.400024 164.600006 274.200012 164.600006 274.099976 C 164.600006 274 164.699997 273.799988 165 273.799988 L 165 273.5 L 160.800003 273.5 L 160.800003 273.799988 C 161.100006 273.799988 161.199997 273.900024 161.199997 274.200012 C 161.199997 274.5 161.100006 274.599976 161 274.799988 L 155.699997 286.700012 C 155.399994 287.300018 155.300003 287.400024 155 287.400024 L 155 287.700012 L 158.5 287.700012 Z M 160.399994 281.800018 L 162.699997 276.700012 L 165 281.800018 L 160.399994 281.800018 Z M 133.199997 273.799988 C 133.699997 273.799988 133.699997 274 133.699997 274.400024 L 133.699997 286.800018 C 133.699997 287.200012 133.699997 287.400024 133.199997 287.400024 L 133.199997 287.700012 L 137 287.700012 L 137 287.400024 C 136.600006 287.400024 136.5 287.200012 136.5 286.800018 L 136.5 281.5 L 142.199997 281.5 C 142.399994 281.5 142.600006 281.5 142.699997 281.600006 C 142.800003 281.600006 142.899994 281.800018 142.899994 281.900024 L 143.199997 281.900024 L 143.199997 278.600006 L 142.899994 278.600006 C 142.899994 278.900024 142.699997 279.100006 142.199997 279.100006 L 136.5 279.100006 L 136.5 275.599976 L 145.399994 275.599976 C 145.899994 275.599976 146.100006 275.799988 146.100006 276.099976 L 146.399994 276.099976 L 146.399994 272.900024 L 146.100006 272.900024 C 146.100006 273.200012 145.899994 273.299988 145.399994 273.299988 L 133.199997 273.299988 L 133.199997 273.599976 Z M 122.400002 275.700012 C 125.400002 275.700012 127.699997 277.400024 127.699997 280.700012 C 127.699997 284 125.300003 285.700012 122.400002 285.700012 C 119.5 285.700012 117.099998 284 117.099998 280.700012 C 117.099998 277.400024 119.5 275.700012 122.400002 275.700012 M 122.400002 273.400024 C 117.900002 273.400024 114.300003 276 114.300003 280.700012 C 114.300003 285.400024 117.900002 288 122.400002 288 C 126.900002 288 130.5 285.400024 130.5 280.700012 C 130.5 276 126.900002 273.400024 122.400002 273.400024 M 104.5 274.799988 L 104.199997 274.799988 C 104.199997 274.799988 104.199997 274.799988 103.900002 274.799988 C 103.599998 274.799988 101.300003 273.299988 97.900002 273.299988 C 94.5 273.299988 90.699997 274.700012 90.699997 277.900024 C 90.699997 284.400024 102 279.600006 102 283.400024 C 102 287.200012 100.800003 285.5 97.300003 285.5 C 93.800003 285.5 92.300003 284.700012 92.300003 283.5 C 92.300003 282.300018 92.300003 283.300018 92.300003 283.200012 L 92 283 L 90.400002 286.300018 L 90.699997 286.300018 C 90.699997 286.300018 90.900002 286.300018 91 286.300018 C 91.400002 286.300018 92.800003 287.800018 97.5 287.800018 C 102.199997 287.800018 105 285.800018 105 283.300018 C 105 276.299988 93.599998 280.900024 93.599998 277.700012 C 93.599998 274.5 94.900002 275.599976 97.900002 275.599976 C 100.900002 275.599976 102.900002 277 102.900002 277.200012 C 102.900002 277.400024 102.900002 277.400024 102.900002 277.5 L 103.199997 277.700012 L 104.699997 274.799988 Z M 83 275.799988 L 87.699997 275.799988 C 88.199997 275.799988 88.400002 276 88.400002 276.299988 L 88.699997 276.299988 L 88.699997 273.099976 L 88.400002 273.099976 C 88.400002 273.400024 88.199997 273.599976 87.699997 273.599976 L 75.599998 273.599976 C 75.099998 273.599976 74.900002 273.400024 74.900002 273.099976 L 74.599998 273.099976 L 74.599998 276.299988 L 74.900002 276.299988 C 74.900002 276 75.099998 275.799988 75.599998 275.799988 L 80.300003 275.799988 L 80.300003 286.800018 C 80.300003 287.200012 80.300003 287.400024 79.699997 287.400024 L 79.699997 287.700012 L 83.599998 287.700012 L 83.599998 287.400024 C 83.099998 287.400024 83 287.200012 83 286.800018 L 83 275.799988 Z M 72.5 274.799988 L 72.199997 274.799988 C 72.199997 274.799988 72.199997 274.799988 71.900002 274.799988 C 71.599998 274.799988 69.300003 273.299988 65.900002 273.299988 C 62.5 273.299988 58.700001 274.700012 58.700001 277.900024 C 58.700001 284.400024 70 279.600006 70 283.400024 C 70 287.200012 68.800003 285.5 65.300003 285.5 C 61.799999 285.5 60.299999 284.700012 60.299999 283.5 C 60.299999 282.300018 60.299999 283.300018 60.299999 283.200012 L 60 283 L 58.400002 286.300018 L 58.700001 286.300018 C 58.700001 286.300018 58.900002 286.300018 59 286.300018 C 59.400002 286.300018 60.799999 287.800018 65.5 287.800018 C 70.199997 287.800018 73 285.800018 73 283.300018 C 73 276.299988 61.599998 280.900024 61.599998 277.700012 C 61.599998 274.5 62.900002 275.599976 65.900002 275.599976 C 68.900002 275.599976 70.900002 277 70.900002 277.200012 C 70.900002 277.400024 70.900002 277.400024 70.900002 277.5 L 71.199997 277.700012 L 72.699997 274.799988 Z M 55.099998 274.400024 C 55.099998 274 55.099998 273.799988 55.799999 273.799988 L 55.799999 273.5 L 51.599998 273.5 L 51.599998 273.799988 C 52.200001 273.799988 52.299999 274 52.299999 274.400024 L 52.299999 286.800018 C 52.299999 287.200012 52.299999 287.400024 51.599998 287.400024 L 51.599998 287.700012 L 55.799999 287.700012 L 55.799999 287.400024 C 55.200001 287.400024 55.099998 287.200012 55.099998 286.800018 L 55.099998 274.400024 Z M 43.599998 275.799988 L 48.299999 275.799988 C 48.799999 275.799988 49 276 49 276.299988 L 49.299999 276.299988 L 49.299999 273.099976 L 49 273.099976 C 49 273.400024 48.799999 273.599976 48.299999 273.599976 L 36.200001 273.599976 C 35.700001 273.599976 35.5 273.400024 35.5 273.099976 L 35.200001 273.099976 L 35.200001 276.299988 L 35.5 276.299988 C 35.5 276 35.700001 275.799988 36.200001 275.799988 L 40.900002 275.799988 L 40.900002 286.800018 C 40.900002 287.200012 40.900002 287.400024 40.299999 287.400024 L 40.299999 287.700012 L 44.200001 287.700012 L 44.200001 287.400024 C 43.700001 287.400024 43.599998 287.200012 43.599998 286.800018 L 43.599998 275.799988 Z M 21.9 275.799988 L 27.799999 275.799988 C 29.200001 275.799988 30.299999 276.299988 30.299999 277.599976 C 30.299999 278.900024 29.200001 279.400024 27.799999 279.400024 L 21.9 279.400024 L 21.9 275.900024 Z M 21.799999 281.700012 L 25.799999 281.700012 L 29.4 286.800018 C 29.6 287.100006 29.700001 287.200012 29.700001 287.300018 C 29.700001 287.400024 29.700001 287.5 29.4 287.5 L 29.4 287.800018 L 33.700001 287.800018 L 33.700001 287.5 C 33.299999 287.5 33.099998 287.300018 32.900002 286.900024 L 29.299999 281.800018 C 31.700001 281.400024 33.099998 280 33.099998 277.700012 C 33.099998 275.400024 31.299999 273.599976 27.9 273.599976 L 18.5 273.599976 L 18.5 273.900024 C 19 273.900024 19 274.099976 19 274.5 L 19 286.900024 C 19 287.300018 19 287.5 18.5 287.5 L 18.5 287.800018 L 22.299999 287.800018 L 22.299999 287.5 C 21.799999 287.5 21.799999 287.300018 21.799999 286.900024 L 21.799999 281.700012 Z M 3.5 287.700012 L 3.5 287.400024 C 3.3 287.400024 3.2 287.300018 3.2 287.100006 C 3.2 286.800018 3.5 286.5 4.6 283.900024 L 11.3 283.900024 C 12.6 286.700012 12.8 287 12.8 287.200012 C 12.8 287.400024 12.8 287.400024 12.5 287.400024 L 12.5 287.700012 L 16.4 287.700012 L 16.4 287.400024 C 16 287.400024 15.9 287.300018 15.6 286.700012 L 10 274.599976 C 10 274.400024 9.8 274.200012 9.8 274.099976 C 9.8 274 9.9 273.799988 10.2 273.799988 L 10.2 273.5 L 6 273.5 L 6 273.799988 C 6.3 273.799988 6.4 273.900024 6.4 274.200012 C 6.4 274.5 6.3 274.599976 6.2 274.799988 L 0.9 286.700012 C 0.6 287.300018 0.5 287.400024 0.2 287.400024 L 0.2 287.700012 L 3.7 287.700012 Z M 5.5 281.800018 L 7.8 276.700012 L 10.1 281.800018 L 5.5 281.800018 Z"/>
+        <path id="path1" fill="#67635f" stroke="none" d="M 38 205.5 C 39.299999 205.5 40.299999 206.5 40.299999 207.800003 L 40.299999 214.899994 L 9.1 214.899994 L 9.1 207.800003 C 9.1 206.5 10.1 205.5 11.4 205.5 L 38.099998 205.5 Z M 47.799999 207.800003 C 47.799999 202.399994 43.400002 198 38 198 L 11.3 198 C 5.9 198 1.5 202.399994 1.5 207.800003 L 1.5 239.399994 L 9.1 239.399994 L 9.1 222.5 L 40.299999 222.5 L 40.299999 239.399994 L 47.799999 239.399994 L 47.799999 207.800003 Z"/>
+        <path id="path2" fill="#67635f" stroke="none" d="M 75.400002 239.300003 L 102.099998 239.300003 C 107.5 239.300003 111.900002 234.899994 111.900002 229.5 L 111.900002 197.899994 L 104.400002 197.899994 L 104.400002 229.5 C 104.400002 230.800003 103.400002 231.800003 102.099998 231.800003 L 75.400002 231.800003 C 74.199997 231.800003 73.199997 230.800003 73.099998 229.599991 L 73.099998 198 L 65.5 198 L 65.5 229.599991 C 65.5 235 69.900002 239.399994 75.300003 239.399994"/>
+    </g>
+    <path id="path3" fill="#67635f" stroke="none" d="M 175.899994 205.5 L 175.899994 198 L 129.600006 198 L 129.600006 205.5 L 149 205.5 L 149 239.300003 L 156.600006 239.300003 L 156.600006 205.5 L 175.899994 205.5 Z"/>
+    <g id="g1">
+        <path id="path4" fill="#67635f" stroke="none" d="M 229.199997 205.5 C 230.5 205.5 231.5 206.5 231.5 207.800003 L 231.5 229.5 C 231.5 230.800003 230.5 231.800003 229.199997 231.800003 L 202.5 231.800003 C 201.300003 231.800003 200.300003 230.800003 200.199997 229.599991 L 200.199997 207.800003 C 200.199997 206.5 201.199997 205.5 202.5 205.5 L 229.199997 205.5 Z M 202.5 239.300003 L 229.199997 239.300003 C 234.600006 239.300003 239 234.899994 239 229.5 L 239 207.800003 C 239 202.399994 234.600006 198 229.199997 198 L 202.5 198 C 197.100006 198 192.699997 202.399994 192.699997 207.800003 L 192.699997 229.5 C 192.699997 234.899994 197.100006 239.300003 202.5 239.300003"/>
+        <path id="path5" fill="#67635f" stroke="none" d="M 293.200012 205.5 C 294.5 205.5 295.5 206.5 295.5 207.800003 L 295.5 212.599991 C 295.5 213.899994 294.5 214.899994 293.200012 214.899994 L 265.5 214.899994 L 265.5 222.5 L 293.299988 222.5 C 294.600006 222.5 295.600006 223.5 295.600006 224.800003 L 295.600006 229.599991 C 295.600006 230.899994 294.600006 231.899994 293.299988 231.899994 L 264.399994 231.899994 L 264.399994 205.599991 L 293.299988 205.599991 Z M 303 229.5 L 303 224.699997 C 303 222.5 302.299988 220.399994 300.899994 218.599991 C 302.200012 216.899994 303 214.699997 303 212.599991 L 303 207.800003 C 303 202.399994 298.600006 198 293.200012 198 L 256.700012 198 L 256.700012 239.399994 L 293.200012 239.399994 C 298.600006 239.399994 303 235 303 229.599991"/>
+        <path id="path6" fill="#67635f" stroke="none" d="M 357.299988 205.5 C 358.600006 205.5 359.600006 206.5 359.600006 207.800003 L 359.600006 229.5 C 359.600006 230.800003 358.600006 231.800003 357.299988 231.800003 L 330.600006 231.800003 C 329.399994 231.800003 328.399994 230.800003 328.299988 229.599991 L 328.299988 207.800003 C 328.299988 206.5 329.299988 205.5 330.600006 205.5 L 357.299988 205.5 Z M 330.600006 239.300003 L 357.299988 239.300003 C 362.700012 239.300003 367.100006 234.899994 367.100006 229.5 L 367.100006 207.800003 C 367.100006 202.399994 362.700012 198 357.299988 198 L 330.600006 198 C 325.200012 198 320.799988 202.399994 320.799988 207.800003 L 320.799988 229.5 C 320.799988 234.899994 325.200012 239.300003 330.600006 239.300003"/>
+        <path id="path7" fill="#67635f" stroke="none" d="M 421.299988 205.5 C 422.600006 205.5 423.600006 206.5 423.600006 207.800003 L 423.600006 229.5 C 423.600006 230.800003 422.600006 231.800003 421.299988 231.800003 L 392.399994 231.800003 L 392.399994 205.5 L 421.299988 205.5 Z M 431.100006 229.5 L 431.100006 207.800003 C 431.100006 202.399994 426.700012 198 421.299988 198 L 384.799988 198 L 384.799988 239.399994 L 421.299988 239.399994 C 426.700012 239.399994 431.100006 235 431.100006 229.599991"/>
+    </g>
+    <path id="path8" fill="#67635f" stroke="none" d="M 499.600006 198 L 489.100006 198 L 471.299988 216.800003 L 453.399994 198 L 443 198 L 467.5 223.800003 L 467.5 239.300003 L 475 239.300003 L 475 223.800003 L 499.600006 198 Z"/>
+    <path id="path9" fill="#67635f" stroke="none" d="M 478 -0.100006 L 471.399994 -0.100006 L 395.799988 90.899994 L 319 -0.100006 L 301.899994 -0.100006 L 301.899994 181.399994 L 325.299988 181.399994 L 325.299988 43.100006 L 389.799988 117.100006 L 403.700012 117.100006 L 475.5 30.5 L 475.5 104.899994 L 498.100006 104.899994 L 498.100006 -0.100006 L 478 -0.100006 Z"/>
+    <g id="g2">
+        <path id="path10" fill="#67635f" stroke="none" d="M 268.100006 15.100006 C 264.899994 12.700012 261.5 10.600006 258 8.700012 C 254.100006 6.700012 250 5 245.699997 3.700012 C 237.800003 1.299988 229.800003 -0.100006 221.600006 -0.100006 L 152.100006 -0.100006 L 152.100006 57.799988 L 174.699997 57.799988 L 174.699997 22.5 L 221.600006 22.5 C 224.199997 22.5 226.699997 22.700012 229.300003 23 C 232.100006 23.399994 234.899994 23.899994 237.600006 24.600006 C 240.100006 25.200012 242.600006 26 245 27 C 247.600006 28.100006 250.100006 29.5 252.5 31 C 257.100006 34.100006 260.700012 38.200012 263.5 42.899994 C 264.200012 44.100006 264.799988 45.399994 265.399994 46.799988 C 266 48.299988 266.399994 49.799988 266.799988 51.299988 C 267.200012 52.899994 267.399994 54.399994 267.600006 56 C 267.799988 57.700012 267.899994 59.5 267.899994 61.299988 C 267.899994 65.399994 267.399994 69.5 266.100006 73.5 C 265.600006 75 265 76.399994 264.299988 77.899994 C 263.200012 80.100006 261.899994 82.200012 260.399994 84.100006 C 258.700012 86.199997 256.799988 88.199997 254.600006 89.899994 C 252.5 91.5 250.300003 92.899994 248 94.100006 C 246.800003 94.699997 245.5 95.300003 244.199997 95.800003 C 240.199997 97.399994 235.699997 98.600006 231.300003 99.199997 C 228.100006 99.699997 224.899994 99.899994 221.699997 99.899994 L 152.199997 99.899994 L 152.199997 181.399994 L 175.600006 181.399994 L 175.600006 122.5 L 221.699997 122.5 C 225.899994 122.5 230.199997 122.199997 234.399994 121.600006 C 239.100006 121 243.699997 119.899994 248.199997 118.600006 C 252.100006 117.399994 255.699997 116 259.299988 114.199997 C 263.299988 112.199997 267 109.800003 270.5 107.100006 C 273.600006 104.600006 276.399994 101.800003 278.899994 98.800003 C 280.200012 97.199997 281.399994 95.5 282.5 93.800003 C 284.799988 90.100006 286.799988 86.199997 288.200012 82.100006 C 288.899994 79.899994 289.600006 77.700012 290 75.399994 C 291 70.700012 291.399994 66 291.399994 61.299988 C 291.399994 56.600006 291 52.600006 290.100006 48.200012 C 289.600006 45.899994 289 43.600006 288.200012 41.399994 C 287.299988 38.899994 286.200012 36.5 285 34.200012 C 284.100006 32.5 283.100006 30.899994 282 29.399994 C 278.299988 23.899994 273.700012 19.100006 268.399994 15.100006"/>
+        <path id="path11" fill="#67635f" stroke="none" d="M 106.199997 19 C 104 17.299988 101.699997 15.600006 99.300003 14.100006 C 92.400002 9.600006 85 6.200012 77.099998 3.600006 C 69.599998 1.200012 61.799999 -0.299988 53.799999 -0.299988 L 2.9 -0.299988 L 2.9 104.899994 L 25.5 104.899994 L 25.5 21.799988 L 48.400002 21.799988 C 58.599998 21.799988 68.5 23.5 77.800003 27.700012 C 81.800003 29.5 85.599998 31.600006 89.199997 34 C 93.199997 36.700012 96.800003 39.799988 100.199997 43.200012 C 103.099998 46.200012 105.699997 49.5 108 53 C 110.599998 56.799988 112.699997 60.899994 114.400002 65.200012 C 116 69.100006 117.199997 72.899994 118.099998 77 C 119 81.5 119.5 86 119.5 90.5 C 119.5 97.5 118.599998 104.300003 116.5 111 C 115.099998 115.5 113.199997 119.699997 110.800003 123.800003 C 109.699997 125.699997 108.5 127.600006 107.199997 129.5 C 104.5 133.399994 101.300003 136.899994 97.800003 140.099991 C 94.699997 143 91.300003 145.5 87.599998 147.800003 C 83.599998 150.300003 79.400002 152.399994 74.900002 154.099991 L 74.900002 154.099991 C 70.900002 155.699997 66.800003 156.899994 62.5 157.699997 C 57.799999 158.599991 53.099998 159.099991 48.299999 159.099991 L 45.799999 159.099991 L 45.799999 181.699997 L 53.700001 181.699997 C 59 181.699997 64.300003 181.199997 69.5 180.099991 C 75.199997 178.899994 80.699997 177.099991 86 174.800003 C 91 172.599991 95.800003 170 100.400002 167 C 105.400002 163.699997 110.099998 159.899994 114.300003 155.699997 C 118.300003 151.800003 122 147.5 125.199997 142.899994 C 128.699997 137.899994 131.800003 132.5 134.300003 127 C 139.600006 115.5 142 103.399994 142 90.899994 C 142 84.600006 141.5 78.5 140.199997 72.299988 C 139.5 69.100006 138.699997 65.799988 137.699997 62.700012 C 136.5 59.200012 135.100006 55.799988 133.5 52.5 C 132.300003 50.100006 131 47.799988 129.600006 45.5 C 124.800003 37.5 118.900002 30.200012 111.900002 23.799988 C 110 22.100006 108.099998 20.5 106.099998 18.899994"/>
+        <path id="path12" fill="#67635f" stroke="none" d="M 216 342 C 216 342 238.600006 336.700012 256.799988 342 C 261.100006 334.300018 272.299988 326.400024 284.200012 318.400024 C 275.700012 317.5 266.899994 319.800018 257.100006 332.300018 C 239.399994 330.100006 223.199997 329.800018 216 342"/>
+    </g></symbol>
+</svg>
+
+
+<header class="masthead">
+  <a class="wordmark" href="index.html" aria-label="DPM Autobody, home"><svg role="img" viewBox="0 0 500 342"><use href="#dpm-mark"/></svg></a>
+  <nav aria-label="Primary">
+    <a href="index.html#work">The work</a>
+    <a href="library.html" class="is-active" aria-current="page">Every restoration</a>
+    <a href="workshop.html">The workshop</a>
+    <a href="index.html#proof">Proof</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a class="tel" href="tel:+441323552827">01323 552827</a>
+</header>
+
+<nav class="pill" id="pill" aria-label="Contents">
+  <a href="index.html">Home</a>
+  <a href="#delivered">Delivered</a>
+  <a href="#in-progress">In the workshop</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail__dot"></div></div>
+
+<main id="main">
+
+<!-- ═════════════════ PAGE HEAD ═════════════════ -->
+<div class="band" id="top">
+  <div class="section-head section-head--intro">
+    <p class="label label--accent">Every restoration &nbsp;·&nbsp; Berwick, East Sussex</p>
+    <h1 class="h-major" style="max-width:17ch">Every car that&rsquo;s passed through the
+      workshop.</h1>
+    <p class="lede" style="max-width:34em">The homepage carries a rotating selection. This is
+      the whole record &mdash; finished and delivered, and still on the ramps right now.</p>
+  </div>
+</div>
+
+<!-- ═════════════════ DELIVERED ═════════════════ -->
+<div class="band" id="delivered" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="chapter">
+    <span class="chapter__kind">Finished and delivered</span>
+  </div>
+  <ul class="ledger">
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg"
+             width="1280" height="853" loading="lazy" decoding="async"
+             alt="The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 01</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Candy Red</h2>
+        <p class="ledger__meta"><b>Chassis 26282</b> &nbsp;·&nbsp; 1,300 hours &nbsp;·&nbsp; A year in the building</p>
+        <p class="ledger__note">Full body and paint, plus five changes the owner specified
+          himself &mdash; wire wheels, power steering, smoothed chrome bumpers, lowered. The
+          most completely documented car DPM have finished.</p>
+        <a class="golink" href="volvo-p1800.html">The full record of the P1800</a>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 02</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Resto-mod, Candy Red</h2>
+        <p class="ledger__meta"><b>Chassis 23925</b> &nbsp;·&nbsp; owned by Tonja, commissioned by Ahmet</p>
+        <p class="ledger__note">Full body and paint, plus in-depth body and trim modifications
+          &mdash; a total one-off example. A separate car from No. 01 above: both are Candy Red
+          P1800s, confirmed distinct by David, 2026-09-11, after an earlier chassis-number mix-up.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-2"
+           data-indicative="Not built for the prototype. Photography received, not yet reviewed or plate-redacted.">The full record of this P1800</a>
+        <span class="caption" id="lib-note-2" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 03</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Red</h2>
+        <p class="ledger__meta">Over 1,300 hours in body and paint</p>
+        <p class="ledger__note">Full body restoration by DPM; mechanical and trim work done by
+          another firm.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-3"
+           data-indicative="Not built for the prototype. On a live site this opens this P1800's own record, in the same form as No. 01.">The full record of this P1800</a>
+        <span class="caption" id="lib-note-3" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 04</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; pair, one client</h2>
+        <p class="ledger__meta">Two cars, one owner</p>
+        <p class="ledger__note">Both won show awards. Names and specific placings to follow
+          from the owner before this can be written up properly.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-4"
+           data-indicative="Not built for the prototype. Awards and show names still pending from the client.">The full record of the pair</a>
+        <span class="caption" id="lib-note-4" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/bentley-s3/whole.jpg"
+             width="2400" height="1351" loading="lazy" decoding="async"
+             alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 05</span>
+        <h2 class="ledger__name">Bentley S3 Continental, 1963</h2>
+        <p class="ledger__note">A second S3 &mdash; a different car, a different year &mdash;
+          is in the workshop now. See No. 10, below.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-5"
+           data-indicative="Not built for the prototype. On a live site this opens the Bentley's own record, in the same form as No. 01.">The full record of the Bentley</a>
+        <span class="caption" id="lib-note-5" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/dpm-work/jaguar-sea-green/booth.jpg"
+             width="1500" height="900" loading="lazy" decoding="async"
+             alt="A Jaguar in Aston Martin Sea Green paint, in the spray booth.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 06</span>
+        <h2 class="ledger__name">Jaguar &mdash; Aston Martin Sea Green</h2>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-6"
+           data-indicative="Not built for the prototype. On a live site this opens the Jaguar's own record, in the same form as No. 01.">The full record of the Jaguar</a>
+        <span class="caption" id="lib-note-6" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item ledger__item--photo">
+      <div class="ledger__thumb">
+        <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-08-26_dpm-autobody-discovery/assets/etype-941pvo/gallery/front.jpg"
+             width="1600" height="1067" loading="lazy" decoding="async"
+             alt="Mark Antwis's Jaguar E-Type 941 PVO, front three-quarter.">
+      </div>
+      <div>
+        <span class="ledger__n">No. 07</span>
+        <h2 class="ledger__name">Jaguar E-Type &mdash; 941 PVO</h2>
+        <p class="ledger__note">Series 1 3.8 FHC, owned by Mark Antwis. Featured over nine
+          pages in the E-Type Owners Club Magazine, April 2026.</p>
+        <a class="golink" href="etype-941pvo.html">The full record of the E-Type</a>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 08</span>
+        <h2 class="ledger__name">Porsche 356 SC</h2>
+        <p class="ledger__note">Full body restoration and a mechanical rebuild. The customer
+          refitted the engine and trim himself to complete the build. Finished with some
+          subtle modifications.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-8"
+           data-indicative="Not built for the prototype. Photography received 2026-09-08, not yet reviewed or plate-redacted.">The full record of the 356</a>
+        <span class="caption" id="lib-note-8" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__n">No. 09</span>
+        <h2 class="ledger__name">Aston Martin DB6 &mdash; the pink one</h2>
+        <p class="ledger__meta">Crashed at La Carrera Panamericana, 2022</p>
+        <p class="ledger__note">DPM repaired the body, including a new door fabricated in
+          house, then finished the car in pink at the owner&rsquo;s request &mdash; to stand
+          out at the next race. Due to race again.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-9"
+           data-indicative="Not built for the prototype. Photography received 2026-09-08, not yet reviewed or plate-redacted.">The full record of the DB6</a>
+        <span class="caption" id="lib-note-9" hidden></span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- ═════════════════ IN THE WORKSHOP NOW ═════════════════ -->
+<div class="band" id="in-progress" data-accent="#C7BBA1" data-ink="#D8CBAE">
+  <div class="chapter">
+    <span class="chapter__kind">In the workshop now</span>
+  </div>
+  <ul class="ledger">
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 10</span>
+        <h2 class="ledger__name">Bentley S3, 1964</h2>
+        <p class="ledger__meta">Over 1,000 hours of hand-crafted metalwork to date</p>
+        <p class="ledger__note">All new panels made by hand, in house. The chassis is being
+          rebuilt now, ahead of mating it back to the body for final prep and paint. A
+          different car from the finished Continental at No. 05.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-10"
+           data-indicative="Not built for the prototype. In progress — will show before shots alongside the raw metalwork, per David's request.">Follow this restoration</a>
+        <span class="caption" id="lib-note-10" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 11</span>
+        <h2 class="ledger__name">Volvo, model to be confirmed</h2>
+        <p class="ledger__note">A near-complete full restoration &mdash; unique, no other
+          example restored to this standard. Once owned by a well-known singer, name to be
+          confirmed by David.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-11"
+           data-indicative="Not built for the prototype. Model and previous owner still to be confirmed.">Follow this restoration</a>
+        <span class="caption" id="lib-note-11" hidden></span>
+      </div>
+    </li>
+
+    <li class="ledger__item">
+      <div>
+        <span class="ledger__status">Restoration in progress</span>
+        <span class="ledger__n">No. 12</span>
+        <h2 class="ledger__name">Volvo P1800 &mdash; Pearl White</h2>
+        <p class="ledger__meta">Now in reassembly &nbsp;·&nbsp; 1,300 hours to date
+</p>
+        <p class="ledger__note">Every part refurbished, all new body panels, a custom pearl
+          white respray commissioned by the client, plus a single-piece bumper conversion and
+          power-steering conversion.</p>
+        <a class="golink golink--dead" href="#" role="link" aria-describedby="lib-note-12"
+           data-indicative="Not built for the prototype. In progress — will show before shots alongside reassembly, per David's request.">Follow this restoration</a>
+        <span class="caption" id="lib-note-12" hidden></span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+</main>
+
+<footer>
+  <div class="colophon">
+    <div class="colophon__row">
+      <div class="colophon__info">
+        <a class="footmark" href="index.html" aria-label="DPM Autobody"><svg role="img" viewBox="0 0 500 342"><use href="#dpm-mark"/></svg></a>
+    <p class="label">Berwick, East Sussex &nbsp;·&nbsp; 01323 552827 &nbsp;·&nbsp; info@dpmautobody.co.uk</p>
+    <p><a class="back" href="index.html">Back to the homepage</a></p>
+      </div>
+      <nav class="colophon__socials" aria-label="DPM Autobody on social media">
+        <a href="https://www.instagram.com/dpm_autobody/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15A4.9 4.9 0 0 0 2.53 5.45c-.25.64-.42 1.37-.47 2.43C2.01 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 21.99 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77A4.9 4.9 0 0 0 18.55 2.53c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.2 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.36.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.2 1.5-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.36.14-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.2-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.14-.36-.3-.88-.34-1.86C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.98.2-1.5.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.36-.14.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 0 0 10.3 5.15 5.15 0 0 0 0-10.3zm0 8.5a3.35 3.35 0 1 1 0-6.7 3.35 3.35 0 0 1 0 6.7zm5.35-8.7a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/dpmautobody/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.4h2.8l.42-3.28h-3.22V8.19c0-.95.26-1.6 1.63-1.6h1.74V3.66C16.56 3.6 15.53 3.5 14.32 3.5c-2.53 0-4.26 1.54-4.26 4.38v2.44H7.25v3.28h2.81V22h3.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3ZpDFw1FbgXrMy5CCONqyw" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.49a2.75 2.75 0 0 0-1.94 1.95C2 8.93 2 12 2 12s0 3.07.42 4.81a2.75 2.75 0 0 0 1.94 1.95c1.74.49 7.64.49 7.64.49s5.9 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95C22 15.07 22 12 22 12s0-3.07-.42-4.81zM9.9 15.2V8.8L15.6 12l-5.7 3.2z"/></svg>
+        </a>
+      </nav>
+    </div>
+      <p class="credit-line">Built by <a href="https://digitalconsultingservices.co.uk" target="_blank" rel="noopener">digitalconsultingservices.co.uk</a></p>
+</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+
+  /* ---------------------------------------------------------------------
+     In-page anchors.
+     A sticky element reports its PINNED position, not its layout position,
+     so once you are below one, native anchor navigation has nowhere to go
+     and silently does nothing. Neutralise position for one synchronous
+     measurement — no paint happens between these three statements — and
+     scroll to the real document offset ourselves.
+     ------------------------------------------------------------------- */
+  function headerHeight() {
+    var h = document.querySelector('.masthead');
+    return h ? h.getBoundingClientRect().height : 0;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      var prev = el.style.position;
+      el.style.position = 'static';
+      var y = el.getBoundingClientRect().top + window.scrollY - headerHeight() - 8;
+      el.style.position = prev;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce.matches ? 'auto' : 'smooth' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    });
+  });
+
+  /* Links that stand where a real project page will go. They latch a state
+     rather than reverting the moment the pointer leaves — which is exactly
+     what the deleted paint-index chips got wrong. */
+  document.querySelectorAll('[data-indicative]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var say = a.getAttribute('data-indicative');
+      var out = document.getElementById(a.getAttribute('aria-describedby'));
+      a.setAttribute('aria-disabled', 'true');
+      if (out) { out.textContent = say; out.hidden = false; }
+    });
+  });
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  /* ---------------------------------------------------------------------
+     The page re-skins itself car by car, from scroll position alone.
+     Whichever band owns the middle of the screen hands its paint code to
+     the chrome. There is nothing to hover and nothing to click: the
+     previous build's swatch chips applied on pointerenter and reverted on
+     pointerleave, so a click appeared to do nothing at all.
+     A colour change is not motion, so this runs with motion reduced too.
+     ------------------------------------------------------------------- */
+  var inMiddle = [];
+  function paint(accent, ink) {
+    if (!accent || !ink) return;
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--accent-ink', ink);
+  }
+  function applySkin() {
+    if (!inMiddle.length) return;
+    var mid = window.innerHeight / 2, best = null, bestD = Infinity;
+    inMiddle.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = el; }
+    });
+    if (best) paint(best.getAttribute('data-accent'), best.getAttribute('data-ink'));
+  }
+  var skin = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var i = inMiddle.indexOf(e.target);
+      if (e.isIntersecting && i === -1) inMiddle.push(e.target);
+      if (!e.isIntersecting && i !== -1) inMiddle.splice(i, 1);
+    });
+    applySkin();
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('[data-accent]').forEach(function (el) { skin.observe(el); });
+
+  /* Phone contents pill, once the hero is behind you. */
+  var pill = document.getElementById('pill');
+  var hero = document.getElementById('top');
+  if (pill && hero) {
+    new IntersectionObserver(function (entries) {
+      pill.classList.toggle('is-on', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  if (reduce.matches) return;   /* static, well-lit page — nothing below runs */
+
+  /* ---------------------------------------------------------------------
+     The travelling light.
+     Two ground-coloured veils slide apart on transform only; the lit band
+     is the gap between them. Nothing is painted over the photograph.
+
+     Geometry, and the client's two notes about it:
+       · The band starts already biting the left (or right) edge, so the
+         panel reads as LIT on arrival rather than as a black screen.
+       · Progress is eased out, so the first 200px of scroll produce the
+         largest movement and the sweep has paid off inside one viewport.
+     ------------------------------------------------------------------- */
+  var panels = [].slice.call(document.querySelectorAll('[data-sheen]')).map(function (track) {
+    var rev = (track.getAttribute('data-rev') || '0.58,0.86').split(',').map(Number);
+    var rev2 = (track.getAttribute('data-rev2') || '').split(',').map(Number);
+    return {
+      track: track,
+      stage: track.querySelector('.stage'),
+      resolve: track.querySelector('.resolve'),
+      resolve2: track.querySelector('.resolve--2'),
+      rtl: track.getAttribute('data-dir') === 'rtl',
+      rev: rev,
+      rev2: rev2.length === 2 && !isNaN(rev2[0]) ? rev2 : null,
+      live: false
+    };
+  });
+
+  var rail = document.querySelector('.rail');
+  var railDot = document.querySelector('.rail__dot');
+  var ticking = false;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var p = panels.find(function (x) { return x.track === e.target; });
+      if (p) p.live = e.isIntersecting;
+    });
+    schedule();
+  }, { rootMargin: '25% 0px 25% 0px' });
+
+  panels.forEach(function (p) { io.observe(p.track); });
+
+  function smooth(x) { return x * x * (3 - 2 * x); }
+
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      if (!p.live || !p.stage) continue;
+
+      var r = p.track.getBoundingClientRect();
+      var stickH = p.stage.offsetHeight || vh;
+      var span = r.height - stickH;
+      var t = span > 0 ? clamp(-r.top / span, 0, 1) : clamp((vh - r.top) / (vh + r.height), 0, 1);
+
+      /* Eased so the payoff is prompt without being frantic. */
+      var e = 1 - Math.pow(1 - t, 1.6);
+
+      var w = p.stage.offsetWidth;
+      var centre = (p.rtl ? (1.35 - 1.45 * e) : (-0.10 + 1.45 * e)) * w;
+      var half = w * (w < 760 ? 0.42 : 0.34);
+
+      /* The veils are 300% wide; --tl / --tr place them so their gradient
+         edges land exactly on the band, and so neither can ever run out of
+         cloth at the far side of the frame. */
+      p.stage.style.setProperty('--bl', (centre - half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--br', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tl', (centre - half - 3 * w).toFixed(1) + 'px');
+      p.stage.style.setProperty('--tr', (centre + half).toFixed(1) + 'px');
+      p.stage.style.setProperty('--bc', centre.toFixed(1) + 'px');
+
+      if (p.resolve) {
+        /* The car arrives only at the end. Opacity and a whisper of scale;
+           no directional travel, which is the motion trigger. */
+        p.stage.style.setProperty('--reveal',
+          smooth(clamp((t - p.rev[0]) / (p.rev[1] - p.rev[0]), 0, 1)).toFixed(3));
+      }
+      if (p.resolve2 && p.rev2) {
+        p.stage.style.setProperty('--reveal2',
+          smooth(clamp((t - p.rev2[0]) / (p.rev2[1] - p.rev2[0]), 0, 1)).toFixed(3));
+      }
+    }
+
+    if (rail && railDot) {
+      var max = document.documentElement.scrollHeight - vh;
+      var g = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      railDot.style.setProperty('--railY', (g * (rail.offsetHeight - railDot.offsetHeight)).toFixed(1) + 'px');
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+
+</body>
+</html>
