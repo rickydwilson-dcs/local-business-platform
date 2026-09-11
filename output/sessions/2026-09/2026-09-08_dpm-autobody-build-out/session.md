@@ -120,6 +120,8 @@ left dormant with generic placeholder content — DPM's approved design doesn't 
 
 ## Phase 2 — Content model
 
+**Status: schema done, 2026-09-11.** See `yolo-brief.md`'s "Completed" section for detail.
+
 Design the MDX frontmatter schema for a "build" content type before writing any build pages, so all 8
 share one shape. Needs at minimum: car make/model/year, chassis number, owner/commissioner names
 (optional — not every build has them), status (`completed` | `in-progress`), hours of labour, scope of
@@ -136,14 +138,23 @@ This is the direct application of the platform's MDX-only rule (root `CLAUDE.md`
 data") to this specific page — get the schema right here and the Phase 0 prototype's per-row image
 slot becomes real with zero duplicated content.
 
-- [ ] Define the Zod schema for the `builds` content type (or whatever collection name fits the
+- [x] Define the Zod schema for the `builds` content type (or whatever collection name fits the
       existing `lib/content.ts` generic loader pattern), `heroImage` required once a build's status
       allows it to appear with a photo
-- [ ] Decide the slug convention now, given the P1800 collision risk flagged in `BACKLOG.md`: likely
+- [x] Decide the slug convention now, given the P1800 collision risk flagged in `BACKLOG.md`: likely
       `p1800-candy-restomod`, `p1800-red`, `p1800-pearl-white`, `p1800-[client-name]-pair` rather than
       anything that could resolve to the same slug twice
 
 ## Phase 3 — Individual build pages + library route (content ready, blocked on photo review)
+
+**Status: partially complete, 2026-09-11 — NOT fully done.** Scope split explicitly: the P1800
+Candy resto-mod (Tonja/Ahmet) and the E-type 941 PVO got full real body content and real pages,
+visually verified against the prototype (see `yolo-brief.md`'s "Completed" section). The other 10
+builds have frontmatter only (photo-only or no content) — they still need their iCloud albums
+pulled, run through plate-redact, and their remaining facts (chassis numbers, owner names,
+in-progress vs. completed status) confirmed by David before real pages can be written for them.
+The library route itself is built and live, listing all 12 builds by their `heroImage`
+frontmatter — but 10 of those rows point to a build with no real page behind it yet.
 
 Build the library route now too, against the design approved in Phase 0 — it's a container for these
 same 8 builds, so it lands naturally alongside them rather than as a separate pass.
@@ -164,7 +175,7 @@ is incomplete, even if the individual page itself is finished.
 
 - [ ] Pull each iCloud album locally, review for usable/hero shots
 - [ ] Run plate-redact on every album (propose → confirm → apply)
-- [ ] P1800 resto-mod (Candy, Tonja/Ahmet) — chassis TBD, see discrepancy above
+- [x] P1800 resto-mod (Candy, Tonja/Ahmet) — real page built and visually verified, 2026-09-11
 - [ ] Pink Aston Martin DB6 — race car, "due to race again," check status before publish
 - [ ] Rare Volvo — singer's name still needed from David; in-progress, frame accordingly
 - [ ] Two P1800s, same client — show names/awards still needed from David
@@ -178,8 +189,10 @@ is incomplete, even if the individual page itself is finished.
       site-wide; fix plaque wording ("riveted" → accurate); remove Aston Martin T. Green; pull the
       wrong Candy Red Volvo video; link the finished-Bentley video
 - [ ] 262 — chassis number still pending from David; may replace T. Green in the featured set
-- [ ] Build the library route itself, against the Phase 0 design (card/list treatment, filtering if
-      any — status, make, era), sitting above the individual `[slug]` build pages
+- [x] Build the library route itself, against the Phase 0 design (card/list treatment, filtering if
+      any — status, make, era), sitting above the individual `[slug]` build pages — built and live,
+      2026-09-11; note the E-type 941 PVO also got a real page in this pass (not originally listed
+      in this Phase 3 checklist, which predates that build's content arriving)
 
 ## Phase 4 — Homepage rotation + workshop/contact split
 
@@ -191,6 +204,17 @@ Carried over from the discovery session's `BACKLOG.md` items 3 and 5:
       3 for the sourcing/rights detail, already cleared)
 - [ ] Workshop action photos (welding, metalwork, general atmosphere) — Ricky's action, not David's
 - [ ] Split contact into its own page
+
+## Note — visual fidelity gate (yolo-brief Phase 7) ran much larger than planned
+
+The build-out yolo-brief's Phase 7 verification gate was scoped as a single fix cycle but actually
+took three full rounds of fixes and re-verification before all pages matched the approved
+prototype closely enough to ship — the first pass found HIGH-severity drift across every page
+(missing webfonts, an invisible nav from a Tailwind breakpoint bug, wrong accent colors, and
+substantially incomplete build-detail pages). See `yolo-brief.md`'s "Completed" section for the
+full root-cause detail, the fix rounds, the two screenshot-tooling bugs found along the way, and
+the list of known remaining MEDIUM/LOW visual-fidelity gaps that were deliberately left open —
+not duplicated here.
 
 ## Phase 5 — Wrap-up
 
