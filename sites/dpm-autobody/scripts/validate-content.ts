@@ -3,21 +3,25 @@
 /**
  * Content Validation Script
  *
- * Validates all MDX files in content/services/ and content/locations/
- * against their respective Zod schemas to catch content errors before
- * they reach production.
+ * Validates all MDX files in content/builds/ against BuildFrontmatterSchema
+ * to catch content errors before they reach production.
+ *
+ * DPM Autobody's approved design has no service-list or location pages —
+ * base-template's services/locations routes and content dirs were deleted
+ * at scaffold time (see site-level CLAUDE.md) — so this site has no
+ * content/services/ or content/locations/ and must not be wired to the
+ * root scripts/validate-content.ts. See
+ * docs/architecture/content-validation.md#non-standard-content-types.
  *
  * Usage:
  *   npm run validate:content
- *   npm run validate:services
- *   npm run validate:locations
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from '@platform/core-components';
+import { BuildFrontmatterSchema } from '../lib/content-schemas';
 import { z } from 'zod';
 
 // ANSI color codes for terminal output
@@ -39,11 +43,7 @@ interface ValidationResult {
 /**
  * Validate a single MDX file against a Zod schema
  */
-function validateFile(
-  filePath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
-): ValidationResult {
+function validateFile(filePath: string, schema: typeof BuildFrontmatterSchema): ValidationResult {
   const fileName = path.basename(filePath);
 
   try {
@@ -85,15 +85,34 @@ function validateFile(
  */
 function validateDirectory(
   dirPath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
+  schema: typeof BuildFrontmatterSchema
 ): ValidationResult[] {
   const files = fs
     .readdirSync(dirPath)
     .filter((file) => file.endsWith('.mdx'))
     .map((file) => path.join(dirPath, file));
 
-  return files.map((file) => validateFile(file, schema, type));
+  return files.map((file) => validateFile(file, schema));
+}
+
+/**
+ * Check for duplicate slugs (filenames without extension) in a directory.
+ */
+function findDuplicateSlugs(dirPath: string): string[] {
+  const slugs = fs
+    .readdirSync(dirPath)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+
+  const seen = new Set<string>();
+  const duplicates = new Set<string>();
+  for (const slug of slugs) {
+    if (seen.has(slug)) {
+      duplicates.add(slug);
+    }
+    seen.add(slug);
+  }
+  return Array.from(duplicates);
 }
 
 /**
@@ -150,44 +169,26 @@ function printResults(results: ValidationResult[], type: string): boolean {
  * Main execution
  */
 function main() {
-  const args = process.argv.slice(2);
-  const mode = args[0] || 'all'; // 'all', 'services', or 'locations'
-
   const contentDir = path.join(process.cwd(), 'content');
-  const servicesDir = path.join(contentDir, 'services');
-  const locationsDir = path.join(contentDir, 'locations');
+  const buildsDir = path.join(contentDir, 'builds');
 
-  let allValid = true;
-
-  // Validate services
-  if (mode === 'all' || mode === 'services') {
-    if (!fs.existsSync(servicesDir)) {
-      console.error(
-        `${colors.red}Error: Services directory not found: ${servicesDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
-
-    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema, 'service');
-    const servicesValid = printResults(serviceResults, 'Services');
-    allValid = allValid && servicesValid;
+  if (!fs.existsSync(buildsDir)) {
+    console.error(`${colors.red}Error: Builds directory not found: ${buildsDir}${colors.reset}`);
+    process.exit(1);
   }
 
-  // Validate locations
-  if (mode === 'all' || mode === 'locations') {
-    if (!fs.existsSync(locationsDir)) {
-      console.error(
-        `${colors.red}Error: Locations directory not found: ${locationsDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
+  const results = validateDirectory(buildsDir, BuildFrontmatterSchema);
+  const schemaValid = printResults(results, 'Builds');
 
-    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema, 'location');
-    const locationsValid = printResults(locationResults, 'Locations');
-    allValid = allValid && locationsValid;
+  const duplicates = findDuplicateSlugs(buildsDir);
+  if (duplicates.length > 0) {
+    console.log(
+      `${colors.red}✗ Duplicate slugs found in builds: ${duplicates.join(', ')}${colors.reset}\n`
+    );
   }
 
-  // Exit with appropriate code
+  const allValid = schemaValid && duplicates.length === 0;
+
   if (allValid) {
     console.log(`${colors.green}✓ All content validation passed!${colors.reset}\n`);
     process.exit(0);
