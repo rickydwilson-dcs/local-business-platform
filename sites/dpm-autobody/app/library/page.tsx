@@ -53,7 +53,10 @@ export const metadata: Metadata = {
 
 /**
  * The prototype's own row order (library.html "No. 01" … "No. 12"), reproduced here because
- * the schema has no order field — see file header. All 12 of Phase 3's real slugs must appear
+ * the schema has no order field — see file header. Confirmed 2026-09-11: prototype rows No. 11
+ * ("Volvo, model to be confirmed" — the singer's car) and No. 12 ("Pearl White") are the same
+ * build, not two — `volvo-tbc.mdx` was removed and its owner-history note folded into
+ * `p1800-pearl-white.mdx`'s `scopeOfWork`, leaving 11 real slugs, not 12. All of them must appear
  * here exactly once; a slug present in content/builds/ but missing from this list would simply
  * never render, which is why every filename under content/builds/ has a matching entry.
  */
@@ -68,7 +71,6 @@ const LIBRARY_ORDER = [
   'porsche-356-sc',
   'aston-martin-db6-pink',
   'bentley-s3-1964',
-  'volvo-tbc',
   'p1800-pearl-white',
 ] as const;
 

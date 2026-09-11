@@ -218,18 +218,38 @@ can be written:
 
 ## Open questions
 
-Unchanged from the prior handoff — still outstanding, still blocking real pages for the
-corresponding builds:
+Still outstanding, still blocking real pages for the corresponding builds:
 
-- "Rare Volvo" build — singer's name still needed.
+- Pearl White P1800 (formerly tracked as two separate builds — see "Resolved" below) — the singer's
+  name is still not known; David hasn't given it. `scopeOfWork` in `p1800-pearl-white.mdx` carries
+  the owner-history note with the name left as "to be confirmed by David."
 - The two-P1800s-same-client build — show names/awards still needed.
 - Bentley S3 1964 (in-progress) — chassis number still TBD.
 - The "262" build — chassis number still pending; may replace the T. Green Aston Martin content in
   the featured set.
 - Porsche 356 SC — confirm the "might/minor mechanical rebuild" wording before publishing.
-- Pearl White P1800's "1,300 hours" figure — double-check it wasn't accidentally copied from the
-  Red P1800's figure.
 - Pink Aston Martin DB6 — currently "due to race again"; confirm current status before publishing.
 
-Resolved and no longer open: the chassis 26282 vs. 23925 question (David confirmed 2026-09-11 these
-are two genuinely different Candy Red P1800s, not a transcription error).
+Resolved and no longer open:
+
+- The chassis 26282 vs. 23925 question (David confirmed 2026-09-11 these are two genuinely
+  different Candy Red P1800s, not a transcription error).
+- **"Rare Volvo" (prototype No. 11, "Volvo, model to be confirmed") and Pearl White P1800
+  (prototype No. 12) are the same build, confirmed 2026-09-11** — not two separate cars as the
+  approved prototype's `library.html` had them. `volvo-tbc.mdx` was removed, its singer-owned-it
+  note folded into `p1800-pearl-white.mdx`'s `scopeOfWork`, and `app/library/page.tsx`'s
+  `LIBRARY_ORDER` updated from 12 real slugs to 11. `npx tsx scripts/validate-content.ts` and
+  `type-check` both re-verified clean after the merge.
+- **The "1,300 hours" figure on Candy Red P1800 (No. 01), Red P1800 (No. 03), and Pearl White
+  (No. 12) — confirmed 2026-09-11 by David as three genuinely separate totals, not one figure
+  copied across builds.** This was flagged as a real risk both in BACKLOG.md and as a caution note
+  baked into the approved prototype's own `library.html` (No. 12's row). No content change needed;
+  all three MDX files already carry their own correct value.
+
+## Content note for future photo-wiring passes
+
+**Pearl White P1800 (and any other in-progress build) should show work-in-progress photos on the
+homepage/library, not finished-car shots** — confirmed 2026-09-11. This matches the framing note
+already in BACKLOG.md item 5 for the Bentley S3 1964 and the (now-merged) rare Volvo: "restoration
+in progress," not a showcase of an end state that doesn't exist yet for these cars. Keep this in
+mind when selecting `heroImage`/`galleryImages` for any build still `status: in-progress`.
