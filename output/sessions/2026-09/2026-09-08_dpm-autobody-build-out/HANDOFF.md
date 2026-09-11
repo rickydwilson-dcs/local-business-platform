@@ -1,9 +1,49 @@
 # DPM Autobody build-out — handoff
 
-**Status:** ready-to-resume. Photo curation for all 8 BACKLOG.md item 5 albums is done. Video work (all 3 items) is now resolved/actioned this session — see "Video work — resolved 2026-09-11" below. Next step is David's outstanding fact confirmations, then real MDX pages.
-**Branch:** `develop`. One frontmatter edit made this session (see below) — not yet committed.
-**Commits this session:** none yet — `sites/dpm-autobody/content/builds/bentley-s3-continental.mdx` has an uncommitted edit (added the confirmed `video` block). Everything else this session was research only (yt-dlp/transcript pulls into the scratchpad, not the repo).
-**Working tree:** the `inbox/` directory from the prior session (untracked, see Traps for exactly what's safe vs. not) plus the one modified MDX file above.
+**Status:** ready-to-resume. Photo curation for all 8 BACKLOG.md item 5 albums is done, the Bentley video-credit commit is pushed, and all 106 curated/redacted photos are now live on R2. Next step is David's outstanding fact confirmations, then real MDX pages using the uploaded photos.
+**Branch:** `develop`, pushed to `origin/develop`.
+**Commits this session (2026-09-11, resumed session):** none new — the Bentley video-credit commit (`d4487852`) and the prior handoff update (`62828063`) were already made in an earlier pass of this same session and were pushed to `origin/develop` at the start of this resumed session (`git push origin develop`, pre-push type-check passed). This resumed pass did the R2 upload only (see below); no MDX/content commits from this pass yet.
+**Working tree:** the `inbox/` directory from the prior session (untracked — see Traps), plus new untracked `tools/upload-dpm-autobody-photos-to-r2.ts` and `photos-manifest.json`.
+
+## R2 upload — done 2026-09-11 (resumed session)
+
+All 106 curated/redacted photos from the "Current state" table below are now uploaded to the
+public R2 bucket, under `dpm-autobody/builds/<slug>/...`:
+
+| Album                   | R2 path                                                | Files |
+| ----------------------- | ------------------------------------------------------ | ----- |
+| `p1800-restomod`        | `dpm-autobody/builds/p1800-candy-restomod/`            | 5     |
+| `bentley-s3-chassis`    | `dpm-autobody/builds/bentley-s3-1964/chassis-rebuild/` | 20    |
+| `bentley-s3-metalwork`  | `dpm-autobody/builds/bentley-s3-1964/metalwork/`       | 12    |
+| `porsche-356sc`         | `dpm-autobody/builds/porsche-356-sc/`                  | 18    |
+| `db6-pink-aston`        | `dpm-autobody/builds/aston-martin-db6-pink/`           | 24    |
+| `p1800-red`             | `dpm-autobody/builds/p1800-red/`                       | 9     |
+| `p1800-pearl-white`     | `dpm-autobody/builds/p1800-pearl-white/`               | 8     |
+| `p1800-candy-underside` | `dpm-autobody/builds/p1800-candy/`                     | 10    |
+
+Album-to-slug mapping taken from `../2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md` item 5
+(matched by which build each iCloud link was attached to) and cross-checked against
+`sites/dpm-autobody/content/builds/*.mdx` filenames. The two Bentley S3 1964 albums ("Metalwork and
+body prep" / "Chassis rebuild") both feed the same in-progress build and were kept in separate
+subfolders since BACKLOG.md's own framing note asks for "before images alongside the raw
+metalwork" as two distinct threads on that page.
+
+**Tool:** `tools/upload-dpm-autobody-photos-to-r2.ts` (new, reuses `tools/lib/r2-client.ts`).
+Excludes `_contact-sheet.jpg` triage artifacts from each album's `redacted/` dir automatically.
+Supports `--dry-run` (used first, per project convention — reported 106 files / 298.19 MB before
+the real run). Idempotent: `headFile()` check skips objects that already exist, so re-running is
+safe. Writes `photos-manifest.json` (local path → R2 key → URL → status) next to `inbox/` in this
+session folder — **not yet committed to git**, but it's plain JSON metadata, not a binary, so no
+`.gitignore` conflict.
+
+**Verified:** dry-run count (106 files, 298.19 MB) matched the handoff's own curation table exactly
+before running live; live run reported 106/106 uploaded, 0 failed; spot-checked 3 URLs across 3
+different albums post-upload, all returned `200 image/jpeg` with real byte counts (258KB–2.7MB,
+consistent with full-resolution photos, not empty/placeholder objects).
+
+**Not done:** MDX frontmatter (`heroImage`, `galleryImages`) for these builds still points at
+placeholder/prototype URLs or nothing at all — wiring the new R2 URLs into each build's MDX is real
+content work for the "write real MDX bodies" step below, not part of this upload step.
 
 ## Video work — resolved 2026-09-11
 
@@ -100,16 +140,20 @@ Best finds: **Porsche 356 SC** and **Candy P1800 underside** albums both contain
 
 ## Next step
 
-Video work (all 3 BACKLOG.md item 5 YouTube items) is resolved — see above. Remaining before real
-pages can be built:
+Video work (all 3 BACKLOG.md item 5 YouTube items) is resolved, the Bentley video-credit commit is
+pushed, and the 106 photos are live on R2 — see above. Remaining before real pages can be built:
 
-1. **Commit the Bentley video-credit edit** (`bentley-s3-continental.mdx`) — trivial, just needs a
-   commit message and the usual develop → staging → main flow when ready.
+1. ~~Commit the Bentley video-credit edit~~ — done and pushed.
 2. **David's outstanding fact confirmations** — see Open Questions below, unchanged.
-3. **Upload the 106 curated/redacted photos to R2** per `docs/guides/prototype-hosting.md` — not
-   yet done (see "What was NOT done").
-4. **Write real MDX bodies** for the builds that now have confirmed photos + facts, once (2) and
-   (3) are done.
+3. ~~Upload the 106 curated/redacted photos to R2~~ — done, see "R2 upload — done 2026-09-11" above.
+4. **Write real MDX bodies** for the builds that now have confirmed photos + facts, wiring each
+   build's `heroImage`/`galleryImages` to its `dpm-autobody/builds/<slug>/...` R2 URLs from the
+   table above — blocked on (2) for several builds, not blocked for others (e.g. Porsche 356 SC
+   photos are ready now; its only outstanding fact is the "might/minor mechanical rebuild" wording).
+5. **Consider whether `bentley-s3-continental.mdx`'s `heroImage` should move off the old
+   `prototypes/2026-08-26_dpm-autobody-discovery/...` R2 path** onto the site-specific
+   `dpm-autobody/...` convention now that real per-build R2 folders exist — not done this session,
+   noted as a gap for whoever writes that build's real MDX body.
 
 ## Open questions
 
