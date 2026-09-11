@@ -164,6 +164,158 @@ entirely, since the masthead already carries the phone number.
 
 ---
 
+## 5. Content updates from David's review meeting — **2026-09-08, not started**
+
+**Added:** 2026-09-08 (Ricky). David reviewed the prototype and was very happy with it. This is the
+full action list from that meeting. Almost everything below is blocked on assets David is sending
+(see "Next steps" at the bottom) — nothing here should be started before the corresponding email/photo
+album lands, except the pure copy fixes noted inline.
+
+### Content corrections (buildable now, no new assets needed)
+
+- **"Lead loading and filling" → "body levelling"**, renamed throughout the site.
+- **Plaque wording**: "riveted" is wrong — the plaques are adhered, not riveted. Find accurate wording.
+- **Candy Red Volvo**: the YouTube video currently associated with it is for a _different_ Volvo — pull
+  the wrong video, don't replace it with anything until the right one (if any) is confirmed.
+- **Aston Martin T. Green: remove.** Insufficient build info to write the page. Likely replaced by the
+  262 (see below).
+
+### New/changed build pages (blocked on David's per-build emails + assets)
+
+- **P1800 resto-mod ("Resto Mod Candy P1800") — the most well-known build, gets its own page.**
+  Content received 2026-09-08. Three-part YouTube video exists (not professionally filmed — expect to
+  need editing/trimming, not a straight embed). **Owned by Tonja, commissioned by Ahmet** (corrects
+  the earlier meeting-note transcription of "Armor and Tonya" — the names are Tonja and Ahmet).
+  **Chassis number: 23925.** DPM did full body and paint plus in-depth body and trim modifications,
+  making this a total one-off example — worth stating explicitly as the positioning line for this
+  build (it's the "resto-mod," distinct from the concours-correct restorations elsewhere on site).
+  Photos: https://share.icloud.com/photos/005auHRyCY3Uwr52m5ceM3Zgg
+
+  **CONFIRMED a different car from chassis 26282 — David, 2026-09-11: "Must be a different one.
+  This is the Resto mod."** Resolves the discrepancy raised after his separate note about chassis
+  26282 — DPM has **two distinct Candy Red P1800s**, not one car under two transcribed chassis
+  numbers: this resto-mod (23925, Tonja/Ahmet, wire wheels, full body/paint/trim mods) and the
+  already-live `volvo-p1800.html` car (26282, no video, main homepage photo, David's separate iCloud
+  album at https://share.icloud.com/photos/067FIpe2yW62VqmZ8gK1TRk6w with a request for underside
+  shots — unchanged, still pending). **Both need to read as clearly separate cars** — the earlier
+  slug/naming-collision warning for the P1800s now applies with more force than "possible duplicate,"
+  since these are two confirmed-real, confirmed-different Candy Red cars. `home.html`'s testimonials
+  naming Ahmet Hussein and Tonja Hussein are simply this resto-mod's real owner/commissioner giving a
+  testimonial — unrelated to which car is on the homepage hero, not evidence of a shared identity.
+
+- **Pink Aston Martin DB6 race car — new build to feature.** Content received 2026-09-08. **Crashed
+  at La Carrera Panamericana in 2022.** DPM carried out body repairs including a brand new door
+  fabricated in-house, then finished the car in pink at the client's request, to stand out at the next
+  race — **due to race again**, which makes this a live, ongoing story rather than a closed one (worth
+  checking with David closer to publish whether the race has happened/result is known). Also got the
+  front page of _Car Goes_ (car magazine — confirm exact title when writing copy, transcript name may
+  be approximate) and a radio interview was done. Strong editorial story — good candidate for a
+  longer-form build page rather than a grid entry.
+  Photos: https://share.icloud.com/photos/0764SxxA2rtd4-DCsAev4bMNA
+- **Red P1800 restoration — new build page, video-mismatch bug now RESOLVED and FIXED.** Content
+  received 2026-09-08, then corrected twice by David in the same exchange — capturing the corrected
+  version: distinct from the Candy resto-mod P1800 above and from the "two P1800s for same client"
+  pair below — **DPM now has at least three separate P1800 builds to track**, keep them clearly
+  distinguished in copy/URLs (colour or client name in the slug, not just "p1800"). Full body
+  restoration done by DPM; mechanical and trim work done by another firm (so, unlike the resto-mod,
+  this one is not a full in-house build — say so accurately). **Over 1,300 hours of labour in body
+  and paint.**
+  **The video bug — confirmed and fixed, 2026-09-08.** David confirmed directly: chassis 26282 (the
+  Candy Red P1800 already live on the homepage and its own page) has no film. The "37:32 minute film"
+  claim on that car was wrong, appeared in 6 places across `home.html` and `volvo-p1800.html`, and has
+  been **removed from all of them** (see the `data-note` correction markers left in place at each
+  spot). It likely belongs to this Red P1800 instead, but that is not confirmed — don't embed it on
+  this build's page until David says so explicitly.
+  Photos: https://share.icloud.com/photos/0c2iKjXCZYDtWkw5ZaXymVV1w
+- **Pearl White P1800 — new build, content received 2026-09-08.** A fourth distinct P1800 build (see
+  the naming/slug warning on the Red P1800 above — this makes it more pressing). Ongoing restoration,
+  now in the reassembly stage after an in-depth restoration. Every single part refurbished, all new
+  body panels. **1,300 hours to date** (David used the same "1,300 hours" figure as the Red P1800 —
+  worth double-checking these are two genuinely separate figures and not one carried over by mistake
+  before publishing both). Custom pearl white colour commissioned by the client. Single-piece bumper
+  conversion and power-steering conversion — both worth naming as bespoke engineering work, not just
+  paint. In-progress build, same framing note as the Bentley S3 and rare Volvo: show it as "restoration
+  in progress," not a finished-car showcase.
+  Photos: https://share.icloud.com/photos/0aeBzHWh8jSVh6Kd7wcH8f8Mg
+- **Rare Volvo currently in the workshop** — near-complete full restoration, unique (no other example
+  restored to this level), "hideous but rare," once owned by a famous singer (name not given in the
+  meeting — ask David). Not yet finished, so this may need to sit as "in progress" rather than a
+  completed build page.
+- **Two P1800s built for the same client** — both won show awards. Owner is sending over the show
+  names and awards; don't write copy claiming specific awards until that arrives.
+- **Bentley (already on site, finished build)** — professionally filmed YouTube video exists, needs
+  linking in. Confirmed by David, 2026-09-08: this is the finished-car video —
+  https://youtu.be/JpztIam_ARE?si=d3p1GH2pm4_KISQr
+- **Bentley S3 1964 — new build, ongoing restoration, content received 2026-09-08.** Same model as
+  the finished Bentley above but a distinct, separate build — currently in the shop, not complete.
+  Over 1,000 hours of hand-crafted metalwork so far; all new panels made by hand in-house. Chassis is
+  currently being rebuilt ahead of mating body and chassis back together for final prep and paint.
+  Chassis number to follow from David. Two iCloud photo sets supplied:
+  - Metalwork and body prep: https://share.icloud.com/photos/0b3yDJOCfdAsJO7DXYn_eelSQ
+  - Chassis rebuild: https://share.icloud.com/photos/056tY5Hd4D_sVvigD2nsnkbhQ
+
+  David's request for how to present it: **show before images alongside the raw metalwork** so the
+  page communicates the depth of work involved — this is an in-progress build, so the page should be
+  framed as "restoration in progress," not a finished-car showcase (same caveat as the rare Volvo
+  below).
+
+- **262** — likely the T. Green replacement. Chassis number to be sent over by David.
+- **Porsche 356 SC restoration — new build, content received 2026-09-08.** Not mentioned in the
+  original review meeting; came in as a standalone email. DPM did a full body restoration and
+  mechanical rebuild (David's wording was "might mechanical rebuild" — likely "minor," confirm before
+  writing copy). Customer refitted the engine and trim themselves to complete the build. Finished
+  with some subtle modifications (unspecified — ask David what, if it's worth naming on the page).
+  Photos: https://share.icloud.com/photos/05b8-dNtrNEZxOfi10y81Tmgg
+
+### Site architecture / IA changes
+
+- **Build library page** — a browse-all view sitting _above_ individual build pages in the hierarchy.
+  This is new: the current prototype doesn't have this level (`open-questions.md` item 6 was "which
+  6–10 builds to feature," this answers the container they'd sit in). Maps onto the platform's
+  `[slug]` dynamic-route pattern — one collection page, N individual build pages under it.
+  **Design directive, Ricky 2026-09-08: it must not read as a shop/product grid.** A flat card grid of
+  photos + names is the e-commerce default and is explicitly what David/Ricky want to avoid here — the
+  clientele are buying craft and provenance, not browsing a catalogue to purchase. Needs inspiration
+  research before designing — the existing `research/` folder in this session already has the teardown
+  method (eaglegb.com, thorntonrestorations.com, halcyon.works were all pulled apart this way); worth
+  widening that search specifically for library/archive/index pages rather than homepages, since none
+  of the three original references were audited for how they present a multi-build collection.
+  Ties directly to `synthesis.md`'s auction-lot-page framing already in this session — a lot list
+  (RM Sotheby's, Bonhams, Gooding & Co.) is a closer visual model than a shop grid and is already the
+  chosen reference point for individual build pages; the library page should probably extend that
+  same language rather than invent a second one.
+- **Homepage: rotating featured-build selection**, client-editable so David can swap which builds are
+  featured to keep the homepage fresh. This is new scope beyond the current two-page prototype — needs
+  a real CMS/content mechanism, not a static homepage section. Worth scoping as part of the "real
+  build" phase (see item 3 above, workshop/contact page split) rather than bolting onto the prototype.
+- **In-house vs. outsourced work**: confirmed — no need to be specific about which parts are
+  outsourced (trim, etc.). Shop's message stays "full restoration," doesn't advertise standalone
+  servicing.
+- **Insurance/accident work stays off the site entirely** — this resolves `open-questions.md` item 3.
+  David's own reasoning: other big firms in this space don't advertise it either, so it's a category
+  convention, not just a DPM preference.
+
+### Workshop page
+
+- Wants **workshop action photos**: welding, metalwork, general in-progress shots. Explicitly _not_
+  build-specific — atmosphere and craft, not "here's car X being welded." Feeds directly into the
+  workshop-page direction already logged in item 3 above (hero'd with the new-unit film, this content
+  sits below it).
+- **Ricky to send camera photos** for this — action on us, not David.
+
+### Next steps (who owes what)
+
+- David: **separate email per build**, with that build's content/photos.
+- David: **iCloud photo album for the P1800 resto-mod** specifically (richest single build, gets its
+  own page — see above).
+- David: **workshop action photos** — wait, this one is Ricky's action (see above), listed here for
+  visibility since it's in the same "next steps" batch as David's items.
+- David: **vector/high-res logo file** — this is the same ask already open in `open-questions.md`
+  item 2 ("does an original AI/EPS exist?"); nothing new here, just confirmed as still outstanding.
+- Ricky: **invoice to follow once pages are near complete.**
+
+---
+
 ## 4. Deferred / smaller
 
 - **Directory sweep at cutover.** The NEC exhibitor listing still carries DPM's old address and phone

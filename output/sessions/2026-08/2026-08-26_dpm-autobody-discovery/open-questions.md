@@ -31,8 +31,13 @@
   hidden here", a blank reads as deliberate. Metadata including GPS is stripped by default.
   Verified on the real library: the plate came back rank-1 at 0.87 on the P1800 whole-car shot.
   See that folder's README.
-- **The 2,000-photo P1800 portfolio** — confirm it is included in the iCloud link. It is the single
-  richest source for a real lot page.
+- ~~**The 2,000-photo P1800 portfolio** — confirm it is included in the iCloud link.~~ **RESOLVED
+  2026-09-08:** David sent a dedicated album for chassis 26282 (the Candy Red car, wire wheels, main
+  homepage photo): https://share.icloud.com/photos/067FIpe2yW62VqmZ8gK1TRk6w. He specifically asked
+  for underside shots to be included from it. **Also resolved in the same message: chassis 26282 has
+  no restoration film** — the "37:32 minute film" claim on `home.html`/`volvo-p1800.html` was wrong
+  and has been removed (see `BACKLOG.md` item 5, Red P1800 entry). It likely belongs to the Red P1800
+  build instead, unconfirmed.
 
 ## Blocking — need answers from David before Phase 3 prototypes
 

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=dpm-autobody",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "ignoreCommand": "cd ../.. && npx turbo-ignore dpm-autobody --fallback=HEAD^1",
+  "framework": "nextjs"
+}
