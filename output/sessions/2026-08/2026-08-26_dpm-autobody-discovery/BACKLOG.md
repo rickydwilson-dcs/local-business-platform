@@ -191,20 +191,17 @@ album lands, except the pure copy fixes noted inline.
   build (it's the "resto-mod," distinct from the concours-correct restorations elsewhere on site).
   Photos: https://share.icloud.com/photos/005auHRyCY3Uwr52m5ceM3Zgg
 
-  **This is almost certainly the same car as chassis 26282, now with stronger evidence — David's
-  follow-up, 2026-09-08.** David wrote separately about "chassis 26282 — the candy red one with wire
-  wheels (main photo on the Home Screen)," said it has **no video** (see the Red P1800 entry above —
-  confirmed and fixed), and gave a **second, larger iCloud album** for it:
-  https://share.icloud.com/photos/067FIpe2yW62VqmZ8gK1TRk6w — "I believe you already have an
-  album/page associated for it," which is correct (`volvo-p1800.html`). He asked specifically for
-  **underside shots** to be included, to show the depth of the restoration — the P1800 page's own
-  copy already gestures at this ("the underside" is named in the homepage's description of what's
-  documented on the full page), so this is a content addition to an existing section, not a new one.
-  Separately, `home.html`'s testimonials section already names **Ahmet Hussein and Tonja Hussein**
-  as two of its three restoration-client quotes — the same first names as this resto-mod's
-  owner/commissioner, which corroborates (without fully confirming) that 26282 and 23925 are the same
-  car under two different chassis-number transcriptions, not two different cars. Still not reconciled
-  — ask David directly which number is correct before it's repeated on a new page.
+  **CONFIRMED a different car from chassis 26282 — David, 2026-09-11: "Must be a different one.
+  This is the Resto mod."** Resolves the discrepancy raised after his separate note about chassis
+  26282 — DPM has **two distinct Candy Red P1800s**, not one car under two transcribed chassis
+  numbers: this resto-mod (23925, Tonja/Ahmet, wire wheels, full body/paint/trim mods) and the
+  already-live `volvo-p1800.html` car (26282, no video, main homepage photo, David's separate iCloud
+  album at https://share.icloud.com/photos/067FIpe2yW62VqmZ8gK1TRk6w with a request for underside
+  shots — unchanged, still pending). **Both need to read as clearly separate cars** — the earlier
+  slug/naming-collision warning for the P1800s now applies with more force than "possible duplicate,"
+  since these are two confirmed-real, confirmed-different Candy Red cars. `home.html`'s testimonials
+  naming Ahmet Hussein and Tonja Hussein are simply this resto-mod's real owner/commissioner giving a
+  testimonial — unrelated to which car is on the homepage hero, not evidence of a shared identity.
 
 - **Pink Aston Martin DB6 race car — new build to feature.** Content received 2026-09-08. **Crashed
   at La Carrera Panamericana in 2022.** DPM carried out body repairs including a brand new door
