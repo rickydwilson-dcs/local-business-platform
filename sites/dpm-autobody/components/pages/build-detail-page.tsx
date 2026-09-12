@@ -602,6 +602,7 @@ function PhotoGrid({ photos, columns = 2 }: { photos: BuildPhoto[]; columns?: 2 
               src={photo.src}
               alt={photo.alt ?? ''}
               fill
+              quality={58}
               sizes="(min-width:64rem) 33vw, (min-width:40rem) 50vw, 100vw"
               className="object-cover"
             />
@@ -744,6 +745,7 @@ function BuildVideoLinksSection({ fm, no }: { fm: Build; no: string }) {
                 src={`https://i.ytimg.com/vi/${link.id}/hqdefault.jpg`}
                 alt={`${link.label} — opens on YouTube`}
                 fill
+                quality={45}
                 sizes="(min-width: 640px) 33vw, 100vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
@@ -784,6 +786,7 @@ function EnquiriesSection({ fm, no }: { fm: Build; no: string }) {
             src={fm.heroImage}
             alt=""
             fill
+            quality={58}
             sizes="100vw"
             className="scale-[1.08] object-cover object-[50%_40%] brightness-[1.14] saturate-[1.06]"
           />
@@ -1130,6 +1133,7 @@ function createBuildMdxComponents(
               src={src}
               alt={alt ?? ''}
               fill
+              quality={58}
               sizes="(min-width:62rem) 60vw, 100vw"
               className="object-cover"
             />
@@ -1217,6 +1221,7 @@ function createBuildMdxComponents(
               src={plaque.image}
               alt={plaque.alt ?? ''}
               fill
+              quality={72}
               sizes="100vw"
               className="scale-[1.03] object-cover object-[50%_44%] brightness-[1.1] saturate-[1.06]"
             />
@@ -1365,6 +1370,7 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
               alt={fm.heroImageAlt ?? `${fm.title} — photographed by DPM Autobody`}
               fill
               priority
+              quality={72}
               sizes="100vw"
               className="scale-[1.08] object-cover object-center brightness-[1.35] saturate-[1.15]"
             />

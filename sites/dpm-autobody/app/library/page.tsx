@@ -154,6 +154,7 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
             src={build.heroImage}
             alt={`${build.title}, DPM Autobody restoration.`}
             fill
+            quality={45}
             sizes="(min-width: 40rem) 15rem, 100vw"
             className="object-cover saturate-[1.08] contrast-[1.05] brightness-[1.1]"
           />

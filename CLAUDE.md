@@ -120,6 +120,27 @@ The theme system exists so sites can be re-branded without touching component co
 - A `<video autoPlay>` fetches real data the moment it mounts, **regardless of `preload="metadata"`** — the browser must start buffering to honour autoplay, so `preload` only controls behaviour when autoplay is absent. A page with several background-video panels below the fold (e.g. a portfolio/work-stack section) will eagerly download all of them on load even though the visitor may never scroll that far: DCS's homepage had 7 such videos totalling 9.7MB, all fetched immediately, which is what a Lighthouse mobile audit's throttled-4G simulation was measuring when it scored LCP at 4.3s despite the actual LCP element being server-rendered text with nothing to do with video. Gate loading behind an `IntersectionObserver` instead — render the `poster` only, set `src` and call `.play()` once the panel nears the viewport — see `sites/dcs/components/home/lazy-video.tsx`. This cut that page's payload from 10.5MB to ~700KB.
 - A third-party `<link rel="stylesheet">` (e.g. a Google Fonts icon-font URL) placed in the root layout's `<head>` is render-blocking on **every route that layout covers**, even ones that never use it. DCS's Material Symbols stylesheet lived in `app/layout.tsx` and cost ~800ms of Lighthouse's estimated LCP/FCP savings on the homepage, which uses none of those icons — icon fonts elsewhere in the site do use it, but nothing above the fold needs it synchronously. Load it after mount from a small client component instead (insert the `<link>` via `document.head.appendChild` inside `useEffect`) — see `sites/dcs/components/material-symbols-font.tsx`. It still must be a real `<link>`, not a CSS `@import` — Tailwind's `@tailwind` expansion buries an `@import url()` mid-file and the browser silently ignores it per spec. The fix here is _when_ the link loads, not _how_.
 
+### Fonts
+
+- `next/font/google`'s `weight` accepts only a discrete literal, an array of them, or `'variable'`
+  — there is no bounded-range syntax (`wght@200..600` from a raw Google Fonts URL has no
+  equivalent), confirmed against the package's own `.d.ts`. A `weight: 'variable'` font downloads
+  its _entire_ default weight axis regardless of which weights the site actually uses, which can
+  make fonts the single largest asset category on a page — 229 KB across 3 families on
+  `dpm-autobody`'s homepage, more than JS or images combined, found via a Lighthouse audit
+  (September 2026). Fix by switching to the exact discrete weight list the site uses (grep every
+  `font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)` class across
+  `.tsx`/`.mdx` first) — a missing weight doesn't error, it silently falls back to a synthetic
+  (browser-faked) bold/thin instead of the true drawn one, so re-run the grep before adding any
+  new weight class.
+- `axes: [...]` on a `next/font/google` call (e.g. `['opsz']` for Fraunces/Newsreader's
+  optical-size axis) can only be combined with `weight: 'variable'` — pairing it with a discrete
+  `weight` throws a hard build error ("Axes can only be defined for variable fonts when the weight
+  property is nonexistent or set to `variable`"). So converting a variable-weight font to a
+  discrete list (see above) means giving up that axis too, not just narrowing the weight range.
+  Confirmed by a failed `dpm-autobody` production build; spot-checking the site's real pages
+  afterward found no visible regression from losing the opsz interpolation.
+
 ### Tailwind Content Globs
 
 - Never use `packages/themes/**/*.{ext}` — the `**` descends into `node_modules/` causing 18+ minute builds. Use scoped globs: `packages/themes/*/*.{ext}` and `packages/themes/*/components/**/*.{ext}`.
