@@ -81,6 +81,7 @@ import type { Build } from '@/lib/content';
 import type { BuildCaption, BuildPhoto, BuildPhotoSection } from '@/lib/content-schemas';
 import { ADDRESS, BUSINESS_EMAIL, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { SourcingGapNotice } from '@/components/sourcing-gap-notice';
+import { Play } from 'lucide-react';
 
 const TEXT_SHADOW_SOFT =
   '[text-shadow:0_1px_24px_rgba(11,11,12,0.92),0_1px_4px_rgba(11,11,12,0.7)]';
@@ -703,6 +704,71 @@ function BuildVideoSection({ fm, no }: { fm: Build; no: string }) {
   );
 }
 
+/**
+ * Video links chapter — a build's `videoLinks` (lib/content-schemas.ts) rendered as thumbnail
+ * cards that open the video on YouTube, rather than an embedded player. Chosen over `video` for
+ * the resto-mod's three-part restoration video, at Ricky's direction 2026-09-12: it is raw,
+ * unedited footage David shot himself, and a straight embed oversells it — a link with the real
+ * thumbnail sets the right expectation before anyone clicks through. Thumbnails come from
+ * `i.ytimg.com` (YouTube's own thumbnail CDN, allow-listed in next.config.ts's `img-src`) rather
+ * than any locally-hosted still, since none exists per video and the real YouTube thumbnail is
+ * one fewer asset to source or keep in sync.
+ */
+function BuildVideoLinksSection({ fm, no }: { fm: Build; no: string }) {
+  if (!fm.videoLinks?.length) return null;
+
+  // Tailwind's static scanner needs a complete, literal class name — not a runtime-interpolated
+  // one (`sm:grid-cols-${n}` compiles to zero CSS, the same class of bug the root CLAUDE.md's
+  // Tailwind notes document) — so the column count is a lookup, not a template string.
+  const GRID_COLS: Record<number, string> = {
+    1: 'sm:grid-cols-1',
+    2: 'sm:grid-cols-2',
+    3: 'sm:grid-cols-3',
+  };
+  const gridColsClass = GRID_COLS[Math.min(fm.videoLinks.length, 3)];
+
+  return (
+    <div className={PAGE}>
+      <ChapterBand no={no} kind="On film" />
+      <div className={`grid gap-5 pt-7 pb-[clamp(3rem,8vh,5rem)] ${gridColsClass}`}>
+        {fm.videoLinks.map((link) => (
+          <a
+            key={link.id}
+            href={`https://www.youtube.com/watch?v=${link.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block"
+          >
+            <div className="relative aspect-video w-full overflow-clip bg-surface-muted">
+              <Image
+                src={`https://i.ytimg.com/vi/${link.id}/hqdefault.jpg`}
+                alt={`${link.label} — opens on YouTube`}
+                fill
+                sizes="(min-width: 640px) 33vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-[rgba(11,11,12,0.24)] transition-colors duration-500 group-hover:bg-[rgba(11,11,12,0.1)]" />
+              <span className="absolute inset-0 grid place-items-center">
+                <span className="grid h-14 w-14 place-items-center rounded-full border border-[rgba(232,228,220,0.5)] bg-[rgba(11,11,12,0.55)] text-surface-foreground transition-colors duration-500 group-hover:border-surface-foreground">
+                  <Play
+                    className="h-5 w-5 translate-x-[1px]"
+                    aria-hidden="true"
+                    fill="currentColor"
+                  />
+                </span>
+              </span>
+            </div>
+            <p className="mt-3 text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-surface-muted-foreground transition-colors duration-500 group-hover:text-surface-foreground">
+              {link.label}
+              <span className="sr-only"> (opens on YouTube in a new tab)</span>
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function EnquiriesSection({ fm, no }: { fm: Build; no: string }) {
   const workshop = [ADDRESS.locality, ADDRESS.region].filter(Boolean).join(', ');
   /** `.contact__rows a, .contact__rows p` — one hairline-ruled row each, Newsreader, light. */
@@ -1270,7 +1336,12 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
    * hardcoded 06 would not.
    */
   const videoNumber = fm.video ? String(counter + 1).padStart(2, '0') : undefined;
-  const enquiriesNumber = String(counter + (fm.video ? 2 : 1)).padStart(2, '0');
+  const hasVideoLinks = Boolean(fm.videoLinks?.length);
+  const videoLinksNumber = hasVideoLinks
+    ? String(counter + (fm.video ? 2 : 1)).padStart(2, '0')
+    : undefined;
+  const trailingChapters = (fm.video ? 1 : 0) + (hasVideoLinks ? 1 : 0);
+  const enquiriesNumber = String(counter + trailingChapters + 1).padStart(2, '0');
 
   const accentStyle = {
     '--build-accent': fm.accent?.base ?? 'var(--color-brand-primary)',
@@ -1417,6 +1488,9 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
 
       {/* ============ The film — only for a build with a confirmed video ==================== */}
       {videoNumber && <BuildVideoSection fm={fm} no={videoNumber} />}
+
+      {/* ============ Video links — link-out cards, for raw/multi-part footage =============== */}
+      {videoLinksNumber && <BuildVideoLinksSection fm={fm} no={videoLinksNumber} />}
 
       {/* ============ Enquiries — the page's closing chapter, above the shared footer ======= */}
       <EnquiriesSection fm={fm} no={enquiriesNumber} />
