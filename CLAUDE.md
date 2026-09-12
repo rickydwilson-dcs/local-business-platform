@@ -182,6 +182,7 @@ npx tsx tools/create-site-from-project.ts --project [project-file.json]
 - If the port is occupied, identify which site/project owns it — do NOT kill the process without confirmation
 - If Turbopack causes PostCSS or worker errors in dev, retry with `--webpack` flag: `npm run dev -- --webpack`
 - Confirm the server is reachable with `curl -s http://localhost:3000` before reporting it as running
+- When restarting a server to pick up a rebuild (e.g. before re-verifying a fix), check that `pnpm run start`/`dev` actually bound the port — a stale process from earlier in the session can still hold it, in which case the new command fails with `EADDRINUSE` and exits immediately while the old build keeps quietly answering every request. `curl` alone won't catch this (the old server still returns 200); check the log output for the `EADDRINUSE` error, or confirm the listening PID changed (`lsof -i :<port> -sTCP:LISTEN`) after restart. Hit exactly this on `dpm-autobody` (September 2026): a background `pnpm run start` failed silently, and every "verification" screenshot and Lighthouse run afterward was unknowingly testing the pre-fix build.
 
 ---
 

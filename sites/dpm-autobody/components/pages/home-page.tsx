@@ -73,12 +73,24 @@ function LayerImage({ image, filter }: { image: LotImage; filter: 'plate' | 'res
       alt={image.alt}
       fill
       priority={image.priority}
-      // Explicit hero quality — this is a site-local component, not one of the shared
+      // Explicit quality by role — this is a site-local component, not one of the shared
       // core-components hero components that already set this (see e.g. hero-section.tsx),
       // so it was falling back to next/image's own implicit default (75) instead of the
-      // platform's established hero convention (72, already in next.config.ts's `qualities`
-      // allow-list) — found via a Lighthouse audit, 2026-09-12.
-      quality={72}
+      // platform's established convention (next.config.ts's `qualities` allow-list) —
+      // found via a Lighthouse audit, 2026-09-12. Only the single priority-loaded layer
+      // (the P1800 hero's macro image) is the LCP-critical one and gets hero quality (72);
+      // every other layer here (macro/resolve/resolve2 on every other lot, and this same
+      // lot's own resolve/resolve2) is a lazy-loaded, below-the-fold scroll-reveal photo.
+      // Went through content quality (58) first, but a follow-up Lighthouse pass still
+      // flagged the P1800's own resolve2 layer for real avoidable weight there too, so
+      // dropped these lazy layers to 50 instead (already in the platform's `qualities`
+      // allow-list, precedented on npracing-v1) after confirming no visible loss at zoom
+      // on the same flagged image — wire-wheel spokes and paint reflections stayed crisp.
+      // Lighthouse's own re-compression estimate still wants roughly this much again even
+      // at 50 (its heuristic target is far below what looks acceptable on a full-bleed
+      // photo at this display size); stopping here rather than chasing the score further
+      // into visibly-softer territory for a large, unmasked reveal image.
+      quality={image.priority ? 72 : 50}
       sizes="100vw"
       style={image.vars}
       className={`object-cover ${IMG_POSITION} ${filter === 'plate' ? PLATE_FILTER : RESOLVE_FILTER}`}
