@@ -59,6 +59,15 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   text-legibility area behind the title. Now `brightness-[1.35] saturate-[1.15]` with lighter scrim
   opacities (see the component's inline comment at the hero). If a future build's hero still reads
   too dark, this shared filter/scrim is the first thing to check, not a per-build fix.
+- **Mobile nav is a real hamburger menu, not the prototype's scroll-triggered pill — changed
+  2026-09-12.** The approved prototype's mobile pattern (a fixed "Contents" pill fading in at the
+  bottom of the viewport once the hero scrolled out of view) was flagged by Ricky as unclear:
+  invisible until you scroll, and its translucent dark fill blended into the page. Replaced in
+  `components/site-header.tsx` with a standard always-visible hamburger button and a full-screen
+  panel, following the same portal-to-`document.body`/Escape-to-close/body-scroll-lock pattern
+  already established on NP Racing (`sites/npracing-v1/components/site-nav-mobile.tsx`). The phone
+  number moved into this panel too — it no longer appears in the collapsed mobile header bar at
+  all, only inside the menu and in the always-visible desktop nav (≥896px).
 - **`sourcingGaps` frontmatter field** (`lib/content-schemas.ts`) flags facts a build's page
   genuinely doesn't have yet — rendered as a visible amber "Needs sourcing from David" notice
   (`components/sourcing-gap-notice.tsx`) on both the library card and the build page. Use this
@@ -96,16 +105,20 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   (frontmatter says `completed`, the approved prototype's own copy for it says still in the
   workshop — one of these is wrong). Chase these with David before removing the corresponding
   `sourcingGaps` entries.
-- **Homepage rotating-featured-build mechanism** — not built; the homepage currently shows a
-  static selection. Confirmed 2026-09-11: this does **not** need a client-editable admin
-  capability — Ricky and Claude make homepage changes directly (editing config/frontmatter,
-  redeploying), David never touches it. Scope any implementation accordingly; no CMS/admin UI
-  work is needed here.
+- **No homepage rotating-featured-build mechanism will be built — closed, 2026-09-12, not just deferred.** Ricky's decision: the homepage's four featured cars will be updated by hand (editing `home-page.tsx`/frontmatter directly, then redeploying) whenever the selection should change, occasionally rather than on a schedule. Do not propose or scope a CMS/admin/rotation feature for this — there is no such feature planned.
 - **Contact form is not wired up** — `site.config.ts`'s `features.contactForm` flag is still
-  `false`.
-- **Workshop page's video hero** — not built; the film has not been delivered yet.
-- **Known MEDIUM/LOW visual-fidelity follow-ups**, deliberately left open to stop iterating past
-  diminishing returns (full list in the yolo-brief's "Completed" section): P1800 headline
+  `false`. Blocked on domain access: Ricky doesn't yet have the access needed to verify DPM's
+  sending domain with Resend (`RESEND_FROM_EMAIL` needs a domain verified at
+  resend.com/domains — see root `docs/standards/security.md`'s Environment Variables section).
+  Not a coding task until that access exists.
+- **Workshop page's hero will not carry a video — closed, 2026-09-12, not just deferred.** Ricky's
+  decision: no film is planned; the hero will instead be updated with different/better photography
+  when it's available. Do not scope a video-embed build for this page (the `BuildVideoSection`
+  pattern added for individual builds — see `components/pages/build-detail-page.tsx` — has no
+  workshop-page equivalent to build). When new hero photography arrives, it's a straightforward
+  swap of `HERO_IMAGE` in `app/workshop/page.tsx`, not a structural change.
+- **Known MEDIUM/LOW visual-fidelity follow-ups on the two flagship build pages**, next up per
+  Ricky's direction 2026-09-12 (full list in the yolo-brief's "Completed" section): P1800 headline
   line-breaks don't exactly match the prototype; the P1800 plaque photo and one E-type pairing
   figure aren't full-bleed like the prototype; hero image crop/zoom differs slightly on a few
   panels; a portrait "trophy" photo on the E-type page is center-cropped in a 3:2 box instead of
@@ -113,6 +126,23 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   dimensions); minor social-icon glyph style (outline vs. filled) mismatch; a scroll-progress rail
   and film-grain overlay from the prototype were deliberately never ported (documented scope
   decisions, not defects).
+
+## Legal pages
+
+`/privacy-policy` and `/cookie-policy` existed since the base-template scaffold but were never
+restyled — both were byte-identical to `base-template`'s own generic versions until 2026-09-12.
+This wasn't just a fidelity gap: `bg-surface-subtle` (used throughout for card fills) has no
+override in this site's `theme.config.ts`, so it fell back to the theme-system's light default
+(`#f9fafb`, near-white), rendering a bright white "Contents" card on this all-dark site — a real
+visible bug, not a nitpick. Restyled both to the same page-head pattern as `/library` (eyebrow
+label, `font-heading` h1, `PAGE`-width container) using this site's real dark tokens
+(`surface-card`/`surface-card-border`) throughout; dropped the `Breadcrumbs` component and its
+wrapper bar (no other real DPM page uses a breadcrumb trail — the masthead's own back-link already
+covers this). Content (the GDPR/cookie boilerplate itself, with real `siteConfig`/`contact-info`
+data threaded through) was preserved as-is — this was a styling pass, not a content rewrite. If a
+future `bg-surface-subtle`/`surface-border` usage turns up anywhere else on this site, check
+`theme.config.ts` for an override before trusting it renders dark — the theme-system's light
+defaults are the trap.
 
 ## Tests
 
