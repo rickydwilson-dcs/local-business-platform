@@ -6,6 +6,16 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-12
+
+### Platform
+
+- **Documented a `frame-src` CSP gap inherited by every site from `base-template`: no video-embed allowance, only `vercel.live *.vercel.live`.** Discovered building out `sites/dpm-autobody`'s remaining build pages — a confirmed YouTube video credit had a schema field and had been approved by the client, but the embed was silently dropped by CSP with no visible error once a render path for it was finally added. Add `https://www.youtube-nocookie.com` to `frame-src` the first time a site embeds a video by iframe (as opposed to serving `<video>` directly from R2, which is the pre-existing `media-src` gotcha). Added to root `CLAUDE.md`'s CSP notes and `docs/standards/security.md`.
+
+### Sites
+
+- **DPM Autobody: every library build now has a real page.** The 8 builds that previously 404'd (frontmatter only) now render via `BuildDetailPage`'s existing thin-content fallback, wired to real photos from the prior session's R2 upload, with a new `sourcingGaps` field surfacing any still-missing facts as a visible on-page notice instead of a silent gap. Two duplicate library entries were also found and merged/removed in the process (a split "Rare Volvo"/Pearl White pair, and a P1800 double-listed under both its own build and a separate "pair, one client" lot). See `sites/dpm-autobody/CHANGELOG.md` for full detail.
+
 ## 2026-09-11
 
 ### Platform
