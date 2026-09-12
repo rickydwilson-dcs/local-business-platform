@@ -46,7 +46,7 @@ const TEXT_SHADOW = '[text-shadow:0_1px_28px_rgba(11,11,12,0.94),0_1px_4px_rgba(
 
 const IN_HOUSE = [
   'Panel work, fabrication, welding',
-  'Lead loading and metal finishing',
+  'Body levelling and metal finishing',
   'Primer, block work, guide coats',
   'Colour mixing and spraying',
   'Flatting, cutting and polishing',

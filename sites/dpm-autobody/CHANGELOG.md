@@ -47,6 +47,57 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
   by David: the plaques are fixed to the chassis, not riveted. Left the one unrelated reference to
   the factory Volvo identification plate (a different, genuinely riveted OEM part) untouched.
 
+### Backlog decisions closed
+
+- No homepage rotating-featured-build mechanism will be built — Ricky will update the four
+  featured cars by hand, occasionally, rather than on any kind of schedule or CMS.
+- The workshop page's hero will not carry a video — no film is planned; it will be updated with
+  different photography instead, when available.
+- Contact form wiring is blocked on domain access, not code — Ricky doesn't yet have what's
+  needed to verify DPM's sending domain with Resend.
+
+### Fixed a real bug: two legal pages and the 404 page were still base-template's generic scaffold
+
+- `/privacy-policy`, `/cookie-policy`, and `app/not-found.tsx` were still using base-template's
+  generic light-theme classes (`bg-surface-subtle`, `border-surface-border`, one literal
+  `bg-white`) — none of these tokens are overridden in this site's dark `theme.config.ts`, so they
+  fell back to the theme-system's light defaults and rendered as bright white cards on an
+  otherwise all-dark site. Not just a fidelity gap — a real, visible defect on three pages a real
+  visitor can land on. Restyled all three to the site's actual dark tokens and typography, matching
+  `/library`'s page-head pattern; content on the two legal pages was left as-is (a styling pass,
+  not a rewrite).
+
+### Mobile nav replaced with a real hamburger menu
+
+- The approved prototype's mobile nav (a fixed "Contents" pill fading in once you scrolled past
+  the hero) wasn't clear enough — invisible until you scrolled, and blended into the dark
+  background once it appeared. Replaced with a standard always-visible hamburger button and a
+  full-screen menu panel, matching the accessible pattern already used on NP Racing. The phone
+  number moved into the panel too, off the collapsed mobile header bar entirely. Social icons
+  (Instagram/Facebook/YouTube) sit below it in the panel.
+- The homepage's closing "One car, documented in full" link (which pointed at the P1800 Candy
+  build specifically) now reads "See even more of our work" and points at `/library` instead —
+  a better closing link than sending everyone to the same one car.
+- Removed the Bentley S3 Continental's small "whole car" establishing shot on the homepage —
+  genuinely a real, deliberate one-off from the approved prototype (verified), but it made that
+  section's first image read as a different size from the other three cars, none of which have
+  an equivalent. The same "whole car" photo still appears via the section's own scroll sequence.
+
+### Corrections and follow-ups from David's meeting transcript, 2026-09-07
+
+- **"Lead loading and metal finishing" → "Body levelling and metal finishing"** on the workshop
+  page — David's own confirmed terminology; DPM avoid lead loading where they can because it's
+  not as good as proper filler work.
+- **DB6 front-page coverage was a real, named local newspaper — _The Argus_** — not an
+  unconfirmed "car magazine." Copy updated on both the homepage and the build page; the
+  sourcing-gap entry for the title is resolved and removed.
+- **Added `videoLinks`**: thumbnail cards that link out to YouTube instead of embedding — the
+  right choice for the resto-mod's three-part restoration video, which is David's own raw,
+  unedited footage, not a professional cut. Wired into `p1800-candy-restomod.mdx` with all three
+  confirmed video ids.
+- The logo vector question is resolved — confirmed already the best file DPM have (this predates
+  this pass; see `c155f47d`, 7 September).
+
 ## 2026-09-11
 
 ### Real pages

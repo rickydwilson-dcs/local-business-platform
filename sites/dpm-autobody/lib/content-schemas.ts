@@ -132,6 +132,15 @@ const BuildVideoSchema = z.object({
 });
 
 /**
+ * A single external video to link out to (thumbnail + label), rather than embed on the page —
+ * see `videoLinks` below for when this is the right choice over `video`.
+ */
+const BuildVideoLinkSchema = z.object({
+  id: z.string().min(1, 'Video id is required for a video link'),
+  label: z.string().min(1, 'Video link label must not be empty'),
+});
+
+/**
  * `builds` MDX frontmatter schema.
  * Used to validate all files in content/builds/ once Phase 3 authors them.
  */
@@ -255,6 +264,14 @@ export const BuildFrontmatterSchema = z.object({
   accent: BuildAccentSchema.optional(),
 
   video: BuildVideoSchema.optional(),
+
+  /**
+   * External video links (thumbnail + label, opening on YouTube) rather than an embedded player.
+   * Use this instead of `video` when a build has multiple videos (the single `video` field has no
+   * multi-video form) or when the footage is raw/unedited and a straight embed oversells it —
+   * see the resto-mod's three-part restoration video for the reference case.
+   */
+  videoLinks: z.array(BuildVideoLinkSchema).optional(),
 });
 
 /**
