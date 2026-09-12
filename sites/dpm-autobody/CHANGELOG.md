@@ -83,6 +83,21 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
   section's first image read as a different size from the other three cars, none of which have
   an equivalent. The same "whole car" photo still appears via the section's own scroll sequence.
 
+### Corrections and follow-ups from David's meeting transcript, 2026-09-07
+
+- **"Lead loading and metal finishing" → "Body levelling and metal finishing"** on the workshop
+  page — David's own confirmed terminology; DPM avoid lead loading where they can because it's
+  not as good as proper filler work.
+- **DB6 front-page coverage was a real, named local newspaper — _The Argus_** — not an
+  unconfirmed "car magazine." Copy updated on both the homepage and the build page; the
+  sourcing-gap entry for the title is resolved and removed.
+- **Added `videoLinks`**: thumbnail cards that link out to YouTube instead of embedding — the
+  right choice for the resto-mod's three-part restoration video, which is David's own raw,
+  unedited footage, not a professional cut. Wired into `p1800-candy-restomod.mdx` with all three
+  confirmed video ids.
+- The logo vector question is resolved — confirmed already the best file DPM have (this predates
+  this pass; see `c155f47d`, 7 September).
+
 ## 2026-09-11
 
 ### Real pages

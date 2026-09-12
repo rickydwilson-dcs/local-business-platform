@@ -99,6 +99,17 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   exist. Uses `youtube-nocookie.com` — `next.config.ts`'s CSP `frame-src` had to be widened to
   allow it, since a plain `youtube.com`/`youtu.be` iframe is silently dropped by CSP with no visible
   error (same class of bug as the root CLAUDE.md's other CSP notes).
+- **`videoLinks` frontmatter field** — thumbnail link-out cards to YouTube, added 2026-09-12
+  (`BuildVideoLinksSection` in `build-detail-page.tsx`) as the alternative to `video` for a build
+  with more than one video, or raw/unedited footage a straight embed would oversell. First use:
+  the resto-mod's three-part restoration video (David's own footage, confirmed amateur, not
+  professional — meeting transcript, 2026-09-07). Thumbnails come from `i.ytimg.com`, YouTube's own
+  thumbnail CDN — this needs **two separate** allow-lists in `next.config.ts`, not one: the CSP
+  `img-src` directive, and `images.remotePatterns` for `next/image` itself. Missing either one
+  fails differently (CSP silently drops the image with no console error; a missing
+  `remotePatterns` entry throws a loud "Invalid src prop... hostname is not configured" runtime
+  error) — both were needed here, confirmed by hitting the second error live after fixing the
+  first.
 - **Homepage's No. 03 slot is the Aston Martin DB6 ("the pink one"), not the Jaguar Sea Green**,
   swapped 2026-09-12 at Ricky's request — DB6 is a finished, delivered car ("Finished and
   delivered", matching No. 01/02's framing) rather than an in-progress one. Jaguar Sea Green is

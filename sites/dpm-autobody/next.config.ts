@@ -62,6 +62,13 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
       },
+      // YouTube's own thumbnail CDN, for video-link cards (see BuildVideoLinksSection) — a
+      // separate allow-list from the CSP img-src directive above; both are required, next/image
+      // 404s a remote host that's only in one of the two.
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
     ],
     // Allow SVG images (safe for logos and icons)
     dangerouslyAllowSVG: true,
@@ -130,7 +137,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co; media-src 'self' *.r2.dev; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live https://www.youtube-nocookie.com; frame-ancestors 'none';`,
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co i.ytimg.com; media-src 'self' *.r2.dev; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live https://www.youtube-nocookie.com; frame-ancestors 'none';`,
           },
           // HSTS - enforce HTTPS for 1 year, include subdomains, allow preload
           {

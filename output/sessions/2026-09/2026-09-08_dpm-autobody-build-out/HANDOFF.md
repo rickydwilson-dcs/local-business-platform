@@ -1,5 +1,193 @@
 # DPM Autobody build-out — handoff
 
+**2026-09-12, later pass — supersedes the update below.** Since that note, a further round of small
+content fixes and one real feature (video link cards) landed, all sourced directly from David's
+7 September review-meeting transcript (Ricky shared it mid-session). **Status: ready-to-resume,
+about to push + deploy.** Nothing blocked, nothing half-applied. Working tree is uncommitted as of
+this note — see "Working tree" below — the plan for this exact moment is: commit, push `develop`,
+promote through the staircase to `main`.
+
+**Branch:** `develop`. **2 commits ahead of `origin/develop`, not yet pushed**
+(`58ed7cd3`, `eaf01cbb` — see the previous handoff section below for what they contain), **plus a
+further batch of uncommitted changes** (this pass) about to become a third commit.
+
+**Working tree — uncommitted, about to be committed:**
+
+```
+ CLAUDE.md                                                       |  1 +
+ docs/standards/security.md                                      |  1 +
+ output/sessions/2026-08-26_dpm-autobody-discovery/BACKLOG.md    | 15 +++--
+ sites/dpm-autobody/CHANGELOG.md                                 | 15 +++++
+ sites/dpm-autobody/CLAUDE.md                                    | 11 ++++
+ sites/dpm-autobody/app/workshop/page.tsx                        |  2 +-
+ sites/dpm-autobody/components/pages/build-detail-page.tsx       | 72 ++++++++++-
+ sites/dpm-autobody/components/pages/home-page.tsx               |  2 +-
+ sites/dpm-autobody/content/builds/aston-martin-db6-pink.mdx     |  3 +-
+ sites/dpm-autobody/content/builds/p1800-candy-restomod.mdx      | 11 ++++
+ sites/dpm-autobody/content/builds/porsche-356-sc.mdx            |  6 +-
+ sites/dpm-autobody/lib/content-schemas.ts                       | 17 +++
+ sites/dpm-autobody/next.config.ts                               |  9 +-
+```
+
+Also still untracked (deliberately, unchanged from every prior pass — see Traps in the superseded
+section below): `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/`.
+
+## What this pass did (2026-09-12, using David's 7 September meeting transcript)
+
+Ricky pasted the full transcript of his review call with David mid-session. Cross-referencing it
+against the live site surfaced both new facts and one correction to a fact this session had
+recorded wrong earlier the same day:
+
+1. **"Lead loading and metal finishing" → "Body levelling and metal finishing"** on the workshop
+   page (`app/workshop/page.tsx`) — David's own confirmed wording, explained on the call: DPM avoid
+   lead loading where they can because it isn't as good as normal filler work. This exact fix had
+   been sitting in `BACKLOG.md` since 8 September as "buildable now, no new assets needed" and was
+   simply never applied until now.
+2. **DB6's front-page coverage was _The Argus_, a real named local newspaper** — not the
+   uncertain "car magazine" the earlier transcript fragment ("the cargos... I think it's a
+   newspaper, probably") had left ambiguous. Updated on both the homepage's DB6 section and
+   `aston-martin-db6-pink.mdx`; removed the now-resolved `sourcingGaps` entry for it.
+3. **Added `videoLinks`** (`lib/content-schemas.ts`) — thumbnail cards that link out to YouTube
+   instead of embedding, rendered by a new `BuildVideoLinksSection` in `build-detail-page.tsx`.
+   Ricky's direction: the resto-mod's three-part restoration video is David's own raw, unedited
+   footage (confirmed on the call — "it's not a professional video, it's one that I did"), and a
+   straight embed would oversell it; a thumbnail + link sets the right expectation before anyone
+   clicks through. Wired into `p1800-candy-restomod.mdx` with the three already-known video ids
+   (`8Y2inpQzaJ4`, `RgkayNub9Ms`, `LVfZx4-4HRg`).
+   - **Hit a real two-part config gap building this**: YouTube's thumbnail CDN (`i.ytimg.com`)
+     needs allow-listing in **two separate places** — CSP `img-src` _and_ Next's own
+     `images.remotePatterns` — and they fail differently. Missing from CSP: silent (empty box, no
+     console error). Missing from `remotePatterns`: a loud build/runtime error naming the exact
+     hostname. Hit both in sequence, fixed both, documented the pattern in both this site's
+     `CLAUDE.md` and the platform's `docs/standards/security.md` / root `CLAUDE.md` so the next
+     site that adds a third-party thumbnail doesn't rediscover it from scratch.
+4. **Porsche 356 SC: confirmed "minor mechanical rebuild"** (Ricky confirmed directly, resolving
+   the "might/minor" transcription ambiguity) — updated frontmatter `scopeOfWork` and body copy,
+   removed the resolved `sourcingGaps` entry.
+5. **Logo vector — confirmed already resolved, no action needed.** This was raised as an open
+   question in this session's earlier research, but it turns out to predate this whole build-out:
+   commit `c155f47d` (7 September, the same day as the meeting) already replaced the traced
+   placeholder with David's real Pixelmator export. Nothing to do here; just corrected the
+   session's own understanding.
+6. **"262" identified and closed as a non-issue** — Ricky confirmed this was David referring to
+   the pink Aston Martin DB6, not a separate unidentified car. `aston-martin-db6-pink.mdx` already
+   exists and is live; there is no separate "262" build to chase or create. Updated
+   `output/sessions/2026-08-26_dpm-autobody-discovery/BACKLOG.md` (both mentions) to record this
+   and stop it resurfacing as an open item in future.
+7. **Drafted (not sent) an outstanding-actions email to David** — conversational output only, not
+   saved to a file anywhere. Final version asks for: workshop action photos; the specific facts
+   behind every live `sourcingGaps` amber notice (Bentley S3 1964 chassis, Bentley S3 Continental
+   chassis, Jaguar Sea Green's chassis/hours/actual current status, the resto-mod pair's second car
+   and awards, the Pearl White singer's name); and a general fact-check pass. If this needs
+   resending or Ricky wants it saved somewhere, it isn't currently in any tracked file — reconstruct
+   from this session's own conversation if needed, or ask Ricky whether he sent it as-is.
+
+**One important correction made mid-session, worth flagging so it isn't undone by mistake:**
+Ricky initially thought the "client rebuilt the car himself, hated it, and sold it quickly" story
+(from the transcript) belonged to the Jaguar Sea Green build, which would have meant that build
+needed the same "insufficient info, pull it" treatment as Aston Martin T. Green. **Ricky confirmed
+after re-reading that this story is actually about T. Green** (already removed from the site,
+correctly) **and is unrelated to the Jaguar Sea Green**, whose actual current status (finished vs.
+still in the workshop) remains a genuinely open `sourcingGaps` item — do not resolve it based on
+the T. Green story; they are two different cars.
+
+## Current state — verified 2026-09-12 (this pass)
+
+- `npx tsx scripts/validate-content.ts` → 10/10 valid.
+- `pnpm --filter dpm-autobody run type-check` and `run lint` → both clean.
+- A full `pnpm run build --webpack` (from `sites/dpm-autobody/`) → all 23 routes generate,
+  including all 10 build pages.
+- Visually verified in a real browser: the resto-mod's video-link cards render real YouTube
+  thumbnails (paint booth, "VOLVO RESTORATION PART 2" title card) with a play-button overlay, and
+  link out to the correct three video ids (checked via
+  `[...document.querySelectorAll('a[href*="youtube.com/watch"]')].map(a => a.href)` in-page,
+  not just by eye); DB6's "front page of _The Argus_" renders correctly, italicised; workshop
+  page's "Body levelling and metal finishing" confirmed live via `curl`.
+- **A local `next dev` process is running on port 3000** (PID 46030 at the time of this note) —
+  check `lsof -i :3000` before assuming the port is free.
+
+## What was NOT done
+
+- **Nothing from this pass is committed yet.** The plan, per Ricky's own instruction that prompted
+  this handoff, is: commit → push `develop` → promote through the staircase to `main`. If this
+  session ends before that completes, the working-tree diff above is the record of what's
+  uncommitted — do not lose it to an unrelated `git checkout`/`git reset`.
+- **The email to David has not been sent** — it was drafted conversationally and Ricky approved
+  the final wording, but sending it is Ricky's own action, outside this codebase.
+- **All the `sourcingGaps` facts the email asks for are still genuinely open** — Bentley S3 1964
+  chassis, Bentley S3 Continental chassis, Jaguar Sea Green (chassis + hours + actual status),
+  the resto-mod pair's second car + awards, the Pearl White singer's name. Do not fill any of these
+  in without an actual reply from David.
+- **Workshop action photos** (welding/metalwork atmosphere shots, not tied to one build) — asked
+  for in the email, not yet received or wired into the workshop page.
+- **The broader outstanding-actions list synthesised earlier this session** (from `BACKLOG.md`,
+  `open-questions.md`, `interview-david.md`) is still mostly open — Halcyon naming permission,
+  DNS/domain control for `dpmautobody.co.uk`, the actual photography commission (daylight hero
+  shots, macro under raking light), RP Automotive Photography's NEC 2023 licence, footage inventory
+  from David's brother, `e2e/smoke.spec.ts` coverage for the 8 newly-built routes. None of these
+  came up in the 7 September transcript specifically, so none were resolved by this pass.
+
+## Traps
+
+- **`interview-david.md`'s formal fact-by-fact verification standard is no longer the operating
+  assumption.** David directly told Ricky on the call that he likes the storytelling/narrative
+  license in the copy ("I quite like how you worded stuff... it sounds more professional"). Don't
+  re-flag the P1800 Candy "log" section's invented-but-plausible staff quotes as a problem needing
+  a formal interview — that concern was raised and explicitly withdrawn earlier this same session
+  after Ricky shared the transcript. The specific facts still tracked as `sourcingGaps` are a
+  different, narrower category (concrete details like chassis numbers) — those remain real gaps.
+- **"Aston Martin T. Green" and "Jaguar — Aston Martin Sea Green" are two unrelated builds** that
+  merely share the words "Aston Martin" — one because a client named/initialled "T. Green" owned a
+  real Aston Martin (removed from the site, insufficient info), the other because a Jaguar was
+  resprayed in a paint colour licensed from Aston Martin's own palette. See the correction note
+  above — this has already caused one mix-up this session; don't let it cause another.
+- **Dynamic Tailwind class strings don't compile** — caught and fixed live while building
+  `BuildVideoLinksSection`: an initial `` `sm:grid-cols-${n}` `` template literal compiled to zero
+  CSS (Tailwind's scanner needs a complete literal class name, not a runtime-interpolated one —
+  same class of bug as the platform's documented `min-[Xrem]:` gotcha). Fixed with a static
+  `Record<number, string>` lookup instead. If a future grid/column count needs to vary by data,
+  copy that lookup pattern rather than interpolating directly.
+- **`pnpm run build` (a manual production build) run while `next dev` is also running against the
+  same `.next` directory reliably corrupts the dev server's cache**, throwing
+  `ENOENT: routes-manifest.json` on every route until the dev server is restarted. Hit this
+  multiple times across this session. If a build is needed for verification, expect to restart
+  `next dev` afterward — this is not a new bug, just a recurring friction worth remembering.
+
+## Next step
+
+1. Commit this pass's working-tree diff (see "Working tree" above).
+2. Push `develop`, watch its CI (`gh run watch`).
+3. Merge `develop` → `staging`, push, watch its CI (three workflows: CI, E2E Tests, Regression
+   Watchdog).
+4. Open the PR `staging` → `main` (`main` is protected — never push it directly). Do not merge it
+   automatically; report the PR URL. (Ricky has, in this same session on prior rounds, then asked
+   for it to be merged once checks were green — confirm current instruction rather than assuming
+   silence means merge.)
+5. Once deployed: send the drafted email to David (Ricky's own action), and chase the remaining
+   `sourcingGaps` facts and workshop photos it asks for.
+
+## Open questions
+
+Unchanged from the previous handoff pass, still outstanding:
+
+- Pearl White P1800 — the singer's name (David couldn't recall it on the 7 September call either;
+  Ricky may decide to just drop the detail if it never surfaces).
+- The resto-mod's client pair — the second car and both cars' show names/award placings.
+- Bentley S3 1964 — chassis number.
+- Bentley S3 Continental — chassis number.
+- Jaguar Sea Green — chassis number, hours of labour, and its actual current status (completed vs.
+  still in the workshop — genuinely unresolved, see Traps above for what NOT to assume).
+- Pink Aston Martin DB6 — confirm current race status (still "due to race again"?) and the
+  pre-crash livery shown in its photos (inferred from the photo set, never stated outright).
+
+Resolved and no longer open (see "What this pass did" above for detail): the logo vector question;
+"262"; the Porsche 356 SC "might/minor" wording; the DB6 magazine/newspaper name; the Jaguar Sea
+Green / T. Green story mix-up.
+
+---
+
+# Superseded — earlier 2026-09-12 update (still accurate as history)
+
 **Status:** ready-to-resume. Every library build now has a real page; the only remaining work is
 chasing David for the facts already flagged as `sourcingGaps`, then promoting `develop` →
 `staging` → `main`. Nothing is blocked, nothing is half-applied.
@@ -15,7 +203,7 @@ This supersedes the previous version of this file (everything below "What this i
 resolve" through "Open questions" describes the R2-upload/video-resolution pass from earlier the
 same day, 2026-09-11 — still accurate as history, but the current state has moved well past it).
 
-## Commits this session, in order (none pushed)
+## Commits this session, in order (none pushed at the time this section was written)
 
 ```
 cb219454 fix(dpm-autobody): remove duplicate P1800 pair lot, lighten build hero images
@@ -30,220 +218,66 @@ deletion before the rest of the change was ready; `2853a326` is just the `p1800-
 delete, `cb219454` is the library/schema/hero-brightness follow-up. Both are real, neither is a
 mistake to squash away, just note it so it doesn't look like a duplicate accident.)
 
-Everything from `46f0ad91` back (the R2 photo upload, the Bentley video credit) was already pushed
-and described in the superseded handoff content below — unchanged.
+**Since this section was written, these commits were pushed and promoted all the way to `main`**
+(PR #79), and two further rounds shipped the same way: `d24464c1` (nav link + plaque wording) and
+a batch containing `58ed7cd3`/`eaf01cbb` (legal pages, 404 page, hamburger menu, homepage image
+consistency, closing link, menu socials) — the latter two are what's "2 commits ahead of
+`origin/develop`" in the top section of this file, still unpushed as of this note.
 
-## What this session did (2026-09-12, in order)
+## What this session did (2026-09-12, in order) — see git log for exact diffs
 
-1. **Merged the "Rare Volvo" and Pearl White P1800 library entries into one** (`19461e8d`) — the
-   approved prototype's `library.html` had them as two separate rows (No. 11 "Volvo, model to be
-   confirmed" / No. 12 "Pearl White"), but Ricky confirmed they're the same car. Removed
-   `volvo-tbc.mdx`, folded its singer-owned-it note into `p1800-pearl-white.mdx`'s `scopeOfWork`,
-   dropped `app/library/page.tsx`'s `LIBRARY_ORDER` from 12 slugs to 11. Also resolved the
-   "1,300 hours" question flagged in the prototype's own caution note — Ricky confirmed with David
-   that Candy Red, Red P1800, and Pearl White are three genuinely separate totals, not one figure
-   copied across builds; no content change needed for that part.
-2. **Changed the `/library` page's own hero copy** — "Every car that's passed through the
-   workshop." → "Some of the cars that have passed through the workshop.", and removed the
-   subtitle paragraph beneath it entirely, per Ricky's direction.
-3. **Gave all remaining builds a real `/builds/[slug]` page** (`22f7b80d`) — before this pass,
-   only `p1800-candy` and `etype-941pvo` had `pageStatus: built`; the other 9 had frontmatter only
-   and 404'd. Added `heroImage`/`galleryImages` (real R2 URLs from the prior session's 106-photo
-   upload) and a short MDX body to each, then flipped `pageStatus` to `built`. Did **not** invent
-   narrative content: the 9 thin builds rely on `BuildDetailPage`'s existing fallback path (a
-   build with no `- **Label:** value` list in its body gets an auto-generated "The record" fact
-   panel from frontmatter, and a flat `galleryImages` array gets an automatic trailing photo grid)
-   — this fallback already existed in the component, it was just never exercised until now.
-4. **Added a `sourcingGaps` frontmatter field + visible UI notice** (`lib/content-schemas.ts`,
-   `components/sourcing-gap-notice.tsx`) — an array of short strings rendered as an amber "Needs
-   sourcing from David" callout on both the library card and the build page. Replaces the previous
-   pattern of leaving a fact silently blank or burying a caveat in a code comment.
-5. **Found and fixed a real gap**: `bentley-s3-continental.mdx` has carried a confirmed `video`
-   field (YouTube id, confirmed by David 2026-09-08) since before this session, but nothing in
-   `BuildDetailPage` ever rendered `fm.video` — the confirmed credit was invisible even once the
-   page existed. Added `BuildVideoSection` (a `youtube-nocookie.com` embed) and widened
-   `next.config.ts`'s CSP `frame-src` to allow it — a plain `youtube.com`/`youtu.be` iframe is
-   silently dropped by CSP with no visible error, same class of bug the root `CLAUDE.md` already
-   documents for other embeds.
-6. **Swapped the homepage's No. 03 featured slot** from Jaguar Sea Green to the Aston Martin DB6
-   ("the pink one") — Ricky's direction: DB6 is a finished, delivered car, so it belongs in the
-   "Finished and delivered" framing No. 01/02 use, not the "still in our hands" framing Jaguar Sea
-   Green had. Jaguar Sea Green is still a library build, just no longer one of the homepage's four
-   featured cars. Rewrote the section's prose (facts only — crash, in-house door, pink respray at
-   owner's request — no invented detail) and picked macro/resolve photos from the DB6 album.
-7. **Removed a duplicate library entry** (`2853a326`/`cb219454`) — `p1800-pair-one-client.mdx`
-   described "two P1800s, one client, both won show awards" as its own lot, but Ricky confirmed the
-   resto-mod (`p1800-candy-restomod.mdx`, chassis 23925) is one of that pair — i.e. it was
-   double-listing a car already catalogued on its own. Deleted the duplicate file and its
-   `LIBRARY_ORDER` row; folded the pair/award fact into the resto-mod's own `sourcingGaps` instead.
-   **The second car in the pair is still not identified** — see Open questions.
-8. **Fixed hero image brightness** (`cb219454`) — `BuildDetailPage`'s shared top-hero filter
-   (`brightness-[1.1]`) and scrim gradients were tuned against the two flagship pages'
-   professionally lit prototype photography. Applied to the other builds' real, un-curated
-   workshop snapshots, Ricky found the car itself hard to make out. Bumped to
-   `brightness-[1.35] saturate-[1.15]` with lighter scrim opacities (see the inline comment at the
-   hero in `build-detail-page.tsx`).
+1. Merged the "Rare Volvo" and Pearl White P1800 library entries into one (`19461e8d`).
+2. Changed the `/library` page's own hero copy.
+3. Gave all remaining builds a real `/builds/[slug]` page (`22f7b80d`) using `BuildDetailPage`'s
+   existing thin-content fallback rather than inventing narrative.
+4. Added a `sourcingGaps` frontmatter field + visible UI notice.
+5. Found and fixed a real gap: `bentley-s3-continental.mdx`'s confirmed `video` field was never
+   rendered anywhere until this pass added `BuildVideoSection` + widened CSP `frame-src`.
+6. Swapped the homepage's No. 03 featured slot from Jaguar Sea Green to the Aston Martin DB6.
+7. Removed a duplicate library entry (`p1800-pair-one-client.mdx` — the resto-mod is confirmed as
+   one of that pair).
+8. Fixed hero image brightness (`brightness-[1.1]` → `brightness-[1.35] saturate-[1.15]`).
 
-## Current state — verified 2026-09-12
+Then, in further rounds the same day (each pushed/promoted separately, see above): 9. Header nav's "The Work" → `/library`; removed "rivet"/"riveted" wherever it described DPM's own
+plaques (David confirmed: fixed to the chassis, not riveted). 10. Restyled `/privacy-policy`, `/cookie-policy`, and the 404 page — all three were still
+base-template's generic scaffold with a real bug (`bg-surface-subtle` falling back to a
+near-white default on this all-dark site). 11. Replaced the mobile nav's scroll-triggered "Contents" pill with a real hamburger menu; moved
+the phone number into it; added social icons. 12. Removed the Bentley S3 Continental's small "whole car" establishing shot on the homepage
+(a genuine one-off in the approved prototype, but inconsistent in size vs. the other three
+cars); changed the homepage's closing link to "See even more of our work" → `/library`.
 
-- **10 build MDX files exist, all `pageStatus: built`** — confirmed by
-  `ls sites/dpm-autobody/content/builds/*.mdx | wc -l` → 10, and
-  `npx tsx scripts/validate-content.ts` → `10/10 valid`.
-- **`app/library/page.tsx`'s `LIBRARY_ORDER` lists exactly those 10 slugs**, confirmed by reading
-  the file directly (not assumed from the count matching).
-- **`pnpm --filter dpm-autobody run type-check`, `run lint`, and a full `run build --webpack`** all
-  passed clean after every change in this session, run repeatedly as changes landed — most recently
-  after commit `cb219454`.
-- **Visually verified in a real browser** (Claude in Chrome, not just curl 200s): homepage's No. 03
-  slot shows the finished pink DB6 with correct copy and a working link to
-  `/builds/aston-martin-db6-pink`; the DB6, Porsche 356 SC, and Bentley S3 1964 build pages all
-  render their hero image, the "Needs sourcing from David" notice (where set), the auto-record
-  fact panel, and the trailing photo grid; `bentley-s3-continental`'s video embeds and plays
-  (thumbnail confirmed loading, "DPM TV: 1963 BENTLEY S3 CONTINENTAL RESTORATION"); the thinnest
-  page (`p1800-pair-one-client`) was screenshotted **before** its removal and degraded gracefully
-  with no `heroImage` (plain dark hero, sourcing notice, no broken layout) — that page no longer
-  exists, but the fallback behaviour it exercised is unchanged and still used by other thin builds.
-  The library page's No. 02 (resto-mod) row was re-verified after the pair-lot removal and shows
-  the folded-in sourcing note correctly; No. 04 (the duplicate) no longer appears.
-- **An apparent "hero renders solid black" bug on `bentley-s3-1964` was investigated and ruled out**
-  as a stale/mistimed screenshot capture, not a real defect — confirmed by re-screenshotting
-  (showed the car correctly), a `zoom` capture of the same region (showed the car correctly even
-  when the full screenshot didn't), and a JS-side check of the `<img>` element's `naturalWidth`/
-  `naturalHeight`/`complete`/computed filter (all correct). Don't re-investigate this from scratch
-  if it resurfaces — re-screenshot first.
-- **Not re-verified against a fresh `git clone`** — all checks above ran against this working
-  tree, which also has 106 R2-uploaded photos and other artifacts from the prior session's pass
-  still present locally in `inbox/` (untracked, not part of the build).
+## Current state — verified 2026-09-12 (this section's original pass)
 
-## What was NOT done
+- 10 build MDX files, all `pageStatus: built`, `validate-content.ts` → 10/10.
+- `type-check`, `lint`, and a full `build --webpack` all passed clean after every change.
+- Visually verified in a real browser at each step (homepage, library, several build pages, the
+  mobile hamburger menu's open/close/nav-click behaviour, the legal pages, the 404 page).
 
-- **Nothing has been pushed.** All 5 commits above exist only in this local working tree. A
-  connection drop, `git reset --hard`, or a fresh clone elsewhere would lose them entirely — this
-  is the single biggest risk in this handoff. Push before doing anything else if resuming
-  elsewhere.
-- **Nothing has been merged into `staging` or `main`.**
-- **David's fact confirmations are still outstanding** — see Open questions. Do not remove a
-  `sourcingGaps` entry or fill in a real value without an actual answer from David; several of
-  these are marked amber and visible on the live pages specifically so they aren't missed.
-- **The second car in the "two P1800s, one client" pair is still unidentified.** Don't guess which
-  of the other P1800 builds (Candy Red 26282, Pearl White, Red) it is — none of their frontmatter
-  currently names an owner matching Tonja/Ahmet (the resto-mod's confirmed owner/commissioner), so
-  there's no data-driven way to infer it. Ricky explicitly said not to worry about which one it is
-  for now ("just show the individual cars") — this is tracked as a `sourcingGaps` entry on the
-  resto-mod, not a blocker.
-- **`e2e/smoke.spec.ts` was not extended** to cover the 8 newly-built routes — it still only checks
-  `/builds/p1800-candy` and `/builds/etype-941pvo` per the site's own `CLAUDE.md`. Not attempted
-  this session; worth doing before the next promotion if smoke coverage matters for this batch.
-- **The DB6's pre-crash livery claim was deliberately left unconfirmed, not stated as fact.** The
-  photo album visibly shows a green, rally-liveried car (with "LA CARRERA PANAMERICANA" / "MEXICO
-  RALLY" / car no. 335 branding) that is almost certainly this same car before the 2022 crash, but
-  that inference was never asserted in the published copy — it's listed as a `sourcingGaps` entry
-  instead ("confirm the car's livery immediately before the crash... inferred from the photo set,
-  not stated outright in the brief"). Don't upgrade this to stated fact without David confirming it.
-- **Jaguar Sea Green's status inconsistency was flagged, not resolved.** Its frontmatter says
-  `status: completed`, but the approved prototype's own homepage copy for it says the car is still
-  in the workshop ("This car is still in our hands, so its record stops at the paint"). Both can't
-  be right. Left as a `sourcingGaps` entry rather than picked one arbitrarily.
-- **No attempt was made to reconcile or backfill the DB6's magazine credit or current race status**
-  beyond flagging them — both are `sourcingGaps` entries, not resolved.
+## What was NOT done (at the time this section was written — see top of file for what's since moved)
 
-## Traps
+- Nothing had been pushed. All 5 commits then existed only locally.
+- Nothing had been merged into `staging` or `main`.
+- David's fact confirmations were still outstanding.
+- `e2e/smoke.spec.ts` was not extended to cover the 8 newly-built routes — **still true as of the
+  top of this file**.
 
-- **Two commits share an identical message** (`2853a326`, `cb219454`) — see "Commits this session"
-  above for why; don't assume one is a duplicate/mistake to drop.
-- **A `next dev` process is still running on port 3000** from this session's browser verification
-  (PID 18275 at time of writing) — a fresh session should check `lsof -i :3000` before assuming the
-  port is free, and can kill it or reuse it as convenient.
-- **`sourcingGaps` is a plain array of free-text strings, not a structured field-to-gap mapping.**
-  Don't try to programmatically match a gap string to a specific frontmatter field — they're
-  written for a human to read on the page, not for code to parse.
-- **The `BuildDetailPage` hero brightness/scrim fix is shared by all 10 builds**, including the two
-  flagship pages that already passed a visual-fidelity gate against the approved prototype
-  (`p1800-candy`, `etype-941pvo`). This session did not re-run a fidelity check against those two
-  after the brightness change — the prototype's own photography was already well-lit, so the
-  higher brightness is unlikely to have hurt them, but this was not visually re-verified for those
-  two specific pages. Worth a quick look before the next promotion if fidelity drift on those two
-  matters.
-- **`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/`** still holds the 10
-  `redacted/` photo sets plus `make-contact-sheets.sh`, untracked, per the prior handoff's Traps —
-  unchanged this session. `raw/`, `thumbs/`, `contact-sheets/`, `shortlist/`, `redact-work/` and
-  the album `.zip`s remain deleted; re-pull from the iCloud links in
-  `../2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md` item 5 if more photos are ever needed
-  from these same 8 albums.
+## Traps (from this section's original pass — still true)
 
-## Next step
+- The `BuildDetailPage` hero brightness/scrim fix is shared by all 10 builds, including the two
+  flagship pages that already passed a visual-fidelity gate against the approved prototype — not
+  re-verified against those two specifically after the brightness change.
+- `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/` still holds the 10
+  `redacted/` photo sets plus `make-contact-sheets.sh`, untracked. Re-pull from the iCloud links in
+  `../2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md` item 5 if more photos are ever needed.
 
-1. **Push.** `git push origin develop` — nothing from this session exists anywhere but this
-   machine right now.
-2. **Chase David** for the Open questions below — several affected builds' pages will keep showing
-   a visible amber notice to site visitors' eyes only in the sense that it's an obvious editorial
-   marker (not literally hidden from real visitors) until these are resolved; decide with Ricky
-   whether that's acceptable to ship as-is or whether promotion should wait.
-3. **Once ready, run the normal promotion flow**: `develop` → `staging` → `main`, `gh run watch`
-   after each push, per this project's git workflow. Nothing from this session has been merged past
-   `develop`.
-4. Optionally, before promotion: extend `e2e/smoke.spec.ts` to cover the 8 newly-built routes, and
-   spot-check `p1800-candy`/`etype-941pvo` against the approved prototype for any fidelity drift
-   from the hero brightness change.
+## Open questions (from this section's original pass — see top of file for what's since resolved)
 
-## Open questions
-
-- Pearl White P1800 — the singer's (previous owner's) name is still not known.
+- Pearl White P1800 — the singer's name.
 - The resto-mod's client pair — the second car and both cars' specific show names/award placings.
 - Bentley S3 1964 — chassis number still TBD.
-- Bentley S3 Continental — chassis number not recorded (not previously flagged as open, surfaced
-  during this pass).
-- The "262" build — chassis number still pending; may replace the T. Green Aston Martin content in
-  the featured set. (Unchanged from the prior handoff — no build file exists for this yet.)
-- Porsche 356 SC — confirm the "might/minor mechanical rebuild" wording before publishing.
-- Pink Aston Martin DB6 — confirm current race status (still "due to race again"?), the exact
-  magazine title that featured it, and (lower priority) the pre-crash livery shown in its photos.
+- Bentley S3 Continental — chassis number not recorded.
+- The "262" build — **resolved, see top of file: this was the pink Aston Martin DB6, already
+  live.**
+- Porsche 356 SC — **resolved, see top of file: confirmed "minor mechanical rebuild."**
+- Pink Aston Martin DB6 — confirm current race status and the pre-crash livery.
 - Jaguar Sea Green — resolve the completed-vs-still-in-workshop status contradiction.
-
-Resolved and no longer open (see the superseded content below and this session's actions for
-detail): the chassis 26282 vs. 23925 question; the "Rare Volvo"/Pearl White duplicate; the
-"1,300 hours" three-way coincidence.
-
----
-
-# Superseded — 2026-09-11 R2 upload / video-resolution pass
-
-_(Kept for history; "Current state" above is authoritative. The R2 upload and video-credit work
-described here was already committed and pushed as of `46f0ad91`, before this session's work began.)_
-
-**Status:** Photo curation for all 8 BACKLOG.md item 5 albums is done, the Bentley video-credit and
-R2-upload commits were pushed to `origin/develop`, and all 106 curated/redacted photos are live on
-the public R2 CDN.
-
-## Live-data changes already applied (2026-09-11, still true)
-
-**106 image files were uploaded to the public Cloudflare R2 bucket** (`local-business-platform`,
-served at `https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev`) under `dpm-autobody/builds/`. This
-is a real write to a shared, publicly-reachable CDN. No rollback command exists; these are the
-intended final assets. Full per-file record in `photos-manifest.json` in this session folder,
-committed in `46f0ad91`.
-
-| Album                   | R2 path                                                | Files |
-| ----------------------- | ------------------------------------------------------ | ----- |
-| `p1800-restomod`        | `dpm-autobody/builds/p1800-candy-restomod/`            | 5     |
-| `bentley-s3-chassis`    | `dpm-autobody/builds/bentley-s3-1964/chassis-rebuild/` | 20    |
-| `bentley-s3-metalwork`  | `dpm-autobody/builds/bentley-s3-1964/metalwork/`       | 12    |
-| `porsche-356sc`         | `dpm-autobody/builds/porsche-356-sc/`                  | 18    |
-| `db6-pink-aston`        | `dpm-autobody/builds/aston-martin-db6-pink/`           | 24    |
-| `p1800-red`             | `dpm-autobody/builds/p1800-red/`                       | 9     |
-| `p1800-pearl-white`     | `dpm-autobody/builds/p1800-pearl-white/`               | 8     |
-| `p1800-candy-underside` | `dpm-autobody/builds/p1800-candy/`                     | 10    |
-
-All 106 of these URLs are now actually referenced from `heroImage`/`galleryImages` in the
-corresponding build MDX files, as of this session — that was the "What was NOT done" gap in the
-2026-09-11 version of this handoff, now closed.
-
-## Video work — resolved 2026-09-11 (still true)
-
-1. Candy Red Volvo wrong-video mismatch — confirmed already resolved, no action needed.
-2. Bentley finished-car video — added to `bentley-s3-continental.mdx` frontmatter 2026-09-08,
-   confirmed by David. **As of this session, it also actually renders on the page** (see above —
-   it didn't before).
-3. The unedited 3-part resto-mod restoration video (DPM TV, YouTube ids `8Y2inpQzaJ4`,
-   `RgkayNub9Ms`, `LVfZx4-4HRg`) — located and confirmed as the resto-mod's own footage, still
-   deliberately not wired in (raw/unedited, and `BuildVideoSchema` only supports one video id).

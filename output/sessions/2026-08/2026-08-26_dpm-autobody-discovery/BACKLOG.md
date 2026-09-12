@@ -177,8 +177,8 @@ album lands, except the pure copy fixes noted inline.
 - **Plaque wording**: "riveted" is wrong — the plaques are adhered, not riveted. Find accurate wording.
 - **Candy Red Volvo**: the YouTube video currently associated with it is for a _different_ Volvo — pull
   the wrong video, don't replace it with anything until the right one (if any) is confirmed.
-- **Aston Martin T. Green: remove.** Insufficient build info to write the page. Likely replaced by the
-  262 (see below).
+- **Aston Martin T. Green: remove.** Insufficient build info to write the page. **Already done —
+  removed, no trace left in the real site.**
 
 ### New/changed build pages (blocked on David's per-build emails + assets)
 
@@ -259,11 +259,16 @@ album lands, except the pure copy fixes noted inline.
   framed as "restoration in progress," not a finished-car showcase (same caveat as the rare Volvo
   below).
 
-- **262** — likely the T. Green replacement. Chassis number to be sent over by David.
+- ~~**262** — likely the T. Green replacement. Chassis number to be sent over by David.~~
+  **RESOLVED 2026-09-12 (Ricky): "262" was David referring to the pink Aston Martin DB6** — not a
+  separate, unidentified car. That build already exists and is live (`aston-martin-db6-pink.mdx`).
+  No separate "262" page or chassis-number ask needed; dropped from the outstanding-actions email
+  to David accordingly.
 - **Porsche 356 SC restoration — new build, content received 2026-09-08.** Not mentioned in the
   original review meeting; came in as a standalone email. DPM did a full body restoration and
-  mechanical rebuild (David's wording was "might mechanical rebuild" — likely "minor," confirm before
-  writing copy). Customer refitted the engine and trim themselves to complete the build. Finished
+  ~~mechanical rebuild (David's wording was "might mechanical rebuild" — likely "minor," confirm
+  before writing copy)~~ **CONFIRMED 2026-09-12 (Ricky): "minor mechanical rebuild."** Copy updated
+  accordingly. Customer refitted the engine and trim themselves to complete the build. Finished
   with some subtle modifications (unspecified — ask David what, if it's worth naming on the page).
   Photos: https://share.icloud.com/photos/05b8-dNtrNEZxOfi10y81Tmgg
 

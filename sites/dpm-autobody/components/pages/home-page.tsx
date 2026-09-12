@@ -704,7 +704,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
               stand out at the next race.
             </Prose>
             <Prose>
-              It went on to make the front page of a car magazine, and a radio interview besides.
+              It went on to make the front page of <i>The Argus</i>, and a radio interview besides.
             </Prose>
             <p className="mt-7">
               <Golink href="/builds/aston-martin-db6-pink">The full record of the DB6</Golink>
