@@ -80,6 +80,7 @@ import rehypeSlug from 'rehype-slug';
 import type { Build } from '@/lib/content';
 import type { BuildCaption, BuildPhoto, BuildPhotoSection } from '@/lib/content-schemas';
 import { ADDRESS, BUSINESS_EMAIL, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
+import { SourcingGapNotice } from '@/components/sourcing-gap-notice';
 
 const TEXT_SHADOW_SOFT =
   '[text-shadow:0_1px_24px_rgba(11,11,12,0.92),0_1px_4px_rgba(11,11,12,0.7)]';
@@ -675,6 +676,33 @@ function PhotoSectionBlock({ section, no }: { section: BuildPhotoSection; no?: s
  *    page. It carries `alt=""`: it is decorative here, restating a photo the page has already
  *    shown with real alt text.
  */
+/**
+ * Video chapter — renders a build's confirmed `video` (lib/content-schemas.ts's
+ * `BuildVideoSchema`) as a responsive embed. Uses youtube-nocookie.com, allow-listed in
+ * next.config.ts's `frame-src` — a plain youtube.com/youtu.be iframe would be silently dropped by
+ * CSP with no visible error, the same class of bug documented in the root CLAUDE.md's CSP notes.
+ */
+function BuildVideoSection({ fm, no }: { fm: Build; no: string }) {
+  if (!fm.video) return null;
+
+  return (
+    <div className={PAGE}>
+      <ChapterBand no={no} kind={fm.video.type === 'professional' ? 'On film' : 'The film'} />
+      <div className="pt-7 pb-[clamp(3rem,8vh,5rem)]">
+        <div className="relative aspect-video w-full overflow-clip bg-surface-muted">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${fm.video.id}`}
+            title={`${fm.title} — film`}
+            className="absolute inset-0 h-full w-full border-0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function EnquiriesSection({ fm, no }: { fm: Build; no: string }) {
   const workshop = [ADDRESS.locality, ADDRESS.region].filter(Boolean).join(', ');
   /** `.contact__rows a, .contact__rows p` — one hairline-ruled row each, Newsreader, light. */
@@ -1241,7 +1269,8 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
    * prototype does not; continuing the sequence keeps the page internally consistent, which a
    * hardcoded 06 would not.
    */
-  const enquiriesNumber = String(counter + 1).padStart(2, '0');
+  const videoNumber = fm.video ? String(counter + 1).padStart(2, '0') : undefined;
+  const enquiriesNumber = String(counter + (fm.video ? 2 : 1)).padStart(2, '0');
 
   const accentStyle = {
     '--build-accent': fm.accent?.base ?? 'var(--color-brand-primary)',
@@ -1291,6 +1320,11 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
             >
               {lede}
             </p>
+          )}
+          {fm.sourcingGaps && fm.sourcingGaps.length > 0 && (
+            <div className="mt-[clamp(1.5rem,4vh,2.25rem)]">
+              <SourcingGapNotice gaps={fm.sourcingGaps} />
+            </div>
           )}
           <p className="mt-[clamp(2rem,5vh,3rem)]">
             <Link
@@ -1376,6 +1410,9 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
           </div>
         </div>
       )}
+
+      {/* ============ The film — only for a build with a confirmed video ==================== */}
+      {videoNumber && <BuildVideoSection fm={fm} no={videoNumber} />}
 
       {/* ============ Enquiries — the page's closing chapter, above the shared footer ======= */}
       <EnquiriesSection fm={fm} no={enquiriesNumber} />

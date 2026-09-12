@@ -39,6 +39,7 @@ import { ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { Schema } from '@platform/core-components';
 import { getBuilds, type Build } from '@/lib/content';
+import { SourcingGapNotice } from '@/components/sourcing-gap-notice';
 
 const PAGE_DESCRIPTION =
   'Every restoration DPM Autobody has completed, and every one currently in the workshop. Berwick, East Sussex.';
@@ -191,6 +192,8 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
           </p>
         )}
 
+        <SourcingGapNotice gaps={build.sourcingGaps} />
+
         {build.pageStatus === 'built' ? (
           <Link
             href={`/builds/${build.slug}`}
@@ -238,12 +241,8 @@ export default async function LibraryPage() {
               Every restoration &nbsp;&middot;&nbsp; {ADDRESS.locality}, {ADDRESS.region}
             </p>
             <h1 className="mt-[0.85rem] max-w-[17ch] text-balance font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-surface-foreground">
-              Every car that&rsquo;s passed through the workshop.
+              Some of the cars that have passed through the workshop.
             </h1>
-            <p className="mt-6 max-w-[34em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8]">
-              The homepage carries a rotating selection. This is the whole record &mdash; finished
-              and delivered, and still on the ramps right now.
-            </p>
           </div>
 
           {/* ── Finished and delivered ───────────────────────────────────── */}

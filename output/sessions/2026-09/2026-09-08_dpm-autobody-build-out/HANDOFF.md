@@ -1,9 +1,22 @@
 # DPM Autobody build-out — handoff
 
-**Status:** ready-to-resume. Photo curation for all 8 BACKLOG.md item 5 albums is done, the Bentley
-video-credit and R2-upload commits are pushed to `origin/develop`, and all 106 curated/redacted
-photos are live on the public R2 CDN. Nothing is blocking a resume — the remaining work is content
-(David's fact confirmations) and then real MDX bodies.
+**2026-09-12 update:** all 9 remaining builds now have real `/builds/[slug]` pages (`pageStatus:
+built`), wired to the R2 photos this session uploaded, using `BuildDetailPage`'s existing
+thin-content fallback rather than inventing narrative. A new `sourcingGaps` frontmatter field +
+`SourcingGapNotice` component makes missing facts (chassis numbers, the Pearl White singer's name,
+etc.) a visible amber notice instead of a silent gap. A build's confirmed `video` now actually
+renders (it never did before — CSP's `frame-src` had to widen for `youtube-nocookie.com`). The
+"Rare Volvo"/Pearl White duplicate builds were merged into one. Homepage's No. 03 slot is now the
+Aston Martin DB6 (finished) instead of Jaguar Sea Green (still-in-progress framing didn't fit a
+"Finished and delivered" slot). See `sites/dpm-autobody/CLAUDE.md`'s "Current state" for the full
+detail — not yet committed as of this note; see git status. Full re-write of the sections below
+(much of it now stale) is due at the next `/wrap-up-session` pass, not attempted here.
+
+**Status (pre-2026-09-12, now partially superseded above):** ready-to-resume. Photo curation for
+all 8 BACKLOG.md item 5 albums is done, the Bentley video-credit and R2-upload commits are pushed
+to `origin/develop`, and all 106 curated/redacted photos are live on the public R2 CDN. Nothing is
+blocking a resume — the remaining work is content (David's fact confirmations) and then real MDX
+bodies.
 **Branch:** `develop`. Working tree clean except one untracked local-only directory (see below).
 Pushed to `origin/develop` — verified `git log --oneline @{u}..` is empty.
 **Commits this session:** 3, all pushed, all still unmerged into `staging`/`main` (verified
