@@ -57,15 +57,20 @@ export const metadata: Metadata = {
  * the schema has no order field — see file header. Confirmed 2026-09-11: prototype rows No. 11
  * ("Volvo, model to be confirmed" — the singer's car) and No. 12 ("Pearl White") are the same
  * build, not two — `volvo-tbc.mdx` was removed and its owner-history note folded into
- * `p1800-pearl-white.mdx`'s `scopeOfWork`, leaving 11 real slugs, not 12. All of them must appear
- * here exactly once; a slug present in content/builds/ but missing from this list would simply
- * never render, which is why every filename under content/builds/ has a matching entry.
+ * `p1800-pearl-white.mdx`'s `scopeOfWork`, leaving 11 real slugs, not 12.
+ *
+ * Confirmed 2026-09-12: `p1800-pair-one-client` was also removed (12 → 10 total) — it was a
+ * duplicate placeholder describing "two P1800s, one client, both won show awards" as its own
+ * lot, when those two cars are (at least one of them, confirmed) already catalogued as their own
+ * builds elsewhere in this list (the resto-mod, chassis 23925). The pair fact now lives as a
+ * `sourcingGaps` note on that build instead of a separate lot. All slugs below must appear here
+ * exactly once; a slug present in content/builds/ but missing from this list would simply never
+ * render, which is why every filename under content/builds/ has a matching entry.
  */
 const LIBRARY_ORDER = [
   'p1800-candy',
   'p1800-candy-restomod',
   'p1800-red',
-  'p1800-pair-one-client',
   'bentley-s3-continental',
   'jaguar-sea-green',
   'etype-941pvo',

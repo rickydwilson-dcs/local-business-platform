@@ -1295,12 +1295,16 @@ export function BuildDetailPage({ frontmatter: fm, mdxSource }: BuildDetailPageP
               fill
               priority
               sizes="100vw"
-              className="scale-[1.08] object-cover object-center brightness-[1.1] saturate-[1.1]"
+              className="scale-[1.08] object-cover object-center brightness-[1.35] saturate-[1.15]"
             />
           </div>
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,11,12,0.5)_0%,rgba(11,11,12,0.2)_38%,rgba(11,11,12,0.62)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(11,11,12,0.88)_0%,rgba(11,11,12,0.62)_38%,rgba(11,11,12,0.2)_68%,rgba(11,11,12,0.02)_100%)]" />
+        {/* Lightened 2026-09-12 — the un-curated real workshop photography behind most builds'
+            heroes (unlike the two flagship pages' professionally lit shots) read as too dark
+            under the original brightness-[1.1] + these same scrim opacities: the car itself was
+            hard to make out, not just the text-legibility area. */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,11,12,0.36)_0%,rgba(11,11,12,0.12)_38%,rgba(11,11,12,0.48)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(11,11,12,0.72)_0%,rgba(11,11,12,0.46)_38%,rgba(11,11,12,0.12)_68%,rgba(11,11,12,0.02)_100%)]" />
 
         <div
           className={`relative z-[2] ${PAGE} pb-[clamp(3rem,7vh,4.5rem)] pt-[clamp(7rem,18vh,12rem)]`}
