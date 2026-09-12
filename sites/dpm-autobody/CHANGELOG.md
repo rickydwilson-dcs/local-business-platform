@@ -30,6 +30,29 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 - Verified with a full `type-check` → `lint` → `validate:content` → `build --webpack` pass and a
   visual spot-check across home, library, a build page, workshop, contact, and the privacy policy.
 
+### Follow-up: the homepage's scroll-reveal photos were still over-quality after the first pass
+
+- A fresh Lighthouse pass against the deployed site still flagged 34 KiB of avoidable weight on
+  one of the homepage's `Track` scroll-reveal photos (the P1800's `resolve2` "whole car" reveal)
+  — the first pass's blanket `quality={72}` on `home-page.tsx`'s `LayerImage` had put every layer
+  at hero quality, but only one photo across the whole page (the P1800 hero's own priority-loaded
+  macro image) is actually the LCP-critical layer; every other `macro`/`resolve`/`resolve2` layer
+  on all four lots is lazy-loaded and below the fold. Split `LayerImage`'s quality by role:
+  72 for the single priority layer, 50 for every lazy one (an already allow-listed platform value,
+  precedented on `npracing-v1`, one tier below the site's usual 58 "content" quality). Verified by
+  zooming into the same flagged photo's wire-wheel spokes and paint reflections at quality 50 —
+  no visible softening — and confirmed the real byte count actually dropped (55 KB → 41 KB for
+  that image at its w=750 breakpoint). Lighthouse's own re-compression estimate still wants
+  roughly this much again even at quality 50, for every lazy layer on the page, not just the one
+  it happened to flag — its heuristic target is far more aggressive than looks acceptable on a
+  full-bleed, unmasked reveal photo at this display size, so stopped here rather than chasing the
+  score into visibly softer territory.
+- Root cause of missing this in the first pass, worth remembering: had two local `next start`
+  servers alive across edits (a stale one still bound to port 3000 from earlier testing), so a
+  `pnpm run start` after rebuilding silently failed with `EADDRINUSE` and every "verification"
+  screenshot/Lighthouse run afterward was unknowingly hitting the old build. Always confirm which
+  PID actually holds the port before trusting a local check.
+
 ## 2026-09-12
 
 ### Every library build now has a real page
