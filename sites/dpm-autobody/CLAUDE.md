@@ -23,15 +23,59 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 
 ## Current state (as of the 2026-09-11 build-out)
 
-- **Real pages, ported and visually verified.** Header, footer, home, workshop, contact, library,
-  and two individual `/builds/[slug]` pages (P1800 Candy, E-type 941 PVO) are real React
-  components built from the approved static prototype — no longer base-template placeholders.
-  They went through a visual fidelity gate (Phase 7 of the build-out brief) that found extensive
-  drift on first pass and required three further rounds of fixes before landing. See
+- **Real pages, ported and visually verified.** Header, footer, home, workshop, contact, and
+  library are real React components built from the approved static prototype — no longer
+  base-template placeholders. They went through a visual fidelity gate (Phase 7 of the build-out
+  brief) that found extensive drift on first pass and required three further rounds of fixes
+  before landing. See
   `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/yolo-brief.md`'s "Completed" section
   for the full root-cause detail (missing webfonts, a Tailwind mixed-units breakpoint bug that made
   the nav invisible, a genuinely missing "Enquiries" CTA section, and more) rather than repeating it
   here.
+- **All 10 real builds now have real `/builds/[slug]` pages** (`pageStatus: built`), as of a
+  2026-09-12 pass. (`p1800-pair-one-client` was removed the same day — see below — so the library
+  is 10 builds, not the 11 or 12 earlier notes in this file describe; check `LIBRARY_ORDER` in
+  `app/library/page.tsx` for the current authoritative count and order, not this prose.) The two
+  richest (P1800 Candy, E-type 941 PVO) use hand-written MDX bodies with the full "documented car"
+  template (chapters, spec tables, plaques — see `components/pages/build-detail-page.tsx`'s file
+  header). The other 8 use that same component's built-in thin-content fallback: no
+  `##`-structured body needed, just frontmatter (`heroImage`, `galleryImages`, the structured
+  facts) plus one or two plain paragraphs of prose reusing already-approved copy — the template
+  auto-renders a "The record" fact panel and a trailing photo grid from that alone. Do not invent
+  narrative for a thin build; reuse this fallback path instead of writing chapters the source
+  material doesn't support.
+- **`p1800-pair-one-client` was removed 2026-09-12 — it was a duplicate, not a distinct car.**
+  BACKLOG.md and the approved prototype both listed "two P1800s, one client, both won show
+  awards" as its own library lot, but at least one of the two cars in that pair is the resto-mod
+  (`p1800-candy-restomod.mdx`, chassis 23925) — confirmed by Ricky, 2026-09-12 — which already has
+  its own real build entry. Rather than double-list that car under two lots, the pair fact now
+  lives as a `sourcingGaps` note on the resto-mod build ("the second car in this pair and both
+  cars' specific show names and award placings"). The second car itself is still not identified —
+  don't guess which of the other P1800 builds it is; only the resto-mod is confirmed.
+- **Hero image brightness was too low for real (non-prototype) photography — fixed 2026-09-12.**
+  `BuildDetailPage`'s top hero used a `brightness-[1.1]` filter plus two scrim gradients tuned
+  against the two flagship pages' professionally lit prototype photography. Applied to the 8 thin
+  builds' un-curated workshop snapshots, the car itself was hard to make out, not just the
+  text-legibility area behind the title. Now `brightness-[1.35] saturate-[1.15]` with lighter scrim
+  opacities (see the component's inline comment at the hero). If a future build's hero still reads
+  too dark, this shared filter/scrim is the first thing to check, not a per-build fix.
+- **`sourcingGaps` frontmatter field** (`lib/content-schemas.ts`) flags facts a build's page
+  genuinely doesn't have yet — rendered as a visible amber "Needs sourcing from David" notice
+  (`components/sourcing-gap-notice.tsx`) on both the library card and the build page. Use this
+  instead of a silent code comment or a guessed value whenever a real fact is missing; remove the
+  gap entry (not just fill the fact) once David confirms it.
+- **A build's confirmed `video` (YouTube id) now actually renders** — `BuildVideoSection` in
+  `build-detail-page.tsx`, added 2026-09-12. It previously had a schema and had been confirmed by
+  David for the Bentley S3 Continental, but nothing in the template rendered `fm.video` until this
+  build-out pass, so the confirmed credit sat invisible even after `pageStatus` allowed the page to
+  exist. Uses `youtube-nocookie.com` — `next.config.ts`'s CSP `frame-src` had to be widened to
+  allow it, since a plain `youtube.com`/`youtu.be` iframe is silently dropped by CSP with no visible
+  error (same class of bug as the root CLAUDE.md's other CSP notes).
+- **Homepage's No. 03 slot is the Aston Martin DB6 ("the pink one"), not the Jaguar Sea Green**,
+  swapped 2026-09-12 at Ricky's request — DB6 is a finished, delivered car ("Finished and
+  delivered", matching No. 01/02's framing) rather than an in-progress one. Jaguar Sea Green is
+  still in the library register as its own build, just no longer one of the homepage's four
+  featured slots.
 - **Colors and fonts in `theme.config.ts` are sourced from the approved static prototype**
   (`output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/src/library.html`'s CSS
   custom properties); fonts now load via `next/font` and the role-mapping has been exercised by
@@ -44,11 +88,14 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 
 ### Still not done
 
-- **The other 10 builds in the library** have frontmatter only (photo-only or no body content yet)
-  — per the brief's own honesty-pattern scope decision, they were deliberately not given full pages
-  in this pass. They still need iCloud photo pulls, plate-redaction, and David's confirmations
-  (chassis numbers, owner names, in-progress vs. completed status) before real pages can be built.
-  See `session.md` Phase 3.
+- **A run of David-confirmation facts is still open**, tracked as `sourcingGaps` on the affected
+  builds and visible on their pages: the singer's name for Pearl White P1800, the second car and
+  both show names/award placings for the resto-mod's client pair, chassis numbers for Bentley S3
+  1964 and Bentley S3 Continental, the Porsche 356 SC "might/minor mechanical rebuild" wording, the
+  DB6's current race status and its magazine's exact title, and Jaguar Sea Green's status field
+  (frontmatter says `completed`, the approved prototype's own copy for it says still in the
+  workshop — one of these is wrong). Chase these with David before removing the corresponding
+  `sourcingGaps` entries.
 - **Homepage rotating-featured-build mechanism** — not built; the homepage currently shows a
   static selection. Confirmed 2026-09-11: this does **not** need a client-editable admin
   capability — Ricky and Claude make homepage changes directly (editing config/frontmatter,

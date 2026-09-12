@@ -177,6 +177,15 @@ export const BuildFrontmatterSchema = z.object({
 
   buildType: BuildTypeSchema.optional(),
 
+  /**
+   * Short human-readable labels for facts this build's page genuinely does not have yet
+   * (e.g. "Chassis number", "Owner names and show awards", "Current race status") — rendered as
+   * a visible highlighted "needs sourcing from David" notice on both the library card and the
+   * build page, rather than silently omitting the fact or inventing a plausible-sounding value.
+   * Remove an entry (not just the underlying fact) once David confirms it.
+   */
+  sourcingGaps: z.array(z.string().min(1, 'A sourcing gap label must not be empty')).optional(),
+
   // --- Work detail (optional — see file header for why nothing here is required) ----------------
   /** Free text, not a structured number — real values are "1,300 hours", "Over 1,000 hours...". */
   hoursOfLabour: z.string().min(1, 'Hours of labour text must not be empty when set').optional(),

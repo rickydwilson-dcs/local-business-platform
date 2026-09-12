@@ -39,6 +39,7 @@ import { ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { Schema } from '@platform/core-components';
 import { getBuilds, type Build } from '@/lib/content';
+import { SourcingGapNotice } from '@/components/sourcing-gap-notice';
 
 const PAGE_DESCRIPTION =
   'Every restoration DPM Autobody has completed, and every one currently in the workshop. Berwick, East Sussex.';
@@ -53,22 +54,29 @@ export const metadata: Metadata = {
 
 /**
  * The prototype's own row order (library.html "No. 01" … "No. 12"), reproduced here because
- * the schema has no order field — see file header. All 12 of Phase 3's real slugs must appear
- * here exactly once; a slug present in content/builds/ but missing from this list would simply
- * never render, which is why every filename under content/builds/ has a matching entry.
+ * the schema has no order field — see file header. Confirmed 2026-09-11: prototype rows No. 11
+ * ("Volvo, model to be confirmed" — the singer's car) and No. 12 ("Pearl White") are the same
+ * build, not two — `volvo-tbc.mdx` was removed and its owner-history note folded into
+ * `p1800-pearl-white.mdx`'s `scopeOfWork`, leaving 11 real slugs, not 12.
+ *
+ * Confirmed 2026-09-12: `p1800-pair-one-client` was also removed (12 → 10 total) — it was a
+ * duplicate placeholder describing "two P1800s, one client, both won show awards" as its own
+ * lot, when those two cars are (at least one of them, confirmed) already catalogued as their own
+ * builds elsewhere in this list (the resto-mod, chassis 23925). The pair fact now lives as a
+ * `sourcingGaps` note on that build instead of a separate lot. All slugs below must appear here
+ * exactly once; a slug present in content/builds/ but missing from this list would simply never
+ * render, which is why every filename under content/builds/ has a matching entry.
  */
 const LIBRARY_ORDER = [
   'p1800-candy',
   'p1800-candy-restomod',
   'p1800-red',
-  'p1800-pair-one-client',
   'bentley-s3-continental',
   'jaguar-sea-green',
   'etype-941pvo',
   'porsche-356-sc',
   'aston-martin-db6-pink',
   'bentley-s3-1964',
-  'volvo-tbc',
   'p1800-pearl-white',
 ] as const;
 
@@ -189,6 +197,8 @@ function LedgerRow({ build, number }: { build: Build; number: number }) {
           </p>
         )}
 
+        <SourcingGapNotice gaps={build.sourcingGaps} />
+
         {build.pageStatus === 'built' ? (
           <Link
             href={`/builds/${build.slug}`}
@@ -236,12 +246,8 @@ export default async function LibraryPage() {
               Every restoration &nbsp;&middot;&nbsp; {ADDRESS.locality}, {ADDRESS.region}
             </p>
             <h1 className="mt-[0.85rem] max-w-[17ch] text-balance font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-surface-foreground">
-              Every car that&rsquo;s passed through the workshop.
+              Some of the cars that have passed through the workshop.
             </h1>
-            <p className="mt-6 max-w-[34em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-[#D6D1C8]">
-              The homepage carries a rotating selection. This is the whole record &mdash; finished
-              and delivered, and still on the ramps right now.
-            </p>
           </div>
 
           {/* ── Finished and delivered ───────────────────────────────────── */}

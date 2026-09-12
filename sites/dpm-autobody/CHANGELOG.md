@@ -5,6 +5,39 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 
 ---
 
+## 2026-09-12
+
+### Every library build now has a real page
+
+- All 10 real builds (down from 12 — see below) now have `pageStatus: built` `/builds/[slug]`
+  pages, not just P1800 Candy and E-type 941 PVO. The 8 thinner builds use
+  `BuildDetailPage`'s existing fallback for a build with no structured body (an auto-generated
+  fact panel plus a trailing photo grid from `galleryImages`) rather than invented narrative —
+  each is wired to its real photos from the prior session's R2 upload.
+- Added a `sourcingGaps` frontmatter field and a shared `SourcingGapNotice` component: a visible
+  amber "Needs sourcing from David" callout on both the library card and the build page for any
+  fact that's still genuinely missing, replacing a silent gap or a guessed value.
+- Fixed a real, previously-invisible gap: `bentley-s3-continental`'s confirmed `video` field never
+  rendered anywhere, because nothing in `BuildDetailPage` read `fm.video` until this pass added a
+  `BuildVideoSection`. Needed a CSP `frame-src` addition for `youtube-nocookie.com` — see root
+  `CLAUDE.md`'s CSP notes and `docs/standards/security.md`.
+- Merged the "Rare Volvo" (prototype's "model to be confirmed" row) and "Pearl White P1800" library
+  entries into one — confirmed the same car, not two, correcting the approved prototype's own
+  12-row structure to 11.
+- Removed a second duplicate: "Volvo P1800 — pair, one client" double-listed a car (the resto-mod,
+  chassis 23925) already catalogued on its own. Folded the pair/award fact into the resto-mod's
+  `sourcingGaps` instead — 11 real builds down to 10.
+- Swapped the homepage's No. 03 featured slot from Jaguar Sea Green to the finished Aston Martin
+  DB6, matching the "Finished and delivered" framing No. 01/02 use rather than an in-progress one.
+- Lightened `BuildDetailPage`'s shared hero brightness/scrim (tuned against the two flagship
+  pages' professionally lit prototype photography) so the other builds' real workshop photography
+  reads clearly instead of too dark.
+- `/library`'s own hero copy changed from "Every car that's passed through the workshop." (with a
+  subtitle) to "Some of the cars that have passed through the workshop." (no subtitle).
+- Not yet done: the homepage's rotating-featured-build mechanism, the contact form's live wiring,
+  and the workshop's video hero remain open. A run of David-confirmation facts is still open too —
+  tracked visibly as `sourcingGaps` rather than in this changelog; see site-level `CLAUDE.md`.
+
 ## 2026-09-11
 
 ### Real pages

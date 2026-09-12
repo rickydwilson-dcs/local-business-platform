@@ -736,75 +736,71 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
         }}
       />
 
-      {/* ═══════════════════ 03 · JAGUAR, ASTON MARTIN SEA GREEN ═══════════════════ */}
+      {/* ═══════════════════ 03 · ASTON MARTIN DB6, THE PINK ONE ═══════════════════ */}
       <div className="mx-auto w-[min(1360px,100%-3rem)]">
-        <Chapter kind="No. 03 · In the booth" />
+        <Chapter kind="No. 03 · Finished and delivered" />
         <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
           <h2 className="max-w-[16ch] font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] text-surface-foreground">
-            Jaguar
+            Aston Martin DB6
             <br />
-            Aston Martin Sea&nbsp;Green
+            The pink&nbsp;one
           </h2>
           <div className="grid gap-[1.15em]">
             <Prose>
-              The owner wanted a colour from another marque entirely. Aston Martin Sea Green goes
-              down looking almost grey under the booth lamps, and only turns green when it is dry
-              and the light starts moving across it.
+              Crashed at La Carrera Panamericana in 2022. We repaired the body, including a new door
+              fabricated in house, then finished the car in pink at the owner&rsquo;s request — to
+              stand out at the next race.
             </Prose>
             <Prose>
-              Mixed here, sprayed here, judged here, under the same lamps every time. The strip
-              light overhead runs as one unbroken highlight from the front wing to the door, and
-              that unbroken run is the only proof there is that a panel underneath is straight.
+              It went on to make the front page of a car magazine, and a radio interview besides.
             </Prose>
-            <Prose>
-              This car is still in our hands, so its record stops at the paint. We would rather show
-              you the surface as it is than wait until there is a finished photograph to show you.
-            </Prose>
+            <p className="mt-7">
+              <Golink href="/builds/aston-martin-db6-pink">The full record of the DB6</Golink>
+            </p>
           </div>
         </div>
       </div>
 
       <Track
-        ariaLabel="Jaguar, Aston Martin Sea Green — mixed here, sprayed here, judged here"
+        ariaLabel="Aston Martin DB6, the pink one — crashed, repaired, and finished to stand out"
         headingId="lot3-h"
         dir="ltr"
         rev={[0.5, 0.84]}
         no="No. 03"
-        label="Jaguar · Aston Martin Sea Green"
-        heading="Mixed here. Sprayed here. Judged here."
+        label="Aston Martin DB6 · The pink one"
+        heading="Repaired to race again. Finished to be seen."
         macro={{
-          src: `${R2}/dpm-work/jaguar-sea-green/panels.jpg`,
-          alt: 'Bonnet, wing and door of the Jaguar in Aston Martin Sea Green, the booth strip light running as one unbroken highlight down each panel in turn.',
+          src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/aston-martin-db6-pink/IMG_8651.jpg',
+          alt: 'A DPM painter working bare metal on the Aston Martin DB6 body, close on the hands and the panel.',
           vars: {
             '--pz': '1.22',
             '--po': '44% 52%',
-            '--pbri': '1.34',
-            '--psat': '1.12',
+            '--pbri': '1.1',
+            '--psat': '1.02',
             '--pcon': '1.04',
           } as Vars,
         }}
         resolve={{
-          src: `${R2}/dpm-work/jaguar-sea-green/booth.jpg`,
-          alt: 'The Jaguar in the spray booth in Aston Martin Sea Green, a painter in a respirator working along the rear wing, the DPM signwriting on the wall behind.',
-          vars: { '--pz': '1.06', '--po': '44% 54%' } as Vars,
+          src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/aston-martin-db6-pink/IMG_8830.jpg',
+          alt: 'The finished Aston Martin DB6 in pink, front three-quarter, outside the workshop.',
+          vars: { '--pz': '1.06', '--po': '48% 54%' } as Vars,
         }}
         captions={{
           macro: (
             <span>
               <b className="font-medium text-surface-foreground">
-                Above &mdash; wing, bonnet and door.
+                Above &mdash; bare metal, close.
               </b>{' '}
-              One strip light, one highlight, running from panel to panel without breaking. Metallic
-              green is the least forgiving colour there is for hiding a low spot.
+              The repair itself, including a new door fabricated in house to replace the one lost in
+              the crash.
             </span>
           ),
           wide: (
             <span>
               <b className="font-medium text-surface-foreground">
-                Above &mdash; the same car, in the booth.
+                Above &mdash; the same car, finished.
               </b>{' '}
-              Colour going down, under our own lamps, in our own building. This is as far as the
-              record goes for now.
+              In pink, at the owner&rsquo;s own request — so it would stand out at the next race.
             </span>
           ),
         }}
