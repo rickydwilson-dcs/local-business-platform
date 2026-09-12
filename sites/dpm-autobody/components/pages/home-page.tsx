@@ -64,6 +64,19 @@ interface LotImage {
   alt: string;
   vars: Vars;
   priority?: boolean;
+  /**
+   * Set when this layer's `src` is the exact same photo already requested elsewhere at hero
+   * quality (currently: the P1800 `resolve2` reveal reuses the hero's own macro photo,
+   * `dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg`). Every `LayerImage` shares the same
+   * `sizes="100vw"`, so for a given viewport the browser resolves both layers' `srcset` to the
+   * same width bucket — meaning if the `quality` also matches, the two `<img>` requests become
+   * byte-identical URLs and the browser serves the second one straight from cache instead of
+   * downloading it again. Confirmed 2026-09-12: at mismatched quality (72 vs 50) this photo cost
+   * 55KB + 41KB = 96KB across the two loads; matching quality collapses that to a single ~55KB
+   * fetch. Real, free savings — leave `false`/unset for every other layer's genuinely distinct
+   * photo, where dropping non-priority quality to 50 is still the right call.
+   */
+  matchesHeroQuality?: boolean;
 }
 
 function LayerImage({ image, filter }: { image: LotImage; filter: 'plate' | 'resolve' }) {
@@ -80,17 +93,11 @@ function LayerImage({ image, filter }: { image: LotImage; filter: 'plate' | 'res
       // found via a Lighthouse audit, 2026-09-12. Only the single priority-loaded layer
       // (the P1800 hero's macro image) is the LCP-critical one and gets hero quality (72);
       // every other layer here (macro/resolve/resolve2 on every other lot, and this same
-      // lot's own resolve/resolve2) is a lazy-loaded, below-the-fold scroll-reveal photo.
-      // Went through content quality (58) first, but a follow-up Lighthouse pass still
-      // flagged the P1800's own resolve2 layer for real avoidable weight there too, so
-      // dropped these lazy layers to 50 instead (already in the platform's `qualities`
-      // allow-list, precedented on npracing-v1) after confirming no visible loss at zoom
-      // on the same flagged image — wire-wheel spokes and paint reflections stayed crisp.
-      // Lighthouse's own re-compression estimate still wants roughly this much again even
-      // at 50 (its heuristic target is far below what looks acceptable on a full-bleed
-      // photo at this display size); stopping here rather than chasing the score further
-      // into visibly-softer territory for a large, unmasked reveal image.
-      quality={image.priority ? 72 : 50}
+      // lot's own resolve/resolve2) is a lazy-loaded, below-the-fold scroll-reveal photo, and
+      // drops to 50 UNLESS it reuses the hero's own photo (see `matchesHeroQuality` above), in
+      // which case it matches the hero's quality so the browser cache — not a lower quality —
+      // absorbs the repeat load.
+      quality={image.priority || image.matchesHeroQuality ? 72 : 50}
       sizes="100vw"
       style={image.vars}
       className={`object-cover ${IMG_POSITION} ${filter === 'plate' ? PLATE_FILTER : RESOLVE_FILTER}`}
@@ -577,6 +584,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
         resolve2={{
           src: `${R2}/dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg`,
           alt: 'The finished Candy Red Volvo P1800 on a lane in winter daylight, front three-quarter, on chrome wire wheels.',
+          matchesHeroQuality: true,
           vars: {
             '--pz': '1.09',
             '--po': '54% 45%',

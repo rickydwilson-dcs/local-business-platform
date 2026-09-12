@@ -53,6 +53,30 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
   screenshot/Lighthouse run afterward was unknowingly hitting the old build. Always confirm which
   PID actually holds the port before trusting a local check.
 
+### Follow-up 2: the real fix was to stop downloading the same photo twice, not compress it harder
+
+- Ricky asked the right question: the P1800's `resolve2` reveal photo is the _exact same source
+  file_ as the P1800 hero's own macro image (`dpm-instagram/DU2rgo5DXqC/web/slide-01.jpg`), just
+  cropped/zoomed differently via CSS — so why fetch it twice at all? Tried recompressing the
+  source JPEG with mozjpeg first (a plausible-sounding fix) and **disproved it empirically**
+  before touching anything live: ran the exact resize+encode pipeline Next's image optimizer uses
+  (`sharp`, width 750, quality 50) against the original source and against several mozjpeg
+  re-encodes, and got the same ~49.3 KB output every time (±0.3%) — Next fully decodes and
+  re-encodes from scratch at request time, so the source file's own compression is irrelevant to
+  what gets delivered. Re-uploading a "better compressed" source under a new R2 key would have
+  meant the cache-busting dance for zero real benefit.
+- The actual fix: every `LayerImage` already shares the same `sizes="100vw"`, so for a given
+  viewport the browser resolves both the hero's and the `resolve2`'s `srcset` to the same width
+  bucket — meaning if the `quality` also matches, the two `<img>` requests become byte-identical
+  URLs and the **browser's own HTTP cache** serves the second one for free instead of downloading
+  it again. Added a `matchesHeroQuality` flag to `LotImage`/`LayerImage` (`home-page.tsx`) so this
+  one shared-photo layer matches the hero's quality (72) instead of the lazy-layer default (50).
+  Verified live in a real browser: both `<img>` tags resolved to the identical
+  `_next/image?...w=3840&q=72` URL, and the Performance Resource Timing API confirmed both loads
+  resolved to the same 117,474-byte resource. This is strictly better than the previous quality-50
+  compromise — full hero quality _and_ the second load costs nothing, versus a lower-quality
+  separate 41 KB download.
+
 ## 2026-09-12
 
 ### Every library build now has a real page
