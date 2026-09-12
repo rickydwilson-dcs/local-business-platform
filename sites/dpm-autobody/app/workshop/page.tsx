@@ -76,6 +76,7 @@ export default function WorkshopPage() {
               alt="Aerial view of DPM Autobody's workshop, a cluster of barns and yard among ripened fields and hedgerows near Berwick, East Sussex, on a clear summer morning."
               fill
               priority
+              quality={72}
               sizes="100vw"
               className="object-cover object-[58%_45%] scale-[1.08] saturate-[1.1] contrast-[1.05] brightness-[1.03]"
             />

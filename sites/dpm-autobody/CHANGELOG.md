@@ -5,6 +5,31 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 
 ---
 
+## 2026-09-12 (Lighthouse pass)
+
+### Cut font payload and set explicit image quality across the site
+
+- A real Lighthouse mobile audit (score 88/100) against the live `dpm-autobody.vercel.app` found
+  fonts were the single largest asset category on the homepage — 229 KB across 3 files, more than
+  JS or images combined — because all three `next/font/google` calls in `app/layout.tsx` used
+  `weight: 'variable'`, which downloads each family's entire default weight axis. `next/font/google`
+  has no bounded-range syntax (confirmed against its own `.d.ts`), so switched to the exact discrete
+  weight list actually used on the site (grepped from every `font-*` weight class across every
+  `.tsx`/`.mdx` file). Hit a real constraint doing this: `axes: ['opsz']` cannot be combined with a
+  discrete `weight` — only valid alongside `weight: 'variable'` — so Fraunces/Newsreader lost their
+  optical-size interpolation as a result; spot-checked across every real page afterward and found no
+  visible regression (no synthetic/faked bold or thin anywhere).
+- Added explicit `quality` props (72 hero / 58 content / 45 thumbnail, the platform's existing
+  convention) to 9 `<Image>` instances across the homepage, workshop, contact, library, and build
+  pages that were silently falling back to next/image's implicit default of 75.
+- Investigated and deliberately did **not** change anything for the audit's third finding
+  (render-blocking CSS, ~150ms on a 1.27 KB file): `experimental.optimizeCss` (critters) is
+  Pages-Router-only in this Next version, and `experimental.cssChunking`'s own doc comment
+  confirms it only controls chunk _ordering_ — the default is already the "loose" mode it would
+  set, so there's no real lever to pull here without added risk for a sub-1KB saving.
+- Verified with a full `type-check` → `lint` → `validate:content` → `build --webpack` pass and a
+  visual spot-check across home, library, a build page, workshop, contact, and the privacy policy.
+
 ## 2026-09-12
 
 ### Every library build now has a real page
