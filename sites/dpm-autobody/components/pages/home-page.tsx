@@ -598,55 +598,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
       {/* ═══════════════════ 02 · BENTLEY S3 CONTINENTAL ═══════════════════ */}
       <div className="mx-auto w-[min(1360px,100%-3rem)]">
         <Chapter kind="No. 02 · Finished and delivered" />
-        {/*
-          The `after:` veil carries TWO scrims, not one. The bottom half
-          (`0 → 0.34` from 55%) is the prototype's own `.section-hero::after`
-          vignette, ported verbatim. The top half (`0.92 → 0` over the first
-          8rem) is NOT in the prototype and is deliberate: the figcaption below
-          is an in-flow child of this fixed-aspect-ratio box, so it lands at the
-          very TOP of the photograph, and in this particular shot that is
-          sunlit foliage and a white van — measured backdrop luminance p99 0.47
-          at 1440px and 0.99 at 1024px, i.e. 1.2–2.5:1 against the caption's
-          #A8A399, far under WCAG AA's 4.5:1.
-
-          The prototype never had to solve this because its caption is invisible
-          there: `.caption` is `position: static` while `.section-hero img` is
-          `position: absolute`, so the photograph paints OVER the caption and
-          hides it completely (confirmed with elementsFromPoint against
-          prototype/client/index.html — the img sits above the figcaption in the
-          paint order). The `relative z-[1]` on the figcaption below is what
-          lifts it back into view; that is the right call — the copy is approved
-          and should be readable — but it is also what put the text onto the
-          photo, so it needs a scrim the prototype never needed.
-
-          Stops are in `rem`, not `%`, on purpose: the caption is a fixed 2.52rem
-          (two lines) from 480px up and 3.78rem (three lines) at ≤390px, while
-          the figure's height is aspect-ratio-driven and swings from 765px to
-          176px. Percentage stops would track the box and not the text; rem stops
-          track the text. 4rem clears the three-line case at every width, and
-          0.86 alpha there measures 5.3:1 worst-case against the muted caption
-          colour and ~10:1 against the bone `<b>` — see the measurement note in
-          the session folder. Where the fade would outrun the bottom vignette on
-          a short (mobile) box, CSS clamps the later stop up; that degrades to a
-          single continuous wash rather than a visible seam.
-        */}
-        <figure className="relative my-7 aspect-video overflow-clip after:pointer-events-none after:absolute after:inset-0 after:content-[''] after:[background:linear-gradient(to_bottom,rgba(11,11,12,0.92)_0,rgba(11,11,12,0.86)_4rem,rgba(11,11,12,0.42)_5.75rem,rgba(11,11,12,0)_8rem,rgba(11,11,12,0)_55%,rgba(11,11,12,0.34)_100%)]">
-          <Image
-            src={`${R2}/dpm-work/bentley-s3/whole.jpg`}
-            alt="The finished Bentley S3 Continental outside in summer daylight, front three-quarter, against a post-and-rail fence."
-            fill
-            sizes="100vw"
-            className={`object-cover ${IMG_POSITION} ${PLATE_FILTER}`}
-          />
-          <figcaption className="relative z-[1] mt-[-0.25rem] max-w-[44em] text-[0.8125rem] leading-[1.55] text-surface-muted-foreground">
-            <b className="font-medium text-surface-foreground">
-              The Bentley S3 Continental, whole.
-            </b>{' '}
-            Out on the yard in summer daylight, before the panels that follow show what it took to
-            get there.
-          </figcaption>
-        </figure>
-        <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
+        <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
           <h2 className="max-w-[16ch] font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] text-surface-foreground">
             Bentley S3
             <br />
@@ -964,7 +916,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
         </div>
 
         <p className="mt-[clamp(2.5rem,6vh,3.5rem)]">
-          <Golink href="/builds/p1800-candy">One car, documented in full</Golink>
+          <Golink href="/library">See even more of our work</Golink>
         </p>
       </div>
     </div>

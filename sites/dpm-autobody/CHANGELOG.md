@@ -73,7 +73,15 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
   the hero) wasn't clear enough — invisible until you scrolled, and blended into the dark
   background once it appeared. Replaced with a standard always-visible hamburger button and a
   full-screen menu panel, matching the accessible pattern already used on NP Racing. The phone
-  number moved into the panel too, off the collapsed mobile header bar entirely.
+  number moved into the panel too, off the collapsed mobile header bar entirely. Social icons
+  (Instagram/Facebook/YouTube) sit below it in the panel.
+- The homepage's closing "One car, documented in full" link (which pointed at the P1800 Candy
+  build specifically) now reads "See even more of our work" and points at `/library` instead —
+  a better closing link than sending everyone to the same one car.
+- Removed the Bentley S3 Continental's small "whole car" establishing shot on the homepage —
+  genuinely a real, deliberate one-off from the approved prototype (verified), but it made that
+  section's first image read as a different size from the other three cars, none of which have
+  an equivalent. The same "whole car" photo still appears via the section's own scroll sequence.
 
 ## 2026-09-11
 

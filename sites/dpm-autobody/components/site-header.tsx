@@ -5,7 +5,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Youtube } from 'lucide-react';
+import { siteConfig } from '@/site.config';
+
+// Same set/order as components/site-footer.tsx's SOCIAL_ICONS — the approved, real socials
+// (site.config.ts's business.socialMedia), never a fabricated URL. Kept as a second copy
+// rather than a shared import: header and footer are two separate small maps, and importing
+// one from the other would create a coupling neither needs.
+const SOCIAL_ICONS = {
+  instagram: Instagram,
+  facebook: Facebook,
+  youtube: Youtube,
+} as const;
 
 export interface SiteHeaderProps {
   siteName: string;
@@ -87,6 +98,18 @@ export function SiteHeader({
 
   const isNavItemActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const isHome = pathname === '/';
+
+  const socials = (Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>)
+    .map((key) => ({ key, href: siteConfig.business.socialMedia[key], Icon: SOCIAL_ICONS[key] }))
+    .filter(
+      (
+        entry
+      ): entry is {
+        key: keyof typeof SOCIAL_ICONS;
+        href: string;
+        Icon: (typeof SOCIAL_ICONS)[keyof typeof SOCIAL_ICONS];
+      } => Boolean(entry.href)
+    );
 
   return (
     <>
@@ -220,15 +243,36 @@ export function SiteHeader({
               </ul>
             </nav>
 
-            {showPhone && phoneDisplay && phoneTel && (
-              <div className="border-t border-surface-card-border px-6 py-6">
-                <a
-                  href={`tel:${phoneTel}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-center text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:text-surface-foreground"
-                >
-                  {phoneDisplay}
-                </a>
+            {((showPhone && phoneDisplay && phoneTel) || socials.length > 0) && (
+              <div className="flex flex-col items-center gap-5 border-t border-surface-card-border px-6 py-6">
+                {showPhone && phoneDisplay && phoneTel && (
+                  <a
+                    href={`tel:${phoneTel}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-center text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground no-underline transition-colors duration-[400ms] hover:text-surface-foreground"
+                  >
+                    {phoneDisplay}
+                  </a>
+                )}
+                {socials.length > 0 && (
+                  <nav
+                    aria-label={`${siteName} on social media`}
+                    className="flex items-center gap-3"
+                  >
+                    {socials.map(({ key, href, Icon }) => (
+                      <a
+                        key={key}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={key.charAt(0).toUpperCase() + key.slice(1)}
+                        className="flex h-9 w-9 shrink-0 items-center justify-center border border-surface-card-border text-surface-muted-foreground transition-colors duration-[400ms] hover:border-brand-primary-hover hover:text-brand-primary-hover"
+                      >
+                        <Icon className="h-[1.05rem] w-[1.05rem]" aria-hidden="true" />
+                      </a>
+                    ))}
+                  </nav>
+                )}
               </div>
             )}
           </div>,

@@ -67,7 +67,26 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   panel, following the same portal-to-`document.body`/Escape-to-close/body-scroll-lock pattern
   already established on NP Racing (`sites/npracing-v1/components/site-nav-mobile.tsx`). The phone
   number moved into this panel too — it no longer appears in the collapsed mobile header bar at
-  all, only inside the menu and in the always-visible desktop nav (≥896px).
+  all, only inside the menu and in the always-visible desktop nav (≥896px). Social icons
+  (Instagram/Facebook/YouTube — same `siteConfig.business.socialMedia` set and icons as
+  `site-footer.tsx`'s colophon, kept as a second small local map rather than a shared import)
+  sit below the phone number in the panel, added the same day.
+- **Homepage's bottom "one car, documented in full" link now points at `/library`**, not
+  `/builds/p1800-candy` — copy changed to "See even more of our work" (2026-09-12, Ricky's
+  request). It's the closing link after the credentials/proof section, distinct from each lot's
+  own "The full record of the [car]" link earlier on the page, which still points at that car's
+  own build page and was correctly untouched.
+- **The Bentley S3 Continental's homepage section no longer has its own small "whole car"
+  establishing shot ahead of its scroll photo — removed 2026-09-12.** This was a genuine,
+  deliberate one-off in the approved prototype (`.section-hero`, verified only ever used once,
+  for Bentley) — not a porting bug, and it rendered at an exact 16:9 on every width, measured
+  live. But it made the Bentley section's first image read as a different size from the other
+  three lots (P1800, DB6, E-type), none of which have an equivalent small photo — their first
+  image is the same full-screen scroll photo Bentley's own `<Track>` already provides. Removed
+  per Ricky's request rather than trying to add a matching small shot to the other three; the
+  same "whole car" image is still shown, via the Track's own closing `resolve2` stage, exactly
+  as before. If this section's spacing/structure ever looks wrong again, compare it directly
+  against the P1800 section immediately above it — they're now structurally identical.
 - **`sourcingGaps` frontmatter field** (`lib/content-schemas.ts`) flags facts a build's page
   genuinely doesn't have yet — rendered as a visible amber "Needs sourcing from David" notice
   (`components/sourcing-gap-notice.tsx`) on both the library card and the build page. Use this
