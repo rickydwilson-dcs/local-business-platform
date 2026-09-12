@@ -174,8 +174,8 @@ export default function WorkshopPage() {
           <div className="space-y-[1.15em]">
             <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
               A restoration here starts with the car photographed exactly as it arrived, and ends
-              with a plaque riveted into the engine bay carrying its chassis number. Between those
-              two things sits a file that the owner keeps: every panel, every gap, every decision,
+              with a plaque fixed into the engine bay carrying its chassis number. Between those two
+              things sits a file that the owner keeps: every panel, every gap, every decision,
               photographed as it happened.
             </p>
             <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">

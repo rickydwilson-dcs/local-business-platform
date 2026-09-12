@@ -38,6 +38,15 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
   and the workshop's video hero remain open. A run of David-confirmation facts is still open too —
   tracked visibly as `sourcingGaps` rather than in this changelog; see site-level `CLAUDE.md`.
 
+### Small content and navigation fixes
+
+- Header nav's "The Work" link changed from the homepage's `#work` in-page anchor to `/library` —
+  the real, full register of every build, not just the four featured on the homepage.
+- Removed the word "rivet"/"riveted" everywhere it described DPM's own chassis plaques (homepage
+  tagline and P1800 blurb, the workshop page, five spots on the P1800 Candy build page) — corrected
+  by David: the plaques are fixed to the chassis, not riveted. Left the one unrelated reference to
+  the factory Volvo identification plate (a different, genuinely riveted OEM part) untouched.
+
 ## 2026-09-11
 
 ### Real pages

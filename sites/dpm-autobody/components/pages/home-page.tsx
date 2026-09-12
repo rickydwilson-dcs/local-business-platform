@@ -467,7 +467,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
               Artists of Automotive Restoration
             </h1>
             <p className="pointer-events-auto m-0 max-w-[23em] font-prose text-[clamp(1.25rem,1.4vw+0.9rem,1.875rem)] font-extralight leading-[1.45] text-surface-foreground/90 [font-variant-numeric:normal] [text-shadow:0_1px_28px_rgba(11,11,12,0.94)]">
-              Not a slogan. It is engraved on the plaque we rivet into every car before it leaves.
+              Not a slogan. It is engraved on the plaque we fix to every car before it leaves.
             </p>
             <div className="pointer-events-auto mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-3">
               <p className="m-0 flex items-center gap-3 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-surface-muted-foreground [text-shadow:0_1px_28px_rgba(11,11,12,0.94)]">
@@ -509,8 +509,8 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
               A year in the workshop and{' '}
               <strong className="font-medium text-surface-foreground">1,300</strong> hours of
               labour, to five changes the owner specified himself. It left on a transporter with a
-              riveted plaque carrying chassis <span className="text-surface-foreground">26282</span>{' '}
-              and a file of over{' '}
+              plaque fixed to the chassis, carrying its number:{' '}
+              <span className="text-surface-foreground">26282</span> and a file of over{' '}
               <strong className="font-medium text-surface-foreground">2,000</strong> photographs.
             </Prose>
             <Prose>
