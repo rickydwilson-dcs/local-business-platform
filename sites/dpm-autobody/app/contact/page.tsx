@@ -140,6 +140,7 @@ export default function ContactPage() {
               alt=""
               fill
               priority
+              quality={72}
               sizes="100vw"
               className="scale-[1.08] object-cover object-[62%_46%] brightness-[1.14] saturate-[1.06]"
             />

@@ -22,13 +22,16 @@ import type { ComponentRegistry, DeepPartialThemeConfig } from '@platform/theme-
  * render lede/prose paragraph copy must apply `font-prose` explicitly; plain body text
  * otherwise inherits `font-sans` (Archivo) via Tailwind Preflight. All three faces are
  * loaded with next/font/google in app/layout.tsx (self-hosted, no external font request),
- * matching the precedent already set by sites/dcs and sites/dj-fox-electrical. Fraunces and
- * Newsreader both load `weight: 'variable'` with `axes: ['opsz']` so optical sizing behaves
- * like the prototype's `Fraunces:opsz,wght@9..144,300..600` /
- * `Newsreader:opsz,wght@6..72,200..500` Google Fonts requests (confirmed against
- * next/font's google font-data.json — both fonts expose an `opsz` axis). Archivo loads
- * `weight: 'variable'` with no extra axes (prototype requests `Archivo:wght@200..600`;
- * Archivo has a `wdth` axis but the prototype doesn't use it).
+ * matching the precedent already set by sites/dcs and sites/dj-fox-electrical. **`weight` is a
+ * discrete list of the exact weights actually used, not `'variable'`** (changed 2026-09-12, see
+ * `app/layout.tsx`'s own comment for the full rationale and the grep to re-run before adding a
+ * new weight anywhere) — `next/font/google` has no way to request a bounded range like the
+ * prototype's own `Fraunces:opsz,wght@9..144,300..600` Google Fonts syntax, so `'variable'` was
+ * downloading each family's entire default axis, and fonts turned out to be the single largest
+ * asset category on the homepage. This also means Fraunces/Newsreader no longer carry
+ * `axes: ['opsz']` — next/font throws a build error combining a fixed `axes` list with a
+ * discrete `weight` (only valid alongside `weight: 'variable'`) — so optical-size interpolation
+ * is gone in favour of each weight's static default opsz. No visible regression found.
  *
  * Components/pages themselves are still base-template's generic placeholders, not the
  * real ledger/register design (separate, in-progress work by other agents).

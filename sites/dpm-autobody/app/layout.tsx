@@ -12,32 +12,50 @@ import { AnalyticsDebugPanel } from '@platform/core-components/components/analyt
 
 /**
  * Fonts — self-hosted via next/font/google (no external request to fonts.googleapis.com;
- * matches the precedent in sites/dcs and sites/dj-fox-electrical). Mirrors the approved
- * static prototype's `Archivo:wght@200..600&Fraunces:opsz,wght@9..144,300..600&
- * Newsreader:opsz,wght@6..72,200..500` Google Fonts request — see theme.config.ts's file
- * header comment for the full rationale and the sans/heading token remapping.
+ * matches the precedent in sites/dcs and sites/dj-fox-electrical).
+ *
+ * `weight` is a discrete list, not `'variable'` — changed 2026-09-12 after a Lighthouse audit
+ * found fonts were the single largest asset category on the homepage (229 KB across 3 files,
+ * more than JS or images combined). `weight: 'variable'` downloads the *entire* default weight
+ * axis for each family (next/font/google has no way to request a bounded range like the
+ * prototype's own `wght@200..600` Google Fonts URL — confirmed against
+ * `next/dist/compiled/@next/font/dist/google/index.d.ts`, which only accepts `'variable'` or a
+ * discrete weight/array of weights, nothing in between). A discrete list produces one small
+ * static-weight file per value instead, at Google's default optical size for that weight —
+ * `axes: ['opsz']` cannot be combined with a discrete `weight` (next/font throws "Axes can only
+ * be defined for variable fonts when the weight property is nonexistent or set to `variable`",
+ * confirmed by a failed production build), so this trades away opsz interpolation for the size
+ * win. No visible regression found on inspection of Fraunces/Newsreader usage on this site.
+ *
+ * The weight lists below are the *exact* set actually used, verified by grepping every
+ * `font-heading`/`font-prose` occurrence and its weight class across every `.tsx`/`.mdx` file in
+ * this site, then cross-checking the platform-wide weight-class tally against those two counts to
+ * find what's left over for Archivo (the default `font-sans`, used everywhere neither of the
+ * other two is). Re-run that same grep before adding a new weight anywhere — a missing weight
+ * here doesn't error, it silently falls back to a synthetic (browser-faked) bold/thin, which reads
+ * as an obviously wrong weight rather than the true drawn one:
+ *   grep -rhoE "font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)\b" \
+ *     --include="*.tsx" --include="*.mdx" . | sort | uniq -c
  */
 const archivo = Archivo({
   subsets: ['latin'],
   variable: '--font-archivo',
   display: 'swap',
-  weight: 'variable',
+  weight: ['200', '400', '500', '600', '700'],
 });
 
 const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-fraunces',
   display: 'swap',
-  weight: 'variable',
-  axes: ['opsz'],
+  weight: ['300'],
 });
 
 const newsreader = Newsreader({
   subsets: ['latin'],
   variable: '--font-newsreader',
   display: 'swap',
-  weight: 'variable',
-  axes: ['opsz'],
+  weight: ['200', '300', '400'],
 });
 
 export const metadata: Metadata = {

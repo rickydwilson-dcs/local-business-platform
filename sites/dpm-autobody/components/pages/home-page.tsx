@@ -73,6 +73,12 @@ function LayerImage({ image, filter }: { image: LotImage; filter: 'plate' | 'res
       alt={image.alt}
       fill
       priority={image.priority}
+      // Explicit hero quality — this is a site-local component, not one of the shared
+      // core-components hero components that already set this (see e.g. hero-section.tsx),
+      // so it was falling back to next/image's own implicit default (75) instead of the
+      // platform's established hero convention (72, already in next.config.ts's `qualities`
+      // allow-list) — found via a Lighthouse audit, 2026-09-12.
+      quality={72}
       sizes="100vw"
       style={image.vars}
       className={`object-cover ${IMG_POSITION} ${filter === 'plate' ? PLATE_FILTER : RESOLVE_FILTER}`}
