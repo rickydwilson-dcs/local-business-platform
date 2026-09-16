@@ -321,6 +321,194 @@ album lands, except the pure copy fixes noted inline.
 
 ---
 
+## 5a. David's per-build content reply, received 2026-09-15
+
+David's answer to the "separate email per build" ask above landed 2026-09-15. Five items were pure
+corrections with no new assets needed and are **already applied to the live MDX/code** (see
+`sites/dpm-autobody/CLAUDE.md`'s "Still not done" section for the detail):
+
+- Removed the "well-known singer" previous-owner claim from `p1800-pearl-white.mdx` entirely —
+  David: never happened, probably confused with a Rolls-Royce DPM restored for Julie Andrews.
+- Removed the "one of two P1800s, one client" pairing claim from `p1800-candy-restomod.mdx` —
+  David: that story belongs to a different client's two cars entirely, unrelated to the resto-mod.
+  (That other client's pair is still real and still open — see item 5 above, "still waiting on his
+  information on the shows they won.")
+- Deleted `jaguar-sea-green.mdx` and its `LIBRARY_ORDER` entry — David's own call, "an old not
+  particularly well documented restoration." Library is 9 builds now, not 10.
+- Porsche 356 SC "minor mechanical rebuild" wording re-confirmed (already correct in the copy
+  since 2026-09-12; no change needed).
+
+**Everything else in David's reply was new content or new photo albums.** Held per Ricky's call,
+2026-09-15, to keep photo-dependent build-out as one pass per car rather than partial updates — that
+pass ran 2026-09-16 and applied all of it (see commit SHAs on each bullet below). Only four things
+remain genuinely open: the Volvo 262C and Red P1800 chassis numbers (both still TBC), the DB6
+photo-batch discrepancy (needs David's confirmation, not resolved), and the redaction gap noted at
+the end of the Photo pipeline section below.
+
+- **Bentley S3 1964 ("current restoration") — chassis now known: BC60 XC.** Full description
+  received (arrival condition, wheel-tub/quarter-panel/valance fabrication, soda blasting, epoxy
+  primer, body levelling, underside/cockpit paint — "now awaits reuniting with the freshly
+  restored chassis before final prep for paint"). Matches the in-progress build already live as
+  `bentley-s3-1964.mdx`. Photos: https://share.icloud.com/photos/003FP2ea7NN0LkE9kzVfSOsTg
+  **DONE 2026-09-16 — commit `2808e624`.** `chassisNumber` set to BC60 XC, `sourcingGaps` entry
+  removed, scopeOfWork/body rewritten, 18 new gallery photos added (11 from this album + 7 from
+  the chassis-rebuild album below).
+- **Bentley S3 chassis rebuild** — companion photo set for the same car above, no separate
+  description. Photos: https://share.icloud.com/photos/0c6GM0eUPUwESLnR0HY0k_d5g
+  **DONE 2026-09-16 — commit `2808e624`** (folded into the Bentley S3 1964 update above; 7 of its
+  photos are among the 18 added).
+- **Bentley S3 Continental ("finished, the one with video") — chassis now known: BC66 XA.**
+  Restored 2021. Full description received (bare-metal repaint, hand-crafted lower-body panels —
+  coachbuilt, no replacement panels exist — 4mm gaps, 5 coats of lacquer, 6-grade block sand,
+  chrome re-done, interior recolonised, hood by SM Trimming). Matches the finished build already
+  live as `bentley-s3-continental.mdx` (video already linked). Adds: showcased at the NEC in 2023.
+  Photos: https://share.icloud.com/photos/0e2Jsfk8iM1w2VShB-q38cIqg
+  **DONE 2026-09-16 — commit `8f3488d4`.** `chassisNumber` set to BC66 XA, `sourcingGaps` entry
+  removed, scopeOfWork/body expanded (coachbuilt panels, paint process, chrome, interior, NEC 2023
+  fact), 11 new gallery photos added (9 from this album + 2 from the NEC exhibition album).
+- **Pearl White P1800 ("current restoration")** — full, much richer description received
+  ("drive in drive out" package, pre-purchase compression check found low compression → engine
+  rebuild required, new wheel tubs/inner wings/floor pans/chassis rails/jacking points/bulkhead,
+  soda blasting, 4mm panel gaps, custom pearl-effect colour, poly bush + new bearings,
+  power-steering conversion). Substantially expands the current thin copy on
+  `p1800-pearl-white.mdx` — rewrite the body when the photos land rather than patching piecemeal.
+  Photos: https://share.icloud.com/photos/0813neGTO0yZN8-gnF89wnvXQ
+  **DONE 2026-09-16 — commit `1a1af03a`.** Full scopeOfWork/body rewrite (compression check, engine
+  rebuild, chassis fabrication, pearl colour, power steering), 8 new gallery photos added.
+- **Volvo 262C — new build, not previously in the library.** Chassis left blank by David, still
+  TBC. Full description received: repeat client, rare model (donor vehicle sourced from the USA
+  for parts/roof — original roof had vinyl-roof moisture-trap damage), in-house engine rebuild,
+  zinc-plated components, injection unit refurbished off-site, "fully rebuilt and now going
+  through shakedown tests." Names Simon specifically for the finessing work — worth keeping in the
+  copy as a craft-attribution detail, matching how Mark Antwis's E-type page credits people by
+  name. Needs a new slug/MDX file, not an edit to an existing one.
+  Photos: https://share.icloud.com/photos/04fC6ytFAK7czhcH87m71yEbw
+  **DONE 2026-09-16 — commit `e9b43f08`.** New build created (`volvo-262c.mdx`), added to
+  `LIBRARY_ORDER` (library is now 10 builds, not 9), 8 gallery photos + heroImage set. **Chassis
+  number stays OPEN** — left TBC with a `sourcingGaps` entry, per David.
+- **Pink Aston Martin DB6 — correction only, no new photos.** Confirms: **has
+  not raced since** the 2022 crash (still due to — resolves the open status question) and the
+  livery shown in the crashed photos is the car's **original** livery, not yet replaced with the
+  new pink-request design (previously only inferred from the photo set). Both `sourcingGaps`
+  entries removed from `aston-martin-db6-pink.mdx` and its copy updated to state both facts
+  directly. **DONE — commit `57f65d24` (2026-09-16; corrects this bullet's earlier "Applied,
+  2026-09-15" note, which predated the actual code change).**
+- **DB6 photo-batch discrepancy — OPEN, needs David's confirmation, NOT resolved.** David's email
+  said "no new photos" for the DB6, but a 15-photo album arrived in the same 2026-09-15 batch
+  regardless. Checked 2026-09-16: 6 of the 15 filenames matched existing gallery photos exactly and
+  the other 9 showed no new content, so **zero photos from that album were added** to
+  `aston-martin-db6-pink.mdx`. A new `sourcingGaps` entry was added instead, asking David to confirm
+  nothing was missed — flagged, not resolved. Commit `57f65d24`.
+- **Red P1800 — chassis still TBC (David left it blank again).** Full description received: sent
+  as a stripped shell, one of the worst DPM has seen, full inner-panel fabrication (floors, chassis
+  rails, inner wings, scuttle, boot floor), body sent for blasting with exterior panels off,
+  factory black stone-chip underside paint, engine/interior refit done by another shop after DPM's
+  work. Confirms the whole restoration was documented by **JPM Productions** (film production
+  company name, not previously confirmed). Matches the build already live as `p1800-red.mdx`.
+  Photos: https://share.icloud.com/photos/00eKK7Hd_OkFdfYVtpPXTRaS
+  **DONE 2026-09-16 — commit `784d3c86`.** scopeOfWork/body expanded (stripped-shell arrival,
+  inner-panel fabrication, JPM Productions credited), 22 new gallery photos added. **Chassis
+  number stays OPEN** — still TBC, a `sourcingGaps` entry was added for it.
+- **Tonja/Ahmet resto-mod Candy P1800 — expanded description for the already-live build.** Much
+  richer copy than currently on `p1800-candy-restomod.mdx`: panel-seam/side-trim removal for a
+  smooth body, bumpers modified/shortened and converted to a single piece from the factory 3-piece
+  setup, window-scraper trim fitment matched to the door-handle trim gap, custom 3-stage Candy Red
+  mix. Mechanical rebuild by **Wilde Classics** (name now confirmed), custom interior by another
+  (unnamed) firm. **Showcased at the NEC in both 2023 and 2024** (previously only 2023 was noted
+  elsewhere). No new photos given for this one — reuse existing.
+  **DONE 2026-09-16 — commit `9faa77ab`.** scopeOfWork/body expanded (trim/bumper/paint mix, Wilde
+  Classics confirmed, NEC 2023+2024), `sourcingGaps` entry for the "second car in pair" removed
+  (David confirmed 2026-09-15 that story belongs to a different client), 8 of 23 new album photos
+  added (1 of 24 was a confirmed byte-identical duplicate, correctly excluded).
+- **Workshop action shots** — general welding/metalwork atmosphere shots, not build-specific.
+  David specifically asks for one of the dog if there's a usable shot. Feeds the workshop-page
+  direction (item 3 above). Photos: https://share.icloud.com/photos/047nVPG5fj8IiPCHCUgr5FwMw
+  **DONE 2026-09-16 — commit `52990124`.** New "Workshop atmosphere" section added to
+  `app/workshop/page.tsx` with 8 photos, including the requested dog photo (found within this
+  album itself).
+- **NEC exhibition photos** — no description, presumably usable across whichever builds were
+  actually shown at the NEC (Bentley S3 Continental 2023, Tonja/Ahmet resto-mod 2023+2024 — confirm
+  which cars appear in the album itself before attributing individual photos).
+  Photos: https://share.icloud.com/photos/018BalSR5CeG-FS-1MKE-Qf7Q
+  **DONE 2026-09-16 — commits `57f65d24` and `8f3488d4`.** 2 photos went to the Bentley S3
+  Continental gallery; the DB6 got 2 new facts from this album (exhibited at the NEC, added to
+  body prose) but no photos, since none were new.
+- **"Porsche SC" — ambiguous, needs checking before use.** No description given. Ricky's read,
+  2026-09-15: likely the same car as the already-live `porsche-356-sc.mdx` (David/Ricky only ever
+  discussed one Porsche), not a second, different model (e.g. a 911 SC) — but not confirmed, since
+  David didn't repeat "356" here. **Check the photos against the existing `porsche-356-sc.mdx`
+  gallery before deciding** whether this is a replacement/addition to that build or a genuinely new
+  one; ask David directly if the photos don't settle it.
+  Photos: https://share.icloud.com/photos/0f1Nvynt2rno7ganz4EwGU_OA
+  **RESOLVED and DONE — commit `65a654f7` (2026-09-16).** Confirmed the same car (matching
+  `IMG_0304.jpg` heroImage filename) and confirmed by David 2026-09-16 — the same-car question is
+  now closed. 11 new gallery photos added (10 plain + 1 with a caption clarifying it's the same
+  restoration at an earlier stage); the duplicate heroImage file was correctly excluded.
+
+### Photo pipeline — complete for all 11 albums, 2026-09-16
+
+All 11 iCloud albums from this email were pulled (Ricky, via Safari — the iCloud web client's
+bulk-download blocked Chrome automation with a server error and repeated retries didn't clear it;
+Safari worked first try), converted HEIC→JPEG at full resolution (`sips`), run through
+`plate-redact`'s detector, then reviewed image-by-image at full native resolution — not just the
+detector's top candidates, which were false positives on every album (rust, weld splatter, chrome
+trim) and never once caught a real plate. All redaction was auto-applied without the tool's normal
+interactive browser confirm step, per Ricky's explicit instruction for this batch — every image
+was still individually eyeballed by Claude first. Results, folders under
+`../../2026-09/2026-09-08_dpm-autobody-build-out/inbox/`:
+
+| Album                                                  | Folder                            | Photos | Plates found & redacted                                                                                                                                  |
+| ------------------------------------------------------ | --------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bentley S3 1964, current restoration (chassis BC60 XC) | `bentley-s3-1964-current`         | 11     | 2 (background van)                                                                                                                                       |
+| Bentley S3 1964, chassis rebuild                       | `bentley-s3-1964-chassis-rebuild` | 7      | 0                                                                                                                                                        |
+| Pink DB6                                               | `db6-pink-2026-09`                | 15     | 1 (background car)                                                                                                                                       |
+| Bentley S3 Continental, finished                       | `bentley-s3-continental-finished` | 16     | 4 (2 photos, 2 plates each — Honda + van, two vans)                                                                                                      |
+| Tonja/Ahmet resto-mod Candy P1800                      | `p1800-candy-restomod-2026-09`    | 24     | 1 (background van)                                                                                                                                       |
+| "Porsche SC"                                           | `porsche-sc`                      | 12     | 0                                                                                                                                                        |
+| Volvo 262C                                             | `volvo-262c`                      | 17     | 0 (no plates fitted to the car at all)                                                                                                                   |
+| NEC exhibition                                         | `nec-exhibition`                  | 7      | 2 (same DB6 plate, "OH OH 7", in two photos — a real personalised plate, not a DPM show plate)                                                           |
+| Pearl White P1800, current restoration                 | `p1800-pearl-white-current`       | 18     | 2 (background cars)                                                                                                                                      |
+| Workshop action shots                                  | `workshop-action`                 | 19     | 0                                                                                                                                                        |
+| Red P1800                                              | `p1800-red-2026-09`               | 24     | 2 (the car's own plate, "723 HYK", in two photos — first pass under-sized one box and left a sliver of the plate exposed, caught on re-verify and fixed) |
+
+**"Porsche SC" resolved by photo evidence, not just inference — CLOSED 2026-09-16, commit
+`65a654f7`.** The album contains `IMG_0304.jpg`
+— the exact filename already used as `porsche-356-sc.mdx`'s live `heroImage` — confirming it's the
+same car, not a second model. It also contains a **second, distinct white bare-shell 356** not
+otherwise documented anywhere on the site. Decision taken: the white shell was folded in as more
+photos of the same in-progress story (11 new gallery photos, 1 with a caption clarifying it's the
+same restoration at an earlier stage), not treated as a second Porsche build. David confirmed
+2026-09-16 this is the same car — the same-car question is resolved.
+
+**Fixed along the way:** `plate-redact/apply.py`'s contact-sheet montage was emitting 12-bit
+JPEGs that standard viewers (including Claude's own image reader) can't open — silently defeating
+the tool's own "check the contact sheet by eye before publishing" step. One-line fix
+(`-depth 8` added to the `montage` call).
+
+**Folder mix-up caught before it mattered:** the Red P1800 and NEC exhibition tokens were
+transposed during the initial batch-convert (a transcription slip, not a tooling bug); caught by
+content-checking the first survey grid against David's descriptions before any redaction work
+started, not after.
+
+**DONE 2026-09-16:** all 170 photos across all 11 albums were uploaded to R2 and wired into
+MDX/new pages — the chassis numbers David supplied (BC60 XC, BC66 XA), the new Volvo 262C page, the
+Pearl White/Bentley description rewrites, and the Porsche SC decision above are all applied and
+committed (see the per-build bullets above for individual commit SHAs). Upload script/manifest
+change: commit `a23c67fb`. Real manifest path:
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/photos-manifest.json`.
+
+**Also note:** David's line "please feel free to expand or change some wording where you seem fit"
+is a general licence to tighten his prose for the site's voice — it isn't an invitation to invent
+facts, so keep expansions to phrasing, not new claims.
+
+**OPEN — redaction gap found 2026-09-16, not yet fixed:** a sub-agent spotted that
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/p1800-red-2026-09/redacted/IMG_1601.jpg`
+still has an unredacted, fully legible plate ("723 HYK", on a shelf, not on the car) that the
+plate-redact pass missed. This photo was **not** used in any gallery in this run, so nothing live
+is affected, but it needs a redaction-pass fix before that specific photo is ever used anywhere.
+
+---
+
 ## 4. Deferred / smaller
 
 - **Directory sweep at cutover.** The NEC exhibitor listing still carries DPM's old address and phone
