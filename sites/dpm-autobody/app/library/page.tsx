@@ -63,21 +63,25 @@ export const metadata: Metadata = {
  * duplicate placeholder describing "two P1800s, one client, both won show awards" as its own
  * lot, when those two cars are (at least one of them, confirmed) already catalogued as their own
  * builds elsewhere in this list (the resto-mod, chassis 23925). The pair fact now lives as a
- * `sourcingGaps` note on that build instead of a separate lot. All slugs below must appear here
- * exactly once; a slug present in content/builds/ but missing from this list would simply never
- * render, which is why every filename under content/builds/ has a matching entry.
+ * `sourcingGaps` note on that build instead of a separate lot.
+ *
+ * Confirmed 2026-09-15: `jaguar-sea-green` was removed (10 → 9 total) at David's own request —
+ * he called it "an old not particularly well documented restoration" and asked for it to come
+ * out of the portfolio. All slugs below must appear here exactly once; a slug present in
+ * content/builds/ but missing from this list would simply never render, which is why every
+ * filename under content/builds/ has a matching entry.
  */
 const LIBRARY_ORDER = [
   'p1800-candy',
   'p1800-candy-restomod',
   'p1800-red',
   'bentley-s3-continental',
-  'jaguar-sea-green',
   'etype-941pvo',
   'porsche-356-sc',
   'aston-martin-db6-pink',
   'bentley-s3-1964',
   'p1800-pearl-white',
+  'volvo-262c',
 ] as const;
 
 /** Hand-authored "the full record of…" labels for the two real documented-car pages, matching
