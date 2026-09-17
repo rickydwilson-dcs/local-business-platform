@@ -1,5 +1,237 @@
 # DPM Autobody build-out — handoff
 
+**2026-09-17 — supersedes every section below.** The "What was NOT done" list in the 2026-09-16
+section immediately below is now done — this note existed only because that section was written
+mid-pass and the follow-through work (an autonomous `yolo-brief.md` run, then a small manual fix)
+happened after it, without anyone coming back to update this file. Don't read the 2026-09-16
+section's "What was NOT done"/"Next step"/"Open questions" as current state.
+
+**What actually happened, in order:**
+
+1. The 2026-09-16 pass below did the text corrections and photo pipeline (redact/strip-metadata
+   for all 11 albums), then stopped — exactly as its own "What was NOT done" list says.
+2. An autonomous session (`claude --dangerously-skip-permissions -p ... yolo-brief.md`) then ran
+   the rest of that brief to completion: R2 upload for all 11 albums (170 photos, commit
+   `a23c67fb`), the six builds' MDX updates (commits `2808e624`, `65a654f7`, `9faa77ab`,
+   `1a1af03a`, `57f65d24`, `8f3488d4`, `784d3c86`), the new Volvo 262C build page (`e9b43f08`),
+   and the workshop action-photo section including David's dog shot (`52990124`). Full detail is
+   in `session-wrap-up.md` and `yolo-brief.md`'s own "Completed" section — not repeated here.
+   `type-check`/`test` (84/84)/`lint`/`build` all re-verified clean at the time. Everything landed
+   as local commits on `develop`; **nothing was pushed or promoted** — that's still a separate,
+   not-yet-done step.
+3. That run surfaced two things it deliberately left open rather than guessing at (both are
+   `sourcingGaps` entries visible on the live pages, not just notes in a doc): a DB6 photo-batch
+   discrepancy (David said "no new photos", one arrived anyway — see
+   `aston-martin-db6-pink.mdx`'s `sourcingGaps`), and an unredacted plate found in
+   `inbox/p1800-red-2026-09/redacted/IMG_1601.jpg` that the automated redaction pass had missed.
+4. **2026-09-17, separately:** the IMG_1601.jpg plate gap was fixed by hand — reviewed the plate
+   location visually, redacted it with `plate-redact/apply.py --style blank`, and, on checking,
+   found the _unredacted_ file had already been pushed live to R2 by the upload step in (2) above
+   (confirmed via `headFile`), just unlinked from any page. Per this platform's R2 cache-busting
+   rule, the fix went to a **new** key (`.../IMG_1601-redacted.jpg`) rather than overwriting the
+   old one, and the old exposed-plate object was deleted outright. Now used in `p1800-red.mdx`'s
+   `galleryImages`. See `BACKLOG.md`'s redaction-gap entry for full detail.
+
+**Still genuinely open** (unchanged by the above): the DB6 photo discrepancy needs a real answer
+from David, not just the flag; Volvo 262C's and Red P1800's chassis numbers are still TBC; the
+resto-mod client pair's second car/show names/awards are still unidentified; whether `develop` has
+been promoted to `staging`/`main` has still not been checked in this session or the one before it.
+
+---
+
+**2026-09-16 — supersedes every section below.** New phase: David replied 2026-09-15 to the
+per-build content ask referenced throughout the sections below (chased for in the 2026-09-12
+draft email). This pass applied his pure-text corrections and ran the full photo pipeline for
+all 11 new albums. **Status: in-progress, not blocked.** Text corrections are done and gate-clean
+but uncommitted. Photo prep (download → convert → detect → manually review at full resolution →
+redact → strip metadata) is done for all 11 albums, also uncommitted (the `inbox/` folder is
+untracked by design — see Traps). **Page-building (MDX updates, new Volvo 262C page, R2 upload)
+has not started.**
+
+**Branch:** `develop`. Locally 1 commit ahead of `origin/develop` (`1f124222`, an unrelated DCS
+change from another session — not part of this work, don't touch it or attribute it to DPM).
+All prior DPM commits referenced in the superseded sections below are already on
+`origin/develop` — confirmed via `git log --oneline @{u}..`, which shows only `1f124222`.
+Whether `develop` has since been promoted to `staging`/`main` was **not checked this pass** — a
+`git log origin/main..origin/develop` locally returned nothing, but that's against a possibly
+stale fetch; re-fetch and check before assuming either way.
+
+**Working tree — uncommitted:**
+
+```
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md
+ M output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/tools/plate-redact/apply.py
+ M sites/dpm-autobody/CLAUDE.md
+ M sites/dpm-autobody/app/library/page.tsx
+ M sites/dpm-autobody/content/builds/aston-martin-db6-pink.mdx
+ D sites/dpm-autobody/content/builds/jaguar-sea-green.mdx
+ M sites/dpm-autobody/content/builds/p1800-candy-restomod.mdx
+ M sites/dpm-autobody/content/builds/p1800-pearl-white.mdx
+?? output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/   (1.1GB, untracked by design)
+?? output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/          (unrelated DCS session, not this work)
+```
+
+All of `sites/dpm-autobody`'s gates re-verified clean immediately before writing this handoff:
+`pnpm --filter dpm-autobody run type-check`, `run test` (84/84), `run lint` — all pass.
+
+## What this pass did
+
+**1. Applied David's 2026-09-15 pure-text corrections** (no new assets needed), all verified
+against the live MDX and gate-clean:
+
+- Removed the "well-known singer" previous-owner claim from `p1800-pearl-white.mdx` — David: never
+  happened, probably confused with a Rolls-Royce DPM restored for Julie Andrews.
+- Removed the "one of two P1800s, one client" pairing claim from `p1800-candy-restomod.mdx` —
+  belongs to a different client's two cars entirely, still open (unrelated to the resto-mod).
+- Deleted `jaguar-sea-green.mdx` and its `LIBRARY_ORDER` entry in `app/library/page.tsx` — David's
+  own call, "an old not particularly well documented restoration." Library is 9 builds, not 10.
+- Porsche 356 SC "minor mechanical rebuild" — re-confirmed, already correct, no change needed.
+- Corrected `aston-martin-db6-pink.mdx`: hasn't raced since the crash (still due to), and the
+  crash photos show the car's **original** livery, not the new pink-request design.
+- `sites/dpm-autobody/CLAUDE.md` updated throughout to match — see its "Still not done" section.
+- `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md` item 5a logs all of this
+  plus everything still pending (see below).
+
+**2. Ran the full photo pipeline for all 11 albums David sent**, into
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/<name>/{raw,redacted}/`:
+
+| Album                                                      | Folder                            | Photos | Plates redacted                    |
+| ---------------------------------------------------------- | --------------------------------- | ------ | ---------------------------------- |
+| Bentley S3 1964, current restoration (chassis **BC60 XC**) | `bentley-s3-1964-current`         | 11     | 2                                  |
+| Bentley S3 1964, chassis rebuild                           | `bentley-s3-1964-chassis-rebuild` | 7      | 0                                  |
+| Pink DB6                                                   | `db6-pink-2026-09`                | 15     | 1                                  |
+| Bentley S3 Continental, finished (chassis **BC66 XA**)     | `bentley-s3-continental-finished` | 16     | 4                                  |
+| Tonja/Ahmet resto-mod Candy P1800                          | `p1800-candy-restomod-2026-09`    | 24     | 1                                  |
+| "Porsche SC" — see resolution below                        | `porsche-sc`                      | 12     | 0                                  |
+| Volvo 262C (**new build, no page yet**)                    | `volvo-262c`                      | 17     | 0 (no plates fitted)               |
+| NEC exhibition                                             | `nec-exhibition`                  | 7      | 2 (same DB6 plate, "OH OH 7")      |
+| Pearl White P1800, current restoration                     | `p1800-pearl-white-current`       | 18     | 2                                  |
+| Workshop action shots (has the dog David wanted)           | `workshop-action`                 | 19     | 0                                  |
+| Red P1800 (chassis still TBC)                              | `p1800-red-2026-09`               | 24     | 2 (the car's own plate, "723 HYK") |
+
+**How it was done, and why it took as long as it did:** iCloud's shared-album API has moved to
+CloudKit (`ckdatabasews.icloud.com`), not the older documented `sharedstreams` endpoint — scripting
+it blind failed, and driving it via Chrome browser automation also failed (`"Unable to Download
+Items — server error"`, repeatable). **Ricky downloaded all 11 albums himself via Safari** and
+dropped them into `inbox/_icloud-downloads/<token>/`. From there: HEIC→JPEG at full resolution
+(`sips`), run through `tools/plate-redact/detect.py`, then **every single photo reviewed
+individually at full native resolution by Claude** — not just the detector's top candidates, which
+were false positives on every album (rust, weld splatter, chrome trim) and never once caught a
+real plate. Every real plate found was one the detector missed. Redaction was auto-applied without
+the tool's normal interactive browser-confirm step, **per Ricky's explicit instruction for this
+batch only** — this is a deliberate, one-time deviation from `plate-redact/README.md`'s own
+"a human confirms every image" design; don't treat it as the new normal without asking again.
+
+**3. Found and fixed a real bug** in `tools/plate-redact/apply.py`: the contact-sheet `montage`
+call was emitting 12-bit JPEGs that no standard viewer (including Claude's own image reader) can
+open — silently defeating the tool's own "check the contact sheet by eye before publishing" step.
+Fix: added `-depth 8` to the `montage` invocation. Verified by re-generating and actually opening
+a contact sheet afterward.
+
+**4. Caught a folder mislabel before it caused harm.** The Red P1800 and NEC exhibition album
+tokens were transposed during the initial batch-convert (a transcription slip copying David's
+email, not a tooling bug) — caught by content-checking the first survey grid against David's
+descriptions _before_ any redaction work started on either folder, and fixed with a plain `mv`
+swap. If a `p1800-red-2026-09` or `nec-exhibition` folder ever looks wrong again, this is why the
+swap happened — both are correctly labelled now.
+
+**5. Resolved the "Porsche SC" ambiguity by photo evidence** (flagged as unclear when the content
+first arrived — see the "Text corrections now, photos later" conversation earlier this session):
+the album contains `IMG_0304.jpg`, the exact filename already used as the live
+`porsche-356-sc.mdx`'s `heroImage` — confirming it's the **same car**, not a second model. It also
+contains a **second, distinct white bare-shell 356** not documented anywhere on the site yet.
+**Decision needed before build-out** (see Open questions): fold the white shell in as more photos
+of the same in-progress story, or treat it as a separate, unannounced build.
+
+## Current state — verified 2026-09-16
+
+- All 6 text-correction files pass `type-check`, `test` (84/84), and `lint` — re-run immediately
+  before writing this handoff, all clean.
+- All 11 albums have a populated `redacted/` folder with metadata stripped and a re-verified
+  (8-bit) contact sheet. Spot-verified several redaction boxes pixel-by-pixel after applying —
+  one (`p1800-red-2026-09/IMG_1615.jpg`) needed a second, wider pass after the first box left a
+  sliver of the plate exposed; re-verified clean after the fix. Treat this as a general lesson:
+  **an angled/perspective plate needs a generously oversized box**, not a tight one — re-check any
+  box that looks "just barely" adequate in a straight-on preview.
+- Nothing has been uploaded to R2. Nothing has been written to any `.mdx` file from the new photo
+  content or descriptions. No new build page exists for the Volvo 262C.
+
+## What was NOT done
+
+- **No commits.** Everything above is sitting in the working tree / untracked `inbox/`.
+- **No R2 upload** of any of the 11 albums' redacted photos.
+- **No MDX changes** applying David's new descriptions (Bentley S3 1964, Bentley S3 Continental,
+  Pearl White P1800 rewrite, Red P1800, Tonja/Ahmet resto-mod expansion) or the two new chassis
+  numbers (BC60 XC, BC66 XA) — these are pure text, no photos needed, and were deliberately held
+  back to keep each build's description + photo update as one pass rather than partial edits (see
+  `BACKLOG.md` item 5a for the full text of each, already transcribed from David's email).
+- **No new Volvo 262C build page** — needs a new slug/MDX file, chassis number is still blank
+  (David left it TBC), full description already transcribed in `BACKLOG.md` item 5a.
+- **The Porsche SC decision above is unmade** — don't guess at it; ask Ricky or re-read the
+  photos yourself against `porsche-356-sc.mdx`'s existing gallery before writing anything.
+- **Workshop page has not been updated** with any of the 19 workshop-action photos, despite
+  David's specific ask for a usable dog photo — one exists in this album (also two more dog
+  cameos turned up unprompted in `bentley-s3-1964-chassis-rebuild` and `p1800-red-2026-09`).
+- **`e2e/smoke.spec.ts` still not extended** for any of this — unchanged since every prior handoff
+  section below.
+
+## Traps
+
+- **`inbox/` is untracked by design, and is now 1.1GB** — don't `git add -A` near it, and don't
+  be alarmed by its size; this matches established project convention for session photo dumps
+  (see root `CLAUDE.md`'s Output Folder section). It contains **both** this pass's new albums
+  (`*-2026-09` suffixed, plus `db6-pink-2026-09`, `bentley-s3-1964-current`,
+  `bentley-s3-1964-chassis-rebuild`, `porsche-sc`, `volvo-262c`, `workshop-action`,
+  `p1800-pearl-white-current`, `nec-exhibition`) **and** the original 2026-09-08 batch's folders
+  (`bentley-s3-chassis`, `bentley-s3-metalwork`, `db6-pink-aston`, `p1800-candy-underside`,
+  `p1800-pearl-white`, `p1800-red`, `p1800-restomod`, `porsche-356sc`) — don't confuse the two
+  vintages; the `-2026-09` suffix (or the plainly newer names) marks this pass's work.
+- **`p1800-red-2026-09` and `nec-exhibition` were transposed once already** — see item 4 above.
+  If either folder's content doesn't match its name, don't assume it's fine; re-check.
+- **Every real registration plate found (the Red P1800's own "723 HYK", the pink DB6's own
+  "OH OH 7", and every background vehicle's plate) is now redacted in every photo that showed
+  it** — if a future pass needs an _unredacted_ original for any reason (it shouldn't), it's in
+  each album's `raw/` subfolder, never `redacted/`.
+- **This session's redaction-review standard (full manual review of every photo, not just
+  detector hits) found real plates the detector's top candidate missed on every single album** —
+  if a future batch of photos comes in and someone is tempted to trust `detect.py`'s top-N
+  candidates alone to save time, don't; re-read this handoff's "How it was done" section above.
+- The `next dev` process noted running in the superseded sections below was **not checked this
+  pass** — don't assume it's still up, or still healthy, without a fresh `lsof -i :3000`.
+
+## Next step
+
+1. Decide the Porsche SC question (fold white shell into the existing build, or treat as new)
+   before touching that build's page.
+2. Write/update the MDX for the six affected builds (Bentley S3 1964, Bentley S3 Continental,
+   Pearl White P1800, Red P1800, Tonja/Ahmet resto-mod, Porsche SC) using the descriptions already
+   transcribed in `BACKLOG.md` item 5a — apply the two now-known chassis numbers while at it.
+3. Create the new Volvo 262C build MDX + slug.
+4. Upload the relevant `redacted/` photos to R2 for each build (see `tools/upload-photography.ts`
+   or the newer `tools/upload-prototype-assets.ts` pattern used earlier in this project — check
+   which is still current before assuming).
+5. Wire the new R2 URLs into each build's `heroImage`/`galleryImages` frontmatter.
+6. Update the workshop page with a selection of the 19 workshop-action photos, including a dog
+   shot.
+7. Re-run `type-check`/`test`/`lint`/`build` for `dpm-autobody`, then commit (probably several
+   commits — one per build is the established pattern in the git log below) and follow this
+   project's normal `develop → staging → main` promotion, per root `CLAUDE.md`.
+8. Update `BACKLOG.md` item 5a to move completed sub-items from open to done, per this project's
+   own "Implementation Briefs" standard in `MEMORY.md`.
+
+## Open questions
+
+- **Porsche SC — same build or new?** See item 5 above. Photo evidence points toward "same car,
+  plus an undocumented second white shell" but this hasn't been put to Ricky or David directly.
+- Volvo 262C's chassis number — David left it blank in his email, still needs chasing.
+- Red P1800's chassis number — also left blank ("chassis TBC").
+- The resto-mod's client pair (a different client from Tonja/Ahmet, two P1800s, show names and
+  awards) — still open, unchanged from every prior handoff section below.
+- Whether `develop` has been promoted to `staging`/`main` since 2026-09-12 — not checked this
+  pass, see "Branch" above.
+
+---
+
 **2026-09-12, later pass — supersedes the update below.** Since that note, a further round of small
 content fixes and one real feature (video link cards) landed, all sourced directly from David's
 7 September review-meeting transcript (Ricky shared it mid-session). **Status: ready-to-resume,

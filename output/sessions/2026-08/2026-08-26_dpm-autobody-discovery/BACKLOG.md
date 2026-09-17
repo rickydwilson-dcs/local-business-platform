@@ -501,11 +501,18 @@ change: commit `a23c67fb`. Real manifest path:
 is a general licence to tighten his prose for the site's voice — it isn't an invitation to invent
 facts, so keep expansions to phrasing, not new claims.
 
-**OPEN — redaction gap found 2026-09-16, not yet fixed:** a sub-agent spotted that
+**RESOLVED 2026-09-17:** the redaction gap found 2026-09-16 in
 `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/p1800-red-2026-09/redacted/IMG_1601.jpg`
-still has an unredacted, fully legible plate ("723 HYK", on a shelf, not on the car) that the
-plate-redact pass missed. This photo was **not** used in any gallery in this run, so nothing live
-is affected, but it needs a redaction-pass fix before that specific photo is ever used anywhere.
+(unredacted, fully legible plate "723 HYK", on a shelf, not on the car — missed by the automated
+plate-redact pass) is fixed. The earlier note that "nothing live is affected" was wrong: the
+unredacted file **had** already been uploaded to R2 at
+`dpm-autobody/builds/p1800-red/2026-09/IMG_1601.jpg` (confirmed via `headFile`, 2,859,667 bytes),
+just not linked from any page. Re-reviewed the plate location by hand, redacted with
+`tools/plate-redact/apply.py --style blank`, and — per the platform's R2 cache-busting rule
+(overwriting a key doesn't bust the 1yr CDN cache) — uploaded the corrected file under a **new**
+key, `.../IMG_1601-redacted.jpg`, then deleted the old exposed-plate object outright rather than
+leaving it live-but-unlinked. Local `redacted/` copy renamed to match. Now used in
+`p1800-red.mdx`'s `galleryImages`.
 
 ---
 

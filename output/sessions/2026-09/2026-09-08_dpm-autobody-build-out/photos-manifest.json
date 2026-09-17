@@ -1305,10 +1305,10 @@
   },
   {
     "album": "p1800-red-2026-09",
-    "localPath": "output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/p1800-red-2026-09/redacted/IMG_1601.jpg",
-    "key": "dpm-autobody/builds/p1800-red/2026-09/IMG_1601.jpg",
-    "size": 2859667,
-    "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/p1800-red/2026-09/IMG_1601.jpg",
+    "localPath": "output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/p1800-red-2026-09/redacted/IMG_1601-redacted.jpg",
+    "key": "dpm-autobody/builds/p1800-red/2026-09/IMG_1601-redacted.jpg",
+    "size": 2434432,
+    "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/p1800-red/2026-09/IMG_1601-redacted.jpg",
     "status": "uploaded"
   },
   {
