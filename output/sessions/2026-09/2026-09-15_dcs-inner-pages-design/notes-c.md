@@ -650,9 +650,32 @@ no horizontal overflow.
    what remains outside this folder; Decision 5 marked **CONFIRMED** with the source
    evidence.
 
+### Source content — CORRECTED 2026-09-17 (commit `d6db9487`)
+
+The prototypes were right and their sources were not. Fixed in `sites/dcs/` on `develop`,
+content only, Zod validation passing for both `services` and `blog`:
+
+| File                                                         | Change                                                                                                               |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `content/services/web-design.mdx`                            | £59/mo → **£45/mo**, £995 → **£750** (frontmatter description and body)                                              |
+| `content/blog/pay-monthly-vs-upfront-website.mdx`            | £59/mo → **£45/mo**                                                                                                  |
+| `content/blog/how-much-does-a-tradesperson-website-cost.mdx` | £59/mo → **£45/mo** ×3, including the "Honest Comparison" table — **this third file was missed in my earlier count** |
+
+Two factual claims went with the figures:
+
+- web-design.mdx claimed the monthly plan "covers the build **spread over 12 months**".
+  Unsourced, and contradicted by the site's own 24-month minimum term. Now "covers the
+  build and the ongoing management together", which needs no term.
+- pay-monthly-vs-upfront-website.mdx claimed monthly overtakes upfront in "typically
+  **three or four years**". The real crossover is month 22 on Starter and Professional and
+  month 24 on Growth — the post was talking readers out of the cheaper option for roughly
+  twice as long as the figures support. Now "a little under two years, on our own figures".
+
+**Not fixed, and still open:** the MDX files are first-person **plural** throughout ("we
+handle", "we fix it", "we also offer"). Session ground rule 8 and the homepage both use the
+singular. The prototypes corrected the voice; the sources still need a pass, and it is a
+whole-file content edit rather than a price fix, so it was left rather than done silently.
+
 ### Still outstanding, outside this folder
 
-`content/services/web-design.mdx` and `content/blog/pay-monthly-vs-upfront-website.mdx` both
-still carry £995/£59 in the real repo — the prototypes are now right, their sources are not.
-The blog post additionally claims the crossover is "three or four years" when the live figures
-put it at 22-24 months. Both are `sites/dcs/` edits, which this session does not touch.
+Nothing. The source-content corrections above closed the last item.
