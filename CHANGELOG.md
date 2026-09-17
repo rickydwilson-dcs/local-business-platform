@@ -6,6 +6,21 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-17
+
+### Sites
+
+- **DPM Autobody: applied David's 2026-09-15 content and photo batch in full — 6 builds updated, a
+  new Volvo 262C build added, and a workshop "atmosphere" photo section shipped**, closing out the
+  content ask that had been open since 2026-09-12. Ran via a two-pass workflow: interactive text
+  corrections first, then an autonomous `claude --dangerously-skip-permissions -p` run against a
+  pre-written brief for the photo pipeline and page-building. Along the way, found a real bug in
+  the shared `plate-redact/apply.py` tool (12-bit contact sheets no viewer could open) and, a day
+  later, a live consequence of it: an unredacted plate had already been uploaded to R2 despite
+  never being linked from any page, fixed by re-uploading under a new key per the platform's R2
+  cache-busting rule rather than overwriting the exposed object. See `sites/dpm-autobody/CHANGELOG.md`
+  for full detail.
+
 ## 2026-09-12
 
 ### Platform

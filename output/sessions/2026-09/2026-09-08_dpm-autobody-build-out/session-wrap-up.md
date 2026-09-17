@@ -54,3 +54,60 @@ A "port this approved design" brief is not lower-risk than net-new design work i
 - Fix the reference-capture height cap (16,384px Chromium raster limit) properly — segment-and-stitch — before reusing this capture tooling on another tall page.
 - The other 10 library builds still need real photos/content before they can get individual pages (per the brief's own honesty-pattern scope decision).
 - Minor visual polish deferred: hand-authored headline line-breaks on P1800, a few non-full-bleed photos, one portrait photo needing real intrinsic dimensions in the content schema.
+
+---
+
+# Session Wrap-Up: DPM Autobody 2026-09-16 Build-Out (Photos + 6 Builds + Volvo 262C + Workshop)
+
+**Date:** 2026-09-16
+**Session folder:** output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/
+**Branch:** develop (no feature branch — see yolo-brief.md's "Deviation from default branch model")
+**Status:** Completed
+
+## Goal
+
+Apply David's 2026-09-15 per-build content/photos to 6 existing builds plus one brand-new build (Volvo 262C), upload the 11 associated photo albums to R2, and add a workshop-atmosphere photo section — see `yolo-brief.md`'s `## Completed` section for the full account.
+
+## What Was Done
+
+See `yolo-brief.md`'s `## Completed` section — 170 photos across 11 albums uploaded to R2, 6 existing builds updated, 1 new build (Volvo 262C) created, and a new workshop photo section added, all gated by `validate-content.ts` and the full site build.
+
+## Key Decisions
+
+- Two photo-discrepancy checks were run rather than trusting David's text: the "Porsche SC" album was confirmed the same car as the live `porsche-356-sc.mdx` and folded in; the DB6's "no new photos" claim was checked against an actual 15-photo album that arrived anyway — 6 of 15 filenames matched the existing gallery exactly, so zero photos were added and a `sourcingGaps` entry was raised for David instead of guessing.
+- A stale `jaguar-sea-green` entry in `LIBRARY_ORDER` (the file had already been deleted from disk in this session's earlier, pre-existing uncommitted work) was corrected as part of the Volvo 262C library-page edit, since leaving it would have broken the build.
+- The brief's stated manifest path (`output/sessions/2026-09/photos-manifest.json`) was wrong — the upload script's actual `path.join(SESSION_DIR, "..", ...)` resolves to `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/photos-manifest.json`. Every sub-agent was corrected to use the real path rather than the brief's stated one.
+- Per the user's scope-discipline rule, this run commits to `develop` and stops — no push, no merge to staging/main.
+
+## Commits
+
+- `a23c67fb` — feat(dpm-autobody): extend R2 photo upload for David's 2026-09-15 batch (11 albums)
+- `2808e624` — feat(dpm-autobody): add Bentley S3 1964 chassis number and David's 2026-09-15 content
+- `65a654f7` — feat(dpm-autobody): fold Porsche SC 2026-09-15 photos into porsche-356-sc build
+- `9faa77ab` — feat(dpm-autobody): expand P1800 Candy resto-mod with trim/paint detail and 2026-09-15 photos
+- `1a1af03a` — feat(dpm-autobody): rewrite P1800 Pearl White with David's 2026-09-15 restoration detail
+- `e9b43f08` — feat(dpm-autobody): add new Volvo 262C build to the library
+- `57f65d24` — feat(dpm-autobody): add DB6 NEC exhibition photos, flag duplicate 2026-09-15 photo batch
+- `8f3488d4` — feat(dpm-autobody): add Bentley S3 Continental chassis number and David's 2026-09-15 content
+- `784d3c86` — feat(dpm-autobody): add P1800 Red restoration detail and David's 2026-09-15 photos
+- `52990124` — feat(dpm-autobody): add workshop action photo section, incl. the dog shot David asked for
+- `f8fdc688` — docs(dpm-autobody): update BACKLOG.md and yolo-brief with 2026-09-16 build-out results
+
+## Files Changed
+
+- `tools/upload-dpm-autobody-photos-to-r2.ts`, `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/photos-manifest.json`
+- `sites/dpm-autobody/content/builds/bentley-s3-1964.mdx`, `bentley-s3-continental.mdx`, `p1800-pearl-white.mdx`, `p1800-red.mdx`, `p1800-candy-restomod.mdx`, `porsche-356-sc.mdx`, `aston-martin-db6-pink.mdx`
+- `sites/dpm-autobody/content/builds/volvo-262c.mdx` (new) and `sites/dpm-autobody/app/library/page.tsx`
+- `sites/dpm-autobody/app/workshop/page.tsx`
+- `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md`
+
+## What Was Learned / Why It Matters
+
+Trusting David's own summary text over the actual photo pipeline output would have produced two real mistakes here (silently missing the Porsche SC merge, or silently adding 15 duplicate DB6 photos) — both were caught by checking manifest/album contents directly, reinforcing this project's established discipline of verifying against real artifacts rather than labels. Delegating one sub-agent per build (9 in parallel) with a shared, corrected manifest path kept the phase fast without any file collisions, since every unit touched a disjoint file.
+
+## Follow-On Tasks
+
+- Volvo 262C's and Red P1800's chassis numbers remain TBC — chase with David.
+- DB6 photo-batch discrepancy needs David's confirmation that nothing was missed in the 15-photo album that didn't get used.
+- A redaction gap was found outside this run's scope: `inbox/p1800-red-2026-09/redacted/IMG_1601.jpg` still has an unredacted, legible plate ("723 HYK", on a shelf, not the car). Not used in any gallery, but needs a redaction-pass fix before it's ever used.
+- Push/promotion (develop → staging → main) is a separate, explicit next step — not done as part of this run.

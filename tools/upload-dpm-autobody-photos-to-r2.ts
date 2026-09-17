@@ -17,7 +17,10 @@ const SESSION_DIR = "output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/i
 
 // iCloud album directory -> R2 path under dpm-autobody/builds/
 // (bentley-s3-1964 gets two subfolders since two albums feed one build)
-const ALBUM_TO_R2_PATH: Record<string, string> = {
+// Value can be a plain subpath string (uses the default R2_PREFIX), or an
+// object with an explicit `prefix` override for albums that don't belong
+// under dpm-autobody/builds (e.g. workshop-action -> dpm-autobody/workshop).
+const ALBUM_TO_R2_PATH: Record<string, string | { path: string; prefix?: string }> = {
   "p1800-restomod": "p1800-candy-restomod",
   "bentley-s3-chassis": "bentley-s3-1964/chassis-rebuild",
   "bentley-s3-metalwork": "bentley-s3-1964/metalwork",
@@ -26,6 +29,17 @@ const ALBUM_TO_R2_PATH: Record<string, string> = {
   "p1800-red": "p1800-red",
   "p1800-pearl-white": "p1800-pearl-white",
   "p1800-candy-underside": "p1800-candy",
+  "bentley-s3-1964-current": "bentley-s3-1964/current-restoration-2026-09",
+  "bentley-s3-1964-chassis-rebuild": "bentley-s3-1964/chassis-rebuild-2026-09",
+  "bentley-s3-continental-finished": "bentley-s3-continental/2026-09",
+  "p1800-pearl-white-current": "p1800-pearl-white/current-restoration-2026-09",
+  "p1800-red-2026-09": "p1800-red/2026-09",
+  "db6-pink-2026-09": "aston-martin-db6-pink/2026-09",
+  "p1800-candy-restomod-2026-09": "p1800-candy-restomod/2026-09",
+  "porsche-sc": "porsche-356-sc/2026-09",
+  "volvo-262c": "volvo-262c",
+  "nec-exhibition": "nec-exhibition",
+  "workshop-action": { path: "action", prefix: "dpm-autobody/workshop" },
 };
 
 const R2_PREFIX = "dpm-autobody/builds";
@@ -54,12 +68,15 @@ function formatBytes(bytes: number): string {
 function planUploads(): PlannedUpload[] {
   const planned: PlannedUpload[] = [];
 
-  for (const [album, r2Subpath] of Object.entries(ALBUM_TO_R2_PATH)) {
+  for (const [album, entry] of Object.entries(ALBUM_TO_R2_PATH)) {
     const redactedDir = path.join(SESSION_DIR, album, "redacted");
     if (!fs.existsSync(redactedDir)) {
       console.warn(`⚠️  Missing directory, skipping: ${redactedDir}`);
       continue;
     }
+
+    const prefix = typeof entry === "string" ? R2_PREFIX : (entry.prefix ?? R2_PREFIX);
+    const subpath = typeof entry === "string" ? entry : entry.path;
 
     const files = fs
       .readdirSync(redactedDir)
@@ -72,7 +89,7 @@ function planUploads(): PlannedUpload[] {
       planned.push({
         album,
         localPath,
-        key: `${R2_PREFIX}/${r2Subpath}/${file}`,
+        key: `${prefix}/${subpath}/${file}`,
         size: fs.statSync(localPath).size,
       });
     }
@@ -101,7 +118,9 @@ async function main() {
     byAlbum.get(p.album)!.push(p);
   }
   for (const [album, items] of byAlbum) {
-    console.log(`  ${album} (${ALBUM_TO_R2_PATH[album]}): ${items.length} files`);
+    const entry = ALBUM_TO_R2_PATH[album];
+    const label = typeof entry === "string" ? entry : `${entry.prefix ?? R2_PREFIX}/${entry.path}`;
+    console.log(`  ${album} (${label}): ${items.length} files`);
   }
   console.log();
 

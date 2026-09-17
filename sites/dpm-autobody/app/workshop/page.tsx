@@ -55,6 +55,48 @@ const IN_HOUSE = [
 
 const OUT_OF_HOUSE = ['Engine building', 'Trim and upholstery'];
 
+/**
+ * General workshop atmosphere and craft shots — not tied to any one build. Sourced from the
+ * "workshop-action" camera roll David sent (welding/metalwork day-to-day shots, per his own
+ * framing in the 2026-09-08 review meeting and 2026-09-15 follow-up: "not build-specific —
+ * atmosphere and craft, not 'here's car X being welded'"). Selected from all 19 photos to avoid
+ * near-duplicate angles, and to include the workshop dog David specifically asked for.
+ */
+const WORKSHOP_ACTION_PHOTOS = [
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_0037.JPG',
+    alt: "DPM's workshop dog, a golden retriever holding a soft toy in its mouth, standing in front of a freshly restored red Volvo P1800 coupé on wire wheels.",
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_0370.JPG',
+    alt: 'A technician grinding the edge of a curved aluminium panel at the workbench, sparks flying, with a pillar drill and hand tools on the wall behind him.',
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_0665.JPG',
+    alt: 'Close-up of a technician in ear defenders and gloves angle-grinding the edge of a primed body panel, sparks showering across the frame.',
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_0796.JPG',
+    alt: 'Two technicians working together underneath a car on a lift, one holding a wrench beneath the exhaust and suspension while the other looks on.',
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_1011.JPG',
+    alt: "A technician in a welding mask and gloves mid-weld on sheet metal, the arc's bright light cutting through the dark workshop.",
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_1063.JPG',
+    alt: 'A tattooed technician crouched beside a bare-metal shell, angle-grinding a wheel arch with sparks flying past his knee.',
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_1531.JPG',
+    alt: "A painter in a respirator mask spraying primer onto a car body inside the paint booth, DPM Autobody's logo visible on the booth wall behind him.",
+  },
+  {
+    src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/workshop/action/IMG_1563.JPG',
+    alt: 'A technician sitting beside a primer-grey, part-masked body shell, sanding by hand with an orange guide-coat line visible along the wing.',
+  },
+];
+
 export const metadata: Metadata = {
   title: `The Workshop | ${siteConfig.business.name}`,
   description:
@@ -213,6 +255,56 @@ export default function WorkshopPage() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* ── 02 · Workshop atmosphere ───────────────────────────────────── */}
+        <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 border-t border-[rgba(232,228,220,0.14)] pt-[clamp(3rem,8vh,6rem)]">
+          <span
+            aria-hidden
+            className="absolute -top-0.5 left-0 h-[3px] w-[clamp(3.5rem,8vw,6rem)] bg-ink-neutral"
+          />
+          <span
+            aria-hidden
+            className="text-[clamp(1.75rem,3vw,2.5rem)] font-extralight leading-none tracking-[-0.02em] text-ink-neutral"
+          >
+            02
+          </span>
+          <span className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-surface-muted-foreground">
+            Workshop atmosphere
+          </span>
+        </div>
+
+        <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-[clamp(1.75rem,4vh,2.75rem)] lg:grid-cols-2 lg:gap-16">
+          <h2 className="font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-balance text-surface-foreground">
+            Not one car,
+            <br />
+            just the floor itself
+          </h2>
+          <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
+            No single build here &mdash; welding, grinding, panel and paint, on any given day. This
+            is what the shop looks like between the finished cars: the craft itself, not one car in
+            particular.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-[clamp(1rem,2.2vw,1.75rem)] pb-[clamp(3rem,8vh,5rem)] sm:grid-cols-2 lg:grid-cols-3">
+          {WORKSHOP_ACTION_PHOTOS.map((photo) => (
+            <figure
+              key={photo.src}
+              className="m-0 border-t border-[rgba(232,228,220,0.14)] bg-surface-muted pt-3"
+            >
+              <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  quality={62}
+                  sizes="(min-width:64rem) 33vw, (min-width:40rem) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+          ))}
         </div>
       </div>
 
