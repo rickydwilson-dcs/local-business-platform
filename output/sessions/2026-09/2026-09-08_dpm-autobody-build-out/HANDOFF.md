@@ -1,50 +1,139 @@
 # DPM Autobody build-out — handoff
 
-**2026-09-17 — supersedes every section below.** The "What was NOT done" list in the 2026-09-16
-section immediately below is now done — this note existed only because that section was written
-mid-pass and the follow-through work (an autonomous `yolo-brief.md` run, then a small manual fix)
-happened after it, without anyone coming back to update this file. Don't read the 2026-09-16
-section's "What was NOT done"/"Next step"/"Open questions" as current state.
+**Status: ready-to-resume, nothing blocked.** All code/content/photo work from David's 2026-09-15
+batch is built, gate-clean, documented, and deployed all the way to production. What's left is
+entirely business-side: a short list of facts to ask David for (below), not engineering work.
 
-**What actually happened, in order:**
+**Branch:** `develop`. Working tree has no uncommitted changes belonging to this work (see
+"Working tree" below for what _is_ dirty and why it's not ours).
+**Commits:** 0 ahead of `origin/develop` — everything is pushed. `develop`, `staging`, and `main`
+are all at the same content (`git diff origin/main origin/staging --stat` is empty, verified
+2026-09-17 21:40 BST).
+**Working tree:** not clean, but nothing in it is this session's work:
 
-1. The 2026-09-16 pass below did the text corrections and photo pipeline (redact/strip-metadata
-   for all 11 albums), then stopped — exactly as its own "What was NOT done" list says.
-2. An autonomous session (`claude --dangerously-skip-permissions -p ... yolo-brief.md`) then ran
-   the rest of that brief to completion: R2 upload for all 11 albums (170 photos, commit
-   `a23c67fb`), the six builds' MDX updates (commits `2808e624`, `65a654f7`, `9faa77ab`,
-   `1a1af03a`, `57f65d24`, `8f3488d4`, `784d3c86`), the new Volvo 262C build page (`e9b43f08`),
-   and the workshop action-photo section including David's dog shot (`52990124`). Full detail is
-   in `session-wrap-up.md` and `yolo-brief.md`'s own "Completed" section — not repeated here.
-   `type-check`/`test` (84/84)/`lint`/`build` all re-verified clean at the time. Everything landed
-   as local commits on `develop`; **nothing was pushed or promoted** — that's still a separate,
-   not-yet-done step.
-3. That run surfaced two things it deliberately left open rather than guessing at (both are
-   `sourcingGaps` entries visible on the live pages, not just notes in a doc): a DB6 photo-batch
-   discrepancy (David said "no new photos", one arrived anyway — see
-   `aston-martin-db6-pink.mdx`'s `sourcingGaps`), and an unredacted plate found in
-   `inbox/p1800-red-2026-09/redacted/IMG_1601.jpg` that the automated redaction pass had missed.
-4. **2026-09-17, separately:** the IMG*1601.jpg plate gap was fixed by hand — reviewed the plate
-   location visually, redacted it with `plate-redact/apply.py --style blank`, and, on checking,
-   found the \_unredacted* file had already been pushed live to R2 by the upload step in (2) above
-   (confirmed via `headFile`), just unlinked from any page. Per this platform's R2 cache-busting
-   rule, the fix went to a **new** key (`.../IMG_1601-redacted.jpg`) rather than overwriting the
-   old one, and the old exposed-plate object was deleted outright. Now used in `p1800-red.mdx`'s
-   `galleryImages`. See `BACKLOG.md`'s redaction-gap entry for full detail.
+```
+ M output/sessions/2026-08/2026-08-17_dcs-homepage-redesign/content-brief.md
+?? output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/
+?? sites/npracing-v1/content/news/breakthrough-t1d-discovery-day.mdx
+```
 
-5. **2026-09-17, later the same day:** ran the full `develop → staging → main` promotion via
-   `/deploy.changes`. `/update.docs` found this `HANDOFF.md`, `CLAUDE.md`, and both CHANGELOGs had
-   drifted from the working tree (see their own commits, `3ca5c9a2`) and fixed them first. `develop`
-   pushed and merged into `staging` clean (CI/E2E/Watchdog all green on both); `staging → main` went
-   through a PR (`main` is protected) — **PR #85, open, not merged** — rather than a direct push, per
-   this repo's deploy model. Production is not yet level with `staging`.
-6. **2026-09-17, later still:** David confirmed nothing was missed in the DB6's disputed
-   `db6-pink-2026-09` photo album — the discrepancy flagged in step 3 above is now resolved, not
-   just flagged. `sourcingGaps` entry removed from `aston-martin-db6-pink.mdx`; `BACKLOG.md` updated.
+These three appeared over the course of this session without this session creating them — they
+look like a concurrent, unrelated Claude Code session (or sessions) touching the same working
+directory (DCS content-brief correction, a DCS inner-pages design folder, an NP Racing news post).
+None were touched, staged, or committed here. If you're a fresh session picking this up and don't
+recognise them either, they're not yours to resolve blind — ask, don't discard.
 
-**Still genuinely open:** Volvo 262C's and Red P1800's chassis numbers are still TBC; the
-resto-mod client pair's second car/show names/awards are still unidentified; PR #85
-(`staging → main`) is open and unmerged — production is behind `staging` until it lands.
+## What this is trying to resolve
+
+David (owner) replied 2026-09-15 to the per-build content ask that had been open since 2026-09-12,
+with text corrections for six builds and 11 new iCloud photo albums. The work was to apply all of
+it: redact every plate in every new photo, upload to R2, update six builds' copy/photos, add one
+new build (Volvo 262C), add a workshop "atmosphere" photo section, and resolve two ambiguities the
+photos themselves raised (a Porsche album that might be a different car; a DB6 album that might
+contain photos David said didn't exist) rather than guessing at either.
+
+## Actions taken (chronological, this session)
+
+1. `2808e624`…`784d3c86`, `e9b43f08`, `52990124` — the six build updates, new Volvo 262C page, and
+   workshop photo section (run via an autonomous `claude --dangerously-skip-permissions -p`
+   session against `yolo-brief.md`, after interactive text-correction and photo-prep work had
+   already landed the groundwork). Full narrative: `session-wrap-up.md` and `yolo-brief.md`'s own
+   "Completed" section — not repeated here.
+2. `e6d8b14f` — found and fixed a live plate exposure: `IMG_1601.jpg`'s redaction had been missed
+   by the automated pass, and the _unredacted_ file was already live on R2 (confirmed via
+   `headFile`) despite never being linked from a page. Redacted by hand, re-uploaded under a new
+   key per this platform's R2 cache-busting rule, old object deleted outright.
+3. `3ca5c9a2` — `/update.docs` found `CLAUDE.md` and both CHANGELOGs had drifted behind the working
+   tree (stale build count, unresolved-looking chassis numbers that were actually done, etc.) and
+   corrected them.
+4. `2cebd0a7` — the leftover `jaguar-sea-green.mdx` deletion and a `plate-redact/apply.py`
+   contact-sheet bugfix (`-depth 8`), both already-verified work that had never been committed.
+5. First `/deploy.changes` run: `develop → staging`, then **PR #85** (`staging → main`, PR because
+   `main` is protected) — merged by the time of the second run below.
+6. `57b67756` — David confirmed nothing was missed in the disputed `db6-pink-2026-09` album;
+   removed the `sourcingGaps` entry and updated `BACKLOG.md`/`CLAUDE.md`/`CHANGELOG.md` to match.
+7. Second `/deploy.changes` run: `develop → staging`, then **PR #86** (`staging → main`) — merged.
+   `main` is now level with `staging`, verified by empty `git diff origin/main origin/staging`.
+
+## Current state — verified 2026-09-17, ~21:40 BST
+
+- **`main`, `staging`, `develop` are all at identical content** — `git diff origin/main
+origin/staging --stat` returns nothing; `git log --oneline origin/develop..HEAD` returns nothing.
+- **Library is 10 builds**, confirmed by reading `LIBRARY_ORDER` in `app/library/page.tsx` directly
+  (not inferred from prose elsewhere in this file, which has drifted before): `p1800-candy`,
+  `p1800-candy-restomod`, `p1800-red`, `bentley-s3-continental`, `etype-941pvo`, `porsche-356-sc`,
+  `aston-martin-db6-pink`, `bentley-s3-1964`, `p1800-pearl-white`, `volvo-262c`.
+- **Only two `sourcingGaps` entries remain anywhere in `content/builds/`** — confirmed via
+  `grep -rl sourcingGaps sites/dpm-autobody/content/builds/*.mdx`: `p1800-red.mdx` and
+  `volvo-262c.mdx`, both just "Chassis number".
+- **`dpm-autobody`'s gates are clean**: `type-check`, `lint`, `test` (84/84), `validate-content.ts
+builds`, and a full `next build --webpack` all passed this session, most recently against the
+  DB6-resolution commit.
+- **CI is green** on all three branches for every push this session (CI + E2E Tests on `develop`
+  and `staging`, plus Regression Watchdog on `staging`).
+- `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/` (the raw photo working tree)
+  was deleted 2026-09-17 after every album's redacted output was confirmed present in
+  `photos-manifest.json` (no missing/failed entries) and a spot-check of 8 R2 URLs across different
+  albums all returned 200. It cannot be regenerated without David's iCloud albums again — see
+  Traps.
+
+## What was NOT done
+
+- **The remaining content questions were never sent to David** — they were compiled and shown to
+  Ricky in this session, but no email/message was drafted or sent. See "Next step".
+- **Business-level `TBC` facts in `site.config.ts` are untouched**: street address/postcode
+  (empty), all seven days of opening hours, `yearEstablished`, and `certifications`/`stats`
+  (both empty arrays — no stats-strip component exists because there's nothing to put in it).
+  These predate this session; nobody has asked David for them yet in any session.
+- **Contact form is still not wired up** (`site.config.ts`'s `features.contactForm: false`) —
+  blocked on Ricky getting access to verify DPM's sending domain with Resend, not a coding task.
+- **The resto-mod's second client pair is still unidentified** — David confirmed 2026-09-15 that
+  the "two P1800s, one client, both won show awards" story belongs to a _different_ client from
+  Tonja/Ahmet, but that client's name, the two cars, and their show names/awards are still unknown.
+  Living as prose in `p1800-candy-restomod.mdx`'s `scopeOfWork`, not a `sourcingGaps` entry — worth
+  converting to one if it stays open much longer.
+- **The Porsche album's second, unidentified white bare-shell 356 was never raised with David** —
+  flagged in `BACKLOG.md` 2026-09-16 as "not acted on," still true. Nobody has asked whether it's a
+  separate, unannounced build or just more photos of an existing one.
+- **No e2e coverage added** for the new `/builds/volvo-262c` route or the workshop page's new
+  photo section — `e2e/smoke.spec.ts` still only covers the two flagship build pages, unchanged
+  from every prior handoff section below.
+
+## Traps
+
+- **The `inbox/` folder is gone.** Every reference to it below this point (from the 2026-09-16
+  section onward) describes work that has since been completed and the folder deleted — don't go
+  looking for it, and don't re-run the photo pipeline assuming it's still there to inspect.
+- **This file's own prose has drifted from ground truth before** (see `CLAUDE.md`'s comment
+  history for the same pattern) — the library-build-count and chassis-number claims in older
+  sections below were stale by the time anyone re-read them. Trust `grep`/`git log` over this
+  file's narrative for anything checkable, and re-verify before acting on an "OPEN" or "TBC" claim
+  that's more than a few days old.
+- **The three unrelated dirty/untracked files listed under "Working tree" above are not this
+  session's** — don't fold them into a future commit for this work without checking whose they are.
+
+## Next step
+
+Nothing code-side is next — the next action is business, not engineering:
+
+1. Ask David the outstanding content questions (compiled this session, not yet sent):
+   - Volvo 262C's chassis number
+   - Red P1800's chassis number
+   - The resto-mod's second client pair — names, cars, show names, award placings
+   - (Lower priority, been open longer, not from this batch) street address/postcode, opening
+     hours, year established, any certifications worth listing
+   - Whether the Porsche album's second white bare-shell 356 is a new build or existing-car photos
+2. Once any answer arrives: apply it to the relevant `.mdx` frontmatter, remove the matching
+   `sourcingGaps` entry (not just fill the fact — see `CLAUDE.md`'s own rule on this), run
+   `pnpm --filter dpm-autobody run lint && run type-check && run test && npx tsx
+../../scripts/validate-content.ts builds` from `sites/dpm-autobody/`, then `/deploy.changes`.
+3. No large batch of work is queued behind this — each answer can go out as its own small
+   `develop → staging → main` pass whenever it arrives, rather than waiting to batch them.
+
+## Open questions
+
+None for the next session to decide — the only open items are the content questions above, which
+need David, not a technical decision.
 
 ---
 
