@@ -1,9 +1,6 @@
-# YOLO Implementation Brief: DPM Autobody — real pages ported from the approved prototype
+# YOLO Implementation Brief: DPM Autobody — 2026-09-16 build-out (photos + 6 builds + Volvo 262C + workshop)
 
-**Branch:** feature/dpm-autobody-real-pages (created from `develop` — this project's confirmed
-integration branch; root `CLAUDE.md`'s git workflow is `develop → staging → main`, never a
-direct push to staging/main. This brief creates an isolated feature branch and does not push —
-Ricky reviews and merges into `develop` himself afterward, same as any other change here.)
+**Branch:** `develop` (no feature branch — see "Deviation from default branch model" below)
 **Session spec:** output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/yolo-brief.md
 **Mode:** Autonomous execution — coordinate all phases, delegate implementation to sub-agents, verify after each, STOP on error
 **Orchestrator model:** sonnet — coordinator only; per-phase `**Model:**` tiers attach to delegated sub-agents and are independent of this
@@ -12,45 +9,57 @@ Ricky reviews and merges into `develop` himself afterward, same as any other cha
 
 ## Context
 
-**Plan source:** Claude independent plan (no Codex review — this is a single-site content/component
-build extending an already-approved visual direction, not a new architectural pattern; matches this
-project's own precedent for skipping `/plan.with.codex` on this class of task).
+**Plan source:** Claude independent plan (no Codex review) — generated directly from
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/HANDOFF.md`'s own "Next step" list, at
+the user's explicit instruction to skip `/plan.with.codex` synthesis for this pass (matches the
+established project convention recorded in memory `feedback_plan_to_yolo_without_codex.md`).
 
-`sites/dpm-autobody` is a real Next.js site scaffolded from `base-template` (2026-09-11) but its
-pages are still base-template's generic placeholders. The actual design — near-black ground,
-auction-lot-page structure, paint-code accent — exists only in a static HTML prototype, reviewed
-and approved by both Ricky and the client (David) and live at `dpm-autobody-proto.vercel.app`.
-This brief ports that approved prototype into real React/MDX: header, footer, home, workshop,
-contact, the library index, and the two individual build pages that have complete real content.
+David Pearce-Martin (DPM Autobody) replied 2026-09-15 with per-build content for 6 existing builds
+plus one brand-new build (Volvo 262C), and sent 11 iCloud photo albums. The prior session already:
+applied David's pure-text corrections, ran the full photo pipeline (download → HEIC→JPEG → plate
+detect → full manual review → redact → strip metadata) for all 11 albums into
+`inbox/<album>/redacted/`, and confirmed via photo evidence that "Porsche SC" is the **same car**
+as the already-live `porsche-356-sc.mdx` (the user re-confirmed this explicitly this turn — it is
+not a new build). Nothing has been uploaded to R2 and no MDX/page changes exist yet for any of
+this content. This brief implements everything from "Next step" items 2–8 of the HANDOFF: R2
+upload, the 6 build-content updates, the new Volvo 262C page, the workshop page photo section, and
+the final gates/commits/BACKLOG update. It does **not** push or promote to staging/main — see
+"Deviation from default promotion model" below.
 
-**Why visual fidelity verification is load-bearing, not optional polish:** a prior attempt at this
-exact class of work (DCS's 14-inner-route rebuild) was built from a _prose description_ of the
-design tokens and was rejected outright — "utterly horrible, not one thing has picked up any of the
-design cues other than colours" (see project memory `feedback_visual_rebuild_needs_visual_reference`).
-Every page phase in this brief reads the prototype's actual HTML/CSS directly, and every rebuilt
-page is screenshotted and compared against a reference screenshot of the live prototype before the
-brief can pass. This is Phase 7 below, and it is a hard gate, not an informational step.
+Implement the plan exactly as specified below. This had no second-model review, so hold to the
+gate contracts all the more — especially the photo-verification steps, which exist because this
+exact project has twice already caught real mismatches (a folder-token transposition, an
+undersized redaction box) by looking at actual pixels instead of trusting filenames or prior notes.
 
-**Scope correction made before this brief was written:** the prototype's library page
-(`prototype/client/library.html`) has real, DPM-approved photography for 4 of its 12 rows (P1800
-Candy, Bentley S3 Continental, Jaguar Sea Green, E-Type 941pvo), but only 2 of those 4 — P1800
-Candy and E-Type — have a complete "documented car" page already built
-(`volvo-p1800.html`, `etype-941pvo.html`). Bentley and Jaguar have approved photos but almost no
-restoration narrative yet, and the prototype itself deliberately leaves their "full record" links
-dead rather than shipping a thin page. **This brief follows the prototype's own honesty pattern
-exactly: only P1800 Candy and E-Type get real `/builds/[slug]` pages. Bentley and Jaguar get their
-real photo in the library row and nothing else — no individual page, matching the prototype.**
-Confirmed with Ricky before this brief was written.
+### Deviation from default branch model
 
-Implement the plan exactly as specified below.
+The generic brief template defaults to a new `feature/<slug>` branch off the base branch. This
+project's root `CLAUDE.md` states a **non-negotiable** `develop → staging → main` workflow with no
+feature-branch step — every prior DPM Autobody commit in `git log` was made directly to `develop`.
+The working tree on `develop` right now also already contains this session's precious uncommitted
+work (text corrections + the 1.1GB `inbox/` photo pipeline output, both described in HANDOFF.md).
+**Do not create a feature branch, do not run `git checkout -b`, do not run `git pull`** (local
+`develop` is already ahead of `origin/develop`, not behind, so a pull is a no-op at best and a risk
+at worst if that ever changes). Work directly on `develop`.
+
+### Deviation from default promotion model
+
+Per the user's global scope-discipline rule ("commit ≠ push, deploy, or promote"), this brief
+**commits locally to `develop` and stops there.** It does not push, does not merge to `staging`,
+and does not open any PR to `main`. Pushing and promotion are a separate, explicit, user-approved
+step after this brief's work is reviewed — do not do it as part of this run, even though HANDOFF's
+own "Next step" item 7 describes the full staircase; that item is deliberately truncated here to
+"commit only."
+
+---
 
 ## Model Tiers
 
 | Tier   | Alias    | Cost (in/out per MTok) | Use for                                                                                             |
 | ------ | -------- | ---------------------- | --------------------------------------------------------------------------------------------------- |
-| Opus   | `opus`   | $15 / $75              | Phases with >5 interdependent files, architectural rewrites, judgment calls not covered by the spec |
-| Sonnet | `sonnet` | $3 / $15               | Standard implementation — file edits, feature wiring, most phases                                   |
-| Haiku  | `haiku`  | $0.80 / $4             | Mechanical tasks: find-replace, import additions, grep checks, content validation                   |
+| Opus   | `opus`   | highest                | Phases with >5 interdependent files, architectural rewrites, judgment calls not covered by the spec |
+| Sonnet | `sonnet` | mid                    | Standard implementation — file edits, feature wiring, most phases                                   |
+| Haiku  | `haiku`  | lowest                 | Mechanical tasks: find-replace, import additions, grep checks, content validation                   |
 
 Default orchestrator: **sonnet**. Default sub-agent: **sonnet** unless the task is clearly mechanical (→ haiku) or requires deep cross-file reasoning (→ opus).
 
@@ -83,91 +92,30 @@ expected and correct — the orchestrator coordinates; the tiers attach to sub-a
 ## Pre-flight
 
 ```bash
-# Base branch is develop (this project's confirmed integration branch — see root CLAUDE.md's
-# git workflow: develop → staging → main). Do NOT branch from main.
-git checkout develop && git pull
-git checkout -b feature/dpm-autobody-real-pages
+# On develop already — do NOT create a feature branch, do NOT git pull (see Deviation note above)
+git status --short   # confirm the working tree still matches HANDOFF.md's description; STOP if it doesn't
+pnpm --filter dpm-autobody run type-check   # sanity gate — must be clean before starting
 
-# Sanity gate — must be clean before starting
-pnpm --filter dpm-autobody run type-check
-
-# Session observability run-init (SESSION_OBSERVABILITY_SKILL_PATH is set in this environment)
+# Session observability run-init (skill available via $SESSION_OBSERVABILITY_SKILL_PATH)
 python3 "$SESSION_OBSERVABILITY_SKILL_PATH/session_observability.py" phase \
-  --run-id 2026-09-08_dpm-autobody-build-out \
-  --phase-id phase-0 --phase-name "Pre-flight" --event start --total-phases 10
+  --run-id 2026-09-08_dpm-autobody-build-out --phase-id phase-0 --phase-name "Pre-flight" \
+  --event start --total-phases 7 || true
+
+# Confirm R2 credentials are present (the upload phase will fail loudly otherwise)
+node -e "for (const k of ['R2_ACCOUNT_ID','R2_ACCESS_KEY_ID','R2_SECRET_ACCESS_KEY']) if (!process.env[k]) { console.error('Missing ' + k); process.exit(1) }; console.log('R2 credentials present')"
 ```
 
-**Read before starting any phase** (all sub-agents should be pointed at these, not asked to
-rediscover them):
-
-- `sites/dpm-autobody/CLAUDE.md` — current scaffold state, what's real vs. placeholder
-- `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/positioning.md` — governing design
-  principle: project the customer's world, not the shop's; process appears as evidence, art-directed,
-  never as the shop's self-image
-- `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/synthesis.md` — the design argument
-- The prototype's **client build** (`prototype/client/*.html`), NOT `prototype/src/*.html` or
-  `prototype/annotated/*.html` — the client build has the real, public-facing copy with internal
-  working notes (`data-note` blocks) already stripped. Reading `src/` risks copying an internal note
-  onto the live site.
+If any of these fail, STOP and report — do not guess around a missing credential or an
+unexpectedly dirty tree.
 
 ---
 
-## Phase 1 — Capture prototype reference screenshots
+## Phase 1 — Upload the 11 new photo albums to R2
 
-**Goal:** Screenshot every page of the live prototype (`https://dpm-autobody-proto.vercel.app`) at
-two viewports, as the ground truth Phase 7's visual fidelity gate compares against. This must run
-first — every later phase's verification depends on these existing.
-**Model:** haiku — mechanical scripted capture, no design judgment
-**Execution:** delegate to 1 haiku sub-agent
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — this phase _produces_ the fixtures Phase 7 uses; there is nothing to test it against.
-- **(b) Invariant on real data:** exactly 12 screenshot files produced (6 pages × 2 viewports), each a non-zero-byte PNG.
-- **(c) Rollback:** `rm -rf output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/reference-screenshots/` (no code changes, nothing to revert in git).
-- **(d) Hard fail:** any screenshot missing or 0 bytes, OR the live prototype URL returns non-200 for any of the 6 pages.
-
-```
-Task: Capture reference screenshots of the live prototype
-model: haiku
-Prompt: |
-  Screenshot all 6 pages of the live static prototype at
-  https://dpm-autobody-proto.vercel.app/ — index.html (home), workshop.html, contact.html,
-  library.html, volvo-p1800.html, etype-941pvo.html — using headless Playwright.
-
-  A reusable capture tool already exists in this project:
-  output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/research/tools/capture-site.mts
-  Read its README/header comment first for its usage and the three gotchas it already solved
-  (run from monorepo root, import from @playwright/test, .mts not .ts extension). Adapt/reuse it
-  rather than writing a new capture script from scratch, unless it genuinely doesn't fit.
-
-  For each of the 6 pages, capture at two viewports: 1440x900 (desktop) and 390x844 (mobile,
-  iPhone 12-ish). Save PNGs to
-  output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/reference-screenshots/
-  named <page>-desktop.png and <page>-mobile.png (e.g. home-desktop.png, home-mobile.png,
-  library-mobile.png, volvo-p1800-desktop.png, etc.) — use "home" for index.html's page name.
-
-  Wait for images to load (the prototype's photography is hosted on R2, not embedded) before
-  capturing — a screenshot with broken/loading image placeholders is not a valid reference.
-
-  Report exactly 12 files produced with their byte sizes. End with the required verdict line.
-```
-
----
-
-## Phase 2 — `builds` content model
-
-**Goal:** Define the Zod schema for a `builds` MDX collection, sized to hold all 12 restoration
-builds from the prototype's library page (not just the 2 with full pages) — per session.md Phase 2's
-own architectural decision: "the library page is a generated view over this same collection, never a
-separately maintained list." A build with no full page yet still gets an MDX entry with whatever
-real fields are known; it just has no body content and its page isn't generated (see Phase 6).
-**Model:** sonnet — schema design judgment, following the existing pattern used for
-`ServiceFrontmatterSchema`/`LocationFrontmatterSchema` in `@platform/core-components`
+**Goal:** Extend `tools/upload-dpm-autobody-photos-to-r2.ts`'s `ALBUM_TO_R2_PATH` map with the 11
+new albums from `inbox/` and run a real (non-dry-run) upload, producing the manifest that every
+later phase will read for exact URLs.
+**Model:** sonnet — extending a typed map and a small script change (per-album prefix override), not purely mechanical
 **Execution:** delegate to 1 sonnet sub-agent
 **Failure contract:**
 
@@ -175,504 +123,323 @@ real fields are known; it just has no body content and its page isn't generated 
 - **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
 - **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
 - **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** a unit test (vitest, matching the existing `lib/__tests__/*.test.ts`
-  pattern in `sites/dpm-autobody`) that validates the schema against the real P1800 Candy and E-Type
-  frontmatter this brief will actually write in Phase 3 (not synthetic dummy data) — write the test
-  in this phase, populate it with real values once Phase 3 lands, or write Phase 2+3 close enough
-  together that the test can use real values from the start.
-- **(b) Invariant on real data:** schema parses successfully for a build with only the minimal
-  known fields (name, status, meta note — e.g. Jaguar Sea Green, which has almost nothing) AND for
-  a build with the full field set (P1800 Candy) — required fields must not force fabrication of
-  data that doesn't exist for the sparse builds.
-- **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** schema rejects any of the 12 real builds' known-real field sets, OR any field
-  is marked required that isn't actually known for all 12 (this would force Phase 3 to invent data).
+  **Gate contract:** (all four required — see templates/gated-phase-brief-template.md)
+- **(a) Golden-fixture test:** n/a — no test suite for this upload script; the gate is the script's own `--dry-run` output (a real recorded listing of the actual `inbox/` files on disk), inspected before the real run.
+- **(b) Invariant on real data:** every album folder listed in the table below has a matching manifest entry with `status: "uploaded"` (or `"skipped-exists"` on a safe re-run), and the manifest's photo count per album matches the table below exactly.
+- **(c) Rollback:** `git revert <this phase's commit>` undoes the script change; the R2 objects themselves are additive (new keys only, nothing overwritten) and don't need reverting.
+- **(d) Hard fail:** any album's uploaded-or-skipped count is 0, or the manifest is missing an album that's in the table below.
 
-```
-Task: Define the builds MDX content type schema
+Task: Extend and run the DPM Autobody R2 photo upload
 model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. Read sites/dpm-autobody/CLAUDE.md and lib/content.ts first (the
-  generic content loader) and packages/core-components/src/lib/content-schemas.ts (the existing
-  ServiceFrontmatterSchema/LocationFrontmatterSchema pattern this should follow structurally,
-  even though `builds` is DPM-specific and should live in sites/dpm-autobody/lib/, not in
-  core-components — this content type isn't shared across other sites).
-
-  Read output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/session.md's Phase 2 section for
-  the field list already decided: car make/model/year, chassis number, owner/commissioner names
-  (optional), status (completed | in-progress), hours of labour, scope of work, heroImage, video
-  reference (id + type), build type (concours restoration / resto-mod / race car).
-
-  Add one more field this brief needs that session.md doesn't yet specify: a `pageStatus` field
-  (`'built' | 'pending'`) — only P1800 Candy and E-Type will have `pageStatus: 'built'` in this
-  brief; the other 10 builds get `pageStatus: 'pending'`. This is what Phase 6 uses to decide
-  which builds get a generated [slug] route and which don't (matching the prototype's own
-  `golink` vs `golink--dead` distinction). Most fields besides name/status/meta-note/pageStatus
-  must be OPTIONAL — most of the 12 real builds don't have most fields populated yet (chassis TBD
-  for several, hours unknown for several, no owner name for several). Do not make anything
-  required that would force Phase 3 to invent a value for a build that doesn't have one.
-
-  Read the actual content of all 12 rows in
-  output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/library.html
-  before finalizing the schema, so every real field that exists across the 12 builds has
-  somewhere to go.
-
-  Create the Zod schema file (site-local, e.g. sites/dpm-autobody/lib/content-schemas.ts or
-  wherever fits the existing lib/content.ts wiring pattern — check how getContentItems() is
-  parameterized per content type and wire `builds` into it the same way). Write a vitest unit
-  test file testing the schema against realistic real field combinations (a full build like P1800
-  Candy, a sparse build like Jaguar Sea Green with almost no fields).
-
-  End with the required verdict line.
-```
-
----
-
-## Phase 3 — Populate `builds` MDX content (all 12, real copy only)
-
-**Goal:** Write 12 MDX files under `sites/dpm-autobody/content/builds/`, one per library row,
-transcribing the REAL, already-approved copy from the prototype's client build — not paraphrasing,
-not inventing, not filling gaps. Only P1800 Candy and E-Type get body content (their full page copy
-from `volvo-p1800.html`/`etype-941pvo.html`); the other 10 get frontmatter only.
-**Model:** sonnet — careful faithful transcription across 12 files with a structured mapping
-**Execution:** delegate to 1 sonnet sub-agent
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** the real fixture IS `prototype/client/library.html` and
-  `prototype/client/volvo-p1800.html`/`etype-941pvo.html` — these are already real, approved,
-  client-reviewed content, not synthetic. The test (extending Phase 2's schema test) validates all
-  12 written MDX files parse against the schema.
-- **(b) Invariant on real data:** every fact transcribed (chassis numbers, hours, names, R2 photo
-  URLs) matches the source HTML byte-for-byte in meaning — no paraphrasing of facts. The 4 real R2
-  photo URLs (P1800 Candy, Bentley, Jaguar, E-Type — see below) must be the exact existing URLs,
-  never re-uploaded or renamed.
-- **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** any of the 12 files missing, OR any fabricated fact not traceable to the
-  source HTML, OR 0 files written.
+Prompt:
 
 ```
-Task: Populate builds/ MDX content from the approved prototype
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. Content dir: sites/dpm-autobody/content/builds/ (create it).
+Read tools/upload-dpm-autobody-photos-to-r2.ts in full first.
 
-  Source of truth for ALL 12 rows, verbatim:
-  output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/library.html
-  This is the CLIENT build — internal working notes (data-note markers, visible in src/ and
-  annotated/ but stripped from client/) must NOT appear here. If you need to cross-reference
-  src/library.html to understand something, that's fine, but never copy a data-note block's text
-  into the live site.
+Extend its `ALBUM_TO_R2_PATH` map (currently a `Record<string, string>`) to also support a
+per-entry prefix override, because one album (`workshop-action`) needs a different R2 prefix
+(`dpm-autobody/workshop` instead of the current hardcoded `dpm-autobody/builds`). Change the map's
+value type to `string | { path: string; prefix?: string }`, and in `planUploads()`, resolve
+`const prefix = typeof entry === 'string' ? R2_PREFIX : (entry.prefix ?? R2_PREFIX)` and
+`const subpath = typeof entry === 'string' ? entry : entry.path` before building `key`. Keep every
+existing map entry unchanged (string form still works — do not rewrite the 8 existing entries into
+object form).
 
-  The 12 rows, in order (chapter "Finished and delivered" then "In the workshop now"):
-  1. Volvo P1800 — Candy Red (chassis 26282) — HAS a full page: prototype/client/volvo-p1800.html.
-     pageStatus: built. heroImage: the real R2 URL in its library row.
-  2. Volvo P1800 — Resto-mod, Candy Red (chassis 23925, owned Tonja, commissioned Ahmet) —
-     no photo, no page. pageStatus: pending.
-  3. Volvo P1800 — Red — no photo, no page, has a data-note about a video-misattribution bug
-     (do NOT act on that bug in this brief — out of scope — but also do not carry the internal
-     note's text onto the site). pageStatus: pending.
-  4. Volvo P1800 — pair, one client — no photo, no page. pageStatus: pending.
-  5. Bentley S3 Continental, 1963 — HAS a real photo (bentley-s3/whole.jpg), NO page (confirmed
-     with Ricky: photo-only, no page yet — matches the prototype's own golink--dead treatment).
-     pageStatus: pending. heroImage: the real R2 URL.
-  6. Jaguar — Aston Martin Sea Green — HAS a real photo (jaguar-sea-green/booth.jpg), NO page
-     (same as Bentley — confirmed, photo-only). pageStatus: pending. heroImage: the real R2 URL.
-  7. Jaguar E-Type — 941 PVO — HAS a full page: prototype/client/etype-941pvo.html. pageStatus:
-     built. heroImage: the real R2 URL in its library row.
-  8. Porsche 356 SC — no photo, no page. pageStatus: pending.
-  9. Aston Martin DB6 — the pink one — no photo, no page. pageStatus: pending.
-  10. Bentley S3, 1964 (in progress) — no photo, no page. pageStatus: pending, status: in-progress.
-  11. Volvo, model TBC (in progress) — no photo, no page. pageStatus: pending, status: in-progress.
-  12. Volvo P1800 — Pearl White (in progress) — no photo, no page. pageStatus: pending,
-      status: in-progress.
+Add these 11 new entries (source album folder -> R2 destination) — all under
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/<album>/redacted/`:
 
-  For builds 1 and 7 (pageStatus: built): the MDX body content must be the real body copy from
-  their respective full prototype pages (volvo-p1800.html, etype-941pvo.html) — read those files
-  in full and port the actual restoration narrative, not just the library-row summary. Convert
-  their HTML structure to MDX/markdown sensibly, preserving all real facts (do not compress or
-  paraphrase away specific details — hours, chassis, named modifications, the AMOC Sandringham
-  testimonial detail on the E-type page, etc).
+| Album folder                    | New map entry                                                          | Photos (verify this count) |
+|----------------------------------|-------------------------------------------------------------------------|-----------------------------|
+| bentley-s3-1964-current          | "bentley-s3-1964/current-restoration-2026-09"                          | 11 |
+| bentley-s3-1964-chassis-rebuild  | "bentley-s3-1964/chassis-rebuild-2026-09"                              | 7  |
+| bentley-s3-continental-finished  | "bentley-s3-continental/2026-09"                                        | 16 |
+| p1800-pearl-white-current        | "p1800-pearl-white/current-restoration-2026-09"                        | 18 |
+| p1800-red-2026-09                | "p1800-red/2026-09"                                                     | 24 |
+| db6-pink-2026-09                 | "aston-martin-db6-pink/2026-09"                                         | 15 |
+| p1800-candy-restomod-2026-09     | "p1800-candy-restomod/2026-09"                                          | 24 |
+| porsche-sc                       | "porsche-356-sc/2026-09"                                                | 12 |
+| volvo-262c                       | "volvo-262c"                                                            | 17 |
+| nec-exhibition                   | "nec-exhibition"                                                        | 7  |
+| workshop-action                  | `{ path: "action", prefix: "dpm-autobody/workshop" }`                  | 19 |
 
-  For builds 2-6, 8-12: frontmatter only, using exactly the fields present in their library row
-  (name, chassis where given, meta line, note text, status). No body content, no invented fields.
+(These counts come from the prior session's photo-pipeline table in
+`output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md`'s "Photo pipeline" section
+— re-verify each against the actual file count in that album's `redacted/` folder, excluding any
+`contact-sheet*` file, which the script's existing filter already excludes. If any count doesn't
+match, STOP and report the discrepancy rather than silently uploading whatever is there — do not
+assume the table or the folder is right.)
 
-  Slugs: kebab-case, avoiding the P1800 collision risk already flagged in BACKLOG.md item 5 —
-  e.g. p1800-candy, p1800-candy-restomod, p1800-red, p1800-pair-one-client, bentley-s3-continental,
-  jaguar-sea-green, etype-941pvo, porsche-356-sc, aston-martin-db6-pink, bentley-s3-1964,
-  volvo-tbc, p1800-pearl-white — adjust as needed but keep them unambiguous and unique.
+Then:
+1. Run `npx tsx tools/upload-dpm-autobody-photos-to-r2.ts --dry-run` from the repo root. Confirm
+   the printed per-album counts match the table above for all 11 new albums (and the 8 existing
+   ones are unaffected). If anything looks wrong, stop and report — do not proceed to a real
+   upload on a plan you're not confident in.
+2. Run `npx tsx tools/upload-dpm-autobody-photos-to-r2.ts` for real (no `--dry-run`).
+3. Confirm the manifest was written to `output/sessions/2026-09/photos-manifest.json` and contains
+   one entry per uploaded photo with a real `url`. This manifest is the single source of truth for
+   every URL later phases will use — do not let any later phase hand-construct a URL instead of
+   reading it from here.
 
-  Use the schema/field names Phase 2 defined — read that phase's output file before starting.
+As you work through the upload (~170 photos across 11 new albums), report progress periodically:
+every ~20-50 items completed, or roughly every 30 seconds, whichever comes first. Run:
 
-  End with the required verdict line, reporting all 12 filenames and which 2 have body content.
+    python3 "$SESSION_OBSERVABILITY_SKILL_PATH/session_observability.py" progress \
+      --run-id 2026-09-08_dpm-autobody-build-out --work-id r2-photo-upload --shard-id shard-01 \
+      --completed <N> --shard-total 170 || true
+
+wrapped so a failed report never blocks the real upload. Report immediately (outside the normal
+cadence) if the upload goes blocked/failed, or on final completion (`--status complete`).
+
+Return: the final manifest path, total uploaded/skipped/failed counts, and confirmation that all
+11 new albums are represented.
 ```
 
----
-
-## Phase 4 — Header and footer components
-
-**Goal:** Replace `sites/dpm-autobody/components/site-header.tsx` and `site-footer.tsx`'s rendered
-output with the prototype's real chrome — near-black masthead, nav (Workshop / Builds / Contact —
-already wired in `site.config.ts`), mobile menu, phone/CTA, footer with social links and the real
-DPM logo. This gates every page phase below (they all render inside this chrome via `app/layout.tsx`).
-**Model:** sonnet — component redesign matching an exact visual reference
-**Execution:** delegate to 1 sonnet sub-agent
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — this is markup/styling, not a parsing/mapping surface. Verified
-  visually in Phase 7 instead (that phase's gate covers this one too).
-- **(b) Invariant on real data:** n/a — same reason.
-- **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** `pnpm --filter dpm-autobody run type-check` red after this phase, OR the header
-  is missing a working mobile menu (check the prototype for its mobile nav pattern and replicate the
-  interaction, not just the desktop layout).
-
-```
-Task: Port the prototype's real header and footer
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. Files: components/site-header.tsx, components/site-footer.tsx.
-
-  Read the masthead and footer/colophon markup + associated CSS from
-  output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/home.html in full —
-  it is the canonical reference (~2000 lines, mostly embedded CSS; the masthead/footer sections
-  are near-identical across all 6 prototype pages, so home.html is representative). Cross-check
-  the mobile nav interaction against workshop.html or contact.html if home.html's isn't clear.
-
-  Colors and fonts should already mostly match — sites/dpm-autobody/theme.config.ts was ported
-  from this same prototype's CSS custom properties in an earlier pass. Verify the actual rendered
-  values against the prototype rather than assuming theme.config.ts got every mapping right (its
-  own comment block flags this as unverified).
-
-  Real logo: sites/dpm-autobody/public/logo.svg already exists (the approved vector artwork).
-  Real business facts (phone, email, address, socials) already flow correctly from site.config.ts
-  via lib/contact-info.ts — don't hardcode facts that already have a real data source.
-
-  Nav items already correct in site.config.ts (Workshop → /workshop, Builds → /library,
-  Contact → /contact) — /workshop and /library don't exist as routes yet (later phases build
-  them); the header should still render working nav links to them.
-
-  Match: near-black ground, the masthead's exact layout/spacing/typography treatment (not just
-  its colors), the scroll behavior if the prototype's masthead has one (check for sticky/scroll-
-  triggered classes), the mobile menu's actual open/close interaction, and the footer's full
-  content (address, phone, email, social icons, "Built by" credit line).
-
-  Run `pnpm --filter dpm-autobody run type-check` before finishing. End with the required verdict
-  line.
-```
-
----
-
-## Phase 5 — Home, Workshop, Contact pages
-
-**Goal:** Port `home.html`, `workshop.html`, and `contact.html` (client build) into real Next.js
-pages. Three independent files, no overlap — run in parallel.
-**Model:** sonnet — each is a real design-language port, not mechanical
-**Execution:** delegate to 3 sonnet sub-agents in one message
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — markup/styling port, verified visually in Phase 7.
-- **(b) Invariant on real data:** each page renders without runtime error and contains no leftover
-  generic base-template copy ("We offer a comprehensive range of professional services...", etc. —
-  grep for it if unsure).
-- **(c) Rollback:** `git revert <this phase's commit>` (three sub-agents, one combined commit for
-  this phase — or revert each if committed separately, orchestrator's call at commit time).
-- **(d) Hard fail:** `pnpm --filter dpm-autobody run type-check` red, OR any of the 3 pages still
-  shows base-template placeholder copy.
-
-```
-Spawn three agents in parallel (single Task-tool message):
-
-Task: Port the prototype homepage
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. Files: app/page.tsx, components/pages/home-page.tsx (currently a
-  minimal placeholder — replace its content entirely).
-
-  Read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/home.html in
-  full — real markup, real CSS, real copy. Port it faithfully: hero, any featured-build section
-  (if the prototype shows one car as a static hero example, keep it static/hardcoded here too —
-  a real rotating-featured-build mechanism is explicitly out of scope for this brief, deferred to
-  session.md Phase 4), testimonials if present, proof/credentials section if present.
-
-  If the homepage links to a specific build's full page (e.g. the P1800 Candy example), link it
-  to the real /builds/p1800-candy route this brief is also building (Phase 6) rather than to the
-  old prototype .html filename.
-
-  Read positioning.md and synthesis.md (paths in this brief's Pre-flight section) for the
-  governing design principle before writing anything — this page must read as evidence of the
-  customer's world, not the shop's self-image.
-
-  Run `pnpm --filter dpm-autobody run type-check`. End with the required verdict line.
-
-Task: Build the real workshop page
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. New route: app/workshop/page.tsx (doesn't exist yet — create the
-  directory and route). Follow the existing pattern in app/contact/page.tsx for how a Server
-  Component page with metadata/breadcrumbs/schema is structured in this codebase.
-
-  Read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/workshop.html
-  in full — real markup, real CSS, real copy. Port it faithfully.
-
-  Note: session.md Phase 4 mentions this page should eventually be "hero'd with the new-unit
-  film" and get real workshop action photos — that video/photography commission is out of scope
-  for this brief (not yet delivered). Build the page as the prototype currently has it (poster/
-  static imagery, no video), matching what's actually in workshop.html today.
-
-  Run `pnpm --filter dpm-autobody run type-check`. End with the required verdict line.
-
-Task: Port the real contact page design
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. File: app/contact/page.tsx (exists, currently base-template's
-  generic layout with real business facts already wired in but generic visual design — replace
-  the visual design, keep the real ContactForm component and real contact-info wiring).
-
-  Read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/contact.html
-  in full for the real visual design (hero, layout, any copy around the form). The prototype's
-  own contact form is mocked (onsubmit="return false") — this real site's form
-  (@platform/core-components ContactForm) is genuinely wired to app/api/contact/route.ts but
-  site.config.ts's features.contactForm is currently false, reflecting that this hasn't been
-  confirmed ready to go live yet. Leave that flag as-is — do not flip it in this brief. Match the
-  prototype's visual design around the existing functional form component; do not remove the real
-  form to replace it with the prototype's mocked one.
-
-  Run `pnpm --filter dpm-autobody run type-check`. End with the required verdict line.
-```
-
----
-
-## Phase 6 — Library route and individual build pages
-
-**Goal:** Build `/library` (generated view over the `builds` collection, ledger design from
-`library.html`) and `/builds/[slug]` (individual pages, generated only for `pageStatus: 'built'`
-entries — P1800 Candy and E-Type). Different route trees, no file overlap — run in parallel.
-Depends on Phase 2 (schema) + Phase 3 (content) + Phase 4 (header/footer) all being done.
-**Model:** sonnet
-**Execution:** delegate to 2 sonnet sub-agents in one message
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** the real fixture is the 12 MDX files Phase 3 wrote. A test (or the
-  route's own `generateStaticParams`) run against them is the check — no synthetic content.
-- **(b) Invariant on real data:** `/library` renders all 12 rows in the correct two chapters
-  ("Finished and delivered" / "In the workshop now"), exactly 4 with a real thumbnail, exactly 2
-  with a live "full record" link (P1800 Candy, E-Type) and the other 10 with the link disabled/
-  absent (matching the prototype's `golink` vs `golink--dead`). `generateStaticParams` for
-  `/builds/[slug]` produces exactly 2 params.
-- **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** library page shows fewer or more than 4 thumbnails, OR more than 2 live build
-  links, OR `/builds/[slug]` generates a route for any `pageStatus: 'pending'` build, OR 0 routes
-  generated.
-
-```
-Spawn two agents in parallel (single Task-tool message):
-
-Task: Build the /library route
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. New route: app/library/page.tsx.
-
-  Read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/library.html
-  in full for the real ledger design (near-black, numbered rows, two chapters, photo vs
-  text-only row treatment — `.ledger__item--photo` vs plain `.ledger__item`).
-
-  Read all 12 MDX files under content/builds/ (Phase 3's output) via the content loader Phase 2
-  wired up. Render one ledger row per build, in the same order as the prototype. A row with
-  `heroImage` set gets the photo treatment; a row without does not — never render a placeholder
-  box for a missing photo (this project's established rule: a missing photo is a text-only row,
-  never a grey box). A row with `pageStatus: 'built'` gets a real link to /builds/[slug]; a row
-  with `pageStatus: 'pending'` gets no link (or a visually disabled one, matching the prototype's
-  `golink--dead` treatment — read how the prototype styles that state).
-
-  Run `pnpm --filter dpm-autobody run type-check`. End with the required verdict line.
-
-Task: Build /builds/[slug] individual pages
-model: sonnet
-Prompt: |
-  Site: sites/dpm-autobody. New route: app/builds/[slug]/page.tsx.
-
-  This uses the "documented car" page template already proven twice in the prototype —
-  read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/prototype/client/volvo-p1800.html
-  AND etype-941pvo.html in full. They share a real, consistent page design (spec table, photo
-  gallery, narrative sections) — extract that as the template, not two separate one-off layouts.
-
-  `generateStaticParams` must return ONLY the builds with `pageStatus: 'built'` in their MDX
-  frontmatter (Phase 3 set this for exactly 2: the P1800 Candy and E-Type entries) — read from
-  the same content/builds/ collection Phase 2/3 set up. Do not hardcode the two slugs; derive them
-  from the real frontmatter flag, so a future build automatically gets a page once its
-  pageStatus flips to 'built' (matching this project's "frontmatter IS the data" rule).
-
-  Render the full body content Phase 3 wrote for these two builds (the real restoration
-  narrative), not just the frontmatter fields.
-
-  Run `pnpm --filter dpm-autobody run type-check`. End with the required verdict line.
-```
-
----
-
-## Phase 7 — Visual fidelity verification (hard gate)
-
-**Goal:** Prove the rebuilt pages actually match the approved prototype's design — not just its
-colors. This is the gate that the DCS inner-pages failure (see Context) makes non-negotiable.
-**Model:** `cs-visual-fidelity-reviewer` (dedicated review agent, its own configured model — not a
-generic Task tier)
-**Execution:** delegate to up to 6 `cs-visual-fidelity-reviewer` agent invocations in one message
-(one per rebuilt page: home, workshop, contact, library, builds/p1800-candy, builds/etype-941pvo)
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** the reference screenshots from Phase 1 (real, from the live
-  prototype — not synthetic).
-- **(b) Invariant on real data:** each reviewed page's drift report contains zero HIGH-severity
-  findings (typography treatment, spacing rhythm, layout structure, motion) — color-only drift or
-  content differences explained by this brief's intentional scope (e.g. library showing only 4
-  photographed rows) are not failures.
-- **(c) Rollback:** n/a for this phase itself (it's read-only review) — a fix sub-agent's commit
-  (7b below) is what would be reverted if a fix turns out wrong: `git revert <fix commit>`.
-- **(d) Hard fail:** any page with a HIGH-severity drift finding that isn't fixed and re-verified
-  before the brief's final commit.
-
-```
-Step 7a — capture actual screenshots of the rebuilt site:
-  Build and start sites/dpm-autobody locally (pnpm --filter dpm-autobody run build && pnpm
-  --filter dpm-autobody run start, or next dev if start has issues — either way it must be a
-  real rendered build, not a mock). Using the same capture approach as Phase 1 (same tool, same
-  two viewports: 1440x900 and 390x844), screenshot: /, /workshop, /contact, /library,
-  /builds/p1800-candy (or whatever slug Phase 3 actually used), /builds/etype-941pvo (same).
-  Save to output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/actual-screenshots/ with the
-  same naming convention as Phase 1's reference-screenshots/.
-
-Step 7b — spawn cs-visual-fidelity-reviewer agents in parallel (single Agent-tool message),
-  one per page pair, each comparing reference-screenshots/<page>-*.png against
-  actual-screenshots/<page>-*.png:
-
-Agent: cs-visual-fidelity-reviewer
-Task: Compare rebuilt home page against the approved prototype reference
-Prompt: |
-  Reference (approved, ground truth): output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/reference-screenshots/home-desktop.png
-  and home-mobile.png
-  Actual (just-built React port): output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/actual-screenshots/home-desktop.png
-  and home-mobile.png
-
-  Compare typography treatment, spacing rhythm, layout structure, color, and any visible motion —
-  not just "does it use the right colors." Report drift by severity (HIGH/MEDIUM/LOW). A HIGH
-  finding is anything that would make this read as a different design system, not the same one
-  faithfully ported (this is exactly the failure mode a prior rebuild attempt on this platform
-  hit — see project memory feedback_visual_rebuild_needs_visual_reference).
-
-[Repeat the same prompt shape for workshop, contact, library, builds/p1800-candy, builds/etype-941pvo]
-
-Step 7c — if any HIGH-severity findings: spawn 1 sonnet fix sub-agent per affected page (not in
-  parallel with anything touching the same file), each given the specific finding and pointed
-  back at the same prototype source file used in that page's original build phase. After fixes,
-  re-run 7a-7b for the affected pages only. Repeat until zero HIGH findings or it becomes clear a
-  finding reflects a deliberate, documented scope decision in this brief (e.g. library showing
-  fewer rows with real content) rather than a real miss.
-
-End Phase 7 with the required verdict line once all pages have zero HIGH findings.
-```
-
----
-
-## Phase 8 — Update smoke tests for the new real routes
-
-**Goal:** `e2e/smoke.spec.ts` was trimmed to `/` and `/contact` at scaffold time (see
-`sites/dpm-autobody/CLAUDE.md`'s Tests section) because `/workshop` and `/library` didn't exist yet.
-They do now — extend it.
-**Model:** haiku — mechanical test-file extension following the existing file's exact pattern
-**Execution:** delegate to 1 haiku sub-agent
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — this phase writes the test, doesn't need one of its own.
-- **(b) Invariant on real data:** `pnpm --filter dpm-autobody run test:e2e:smoke` passes against
-  the actual built site with the new tests included.
-- **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** smoke suite red, OR fewer than 6 route checks present after this phase
-  (`/`, `/contact`, `/workshop`, `/library`, and the two real `/builds/[slug]` routes).
-
-```
-Task: Extend smoke tests to cover the new real routes
-model: haiku
-Prompt: |
-  File: sites/dpm-autobody/e2e/smoke.spec.ts. Currently tests only "/" and "/contact" (each
-  checking HTTP 200 + a visible h1) — read the existing file for the exact pattern, then add the
-  same shape of test for: /workshop, /library, and the two real build slugs Phase 3/6 created
-  (check content/builds/ for the exact pageStatus:'built' slugs — do not guess them).
-
-  Run `pnpm --filter dpm-autobody run test:e2e:smoke` against the locally running build from
-  Phase 7 (or rebuild/restart if needed) to confirm it passes. End with the required verdict line.
-```
-
----
-
-## Phase 9 — Final verification gates
-
-**Goal:** Run every gate this project defines for this site, scoped correctly, before anything is
-considered done.
-**Model:** n/a
-**Execution:** inline (exception) — running the project's own existing verification gates is the
-orchestrator's coordination duty per the Delegation Model ("dispatch sub-agents, run verification
-gates, make commits"), not implementation work with a design judgment to delegate.
-**Failure contract:**
-
-- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
-- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
-- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
-- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — this phase runs existing golden-fixture tests from earlier
-  phases as part of the full suite; it introduces none of its own.
-- **(b) Invariant on real data:** all of: type-check, build, lint, unit tests (vitest), e2e smoke
-  — green.
-- **(c) Rollback:** n/a (no changes made in this phase — it's pure verification).
-- **(d) Hard fail:** any gate red.
+**Commit after this phase:**
 
 ```bash
-# Verification gate — STOP if any of these fail
-pnpm --filter dpm-autobody run type-check
-pnpm --filter dpm-autobody run build
-pnpm --filter dpm-autobody run lint
-pnpm --filter dpm-autobody run test
-pnpm --filter dpm-autobody run test:e2e:smoke
+git add tools/upload-dpm-autobody-photos-to-r2.ts
+git commit -m "feat(dpm-autobody): extend R2 photo upload for David's 2026-09-15 batch (11 albums)
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JfHobWPgzzVWigAY9SAn55"
+```
+
+(The uploaded photos themselves live in R2, not git — nothing else to add here. `photos-manifest.json`
+lives under `output/sessions/2026-09/`, which is tracked; add and commit it too if it changed.)
+
+---
+
+## Phase 2 — Author the 7 existing-build content updates (parallel)
+
+Each item below is a **separate MDX file** with **no overlap** — safe to run as one parallel
+group. Every sub-agent must:
+
+- Read `output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md` §5a in full for the
+  complete transcription of David's email (the summary in each prompt below is a compressed
+  pointer, not a substitute for the source text).
+- Read `output/sessions/2026-09/photos-manifest.json` (written by Phase 1) to get every real R2
+  URL for that build's album(s) — never hand-construct a URL.
+- Read the build's existing MDX file in full before editing it.
+- **Look at actual photos**, not just filenames, before choosing which go into `galleryImages`
+  (or a new `photoSections` group) and before writing any caption. Open the album's contact sheet
+  (`inbox/<album>/redacted/contact-sheet*.jpg`) and any individual photo needed to confirm what it
+  shows. This project has twice already caught a real mismatch (a transposed folder, an undersized
+  redaction box) by checking pixels instead of trusting labels — do the same here.
+- **Do not overwrite `heroImage`** on any of these 7 builds. Every one already has an approved hero
+  photo; add the new photos to `galleryImages` (flat URL list is fine, matching the existing style
+  in each file) or, only if genuinely better structured that way, a new `photoSections` entry.
+- **Expand wording, never invent facts.** David's own line ("feel free to expand or change some
+  wording where you see fit") licenses tightening prose for the site's voice, not adding claims he
+  didn't make.
+- Update or remove `sourcingGaps` entries that this new information resolves (e.g. the two now-known
+  chassis numbers).
+- Validate frontmatter: `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` must report
+  this file (and all others) valid before the phase is done.
+
+**Model:** sonnet — real narrative authorship from source material + photo verification, not mechanical
+**Execution:** delegate to 7 sonnet sub-agents in one message
+**Failure contract:**
+
+- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
+- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
+- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
+- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
+  **Gate contract:** (all four required — see templates/gated-phase-brief-template.md)
+- **(a) Golden-fixture test:** n/a — content authorship, not a parser; the closest equivalent is Zod validation against the real schema (`scripts/validate-content.ts`), which each sub-agent must run and pass.
+- **(b) Invariant on real data:** every photo URL written into frontmatter must appear in `photos-manifest.json` with `status` of `uploaded` or `skipped-exists` — never a hand-typed or guessed URL.
+- **(c) Rollback:** `git revert <that build's commit>` (each build is committed separately — see below).
+- **(d) Hard fail:** `validate-content.ts` reports this file invalid, OR the sub-agent added 0 photos/no content change despite new source material existing for it.
+
+Spawn 7 agents in parallel (single Task-tool message):
+
+```
+Task: Update bentley-s3-1964.mdx with David's 2026-09-15 content
+model: sonnet
+Prompt: |
+  Update sites/dpm-autobody/content/builds/bentley-s3-1964.mdx.
+
+  New facts from David (BACKLOG.md §5a — read the full paragraph there): chassis number is now
+  known as **BC60 XC**. Full description of this "current restoration": arrival condition,
+  wheel-tub/quarter-panel/valance fabrication, soda blasting, epoxy primer, body levelling,
+  underside/cockpit paint — the car "now awaits reuniting with the freshly restored chassis before
+  final prep for paint."
+
+  Photos: two albums feed this one build —
+  - bentley-s3-1964-current (R2 subpath bentley-s3-1964/current-restoration-2026-09, 11 photos):
+    the car itself, matching the description above.
+  - bentley-s3-1964-chassis-rebuild (R2 subpath bentley-s3-1964/chassis-rebuild-2026-09, 7 photos):
+    the chassis rebuild specifically — a companion set, no separate description from David.
+
+  Set chassisNumber: "BC60 XC". Remove any sourcingGaps entry for the chassis number (keep any
+  other still-open gap). Rewrite/expand scopeOfWork and the body prose using the new description.
+  Add the new photos to galleryImages (read exact URLs from photos-manifest.json for both albums).
+  Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Update bentley-s3-continental.mdx with David's 2026-09-15 content
+model: sonnet
+Prompt: |
+  Update sites/dpm-autobody/content/builds/bentley-s3-continental.mdx.
+
+  New facts from David (BACKLOG.md §5a): chassis number is now known as **BC66 XA**. Restored
+  2021. Full description: bare-metal repaint, hand-crafted lower-body panels (coachbuilt — no
+  replacement panels exist for this model), 4mm panel gaps, 5 coats of lacquer, 6-grade block sand,
+  chrome re-done, interior recolonised, hood by SM Trimming. New fact: showcased at the NEC in
+  2023 (this build already has a confirmed `video` field — do not touch that).
+
+  Photos: bentley-s3-continental-finished (R2 subpath bentley-s3-continental/2026-09, 16 photos).
+  Also check output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/nec-exhibition/redacted/
+  (R2 subpath nec-exhibition, 7 photos) — if any clearly show this Bentley at the NEC, add those
+  too (this album is shared across builds; the resto-mod's sub-agent is independently checking the
+  same folder for its own car — that's fine, the same photo can be referenced by URL from both
+  builds if it genuinely shows both, though for a single-car show shot it will usually belong to
+  just one).
+
+  Set chassisNumber: "BC66 XA". Remove the corresponding sourcingGaps entry. Expand scopeOfWork and
+  body prose with the new detail, including the NEC 2023 showcase fact. Add new photos to
+  galleryImages (URLs from photos-manifest.json). Run
+  `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Rewrite p1800-pearl-white.mdx with David's 2026-09-15 content
+model: sonnet
+Prompt: |
+  Rewrite (not just patch) sites/dpm-autobody/content/builds/p1800-pearl-white.mdx's body and
+  scopeOfWork. BACKLOG.md §5a explicitly calls for a rewrite here since the new description is much
+  richer than the current thin copy, "rather than patching piecemeal."
+
+  New facts from David: a "drive in drive out" package; a pre-purchase compression check found low
+  compression, requiring an engine rebuild; new wheel tubs, inner wings, floor pans, chassis rails,
+  jacking points, bulkhead; soda blasting; 4mm panel gaps; a custom pearl-effect colour; poly bush
+  + new bearings; a power-steering conversion. Note: the earlier "well-known singer" previous-owner
+  claim was already removed in the prior session's pass (2026-09-15) — do not reintroduce it or
+  anything like it.
+
+  Photos: p1800-pearl-white-current (R2 subpath p1800-pearl-white/current-restoration-2026-09, 18
+  photos, URLs from photos-manifest.json).
+
+  Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Update p1800-red.mdx with David's 2026-09-15 content
+model: sonnet
+Prompt: |
+  Update sites/dpm-autobody/content/builds/p1800-red.mdx.
+
+  New facts from David: chassis is still TBC (left blank again — do not invent one; keep/add a
+  sourcingGaps entry for "Chassis number" if not already present). Full description: sent to DPM
+  as a stripped shell, "one of the worst DPM has seen"; full inner-panel fabrication (floors,
+  chassis rails, inner wings, scuttle, boot floor); body sent for blasting with exterior panels
+  off; factory black stone-chip underside paint; engine/interior refit was done by another shop
+  after DPM's own work. Confirms the whole restoration was documented by **JPM Productions** (a
+  film production company — name not previously confirmed; worth keeping as an attribution detail
+  if there's a natural place for it, matching how other builds credit named parties).
+
+  Photos: p1800-red-2026-09 (R2 subpath p1800-red/2026-09, 24 photos, URLs from
+  photos-manifest.json).
+
+  Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Expand p1800-candy-restomod.mdx with David's 2026-09-15 content
+model: sonnet
+Prompt: |
+  Expand sites/dpm-autobody/content/builds/p1800-candy-restomod.mdx (the earlier corrections from
+  this session already removed the wrong "one of two P1800s, one client" pairing claim — leave
+  that fix alone, add to it).
+
+  New facts from David: panel-seam and side-trim removal for a smooth body; bumpers modified and
+  shortened, converted to a single piece from the factory's original 3-piece setup; window-scraper
+  trim fitment matched to the door-handle trim gap; a custom 3-stage Candy Red paint mix.
+  Mechanical rebuild by **Wilde Classics** (name now confirmed); custom interior by another,
+  unnamed firm. Showcased at the NEC in **both 2023 and 2024** (previously only 2023 was noted).
+
+  Photos — IMPORTANT, verify before trusting the text: BACKLOG.md §5a's prose says "No new photos
+  given for this one — reuse existing," but a photo-pipeline table in the same document (and this
+  brief's Phase 1) lists an actual album `p1800-candy-restomod-2026-09` with 24 photos, R2 subpath
+  p1800-candy-restomod/2026-09. Open that album's contact sheet and compare it against this
+  build's current galleryImages. Two possible outcomes:
+  (a) the 24 photos are genuinely new (not already used elsewhere on this build) — in which case
+      add a sensible selection to galleryImages, same as every other build in this phase; or
+  (b) they turn out to be a duplicate/near-duplicate of an existing set, or actually belong to a
+      different build (this project has hit exactly this kind of folder mix-up before) — in which
+      case do NOT add them, and instead write one sentence into your final report flagging what you
+      found, so the orchestrator can note it for the user.
+  Do not guess; decide from what the photos actually show.
+
+  Also check output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/nec-exhibition/redacted/
+  (R2 subpath nec-exhibition, 7 photos) for any that clearly show this resto-mod at either NEC show
+  and add those if found.
+
+  Expand scopeOfWork and body prose with the new detail (trim/panel work, the paint mix, the two
+  confirmed names, both NEC years). Run
+  `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Fold the "Porsche SC" white-shell photos into porsche-356-sc.mdx
+model: sonnet
+Prompt: |
+  Update sites/dpm-autobody/content/builds/porsche-356-sc.mdx. The user has confirmed directly
+  (2026-09-16, this session) that "Porsche SC" is the **same car** as this already-live build —
+  this is settled, do not re-litigate it. The album also contains a second, distinct white
+  bare-shell 356 not previously documented anywhere on the site; per the user's decision, treat
+  these as more photos of the same in-progress restoration story, not a separate build.
+
+  Photos: porsche-sc (R2 subpath porsche-356-sc/2026-09, 12 photos, URLs from
+  photos-manifest.json). Note: this album contains IMG_0304.jpg, the exact file already used as
+  this build's existing `heroImage` — do not add a duplicate entry for that same photo to
+  galleryImages. Add the rest (including the white-shell photos) to galleryImages. If the
+  white-shell photos read as visually distinct enough from the rest of the gallery that a reader
+  might be confused about whether it's the same car, add a short clause to the body prose or a
+  caption clarifying it's the same restoration at an earlier/different stage — do not leave it
+  ambiguous, but do not invent a story about *why* the shell looks different beyond what's visually
+  obvious (e.g. "before" vs. "after" paint, if that's what the photos show).
+
+  Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+
+Task: Reconcile aston-martin-db6-pink.mdx's unexpected new-photo album
+model: sonnet
+Prompt: |
+  sites/dpm-autobody/content/builds/aston-martin-db6-pink.mdx already received its text
+  corrections in the prior session's pass (crash/livery/race-status facts — already correct, leave
+  that prose alone). BACKLOG.md §5a's prose for this build says "correction only, no new photos" —
+  but Phase 1 of this brief uploaded an album `db6-pink-2026-09` with 15 photos (R2 subpath
+  aston-martin-db6-pink/2026-09, one plate redacted) that was part of the same 2026-09-15 batch.
+  This is a genuine discrepancy between what David's email text said and what the photo pipeline
+  actually received — investigate before acting.
+
+  Open the album's contact sheet and compare it against this build's existing galleryImages (17
+  photos already live, all showing the pink DB6 at various stages — crash, bare metal, masking,
+  finished pink). If the 15 new photos clearly show the same car at the same or new stages (not a
+  duplicate of the existing 17), add the genuinely new ones to galleryImages using URLs from
+  photos-manifest.json. If instead they look like duplicates of what's already live, or don't
+  clearly match this car, do not guess — add none, and write one sentence in your final report
+  flagging the discrepancy for the orchestrator to note.
+
+  Also check output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/inbox/nec-exhibition/redacted/
+  (7 photos) — the NEC album's plate-redaction notes mention the DB6's own plate ("OH OH 7")
+  appearing there, meaning this car was very likely exhibited at the NEC. If so and there's no NEC
+  mention in this build's prose yet, add one short sentence noting it, and add any clearly-matching
+  NEC photos to the gallery.
+
+  Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this file passes.
+```
+
+**Commit after each build in this phase** (7 separate commits, matching this project's established
+one-commit-per-build convention — see `git log` for `bentley-s3-1964`-style prior commits):
+
+```bash
+git add sites/dpm-autobody/content/builds/bentley-s3-1964.mdx
+git commit -m "feat(dpm-autobody): add Bentley S3 1964 chassis number and David's 2026-09-15 content
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JfHobWPgzzVWigAY9SAn55"
+# ...repeat for bentley-s3-continental.mdx, p1800-pearl-white.mdx, p1800-red.mdx,
+# p1800-candy-restomod.mdx, porsche-356-sc.mdx, aston-martin-db6-pink.mdx — one commit each,
+# with a message describing that specific build's actual change.
 ```
 
 ---
 
-## Phase 10 — Commit, update session docs
+## Phase 3 — Create the new Volvo 262C build page
 
-**Goal:** One clean commit for the whole feature (or per-phase commits, orchestrator's call — see
-Rules), and update this project's own tracking docs so a future session knows what's real now.
-**Model:** sonnet — writing an accurate summary of what changed needs judgment, not just mechanical edits
+**Goal:** New build, not previously in the library — needs a new MDX file + slug + library entry.
+**Model:** sonnet — new content type instance, schema-conformant, plus a library-order edit
 **Execution:** delegate to 1 sonnet sub-agent
 **Failure contract:**
 
@@ -680,31 +447,134 @@ Rules), and update this project's own tracking docs so a future session knows wh
 - **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
 - **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
 - **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
-  **Gate contract:**
-- **(a) Golden-fixture test:** n/a — doc updates only.
-- **(b) Invariant on real data:** n/a.
+  **Gate contract:** (all four required — see templates/gated-phase-brief-template.md)
+- **(a) Golden-fixture test:** n/a — new content authorship; gate is Zod validation against the real schema.
+- **(b) Invariant on real data:** the new build appears in `LIBRARY_ORDER` in `app/library/page.tsx`, `validate-content.ts` reports it valid, and every photo URL exists in `photos-manifest.json`.
 - **(c) Rollback:** `git revert <this phase's commit>`.
-- **(d) Hard fail:** commit fails, OR the pre-commit hook (prettier/lint-staged) fails and isn't
-  resolved.
+- **(d) Hard fail:** `validate-content.ts` fails, OR the build is missing from `LIBRARY_ORDER`, OR it has zero photos despite 17 being available.
+
+Task: Create sites/dpm-autobody/content/builds/volvo-262c.mdx
+model: sonnet
+Prompt:
 
 ```
-Task: Update session docs to reflect the real pages now built
+Read sites/dpm-autobody/lib/content-schemas.ts's BuildFrontmatterSchema in full, and read one
+existing "thin" build (e.g. p1800-red.mdx or bentley-s3-1964.mdx) as a structural reference — this
+new build should follow the same thin-content pattern (frontmatter + 1-2 paragraphs of prose, no
+`##`-structured chapters), matching this site's established convention documented in
+sites/dpm-autobody/CLAUDE.md ("do not invent narrative for a thin build").
+
+New build, from David's 2026-09-15 email (full text in
+output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md §5a): a Volvo 262C, a repeat
+client, a rare model. Donor vehicle sourced from the USA for parts/roof (the original roof had
+vinyl-roof moisture-trap damage). In-house engine rebuild, zinc-plated components, injection unit
+refurbished off-site. "Fully rebuilt and now going through shakedown tests." Names **Simon**
+specifically for the finessing work — keep this as a named-credit detail, matching how
+`etype-941pvo.mdx` credits Mark Antwis by name (read that file for the pattern).
+
+Chassis number: left blank by David, still TBC — do not invent one. Add a sourcingGaps entry:
+"Chassis number".
+
+status: use "in-progress" (shakedown testing, not yet delivered to the client). pageStatus: "built".
+buildType: pick the closest BuildTypeSchema fit from the description (concours-restoration /
+resto-mod / race-car) — if genuinely ambiguous, leave it unset (it's optional) rather than
+guessing.
+
+Create the file at sites/dpm-autobody/content/builds/volvo-262c.mdx with slug `volvo-262c`.
+
+Photos: album `volvo-262c`, R2 subpath `volvo-262c` (17 photos, no plates — none fitted to the
+car). Read exact URLs from output/sessions/2026-09/photos-manifest.json (written by an earlier
+phase in this run). Open the album's contact sheet, pick a strong heroImage (this build has none
+yet, unlike every other phase in this brief — you must set one), a heroImageAlt describing what's
+actually in that photo, and add a sensible gallery selection to galleryImages.
+
+Then add "volvo-262c" to the LIBRARY_ORDER array in sites/dpm-autobody/app/library/page.tsx —
+append it at the end of the array (the file's own header comment explains there's no `order` field
+yet, so the array's literal sequence IS the display order; appending is the minimal, safe choice
+per that file's documented convention).
+
+Run `cd sites/dpm-autobody && npx tsx scripts/validate-content.ts` and confirm this new file
+passes, and run `pnpm --filter dpm-autobody run type-check` to confirm the LIBRARY_ORDER edit
+doesn't break anything (it's a `const` tuple — adding a new valid slug string should be fine, but
+verify).
+```
+
+**Commit after this phase:**
+
+```bash
+git add sites/dpm-autobody/content/builds/volvo-262c.mdx sites/dpm-autobody/app/library/page.tsx
+git commit -m "feat(dpm-autobody): add new Volvo 262C build to the library
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JfHobWPgzzVWigAY9SAn55"
+```
+
+---
+
+## Phase 4 — Add a workshop-action photo section to the workshop page
+
+**Goal:** David specifically asked for workshop action photos (welding/metalwork atmosphere, not
+build-specific), including a usable dog photo if one exists. The workshop page currently has no
+photo grid at all beyond its single hero image — this is a real addition, not a hero swap.
+**Model:** sonnet — new JSX section, needs real photo inspection to pick the dog shot and a coherent selection
+**Execution:** delegate to 1 sonnet sub-agent
+**Failure contract:**
+
+- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
+- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
+- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
+- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
+  **Gate contract:** (all four required — see templates/gated-phase-brief-template.md)
+- **(a) Golden-fixture test:** n/a — page/component work, not a parser.
+- **(b) Invariant on real data:** the rendered page (checked via `pnpm --filter dpm-autobody run build` + a manual look, or dev server + curl/screenshot) shows a new photo grid with more than one image and includes the dog photo; every `src` resolves to a URL present in `photos-manifest.json`.
+- **(c) Rollback:** `git revert <this phase's commit>`.
+- **(d) Hard fail:** the section renders 0 images, OR no dog photo is included despite one being available in the album.
+
+Task: Add a workshop-action photo grid to app/workshop/page.tsx
 model: sonnet
-Prompt: |
-  Update sites/dpm-autobody/CLAUDE.md's "Current state" section — it currently says the pages are
-  "still base-template's generic placeholder layouts" — correct that: home/workshop/contact/
-  library/the 2 real build pages are now real, ported from the approved prototype, visually
-  verified. State clearly which parts are STILL not done: the other 10 builds (photo-only or
-  no-content), the homepage rotating-featured-build mechanism, the contact form's real wiring,
-  workshop's video hero.
+Prompt:
 
-  Update output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/session.md: tick off the now-
-  complete parts of Phase 2 (schema exists) and note Phase 3's scope split explicitly (P1800
-  Candy + E-Type built; the other 10 builds still need iCloud photo pulls/plate-redaction/David
-  confirmations before their pages can exist) — do not mark Phase 3 fully complete, since most of
-  its checklist items (the 8 new-content builds from BACKLOG.md item 5) are still genuinely open.
+```
+Read sites/dpm-autobody/app/workshop/page.tsx in full — it currently has a hero, a lede, and an
+in-house/out-of-house two-column list, and nothing else. Also skim
+sites/dpm-autobody/components/pages/build-detail-page.tsx's `PhotoGrid` function (around line 588)
+purely as a visual-pattern reference (grid gap/columns/figcaption styling using theme tokens) — do
+NOT import it into the workshop page; this page has no shared gallery component yet and one isn't
+needed for a single grid, so write a small self-contained grid directly in page.tsx using the same
+Tailwind theme-token conventions (no hardcoded hex, `bg-brand-primary`-style tokens only) already
+used elsewhere on this page.
 
-  Commit everything from this brief with a clear message. End with the required verdict line.
+Photos: album `workshop-action`, uploaded in an earlier phase of this run to R2 under
+`dpm-autobody/workshop/action/` (19 photos, no plates). Read exact URLs from
+output/sessions/2026-09/photos-manifest.json.
+
+David's ask (BACKLOG.md, "Workshop page" section): general welding/metalwork atmosphere shots, "not
+build-specific — atmosphere and craft, not 'here's car X being welded'"; and specifically a photo
+of the workshop dog, if there's a usable one. Open the album's contact sheet and look at the actual
+photos: pick ~6-10 that read as atmosphere/craft shots (avoid several near-duplicates of the same
+angle), and make sure the dog photo is one of them. (HANDOFF.md notes two more dog cameos turned up
+unprompted in the bentley-s3-1964-chassis-rebuild and p1800-red-2026-09 albums, already uploaded in
+this run under bentley-s3-1964/chassis-rebuild-2026-09 and p1800-red/2026-09 respectively — you may
+use one of those instead if it's a stronger shot than anything in workshop-action itself.)
+
+Add the new grid section below the existing in-house/out-of-house list, using `next/image` (not
+plain `<img>`), real alt text describing what's actually in each photo (not generic "workshop
+photo" text), and a heading that makes clear this is general workshop atmosphere rather than a
+specific build (matching David's own framing).
+
+Verify visually: start the dev server if one isn't already running cleanly on port 3000 (check
+`lsof -i :3000 -sTCP:LISTEN` first per this project's CLAUDE.md — don't assume a stale process is
+healthy), and confirm the new section renders with real images, not broken boxes.
+```
+
+**Commit after this phase:**
+
+```bash
+git add sites/dpm-autobody/app/workshop/page.tsx
+git commit -m "feat(dpm-autobody): add workshop action photo section, incl. the dog shot David asked for
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JfHobWPgzzVWigAY9SAn55"
 ```
 
 ---
@@ -715,50 +585,100 @@ This section lists work units that can run concurrently. Each group lists items 
 
 ### Intra-phase groups
 
-| Group | Phase   | Items                                                                                     | File overlap             | Model                 | Rationale                                                                                        |
-| ----- | ------- | ----------------------------------------------------------------------------------------- | ------------------------ | --------------------- | ------------------------------------------------------------------------------------------------ |
-| G1    | Phase 5 | Port home.html → app/page.tsx + home-page.tsx; build workshop route; port contact.html    | none (different files)   | sonnet                | Independent pages, no shared files, all depend only on Phase 4's already-committed header/footer |
-| G2    | Phase 6 | Build /library route; build /builds/[slug] route                                          | none (different files)   | sonnet                | Different route trees, both depend only on Phases 2/3/4 already being committed                  |
-| G3    | Phase 7 | `cs-visual-fidelity-reviewer` × up to 6 (home, workshop, contact, library, 2 build pages) | none (read-only compare) | n/a (dedicated agent) | Independent per-page comparisons                                                                 |
-| G4    | Phase 9 | `type-check`, `lint`, `test` (vitest), `test:e2e:smoke`                                   | none (read-only checks)  | n/a                   | Independent verification commands — `build` runs alone (writes `.next/`)                         |
-
-Every other phase (1, 2, 3, 4, 8, 10) is `1 sub-agent, sequential` — no parallel group.
+| Group | Phase   | Items                                                                                                                                                                        | File overlap            | Model  | Rationale                              |
+| ----- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------ | -------------------------------------- |
+| G1    | Phase 2 | 7 sub-agents: bentley-s3-1964.mdx, bentley-s3-continental.mdx, p1800-pearl-white.mdx, p1800-red.mdx, p1800-candy-restomod.mdx, porsche-356-sc.mdx, aston-martin-db6-pink.mdx | none — 7 distinct files | sonnet | Independent MDX files, no shared state |
 
 ### Cross-phase groups
 
-| Group  | Phases | Items | Rationale                                                                                                                                                                                          |
-| ------ | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| (none) |        |       | Phase 3 depends on Phase 2's schema; Phases 5/6 depend on Phase 4's committed header/footer and (for Phase 6) Phase 2/3's content; nothing here is independent enough to cross-parallelize safely. |
+Phases 2, 3, and 4 touch entirely disjoint files (Phase 2: 7 build MDX files; Phase 3:
+`volvo-262c.mdx` + `app/library/page.tsx`; Phase 4: `app/workshop/page.tsx`) and none depends on
+another's output beyond Phase 1's manifest, which all three only _read_. They may be launched as
+one combined 9-agent group instead of three sequential phases, if the orchestrator prefers — this
+is explicitly allowed, unlike the default "leave empty" rule, because the independence is real and
+stated here.
+
+| Group | Phases  | Items                                                                                              | Rationale                                                                  |
+| ----- | ------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| G2    | 2, 3, 4 | All of G1's 7 sub-agents + Phase 3's Volvo 262C sub-agent + Phase 4's workshop sub-agent (9 total) | Disjoint files, all read-only against Phase 1's manifest, no ordering need |
+
+If run as G2, commit each phase's file(s) separately and in the order written above (7 builds,
+then Volvo 262C + library page, then workshop page) once all 9 sub-agents return — commits are
+still never batched, per the Rules footer.
 
 ### Sequential points — MUST NOT parallelise
 
-| Item                                                                              | Reason                                                                     |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Verification gates between phases (type-check after each phase)                   | Each phase's output gates the next. Gates are the synchronisation barrier. |
-| Git commits                                                                       | One commit per phase, in order. Commits are never batched.                 |
-| Any file edited by two or more items                                              | Same-file edits must always serialise.                                     |
-| Phase 9's `build` command relative to `type-check`/`lint`/`test`/`test:e2e:smoke` | `build` writes `.next/` — run it alone, not inside G4's parallel group.    |
+| Item                                                                                    | Reason                                                                     |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Phase 1 (R2 upload) before Phase 2/3/4                                                  | Every later phase reads `photos-manifest.json`, which Phase 1 produces.    |
+| Verification gates (type-check / build / lint / test / validate:content) between phases | Each phase's output gates the next. Gates are the synchronisation barrier. |
+| Git commits                                                                             | One commit per build/phase, in order. Commits are never batched.           |
+| Any file edited by two or more items                                                    | None here — see table above — but the rule still applies if that changes.  |
 
 ---
 
+## Phase 5 — Final verification gate, BACKLOG update, session file
+
+**Goal:** Run every gate `dpm-autobody` defines, update `BACKLOG.md` §5a to move completed items
+from open to done, and close out the session file.
+**Model:** sonnet — coordination + doc update, low complexity but needs accurate cross-referencing of what actually landed
+**Execution:** delegate to 1 sonnet sub-agent
+**Failure contract:**
+
+- **Fail fast.** Any uncaught exception aborts the phase immediately — do not swallow it, retry blindly, or continue to the next step.
+- **Show the evidence.** On failure, print the full traceback AND the offending record (the exact input/row/item being processed when it threw). No bare error messages.
+- **No partial passes.** A phase that processed only some of its records has FAILED, not passed. Never report success on partial data — surface the shortfall.
+- **Verdict line, always.** End the phase with exactly one line: `PASS — <n>/<total> records, 0 errors` or `FAIL — <n>/<total> records, <e> errors: <first offending record>`. The counts are mandatory, on both PASS and FAIL.
+  **Gate contract:** (all four required — see templates/gated-phase-brief-template.md)
+- **(a) Golden-fixture test:** the gate commands below, run for real against the actual repo state (not simulated).
+- **(b) Invariant on real data:** all of type-check/build/lint/test/validate:content/validate:quality exit 0.
+- **(c) Rollback:** `git revert <this phase's commit>` for the BACKLOG.md change; the gate run itself has no state to roll back.
+- **(d) Hard fail:** any gate command exits non-zero.
+
+```bash
+# Verification gate — STOP if this fails
+pnpm --filter dpm-autobody run type-check
+pnpm --filter dpm-autobody run build
+pnpm --filter dpm-autobody run lint
+pnpm --filter dpm-autobody run test
+cd sites/dpm-autobody && npx tsx scripts/validate-content.ts && npx tsx scripts/validate-quality.ts && cd ../..
+```
+
+Task: Update BACKLOG.md §5a and close out the session file
+model: sonnet
+Prompt:
+
+```
+Read output/sessions/2026-08/2026-08-26_dpm-autobody-discovery/BACKLOG.md §5a in full. For every
+bullet whose content was actually applied in this run (check the real git log from this session
+for what landed, and note any items a Phase-2 sub-agent flagged as skipped/uncertain — e.g. the
+resto-mod's or DB6's photo discrepancies, if either was flagged), move it from "not yet applied" to
+a clearly marked "done" state, following this project's own "Implementation Briefs" standard in
+MEMORY.md (move completed sub-items from open to done, update evidence + summary counts). Leave
+anything genuinely still open (the Porsche SC decision is now resolved and should be marked so;
+Volvo 262C's and Red P1800's chassis numbers are still TBC and stay open; the resto-mod pair's
+second-car/awards question stays open) clearly marked as such — do not mark something done that a
+Phase-2 sub-agent explicitly flagged as skipped.
+
+Then append a "## Completed" section to
+output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/yolo-brief.md per the template below,
+listing every commit SHA from this run with its message, and a short paragraph summarising what
+was implemented and any surprises (the two photo-discrepancy flags, if either fired, belong here).
+```
+
 ## Cost Estimate
 
-| Phase                                | Model        | Est. input tokens | Est. output tokens | Est. cost  |
-| ------------------------------------ | ------------ | ----------------- | ------------------ | ---------- |
-| Phase 1: Reference screenshots       | haiku        | ~6k               | ~1k                | ~$0.01     |
-| Phase 2: Content schema              | sonnet       | ~15k              | ~3k                | ~$0.09     |
-| Phase 3: Populate 12 builds' MDX     | sonnet       | ~30k              | ~8k                | ~$0.21     |
-| Phase 4: Header/footer               | sonnet       | ~20k              | ~4k                | ~$0.12     |
-| Phase 5: Home/workshop/contact (×3)  | sonnet       | ~45k              | ~10k               | ~$0.29     |
-| Phase 6: Library + build pages (×2)  | sonnet       | ~30k              | ~7k                | ~$0.20     |
-| Phase 7: Visual fidelity review (×6) | (dedicated)  | ~24k              | ~6k                | ~$0.15     |
-| Phase 8: Smoke test update           | haiku        | ~5k               | ~1k                | ~$0.01     |
-| Phase 9: Final gates                 | n/a (inline) | —                 | —                  | —          |
-| Phase 10: Commit + doc updates       | sonnet       | ~10k              | ~2k                | ~$0.06     |
-| **Total**                            |              | **~185k**         | **~42k**           | **~$1.14** |
+| Phase                                       | Model  | Est. input tokens | Est. output tokens | Est. cost                     |
+| ------------------------------------------- | ------ | ----------------- | ------------------ | ----------------------------- |
+| Phase 1: R2 upload (11 albums, ~170 photos) | sonnet | ~15k              | ~3k                | low                           |
+| Phase 2: 7 build MDX updates                | sonnet | ~90k (7×~13k)     | ~21k (7×~3k)       | mid                           |
+| Phase 3: New Volvo 262C page                | sonnet | ~14k              | ~3k                | low                           |
+| Phase 4: Workshop page photo section        | sonnet | ~12k              | ~3k                | low                           |
+| Phase 5: Final gates + BACKLOG update       | sonnet | ~10k              | ~2k                | low                           |
+| **Total**                                   |        | **~141k**         | **~32k**           | **mid, single-digit dollars** |
 
-Rates: Opus $15/$75, Sonnet $3/$15, Haiku $0.80/$4 per MTok.
-Estimation: ~5 tokens per line of code. Input = files read + brief (~3k) + system prompt (~3k). Output = code written + verification output (~500/gate).
+Rates: Opus highest, Sonnet mid, Haiku lowest per MTok (see console.anthropic.com for exact current pricing).
+Estimation: ~5 tokens per line of code/prose. Input = files read + brief (~6k) + system prompt (~3k) per sub-agent. Output = MDX/JSX written + verification output (~500/gate).
 
 ---
 
@@ -767,17 +687,19 @@ Estimation: ~5 tokens per line of code. Input = files read + brief (~3k) + syste
 After all phases complete, output:
 
 1. Phases completed — list each with commit SHA
-2. Build status — confirm `pnpm --filter dpm-autobody run type-check && pnpm --filter dpm-autobody run build && pnpm --filter dpm-autobody run lint && pnpm --filter dpm-autobody run test && pnpm --filter dpm-autobody run test:e2e:smoke` all pass
-3. Any exceptions or intentional deviations from the plan (especially: any Phase 7 finding accepted as a documented scope decision rather than fixed)
+2. Build status — confirm `pnpm --filter dpm-autobody run type-check && run build && run lint && run test` and both `validate-content.ts`/`validate-quality.ts` pass
+3. Any exceptions or intentional deviations from the plan — **explicitly call out** whether the
+   DB6 and/or resto-mod photo-discrepancy flags fired (see Phase 2 prompts), and what was decided
 4. Token usage and cost estimate:
 
    | Model     | Est. input tokens     | Est. output tokens | Est. cost |
    | --------- | --------------------- | ------------------ | --------- |
    | sonnet    | [total across phases] |                    | $X.XX     |
-   | haiku     | [total across phases] |                    | $X.XX     |
    | **Total** |                       |                    | **$X.XX** |
 
-   Compare to the Cost Estimate above. For exact figures: check console.anthropic.com.
+   Estimate tokens from: files read (lines x 5) and written (lines x 5).
+   Compare to the pre-flight Cost Estimate above.
+   For exact figures: check console.anthropic.com.
 
 ---
 
@@ -800,8 +722,6 @@ After completing all phases, append to `output/sessions/2026-09/2026-09-08_dpm-a
 
 Confirm this was done in the final report.
 
----
-
 ## Run Wrap-Up
 
 After completing all phases and updating the session file, run:
@@ -816,67 +736,69 @@ This writes a wrap-up summary to the session folder. **Do not skip it.**
 
 - STOP on any failed verification gate — do not continue to next phase
 - **Honour every phase's `**Failure contract:**`.** Fail fast on any uncaught exception (never swallow, blind-retry, or press on), print the full traceback and the offending record, and never report a phase as passed on partial data. Each phase MUST end with its one-line PASS/FAIL verdict including counts (`PASS — <n>/<total> records, 0 errors` / `FAIL — <n>/<total> records, <e> errors: <first offending record>`). A FAIL verdict is a failed gate — STOP.
-- **Honour every phase's `**Gate contract:**`.** A phase passes only when its golden-fixture test (a) is green against a **real recorded** shape, its real-data invariant (b) holds, and the type-check is clean. A phase whose fixture/invariant did not actually run, or that declares no gate checks at all, has NOT passed — STOP. Have the phase's rollback (c) to hand before you start it.
+- **Honour every phase's `**Gate contract:**`.** A phase passes only when its checks actually ran and passed, not merely declared. Have the phase's rollback to hand before you start it.
 - Read every file before editing it
-- Never push — leave all changes on the `feature/dpm-autobody-real-pages` branch
-- **Delegate every phase's implementation to sub-agents by default.** The orchestrator coordinates, gates, and commits — it does NOT write phase code inline. Each phase's `**Execution:**` line says how. Only Phase 9 is inline, and it declares the exception with its rationale.
-- **The `**Model:**` tier names the sub-agent's model, not the orchestrator's.** The orchestrator's own model is set by the launch command.
-- **Consult the `## Parallel execution groups` section before launching any work.** Every item listed in a group MUST be launched in a single Task-tool message.
-- **Items NOT listed in any group run sequentially — but still as delegated sub-agents.**
-- **Never parallelise across phase boundaries** — the Cross-phase groups table is empty for this brief; every phase gates the next.
+- **Never push. Never merge to `staging` or `main`. Everything stays committed on `develop`, locally.** This is a hard stop, not a default that can be overridden by inference from HANDOFF's own next-step text — the user must explicitly ask for push/promotion separately.
+- **Do not create a feature branch.** Work happens directly on `develop` — see "Deviation from default branch model" above.
+- **Delegate every phase's implementation to sub-agents by default.** The orchestrator coordinates, gates, and commits — it does NOT write phase code/content inline.
+- **The `**Model:**` tier names the sub-agent's model, not the orchestrator's.**
+- **Inline is the exception, not the default.**
+- **Consult the `## Parallel execution groups` section before launching any work.** G1 (or the combined G2, if you choose to merge phases 2-4) MUST be launched in a single Task-tool message.
+- **Never parallelise across phase boundaries** except where G2 explicitly allows it above.
 - **If the groups table and the phase prose disagree, the groups table wins.**
-- Minimal changes only — implement what this brief says, nothing more. Do NOT build the other 10 builds' individual pages, the homepage rotation mechanism, the real contact form wiring, or the workshop video hero — all explicitly out of scope, per the Context section's scope correction.
-- Use `model: haiku` for Task agents doing mechanical work; `model: sonnet` for standard edits.
-- The Co-Authored-By line in commits must reflect the orchestrator model (the committer).
-- Every phase that touches `sites/dpm-autobody` files must run `pnpm --filter dpm-autobody run type-check` before that phase's commit — don't wait until Phase 9 to discover a break several phases back.
-- **Never fabricate facts, figures, or photography.** Every real fact in this brief's phases traces back to the prototype's client build or BACKLOG.md item 5. If a sub-agent finds it needs a fact that isn't in either source, it must leave that field absent/TBC and flag it in its report — not invent a plausible-sounding value. This platform's whole DPM history has operated on this rule; breaking it here would undo work spanning multiple sessions.
+- Minimal changes only — implement what the plan says, nothing more. Do not invent facts David
+  didn't supply; expand wording only, per his own stated licence.
+- Use `model: sonnet` for every phase in this brief — none of this work is purely mechanical
+  (find-replace/import-only), and none requires opus-level cross-file architectural reasoning.
+- The Co-Authored-By line in commits must reflect the **orchestrator** model (the committer). If
+  the running orchestrator differs from this brief's stated `**Orchestrator model:**`, use the
+  actual running model.
+- Every brief MUST verify with the project's type-check, build, and lint gates, plus this site's
+  `test`, `validate:content`, and `validate:quality` — see Phase 5. STOP if any fails.
+- **Real-data rule:** every photo URL written into any frontmatter or page component MUST come
+  from `photos-manifest.json` (produced by a real R2 upload in Phase 1) — never hand-constructed,
+  never invented. This is the project's own established discipline (this exact class of mistake —
+  trusting a label instead of verifying against the real artifact — has bitten this project twice
+  already; see the folder-transposition and undersized-redaction-box notes in HANDOFF.md).
 
 ## Completed
 
-**Date:** 2026-09-11
+**Date:** 2026-09-16
 **Status:** All phases executed successfully
 
-Phases 1-6 ported the approved DPM Autobody static prototype into real Next.js/MDX pages: the
-builds content schema, MDX content for 12 builds, the real header/footer, home/workshop/contact
-pages, the `/library` ledger, and two individual `/builds/[slug]` pages (P1800 Candy resto-mod and
-E-type 941 PVO) — all landed roughly as planned. The real surprise was Phase 7, the visual fidelity
-gate: it was scoped as a single fix cycle but the first verification pass found extensive
-HIGH-severity drift across every page, forcing three further rounds of fixes and re-verification
-before the site was fit to ship. The three main root causes were (1) missing webfonts — every page
-silently fell back to Georgia because the fonts weren't wired up via `next/font`; (2) a Tailwind
-arbitrary-breakpoint bug where `min-[56rem]:`/`min-[60rem]:` variants emitted zero CSS because the
-`screens` config mixed px and rem units, making the primary nav invisible site-wide; and (3) a
-genuinely missing structural section — both build-detail pages were missing an "Enquiries" CTA
-section entirely, which is a real content gap rather than a styling regression. Along the way the
-screenshot-capture tooling itself produced two false-positive findings (no scroll-through pass
-before capture, missing lazy-loaded/scroll-reveal content; and `deviceScaleFactor: 2` on a
-`fullPage: true` capture of a very tall page causing Chromium tile-raster corruption that looked
-like missing content) — both were root-caused and fixed rather than chased as site bugs. All final
-gates are green: type-check, build, lint, vitest (84/84), and e2e smoke (6/6, now covering
-`/workshop`, `/library`, and both build pages). Known MEDIUM/LOW visual-fidelity gaps were
-deliberately left open to avoid iterating past diminishing returns: P1800 headline line-breaks
-don't exactly match the prototype; the P1800 plaque photo and one E-type pairing figure aren't
-full-bleed like the prototype; hero image crop/zoom differs slightly on a few panels; a portrait
-"trophy" photo on the E-type page is center-cropped in a 3:2 box rather than its natural aspect
-ratio (needs a content-schema change to carry real per-image intrinsic dimensions — out of scope
-here); a minor social-icon glyph style (outline vs. filled) mismatch; and a scroll-progress rail
-plus film-grain overlay from the prototype were deliberately never ported (documented scope
-decisions, not defects). One tooling limitation also remains unsolved: Chromium's screenshot
-capture hits a hard 16,384px height cap, so the reference capture for the two tallest pages (home,
-P1800) still truncates the last ~4% of the page (just the footer) — worth a proper
-segment-and-stitch fix in a future session if this capture tooling gets reused. Out of scope for
-this brief and not touched: the other 10 builds' individual pages (frontmatter only, pending
-photo pulls and David's confirmations), the homepage rotating-featured-build mechanism, the real
-contact form wiring, and the workshop's video hero.
+David's 2026-09-15 per-build content and photo albums were applied across all 10 builds in the
+library (9 existing + 1 new). 170 photos across 11 albums were uploaded to R2 and wired into
+frontmatter via `photos-manifest.json` (real manifest path:
+`output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/photos-manifest.json`). Chassis numbers
+were confirmed and set for the Bentley S3 1964 (BC60 XC) and Bentley S3 Continental (BC66 XA); the
+Volvo 262C (a brand-new build added to the library, bringing it to 10 builds) and the Red P1800
+both remain TBC on chassis number with open `sourcingGaps` entries. Two photo-discrepancy checks
+surfaced during the run: the "Porsche SC" album was confirmed to be the same car as
+`porsche-356-sc.mdx` (RESOLVED, per David 2026-09-16) via a matching filename plus 11 new gallery
+photos; and the DB6 album was found to contain a 15-photo batch despite David's email saying "no
+new photos" for that build — 6 of 15 filenames matched existing gallery photos exactly and the
+remaining 9 showed no new content, so zero photos were added and a new `sourcingGaps` entry was
+added instead asking David to confirm nothing was missed (this stays open, not resolved). Two
+previously-open DB6 `sourcingGaps` entries (race status since the 2022 crash, pre-crash livery
+colour) were resolved and removed. A new workshop-page "Workshop atmosphere" photo section was
+added, including the dog photo David requested, found within the workshop-action album itself —
+this also corrected an incorrect HANDOFF.md claim that two other albums contained unprompted dog
+cameos; neither actually does. One redaction gap was found outside this run's scope: an unredacted,
+legible plate ("723 HYK", on a shelf, not the car) in
+`inbox/p1800-red-2026-09/redacted/IMG_1601.jpg`, not used in any gallery, logged as an open item.
+All 10 build MDX files pass `validate-content.ts`, and the full gate run passed: type-check, build
+(10 build pages generated), lint, test (84/84), validate-content (10/10), validate-quality (0/0,
+expected on this site).
 
 ### Commits
 
-- `b4c15184` feat(dpm-autobody): add builds content schema
-- `df8bd433` feat(dpm-autobody): populate builds MDX content from approved prototype
-- `dcdc1daf` feat(dpm-autobody): port real header and footer from approved prototype
-- `a47bd943` feat(dpm-autobody): port real home, workshop, and contact pages
-- `1076dbe6` feat(dpm-autobody): add /library ledger and /builds/[slug] pages
-- `fb56e211` fix(dpm-autobody): visual fidelity remediation round 1 — fonts, nav, tokens, build structure
-- `1bdb0a0d` fix(dpm-autobody): visual fidelity remediation round 2 — footer, fonts, content accuracy
-- `ee3bb5b0` fix(dpm-autobody): visual fidelity remediation round 3 — enquiries section, form fonts, contrast
-- `d25df472` test(dpm-autobody): extend smoke tests to cover workshop, library, and build pages
+- `a23c67fb` — feat(dpm-autobody): extend R2 photo upload for David's 2026-09-15 batch (11 albums)
+- `2808e624` — feat(dpm-autobody): add Bentley S3 1964 chassis number and David's 2026-09-15 content
+- `65a654f7` — feat(dpm-autobody): fold Porsche SC 2026-09-15 photos into porsche-356-sc build
+- `9faa77ab` — feat(dpm-autobody): expand P1800 Candy resto-mod with trim/paint detail and 2026-09-15 photos
+- `1a1af03a` — feat(dpm-autobody): rewrite P1800 Pearl White with David's 2026-09-15 restoration detail
+- `e9b43f08` — feat(dpm-autobody): add new Volvo 262C build to the library
+- `57f65d24` — feat(dpm-autobody): add DB6 NEC exhibition photos, flag duplicate 2026-09-15 photo batch
+- `8f3488d4` — feat(dpm-autobody): add Bentley S3 Continental chassis number and David's 2026-09-15 content
+- `784d3c86` — feat(dpm-autobody): add P1800 Red restoration detail and David's 2026-09-15 photos
+- `52990124` — feat(dpm-autobody): add workshop action photo section, incl. the dog shot David asked for

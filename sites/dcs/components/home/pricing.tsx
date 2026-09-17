@@ -56,7 +56,8 @@ function CheckIcon({ hidden }: { hidden?: boolean }) {
 }
 
 export function Pricing() {
-  const [mode, setMode] = useState<Mode>('monthly');
+  // Default to upfront: the homepage leads with the one-off price.
+  const [mode, setMode] = useState<Mode>('upfront');
   const [tier, setTier] = useState<TierKey>('starter');
   // Phase 6: one shared one-shot read of the media query for the whole
   // homepage, rather than a second copy of it here. Same semantics as before
@@ -96,19 +97,19 @@ export function Pricing() {
         <div className="paytoggle" role="group" aria-label="How you'd like to pay">
           <button
             type="button"
-            data-mode="monthly"
-            aria-pressed={mode === 'monthly'}
-            onClick={() => selectMode('monthly')}
-          >
-            Pay monthly
-          </button>
-          <button
-            type="button"
             data-mode="upfront"
             aria-pressed={mode === 'upfront'}
             onClick={() => selectMode('upfront')}
           >
             Pay upfront
+          </button>
+          <button
+            type="button"
+            data-mode="monthly"
+            aria-pressed={mode === 'monthly'}
+            onClick={() => selectMode('monthly')}
+          >
+            Pay monthly
           </button>
         </div>
       </div>

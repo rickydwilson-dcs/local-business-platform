@@ -5,6 +5,75 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 
 ---
 
+## 2026-09-17
+
+### Fixed a live plate exposure the 2026-09-16 redaction pass missed
+
+- `p1800-red-2026-09/redacted/IMG_1601.jpg` still had a fully legible plate ("723 HYK", on a shelf
+  in the background, not on the car) after the prior pass's automated redact/review step — flagged
+  in `BACKLOG.md` at the time but left unfixed, with a note that "this photo was not used in any
+  gallery in this run, so nothing live is affected." That note was wrong: the R2 upload script
+  uploads every file in an album's `redacted/` folder regardless of whether anything links to it,
+  so the unredacted file was already live on R2 (confirmed via `headFile`), just unlinked from any
+  page. Reviewed the plate location by hand, redacted with `tools/plate-redact/apply.py --style
+blank`, and — per this platform's R2 cache-busting rule (overwriting a key doesn't bust the 1yr
+  CDN cache) — uploaded the fix under a new key (`.../IMG_1601-redacted.jpg`) instead of
+  overwriting the exposed one, then deleted the old object outright. Now used in `p1800-red.mdx`'s
+  `galleryImages`.
+- Deleted the session's `inbox/` working tree (1.1GB, untracked by design) once every album's
+  `redacted/` output was confirmed present in `photos-manifest.json` with no missing/failed
+  entries and a spot-check of R2 URLs across several albums returned 200.
+
+## 2026-09-16
+
+### David's 2026-09-15 content and photo batch, applied in full
+
+David replied 2026-09-15 to the per-build content ask outstanding since 2026-09-12, with text
+corrections for six builds and 11 new iCloud photo albums. Applied in two passes: pure-text
+corrections first (interactive), then the photo pipeline and page-building work (an autonomous
+`claude --dangerously-skip-permissions -p` run against a pre-written `yolo-brief.md`, once the
+text pass and photo prep were already committed-ready).
+
+- **Photo pipeline for all 11 albums** (170 photos): iCloud's shared-album API has moved to
+  CloudKit, not the documented `sharedstreams` endpoint, so scripting or browser-automating the
+  download failed outright — Ricky downloaded all 11 albums himself via Safari instead. From
+  there: HEIC→JPEG at full resolution, `plate-redact/detect.py`, then **every single photo
+  reviewed individually at full native resolution**, not just the detector's top candidates —
+  which were false positives on every album (rust, weld splatter, chrome trim) and never once
+  caught a real plate; every real plate found was one the detector missed. Redaction was
+  auto-applied without the tool's normal interactive browser-confirm step, per Ricky's explicit
+  instruction for this batch only — a deliberate one-time deviation from `plate-redact/README.md`,
+  not the new normal.
+- **Found and fixed a real bug in `tools/plate-redact/apply.py`**: its contact-sheet `montage` call
+  was emitting 12-bit JPEGs that no standard viewer (including Claude's own image reader) could
+  open — silently defeating the tool's own "check the contact sheet by eye before publishing"
+  step. One-line fix: added `-depth 8` to the `montage` invocation.
+- **Caught a folder mislabel before it caused harm**: the Red P1800 and NEC exhibition album
+  tokens were transposed during the initial batch-convert (a transcription slip, not a tooling
+  bug) — caught by content-checking the first survey grid against David's descriptions before any
+  redaction work started on either folder.
+- **Resolved the "Porsche SC" ambiguity by photo evidence**: the album contained `IMG_0304.jpg`,
+  already the live `porsche-356-sc.mdx`'s `heroImage`, confirming the same car rather than a second
+  model. Folded its photos into `porsche-356-sc.mdx`. The album also contained a second, distinct
+  white bare-shell 356 not documented anywhere — flagged in `BACKLOG.md`, not acted on.
+- **Six builds updated with David's text corrections and new photos**: Bentley S3 1964 (chassis
+  **BC60 XC**), Bentley S3 Continental (chassis **BC66 XA**), Pearl White P1800 (full restoration
+  detail rewrite), Red P1800 (restoration detail; chassis still `TBC`), the Tonja/Ahmet resto-mod
+  (trim/paint detail), and DB6 (NEC exhibition photos added — see the open flag below).
+- **New Volvo 262C build added** — a rare model restored for a repeat client, the one genuinely new
+  car in this batch, not just an update. Chassis number left `TBC` by David.
+- **Workshop page gained a "Workshop atmosphere" section** — 8 photos selected from the 19-photo
+  `workshop-action` album, deliberately not tied to any one build ("atmosphere and craft," David's
+  own framing), including the workshop dog photo he specifically asked for.
+- **`jaguar-sea-green` removed entirely**, David's own call: "an old not particularly well
+  documented restoration," not worth chasing sourcing facts for.
+- **Flagged, not silently dropped: a DB6 photo-batch discrepancy.** David's email said this
+  build's correction was "no new photos," but a 15-photo album arrived keyed to it anyway. 6 of
+  the 15 filenames matched the existing gallery; the rest showed no clearly new content. Zero
+  photos added — logged as a visible `sourcingGaps` entry rather than guessed at either way.
+- Full commit-by-commit detail: `output/sessions/2026-09/2026-09-08_dpm-autobody-build-out/`'s
+  `BACKLOG.md`, `HANDOFF.md`, and `yolo-brief.md`.
+
 ## 2026-09-12 (Lighthouse pass)
 
 ### Cut font payload and set explicit image quality across the site
