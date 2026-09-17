@@ -67,7 +67,10 @@ export const metadata: Metadata = {
  *
  * Confirmed 2026-09-15: `jaguar-sea-green` was removed (10 → 9 total) at David's own request —
  * he called it "an old not particularly well documented restoration" and asked for it to come
- * out of the portfolio. All slugs below must appear here exactly once; a slug present in
+ * out of the portfolio.
+ *
+ * Added 2026-09-16: `volvo-262c`, a new build from David's 2026-09-15 batch (9 → 10 total again).
+ * All slugs below must appear here exactly once; a slug present in
  * content/builds/ but missing from this list would simply never render, which is why every
  * filename under content/builds/ has a matching entry.
  */

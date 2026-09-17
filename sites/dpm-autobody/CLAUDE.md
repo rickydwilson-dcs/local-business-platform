@@ -33,10 +33,11 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   the nav invisible, a genuinely missing "Enquiries" CTA section, and more) rather than repeating it
   here.
 - **All real builds have real `/builds/[slug]` pages** (`pageStatus: built`), as of a 2026-09-12
-  pass. (`p1800-pair-one-client` was removed the same day, and `jaguar-sea-green` on 2026-09-15 at
-  David's request — see below — so the library is 9 builds, not the 10, 11 or 12 earlier notes in
-  this file describe; check `LIBRARY_ORDER` in `app/library/page.tsx` for the current authoritative
-  count and order, not this prose.) The two
+  pass. (`p1800-pair-one-client` was removed 2026-09-12, `jaguar-sea-green` on 2026-09-15 at
+  David's request, and a new `volvo-262c` build was added 2026-09-16 — see below for both — so the
+  library is 10 builds, not the 9, 11 or 12 earlier notes in this file describe; check
+  `LIBRARY_ORDER` in `app/library/page.tsx` for the current authoritative count and order, not this
+  prose.) The two
   richest (P1800 Candy, E-type 941 PVO) use hand-written MDX bodies with the full "documented car"
   template (chapters, spec tables, plaques — see `components/pages/build-detail-page.tsx`'s file
   header). The other 8 use that same component's built-in thin-content fallback: no
@@ -45,6 +46,16 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   auto-renders a "The record" fact panel and a trailing photo grid from that alone. Do not invent
   narrative for a thin build; reuse this fallback path instead of writing chapters the source
   material doesn't support.
+- **New `volvo-262c` build added 2026-09-16** — a rare model David restored for a repeat client,
+  the first of David's 2026-09-15 batch that was a genuinely new car rather than a content update
+  to an existing one. Uses the same thin-content fallback as the other 8. Chassis number is still
+  `TBC` (David left it blank in his email) — tracked as `sourcingGaps`, not guessed.
+- **Workshop page gained a "Workshop atmosphere" section, 2026-09-16** (`app/workshop/page.tsx`,
+  `WORKSHOP_ACTION_PHOTOS`) — 8 photos selected from the 19-photo `workshop-action` album David
+  sent, deliberately not tied to any one build ("atmosphere and craft, not 'here's car X being
+  welded'", his own framing from the 2026-09-08 and 2026-09-15 conversations). Includes the
+  workshop dog photo David specifically asked for. This is a separate thing from the workshop
+  page's hero, which still has no video planned — see "Still not done" below.
 - **`p1800-pair-one-client` was removed 2026-09-12 — it was a duplicate, not a distinct car.**
   BACKLOG.md and the approved prototype both listed "two P1800s, one client, both won show
   awards" as its own library lot, but at least one of the two cars in that pair is the resto-mod
@@ -129,10 +140,10 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 ### Still not done
 
 - **A run of David-confirmation facts is still open**, tracked as `sourcingGaps` on the affected
-  builds and visible on their pages: chassis numbers for Bentley S3 1964 and Bentley S3
-  Continental (now supplied by David, 2026-09-15 — BC60 XC and BC66 XA respectively — not yet
-  applied to the MDX, see `BACKLOG.md` item 5a), and the DB6's magazine's exact title. Chase the
-  remainder with David before removing the corresponding `sourcingGaps` entries.
+  builds and visible on their pages: chassis numbers for the new Volvo 262C and for the Red P1800
+  (both still `TBC`), the resto-mod's second client pair (a different client from Tonja/Ahmet, two
+  P1800s, show names and award placings — still unidentified), and the DB6's magazine's exact
+  title. Chase these with David before removing the corresponding `sourcingGaps` entries.
   - **Resolved 2026-09-15:** the DB6's race status and pre-crash livery — David confirmed it
     hasn't raced since the crash (still due to) and that the crash photos show its original
     livery, not yet replaced with the new pink-request design. Both `sourcingGaps` entries removed
@@ -150,9 +161,36 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
     confirmed this again independently, matching the 2026-09-12 confirmation already in the copy.
     No `sourcingGaps` entry existed for this; noted here only because the CLAUDE.md text above had
     drifted and still listed it as open.
+  - **Resolved 2026-09-16:** Bentley S3 1964's and Bentley S3 Continental's chassis numbers,
+    supplied by David 2026-09-15 (**BC60 XC** and **BC66 XA** respectively), are now applied in
+    both MDX files — no longer just noted in `BACKLOG.md`.
+  - **Resolved 2026-09-16 (photo evidence, not inference):** the "Porsche SC" album's ambiguity —
+    whether it was the same car as the live `porsche-356-sc.mdx` or a second model — turned out to
+    contain `IMG_0304.jpg`, the exact filename already used as that build's `heroImage`, confirming
+    same car. Its photos were folded into `porsche-356-sc.mdx`. The album also contained a second,
+    distinct white bare-shell 356 not documented anywhere on the site — not acted on, flagged in
+    `BACKLOG.md` in case it's a separate, unannounced build worth asking David about.
 - **`jaguar-sea-green` was removed entirely, 2026-09-15** — David's own call: "an old not
-  particularly well documented restoration," not worth chasing sourcing facts for. Library is 9
-  real builds now, not 10 (see `LIBRARY_ORDER` in `app/library/page.tsx`).
+  particularly well documented restoration," not worth chasing sourcing facts for.
+- **OPEN — a DB6 photo batch may or may not be genuinely new, needs a real answer from David, not
+  just the flag.** David's 2026-09-15 email said this build's correction was "no new photos," but
+  the batch photo pipeline received a 15-photo `db6-pink-2026-09` album keyed to it anyway. 6 of
+  those 15 filenames match ones already live in the gallery; the other 9 show no clearly new
+  content. Zero photos were added from it — this is a live `sourcingGaps` entry on
+  `aston-martin-db6-pink.mdx`, not just a note here; don't add photos from that album without
+  checking with David first.
+- **A live plate-exposure incident, fixed 2026-09-17, worth knowing the shape of.** The 2026-09-16
+  automated redaction pass missed a fully legible plate ("723 HYK", on a shelf in the background,
+  not on the car) in `p1800-red-2026-09/redacted/IMG_1601.jpg`. The photo hadn't been used in any
+  gallery, but the _unredacted_ file had already been uploaded to R2 by that pass's upload step
+  regardless — confirmed live via `headFile`, publicly reachable even though unlinked. Fixed by
+  hand: redacted with `tools/plate-redact/apply.py`, then — per this platform's R2 cache-busting
+  rule (root `CLAUDE.md`) — uploaded under a **new** key (`.../IMG_1601-redacted.jpg`) rather than
+  overwriting the exposed one, and deleted the old object outright rather than leaving it live-but-
+  unlinked. Lesson for any future redaction batch: the "not used in a gallery, so nothing live is
+  affected" assumption is wrong whenever the upload step runs over every file in a `redacted/`
+  folder rather than just the ones actually referenced in MDX — check R2 directly, not just the
+  page.
 - **No homepage rotating-featured-build mechanism will be built — closed, 2026-09-12, not just deferred.** Ricky's decision: the homepage's four featured cars will be updated by hand (editing `home-page.tsx`/frontmatter directly, then redeploying) whenever the selection should change, occasionally rather than on a schedule. Do not propose or scope a CMS/admin/rotation feature for this — there is no such feature planned.
 - **Contact form is not wired up** — `site.config.ts`'s `features.contactForm` flag is still
   `false`. Blocked on domain access: Ricky doesn't yet have the access needed to verify DPM's
