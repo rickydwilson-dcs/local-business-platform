@@ -24,18 +24,27 @@ section's "What was NOT done"/"Next step"/"Open questions" as current state.
    discrepancy (David said "no new photos", one arrived anyway — see
    `aston-martin-db6-pink.mdx`'s `sourcingGaps`), and an unredacted plate found in
    `inbox/p1800-red-2026-09/redacted/IMG_1601.jpg` that the automated redaction pass had missed.
-4. **2026-09-17, separately:** the IMG_1601.jpg plate gap was fixed by hand — reviewed the plate
+4. **2026-09-17, separately:** the IMG*1601.jpg plate gap was fixed by hand — reviewed the plate
    location visually, redacted it with `plate-redact/apply.py --style blank`, and, on checking,
-   found the _unredacted_ file had already been pushed live to R2 by the upload step in (2) above
+   found the \_unredacted* file had already been pushed live to R2 by the upload step in (2) above
    (confirmed via `headFile`), just unlinked from any page. Per this platform's R2 cache-busting
    rule, the fix went to a **new** key (`.../IMG_1601-redacted.jpg`) rather than overwriting the
    old one, and the old exposed-plate object was deleted outright. Now used in `p1800-red.mdx`'s
    `galleryImages`. See `BACKLOG.md`'s redaction-gap entry for full detail.
 
-**Still genuinely open** (unchanged by the above): the DB6 photo discrepancy needs a real answer
-from David, not just the flag; Volvo 262C's and Red P1800's chassis numbers are still TBC; the
-resto-mod client pair's second car/show names/awards are still unidentified; whether `develop` has
-been promoted to `staging`/`main` has still not been checked in this session or the one before it.
+5. **2026-09-17, later the same day:** ran the full `develop → staging → main` promotion via
+   `/deploy.changes`. `/update.docs` found this `HANDOFF.md`, `CLAUDE.md`, and both CHANGELOGs had
+   drifted from the working tree (see their own commits, `3ca5c9a2`) and fixed them first. `develop`
+   pushed and merged into `staging` clean (CI/E2E/Watchdog all green on both); `staging → main` went
+   through a PR (`main` is protected) — **PR #85, open, not merged** — rather than a direct push, per
+   this repo's deploy model. Production is not yet level with `staging`.
+6. **2026-09-17, later still:** David confirmed nothing was missed in the DB6's disputed
+   `db6-pink-2026-09` photo album — the discrepancy flagged in step 3 above is now resolved, not
+   just flagged. `sourcingGaps` entry removed from `aston-martin-db6-pink.mdx`; `BACKLOG.md` updated.
+
+**Still genuinely open:** Volvo 262C's and Red P1800's chassis numbers are still TBC; the
+resto-mod client pair's second car/show names/awards are still unidentified; PR #85
+(`staging → main`) is open and unmerged — production is behind `staging` until it lands.
 
 ---
 

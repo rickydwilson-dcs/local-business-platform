@@ -340,10 +340,10 @@ corrections with no new assets needed and are **already applied to the live MDX/
 
 **Everything else in David's reply was new content or new photo albums.** Held per Ricky's call,
 2026-09-15, to keep photo-dependent build-out as one pass per car rather than partial updates — that
-pass ran 2026-09-16 and applied all of it (see commit SHAs on each bullet below). Only four things
-remain genuinely open: the Volvo 262C and Red P1800 chassis numbers (both still TBC), the DB6
-photo-batch discrepancy (needs David's confirmation, not resolved), and the redaction gap noted at
-the end of the Photo pipeline section below.
+pass ran 2026-09-16 and applied all of it (see commit SHAs on each bullet below). The DB6
+photo-batch discrepancy and the redaction gap noted at the end of the Photo pipeline section below
+have both since been resolved (2026-09-17 — see their own bullets). Only two things remain
+genuinely open: the Volvo 262C and Red P1800 chassis numbers, both still TBC.
 
 - **Bentley S3 1964 ("current restoration") — chassis now known: BC60 XC.** Full description
   received (arrival condition, wheel-tub/quarter-panel/valance fabrication, soda blasting, epoxy
@@ -393,12 +393,14 @@ the end of the Photo pipeline section below.
   entries removed from `aston-martin-db6-pink.mdx` and its copy updated to state both facts
   directly. **DONE — commit `57f65d24` (2026-09-16; corrects this bullet's earlier "Applied,
   2026-09-15" note, which predated the actual code change).**
-- **DB6 photo-batch discrepancy — OPEN, needs David's confirmation, NOT resolved.** David's email
-  said "no new photos" for the DB6, but a 15-photo album arrived in the same 2026-09-15 batch
+- **DB6 photo-batch discrepancy — RESOLVED 2026-09-17, confirmed by David.** David's email said
+  "no new photos" for the DB6, but a 15-photo album arrived in the same 2026-09-15 batch
   regardless. Checked 2026-09-16: 6 of the 15 filenames matched existing gallery photos exactly and
   the other 9 showed no new content, so **zero photos from that album were added** to
-  `aston-martin-db6-pink.mdx`. A new `sourcingGaps` entry was added instead, asking David to confirm
-  nothing was missed — flagged, not resolved. Commit `57f65d24`.
+  `aston-martin-db6-pink.mdx` (commit `57f65d24`). A `sourcingGaps` entry was added asking David to
+  confirm nothing was missed. **David confirmed 2026-09-17: nothing was missed.** `sourcingGaps`
+  entry removed from the MDX; the gallery comment now records the confirmation instead of the open
+  question.
 - **Red P1800 — chassis still TBC (David left it blank again).** Full description received: sent
   as a stripped shell, one of the worst DPM has seen, full inner-panel fabrication (floors, chassis
   rails, inner wings, scuttle, boot floor), body sent for blasting with exterior panels off,

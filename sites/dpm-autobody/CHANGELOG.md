@@ -24,6 +24,21 @@ blank`, and — per this platform's R2 cache-busting rule (overwriting a key doe
   `redacted/` output was confirmed present in `photos-manifest.json` with no missing/failed
   entries and a spot-check of R2 URLs across several albums returned 200.
 
+### Promoted the 2026-09-16 content pass through develop → staging → main
+
+- Ran `/deploy.changes`. `/update.docs` caught `CLAUDE.md` and both CHANGELOGs drifting behind the
+  working tree (build count, resolved chassis numbers, the Porsche SC resolution, and the
+  IMG_1601 incident above were all still undocumented) and fixed them before anything shipped.
+  `develop` and `staging` both went green on CI/E2E/Watchdog; `staging → main` went through a PR
+  (main is protected) rather than a direct push, per this repo's deploy model.
+
+### Closed the DB6 photo-batch discrepancy — confirmed by David, nothing missed
+
+- The 15-photo `db6-pink-2026-09` album flagged 2026-09-16 (David said "no new photos," one arrived
+  anyway) turned out to be exactly what it looked like: David confirmed nothing was missed. Removed
+  the `sourcingGaps` entry from `aston-martin-db6-pink.mdx` and updated its gallery comment and
+  `BACKLOG.md` to record the confirmation instead of the open question.
+
 ## 2026-09-16
 
 ### David's 2026-09-15 content and photo batch, applied in full
