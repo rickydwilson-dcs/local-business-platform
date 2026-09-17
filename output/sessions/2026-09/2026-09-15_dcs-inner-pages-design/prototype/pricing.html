@@ -1,0 +1,977 @@
+<!--
+  ============================================================================
+  CORRECTION, 2026-09-17 (orchestrator)
+  An earlier pass recorded the price question as "RULED" and attributed the
+  decision to Ricky. That attribution was false: Ricky has NOT ruled on which
+  price set is real. The question remains OPEN:
+      set A  £750 / £45   — components/home/home-data.ts (live homepage)
+      set B  £995 / £59   — content/services/web-design.mdx
+  This page uses set A because it is what the live homepage ships, which is a
+  defensible default — NOT because it was approved. Do not cite this file as
+  evidence of a decision.
+  ============================================================================
+-->
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Pricing — Digital Consulting Services</title>
+<meta name="description" content="Website pricing from £750 upfront or £45 a month. Four plans, everything included, no hidden fees. See exactly what you get before you ask for a quote.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 3 / AGENT C — /pricing
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  THE SITUATION THIS PAGE RESOLVES
+  --------------------------------
+  Two pricing UIs currently tell the same story differently:
+    · the homepage  — components/home/pricing.tsx + home-data.ts: a desktop
+      two-pane tablist (.tiers + .detail), a separate mobile card set
+      (.tiercards), sharing state, with an upfront/monthly .paytoggle.
+    · /pricing      — app/(site)/pricing/page.tsx, 497 lines of the old
+      generic template with its OWN upfront/monthly presentation, its own
+      tier list, and — see the bug list in notes-c.md — its own contradictory
+      page counts.
+
+  The resolution here is structural, not cosmetic: SECTION 2 OF THIS PAGE IS
+  THE HOMEPAGE SECTION, VERBATIM. Same components, same TIERS data, same
+  default (upfront), same toggle order, same eCommerce force-switch, same
+  desktop/mobile split. A visitor arriving from the homepage meets the object
+  they just used. Everything BELOW section 2 is depth the homepage panel does
+  not have room for and never claims to answer.
+
+  At port time (Phase 5) that means ONE component: extract <Pricing/> and
+  render it in both places. The old 497-line page's unique content — the
+  eight-item "included" list, the add-ons, the five pricing FAQs — survives
+  as the sections below. Its contradictory tier data does not.
+
+  PRICES ARE AUTHORED, NEVER COMPUTED IN THE BROWSER, NEVER ANIMATED.
+  Session ground rule 5 / design-kit.md §5.4.1. Every figure on this page is
+  a literal string in this markup. There is no count-up, no easing on a
+  number, no innerHTML arithmetic. The JS at the bottom only swaps between
+  two authored strings that are BOTH already in the document.
+
+  COMMA TRAP. Every price with a thousands comma (£1,495 · £2,995 · £1,080 ·
+  £1,855 · £2,040 · £3,595 · £3,600 · £4,195 · £990 is comma-free) inherits
+  Archivo from <body> and carries no font-variant-numeric anywhere up its
+  ancestor chain. There is no monospaced face on this page at all — .prose
+  is not used here, so kit.css §31's `code`/`pre` mono rule never applies.
+  Verified as rendered at 1440px and 390px — notes-c.md.
+
+  NO DERIVED FIGURES ANYWHERE ON THIS PAGE. An earlier draft showed what each
+  way of paying totals over the 24-month minimum term, and the month at which
+  upfront overtakes monthly. Ricky's instruction, 2026-09-17: do not show
+  two-year costs. Both are gone, along with the two sentences that referred
+  to them. Every figure on the page is now a literal transcription of
+  components/home/home-data.ts and nothing else.
+
+  VOICE. First person singular throughout ("I", never "we") — session ground
+  rule 8. The old page and the supporting blog post are both written in the
+  plural; the corrections are listed in notes-c.md.
+
+  WHICH PRICES ARE REAL — NOT YET DECIDED (see correction below). Three inconsistent price sets
+  exist in the repo (notes-c.md §8). PROPOSED (not ruled): the prices AND the page
+  counts that were published and live on the homepage are the correct ones —
+  i.e. components/home/home-data.ts:261-325. That is the set this page uses
+  throughout and the only set it uses. Specifically NOT used anywhere in
+  rendered output: the old /pricing page's "up to 20" / "up to 50" page
+  counts, and the services MDX and blog post's "from £995" / "from £59/mo".
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit.css">
+<!-- kit-additions-*.css merged into kit.css by Phase 4 (2026-09-17); link removed. Verified: computed styles identical with the additions sheet disabled. -->
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER — Phase 2 chrome, copied from prototype/service-detail.html.
+     .menu is a SIBLING of .bar, never a descendant: an ancestor carrying
+     backdrop-filter or transform becomes the containing block for
+     position:fixed and traps the "fullscreen" overlay in the bar's own box.
+     ===================================================================== -->
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="#">Work</a>
+    <a href="#">Services</a>
+    <a href="#" aria-current="page">Pricing</a>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="#"><span>Work</span></a>
+    <a href="#"><span>Services</span></a>
+    <a href="#" aria-current="page"><span>Pricing</span></a>
+    <a href="#"><span>Blog</span></a>
+    <a href="#"><span>About</span></a>
+    <a href="#"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD — ink =============================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><span aria-current="page">Pricing</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Pricing</p>
+  <h1>What a website costs.</h1>
+  <p class="lead">Four plans, two ways to pay, and the same things included in every one of them.
+    If none of them quite fit, tell me what you need and I&rsquo;ll price it properly.</p>
+  <!-- No count-up. Four authored facts, all from components/home/home-data.ts
+       (TIERS) except the 24-month term, which is the site's own published
+       copy — app/(site)/pricing/page.tsx:126. -->
+  <div class="mast__meta">
+    <div><b>&pound;750</b><span>Upfront, from</span></div>
+    <div><b>&pound;45/month</b><span>Pay monthly, from</span></div>
+    <div><b>24 months</b><span>Pay-monthly minimum term</span></div>
+    <div><b>Nothing hidden</b><span>Hosting, SSL and support included</span></div>
+  </div>
+</header>
+
+
+<!-- ===== 2. THE PICKER — white ========================================
+     THIS IS THE HOMEPAGE SECTION, VERBATIM.
+
+     White is not a free choice: the homepage's #pricing panel is p--white
+     (home-body.tsx:54) and every component in here is written for a light
+     ground — .tiers' rules are rgba(14,14,18,.16), .paytoggle's track is
+     rgba(14,14,18,.06), .tcard's ground is #F7F6F4. Same ground, same truth.
+
+     Markup mirrors components/home/pricing.tsx exactly:
+       .payhead > .paytoggle          — "Pay upfront" FIRST, pressed by
+                                        default (pricing.tsx:60, 98-113).
+                                        Changed to upfront-default 2026-09-15.
+       .price > .tiers[role=tablist]  — desktop picker
+              + .detail[role=tabpanel]
+              + .tiercards            — mobile whole-cards, shown below 901px
+                                        by kit.css §22, because in one column
+                                        the detail pane lands off-screen and a
+                                        tap reads as nothing happening.
+
+     THE DEFAULT STATE IS AUTHORED IN HTML, not rendered by the script. With
+     JavaScript off this page still shows Starter on upfront, correctly, with
+     every figure present — matching the design's own doctrine that content is
+     never absent until script fires (home-r9.css:3-4, hero.tsx:5-9).
+     ==================================================================== -->
+<section class="sec p--white" data-ground="white" id="plans">
+  <p class="eyeless">The plans</p>
+  <h2 class="res">Four plans. Two ways to pay.</h2>
+  <p class="lead">Pick a plan to see what is in it. Every plan can be paid either way except the
+    online store, which is upfront only.</p>
+
+  <div class="payhead">
+    <div class="paytoggle" role="group" aria-label="How you'd like to pay">
+      <button type="button" data-mode="upfront" aria-pressed="true">Pay upfront</button>
+      <button type="button" data-mode="monthly" aria-pressed="false">Pay monthly</button>
+    </div>
+  </div>
+
+  <div class="price">
+    <div class="tiers" role="tablist" aria-label="Plans">
+      <button class="tier" role="tab" aria-selected="true" data-k="starter" aria-controls="detail">
+        <span>
+          <span class="tier__n">Starter</span>
+          <span class="tier__s">Up to 5 pages</span>
+        </span>
+        <span class="tier__f">&pound;750<small>+ &pound;10/mo</small></span>
+      </button>
+      <button class="tier" role="tab" aria-selected="false" data-k="pro" aria-controls="detail">
+        <span>
+          <span class="tier__n">Professional</span>
+          <span class="tier__s">Up to 20 pages &middot; most land here</span>
+        </span>
+        <span class="tier__f">&pound;1,495<small>+ &pound;15/mo</small></span>
+      </button>
+      <button class="tier" role="tab" aria-selected="false" data-k="growth" aria-controls="detail">
+        <span>
+          <span class="tier__n">Growth</span>
+          <span class="tier__s">Up to 100 pages</span>
+        </span>
+        <span class="tier__f">&pound;2,995<small>+ &pound;25/mo</small></span>
+      </button>
+      <button class="tier" role="tab" aria-selected="false" data-k="ecom" aria-controls="detail">
+        <span>
+          <span class="tier__n">eCommerce</span>
+          <span class="tier__s">Online store &middot; upfront only</span>
+        </span>
+        <span class="tier__f">From &pound;2,995<small>+ &pound;50/mo</small></span>
+      </button>
+    </div>
+
+    <div id="detail" role="tabpanel" class="detail">
+      <div class="detail__h">&pound;750 upfront, then &pound;10 a month</div>
+      <p class="detail__p">Up to five pages, all designed and written for you. Everything a business
+        needs to look credible and get found.</p>
+      <div class="detail__l">
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bespoke design &mdash; no template</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Local SEO built in</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hosting, SSL and security</span></div>
+      </div>
+      <a class="btn" href="#">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- Mobile pricing. Same data, same shared mode/tier state; whole cards
+         rather than the tablist (home-r9.css:660-662). -->
+    <div class="tiercards" id="tiercards">
+      <article class="tcard" data-k="starter">
+        <div class="tcard__h">
+          <span><span class="tcard__n">Starter</span><span class="tcard__s">Up to 5 pages</span></span>
+          <span class="tcard__f">&pound;750<small>+ &pound;10/mo</small></span>
+        </div>
+        <p class="tcard__p">Up to five pages, all designed and written for you. Everything a business
+          needs to look credible and get found.</p>
+        <ul class="tcard__l">
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bespoke design &mdash; no template</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Local SEO built in</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hosting, SSL and security</span></li>
+        </ul>
+        <a class="btn" href="#">Get a free quote</a>
+      </article>
+
+      <article class="tcard tcard--rec" data-k="pro">
+        <span class="tcard__b">Most popular</span>
+        <div class="tcard__h">
+          <span><span class="tcard__n">Professional</span><span class="tcard__s">Up to 20 pages &middot; most land here</span></span>
+          <span class="tcard__f">&pound;1,495<small>+ &pound;15/mo</small></span>
+        </div>
+        <p class="tcard__p">Up to twenty pages, and the one most small businesses land on. Room for the
+          pages Google takes seriously.</p>
+        <ul class="tcard__l">
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Starter, plus:</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Service and location pages</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Monthly plain-English reporting</span></li>
+        </ul>
+        <a class="btn" href="#">Get a free quote</a>
+      </article>
+
+      <article class="tcard" data-k="growth">
+        <div class="tcard__h">
+          <span><span class="tcard__n">Growth</span><span class="tcard__s">Up to 100 pages</span></span>
+          <span class="tcard__f">&pound;2,995<small>+ &pound;25/mo</small></span>
+        </div>
+        <p class="tcard__p">Up to a hundred pages &mdash; every service you offer, in every town you
+          cover, each with a page of its own.</p>
+        <ul class="tcard__l">
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Professional, plus:</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Every service in every town</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support</span></li>
+        </ul>
+        <a class="btn" href="#">Get a free quote</a>
+      </article>
+
+      <article class="tcard" data-k="ecom">
+        <div class="tcard__h">
+          <span><span class="tcard__n">eCommerce</span><span class="tcard__s">Online store &middot; upfront only</span></span>
+          <span class="tcard__f">From &pound;2,995<small>+ &pound;50/mo</small></span>
+        </div>
+        <p class="tcard__p">An online store, built and loaded. Products, payments and delivery set up
+          and handed over working.</p>
+        <ul class="tcard__l">
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Store built and products loaded</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Payments and delivery set up</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock and orders handled</span></li>
+        </ul>
+        <a class="btn" href="#">Get a free quote</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== 3. WHICH WAY TO PAY — ink ====================================
+     THE TOGGLE ASKS A QUESTION NEITHER UI ANSWERS. The homepage gives you a
+     switch between two figures and no way to decide which one you want. This
+     is the section that answers it.
+
+     SOURCE: sites/dcs/content/blog/pay-monthly-vs-upfront-website.mdx — a
+     real, already-written 1,000-word argument covering both models honestly,
+     currently published nowhere (the whole (site) route group has been
+     noindex since it was built). Condensed here to its four load-bearing
+     claims; the full post is linked at the end so this page stays a pricing
+     page rather than becoming an essay. Two corrections to the source, both
+     recorded in notes-c.md: "we" -> "I", and the post's "from £59/month"
+     is dropped — home-data.ts says the monthly floor is £45.
+
+     THE DESIGN HAS NO NEGATIVE IDIOM — no cross, no minus, no warning
+     colour. So each downside sits under `.trade`, a rule and a small-caps
+     label, which is how this design marks every other aside. A red cross
+     would be a new visual language on the page that most needs to be
+     believed.
+     ==================================================================== -->
+<section class="sec p--ink" data-ground="ink">
+  <p class="eyeless">Which way to pay</p>
+  <h2 class="res">Which one suits you.</h2>
+  <p class="lead">There is no catch in either one &mdash; they just suit different situations.
+    Here is the honest version of both, including the part that doesn&rsquo;t flatter them.</p>
+
+  <div class="twoup">
+    <div>
+      <h3>Pay upfront</h3>
+      <p class="twoup__p">You pay for the build once and own what has been built. After that there is a
+        small monthly fee for hosting, SSL, the domain and security monitoring &mdash; &pound;10 a month
+        on Starter, up to &pound;50 on an online store.</p>
+      <div class="detail__l">
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>You own the site outright. Nobody can take it away or raise the price on you.</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>No ongoing commitment beyond the monthly hosting fee.</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>You can move it elsewhere whenever you want to.</span></div>
+      </div>
+      <div class="trade">
+        <p class="eyeless">And the trade-off</p>
+        <p>It is a lump sum. For a business that is still getting going, &pound;750 to &pound;2,995 is
+          money that could go on tools, a van or advertising instead. The usual catch with an upfront
+          build elsewhere is that hosting, updates and support are then extra, or left to you &mdash;
+          here they are the &pound;10 to &pound;50 a month that follows, and nothing else.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3>Pay monthly</h3>
+      <p class="twoup__p">Nothing upfront. One predictable fee covers the design, the build, the
+        hosting, the support and the changes &mdash; &pound;45, &pound;85 or &pound;150 a month
+        depending on the plan, on a 24-month minimum term.</p>
+      <div class="detail__l">
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>No lump sum. The barrier to starting is one month&rsquo;s fee.</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything is included, so there are no separate bills to be surprised by.</span></div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>If it breaks it is my problem to fix, not yours.</span></div>
+      </div>
+      <div class="trade">
+        <p class="eyeless">And the trade-off</p>
+        <!-- No crossover month, and no total. Removed 2026-09-17 with the
+             table's two-year rows — same decision, same reason. The claim
+             below is true without a figure and does not need one. -->
+        <!-- NO BREAKEVEN REASONING, 2026-09-17. Ricky: "they can do the math -
+             i dont want to do it for them." Every figure the calculation needs
+             is on the page; the trade-off below is the one that is true on day
+             one, not on month 22. -->
+        <p>You do not own it while you are paying for it. If you stop paying, the site goes with
+          the subscription &mdash; your content is still yours, and I will export it, but the site
+          itself is not.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="trade" style="margin-top:clamp(56px,8vh,96px)">
+    <p class="eyeless">The short version</p>
+    <p class="lead" style="max-width:62ch">If you can put the lump sum down without it hurting your
+      cash flow, pay upfront. If you would rather keep hold of the cash and have the whole thing
+      handled for you, pay monthly. Both prices are on this page &mdash; work it out whichever way
+      suits you. Still weighing it up?
+      <a href="#" style="border-bottom:1.5px solid rgba(0,210,216,.5)">I have written it out at
+      length here</a> &mdash; both options, no thumb on the scale.</p>
+  </div>
+</section>
+
+
+<!-- ===== 4. WHAT'S IN EVERY PLAN + WHAT CHANGES — white ===============
+     Two things the homepage panel cannot say.
+
+     (a) The homepage gives each tier three bullets and the upper tiers open
+         with "Everything in Starter, plus:" — which implies a baseline and
+         never states it. This is the baseline, stated.
+
+     (b) `.tiers` is a role="tablist": one tier at a time, by design. Four
+         columns side by side is a different question, and it needs a table.
+         This is the single strongest reason for /pricing to exist alongside
+         the homepage section.
+     ==================================================================== -->
+<section class="sec p--white" data-ground="white">
+  <p class="eyeless">What&rsquo;s included</p>
+  <h2 class="res">In every plan, including the cheapest one.</h2>
+  <p class="lead">Whichever plan you choose, and whichever way you pay, all of this comes with it.
+    Nothing here is an upgrade or an add-on.</p>
+  <!-- .detail__l on a light ground: the check swaps aqua -> magenta by the
+       accent rule (design-kit.md §1.4). One rule, kit-additions-c.css C1. -->
+  <div class="detail__l detail__l--2">
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom bespoke design</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Local SEO built in &mdash; service pages, location pages, Schema markup</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mobile-first and fast</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Contact form with email notification</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hosting, SSL certificate and domain management</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ongoing support and monitoring</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited revision rounds during the build</span></div>
+    <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Google Search Console submission</span></div>
+  </div>
+
+  <h2 class="res" style="margin-top:clamp(74px,9vh,120px)">All four, side by side.</h2>
+  <p class="lead">Everything that changes between the plans, in one place. An online store is the
+    only one that can&rsquo;t be paid monthly.</p>
+
+  <!--
+    NO DERIVED FIGURES IN THIS TABLE, BY DECISION.
+
+    An earlier draft carried two "Total over 24 months" rows (£990/£1,080,
+    £1,855/£2,040, £3,595/£3,600, from £4,195) and a "Upfront costs less
+    from" row (month 22 / 22 / 24), arithmetic on the authored figures.
+    REMOVED AT RICKY'S INSTRUCTION, 2026-09-17: he does not want two-year
+    costs shown. The crossover row went with them — it is the conclusion of
+    the same sum, and publishing the conclusion while withholding the
+    working would be asserting a number nobody on the page can check.
+
+    Every figure remaining below is a literal string transcribed from
+    components/home/home-data.ts. Nothing is computed, nothing is animated.
+  -->
+  <div class="cscroll">
+    <table class="ctable">
+      <thead>
+        <tr>
+          <th scope="col"><span class="eyeless">Plan</span></th>
+          <th scope="col">Starter<span class="tier__s">Up to 5 pages</span></th>
+          <th scope="col" data-rec>Professional<span class="tier__s">Most land here</span></th>
+          <th scope="col">Growth<span class="tier__s">Up to 100 pages</span></th>
+          <th scope="col">eCommerce<span class="tier__s">Online store</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" class="eyeless">Pages</th>
+          <td>Up to 5</td>
+          <td data-rec>Up to 20</td>
+          <td>Up to 100</td>
+          <td>Online store</td>
+        </tr>
+        <tr>
+          <th scope="row" class="eyeless">Pay upfront</th>
+          <td><span class="tier__f">&pound;750<small>then &pound;10/mo</small></span></td>
+          <td data-rec><span class="tier__f">&pound;1,495<small>then &pound;15/mo</small></span></td>
+          <td><span class="tier__f">&pound;2,995<small>then &pound;25/mo</small></span></td>
+          <td><span class="tier__f">From &pound;2,995<small>then &pound;50/mo</small></span></td>
+        </tr>
+        <tr>
+          <th scope="row" class="eyeless">Pay monthly</th>
+          <td><span class="tier__f">&pound;45<small>per month</small></span></td>
+          <td data-rec><span class="tier__f">&pound;85<small>per month</small></span></td>
+          <td><span class="tier__f">&pound;150<small>per month</small></span></td>
+          <td class="na">Not available &mdash; upfront only</td>
+        </tr>
+        <tr>
+          <th scope="row" class="eyeless">What you get</th>
+          <td>
+            <ul>
+              <li>Bespoke design &mdash; no template</li>
+              <li>Local SEO built in</li>
+              <li>Hosting, SSL and security</li>
+            </ul>
+          </td>
+          <td data-rec>
+            <ul>
+              <li>Everything in Starter, plus:</li>
+              <li>Service and location pages</li>
+              <li>Monthly plain-English reporting</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Everything in Professional, plus:</li>
+              <li>Every service in every town</li>
+              <li>Priority support</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Store built and products loaded</li>
+              <li>Payments and delivery set up</li>
+              <li>Stock and orders handled</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===== 5. QUESTIONS — magenta =======================================
+     Ground matches the homepage's own #faq panel (home-body.tsx:63), which
+     is the same echo as section 2's white: where this page repeats the
+     homepage, it repeats it exactly.
+
+     Content is the five pricing FAQs from the current page
+     (app/(site)/pricing/page.tsx:107-133) — the only pricing-specific
+     questions written anywhere. Voice corrected to first-person singular;
+     no claim changed. Listed in notes-c.md.
+     ==================================================================== -->
+<section class="sec p--magenta" data-ground="magenta">
+  <div class="measure">
+    <p class="eyeless">Questions</p>
+    <h2 class="res">The ones people actually ask.</h2>
+    <div class="qa">
+      <details>
+        <summary>Do I own my website?</summary>
+        <div class="qa__a"><div><p>Yes, if you paid upfront. Pay-monthly clients own all their
+          content; the hosting arrangement transfers to you if you cancel after your minimum
+          term.</p></div></div>
+      </details>
+      <details>
+        <summary>What happens if I want to cancel?</summary>
+        <div class="qa__a"><div><p>Give me 30 days&rsquo; notice after your minimum term and I&rsquo;ll
+          export all your content so you can take it elsewhere. No fuss.</p></div></div>
+      </details>
+      <details>
+        <summary>Can I upgrade my plan later?</summary>
+        <div class="qa__a"><div><p>Yes, you can upgrade at any time. I&rsquo;ll quote for the
+          additional pages and work out the most cost-effective route for you.</p></div></div>
+      </details>
+      <details>
+        <summary>Is there a contract?</summary>
+        <div class="qa__a"><div><p>Pay-monthly has a 24-month minimum term, after which it rolls
+          monthly. Upfront clients have no ongoing commitment beyond the monthly hosting
+          fee.</p></div></div>
+      </details>
+      <details>
+        <summary>What&rsquo;s included in &ldquo;managed hosting&rdquo;?</summary>
+        <div class="qa__a"><div><p>Hosting on fast UK servers, SSL certificate, domain renewal,
+          security monitoring, and uptime alerts &mdash; all managed by me.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== 6. EXTRAS — aqua =============================================
+     Aqua appears exactly once and late, immediately before navy closes —
+     the homepage's own closing move (design-kit.md §1.2).
+
+     `.work`/`.row` is the design's dense index list and it is a light-ground
+     pattern (ink rules, magenta wipe-up fill), which is what aqua needs.
+     kit.css §30 already corrects `.row__m`'s hardcoded #5E5E68 on aqua.
+
+     NO PRICES HERE, deliberately. The current page says "prices vary — get
+     in touch", and there are no authored figures for any of these. Inventing
+     one would be the exact failure this page exists to fix.
+
+     `.row__m` carries the descriptor and NO <em> sub-line. The first draft
+     repeated "Price on enquiry" as an <em> on all seven rows; measured on
+     the aqua ground that is ink at .66 x .72 = .475 effective alpha, which
+     computes to 2.9:1 — a fail at 12px. Without the <em>, `.row__m` sits at
+     kit.css §30's rgba(14,14,18,.66) and computes to 4.7:1, which passes.
+     The fact itself is not lost: the lead above says it once, for all seven.
+     Measured, not estimated — notes-c.md carries the working.
+     ==================================================================== -->
+<section class="sec p--aqua" data-ground="aqua">
+  <p class="eyeless">Extras</p>
+  <h2 class="res">And the things you can bolt on.</h2>
+  <p class="lead">None of these are in the plan prices and none of them have a list price. Tell me
+    which ones you want and I&rsquo;ll quote for them with the build.</p>
+  <div class="work">
+    <a class="row" href="#">
+      <span class="row__n">Review capture widget</span>
+      <span class="row__m">Google and Trustpilot</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">SMS lead notification</span>
+      <span class="row__m">A text the moment an enquiry lands</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Call tracking number</span>
+      <span class="row__m">Which channel drove the call</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">AI chatbot FAQ</span>
+      <span class="row__m">Common questions, answered 24/7</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Booking calendar</span>
+      <span class="row__m">Customers book a slot directly</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Google Business Profile setup</span>
+      <span class="row__m">Created and optimised for local search</span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Google Ads management</span>
+      <span class="row__m">Campaigns managed monthly</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ===== 7. PAGE FOOTER — navy ======================================= -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Not sure which plan</p>
+    <!-- `.pagefoot h2{max-width:14ch}` (kit.css §32). A two-sentence heading
+         with a <br> broke into four ragged lines against that measure when
+         rendered; one sentence sits on two. The second sentence moved into
+         the lead, where it has 56ch to sit in. -->
+    <h2 class="res">Tell me what you need.</h2>
+    <p class="lead">I&rsquo;ll tell you which plan it is and what it costs. Free, and without
+      obligation.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#" aria-current="page">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="#">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* ---------------------------------------------------------------------
+   Four behaviours. Three are the Phase 2 chrome's, unchanged. The fourth
+   is a port of components/home/pricing.tsx.
+   --------------------------------------------------------------------- */
+
+/* 1. The .bar ground probe — home-behaviour.tsx:109-115, 224-247.
+      A point bar.height * 0.62 down from the top is tested against every
+      [data-ground] rect, and THE LAST MATCH IN DOCUMENT ORDER WINS. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+/* 2. The .in latch — home-behaviour.tsx:276-289. One-shot at threshold .16,
+      unobserved immediately so a .res heading can never flicker back. */
+(function(){
+  var sel = '.sec,.mast,.pagefoot,.work,.qa,.cscroll';
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll(sel).forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  document.querySelectorAll(sel).forEach(function(el){ io.observe(el); });
+})();
+
+/* 3. The mobile menu. #menu is a SIBLING of .bar. `pricing.html#menu` opens
+      it on load, which is how the open state is inspected in a 390px iframe. */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+
+/* 4. THE PICKER — a port of components/home/pricing.tsx, which is itself a
+      port of the r9 prototype's imperative paint(). Same state machine, same
+      two art-directed behaviours, same data.
+
+      TIERS below is transcribed from components/home/home-data.ts:261-325
+      VERBATIM — names, subtitles, figures, sub-labels, heads, descriptions,
+      bullets and the upfrontOnly flag. It is the single source for both this
+      page and the homepage, and at port time it stays that way: one shared
+      <Pricing/> component reading one TIERS array, rendered in both places.
+
+      NO COUNT-UPS, NO COMPUTED PRICES. Every string below already appears
+      in the static markup above for one state or the other; this only swaps
+      between them. A frozen script leaves the authored default on screen,
+      which is a correct price — that is the whole point of authoring it.
+
+      COMMA TRAP: these strings go into textContent, so they inherit Archivo
+      from <body>. Nothing here sets font-family or font-variant-numeric. */
+(function(){
+  var TIERS = [
+    {k:'starter', name:'Starter', sub:'Up to 5 pages', upfrontOnly:false,
+     upfront:{fig:'£750', sub:'+ £10/mo', head:'£750 upfront, then £10 a month'},
+     monthly:{fig:'£45', sub:'per month', head:'£45 a month, nothing upfront'},
+     desc:'Up to five pages, all designed and written for you. Everything a business needs to look credible and get found.',
+     bullets:['Bespoke design — no template','Local SEO built in','Hosting, SSL and security']},
+    {k:'pro', name:'Professional', sub:'Up to 20 pages · most land here', upfrontOnly:false,
+     upfront:{fig:'£1,495', sub:'+ £15/mo', head:'£1,495 upfront, then £15 a month'},
+     monthly:{fig:'£85', sub:'per month', head:'£85 a month, nothing upfront'},
+     desc:'Up to twenty pages, and the one most small businesses land on. Room for the pages Google takes seriously.',
+     bullets:['Everything in Starter, plus:','Service and location pages','Monthly plain-English reporting']},
+    {k:'growth', name:'Growth', sub:'Up to 100 pages', upfrontOnly:false,
+     upfront:{fig:'£2,995', sub:'+ £25/mo', head:'£2,995 upfront, then £25 a month'},
+     monthly:{fig:'£150', sub:'per month', head:'£150 a month, nothing upfront'},
+     desc:'Up to a hundred pages — every service you offer, in every town you cover, each with a page of its own.',
+     bullets:['Everything in Professional, plus:','Every service in every town','Priority support']},
+    {k:'ecom', name:'eCommerce', sub:'Online store · upfront only', upfrontOnly:true,
+     upfront:{fig:'From £2,995', sub:'+ £50/mo', head:'From £2,995 upfront, then £50 a month'},
+     /* home-data.ts:313-316 — transcribed for fidelity, never displayed on
+        the homepage because behaviour 1 below force-switches the mode. On
+        THIS page the mobile card does render it, exactly as pricing.tsx:171
+        does, and offers the switch as a button. */
+     monthly:{fig:'N/A', sub:'upfront only'},
+     desc:'An online store, built and loaded. Products, payments and delivery set up and handed over working.',
+     bullets:['Store built and products loaded','Payments and delivery set up','Stock and orders handled']}
+  ];
+  function get(k){ for (var i=0;i<TIERS.length;i++) if (TIERS[i].k===k) return TIERS[i]; }
+
+  /* Default to upfront — pricing.tsx:59-60, changed 2026-09-15. The homepage
+     leads with the one-off price and the toggle renders "Pay upfront" first. */
+  var mode = 'upfront';
+  var tier = 'starter';
+  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var toggle  = document.querySelectorAll('.paytoggle button');
+  var tiers   = document.querySelectorAll('.tiers .tier');
+  var detail  = document.getElementById('detail');
+  var cards   = document.querySelectorAll('.tiercards .tcard');
+
+  function fig(el, d){
+    /* textContent, not innerHTML — the <small> is rebuilt rather than parsed,
+       so a price string can never be interpreted as markup. */
+    el.textContent = d.fig;
+    var s = document.createElement('small');
+    s.textContent = d.sub;
+    el.appendChild(s);
+  }
+
+  function check(){
+    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','0 0 16 16'); svg.setAttribute('fill','none');
+    svg.setAttribute('aria-hidden','true');
+    var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d','M3 8.4 6.4 12 13 4.6'); p.setAttribute('stroke','currentColor');
+    p.setAttribute('stroke-width','2.1'); p.setAttribute('stroke-linecap','round');
+    p.setAttribute('stroke-linejoin','round');
+    svg.appendChild(p); return svg;
+  }
+
+  /* the .btn arrow, rebuilt rather than cloned so the CTA can be replaced */
+  function arrow(){
+    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','0 0 16 16'); svg.setAttribute('fill','none');
+    svg.setAttribute('aria-hidden','true');
+    var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d','M2 8h11M9 4l4 4-4 4'); p.setAttribute('stroke','currentColor');
+    p.setAttribute('stroke-width','1.9'); p.setAttribute('stroke-linecap','round');
+    p.setAttribute('stroke-linejoin','round');
+    svg.appendChild(p); return svg;
+  }
+
+  function paint(){
+    for (var i=0;i<toggle.length;i++){
+      toggle[i].setAttribute('aria-pressed', String(toggle[i].dataset.mode === mode));
+    }
+    for (i=0;i<tiers.length;i++){
+      var t = get(tiers[i].dataset.k);
+      tiers[i].setAttribute('aria-selected', String(tiers[i].dataset.k === tier));
+      fig(tiers[i].querySelector('.tier__f'), t[mode]);
+    }
+
+    var active = get(tier);
+    var d = active[mode];
+    var dead = active.upfrontOnly && mode === 'monthly';
+
+    /* ------------------------------------------------------------------
+       BUG FOUND BY RENDERING THIS PAGE — it is in the SHIPPED homepage.
+
+       pricing.tsx guards ONE direction only: selectTier() force-switches
+       the mode to upfront when you pick eCommerce while on monthly
+       (pricing.tsx:78-85). selectMode() has no guard at all
+       (pricing.tsx:87-89). So the reachable sequence is:
+
+         pick eCommerce  -> mode forced to upfront (correct)
+         click "Pay monthly" -> mode becomes monthly, tier stays ecom
+
+       and `activeDetail` is then TIERS.ecom.monthly, whose `head` is
+       ABSENT — `head?: string` (home-data.ts:244, 316). React renders
+       nothing into `.detail__h`, so the pane shows an EMPTY HEADLINE above
+       a live description, bullets and a "Get a free quote" button, while
+       the tier row beside it reads "N/A · upfront only". It does not throw
+       and it does not look broken enough to notice. It is exactly the dead
+       panel the component's own header comment says must never render.
+
+       The fix is not new design: THE MOBILE CARD ALREADY ANSWERS THIS
+       STATE CORRECTLY (pricing.tsx:194-202) — it shows the N/A figure and
+       swaps its CTA for a "See upfront pricing" button. The desktop pane is
+       the half that was never given the same answer. So it gets it here.
+
+       Falling back to the upfront head was the first thing I wrote and it
+       is worse: the pane would say "From £2,995 upfront" while the toggle
+       above it says "Pay monthly". Contradicting yourself is not better
+       than being blank.
+
+       ONE LINE OF NEW COPY: the head below. Flagged in notes-c.md.
+       ------------------------------------------------------------------ */
+    detail.querySelector('.detail__h').textContent =
+      dead ? 'An online store is upfront only' : d.head;
+    detail.querySelector('.detail__p').textContent = active.desc;
+    var list = detail.querySelector('.detail__l');
+    list.textContent = '';
+    active.bullets.forEach(function(b){
+      var row = document.createElement('div');
+      var span = document.createElement('span');
+      span.textContent = b;
+      row.appendChild(check()); row.appendChild(span);
+      list.appendChild(row);
+    });
+
+    /* the pane's own CTA takes the mobile card's answer too: a real switch
+       rather than a quote request for a price that does not exist. */
+    var dcta = detail.querySelector('.btn');
+    var dnext = document.createElement(dead ? 'button' : 'a');
+    dnext.className = 'btn';
+    if (dead){
+      dnext.type = 'button';
+      dnext.textContent = 'See upfront pricing';
+      dnext.dataset.switch = 'upfront';
+      dnext.addEventListener('click', function(){ mode = 'upfront'; paint(); });
+    } else {
+      dnext.href = '#';
+      dnext.textContent = 'Get a free quote';
+      dnext.appendChild(arrow());
+    }
+    dcta.parentNode.replaceChild(dnext, dcta);
+
+    /* Behaviour 2 (pricing.tsx:16-19): replay the `swap` animation on every
+       state change unless prefers-reduced-motion. React does it by changing
+       a key and remounting; here the class is stripped, layout is forced,
+       and it is re-added — which is what the r9 prototype itself did. */
+    if (!reduce){
+      detail.classList.remove('swap');
+      void detail.offsetWidth;
+      detail.classList.add('swap');
+    }
+
+    for (i=0;i<cards.length;i++){
+      var ct = get(cards[i].dataset.k);
+      var cd = ct[mode];
+      fig(cards[i].querySelector('.tcard__f'), cd);
+      var upOnly = ct.upfrontOnly && mode === 'monthly';
+      var cta = cards[i].querySelector('.btn');
+      var next = document.createElement(upOnly ? 'button' : 'a');
+      next.className = 'btn';
+      if (upOnly){
+        next.type = 'button';
+        next.textContent = 'See upfront pricing';
+        next.dataset.switch = 'upfront';
+      } else {
+        next.href = '#';
+        next.textContent = 'Get a free quote';
+      }
+      cta.parentNode.replaceChild(next, cta);
+    }
+  }
+
+  for (var i=0;i<toggle.length;i++){
+    toggle[i].addEventListener('click', function(){ mode = this.dataset.mode; paint(); });
+  }
+  for (i=0;i<tiers.length;i++){
+    tiers[i].addEventListener('click', function(){
+      tier = this.dataset.k;
+      /* Behaviour 1 (pricing.tsx:78-85): selecting the eCommerce tier while
+         on monthly switches the mode to upfront. There is no monthly store
+         price, so a dead N/A panel would read as broken. */
+      if (get(tier).upfrontOnly && mode === 'monthly') mode = 'upfront';
+      paint();
+    });
+  }
+  /* delegated, because the mobile CTA is replaced on every paint */
+  document.getElementById('tiercards').addEventListener('click', function(e){
+    var b = e.target.closest('[data-switch]');
+    if (b){ mode = b.dataset.switch; paint(); }
+  });
+
+  /* Deliberately NOT called on load. The default state is already authored in
+     the markup; painting it again would only risk the script and the HTML
+     disagreeing without anyone noticing. paint() runs on the first
+     interaction and not before. */
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   kit-additions-c.css — AGENT C (/pricing), Phase 3 wave 1.
+
+   Linked AFTER kit.css. kit.css itself is NOT edited — four agents are
+   working against it simultaneously and Phase 4 reconciles.
+
+   Everything below is either (a) an existing kit value applied through a new
+   selector, or (b) a composition of existing values into a container rule.
+   Nothing is approximated from memory. Where a number has no source in
+   kit.css/design-kit.md it is called out as INVENTED with the reason.
+
+   Six blocks:
+     C1  .detail__l on light grounds        (accent-swap, 1 rule)
+     C2  .detail__l--2                      (two-column check list)
+     C3  .twoup                             (generic two-column section grid)
+     C4  .trade                             (the "and the trade-off" block)
+     C5  .ctable / .cscroll                 (the four-tier comparison table)
+     C6  responsive + hover:none for C1-C5
+   ========================================================================== */
+
+
+/* ==========================================================================
+   C1  .detail__l ON A LIGHT GROUND
+
+   `.detail__l` is "the design's one included / confirmed idiom" (kit.css
+   §17) and its check is aqua because on the homepage it only ever sits
+   inside the ink `.detail` pane. Aqua on white measures ~1.7:1 — the exact
+   failure kit.css §28 ADAPTATION 2 already fixed for the breadcrumb's hover.
+
+   This is that same fix, applied to the check: design-kit.md §1.4's
+   accent-swap rule — aqua on ink/magenta/navy, magenta on paper/white/aqua.
+   No new value; `var(--magenta)` is what `.tcard__l svg` (kit.css §17)
+   already uses for exactly this list on the light `#F7F6F4` card ground.
+
+   Written for Phase 4 to promote into kit.css §17 wholesale — it is not
+   specific to /pricing, it completes a component the kit ships incomplete.
+   ========================================================================== */
+.p--white .detail__l svg,
+.p--paper .detail__l svg,
+.p--aqua  .detail__l svg{color:var(--magenta)}
+
+/* CAUGHT BY RENDERING, NOT BY READING. `.detail` is the pricing picker's
+   pane and it carries its OWN ink background (kit.css §17,
+   home-r9.css:413) — it does not take the ground of the section around it.
+   The homepage's #pricing panel is p--white, so the rule above reached
+   straight into the ink pane and turned its checks magenta on an ink
+   ground: the one place in the design where the aqua check is native.
+
+   Re-asserted at higher specificity (0,4,1 against 0,3,1) rather than by
+   source order, so a Phase 4 merge cannot reorder it into a regression.
+   `.p--magenta`/`.p--navy`/`.p--ink` need no entry — they never matched. */
+.p--white .detail .detail__l svg,
+.p--paper .detail .detail__l svg,
+.p--aqua  .detail .detail__l svg{color:var(--aqua)}
+
+
+/* ==========================================================================
+   C2  .detail__l--2 — TWO-COLUMN CHECK LIST
+
+   `.detail__l` is a single-column grid (kit.css §17) because the ink pane it
+   lives in is one narrow column. "Everything in every plan" is eight items
+   on a full-width white section; one column of eight runs ~520px tall with
+   the right half of the section empty.
+
+   column-gap is `.price`'s clamp(22px,3.4vw,58px) (home-r9.css:393) — the
+   design's own two-column gap. Row gap stays `.detail__l`'s own 12px.
+   ========================================================================== */
+.detail__l--2{grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(22px,3.4vw,58px)}
+
+
+/* ==========================================================================
+   C3  .twoup — TWO-COLUMN SECTION GRID
+
+   The "which way to pay" section is two arguments side by side. `.price`
+   already is the design's two-column grid, but it CANNOT be reused as a
+   generic one: kit.css §22's mobile layer contains
+   `.price .tiers,.price .detail{display:none}` and `.price{display:block}`,
+   so anything wearing `.price` inherits the pricing picker's mobile
+   collapse. Hence a separate container with the same numbers.
+
+   columns   repeat(2,minmax(0,1fr))      `.cards--2` (home-r9.css:167)
+             — equal, not `.price`'s 1fr/1.05fr: that asymmetry exists
+             because the detail pane carries more than the tier list does;
+             two equal arguments must not be weighted against each other.
+   gap       clamp(22px,3.4vw,58px)       `.price` (home-r9.css:393)
+   margin-top clamp(30px,4.6vh,54px)      `.price` (home-r9.css:393)
+   ========================================================================== */
+.twoup{margin-top:clamp(30px,4.6vh,54px);display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3.4vw,58px);
+  align-items:start}
+/* h3 inside a .twoup column: kit.css:121's global h3 at its 2.2rem cap is
+   the same size as the section's own h2 floor once the column is half-width.
+   This is `.tier__n`'s spec (home-r9.css:402) — an existing pair in the
+   scale, and the right one, because these two headings ARE tier-level
+   labels: "Pay upfront" / "Pay monthly" are the toggle's own two options. */
+.twoup h3{font-size:clamp(1.15rem,2.3vw,1.75rem);font-weight:700;letter-spacing:-.028em;
+  line-height:1.02}
+/* the paragraph under it: `.detail__p`'s spec (home-r9.css:423) minus the
+   reserved min-height, which only exists to hold four tiers to one height. */
+.twoup__p{margin-top:14px;opacity:.8;line-height:1.5;font-size:15.5px}
+
+
+/* ==========================================================================
+   C4  .trade — "AND THE TRADE-OFF"
+
+   The honest half of each payment model. The design has NO negative idiom —
+   no cross, no minus, no warning colour — and inventing one would be a new
+   visual language on a page whose whole job is to be trusted. So the
+   downside is marked the way this design marks every other aside: a 1px rule
+   and the small-caps label (`.eyeless`, design-kit.md §2.3), which is the
+   only non-heading emphasis the design has.
+
+   Values are entirely `.mast__meta`'s (kit.css §29), which is the same move
+   — a rule, a gap, a stacked label:
+     margin-top   clamp(28px,4vh,44px)     .mast__meta
+     padding-top  clamp(20px,3vh,28px)     .mast__meta
+     rule         rgba(255,255,255,.22)    .mast__meta / .end__foot / .qa
+     light rule   rgba(14,14,18,.16)       .mast__meta's light override
+   ========================================================================== */
+.trade{margin-top:clamp(28px,4vh,44px);padding-top:clamp(20px,3vh,28px);
+  border-top:1px solid rgba(255,255,255,.22)}
+.p--white .trade,.p--paper .trade,.p--aqua .trade{border-top-color:rgba(14,14,18,.16)}
+.trade p{font-size:15.5px;line-height:1.5;opacity:.8}
+
+
+/* ==========================================================================
+   C5  .ctable — THE FOUR-TIER COMPARISON TABLE
+
+   THIS IS THE PAGE'S REASON TO EXIST and it is the one thing the homepage
+   picker structurally cannot do. `.tiers` is a `role="tablist"`: it shows
+   ONE tier's detail at a time, by design (home-r9.css:393-427). Four
+   columns side by side is a different question — "how do these compare?" —
+   and it needs a table, not a picker.
+
+   TRAP — COMMAS. Every figure in this table is a comma'd price. `.ctable`
+   sets NO font-variant-numeric and NO font-family; the figures inherit
+   Archivo from <body> via --f. NEVER add `tabular-nums` here and never give
+   this table a mono face: the comma takes a full digit advance and GBP 1,995
+   renders as "1 , 995" (design-kit.md §9.1, pricing.tsx:21-25). Verified as
+   rendered — notes-c.md.
+
+   Values, all existing:
+     cell padding   clamp(15px,2.2vh,24px) 6px   `.tier` (home-r9.css:396)
+     rule           rgba(14,14,18,.16)           `.tiers` (home-r9.css:394)
+     column head    clamp(1rem,1.42vw,1.28rem)/700/-.022em   `.card__t` (229)
+     row label      class="eyeless" in the markup — 12.5px/.11em/700/uppercase
+                    (kit.css:126). Its margin-bottom does not apply to a
+                    table-cell box, so no override is needed.
+     figure         class="tier__f" in the markup (home-r9.css:408)
+     sub-label      `.tier__f small` (home-r9.css:409)
+     rec tint       rgba(14,14,18,.045)          `.tier:hover` (home-r9.css:399)
+     bullet size    15.5px / 1.5                 `.detail__p` (home-r9.css:423)
+     bullet gap     8px                          `.tcard__l` (home-r9.css:681)
+
+   min-width:780px is MEASURED, not chosen: five columns (one label + four
+   tiers) where the widest single cell is the eCommerce figure "From £2,995"
+   at `.tier__f`'s white-space:nowrap. Below 780px the figures start
+   colliding with the sub-labels. The wrapper scrolls instead of the document
+   — root CLAUDE.md's rule: a table may exceed the viewport only inside its
+   own overflow-x:auto container, so the page body never scrolls sideways.
+   ========================================================================== */
+.cscroll{margin-top:clamp(30px,4.6vh,54px);overflow-x:auto;
+  -webkit-overflow-scrolling:touch}
+.ctable{width:100%;min-width:780px;border-collapse:collapse;text-align:left}
+.ctable th,.ctable td{padding:clamp(15px,2.2vh,24px) 6px;vertical-align:top;
+  border-bottom:1px solid rgba(14,14,18,.16)}
+.ctable thead th{border-bottom:1px solid rgba(14,14,18,.16);
+  font-size:clamp(1rem,1.42vw,1.28rem);font-weight:700;letter-spacing:-.022em}
+/* the row label column. `.eyeless` carries the type; this only sizes it so a
+   four-word label does not steal width from the figures. 22% of 780px is
+   172px, which holds "Total over 24 months" on two lines. */
+.ctable tbody th{width:22%;font-weight:700}
+/* `.tier__f` is text-align:right because on the homepage the figure sits at
+   the end of a `1fr auto` row (home-r9.css:404-407). In a table column it is
+   the start of the cell, so the alignment that fixed it there breaks it
+   here. */
+.ctable .tier__f{text-align:left;display:block}
+/* `.tier__s` (13px/.66) reused as the "most popular" line under the column
+   head, instead of `.tcard__b`'s absolutely-positioned badge — a positioned
+   pill inside a scrolling table cell drifts away from its own column. */
+.ctable thead .tier__s{font-weight:400}
+/* the recommended column. `.tier:hover`'s tint, not `.tier[aria-selected]`'s
+   solid ink: nothing in this table is selected, and a solid ink column would
+   claim the tier had been chosen. */
+.ctable [data-rec]{background:rgba(14,14,18,.045)}
+.ctable ul{list-style:none;display:grid;gap:8px}
+.ctable li{font-size:15.5px;line-height:1.5}
+/* "Not available" — eCommerce has no monthly price. The homepage HIDES this
+   state (pricing.tsx:78-85 force-switches the mode so the dead panel never
+   renders); this page states it, which is the whole difference between a
+   picker and a comparison. .5 is `.paytoggle button`'s unselected opacity
+   rounded down from .6 — it must read as absent, not merely quiet. */
+.ctable .na{opacity:.5}
+
+
+/* ==========================================================================
+   C6  RESPONSIVE + TOUCH
+   ========================================================================== */
+
+@media (max-width:900px){
+  /* `.cards--2`'s own collapse (home-r9.css:500-502) — two arguments stack
+     rather than squeeze. */
+  .twoup{grid-template-columns:1fr;gap:clamp(34px,5vh,58px)}
+  /* one column of eight is correct once the section is one column wide */
+  .detail__l--2{grid-template-columns:1fr}
+  /* the mobile layer's 16px prose floor (home-r9.css:544-551 doctrine) */
+  .twoup__p,.trade p{font-size:16px}
+  /* the table keeps its 780px and scrolls; the wrapper must be allowed to,
+     so it takes the full bleed to the gutter rather than being padded in. */
+  .cscroll{margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad)}
+  .ctable li{font-size:16px}
+}
+
+/* kit.css §24 / §35's rule: EVERY new hover goes here, because on touch a
+   hover fires on tap and LATCHES until you tap elsewhere.
+
+   The check was made and there is nothing to neutralise. C1-C5 introduce no
+   :hover rule at all — the `[data-rec]` column tint is a static attribute,
+   `.ctable` has no hover state, `.trade` and `.twoup` are typography. Every
+   hover the page actually uses belongs to kit.css and is already neutralised
+   at kit.css §24 / §35: `.row` (the add-on list), `.tier` and `.paytoggle`
+   (the picker), `.btn`, `.qa summary`, `.crumb a`, `.footmap a`.
+
+   No @media (hover:none) block follows, deliberately. An empty one would
+   read as an oversight later.
+   ========================================================================== */

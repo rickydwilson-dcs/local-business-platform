@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DCS inner pages — wave 1 review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E12; --paper:#ECEBE9; --white:#fff;
+    --magenta:#D6006B; --aqua:#00D2D8; --navy:#17265E; --grey:#70707B;
+    --pad:clamp(20px,4.4vw,76px);
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--paper);
+    font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased}
+
+  header{padding:clamp(48px,9vh,96px) var(--pad) clamp(32px,5vh,56px);
+    border-bottom:1px solid rgba(236,235,233,.14)}
+  .eyeless{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--aqua);margin:0 0 18px}
+  h1{margin:0;font-weight:800;letter-spacing:-.04em;line-height:.95;
+    font-size:clamp(2.4rem,6.2vw,4.6rem)}
+  h1 em{font-style:normal;color:var(--magenta)}
+  .lead{margin:22px 0 0;max-width:62ch;font-size:clamp(15.5px,1.5vw,18px);
+    line-height:1.55;color:rgba(236,235,233,.74)}
+
+  .decisions{margin:clamp(32px,5vh,48px) 0 0;padding:0;list-style:none;
+    display:grid;gap:10px;max-width:86ch}
+  .decisions li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;
+    padding:14px 18px;border:1px solid rgba(236,235,233,.18);border-radius:14px;
+    background:rgba(236,235,233,.035);font-size:14.5px;line-height:1.5}
+  .decisions b{color:var(--aqua);font-weight:700;white-space:nowrap}
+  .decisions span{color:rgba(236,235,233,.82)}
+
+  .grid{display:grid;gap:clamp(20px,2.6vw,34px);padding:clamp(36px,6vh,64px) var(--pad) 0;
+    grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr))}
+
+  .item{border:1px solid rgba(236,235,233,.2);border-radius:20px;overflow:hidden;
+    background:#141419;display:flex;flex-direction:column;
+    transition:border-color .4s var(--ease),transform .4s var(--ease)}
+  .item:hover{border-color:var(--magenta);transform:translateY(-3px)}
+
+  .item__h{padding:16px 20px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+    border-bottom:1px solid rgba(236,235,233,.16)}
+  .item__n{font-weight:800;letter-spacing:-.02em;font-size:17px}
+  .item__r{font-size:12.5px;color:var(--grey);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .item__by{margin-left:auto;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:rgba(236,235,233,.45)}
+
+  /* Live scaled iframe — never a screenshot, so it cannot go stale. */
+  .frame{position:relative;width:100%;aspect-ratio:16/11;overflow:hidden;background:var(--paper)}
+  .frame iframe{position:absolute;top:0;left:0;width:1440px;height:990px;border:0;
+    transform-origin:0 0;pointer-events:none}
+
+  .item__f{padding:13px 20px;display:flex;gap:18px;align-items:center;
+    border-top:1px solid rgba(236,235,233,.16);font-size:13.5px}
+  .item__f a{color:var(--magenta);font-weight:700;text-decoration:none;position:relative}
+  .item__f a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+    background:currentColor;transform:scaleX(0);transform-origin:0 50%;
+    transition:transform .4s var(--ease)}
+  .item__f a:hover::after{transform:scaleX(1)}
+  .item__f a.alt{color:var(--aqua)}
+  .note{color:rgba(236,235,233,.5);margin-left:auto;font-size:12.5px}
+
+  footer{padding:clamp(48px,8vh,88px) var(--pad);margin-top:clamp(40px,6vh,72px);
+    border-top:1px solid rgba(236,235,233,.14);color:rgba(236,235,233,.6);
+    font-size:14px;line-height:1.6}
+  footer b{color:var(--paper)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
+    background:rgba(236,235,233,.1);padding:2px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyeless">Phase 3 wave 1 · reconciled 2026-09-17</p>
+  <h1>Nine pages,<br>one <em>design kit</em>.</h1>
+  <p class="lead">
+    Every frame below is a <strong>live iframe</strong>, not a screenshot — it reflects the file
+    on disk right now and cannot go stale. All nine pages share one stylesheet
+    (<code>kit.css</code>, 499 rules, 3,851 declarations, zero empty rules) and the chrome you
+    already approved.
+  </p>
+
+  <ul class="decisions">
+    <li><b>Decision 1 &mdash; SETTLED</b><span><strong>£750/£45 is real.</strong> Ricky, 2026-09-17: the prices <em>and</em> the page counts published on the live homepage (<code>home-data.ts</code>) are correct. <strong>Now corrected in the prototypes</strong> — <em>service-detail</em> (4 figures), <em>services-list</em> (4), <em>_chrome</em> (2). One wrong claim went with them: service-detail said the monthly plan "spread the build over 12 months", which nothing supports and which the site's own 24-month minimum term contradicts. <strong>Still to do outside this folder:</strong> <code>content/services/web-design.mdx</code> and <code>content/blog/pay-monthly-vs-upfront-website.mdx</code> both still carry £995/£59, and the blog post additionally claims the crossover is "three or four years" when the real figures put it at 22&ndash;24 months.</span></li>
+    <li><b>Decision 2</b><span><strong>The contact form cannot receive an enquiry.</strong> A native form post hits a handler that demands a CSRF header (403), then <code>request.json()</code> on a form-encoded body (400), and the honeypot names don't match. Fix now, or at port?</span></li>
+    <li><b>Decision 3</b><span><strong>The three project videos are sector atmosphere, not website captures</strong> — scaffolding, an embroidery machine, a bolt of fabric. Captioned honestly for now. Three screen recordings would settle it; all three sites are live.</span></li>
+    <li><b>Decision 4</b><span><strong>"Est. 2019" and "20+ sites delivered"</strong> — 2019 is supported by <code>content-brief.md</code>; the site count is unsourced. Confirm, correct, or drop.</span></li>
+    <li><b>Decision 5 &mdash; CONFIRMED</b><span><strong>Burger-only on every page, at every width</strong>, matching the shipped homepage — Ricky, 2026-09-17, twice ("match live site burger menu on desktop", "on all pages"). Verified against source rather than recall: <code>site-bar.tsx:30-82</code> renders no <code>&lt;nav&gt;</code> at any width, and none of <code>home-r9.css</code>'s three <code>.burger</code> rules (67-75, 562, 590) hides it. <strong><code>session.md</code> D1 has been amended</strong> so the next agent does not "fix" this back. Restore path is still in the <code>kit.css</code> §26 comment; the markup is hidden rather than deleted, so it is one declaration either way.</span></li>
+    <li><b>Watch</b><span><strong>The masthead is loud</strong> — measured at 78% of the viewport by Phase 2 and 81% by Agent E, independently. One <code>max-height:1040px</code> compression on <code>.mast h1</code> quietens it if you want that.</span></li>
+  </ul>
+</header>
+
+<main class="grid" id="grid">
+  <!-- Populated below so every card is built from one list — adding a wave-2 page means one line. -->
+</main>
+
+<footer>
+  <p><b>What this is.</b> Static HTML design prototypes. Nothing under <code>sites/dcs/</code> has been
+  modified, and no React has been written. The port is Phase 5, a separate session, and it carries the
+  cutover with it: remove the site-wide <code>noindex</code>, fix <code>logoAlt="DCS Gardening &amp; Landscaping"</code>,
+  reconcile the two pricing toggles, and unify the voice to first person.</p>
+  <p><b>Still to design (wave 2).</b> <code>/blog</code>, <code>/blog/[slug]</code>, blog categories,
+  <code>/locations</code> ×2, and the legal template ×3.</p>
+  <p><b>Provenance.</b> Per-page reasoning is in <code>notes-{a..e}.md</code>; the numeric spec is
+  <code>design-kit.md</code> (900 lines, 124 source citations); the chrome rationale is
+  <code>phase2-notes.md</code>. The pre-merge stylesheet is kept as <code>kit.css.pre-phase4.bak</code>.</p>
+</footer>
+
+<script>
+  const PAGES = [
+    ['_chrome.html',        'Chrome showcase',  'header · footer · masthead · breadcrumb', 'Phase 2', 'Approved'],
+    ['service-detail.html', 'Service detail',   '/services/[slug]',                        'Phase 2', 'Approved — but carries contested prices'],
+    ['services-list.html',  'Services',         '/services',                               'Agent B', '1+2+2+1, no media exists for a service'],
+    ['projects-list.html',  'Work',             '/projects',                               'Agent A', '13 case studies, real sector filter'],
+    ['project-detail.html', 'Case study',       '/projects/[slug]',                        'Agent A', 'Colossus — the one with video + full body'],
+    ['pricing.html',        'Pricing',          '/pricing',                                'Agent C', 'Homepage panel verbatim, then the full answer'],
+    ['contact.html',        'Contact',          '/contact',                                'Agent D', 'Form designed from nothing + success state'],
+    ['about.html',          'About',            '/about',                                  'Agent E', 'No photograph of Ricky exists — by design'],
+    ['404.html',            'Not found',        '404',                                     'Agent D', 'Needed no new CSS at all'],
+  ];
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = PAGES.map(([file, name, route, by, note]) => `
+    <article class="item">
+      <div class="item__h">
+        <span class="item__n">${name}</span>
+        <span class="item__r">${route}</span>
+        <span class="item__by">${by}</span>
+      </div>
+      <div class="frame"><iframe src="${file}" loading="lazy" title="${name}" scrolling="no"></iframe></div>
+      <div class="item__f">
+        <a href="${file}" target="_blank" rel="noopener">Open full page &rarr;</a>
+        <a class="alt" href="${file}" target="_blank" rel="noopener"
+           onclick="this.href=this.href">Open at 390px &rarr;</a>
+        <span class="note">${note}</span>
+      </div>
+    </article>`).join('');
+
+  // Scale each live iframe to its card. Re-measured on resize, so the thumbnails
+  // stay correct at any window width rather than being pinned to one breakpoint.
+  function scaleFrames(){
+    document.querySelectorAll('.frame').forEach(f => {
+      const iframe = f.querySelector('iframe');
+      const s = f.clientWidth / 1440;
+      iframe.style.transform = `scale(${s})`;
+      iframe.style.height = (f.clientHeight / s) + 'px';
+    });
+  }
+  scaleFrames();
+  addEventListener('resize', scaleFrames);
+  // Late webfont/layout settling can change card width; re-measure once.
+  addEventListener('load', scaleFrames);
+</script>
+
+</body>
+</html>

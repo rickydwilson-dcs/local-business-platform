@@ -1,0 +1,335 @@
+/* ==========================================================================
+   kit-additions-a.css
+   PHASE 3 / AGENT A — /projects (list) and /projects/[slug] (case study)
+
+   Loaded AFTER kit.css. kit.css itself is NOT edited: four other agents are
+   writing against the same file in parallel and Phase 4 reconciles the five
+   additions files by hand.
+
+   PROVENANCE RULE, unchanged from Phases 1-2: every value below is cited to
+   kit.css, home-r9.css, shared.css, or the 2026-08-26 round-1 prototypes
+   (project-list.html / project-post.html). The two genuinely new numbers are
+   marked INVENTED and listed in notes-a.md.
+
+   CONTENTS
+     A1  .cards--2 .card[hidden]      the filter hide rule (a real trap)
+     A2  .card__meta                  always-visible proof line under the well
+     A3  .card__link                  "read the case study" affordance
+     A4  .card__note                  media credit line — HONESTY MECHANISM
+     --  .empty a                     the no-results link (unstyled in kit.css)
+     A5  .mast__media                 full-bleed case-study hero media band
+     A6  .quotes / .quote--sm         the three testimonials, per decision D3
+     A7  responsive
+     A8  touch (hover:none)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   A1  .cards--2 .card[hidden] — THE FILTER HIDE RULE
+
+   Not tidying. `[hidden]` is a UA rule (`display:none`) at UA-origin
+   specificity, and kit.css:438 sets `.cards--2 .card{display:block}` in the
+   author origin — which WINS. So `card.hidden = true` on a .cards--2 card does
+   nothing at all: the attribute is set, the element stays on screen, and
+   nothing errors. Round 1 sidestepped this with inline
+   `style.display='none'` (project-list.html:309), which works but fights the
+   stylesheet for control of `display` and leaves inline junk on 13 elements.
+   One author-origin rule fixes it properly.
+   ========================================================================== */
+.cards--2 .card[hidden]{display:none}
+
+
+/* ==========================================================================
+   A2  .card__meta — the always-visible proof line
+
+   PROMOTED from project-list.html:19-20, where it was page-local.
+
+   WHY IT EXISTS AT ALL. `.cards--2 .card` carries its supporting line in
+   `.card__s`, a full-bleed scrim revealed on hover or :focus-visible
+   (kit.css:455-467). That is the right home for *description*. It is the wrong
+   home for *proof*: the outcome figure is the thing that sells a portfolio
+   card, and on desktop a hover-only proof point is invisible to a scanner.
+   Round 1 had both bands but put near-identical copy in each — the Clothing
+   Kings card said "price changes with the job..." in the scrim and "where the
+   price changes with embroidery vs. vinyl..." in the meta. The fix is not to
+   delete one band, it is to give them different jobs:
+
+     .card__meta  the strongest real outcome bullet   — always visible
+     .card__s     what the project actually is        — on hover / focus
+
+   VALUES. Padding is project-list.html:19 verbatim; its horizontal value
+   matches `.cards--2 .card__t`'s own clamp(17px,1.5vw,23px) (kit.css:444), so
+   the two bands hang on one edge. The paragraph is `.card__s`'s BASE spec
+   (kit.css:429) — 13.5px / 1.4 / opacity .72 — not round 1's 1.45 / .68; same
+   role, so the same numbers, one less value in the design.
+   ========================================================================== */
+.cards--2 .card__meta{padding:clamp(13px,1.2vw,17px) clamp(17px,1.5vw,23px) clamp(15px,1.4vw,20px)}
+.cards--2 .card__meta p{font-size:13.5px;line-height:1.4;opacity:.72;max-width:40ch}
+
+
+/* ==========================================================================
+   A3  .card__link — the "there is a page behind this" affordance
+
+   PROMOTED from project-list.html:21. It earns its place on THIS grid
+   specifically: 10 of the 13 wells carry the `.slot` placeholder, and a
+   striped box with "Awaiting footage" on it reads as an unfinished card rather
+   than a link to a case study. The card is already an <a>, so this is
+   signposting, not a second target — hence aria-hidden on the arrow and no
+   nested interactive element.
+
+   VALUES. 13px/600 and the 7px gap are project-list.html:21 verbatim. The
+   arrow nudge is the design's universal arrow idiom — translateX on hover over
+   .4s cubic-bezier(.16,1,.3,1), `.btn svg`'s own transition (kit.css:291-293),
+   at `.hire svg`'s 4px rather than `.btn svg`'s 5px because this arrow is
+   12px, not 16px.
+
+   NOT SCOPED TO .cards--2 — FOUND BY RENDERING. The first draft wrote it as
+   `.cards--2 .card__link`. The case-study page then reuses the same "read on"
+   affordance for a standalone "See all thirteen" link outside any card, and it
+   rendered as plain body text with a zero-sized SVG beside it: no colour, no
+   weight, no arrow, and nothing in the console. The rule is generic, so the
+   base selector is generic and only the card's own hover is scoped.
+   ========================================================================== */
+.card__link{display:inline-flex;align-items:center;gap:7px;margin-top:10px;
+  font-size:13px;font-weight:600;color:var(--magenta)}
+.card__link svg{width:12px;height:12px;flex:none;
+  transition:transform .4s cubic-bezier(.16,1,.3,1)}
+/* the card is the link, so the nudge is driven by the CARD's hover; a
+   standalone one drives its own */
+.cards--2 .card:hover .card__link svg,
+a.card__link:hover svg{transform:translateX(4px)}
+/* on a dark ground the accent swaps — design-kit.md §1.4, the same rule
+   `.prose a` follows at kit.css:1419 */
+.p--ink .card__link,.p--navy .card__link,.p--magenta .card__link{color:var(--aqua)}
+
+
+/* ==========================================================================
+   A4  .card__note — MEDIA CREDIT. THIS IS AN HONESTY MECHANISM.
+
+   READ THIS BEFORE REMOVING IT.
+
+   Three of the thirteen case studies have real R2 media (kit/brief say so, and
+   HOME_ASSETS confirms the URLs): The Clothing Kings, Cuddle Plush Fabrics,
+   Colossus Scaffolding. The 2026-08-26 brief describes all three as
+   "screen-recording video + poster" of the client's site (brief.md:37-40).
+   THEY ARE NOT. Fetched and looked at, 2026-09-17:
+
+     colossus-scaffolding.jpg   scaffolding poles across the front of a brick
+                                terrace — Phase 2 caught this one already
+                                (phase2-notes.md §3)
+     the-clothing-kings.jpg     an embroidery machine stitching a logo onto a
+                                navy polo shirt; the logo is not the client's
+     cuddle-plush-fabrics.jpg   a folded bolt of pale green fabric
+
+   All three are sector atmosphere. None is a capture of a website. On the
+   homepage they run full-bleed behind a client name as `.wpanel` background
+   and nobody reads them as screenshots. In a portfolio CARD they sit in a
+   16/10 well under that client's name, which is exactly the context where a
+   viewer reads "this is their site" — so the card has to say what the footage
+   actually is. That is session ground rule 6 and design-kit.md §10.
+
+   The alternative — give all 13 the `.slot` placeholder — is honest but leaves
+   a portfolio of thirteen striped boxes. A quiet credit line keeps the
+   atmosphere and removes the false claim.
+
+   IT IS A STATIC CAPTION, NOT AN OVERLAY — FOUND BY RENDERING. The first
+   draft put it over the media, bottom-left, `.card__tag`'s 14px insets, white
+   at .62, z-index 4. It read perfectly over the Colossus and Clothing Kings
+   frames and would have been INVISIBLE over Cuddle Plush, which is pale fabric
+   against a near-white wall. The design already knows this: `.wpanel`'s scrim
+   is explicitly "sized so white text clears 4.5:1 even against a pure-white
+   video frame" (home-r9.css:281-285), ~.55 alpha minimum. Adding a second
+   scrim under the note would have stacked with the one `.card__s` already
+   becomes on touch (kit.css:477-479). A caption below the media needs no
+   scrim, cannot be covered by the hover scrim, and sits with the rest of the
+   card's copy. Every note is worded to start "Pictured:" so it is
+   unambiguously about the media and not more card copy.
+
+   VALUES, all reused: 11.5px / opacity .62 / letter-spacing .04em is
+   `.slot__s` verbatim (kit.css:501) — the same voice the `.slot` placeholder
+   already speaks in, which is the right register for the same admission.
+   margin-top 12px is `.prose figcaption`'s (kit.css:1483), the design's one
+   existing caption.
+   ========================================================================== */
+.card__note{display:block;margin-top:12px;
+  font-size:11.5px;letter-spacing:.04em;opacity:.62;line-height:1.35}
+
+
+/* --- the empty state's link ---------------------------------------------
+   FOUND BY RENDERING (by forcing the state — see below). `.empty` exists in
+   kit.css §21 but nothing styles a link inside it, and the global reset is
+   `a{color:inherit;text-decoration:none}` (kit.css:96), so the "get in touch"
+   call to action rendered as plain grey body text indistinguishable from the
+   sentence around it. Round 1 patched this with an inline
+   style="color:var(--magenta);font-weight:600" (project-list.html:256); these
+   are `.prose a`'s declarations instead (kit.css:1416), which is the design's
+   one existing inline-link treatment.
+
+   NOTE: the empty state is UNREACHABLE with the current content — all five
+   sectors have at least one project, so no filter can return zero. It is kept
+   because the ported page will build its chips from data and a new sector can
+   be added before its first project exists. It was verified by forcing it, not
+   by reaching it. */
+.empty a{color:var(--magenta);font-weight:600;
+  border-bottom:1.5px solid rgba(214,0,107,.5);transition:border-color .3s ease}
+.empty a:hover{border-bottom-color:var(--magenta)}
+
+
+/* ==========================================================================
+   A5  .mast__media — the case-study hero media band
+
+   Round 1 put the case-study video in `.chero__well`
+   (project-post.html:18-19): a full-bleed 16/8 band directly under the
+   headline block, outside the gutter. That was right, and it is the one thing
+   a case study has that a service page does not.
+
+   Rather than a fourth page-local masthead answer, this is a child of `.mast`
+   — the component Phase 2 built precisely to stop that happening
+   (kit.css §29). It goes full-bleed by negating `.mast`'s own `var(--pad)`
+   rather than by living outside it, so there is one gutter value on the page.
+
+   VALUES. aspect-ratio 16/8 is project-post.html:18 verbatim. The media fill
+   rules are `.card__well img,video`'s (kit.css:424) minus the hover scale — a
+   page hero is not a card and does not lift. The top margin is `.mast__meta`'s
+   own clamp(28px,4vh,44px) (kit.css:1312), so media and meta row are
+   interchangeable in that slot, which is the whole point of `.mast`.
+
+   The dark background is not decoration: a lazily-loaded video has nothing to
+   paint until the poster arrives, and `.wpanel` carries its own background for
+   exactly this reason (work-stack.tsx:40, design-kit.md §12.3). --navy is
+   `.card__well`'s own backdrop (kit.css:423).
+   ========================================================================== */
+/* THE CAP IS NOT OPTIONAL — FOUND BY RENDERING. aspect-ratio:16/8 alone means
+   the band's height is the window's width halved, so it grows without bound:
+   measured 840px tall in a 714px-tall window at 1680px wide, i.e. a hero image
+   taller than the screen it is on, and 1280px on an ultrawide. The design's own
+   value for "a full-width media block sized to sit inside the viewport" is
+   `.svccard`'s min(80vh,720px) (kit.css:574), so that is the cap, in lvh rather
+   than vh per ground rule 9. With object-fit:cover the media crops rather than
+   letterboxing when the cap binds. */
+/* AND THE WIDTH MUST BE DEFINITE — the second thing rendering caught. With
+   `width:auto`, `aspect-ratio` plus a binding `max-height` makes the browser
+   run the ratio BACKWARDS and shrink the width to match the clamped height:
+   the full-bleed band measured 1142px inside a 1671px window, indented and no
+   longer full-bleed, with no error anywhere. The transferred size suggestion
+   only applies to an axis that is `auto`, so stating the width explicitly
+   stops it. calc(100% + var(--pad)*2) is the same full-bleed the negative
+   margins already describe, just made definite rather than inferred. */
+.mast__media{position:relative;overflow:hidden;background:var(--navy);
+  margin-top:clamp(28px,4vh,44px);
+  width:calc(100% + var(--pad) * 2);
+  margin-inline:calc(var(--pad) * -1);
+  aspect-ratio:16/8;max-height:min(80lvh,720px)}
+.mast__media img,.mast__media video{width:100%;height:100%;object-fit:cover;display:block}
+/* the placeholder alternative, for a case study with no media at all. .slot is
+   position:absolute;inset:0 (kit.css:494), so it needs this positioning
+   context and nothing else. */
+.mast__media .slot{border-radius:0}
+
+
+/* ==========================================================================
+   A6  .quotes / .quote--sm — the three testimonials  (decision D3)
+
+   D3 (session.md:143-148) drops the standalone /reviews route — "a page
+   holding three testimonials advertises that there are only three" — and
+   places them inside the pages instead, using the existing `.quote` pattern.
+
+   kit.css §19 already carries TWO sizes of one pattern: `.quote`
+   clamp(1.6rem,3.6vw,2.6rem) for in-page use, `.quote--hero`
+   clamp(1.8rem,5.4vw,4.6rem) for the homepage's full panel. Three quotes side
+   by side need a third, because `.quote`'s 41.6px cap in a ~400px column is
+   about ten characters a line.
+
+   `.quote--sm` is NOT a new type spec. It is `.cards--2 .card__t`'s
+   (kit.css:445) — 600 / clamp(1.12rem,1.62vw,1.45rem) / -.02em / 1.24 — which
+   is the same pair Phase 2 chose for `.prose blockquote` on the same reasoning
+   ("reads exactly like a pull quote at this measure", kit.css:1452-1456). Two
+   pull-quote treatments at one size beats two sizes doing one job.
+
+   max-width:none because `.quote`'s 34ch measure (kit.css:813) is wider than
+   the column it now sits in, so it would never bind and would only look like
+   an unenforced constraint. The grid columns are `.cards--3`'s
+   repeat(3,minmax(0,1fr)) (kit.css:406); the gap is `.price`'s
+   clamp(22px,3.4vw,58px) (kit.css:705), the same one `.footmap` uses for the
+   same job (kit.css:1553); the top margin is `.cards--2`'s
+   clamp(40px,6vh,72px) (kit.css:437).
+   ========================================================================== */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(22px,3.4vw,58px);margin-top:clamp(40px,6vh,72px)}
+.quote--sm{font-weight:600;font-size:clamp(1.12rem,1.62vw,1.45rem);
+  letter-spacing:-.02em;line-height:1.24;max-width:none}
+
+
+/* ==========================================================================
+   A7  RESPONSIVE
+
+   Nothing here sets a viewport height, so there is no lvh/svh decision to get
+   wrong — and it would be untestable in an iframe anyway (design-kit.md §14).
+   ========================================================================== */
+
+@media (max-width:900px){
+  /* kit.css:919 collapses .cards--2 and .cards--3 to one column here. .quotes
+     takes the same breakpoint for the same reason — three columns of ~110px
+     is not a measure. Two columns is not an option with three items. */
+  .quotes{grid-template-columns:1fr;gap:34px}
+
+  /* THE FILTER PILLS OVERFLOW AT 390px WITHOUT THIS — FOUND BY RENDERING.
+     kit.css:997 turns `.paytoggle` into `width:100%; display:grid;
+     grid-template-columns:1fr 1fr` below 900px. That rule was written for the
+     homepage's TWO payment modes ("Pay monthly" / "Pay upfront"), which fit a
+     half-width track. Six sector labels do not: `.paytoggle button` carries
+     `white-space:nowrap` (kit.css:697), so "Studios & Practitioners" at the
+     mobile 15px measures ~203px inside a 162px track, bursts it, and pushes
+     the document to scrollWidth 398 against innerWidth 390 — which
+     `html{overflow-x:clip}` (kit.css:91) then silently CLIPS. No scrollbar, no
+     error, just three pills with their right-hand ends cut off. This is the
+     same failure mode Phase 2 hit with the footer email (kit.css:1558-1565).
+
+     The fix is to undo the grid for the FILTER use only and let the base
+     `flex-wrap:wrap` (kit.css:695) do what it was written to do — pills wrap
+     onto as many rows as they need. Scoped to `.filterbar` so the pricing
+     page's own two-mode toggle keeps kit.css:997 exactly as it is. The button
+     sizing (15px / padding 14px 12px, i.e. a 47px touch target) is left alone,
+     because that half of the mobile rule is right for both uses. */
+  .filterbar .paytoggle{display:inline-flex;width:auto}
+
+  /* AND THE TRACK STOPS BEING A PILL ONCE IT WRAPS — also found by rendering.
+     `.paytoggle` is border-radius:100px (kit.css:694), which is right for the
+     homepage's single row of two. Wrapped onto four rows at 390px the same
+     radius renders as a rounded grey blob with pills scattered inside it.
+     18px is the design's card radius (`.card`, `.tcard`, kit.css:414/756) and
+     is what a multi-row track should be. The BUTTONS keep their 100px — they
+     are still pills. Left at 100px above 900px, where six chips still fit one
+     row and the homepage's own shape is correct. */
+  .filterbar .paytoggle{border-radius:18px}
+
+  /* prose floor. The mobile layer's doctrine is 16px for anything read rather
+     than scanned (home-r9.css:544-551, kit.css:934-942), and it already lifts
+     `.lead`, `.qa__a p`, `.step__b` and `.svccard__d` to exactly 16px. The
+     card's meta line is the one piece of running copy on this page that sits
+     below it at 13.5px. The scrim's own line is already 14.5px minimum and is
+     a gradient caption, not body copy — left alone. */
+  .cards--2 .card__meta p{font-size:16px;line-height:1.45;max-width:none}
+  .card__link{font-size:15px;padding:8px 0}
+
+  /* the credit line stays below the 16px prose floor deliberately: it is a
+     caption, the same class of thing as `.slot__s` (11.5px) and
+     `.prose figcaption` (13.5px), neither of which the mobile layer lifts
+     either. 12.5px is `.eyeless`'s size — the smallest type the design uses
+     anywhere outside a caption — so it gains a little without becoming body
+     copy. */
+  .card__note{font-size:12.5px;line-height:1.45}
+}
+
+
+/* ==========================================================================
+   A8  TOUCH (hover:none)
+   kit.css §24's rule is not optional tidying: on touch a hover fires on tap
+   and LATCHES until you tap elsewhere. A3 is the only hover effect this file
+   adds.
+   ========================================================================== */
+@media (hover:none){
+  .cards--2 .card:hover .card__link svg,
+  a.card__link:hover svg{transform:none}
+  .empty a:hover{border-bottom-color:rgba(214,0,107,.5)}
+}
