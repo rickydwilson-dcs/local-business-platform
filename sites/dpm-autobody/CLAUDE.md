@@ -172,13 +172,13 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
     `BACKLOG.md` in case it's a separate, unannounced build worth asking David about.
 - **`jaguar-sea-green` was removed entirely, 2026-09-15** — David's own call: "an old not
   particularly well documented restoration," not worth chasing sourcing facts for.
-- **OPEN — a DB6 photo batch may or may not be genuinely new, needs a real answer from David, not
-  just the flag.** David's 2026-09-15 email said this build's correction was "no new photos," but
-  the batch photo pipeline received a 15-photo `db6-pink-2026-09` album keyed to it anyway. 6 of
-  those 15 filenames match ones already live in the gallery; the other 9 show no clearly new
-  content. Zero photos were added from it — this is a live `sourcingGaps` entry on
-  `aston-martin-db6-pink.mdx`, not just a note here; don't add photos from that album without
-  checking with David first.
+- **Resolved 2026-09-17: the DB6 photo-batch discrepancy.** David's 2026-09-15 email said this
+  build's correction was "no new photos," but the batch photo pipeline received a 15-photo
+  `db6-pink-2026-09` album keyed to it anyway. 6 of those 15 filenames matched ones already live in
+  the gallery; the other 9 showed no clearly new content, so zero photos were added from it — a
+  `sourcingGaps` entry was added asking David to confirm nothing was missed. **David confirmed
+  2026-09-17 that nothing was missed**; the `sourcingGaps` entry is removed from
+  `aston-martin-db6-pink.mdx` and the gallery comment there now records the confirmation.
 - **A live plate-exposure incident, fixed 2026-09-17, worth knowing the shape of.** The 2026-09-16
   automated redaction pass missed a fully legible plate ("723 HYK", on a shelf in the background,
   not on the car) in `p1800-red-2026-09/redacted/IMG_1601.jpg`. The photo hadn't been used in any
