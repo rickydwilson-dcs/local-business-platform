@@ -182,7 +182,7 @@ def main() -> int:
         if files:
             out = dst / "_contact-sheet.jpg"
             subprocess.run(["montage", *files, "-tile", "5x", "-geometry", "300x200+3+3",
-                            "-background", "#222", str(out)], check=False)
+                            "-background", "#222", "-depth", "8", str(out)], check=False)
             print(f"contact sheet -> {out}  (check every plate before publishing)")
     return 0
 

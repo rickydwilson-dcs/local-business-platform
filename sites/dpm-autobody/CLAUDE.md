@@ -32,10 +32,11 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   for the full root-cause detail (missing webfonts, a Tailwind mixed-units breakpoint bug that made
   the nav invisible, a genuinely missing "Enquiries" CTA section, and more) rather than repeating it
   here.
-- **All 10 real builds now have real `/builds/[slug]` pages** (`pageStatus: built`), as of a
-  2026-09-12 pass. (`p1800-pair-one-client` was removed the same day — see below — so the library
-  is 10 builds, not the 11 or 12 earlier notes in this file describe; check `LIBRARY_ORDER` in
-  `app/library/page.tsx` for the current authoritative count and order, not this prose.) The two
+- **All real builds have real `/builds/[slug]` pages** (`pageStatus: built`), as of a 2026-09-12
+  pass. (`p1800-pair-one-client` was removed the same day, and `jaguar-sea-green` on 2026-09-15 at
+  David's request — see below — so the library is 9 builds, not the 10, 11 or 12 earlier notes in
+  this file describe; check `LIBRARY_ORDER` in `app/library/page.tsx` for the current authoritative
+  count and order, not this prose.) The two
   richest (P1800 Candy, E-type 941 PVO) use hand-written MDX bodies with the full "documented car"
   template (chapters, spec tables, plaques — see `components/pages/build-detail-page.tsx`'s file
   header). The other 8 use that same component's built-in thin-content fallback: no
@@ -128,13 +129,30 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 ### Still not done
 
 - **A run of David-confirmation facts is still open**, tracked as `sourcingGaps` on the affected
-  builds and visible on their pages: the singer's name for Pearl White P1800, the second car and
-  both show names/award placings for the resto-mod's client pair, chassis numbers for Bentley S3
-  1964 and Bentley S3 Continental, the Porsche 356 SC "might/minor mechanical rebuild" wording, the
-  DB6's current race status and its magazine's exact title, and Jaguar Sea Green's status field
-  (frontmatter says `completed`, the approved prototype's own copy for it says still in the
-  workshop — one of these is wrong). Chase these with David before removing the corresponding
-  `sourcingGaps` entries.
+  builds and visible on their pages: chassis numbers for Bentley S3 1964 and Bentley S3
+  Continental (now supplied by David, 2026-09-15 — BC60 XC and BC66 XA respectively — not yet
+  applied to the MDX, see `BACKLOG.md` item 5a), and the DB6's magazine's exact title. Chase the
+  remainder with David before removing the corresponding `sourcingGaps` entries.
+  - **Resolved 2026-09-15:** the DB6's race status and pre-crash livery — David confirmed it
+    hasn't raced since the crash (still due to) and that the crash photos show its original
+    livery, not yet replaced with the new pink-request design. Both `sourcingGaps` entries removed
+    from `aston-martin-db6-pink.mdx` and its copy updated to state both facts directly.
+  - **Resolved 2026-09-15:** the Pearl White P1800's "well-known singer" previous owner was
+    wrong — David says it never happened, likely confused with a Rolls-Royce DPM restored for
+    Julie Andrews. Claim removed from `p1800-pearl-white.mdx` entirely, not just the
+    `sourcingGaps` note.
+  - **Resolved 2026-09-15:** the resto-mod's "one of two P1800s, one client" pairing was also
+    wrong — David confirmed that story belongs to a different client entirely (still awaiting
+    their show names/awards, tracked separately, not as a fact about the resto-mod).
+    `p1800-candy-restomod.mdx`'s `sourcingGaps` entry removed; its `scopeOfWork` now states the
+    correction directly.
+  - **Resolved 2026-09-15 (re-confirmed):** Porsche 356 SC's mechanical rebuild is "minor" — David
+    confirmed this again independently, matching the 2026-09-12 confirmation already in the copy.
+    No `sourcingGaps` entry existed for this; noted here only because the CLAUDE.md text above had
+    drifted and still listed it as open.
+- **`jaguar-sea-green` was removed entirely, 2026-09-15** — David's own call: "an old not
+  particularly well documented restoration," not worth chasing sourcing facts for. Library is 9
+  real builds now, not 10 (see `LIBRARY_ORDER` in `app/library/page.tsx`).
 - **No homepage rotating-featured-build mechanism will be built — closed, 2026-09-12, not just deferred.** Ricky's decision: the homepage's four featured cars will be updated by hand (editing `home-page.tsx`/frontmatter directly, then redeploying) whenever the selection should change, occasionally rather than on a schedule. Do not propose or scope a CMS/admin/rotation feature for this — there is no such feature planned.
 - **Contact form is not wired up** — `site.config.ts`'s `features.contactForm` flag is still
   `false`. Blocked on domain access: Ricky doesn't yet have the access needed to verify DPM's
