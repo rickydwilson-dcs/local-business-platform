@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-09-17
+
+### Content
+
+- Added a new news article, "My Day at Breakthrough T1D Discovery Day" (`content/news/breakthrough-t1d-discovery-day.mdx`, `publishedAt: 2026-09-17`), with a hero image and a 3-photo gallery from Breakthrough T1D UK's Discovery Day event. Photos were resized from full camera/phone originals (up to 6048×4024, several MB each) to fit within 2048px and re-compressed to JPEG q82 before upload to R2, matching the site's existing image convention. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 4 to 5 to match.
+
 ## 2026-09-03
 
 ### Content
