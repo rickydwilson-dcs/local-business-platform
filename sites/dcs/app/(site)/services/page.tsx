@@ -16,13 +16,20 @@ import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 
+// Title and description ported verbatim from the approved design
+// (`prototype/services-list.html:5-6`) — real, settled copy, not authored
+// here.
+const PAGE_TITLE = `Services — ${siteConfig.business.name}`;
+const PAGE_DESCRIPTION =
+  'Six services, all delivered by one person: websites, local SEO, ongoing management, online shops, plain-English reporting and business email.';
+
 export const metadata: Metadata = {
-  title: `Our Services | ${siteConfig.business.name}`,
-  description: `Professional web design and digital services offered by ${siteConfig.business.name}. Quality work, competitive prices, and excellent customer service.`,
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   keywords: ['services', 'web design', 'local SEO', 'website management'],
   openGraph: {
-    title: `Our Services | ${siteConfig.business.name}`,
-    description: `Professional services offered by ${siteConfig.business.name}.`,
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     url: '/services',
     type: 'website',
   },

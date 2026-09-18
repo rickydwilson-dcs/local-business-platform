@@ -1,191 +1,256 @@
-import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
+/**
+ * `/services/[slug]` — the r9 port of
+ * `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/prototype/service-detail.html`,
+ * generalised to all six services rather than only the `web-design`
+ * reference page the design session hand-authored.
+ *
+ * Structure (matching the prototype's own section comments):
+ *   1. `.crumb` + `.mast` — ink masthead: title, description, CTAs, the
+ *      site-wide stat row (`lib/service-card-meta.ts#SERVICE_HERO_STATS`).
+ *   2. `.sec p--white` — the real MDX body (`mdxContent`) in `.prose
+ *      .measure`, plus a real service testimonial if one exists.
+ *   3. `.sec p--ink` — the "Everything, in one price" checklist and FAQ
+ *      accordion. The checklist is OMITTED when `frontmatter.benefits` is
+ *      empty — see the note below.
+ *   4. `.sec p--aqua` — "The other five", linking to every other service.
+ * The chrome (`.bar`, `.menu`, `.pagefoot`) is `SiteChrome`'s, not this
+ * page's.
+ *
+ * FLAG — the "Everything, in one price" `.detail__l` checklist. The
+ * prototype's reference page hand-authors six checklist lines
+ * (`service-detail.html:218-223`) paraphrased from `web-design.mdx`'s body
+ * and FAQ prose. No `content/services/*.mdx` file has a structured
+ * `benefits` array (`ServiceFrontmatter.benefits` exists on the TypeScript
+ * interface but is unpopulated everywhere), so there is no generic source to
+ * draw a checklist from for any of the six services without hand-typing
+ * design content into this component — out of scope for a port. This
+ * section renders only when `frontmatter.benefits` is populated (true of
+ * none of the six services today); flagged in the Phase 2 report rather than
+ * invented.
+ *
+ * FLAG — the mid-body photo + quote. The reference page's `<figure>` is a
+ * real, named case-study photo (`colossus-scaffolding.jpg`) captioned
+ * honestly as a photo of the client's scaffolding, not a website screenshot
+ * — content specific to that one testimonial, not a generic per-service
+ * field. It is not reproduced here. The testimonial itself (when
+ * `getTestimonialsByService(slug)` returns one) renders as a `.prose
+ * blockquote` after the MDX body rather than mid-paragraph, because
+ * `mdxContent` is opaque compiled output with no anchor point to splice
+ * into — flagged in the Phase 2 report.
+ */
+
 import Link from 'next/link';
+import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
+import { CONTACT } from '@/components/home/home-data';
+import { SERVICE_CARDS, SERVICE_HERO_STATS, getServiceCardMeta } from '@/lib/service-card-meta';
+
+export interface ServiceTestimonial {
+  text: string;
+  customerName: string;
+  customerRole?: string;
+}
+
+export interface SiteServiceDetailPageProps extends ServiceDetailPageTemplateProps {
+  /** The current service's own slug — needed to build "the other five" and
+   *  to look up this service's `SERVICE_CARDS` entry. Not part of the shared
+   *  `ServiceDetailPageTemplateProps` (other sites' service pages have no
+   *  such list), so it is added here rather than widening that shared type. */
+  slug: string;
+  /** Real `getTestimonialsByService(slug)` result, first entry if any. */
+  testimonial?: ServiceTestimonial | null;
+  /**
+   * `content/services/<slug>.mdx`'s own `hero.heading` / `hero.subheading`
+   * frontmatter — every service MDX carries this pair, and it is the exact
+   * source of the approved masthead's `<h1>` and `.lead`
+   * (`service-detail.html:91-93`: "A website that works as hard as you do" /
+   * "Bespoke, mobile-first websites…" is `web-design.mdx`'s `hero.heading` /
+   * `hero.subheading` verbatim, already first-person singular — unlike the
+   * plural `description` field). Falls back to `frontmatter.title`/
+   * `description` when a service has no `hero` block.
+   */
+  heroHeading?: string;
+  heroSubheading?: string;
+}
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M2 8h11M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M3 8.5l3.2 3.2L13 4.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export function SiteServiceDetailPage({
-  siteConfig,
   frontmatter,
   mdxContent,
   breadcrumbs,
   schemaNodes,
-}: ServiceDetailPageTemplateProps) {
+  slug,
+  testimonial,
+  heroHeading,
+  heroSubheading,
+}: SiteServiceDetailPageProps) {
+  const meta = getServiceCardMeta(slug);
+  const otherServices = SERVICE_CARDS.filter((c) => c.slug !== slug);
+
   return (
-    <div className="min-h-screen font-body">
+    <>
       {schemaNodes}
 
-      {/* ─── Breadcrumb ──────────────────────────────────────────────────────── */}
-      <nav aria-label="Breadcrumb" className="max-w-[1200px] mx-auto px-6 pt-5 pb-2">
-        <ol className="flex items-center gap-1.5 text-sm text-surface-muted-foreground flex-wrap">
-          {breadcrumbs.map((item, index) => (
-            <li key={item.href} className="flex items-center gap-1.5">
-              {index > 0 && (
-                <span aria-hidden="true" className="select-none">
-                  &gt;
-                </span>
-              )}
-              {item.current ? (
-                <span className="text-surface-foreground font-medium" aria-current="page">
-                  {item.name}
-                </span>
+      {/* ===== 1. BREADCRUMB + MASTHEAD — ink ============================ */}
+      <div className="crumb p--ink" data-ground="ink">
+        <nav aria-label="Breadcrumb">
+          <ol>
+            {breadcrumbs.map((item) =>
+              item.current ? (
+                <li key={item.href}>
+                  <span aria-current="page">{item.name}</span>
+                </li>
               ) : (
-                <Link href={item.href} className="hover:text-brand-primary transition-colors">
-                  {item.name}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
+                <li key={item.href}>
+                  <Link href={item.href}>{item.name}</Link>
+                </li>
+              )
+            )}
+          </ol>
+        </nav>
+      </div>
 
-      {/* ─── Hero ────────────────────────────────────────────────────────────── */}
-      <header className="bg-brand-primary py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-6">
-          {frontmatter.badge && (
-            <span className="inline-block bg-white/20 text-white text-xs font-semibold font-body uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
-              {frontmatter.badge}
-            </span>
-          )}
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-white mb-4 leading-[1.1] max-w-3xl">
-            {frontmatter.title}
-          </h1>
-          {frontmatter.description && (
-            <p className="text-lg md:text-xl text-white/80 font-body leading-relaxed max-w-2xl">
-              {frontmatter.description}
-            </p>
-          )}
+      <header className="mast p--ink" data-ground="ink">
+        <p className="eyeless">
+          Services
+          {meta
+            ? ` · ${String(SERVICE_CARDS.indexOf(meta) + 1).padStart(2, '0')} / ${String(SERVICE_CARDS.length).padStart(2, '0')}`
+            : ''}
+        </p>
+        <h1>{heroHeading || frontmatter.title}</h1>
+        {(heroSubheading || frontmatter.description) && (
+          <p className="lead">{heroSubheading || frontmatter.description}</p>
+        )}
+        <div className="hero__act">
+          <a className="btn" href={CONTACT.mailtoHref}>
+            Talk to me
+            <ArrowIcon />
+          </a>
+          <Link className="btn btn--ghost" href="/pricing">
+            See the pricing
+          </Link>
+        </div>
+        <div className="mast__meta">
+          {SERVICE_HERO_STATS.map((stat) => (
+            <div key={stat.label}>
+              <b>{stat.fig}</b>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </header>
 
-      {/* ─── Two-column body ─────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* ── Left: content + benefits ─────────────────────────────────── */}
-            <div className="lg:col-span-2">
-              <h2 className="font-headline font-bold text-2xl md:text-3xl text-surface-foreground mb-6">
-                About this service
-              </h2>
+      {/* ===== 2. THE BODY — white ========================================= */}
+      <section className="sec p--white" data-ground="white">
+        <article className="prose measure">
+          {mdxContent}
+          {testimonial && (
+            <blockquote>
+              <p>{testimonial.text}</p>
+              <cite>
+                {testimonial.customerName}
+                {testimonial.customerRole ? ` — ${testimonial.customerRole}` : ''}
+              </cite>
+            </blockquote>
+          )}
+        </article>
+      </section>
 
-              <div className="prose prose-lg max-w-none prose-headings:font-headline prose-headings:text-surface-foreground prose-a:text-brand-primary prose-strong:text-surface-foreground">
-                {mdxContent}
-              </div>
-
-              {frontmatter.benefits && frontmatter.benefits.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="font-headline font-bold text-xl text-surface-foreground mb-4">
-                    What you get
-                  </h3>
-                  <ul className="space-y-3">
-                    {frontmatter.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <span
-                          className="material-symbols-outlined text-xl leading-none mt-0.5 flex-shrink-0"
-                          style={{
-                            fontVariationSettings: "'FILL' 1",
-                            color: 'var(--color-success, #16a34a)',
-                          }}
-                          aria-hidden="true"
-                        >
-                          check_circle
-                        </span>
-                        <span className="text-surface-foreground font-body leading-snug">
-                          {benefit}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-
-            {/* ── Right: sticky sidebar ────────────────────────────────────── */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-8 space-y-6">
-                {/* CTA card */}
-                <div className="bg-brand-primary text-white rounded-[20px] p-6">
-                  <h3 className="font-headline font-bold text-xl mb-2">Ready to get started?</h3>
-                  <p className="text-white/80 text-sm font-body mb-5 leading-relaxed">
-                    Contact {siteConfig.name} today for a free, no-obligation quote.
-                  </p>
-
-                  {siteConfig.cta.phone.show && (
-                    <Link
-                      href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                      className="flex items-center gap-2 text-white font-semibold font-body mb-4 hover:text-white/80 transition-colors"
-                    >
-                      <span
-                        className="material-symbols-outlined text-xl leading-none"
-                        aria-hidden="true"
-                      >
-                        call
-                      </span>
-                      {siteConfig.phoneDisplay}
-                    </Link>
-                  )}
-
-                  <Link
-                    href="/contact"
-                    className="block w-full bg-white text-brand-primary text-center px-6 py-3 rounded-xl font-bold font-body text-sm hover:bg-white/90 transition-colors"
-                  >
-                    {siteConfig.cta.primary.label}
-                  </Link>
-                </div>
-
-                {/* FAQ accordion */}
-                {frontmatter.faqs && frontmatter.faqs.length > 0 && (
-                  <div className="bg-surface-card rounded-[20px] border border-surface-card-border p-6">
-                    <h3 className="font-headline font-bold text-lg text-surface-foreground mb-4">
-                      Common questions
-                    </h3>
-                    <div className="space-y-2">
-                      {frontmatter.faqs.map((faq, index) => (
-                        <details
-                          key={index}
-                          className="group border border-surface-card-border rounded-xl overflow-hidden"
-                        >
-                          <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-surface-muted transition-colors">
-                            <span className="font-semibold text-sm text-surface-foreground font-body leading-snug">
-                              {faq.question}
-                            </span>
-                            <span
-                              className="material-symbols-outlined text-brand-primary flex-shrink-0 text-lg leading-none transition-transform group-open:rotate-180"
-                              aria-hidden="true"
-                            >
-                              expand_more
-                            </span>
-                          </summary>
-                          <div className="px-4 pb-4 text-sm text-surface-muted-foreground font-body leading-relaxed">
-                            {faq.answer}
-                          </div>
-                        </details>
-                      ))}
+      {/* ===== 3. INCLUDED + QUESTIONS — ink =============================== */}
+      {(frontmatter.benefits?.length || frontmatter.faqs?.length) && (
+        <section className="sec p--ink" data-ground="ink">
+          <div className="measure">
+            {frontmatter.benefits && frontmatter.benefits.length > 0 && (
+              <>
+                <p className="eyeless">What you get</p>
+                <h2 className="res">Everything, in one price.</h2>
+                <div className="detail__l">
+                  {frontmatter.benefits.map((benefit) => (
+                    <div key={benefit}>
+                      <CheckIcon />
+                      {benefit}
                     </div>
-                  </div>
-                )}
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
+                  ))}
+                </div>
+              </>
+            )}
 
-      {/* ─── CTA Banner ──────────────────────────────────────────────────────── */}
-      <section className="bg-brand-accent py-16">
-        <div className="max-w-[1200px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-8">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-2">
-              Ready to get more enquiries?
-            </h2>
-            <p className="text-surface-foreground/70 font-body">
-              Let {siteConfig.name} handle it — contact us today.
-            </p>
+            {frontmatter.faqs && frontmatter.faqs.length > 0 && (
+              <>
+                <h2
+                  className="res"
+                  style={
+                    frontmatter.benefits && frontmatter.benefits.length > 0
+                      ? { marginTop: 'clamp(56px,8vh,96px)' }
+                      : undefined
+                  }
+                >
+                  Common questions
+                </h2>
+                <div className="qa">
+                  {frontmatter.faqs.map((faq) => (
+                    <details key={faq.question}>
+                      <summary>{faq.question}</summary>
+                      <div className="qa__a">
+                        <div>
+                          <p>{faq.answer}</p>
+                        </div>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-          <Link
-            href="/contact"
-            className="flex-shrink-0 bg-brand-primary text-white px-10 py-4 rounded-xl text-base font-bold font-body shadow-lg hover:opacity-90 transition-opacity text-center"
-          >
-            Get in Touch
-          </Link>
+        </section>
+      )}
+
+      {/* ===== 4. THE OTHER FIVE SERVICES — aqua =========================== */}
+      <section className="sec p--aqua" data-ground="aqua">
+        <p className="eyeless">More services</p>
+        <h2 className="res">The other five.</h2>
+        <p className="lead">
+          Every one of them is something I already do for the sites I look after. Nothing here is a
+          bolt-on somebody else delivers.
+        </p>
+        <div className="work">
+          {otherServices.map((other) => (
+            <Link key={other.slug} className="row" href={`/services/${other.slug}`}>
+              <span className="row__n">{other.displayTitle}</span>
+              <span className="row__m">
+                {other.otherRow.meta}
+                <em>{other.otherRow.sub}</em>
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }

@@ -10,7 +10,7 @@ import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
 import { SiteServiceDetailPage } from '@/components/pages/ServiceDetailPage';
-import { getServices, getService } from '@/lib/content';
+import { getServices, getService, getTestimonialsByService } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -24,7 +24,7 @@ interface ServiceFrontmatter {
   description?: string;
   badge?: string;
   keywords?: string[];
-  hero?: { image?: string };
+  hero?: { heading?: string; subheading?: string; image?: string };
   heroImage?: string;
   benefits?: string[];
   faqs?: FAQItem[];
@@ -100,11 +100,22 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
   const fm = result.frontmatter as ServiceFrontmatter;
   const { content: mdxContent } = await loadMdx({ baseDir: 'services', slug });
+  const testimonials = await getTestimonialsByService(slug);
+  const testimonial = testimonials[0]
+    ? {
+        text: testimonials[0].text,
+        customerName: testimonials[0].customerName,
+        customerRole: testimonials[0].customerRole,
+      }
+    : null;
 
   const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
 
+  // "Home" first: `prototype/service-detail.html:82` — the crumb the
+  // approved design ships, not the shared template's previous two-item form.
   const breadcrumbItems = [
+    { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
     { name: fm.title, href: `/services/${slug}`, current: true },
   ];
@@ -146,6 +157,10 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   return (
     <SiteServiceDetailPage
       siteConfig={siteSummary}
+      slug={slug}
+      testimonial={testimonial}
+      heroHeading={fm.hero?.heading}
+      heroSubheading={fm.hero?.subheading}
       frontmatter={{
         title: fm.title,
         description: fm.description,
