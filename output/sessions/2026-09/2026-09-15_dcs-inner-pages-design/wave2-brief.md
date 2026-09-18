@@ -66,9 +66,11 @@ Directly relevant to wave 2, already built and approved:
 - **`.filterbar`** — already exists. Blog and locations should both look here first.
 - **`.footmap`** — already exists, and is where demoted locations plausibly live.
 - **`.detail`, `.detail__h`, `.detail__l`, `.detail__l--2`, `.detail__p`, `.detail--flow`** —
-  the list/detail shell. **Trap:** `.detail{top:120px}` (`kit.css:732`) hardcodes an offset for
-  an 81px bar, but the inner-page bar measures **74.5px at 1440 and 65px at 390.** Do not
-  copy that 120px into anything new.
+  the list/detail shell. **CORRECTED 2026-09-18 — the earlier version of this brief was wrong
+  here.** It said the inner-page bar measures 74.5px against `.detail{top:120px}`'s 81px
+  assumption. **The bar measures 81px at 1440 on every approved page**, so `top:120px` is
+  correct and must not be "fixed". Full reasoning in `bar-height-correction.md`. Agent G
+  caught this and was right; agents F and H were briefed from the stale figure.
 - **`.sec`, `.panel`, `.p--ink/--white/--paper/--magenta/--aqua/--navy`** — the panel sequence.
   The ink/white/magenta/aqua/navy order is governed; navy closes. See `design-kit.md` §1.2.
 - **`.quote`, `.quote--sm`, `.quote--hero`, `.quote__a`, `.quotes`** — the testimonial pattern.

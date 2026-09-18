@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>A fast team needs a fast website — Digital Consulting Services</title>
+<meta name="description" content="NP Racing's British Superbike homepage runs full race footage and still scores a perfect 100 on Google PageSpeed — every category, mobile and desktop.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 3b / AGENT F — /blog/[slug]  (the long-form reading page)
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  THE CONTENT IS THE WHOLE OF sites/dcs/content/blog/
+  a-fast-team-needs-a-fast-website.mdx — every heading, paragraph, table cell
+  and link below is that file. Chosen for three reasons: it is the only one of
+  the twenty-one whose frontmatter carries `featured: true`; it is the only one
+  that is not about a trade, which is the point decision D4 is making; and it
+  is one of only three that contain a markdown table, which is the one thing
+  `.prose` had no rule for.
+
+  THIS PAGE IS THE LICENCE TO BE QUIETER. session.md §3 2.3: /blog/[slug] is
+  "the one place where the r9 chapter-panel language has to yield to
+  legibility". So: one ground change for the body, `.measure`'s 74ch, and
+  `.prose` doing the work. It is a licence to be quiet, not to be generic —
+  the masthead, the cut between sections, the accent rule and the closing navy
+  are all unchanged from the approved set.
+
+  THREE EDITS TO THE SOURCE TEXT, every one listed line by line in notes-f.md:
+    1. TITLE TO SENTENCE CASE. "A Fast Team Needs a Fast Website" ->
+       "A fast team needs a fast website" (notes-c.md §15's settled ruling).
+    2. FIRST-PERSON PLURAL -> SINGULAR, eight times. Ground rule 8.
+    3. THE BODY'S OWN <h1> IS DROPPED. Sixteen of the twenty-one posts open
+       with a `# ` that duplicates the frontmatter title exactly; the masthead
+       carries it here, and rendering both would put two h1s on the page. The
+       port has to strip it. notes-f.md §3.
+
+  NO HERO IMAGE, DELIBERATELY. This post's frontmatter declares no heroImage
+  at all, and the fifteen that do declare one point it at
+  `placeholder/blog-*.webp`, which does not exist. `.slot` is the honesty
+  mechanism for MISSING PROJECT FOOTAGE (kit.css §10) and a blog post has no
+  footage to await, so there is no placeholder here either — the masthead
+  simply carries type, which is what `.mast` was built to do (kit.css §29).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit.css">
+<link rel="stylesheet" href="../kit-additions-f.css">
+</head>
+<body>
+
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="projects-list.html">Work</a>
+    <a href="#">Services</a>
+    <a href="#">Pricing</a>
+    <a href="blog-list.html" aria-current="page">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="projects-list.html"><span>Work</span></a>
+    <a href="#"><span>Services</span></a>
+    <a href="#"><span>Pricing</span></a>
+    <a href="blog-list.html" aria-current="page"><span>Blog</span></a>
+    <a href="#"><span>About</span></a>
+    <a href="#"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD — ink ============================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><a href="blog-list.html">Blog</a></li>
+      <li><a href="blog-category.html">Making it fast and usable</a></li>
+      <li><span aria-current="page">A fast team needs a fast website</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Making it fast and usable</p>
+  <h1>A fast team needs a fast website</h1>
+  <!-- the frontmatter `excerpt`, verbatim except "We ran" -> "I ran". -->
+  <p class="lead">I ran NP Racing&rsquo;s British Superbike homepage &mdash; video hero and all &mdash;
+    through Google&rsquo;s own speed test. It came back a perfect 100, on mobile and desktop.
+    Here&rsquo;s why that&rsquo;s harder than it sounds, and why it matters.</p>
+  <!--
+    HONESTY. `author.name` and `author.role` are real frontmatter. There is no
+    photograph of Ricky and none is invented here — the byline is type, which
+    is all the masthead has ever been (session ground rule 6, design-kit.md §10).
+    Reading time is the file's own `readingTime: 6`; five of the twenty-one
+    declare none and on those rows this field is simply absent rather than
+    estimated (notes-f.md §3).
+  -->
+  <div class="mast__meta">
+    <div><b>Ricky Wilson</b><span>Written by</span></div>
+    <div><b>25 August 2026</b><span>Published</span></div>
+    <div><b>6 min</b><span>Read time</span></div>
+    <div><b>Motorsport and teams</b><span>Who it&rsquo;s for</span></div>
+  </div>
+</header>
+
+<!-- ===== 2. THE BODY — white =========================================
+     ONE ground change, then 74ch and nothing else. .sec pulls up over the
+     masthead by --r so the corners reveal the masthead's INK (kit.css §30).
+     ================================================================== -->
+<section class="sec p--white" data-ground="white">
+  <div class="measure">
+
+    <!-- THE JUMP LIST. Non-sticky on purpose — see kit-additions-f.css F-04.
+         A sticky TOC plus in-page anchors is precisely the combination that
+         reports its PINNED position and silently stops scrolling once you are
+         below the target, and it only reproduces when you test from below
+         (harness traps 4-5, design-kit.md §9.3). Nothing here is sticky, so
+         native anchor navigation needs no JavaScript at all; the only thing it
+         needs is scroll-margin-top on the targets, because
+         html{scroll-padding-top:0} is load-bearing and must not be touched
+         (kit.css:87-88).
+
+         This post has three h2s. Across the twenty-one the range is 3-8 with a
+         median of 6 — counted, table in notes-f.md §3 — so a typical post
+         renders twice this many rows. -->
+    <nav class="jump" aria-labelledby="jump-l">
+      <p class="eyeless" id="jump-l">In this guide</p>
+      <ol>
+        <li><a href="#the-numbers">The numbers</a></li>
+        <li><a href="#why-video-usually-ruins-this">Why video usually ruins this</a></li>
+        <li><a href="#speed-is-a-trust-signal">Speed is a trust signal, not a vanity metric</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose">
+
+      <p>A British Superbike team doesn&rsquo;t win races by being careful. Every part of the
+        operation &mdash; the bike, the pit crew, the data &mdash; is built to shave off tenths of a
+        second, because tenths of a second is the difference between a podium and an also-ran.</p>
+
+      <!-- VOICE: "when we built" -> "when I built"; "We wanted ... so we ran"
+           -> "I wanted ... so I ran". Source lines 24. -->
+      <p>So when I built the <a href="https://www.npracingbsb.co.uk/" rel="noopener">NP Racing</a>
+        website, &ldquo;good enough&rdquo; was never on the table. The homepage opens with race footage
+        &mdash; full-bleed, high-motion, the kind of thing that usually wrecks a site&rsquo;s
+        performance score. I wanted to know exactly how it held up under real scrutiny, so I ran it
+        through <a href="https://pagespeed.web.dev/" rel="noopener">Google PageSpeed Insights</a>, the
+        same tool Google uses to judge how fast a page actually feels to a real visitor.</p>
+
+      <!-- VOICE: "take our word for it" -> "take my word for it". Source 26. -->
+      <p>Here&rsquo;s what came back &mdash; and you don&rsquo;t have to take my word for it.
+        <a href="https://pagespeed.web.dev/analysis/https-www-npracingbsb-co-uk/ob99o8iwxi?form_factor=mobile" rel="noopener">See
+        the live report yourself</a>, straight from Google, unedited.</p>
+
+      <h2 class="res" id="the-numbers">The numbers</h2>
+
+      <p><strong>Mobile:</strong></p>
+
+      <!--
+        TWO TABLES, BOTH FROM THE SOURCE FILE, BOTH KEPT.
+        `.prose` had no table rule at all before kit-additions-f.css F-06 —
+        three of the twenty-one posts contain one and they would have rendered
+        as UA-default tables inside a fully-specified prose column.
+
+        TRAP: neither this table nor the two in the other posts may ever be
+        given `tabular-nums` or a mono face. These figures have no comma, but
+        how-much-does-a-tradesperson-website-cost.mdx's table is all comma'd
+        prices, and the rule is shared. `.prose code` IS mono and inherits, so a
+        price must never be wrapped in backticks in a cell either.
+
+        These two tables are identical in shape and adjacent, which is a real
+        editorial wrinkle in the source, not a rendering fault. Flagged in
+        notes-f.md §3 rather than fixed — D4 says do not rewrite the posts.
+      -->
+      <div class="cscroll">
+        <table>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Score</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Performance</th><td>100</td></tr>
+            <tr><th scope="row">Accessibility</th><td>100</td></tr>
+            <tr><th scope="row">Best Practices</th><td>100</td></tr>
+            <tr><th scope="row">SEO</th><td>100</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Desktop:</strong></p>
+
+      <div class="cscroll">
+        <table>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Score</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Performance</th><td>100</td></tr>
+            <tr><th scope="row">Accessibility</th><td>100</td></tr>
+            <tr><th scope="row">Best Practices</th><td>100</td></tr>
+            <tr><th scope="row">SEO</th><td>100</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>For the technically minded: the mobile Largest Contentful Paint &mdash; the point at which the
+        biggest, most important thing on the page has actually loaded &mdash; comes in at 1.8 seconds.
+        Desktop does it in 0.4 seconds. Total Blocking Time, which measures how much the page gets in
+        the way of someone trying to actually use it, is 0 milliseconds on both. Layout shift &mdash;
+        the page jumping around while you&rsquo;re trying to read it &mdash; is zero. On both.</p>
+
+      <p>Those aren&rsquo;t &ldquo;good for a small business site&rdquo; numbers. Those are perfect,
+        full stop.</p>
+
+      <h2 class="res" id="why-video-usually-ruins-this">Why video usually ruins this</h2>
+
+      <p>Here&rsquo;s the part most people don&rsquo;t know: a homepage video is one of the easiest ways
+        to quietly wreck your site&rsquo;s performance, and most businesses never find out until someone
+        tells them.</p>
+
+      <!-- VOICE: "We've seen homepages" -> "I've seen homepages". Source 56. -->
+      <p>The problem isn&rsquo;t the video itself &mdash; it&rsquo;s how it&rsquo;s loaded. Left to its
+        own devices, a browser will start fetching a background video the moment the page mounts, even
+        if that section sits below the fold and the visitor never scrolls anywhere near it. I&rsquo;ve
+        seen homepages that were shipping ten megabytes of video the instant someone landed on the
+        page, before they&rsquo;d even had a chance to see anything. On a mobile connection,
+        that&rsquo;s the difference between a site that feels instant and one that feels broken.</p>
+
+      <p>The fix isn&rsquo;t complicated, but it does have to be done properly. The video&rsquo;s poster
+        frame &mdash; a single static image &mdash; loads first. The actual video file only starts
+        downloading once that section is genuinely about to come into view, and playback only starts
+        once it&rsquo;s actually visible. Get that sequencing right and a visitor sees a fast, polished
+        page from the first frame, with video that feels seamless rather than like something the page
+        is straining under.</p>
+
+      <p>That&rsquo;s the difference between a site that <em>looks</em> fast in a screenshot and one
+        that <em>is</em> fast when a real person on a real phone, on a real connection, actually opens
+        it.</p>
+
+      <h2 class="res" id="speed-is-a-trust-signal">Speed is a trust signal, not a vanity metric</h2>
+
+      <!-- VOICE: "we're not just showing you ... we're showing you" ->
+           "I'm not just showing you ... I'm showing you". Source 64. -->
+      <p>There&rsquo;s a reason I&rsquo;m not just showing you a nice-looking homepage &mdash; I&rsquo;m
+        showing you a score from an independent, external tool that anyone can run for themselves.
+        Google built PageSpeed Insights to measure exactly what a visitor experiences: how quickly the
+        page becomes visible, how quickly it becomes usable, and how stable it feels while that&rsquo;s
+        happening. It&rsquo;s the same signal Google&rsquo;s own search ranking takes into account.</p>
+
+      <p>For a business that lives and dies on people trusting it enough to hand over a phone number or
+        a job, that matters more than it sounds like it should. A slow, janky site reads as amateur even
+        when the business behind it isn&rsquo;t. A fast, stable one does the opposite &mdash; it signals
+        that someone cared enough to get the details right, before the visitor has read a single word of
+        copy.</p>
+
+      <!-- VOICE: "every trade website we build" -> "every trade website I build".
+           Source 68. "trade" kept: narrowing or widening the claim would be
+           rewriting the post, which decision D4 rules out. -->
+      <p>That&rsquo;s the same instinct that goes into every trade website I build on this platform:
+        proper image compression, lazy-loaded assets, clean markup, and a build pipeline that treats
+        performance as a requirement, not an afterthought. NP Racing&rsquo;s homepage just happens to be
+        a particularly demanding test case &mdash; video, motion, a genuinely content-heavy page &mdash;
+        and it still comes back with a perfect score.</p>
+
+      <!-- VOICE: "We think every business does" -> "I think every business does".
+           Source 70. -->
+      <p>A fast team needs a fast website. I think every business does.</p>
+
+      <!-- VOICE: "we'll take a look" -> "I'll take a look". Source 72. The
+           source sets this closing line in italics; kept as <em>, which is the
+           markdown's own emphasis rather than a treatment invented here. -->
+      <p><em>Want to see how your own site scores? <a href="#">Get in touch</a> and I&rsquo;ll take a
+        look &mdash; no obligation, just an honest read on where it stands.</em></p>
+
+    </article>
+  </div>
+</section>
+
+<!-- ===== 3. FILED UNDER + WHERE NEXT — aqua ==========================
+     Aqua appears exactly once on this page and immediately before navy, which
+     is the homepage's own closing move (design-kit.md §1.2).
+
+     THE TAGS ARE NOT LINKS. All twenty-one posts carry 3-4 `tags` in
+     frontmatter and there is no tag route — only the category route this wave
+     proposes. Rendering them as links would promise a page that does not
+     exist, so they are static `.chip`s (kit-additions-f.css F-05, closing
+     design-kit.md G14).
+     ================================================================== -->
+<section class="sec p--aqua" data-ground="aqua">
+  <!-- NO .measure AROUND THE CHIPS — FOUND BY RENDERING. The first draft wrapped
+       them in `.measure` (74ch, margin-inline:auto, kit.css:1410) by analogy
+       with the prose section above. That centred the "Filed under" label at
+       x=380 on a 1440 viewport while "More in this topic" below it started at
+       the gutter at x=63 — two labels in one section on two different left
+       edges. `.measure` is for running prose; a tag row is not prose and takes
+       the section's own gutter like every other block on the page. -->
+  <p class="eyeless">Filed under</p>
+  <!-- verbatim from the file's `tags:` list, hyphens read out as words -->
+  <div class="chips">
+    <span class="chip">Website performance</span>
+    <span class="chip">Case study</span>
+    <span class="chip">Web design</span>
+    <span class="chip">Core web vitals</span>
+  </div>
+
+  <p class="eyeless" style="margin-top:clamp(56px,8vh,96px)">More in this topic</p>
+  <h2 class="res">Making it fast and usable.</h2>
+  <!--
+    HONESTY, AND A REAL FINDING SHOWN RATHER THAN PAPERED OVER. There is
+    exactly ONE other guide in this topic. The obvious move is to pad the row
+    with three posts from other topics and call them "related", which would be
+    inventing a relationship the content does not contain — the same call Agent
+    A made refusing to attach a testimonial to a case study because their
+    frontmatter never links them (notes-a.md §5). So: one row, and the sentence
+    says why.
+  -->
+  <p class="lead">There are two guides under this one so far, and you have just read the other. The
+    library is still filling out &mdash; the whole of it is two clicks away.</p>
+  <div class="work">
+    <a class="row" href="blog-post.html">
+      <span class="row__n">Why your tradesperson website must be mobile-first</span>
+      <span class="row__m">5 min read<em>March 2026</em></span>
+    </a>
+  </div>
+  <p class="lead">
+    <a class="card__link" href="blog-list.html" style="margin-top:0">All 21 guides, across 7 topics
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </p>
+</section>
+
+<!-- ===== PAGE FOOTER — navy ========================================= -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Want to know<br>how yours scores?</h2>
+    <p class="lead">Send me the address and I&rsquo;ll run the same test on it. Free, and without
+      obligation.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="projects-list.html">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="blog-list.html" aria-current="page">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="#">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <!-- Decision D2 (session.md:137-141): the 8 location pages live here,
+           not in the primary nav. -->
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+
+/* ---------------------------------------------------------------------
+   Ported verbatim from prototype/service-detail.html (Phase 2), which
+   ported them from the live homepage. Nothing here is new behaviour.
+   --------------------------------------------------------------------- */
+
+/* 1. The .bar ground probe — home-behaviour.tsx:109-115, 224-247.
+      A point bar.height * 0.62 down from the top is tested against every
+      [data-ground] rect and THE LAST MATCH IN DOCUMENT ORDER WINS, because
+      sections overlap (here by --r) and the last one paints on top.
+      Round 1 used a hardcoded 40px probe; 0.62 of the measured bar is the
+      real formula. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+/* 2. The .in latch — home-behaviour.tsx:276-289. One-shot at threshold .16,
+      unobserved immediately so a .res heading can never flicker back to its
+      rest colour. Without this every .res heading stays muted forever. */
+(function(){
+  var sel = '.sec,.mast,.pagefoot,.work,.prose';
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ io.observe(el); });
+})();
+
+/* 3. The mobile menu. #menu is a SIBLING of .bar — an ancestor carrying
+      backdrop-filter or transform becomes the containing block for
+      position:fixed and traps the overlay in the bar's own box
+      (design-kit.md §9.5). Append #menu to the URL to open it on load, which
+      is how it can be inspected inside a 390px iframe. */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+</script>
+</body>
+</html>

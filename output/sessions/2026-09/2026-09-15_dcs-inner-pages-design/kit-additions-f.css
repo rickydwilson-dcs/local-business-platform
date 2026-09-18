@@ -1,0 +1,502 @@
+/* ##########################################################################
+   ##                                                                      ##
+   ##   kit-additions-f.css — PHASE 3b, AGENT F                            ##
+   ##   /blog · /blog/[slug] · /blog/category/[slug]                       ##
+   ##                                                                      ##
+   ##   Linked AFTER kit.css. kit.css itself is NOT edited: three agents    ##
+   ##   (F, G, H) are writing against it in parallel and Phase 4b           ##
+   ##   reconciles. Section numbers are prefixed F- so they cannot collide  ##
+   ##   with G's or H's.                                                    ##
+   ##                                                                      ##
+   ##   PROVENANCE RULE UNCHANGED from phases 1–3. Every declaration below  ##
+   ##   is either                                                           ##
+   ##     (a) a value copied from kit.css / home-r9.css / shared.css with    ##
+   ##         the line it came from, or                                     ##
+   ##     (b) a RESET of a value kit.css sets, or a purely structural        ##
+   ##         declaration (display, grid-column, position) — neither of      ##
+   ##         which introduces a number.                                    ##
+   ##                                                                      ##
+   ##   FOUR new numbers exist in this file. All four are marked INVENTED    ##
+   ##   inline and listed in notes-f.md §4.                                  ##
+   ##                                                                      ##
+   ##   CONTENTS                                                            ##
+   ##     F-01  .filterset / .filterax   two stacked filter axes      (G9)  ##
+   ##     F-02  .paytoggle zero-count    the empty-axis chip state     (G9)  ##
+   ##     F-03  .topic                   the topic block — THE WALL FIX     ##
+   ##     F-04  .jump                    non-sticky in-page jump list       ##
+   ##     F-05  .chip / .chips           in-flow, non-interactive tag (G14) ##
+   ##     F-06  .prose table             tables in running prose            ##
+   ##     F-07  responsive                                                  ##
+   ##     F-08  touch (hover:none)                                          ##
+   ########################################################################## */
+
+
+/* ==========================================================================
+   F-01  .filterset / .filterax — TWO STACKED FILTER AXES  (design-kit.md G9)
+
+   G9 is the one gap in the list that decision D4 makes mandatory rather than
+   nice: "/blog must lead on topic AND design in a second axis for
+   sector/audience from the start, even though today it would only have one
+   populated value. Retrofitting that once there are 40 posts is the expensive
+   version" (session.md:187-191).
+
+   kit.css §21's `.filterbar` is a flex row with `justify-content:space-between`
+   holding ONE `.paytoggle` and ONE `.count` — the /projects shape, and the
+   right shape for one axis. Two axes need labels, because two unlabelled pill
+   rows above a list do not say which is which. So this is a container, not a
+   new control: both axes are `.paytoggle` exactly as kit.css and /projects use
+   it, and the label is `.eyeless` exactly as `.footmap` uses it.
+
+   NOT ONE NEW NUMBER:
+     .filterset margin-top  clamp(28px,4vh,44px)   `.filterbar` (kit.css:860)
+     .filterset gap         18px                   `.payhead`   (kit.css:689)
+                            — the distance this design puts between a toggle
+                              and its siblings
+     .filterax gap          8px                    `.f`         (kit.css:2819)
+                            — the label-above-a-control gap Agent D's form
+                              field already uses for exactly this relationship
+     .eyeless margin-bottom 0                      `.footmap .eyeless`
+                                                   (kit.css:1607) — the same
+                              override, for the same reason: the gap belongs to
+                              the grid, not to the label.
+   ========================================================================== */
+.filterset{margin-top:clamp(28px,4vh,44px);display:grid;gap:18px;justify-items:start}
+.filterax{display:grid;gap:8px;justify-items:start;max-width:100%}
+.filterax .eyeless{margin-bottom:0}
+
+/* THE TRACK STOPS BEING A PILL ONCE IT WRAPS — AND HERE IT WRAPS WELL ABOVE
+   900px. Agent A found this at ≤900px and fixed it there (kit.css:2100):
+   `.paytoggle` is `border-radius:100px` (kit.css:694), which is right for the
+   homepage's single row of two, and renders as a rounded grey blob with pills
+   scattered inside it once the row wraps. Agent A scoped the fix to ≤900px
+   because six sector chips still fit one row above it.
+
+   MEASURED, at eight widths, rather than assumed (notes-f.md §3):
+
+     1680  topic 41px   sector 41px    one row each
+     1440  topic 41px   sector 41px    one row each
+     1280  topic 41px   sector 78px    the SEVEN-chip sector axis wraps
+     1024  topic 78px   sector 78px    the EIGHT-chip topic axis wraps too
+      390  topic 196px  sector 196px   four rows each
+
+   So the blob appears from 1280 down — a 1280 laptop and an iPad in landscape,
+   not only a phone — and the fix has to be unconditional for this use. Same
+   value as Agent A's: 18px is the design's card radius (`.card` kit.css:414,
+   `.tcard` kit.css:756). The BUTTONS keep their 100px; they are still pills.
+   The pricing page's own two-mode `.paytoggle` is untouched. */
+.filterset .paytoggle{border-radius:18px}
+
+/* `.filterbar`'s `.count` is a flex sibling pushed right by
+   space-between; in a grid it is simply the last row. 13.5px/600/.55 is
+   `.count`'s own (kit.css:861) and is not restated. Structural only. */
+.filterset .count{justify-self:start}
+
+
+/* ==========================================================================
+   F-02  THE ZERO-COUNT CHIP — what an axis looks like before it is populated
+
+   This is the honest half of F-01. The sector axis has SEVEN values and TWO of
+   them have posts (trades 20, motorsport 1). D4's instruction is to design the
+   axis at full width now; the alternative — render only the two populated
+   chips — leaves the control untested at seven and is the retrofit D4 is
+   explicitly trying to avoid.
+
+   So all seven render, and the five empty ones say so rather than being
+   quietly dropped or (worse) clickable and returning nothing. This is the same
+   call Agent A made keeping `.empty` for a sector that can exist before its
+   first project does (kit.css:1964-1968).
+
+   VALUES: `opacity:.45` and `cursor:not-allowed` are Agent D's
+   `.btn[aria-disabled="true"]` verbatim (kit.css:3087) — the design's one
+   existing "this control is present but cannot be used" treatment. The chip
+   keeps `.paytoggle button`'s type, padding and radius unchanged.
+
+   `aria-disabled` rather than `disabled`: a `disabled` button is removed from
+   the tab order, and the count inside it is the information a keyboard user
+   most wants from this axis. The click handler ignores it.
+   ========================================================================== */
+.paytoggle button[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.paytoggle button[aria-disabled="true"]:hover{opacity:.45}
+
+
+/* ==========================================================================
+   F-03  .topic — THE TOPIC BLOCK. THIS IS THE ANSWER TO THE WALL.
+
+   READ THIS BEFORE CHANGING THE CAP.
+
+   D4: "The layout must not degrade into a wall at 40–60 posts. Assume it will
+   get there" (session.md:192). A reverse-chronological grid or a single dense
+   list fails that by construction: its height is a function of the number of
+   POSTS, which is the number that grows.
+
+   `.topic` makes the index's height a function of the number of TOPICS
+   instead. Each topic block shows at most four posts and hands the rest to
+   `/blog/category/[slug]`, which is the "all of them" view. Add twenty posts
+   and the index does not get taller — only the "All 26" links change. The
+   arithmetic at 21, 40 and 60 items, measured, is in notes-f.md §3.
+
+   The cap lives in the MARKUP (rows past the fourth carry `hidden`), not in
+   CSS, for two reasons: `:nth-child(n+5){display:none}` would fight the
+   `hidden` attribute the sector filter also uses on the same elements, and the
+   ported React page will slice the array server-side rather than render
+   twenty-six rows and hide twenty-two.
+
+   THE LIST ITSELF IS `.work`/`.row`, UNCHANGED. design-kit.md §6.2 records
+   that pattern as "designed for: a dense index — blog post list, location
+   list", and it has never been used for one. This is it.
+
+   VALUES:
+     .topic margin-top        clamp(56px,8vh,96px)  `.footmap` (kit.css:1605)
+                              — the distance this design puts above a new block
+                                INSIDE a section, and the value
+                                service-detail.html:226 already sets inline for
+                                its second h2 on the same ground.
+     .topic:first-child       clamp(28px,4vh,44px)  `.filterbar` (kit.css:860)
+     .topic__h                `.payhead` (kit.css:689) minus its margin-top —
+                              flex, gap 18px, wrap. align-items is `baseline`
+                              rather than `center` so the h3 and the "All 6"
+                              link sit on one baseline; `.tcard__h`
+                              (kit.css:762) is the design's precedent for a
+                              heading-plus-trailing-item row.
+     .topic__d                `.twoup__p` verbatim (kit.css:2455), which is
+                              `.detail__p` minus its reserved min-height.
+     .topic .work margin-top  clamp(20px,3vh,34px)  `.payhead` (kit.css:689) —
+                              the distance between a heading block and the
+                              control or list under it. `.work`'s own
+                              clamp(34px,5vh,58px) is a between-SECTIONS gap
+                              and is too much inside a block.
+   ========================================================================== */
+.topic{margin-top:clamp(56px,8vh,96px)}
+.topic:first-of-type{margin-top:clamp(28px,4vh,44px)}
+.topic__h{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.topic__h h3{min-width:0}
+/* `.card__link` is `margin-top:10px` (kit.css:1889) for use under a card's
+   copy. On a baseline-aligned heading row that 10px pushes it off the
+   baseline. Reset, not a new value. Agent A already established that
+   `.card__link` is generic rather than card-scoped (kit.css:1882-1887). */
+.topic__h .card__link{margin-top:0;margin-left:auto}
+.topic__d{margin-top:14px;opacity:.8;line-height:1.5;font-size:15.5px;max-width:62ch}
+.topic .work{margin-top:clamp(20px,3vh,34px)}
+
+/* THE TITLE SIZE — FOUND BY RENDERING, AND THE ONE REAL FIGHT ON THIS PAGE.
+   `.row__n` is clamp(1.4rem,3.4vw,2.9rem) (kit.css:544), compressing to
+   clamp(1.2rem,2.4vw,2rem) under max-height:1040px (kit.css:893). It was
+   written for the homepage's short service names ("Local SEO", "eCommerce
+   websites") and for the five rows on service-detail.html:269-290.
+
+   Blog titles are not short. At 32px the longest of the twenty-one — "Why
+   before-and-after project pages convert better than service pages", 66
+   characters — ran to three lines, and the nineteen-row directory measured
+   4,900px at 1440×900. Every row read as a heading and nothing read as a list.
+
+   This is `.qa summary`'s type spec instead (kit.css:788) — the existing pair
+   phase 2 chose for `.prose h3` on exactly this reasoning, "an existing pair in
+   the scale that sits a clear step below" (kit.css:1448-1453), and the one
+   `.quote--sm` and `.prose blockquote` also reuse. Leading 1.24 is
+   `.cards--2 .card__t`'s (kit.css:445) — `.row__n` sets none, so a wrapped
+   title took the browser default.
+   Scoped to `.topic` so service-detail.html's aqua row list is untouched. */
+.topic .row__n{font-size:clamp(1.02rem,1.75vw,1.42rem);letter-spacing:-.022em;
+  line-height:1.24}
+
+/* THE META LINE IN A `.svc__d` — FOUND BY RENDERING, on blog-category.html.
+   `.svc__d` is one block of 14.5px at opacity .84 (kit.css:561), so "6 min ·
+   March 2026" sitting under the description read as the last clause of the
+   sentence rather than as metadata. `.row__m` solved exactly this on the light
+   side: an `<em>` that is reset to normal style and becomes the design's 12px
+   uppercase micro-label (kit.css:546-547). `.svc__d` has no such rule because
+   the homepage's version carries only a sentence.
+
+   Every declaration below is kit.css:546-547's, copied and not adjusted. The
+   selector is the only new thing. FOR PHASE 4b: this belongs on bare
+   `.svc__d em` in kit.css §13, not in an agent's file — it completes a pattern
+   the kit ships with only half of, exactly as Agent B's `.svccard__l svg` did
+   (kit.css:1762). */
+.svc__d em{font-style:normal;display:block;font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;opacity:.72;margin-top:3px}
+
+/* `.row` is `align-items:center` (kit.css:535). With a two-line title against
+   a two-line meta that is right; with a two-line title against a ONE-line meta
+   the date floated in the middle of the title. `.svc` uses `align-items:
+   baseline` for the same two-column row on a dark ground (kit.css:557), which
+   is the pattern's own sibling and the value to borrow. Structural only. */
+.topic .row{align-items:baseline}
+
+
+/* ==========================================================================
+   F-04  .jump — THE IN-PAGE JUMP LIST, DELIBERATELY NOT STICKY
+
+   The twenty-one posts carry 3–8 `<h2>`s each (median 6) over 769–1,169 words
+   — counted, not assumed; the table is in notes-f.md §3. Six headings is worth
+   indexing; it is not worth a sticky sidebar.
+
+   WHY NOT STICKY. Harness traps 4 and 5 and design-kit.md §9.3-9.4 are both
+   about the same combination: an unbounded sticky element reports its PINNED
+   position from both `getBoundingClientRect()` and `offsetTop`, so in-page
+   anchors silently do nothing once you are below the target — and it only
+   reproduces when you test from below, so testing from the top passes and
+   proves nothing. A sticky element also gets its room only from in-flow
+   content after it, so the last item in a sticky stack silently fails to pin.
+   A non-sticky jump list above the body has neither problem, and native
+   anchor navigation then needs no JavaScript at all. Verified from above AND
+   from below — notes-f.md §3.
+
+   SCROLL-MARGIN-TOP IS THE ONE THING IT DOES NEED. `html` sets
+   `scroll-padding-top:0` and that is load-bearing, not an omission: 84px
+   landed a jumped-to section's top BELOW the bar's ground probe, so the bar
+   kept the previous section's colour (kit.css:87-88, design-kit.md §9.11). So
+   the clearance goes on the TARGETS, via `scroll-margin-top`, which leaves
+   `scroll-padding-top` alone and leaves the probe reading the section it is
+   actually over.
+   clamp(96px,13vh,124px) is `.wpanel__ix`'s own "must clear the fixed bar"
+   clamp (kit.css:656). The mobile value is 84px + the top inset, which is
+   kit.css:973's own mobile version of the same number.
+
+   EVERY OTHER VALUE REUSED:
+     container     `.trade`'s numbers (kit.css:2475-2477) — clamp(20px,3vh,28px)
+                   of padding to a 1px rule, clamp(28px,4vh,44px) of margin,
+                   with the same light-ground override. `.trade` is the design's
+                   existing "a rule and a small-caps label mark an aside" move
+                   and this is the same move.
+                   ON THE OTHER EDGE, and that is the one change — FOUND BY
+                   RENDERING. `.trade` rules ABOVE itself because it closes a
+                   block. The jump list OPENS the white section, so a top rule
+                   44px below the section's own boundary reads as a stray line
+                   under the masthead cut. A bottom rule separates it from the
+                   prose it introduces, which is what it is actually for, and
+                   bottom rules at these alphas are already the design's own
+                   idiom — `.row`, `.svc` and `.qa details` all use one
+                   (kit.css:536, 556, 785).
+     list gap      12px                  `.detail__l` (kit.css:743)
+     numeral       800 / 15px / accent   `.prose ol li::before` (kit.css:1497)
+     indent        28px                  `.prose li` (kit.css:1487), so the
+                   jump list hangs on the same edge as every prose list
+     link         15px / opacity .76 / accent hover   `.footmap a`
+                   (kit.css:1617-1619) — the design's existing "a block of
+                   links inside a section" treatment
+     hover accent  the ground swap is `.crumb a:hover`'s (kit.css:1319-1320),
+                   applied for the identical reason: aqua on white is ~1.7:1.
+   ========================================================================== */
+.jump{padding-bottom:clamp(20px,3vh,28px);margin-bottom:clamp(28px,4vh,44px);
+  border-bottom:1px solid rgba(255,255,255,.22)}
+.p--white .jump,.p--paper .jump,.p--aqua .jump{border-bottom-color:rgba(14,14,18,.16)}
+.jump .eyeless{margin-bottom:0}
+.jump ol{list-style:none;counter-reset:jp;display:grid;gap:12px;margin-top:16px;max-width:62ch}
+.jump li{counter-increment:jp;position:relative;padding-left:28px}
+.jump li::before{content:counter(jp) ".";position:absolute;left:0;top:0;
+  font-weight:800;font-size:15px;color:var(--magenta);line-height:1.8}
+.p--ink .jump li::before,.p--navy .jump li::before,
+.p--magenta .jump li::before{color:var(--aqua)}
+.jump a{font-size:15px;opacity:.76;line-height:1.55;
+  transition:color .3s ease,opacity .3s ease}
+.jump a:hover{opacity:1;color:var(--aqua)}
+.p--white .jump a:hover,.p--paper .jump a:hover,.p--aqua .jump a:hover{color:var(--magenta)}
+
+/* the targets. Applied to the prose headings a .jump can point at, not
+   globally — a page with no jump list wants no scroll margin. */
+.prose h2[id],.prose h3[id]{scroll-margin-top:clamp(96px,13vh,124px)}
+
+
+/* ==========================================================================
+   F-05  .chip / .chips — THE IN-FLOW, NON-INTERACTIVE TAG  (design-kit.md G14)
+
+   G14: "`.card__tag` (home-r9.css:231-233) is a positioned overlay pill; there
+   is no in-flow tag for a post's categories."
+
+   Every one of the twenty-one posts carries 3–4 `tags` in frontmatter
+   (`website-performance`, `case-study`, `core-web-vitals`…). They are real
+   content and they belong at the foot of the post. They are NOT links: there
+   is no tag route, only the category route this wave proposes, so rendering
+   them as links would promise a page that does not exist. A static pill is the
+   honest form and it is also why `.paytoggle button` — the design's other pill
+   idiom — is wrong here: that one is a control.
+
+   `.chip` IS `.card__tag` WITH THE POSITIONING REMOVED. Type, tracking, case,
+   padding and radius are kit.css:430-432 verbatim; `position`, `top`, `left`
+   and `z-index` are dropped, which introduces no number. The one thing that
+   had to change is the background: `.card__tag`'s rgba(255,255,255,.92) is a
+   scrim for sitting over MEDIA, and over an ink section it reads as a white
+   label rather than a tag. So the fill is the ground's own quiet tint —
+   rgba(255,255,255,.12) and rgba(14,14,18,.06), which are `.prose code`'s two
+   ground tints (kit.css:1558-1559), the design's existing "an inline run,
+   tinted off its own ground" pair.
+
+   `.chips` gap 12px is `.detail__l`'s (kit.css:743). No new numbers.
+   ========================================================================== */
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 9px;border-radius:100px;
+  background:rgba(14,14,18,.06);color:inherit}
+.p--ink .chip,.p--navy .chip,.p--magenta .chip{background:rgba(255,255,255,.12)}
+
+
+/* ==========================================================================
+   F-06  .prose table — TABLES IN RUNNING PROSE
+
+   NOT SPECULATIVE. Three of the twenty-one posts contain a markdown table and
+   `.prose` (kit.css §31) has no table rule at all, so they would render as
+   UA-default tables — Times, no padding, no rules — inside an otherwise
+   fully-specified prose column. Counted:
+
+     a-fast-team-needs-a-fast-website.mdx           2 tables (4 rows each)
+     how-much-does-a-tradesperson-website-cost.mdx  1 table  ("Honest Comparison")
+     setting-up-google-workspace-for-small-business 1 table  (plan pricing)
+
+   !!! TRAP — COMMAS. Two of those three tables contain comma'd prices. This
+   rule sets NO font-variant-numeric and NO font-family, so the figures inherit
+   Archivo from <body> via --f. NEVER add `tabular-nums` here and never give a
+   prose table a mono face: the comma takes a full digit advance and £1,995
+   renders as "£1 , 995" (design-kit.md §9.1, pricing.tsx:21-25). Note that
+   `.prose code` IS mono (kit.css:1557) and INHERITS — so a price must never be
+   wrapped in backticks inside a table cell either.
+
+   VALUES ARE AGENT C's `.ctable` (kit.css:2519-2523), which is the design's
+   one existing table, minus the two things that are specific to the four-tier
+   comparison:
+     · `min-width:780px` — measured for five columns of nowrap prices. A prose
+       table is 2–3 columns inside a 74ch measure, so it takes no minimum and
+       the `.cscroll` wrapper only has to catch the exception.
+     · `tbody th{width:22%}` — sized for that table's row labels.
+   Everything else is verbatim: cell padding clamp(15px,2.2vh,24px) 6px
+   (`.tier`, home-r9.css:396), rule rgba(14,14,18,.16) (`.tiers`,
+   home-r9.css:394), head clamp(1rem,1.42vw,1.28rem)/700/-.022em (`.card__t`,
+   home-r9.css:229). The dark-ground rule is rgba(255,255,255,.22), which is
+   `.qa`'s (kit.css:784) and `.prose hr`'s own dark value (kit.css:1542).
+   Body cell type is 15.5px/1.5 — `.ctable li`'s (kit.css:2537).
+
+   margin-top clamp(28px,4vh,44px) is `.prose figure`/`ul`/`blockquote`'s, so a
+   table sits at the same distance from the paragraph above it as every other
+   block `.prose` already places (kit.css:1485,1511,1530).
+   ========================================================================== */
+.prose .cscroll{margin-top:clamp(28px,4vh,44px)}
+.prose table{width:100%;border-collapse:collapse;text-align:left}
+.prose table th,.prose table td{padding:clamp(15px,2.2vh,24px) 6px;vertical-align:top;
+  border-bottom:1px solid rgba(14,14,18,.16);font-size:15.5px;line-height:1.5}
+.prose table thead th{font-size:clamp(1rem,1.42vw,1.28rem);font-weight:700;
+  letter-spacing:-.022em}
+.prose table tbody th{font-weight:700}
+.p--ink .prose table th,.p--ink .prose table td,
+.p--navy .prose table th,.p--navy .prose table td,
+.p--magenta .prose table th,.p--magenta .prose table td{
+  border-bottom-color:rgba(255,255,255,.22)}
+/* `.prose td` is not `.prose p`, so it does not pick up opacity:.86
+   (kit.css:1446). Applied here so a table cell reads at the same weight as the
+   paragraph it sits between — same value, not a new one. */
+.prose table td{opacity:.86}
+
+
+/* ==========================================================================
+   F-07  RESPONSIVE
+
+   Nothing in this file sets a viewport height, so there is no lvh/svh decision
+   to get wrong. `.jump`'s scroll-margin uses 13vh, which is `.wpanel__ix`'s
+   own unit for the same job (kit.css:656) and is a clearance, not a cover.
+   ========================================================================== */
+
+/* the normal-laptop compression (kit.css §22). `.topic`'s margins join the
+   rhythm collapse kit.css:894 applies to .work/.svcs/.steps/.price/.cards —
+   the directory is the longest block on the page and 96px between seven topic
+   blocks is 672px of nothing on a 757px-tall viewport. */
+@media (max-height:1040px){
+  .topic{margin-top:clamp(28px,4vh,44px)}
+  .topic .work{margin-top:clamp(18px,2.6vh,30px)}
+  .filterset{margin-top:clamp(18px,2.6vh,30px)}
+}
+
+@media (max-width:900px){
+  /* THE FILTER CHIPS BURST THE VIEWPORT WITHOUT THIS — FOUND BY RENDERING,
+     AND IT IS AGENT A'S BUG ARRIVING EXACTLY WHERE AGENT A SAID IT WOULD.
+
+     kit.css:997 turns a bare `.paytoggle` into `width:100%; display:grid;
+     grid-template-columns:1fr 1fr` below 900px. That rule was written for the
+     homepage's TWO payment modes, which fit a half-width track. Agent A hit it
+     with six sector chips and scoped the undo to `.filterbar .paytoggle`
+     (kit.css:2090) — which does not reach `.filterset`, so /blog inherited the
+     bug in full. Agent A's own Phase 4 note said this would happen: "kit.css:
+     997's two-column mobile grid was written for the homepage's two payment
+     modes. /projects needs six chips, and /blog needs TWO STACKED AXES per
+     D4/G9" (notes-a.md §9.3).
+
+     Measured at 390px before this line: `.paytoggle button` carries
+     `white-space:nowrap` (kit.css:697), so "Studios and practitioners" at the
+     mobile 15px measures 213px inside a 162px track, bursts it, and takes the
+     whole axis to 433px wide inside a 350px content box —
+     `documentElement.scrollWidth` 453 against `innerWidth` 390, which
+     `html{overflow-x:clip}` (kit.css:91) then silently CLIPS. No scrollbar, no
+     console error, just chips with their right-hand ends cut off. Same failure
+     mode as Phase 2's footer email (kit.css:1609-1616).
+
+     Same fix as Agent A's, same values: undo the grid and let the base
+     `flex-wrap:wrap` (kit.css:695) do what it was written to do. The button
+     sizing kit.css:998 sets (15px, padding 14px 12px — a 47px touch target) is
+     left alone; that half of the rule is right for all three uses.
+
+     FOR PHASE 4b: `.filterbar` and `.filterset` now carry the identical
+     override for the identical reason. The right resolution is to make the
+     two-column grid the special case — `.payhead .paytoggle`, the pricing use
+     — and leave wrapping flex as the default, rather than a third copy of this
+     block arriving with the next filtered index. */
+  .filterset .paytoggle{display:inline-flex;width:auto}
+
+  /* kit.css:920-921 collapses `.row` to one column and left-aligns `.row__m`.
+     In the topic directory that puts the read-time line under the title, which
+     is right — but `.row`'s own `gap:20px` (kit.css:535) then applies between
+     them and reads as two separate items. 9px is `.detail__l`'s original gap
+     (home-r9.css:424) — the design's tightest list gap. */
+  .topic .row{gap:9px}
+  /* the mobile layer's 16px prose floor (home-r9.css:544-551 doctrine), which
+     already lifts `.lead`, `.qa__a p`, `.step__b`, `.svccard__d`,
+     `.twoup__p` and `.trade p` to exactly 16px. */
+  .topic__d{font-size:16px}
+  .jump a{font-size:16px}
+  .prose table th,.prose table td{font-size:16px}
+  /* 44px touch floor. kit.css:1671 reaches it for `.crumb a` by asserting the
+     doctrine's own number directly rather than inferring it from padding;
+     `.jump a` is the same case at the same 15px→16px size. */
+  .jump a{display:inline-flex;align-items:center;min-height:44px}
+  /* the jump numeral's line-height 1.8 was calibrated against 15px; at the
+     44px target the numeral has to top-align to the first line instead.
+     `.prose li::before` uses top:0 with line-height:1.8 for a 16.5px line;
+     matching that here is the same pair, not a new one. */
+  .jump li::before{line-height:2.8}
+  /* the target clearance under the mobile bar. 84px is kit.css:973's own
+     "clear the mobile bar" number, used there for `.wpanel__ix` and at
+     kit.css:1666 for `.crumb`. */
+  .prose h2[id],.prose h3[id]{scroll-margin-top:calc(84px + env(safe-area-inset-top))}
+  /* the wrapper takes the full bleed to the gutter rather than being padded
+     in, so a table that does need to scroll has the whole width to do it in.
+     Agent C's own `.cscroll` mobile rule (kit.css:2555), applied to the prose
+     wrapper.
+
+     NO min-width HERE, AND THAT IS A CORRECTION MADE BY RENDERING. The first
+     draft set `.prose table{min-width:520px}` by analogy with `.ctable`'s
+     780px — but 780 is MEASURED for five columns of `white-space:nowrap`
+     prices (kit.css:2531-2535), and 520 was an invented number with no source.
+     At 390px it forced the two-column "Metric / Score" table into a horizontal
+     scroll it did not need: the table measured 520px inside a 341px measure
+     when its own content fits in 341. A `.prose table` cell sets no nowrap, so
+     it wraps and fits, and `.cscroll` is left to catch only the table that
+     genuinely cannot — which is what an overflow wrapper is for. */
+  .prose .cscroll{margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad)}
+}
+
+
+/* ==========================================================================
+   F-08  TOUCH (hover:none)
+
+   kit.css §24's rule is not optional tidying: on touch a hover fires on tap
+   and LATCHES until you tap elsewhere, so a tapped jump link stays lit for the
+   rest of the visit.
+
+   This file adds exactly two hover effects — `.jump a` and the zero-count
+   chip's suppression. Both are here. Every other hover these three pages use
+   belongs to kit.css or to Agent A's block and is already neutralised at
+   kit.css §24 / §35 / A8: `.row`, `.crumb a`, `.footmap a`, `.prose a`,
+   `.paytoggle button`, `.btn`, `.svccard__l`, `.card__link`, `.big`,
+   `.menu__nav a`.
+   ========================================================================== */
+@media (hover:none){
+  .jump a:hover{opacity:.76;color:inherit}
+  .p--white .jump a:hover,.p--paper .jump a:hover,.p--aqua .jump a:hover{color:inherit}
+  .paytoggle button[aria-disabled="true"]:hover{opacity:.45}
+}

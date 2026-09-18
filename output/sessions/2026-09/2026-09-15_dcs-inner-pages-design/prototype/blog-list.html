@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Blog — Digital Consulting Services</title>
+<meta name="description" content="Twenty-one plain-English guides on getting a small business found online — local search, what a site costs, what to put on it, and how to make it fast.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 3b / AGENT F — /blog  (the library index)
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  CHROME is copied from prototype/projects-list.html — the Phase 2 chrome that
+  was approved at the Phase 4 gate. Bar, overlay, footer link map and the three
+  behaviour scripts are byte-identical except for which link carries
+  aria-current and the filter script, which this page replaces with a two-axis
+  version.
+
+  CONTENT IS REAL. All twenty-one titles, dates, reading times and excerpts
+  below come from sites/dcs/content/blog/*.mdx frontmatter. The seven topics are
+  the seven `category` values that actually exist in that frontmatter.
+
+  THREE EDITS TO THE SOURCE TEXT, all recorded line by line in notes-f.md:
+    1. TITLES CONVERTED TO SENTENCE CASE. All 21 are Title Case in frontmatter
+       ("What Makes a Great Website for Plumbers?"). The set's settled ruling is
+       sentence case everywhere (notes-c.md §15, which converted
+       service-detail.html for the same reason). Proper nouns kept: Google,
+       Google Maps, Google Business Profile, Google Workspace, SEO.
+    2. FIRST-PERSON PLURAL -> SINGULAR in every excerpt lifted below. Ground
+       rule 8 / design-kit.md §10.
+    3. THE SECTOR AXIS IS A PROPOSED FRONTMATTER FIELD. `sector` does not exist
+       in blog frontmatter today. Decision D4 requires the second axis to be
+       designed in now rather than retrofitted at 40 posts, so it is here, and
+       each value is DERIVED from the post's own title/description rather than
+       invented. The full mapping is in notes-f.md §5. The port has to add the
+       field.
+
+  NO MEDIA ANYWHERE ON THIS PAGE, DELIBERATELY. Every post's frontmatter
+  heroImage points at `placeholder/blog-*.webp`, which does not exist, and
+  `.slot` is the honesty mechanism for MISSING PROJECT FOOTAGE (kit.css §10) —
+  a blog post has no footage to await, so twenty-one striped boxes would be a
+  category error. Same argument Agent B made for /services
+  (kit-additions-b.css B-01).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<!-- kit.css is NOT edited by this agent. Additions load after it. -->
+<link rel="stylesheet" href="../kit.css">
+<link rel="stylesheet" href="../kit-additions-f.css">
+</head>
+<body>
+
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="projects-list.html">Work</a>
+    <a href="#">Services</a>
+    <a href="#">Pricing</a>
+    <a href="blog-list.html" aria-current="page">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="projects-list.html"><span>Work</span></a>
+    <a href="#"><span>Services</span></a>
+    <a href="#"><span>Pricing</span></a>
+    <a href="blog-list.html" aria-current="page"><span>Blog</span></a>
+    <a href="#"><span>About</span></a>
+    <a href="#"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD — ink ==============================
+     .crumb carries its own p--ink so the bar's [data-ground] probe reads it
+     (kit.css §28). .crumb + .mast drops the masthead's top padding to 20px
+     because the crumb has already cleared the fixed bar (kit.css:1359).
+     ================================================================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><span aria-current="page">Blog</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Blog</p>
+  <!-- NO <br> HERE, AND THE SHORTER HEADLINE IS THE REASON — FOUND BY
+       RENDERING. `.mast h1` is max-width:17ch (kit.css:1360). The first draft
+       read "Answers to the questions<br>I get asked most." and the 17ch measure
+       broke the first half in two on its own, so the authored break made it
+       FOUR lines and a 1,000px masthead. Wave 1's own h1s ("Real clients.<br>
+       Real outcomes.") are short enough that the measure never binds. -->
+  <h1>The questions I get asked most.</h1>
+  <p class="lead">Twenty-one plain-English guides on getting a small business found online.
+    Start with the problem you have, not the trade you happen to be in.</p>
+  <!--
+    HONESTY / SOURCING. Every figure below is checkable against
+    sites/dcs/content/blog/:
+      21       twenty-one .mdx files
+      7        seven distinct `category` values in their frontmatter
+      5-7 min  the full range of the sixteen `readingTime` values that exist
+               (min 5, max 7). Five posts declare none — see notes-f.md §3.
+      Aug 2026 a-fast-team-needs-a-fast-website.mdx, date "2026-08-25", the
+               most recent of the twenty-one
+    No count-up animation on any of them (ground rule 5): authored values.
+  -->
+  <div class="mast__meta">
+    <div><b>21</b><span>Guides in the library</span></div>
+    <div><b>7 topics</b><span>Grouped by problem</span></div>
+    <div><b>5&ndash;7 min</b><span>Typical read</span></div>
+    <div><b>Aug 2026</b><span>Latest guide</span></div>
+  </div>
+</header>
+
+<!-- ===== 2. LATEST — magenta ==========================================
+     GROUND SEQUENCE for this page: ink -> magenta -> white -> aqua -> navy.
+     No two adjacent panels share a ground, every boundary is a hard cut, aqua
+     appears exactly once and late, and navy closes (design-kit.md §1.2).
+     ink -> magenta is a real boundary on the live homepage
+     (.wstack ink -> p--magenta #services).
+
+     The featured item is the ONE post whose frontmatter carries
+     `featured: true`, and it happens also to be the most recent — so this band
+     needs no editorial judgement to order.
+
+     .svcgrid / .svccard--wide is Agent B's block (kit-additions-b.css B-01),
+     reused unchanged. It is the one pattern in the kit whose anatomy is
+     index label / display title / description / meta row / link, which is
+     exactly a featured post's anatomy, and it differentiates by GROUND rather
+     than by image — which matters on a page with no media at all.
+     ================================================================== -->
+<section class="sec p--magenta" data-ground="magenta">
+  <p class="eyeless">Latest</p>
+  <h2 class="res">Most recent first.</h2>
+  <p class="lead">The newest guide, and the four behind it. Everything else is grouped by
+    topic further down.</p>
+
+  <div class="svcgrid">
+    <a class="svccard svccard--ink svccard--wide" href="blog-post.html">
+      <div class="svccard__body">
+        <p class="svccard__ix">Featured &middot; Design and speed</p>
+        <h3 class="svccard__t">A fast team needs a fast website</h3>
+        <!-- excerpt, verbatim except "We ran" -> "I ran" and "our" removed.
+             Source: a-fast-team-needs-a-fast-website.mdx:17 -->
+        <p class="svccard__d">I ran NP Racing&rsquo;s British Superbike homepage &mdash; video hero and
+          all &mdash; through Google&rsquo;s own speed test. It came back a perfect 100, on mobile and
+          desktop. Here&rsquo;s why that&rsquo;s harder than it sounds, and why it matters.</p>
+      </div>
+      <div class="svccard__body">
+        <div class="mast__meta">
+          <div><b>6 min</b><span>Read time</span></div>
+          <div><b>25 Aug 2026</b><span>Published</span></div>
+          <div><b>Motorsport</b><span>Who it&rsquo;s for</span></div>
+        </div>
+        <span class="svccard__l">Read the guide
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <!-- .svcs/.svc is the dark-ground sibling of .row (kit.css §13) and this is
+       a dark ground, so it is the right list here. .row's own rules and
+       #5E5E68 meta colour are light-ground only (kit.css:1412-1414). -->
+  <div class="svcs">
+    <a class="svc" href="blog-post.html">
+      <span class="svc__n">What makes a great website for scaffolding companies?</span>
+      <span class="svc__d">7 min &middot; May 2026 &middot; Sector guides</span>
+    </a>
+    <a class="svc" href="blog-post.html">
+      <span class="svc__n">What makes a great website for plumbers?</span>
+      <span class="svc__d">7 min &middot; May 2026 &middot; Sector guides</span>
+    </a>
+    <a class="svc" href="blog-post.html">
+      <span class="svc__n">What makes a great website for electricians?</span>
+      <span class="svc__d">7 min &middot; April 2026 &middot; Sector guides</span>
+    </a>
+    <a class="svc" href="blog-post.html">
+      <span class="svc__n">Google Workspace for small businesses: what you need to know</span>
+      <span class="svc__d">6 min &middot; April 2026 &middot; Tools and email</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===== 3. THE LIBRARY — white =======================================
+     THIS SECTION IS THE ANSWER TO D4. Read kit-additions-f.css F-03 before
+     changing the four-post cap: the index's height is deliberately a function
+     of the number of TOPICS, not the number of posts, so twenty more guides
+     make it no taller. The arithmetic at 21, 40 and 60 is in notes-f.md §3.
+     ================================================================== -->
+<section class="sec p--white" data-ground="white" id="library">
+  <p class="eyeless">The library</p>
+  <h2 class="res">Start with the problem,<br>not the sector.</h2>
+  <p class="lead">Seven topics, each one a problem rather than an industry. Trades turn up inside
+    them as worked examples &mdash; a scaffolder&rsquo;s site and a fabric shop&rsquo;s have more in
+    common than either would guess.</p>
+
+  <!-- TWO AXES. Topic is the primary one (D4: "lead on topic"); "who it's for"
+       is the second axis D4 requires to exist now rather than be retrofitted
+       at 40 posts. Five of its seven values have no posts yet and say so
+       rather than being hidden — kit-additions-f.css F-02. -->
+  <div class="filterset" id="filterset">
+    <div class="filterax">
+      <p class="eyeless" id="lbl-topic">Topic</p>
+      <div class="paytoggle" id="f-topic" role="group" aria-labelledby="lbl-topic">
+        <button type="button" aria-pressed="true"  data-topic="all">All <span aria-hidden="true">21</span></button>
+        <button type="button" aria-pressed="false" data-topic="local-seo">Local search</button>
+        <button type="button" aria-pressed="false" data-topic="getting-found-online">Getting found</button>
+        <button type="button" aria-pressed="false" data-topic="costs-and-value">Costs and value</button>
+        <button type="button" aria-pressed="false" data-topic="website-content">Site content</button>
+        <button type="button" aria-pressed="false" data-topic="industry-guides">Sector guides</button>
+        <button type="button" aria-pressed="false" data-topic="website-design">Design and speed</button>
+        <button type="button" aria-pressed="false" data-topic="business-tools">Tools and email</button>
+      </div>
+    </div>
+    <div class="filterax">
+      <p class="eyeless" id="lbl-sector">Who it&rsquo;s for</p>
+      <div class="paytoggle" id="f-sector" role="group" aria-labelledby="lbl-sector">
+        <button type="button" aria-pressed="true"  data-sector="all">Anyone</button>
+        <button type="button" aria-pressed="false" data-sector="trades">Trades and contractors <span aria-hidden="true">20</span></button>
+        <button type="button" aria-pressed="false" data-sector="motorsport">Motorsport and teams <span aria-hidden="true">1</span></button>
+        <button type="button" aria-disabled="true" data-sector="retail">Retail and eCommerce <span aria-hidden="true">0</span></button>
+        <button type="button" aria-disabled="true" data-sector="studios">Studios and practitioners <span aria-hidden="true">0</span></button>
+        <button type="button" aria-disabled="true" data-sector="property">Professional and property <span aria-hidden="true">0</span></button>
+        <button type="button" aria-disabled="true" data-sector="creative">Creative and B2B <span aria-hidden="true">0</span></button>
+      </div>
+    </div>
+    <span class="count" id="count" role="status" aria-live="polite">21 guides across 7 topics</span>
+  </div>
+
+  <!-- ---------- TOPIC 1 · local-seo · 6 posts (the only one that caps) ---- -->
+  <section class="topic" data-topic="local-seo">
+    <div class="topic__h">
+      <h3>Showing up in local search</h3>
+      <a class="card__link" href="blog-category.html">6 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">The map pack, reviews, structured data, and the pages that make a business
+      findable in the town it actually works in.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">How to get more Google reviews as a tradesperson</span>
+        <span class="row__m">6 min read<em>March 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Service pages vs location pages: what&rsquo;s the difference?</span>
+        <span class="row__m">6 min read<em>January 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Schema markup: the hidden SEO trick most tradespeople miss</span>
+        <span class="row__m">6 min read<em>June 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">What is a Google Business Profile and do you need one?</span>
+        <span class="row__m">5 min read<em>May 2025</em></span>
+      </a>
+      <!-- capped. Shown when this topic or a sector is selected; otherwise the
+           "All 6" link above is the way to them. -->
+      <a class="row" href="blog-post.html" data-sector="trades" data-cap="true" hidden>
+        <span class="row__n">How to rank higher on Google Maps as a tradesperson</span>
+        <span class="row__m">6 min read<em>April 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades" data-cap="true" hidden>
+        <span class="row__n">Local SEO for tradespeople: what it is and why it matters</span>
+        <span class="row__m">6 min read<em>March 2025</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 2 · getting-found-online · 3 posts ----------------- -->
+  <section class="topic" data-topic="getting-found-online">
+    <div class="topic__h">
+      <h3>Getting found in the first place</h3>
+      <a class="card__link" href="blog-category.html">3 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">Starting from nothing &mdash; or from a Facebook page &mdash; and turning the
+      visits you do get into enquiries.</p>
+    <div class="work">
+      <!-- NO READING TIME on these two: their frontmatter declares none. Five
+           of the twenty-one were written under a looser convention (no slug,
+           no excerpt, no readingTime, no heroImage) and inventing a figure for
+           them would be authoring content. notes-f.md §3. -->
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">How to get more leads from your tradesperson website</span>
+        <span class="row__m"><em>November 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Website vs Facebook page: what tradespeople actually need</span>
+        <span class="row__m"><em>August 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Why tradespeople need a website in 2025</span>
+        <span class="row__m">5 min read<em>February 2025</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 3 · costs-and-value · 3 posts ---------------------- -->
+  <section class="topic" data-topic="costs-and-value">
+    <div class="topic__h">
+      <h3>Working out what to spend</h3>
+      <a class="card__link" href="blog-category.html">3 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">What a website really costs, what SEO is worth paying for, and whether to buy
+      it outright or monthly.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Is it worth paying for SEO as a tradesperson?</span>
+        <span class="row__m"><em>October 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Pay monthly vs upfront website: which is right for you?</span>
+        <span class="row__m"><em>September 2025</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">How much does a tradesperson website cost?</span>
+        <span class="row__m"><em>July 2025</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 4 · website-content · 3 posts ---------------------- -->
+  <section class="topic" data-topic="website-content">
+    <div class="topic__h">
+      <h3>Deciding what goes on the site</h3>
+      <a class="card__link" href="blog-category.html">3 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">Which pages you actually need, what to write on them, and how to let proof of
+      work do the selling instead of adjectives.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Why before-and-after project pages convert better than service pages</span>
+        <span class="row__m">5 min read<em>February 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">How to write a good testimonials page for your trade business</span>
+        <span class="row__m">5 min read<em>February 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">What to put on your tradesperson website: the 7 essentials</span>
+        <span class="row__m">6 min read<em>December 2025</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 5 · industry-guides · 3 posts ----------------------
+       THE ONE SEAM IN THE TAXONOMY, stated rather than hidden. This topic is
+       the only one labelled by WHO has the problem rather than by the problem,
+       which is exactly what D4 says a topic must not be. It is here because
+       the three posts exist and carry that category in their frontmatter; the
+       recommendation for 40 posts is in notes-f.md §2 — this topic dissolves
+       into the sector axis and stops being a topic at all.
+       ------------------------------------------------------------------- -->
+  <section class="topic" data-topic="industry-guides">
+    <div class="topic__h">
+      <h3>What a site needs, sector by sector</h3>
+      <a class="card__link" href="blog-category.html">3 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">Worked examples. What changes when the business is an electrician rather than
+      a plumber &mdash; and, more usefully, what doesn&rsquo;t.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">What makes a great website for scaffolding companies?</span>
+        <span class="row__m">7 min read<em>May 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">What makes a great website for plumbers?</span>
+        <span class="row__m">7 min read<em>May 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">What makes a great website for electricians?</span>
+        <span class="row__m">7 min read<em>April 2026</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 6 · website-design · 2 posts ----------------------- -->
+  <section class="topic" data-topic="website-design">
+    <div class="topic__h">
+      <h3>Making it fast and usable</h3>
+      <a class="card__link" href="blog-category.html">2 guides
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">How a site is built decides how fast it feels, and how fast it feels decides
+      whether anyone waits around to read it.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="motorsport">
+        <span class="row__n">A fast team needs a fast website</span>
+        <span class="row__m">6 min read<em>August 2026</em></span>
+      </a>
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Why your tradesperson website must be mobile-first</span>
+        <span class="row__m">5 min read<em>March 2026</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ---------- TOPIC 7 · business-tools · 1 post ------------------------ -->
+  <section class="topic" data-topic="business-tools">
+    <div class="topic__h">
+      <h3>The tools around the website</h3>
+      <a class="card__link" href="blog-category.html">1 guide
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="topic__d">Professional email, and the handful of other things worth setting up once and
+      then forgetting about.</p>
+    <div class="work">
+      <a class="row" href="blog-post.html" data-sector="trades">
+        <span class="row__n">Google Workspace for small businesses: what you need to know</span>
+        <span class="row__m">6 min read<em>April 2026</em></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- kit.css §21's no-results state. REACHABLE on this page, unlike on
+       /projects: pick "Motorsport and teams" plus any topic except "Design and
+       speed" and the answer is genuinely nothing. -->
+  <div class="empty" id="empty">
+    <h3>Nothing under both of those yet.</h3>
+    <p>The library is still filling out &mdash; try one filter at a time, or
+      <a href="mailto:mail@digitalconsultingservices.co.uk">ask me the question directly</a>.</p>
+  </div>
+</section>
+
+<!-- ===== 4. WHO IT'S FOR — aqua =======================================
+     The honest half of the second axis. Five of its seven values have no posts
+     and this says so in customer-facing copy rather than leaving a row of grey
+     chips to explain itself.
+
+     .twoup is Agent C's generic two-column section grid (kit-additions-c.css
+     C3) — "two arguments side by side", which is what this is. The check list
+     is .detail__l, whose aqua tick correctly becomes magenta on an aqua ground
+     via Agent C's C1 accent swap. There is no negative idiom in this design
+     and inventing one would be a new visual language (kit-additions-c.css C4),
+     so "not yet written" is prose, not a crossed-out list.
+     ================================================================== -->
+<section class="sec p--aqua" data-ground="aqua">
+  <p class="eyeless">Who it&rsquo;s for</p>
+  <h2 class="res">Mostly trades &mdash; for now.</h2>
+  <p class="lead">Twenty of these twenty-one guides were written for trades and contractors, because
+    that is where most of my work started. The work itself has moved on, and the library is built so
+    the rest sit in the same place rather than in a separate section.</p>
+
+  <div class="twoup">
+    <div>
+      <h3>Written so far</h3>
+      <div class="detail__l">
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Trades and contractors &mdash; 20 guides, across all seven topics</div>
+        <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Motorsport and teams &mdash; 1 guide, on speed under load</div>
+      </div>
+    </div>
+    <div>
+      <h3>Not yet, but the shelf is there</h3>
+      <p class="twoup__p">Retail and eCommerce, studios and practitioners, professional services and
+        property, creative and B2B. I have built for all four &mdash; the case studies are on the
+        work page &mdash; and the guides go under the same seven topics when they are written, not
+        into a second blog.</p>
+      <p class="twoup__p">If you run one of those and want the answer to something before I get round
+        to writing it up, ask me. It is the fastest route to a guide getting written.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE FOOTER — navy ========================================= -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Read enough?<br>Let&rsquo;s talk.</h2>
+    <p class="lead">Free, and without obligation. I&rsquo;ll tell you honestly whether a new website is
+      the thing that will help.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="projects-list.html">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="blog-list.html" aria-current="page">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="#">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <!-- Decision D2 (session.md:137-141): the 8 location pages live here,
+           not in the primary nav. -->
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+
+/* ---------------------------------------------------------------------
+   Ported verbatim from prototype/service-detail.html (Phase 2), which
+   ported them from the live homepage. Nothing here is new behaviour.
+   --------------------------------------------------------------------- */
+
+/* 1. The .bar ground probe — home-behaviour.tsx:109-115, 224-247.
+      A point bar.height * 0.62 down from the top is tested against every
+      [data-ground] rect and THE LAST MATCH IN DOCUMENT ORDER WINS, because
+      sections overlap (here by --r) and the last one paints on top.
+      Round 1 used a hardcoded 40px probe; 0.62 of the measured bar is the
+      real formula. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+/* 2. The .in latch — home-behaviour.tsx:276-289. One-shot at threshold .16,
+      unobserved immediately so a .res heading can never flicker back to its
+      rest colour. Without this every .res heading stays muted forever. */
+(function(){
+  var sel = '.sec,.mast,.pagefoot,.topic,.svcgrid,.svcs,.twoup';
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ io.observe(el); });
+})();
+
+/* 3. The mobile menu. #menu is a SIBLING of .bar — an ancestor carrying
+      backdrop-filter or transform becomes the containing block for
+      position:fixed and traps the overlay in the bar's own box
+      (design-kit.md §9.5). Append #menu to the URL to open it on load, which
+      is how it can be inspected inside a 390px iframe. */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------------
+   THE TWO-AXIS FILTER (design-kit.md G9, decision D4).
+
+   Real, not mocked, so the interaction can be judged. It does four things
+   beyond /projects' single-axis version (projects-list.html:634-694):
+
+   (a) TWO AXES that compose. Topic AND sector, intersected. A topic block
+       with no matching row in the current sector hides itself, so the page
+       never shows an empty heading.
+   (b) THE CAP LIFTS WHEN YOU FILTER. At rest each topic shows at most four
+       posts, because that is what keeps the index from becoming a wall at 40
+       to 60 items (kit-additions-f.css F-03). The moment you narrow either
+       axis the set is small enough to show whole, so the capped rows come
+       back. Selecting "Local search" turns the index into that topic's full
+       list without a page load.
+   (c) hides with the `hidden` ATTRIBUTE, not inline style.display. Agent A's
+       finding: `[hidden]` alone loses to an author `display:grid`, which is
+       what `.row` sets (kit.css:535). kit.css:1755 now carries the global
+       `[hidden]{display:none !important}` that makes the attribute work, so
+       nothing here ends up with an inline display.
+   (d) announces. `.count` is role="status" aria-live="polite". A pill group
+       that silently reflows a list below it tells a screen-reader user
+       nothing.
+
+   The zero-count sector chips carry aria-disabled rather than disabled — a
+   disabled button leaves the tab order, and the count inside it is the one
+   thing a keyboard user wants from that axis. The handler ignores them.
+
+   NO SCROLLING HERE. If any is ever added: documentElement.scrollTop is a
+   silent no-op on this design (html{overflow-x:clip} computes to
+   `clip visible`) — use window.scrollTo({behavior:'instant'}).
+   --------------------------------------------------------------------- */
+(function(){
+  var root = document.getElementById('filterset');
+  if (!root) return;
+  var topicBtns  = Array.prototype.slice.call(document.querySelectorAll('#f-topic button'));
+  var sectorBtns = Array.prototype.slice.call(document.querySelectorAll('#f-sector button'));
+  var topics     = Array.prototype.slice.call(document.querySelectorAll('.topic'));
+  var count      = document.getElementById('count');
+  var empty      = document.getElementById('empty');
+
+  var state = {topic:'all', sector:'all'};
+  var TOTAL = 21, NTOPICS = 7;
+
+  function labelOf(btn){
+    /* the chip's own text minus its count span, so the readout says what the
+       user pressed rather than a second wording of it */
+    var clone = btn.cloneNode(true);
+    var s = clone.querySelector('span');
+    if (s) s.remove();
+    return clone.textContent.trim();
+  }
+
+  function apply(){
+    var wide = state.topic === 'all' && state.sector === 'all';
+    var shown = 0, liveTopics = 0;
+
+    topics.forEach(function(t){
+      var topicHit = state.topic === 'all' || t.dataset.topic === state.topic;
+      var rows = Array.prototype.slice.call(t.querySelectorAll('.row'));
+      var matches = 0;
+
+      rows.forEach(function(r){
+        var sectorHit = state.sector === 'all' || r.dataset.sector === state.sector;
+        var hit = topicHit && sectorHit;
+        if (hit) matches++;
+        /* the cap only applies in the unfiltered view */
+        var capped = wide && r.dataset.cap === 'true';
+        var vis = hit && !capped;
+        r.hidden = !vis;
+        if (vis) shown++;
+      });
+
+      t.hidden = !(topicHit && matches > 0);
+      if (!t.hidden) liveTopics++;
+    });
+
+    if (wide){
+      count.textContent = TOTAL + ' guides across ' + NTOPICS + ' topics';
+    } else {
+      var bits = [];
+      if (state.topic  !== 'all') bits.push(labelOf(current(topicBtns,  'topic')));
+      if (state.sector !== 'all') bits.push(labelOf(current(sectorBtns, 'sector')));
+      count.textContent = shown === 0
+        ? 'Nothing matches ' + bits.join(' + ')
+        : 'Showing ' + shown + ' of ' + TOTAL + ' — ' + bits.join(' + ');
+    }
+    empty.dataset.show = shown === 0 ? 'true' : 'false';
+  }
+
+  function current(btns, key){
+    for (var i=0;i<btns.length;i++){
+      if (btns[i].getAttribute('aria-pressed') === 'true') return btns[i];
+    }
+    return btns[0];
+  }
+
+  function wire(btns, key){
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (btn.getAttribute('aria-disabled') === 'true') return;
+        btns.forEach(function(b){
+          if (b.getAttribute('aria-disabled') !== 'true') b.setAttribute('aria-pressed','false');
+        });
+        btn.setAttribute('aria-pressed','true');
+        state[key] = btn.dataset[key];
+        apply();
+      });
+    });
+  }
+
+  wire(topicBtns,  'topic');
+  wire(sectorBtns, 'sector');
+})();
+</script>
+</body>
+</html>

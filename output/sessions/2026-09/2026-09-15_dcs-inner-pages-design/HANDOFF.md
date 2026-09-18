@@ -127,9 +127,12 @@ MDX edits on a local branch.
   `_harness-e.html`. Other agents' scaffolding, not deliverables. Safe to delete.
 - **Redundant CSS left for a single tidy pass, not edited piecemeal:** `kit.css:931` and
   §34 both still hide `.bar nav` at a breakpoint, for a nav that is now hidden at all
-  widths. `.panel--tight` (`kit.css:344`) duplicates `.mast`. `.detail{top:120px}`
+  widths. `.panel--tight` (`kit.css:344`) duplicates `.mast`. ~~`.detail{top:120px}`
   (`kit.css:732`) hardcodes an offset for an 81px bar; the inner-page bar measures
-  **74.5px at 1440 and 65px at 390**.
+  **74.5px at 1440 and 65px at 390**.~~ **STRUCK 2026-09-18 — this one is not a defect.**
+  The 74.5px figure was measured before Decision 5 and is void; the bar is **81px** and
+  `top:120px` is correct. Acting on it would have introduced a 6.5px bug. See
+  `bar-height-correction.md`.
 
 ---
 
