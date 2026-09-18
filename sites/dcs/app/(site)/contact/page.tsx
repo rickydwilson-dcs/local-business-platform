@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   title: 'Contact',
   description:
     "Tell me what you need and I'll come back with what I'd build, what it would cost and how long it would take. No obligation, and no sales call.",
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/contact'),
   },

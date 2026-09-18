@@ -61,6 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${heading} | Blog | ${siteConfig.business.name}`,
     description: description.length > 200 ? description.slice(0, 197) + '...' : description,
+    robots: { index: true, follow: true },
     openGraph: {
       title: heading,
       description,

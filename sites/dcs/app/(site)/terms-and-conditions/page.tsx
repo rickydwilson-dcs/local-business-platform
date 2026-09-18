@@ -44,6 +44,7 @@ import { type LegalTocItem } from '@/components/legal/legal-toc';
 export const metadata: Metadata = {
   title: `Terms and Conditions | ${siteConfig.business.name}`,
   description: `Terms and conditions for ${siteConfig.business.name}. Understand our service terms, pricing models, and your rights.`,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/terms-and-conditions'),
   },

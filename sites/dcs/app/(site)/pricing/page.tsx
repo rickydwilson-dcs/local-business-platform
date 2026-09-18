@@ -53,6 +53,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/pricing'),
   },

@@ -29,6 +29,7 @@ import { type LegalTocItem } from '@/components/legal/legal-toc';
 export const metadata: Metadata = {
   title: `Cookie Policy | ${siteConfig.business.name}`,
   description: `Cookie policy for ${siteConfig.business.name}. Learn about the cookies we use and how to manage your preferences.`,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/cookie-policy'),
   },

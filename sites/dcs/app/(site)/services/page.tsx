@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
   keywords: ['services', 'web design', 'local SEO', 'website management'],
+  robots: { index: true, follow: true },
   openGraph: {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,

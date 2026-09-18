@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description:
     'Twenty-one plain-English guides on getting a small business found online — local search, what a site costs, what to put on it, and how to make it fast.',
   keywords: ['blog', 'web design tips', 'local SEO', 'tradespeople', 'digital marketing'],
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'Blog | Insights for Tradespeople',
     description: 'Plain-English guides on getting a small business found online.',

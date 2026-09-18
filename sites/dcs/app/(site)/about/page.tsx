@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: 'About — Digital Consulting Services',
   description:
     'Digital Consulting Services is one person. I ask the questions, write the content and build the site myself — no account manager, no ticket queue.',
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/about'),
   },

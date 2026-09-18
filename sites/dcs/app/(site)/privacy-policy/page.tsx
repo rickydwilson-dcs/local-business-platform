@@ -34,6 +34,7 @@ import { type LegalTocItem } from '@/components/legal/legal-toc';
 export const metadata: Metadata = {
   title: `Privacy Policy | ${siteConfig.business.name}`,
   description: `Privacy policy for ${siteConfig.business.name}. Learn how we collect, use, and protect your personal information.`,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/privacy-policy'),
   },

@@ -70,6 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title,
     description,
     keywords: fm.keywords,
+    robots: { index: true, follow: true },
     openGraph: {
       title: displayTitle,
       description,

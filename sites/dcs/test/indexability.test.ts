@@ -17,10 +17,17 @@ import { TOPIC_ORDER } from '../lib/blog-topics';
  *   3. fetches the real `/sitemap-index.xml`, follows every listed sitemap,
  *      and reads the real XML `<loc>` entries.
  *
- * Phase 8 (2026-08-23): `/` is the only URL that may be indexed until the
- * inner pages ship. Every other route must stay reachable (200, no
- * Disallow) and crawlable, but must emit `noindex`. See Phase 8 of
- * output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/yolo-brief.md.
+ * Phase 5 (2026-09-18) of the inner-pages port opted the shipped sections
+ * into indexing per-page: `/about`, `/contact`, `/pricing`,
+ * `/privacy-policy`, `/cookie-policy`, `/terms-and-conditions`, the
+ * `/services`, `/locations`, `/blog` and `/projects` list pages, and all
+ * five of their dynamic `[slug]` children (including
+ * `/blog/category/[slug]`) — see `INDEXABLE_STATIC_PATHS` and
+ * `INDEXABLE_DYNAMIC_PATTERNS` below. Only the root 404 page
+ * (`app/not-found.tsx`) is still deliberately `noindex` — it was never
+ * ported and 404s should never be indexed. See Phase 5 of
+ * output/sessions/2026-09/2026-09-18_dcs-inner-pages-port/yolo-brief.md and
+ * PRODUCT.md's "Indexing" section for the default-deny rationale.
  *
  * This test is slower than the others (it boots a real production server)
  * — that's expected. It always kills the server on the way out, pass or
@@ -30,6 +37,52 @@ import { TOPIC_ORDER } from '../lib/blog-topics';
 const PORT = 3100;
 const BASE_URL = `http://localhost:${PORT}`;
 const SITE_ROOT = path.resolve(__dirname, '..');
+
+// Static routes-manifest `page` values opted into indexing by Phase 5. Every
+// other static page path reaching the crawl loop (there are none left, as of
+// Phase 5 — every static route in `app/(site)/*` is opted in) is expected
+// `noindex`.
+const INDEXABLE_STATIC_PATHS = new Set<string>([
+  '/',
+  '/about',
+  '/blog',
+  '/contact',
+  '/cookie-policy',
+  '/locations',
+  '/pricing',
+  '/privacy-policy',
+  '/projects',
+  '/services',
+  '/terms-and-conditions',
+]);
+
+// Dynamic routes-manifest `page` patterns (bracketed, pre-slug-resolution)
+// opted into indexing by Phase 5. All five ported dynamic routes qualify.
+const INDEXABLE_DYNAMIC_PATTERNS = new Set<string>([
+  '/blog/[slug]',
+  '/blog/category/[slug]',
+  '/locations/[slug]',
+  '/projects/[slug]',
+  '/services/[slug]',
+]);
+
+// A path that can never resolve to a real route — used to exercise the
+// still-`noindex` 404 page (`app/not-found.tsx`), which is deliberately
+// excluded from the routes-manifest crawl below (see `isNonPageRoute`) since
+// `/_not-found` is an internal build artifact, not a URL a visitor or
+// crawler would ever request directly.
+const UNMATCHED_PATH = '/this-route-does-not-exist-indexability-test';
+
+// Every real slug in a `content/<dir>/*.mdx` directory, read live rather
+// than hardcoded — mirrors `firstSlug` below but returns the full list.
+function allSlugs(contentDir: string): string[] {
+  const dir = path.join(SITE_ROOT, 'content', contentDir);
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.mdx'))
+    .map((f) => f.replace(/\.mdx$/, ''))
+    .sort();
+}
 
 let serverProcess: ChildProcess | null = null;
 
@@ -162,17 +215,32 @@ afterAll(() => {
   killServer();
 });
 
-describe('dcs indexability — homepage indexable, everything else noindex', () => {
-  it('crawls the real route manifest: exactly one URL is indexable, every other page URL is noindex', async () => {
+describe('dcs indexability — opted-in sections indexable, everything else noindex', () => {
+  it('crawls the real route manifest: every opted-in page URL is indexable, every other page URL is noindex, and the still-denied 404 stays noindex', async () => {
     const manifest = loadRoutesManifest();
 
-    const pagePaths = [
-      ...manifest.staticRoutes.map((r) => r.page).filter((p) => !isNonPageRoute(p)),
-      ...manifest.dynamicRoutes.map((r) => resolveDynamicPage(r.page)),
+    const staticPagePaths = manifest.staticRoutes
+      .map((r) => r.page)
+      .filter((p) => !isNonPageRoute(p));
+    const dynamicRoutePatterns = manifest.dynamicRoutes.map((r) => r.page);
+
+    // Carry both the fetchable path and its expected indexability together,
+    // so the assertion loop never has to re-derive intent from the path
+    // string.
+    const pages: Array<{ path: string; expectIndexable: boolean }> = [
+      ...staticPagePaths.map((p) => ({ path: p, expectIndexable: INDEXABLE_STATIC_PATHS.has(p) })),
+      ...dynamicRoutePatterns.map((pattern) => ({
+        path: resolveDynamicPage(pattern),
+        expectIndexable: INDEXABLE_DYNAMIC_PATTERNS.has(pattern),
+      })),
+      // The 404 page is not in the crawlable manifest at all (its
+      // `/_not-found` entry is a build artifact — see `isNonPageRoute`), so
+      // it's exercised here via a path guaranteed to 404.
+      { path: UNMATCHED_PATH, expectIndexable: false },
     ];
 
-    expect(pagePaths.length).toBeGreaterThan(0);
-    expect(pagePaths).toContain('/');
+    expect(pages.length).toBeGreaterThan(0);
+    expect(pages.some((p) => p.path === '/')).toBe(true);
 
     let indexableCount = 0;
     let noindexCount = 0;
@@ -180,7 +248,7 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
     let firstOffender = '';
     const results: Array<{ path: string; status: number; robots: string | null }> = [];
 
-    for (const pagePath of pagePaths) {
+    for (const { path: pagePath, expectIndexable } of pages) {
       const url = `${BASE_URL}${pagePath}`;
       const res = await fetch(url);
       const html = await res.text();
@@ -189,19 +257,22 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
 
       results.push({ path: pagePath, status: res.status, robots });
 
-      if (res.status !== 200) {
+      // The 404 fixture is expected to answer 404, not 200 — every other
+      // page must answer 200.
+      const expectedStatus = pagePath === UNMATCHED_PATH ? 404 : 200;
+      if (res.status !== expectedStatus) {
         errors++;
         if (!firstOffender) {
-          firstOffender = `${pagePath}: expected HTTP 200, got ${res.status}`;
+          firstOffender = `${pagePath}: expected HTTP ${expectedStatus}, got ${res.status}`;
         }
         continue;
       }
 
-      if (pagePath === '/') {
+      if (expectIndexable) {
         if (isNoindex) {
           errors++;
           if (!firstOffender) {
-            firstOffender = `${pagePath}: homepage must NOT carry noindex, got robots="${robots}"`;
+            firstOffender = `${pagePath}: expected indexable (opted in), got robots="${robots}"`;
           }
         } else {
           indexableCount++;
@@ -220,21 +291,25 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
 
     if (errors === 0) {
       console.log(
-        `PASS — ${pagePaths.length}/${pagePaths.length} URLs verified, 0 errors ` +
-          `(1 indexable: /, ${noindexCount} noindex)`
+        `PASS — ${pages.length}/${pages.length} URLs verified, 0 errors ` +
+          `(${indexableCount} indexable, ${noindexCount} noindex)`
       );
     } else {
       console.log(
-        `FAIL — ${pagePaths.length - errors}/${pagePaths.length} URLs verified, ${errors} errors: ${firstOffender}`
+        `FAIL — ${pages.length - errors}/${pages.length} URLs verified, ${errors} errors: ${firstOffender}`
       );
     }
 
     expect(errors, `first offending record: ${firstOffender}`).toBe(0);
-    expect(indexableCount).toBe(1);
-    expect(noindexCount).toBe(pagePaths.length - 1);
+    expect(indexableCount).toBeGreaterThan(0);
+    expect(noindexCount).toBeGreaterThan(0);
+    expect(indexableCount).toBe(INDEXABLE_STATIC_PATHS.size + INDEXABLE_DYNAMIC_PATTERNS.size);
+    // Only the 404 fixture is expected noindex among the paths this loop
+    // fetches — every real static/dynamic route in the manifest is opted in.
+    expect(noindexCount).toBe(pages.length - indexableCount);
   });
 
-  it('sitemap-index.xml and every sitemap it lists resolve to exactly one URL: the homepage', async () => {
+  it('sitemap-index.xml and every sitemap it lists resolve to exactly the opted-in URL set, with no noindex page listed', async () => {
     const indexRes = await fetch(`${BASE_URL}/sitemap-index.xml`);
     expect(indexRes.status).toBe(200);
     const indexXml = await indexRes.text();
@@ -256,16 +331,53 @@ describe('dcs indexability — homepage indexable, everything else noindex', () 
       }
     }
 
+    // Built from the same opted-in sets as the crawl test above, plus every
+    // real content slug read live from `content/<dir>/*.mdx` — never
+    // hardcoded counts, so this stays correct as content changes.
+    const expectedPageLocs = new Set<string>();
     // app/sitemap.ts emits `url: baseUrl` for the homepage entry (no
     // trailing slash) — match that exactly rather than assuming one.
-    const expectedHomepageUrl = siteConfig.url;
+    for (const staticPath of INDEXABLE_STATIC_PATHS) {
+      expectedPageLocs.add(staticPath === '/' ? siteConfig.url : `${siteConfig.url}${staticPath}`);
+    }
+    for (const slug of TOPIC_ORDER) {
+      expectedPageLocs.add(`${siteConfig.url}/blog/category/${slug}`);
+    }
+    for (const slug of allSlugs('services')) {
+      expectedPageLocs.add(`${siteConfig.url}/services/${slug}`);
+    }
+    for (const slug of allSlugs('locations')) {
+      expectedPageLocs.add(`${siteConfig.url}/locations/${slug}`);
+    }
+    for (const slug of allSlugs('blog')) {
+      expectedPageLocs.add(`${siteConfig.url}/blog/${slug}`);
+    }
+    for (const slug of allSlugs('projects')) {
+      expectedPageLocs.add(`${siteConfig.url}/projects/${slug}`);
+    }
 
-    console.log(
-      allPageLocs.size === 1 && allPageLocs.has(expectedHomepageUrl)
-        ? `PASS — 1/1 sitemap URLs verified, 0 errors (only ${expectedHomepageUrl})`
-        : `FAIL — sitemap union has ${allPageLocs.size} URLs, expected exactly {${expectedHomepageUrl}}: ${JSON.stringify([...allPageLocs])}`
-    );
+    const missing = [...expectedPageLocs].filter((loc) => !allPageLocs.has(loc));
+    const unexpected = [...allPageLocs].filter((loc) => !expectedPageLocs.has(loc));
 
-    expect([...allPageLocs]).toEqual([expectedHomepageUrl]);
+    if (missing.length === 0 && unexpected.length === 0) {
+      console.log(
+        `PASS — ${allPageLocs.size}/${expectedPageLocs.size} sitemap URLs verified, 0 errors`
+      );
+    } else {
+      console.log(
+        `FAIL — ${expectedPageLocs.size - missing.length}/${expectedPageLocs.size} sitemap URLs verified, ` +
+          `${missing.length + unexpected.length} errors: ` +
+          `missing=${JSON.stringify(missing)} unexpected=${JSON.stringify(unexpected)}`
+      );
+    }
+
+    expect(
+      missing,
+      `URLs opted in but absent from the sitemap: ${JSON.stringify(missing)}`
+    ).toEqual([]);
+    expect(
+      unexpected,
+      `URLs in the sitemap that are not opted in (or are stale): ${JSON.stringify(unexpected)}`
+    ).toEqual([]);
   });
 });

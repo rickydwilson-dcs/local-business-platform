@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
   description: `View our portfolio of completed websites. See how we've helped tradespeople across ${siteConfig.serviceAreas.join(', ')} get more jobs online.`,
   keywords: ['portfolio', 'case studies', 'web design examples', 'tradesperson websites'],
+  robots: { index: true, follow: true },
   openGraph: {
     title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
     description: `View our portfolio of completed websites for local tradespeople.`,

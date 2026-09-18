@@ -41,6 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: frontmatter.seoTitle || `${frontmatter.title} | ${siteConfig.business.name}`,
     description: frontmatter.description,
     keywords: frontmatter.keywords,
+    robots: { index: true, follow: true },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
