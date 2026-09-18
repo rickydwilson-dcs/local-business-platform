@@ -543,8 +543,17 @@ h1 .dim{color:rgba(255,255,255,.44)}
 .row:hover .row__n,.row:hover .row__m{color:#fff}
 .row__n{font-weight:700;font-size:clamp(1.4rem,3.4vw,2.9rem);letter-spacing:-.032em}
 .row__m{font-size:14.5px;color:#5E5E68;text-align:right;font-weight:500}
+/* CONTRAST FIX 2026-09-18 — `opacity:.72` removed (was home-r9.css:322).
+   Tool-measured, not hand-calculated: at .72 the label composited to
+   rgb(139,139,146) on white = 3.38:1, against the 4.5:1 AA floor for normal
+   text (12px is not "large"). At full opacity it is #5E5E68 = 6.41:1.
+   The de-emphasis this opacity was carrying is already done three other ways
+   on the same element — 12px against `.row__m`'s 14.5px, uppercase, and .09em
+   tracking — so the hierarchy survives the change; only the failure goes.
+   Applied kit-wide: 47 instances across 6 pages, of which Agent G's scoped
+   `.work--loc` rule reached only 8. */
 .row__m em{font-style:normal;display:block;font-size:12px;letter-spacing:.09em;
-  text-transform:uppercase;opacity:.72;margin-top:3px}
+  text-transform:uppercase;margin-top:3px}
 
 
 /* ==========================================================================
@@ -900,6 +909,27 @@ h1 .dim{color:rgba(255,255,255,.44)}
   .svccard__t{font-size:clamp(1.7rem,3.6vw,2.9rem)}
   .lead{margin-top:14px}
   .quote--hero{font-size:clamp(1.6rem,4vw,3.4rem)}
+
+  /* MASTHEAD COMPRESSION 2026-09-18 — flagged three times before it was taken.
+     Measured at 1440x900 BEFORE: the masthead is not a uniform 78-81% as
+     reported; it tracks h1 line count. 1 line = 45% (pricing, contact),
+     2 lines = 57-68%, 3 lines = 79% (services-list, the loudest real page).
+     `.mast h1`'s `max-width:17ch` is in ch, so it scales with font-size and the
+     line COUNT does not change — height falls linearly, which makes this
+     predictable rather than a reflow lottery.
+
+     Base h1 is clamp(2.3rem,7vw,6.4rem) = 100.8px here. The block's own idiom
+     for display type is `.stack h2`, which compresses 6.2rem -> 3.5rem at the
+     cap. Applied literally to h1's 6.4rem cap that gives 3.6rem = 57.6px —
+     within 2px of the compressed `.stack h2` beside it, which would flatten the
+     page title into a section heading. So the cap is 4.4rem (70.4px), keeping
+     h1 at 1.26x the compressed section heading while still taking ~30% off. */
+  /* The MINIMUM stays at h1's own 2.3rem, not a reduced one: this block also
+     matches at 390x844 (844 < 1040), where the clamp floors out, so a lower min
+     would have quietly shrunk the mobile h1 from 36.8px to 33.6px — a change
+     nobody asked for on a viewport where the masthead is not the problem.
+     Only the vw coefficient and the cap move, so this is a desktop-only fix. */
+  .mast h1{font-size:clamp(2.3rem,5.4vw,4.4rem)}
 }
 
 /* home-r9.css:497-499 */
@@ -3930,7 +3960,11 @@ a.card__link:hover svg{transform:translateX(4px)}
    `.row:hover .row__n,.row:hover .row__m{color:inherit}` already neutralises
    the fill this label sits in.
    ========================================================================== */
-.work--loc .row__m em{opacity:1}
+/* SUPERSEDED 2026-09-18 — this scoped fix became kit-wide at `.row__m em`
+   (kit.css §12). Agent G flagged it as 'arguably a kit-wide fix rather than a
+   page one' and put the decision to a human; Ricky took it kit-wide. The rule
+   below is now a no-op and is kept only as the provenance of the change. */
+/* .work--loc .row__m em{opacity:1} */
 
 
 /* ==========================================================================
