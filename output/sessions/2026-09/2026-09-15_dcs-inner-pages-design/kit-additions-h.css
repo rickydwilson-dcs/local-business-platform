@@ -1,0 +1,458 @@
+/* ==========================================================================
+   kit-additions-h.css
+   PHASE 3b / AGENT H — the legal page template (/privacy-policy,
+   /cookie-policy, /terms-and-conditions)
+
+   Loaded AFTER kit.css. kit.css itself is NOT edited: three agents are
+   writing against the same file in parallel and Phase 4b reconciles the
+   three additions files by hand.
+
+   PROVENANCE RULE, unchanged: every value below is cited to kit.css,
+   home-r9.css, shared.css or a measurement taken in the browser. Anything
+   genuinely new is labelled INVENTED with the reason.
+
+   WHAT THIS PAGE NEEDED AND THE KIT DID NOT HAVE
+   ----------------------------------------------
+   Four things, and only four. Everything else on legal.html is kit:
+   `.bar`/`.menu`/`.burger`, `.crumb`, `.mast` + `.mast__meta`, `.sec`,
+   `.p--*`, `.eyeless`, `.res`, `.prose` (p / h2 / h3 / ul / ol / strong /
+   a / hr / code), `.svcs`/`.svc`, `.pagefoot` + `.footmap` + `.end__foot`,
+   `.btn`, `.hire`, `.twoup`, `.cscroll`.
+
+     H1  .legal              the two-column reading layout (rail + prose)
+     H2  .legal__rail        the table of contents
+     H3  .ltable             a table inside `.prose`
+     H4  responsive
+     H5  touch (hover:none)
+     H6  RIG — prototype only, DELETE AT PORT
+
+   THE ONE THING THAT DID *NOT* NEED NEW CSS AND IS WORTH RECORDING:
+   the article body is a FLAT `.prose` block with `id`s on the `h2`s, not a
+   stack of `<section id>` wrappers the way the React source writes it
+   (privacy-policy/page.tsx:97). `.prose>*+*` and `.prose>:first-child` are
+   CHILD selectors (kit.css:1444-1445). Wrapping each clause in a `<section>`
+   makes every paragraph a grandchild, so p->p spacing silently becomes 0,
+   and the three rules you then add to fix it out-specify `.prose h3`,
+   `.prose ul` and `.prose ol`'s own margins (0,2,0 beats 0,1,1) and collapse
+   those too. Flat markup keeps `.prose` behaving exactly as wave 1 rendered
+   and verified it. See notes-h.md for the port note.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   H1  .legal — THE TWO-COLUMN READING LAYOUT
+
+   The requirement: a sticky table of contents AND a reading column that sits
+   in exactly the same place it does on every other long-form page in the
+   set. Those two pull against each other, and the naive answer gets the
+   second one wrong.
+
+   `.cols` (kit.css:3174) is the kit's existing two-column page body, but it
+   is minmax(0,1.05fr) minmax(0,1fr) — two working columns of comparable
+   weight. A 200px nav rail beside a 74ch article is not that shape.
+
+   TWO TRACKS, CENTRED AS A PAIR — and the version before it is worth
+   recording, because it failed for a reason that is not obvious.
+
+   THE FIRST VERSION WAS THREE TRACKS: 1fr | 74ch | 1fr, with the rail in the
+   left track at justify-self:end. That is arithmetically identical to
+   `.measure{max-width:74ch;margin-inline:auto}` (kit.css:1410), so the
+   article landed pixel-identical to service-detail.html — the rail sat in
+   space that was empty margin anyway. It rendered beautifully at 1440.
+
+   IT OVERFLOWS THE GUTTER BELOW ~1286px, and silently. A fixed-width 200px
+   item inside a `minmax(0,1fr)` track cannot shrink when the track does; it
+   just sticks out of it, leftward, and `html{overflow-x:clip}`
+   (home-r9.css:29) then hides the evidence rather than producing a
+   scrollbar. Measured at 1240: rail left edge 34px, the section's own gutter
+   54.6px — the nav sitting 20px outside the page's margin with nothing
+   flagging it. At 1300 it clears by 4.8px, which is not clearance, it is
+   luck. The real threshold works out at 1286px once you use the article's
+   MEASURED width (678px at 1440, not the 629px a 74ch estimate suggests),
+   and a breakpoint that tight is a bug waiting for a font to change.
+
+   So: two tracks, `200px` and `minmax(0,74ch)`, centred with
+   justify-content. `minmax(0,74ch)` is the whole fix — the article track
+   SHRINKS when the pair no longer fits, so the layout narrows the measure
+   instead of pushing the rail out of the page. There is no derived
+   breakpoint to get wrong: it holds all the way down to the kit's own 900px
+   collapse (measured at 901px: article 582px, about 63ch, still a
+   comfortable measure). Every laptop width keeps the sticky rail, which the
+   1286px version would have lost.
+
+   WHAT IT COSTS, STATED PLAINLY: the article is no longer dead-centre. At
+   1440 its centre sits about 124px right of where `.measure` puts it on
+   service-detail.html, because the rail and its gap are part of the centred
+   block. Centring the PAIR rather than left-anchoring it (which is what the
+   React source does — `lg:grid-cols-[220px_1fr]`,
+   privacy-policy/page.tsx:90) at least makes the margins symmetric, so it
+   reads as a deliberate two-column document rather than as a column that
+   has drifted. Flagged in notes-h.md §3 as the one thing to look at when
+   this page is reviewed beside service-detail.html.
+
+   gap: clamp(22px,3.4vw,58px) — `.price`'s two-column gap (home-r9.css:393),
+   the same one `.footmap` (kit.css:1604) and `.twoup` (kit.css:2443) use.
+   ========================================================================== */
+.legal{display:grid;grid-template-columns:200px minmax(0,74ch);
+  gap:clamp(22px,3.4vw,58px);justify-content:center}
+.legal__body{min-width:0}
+.legal__rail{align-self:start;min-width:0}
+/* STICKY. align-self:start is load-bearing, not tidying: a grid item's
+   containing block is its GRID AREA, which spans the full row height, but
+   with the default align-self:stretch the item's own box is ALSO the full
+   row height — and a sticky element whose box fills its containing block has
+   nowhere to travel, so it never pins. Measured both ways (notes-h.md):
+   stretch gives 0px of pin, start gives 4,806px at 1440.
+
+   top: clamp(90px,12vh,124px) is `.crumb`'s own "clear the fixed bar"
+   clearance (kit.css:1306), reused rather than a new number — and
+   explicitly NOT `.detail`'s top:120px (kit.css:732), which hardcodes an
+   offset for the 81px homepage bar.
+
+   MEASURED, because the kit's own figure is wrong here: phase2-notes.md §10
+   records the inner-page bar at 74.5px at 1440, and it measures 81px on this
+   page at 1440 (65px at 390). The bar's padding is width-driven —
+   clamp(11px,1.5vw,17px), home-r9.css:44 — so 81px is what it is at 1440 at
+   every viewport HEIGHT. This clamp's 90px floor clears it at all of them. */
+.legal__rail{position:sticky;top:clamp(90px,12vh,124px)}
+/* The rail can be taller than the viewport minus its offset — Terms has nine
+   entries. Without this the last two entries are unreachable once it pins. */
+.legal__rail{max-height:calc(100lvh - clamp(90px,12vh,124px) - 24px);
+  overflow-y:auto;overscroll-behavior:contain}
+
+/* `scroll-margin-top` on the heading, NOT `scroll-padding-top` on `html`.
+   html{scroll-padding-top:0} is load-bearing (design-kit.md §9.11: 84px
+   landed a jumped-to section's top below the bar's ground probe, so the bar
+   kept the previous section's colour) and must not be touched by a page.
+   scroll-margin-top is per-target, so it fixes the landing position without
+   going anywhere near the probe. This is the React source's own decision
+   (`scroll-mt-24`, privacy-policy/page.tsx:97) with a cited value instead of
+   a Tailwind step.
+
+   FOUND BY RENDERING — AND THE FIRST VALUE WAS WRONG. The obvious citation
+   is `.svcstack`'s sticky clearance clamp(76px,10vh,94px) (home-r9.css:337),
+   and at 1440x900 it resolves to 90px and lands every heading 9px clear of
+   the bar. But the bar's height is WIDTH-driven — its padding is
+   clamp(11px,1.5vw,17px) (home-r9.css:44) — and it measures 81px at 1440 at
+   EVERY viewport height. So at 1440x700, which is 10vh = 70px, the clamp
+   floors at 76px and the jumped-to heading lands FIVE PIXELS BEHIND THE BAR.
+   Measured: headingTop 76, bar height 81. 1440x700 is not an edge case — it
+   is the normal-laptop case the kit's own max-height:1040px layer exists for
+   (design-kit.md §7 measures a 1440x900 laptop at a 757px viewport).
+
+   So: clamp(90px,12vh,124px), `.crumb`'s own clearance (kit.css:1306) and
+   the same value the rail's sticky top uses. Its 90px floor clears the 81px
+   bar at every viewport height, not just tall ones. Re-measured at 1440x900,
+   1440x700 and 390x844: every heading lands clear. One number, two uses,
+   already in the kit. */
+.legal__body h2[id],.legal__body h3[id]{scroll-margin-top:clamp(90px,12vh,124px)}
+
+
+/* ==========================================================================
+   H2  .legal__rail / .legal__toc — THE TABLE OF CONTENTS
+
+   RESTYLED, NOT REBUILT. components/legal/legal-toc.tsx already exists and
+   its anatomy is kept intact so the port is a className swap:
+
+     legal-toc.tsx                              here
+     ------------------------------------------ ---------------------------
+     <nav aria-label="Table of contents">       same
+     uppercase tracked "On this page" label     `.eyeless` (kit.css:126)
+     <ol> of <li><a href="#id">                 same
+     border-l-2 border-transparent, pl-3        border-left 2px, pad-left 14px
+     hover:text-brand-primary + border          hover shift + [aria-current]
+     lg:sticky lg:top-28                        H1's sticky block above
+
+   THE ONE ADDITION to the component's anatomy is the ordinal. Every clause
+   in all three documents is already numbered in its own heading ("1. Data
+   controller information"), so a TOC without the numbers makes the reader
+   map labels onto numbers by hand. A CSS counter means the numbers cannot
+   drift from the list. The number idiom is `.step__k`'s — weight 800 in the
+   accent (home-r9.css:380) — at running size, exactly as `.prose ol
+   li::before` already does it (kit.css:1497-1498).
+
+   TYPE. 14px / 500 / opacity .72 is `.bar nav a` verbatim (home-r9.css:89).
+   That is this design's one existing navigation-link spec, and a TOC is a
+   navigation link list. It is below the 16px prose floor deliberately: the
+   floor is doctrine for PROSE (design-kit.md §7) and `.bar nav a`,
+   `.footmap a` (15px) and `.crumb` (13.5px) are all navigation and all
+   below it.
+
+   ACCENT. var(--acc) (kit.css:1770) rather than a hardcoded magenta, so the
+   accent-swap rule (design-kit.md §1.4 — aqua on ink/magenta/navy, magenta
+   on paper/white/aqua) applies for free if this rail is ever put on a dark
+   ground. #D6006B on #fff measures 5.4:1, which clears 4.5:1 at 14px.
+
+   HOVER is the padding shift, the design's own idiom for a list row:
+   `.tier` 12px (home-r9.css:399), `.svc` 14px (home-r9.css:365), `.qa
+   summary` 12px (home-r9.css:438). 14px -> 26px is a 12px shift on
+   `.tier`'s number. The curve is cubic-bezier(.16,1,.3,1), the primary
+   curve, at `.tier`'s own .35s (home-r9.css:399).
+
+   CURRENT is a different move from hover on purpose — a solid accent left
+   rule plus full opacity, which is `[aria-current]`'s existing treatment
+   everywhere else in the kit (`.bar nav a[aria-current]` shared.css:52,
+   `.footmap a[aria-current]` kit.css:1620, `.crumb [aria-current]`
+   kit.css:1314). Set by the optional scroll-spy in legal.html; the rail is
+   complete and correct with that script deleted.
+
+   INVENTED: the 200px rail width. Measured, not picked — it is the narrowest
+   width that holds the longest label in the three documents ("Ownership and
+   intellectual property", Terms §4) on three lines at 14px Archivo without
+   hyphenation. The React component's 220px was the starting point.
+   ========================================================================== */
+.legal__toc{list-style:none;counter-reset:lt;display:grid}
+.legal__toc li{counter-increment:lt;min-width:0}
+.legal__toc a{display:flex;gap:9px;align-items:baseline;
+  min-height:44px;padding:11px 0 11px 14px;
+  border-left:2px solid transparent;
+  font-size:14px;font-weight:500;line-height:1.35;opacity:.72;
+  transition:padding-left .35s cubic-bezier(.16,1,.3,1),
+             opacity .3s ease,color .3s ease,border-color .3s ease}
+/* gap 9px is `.detail__l`'s icon gap (home-r9.css:424) — the same distance
+   this design already puts between a list marker and its text. */
+.legal__toc a::before{content:counter(lt) ".";flex:none;
+  font-weight:800;font-size:13px;color:var(--acc)}
+.legal__toc a:hover{opacity:1;padding-left:26px}
+.legal__toc a[aria-current]{opacity:1;color:var(--acc);border-left-color:var(--acc)}
+.legal__toc a[aria-current]::before{opacity:1}
+
+
+/* ==========================================================================
+   H3  .ltable — A TABLE INSIDE `.prose`
+
+   design-kit.md G5 lists what `.prose` was missing and tables are not even
+   on the list — the homepage has no running prose, so it has no table in
+   prose either. But four of the three documents' blocks are irreducibly
+   tabular: the retention-period table (Privacy §6) and the three cookie
+   tables (Cookie §3). Those are data, not prose; re-marking them as
+   paragraphs would be the rewrite this brief forbids.
+
+   `.ctable` (kit.css:2519) is NOT reused, and the reason is one number:
+   min-width:780px, which kit.css:2510-2515 records as MEASURED for five
+   pricing columns whose widest cell is "From GBP 2,995" at nowrap. Inside a
+   629px reading column a 780px minimum scrolls horizontally on every
+   viewport, forever, for a two-column table of "Quote enquiries / 2 years".
+   Same job, different measurement.
+
+   TRAP — COMMAS. `.ltable` sets NO font-variant-numeric and NO font-family;
+   figures inherit Archivo from <body> via --f. Never add tabular-nums here
+   and never give this table a mono face: the comma takes a full digit
+   advance and GBP 1,995 renders as "1 , 995" (design-kit.md §9.1,
+   pricing.tsx:21-25). Nothing currently in these tables carries a comma —
+   the durations are "2 years", "90 days", "Session" — but the Terms pricing
+   figures (GBP 1,495 / GBP 2,995) sit two sections away in the same `.prose`
+   block, and the next person to tabulate them inherits this rule.
+
+   Values, all existing:
+     cell padding vert   clamp(13px,2vh,21px)   `.qa summary` (home-r9.css:437)
+     cell padding horiz  14px                   `.tier`'s gap (home-r9.css:707)
+     rule                rgba(14,14,18,.14)     `.row`/`.work` (home-r9.css:313)
+     head rule           rgba(14,14,18,.16)     `.tiers` (home-r9.css:394)
+     column head         12.5px/.11em/700/upper/.6   `.eyeless` (kit.css:126)
+     body cell           15.5px / 1.5           `.detail__p` (home-r9.css:423)
+     cell opacity        .86                    `.prose p` (kit.css:1446)
+     dark rules          rgba(255,255,255,.22)  `.qa` (home-r9.css:432)
+
+   The column head takes `.eyeless`'s SPEC rather than requiring the class in
+   the markup — `.ctable` chose the other way round (kit.css:2501) because
+   its row labels are in <th> cells an author writes anyway. A <thead> is
+   generated from the data at port time, so the rule belongs in CSS.
+
+   min-width on `.ltable--wide` only. 420px is measured: the three-column
+   cookie table's widest single cell is "Google Analytics - distinguishes
+   users" and below 420px it wraps to four lines while the duration column
+   wraps "90 days" in two. The two-column retention table has no minimum
+   because it wraps legibly at 350px (390 minus two --pads). Root CLAUDE.md's
+   rule: a table may exceed the viewport only inside its own overflow-x:auto
+   container, which is `.cscroll` (kit.css:2517), already in the kit.
+   ========================================================================== */
+.ltable{width:100%;border-collapse:collapse;text-align:left}
+/* FOUND BY RENDERING. The Cookie policy stacks THREE of these with identical
+   headers, and with the default `table-layout:auto` each one sizes its own
+   columns to its own content — so at 1440 the "Purpose" column started at
+   719px in the first table and 624px in the second, three tables' worth of
+   headers stepping in and out. Nothing is technically wrong and it reads as
+   sloppy. `table-layout:fixed` plus two widths locks all three to one grid.
+   INVENTED, and measured rather than picked — twice, because the first
+   numbers were 2px out. `cookie_consent` renders 132px wide (it is the
+   longest cookie name in the document and `.ltable code` sets nowrap, so it
+   cannot break). 32% of a 420px minimum gives a 134px cell, which is 120px
+   of CONTENT box once the cell's own 14px padding-right is taken off — so
+   the name overran its column into the gutter and left 2px between it and
+   the Purpose text. 35% of 440px gives 154px, i.e. 140px of content and 8px
+   of real clearance. 18% is 79px, enough for "90 days" and "Session" on one
+   line. Purpose takes the remaining 47%. */
+.ltable--wide{min-width:440px;table-layout:fixed}
+.ltable--wide thead th:nth-child(1){width:35%}
+.ltable--wide thead th:nth-child(3){width:18%}
+.ltable th,.ltable td{padding:clamp(13px,2vh,21px) 14px clamp(13px,2vh,21px) 0;
+  vertical-align:top;font-size:15.5px;line-height:1.5;
+  border-bottom:1px solid rgba(14,14,18,.14)}
+.ltable th:last-child,.ltable td:last-child{padding-right:0}
+.ltable thead th{font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;
+  font-weight:700;opacity:.6;line-height:1.3;
+  border-bottom:1px solid rgba(14,14,18,.16)}
+.ltable tbody th{font-weight:700}
+.ltable td{opacity:.86}
+/* `.cscroll` carries its own margin-top (kit.css:2517); a second one on the
+   table would double the distance. `.prose>*+*` gives the wrapper 16px and
+   the block reads as part of the paragraph it follows, which is right — the
+   table IS the sentence's object ("Retention periods vary based on data
+   type:"). */
+.cscroll .ltable{margin-top:0}
+.prose .cscroll{margin-top:clamp(28px,4vh,44px)}
+/* every ground, as `.prose` itself is (kit.css:1440-1442) */
+.p--ink .ltable th,.p--ink .ltable td,
+.p--navy .ltable th,.p--navy .ltable td,
+.p--magenta .ltable th,.p--magenta .ltable td{border-bottom-color:rgba(255,255,255,.22)}
+.p--ink .ltable thead th,.p--navy .ltable thead th,
+.p--magenta .ltable thead th{border-bottom-color:rgba(255,255,255,.28)}
+
+/* A cookie name is `.prose code` (kit.css:1557), the design's only mono —
+   safe here because no cookie name contains a comma. It must not wrap
+   mid-token, and `_ga_*` in a 110px column will try. */
+.ltable code{white-space:nowrap}
+
+/* `.mast__meta` is reused inside `.prose` for the data-controller block
+   (Privacy §1) — the stacked value-over-label item is exactly that block's
+   shape, and `.svcgrid` already reuses it the same way (kit.css:2279). Two
+   adjustments it needs in running prose:
+   1. its margin-top is the masthead's; in prose the distance is the
+      paragraph rhythm above it. `.prose>*+*` supplies 16px, so zero it.
+   2. the business email is one 36-character unbreakable token. kit.css:1609
+      records the measurement: four such links pushed documentElement
+      .scrollWidth to 453 against innerWidth 390, which html{overflow-x:clip}
+      then silently TRUNCATES. Same fix, same reason. */
+.prose .mast__meta{margin-top:clamp(28px,4vh,44px)}
+.prose .mast__meta a{overflow-wrap:anywhere;color:inherit;border-bottom:0}
+.prose .mast__meta b{font-weight:800}
+
+
+/* ==========================================================================
+   H4  RESPONSIVE
+
+   900px — the kit's OWN collapse breakpoint, the one where `.row`, `.svc`,
+   `.price`, `.cards--2` and `.cards--3` all go to a single column
+   (kit.css:919-924, home-r9.css:511-523). Not a number of mine. Below it the
+   rail is in-flow above the article, sized and centred exactly like the
+   article so the two read as one column. It keeps the numbers, the 44px
+   targets and the accent; it loses the sticky and the hover shift (a padding
+   shift inside a full-width in-flow block reads as a wobble, not as an
+   affordance).
+
+   A collapsed <details> was considered and rejected. Getting one element to
+   be an always-open rail above 900px and a disclosure below it needs either
+   duplicate markup for the same nine links (two <nav>s, one wrong for a
+   screen reader at any given width) or an author `display:block` override of
+   the UA's closed-<details> machinery, which is a hack this prototype cannot
+   test across browsers. Nine visible entries at the head of a legal document
+   is not a failure state — it is the thing the reader came for. Measured
+   height at 390px: 478px including the label and rules. Recorded in
+   notes-h.md as a real cost, not hidden.
+
+   Values: the rules above and below are `.row`'s rgba(14,14,18,.14)
+   (home-r9.css:313). The distance below is `.cards--2`'s
+   clamp(40px,6vh,72px) (home-r9.css:168) — the kit's own "next major block"
+   gap. 15px / opacity .76 is `.footmap a`'s (kit.css:1617), one step up from
+   14px because in-flow at full width it is body-adjacent, not chrome.
+   ========================================================================== */
+@media (max-width:900px){
+  .legal{display:block}
+  /* FOUND BY RENDERING, and kept as a reset even though the current H1 no
+     longer sets `justify-self`: Chrome now applies the box-alignment
+     properties in BLOCK layout, not only in flex and grid. An earlier draft
+     carried `justify-self:end` on the rail for the three-track layout, and
+     once `.legal` became `display:block` here that declaration made the nav
+     shrink-to-fit and sit against the end edge — `width:auto` did not fill,
+     it collapsed to the longest TOC entry. Measured at 390: rail 217.8px
+     inside a 341px column, right-aligned, with the article beneath it at the
+     full 341. It presents as a width bug and is an alignment one, and
+     `width:100%` "fixes" the symptom while leaving the cause in place.
+     Worth knowing for any pattern in this kit that sets justify-self or
+     align-self on a grid item and then collapses the grid at a breakpoint. */
+  .legal__rail{position:static;justify-self:auto;align-self:auto;
+    width:auto;max-height:none;overflow:visible;
+    max-width:74ch;margin:0 auto clamp(40px,6vh,72px);
+    padding-top:clamp(20px,3vh,28px);padding-bottom:clamp(20px,3vh,28px);
+    border-top:1px solid rgba(14,14,18,.14);
+    border-bottom:1px solid rgba(14,14,18,.14)}
+  .legal__body{max-width:74ch;margin-inline:auto}
+  .legal__toc a{font-size:15px;opacity:.76;padding-left:12px}
+  .legal__toc a:hover{padding-left:12px}
+  /* on a dark ground the in-flow rail's rules swap with everything else */
+  .p--ink .legal__rail,.p--navy .legal__rail,.p--magenta .legal__rail{
+    border-top-color:rgba(255,255,255,.22);border-bottom-color:rgba(255,255,255,.22)}
+
+  /* 16px is the design's smallest horizontal cell padding at this width;
+     `.qa__a p` uses 4px and `.ltable`'s 14px is already close. Nudged so a
+     three-column table does not butt its columns together once `.cscroll`
+     is scrolling it. */
+  .ltable th,.ltable td{padding-right:16px}
+  .ltable th:last-child,.ltable td:last-child{padding-right:0}
+  /* `.mast__meta{gap:22px}` is already set at this width (kit.css:1679); the
+     in-prose copy needs its own row gap too or four stacked facts touch. */
+  .prose .mast__meta{gap:22px}
+}
+
+
+/* ==========================================================================
+   H5  TOUCH (hover:none)
+
+   kit.css §24 / §35's rule, which is not optional tidying: on touch a hover
+   fires on tap and LATCHES until you tap elsewhere, so a tapped TOC entry
+   would keep its 12px shift and its accent for the rest of the visit — and
+   on a TOC that reads as "you are here", which would then be wrong.
+   ========================================================================== */
+@media (hover:none){
+  .legal__toc a:hover{opacity:.72;padding-left:14px;color:inherit}
+  .legal__toc a[aria-current]{opacity:1;color:var(--acc);border-left-color:var(--acc)}
+}
+@media (hover:none) and (max-width:900px){
+  .legal__toc a:hover{opacity:.76;padding-left:12px}
+}
+
+
+/* ==========================================================================
+   H6  RIG — PROTOTYPE ONLY. DELETE AT PORT, WITH ITS MARKUP.
+
+   On the real site these are three separate routes. This one file carries
+   all three bodies so the template can be reviewed under all three without
+   three near-identical files drifting apart, and the switcher below is how
+   you flip between them. It is NOT part of the design.
+
+   Everything here is marked `[data-rig]` so it greps in one pass. Agent D's
+   `contact.html?rig` demo rig was handled the same way and Phase 4 ruled it
+   gets deleted in Phase 5 (session.md §4a #2).
+
+   It is fixed to the bottom of the viewport rather than placed in the flow
+   so a reviewer can switch documents from any scroll position without
+   losing their place in the page. It is a direct child of <body>: never
+   inside an ancestor carrying backdrop-filter or transform, either of which
+   becomes the containing block for position:fixed (design-kit.md §9.5).
+
+   Centred with left/right/margin-inline and NOT with translateX(-50%) —
+   root CLAUDE.md's rule: a transform establishes a containing block for
+   position:fixed descendants on its own, with no backdrop-filter present.
+   The rig has no fixed descendants today, but the fix costs one line and the
+   trap is the one that traps mobile nav overlays.
+   ========================================================================== */
+[data-rig]{position:fixed;z-index:80;
+  left:0;right:0;margin-inline:auto;width:max-content;
+  bottom:calc(14px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center;
+  max-width:calc(100vw - 24px);
+  padding:5px 5px 5px 14px;border-radius:100px;
+  background:var(--ink);color:#fff;
+  box-shadow:0 18px 40px -20px rgba(14,14,18,.7)}
+[data-rig] b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:700;opacity:.5;padding-right:6px}
+[data-rig] button{font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  border:0;border-radius:100px;padding:9px 15px;
+  background:none;color:#fff;opacity:.55}
+[data-rig] button[aria-pressed="true"]{background:var(--aqua);color:var(--ink);opacity:1}
+@media (max-width:520px){
+  [data-rig] b{display:none}
+  [data-rig]{padding-left:5px}
+  [data-rig] button{padding:9px 12px;font-size:13px}
+}

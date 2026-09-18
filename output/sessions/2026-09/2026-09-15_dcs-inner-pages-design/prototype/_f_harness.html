@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Agent F harness — 1440 + 390</title>
+<!--
+  MEASUREMENT HARNESS, NOT A PAGE. Prefixed _ like _a_harness.html,
+  _d_harness.html and _harness-b*.html from wave 1. Delete at port time.
+
+  WHY IT EXISTS. `resize_window` is a no-op in this environment — the same
+  finding design-kit.md §14 recorded in Phase 1. The top-level viewport is
+  locked at 1338 x 714 whatever is requested, so a width-based media query can
+  only be exercised by giving the document a container of a known width. An
+  iframe does that genuinely: `innerWidth` inside it IS the iframe's width, so
+  @media (max-width:900px) and the whole authored mobile layer really fire.
+
+  The CSS scale on the 1440 frame is visual only — `transform: scale()` does
+  not change layout, so the inner document still computes at 1440 and every
+  measurement taken through contentWindow is a real 1440 measurement.
+
+  CAVEAT, stated rather than glossed: a height-based query inside an iframe
+  answers to the IFRAME's height, not the window's. That is fine here — the
+  real 714px window already matches max-height:1040px and so does a 900px
+  frame — but it is not a way to test the tall-screen case.
+
+  Usage:  _f_harness.html?src=blog-list.html
+-->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:14px/1.5 system-ui,sans-serif;background:#ECEBE9;color:#0E0E12;padding:14px}
+h1{font-size:15px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.wrap{display:flex;gap:18px;align-items:flex-start}
+.col{flex:none}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  opacity:.55;margin-bottom:6px}
+.shell{border:1px solid rgba(14,14,18,.2);overflow:hidden;background:#fff}
+iframe{border:0;display:block;transform-origin:0 0}
+</style>
+</head>
+<body>
+<h1 id="t">Agent F harness</h1>
+<div class="wrap">
+  <div class="col">
+    <div class="lbl">1440 &times; 900 (shown at 62%)</div>
+    <div class="shell" id="s1"><iframe id="d" width="1440" height="900" style="transform:scale(.62)"></iframe></div>
+  </div>
+  <div class="col">
+    <div class="lbl">390 &times; 844</div>
+    <div class="shell" id="s2"><iframe id="m" width="390" height="844"></iframe></div>
+  </div>
+</div>
+<script>
+var src = new URLSearchParams(location.search).get('src') || 'blog-list.html';
+document.getElementById('t').textContent = 'Agent F harness — ' + src;
+document.getElementById('d').src = src;
+document.getElementById('m').src = src;
+/* the shells have to be sized to the SCALED box, or the 1440 frame leaves
+   900px of dead space under it */
+document.getElementById('s1').style.width  = Math.round(1440 * .62) + 'px';
+document.getElementById('s1').style.height = Math.round(900 * .62) + 'px';
+document.getElementById('s2').style.width  = '390px';
+document.getElementById('s2').style.height = '844px';
+</script>
+</body>
+</html>

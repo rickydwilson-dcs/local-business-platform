@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Agent E harness — about.html at 1440 and 390</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#2a2a30;color:#fff;font:13px/1.4 system-ui,sans-serif;padding:14px;display:flex;gap:20px;align-items:flex-start}
+  .col{display:grid;gap:8px}
+  h2{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;font-weight:700}
+  /* Width media queries respond to the IFRAME's own width — which is the whole
+     point of the harness, because resize_window is a no-op in this browser.
+     A CSS transform on the iframe ELEMENT does not affect coordinates inside
+     the iframe DOCUMENT, so measurements taken through contentWindow are true
+     1440px / 390px values despite the scaling used for capture. */
+  iframe{border:0;background:#fff;display:block}
+  #wide{width:1440px;height:900px;transform:scale(.46);transform-origin:0 0}
+  #wideWrap{width:663px;height:414px;overflow:hidden;outline:1px solid #555}
+  #narrow{width:390px;height:844px;outline:1px solid #555}
+</style>
+</head>
+<body>
+  <div class="col">
+    <h2>1440 &times; 900 (scaled .46 for capture)</h2>
+    <div id="wideWrap"><iframe id="wide" src="about.html"></iframe></div>
+  </div>
+  <div class="col">
+    <h2>390 &times; 844</h2>
+    <iframe id="narrow" src="about.html"></iframe>
+  </div>
+</body>
+</html>

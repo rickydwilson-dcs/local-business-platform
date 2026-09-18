@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Agent G harness — 1440 + 390</title>
+<!--
+  AGENT G HARNESS. resize_window is a no-op in this browser (notes-b §5,
+  notes-e §7), so both widths are exercised as iframes: width media queries
+  respond to the iframe's own width, so the layouts are genuinely rendered.
+  The .5 scale is a CSS transform on the iframe ELEMENT — it does not affect
+  coordinates or measurements inside the iframe DOCUMENT, so every number read
+  out of frame A is a true 1440px value.
+  ?src= picks the page. Default is my own locations-list.
+-->
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#22222a;font:13px/1.4 system-ui,sans-serif;color:#fff;padding:10px;display:flex;gap:14px;align-items:flex-start}
+  .wrap{flex:none}
+  h2{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:6px}
+  #a{width:1440px;height:900px;border:0;background:#fff;transform:scale(.5);transform-origin:0 0}
+  .aBox{width:720px;height:450px;overflow:hidden}
+  #b{width:390px;height:844px;border:0;background:#fff}
+</style>
+</head>
+<body>
+<div class="wrap"><h2>A — 1440 x 900 (scaled .5 for capture only)</h2><div class="aBox"><iframe id="a"></iframe></div></div>
+<div class="wrap"><h2>B — 390 x 844</h2><iframe id="b"></iframe></div>
+<script>
+  var src = new URLSearchParams(location.search).get('src') || 'locations-list.html';
+  document.getElementById('a').src = src;
+  document.getElementById('b').src = src;
+  /* The .in latch never fires in this harness: document.hidden is true while
+     the JS tool runs, so the IntersectionObserver is throttled and every .res
+     heading would stay in its muted rest colour (notes-b §7, notes-e §6).
+     Latch by hand on load so a capture shows the resolved state. */
+  function latch(f){
+    try{
+      var d = f.contentDocument;
+      d.querySelectorAll('.sec,.mast,.pagefoot,.work,.qa,.locmap').forEach(function(el){el.classList.add('in');});
+    }catch(e){}
+  }
+  ['a','b'].forEach(function(id){
+    var f = document.getElementById(id);
+    f.addEventListener('load', function(){ latch(f); });
+  });
+</script>
+</body>
+</html>

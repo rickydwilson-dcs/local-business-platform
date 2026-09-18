@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Colossus Scaffolding — new website from scratch | Digital Consulting Services</title>
+<meta name="description" content="A 30-page website for an East Sussex scaffolding contractor with no online presence at all — built to win commercial contracts as well as rank locally.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 3 / AGENT A — /projects/[slug]  (the case study)
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  CHROME is copied from prototype/service-detail.html — the Phase 2 chrome the
+  client signed off, byte-identical except for which link carries aria-current.
+
+  CONTENT IS REAL: sites/dcs/content/projects/colossus-scaffolding.mdx —
+  frontmatter, the four `outcomes:` bullets, and the full Challenge / Solution /
+  Results body. Chosen because it is the one case study with both a complete
+  narrative and a real media asset.
+
+  ONE EDIT TO THE SOURCE TEXT: first-person plural -> singular, the same
+  correction Phase 2 made to web-design.mdx. Substance, claims and figures are
+  untouched. See the note above the body.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<!-- kit.css is NOT edited by this agent. Additions load after it. -->
+<link rel="stylesheet" href="../kit.css">
+<!-- kit-additions-a.css merged into kit.css by Phase 4; link removed 2026-09-18.
+     The Phase 4 note claimed no page still linked an additions sheet — two did, this
+     and project-detail/contact. Verified before removal: every selector in the file is
+     present in merged kit.css, and disabling the sheet changed 0 of 294/246 elements
+     across 34 computed properties. -->
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER. .menu is a SIBLING of .bar, never a descendant — an ancestor
+     with backdrop-filter or transform becomes the containing block for
+     position:fixed and traps the overlay in the bar's own box.
+     ===================================================================== -->
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="projects-list.html" aria-current="page">Work</a>
+    <a href="#">Services</a>
+    <a href="#">Pricing</a>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="projects-list.html" aria-current="page"><span>Work</span></a>
+    <a href="#"><span>Services</span></a>
+    <a href="#"><span>Pricing</span></a>
+    <a href="#"><span>Blog</span></a>
+    <a href="#"><span>About</span></a>
+    <a href="#"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD + MEDIA — ink ======================
+     Round 1 spread this across three page-local blocks: .crumb, .chero /
+     .chero__head, and a separate white .facts band
+     (project-post.html:12-24, 66-89). Phase 2 built .crumb and .mast to
+     replace exactly that, and .mast__meta is explicitly the reconciliation of
+     round 1's .credentials container with its .facts item (kit.css:1293-1296).
+     So the facts band is no longer a band — it is the masthead's own meta row,
+     on the masthead's own ground, and the page loses a boundary it never
+     needed.
+     ================================================================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><a href="projects-list.html">Work</a></li>
+      <li><span aria-current="page">Colossus Scaffolding</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Case study &middot; Trades &amp; Contractors</p>
+  <h1>Colossus Scaffolding</h1>
+  <p class="lead">A 30-page website for an East Sussex scaffolding contractor who had no online presence at
+    all &mdash; built to win commercial contracts as well as rank locally. Live since September 2024.</p>
+
+  <div class="mast__meta">
+    <div><b>Scaffolding</b><span>Sector</span></div>
+    <div><b>East Sussex</b><span>Where they work</span></div>
+    <div><b>September 2024</b><span>Launched</span></div>
+    <div><b>30 pages</b><span>Site size</span></div>
+    <div><b>New build</b><span>Type of job</span></div>
+  </div>
+
+  <!--
+    HONESTY — READ BEFORE CHANGING THE CAPTION.
+    This is the real R2 asset the live homepage already uses for this case
+    study (lib/home-assets.ts, work-colossus.video / .poster). I fetched and
+    looked at it: it is scaffolding poles across the front of a brick terrace.
+    It is NOT a screen recording of the website, which is what the 2026-08-26
+    brief describes all three of these assets as (brief.md:37-40). Phase 2 made
+    and corrected the same mistake on the same asset (phase2-notes.md §3).
+    The alt text and the credit line both say what the footage actually shows
+    and explicitly say it is not the site. A project with no media at all takes
+    `.slot` here instead — never a fabricated screenshot.
+
+    preload="none" and no autoplay: a <video autoPlay> fetches real data on
+    mount regardless of preload (design-kit.md §9.7). This is a 1.4MB asset
+    above the fold, so it plays on click or on hover, not on load.
+  -->
+  <div class="mast__media">
+    <video muted loop playsinline controls preload="none"
+           poster="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.jpg"
+           aria-label="Scaffolding poles erected across the front of a brick terrace with white sash windows.">
+      <source src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="card__note">Pictured: scaffolding erected across the front of a brick terrace. Sector footage &mdash;
+    not a capture of the website. A screen recording of the site has not been taken yet.</p>
+</header>
+
+<!-- ===== 2. THE NARRATIVE — white ====================================
+     .prose is Phase 2's, and it is the shared long-form treatment: /blog/[slug]
+     inherits it in wave 2. .measure carries the 74ch column; the gutter stays
+     on .sec, which is Phase 2's one structural fix to round 1's .body (the
+     border-box reset put var(--pad) INSIDE the 74ch, so the real measure was
+     ~60ch at 1380px and ~40ch at the cap — kit.css:1382-1387).
+
+     VOICE: the source MDX is first-person plural ("we built", "we created").
+     Session ground rule 8 and design-kit.md §10 make the singular correct —
+     the homepage says "looked after by me" (hero.tsx:32). Same substance, same
+     claims, same figures; "we" -> "I" throughout. This is the same correction
+     Phase 2 made to web-design.mdx and flagged rather than made silently.
+     The MDX's own `# Colossus Scaffolding` h1 is dropped: the masthead is the
+     h1, and two would be a document-outline bug rather than a design choice.
+     ================================================================== -->
+<section class="sec p--white" data-ground="white">
+  <article class="prose measure">
+
+    <p class="lead">Colossus Scaffolding is an East Sussex scaffolding contractor with a solid reputation built
+      entirely through word of mouth. Before coming to me they had no website at all &mdash; not even a basic
+      holding page. Work came in through referrals and repeat customers, which was fine, but it created a
+      ceiling.</p>
+
+    <h2 class="res">The Challenge</h2>
+
+    <p>The team at Colossus were excellent at their trade. The problem was perception. When a commercial client
+      searches for a scaffolding contractor in East Sussex, they&rsquo;re making a judgement call based on what
+      they find online. A well-presented site signals that a company is established, insured, and takes its
+      business seriously. No website signals the opposite, regardless of how good the actual work is.</p>
+
+    <p>Beyond winning commercial contracts, there was also the long-term opportunity of organic search traffic.
+      Dozens of people in East Sussex search for scaffolding services every month &mdash; &ldquo;scaffolding
+      contractor Eastbourne&rdquo;, &ldquo;residential scaffolding Hastings&rdquo;, &ldquo;scaffold hire East
+      Sussex&rdquo; &mdash; and Colossus weren&rsquo;t appearing for any of them. That was free enquiries going
+      to competitors every single day.</p>
+
+    <h2 class="res">The Solution</h2>
+
+    <p>I built Colossus a 30-page website on the DCS platform using the Vega theme in navy blue &mdash;
+      professional, clean, and well-suited to a trade contractor audience. The site structure was planned from
+      the ground up to serve two goals simultaneously: look credible to potential clients, and rank in Google
+      for the searches that matter.</p>
+
+    <p>On the service side, I created dedicated pages for each type of scaffolding they offer:</p>
+
+    <ul>
+      <li>Residential scaffolding</li>
+      <li>Commercial scaffolding</li>
+      <li>New build scaffolding</li>
+      <li>Scaffold hire</li>
+      <li>Event scaffolding</li>
+    </ul>
+
+    <p>Each page explains the service, when it&rsquo;s used, and what the process looks like &mdash; the kind of
+      content that builds trust before a client has even made contact.</p>
+
+    <p>On the location side, I created pages for the main towns and areas across East Sussex where Colossus
+      works: Eastbourne, Hastings, Bexhill, Lewes, Seaford, Hailsham, and several more. Each location page
+      targets the local search terms for that area and links to the relevant services. That&rsquo;s the
+      architecture that makes <a href="#">local SEO</a> work &mdash; search engines can see clearly who you are,
+      what you do, and exactly where you do it.</p>
+
+    <p>I also set up Google Business Profile, made sure the site had proper Schema.org markup for a local
+      contractor, and submitted it to Google Search Console on launch day.</p>
+
+    <h2 class="res">The Results</h2>
+
+    <p>The site went live in September 2024. Within three weeks, Colossus received their first enquiry via the
+      website contact form &mdash; a residential customer in Eastbourne who had found them through Google. Not a
+      referral, not a repeat customer. A cold lead, from the internet, for the first time.</p>
+
+    <p>Within a few months the site was appearing in Google Maps results for scaffolding searches across East
+      Sussex. The 30-page structure means Colossus now has a foothold for dozens of search terms they simply
+      didn&rsquo;t exist for before.</p>
+
+    <p>More significantly, they now have the professional presence needed to pursue larger commercial work. When
+      a developer or property manager looks them up, they find a well-presented site that clearly explains the
+      company&rsquo;s capabilities, service area, and contact details. That&rsquo;s the difference between
+      getting a callback and being passed over.</p>
+
+    <p>Colossus Scaffolding are a good example of what a well-built website can do for a trade business
+      that&rsquo;s already delivering quality work &mdash; it removes the one barrier stopping clients from
+      finding them.</p>
+
+  </article>
+</section>
+
+<!-- ===== 3. OUTCOMES — ink ===========================================
+     .detail__l is the design's one "included / confirmed" idiom and the aqua
+     check is the point of it (kit.css:739-745). It has to sit on a dark
+     ground: --aqua on --white measures about 1.7:1, which is why round 1
+     putting this list on .p--paper (project-post.html:124-133) was wrong and
+     is changed here. Phase 2 put it on .sec.p--ink for the same reason.
+
+     Four bullets, verbatim from colossus-scaffolding.mdx's `outcomes:` array.
+     No count-up on any figure (ground rule 5) — authored values.
+     ================================================================== -->
+<section class="sec p--ink" data-ground="ink">
+  <div class="measure">
+    <p class="eyeless">In short</p>
+    <h2 class="res">What it did.</h2>
+    <div class="detail__l">
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> First Google enquiry within 3 weeks of launch</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 30-page site covering all service and location areas</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Now appearing in Google Maps for scaffolding searches in East Sussex</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Winning larger commercial contracts with a credible online presence</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. RELATED — paper ==========================================
+     G12 RESOLVED: .related-grid is retired, .cards--2 is the one portfolio
+     card. Reasoning in notes-a.md. There is no new CSS here at all — this
+     block is .cards--2 exactly as the list page uses it.
+     ================================================================== -->
+<section class="sec p--paper" data-ground="paper">
+  <p class="eyeless">More like this</p>
+  <h2 class="res">Two more from the trades side.</h2>
+  <p class="lead">Six of the thirteen case studies are trades and contractors &mdash; the other seven are
+    retail, studios, property and creative. <a class="card__link" href="projects-list.html" style="margin-top:0">See all thirteen
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></p>
+
+  <div class="cards cards--2">
+    <a class="card" href="projects-list.html">
+      <div class="card__t card__t--row">DJ Fox Electrical <small>20+ pages</small></div>
+      <div class="card__well">
+        <div class="slot">
+          <span class="slot__i" aria-hidden="true"></span>
+          <span class="slot__t">Awaiting footage</span>
+          <span class="slot__s">Live at djfoxelectrical.com &mdash; capture not yet taken</span>
+        </div>
+        <span class="card__tag">Trades &amp; Contractors</span>
+        <div class="card__s"><span>An electrician's site on the DCS platform &mdash; service pages for domestic,
+          commercial and EV charging work, plus location pages across East Sussex.</span></div>
+      </div>
+      <div class="card__meta">
+        <p>Full 20+ page site, live on Vercel at djfoxelectrical.com.</p>
+        <span class="card__link">Read the case study
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+    <a class="card" href="projects-list.html">
+      <div class="card__t card__t--row">DCH Automotive <small>Trade launch</small></div>
+      <div class="card__well">
+        <div class="slot">
+          <span class="slot__i" aria-hidden="true"></span>
+          <span class="slot__t">Awaiting footage</span>
+          <span class="slot__s">Live at dch-one.vercel.app &mdash; capture not yet taken</span>
+        </div>
+        <span class="card__tag">Trades &amp; Contractors</span>
+        <div class="card__s"><span>An automotive specialist's first website &mdash; work showcase, accreditations,
+          and a live Instagram feed keeping the site current between jobs.</span></div>
+      </div>
+      <div class="card__meta">
+        <p>A professional online presence established from a standing start.</p>
+        <span class="card__link">Read the case study
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== PAGE FOOTER — navy ========================================= -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Want a result<br>like this?</h2>
+    <p class="lead">Whatever the business, the process is the same: I ask the questions, write the content, build it, and show you how it works.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="projects-list.html" aria-current="page">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="#">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <!-- Decision D2 (session.md:137-141): the 8 location pages live here,
+           not in the primary nav. -->
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+
+<script>
+
+/* ---------------------------------------------------------------------
+   Ported verbatim from prototype/service-detail.html (Phase 2), which
+   ported them from the live homepage. Nothing here is new behaviour.
+   --------------------------------------------------------------------- */
+
+/* 1. The .bar ground probe — home-behaviour.tsx:109-115, 224-247.
+      A point bar.height * 0.62 down from the top is tested against every
+      [data-ground] rect and THE LAST MATCH IN DOCUMENT ORDER WINS, because
+      sections overlap (here by --r) and the last one paints on top.
+      Round 1 used a hardcoded 40px probe; 0.62 of the measured bar is the
+      real formula. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+/* 2. The .in latch — home-behaviour.tsx:276-289. One-shot at threshold .16,
+      unobserved immediately so a .res heading can never flicker back to its
+      rest colour. Without this every .res heading stays muted forever. */
+(function(){
+  var sel = '.sec,.mast,.pagefoot,.cards--2,.quotes';
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){ io.observe(el); });
+})();
+
+/* 3. The mobile menu. #menu is a SIBLING of .bar — an ancestor carrying
+      backdrop-filter or transform becomes the containing block for
+      position:fixed and traps the overlay in the bar's own box
+      (design-kit.md §9.5). Append #menu to the URL to open it on load, which
+      is how it can be inspected inside a 390px iframe. */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+</script>
+</body>
+</html>
