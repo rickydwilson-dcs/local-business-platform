@@ -1,7 +1,8 @@
 # DCS inner pages — design-first plan
 
-**Status:** Wave 1 designed and reconciled (Phases 1-4 complete). Awaiting review at
-`prototype/index.html`, and four decisions listed there before wave 2.
+**Status:** **Wave 1 APPROVED at the Phase 4 gate, 2026-09-18.** All five review-page
+decisions are settled (see §4a) and all 7 commits are pushed to `origin/develop` with CI
+green. Wave 2 (the second fan-out, 3 agents) is now in progress.
 **Date:** 2026-09-15
 **Scope:** Design only. No React port in this session. See §7.
 
@@ -206,6 +207,24 @@ faceless agency, and the copy is already written in `content-brief.md` §1–3.
 | ---- | ------------------------------------------------------------------------------------------------------------------------- |
 | 1    | chrome, `/projects`, `/projects/[slug]`, `/services`, `/services/[slug]`, `/pricing`, `/contact` + success, 404, `/about` |
 | 2    | `/blog`, `/blog/[slug]`, blog categories, `/locations`, `/locations/[slug]`, legal template ×3                            |
+
+## 4a. Phase 4 gate rulings — resolved 2026-09-18
+
+These are the review-page decisions, numbered as `prototype/index.html` numbers them.
+**They are not the same as D1–D5 above**, which are the original plan decisions. All five
+are closed; a fresh session must not re-litigate any of them.
+
+| #     | Ruling                                                                                              | Consequence                                                                                                                                                                        |
+| ----- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1** | £750/£45 and the 5/20/100 page counts are real (`home-data.ts`).                                    | Settled 2026-09-17. Prototypes and three MDX sources already corrected in `d6db9487`.                                                                                              |
+| **2** | **The contact form is fixed at port, not now.**                                                     | All three faults are server-side, so they land in the React handler in Phase 5 where they can be tested end-to-end. Phase 5 also deletes the `contact.html?rig` demo rig (trap 5). |
+| **3** | **The atmosphere footage stays as-is**, with its current honest captions.                           | No screen recordings to obtain. The three clips are not captioned as website captures, so ground rule 6 is satisfied. The ten `.slot` placeholders also stay.                      |
+| **4** | **"Est. 2019" and "20+ sites delivered" both ship unchanged** — Ricky confirmed the count directly. | It was unsourced, not wrong. Ricky is the source of record; no citation needed. `/about` needs no edit.                                                                            |
+| **5** | Burger-only at every width, on every page.                                                          | Confirmed twice. **D1 below is amended in place** — read the amendment, not the original sentence.                                                                                 |
+
+**Still open, deliberately, and not a gate item:** the masthead measures 78–81% of viewport
+height. A `max-height:1040px` compression on `.mast h1` is the proposed quietening. Offered
+to Ricky twice and not taken up either time; leaving it alone until asked.
 
 ## 5. The agent plan
 
