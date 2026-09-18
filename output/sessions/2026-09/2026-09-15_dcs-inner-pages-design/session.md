@@ -244,9 +244,18 @@ are closed; a fresh session must not re-litigate any of them.
 | **4** | **"Est. 2019" and "20+ sites delivered" both ship unchanged** — Ricky confirmed the count directly. | It was unsourced, not wrong. Ricky is the source of record; no citation needed. `/about` needs no edit.                                                                            |
 | **5** | Burger-only at every width, on every page.                                                          | Confirmed twice. **D1 below is amended in place** — read the amendment, not the original sentence.                                                                                 |
 
-**Still open, deliberately, and not a gate item:** the masthead measures 78–81% of viewport
-height. A `max-height:1040px` compression on `.mast h1` is the proposed quietening. Offered
-to Ricky twice and not taken up either time; leaving it alone until asked.
+**RESOLVED 2026-09-18** (Ricky asked for all three outstanding items to be closed):
+
+- **Masthead.** Measuring first showed "78–81%" is not a constant — it tracks `h1` line
+  count, 45% at one line to 79% at three. `.mast h1` added to the `max-height:1040px` block
+  at `clamp(2.3rem,5.4vw,4.4rem)`. Worst real page 79% → **68%**; mobile `h1` unchanged at
+  36.8px. `project-detail` still measures 128%, but that is its 716px `.mast__media` hero,
+  not the heading.
+- **`.row__m em` contrast.** `opacity:.72` removed kit-wide. White 3.38 → **6.41**, aqua
+  2.92 → **4.83**, magenta hover 3.11 → **5.16**; all now clear the 4.5:1 floor for 12px
+  text. The aqua case was the worst and had not previously been spotted.
+- **Legal page dates.** `new Date()` replaced with an authored constant in all three pages —
+  see the commit; verified in the built output, not just type-check.
 
 ## 4b. Wave 2 merge record — 2026-09-18
 
