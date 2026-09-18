@@ -96,13 +96,13 @@ shared by all 14.
 
 ### Tier 2 — Trust and editorial
 
-| #   | Route(s)                          | Content that exists                 | Notes                                                                                                                                |
-| --- | --------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 2.1 | `/about`                          | `content-brief.md` §1–3             | The one-person-studio story. Honesty rule: **no photograph of Ricky exists** — no generated image may stand in for him or "our team" |
-| 2.2 | `/blog`                           | 21 posts, 8 categories              | Index needs to handle 21 items without becoming a wall                                                                               |
-| 2.3 | `/blog/[slug]`                    | 1,000–1,300 words each              | Long-form reading page — the one place where the r9 chapter-panel language has to yield to legibility                                |
-| 2.4 | **`/blog/category/[slug]`** (new) | 8 categories already in frontmatter | Proposed: cheap to add, real SEO and navigation value                                                                                |
-| 2.5 | `/reviews`                        | **only 3 testimonials**             | See decision D3                                                                                                                      |
+| #   | Route(s)                          | Content that exists                     | Notes                                                                                                                                |
+| --- | --------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 2.1 | `/about`                          | `content-brief.md` §1–3                 | The one-person-studio story. Honesty rule: **no photograph of Ricky exists** — no generated image may stand in for him or "our team" |
+| 2.2 | `/blog`                           | 21 posts, **7** categories              | Index needs to handle 21 items without becoming a wall                                                                               |
+| 2.3 | `/blog/[slug]`                    | **769–1,169** words each                | Long-form reading page — the one place where the r9 chapter-panel language has to yield to legibility                                |
+| 2.4 | **`/blog/category/[slug]`** (new) | **7** categories already in frontmatter | Proposed: cheap to add, real SEO and navigation value                                                                                |
+| 2.5 | `/reviews`                        | **only 3 testimonials**                 | See decision D3                                                                                                                      |
 
 ### Tier 3 — Local SEO
 
@@ -184,7 +184,7 @@ property and B2B, and the business wants to be visible to all of them. So the
 `/blog` index must be designed for a library that **grows well past 21 and spans
 sectors** — not one that silently assumes trades:
 
-- Lead on **topic**, using the 8 categories already in frontmatter, labelled by the
+- Lead on **topic**, using the **7** categories already in frontmatter, labelled by the
   problem being solved rather than by who has it.
 - Design in a **second axis for sector/audience** from the start, even though today
   it would only have one populated value. Retrofitting that once there are 40 posts
@@ -207,6 +207,26 @@ faceless agency, and the copy is already written in `content-brief.md` §1–3.
 | ---- | ------------------------------------------------------------------------------------------------------------------------- |
 | 1    | chrome, `/projects`, `/projects/[slug]`, `/services`, `/services/[slug]`, `/pricing`, `/contact` + success, 404, `/about` |
 | 2    | `/blog`, `/blog/[slug]`, blog categories, `/locations`, `/locations/[slug]`, legal template ×3                            |
+
+### Correction, 2026-09-18 — the blog content facts above were wrong
+
+Raised by Agent F in wave 2 and verified directly against the 21 files:
+
+- **7 categories, not 8.** `local-seo` 6, `costs-and-value` 3, `website-content` 3,
+  `industry-guides` 3, `getting-found-online` 3, `website-design` 2, `business-tools` 1 —
+  which sums to 21. The "8" appears to have come from counting
+  `getting-found-online` twice, since frontmatter quotes it inconsistently (`"local-seo"`
+  quoted, `costs-and-value` bare, `getting-found-online` **both ways** across files).
+  The quoting is harmless to parse; it is a tidy-up for the port, not a bug.
+- **769–1,169 words, mean 948 — not "1,000–1,300".** Thirteen of the 21 are under 1,000.
+  The reading page is designed for shorter pieces than the plan assumed.
+- **16 of the 21 open with a `# ` h1 that duplicates the frontmatter title.** The port must
+  strip it or every post ships two h1s. This is a Phase 5 item.
+- **All 21 titles are Title Case**, against the settled sentence-case ruling. Converted in
+  the wave 2 prototypes and listed in `notes-f.md` §5.2; **the MDX is untouched** — it
+  belongs with the voice pass.
+- **`sector` does not exist in frontmatter.** D4's second axis is a _proposed_ field; Agent F
+  derived each value from the post's own text. The mapping is in `notes-f.md` §5.4.
 
 ## 4a. Phase 4 gate rulings — resolved 2026-09-18
 

@@ -107,9 +107,13 @@
    top: clamp(90px,12vh,124px) is `.crumb`'s own "clear the fixed bar"
    clearance (kit.css:1306), reused rather than a new number — and
    explicitly NOT `.detail`'s top:120px (kit.css:732), which hardcodes an
-   offset for the 81px homepage bar. The inner-page bar measures 74.5px at
-   1440 and 65px at 390 (phase2-notes.md §10, design-kit.md §12.8); this
-   clamp's 90px floor clears both. */
+   offset for the 81px homepage bar.
+
+   MEASURED, because the kit's own figure is wrong here: phase2-notes.md §10
+   records the inner-page bar at 74.5px at 1440, and it measures 81px on this
+   page at 1440 (65px at 390). The bar's padding is width-driven —
+   clamp(11px,1.5vw,17px), home-r9.css:44 — so 81px is what it is at 1440 at
+   every viewport HEIGHT. This clamp's 90px floor clears it at all of them. */
 .legal__rail{position:sticky;top:clamp(90px,12vh,124px)}
 /* The rail can be taller than the viewport minus its offset — Terms has nine
    entries. Without this the last two entries are unreachable once it pins. */
@@ -264,7 +268,24 @@
    container, which is `.cscroll` (kit.css:2517), already in the kit.
    ========================================================================== */
 .ltable{width:100%;border-collapse:collapse;text-align:left}
-.ltable--wide{min-width:420px}
+/* FOUND BY RENDERING. The Cookie policy stacks THREE of these with identical
+   headers, and with the default `table-layout:auto` each one sizes its own
+   columns to its own content — so at 1440 the "Purpose" column started at
+   719px in the first table and 624px in the second, three tables' worth of
+   headers stepping in and out. Nothing is technically wrong and it reads as
+   sloppy. `table-layout:fixed` plus two widths locks all three to one grid.
+   INVENTED, and measured rather than picked — twice, because the first
+   numbers were 2px out. `cookie_consent` renders 132px wide (it is the
+   longest cookie name in the document and `.ltable code` sets nowrap, so it
+   cannot break). 32% of a 420px minimum gives a 134px cell, which is 120px
+   of CONTENT box once the cell's own 14px padding-right is taken off — so
+   the name overran its column into the gutter and left 2px between it and
+   the Purpose text. 35% of 440px gives 154px, i.e. 140px of content and 8px
+   of real clearance. 18% is 79px, enough for "90 days" and "Session" on one
+   line. Purpose takes the remaining 47%. */
+.ltable--wide{min-width:440px;table-layout:fixed}
+.ltable--wide thead th:nth-child(1){width:35%}
+.ltable--wide thead th:nth-child(3){width:18%}
 .ltable th,.ltable td{padding:clamp(13px,2vh,21px) 14px clamp(13px,2vh,21px) 0;
   vertical-align:top;font-size:15.5px;line-height:1.5;
   border-bottom:1px solid rgba(14,14,18,.14)}
@@ -311,20 +332,23 @@
 /* ==========================================================================
    H4  RESPONSIVE
 
-   1240px is H1's derived rail breakpoint. Below it the rail is in-flow above
-   the article, sized and centred exactly like the article so the two read as
-   one column. It keeps the numbers, the 44px targets and the accent; it
-   loses the sticky and the hover shift (a padding shift inside a full-width
-   in-flow block reads as a wobble, not as an affordance).
+   900px — the kit's OWN collapse breakpoint, the one where `.row`, `.svc`,
+   `.price`, `.cards--2` and `.cards--3` all go to a single column
+   (kit.css:919-924, home-r9.css:511-523). Not a number of mine. Below it the
+   rail is in-flow above the article, sized and centred exactly like the
+   article so the two read as one column. It keeps the numbers, the 44px
+   targets and the accent; it loses the sticky and the hover shift (a padding
+   shift inside a full-width in-flow block reads as a wobble, not as an
+   affordance).
 
    A collapsed <details> was considered and rejected. Getting one element to
-   be an always-open rail above 1240px and a disclosure below it needs either
+   be an always-open rail above 900px and a disclosure below it needs either
    duplicate markup for the same nine links (two <nav>s, one wrong for a
    screen reader at any given width) or an author `display:block` override of
    the UA's closed-<details> machinery, which is a hack this prototype cannot
    test across browsers. Nine visible entries at the head of a legal document
    is not a failure state — it is the thing the reader came for. Measured
-   height at 390px: 484px including the label and rules. Recorded in
+   height at 390px: 478px including the label and rules. Recorded in
    notes-h.md as a real cost, not hidden.
 
    Values: the rules above and below are `.row`'s rgba(14,14,18,.14)
@@ -333,17 +357,20 @@
    gap. 15px / opacity .76 is `.footmap a`'s (kit.css:1617), one step up from
    14px because in-flow at full width it is body-adjacent, not chrome.
    ========================================================================== */
-@media (max-width:1239px){
+@media (max-width:900px){
   .legal{display:block}
-  /* FOUND BY RENDERING. `justify-self:end` has to be reset explicitly, and
-     the reason is recent: Chrome now applies the box-alignment properties in
-     BLOCK layout, not only in flex and grid. Left in place, a block-level
-     `justify-self:end` makes the element shrink-to-fit and sit against the
-     end edge — so `width:auto` did not fill, it collapsed to the longest TOC
-     entry. Measured at 390: rail 217.8px inside a 341px column, aligned
-     right, while the article beneath it was the full 341. It looks like a
-     width bug and it is an alignment one; `width:100%` "fixes" it and leaves
-     the real cause in place. Same for `align-self`. */
+  /* FOUND BY RENDERING, and kept as a reset even though the current H1 no
+     longer sets `justify-self`: Chrome now applies the box-alignment
+     properties in BLOCK layout, not only in flex and grid. An earlier draft
+     carried `justify-self:end` on the rail for the three-track layout, and
+     once `.legal` became `display:block` here that declaration made the nav
+     shrink-to-fit and sit against the end edge — `width:auto` did not fill,
+     it collapsed to the longest TOC entry. Measured at 390: rail 217.8px
+     inside a 341px column, right-aligned, with the article beneath it at the
+     full 341. It presents as a width bug and is an alignment one, and
+     `width:100%` "fixes" the symptom while leaving the cause in place.
+     Worth knowing for any pattern in this kit that sets justify-self or
+     align-self on a grid item and then collapses the grid at a breakpoint. */
   .legal__rail{position:static;justify-self:auto;align-self:auto;
     width:auto;max-height:none;overflow:visible;
     max-width:74ch;margin:0 auto clamp(40px,6vh,72px);
@@ -356,9 +383,7 @@
   /* on a dark ground the in-flow rail's rules swap with everything else */
   .p--ink .legal__rail,.p--navy .legal__rail,.p--magenta .legal__rail{
     border-top-color:rgba(255,255,255,.22);border-bottom-color:rgba(255,255,255,.22)}
-}
 
-@media (max-width:900px){
   /* 16px is the design's smallest horizontal cell padding at this width;
      `.qa__a p` uses 4px and `.ltable`'s 14px is already close. Nudged so a
      three-column table does not butt its columns together once `.cscroll`
@@ -383,7 +408,7 @@
   .legal__toc a:hover{opacity:.72;padding-left:14px;color:inherit}
   .legal__toc a[aria-current]{opacity:1;color:var(--acc);border-left-color:var(--acc)}
 }
-@media (hover:none) and (max-width:1239px){
+@media (hover:none) and (max-width:900px){
   .legal__toc a:hover{opacity:.76;padding-left:12px}
 }
 

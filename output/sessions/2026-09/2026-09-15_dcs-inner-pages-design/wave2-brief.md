@@ -134,7 +134,9 @@ any line you converted, so the later content pass can be checked against your pr
 
 **The hardest brief in wave 2, and the reason is in `session.md` D4.** Read that decision in full.
 
-Content: 21 posts, 1,000–1,300 words each, **8 categories** already in frontmatter:
+Content: 21 posts, **769–1,169 words each (mean 948; thirteen are under 1,000)**, and
+**7 categories — not 8** (an earlier version of this brief said 8 while listing 7 that sum
+to 21; corrected 2026-09-18 after Agent F caught it) already in frontmatter:
 `local-seo` (6), `costs-and-value` (3), `website-content` (3), `industry-guides` (3),
 `getting-found-online` (3), `website-design` (2), `business-tools` (1).
 _(Note: frontmatter quoting is inconsistent — `"local-seo"` quoted, `costs-and-value` not, and
@@ -142,7 +144,7 @@ _(Note: frontmatter quoting is inconsistent — `"local-seo"` quoted, `costs-and
 
 Binding design constraints from D4:
 
-- **Lead on topic**, using the 8 categories, labelled by the _problem being solved_ rather than
+- **Lead on topic**, using the 7 categories, labelled by the _problem being solved_ rather than
   by who has it.
 - **Design in a second axis for sector/audience from the start**, even though today it has only
   one populated value. Retrofitting at 40 posts is the expensive version.
