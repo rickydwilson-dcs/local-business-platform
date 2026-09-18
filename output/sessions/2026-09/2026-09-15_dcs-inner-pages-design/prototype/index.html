@@ -77,7 +77,7 @@
 
 <header>
   <p class="eyeless">Phase 3 wave 1 · reconciled 2026-09-17</p>
-  <h1>Nine pages,<br>one <em>design kit</em>.</h1>
+  <h1>Fifteen pages,<br>one <em>design kit</em>.</h1>
   <p class="lead">
     Every frame below is a <strong>live iframe</strong>, not a screenshot — it reflects the file
     on disk right now and cannot go stale. All nine pages share one stylesheet
@@ -104,11 +104,18 @@
   modified, and no React has been written. The port is Phase 5, a separate session, and it carries the
   cutover with it: remove the site-wide <code>noindex</code>, fix <code>logoAlt="DCS Gardening &amp; Landscaping"</code>,
   reconcile the two pricing toggles, and unify the voice to first person.</p>
-  <p><b>Still to design (wave 2).</b> <code>/blog</code>, <code>/blog/[slug]</code>, blog categories,
-  <code>/locations</code> ×2, and the legal template ×3.</p>
+  <p><b>Wave 2 is now designed and merged (2026-09-18).</b> <code>/blog</code>,
+  <code>/blog/[slug]</code>, <code>/blog/category/[slug]</code>, <code>/locations</code> ×2 and the
+  legal template (carrying all three bodies) are in the grid above. That is every route except
+  <code>/reviews</code>, which D3 dropped deliberately. <b>Nothing is ported</b> — Phase 5 is still
+  a separate session.</p>
   <p><b>Provenance.</b> Per-page reasoning is in <code>notes-{a..e}.md</code>; the numeric spec is
   <code>design-kit.md</code> (900 lines, 124 source citations); the chrome rationale is
-  <code>phase2-notes.md</code>. The pre-merge stylesheet is kept as <code>kit.css.pre-phase4.bak</code>.</p>
+  <code>phase2-notes.md</code>. Wave 2's reasoning is in <code>notes-{f,g,h}.md</code> against
+  <code>wave2-brief.md</code>. Pre-merge stylesheets are kept as
+  <code>kit.css.pre-phase4.bak</code> (wave 1) and <code>kit.css.pre-wave2.bak</code> (wave 2).
+  Two measurement corrections made during the merge are written up in
+  <code>bar-height-correction.md</code>.</p>
 </footer>
 
 <script>
@@ -122,6 +129,14 @@
     ['contact.html',        'Contact',          '/contact',                                'Agent D', 'Form designed from nothing + success state'],
     ['about.html',          'About',            '/about',                                  'Agent E', 'No photograph of Ricky exists — by design'],
     ['404.html',            'Not found',        '404',                                     'Agent D', 'Needed no new CSS at all'],
+
+    /* ---- WAVE 2, merged 2026-09-18 ---- */
+    ['blog-list.html',      'Blog',             '/blog',                                   'Agent F', 'Topic directory — height flat from 21 to 60 posts'],
+    ['blog-post.html',      'Post',             '/blog/[slug]',                            'Agent F', 'The one page allowed to be quieter, for legibility'],
+    ['blog-category.html',  'Topic',            '/blog/category/[slug]',                   'Agent F', 'local-seo, the six-guide topic'],
+    ['locations-list.html', 'Areas',            '/locations',                              'Agent G', 'Ordered nearest-first from real coordinates'],
+    ['location-detail.html','Area',             '/locations/[slug]',                       'Agent G', 'Brighton — blocks vary by what each town actually has'],
+    ['legal.html',          'Legal template',   'privacy · cookie · terms',                'Agent H', 'One template, three real bodies, switchable'],
   ];
 
   const grid = document.getElementById('grid');

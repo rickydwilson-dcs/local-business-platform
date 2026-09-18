@@ -112,6 +112,18 @@ hover effect you add must be added to that rule too, because on touch a hover fi
    overlay in the header's own box. Verify by measuring an opened panel: it must report the
    viewport (390×844), not the bar's box (~277×58).
 
+8. **Cache-busting the HTML does not cache-bust the stylesheet, and this will fake both
+   false positives and false negatives.** Every page links `../kit.css` with no query string,
+   so `page.html?v=123` fetches fresh HTML that re-links the **cached** stylesheet. After any
+   edit to `kit.css` — a Phase 4 merge above all — measurements silently describe the _old_
+   stylesheet. This cost real time on 2026-09-18: a full 14-page sweep after the wave 2 merge
+   reported `blog-list` overflowing the viewport at 390 and `.filterset` missing from the
+   CSSOM entirely, and the "fix" would have been to undo a correct rule Agent F had already
+   written. The giveaway was the rule count — 649 parsed against 750 in the file on disk.
+   **Always `await fetch('../kit.css',{cache:'reload'})` before a measurement run**, and sanity-
+   check by counting parsed rules against the file. This is a sharper-edged cousin of trap 2
+   in the handoff, where Chrome's cache served stale _files_ during the recovery.
+
 ## The voice trap
 
 `session.md` ground rule 8 says first-person singular. The **source MDX is not there yet** —

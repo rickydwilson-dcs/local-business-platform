@@ -1,8 +1,10 @@
 # DCS inner pages — design-first plan
 
-**Status:** **Wave 1 APPROVED at the Phase 4 gate, 2026-09-18.** All five review-page
-decisions are settled (see §4a) and all 7 commits are pushed to `origin/develop` with CI
-green. Wave 2 (the second fan-out, 3 agents) is now in progress.
+**Status:** **Waves 1 and 2 both designed, merged and verified — 2026-09-18.** All five
+review-page decisions are settled (§4a). Wave 2's three agents have landed; their CSS is
+merged into `kit.css` and all **15 pages** are in `prototype/index.html`. Every route in §3
+now has a design except `/reviews`, which D3 dropped deliberately. **Nothing is ported** —
+Phase 5 remains a separate session. Awaiting Ricky's review of the wave 2 pages.
 **Date:** 2026-09-15
 **Scope:** Design only. No React port in this session. See §7.
 
@@ -245,6 +247,41 @@ are closed; a fresh session must not re-litigate any of them.
 **Still open, deliberately, and not a gate item:** the masthead measures 78–81% of viewport
 height. A `max-height:1040px` compression on `.mast h1` is the proposed quietening. Offered
 to Ricky twice and not taken up either time; leaving it alone until asked.
+
+## 4b. Wave 2 merge record — 2026-09-18
+
+Agents F (`/blog` ×3), G (`/locations` ×2) and H (the legal template) ran in parallel against
+`wave2-brief.md`. `kit.css` went from 189,896 to **250,292 bytes**; `kit.css.pre-wave2.bak`
+is the pre-merge record, as `kit.css.pre-phase4.bak` is for wave 1.
+
+**Reconcile found exactly one collision:** `.prose .cscroll`, claimed by F and H — who had
+written the _identical_ declaration for the identical reason (re-basing `.cscroll`'s
+30px/4.6vh/54px onto `.prose`'s block rhythm). F's copy survives; H's is replaced by a comment
+recording the convergence. No agent selector shadowed an existing `kit.css` selector.
+
+**Verified after merge**, against a force-refreshed stylesheet, all 14 real pages at 1440×900
+and 390×844: bar 81px / 65px, burger `grid` at both, **zero** document overflow, **zero**
+elements escaping a scroll wrapper, `<meta name="description">` present on every page
+(141–156 chars), 750 style rules parsed. `index.html` rebuilt to 15 cards, every referenced
+file returning 200.
+
+**Two claims in the handoff turned out to be wrong**, both found by measuring rather than
+reading — see `bar-height-correction.md` for the first:
+
+1. The inner-page bar is **81px, not 74.5px**, so `.detail{top:120px}` is correct and the
+   queued "fix" would have introduced a 6.5px error.
+2. The five wave 1 `kit-additions-*.css` files were described as orphaned with no page
+   linking them. **Two pages still linked them** — `contact.html` → `-d`, `project-detail.html`
+   → `-a`. Deleting the files as "orphaned" would have broken both. Verified redundant before
+   unlinking: every selector already present in merged `kit.css`, and disabling each sheet
+   changed 0 of 294 / 246 elements across 34 computed properties. Now genuinely orphaned.
+
+**A new harness trap was found and is recorded as trap 8 in `wave2-brief.md`:** cache-busting
+the HTML does not cache-bust `../kit.css`, so measurements after a merge silently describe the
+_old_ stylesheet. It briefly produced a convincing false positive — `blog-list` appearing to
+overflow at 390 with `.filterset` missing from the CSSOM — whose "fix" would have been to undo
+a correct rule Agent F had already written. The tell was the rule count: 649 parsed against
+750 on disk.
 
 ## 5. The agent plan
 
