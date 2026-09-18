@@ -23,11 +23,20 @@ export default function TermsAndConditionsPage() {
   const breadcrumbItems = [
     { name: 'Terms and Conditions', href: '/terms-and-conditions', current: true },
   ];
-  const lastUpdated = new Date().toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  /*
+   * The date this document's TEXT last changed — authored by hand, deliberately.
+   *
+   * This was `new Date().toLocaleDateString(...)`, which is evaluated at BUILD
+   * time. Because these pages are statically generated, every deploy restamped
+   * all three legal documents as "last updated" that day, whether or not a word
+   * had changed — so the date was guaranteed to be wrong except by coincidence,
+   * and on a privacy policy a false revision date is misleading rather than
+   * merely untidy.
+   *
+   * 23 August 2026 is when this file's content last changed in git history.
+   * UPDATE THIS BY HAND whenever the wording below actually changes.
+   */
+  const lastUpdated = '23 August 2026';
 
   return (
     <>
