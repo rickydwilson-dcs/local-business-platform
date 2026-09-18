@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Agent B harness — services-list 1440</title>
+<style>body{margin:0;background:#555}
+#f{width:1440px;height:4400px;border:0;transform:scale(.5);transform-origin:0 0;background:#fff;display:block}
+#box{width:720px;height:2200px}</style></head><body>
+<div id="box"><iframe id="f" src="services-list.html"></iframe></div>
+<script>
+addEventListener('load',function(){
+ setTimeout(function(){
+  var d=f.contentDocument;
+  d.querySelectorAll('.sec,.mast,.pagefoot').forEach(function(e){e.classList.add('in')});
+  var h=d.documentElement.scrollHeight;
+  f.style.height=h+'px'; box.style.height=(h*0.5)+'px';
+ },400);
+});
+</script></body></html>

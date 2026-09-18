@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Privacy policy — Digital Consulting Services</title>
+<meta name="description" content="How Digital Consulting Services Ltd collects, uses and protects your personal data, and the rights you have under UK GDPR.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<!--
+  PHASE 3b / AGENT H — the legal page TEMPLATE, carrying all three bodies.
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  ONE TEMPLATE, THREE USES. /privacy-policy, /cookie-policy and
+  /terms-and-conditions are three routes on the real site; they are three
+  <div class="doc"> blocks in this one file so the template can be reviewed
+  under all three bodies without three near-identical files drifting apart.
+  The switcher at the bottom of the viewport is a RIG — it is marked
+  [data-rig], it is not part of the design, and it is deleted at port along
+  with its CSS block (kit-additions-h.css §H6). Deep-linkable:
+  ?doc=privacy | ?doc=cookie | ?doc=terms.
+
+  CONTENT IS REAL AND UNCHANGED. Every clause, figure, table row, cookie
+  name and retention period below is the actual text of
+  app/(site)/privacy-policy/page.tsx (322 lines),
+  app/(site)/cookie-policy/page.tsx (278) and
+  app/(site)/terms-and-conditions/page.tsx (378). Nothing is rewritten,
+  summarised, shortened or invented. Four presentational edits, all recorded
+  in notes-h.md §5:
+    1. Title Case -> sentence case in headings, TOC labels and table heads
+       (settled decision, notes-c.md §15). Proper nouns, product tier names
+       and initialisms untouched.
+    2. Two terse dt/dd blocks (Privacy §4 legal bases, §7 rights) are marked
+       up as a list with a bolded term and an em-dash separator, because a
+       one-line explanation does not want to be a heading. The words are
+       verbatim; the dash is the only added character.
+    3. `id`s are PREFIXED per document (pp- / cp- / tc-) because three
+       documents in one file collide on `contact` and `how-we-use`. On the
+       real site each is its own route and the source ids are correct
+       unprefixed. See notes-h.md §6.
+    4. The body is a FLAT `.prose` block with ids on the h2s rather than the
+       source's `<section id>` wrappers. Reason in kit-additions-h.css's
+       header: `.prose>*+*` is a CHILD selector, so wrapping collapses
+       paragraph spacing to 0 and then out-specifies `.prose h3`/`ul`/`ol`.
+
+  VOICE. Ground rule 8 is first-person singular, and these three bodies are
+  first-person PLURAL — 36 / 20 / 35 occurrences of we/us/our. They are left
+  as written, deliberately, and this is the one place in the set where that
+  is the right answer: in Terms §1 "we"/"us"/"our" are DEFINED TERMS naming
+  the contracting party, so changing them is a change to a contract, not to
+  a shell — and this brief's instruction is that only the shell changes.
+  Every word of shell copy authored HERE (the closing band, the nav
+  descriptions) is singular. Flagged in notes-h.md §5 for the content pass,
+  with the exact counts and the clause that has to change first.
+
+  LAST UPDATED. The three source pages compute this with `new Date()`, so
+  every build publishes "last updated: today" on three legal documents. That
+  is a real bug, not a styling one. The date authored below is the source
+  files' own last-modified date, which is the nearest defensible value; the
+  real date must be authored, not computed, and confirmed before launch.
+  notes-h.md §3.
+
+  GROUND SEQUENCE. ink (crumb + masthead) -> white (the document) ->
+  ink (the other two documents) -> navy (footer). Four grounds, alternating,
+  no repeat adjacent, aqua absent, navy closing — design-kit.md §1.2. The
+  ink cut after 300+ lines of reading is the "colour as a wall you hit"
+  thesis doing the one job a legal page needs: an unmistakable end of
+  document.
+
+  THE TOC. Harness traps 4 and 5 were read before it was built and both were
+  measured rather than assumed. Findings in notes-h.md §3 — in short: the
+  sticky rail needs align-self:start or it pins for 0px, and native anchor
+  navigation DOES work here (tested from BELOW every target, not from the
+  top) because the scroll targets are static prose; the trap bites when the
+  TARGET is sticky, which nothing here is. No JS is used for scrolling.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER. Burger at every width, no desktop link row (session.md §4a #5).
+     .menu is a SIBLING of .bar, never a descendant — an ancestor carrying
+     backdrop-filter or transform becomes the containing block for
+     position:fixed and traps the overlay in the bar's own box.
+     No [aria-current] anywhere: a legal page is not one of the six routes.
+     ===================================================================== -->
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><use href="#dcsmark"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="#">Work</a>
+    <a href="service-detail.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="#">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="contact.html">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#arr"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="#"><span>Work</span></a>
+    <a href="service-detail.html"><span>Services</span></a>
+    <a href="pricing.html"><span>Pricing</span></a>
+    <a href="#"><span>Blog</span></a>
+    <a href="about.html"><span>About</span></a>
+    <a href="contact.html"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- #####################################################################
+     #####################################################################
+     ##  DOCUMENT 1 — PRIVACY POLICY                                    ##
+     ##  source: app/(site)/privacy-policy/page.tsx                     ##
+     #####################################################################
+     ##################################################################### -->
+<div class="doc" data-doc="privacy">
+
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><span aria-current="page">Privacy policy</span></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- MASTHEAD. `.mast` carries NO `.lead` on any of the three, deliberately:
+     a plain-English one-liner above a privacy notice is a summary of legal
+     effect, and this brief forbids summarising. `.mast__meta` does the
+     orienting instead, and every one of its three facts is sourced —
+     the date from the file, "nine sections" from the TOC, the ICO from §9. -->
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Legal</p>
+  <h1>Privacy policy</h1>
+  <div class="mast__meta">
+    <div><b>25 August 2026</b><span>Last updated</span></div>
+    <div><b>Nine sections</b><span>In this document</span></div>
+    <div><b>ICO</b><span>Supervisory authority</span></div>
+  </div>
+</header>
+
+<section class="sec p--white" data-ground="white">
+  <div class="legal">
+
+    <nav class="legal__rail" aria-label="Table of contents">
+      <p class="eyeless">On this page</p>
+      <ol class="legal__toc">
+        <li><a href="#pp-data-controller">Data controller information</a></li>
+        <li><a href="#pp-data-we-collect">Data we collect</a></li>
+        <li><a href="#pp-how-we-use">How we use your data</a></li>
+        <li><a href="#pp-legal-basis">Legal basis for processing</a></li>
+        <li><a href="#pp-data-sharing">Data sharing &amp; third parties</a></li>
+        <li><a href="#pp-data-retention">Data retention</a></li>
+        <li><a href="#pp-your-rights">Your rights</a></li>
+        <li><a href="#pp-cookies">Cookies</a></li>
+        <li><a href="#pp-contact">Contact &amp; complaints</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose legal__body">
+
+      <h2 class="res" id="pp-data-controller">1. Data controller information</h2>
+      <p>Digital Consulting Services Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is the
+        data controller responsible for your personal data.</p>
+      <!-- `.mast__meta` reused inside `.prose` — the stacked value-over-label
+           item is exactly this block's shape, and `.svcgrid` already reuses
+           it the same way (kit.css:2279). Replaces a Tailwind
+           `bg-surface-card rounded-[20px]` card with no r9 equivalent. -->
+      <div class="mast__meta">
+        <div><b>Digital Consulting Services Ltd</b><span>Business name</span></div>
+        <div><b>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</b><span>Address</span></div>
+        <div><b>07748 148082</b><span>Phone</span></div>
+        <div><b><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></b><span>Email</span></div>
+      </div>
+
+      <h2 class="res" id="pp-data-we-collect">2. Data we collect</h2>
+      <p>We may collect and process the following types of personal data:</p>
+      <!-- h3 + p, exactly as the source structures these four: the bodies
+           are full sentences, so they take a heading and a paragraph. The
+           two terse blocks later (§4, §7) take a list instead. -->
+      <h3>Contact information</h3>
+      <p>Name, email address, phone number, and postal address when you contact us or request a quote.</p>
+      <h3>Project information</h3>
+      <p>Details about your project requirements, property information, and service preferences.</p>
+      <h3>Technical data</h3>
+      <p>IP address, browser type, device information, and cookies when you visit our website.</p>
+      <h3>Communication records</h3>
+      <p>Records of correspondence if you contact us, including emails and phone call notes.</p>
+
+      <h2 class="res" id="pp-how-we-use">3. How we use your data</h2>
+      <p>We use your personal data for the following purposes:</p>
+      <ul>
+        <li>To respond to your enquiries and provide quotes</li>
+        <li>To deliver our services and fulfil contracts</li>
+        <li>To send service updates and communications</li>
+        <li>To improve our website and services</li>
+        <li>To comply with legal obligations</li>
+        <li>To protect our legitimate business interests</li>
+      </ul>
+
+      <h2 class="res" id="pp-legal-basis">4. Legal basis for processing</h2>
+      <p>We process your personal data under the following legal bases:</p>
+      <ul>
+        <li><strong>Contract</strong> &mdash; Processing necessary to perform our services</li>
+        <li><strong>Legitimate interest</strong> &mdash; Business operations and service improvement</li>
+        <li><strong>Consent</strong> &mdash; Marketing communications with your permission</li>
+        <li><strong>Legal obligation</strong> &mdash; Compliance with laws and regulations</li>
+      </ul>
+
+      <h2 class="res" id="pp-data-sharing">5. Data sharing &amp; third parties</h2>
+      <p>We may share your data with:</p>
+      <ul>
+        <li>Service providers who assist our operations (e.g., IT support, payment processors)</li>
+        <li>Professional advisors (accountants, lawyers) when required</li>
+        <li>Regulatory authorities when legally required</li>
+      </ul>
+      <p>We do not sell your personal data to third parties. All third parties must respect the security of
+        your data and treat it in accordance with the law.</p>
+
+      <h2 class="res" id="pp-data-retention">6. Data retention</h2>
+      <p>We retain your personal data for as long as necessary to fulfil the purposes we collected it for.
+        Retention periods vary based on data type:</p>
+      <!-- `.ltable` with no `--wide`: two columns wrap legibly at 350px
+           (390 minus two --pads), so it does not need to scroll. -->
+      <div class="cscroll">
+        <table class="ltable">
+          <thead>
+            <tr><th scope="col">Data type</th><th scope="col">Retention period</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Quote enquiries</th><td>2 years</td></tr>
+            <tr><th scope="row">Customer records</th><td>7 years after last service</td></tr>
+            <tr><th scope="row">Financial records</th><td>7 years (legal requirement)</td></tr>
+            <tr><th scope="row">Marketing consent</th><td>Until withdrawn</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="res" id="pp-your-rights">7. Your rights</h2>
+      <p>Under UK GDPR, you have the following rights:</p>
+      <ul>
+        <li><strong>Right of access</strong> &mdash; Request copies of your personal data</li>
+        <li><strong>Right to rectification</strong> &mdash; Request correction of inaccurate data</li>
+        <li><strong>Right to erasure</strong> &mdash; Request deletion of your data</li>
+        <li><strong>Right to restrict processing</strong> &mdash; Limit how we use your data</li>
+        <li><strong>Right to data portability</strong> &mdash; Receive your data in a portable format</li>
+        <li><strong>Right to object</strong> &mdash; Object to certain types of processing</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us at
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>.</p>
+
+      <h2 class="res" id="pp-cookies">8. Cookies</h2>
+      <p>Our website uses cookies to enhance your experience. For detailed information about the cookies we
+        use and how to manage them, please see our
+        <a href="?doc=cookie" data-doc-link="cookie">Cookie policy</a>.</p>
+
+      <h2 class="res" id="pp-contact">9. Contact &amp; complaints</h2>
+      <!-- The source renders these two as bordered cards. Two h3 blocks in
+           flow instead: the card was a Tailwind default, and a card in this
+           design implies a destination (`.card` has a hover lift and a
+           `.card__link`). Nothing here is clickable except the two links. -->
+      <h3>Contact us</h3>
+      <p>For any questions about this privacy policy or our data practices:</p>
+      <p>Email: <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a><br>
+        Phone: 07748 148082</p>
+      <h3>Supervisory authority</h3>
+      <p>You have the right to lodge a complaint with:</p>
+      <p><strong>Information Commissioner&rsquo;s Office (ICO)</strong><br>
+        Website: <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a><br>
+        Helpline: 0303 123 1113</p>
+
+    </article>
+  </div>
+</section>
+
+<!-- ===== THE OTHER TWO DOCUMENTS — ink ==============================
+     `.svcs`/`.svc` — a SPARE pattern (design-kit.md §6.2: 0 uses on the live
+     homepage, "designed for a services list on an ink/magenta panel"). Name
+     left, description right-aligned at 38ch. Exhausting the library came
+     before inventing; this is the row list this design already has for
+     "two or three destinations on a dark ground".
+     Full width rather than inside `.measure`, like the homepage's own
+     `#services` panel — the width change and the ground cut together are
+     what say the document has ended.
+     The descriptions are the only copy authored on this page, and they are
+     first-person singular per ground rule 8. ==================== -->
+<section class="sec p--ink" data-ground="ink">
+  <p class="eyeless">Also legal</p>
+  <h2 class="res">The other two documents.</h2>
+  <div class="svcs">
+    <a class="svc" href="?doc=cookie" data-doc-link="cookie">
+      <span class="svc__n">Cookie policy</span>
+      <span class="svc__d">What gets set on your device, why, and how to turn it off.</span>
+    </a>
+    <a class="svc" href="?doc=terms" data-doc-link="terms">
+      <span class="svc__n">Terms and conditions</span>
+      <span class="svc__d">The commercial terms I work under &mdash; quotes, payment, ownership, cancellation.</span>
+    </a>
+  </div>
+</section>
+
+</div><!-- /doc privacy -->
+
+
+<!-- #####################################################################
+     #####################################################################
+     ##  DOCUMENT 2 — COOKIE POLICY                                     ##
+     ##  source: app/(site)/cookie-policy/page.tsx                       ##
+     #####################################################################
+     ##################################################################### -->
+<div class="doc" data-doc="cookie" hidden>
+
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><span aria-current="page">Cookie policy</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Legal</p>
+  <h1>Cookie policy</h1>
+  <div class="mast__meta">
+    <div><b>25 August 2026</b><span>Last updated</span></div>
+    <div><b>Six sections</b><span>In this document</span></div>
+    <div><b>Three</b><span>Cookie categories</span></div>
+  </div>
+</header>
+
+<section class="sec p--white" data-ground="white">
+  <div class="legal">
+
+    <nav class="legal__rail" aria-label="Table of contents">
+      <p class="eyeless">On this page</p>
+      <ol class="legal__toc">
+        <li><a href="#cp-what-are-cookies">What are cookies?</a></li>
+        <li><a href="#cp-how-we-use">How we use cookies</a></li>
+        <li><a href="#cp-cookie-categories">Cookie categories</a></li>
+        <li><a href="#cp-managing-cookies">Managing your cookies</a></li>
+        <li><a href="#cp-third-party">Third-party cookies</a></li>
+        <li><a href="#cp-contact">Contact us</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose legal__body">
+
+      <h2 class="res" id="cp-what-are-cookies">1. What are cookies?</h2>
+      <p>Cookies are small text files that are stored on your device when you visit a website. They help
+        websites remember your preferences and improve your browsing experience.</p>
+      <p>Cookies can be &ldquo;session&rdquo; cookies (deleted when you close your browser) or
+        &ldquo;persistent&rdquo; cookies (remain until they expire or you delete them).</p>
+
+      <h2 class="res" id="cp-how-we-use">2. How we use cookies</h2>
+      <p>We use cookies to:</p>
+      <ul>
+        <li>Remember your cookie consent preferences</li>
+        <li>Understand how you use our website</li>
+        <li>Improve our website performance</li>
+        <li>Provide relevant content and advertisements</li>
+        <li>Ensure website security</li>
+      </ul>
+
+      <h2 class="res" id="cp-cookie-categories">3. Cookie categories</h2>
+
+      <h3>Necessary cookies</h3>
+      <p>Required for the website to function. Cannot be disabled.</p>
+      <!-- `.ltable--wide` (min-width 420px, measured) inside `.cscroll`. The
+           cookie name is `.prose code` — the design's only mono face, safe
+           here because no cookie name contains a comma. A comma'd figure in
+           a mono face renders "1 , 995" (design-kit.md §9.1). -->
+      <div class="cscroll">
+        <table class="ltable ltable--wide">
+          <thead>
+            <tr><th scope="col">Cookie</th><th scope="col">Purpose</th><th scope="col">Duration</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><code>cookie_consent</code></th><td>Stores your cookie preferences</td><td>1 year</td></tr>
+            <tr><th scope="row"><code>csrf_token</code></th><td>Security token for form submissions</td><td>Session</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Analytics cookies</h3>
+      <p>Help us understand how visitors use our website.</p>
+      <div class="cscroll">
+        <table class="ltable ltable--wide">
+          <thead>
+            <tr><th scope="col">Cookie</th><th scope="col">Purpose</th><th scope="col">Duration</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><code>_ga</code></th><td>Google Analytics &mdash; distinguishes users</td><td>2 years</td></tr>
+            <tr><th scope="row"><code>_ga_*</code></th><td>Google Analytics &mdash; stores session state</td><td>2 years</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Marketing cookies</h3>
+      <p>Used to deliver relevant advertisements and track campaign effectiveness.</p>
+      <div class="cscroll">
+        <table class="ltable ltable--wide">
+          <thead>
+            <tr><th scope="col">Cookie</th><th scope="col">Purpose</th><th scope="col">Duration</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><code>_fbp</code></th><td>Facebook Pixel &mdash; tracks conversions</td><td>90 days</td></tr>
+            <tr><th scope="row"><code>gclid</code></th><td>Google Ads &mdash; tracks ad clicks</td><td>90 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="res" id="cp-managing-cookies">4. Managing your cookies</h2>
+      <p>You can control cookies through several methods:</p>
+      <h3>Consent banner</h3>
+      <p>When you first visit our site, you can choose which cookie categories to accept using our consent
+        banner.</p>
+      <h3>Browser settings</h3>
+      <p>Most browsers allow you to manage cookies through their settings:</p>
+      <ul>
+        <li><strong>Chrome:</strong> Settings &gt; Privacy and Security &gt; Cookies</li>
+        <li><strong>Firefox:</strong> Options &gt; Privacy &amp; Security &gt; Cookies</li>
+        <li><strong>Safari:</strong> Preferences &gt; Privacy &gt; Cookies</li>
+        <li><strong>Edge:</strong> Settings &gt; Privacy, Search, and Services &gt; Cookies</li>
+      </ul>
+      <p>Note: Blocking all cookies may affect website functionality.</p>
+
+      <h2 class="res" id="cp-third-party">5. Third-party cookies</h2>
+      <p>Some cookies are placed by third-party services we use:</p>
+      <h3>Google Analytics</h3>
+      <p>Website analytics to understand visitor behaviour.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google privacy policy</a></p>
+      <h3>Facebook Pixel</h3>
+      <p>Advertising and conversion tracking.
+        <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer">Facebook privacy policy</a></p>
+
+      <h2 class="res" id="cp-contact">6. Contact us</h2>
+      <p>If you have questions about our use of cookies, please contact us at
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>.</p>
+      <p>For more information about how we handle your personal data, please see our
+        <a href="?doc=privacy" data-doc-link="privacy">Privacy policy</a>.</p>
+
+    </article>
+  </div>
+</section>
+
+<section class="sec p--ink" data-ground="ink">
+  <p class="eyeless">Also legal</p>
+  <h2 class="res">The other two documents.</h2>
+  <div class="svcs">
+    <a class="svc" href="?doc=privacy" data-doc-link="privacy">
+      <span class="svc__n">Privacy policy</span>
+      <span class="svc__d">What personal data I hold, why, how long for, and your rights over it.</span>
+    </a>
+    <a class="svc" href="?doc=terms" data-doc-link="terms">
+      <span class="svc__n">Terms and conditions</span>
+      <span class="svc__d">The commercial terms I work under &mdash; quotes, payment, ownership, cancellation.</span>
+    </a>
+  </div>
+</section>
+
+</div><!-- /doc cookie -->
+
+
+<!-- #####################################################################
+     #####################################################################
+     ##  DOCUMENT 3 — TERMS AND CONDITIONS                              ##
+     ##  source: app/(site)/terms-and-conditions/page.tsx                ##
+     ##                                                                 ##
+     ##  NOTE. This is the one of the three that does NOT currently use  ##
+     ##  LegalHero/LegalToc at all — it hand-rolls a `Breadcrumbs`       ##
+     ##  component, an `h1.heading-hero` and a bordered "Contents" box   ##
+     ##  with its own nine-item <ol> (page.tsx:34-97). Unifying it onto  ##
+     ##  the same template is most of the point of this brief. See       ##
+     ##  notes-h.md §3 for what that removes.                            ##
+     #####################################################################
+     ##################################################################### -->
+<div class="doc" data-doc="terms" hidden>
+
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><span aria-current="page">Terms and conditions</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Legal</p>
+  <h1>Terms and conditions</h1>
+  <div class="mast__meta">
+    <div><b>25 August 2026</b><span>Last updated</span></div>
+    <div><b>Nine sections</b><span>In this document</span></div>
+    <div><b>England &amp; Wales</b><span>Governing law</span></div>
+  </div>
+</header>
+
+<section class="sec p--white" data-ground="white">
+  <div class="legal">
+
+    <nav class="legal__rail" aria-label="Table of contents">
+      <p class="eyeless">On this page</p>
+      <ol class="legal__toc">
+        <li><a href="#tc-services-overview">Services overview</a></li>
+        <li><a href="#tc-quotes-and-pricing">Quotes and pricing</a></li>
+        <li><a href="#tc-payment">Payment terms</a></li>
+        <li><a href="#tc-ownership">Ownership and intellectual property</a></li>
+        <li><a href="#tc-hosting-support">Hosting and support</a></li>
+        <li><a href="#tc-cancellation">Cancellation and termination</a></li>
+        <li><a href="#tc-liability">Limitation of liability</a></li>
+        <li><a href="#tc-governing-law">Governing law</a></li>
+        <li><a href="#tc-contact">Contact and disputes</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose legal__body">
+
+      <h2 class="res" id="tc-services-overview">1. Services overview</h2>
+      <p>Digital Consulting Services Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;, or
+        &ldquo;Ricky&rdquo;) provides website design, build, eCommerce solutions, local SEO, ongoing
+        management, analytics reporting, and business email services to small businesses and service
+        providers.</p>
+      <p>Our services include custom design, content creation, website hosting, security, updates,
+        maintenance, and ongoing support. All work is tailored to your business and delivered without
+        templates or builder interfaces.</p>
+      <div class="mast__meta">
+        <div><b>Digital Consulting Services Ltd</b><span>Service provider</span></div>
+        <div><b>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</b><span>Address</span></div>
+        <div><b>07748 148082</b><span>Phone</span></div>
+        <div><b><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></b><span>Email</span></div>
+      </div>
+
+      <h2 class="res" id="tc-quotes-and-pricing">2. Quotes and pricing</h2>
+      <p>Quotes are provided in writing and remain valid for 30 days from the date of issue. Prices are based
+        on the project scope outlined in the quote.</p>
+      <p>Our standard pricing tiers are:</p>
+      <!-- FIGURES CROSS-CHECKED against the approved pricing.html, which
+           carries the same set: 750/10, 45, 1,495/15, 85, 2,995/25, 150, 50,
+           and the 5/20/100 page counts. Session §4a #1 settled 750/45 and
+           5/20/100 as real; the rest match the page wave 1 shipped.
+           COMMA TRAP: GBP 1,495 and GBP 2,995 sit in `.prose p`, which is
+           Archivo with no font-variant-numeric and no mono. Never wrap these
+           in <code> — a mono face gives the comma a full digit advance.
+           Kept as four heading + line blocks rather than tabulated: putting
+           them in a table would mean editing the price strings themselves,
+           and these are contract terms. -->
+      <h3>Starter</h3>
+      <p>Up to 5 pages<br>
+        Upfront: &pound;750 + &pound;10/month | Monthly: &pound;45/month with 24-month minimum term</p>
+      <h3>Professional</h3>
+      <p>Up to 20 pages<br>
+        Upfront: &pound;1,495 + &pound;15/month | Monthly: &pound;85/month with 24-month minimum term</p>
+      <h3>Growth</h3>
+      <p>Up to 100 pages<br>
+        Upfront: &pound;2,995 + &pound;25/month | Monthly: &pound;150/month with 24-month minimum term</p>
+      <h3>eCommerce</h3>
+      <p>Online store<br>
+        From &pound;2,995 upfront + &pound;50/month (upfront model only)</p>
+      <p>Prices may be adjusted for scope changes, additional features, or custom requirements. Any changes
+        will be quoted in writing before proceeding.</p>
+
+      <h2 class="res" id="tc-payment">3. Payment terms</h2>
+      <p>We offer two payment models: upfront and pay-monthly.</p>
+      <h3>Upfront model</h3>
+      <ul>
+        <li>Full upfront payment is due before work begins</li>
+        <li>Monthly hosting fee is due at the start of each month</li>
+        <li>No long-term commitment beyond the monthly hosting fee</li>
+        <li>Includes all design, build, content, and setup work</li>
+      </ul>
+      <h3>Pay-monthly model</h3>
+      <ul>
+        <li>Monthly payment is due at the start of each month</li>
+        <li>Includes all design, build, content, setup, and ongoing hosting</li>
+        <li>24-month minimum term after which the agreement rolls monthly</li>
+        <li>Payment can be made by bank transfer or card</li>
+      </ul>
+      <p>Late payments may result in suspension of hosting and support services. We reserve the right to
+        pursue recovery of unpaid invoices.</p>
+
+      <h2 class="res" id="tc-ownership">4. Ownership and intellectual property</h2>
+      <h3>Upfront payment model</h3>
+      <p>You own your website outright upon payment. This includes all content, design, and the ability to
+        transfer or modify the site as you choose.</p>
+      <h3>Pay-monthly model</h3>
+      <p>You own all content you provide or that we create for you. The website platform, design system, and
+        our proprietary code remain our property. Upon cancellation after your minimum term, the hosting
+        arrangement can transfer to you, allowing you to take your content and continue the site elsewhere if
+        desired.</p>
+      <p>We retain intellectual property rights to our processes, methodologies, and design patterns used in
+        delivering our services.</p>
+
+      <h2 class="res" id="tc-hosting-support">5. Hosting and support</h2>
+      <p>Your website is hosted on fast UK-based servers with the following included:</p>
+      <ul>
+        <li>SSL certificate for secure browsing (HTTPS)</li>
+        <li>Domain renewal and management</li>
+        <li>Security monitoring and uptime alerts</li>
+        <li>Regular security updates and patches</li>
+        <li>Ongoing backups and data protection</li>
+        <li>Technical support and maintenance</li>
+      </ul>
+      <p>For pay-monthly clients, support and changes are handled directly &mdash; you contact us with
+        requests and we implement them. There is no CMS, dashboard, or portal to manage.</p>
+      <p>We aim to maintain 99% uptime. In the event of downtime, we will work to restore service as quickly
+        as possible. We are not liable for losses resulting from temporary unavailability beyond our
+        reasonable control.</p>
+
+      <h2 class="res" id="tc-cancellation">6. Cancellation and termination</h2>
+      <h3>Upfront model</h3>
+      <p>No long-term commitment is required. You may cancel at any time by providing 30 days&rsquo; written
+        notice, after which your hosting will cease.</p>
+      <h3>Pay-monthly model</h3>
+      <p>The initial 24-month term is mandatory. After the minimum term expires, you may cancel by providing
+        30 days&rsquo; written notice. During the notice period, your website continues to operate
+        normally.</p>
+      <p>Upon cancellation, we will export all your content in standard formats so you can take it elsewhere
+        if desired. No data is deleted or withheld.</p>
+      <h3>Our cancellation rights</h3>
+      <p>We reserve the right to cancel services if payment is overdue by more than 30 days, or if you violate
+        these terms. We will provide 14 days&rsquo; written notice in such cases.</p>
+
+      <h2 class="res" id="tc-liability">7. Limitation of liability</h2>
+      <p>To the extent permitted by law, our liability for any claim arising from these terms or our services
+        is limited to the total fees you have paid to us in the preceding 12 months.</p>
+      <p>We are not liable for:</p>
+      <ul>
+        <li>Loss of profit, revenue, or data</li>
+        <li>Indirect, incidental, or consequential damages</li>
+        <li>Downtime caused by factors beyond our control</li>
+        <li>Damages from third-party actions or services</li>
+      </ul>
+      <p>You agree to indemnify us against any claims arising from content you provide, your use of the
+        website, or violation of these terms.</p>
+
+      <h2 class="res" id="tc-governing-law">8. Governing law</h2>
+      <p>These terms and conditions are governed by and construed in accordance with the laws of England and
+        Wales. You agree to submit to the exclusive jurisdiction of the courts of England and Wales for any
+        disputes arising from or relating to these terms or our services.</p>
+
+      <h2 class="res" id="tc-contact">9. Contact and disputes</h2>
+      <p>If you have questions about these terms or wish to raise a dispute, please contact us:</p>
+      <div class="mast__meta">
+        <div><b><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></b><span>Email</span></div>
+        <div><b>07748 148082</b><span>Phone</span></div>
+        <div><b>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</b><span>Address</span></div>
+      </div>
+      <p>We will attempt to resolve disputes amicably. If a dispute cannot be resolved through direct
+        communication, either party may pursue legal action in accordance with the governing law section
+        above.</p>
+
+      <!-- The source's closing note (page.tsx:364-371) sits in a tinted
+           bordered panel with no id and no TOC entry. `.prose hr` +
+           a paragraph instead: kit.css:1536-1539 records that the rule is
+           standing in for a new h2, which is exactly what an unnumbered
+           closing remark after clause 9 needs. Zero new CSS. -->
+      <hr>
+      <p><strong>Note:</strong> These terms and conditions reflect the standard services and pricing offered
+        by Digital Consulting Services Ltd. They are provided as a guide and represent the commercial terms
+        under which we operate. For any clarification or to discuss specific arrangements, please contact us
+        directly.</p>
+
+    </article>
+  </div>
+</section>
+
+<section class="sec p--ink" data-ground="ink">
+  <p class="eyeless">Also legal</p>
+  <h2 class="res">The other two documents.</h2>
+  <div class="svcs">
+    <a class="svc" href="?doc=privacy" data-doc-link="privacy">
+      <span class="svc__n">Privacy policy</span>
+      <span class="svc__d">What personal data I hold, why, how long for, and your rights over it.</span>
+    </a>
+    <a class="svc" href="?doc=cookie" data-doc-link="cookie">
+      <span class="svc__n">Cookie policy</span>
+      <span class="svc__d">What gets set on your device, why, and how to turn it off.</span>
+    </a>
+  </div>
+</section>
+
+</div><!-- /doc terms -->
+
+
+<!-- ===== PAGE FOOTER — navy ==========================================
+     Shared by all three documents. The active legal link takes
+     [aria-current], which `.footmap a[aria-current]` (kit.css:1620) already
+     styles aqua — the rig sets it when the document changes.
+     ================================================================== -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Let&rsquo;s talk about<br>your website.</h2>
+    <p class="lead">Free, and without obligation.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="contact.html">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#arr"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="service-detail.html">Services</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="service-detail.html">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="?doc=privacy" data-foot-doc="privacy" data-doc-link="privacy">Privacy policy</a></li>
+        <li><a href="?doc=cookie" data-foot-doc="cookie" data-doc-link="cookie">Cookie policy</a></li>
+        <li><a href="?doc=terms" data-foot-doc="terms" data-doc-link="terms">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<!-- ===== RIG. PROTOTYPE ONLY — DELETE AT PORT, WITH §H6 OF THE CSS. ==== -->
+<div data-rig role="group" aria-label="Prototype: switch document">
+  <b>Document</b>
+  <button type="button" data-rig-btn="privacy" aria-pressed="true">Privacy</button>
+  <button type="button" data-rig-btn="cookie" aria-pressed="false">Cookies</button>
+  <button type="button" data-rig-btn="terms" aria-pressed="false">Terms</button>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="dcsmark" viewBox="0 0 530 254"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></symbol>
+<symbol id="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<script>
+/* =====================================================================
+   1. BAR GROUND PROBE. Identical to 404.html / service-detail.html /
+      contact.html. `main [data-ground]` is re-read on every frame rather
+      than cached, because the rig swaps which document is in the DOM flow
+      and a cached list would hold rects of hidden blocks (all zero).
+   ===================================================================== */
+(function(){
+  var bar = document.getElementById('bar');
+  var queued = false;
+  function read(){
+    queued = false;
+    var grounds = document.querySelectorAll('main [data-ground]');
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      /* a hidden document's blocks report 0/0 and cannot contain the probe */
+      if (r.height && r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  window.__barRead = read;
+  read();
+})();
+
+/* =====================================================================
+   2. `.res` LATCH. Unchanged from wave 1.
+   ===================================================================== */
+(function(){
+  function all(){ return document.querySelectorAll('.sec,.mast,.pagefoot,.svcs'); }
+  if (!('IntersectionObserver' in window)) {
+    all().forEach(function(el){ el.classList.add('in'); });
+    window.__resAll = function(){ all().forEach(function(el){ el.classList.add('in'); }); };
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  all().forEach(function(el){ io.observe(el); });
+  /* the harness backgrounds the tab, so IntersectionObserver never fires
+     (wave2-brief harness trap 1). This latches everything by hand. */
+  window.__resAll = function(){ all().forEach(function(el){ el.classList.add('in'); }); };
+})();
+
+/* =====================================================================
+   3. BURGER. Unchanged from wave 1.
+   ===================================================================== */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+})();
+
+/* =====================================================================
+   4. TOC SCROLL-SPY — OPTIONAL ENHANCEMENT, NOT LOAD-BEARING.
+
+      It sets `aria-current="true"` on one rail entry and nothing else. The
+      TOC is complete, legible and fully navigable with this block deleted;
+      components/legal/legal-toc.tsx currently ships with no scroll-spy at
+      all ("No scroll-spy JS — these pages are text, not an app surface")
+      and that remains a defensible position. It is here so the decision can
+      be made having SEEN it rather than in the abstract. Port cost is
+      recorded in notes-h.md §6: `LegalToc` is a server component today, so
+      this needs either a small client wrapper or a `'use client'` on it.
+
+      NOT an IntersectionObserver, for two reasons. One: IO never fires in
+      this harness (trap 1), so an IO version could not be verified at all.
+      Two: a scroll listener reuses the exact rAF-throttled pattern the bar
+      probe above already uses on every page in the set.
+
+      `getBoundingClientRect().top`, never `offsetTop` — inside a `.sec`,
+      `offsetTop` is relative to the `.sec` and not the document (trap 3).
+      The headings here are static prose, so their rects are true; the trap
+      that makes a rect lie is the TARGET being sticky (trap 4), and nothing
+      in `.legal__body` is.
+   ===================================================================== */
+(function(){
+  var queued = false;
+  function clearance(){
+    /* the same clamp(76px,10vh,94px) the CSS gives scroll-margin-top, read
+       off a heading rather than duplicated as a number here. */
+    var h = document.querySelector('.doc:not([hidden]) .legal__body h2[id]');
+    if (!h) return 90;
+    var v = parseFloat(getComputedStyle(h).scrollMarginTop);
+    return isNaN(v) ? 90 : v;
+  }
+  function read(){
+    queued = false;
+    var doc = document.querySelector('.doc:not([hidden])');
+    if (!doc) return;
+    var rail = doc.querySelector('.legal__toc');
+    if (!rail) return;
+    var heads = doc.querySelectorAll('.legal__body h2[id]');
+    var line = clearance() + 4;
+    var active = null;
+    for (var i = 0; i < heads.length; i++){
+      if (heads[i].getBoundingClientRect().top <= line) active = heads[i];
+    }
+    var links = rail.querySelectorAll('a');
+    for (var j = 0; j < links.length; j++){
+      var on = active && links[j].getAttribute('href') === '#' + active.id;
+      if (on) links[j].setAttribute('aria-current', 'true');
+      else links[j].removeAttribute('aria-current');
+    }
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  window.__spyRead = read;
+  read();
+})();
+
+/* =====================================================================
+   5. RIG — PROTOTYPE ONLY. DELETE AT PORT, WITH ITS MARKUP AND §H6.
+      Three routes, one file. Switching sets `hidden` on the two documents
+      that are not showing, updates <title>, the footer's [aria-current],
+      the rig's [aria-pressed] and the URL (?doc=), then jumps to the top.
+      `behavior:'instant'` — smooth scroll is rAF-driven and rAF does not
+      fire in a backgrounded iframe (harness trap 2).
+   ===================================================================== */
+(function(){
+  var TITLES = {
+    privacy: 'Privacy policy',
+    cookie:  'Cookie policy',
+    terms:   'Terms and conditions'
+  };
+  function show(name, keepScroll){
+    if (!TITLES[name]) name = 'privacy';
+    document.querySelectorAll('.doc').forEach(function(d){
+      d.hidden = (d.dataset.doc !== name);
+    });
+    document.querySelectorAll('[data-rig-btn]').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.rigBtn === name));
+    });
+    document.querySelectorAll('[data-foot-doc]').forEach(function(a){
+      if (a.dataset.footDoc === name) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    document.title = TITLES[name] + ' — Digital Consulting Services';
+    try {
+      history.replaceState(null, '', location.pathname + '?doc=' + name);
+    } catch (e) {}
+    if (!keepScroll) window.scrollTo({top: 0, behavior: 'instant'});
+    if (window.__resAll) window.__resAll();
+    if (window.__barRead) window.__barRead();
+    if (window.__spyRead) window.__spyRead();
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-rig-btn]');
+    if (btn){ show(btn.dataset.rigBtn); return; }
+    var link = e.target.closest('[data-doc-link]');
+    if (link){ e.preventDefault(); show(link.dataset.docLink); }
+  });
+  var m = /[?&]doc=([a-z]+)/.exec(location.search);
+  show(m ? m[1] : 'privacy', true);
+})();
+</script>
+</body>
+</html>

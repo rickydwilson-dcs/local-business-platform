@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Website design in Brighton — Digital Consulting Services</title>
+<meta name="description" content="Brighton is one of the most competitive markets in the south of England. I build sites that get found there, from a studio seventeen miles away in Polegate.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 3b / WAVE 2 — AGENT G — /locations/[slug]
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  THE TEMPLATE, SHOWN CARRYING BRIGHTON. Brighton was chosen because it is
+  the town with the most source material AND the one where the most optional
+  blocks fire, so the template is exercised rather than merely displayed.
+
+  HOW THIS TEMPLATE AVOIDS BEING EIGHT COPIES OF ONE PAGE. Every block below
+  is marked either CONSTANT (byte-identical on all eight) or PER-TOWN. Three
+  of the PER-TOWN blocks are OPTIONAL — they render only where the source
+  data supports them, so the eight pages differ in SHAPE, not just in the
+  town name:
+
+    .quote / blockquote    fires on 3 of 8. All three testimonials carry a
+                           `locationSlug` (brighton, lewes, eastbourne), so
+                           the Brighton quote belongs to this page by data
+                           rather than being borrowed for it. The other five
+                           towns get NOTHING — no invented quote, no stand-in.
+    "in person" block      fires on 3 of 8 (polegate, hailsham, lewes) —
+                           the only three whose MDX offers a local meeting.
+    "the area around it"   fires on 3 of 8 (uckfield, seaford, hove) — the
+                           only three whose MDX names neighbouring places.
+
+  The full eight-row matrix of which block fires where is in notes-g.md §3.
+
+  CONTENT IS REAL. Every paragraph, bullet and FAQ below is the text of
+  sites/dcs/content/locations/brighton.mdx. The testimonial is
+  content/testimonials/mark-h-electrician.mdx, whose own frontmatter carries
+  locationSlug: "brighton".
+
+  TWO RECORDED CONTENT EDITS, logged line by line in notes-g.md §5:
+    - first-person plural -> singular (session ground rule 8).
+    - the trades frame becomes a worked example rather than the frame
+      (session.md D2). The h1 loses "for Tradespeople"; the trade list stays
+      in the body as an example of who has actually been built for.
+  Substance, claims and structure are otherwise untouched. Nothing local was
+  invented: there is no fact about Brighton on this page that is not either in
+  brighton.mdx or computed from its own `coordinates` block.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit.css">
+</head>
+<body>
+
+<!-- ===== CONSTANT — header, from service-detail.html:38-74 unchanged ==== -->
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="#">Work</a>
+    <a href="services-list.html">Services</a>
+    <a href="#">Pricing</a>
+    <a href="#">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="#"><span>Work</span></a>
+    <a href="services-list.html"><span>Services</span></a>
+    <a href="#"><span>Pricing</span></a>
+    <a href="#"><span>Blog</span></a>
+    <a href="about.html"><span>About</span></a>
+    <a href="contact.html"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD — ink =============================
+     PER-TOWN: the last crumb, the eyebrow, the h1, the lead and the first
+     fact. CONSTANT: everything else.
+
+     The crumb is brighton.mdx:21-25's own `breadcrumbs` array, with ONE
+     CORRECTION: that file lists "Locations" TWICE (lines 22 and 23) and so
+     would render Home / Locations / Locations / Brighton. It is the only one
+     of the eight with the duplicate. Flagged, not fixed — the MDX is not
+     mine to edit (notes-g.md §6).
+     ================================================================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><a href="locations-list.html">Locations</a></li>
+      <li><span aria-current="page">Brighton</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Areas I cover &middot; Brighton</p>
+  <!-- h1: brighton.mdx:2 "Website Design for Tradespeople in Brighton",
+       reframed per D2 and set in sentence case per notes-c.md §15. Two lines
+       inside `.mast h1`'s 17ch cap (kit.css:1310) — a four-line masthead
+       takes the page to 83% of viewport height. -->
+  <h1>Website design in Brighton</h1>
+  <p class="lead">Brighton is one of the most competitive markets in the south of England. The city is
+    full of good small businesses and customers have plenty of choice &mdash; so if you aren&rsquo;t
+    showing up prominently online, you&rsquo;re handing the work to somebody who is.</p>
+  <!-- TWO facts, not wave 1's four. The demoted tier gets the quietest
+       masthead in the set, and both figures are real: 17 miles is the
+       haversine distance between brighton.mdx:10-12's coordinates and
+       polegate.mdx's own, and the address is polegate.mdx's FAQ 1.
+       Labels are short so the row pairs up at 390px — see notes-g.md §3. -->
+  <div class="mast__meta">
+    <div><b>17 miles</b><span>From the studio</span></div>
+    <div><b>Polegate BN26</b><span>Where I work from</span></div>
+  </div>
+</header>
+
+<!-- ===== 2. THE BODY — white ========================================
+     PER-TOWN in full. `.prose` inside `.measure` is the approved long-form
+     composition (service-detail.html:110) and the only thing this tier needs:
+     a location page is a page that gets read once, by one person, deciding
+     whether the person who built it understands where they work.
+     ================================================================== -->
+<section class="sec p--white" data-ground="white">
+  <article class="prose measure">
+
+    <h2 class="res">Why Brighton is harder than the towns around it</h2>
+
+    <p>Brighton is home to a huge number of small businesses, and customers here have more choice than
+      anywhere else I work. That cuts both ways: the market is big enough to build a business on, and
+      crowded enough that being invisible in it costs you real work every week.</p>
+
+    <p>I run DCS from Polegate in East Sussex, about seventeen miles east of the city. I know the Brighton
+      market &mdash; the density of the competition, the range of customers from student landlords to
+      luxury homeowners, and the expectations that come with operating somewhere this size.</p>
+
+    <h2 class="res">Brighton is the wrong place for an off-the-shelf site</h2>
+
+    <p>Every site I build is built from scratch, and in a market this competitive that is the difference
+      between showing up and being one of forty results nobody scrolls to.</p>
+
+    <p><strong>For a Brighton business that means four things in particular:</strong></p>
+
+    <ul>
+      <li>Custom design, rather than a template a visitor can recognise in two seconds.</li>
+      <li>Copy written for what you actually do and the part of the city you actually work in.</li>
+      <li>Local SEO targeting Brighton neighbourhoods and the surrounding towns, not just the word
+        &ldquo;Brighton&rdquo;.</li>
+      <li>Layouts built to turn a visit into a call or an enquiry, which is the only thing a site in
+        this market is for.</li>
+    </ul>
+
+    <p>That applies whatever the business is. The electrician quoted below works in the city; a shop, a
+      studio or a letting agent would get the same build, written for a different customer.</p>
+
+    <!-- OPTIONAL BLOCK — TESTIMONIAL. Fires on 3 of the 8 towns only.
+         content/testimonials/mark-h-electrician.mdx carries
+         locationSlug: "brighton", so this quote is this page's own. Lewes has
+         Dave C. and Eastbourne has Sarah T.; the remaining five towns render
+         no quote at all rather than borrowing one. `.prose blockquote`
+         (kit.css §31) rather than `.quote`, which at
+         clamp(1.6rem,3.6vw,2.6rem) is a panel headline and would dominate a
+         74ch column. -->
+    <blockquote>
+      <p>My phone started ringing within two weeks of the site going live. Ricky handled everything
+        &mdash; I didn&rsquo;t have to do a thing.</p>
+      <cite>Mark H. &mdash; Electrician, Brighton</cite>
+    </blockquote>
+
+    <h2 class="res">Domestic and commercial are two different jobs</h2>
+
+    <p>Brighton has more commercial work going than the towns around it &mdash; letting agents, property
+      managers, and firms that put a contract out rather than ring the first name they find. Those
+      buyers want to see credibility before they make contact, and they want to see it in a different
+      place on the page than a homeowner does.</p>
+
+    <p>So where it&rsquo;s worth doing, I&rsquo;ll build the site to speak to both: separate content and
+      separate calls to action for domestic and commercial, rather than one set of words trying to do
+      both jobs and landing neither.</p>
+
+    <h2 class="res">Local to Brighton, and it wouldn&rsquo;t matter if I weren&rsquo;t</h2>
+
+    <p>Brighton is genuinely local to me, and I know the area, the competition and the market well
+      enough for it to show in the work. But I build for businesses across the whole of the UK, from
+      Cornwall to the Cairngorms, and every one of them gets the same locally-tuned approach &mdash;
+      built around the searches their own customers are actually making.</p>
+
+    <p>If you run a business in Brighton and want a site that brings in consistent, quality enquiries,
+      <a href="contact.html">get in touch</a>. There&rsquo;s <a href="#">the pricing</a> if you&rsquo;d
+      rather see the numbers first.</p>
+
+  </article>
+</section>
+
+<!-- ===== 3. QUESTIONS — ink =========================================
+     PER-TOWN: all five. Each town's MDX carries five genuinely different
+     questions — they are the least repetitive thing in the source and the
+     main reason these eight pages have something to say. `.qa` (kit.css §18)
+     assumes a dark or magenta ground; ink is the composition the approved
+     detail page uses (service-detail.html:226-259).
+     ================================================================== -->
+<section class="sec p--ink" data-ground="ink">
+  <div class="measure">
+    <p class="eyeless">Brighton questions</p>
+    <h2 class="res">What people here ask first.</h2>
+    <div class="qa">
+      <details>
+        <summary>Do you work with businesses in Brighton?</summary>
+        <div class="qa__a"><div><p>Yes &mdash; Brighton is one of my most active areas. I work with
+          electricians, plumbers, builders, roofers, heating engineers and landscapers in and around the
+          city, and the same build suits a shop, a studio or a practice just as well. The office is in
+          Polegate, East Sussex, so Brighton is right on the doorstep.</p></div></div>
+      </details>
+      <details>
+        <summary>How do I get found on Google in Brighton with this much competition?</summary>
+        <div class="qa__a"><div><p>Competing in Brighton takes a technically sound website, well-targeted
+          local content, and a properly optimised Google Business Profile. I build all three in from the
+          start. I&rsquo;ll also position you around specific neighbourhoods and the surrounding areas,
+          where the competition is often lower and the opportunities just as
+          strong.</p></div></div>
+      </details>
+      <details>
+        <summary>What does a professional website need in Brighton?</summary>
+        <div class="qa__a"><div><p>Brighton customers are savvy and their expectations are high. Your site
+          needs to load fast, look right on a phone, show real reviews and accreditations, and make
+          getting in touch frictionless. All of that is in every build as
+          standard.</p></div></div>
+      </details>
+      <details>
+        <summary>Can a website help me win larger commercial jobs here?</summary>
+        <div class="qa__a"><div><p>Yes. A strong site builds the kind of credibility that commercial
+          clients, letting agents and property managers expect before they make contact. I can tailor the
+          site to target domestic and commercial audiences separately, with its own content and calls to
+          action for each.</p></div></div>
+      </details>
+      <details>
+        <summary>Is DCS only East Sussex, or the rest of the UK too?</summary>
+        <div class="qa__a"><div><p>Both. The office is in Polegate, East Sussex &mdash; so Brighton is a
+          local area &mdash; but I work with businesses across the whole of the UK. The same process and
+          the same standard, wherever you&rsquo;re based.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. PAGE FOOTER — navy =====================================
+     CONSTANT except [aria-current], which moves to this town. The footer is
+     also this tier's only cross-link between the eight: a dedicated
+     "nearby areas" band was designed and then cut, because the footer map
+     already lists all eight on every page and a demoted tier does not need
+     the same navigation twice. Reasoned in notes-g.md §2.
+     ================================================================== -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Let&rsquo;s talk about<br>your website.</h2>
+    <p class="lead">Free, and without obligation.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="services-list.html">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="service-detail.html">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="location-detail.html" aria-current="page">Brighton</a></li>
+        <li><a href="location-detail.html">Eastbourne</a></li>
+        <li><a href="location-detail.html">Hailsham</a></li>
+        <li><a href="location-detail.html">Hove</a></li>
+        <li><a href="location-detail.html">Lewes</a></li>
+        <li><a href="location-detail.html">Polegate</a></li>
+        <li><a href="location-detail.html">Seaford</a></li>
+        <li><a href="location-detail.html">Uckfield</a></li>
+        <li><a href="locations-list.html">All eight areas</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* service-detail.html:366-429 unchanged. Ground probe, .in latch, mobile menu. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+(function(){
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.sec,.mast,.pagefoot').forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  document.querySelectorAll('.sec,.mast,.pagefoot,.work,.qa').forEach(function(el){ io.observe(el); });
+})();
+
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+</script>
+</body>
+</html>

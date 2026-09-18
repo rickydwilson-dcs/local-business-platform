@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Website design for tradespeople — Digital Consulting Services</title>
+<meta name="description" content="Bespoke, mobile-first websites for tradespeople across the UK. I build it, manage it and keep it running — hosting, local SEO and support included.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  PHASE 2 REFERENCE PAGE — /services/[slug]
+  Static HTML. Nothing under sites/dcs/ is touched.
+
+  CONTENT IS REAL. Every heading, paragraph, bullet, FAQ and figure below is
+  the actual text of sites/dcs/content/services/web-design.mdx (frontmatter +
+  body), chosen because it has the strongest body of the six: five h2
+  sections, a bulleted list, real prices and a genuine closing move.
+  The testimonial is sites/dcs/content/testimonials/mark-h-electrician.mdx,
+  whose own frontmatter carries serviceSlug: "web-design" — it belongs to this
+  page rather than being borrowed for it.
+
+  ONE EDIT TO THE SOURCE TEXT: first-person plural -> singular throughout
+  ("we build" -> "I build"). Session ground rule 8 / design-kit.md §10: the
+  homepage is first-person singular ("looked after by me", hero.tsx:32) and is
+  the correct voice; the inner pages are the ones that are wrong. Substance,
+  claims, prices and structure are otherwise untouched.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER. .menu is a SIBLING of .bar, never a descendant — an ancestor
+     with backdrop-filter or transform becomes the containing block for
+     position:fixed and traps the overlay in the bar's own box.
+     ===================================================================== -->
+<header class="bar" id="bar" data-ground="ink">
+  <a class="mark" href="#top" aria-label="Digital Consulting Services — home">
+    <svg class="mark__svg" viewBox="0 0 530 254" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 434.40,253.91 L 425.70,253.92 L 418.90,252.95 L 329.30,252.94 L 327.47,252.70 L 326.29,251.80 L 326.54,247.70 L 338.14,213.90 L 342.94,200.60 L 344.70,198.47 L 348.00,197.95 L 447.70,197.94 L 457.30,196.81 L 465.30,194.21 L 469.50,190.91 L 474.17,185.40 L 475.95,178.50 L 474.76,171.90 L 471.35,166.10 L 467.00,162.31 L 460.87,159.10 L 453.20,157.08 L 414.70,152.83 L 390.50,148.59 L 379.30,145.49 L 368.50,141.19 L 355.59,133.70 L 346.20,125.61 L 338.63,115.90 L 334.73,109.40 L 329.54,95.20 L 327.19,85.90 L 327.19,72.20 L 328.32,70.90 L 330.10,70.89 L 355.70,80.36 L 358.40,80.57 L 360.01,79.40 L 379.32,19.00 L 378.40,16.14 L 371.80,12.11 L 370.70,10.05 L 372.15,8.50 L 377.30,6.37 L 383.80,4.22 L 393.20,2.16 L 412.70,-0.02 L 517.00,0.19 L 518.50,1.52 L 518.44,3.90 L 504.33,53.30 L 502.25,56.40 L 498.90,56.95 L 401.00,57.04 L 395.70,58.63 L 389.80,61.79 L 385.71,65.90 L 383.54,70.70 L 383.18,76.80 L 386.29,84.40 L 390.30,88.47 L 397.03,91.80 L 409.70,94.82 L 465.80,102.18 L 480.88,106.10 L 493.90,111.97 L 499.80,115.57 L 505.60,120.19 L 512.35,127.10 L 520.20,138.48 L 526.83,153.40 L 529.92,168.60 L 529.92,183.30 L 528.71,191.90 L 523.73,207.40 L 518.69,217.30 L 512.30,226.06 L 503.06,235.30 L 497.99,239.20 L 483.88,246.80 L 471.40,250.59 L 458.20,252.83 L 439.70,252.98 L 434.40,253.91 Z M 313.30,253.91 L 287.20,253.94 L 278.70,252.83 L 260.20,248.51 L 248.50,244.19 L 237.50,238.63 L 223.30,228.71 L 211.60,217.06 L 203.40,206.26 L 201.80,205.25 L 199.90,206.16 L 195.00,212.39 L 180.06,227.30 L 165.90,237.31 L 154.40,243.19 L 144.88,246.80 L 130.40,250.59 L 119.90,251.95 L 5.00,251.95 L 1.09,251.00 L -0.05,247.50 L -0.05,4.80 L 0.74,1.90 L 4.10,0.95 L 108.70,0.96 L 114.30,1.89 L 122.20,2.07 L 134.40,4.31 L 154.60,10.37 L 167.70,17.11 L 181.39,26.90 L 192.30,37.84 L 200.50,48.06 L 202.20,48.97 L 204.20,47.91 L 210.60,39.84 L 220.84,29.60 L 227.59,24.20 L 236.50,18.27 L 257.30,8.37 L 276.20,3.16 L 295.00,0.95 L 311.20,0.98 L 329.70,3.16 L 343.10,6.51 L 350.60,9.37 L 364.90,16.43 L 369.00,19.06 L 370.33,21.60 L 368.51,28.70 L 355.93,67.50 L 354.38,70.00 L 351.30,70.23 L 323.90,60.76 L 316.20,59.08 L 289.70,58.98 L 278.30,61.41 L 265.30,67.43 L 259.84,71.60 L 252.20,79.29 L 248.29,84.50 L 243.84,92.20 L 238.26,109.70 L 236.98,117.60 L 236.96,135.00 L 239.39,148.70 L 244.49,162.90 L 247.98,169.90 L 254.20,178.61 L 260.30,184.71 L 267.90,189.85 L 275.03,192.80 L 282.10,194.72 L 290.30,195.89 L 305.60,195.89 L 310.30,195.01 L 316.20,194.82 L 334.70,191.34 L 336.86,192.10 L 336.93,194.40 L 333.90,203.63 L 317.64,250.30 L 316.01,252.90 L 313.30,253.91 Z M 111.45,196.90 L 118.70,195.51 L 127.60,192.52 L 142.31,184.70 L 152.19,175.00 L 159.06,162.70 L 162.81,151.60 L 165.95,136.50 L 165.86,115.90 L 163.64,103.70 L 159.76,90.90 L 156.25,83.90 L 148.70,73.59 L 134.50,63.34 L 125.80,59.73 L 121.10,58.24 L 112.70,56.96 L 59.88,57.20 L 58.40,58.38 L 57.95,60.80 L 58.19,195.00 L 59.40,196.51 L 61.50,196.94 L 111.45,196.90 Z M 369.80,189.91 L 350.30,189.89 L 347.90,189.42 L 347.42,188.70 L 349.90,186.51 L 368.60,176.91 L 370.50,178.52 L 372.43,187.20 L 371.94,189.10 L 369.80,189.91 Z"/></svg>
+    <span class="mark__type"><span>digital consulting</span><span>services</span></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="#">Work</a>
+    <a href="#" aria-current="page">Services</a>
+    <a href="#">Pricing</a>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="bar__r">
+    <a class="hire" href="mailto:mail@digitalconsultingservices.co.uk">Start a project
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Primary">
+    <a href="#"><span>Work</span></a>
+    <a href="#" aria-current="page"><span>Services</span></a>
+    <a href="#"><span>Pricing</span></a>
+    <a href="#"><span>Blog</span></a>
+    <a href="#"><span>About</span></a>
+    <a href="#"><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+    <a href="tel:+447748148082">07748 148082</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== 1. BREADCRUMB + MASTHEAD — ink ============================== -->
+<div class="crumb p--ink" data-ground="ink">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><span aria-current="page">Website Design for Tradespeople</span></li>
+    </ol>
+  </nav>
+</div>
+
+<header class="mast p--ink" data-ground="ink">
+  <p class="eyeless">Services &middot; 01 / 06</p>
+  <h1>A website that works as hard as you do</h1>
+  <p class="lead">Bespoke, mobile-first websites for tradespeople across the UK. I build it, manage it,
+    and keep it running &mdash; you just focus on the work.</p>
+  <div class="hero__act">
+    <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Talk to me
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="btn btn--ghost" href="#">See the pricing</a>
+  </div>
+  <div class="mast__meta">
+    <div><b>&pound;45/month</b><span>Pay monthly from</span></div>
+    <div><b>&pound;750</b><span>Upfront from</span></div>
+    <div><b>2&ndash;3 weeks</b><span>Typical build</span></div>
+    <div><b>Fully managed</b><span>Hosting, updates, support</span></div>
+  </div>
+</header>
+
+<!-- ===== 2. THE BODY — white ========================================= -->
+<section class="sec p--white" data-ground="white">
+  <article class="prose measure">
+
+    <h2 class="res">Why tradespeople need a proper website</h2>
+
+    <p>Most people looking for a tradesperson start with Google. They type in something like
+      &ldquo;electrician near me&rdquo; or &ldquo;local plumber&rdquo; and pick from the first few results. If
+      you&rsquo;re not showing up &mdash; or if your site looks rough on a phone &mdash; you&rsquo;re losing jobs
+      to someone who just has a better website.</p>
+
+    <p>A Facebook page isn&rsquo;t enough. Checkatrade and MyBuilder send you leads shared with every other
+      tradesperson in your area, and you&rsquo;re paying for them whether you win the job or not. A website you
+      own means enquiries that come directly to you, at no cost per lead.</p>
+
+    <p>But the website needs to actually work. That means loading fast, looking professional on a phone, being
+      clear about what you do and where you cover, and making it easy for someone to get in touch. These
+      things aren&rsquo;t complicated, but they matter.</p>
+
+    <h2 class="res">What makes a good tradesperson website</h2>
+
+    <p>A tradesperson website isn&rsquo;t the same as a website for a shop or a restaurant. Your customers are
+      looking for trust signals fast: are you local, are you qualified, can I see examples of your work, how do
+      I call you right now.</p>
+
+    <p><strong>A good tradesperson website does a few things well:</strong></p>
+
+    <ul>
+      <li>It loads in under two seconds on a phone. Slow sites get abandoned before anyone reads a word.</li>
+      <li>It tells visitors immediately what you do and where you work. No guessing.</li>
+      <li>It shows your qualifications, accreditations, and any relevant memberships (Gas Safe, NICEIC, CHAS,
+        etc.).</li>
+      <li>It has clear calls to action &mdash; phone number prominent at the top, a short contact form that
+        actually works.</li>
+      <li>It has separate pages for each main service, so Google understands what you offer.</li>
+      <li>It has pages for the towns and areas you cover, so you show up in
+        <a href="#">local searches</a>.</li>
+    </ul>
+
+    <h2 class="res">Why bespoke beats a template</h2>
+
+    <p>Template-based website builders like Wix or Squarespace can produce a serviceable website. But they come
+      with real drawbacks for tradespeople.</p>
+
+    <p>First, the SEO. Template platforms often produce bloated code that loads slowly, with limited control
+      over the technical SEO elements that matter for local search. Second, they all look like templates. A
+      visitor can spot a generic Wix site in seconds, and it doesn&rsquo;t inspire confidence in someone
+      who&rsquo;s about to let you into their home.</p>
+
+    <p>A DCS website is built from the ground up to your brief. It reflects your business &mdash; the services
+      you actually offer, the areas you actually cover, the tone that suits your customers. And it&rsquo;s
+      built on a fast, modern tech stack that performs well in Google&rsquo;s eyes.</p>
+
+    <blockquote>
+      <p>My phone started ringing within two weeks of the site going live. Ricky handled everything &mdash; I
+        didn&rsquo;t have to do a thing.</p>
+      <cite>Mark H. &mdash; Electrician, Brighton</cite>
+    </blockquote>
+
+    <figure>
+      <!-- HONESTY. This is the real R2 asset the live homepage already uses as the
+           Colossus Scaffolding case-study poster (lib/home-assets.ts:62). It is a
+           photograph of the client's scaffolding, NOT a screenshot of their website
+           — the first draft of this caption said it was, which would have been a
+           false claim about a named client. Alt and caption now both say what it
+           actually is. A project with no real media takes `.slot` instead. -->
+      <img src="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/home/video/colossus-scaffolding.jpg"
+           alt="Scaffolding erected across the front of a brick building in East Sussex."
+           loading="lazy" decoding="async">
+      <figcaption>Colossus Scaffolding, East Sussex &mdash; a 30-page build covering every service and every
+        town in their area. Live since September 2024.</figcaption>
+    </figure>
+
+    <h2 class="res">Fully managed &mdash; no tech needed</h2>
+
+    <p>A lot of tradespeople don&rsquo;t want to think about their website. They want it to exist, work, and
+      bring in jobs &mdash; full stop. That&rsquo;s exactly how DCS works.</p>
+
+    <p>I handle the hosting, security updates, domain renewal, and any content changes. You don&rsquo;t need to
+      know anything about websites or log into any systems. If something breaks, I fix it. If you want to add a
+      new service, you send me a message.</p>
+
+    <!-- PRICES CORRECTED 2026-09-17 to the live homepage set (home-data.ts).
+         Also dropped "spread over 12 months": nothing states a term, and the
+         only term the site publishes is a 24-month minimum. -->
+    <p>You can pay monthly from &pound;45 a month, which covers the build and the
+      <a href="#">ongoing management</a> together &mdash; no large upfront cost. If you&rsquo;d prefer
+      to own the site outright from day one, there&rsquo;s an upfront build from &pound;750, and a
+      larger multi-page build from &pound;1,495.</p>
+
+    <h2 class="res">I build for tradespeople across the UK</h2>
+
+    <p>I&rsquo;m based in East Sussex, but I work with tradespeople from Cornwall to the Scottish Highlands. The
+      work is done remotely &mdash; a phone call to understand your business, a simple form to gather the
+      content, and then I get on with building it. I&rsquo;ve built sites for electricians, plumbers, builders,
+      roofers, landscapers, and more.</p>
+
+    <p>If you&rsquo;re ready for a website that actually brings in work, <a href="#">get in touch</a>.</p>
+
+  </article>
+</section>
+
+<!-- ===== 3. INCLUDED + QUESTIONS — ink =============================== -->
+<section class="sec p--ink" data-ground="ink">
+  <div class="measure">
+    <p class="eyeless">What you get</p>
+    <h2 class="res">Everything, in one price.</h2>
+    <!-- .detail__l on ink is this list's native ground: the aqua check is the
+         design's one "included / confirmed" idiom (kit.css §17). -->
+    <div class="detail__l">
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Bespoke design, built to your brief &mdash; not from a template</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Mobile-first build, tested on real devices before going live</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Fast hosting, SSL certificate and your domain</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> On-page SEO, service pages and location pages</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> A contact form that works, and ongoing management</div>
+      <div><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> You never need to log into a CMS or touch the site yourself</div>
+    </div>
+
+    <h2 class="res" style="margin-top:clamp(56px,8vh,96px)">Common questions</h2>
+    <div class="qa">
+      <details>
+        <summary>How long does it take to build?</summary>
+        <div class="qa__a"><div><p>Most sites are live within 2&ndash;3 weeks of me receiving your content and
+          sign-off. I send you a simple intake form to gather everything I need &mdash; business info, services,
+          areas covered, and any photos you have. From there, I handle everything.</p></div></div>
+      </details>
+      <details>
+        <summary>What if I want changes after it&rsquo;s live?</summary>
+        <div class="qa__a"><div><p>Content updates &mdash; adding a new service, updating your phone number,
+          changing a photo &mdash; are included in your monthly management. Just send me a message and
+          I&rsquo;ll make the change, usually within one business day.</p></div></div>
+      </details>
+      <details>
+        <summary>Do I need to buy a domain?</summary>
+        <div class="qa__a"><div><p>No. Domain registration is handled as part of your website setup. If you
+          already own a domain, I can transfer it or point it to your new site &mdash; whichever you
+          prefer.</p></div></div>
+      </details>
+      <details>
+        <summary>Is it mobile-friendly?</summary>
+        <div class="qa__a"><div><p>Yes, every site I build is mobile-first. That means it&rsquo;s designed for
+          phones before anything else, because that&rsquo;s where most of your enquiries will come from. I test
+          on real devices before going live.</p></div></div>
+      </details>
+      <details>
+        <summary>Will it show up on Google?</summary>
+        <div class="qa__a"><div><p>I build local SEO into every site from the start &mdash; service pages,
+          location pages, Schema markup, and a proper sitemap. I&rsquo;ll also guide you through setting up or
+          optimising your Google Business Profile. You won&rsquo;t rank overnight, but you&rsquo;ll be set up
+          correctly from day one.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. THE OTHER FIVE SERVICES — aqua =========================== -->
+<section class="sec p--aqua" data-ground="aqua">
+  <p class="eyeless">More services</p>
+  <h2 class="res">The other five.</h2>
+  <p class="lead">Every one of them is something I already do for the sites I look after. Nothing here is a
+    bolt-on somebody else delivers.</p>
+  <div class="work">
+    <a class="row" href="#">
+      <span class="row__n">Local SEO</span>
+      <span class="row__m">Built in as standard<em>Included with every build</em></span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Ongoing website management</span>
+      <span class="row__m">From &pound;10/month<em>Hosting, updates, support</em></span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">eCommerce websites</span>
+      <span class="row__m">WooCommerce<em>Built, loaded and managed</em></span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Analytics &amp; reporting</span>
+      <span class="row__m">Plain-English monthly<em>Analytics and Search Console</em></span>
+    </a>
+    <a class="row" href="#">
+      <span class="row__n">Google Workspace email</span>
+      <span class="row__m">One-off setup<em>Google bills you directly</em></span>
+    </a>
+  </div>
+</section>
+
+<!-- ===== 5. PAGE FOOTER — navy ====================================== -->
+<footer class="pagefoot p--navy" data-ground="navy">
+  <div class="end__main">
+    <p class="eyeless">Start a project</p>
+    <h2 class="res">Let&rsquo;s talk about<br>your website.</h2>
+    <p class="lead">Free, and without obligation.</p>
+    <div><a class="big" href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></div>
+    <div><a class="big" href="tel:+447748148082">07748 148082</a></div>
+    <div class="hero__act">
+      <a class="btn" href="mailto:mail@digitalconsultingservices.co.uk">Get a free quote
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footmap">
+    <div>
+      <p class="eyeless">Pages</p>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Services</p>
+      <ul>
+        <li><a href="#" aria-current="page">Website design</a></li>
+        <li><a href="#">Local SEO</a></li>
+        <li><a href="#">Ongoing management</a></li>
+        <li><a href="#">eCommerce</a></li>
+        <li><a href="#">Analytics &amp; reporting</a></li>
+        <li><a href="#">Google Workspace email</a></li>
+      </ul>
+    </div>
+    <div>
+      <!-- Decision D2 (session.md:137-141): the 8 location pages live here,
+           not in the primary nav. -->
+      <p class="eyeless">Areas I cover</p>
+      <ul>
+        <li><a href="#">Brighton</a></li>
+        <li><a href="#">Eastbourne</a></li>
+        <li><a href="#">Hailsham</a></li>
+        <li><a href="#">Hove</a></li>
+        <li><a href="#">Lewes</a></li>
+        <li><a href="#">Polegate</a></li>
+        <li><a href="#">Seaford</a></li>
+        <li><a href="#">Uckfield</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyeless">Get in touch</p>
+      <ul>
+        <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+        <li><a href="tel:+447748148082">07748 148082</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Cookie policy</a></li>
+        <li><a href="#">Terms &amp; conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="end__foot">
+    <span>&copy; 2026 Digital Consulting Services Ltd</span>
+    <span>Unit H3, Chaucer Business Park, Polegate, East Sussex BN26 6QH</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* ---------------------------------------------------------------------
+   Three behaviours, all of them ports of what the live homepage does.
+   Nothing here is new design; it is what the CSS in kit.css assumes.
+   --------------------------------------------------------------------- */
+
+/* 1. The .bar ground probe — home-behaviour.tsx:109-115, 224-247.
+      A point bar.height * 0.62 down from the top is tested against every
+      [data-ground] rect, and THE LAST MATCH IN DOCUMENT ORDER WINS, because
+      sections overlap (here by --r) and the last one is the one painting on
+      top. Round 1 used a hardcoded probe of 40px; 0.62 of the measured bar
+      is the real formula. */
+(function(){
+  var bar = document.getElementById('bar');
+  var grounds = Array.prototype.slice.call(document.querySelectorAll('main [data-ground]'));
+  var queued = false;
+  function read(){
+    queued = false;
+    var probe = bar.getBoundingClientRect().height * 0.62;
+    var current = null;
+    for (var i = 0; i < grounds.length; i++){
+      var r = grounds[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = grounds[i];
+    }
+    if (current) bar.setAttribute('data-ground', current.dataset.ground);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(read); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  read();
+})();
+
+/* 2. The .in latch — home-behaviour.tsx:276-289. One-shot at threshold .16,
+      unobserved immediately so a heading can never flicker back to its rest
+      colour. Without this every .res heading stays muted forever. */
+(function(){
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.sec,.mast,.pagefoot').forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16});
+  document.querySelectorAll('.sec,.mast,.pagefoot,.work,.qa').forEach(function(el){ io.observe(el); });
+})();
+
+/* 3. The mobile menu. #menu is a sibling of .bar, and the burger only exists
+      below 1080px. `service-detail.html#menu` opens it on load, which is how
+      _chrome.html shows the open state inside a 390px iframe. */
+(function(){
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function set(open){
+    menu.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ set(menu.hidden); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) set(false); });
+  if (location.hash === '#menu') set(true);
+})();
+</script>
+</body>
+</html>

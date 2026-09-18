@@ -1,0 +1,696 @@
+/* ##########################################################################
+   ##                                                                      ##
+   ##   kit-additions-d.css  —  PHASE 3, AGENT D                           ##
+   ##   /contact (+ success state) and the 404.                            ##
+   ##                                                                      ##
+   ##   LINK THIS AFTER kit.css. It does not modify kit.css; four other    ##
+   ##   agents are editing in parallel and Phase 4 reconciles.             ##
+   ##                                                                      ##
+   ##   WHAT THIS FILE IS. design-kit.md G6: there is no input, textarea,  ##
+   ##   select, label, error or success styling ANYWHERE in home-r9.css,   ##
+   ##   shared.css or kit.css, and home-r9-reset.css:80-88 deliberately    ##
+   ##   `revert`s form controls to the browser default. So this is the     ##
+   ##   one genuinely new component family in wave 1.                      ##
+   ##                                                                      ##
+   ##   HOW IT WAS DERIVED, in one paragraph. This design already has      ##
+   ##   five interactive surfaces and they agree with each other:          ##
+   ##     · an EMPTY interactive surface is a 1.5px border that goes       ##
+   ##       SOLID currentColor on engagement          (.btn--ghost:hover)  ##
+   ##     · a SELECTABLE THING is a full-width row on a 1px rule, with a   ##
+   ##       label left and a value right       (.tier, .row, .svc, .qa)    ##
+   ##     · ENGAGEMENT is announced by a RULE THAT DRAWS FROM THE LEFT     ##
+   ##       (.bar nav a::after 1.5px/.4s · .panel::before 3px/1.1s ·       ##
+   ##        .step__r 1px/1s) — the same gesture at three scales           ##
+   ##     · CONFIRMED / INCLUDED is an aqua check on a dark ground         ##
+   ##       (.detail__l — "the design's one included/confirmed idiom")     ##
+   ##     · an ACCENT swaps by ground: aqua on ink/magenta/navy, magenta   ##
+   ##       on paper/white/aqua                          (design-kit §1.4) ##
+   ##   So: a field is a `.tier`-anatomy row; its rest state is a 1px      ##
+   ##   rule; hover takes the rule solid exactly as the ghost button does; ##
+   ##   focus draws a 1.5px accent rule across it from the left exactly as ##
+   ##   the nav underline does; and the success state is the ink           ##
+   ##   `.detail` pane with an aqua check list, because that is already    ##
+   ##   this design's way of saying "done, and here is what you get".      ##
+   ##   Nothing is imported from generic form convention — no rounded      ##
+   ##   input boxes, no red, no green tick, no floating labels.            ##
+   ##                                                                      ##
+   ##   CONTENTS                                                           ##
+   ##     D0  infrastructure ([hidden], .vh)                               ##
+   ##     D1  ground accent + focus-ring tokens, all six grounds           ##
+   ##     D2  .form / .f — the field                                       ##
+   ##     D3  select, textarea, autofill                                   ##
+   ##     D4  helper, counter, inline error, invalid state                 ##
+   ##     D5  .formerr — the form-level error                              ##
+   ##     D6  submit: default / pending / disabled                         ##
+   ##     D7  .done — the success state                                    ##
+   ##     D8  .cols — the two-column page body                             ##
+   ##     D9  .detail--flow — the contact detail pane                      ##
+   ##     D10 responsive                                                   ##
+   ##     D11 touch (hover:none)                                           ##
+   ##     D12 reduced motion                                               ##
+   ##                                                                      ##
+   ##   EVERY INVENTED VALUE IS MARKED `INVENTED:` INLINE and listed in    ##
+   ##   notes-d.md §3. Everything else carries the rule it came from.      ##
+   ########################################################################## */
+
+
+/* ==========================================================================
+   D0  INFRASTRUCTURE
+   Not design values. Two things the kit has no rule for and this page
+   cannot be built without.
+   ========================================================================== */
+
+/* kit.css's reset (home-r9.css:24) has no [hidden] rule, and the UA default
+   `[hidden]{display:none}` LOSES to any author `display:` declaration. Every
+   component below that is revealed by script (.f__e, .formerr, .done) sets
+   display:grid or display:flex, so without this the "hidden" states render
+   on page load. FOUND BY RENDERING — the inline error and the success panel
+   were both visible in the first draft. PHASE 4: this belongs in §02. */
+[hidden]{display:none !important}
+
+/* No visually-hidden utility exists in the kit. Required for the polite
+   live region that announces the success state (see D7) and for the
+   honeypot's label. Standard clip-path implementation, not a design value. */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* The honeypot. NOT display:none and NOT [hidden] — a bot that parses CSS
+   skips those, which is the entire point of the field. Off-screen, out of
+   the tab order, hidden from the a11y tree.
+   NOTE FOR PHASE 5, and it is a live bug: the API checks `body.website`
+   (contact-route.ts:95) but the shipped ContactPage.tsx:32 names the field
+   `_gotcha`, which the handler never reads. The honeypot on the live site
+   does nothing. The field below is named `website`. */
+.hp{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
+
+
+/* ==========================================================================
+   D1  GROUND ACCENT + FOCUS-RING TOKENS — all six grounds
+
+   design-kit.md §1.4 states the accent rule and kit.css §04 implements it for
+   the bar only (`--bar-acc`, driven by [data-ground]). Panels carry `.p--*`,
+   not [data-ground], so there is no accent token available inside a section —
+   which is why Phase 2 had to write out four-selector ground lists by hand
+   for `.prose a`, `.prose ul li::before`, `.prose ol li::before`,
+   `.prose blockquote` and `.prose hr`. `--acc` is that rule as a token.
+   PHASE 4: those five Phase 2 rules collapse to `var(--acc)` once this lands.
+
+   `--ring` is SEPARATE from `--acc` and it is not a stylistic choice. A focus
+   indicator has to clear 3:1 against its own ground (WCAG 1.4.11). Measured
+   with the real hexes (contrast ratios computed in the browser, reported in
+   notes-d.md §7):
+
+     ground    accent (kit rule)   ratio   ring used here   ratio
+     ink       aqua                10.3    aqua             10.3   ok
+     navy      aqua                 7.6    aqua              7.6   ok
+     white     magenta              5.2    magenta           5.2   ok
+     paper     magenta              4.3    magenta           4.3   ok
+     aqua      magenta              2.7  X  ink             10.3   swapped
+     magenta   aqua                 2.7  X  #fff             5.2   swapped
+
+   Both swaps land on the ground's OWN foreground colour (`.p--aqua` is
+   color:var(--ink), `.p--magenta` is color:#fff), i.e. on `currentColor` —
+   so the fallback is not a new colour, it is the maximum-contrast colour the
+   ground already declares. And the aqua case has a precedent in the kit
+   already: `.stack .p--aqua::before{background:var(--ink)}` puts the panel's
+   arrival rule in ink on aqua for exactly this reason ("so it never
+   disappears", kit.css §07).
+   ========================================================================== */
+/* `--frule` — THE FIELD'S REST RULE, and the ONE place in this file where a
+   measured requirement overrode an existing kit value.
+
+   The obvious choice was `.tier`'s own rule, rgba(14,14,18,.16)
+   (home-r9.css:397) — `.tier` is a <button>, it is the design's existing
+   "row you can act on", and the field is derived from it. MEASURED, that
+   rule is 1.42:1 against white and 2.44:1 (at `.svc`'s .28) against ink.
+   WCAG 1.4.11 wants 3:1 for "visual information required to identify user
+   interface components", and for an EMPTY text field the rule is the only
+   thing identifying it — `.tier` gets away with .16 because a tier row is
+   full of text at rest and a blank field is not.
+
+   So the alphas below are the lowest that clear 3:1 on each ground, measured
+   in the browser rather than estimated:
+
+     white    .46 -> 3.19    (kit's .16 -> 1.42)
+     paper    .46 -> 3.09
+     aqua     .50 -> 3.13    (.46 only reaches 2.81 on this ground)
+     ink      .40 -> 3.79    (kit's .28 -> 2.44; .34 -> 3.07, too close)
+     navy     .40 -> 3.50    (.34 -> 2.93, fails)
+     magenta  .75 -> ~3.0    SPECIFIED, NOT EXERCISED, and marginal: no
+                             white alpha below .75 clears 3:1 on magenta and
+                             solid ink only reaches 3.73. A long form does
+                             not belong on the magenta ground.
+
+   CONSEQUENCE TO KNOW ABOUT: a field rule is visibly darker than a `.tier`
+   or `.row` rule. On this page nothing else on the white ground carries a
+   rule so there is no clash, but a page that puts a form beside a `.tiers`
+   list will show two rule weights. That is the correct trade — one of them
+   has an accessibility requirement the other does not. */
+:root{
+  --acc:var(--magenta);
+  --ring:var(--magenta);
+  --frule:rgba(14,14,18,.46);
+}
+.p--ink,.p--navy{--acc:var(--aqua);--ring:var(--aqua);--frule:rgba(255,255,255,.4)}
+.p--magenta{--acc:var(--aqua);--ring:#fff;--frule:rgba(255,255,255,.75)}
+.p--white,.p--paper{--acc:var(--magenta);--ring:var(--magenta);--frule:rgba(14,14,18,.46)}
+.p--aqua{--acc:var(--magenta);--ring:var(--ink);--frule:rgba(14,14,18,.5)}
+
+/* kit.css:99 is `:focus-visible{outline:3px solid var(--magenta);
+   outline-offset:4px;border-radius:2px}` and kit.css:213 already overrides
+   the colour inside the bar (`.bar :focus-visible{outline-color:var(--bar-acc)}`).
+   This is the same move for panels. Specificity (0,2,0) matches the bar's
+   rule but `.bar` carries [data-ground], never `.p--*`, so the two never
+   collide on one element. */
+.p--ink :focus-visible,.p--navy :focus-visible,.p--magenta :focus-visible,
+.p--white :focus-visible,.p--paper :focus-visible,.p--aqua :focus-visible{
+  outline-color:var(--ring)}
+
+/* Text controls are the ONE place the global ring is replaced rather than
+   recoloured, and it is a decision, not an omission — see D2's focus rule
+   for the replacement and the reasoning. Every other focusable thing on the
+   page keeps kit.css:99's 3px offset ring, recoloured above. */
+
+/* ---- `.detail` is a ground with no ground CLASS. FOUND BY RENDERING. -----
+   `.detail` (kit.css §17, home-r9.css:413) hardcodes `background:var(--ink);
+   color:#fff` but carries no `.p--ink`, so every selector in this kit that
+   resolves by ground class silently misses inside it. The one that bites is
+   `.btn--ghost`: kit.css §06 gives the base rule `color:var(--ink)` and only
+   `.p--ink .btn--ghost` flips it to white — so a ghost button dropped into an
+   ink `.detail` pane renders INK ON INK and disappears. Measured in the
+   success panel before this rule: `color: rgb(14,14,18)` on a `#0E0E12`
+   ground, i.e. 1.02:1.
+
+   Phase 2 already found the other half of this and wrote the principle down
+   (phase2-notes.md §4): `.mast` and `.pagefoot` are shells with NO ground of
+   their own precisely so they compose with `.p--*`, "rather than hardcoding
+   a background inline the way round 1 did". `.detail` predates that decision
+   and hardcodes. Rather than ask every agent to remember to add `.p--ink`
+   next to `.detail`, the tokens and the one grounded rule are attached to
+   `.detail` itself. Values are kit.css §06's own dark-ground pair
+   (shared.css:67-68) — nothing new.
+   PHASE 4: this is a candidate for fixing in §17 directly. */
+.detail,.done{--acc:var(--aqua);--ring:var(--aqua);--frule:rgba(255,255,255,.4)}
+.detail :focus-visible,.done :focus-visible{outline-color:var(--ring)}
+.detail .btn--ghost,.done .btn--ghost{color:inherit;border:1.5px solid rgba(255,255,255,.4)}
+.detail .btn--ghost:hover,.done .btn--ghost:hover{border-color:#fff;box-shadow:none}
+
+
+/* ==========================================================================
+   D2  .form / .f — THE FIELD
+
+   ANATOMY, and where each part comes from:
+
+     .form   the stack. Gap is clamp(18px,2.6vh,30px) — home-r9.css:482's
+             compressed rhythm value, which design-kit.md §7 establishes is
+             THE NORMAL LAPTOP CASE, not an edge case. A form is a dense
+             block; the uncompressed rhythm would spread five fields over a
+             screen and a half.
+     .f      the field. display:grid, gap 8px — `.tcard__l`'s gap
+             (home-r9.css:680), the design's existing label-scale gap.
+     .f__l   the label. `.eyeless` VERBATIM (kit.css:124-126) minus its
+             margin-bottom, which the grid gap supplies. design-kit.md §2.3:
+             the 10.5-12.5px / 700 / uppercase / positive-tracking micro-cap
+             is "the only uppercase in the design" and it is the label idiom.
+             A form label is a label; there was nothing to invent.
+     .f__w   the control shell. Exists so the focus rule can be positioned
+             on the CONTROL's bottom edge rather than on the whole field's
+             (which includes the helper and error lines below it). It also
+             carries the select chevron and gives the counter a corner.
+     .f__c   the control itself.
+
+   WHY NOT A BORDERED, ROUNDED INPUT BOX. Bordered boxes do exist here
+   (`.tcard` 1px/18px, `.cards--2 .card` 1px ink/clamp(16px,1.7vw,24px)), so
+   that would not have been off-language — but `.tier`, `.row`, `.svc` and
+   `.qa summary` are four separate implementations of "a thing you act on is
+   a full-width row on a 1px rule", and none of them is a box. The row is the
+   more specific and more distinctive answer, and a column of rounded input
+   boxes is exactly the generic convention this process exists to avoid.
+   ========================================================================== */
+.form{display:grid;gap:clamp(18px,2.6vh,30px)}
+
+.f{display:grid;gap:8px}
+
+/* kit.css:124-126 verbatim, margin-bottom dropped. */
+.f__l{display:block;font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;
+  font-weight:700;opacity:.6}
+/* "(optional)". Weight 500 is `.tier__f small`'s (home-r9.css:392) — the
+   design's existing way of demoting a fragment inside a stronger one. No
+   second opacity: nesting opacity multiplies, and .6 x .7 is 0.42, which
+   fails contrast on every ground. */
+.f__l em{font-style:normal;font-weight:500}
+/* An invalid field lifts its label to full strength, so the field reads as
+   flagged without depending on the magenta (WCAG 1.4.1 — never colour alone). */
+.f[data-invalid="true"] .f__l{opacity:1}
+
+.f__w{position:relative}
+
+/* THE CONTROL.
+   font:inherit is load-bearing — home-r9-reset.css:80-88 `revert`s
+   font-family/size/line-height on input, select and textarea back to the UA
+   default, so a control inherits nothing unless it is told to.
+   16px / 1.5 is `.detail__l div`'s (kit.css:742) — the design's 16px prose
+   floor, which is also the size below which iOS zooms the viewport on focus.
+   12px block padding is `.hire`'s (home-r9.css:97). 24px line box + 24px
+   padding + 1px rule = a 49px control, clear of the 44px touch floor at
+   every width with no separate mobile rule. MEASURED: 49px at 1440 and 390.
+   0 horizontal padding, NOT `.tier`'s 6px: `.tier` carries 6px only to give
+   its hover `padding-left:12px` somewhere to move from, and this control has
+   no such shift. 0 puts the value, the label and the rule's left end on the
+   same hard left edge every other block in this design aligns to.
+   transition .35s ease is `.burger`'s (home-r9.css:70). */
+.f__c{display:block;width:100%;font:inherit;font-size:16px;line-height:1.5;
+  color:inherit;background:transparent;border:0;border-radius:0;
+  border-bottom:1px solid var(--frule);padding:12px 0;
+  transition:border-color .35s ease}
+
+/* HOVER — `.btn--ghost:hover` (home-r9.css:129 / shared.css:68) verbatim in
+   gesture: the border goes SOLID currentColor. One declaration covers both
+   grounds, because currentColor is ink on a light panel and #fff on a dark
+   one, which is precisely what the two ghost-button rules spell out
+   separately. */
+.f__c:hover{border-bottom-color:currentColor}
+
+/* FOCUS — `.bar nav a::after` (home-r9.css:93-95) in gesture: a rule scaled
+   from transform-origin:0 50% over .4s on the design's primary curve. The
+   same gesture as `.panel::before` (3px/1.1s) and `.step__r` (1px/1s) at
+   their own scales. 2px rather than the nav's 1.5px is `.card::before`'s
+   weight (home-r9.css:219) — the nav's 1.5px sits under 14px text, a panel's
+   3px spans the viewport, and a field is between the two.
+
+   It is ABSOLUTELY POSITIONED over the rest rule rather than thickening it,
+   so a field does not change height by a pixel when it takes focus. MEASURED:
+   49px focused and unfocused, on all five controls.
+
+   Colour is --ring, not --acc, because this IS the focus indicator: 5.2:1
+   magenta on white, 10.3:1 aqua on ink, and never below 3:1 on any of the
+   six grounds (D1's table).
+
+   ---------------------------------------------------------------------
+   AND THIS RULE REPLACES kit.css:99's GLOBAL RING ON TEXT CONTROLS ONLY.
+   FOUND BY RENDERING, and it is the one real design argument in this file.
+   The global treatment is `outline:3px solid <accent>; outline-offset:4px`,
+   which is right for a pill or an inline link — offset around a compact
+   shape reads as a halo. Around a 750 x 49 borderless field it draws a
+   magenta RECTANGLE, which is (a) the most generic-looking object on the
+   page and (b) the same colour as the rule drawing inside it, so the two
+   merge and the design's own gesture disappears. Captured at 1680px before
+   this change.
+
+   The replacement is a deliberate custom indicator, not a removal: a 2px
+   accent rule at 5.2:1 against its ground, appearing where there was a 1px
+   rule at .16 alpha. That satisfies 2.4.7 (visible) and 1.4.11 (3:1
+   non-text contrast). The transparent outline is retained on purpose so
+   Windows High Contrast Mode has something to paint — forced-colors
+   overrides the colour but not the width, so a control with `outline:none`
+   would have NO indicator there at all.
+   --------------------------------------------------------------------- */
+.f__w::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--ring);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.f__w:focus-within::after{transform:scaleX(1)}
+.f__c:focus-visible{outline:2px solid transparent;outline-offset:2px}
+@media (forced-colors:active){
+  .f__c:focus-visible{outline-color:Highlight}
+}
+
+/* DISABLED. .45 — INVENTED, by one step: `.paytoggle button` sits at
+   opacity .6 for "available but not selected" (home-r9.css:389), so a
+   disabled control has to read as clearly weaker than that. WCAG 1.4.3
+   exempts inactive components from contrast, which is why a value this low
+   is defensible here and nowhere else in this file. */
+.f__c:disabled{opacity:.45;cursor:not-allowed}
+.f__c:disabled:hover{border-bottom-color:var(--frule)}
+.f:has(.f__c:disabled) .f__l{opacity:.45}
+
+
+/* ==========================================================================
+   D3  SELECT, TEXTAREA, AUTOFILL
+   ========================================================================== */
+
+/* SELECT. appearance:none because the UA arrow cannot be styled and would be
+   the only piece of OS chrome on the page.
+   The replacement chevron is `.qa summary::after`'s construction
+   (home-r9.css:441) — a square with 2px right+bottom borders rotated 45 —
+   at `.big::after`'s 9px size (home-r9.css:709), which is the design's
+   small chevron. Two existing parts, no new drawing.
+   padding-right 26px = the 9px glyph + its 4px inset + 13px of clearance,
+   13px being `.end__nav a`'s own touch padding (kit.css:955). */
+.f--sel .f__c{appearance:none;-webkit-appearance:none;padding-right:26px;cursor:pointer}
+.f--sel .f__w::before{content:"";position:absolute;right:4px;top:50%;
+  width:9px;height:9px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);
+  /* INVENTED: -68%. A 45-rotated square's optical centre sits below its box
+     centre, so a plain -50% reads low. `.qa summary::after` corrects the same
+     thing with translate(-3px,-3px) on a 13px glyph; at 9px that nudge is
+     proportionally 2.1px, i.e. -68% of the 9px box off the 50% line.
+     MEASURED by eye against the label's cap height at 1440 and 390. */
+  transform:translateY(-68%) rotate(45deg);pointer-events:none}
+/* On a dark ground the OS renders <option> with system colours on some
+   platforms and the list becomes white-on-white. Forced to the design's own
+   pair. Cannot be verified cross-platform from here — notes-d.md §9. */
+.p--ink .f__c option,.p--navy .f__c option,.p--magenta .f__c option{
+  color:var(--ink);background:var(--white)}
+
+/* TEXTAREA. min-height is six of the control's own 24px line boxes plus its
+   24px of block padding = 168px. Derived from the control, not chosen.
+   resize:vertical only — horizontal resize breaks the --pad gutter. */
+.f--area .f__c{min-height:168px;resize:vertical}
+
+/* AUTOFILL. Chrome paints -internal-light-dark(#E8F0FE) over the control's
+   background and there is no way to override background-color on an
+   autofilled control — only an inset box-shadow, and a transition long
+   enough that the shadow never resolves. Without this a transparent field on
+   an ink ground turns pale blue with invisible text the moment the browser
+   fills it. NOT verified here (no saved autofill profile in this browser) —
+   notes-d.md §9. */
+.f__c:-webkit-autofill,
+.f__c:-webkit-autofill:hover,
+.f__c:-webkit-autofill:focus{
+  -webkit-text-fill-color:currentColor;
+  -webkit-box-shadow:0 0 0 1000px transparent inset;
+  caret-color:currentColor;
+  transition:background-color 9999s ease-in-out 0s}
+
+
+/* ==========================================================================
+   D4  HELPER, COUNTER, INLINE ERROR, INVALID STATE
+   ========================================================================== */
+
+/* The row under the control. space-between + a wrapping gap is `.end__foot`'s
+   own composition (home-r9.css:460). gap 12px is `.detail__l`'s. */
+.f__foot{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+
+/* HELPER. 13.5px / opacity .66 is `.end__foot`'s verbatim (home-r9.css:461);
+   leading 1.45 is `.tcard__p`'s (home-r9.css:678). Measured 6.3:1 on white. */
+.f__h{font-size:13.5px;line-height:1.45;opacity:.66;max-width:44ch}
+
+/* COUNTER. `.count` already exists (kit.css §21, shared.css:140) at
+   13.5px/600/opacity .55 — reused as-is. These two states are the only
+   addition: it is silent until the message is genuinely long, then it
+   surfaces, then it flags. Never a live region — a counter that announces on
+   every keystroke is unusable with a screen reader; the limit is stated once
+   in the helper text instead. */
+.count[data-near="true"]{opacity:1}
+.count[data-over="true"]{opacity:1;color:var(--magenta);font-weight:700}
+.p--ink .count[data-over="true"],.p--navy .count[data-over="true"],
+.p--magenta .count[data-over="true"],.p--aqua .count[data-over="true"]{color:currentColor}
+
+/* INLINE ERROR.
+   14.5px / 600 is `.hire`'s (home-r9.css:98) — the design's size for a short
+   piece of load-bearing UI text. Leading 1.45 is `.tcard__p`'s. NO reduced
+   opacity: design-kit.md §9.12 makes "the rest colour must be legible
+   unaided" an accessibility obligation for `.res`, and the same logic binds
+   harder on an error.
+   The glyph is `.tcard__l svg` verbatim (home-r9.css:682): 15px, flex:none,
+   margin-top 3px, in a 10px gap — and it is drawn with the same 2px round
+   stroke as `.detail__l`'s check, so it reads as the same hand.
+   COLOUR. Magenta is the design's action/attention colour and it clears
+   4.5:1 on white (5.2) and paper (4.3). On ink it is 3.7:1 and on navy,
+   magenta and aqua it is below 3 — so on those four grounds the text falls
+   back to currentColor at full strength and the magenta lives in the rule
+   and the glyph instead. Same ground split Phase 2 established for
+   `.prose a` (kit.css §31). */
+.f__e{display:flex;align-items:flex-start;gap:10px;
+  font-size:14.5px;font-weight:600;line-height:1.45;color:var(--magenta)}
+.f__e svg{width:15px;height:15px;flex:none;margin-top:3px}
+.p--ink .f__e,.p--navy .f__e,.p--magenta .f__e,.p--aqua .f__e{color:currentColor}
+
+/* INVALID. The rule goes to 2px solid — 2px is `.card::before`'s and
+   `.big`'s weight, the design's "this rule is saying something" weight, one
+   step up from the 1px rest rule and one step below `.panel::before`'s 3px
+   arrival rule. It replaces the rest rule rather than sitting beside it, so
+   the field's height does not change by a pixel when it flags. MEASURED: 49px
+   valid, 49px invalid — verified, because a 1px height jump propagating down
+   a five-field form on every blur is exactly the kind of thing that only
+   shows up when you actually tab through it. */
+.f[data-invalid="true"] .f__c{border-bottom:2px solid var(--magenta);padding-bottom:11px}
+.p--navy .f[data-invalid="true"] .f__c,
+.p--magenta .f[data-invalid="true"] .f__c,
+.p--aqua .f[data-invalid="true"] .f__c{border-bottom-color:currentColor}
+.f[data-invalid="true"] .f__c:hover{border-bottom-color:var(--magenta)}
+
+
+/* ==========================================================================
+   D5  .formerr — THE FORM-LEVEL ERROR
+
+   Two jobs, one component: "N things need a look before I can send this"
+   after a failed client-side submit, and "that did not reach me, here is how
+   to reach me anyway" after a failed request.
+
+   Not `.empty` (kit.css §21): that is a 56px-padded, centred, dashed box for
+   an empty result set, and an error is neither centred nor empty. This is
+   `.tcard`'s surface — 1px border, 18px radius (home-r9.css:669),
+   22px/20px padding (home-r9.css:670) — tinted with the accent instead of
+   `#F7F6F4`. The .5 border alpha is `.prose a`'s resting underline alpha
+   (kit.css §31, from home-r9.css:305); the .06 fill is `.paytoggle`'s track
+   alpha (home-r9.css:386). Type is `.detail__p`'s 15.5px/1.5
+   (home-r9.css:423). Nothing here is a new number.
+   ========================================================================== */
+.formerr{display:flex;align-items:flex-start;gap:12px;
+  margin-bottom:clamp(18px,2.6vh,30px);
+  padding:22px 20px;border-radius:18px;
+  border:1px solid rgba(214,0,107,.5);background:rgba(214,0,107,.06);
+  font-size:15.5px;line-height:1.5}
+.formerr svg{width:16px;height:16px;flex:none;margin-top:4px;color:var(--magenta)}
+.formerr b{display:block;font-weight:700}
+.formerr p{margin-top:6px;opacity:.86}
+.formerr a{color:var(--magenta);border-bottom:1.5px solid rgba(214,0,107,.5)}
+.formerr a:hover{border-bottom-color:var(--magenta)}
+/* Dark grounds: the border and glyph fall back to currentColor where magenta
+   drops below 3:1 (D1's table), and the fill takes the --navy-on-ink pairing
+   `.card__well`, `.mock` and `.prose pre` already rely on. SPECIFIED, NOT
+   EXERCISED — the form in this prototype is on white. notes-d.md §9. */
+.p--ink .formerr,.p--magenta .formerr{background:var(--navy);border-color:rgba(255,255,255,.34)}
+.p--navy .formerr{background:var(--ink);border-color:rgba(255,255,255,.34)}
+.p--aqua .formerr{background:rgba(14,14,18,.06);border-color:rgba(14,14,18,.28)}
+.p--ink .formerr svg,.p--navy .formerr svg,.p--magenta .formerr svg,
+.p--aqua .formerr svg{color:currentColor}
+.p--ink .formerr a,.p--navy .formerr a,.p--magenta .formerr a{
+  color:var(--aqua);border-bottom-color:rgba(0,210,216,.5)}
+
+
+/* ==========================================================================
+   D6  SUBMIT — DEFAULT / PENDING / DISABLED
+
+   Default is `.btn`, untouched.
+
+   PENDING. This design has no spinner and should not acquire one: its idiom
+   for "something is happening" is A RULE DRAWING ACROSS A SURFACE —
+   `.panel::before` (3px/1.1s), `.step__r` (1px/1s), `.bar nav a::after`
+   (1.5px/.4s). A spinner is a different visual language. So the pending
+   button carries the same 1.5px rule, sweeping along its own bottom edge on
+   a 1.1s loop — `.panel::before`'s duration, the design's rule-draw tempo.
+   INVENTED: the 40% bar width and the -100%/350% travel, which are geometry
+   with no possible source. The colour is currentColor, i.e. the button's
+   own #fff — no new value.
+
+   Under prefers-reduced-motion the bar does not animate: it sits at the left
+   as a static in-progress mark. The state is still announced by the label
+   change ("Sending...") and by aria-busy, so nothing depends on the motion.
+
+   DISABLED. The page deliberately DOES NOT use a disabled submit as a
+   validation gate. A submit that is disabled until the form is valid never
+   tells anyone why, cannot be focused to find out, and is a well-known
+   accessibility failure. The button is always live; pressing it with an
+   invalid form runs validation, flags the fields and moves focus to the
+   first one. The only time it is disabled is while a request is in flight.
+   The treatment below is still specified because the brief asked for it and
+   because Phase 5 will need it somewhere.
+   ========================================================================== */
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.btn[disabled]:hover,.btn[aria-disabled="true"]:hover{transform:none;box-shadow:none}
+.btn[disabled]:hover svg,.btn[aria-disabled="true"]:hover svg{transform:none}
+
+.btn[data-pending="true"]{position:relative;overflow:hidden;cursor:progress;opacity:1}
+.btn[data-pending="true"]:hover{transform:none;box-shadow:none}
+.btn[data-pending="true"]::after{content:"";position:absolute;left:0;bottom:0;
+  height:1.5px;width:40%;background:currentColor}
+@keyframes d-sweep{from{transform:translateX(-100%)}to{transform:translateX(350%)}}
+
+
+/* ==========================================================================
+   D7  .done — THE SUCCESS STATE
+
+   There is no success state anywhere on the site today (session.md:48: no
+   `thank`/`success`/`submitted` in ContactPage.tsx). IN-PAGE, NOT A ROUTE —
+   the argument is in notes-d.md §5.
+
+   THE COMPONENT IS `.detail`. That is not a shortcut, it is the reading:
+   `.detail` is the ink pane the homepage uses to say "here is the thing,
+   resolved, and here is exactly what it includes", and it carries
+   `.detail__l`, "the design's one included/confirmed idiom" (kit.css §17) —
+   an aqua check on a dark ground. A confirmation page is that sentence. So
+   the form, which is light and open and being worked on, resolves into the
+   solid ink pane with aqua checks. Reusing it also means the success state
+   is not a new visual language bolted onto the end of the page.
+
+   Values: ground, colour and radius are `.detail`'s (home-r9.css:413-416);
+   padding is `.svccard__body`'s single even clamp (home-r9.css:347), because
+   `.detail`'s asymmetric padding exists to align its heading with `.tier`'s
+   and there is no tier list here to align to; gap is D2's field rhythm.
+   `.detail`'s grid-template-rows and its .detail__h/.detail__p min-heights
+   are NOT taken: those reserve two and three lines so that four pricing
+   panes are the same height (home-r9.css:417-419), and there is only one
+   panel here.
+
+   ARRIVAL. Two existing motions, both earned:
+     · `.swap` (home-r9.css:428) — translateY(8px)->0 over .45s, which exists
+       precisely for "this content just replaced that content" and is
+       replayed on the live site by remounting the node (pricing.tsx:19-24).
+     · a 3px accent rule scaling in from the left over 1.1s with a .1s delay
+       — `.stack .panel::before` verbatim (home-r9.css:144-146), the design's
+       arrival gesture, in aqua because the pane is ink (design-kit §1.4).
+   ========================================================================== */
+.done{position:relative;overflow:hidden;
+  background:var(--ink);color:#fff;border-radius:calc(var(--r)*.7);
+  padding:clamp(24px,3.4vw,58px);
+  display:grid;align-content:start;gap:clamp(18px,2.6vh,30px)}
+/* home-r9.css:144-146, with the aqua the accent rule gives on an ink ground. */
+.done::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;
+  background:var(--aqua);transform:scaleX(0);transform-origin:0 50%}
+.done.in::before{transform:scaleX(1);transition:transform 1.1s cubic-bezier(.16,1,.3,1) .1s}
+/* `.detail__h`'s type without its min-height (kit.css:737). */
+.done h2{font-weight:800;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.032em;
+  line-height:1;max-width:17ch}
+.done .lead{margin-top:0;opacity:.86}
+.done .eyeless{margin-bottom:0}
+/* `.detail .btn{margin-top:26px}` (home-r9.css:427) is the pane's own CTA
+   distance; the grid gap already supplies it here, so the row is reset. */
+.done .hero__act{margin-top:0}
+/* The one thing in the panel that is not reused: a rule above the "what
+   happens next" list, so the confirmation and the list are two beats rather
+   than one block. .22 is `.qa`'s dark rule (home-r9.css:432) and the padding
+   above it is `.end__foot`'s (home-r9.css:460). */
+.done__next{padding-top:clamp(20px,3vh,32px);border-top:1px solid rgba(255,255,255,.22)}
+.done__next .detail__l{margin-top:16px}
+
+
+/* ==========================================================================
+   D8  .cols — THE TWO-COLUMN PAGE BODY
+
+   `.price` (home-r9.css:393) is already a two-column grid holding a working
+   column and an ink pane, at minmax(0,1fr) minmax(0,1.05fr) with
+   clamp(22px,3.4vw,58px) between — and design-kit.md §3.4 records that the
+   1.05 is deliberate, "not 50/50".
+
+   It is NOT reused directly, and this is a real trap rather than a
+   preference: kit.css:1002-1004 hides `.price .tiers` and `.price .detail`
+   outright below 901px, because the homepage swaps the whole pricing
+   tablist for `.tiercards` there. A contact page borrowing the class would
+   lose its entire right-hand column on every phone, silently. So `.cols`
+   restates the grid.
+
+   The ratio is flipped — 1.05fr first — because here the WORKING column is
+   the form, and the 1.05 belongs to whichever column carries the work. Same
+   number, same gap, reasoned position.
+   ========================================================================== */
+.cols{margin-top:clamp(30px,4.6vh,54px);display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(22px,3.4vw,58px);align-items:start}
+
+
+/* ==========================================================================
+   D9  .detail--flow — THE CONTACT DETAIL PANE
+
+   `.detail` verbatim except for two things it cannot keep:
+
+   1. position. `.detail` is `sticky;top:120px` and that 120px is a known
+      wrong number on an inner page — it assumes the 81px homepage bar, and
+      the inner-page bar measures 74.5px at 1440 and 65px at 390
+      (phase2-notes.md §10, design-kit.md §12.8). Rather than pick a new
+      hardcoded offset, the pane is static: it is shorter than the form
+      column it sits beside, so stickiness buys nothing and the wrong-offset
+      trap is removed rather than inherited.
+   2. grid-template-rows:auto auto 1fr auto, which reserves four slots for
+      the pricing pane's head / paragraph / list / CTA. This pane has six
+      children.
+   ========================================================================== */
+.detail--flow{position:static;grid-template-rows:none;
+  padding:clamp(24px,3.4vw,58px);
+  align-content:start;gap:clamp(18px,2.6vh,30px)}
+.detail--flow .eyeless{margin-bottom:0}
+.detail--flow .detail__l{margin-top:0}
+/* `.big` is written for a full-viewport navy chapter (2px bottom rule at
+   .3 alpha, aqua on hover) and at clamp(1.3rem,3.6vw,3rem) it would be the
+   largest thing on the contact page. Inside the pane the contact links take
+   `.svccard__t`'s smaller sibling: `.row__n`'s weight 700 and -.032em at a
+   size that fits the pane. clamp(1.15rem,2.3vw,1.75rem) is `.tier__n`'s
+   (home-r9.css:402) — an existing size one step below the pane's own head. */
+.detail--flow a.line{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-weight:700;font-size:clamp(1.15rem,2.3vw,1.75rem);letter-spacing:-.028em;
+  overflow-wrap:anywhere;line-height:1.2;
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.22);
+  transition:border-color .35s ease,color .3s ease}
+.detail--flow a.line:hover{border-bottom-color:var(--aqua);color:var(--aqua)}
+/* `.big::after`'s chevron (home-r9.css:709), verbatim. */
+.detail--flow a.line::after{content:"";flex:none;width:9px;height:9px;
+  border-right:2px solid var(--aqua);border-bottom:2px solid var(--aqua);
+  transform:rotate(-45deg)}
+/* `.mast__meta`'s stacked value-over-label item (kit.css §29), on a dark
+   ground, for hours and address. */
+.detail--flow .facts{display:grid;gap:14px}
+.detail--flow .facts div{display:grid;gap:3px}
+.detail--flow .facts b{font-weight:800;font-size:15.5px;letter-spacing:-.01em}
+.detail--flow .facts span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;opacity:.55}
+.detail--flow .facts p{font-size:15.5px;line-height:1.5;opacity:.86}
+
+
+/* ==========================================================================
+   D10  RESPONSIVE
+   ========================================================================== */
+@media (max-width:900px){
+  /* One column. `.detail` is already forced static at this width by
+     kit.css:1000, so `--flow`'s own static is redundant here and harmless. */
+  .cols{grid-template-columns:1fr;gap:clamp(28px,4vh,44px)}
+  /* The pane follows the form rather than sitting beside it, and reads as a
+     postscript, so it loses the shoulder-to-shoulder radius scale. */
+  .detail--flow{padding:clamp(24px,6vw,34px)}
+  /* The helper and the counter stop fitting on one line together at the
+     narrow end; stacking is better than a 3-word-per-line helper. */
+  .f__foot{flex-wrap:wrap}
+  .f__h{max-width:none}
+  /* .done keeps the same padding clamp; only the arrival rule's 3px would
+     be disproportionate on a small pane, and it is not — .panel::before is
+     3px at every width on the live site. Nothing to change. */
+}
+
+@media (max-width:360px){
+  .detail--flow a.line{font-size:4.6vw;gap:10px}
+  .detail--flow a.line::after{display:none}
+}
+
+
+/* ==========================================================================
+   D11  TOUCH (hover:none)
+
+   kit.css §24's rule is not optional tidying: on touch a hover fires on tap
+   and LATCHES until you tap elsewhere, so a tapped field would keep a solid
+   rule for the rest of the visit and read as focused when it is not. Every
+   hover this file adds is neutralised here.
+   ========================================================================== */
+@media (hover:none){
+  .f__c:hover{border-bottom-color:var(--frule)}
+  .f[data-invalid="true"] .f__c:hover{border-bottom-color:var(--magenta)}
+  .p--navy .f[data-invalid="true"] .f__c:hover,
+  .p--magenta .f[data-invalid="true"] .f__c:hover,
+  .p--aqua .f[data-invalid="true"] .f__c:hover{border-bottom-color:currentColor}
+  .f__c:disabled:hover{border-bottom-color:var(--frule)}
+  .detail--flow a.line:hover{border-bottom-color:rgba(255,255,255,.22);color:inherit}
+  .formerr a:hover{border-bottom-color:rgba(214,0,107,.5)}
+}
+
+
+/* ==========================================================================
+   D12  REDUCED MOTION
+   The pending sweep and the success arrival rule are the only two motions
+   this file adds; both are gated the way kit.css §23 gates the reveal layer.
+   `.swap` is already inside home-r9.css's own no-preference block? — it is
+   NOT (home-r9.css:428-429 is unconditional), so it is gated here.
+   ========================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  .btn[data-pending="true"]::after{animation:d-sweep 1.1s cubic-bezier(.16,1,.3,1) infinite}
+}
+@media (prefers-reduced-motion:reduce){
+  .done{animation:none}
+  .done.in::before{transition:none}
+}

@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-09-18
+
+### Content
+
+- Added a fourth gallery photo to "My Day at Breakthrough T1D Discovery Day" (`content/news/breakthrough-t1d-discovery-day.mdx`), showing the Lived Experience Panel being interviewed on stage. Uploaded as-is to R2 at `npracing-v1/news/breakthrough-t1d-discovery-day-04.jpg` — the supplied photo (1024×682) was already smaller than the site's usual 2048px cap, so no resize/recompress step was needed.
+
 ## 2026-09-17
 
 ### Content
