@@ -45,12 +45,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   //   changeFrequency: "monthly",
   //   priority: 0.8,
   // },
-  // {
-  //   url: `${baseUrl}/reviews`,
-  //   lastModified: new Date(),
-  //   changeFrequency: "monthly" as const,
-  //   priority: 0.7,
-  // },
+  // (The `/reviews` entry that sat here was removed on 2026-09-18 along with
+  // the route itself — decision D3, inner-pages port Phase 1. Its three
+  // testimonials live on /projects and in the case studies instead. Do not
+  // restore it: uncommenting an entry for a route that no longer resolves
+  // would publish a 404 in the sitemap.)
   // {
   //   url: `${baseUrl}/privacy-policy`,
   //   lastModified: new Date(),

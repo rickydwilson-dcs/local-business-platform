@@ -17,18 +17,52 @@
  *
  * Per Trap 11 (see root CLAUDE.md and the yolo-brief's Traps section), this
  * component must never render `.menu` as a descendant — `.menu` lives in
- * `mobile-menu.tsx` and is composed as a sibling of `<SiteBar />` by the
- * Phase 7 furniture wrapper.
+ * `mobile-menu.tsx` (homepage) / `components/site/site-menu.tsx` (inner
+ * pages) and is composed as a sibling of `<SiteBar />` by the furniture
+ * wrapper.
+ *
+ * It renders NO `<nav>`, at any width, and that is the settled design, not an
+ * omission. `home-r9.css:89-95` styles `.bar nav a` in full and it has never
+ * painted. The inner-pages design session put the link row on screen, then
+ * Ricky superseded it on 2026-09-17: the header matches the live site's burger
+ * menu on desktop, on all pages (`prototype/_chrome.html:69-76`). The merged
+ * stylesheet encodes that as `.bar nav{display:none}` + `.bar .burger{display:grid}`
+ * with no media query (`inner-pages.css:1275-1276`). Every prototype HTML file
+ * still contains the `<nav>` markup so the treatment stays on record while it
+ * was under review — do not port it.
+ *
+ * ## The three props, and why they exist
+ *
+ * The homepage is a single document: its lockup scrolls to `#top` and its CTA
+ * to the `#end` chapter. An inner page has neither — `prototype/service-detail.html:39,52`
+ * points the lockup at the top of its own document (its `aria-label` says
+ * "home", and the real site has a `/` for it to mean) and the CTA at a
+ * `mailto:`, and relabels it "Start a project". Every default below is the
+ * homepage's existing value, so `<SiteBar />` with no props renders exactly
+ * what it rendered before — `test/home-markup-parity.test.ts` guards that.
  */
 
 import { useHomeBehaviour } from './home-behaviour';
 
-export function SiteBar() {
+export interface SiteBarProps {
+  /** Where the lockup goes. Homepage: `#top` (its own hero). */
+  markHref?: string;
+  /** The pill CTA's destination. Homepage: `#end` (its closing chapter). */
+  ctaHref?: string;
+  /** The pill CTA's label. Homepage: "Hire me". */
+  ctaLabel?: string;
+}
+
+export function SiteBar({
+  markHref = '#top',
+  ctaHref = '#end',
+  ctaLabel = 'Hire me',
+}: SiteBarProps = {}) {
   const { ground, menuOpen, toggleMenu } = useHomeBehaviour();
 
   return (
     <header className="bar" id="bar" data-ground={ground}>
-      <a className="mark" href="#top">
+      <a className="mark" href={markHref}>
         <svg
           className="mark__svg"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +86,8 @@ export function SiteBar() {
         <span className="sr-only"> (home)</span>
       </a>
       <div className="bar__r">
-        <a className="hire" href="#end">
-          Hire me
+        <a className="hire" href={ctaHref}>
+          {ctaLabel}
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
               d="M2 8h11M9 4l4 4-4 4"
