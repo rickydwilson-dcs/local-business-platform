@@ -1,56 +1,50 @@
 /**
- * Locations Listing Page
- * ======================
+ * `/locations` — the areas-covered index, ported to the r9 design.
+ * See `components/locations/locations-list-page.tsx` for the port's own
+ * notes.
  *
- * Displays all service area locations.
+ * TIER 3, DELIBERATELY DEMOTED (session.md D2) — entry is the footer's
+ * "Areas I cover" column, never the primary nav (`components/site/
+ * site-chrome-data.ts`'s `LOCATION_LINKS`).
  */
 
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { SiteLocationsPage } from '@/components/pages/LocationsPage';
+import { SiteLocationsListPage } from '@/components/locations/locations-list-page';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 
+// Title and description are the prototype's own <title>/<meta
+// name="description"> (`prototype/locations-list.html:5-6`) — real, settled
+// copy, not authored here.
+const PAGE_TITLE = `Areas I cover — ${siteConfig.business.name}`;
+const PAGE_DESCRIPTION =
+  'Eight East Sussex towns with their own page, and the rest of the UK run remotely. The build, the price and the timescale are the same wherever you are.';
+
 export const metadata: Metadata = {
-  title: `Service Areas | Locations | ${siteConfig.business.name}`,
-  description: `${siteConfig.business.name} serves tradespeople across ${siteConfig.serviceAreas.join(', ')}. Find our services in your area.`,
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   keywords: ['locations', 'service areas', 'web design', ...siteConfig.serviceAreas],
   openGraph: {
-    title: `Service Areas | ${siteConfig.business.name}`,
-    description: `${siteConfig.business.name} serves tradespeople across multiple locations.`,
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     url: '/locations',
     type: 'website',
+  },
+  alternates: {
+    canonical: absUrl('/locations'),
   },
 };
 
 export default async function LocationsPage() {
   const locations = await getLocations();
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
   return (
     <>
-      <SiteLocationsPage
-        siteConfig={siteSummary}
-        locations={locations.map((l) => ({
-          slug: l.slug,
-          title: l.title,
-          description: l.description,
-        }))}
-      />
+      <SiteLocationsListPage locations={locations} studioTown={siteConfig.business.address.city} />
 
       <Schema
         org={{
@@ -67,7 +61,7 @@ export default async function LocationsPage() {
           '@id': absUrl('/locations#collection'),
           url: absUrl('/locations'),
           name: `${siteConfig.business.name} Service Areas`,
-          description: `${siteConfig.business.name} serves tradespeople across multiple locations.`,
+          description: PAGE_DESCRIPTION,
         }}
       />
     </>

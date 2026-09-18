@@ -1,21 +1,16 @@
 /**
- * Blog Post Detail Page
- * =====================
- *
- * Individual blog post page with MDX content rendering.
+ * `/blog/[slug]` — a single guide, ported to the r9 design.
+ * See `components/blog/blog-post-page.tsx` for the port's own notes.
  */
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { SiteBlogPostPage } from '@/components/pages/BlogPostPage';
-import { getBlogPosts, getBlogPost, calculateReadingTime } from '@/lib/content';
+import { BlogPostPage } from '@/components/blog/blog-post-page';
+import { getBlogPosts, getBlogPost } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
-import { loadMdx } from '@/lib/mdx';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -35,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     return {
       title: 'Article Not Found',
       description: 'The requested blog article could not be found.',
+      robots: { index: false },
     };
   }
 
@@ -76,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
+export default async function BlogPostRoute({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
 
@@ -84,99 +80,51 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
     notFound();
   }
 
-  const { frontmatter, content: rawContent } = post;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'blog', slug });
+  const { frontmatter, content } = post;
   const allPosts = await getBlogPosts();
-  const readingTime = frontmatter.readingTime || calculateReadingTime(rawContent);
-
-  const breadcrumbItems = [
-    { name: 'Blog', href: '/blog' },
-    { name: frontmatter.title, href: `/blog/${slug}`, current: true },
-  ];
-
-  const relatedPosts = allPosts
-    .filter((p) => p.slug !== slug)
-    .slice(0, 3)
-    .map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      date: String(p.date),
-      category: p.category,
-      heroImage: p.heroImage,
-      readingTime: p.readingTime,
-      author: { name: p.author.name },
-    }));
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
-  const schemaNodes = (
-    <Schema
-      org={{
-        name: siteConfig.business.name,
-        url: '/',
-        logo: '/logo.svg',
-      }}
-      breadcrumbs={[
-        { name: 'Home', url: '/' },
-        { name: 'Blog', url: '/blog' },
-        { name: frontmatter.title, url: `/blog/${slug}` },
-      ]}
-      article={{
-        '@type': 'BlogPosting',
-        '@id': absUrl(`/blog/${slug}#article`),
-        headline: frontmatter.title,
-        description: frontmatter.description,
-        image: frontmatter.heroImage ? getImageUrl(frontmatter.heroImage) : undefined,
-        datePublished: frontmatter.date,
-        dateModified: frontmatter.date,
-        author: {
-          '@type': 'Person',
-          name: frontmatter.author.name,
-          jobTitle: frontmatter.author.role,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: siteConfig.business.name,
-          logo: {
-            '@type': 'ImageObject',
-            url: absUrl('/logo.svg'),
-          },
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': absUrl(`/blog/${slug}`),
-        },
-      }}
-    />
-  );
 
   return (
-    <SiteBlogPostPage
-      siteConfig={siteSummary}
-      frontmatter={{
-        title: frontmatter.title,
-        description: frontmatter.description,
-        date: String(frontmatter.date),
-        category: frontmatter.category,
-        heroImage: frontmatter.heroImage,
-        author: frontmatter.author,
-        tags: frontmatter.tags,
-        relatedServices: frontmatter.relatedServices,
-      }}
-      mdxContent={mdxContent}
-      relatedPosts={relatedPosts}
-      readingTime={readingTime}
-      breadcrumbs={breadcrumbItems}
-      schemaNodes={schemaNodes}
-    />
+    <>
+      <BlogPostPage post={frontmatter} content={content} allPosts={allPosts} />
+
+      <Schema
+        org={{
+          name: siteConfig.business.name,
+          url: '/',
+          logo: '/logo.svg',
+        }}
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Blog', url: '/blog' },
+          { name: frontmatter.title, url: `/blog/${slug}` },
+        ]}
+        article={{
+          '@type': 'BlogPosting',
+          '@id': absUrl(`/blog/${slug}#article`),
+          headline: frontmatter.title,
+          description: frontmatter.description,
+          image: frontmatter.heroImage ? getImageUrl(frontmatter.heroImage) : undefined,
+          datePublished: frontmatter.date,
+          dateModified: frontmatter.date,
+          author: {
+            '@type': 'Person',
+            name: frontmatter.author.name,
+            jobTitle: frontmatter.author.role,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: siteConfig.business.name,
+            logo: {
+              '@type': 'ImageObject',
+              url: absUrl('/logo.svg'),
+            },
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': absUrl(`/blog/${slug}`),
+          },
+        }}
+      />
+    </>
   );
 }

@@ -1,28 +1,25 @@
 /**
- * Blog Listing Page
- * =================
- *
- * Displays all blog posts.
+ * `/blog` — the library index, ported to the r9 design.
+ * See `components/blog/blog-list-page.tsx` for the port's own notes.
  */
 
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { SiteBlogPage } from '@/components/pages/BlogPage';
+import { BlogListPage } from '@/components/blog/blog-list-page';
 import { getBlogPosts } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: `Blog | Insights for Tradespeople | ${siteConfig.business.name}`,
-  description: `Expert tips on websites, local SEO, and growing your trade business. Advice from the ${siteConfig.business.name} team.`,
+  description:
+    'Twenty-one plain-English guides on getting a small business found online — local search, what a site costs, what to put on it, and how to make it fast.',
   keywords: ['blog', 'web design tips', 'local SEO', 'tradespeople', 'digital marketing'],
   openGraph: {
-    title: `Blog | Insights for Tradespeople`,
-    description: `Expert tips on websites, local SEO, and growing your trade business.`,
+    title: 'Blog | Insights for Tradespeople',
+    description: 'Plain-English guides on getting a small business found online.',
     url: '/blog',
     type: 'website',
   },
@@ -31,31 +28,9 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
   return (
     <>
-      <SiteBlogPage
-        siteConfig={siteSummary}
-        posts={posts.map((p) => ({
-          slug: p.slug,
-          title: p.title,
-          excerpt: p.excerpt,
-          date: String(p.date),
-          category: p.category,
-          heroImage: p.heroImage,
-          readingTime: p.readingTime,
-          author: { name: p.author.name },
-        }))}
-      />
+      <BlogListPage posts={posts} />
 
       <Schema
         org={{
@@ -72,7 +47,7 @@ export default async function BlogPage() {
           '@id': absUrl('/blog#blog'),
           url: absUrl('/blog'),
           name: `${siteConfig.business.name} Blog`,
-          description: `Expert tips on websites, local SEO, and growing your trade business.`,
+          description: `${posts.length} guides on websites, local SEO, and getting found online.`,
         }}
       />
     </>

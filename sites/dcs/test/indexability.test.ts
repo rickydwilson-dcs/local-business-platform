@@ -3,6 +3,7 @@ import { spawn, type ChildProcess } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import { siteConfig } from '../site.config';
+import { TOPIC_ORDER } from '../lib/blog-topics';
 
 /**
  * Runs against the REAL BUILT SITE — `next start` on the pre-built `.next`
@@ -103,6 +104,7 @@ function firstSlug(contentDir: string): string {
 
 function resolveDynamicPage(pagePath: string): string {
   if (pagePath === '/blog/[slug]') return `/blog/${firstSlug('blog')}`;
+  if (pagePath === '/blog/category/[slug]') return `/blog/category/${TOPIC_ORDER[0]}`;
   if (pagePath === '/locations/[slug]') return `/locations/${firstSlug('locations')}`;
   if (pagePath === '/projects/[slug]') return `/projects/${firstSlug('projects')}`;
   if (pagePath === '/services/[slug]') return `/services/${firstSlug('services')}`;

@@ -1,7 +1,20 @@
 /**
  * Cookie Policy Page
  *
- * Cookie compliance and transparency page.
+ * Restyled for the r9 inner-pages port (Phase 3c) onto the shared
+ * `LegalHero`/`LegalDocument` template — see
+ * `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/prototype/legal.html`
+ * and `notes-h.md` for the approved design and its provenance.
+ *
+ * This is a RESTYLE, not a rewrite: every clause below is the same cookie
+ * text this file already shipped, in the same order, under the same
+ * section ids. The three cookie tables move from a Tailwind-styled table to
+ * `.ltable.ltable--wide` inside `.cscroll` — same three columns, same rows,
+ * same cookie names — and §5 (third-party cookies) drops its two bordered
+ * cards for two `<h3>` blocks in flow, matching Privacy §9's re-marking
+ * (`notes-h.md` §5.3): the words are unchanged in both cases. Headings are
+ * sentence-cased per the approved design's site-wide case rule
+ * (`notes-c.md` §15); no word of the cookie prose itself was changed.
  */
 
 import type { Metadata } from 'next';
@@ -10,7 +23,8 @@ import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { LegalHero } from '@/components/legal/legal-hero';
-import { LegalToc, type LegalTocItem } from '@/components/legal/legal-toc';
+import { LegalDocument } from '@/components/legal/legal-document';
+import { type LegalTocItem } from '@/components/legal/legal-toc';
 
 export const metadata: Metadata = {
   title: `Cookie Policy | ${siteConfig.business.name}`,
@@ -21,12 +35,25 @@ export const metadata: Metadata = {
 };
 
 const TOC_ITEMS: LegalTocItem[] = [
-  { id: 'what-are-cookies', label: 'What Are Cookies?' },
-  { id: 'how-we-use', label: 'How We Use Cookies' },
-  { id: 'cookie-categories', label: 'Cookie Categories' },
-  { id: 'managing-cookies', label: 'Managing Your Cookies' },
-  { id: 'third-party', label: 'Third-Party Cookies' },
-  { id: 'contact', label: 'Contact Us' },
+  { id: 'what-are-cookies', label: 'What are cookies?' },
+  { id: 'how-we-use', label: 'How we use cookies' },
+  { id: 'cookie-categories', label: 'Cookie categories' },
+  { id: 'managing-cookies', label: 'Managing your cookies' },
+  { id: 'third-party', label: 'Third-party cookies' },
+  { id: 'contact', label: 'Contact us' },
+];
+
+const OTHER_DOCS = [
+  {
+    href: '/privacy-policy',
+    name: 'Privacy policy',
+    description: 'What personal data I hold, why, how long for, and your rights over it.',
+  },
+  {
+    href: '/terms-and-conditions',
+    name: 'Terms and conditions',
+    description: 'The commercial terms I work under — quotes, payment, ownership, cancellation.',
+  },
 ];
 
 interface CookieRow {
@@ -37,21 +64,23 @@ interface CookieRow {
 
 function CookieTable({ rows }: { rows: CookieRow[] }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm border-collapse">
+    <div className="cscroll">
+      <table className="ltable ltable--wide">
         <thead>
-          <tr className="border-b border-surface-border">
-            <th className="py-3 pr-4 text-left font-semibold text-surface-foreground">Cookie</th>
-            <th className="py-3 pr-4 text-left font-semibold text-surface-foreground">Purpose</th>
-            <th className="py-3 text-left font-semibold text-surface-foreground">Duration</th>
+          <tr>
+            <th scope="col">Cookie</th>
+            <th scope="col">Purpose</th>
+            <th scope="col">Duration</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-surface-border">
+        <tbody>
           {rows.map((row) => (
             <tr key={row.name}>
-              <td className="py-3 pr-4 font-mono text-xs text-surface-foreground">{row.name}</td>
-              <td className="py-3 pr-4 text-surface-muted-foreground">{row.purpose}</td>
-              <td className="py-3 text-surface-muted-foreground">{row.duration}</td>
+              <th scope="row">
+                <code>{row.name}</code>
+              </th>
+              <td>{row.purpose}</td>
+              <td>{row.duration}</td>
             </tr>
           ))}
         </tbody>
@@ -104,184 +133,112 @@ export default function CookiePolicyPage() {
 
   return (
     <div className="font-body">
-      <LegalHero title="Cookie Policy" current="Cookie Policy" lastUpdated={lastUpdated} />
+      <LegalHero
+        title="Cookie policy"
+        current="Cookie policy"
+        metaItems={[
+          { value: lastUpdated, label: 'Last updated' },
+          { value: 'Six sections', label: 'In this document' },
+          { value: 'Three', label: 'Cookie categories' },
+        ]}
+      />
 
-      <div className="bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6 py-16">
-          <div className="lg:grid lg:grid-cols-[220px_1fr] lg:gap-16">
-            <aside className="hidden lg:block">
-              <LegalToc items={TOC_ITEMS} />
-            </aside>
+      <LegalDocument tocItems={TOC_ITEMS} otherDocs={OTHER_DOCS}>
+        <h2 className="res" id="what-are-cookies">
+          1. What are cookies?
+        </h2>
+        <p>
+          Cookies are small text files that are stored on your device when you visit a website. They
+          help websites remember your preferences and improve your browsing experience.
+        </p>
+        <p>
+          Cookies can be &quot;session&quot; cookies (deleted when you close your browser) or
+          &quot;persistent&quot; cookies (remain until they expire or you delete them).
+        </p>
 
-            <article className="max-w-[680px]">
-              {/* What Are Cookies */}
-              <section id="what-are-cookies" className="scroll-mt-24 mb-14">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">
-                  1. What Are Cookies?
-                </h2>
-                <p className="text-surface-muted-foreground leading-relaxed mb-4">
-                  Cookies are small text files that are stored on your device when you visit a
-                  website. They help websites remember your preferences and improve your browsing
-                  experience.
-                </p>
-                <p className="text-surface-muted-foreground leading-relaxed">
-                  Cookies can be &quot;session&quot; cookies (deleted when you close your browser)
-                  or &quot;persistent&quot; cookies (remain until they expire or you delete them).
-                </p>
-              </section>
+        <h2 className="res" id="how-we-use">
+          2. How we use cookies
+        </h2>
+        <p>We use cookies to:</p>
+        <ul>
+          <li>Remember your cookie consent preferences</li>
+          <li>Understand how you use our website</li>
+          <li>Improve our website performance</li>
+          <li>Provide relevant content and advertisements</li>
+          <li>Ensure website security</li>
+        </ul>
 
-              {/* How We Use Cookies */}
-              <section id="how-we-use" className="scroll-mt-24 mb-14">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">
-                  2. How We Use Cookies
-                </h2>
-                <p className="text-surface-muted-foreground leading-relaxed mb-4">
-                  We use cookies to:
-                </p>
-                <ul className="list-disc list-outside pl-5 space-y-2 text-surface-muted-foreground leading-relaxed">
-                  <li>Remember your cookie consent preferences</li>
-                  <li>Understand how you use our website</li>
-                  <li>Improve our website performance</li>
-                  <li>Provide relevant content and advertisements</li>
-                  <li>Ensure website security</li>
-                </ul>
-              </section>
+        <h2 className="res" id="cookie-categories">
+          3. Cookie categories
+        </h2>
 
-              {/* Cookie Categories */}
-              <section id="cookie-categories" className="scroll-mt-24 mb-14">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-6">
-                  3. Cookie Categories
-                </h2>
+        <h3>Necessary cookies</h3>
+        <p>Required for the website to function. Cannot be disabled.</p>
+        <CookieTable rows={NECESSARY_COOKIES} />
 
-                <div className="space-y-10">
-                  <div>
-                    <h3 className="font-semibold text-surface-foreground mb-1">
-                      Necessary Cookies
-                    </h3>
-                    <p className="text-surface-muted-foreground text-sm mb-4">
-                      Required for the website to function. Cannot be disabled.
-                    </p>
-                    <CookieTable rows={NECESSARY_COOKIES} />
-                  </div>
+        <h3>Analytics cookies</h3>
+        <p>Help us understand how visitors use our website.</p>
+        <CookieTable rows={ANALYTICS_COOKIES} />
 
-                  <div>
-                    <h3 className="font-semibold text-surface-foreground mb-1">
-                      Analytics Cookies
-                    </h3>
-                    <p className="text-surface-muted-foreground text-sm mb-4">
-                      Help us understand how visitors use our website.
-                    </p>
-                    <CookieTable rows={ANALYTICS_COOKIES} />
-                  </div>
+        <h3>Marketing cookies</h3>
+        <p>Used to deliver relevant advertisements and track campaign effectiveness.</p>
+        <CookieTable rows={MARKETING_COOKIES} />
 
-                  <div>
-                    <h3 className="font-semibold text-surface-foreground mb-1">
-                      Marketing Cookies
-                    </h3>
-                    <p className="text-surface-muted-foreground text-sm mb-4">
-                      Used to deliver relevant advertisements and track campaign effectiveness.
-                    </p>
-                    <CookieTable rows={MARKETING_COOKIES} />
-                  </div>
-                </div>
-              </section>
+        <h2 className="res" id="managing-cookies">
+          4. Managing your cookies
+        </h2>
+        <p>You can control cookies through several methods:</p>
+        <h3>Consent banner</h3>
+        <p>
+          When you first visit our site, you can choose which cookie categories to accept using our
+          consent banner.
+        </p>
+        <h3>Browser settings</h3>
+        <p>Most browsers allow you to manage cookies through their settings:</p>
+        <ul>
+          {BROWSER_SETTINGS.map((row) => (
+            <li key={row.browser}>
+              <strong>{row.browser}:</strong> {row.path}
+            </li>
+          ))}
+        </ul>
+        <p>Note: Blocking all cookies may affect website functionality.</p>
 
-              {/* Managing Cookies */}
-              <section id="managing-cookies" className="scroll-mt-24 mb-14">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">
-                  4. Managing Your Cookies
-                </h2>
-                <p className="text-surface-muted-foreground leading-relaxed mb-6">
-                  You can control cookies through several methods:
-                </p>
+        <h2 className="res" id="third-party">
+          5. Third-party cookies
+        </h2>
+        <p>Some cookies are placed by third-party services we use:</p>
+        <h3>Google Analytics</h3>
+        <p>
+          Website analytics to understand visitor behaviour.{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Google privacy policy
+          </a>
+        </p>
+        <h3>Facebook Pixel</h3>
+        <p>
+          Advertising and conversion tracking.{' '}
+          <a
+            href="https://www.facebook.com/privacy/explanation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook privacy policy
+          </a>
+        </p>
 
-                <h3 className="font-semibold text-surface-foreground mb-2">Consent Banner</h3>
-                <p className="text-surface-muted-foreground leading-relaxed mb-6">
-                  When you first visit our site, you can choose which cookie categories to accept
-                  using our consent banner.
-                </p>
-
-                <h3 className="font-semibold text-surface-foreground mb-2">Browser Settings</h3>
-                <p className="text-surface-muted-foreground leading-relaxed mb-3">
-                  Most browsers allow you to manage cookies through their settings:
-                </p>
-                <ul className="space-y-1.5 text-surface-muted-foreground text-sm mb-4">
-                  {BROWSER_SETTINGS.map((row) => (
-                    <li key={row.browser}>
-                      <strong className="text-surface-foreground">{row.browser}:</strong> {row.path}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-surface-muted-foreground text-sm">
-                  Note: Blocking all cookies may affect website functionality.
-                </p>
-              </section>
-
-              {/* Third-Party Cookies */}
-              <section id="third-party" className="scroll-mt-24 mb-14">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">
-                  5. Third-Party Cookies
-                </h2>
-                <p className="text-surface-muted-foreground leading-relaxed mb-6">
-                  Some cookies are placed by third-party services we use:
-                </p>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div className="bg-surface-card border border-surface-border rounded-[20px] p-5">
-                    <h3 className="font-semibold text-surface-foreground mb-1">Google Analytics</h3>
-                    <p className="text-sm text-surface-muted-foreground">
-                      Website analytics to understand visitor behaviour.{' '}
-                      <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-brand-primary hover:underline"
-                      >
-                        Google Privacy Policy
-                      </a>
-                    </p>
-                  </div>
-                  <div className="bg-surface-card border border-surface-border rounded-[20px] p-5">
-                    <h3 className="font-semibold text-surface-foreground mb-1">Facebook Pixel</h3>
-                    <p className="text-sm text-surface-muted-foreground">
-                      Advertising and conversion tracking.{' '}
-                      <a
-                        href="https://www.facebook.com/privacy/explanation"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-brand-primary hover:underline"
-                      >
-                        Facebook Privacy Policy
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              {/* Contact */}
-              <section id="contact" className="scroll-mt-24">
-                <h2 className="text-2xl font-bold text-surface-foreground mb-4">6. Contact Us</h2>
-                <p className="text-surface-muted-foreground leading-relaxed mb-4">
-                  If you have questions about our use of cookies, please contact us at{' '}
-                  <a
-                    href={`mailto:${BUSINESS_EMAIL}`}
-                    className="text-brand-primary hover:underline"
-                  >
-                    {BUSINESS_EMAIL}
-                  </a>
-                  .
-                </p>
-                <p className="text-surface-muted-foreground leading-relaxed">
-                  For more information about how we handle your personal data, please see our{' '}
-                  <Link href="/privacy-policy" className="text-brand-primary hover:underline">
-                    Privacy Policy
-                  </Link>
-                  .
-                </p>
-              </section>
-            </article>
-          </div>
-        </div>
-      </div>
+        <h2 className="res" id="contact">
+          6. Contact us
+        </h2>
+        <p>
+          If you have questions about our use of cookies, please contact us at{' '}
+          <a href={`mailto:${BUSINESS_EMAIL}`}>{BUSINESS_EMAIL}</a>.
+        </p>
+        <p>
+          For more information about how we handle your personal data, please see our{' '}
+          <Link href="/privacy-policy">Privacy policy</Link>.
+        </p>
+      </LegalDocument>
     </div>
   );
 }
