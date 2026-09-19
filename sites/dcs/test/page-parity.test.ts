@@ -1626,7 +1626,7 @@ describe('/blog matches the approved design (prototype/blog-list.html)', () => {
     expect(hrefs).toEqual(TOPIC_ORDER.map((t) => `/blog/category/${t}`).sort());
   });
 
-  it('renders the featured post and the two-axis filter controls', async () => {
+  it('renders the featured post and the topic filter controls', async () => {
     const posts = await getBlogPosts();
     const featured = posts.find((p) => p.featured) ?? posts[0];
 
@@ -1636,7 +1636,9 @@ describe('/blog matches the approved design (prototype/blog-list.html)', () => {
       `/blog/${featured.slug}`
     );
     expect(container.querySelector('#f-topic')).toBeTruthy();
-    expect(container.querySelector('#f-sector')).toBeTruthy();
+    // #f-sector (the "who it's for" filter axis) is deliberately not wired up
+    // — see blog-filter-section.tsx's header, Ricky declined it 2026-09-19.
+    expect(container.querySelector('#f-sector')).toBeNull();
     expect(container.querySelector('.count[role="status"]')).toBeTruthy();
   });
 
