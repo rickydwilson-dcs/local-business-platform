@@ -49,9 +49,13 @@
  * meant rewriting the ported rules themselves — breaking both the verbatim-port
  * contract and the test that enforces it — to work around a collision that is
  * not in those rules at all. This file restores the environment the port was
- * written against instead, and is imported ONLY by `app/page.tsx`, so it is
- * emitted in the homepage's stylesheet and does not reach the 14 routes in the
- * `(site)` group. It must be imported BEFORE `home-r9.css`.
+ * written against instead, and is imported by `app/page.tsx` (before
+ * `home-r9.css`) and, since 2026-09-18, by `app/(site)/layout.tsx` (before
+ * `inner-pages.css`). Both of those stylesheets are verbatim ports authored
+ * against browser defaults — `inner-pages.css` §02 states the same
+ * requirement in its own words — and both are route-scoped imports rather
+ * than root-layout ones, so this reaches exactly the routes that need it and
+ * no others. It must always be imported BEFORE the stylesheet it protects.
  *
  * `revert` rather than literal values on the controls: it rolls the cascade
  * back to the user-agent origin, which is exactly the state the prototype's

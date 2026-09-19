@@ -23,6 +23,12 @@
  * `tabular-nums`. The classes below (`.tier__f`, `.tcard__f`) are the
  * already-ported, verified CSS — no numeric font-variant styling is added
  * here.
+ *
+ * Shared with `/pricing` (inner-pages port, Phase 2c) — `pricing.html`'s own
+ * header comment calls this out explicitly: "SECTION 2 OF THIS PAGE IS THE
+ * HOMEPAGE SECTION, VERBATIM. Same components, same TIERS data...". This file
+ * is that one shared component, not a homepage-only one duplicated for the
+ * new route.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -55,7 +61,19 @@ function CheckIcon({ hidden }: { hidden?: boolean }) {
   );
 }
 
-export function Pricing() {
+export interface PricingProps {
+  /**
+   * Target for both "Get a free quote" CTAs (the desktop `.detail` pane and
+   * the mobile `.tcard`s). Defaults to `'#end'` — the homepage's own closing
+   * chapter (`home-body.tsx`'s final `ChapterPanel id="end"`). Any caller
+   * that does not render an element with `id="end"` of its own (e.g.
+   * `/pricing`, which has no `#end` section) must override this — see
+   * `app/(site)/pricing/page.tsx`.
+   */
+  ctaHref?: string;
+}
+
+export function Pricing({ ctaHref = '#end' }: PricingProps = {}) {
   // Default to upfront: the homepage leads with the one-off price.
   const [mode, setMode] = useState<Mode>('upfront');
   const [tier, setTier] = useState<TierKey>('starter');
@@ -154,7 +172,7 @@ export function Pricing() {
               </div>
             ))}
           </div>
-          <a className="btn" href="#end">
+          <a className="btn" href={ctaHref}>
             Get a free quote
           </a>
         </div>
@@ -201,7 +219,7 @@ export function Pricing() {
                     See upfront pricing
                   </button>
                 ) : (
-                  <a className="btn" href="#end">
+                  <a className="btn" href={ctaHref}>
                     Get a free quote
                   </a>
                 )}

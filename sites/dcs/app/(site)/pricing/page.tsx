@@ -1,110 +1,100 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import { Pricing } from '@/components/home/pricing';
+import { absUrl } from '@/lib/site';
+
+/**
+ * `/pricing` — ported from
+ * `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/prototype/pricing.html`.
+ *
+ * SECTION 2 ("The picker") is the homepage's own pricing panel, verbatim —
+ * the prototype's own header comment is explicit about this: "SECTION 2 OF
+ * THIS PAGE IS THE HOMEPAGE SECTION, VERBATIM. Same components, same TIERS
+ * data...". `<Pricing/>` (`components/home/pricing.tsx`) is that one shared
+ * component; it is not duplicated here. The only difference from the
+ * homepage's call is `ctaHref` — the homepage's default (`#end`) points at
+ * its own closing chapter, which this route does not have, so this page
+ * points the CTA at the real contact route instead.
+ *
+ * Everything else on this page is the depth the homepage panel has no room
+ * for and never claims to answer (sections 1, 3, 4, 5, 6 below) — see the
+ * prototype's own header comment for the full rationale.
+ *
+ * PRICES ARE AUTHORED, NEVER COMPUTED. Every figure outside the shared
+ * `<Pricing/>` component (the masthead stats, the "which way to pay" copy,
+ * the comparison table) is a literal string transcribed from
+ * `components/home/home-data.ts`'s `TIERS`, exactly as the prototype
+ * authors it — never derived or animated. £750 / £45 and page counts
+ * 5 / 20 / 100 throughout; never £995 / £59, never 20 / 50 (the old
+ * pre-port page's figures, which this file replaces).
+ *
+ * VOICE: first-person singular throughout ("I", never "we"), matching the
+ * prototype and the rest of the r9 port.
+ *
+ * WIRING NOTES (flagged in the Phase 2 report — the prototype's own hrefs
+ * are all placeholder "#", since it is a standalone static file):
+ *   - The shared `<Pricing/>` CTAs ("Get a free quote") point at
+ *     `/contact` rather than a mailto, so a visitor lands on the real
+ *     enquiry form rather than their mail client.
+ *   - Section 6's extras rows point at `/contact` too — "tell me which ones
+ *     you want" is the contact form's job.
+ *   - The closing "I have written it out at length here" link points at
+ *     `/blog/pay-monthly-vs-upfront-website`, the real post the prototype
+ *     names in its own comments (`content/blog/pay-monthly-vs-upfront-website.mdx`).
+ *     That route ships in Phase 3 of this brief; the link is correct once it
+ *     lands.
+ */
+
+const TITLE = 'Pricing — Digital Consulting Services';
+const DESCRIPTION =
+  'Website pricing from £750 upfront or £45 a month. Four plans, everything included, no hidden fees. See exactly what you get before you ask for a quote.';
+
 export const metadata: Metadata = {
-  title: 'Pricing | Digital Consulting Services',
-  description:
-    'Simple, transparent pricing for tradesperson websites. Pay monthly from £45/month or upfront from £750. No hidden fees.',
+  title: TITLE,
+  description: DESCRIPTION,
+  robots: { index: true, follow: true },
+  alternates: {
+    canonical: absUrl('/pricing'),
+  },
 };
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+function Check() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M3 8.4 6.4 12 13 4.6"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-const tiers = [
-  {
-    name: 'Starter',
-    pages: 'Up to 20',
-    upfront: '£750',
-    monthlyAfterUpfront: '£10/mo',
-    payMonthly: '£45/mo',
-    minTerm: '24 months',
-    popular: false,
-  },
-  {
-    name: 'Professional',
-    pages: 'Up to 50',
-    upfront: '£1,495',
-    monthlyAfterUpfront: '£15/mo',
-    payMonthly: '£85/mo',
-    minTerm: '24 months',
-    popular: true,
-  },
-  {
-    name: 'Growth',
-    pages: 'Up to 100',
-    upfront: '£2,995',
-    monthlyAfterUpfront: '£25/mo',
-    payMonthly: '£150/mo',
-    minTerm: '24 months',
-    popular: false,
-  },
-] as const;
-
-const included = [
+const INCLUDED = [
   'Custom bespoke design',
-  'Local SEO built in (service pages, location pages, Schema markup)',
+  'Local SEO built in — service pages, location pages, Schema markup',
   'Mobile-first and fast',
   'Contact form with email notification',
-  'Hosting, SSL certificate, and domain management',
+  'Hosting, SSL certificate and domain management',
   'Ongoing support and monitoring',
-  'Unlimited revision rounds during build',
+  'Unlimited revision rounds during the build',
   'Google Search Console submission',
 ];
 
-const tierDifferences = [
-  { label: 'Pages', starter: '20', professional: '50', growth: '100' },
-  {
-    label: 'Content updates included per month',
-    starter: '1',
-    professional: '2',
-    growth: '4',
-  },
-  {
-    label: 'Build timeline',
-    starter: '4 weeks',
-    professional: '6 weeks',
-    growth: '8 weeks',
-  },
-] as const;
+const EXTRAS = [
+  { name: 'Review capture widget', meta: 'Google and Trustpilot' },
+  { name: 'SMS lead notification', meta: 'A text the moment an enquiry lands' },
+  { name: 'Call tracking number', meta: 'Which channel drove the call' },
+  { name: 'AI chatbot FAQ', meta: 'Common questions, answered 24/7' },
+  { name: 'Booking calendar', meta: 'Customers book a slot directly' },
+  { name: 'Google Business Profile setup', meta: 'Created and optimised for local search' },
+  { name: 'Google Ads management', meta: 'Campaigns managed monthly' },
+];
 
-const addons = [
-  {
-    icon: 'star',
-    name: 'Review capture widget',
-    description: 'Prompt happy customers to leave a review on Google or Trustpilot automatically.',
-  },
-  {
-    icon: 'sms',
-    name: 'SMS lead notification',
-    description: 'Get a text message the moment a new enquiry lands in your inbox.',
-  },
-  {
-    icon: 'analytics',
-    name: 'Call tracking number',
-    description: 'A dedicated number that records which marketing channel drove the call.',
-  },
-  {
-    icon: 'smart_toy',
-    name: 'AI chatbot FAQ',
-    description: 'A lightweight chatbot that answers common questions 24/7 without your input.',
-  },
-  {
-    icon: 'calendar_month',
-    name: 'Booking calendar integration',
-    description: 'Let customers book a slot directly from your website.',
-  },
-  {
-    icon: 'location_on',
-    name: 'Google My Business setup',
-    description: 'Full GMB profile creation and optimisation for local search visibility.',
-  },
-  {
-    icon: 'ads_click',
-    name: 'Google Ads management',
-    description: 'Targeted pay-per-click campaigns managed monthly to drive immediate leads.',
-  },
-] as const;
-
-const faqs = [
+const FAQS = [
   {
     question: 'Do I own my website?',
     answer:
@@ -113,12 +103,12 @@ const faqs = [
   {
     question: 'What happens if I want to cancel?',
     answer:
-      "Give us 30 days notice after your minimum term and we'll export all your content so you can take it elsewhere. No fuss.",
+      "Give me 30 days' notice after your minimum term and I'll export all your content so you can take it elsewhere. No fuss.",
   },
   {
-    question: 'Can I upgrade my tier later?',
+    question: 'Can I upgrade my plan later?',
     answer:
-      "Yes, you can upgrade at any time. We'll quote for the additional pages and work out the most cost-effective route for you.",
+      "Yes, you can upgrade at any time. I'll quote for the additional pages and work out the most cost-effective route for you.",
   },
   {
     question: 'Is there a contract?',
@@ -126,372 +116,352 @@ const faqs = [
       'Pay-monthly has a 24-month minimum term, after which it rolls monthly. Upfront clients have no ongoing commitment beyond the monthly hosting fee.',
   },
   {
-    question: "What's included in 'managed hosting'?",
+    question: 'What’s included in “managed hosting”?',
     answer:
-      'Hosting on fast UK servers, SSL certificate, domain renewal, security monitoring, and uptime alerts — all managed by us.',
+      'Hosting on fast UK servers, SSL certificate, domain renewal, security monitoring, and uptime alerts — all managed by me.',
   },
-] as const;
-
-// ─── Page ──────────────────────────────────────────────────────────────────────
+];
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen font-body">
-      {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-      <header className="bg-brand-primary py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-white mb-4 leading-[1.1]">
-              Simple, Transparent Pricing
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 font-body leading-relaxed">
-              No hidden fees. No long contracts. Just a website that works.
-            </p>
+    <>
+      {/* ===== 1. Breadcrumb + masthead — ink ================================ */}
+      <div className="crumb p--ink" data-ground="ink">
+        <nav aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <span aria-current="page">Pricing</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <header className="mast p--ink" data-ground="ink">
+        <p className="eyeless">Pricing</p>
+        <h1>What a website costs.</h1>
+        <p className="lead">
+          Four plans, two ways to pay, and the same things included in every one of them. If none of
+          them quite fit, tell me what you need and I&rsquo;ll price it properly.
+        </p>
+        <div className="mast__meta">
+          <div>
+            <b>&pound;750</b>
+            <span>Upfront, from</span>
+          </div>
+          <div>
+            <b>&pound;45/month</b>
+            <span>Pay monthly, from</span>
+          </div>
+          <div>
+            <b>24 months</b>
+            <span>Pay-monthly minimum term</span>
+          </div>
+          <div>
+            <b>Nothing hidden</b>
+            <span>Hosting, SSL and support included</span>
           </div>
         </div>
       </header>
 
-      {/* ── Payment options explainer ─────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-8 text-center">
-            Two ways to pay
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Pay Upfront */}
-            <div className="bg-surface-card rounded-[20px] border border-surface-card-border p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-brand-primary/10 w-12 h-12 rounded-xl flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-2xl leading-none"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    payments
-                  </span>
-                </div>
-                <h3 className="font-headline font-bold text-xl text-surface-foreground">
-                  Pay Upfront
-                </h3>
-              </div>
-              <ul className="space-y-3 text-surface-muted-foreground font-body text-sm leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  One-off setup fee covers design and build.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  Lower monthly fee after launch — just hosting and management.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  You own the site outright from day one.
-                </li>
-              </ul>
-            </div>
+      {/* ===== 2. The picker — white. The homepage section, verbatim. ======== */}
+      <section className="sec p--white" data-ground="white" id="plans">
+        <p className="eyeless">The plans</p>
+        <h2 className="res">Four plans. Two ways to pay.</h2>
+        <p className="lead">
+          Pick a plan to see what is in it. Every plan can be paid either way except the online
+          store, which is upfront only.
+        </p>
+        <Pricing ctaHref="/contact" />
+      </section>
 
-            {/* Pay Monthly */}
-            <div className="bg-surface-card rounded-[20px] border border-surface-card-border p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-brand-primary/10 w-12 h-12 rounded-xl flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-2xl leading-none"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    calendar_month
-                  </span>
-                </div>
-                <h3 className="font-headline font-bold text-xl text-surface-foreground">
-                  Pay Monthly
-                </h3>
+      {/* ===== 3. Which way to pay — ink ====================================== */}
+      <section className="sec p--ink" data-ground="ink">
+        <p className="eyeless">Which way to pay</p>
+        <h2 className="res">Which one suits you.</h2>
+        <p className="lead">
+          There is no catch in either one &mdash; they just suit different situations. Here is the
+          honest version of both, including the part that doesn&rsquo;t flatter them.
+        </p>
+
+        <div className="twoup">
+          <div>
+            <h3>Pay upfront</h3>
+            <p className="twoup__p">
+              You pay for the build once and own what has been built. After that there is a small
+              monthly fee for hosting, SSL, the domain and security monitoring &mdash; &pound;10 a
+              month on Starter, up to &pound;50 on an online store.
+            </p>
+            <div className="detail__l">
+              <div>
+                <Check />
+                <span>
+                  You own the site outright. Nobody can take it away or raise the price on you.
+                </span>
               </div>
-              <ul className="space-y-3 text-surface-muted-foreground font-body text-sm leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  No upfront setup fee — spread the cost over time.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  Higher monthly cost covers design, build, hosting, and support.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-base leading-none mt-0.5 shrink-0"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    check_circle
-                  </span>
-                  24-month minimum term.
-                </li>
-              </ul>
+              <div>
+                <Check />
+                <span>No ongoing commitment beyond the monthly hosting fee.</span>
+              </div>
+              <div>
+                <Check />
+                <span>You can move it elsewhere whenever you want to.</span>
+              </div>
+            </div>
+            <div className="trade">
+              <p className="eyeless">And the trade-off</p>
+              <p>
+                It is a lump sum. For a business that is still getting going, &pound;750 to
+                &pound;2,995 is money that could go on tools, a van or advertising instead. The
+                usual catch with an upfront build elsewhere is that hosting, updates and support are
+                then extra, or left to you &mdash; here they are the &pound;10 to &pound;50 a month
+                that follows, and nothing else.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3>Pay monthly</h3>
+            <p className="twoup__p">
+              Nothing upfront. One predictable fee covers the design, the build, the hosting, the
+              support and the changes &mdash; &pound;45, &pound;85 or &pound;150 a month depending
+              on the plan, on a 24-month minimum term.
+            </p>
+            <div className="detail__l">
+              <div>
+                <Check />
+                <span>No lump sum. The barrier to starting is one month&rsquo;s fee.</span>
+              </div>
+              <div>
+                <Check />
+                <span>
+                  Everything is included, so there are no separate bills to be surprised by.
+                </span>
+              </div>
+              <div>
+                <Check />
+                <span>If it breaks it is my problem to fix, not yours.</span>
+              </div>
+            </div>
+            <div className="trade">
+              <p className="eyeless">And the trade-off</p>
+              <p>
+                You do not own it while you are paying for it. If you stop paying, the site goes
+                with the subscription &mdash; your content is still yours, and I will export it, but
+                the site itself is not.
+              </p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ── Tier comparison cards ─────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-8 text-center">
-            Choose your tier
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {tiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`bg-surface-card rounded-[20px] border border-surface-card-border p-6 relative flex flex-col${
-                  tier.popular ? ' shadow-2xl ring-2 ring-brand-primary/30' : ' shadow-md'
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-brand-accent text-surface-foreground text-xs font-bold font-body px-4 py-1.5 rounded-full whitespace-nowrap">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-
-                <h3 className="font-headline font-bold text-2xl text-surface-foreground mb-1 mt-2">
-                  {tier.name}
-                </h3>
-                <p className="text-surface-muted-foreground text-sm font-body mb-6">
-                  {tier.pages} pages
-                </p>
-
-                {/* Pricing rows */}
-                <div className="space-y-4 mb-6 flex-1">
-                  <div className="bg-surface-background rounded-xl p-4">
-                    <p className="text-xs text-surface-muted-foreground font-body uppercase tracking-wide mb-1">
-                      Pay upfront
-                    </p>
-                    <p className="font-headline font-bold text-2xl text-surface-foreground">
-                      {tier.upfront}
-                    </p>
-                    <p className="text-xs text-surface-muted-foreground font-body mt-1">
-                      then {tier.monthlyAfterUpfront} ongoing
-                    </p>
-                  </div>
-
-                  <div className="bg-surface-background rounded-xl p-4">
-                    <p className="text-xs text-surface-muted-foreground font-body uppercase tracking-wide mb-1">
-                      Pay monthly (no setup)
-                    </p>
-                    <p className="font-headline font-bold text-2xl text-surface-foreground">
-                      {tier.payMonthly}
-                    </p>
-                    <p className="text-xs text-surface-muted-foreground font-body mt-1">
-                      {tier.minTerm} minimum
-                    </p>
-                  </div>
-                </div>
-
-                <Link
-                  href="/contact"
-                  className={`block text-center py-3 px-6 rounded-xl text-sm font-bold font-body transition-colors${
-                    tier.popular
-                      ? ' bg-brand-primary text-white hover:opacity-90'
-                      : ' bg-brand-primary/10 text-brand-primary hover:bg-brand-primary/20'
-                  }`}
-                >
-                  Get a quote
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── What's included ───────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-8 text-center">
-              What&apos;s Included on Every Plan
-            </h2>
-            <div className="bg-surface-card rounded-[20px] border border-surface-card-border p-8">
-              <ul className="space-y-4">
-                {included.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span
-                      className="material-symbols-outlined text-brand-primary text-xl leading-none mt-0.5 shrink-0"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                      aria-hidden="true"
-                    >
-                      check_circle
-                    </span>
-                    <span className="text-surface-foreground font-body leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── What changes between tiers ────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-8 text-center">
-            What Changes Between Tiers
-          </h2>
-          <div className="bg-surface-card rounded-[20px] border border-surface-card-border overflow-hidden">
-            {/* Header row */}
-            <div className="grid grid-cols-4 bg-brand-primary/10 border-b border-surface-card-border">
-              <div className="p-4 font-headline font-bold text-sm text-surface-foreground" />
-              {tiers.map((tier) => (
-                <div
-                  key={tier.name}
-                  className="p-4 font-headline font-bold text-sm text-surface-foreground text-center"
-                >
-                  {tier.name}
-                </div>
-              ))}
-            </div>
-            {/* Data rows */}
-            {tierDifferences.map((row, i) => (
-              <div
-                key={row.label}
-                className={`grid grid-cols-4${i < tierDifferences.length - 1 ? ' border-b border-surface-card-border' : ''}`}
-              >
-                <div className="p-4 font-body text-sm text-surface-muted-foreground leading-relaxed">
-                  {row.label}
-                </div>
-                <div className="p-4 font-body text-sm text-surface-foreground text-center font-semibold">
-                  {row.starter}
-                </div>
-                <div className="p-4 font-body text-sm text-surface-foreground text-center font-semibold">
-                  {row.professional}
-                </div>
-                <div className="p-4 font-body text-sm text-surface-foreground text-center font-semibold">
-                  {row.growth}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Extras & Add-ons ──────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-3 text-center">
-            We Can Also Add&hellip;
-          </h2>
-          <p className="text-center text-surface-muted-foreground font-body mb-10">
-            Prices vary &mdash; get in touch to discuss what you need.
+        <div className="trade" style={{ marginTop: 'clamp(56px,8vh,96px)' }}>
+          <p className="eyeless">The short version</p>
+          <p className="lead" style={{ maxWidth: '62ch' }}>
+            If you can put the lump sum down without it hurting your cash flow, pay upfront. If you
+            would rather keep hold of the cash and have the whole thing handled for you, pay
+            monthly. Both prices are on this page &mdash; work it out whichever way suits you. Still
+            weighing it up?{' '}
+            <Link
+              href="/blog/pay-monthly-vs-upfront-website"
+              style={{ borderBottom: '1.5px solid rgba(0,210,216,.5)' }}
+            >
+              I have written it out at length here
+            </Link>{' '}
+            &mdash; both options, no thumb on the scale.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {addons.map((addon) => (
-              <div
-                key={addon.name}
-                className="bg-surface-card rounded-[20px] border border-surface-card-border p-5"
-              >
-                <div className="bg-brand-primary/10 w-11 h-11 rounded-xl flex items-center justify-center mb-4">
-                  <span
-                    className="material-symbols-outlined text-brand-primary text-2xl leading-none"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                    aria-hidden="true"
-                  >
-                    {addon.icon}
+        </div>
+      </section>
+
+      {/* ===== 4. What's in every plan + what changes — white ================= */}
+      <section className="sec p--white" data-ground="white">
+        <p className="eyeless">What&rsquo;s included</p>
+        <h2 className="res">In every plan, including the cheapest one.</h2>
+        <p className="lead">
+          Whichever plan you choose, and whichever way you pay, all of this comes with it. Nothing
+          here is an upgrade or an add-on.
+        </p>
+        <div className="detail__l detail__l--2">
+          {INCLUDED.map((item) => (
+            <div key={item}>
+              <Check />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="res" style={{ marginTop: 'clamp(74px,9vh,120px)' }}>
+          All four, side by side.
+        </h2>
+        <p className="lead">
+          Everything that changes between the plans, in one place. An online store is the only one
+          that can&rsquo;t be paid monthly.
+        </p>
+
+        <div className="cscroll">
+          <table className="ctable">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span className="eyeless">Plan</span>
+                </th>
+                <th scope="col">
+                  Starter
+                  <span className="tier__s">Up to 5 pages</span>
+                </th>
+                <th scope="col" data-rec="">
+                  Professional
+                  <span className="tier__s">Most land here</span>
+                </th>
+                <th scope="col">
+                  Growth
+                  <span className="tier__s">Up to 100 pages</span>
+                </th>
+                <th scope="col">
+                  eCommerce
+                  <span className="tier__s">Online store</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" className="eyeless">
+                  Pages
+                </th>
+                <td>Up to 5</td>
+                <td data-rec="">Up to 20</td>
+                <td>Up to 100</td>
+                <td>Online store</td>
+              </tr>
+              <tr>
+                <th scope="row" className="eyeless">
+                  Pay upfront
+                </th>
+                <td>
+                  <span className="tier__f">
+                    &pound;750
+                    <small>then &pound;10/mo</small>
                   </span>
+                </td>
+                <td data-rec="">
+                  <span className="tier__f">
+                    &pound;1,495
+                    <small>then &pound;15/mo</small>
+                  </span>
+                </td>
+                <td>
+                  <span className="tier__f">
+                    &pound;2,995
+                    <small>then &pound;25/mo</small>
+                  </span>
+                </td>
+                <td>
+                  <span className="tier__f">
+                    From &pound;2,995
+                    <small>then &pound;50/mo</small>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" className="eyeless">
+                  Pay monthly
+                </th>
+                <td>
+                  <span className="tier__f">
+                    &pound;45
+                    <small>per month</small>
+                  </span>
+                </td>
+                <td data-rec="">
+                  <span className="tier__f">
+                    &pound;85
+                    <small>per month</small>
+                  </span>
+                </td>
+                <td>
+                  <span className="tier__f">
+                    &pound;150
+                    <small>per month</small>
+                  </span>
+                </td>
+                <td className="na">Not available &mdash; upfront only</td>
+              </tr>
+              <tr>
+                <th scope="row" className="eyeless">
+                  What you get
+                </th>
+                <td>
+                  <ul>
+                    <li>Bespoke design &mdash; no template</li>
+                    <li>Local SEO built in</li>
+                    <li>Hosting, SSL and security</li>
+                  </ul>
+                </td>
+                <td data-rec="">
+                  <ul>
+                    <li>Everything in Starter, plus:</li>
+                    <li>Service and location pages</li>
+                    <li>Monthly plain-English reporting</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    <li>Everything in Professional, plus:</li>
+                    <li>Every service in every town</li>
+                    <li>Priority support</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    <li>Store built and products loaded</li>
+                    <li>Payments and delivery set up</li>
+                    <li>Stock and orders handled</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ===== 5. Questions — magenta ========================================= */}
+      <section className="sec p--magenta" data-ground="magenta">
+        <div className="measure">
+          <p className="eyeless">Questions</p>
+          <h2 className="res">The ones people actually ask.</h2>
+          <div className="qa">
+            {FAQS.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <div className="qa__a">
+                  <div>
+                    <p>{faq.answer}</p>
+                  </div>
                 </div>
-                <h3 className="font-headline font-bold text-base text-surface-foreground mb-2">
-                  {addon.name}
-                </h3>
-                <p className="text-surface-muted-foreground text-sm font-body leading-relaxed">
-                  {addon.description}
-                </p>
-              </div>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ───────────────────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold font-headline text-surface-foreground mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-3">
-              {faqs.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="bg-surface-card rounded-[20px] border border-surface-card-border group"
-                >
-                  <summary className="flex items-center justify-between gap-4 p-6 cursor-pointer list-none font-headline font-bold text-base text-surface-foreground select-none">
-                    {faq.question}
-                    <span
-                      className="material-symbols-outlined text-brand-primary text-xl leading-none shrink-0 transition-transform group-open:rotate-180"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                      aria-hidden="true"
-                    >
-                      expand_more
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 font-body text-surface-muted-foreground leading-relaxed text-sm">
-                    {faq.answer}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
+      {/* ===== 6. Extras — aqua =============================================== */}
+      <section className="sec p--aqua" data-ground="aqua">
+        <p className="eyeless">Extras</p>
+        <h2 className="res">And the things you can bolt on.</h2>
+        <p className="lead">
+          None of these are in the plan prices and none of them have a list price. Tell me which
+          ones you want and I&rsquo;ll quote for them with the build.
+        </p>
+        <div className="work">
+          {EXTRAS.map((extra) => (
+            <Link key={extra.name} className="row" href="/contact">
+              <span className="row__n">{extra.name}</span>
+              <span className="row__m">{extra.meta}</span>
+            </Link>
+          ))}
         </div>
       </section>
-
-      {/* ── CTA banner ────────────────────────────────────────────────────────── */}
-      <section className="bg-brand-accent py-16">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline text-surface-foreground mb-4">
-            Not sure which plan is right for you?
-          </h2>
-          <p className="text-lg font-body text-surface-foreground/80 mb-10 max-w-xl mx-auto">
-            Let&apos;s talk. We&apos;ll recommend the right tier for your trade and answer any
-            questions you have.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-brand-primary text-white px-10 py-4 rounded-xl text-base font-bold font-body shadow-lg hover:opacity-90 transition-opacity"
-          >
-            Get a free quote
-          </Link>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }

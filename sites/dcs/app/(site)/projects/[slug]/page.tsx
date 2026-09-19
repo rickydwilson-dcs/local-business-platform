@@ -1,21 +1,18 @@
 /**
- * Project Detail Page
- * ===================
- *
- * Individual project page with MDX content rendering.
+ * `/projects/[slug]` — a case study, ported to the r9 design.
+ * See `components/projects/project-detail-page.tsx` for the port's own
+ * notes (in particular: what's generalised beyond the one demoed prototype
+ * instance, Colossus Scaffolding).
  */
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { SiteProjectDetailPage } from '@/components/pages/ProjectDetailPage';
+import { ProjectDetailPage } from '@/components/projects/project-detail-page';
 import { getProjects, getProject } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
-import { loadMdx } from '@/lib/mdx';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -44,6 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: frontmatter.seoTitle || `${frontmatter.title} | ${siteConfig.business.name}`,
     description: frontmatter.description,
     keywords: frontmatter.keywords,
+    robots: { index: true, follow: true },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
@@ -81,39 +79,11 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
     notFound();
   }
 
-  const { frontmatter } = project;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'projects', slug });
-
-  const breadcrumbItems = [
-    { name: 'Portfolio', href: '/projects' },
-    { name: frontmatter.title, href: `/projects/${slug}`, current: true },
-  ];
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
+  const { frontmatter, content } = project;
 
   return (
     <>
-      <SiteProjectDetailPage
-        siteConfig={siteSummary}
-        frontmatter={{
-          title: frontmatter.title,
-          description: frontmatter.description,
-          heroImage: frontmatter.heroImage,
-          date: frontmatter.year?.toString(),
-          tags: frontmatter.category ? [frontmatter.category] : [],
-          outcomes: frontmatter.results,
-        }}
-        mdxContent={mdxContent}
-        breadcrumbs={breadcrumbItems}
-      />
+      <ProjectDetailPage slug={slug} frontmatter={frontmatter} content={content} />
 
       <Schema
         org={{
@@ -123,7 +93,10 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         }}
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: 'Portfolio', url: '/projects' },
+          // "Work", matching the rendered breadcrumb and the primary nav
+          // label (`components/site/site-chrome-data.ts`) — see the same
+          // note in `app/(site)/projects/page.tsx`.
+          { name: 'Work', url: '/projects' },
           { name: frontmatter.title, url: `/projects/${slug}` },
         ]}
         webpage={{

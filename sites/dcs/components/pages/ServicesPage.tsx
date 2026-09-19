@@ -1,146 +1,193 @@
+/**
+ * `/services` — the r9 port of
+ * `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/prototype/services-list.html`.
+ *
+ * Structure (matching the prototype's own section comments):
+ *   1. `.crumb` + `.mast` — ink masthead, "Six services. One person
+ *      responsible."
+ *   2. `.sec p--white` — the `.svcgrid` of six `.svccard`s.
+ * The chrome (`.bar`, `.menu`, `.pagefoot`) is `SiteChrome`'s, not this
+ * page's — see `app/(site)/layout.tsx`.
+ *
+ * DATA. `services` still comes from `getServices()` (`app/(site)/services/
+ * page.tsx`) — slug, title and description are real MDX frontmatter, not
+ * reinvented here. `SERVICE_CARDS` (`lib/service-card-meta.ts`) supplies only
+ * what frontmatter has no field for: narrative order, ground colour, and the
+ * design's own stat/label microcopy — see that file's header for citations.
+ * A service slug present in `SERVICE_CARDS` but absent from the real
+ * `services` array (or vice versa) is skipped rather than crashing, and
+ * surfaced below as `unmatchedCards`/`extraServices` for visibility.
+ */
+
 import type { ServicesPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
+import { CONTACT } from '@/components/home/home-data';
+import { SERVICE_CARDS, countWord, toFirstPersonSingular } from '@/lib/service-card-meta';
 
-const serviceIcons: Record<string, string> = {
-  default: 'build_circle',
-  garden: 'yard',
-  cleaning: 'cleaning_services',
-  electrical: 'bolt',
-  plumbing: 'plumbing',
-  painting: 'format_paint',
-  landscaping: 'nature',
-};
-
-function resolveServiceIcon(title: string, provided?: string): string {
-  if (provided) return provided;
-  const lower = title.toLowerCase();
-  for (const [key, icon] of Object.entries(serviceIcons)) {
-    if (key !== 'default' && lower.includes(key)) return icon;
-  }
-  return serviceIcons.default;
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M2 8h11M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
-export function SiteServicesPage({ siteConfig, services }: ServicesPageTemplateProps) {
-  return (
-    <div className="min-h-screen font-body">
-      {/* ─── Hero ──────────────────────────────────────────────────────────────── */}
-      <header className="bg-brand-primary py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-6">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-2 text-sm text-white/70 font-body">
-              <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <span className="material-symbols-outlined text-sm leading-none align-middle">
-                  chevron_right
-                </span>
-              </li>
-              <li>
-                <span className="text-white font-semibold" aria-current="page">
-                  Services
-                </span>
-              </li>
-            </ol>
-          </nav>
+export function SiteServicesPage({ services }: ServicesPageTemplateProps) {
+  const byslug = new Map(services.map((s) => [s.slug, s]));
+  // Real content drives which cards render at all — a design-listed slug
+  // with no matching MDX file is dropped rather than shown with invented
+  // copy (see this file's header).
+  const cards = SERVICE_CARDS.map((meta, i) => {
+    const real = byslug.get(meta.slug);
+    if (!real) return null;
+    return { meta, real, index: i + 1 };
+  }).filter(
+    (
+      c
+    ): c is {
+      meta: (typeof SERVICE_CARDS)[number];
+      real: (typeof services)[number];
+      index: number;
+    } => c !== null
+  );
 
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-headline text-white mb-4 leading-[1.1]">
-              Our Services
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 font-body leading-relaxed">
-              Everything you need to get found online and win more jobs.
-            </p>
+  return (
+    <>
+      {/* ===== 1. BREADCRUMB + MASTHEAD — ink ============================ */}
+      <div className="crumb p--ink" data-ground="ink">
+        <nav aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <span aria-current="page">Services</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <header className="mast p--ink" data-ground="ink">
+        <p className="eyeless">Services</p>
+        <h1>
+          {countWord(services.length)} services.
+          <br />
+          One person responsible.
+        </h1>
+        <p className="lead">
+          Retailers, online shops, studios, practitioners, tutors, letting agents, B2B firms and
+          trades — I build for all of them. Every service below is something I do myself, in-house,
+          rather than something I pass on.
+        </p>
+        <div className="hero__act">
+          <a className="btn" href={CONTACT.mailtoHref}>
+            Talk to me
+            <ArrowIcon />
+          </a>
+          <Link className="btn btn--ghost" href="/pricing">
+            See the pricing
+          </Link>
+        </div>
+        <div className="mast__meta">
+          <div>
+            <b>{countWord(services.length)}</b>
+            <span>Services</span>
+          </div>
+          <div>
+            <b>£45/month</b>
+            <span>Fully managed, from</span>
+          </div>
+          <div>
+            <b>2–3 weeks</b>
+            <span>Typical build</span>
+          </div>
+          <div>
+            <b>30 days</b>
+            <span>Notice to cancel</span>
           </div>
         </div>
       </header>
 
-      {/* ─── Services Grid ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-surface-background">
-        <div className="max-w-[1200px] mx-auto px-6">
-          {services.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-surface-muted-foreground text-lg font-body">
-                No services available yet. Check back soon.
+      {/* ===== 2. THE SIX — white ========================================= */}
+      <section className="sec p--white" data-ground="white">
+        <p className="eyeless">How it fits together</p>
+        <h2 className="res">
+          It starts with a site.
+          <br />
+          It ends with someone looking after it.
+        </h2>
+        <p className="lead">
+          Between those two sit four services that attach to one or the other — an online shop, the
+          local search work, the reporting, and business email. Some are included as standard, some
+          are a one-off. All of them are mine.
+        </p>
+
+        <div className="svcgrid">
+          {cards.map(({ meta, real, index }) => {
+            const ix = (
+              <p className="svccard__ix">
+                {String(index).padStart(2, '0')} / {String(cards.length).padStart(2, '0')}
               </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service) => (
-                <div
-                  key={service.slug}
-                  className="bg-surface-card rounded-[20px] shadow-md solaris-card-hover solaris-card-accent border border-surface-card-border p-6"
-                >
-                  {/* Icon */}
-                  <div className="bg-brand-primary/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-5">
-                    <span
-                      className="material-symbols-outlined text-brand-primary text-3xl leading-none"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                      aria-hidden="true"
-                    >
-                      {resolveServiceIcon(service.title, service.icon)}
-                    </span>
+            );
+            const title = <h3 className="svccard__t">{meta.displayTitle}</h3>;
+            const description = real.description && (
+              <p className="svccard__d">{toFirstPersonSingular(real.description)}</p>
+            );
+            const statsBlock = (
+              <div className="mast__meta">
+                {meta.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <b>{stat.fig}</b>
+                    <span>{stat.label}</span>
                   </div>
+                ))}
+              </div>
+            );
+            const link = (
+              <span className="svccard__l">
+                {meta.linkLabel}
+                <ArrowIcon />
+              </span>
+            );
 
-                  {/* Title */}
-                  <h2 className="font-headline font-bold text-xl text-surface-foreground mb-2">
-                    {service.title}
-                  </h2>
-
-                  {/* Description */}
-                  {service.description && (
-                    <p className="text-surface-muted-foreground text-sm leading-relaxed font-body line-clamp-3 mb-4">
-                      {service.description}
-                    </p>
-                  )}
-
-                  {/* Link */}
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-brand-primary text-sm font-semibold font-body hover:gap-2 transition-all"
-                  >
-                    Find out more →
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ─── CTA Banner ──────────────────────────────────────────────────────── */}
-      <section className="bg-brand-primary py-16">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline text-white mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-lg text-white/80 font-body mb-10 max-w-xl mx-auto">
-            Contact {siteConfig.name} today for a free, no-obligation quote.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-brand-primary px-10 py-4 rounded-xl text-base font-bold shadow-lg hover:bg-white/90 transition-colors text-center font-body"
-            >
-              {siteConfig.cta.primary.label}
-            </Link>
-            {siteConfig.cta.phone.show && (
+            return (
               <Link
-                href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                className="flex items-center justify-center gap-2 border-2 border-white text-white px-10 py-4 rounded-xl text-base font-bold hover:bg-white/10 transition-colors font-body"
+                key={meta.slug}
+                className={`svccard svccard--${meta.ground}${meta.wide ? ' svccard--wide' : ''}`}
+                href={`/services/${meta.slug}`}
               >
-                <span className="material-symbols-outlined text-xl leading-none" aria-hidden="true">
-                  call
-                </span>
-                {siteConfig.phoneDisplay}
+                {meta.wide ? (
+                  <>
+                    <div className="svccard__body">
+                      {ix}
+                      {title}
+                      {description}
+                    </div>
+                    <div className="svccard__body">
+                      {statsBlock}
+                      {link}
+                    </div>
+                  </>
+                ) : (
+                  <div className="svccard__body">
+                    {ix}
+                    {title}
+                    {description}
+                    {statsBlock}
+                    {link}
+                  </div>
+                )}
               </Link>
-            )}
-          </div>
+            );
+          })}
         </div>
       </section>
-    </div>
+    </>
   );
 }
