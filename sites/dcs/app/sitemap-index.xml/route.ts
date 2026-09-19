@@ -16,18 +16,16 @@ import { siteConfig } from '@/site.config';
  * - /projects/sitemap.xml
  */
 
-// Phase 8 (2026-08-23): the 14 inner routes are `noindex` until they ship,
-// so their section sitemaps come out of the index too — nothing submits
-// them to search engines, though the section `sitemap.ts` files themselves
-// are left in place unmodified. Uncomment to restore once a section ships.
-// See Phase 8 of
-// output/sessions/2026-08/2026-08-23_dcs-homepage-nextjs-port/yolo-brief.md.
+// Phase 5 (2026-09-18) of the inner-pages port opted /services, /locations,
+// /blog and /projects into indexing, so their section sitemaps are back in
+// the index. See Phase 5 of
+// output/sessions/2026-09/2026-09-18_dcs-inner-pages-port/yolo-brief.md.
 const SITEMAP_PATHS = [
   '/sitemap.xml',
-  // '/services/sitemap.xml',
-  // '/locations/sitemap.xml',
-  // '/blog/sitemap.xml',
-  // '/projects/sitemap.xml',
+  '/services/sitemap.xml',
+  '/locations/sitemap.xml',
+  '/blog/sitemap.xml',
+  '/projects/sitemap.xml',
 ];
 
 async function discoverSitemaps(): Promise<string[]> {

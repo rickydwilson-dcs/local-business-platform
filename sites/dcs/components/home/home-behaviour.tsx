@@ -199,7 +199,26 @@ export function useHomeBehaviour(): HomeBehaviourValue {
 /* Provider                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export function HomeBehaviour({ children }: { children: ReactNode }) {
+export interface HomeBehaviourProps {
+  children: ReactNode;
+  /**
+   * Which elements the one-shot `.in` reveal latch observes.
+   *
+   * The homepage's revealable unit is the sticky `.panel`, which is the
+   * default and the only value it ever passes. An inner page is not a chapter
+   * stack — its revealable units are `.sec`, `.mast`, `.pagefoot`, `.work` and
+   * `.qa`, which is exactly the list the inner-page prototypes' own script
+   * observes (`prototype/service-detail.html:415`). Without it every `.res`
+   * heading on an inner page stays in its muted rest colour forever.
+   *
+   * It is a prop rather than a widened default selector on purpose: adding
+   * `.qa` to the homepage's latch would start writing `.in` onto an element
+   * the homepage renders and does not reveal today.
+   */
+  revealSelector?: string;
+}
+
+export function HomeBehaviour({ children, revealSelector = '.panel' }: HomeBehaviourProps) {
   const [menuOpen, setMenuOpenState] = useState(false);
   // `'ink'` matches the prototype's server-rendered `<header ... data-ground="ink">`,
   // so hydration is a no-op and the first rAF corrects it if needed.
@@ -267,7 +286,7 @@ export function HomeBehaviour({ children }: { children: ReactNode }) {
 
   /* --- Latched reveals — prototype lines 1161-1164 ------------------------- */
   useEffect(() => {
-    const panels = Array.from(document.querySelectorAll<HTMLElement>('.panel'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>(revealSelector));
     if (panels.length === 0) return;
 
     // One-shot latch: `.in` is added the first time a panel is >=16% visible
@@ -287,7 +306,7 @@ export function HomeBehaviour({ children }: { children: ReactNode }) {
 
     panels.forEach((panel) => io.observe(panel));
     return () => io.disconnect();
-  }, []);
+  }, [revealSelector]);
 
   /* --- In-page link interception — prototype lines 1181-1205 --------------- */
   useEffect(() => {

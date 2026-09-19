@@ -1,18 +1,14 @@
 /**
- * Projects Listing Page
- * =====================
- *
- * Portfolio of completed projects.
+ * `/projects` — the portfolio list, ported to the r9 design.
+ * See `components/projects/projects-list-page.tsx` for the port's own notes.
  */
 
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { SiteProjectsPage } from '@/components/pages/ProjectsPage';
-import { getProjects } from '@/lib/content';
+import { ProjectsListPage } from '@/components/projects/projects-list-page';
+import { getProjects, getTestimonials } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 
@@ -20,6 +16,7 @@ export const metadata: Metadata = {
   title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
   description: `View our portfolio of completed websites. See how we've helped tradespeople across ${siteConfig.serviceAreas.join(', ')} get more jobs online.`,
   keywords: ['portfolio', 'case studies', 'web design examples', 'tradesperson websites'],
+  robots: { index: true, follow: true },
   openGraph: {
     title: `Our Portfolio | Case Studies | ${siteConfig.business.name}`,
     description: `View our portfolio of completed websites for local tradespeople.`,
@@ -29,31 +26,11 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
+  const [projects, testimonials] = await Promise.all([getProjects(), getTestimonials()]);
 
   return (
     <>
-      <SiteProjectsPage
-        siteConfig={siteSummary}
-        projects={projects.map((p) => ({
-          slug: p.slug,
-          title: p.title,
-          description: p.description,
-          heroImage: p.heroImage,
-          date: p.year?.toString(),
-          tags: [p.projectType],
-        }))}
-      />
+      <ProjectsListPage projects={projects} testimonials={testimonials} />
 
       <Schema
         org={{
@@ -63,7 +40,11 @@ export default async function ProjectsPage() {
         }}
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: 'Portfolio', url: '/projects' },
+          // "Work" matches the rendered breadcrumb and primary nav label
+          // (`components/site/site-chrome-data.ts`'s `PRIMARY_LINKS`) — the
+          // r9 design labels this route "Work" throughout, though the path
+          // stays `/projects`.
+          { name: 'Work', url: '/projects' },
         ]}
         webpage={{
           '@type': 'CollectionPage',

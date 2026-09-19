@@ -1,34 +1,37 @@
 /**
- * Contact Page
+ * Contact page route.
  *
- * Uses site page template driven from siteConfig.
+ * The page body is `SiteContactPage` (`components/pages/ContactPage.tsx`),
+ * ported from the approved r9 design — see that file's header comment for
+ * what it owns, what was deleted, and what was deliberately left unwired.
+ * It no longer takes a `siteConfig` prop: the ported design's contact
+ * details (email, phone, address, hours) are the site's real, literal
+ * values from `components/home/home-data.ts`'s `CONTACT`, not templated from
+ * `site.config.ts` — matching how the rest of the r9 chrome already sources
+ * those same values.
+ *
+ * Title/description below are the prototype's own copy
+ * (`prototype/contact.html:5-6`), first-person singular, replacing the old
+ * plural "We usually respond within a few hours" — the wrong voice for this
+ * site (see `ContactPage.tsx`'s header) and, separately, the wrong claim: the
+ * shipped API's own auto-reply says 24 hours
+ * (`packages/core-components/src/lib/api/contact-route.ts:162`).
  */
 
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { SiteContactPage } from '@/components/pages/ContactPage';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: `Contact Us | ${siteConfig.business.name}`,
-  description: `Get in touch with ${siteConfig.business.name} for a free quote or to discuss your website requirements. Professional web design for tradespeople across ${siteConfig.serviceAreas.slice(0, 3).join(', ')} and surrounding areas.`,
+  title: 'Contact',
+  description:
+    "Tell me what you need and I'll come back with what I'd build, what it would cost and how long it would take. No obligation, and no sales call.",
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absUrl('/contact'),
   },
 };
 
 export default function ContactPage() {
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
-  return <SiteContactPage siteConfig={siteSummary} />;
+  return <SiteContactPage />;
 }
