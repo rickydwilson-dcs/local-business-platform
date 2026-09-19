@@ -106,10 +106,40 @@ describe('sites/dcs (site) chrome matches the approved r9 design (_chrome.html)'
 
   it('styles/inner-pages.css is a verbatim copy of the design session kit.css', () => {
     // Everything after the added provenance header must be the source file
-    // byte-for-byte. Comparing the tail rather than the whole file is what
-    // lets the header exist at all.
-    expect(innerCss.length).toBeGreaterThan(kitCss.length);
-    expect(innerCss.slice(innerCss.length - kitCss.length)).toBe(kitCss);
+    // byte-for-byte, with one documented exception below. Comparing the tail
+    // rather than the whole file is what lets the header exist at all.
+    //
+    // ALLOWLIST (mirrors home-css-parity.test.ts's pattern): kit.css itself
+    // carries an orphaned text line outside any `/* */` block (the wave 2
+    // legal-template merge header, Agent H) — invalid CSS that Turbopack's
+    // parser rejects outright, crashing `next dev` and with it
+    // test:e2e:smoke. The production stylesheet cannot ship that bug, so the
+    // single fix (folding the orphan line into the header comment above it)
+    // is applied to a copy of kitCss's text before comparison here, not to
+    // the frozen design-session file itself, which stays exactly as Ricky
+    // approved it on 2026-09-18. Self-verifying: fails loudly if the source
+    // text ever changes out from under it. Flagged in the final report —
+    // the same bug is live in the archived kit.css and will bite the next
+    // site that copies it verbatim.
+    const KIT_CSS_ALLOWLIST: Array<{ old: string; new: string; reason: string }> = [
+      {
+        old: '   ========================================================================== */\n   RECONCILED: one duplicate declaration removed — see the note inline.\n/* ==========================================================================',
+        new: '   ========================================================================== */\n/* RECONCILED: one duplicate declaration removed — see the note inline. */\n/* ==========================================================================',
+        reason:
+          'orphaned text line outside any CSS comment block (invalid CSS) crashes Turbopack; wrapped in its own comment',
+      },
+    ];
+
+    let expectedTail = kitCss;
+    for (const { old, new: replacement, reason } of KIT_CSS_ALLOWLIST) {
+      expect(expectedTail, `ALLOWLIST entry stale — "${reason}" not found in kit.css`).toContain(
+        old
+      );
+      expectedTail = expectedTail.replace(old, replacement);
+    }
+
+    expect(innerCss.length).toBeGreaterThan(expectedTail.length);
+    expect(innerCss.slice(innerCss.length - expectedTail.length)).toBe(expectedTail);
   });
 
   /* ---------------------------------------------------------------- the bar */
