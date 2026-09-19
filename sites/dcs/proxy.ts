@@ -178,7 +178,8 @@ function generatePageTitle(pathname: string, siteName: string): string {
     '/locations': `Locations - ${siteName}`,
     '/blog': `Blog - ${siteName}`,
     '/projects': `Projects - ${siteName}`,
-    '/reviews': `Reviews - ${siteName}`,
+    // No '/reviews' entry — the route was dropped on 2026-09-18 (decision D3,
+    // inner-pages port Phase 1) and no longer resolves.
   };
 
   // Check for exact matches first
