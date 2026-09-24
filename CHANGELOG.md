@@ -6,6 +6,12 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-24
+
+### Prototypes
+
+- **New client prototype: Autcobel Ltd** (`output/sessions/2026-09/2026-09-24_autcobel-redesign/`) — an 11-page HTML/CSS prototype rebuilding autcobel.ltd, whose live site has a non-functional single-page nav. Researched the real company (Companies House no. 14044405) and competitors, drafted full agency-authored copy for every page (with an internal, never-published `CONTENT-STATUS.md` tracking facts still needed from the client), explored 10 homepage design directions across different design skills, then built and iterated the full site against direct client feedback — palette rework, a full-width photo-hero-with-scrim treatment on every page, generated hero imagery and a new logo mark via the `higgsfield` CLI, and unified card styling site-wide. Deployed to `autcobel-proto.vercel.app` (correctly suffixed `-proto`, per the prototype-naming rule below); hero/logo assets uploaded to Cloudflare R2 under `prototypes/2026-09-24_autcobel-redesign/assets/`, split into `hero/`/`brand/` subfolders to avoid the PNG archive-cache regex in `tools/upload-prototype-assets.ts`. Mobile and Safari visual QA were not completed this session — see the session's `HANDOFF.md`.
+
 ## 2026-09-17
 
 ### Sites

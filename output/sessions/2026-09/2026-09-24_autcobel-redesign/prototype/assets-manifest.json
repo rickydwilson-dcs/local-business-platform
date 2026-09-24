@@ -1,0 +1,65 @@
+{
+  "slug": "2026-09-24_autcobel-redesign",
+  "bucket": "local-business-platform",
+  "prefix": "prototypes/2026-09-24_autcobel-redesign/",
+  "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
+  "totalBytes": 10746664,
+  "assets": [
+    {
+      "relativePath": "assets/img/brand/logo-mark.svg",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/brand/logo-mark.svg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/brand/logo-mark.svg",
+      "contentType": "image/svg+xml",
+      "bytes": 22244,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-airflow-sweep.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-airflow-sweep.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-airflow-sweep.png",
+      "contentType": "image/png",
+      "bytes": 1974627,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-calm-waves.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-calm-waves.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-calm-waves.png",
+      "contentType": "image/png",
+      "bytes": 1560886,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-data-stream.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-data-stream.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-data-stream.png",
+      "contentType": "image/png",
+      "bytes": 2050451,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-radial-converge.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-radial-converge.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-radial-converge.png",
+      "contentType": "image/png",
+      "bytes": 1843508,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-twin-ribbons.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-twin-ribbons.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-twin-ribbons.png",
+      "contentType": "image/png",
+      "bytes": 1539542,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/hero/hero-visual-vertical-current.png",
+      "key": "prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-vertical-current.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-09-24_autcobel-redesign/assets/img/hero/hero-visual-vertical-current.png",
+      "contentType": "image/png",
+      "bytes": 1755406,
+      "archive": false
+    }
+  ]
+}

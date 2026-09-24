@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Autcobel — Coldchain Electrical &amp; Data Solutions</title>
+<style>
+
+  /* ============================================================
+     DESIGN TOKENS
+     Brand identity system for Autcobel Ltd.
+     Typographic identity: grotesque sans for voice, monospace
+     for every number/label — the "data-readout" signature that
+     carries the data-centricity concept through the whole page,
+     not just the hero graphic.
+     ============================================================ */
+  :root{
+    /* --- colour: lighter cobalt leads, deep navy is structural only --- */
+    --blue-900: #0B2A63;   /* structural ink-navy — footer / CTA band only */
+    --blue-700: #123A8C;   /* deep accent — headings on paper, borders   */
+    --blue-500: #2F6FED;   /* DOMINANT — hero field, primary actions     */
+    --blue-400: #5B93FF;   /* mid accent — hovers, secondary fills       */
+    --blue-200: #AFCBFF;   /* light accent — tagline highlight on hero   */
+    --cyan-300: #7FE3EE;   /* data/signal accent — nodes, traces, pulses */
+    --paper:    #F5F8FC;   /* section background                         */
+    --paper-2:  #EAF0FB;   /* card background                            */
+    --white:    #FFFFFF;
+    --ink:      #0B1B33;   /* body text                                  */
+    --ink-soft: rgba(11,27,51,0.64);
+    --ink-faint:rgba(11,27,51,0.40);
+    --line:     rgba(11,27,51,0.12);
+    --line-on-blue: rgba(255,255,255,0.22);
+
+    /* --- type --- */
+    --font-sans: -apple-system, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+    /* --- shape --- */
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-chip: 16px;
+
+    /* --- spacing scale --- */
+    --sp-1: 0.4rem;
+    --sp-2: 0.8rem;
+    --sp-3: 1.2rem;
+    --sp-4: 1.8rem;
+    --sp-5: 2.6rem;
+    --sp-6: 4rem;
+    --sp-7: 6rem;
+    --sp-8: 8.5rem;
+
+    --shadow-card: 0 1px 2px rgba(11,27,51,0.06), 0 10px 24px -12px rgba(11,27,51,0.18);
+    --shadow-btn: 0 10px 24px -10px rgba(47,111,237,0.55);
+
+    --wrap: 1180px;
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3,p{ margin:0; }
+
+  .wrap{
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .nav{
+    position: relative;
+    z-index: 20;
+    background: var(--blue-500);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: var(--sp-3) var(--sp-4);
+    gap: var(--sp-4);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap: 0.65rem;
+  }
+  .brand-mark{
+    width: 38px; height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--blue-700);
+    display:flex; align-items:center; justify-content:center;
+    flex: none;
+  }
+  .brand-word{
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.18rem;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    line-height: 1;
+  }
+  .brand-word small{
+    display:block;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-200);
+    margin-top: 4px;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap: var(--sp-4);
+  }
+  .nav-links a{
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover{ color:#fff; border-color: var(--cyan-300); }
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:0.4rem;
+    background: var(--white);
+    color: var(--blue-700);
+    font-weight:700;
+    font-size:0.86rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    white-space:nowrap;
+  }
+  .nav-toggle{ display:none; }
+
+  /* ============================================================
+     HERO — dominant lighter blue field
+     ============================================================ */
+  .hero{
+    position: relative;
+    background: linear-gradient(165deg, var(--blue-500) 0%, #3B79EF 55%, #2E63D6 100%);
+    overflow: hidden;
+    padding-bottom: var(--sp-7);
+  }
+  /* data-field texture: faint dot grid across the whole hero */
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    opacity: .55;
+    pointer-events:none;
+  }
+  /* faint diagonal circuit traces crossing the whole hero, secondary to the monogram */
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(90deg, transparent 0 48%, rgba(255,255,255,0.07) 48% 48.6%, transparent 48.6% 100%),
+      linear-gradient(0deg, transparent 0 72%, rgba(255,255,255,0.06) 72% 72.6%, transparent 72.6% 100%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position: relative;
+    z-index: 2;
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--sp-6);
+    align-items:center;
+    padding-top: var(--sp-7);
+  }
+  .hero-copy .eyebrow{
+    color: var(--blue-200);
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .hero-copy .eyebrow::before{
+    content:"";
+    width:7px; height:7px; border-radius:50%;
+    background: var(--cyan-300);
+    box-shadow: 0 0 0 4px rgba(127,227,238,0.25);
+  }
+  .hero-copy h1{
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height: 1.05;
+    font-weight: 800;
+    color: var(--white);
+    margin-top: var(--sp-3);
+    letter-spacing: -0.01em;
+  }
+  .hero-copy h1 .hl{
+    color: var(--blue-200);
+  }
+  .hero-copy p{
+    margin-top: var(--sp-3);
+    max-width: 46ch;
+    font-size: 1.08rem;
+    color: rgba(255,255,255,0.86);
+  }
+  .hero-cta{
+    margin-top: var(--sp-5);
+    display:flex;
+    flex-wrap:wrap;
+    gap: 0.85rem;
+    align-items:center;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background: var(--white);
+    color: var(--blue-700);
+    box-shadow: var(--shadow-btn);
+  }
+  .btn-ghost{
+    color: var(--white);
+    border-color: rgba(255,255,255,0.5);
+  }
+  .btn-ghost:hover{ border-color:#fff; background: rgba(255,255,255,0.08); }
+
+  /* signal readout strip — secondary data motif under CTAs */
+  .readout{
+    margin-top: var(--sp-6);
+    display:flex;
+    align-items:flex-end;
+    gap: 4px;
+    height: 28px;
+  }
+  .readout span{
+    display:block;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--cyan-300);
+    opacity: .55;
+  }
+  .readout-label{
+    margin-left: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-200);
+  }
+
+  /* --- hero visual: circuit monogram --- */
+  .hero-visual{
+    position: relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .visual-frame{
+    position: relative;
+    width: min(420px, 100%);
+    aspect-ratio: 1 / 1;
+  }
+  .frame-corner{
+    position:absolute;
+    width: 26px; height: 26px;
+    border: 2px solid rgba(255,255,255,0.55);
+  }
+  .frame-corner.tl{ top:-4px; left:-4px; border-right:none; border-bottom:none; }
+  .frame-corner.tr{ top:-4px; right:-4px; border-left:none; border-bottom:none; }
+  .frame-corner.bl{ bottom:-4px; left:-4px; border-right:none; border-top:none; }
+  .frame-corner.br{ bottom:-4px; right:-4px; border-left:none; border-top:none; }
+
+  .frame-tag{
+    position:absolute;
+    top: -34px; left: -4px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: var(--blue-200);
+    text-transform:uppercase;
+  }
+  .frame-tag b{ color:#fff; }
+
+  .monogram-trace{ fill:none; stroke: rgba(255,255,255,0.9); stroke-width:6; stroke-linecap:round; stroke-linejoin:round; }
+  .monogram-trace.faint{ stroke: rgba(255,255,255,0.35); stroke-width:3; }
+  .monogram-node{ fill: var(--cyan-300); }
+  .monogram-node.dim{ fill: rgba(255,255,255,0.7); }
+
+  @media (prefers-reduced-motion: no-preference){
+    .pulse-node{ animation: pulse 2.6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    .pulse-node.d2{ animation-delay: .5s; }
+    .pulse-node.d3{ animation-delay: 1.1s; }
+    .signal-path{ stroke-dasharray: 10 8; animation: travel 3.4s linear infinite; }
+    .readout span{ animation: eq 1.8s ease-in-out infinite; }
+  }
+  @keyframes pulse{
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.7); opacity: .35; }
+  }
+  @keyframes travel{ to{ stroke-dashoffset: -180; } }
+  @keyframes eq{
+    0%, 100%{ transform: scaleY(0.4); opacity:.4; }
+    50%{ transform: scaleY(1); opacity:.9; }
+  }
+
+  /* ============================================================
+     PROOF STATS STRIP
+     ============================================================ */
+  .stats{
+    background: var(--blue-700);
+    padding: var(--sp-5) 0;
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-4);
+  }
+  .stat{
+    text-align:center;
+    padding: 0 var(--sp-2);
+    border-left: 1px solid rgba(255,255,255,0.14);
+  }
+  .stat:first-child{ border-left:none; }
+  .stat-num{
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    color: var(--cyan-300);
+  }
+  .stat-label{
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.78);
+  }
+
+  /* ============================================================
+     PILLARS — bespoke iconography
+     ============================================================ */
+  .section{ padding: var(--sp-7) 0; }
+  .section-head{
+    max-width: 640px;
+    margin-bottom: var(--sp-5);
+  }
+  .section-head .eyebrow{ color: var(--blue-500); }
+  .section-head h2{
+    margin-top: var(--sp-2);
+    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+    font-weight: 800;
+    color: var(--blue-900);
+    letter-spacing: -0.01em;
+  }
+  .section-head p{
+    margin-top: var(--sp-2);
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+
+  .pillars-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+  .pillar-card{
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-4);
+    box-shadow: var(--shadow-card);
+    display:flex;
+    flex-direction:column;
+    gap: var(--sp-3);
+  }
+  .pillar-index{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+  }
+  .chip{
+    width: 56px; height: 56px;
+    border-radius: var(--radius-chip);
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    position: relative;
+  }
+  .chip::after{
+    content:"";
+    position:absolute; top:6px; left:6px;
+    width:6px; height:6px;
+    border-top:2px solid var(--blue-500);
+    border-left:2px solid var(--blue-500);
+    opacity:.55;
+  }
+  .chip svg{ width: 28px; height: 28px; }
+  .icon-line{ fill:none; stroke: var(--blue-700); stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+  .icon-node{ fill: var(--blue-500); }
+  .icon-accent{ stroke: var(--cyan-300); }
+
+  .pillar-card h3{
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--blue-900);
+  }
+  .pillar-card p{
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  /* ============================================================
+     SECTORS STRIP
+     ============================================================ */
+  .sectors{
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .sectors-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap: var(--sp-3);
+    padding: var(--sp-4) 0;
+  }
+  .sectors-label{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform:uppercase;
+    color: var(--ink-faint);
+  }
+  .sectors-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 0.6rem;
+  }
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:0.45rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--blue-900);
+  }
+  .tag::before{
+    content:"";
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--blue-500);
+  }
+
+  /* ============================================================
+     CLOSING CTA BAND
+     ============================================================ */
+  .cta-band{
+    background: var(--blue-900);
+    position: relative;
+    overflow:hidden;
+    padding: var(--sp-7) 0;
+  }
+  .cta-band::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.4px);
+    background-size: 30px 30px;
+    pointer-events:none;
+  }
+  .cta-band-inner{
+    position:relative; z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: var(--sp-5);
+    flex-wrap:wrap;
+  }
+  .cta-band h2{
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    color: var(--white);
+    max-width: 22ch;
+  }
+  .cta-band p{
+    margin-top: var(--sp-2);
+    color: rgba(255,255,255,0.72);
+    max-width: 46ch;
+    font-size: 1rem;
+  }
+  .cta-band .btn-primary{
+    background: var(--cyan-300);
+    color: var(--blue-900);
+    box-shadow: 0 10px 24px -10px rgba(127,227,238,0.5);
+  }
+
+  footer{
+    background: var(--blue-900);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: var(--sp-4) 0;
+  }
+  .foot-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap: var(--sp-2);
+  }
+  .foot-inner span{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 980px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns: 1fr; }
+    .hero-visual{ order:-1; }
+    .visual-frame{ width: min(300px, 70vw); margin: 0 auto; }
+    .stats-grid{ grid-template-columns: repeat(2,1fr); row-gap: var(--sp-4); }
+    .stat:nth-child(3){ border-left:none; }
+    .pillars-grid{ grid-template-columns: repeat(2, 1fr); }
+    .cta-band-inner{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width: 560px){
+    .pillars-grid{ grid-template-columns: 1fr; }
+    .stats-grid{ grid-template-columns: repeat(2,1fr); }
+    .wrap{ padding: 0 var(--sp-3); }
+    .brand-word{ font-size: 1.02rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <header class="nav">
+    <div class="nav-inner wrap">
+      <a href="#" class="brand" aria-label="Autcobel home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24">
+            <path class="monogram-trace" style="stroke:#fff; stroke-width:2.4" d="M4,20 L4,12 L9,12 L9,7 L12,3 L15,7 L15,12 L20,12 L20,20"/>
+            <circle class="monogram-node" r="1.6" cx="12" cy="3"/>
+          </svg>
+        </span>
+        <span class="brand-word">AUTCOBEL<small>Electrical &amp; Data Solutions</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#">Home</a>
+        <a href="#">Who We Are</a>
+        <a href="#">Our Approach</a>
+        <a href="#">Our Services</a>
+        <a href="#">Sectors We Serve</a>
+        <a href="#">Contact Us</a>
+      </nav>
+      <a href="#" class="nav-cta">Speak with our team</a>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Coldchain Electrical &amp; Data Solutions</p>
+        <h1>Driving Innovation. <span class="hl">Inspiring Performance.</span></h1>
+        <p>We deliver end-to-end electrical and data project solutions for the UK's most demanding environments — from supermarkets to warehouses.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary">Speak with our team</a>
+          <a href="#" class="btn btn-ghost">View our services</a>
+        </div>
+        <div class="readout" aria-hidden="true">
+          <span style="height:40%"></span><span style="height:70%"></span><span style="height:30%"></span>
+          <span style="height:90%"></span><span style="height:55%"></span><span style="height:65%"></span>
+          <span style="height:25%"></span><span style="height:80%"></span><span style="height:45%"></span>
+          <span style="height:60%"></span><span style="height:35%"></span><span style="height:75%"></span>
+          <span class="readout-label">Live project data · nationwide</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-frame">
+          <span class="frame-tag">Node map <b>// AUTCOBEL</b></span>
+          <span class="frame-corner tl" aria-hidden="true"></span>
+          <span class="frame-corner tr" aria-hidden="true"></span>
+          <span class="frame-corner bl" aria-hidden="true"></span>
+          <span class="frame-corner br" aria-hidden="true"></span>
+
+          <svg viewBox="0 0 320 300" width="100%" height="100%" role="img" aria-label="Abstract circuit-trace monogram of the letter A, representing Autcobel's data-centred approach to electrical infrastructure">
+            <!-- faint branch traces -->
+            <path class="monogram-trace faint" d="M125,110 L96,92"/>
+            <path class="monogram-trace faint" d="M195,110 L224,92"/>
+            <path class="monogram-trace faint" d="M70,170 L34,170"/>
+            <path class="monogram-trace faint" d="M250,170 L286,170"/>
+
+            <!-- main A legs -->
+            <path class="monogram-trace" d="M70,258 L70,170 L125,170 L125,110 L160,58"/>
+            <path class="monogram-trace" d="M250,258 L250,170 L195,170 L195,110 L160,58"/>
+            <!-- crossbar, animated as a travelling signal -->
+            <path class="monogram-trace signal-path" d="M100,198 L220,198"/>
+
+            <!-- joint nodes -->
+            <circle class="monogram-node dim" r="5" cx="70" cy="258"/>
+            <circle class="monogram-node dim" r="5" cx="70" cy="170"/>
+            <circle class="monogram-node dim" r="5" cx="125" cy="170"/>
+            <circle class="monogram-node dim" r="5" cx="125" cy="110"/>
+            <circle class="monogram-node dim" r="5" cx="250" cy="258"/>
+            <circle class="monogram-node dim" r="5" cx="250" cy="170"/>
+            <circle class="monogram-node dim" r="5" cx="195" cy="170"/>
+            <circle class="monogram-node dim" r="5" cx="195" cy="110"/>
+            <circle class="monogram-node dim" r="4" cx="100" cy="198"/>
+            <circle class="monogram-node dim" r="4" cx="220" cy="198"/>
+            <circle class="monogram-node dim" r="4" cx="96" cy="92"/>
+            <circle class="monogram-node dim" r="4" cx="224" cy="92"/>
+            <circle class="monogram-node dim" r="4" cx="34" cy="170"/>
+            <circle class="monogram-node dim" r="4" cx="286" cy="170"/>
+
+            <!-- pulsing "live" nodes -->
+            <circle class="monogram-node pulse-node" r="7" cx="160" cy="58"/>
+            <circle class="monogram-node pulse-node d2" r="4" cx="96" cy="92"/>
+            <circle class="monogram-node pulse-node d3" r="4" cx="224" cy="92"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROOF STATS
+       ============================================================ -->
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Combined years' experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">UK</div>
+        <div class="stat-label">Nationwide delivery</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Project support</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PILLARS — bespoke icon system
+       ============================================================ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What we deliver</p>
+        <h2>Four disciplines, one accountable team</h2>
+        <p>Every pillar shares the same delivery grammar — plan, connect, verify — so electrical and data infrastructure lands as one coordinated project, not a handover between contractors.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <article class="pillar-card">
+          <span class="pillar-index">01</span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24">
+              <path class="icon-line" d="M13,3 L7,13 L11,13 L10,21 L17,10 L13,10 Z"/>
+              <circle class="icon-node" r="1.5" cx="13" cy="3"/>
+              <circle class="icon-node icon-accent" r="1.5" cx="10" cy="21" fill="none"/>
+            </svg>
+          </span>
+          <h3>Turnkey Electrical &amp; Data</h3>
+          <p>End-to-end project services — from first survey to final sign-off, under one contract.</p>
+        </article>
+
+        <article class="pillar-card">
+          <span class="pillar-index">02</span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24">
+              <path class="icon-line" d="M4,4 L4,9 M4,4 L9,4"/>
+              <path class="icon-line" d="M20,20 L20,15 M20,20 L15,20"/>
+              <circle class="icon-line" r="4.2" cx="12" cy="12"/>
+              <path class="icon-line" d="M12,9.5 L12,14.5 M9.5,12 L14.5,12"/>
+            </svg>
+          </span>
+          <h3>Project &amp; Design Management</h3>
+          <p>Consultation &amp; collaboration — we plan alongside your team, not at arm's length.</p>
+        </article>
+
+        <article class="pillar-card">
+          <span class="pillar-index">03</span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24">
+              <rect class="icon-line" x="4" y="10" width="9" height="10" rx="1.5"/>
+              <rect class="icon-line" x="11.5" y="4" width="9" height="10" rx="1.5"/>
+              <circle class="icon-node" r="1.3" cx="8.5" cy="15"/>
+            </svg>
+          </span>
+          <h3>Temporary Plant Systems</h3>
+          <p>Client-tailored solutions — modular power and infrastructure sized to the site.</p>
+        </article>
+
+        <article class="pillar-card">
+          <span class="pillar-index">04</span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24">
+              <path class="icon-line" d="M4,20 L4,15 L10,15 L10,9 L16,9 L16,4"/>
+              <circle class="icon-node" r="1.4" cx="4" cy="20"/>
+              <circle class="icon-node" r="1.4" cx="10" cy="15"/>
+              <circle class="icon-line icon-accent" r="2.6" cx="16" cy="4" fill="none"/>
+            </svg>
+          </span>
+          <h3>Our Approach</h3>
+          <p>How we plan, partner and deliver — transparent milestones from kickoff to handover.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTORS
+       ============================================================ -->
+  <section class="sectors">
+    <div class="wrap sectors-inner">
+      <span class="sectors-label">Sectors we serve</span>
+      <div class="sectors-tags">
+        <span class="tag">Retail rollouts</span>
+        <span class="tag">Cold chain</span>
+        <span class="tag">Commercial</span>
+        <span class="tag">Facilities</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLOSING CTA BAND
+       ============================================================ -->
+  <section class="cta-band">
+    <div class="wrap cta-band-inner">
+      <div>
+        <h2>Got a site that can't afford downtime?</h2>
+        <p>Tell us what you're running and we'll tell you how we'd deliver it — no obligation, no sales script.</p>
+      </div>
+      <a href="#" class="btn btn-primary">Speak with our team</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <span>AUTCOBEL LTD — ELECTRICAL &amp; DATA SOLUTIONS</span>
+      <span>DESIGN EXPLORATION · V9 · BRAND IDENTITY</span>
+    </div>
+  </footer>
+
+</body>
+</html>
