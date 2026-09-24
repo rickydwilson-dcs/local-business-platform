@@ -29,7 +29,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { BLOG_SECTOR_BY_SLUG } from '@/lib/blog-sectors';
+import type { BlogSectorKey } from '@/lib/blog-sectors';
 import { TOPIC_LABELS, type TopicSlug } from '@/lib/blog-topics';
 import { formatMonthYear } from '@/lib/blog-format';
 
@@ -40,6 +40,9 @@ export interface LibraryRow {
   title: string;
   readingTime?: number;
   date: string;
+  /** Authored `sector` frontmatter, already narrowed by `toBlogSector`.
+   *  Undefined when the post omits it or carries an unknown value. */
+  sector?: BlogSectorKey;
 }
 
 export interface LibraryTopic {
@@ -77,7 +80,7 @@ export function BlogFilterSection({ topics, totalPosts }: BlogFilterSectionProps
   const computed = topics.map((topic) => {
     const topicHit = topicFilter === 'all' || topic.slug === topicFilter;
     const rowsWithHit = topic.rows.map((row, index) => {
-      const sector = BLOG_SECTOR_BY_SLUG[row.slug];
+      const sector = row.sector;
       const capped = wide && index >= CAP;
       return { row, sector, hit: topicHit, visible: topicHit && !capped };
     });

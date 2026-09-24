@@ -20,7 +20,7 @@
 
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/content';
-import { BLOG_SECTOR_BY_SLUG, BLOG_SECTOR_KEYS, BLOG_SECTOR_LABELS } from '@/lib/blog-sectors';
+import { BLOG_SECTOR_KEYS, BLOG_SECTOR_LABELS, toBlogSector } from '@/lib/blog-sectors';
 import {
   TOPIC_DESCRIPTIONS,
   TOPIC_HEADINGS,
@@ -59,7 +59,7 @@ export interface BlogListPageProps {
 export function BlogListPage({ posts }: BlogListPageProps) {
   const featured = posts.find((p) => p.featured) ?? posts[0];
   const recentFour = posts.filter((p) => p.slug !== featured?.slug).slice(0, 4);
-  const featuredSector = featured ? BLOG_SECTOR_BY_SLUG[featured.slug] : undefined;
+  const featuredSector = toBlogSector(featured?.sector);
 
   const readingTimeRange = formatReadingTimeRange(posts.map((p) => p.readingTime));
   const latest = posts[0] ? formatShortMonthYear(posts[0].date) : null;
@@ -70,12 +70,21 @@ export function BlogListPage({ posts }: BlogListPageProps) {
     description: TOPIC_DESCRIPTIONS[slug],
     rows: posts
       .filter((p) => categoryOf(p) === slug)
-      .map((p) => ({ slug: p.slug, title: p.title, readingTime: p.readingTime, date: p.date })),
+      .map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        readingTime: p.readingTime,
+        date: p.date,
+        sector: toBlogSector(p.sector),
+      })),
   }));
 
   const sectorCounts: Record<string, number> = {};
   for (const key of BLOG_SECTOR_KEYS) sectorCounts[key] = 0;
-  for (const sector of Object.values(BLOG_SECTOR_BY_SLUG)) sectorCounts[sector] += 1;
+  for (const post of posts) {
+    const sector = toBlogSector(post.sector);
+    if (sector) sectorCounts[sector] += 1;
+  }
   const populatedSectors = BLOG_SECTOR_KEYS.filter((k) => sectorCounts[k] > 0);
   const emptySectors = BLOG_SECTOR_KEYS.filter((k) => sectorCounts[k] === 0);
 

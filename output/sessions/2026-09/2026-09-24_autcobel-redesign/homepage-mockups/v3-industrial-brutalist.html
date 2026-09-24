@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Autcobel — Coldchain Electrical &amp; Data Solutions [v3 / Industrial Brutalist]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:#F2F1EC;
+    --paper-alt:#E7E5DD;
+    --ink:#0A0A0A;
+    --ink-soft:#4A4A46;
+    --blue:#2E5FE0;
+    --blue-deep:#1638A0;
+    --blue-light:#9AC0FF;
+    --line:#0A0A0A;
+    --sans:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    --mono:'IBM Plex Mono','Space Mono','Courier New',monospace;
+    --macro:'Archivo Black','Inter',var(--sans);
+    --gutter:clamp(16px,3vw,40px);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{background:var(--paper);}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+
+  /* ============ GLOBAL NOISE / GRAIN ============ */
+  .grain{
+    position:fixed; inset:0; z-index:999; pointer-events:none;
+    opacity:0.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ============ ASCII / LABEL HELPERS ============ */
+  .mono{ font-family:var(--mono); letter-spacing:0.08em; text-transform:uppercase; }
+  .label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  .label-inverse{ color:var(--blue-light); }
+  .bracket::before{ content:"[ "; }
+  .bracket::after{ content:" ]"; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ============ STRUCTURE ============ */
+  .container{
+    max-width:1400px; margin:0 auto;
+    border-left:1px solid var(--line); border-right:1px solid var(--line);
+  }
+
+  /* ============ NAV ============ */
+  header.site-nav{
+    position:sticky; top:0; z-index:100;
+    background:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav-inner{
+    max-width:1400px; margin:0 auto;
+    display:grid; grid-template-columns:auto 1fr auto;
+    align-items:center;
+    border-left:1px solid var(--line); border-right:1px solid var(--line);
+    padding:0 var(--gutter);
+    min-height:64px;
+    gap:24px;
+  }
+  .nav-mark{
+    font-family:var(--macro); font-size:1.05rem; letter-spacing:-0.01em;
+    text-transform:uppercase; white-space:nowrap;
+  }
+  .nav-mark span{ color:var(--blue); }
+  .nav-links{
+    display:flex; gap:clamp(14px,2vw,32px); justify-content:center;
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .nav-links a{ position:relative; padding:4px 0; white-space:nowrap; }
+  .nav-links a:hover{ color:var(--blue); }
+  .nav-status{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em;
+    color:var(--ink-soft); text-transform:uppercase; text-align:right;
+    display:flex; align-items:center; gap:8px; white-space:nowrap;
+  }
+  .dot{
+    width:7px; height:7px; background:var(--blue); display:inline-block;
+    flex:none;
+    animation:blink 1.6s steps(1) infinite;
+  }
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .nav-status{ font-size:0.6rem; }
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    background:var(--blue);
+    color:var(--paper);
+    border-bottom:2px solid var(--ink);
+    overflow:hidden;
+  }
+  .hero::before{
+    /* blueprint graph-paper grid */
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(242,241,236,0.08) 0, rgba(242,241,236,0.08) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(242,241,236,0.08) 0, rgba(242,241,236,0.08) 1px, transparent 1px, transparent 40px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative; max-width:1400px; margin:0 auto;
+    border-left:1px solid rgba(242,241,236,0.35); border-right:1px solid rgba(242,241,236,0.35);
+    padding:clamp(28px,4vw,56px) var(--gutter) 0;
+  }
+  .hero-eyebrow{
+    display:flex; justify-content:space-between; align-items:baseline;
+    flex-wrap:wrap; gap:8px;
+    border-bottom:1px solid rgba(242,241,236,0.35);
+    padding-bottom:14px; margin-bottom:clamp(28px,5vw,56px);
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--blue-light);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr;
+    gap:clamp(24px,4vw,48px);
+    align-items:start;
+    padding-bottom:clamp(32px,5vw,56px);
+  }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .hero-headline{
+    font-family:var(--macro);
+    font-size:clamp(2.6rem,7.4vw,6.2rem);
+    line-height:0.92;
+    letter-spacing:-0.03em;
+    text-transform:uppercase;
+    margin-bottom:clamp(20px,3vw,32px);
+  }
+  .hero-headline em{
+    font-style:normal;
+    color:var(--blue-light);
+  }
+  .hero-sub{
+    font-family:var(--sans); font-weight:600;
+    font-size:clamp(1rem,1.4vw,1.2rem);
+    line-height:1.5; max-width:46ch;
+    color:rgba(242,241,236,0.92);
+    margin-bottom:clamp(28px,4vw,40px);
+  }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; }
+  .btn{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.1em;
+    text-transform:uppercase; padding:16px 26px;
+    border:2px solid var(--paper);
+    display:inline-flex; align-items:center; gap:10px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .btn-primary{ background:var(--paper); color:var(--blue-deep); }
+  .btn-primary:hover{ background:var(--blue-light); }
+  .btn-secondary{ background:transparent; color:var(--paper); }
+  .btn-secondary:hover{ background:rgba(242,241,236,0.14); }
+
+  /* ---- schematic / data visual ---- */
+  .schematic{
+    border:1px solid rgba(242,241,236,0.4);
+    background:rgba(10,10,10,0.16);
+    padding:16px;
+    position:relative;
+  }
+  .schematic-head{
+    display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:0.65rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--blue-light);
+    margin-bottom:10px; padding-bottom:8px;
+    border-bottom:1px dashed rgba(242,241,236,0.35);
+  }
+  .schematic svg{ width:100%; height:auto; }
+  .schem-line{
+    fill:none; stroke:rgba(242,241,236,0.55); stroke-width:1.5;
+  }
+  .schem-line-active{
+    fill:none; stroke:var(--blue-light); stroke-width:1.5;
+    stroke-dasharray:6 6;
+    animation:dash-flow 2.4s linear infinite;
+  }
+  .schem-node-ring{ fill:none; stroke:var(--paper); stroke-width:1.5; }
+  .schem-hub{ fill:var(--blue-light); }
+  .schem-node{ fill:var(--paper); }
+  .schem-text{
+    font-family:var(--mono); font-size:7.5px; letter-spacing:0.05em;
+    fill:rgba(242,241,236,0.85); text-transform:uppercase;
+  }
+  .schem-text-dim{ fill:rgba(242,241,236,0.5); }
+  .schematic-readout{
+    margin-top:12px; padding-top:10px;
+    border-top:1px dashed rgba(242,241,236,0.35);
+    font-family:var(--mono); font-size:0.62rem; letter-spacing:0.06em;
+    color:rgba(242,241,236,0.75);
+    display:grid; grid-template-columns:1fr 1fr; gap:4px 12px;
+  }
+  .schematic-readout b{ color:var(--blue-light); font-weight:600; }
+
+  .hero-ticker{
+    border-top:1px solid rgba(242,241,236,0.35);
+    overflow:hidden; white-space:nowrap;
+    padding:10px var(--gutter);
+    margin:0 calc(-1 * var(--gutter));
+  }
+  .hero-ticker-track{
+    display:inline-block; font-family:var(--mono); font-size:0.68rem;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-light);
+    animation:ticker 22s linear infinite;
+    padding-left:100%;
+  }
+
+  @keyframes dash-flow{ to{ stroke-dashoffset:-48; } }
+  @keyframes blink{ 50%{ opacity:0.15; } }
+  @keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-100%); } }
+
+  @media (prefers-reduced-motion: reduce){
+    .schem-line-active{ animation:none; stroke-dasharray:none; }
+    .dot{ animation:none; }
+    .hero-ticker-track{ animation:none; padding-left:0; }
+  }
+
+  /* ============ PROOF STATS STRIP ============ */
+  .stats{
+    background:var(--ink);
+  }
+  .stats-inner{
+    max-width:1400px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--ink);
+  }
+  .stat-cell{
+    background:var(--paper); padding:clamp(24px,3vw,36px) var(--gutter);
+  }
+  .stat-num{
+    font-family:var(--macro); font-size:clamp(2.1rem,4vw,3.4rem);
+    letter-spacing:-0.02em; color:var(--blue); line-height:1;
+    margin-bottom:8px;
+  }
+  .stat-label{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  @media (max-width:760px){
+    .stats-inner{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  /* ============ SECTION HEADERS ============ */
+  .section-head{
+    max-width:1400px; margin:0 auto;
+    border-left:1px solid var(--line); border-right:1px solid var(--line);
+    border-bottom:2px solid var(--ink);
+    padding:18px var(--gutter);
+    display:flex; justify-content:space-between; align-items:baseline;
+    flex-wrap:wrap; gap:10px;
+  }
+  .section-head h2{
+    font-family:var(--macro); font-size:clamp(1.5rem,3vw,2.4rem);
+    letter-spacing:-0.02em; text-transform:uppercase;
+  }
+  .section-head .label{ white-space:nowrap; }
+
+  /* ============ PILLARS ============ */
+  .pillars{
+    max-width:1400px; margin:0 auto;
+    border-left:1px solid var(--line); border-right:1px solid var(--line);
+    border-bottom:2px solid var(--ink);
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--ink);
+  }
+  .pillar{
+    background:var(--paper); padding:clamp(22px,3vw,32px) clamp(18px,2vw,26px);
+    display:flex; flex-direction:column; min-height:280px;
+  }
+  .pillar-idx{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em;
+    color:var(--blue); margin-bottom:20px;
+  }
+  .pillar h3{
+    font-family:var(--macro); font-size:clamp(1.05rem,1.6vw,1.35rem);
+    letter-spacing:-0.01em; text-transform:uppercase; line-height:1.05;
+    margin-bottom:14px;
+  }
+  .pillar p{
+    font-family:var(--sans); font-size:0.92rem; line-height:1.55;
+    color:var(--ink-soft); flex-grow:1;
+  }
+  .pillar-foot{
+    margin-top:18px; padding-top:12px; border-top:1px dashed var(--ink-soft);
+    font-family:var(--mono); font-size:0.62rem; letter-spacing:0.08em;
+    color:var(--ink-soft); text-transform:uppercase;
+  }
+  @media (max-width:900px){ .pillars{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .pillars{ grid-template-columns:1fr; } }
+
+  /* ============ SECTORS STRIP ============ */
+  .sectors{
+    background:var(--ink); color:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .sectors-inner{
+    max-width:1400px; margin:0 auto;
+    border-left:1px solid rgba(242,241,236,0.2); border-right:1px solid rgba(242,241,236,0.2);
+    padding:clamp(20px,3vw,30px) var(--gutter);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  .sectors-label{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em;
+    color:var(--blue-light); text-transform:uppercase; white-space:nowrap;
+  }
+  .sectors-list{
+    display:flex; flex-wrap:wrap; gap:clamp(14px,2.4vw,32px);
+    font-family:var(--macro); font-size:clamp(0.95rem,1.8vw,1.4rem);
+    letter-spacing:-0.01em; text-transform:uppercase;
+  }
+  .sectors-list span{ color:rgba(242,241,236,0.35); font-family:var(--mono); font-weight:400; }
+
+  /* ============ CLOSING CTA ============ */
+  .closing{
+    background:var(--blue); color:var(--paper);
+    position:relative; overflow:hidden;
+    border-bottom:2px solid var(--ink);
+  }
+  .closing::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(135deg, rgba(242,241,236,0.06) 0 2px, transparent 2px 14px);
+    pointer-events:none;
+  }
+  .closing-inner{
+    position:relative; max-width:1400px; margin:0 auto;
+    border-left:1px solid rgba(242,241,236,0.35); border-right:1px solid rgba(242,241,236,0.35);
+    padding:clamp(48px,7vw,96px) var(--gutter);
+    text-align:left;
+  }
+  .closing-label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--blue-light); margin-bottom:20px;
+  }
+  .closing h2{
+    font-family:var(--macro); font-size:clamp(2rem,5.4vw,4.4rem);
+    line-height:0.95; letter-spacing:-0.03em; text-transform:uppercase;
+    max-width:16ch; margin-bottom:24px;
+  }
+  .closing p{
+    font-family:var(--sans); font-weight:600; font-size:clamp(1rem,1.4vw,1.15rem);
+    max-width:52ch; color:rgba(242,241,236,0.9); line-height:1.55;
+    margin-bottom:32px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--paper);
+  }
+  .footer-inner{
+    max-width:1400px; margin:0 auto;
+    border-left:1px solid var(--line); border-right:1px solid var(--line);
+    padding:20px var(--gutter);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    font-family:var(--mono); font-size:0.64rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  .footer-inner nav{ display:flex; gap:18px; flex-wrap:wrap; }
+  .footer-inner nav a:hover{ color:var(--blue); }
+
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-mark">AUTCOBEL<span>®</span></div>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#">Home</a>
+      <a href="#">Who We Are</a>
+      <a href="#">Our Approach</a>
+      <a href="#">Our Services</a>
+      <a href="#">Sectors We Serve</a>
+      <a href="#">Contact Us</a>
+    </nav>
+    <div class="nav-status"><span class="dot" aria-hidden="true"></span>SYS ONLINE — UK NATIONWIDE</div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="bracket">AUTCOBEL LTD /// COLDCHAIN ELECTRICAL &amp; DATA SOLUTIONS</span>
+        <span>DOC REV 3.0 — HOMEPAGE / EXPLORATION</span>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-headline">Driving<br>Innovation.<br><em>Inspiring</em><br>Performance.</h1>
+          <p class="hero-sub">We deliver end-to-end electrical and data project solutions for the UK's most demanding environments — from supermarkets to warehouses.</p>
+          <div class="hero-ctas">
+            <a href="#" class="btn btn-primary">&gt;&gt;&gt; Speak with our team</a>
+            <a href="#" class="btn btn-secondary">View our services</a>
+          </div>
+        </div>
+
+        <div class="schematic" aria-hidden="true">
+          <div class="schematic-head">
+            <span>FIG. 01 — SYSTEM MAP</span>
+            <span>NODES: 04/04</span>
+          </div>
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic diagram showing Autcobel as a central hub connected to retail, cold chain, commercial and logistics nodes">
+            <!-- traces: right-angled blueprint routing from hub to 4 corner nodes -->
+            <path class="schem-line-active" d="M150,150 L150,70 L70,70"></path>
+            <path class="schem-line-active" d="M150,150 L150,70 L230,70" style="animation-delay:-0.6s"></path>
+            <path class="schem-line-active" d="M150,150 L150,230 L70,230" style="animation-delay:-1.2s"></path>
+            <path class="schem-line-active" d="M150,150 L150,230 L230,230" style="animation-delay:-1.8s"></path>
+
+            <!-- crosshair ticks along traces -->
+            <g stroke="rgba(242,241,236,0.4)" stroke-width="1">
+              <line x1="150" y1="150" x2="150" y2="230"></line>
+              <line x1="150" y1="150" x2="150" y2="70"></line>
+            </g>
+
+            <!-- corner nodes -->
+            <g>
+              <circle class="schem-node" cx="70" cy="70" r="5"></circle>
+              <circle class="schem-node-ring" cx="70" cy="70" r="10"></circle>
+              <text class="schem-text" x="82" y="66">RETAIL</text>
+              <text class="schem-text schem-text-dim" x="82" y="76">X:042 Y:118</text>
+            </g>
+            <g>
+              <circle class="schem-node" cx="230" cy="70" r="5"></circle>
+              <circle class="schem-node-ring" cx="230" cy="70" r="10"></circle>
+              <text class="schem-text" x="185" y="66" text-anchor="end">COLD CHAIN</text>
+              <text class="schem-text schem-text-dim" x="185" y="76" text-anchor="end">TEMP -18C</text>
+            </g>
+            <g>
+              <circle class="schem-node" cx="70" cy="230" r="5"></circle>
+              <circle class="schem-node-ring" cx="70" cy="230" r="10"></circle>
+              <text class="schem-text" x="82" y="238">COMMERCIAL</text>
+              <text class="schem-text schem-text-dim" x="82" y="248">SIG: -42DBM</text>
+            </g>
+            <g>
+              <circle class="schem-node" cx="230" cy="230" r="5"></circle>
+              <circle class="schem-node-ring" cx="230" cy="230" r="10"></circle>
+              <text class="schem-text" x="185" y="238" text-anchor="end">LOGISTICS</text>
+              <text class="schem-text schem-text-dim" x="185" y="248" text-anchor="end">LOAD: 87%</text>
+            </g>
+
+            <!-- hub -->
+            <circle class="schem-hub" cx="150" cy="150" r="14"></circle>
+            <circle class="schem-node-ring" cx="150" cy="150" r="22"></circle>
+            <text class="schem-text" x="150" y="180" text-anchor="middle">AUTCOBEL HUB</text>
+          </svg>
+          <div class="schematic-readout">
+            <div>PWR <b>400V / 3PH</b></div>
+            <div>UPTIME <b>99.98%</b></div>
+            <div>LINK <b>ACTIVE</b></div>
+            <div>NODES <b>04 ONLINE</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ticker" aria-hidden="true">
+      <span class="hero-ticker-track">50+ PROJECTS DELIVERED /// 30+ COMBINED YEARS' EXPERIENCE /// NATIONWIDE DELIVERY /// 24/7 PROJECT SUPPORT /// TURNKEY ELECTRICAL &amp; DATA /// PROJECT &amp; DESIGN MANAGEMENT /// TEMPORARY PLANT SYSTEMS ///&nbsp;</span>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Proof points">
+    <div class="stats-inner">
+      <div class="stat-cell">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Combined years' experience</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">UK</div>
+        <div class="stat-label">Nationwide delivery</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Project support</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>What We Deliver</h2>
+    <span class="label bracket">Service pillars — 04</span>
+  </div>
+
+  <section class="pillars" aria-label="Service pillars">
+    <div class="pillar">
+      <div class="pillar-idx">01 / 04</div>
+      <h3>Turnkey Electrical &amp; Data</h3>
+      <p>End-to-end project services — design, installation and handover managed under one roof, so nothing falls between contractors.</p>
+      <div class="pillar-foot">STATUS: CORE SERVICE</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-idx">02 / 04</div>
+      <h3>Project &amp; Design Management</h3>
+      <p>Consultation and collaboration from first drawing to final sign-off — we work alongside your team, not around it.</p>
+      <div class="pillar-foot">STATUS: CORE SERVICE</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-idx">03 / 04</div>
+      <h3>Temporary Plant Systems</h3>
+      <p>Client-tailored solutions for interim power and infrastructure — keeping sites running while permanent works land.</p>
+      <div class="pillar-foot">STATUS: CORE SERVICE</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-idx">04 / 04</div>
+      <h3>Our Approach</h3>
+      <p>No sales script — we tell you what's involved, what it costs, and how we'd deliver it, then we deliver exactly that.</p>
+      <div class="pillar-foot">STATUS: OPERATING PRINCIPLE</div>
+    </div>
+  </section>
+
+  <section class="sectors" aria-label="Sectors we serve">
+    <div class="sectors-inner">
+      <div class="sectors-label bracket">Sectors we serve</div>
+      <div class="sectors-list">
+        <a href="#">Retail rollouts</a><span>///</span>
+        <a href="#">Cold chain</a><span>///</span>
+        <a href="#">Commercial</a><span>///</span>
+        <a href="#">Facilities</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="closing-label bracket">Get in touch</div>
+      <h2>Got a site that can't afford downtime?</h2>
+      <p>Tell us what you're running and we'll tell you how we'd deliver it — no obligation, no sales script.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary">&gt;&gt;&gt; Speak with our team</a>
+        <a href="#" class="btn btn-secondary">View our services</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>AUTCOBEL LTD ® — UK NATIONWIDE — DOC REV 3.0</span>
+    <nav aria-label="Footer">
+      <a href="#">Home</a>
+      <a href="#">Who We Are</a>
+      <a href="#">Our Approach</a>
+      <a href="#">Our Services</a>
+      <a href="#">Sectors We Serve</a>
+      <a href="#">Contact Us</a>
+    </nav>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
