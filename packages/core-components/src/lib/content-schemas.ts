@@ -318,6 +318,22 @@ export const BlogFrontmatterSchema = z.object({
 
   category: BlogCategory,
 
+  /**
+   * Audience/sector the post is written for — the second taxonomy axis
+   * alongside `category`.
+   *
+   * OPTIONAL by design, and it must stay optional: six sites in this
+   * monorepo carry blog content and only `sites/dcs` authors this field.
+   * Making it required would fail validation for every other site's posts.
+   *
+   * Deliberately a plain string here rather than an enum: the vocabulary is
+   * per-site (dcs uses its `/projects` portfolio taxonomy — see
+   * `sites/dcs/lib/blog-sectors.ts`), and hard-coding one site's terms into
+   * the shared schema would impose them on every other site. Sites narrow
+   * and validate their own vocabulary.
+   */
+  sector: z.string().min(2, "Sector must be at least 2 characters").optional(),
+
   tags: z
     .array(z.string().min(2, "Tag must be at least 2 characters"))
     .min(1, "At least 1 tag required")

@@ -24,7 +24,7 @@
 
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/content';
-import { BLOG_SECTOR_BY_SLUG, BLOG_SECTOR_LABELS } from '@/lib/blog-sectors';
+import { BLOG_SECTOR_LABELS, toBlogSector } from '@/lib/blog-sectors';
 import { TOPIC_ORDER, categoryOf, topicHeadingOf, topicOf } from '@/lib/blog-topics';
 import { extractHeadings } from '@/lib/blog-headings';
 import { formatMonthYear } from '@/lib/blog-format';
@@ -48,7 +48,7 @@ export interface BlogPostPageProps {
 export function BlogPostPage({ post, content, allPosts }: BlogPostPageProps) {
   const topic = topicOf(post);
   const topicHeading = topicHeadingOf(post);
-  const sector = BLOG_SECTOR_BY_SLUG[post.slug];
+  const sector = toBlogSector(post.sector);
   const headings = extractHeadings(content).filter((h) => h.depth === 2);
 
   const sameTopic = allPosts.filter(
