@@ -1,36 +1,39 @@
 /**
- * PROVISIONAL — the blog's "who it's for" filter axis.
- * =====================================================
+ * The blog's "who it's for" axis — the sector vocabulary and its labels.
  *
- * `sector` does NOT exist as a frontmatter field on any `content/blog/*.mdx`
- * file. Decision D4 (inner-pages design session) asked for a second filter
- * axis on `/blog` beyond `category`, to be designed in now rather than
- * retrofitted once the library reaches 40+ posts. Agent F (wave 2 design
- * session, `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/
- * notes-f.md` §5.4) derived a value for each of the 21 posts from the post's
- * OWN title/description text, not by invented editorial judgement:
+ * `sector` is a REAL authored frontmatter field on every `content/blog/*.mdx`
+ * file (promoted 2026-09-25). This file no longer derives or stores per-post
+ * values; it owns the vocabulary and the narrowing helper, and each post
+ * carries its own value.
  *
- *   - "trades" if the post's title or description names a trade or says
- *     "tradesperson"/"trades".
- *   - "motorsport" for the one post that is a motor-racing case study
- *     instead (`a-fast-team-needs-a-fast-website`, whose description opens
- *     "NP Racing's British Superbike homepage…").
+ * History, so the next reader does not re-open a settled question:
  *
- * The four other values (retail, studios, property, creative) are the
- * `/projects` portfolio taxonomy's own sectors (`lib/project-sectors.ts`),
- * reused here so the two indexes share one vocabulary — see
- * `SECTOR_LABELS` there. No blog post currently carries any of the four.
+ *  - Decision D4 (inner-pages design session) asked for a second filter axis
+ *    on `/blog` beyond `category`, designed in now rather than retrofitted at
+ *    40+ posts.
+ *  - The port shipped it as a PROVISIONAL derived map — Agent F inferred a
+ *    value for each of the 21 posts from the post's own title/description
+ *    text, rather than writing an unapproved field into content.
+ *  - Ricky declined the interactive sector FILTER CHIPS on 2026-09-19
+ *    (commit `84cc16f9`): with ~20 of 21 posts under one chip it wasn't
+ *    useful yet. **That decision stands — there is no sector filter on
+ *    `/blog`, and this file is not an invitation to re-add one.**
+ *  - Ricky then promoted `sector` to real frontmatter on 2026-09-25 to close
+ *    the loose end of live copy being driven by data marked "provisional".
  *
- * THIS MAPPING IS PROVISIONAL AND DERIVED, PENDING RICKY'S CONFIRMATION.
- * It is NOT authored/approved content in the way `lib/project-sectors.ts`'s
- * mapping is (that one is copied verbatim off an approved, signed-off
- * prototype's `data-sector` attributes). This file exists so the design's
- * two-axis filter can be built and tested against real numbers without
- * writing an unapproved `sector` field into 21 MDX files — see root
- * `CLAUDE.md`'s MDX-only / no-invented-content rules. If Ricky does not
- * confirm this axis, delete this file and `components/blog/blog-filter-
- * section.tsx`'s sector axis collapses to the topic-only filter with no
- * other change required.
+ * The derived values were checked against all 21 posts before being written:
+ * each of the 20 `trades` posts names a trade or "tradesperson"/"trades" in
+ * its own title or description, and the one `motorsport` post is the NP
+ * Racing British Superbike case study.
+ *
+ * What still reads this axis (the filter chips do NOT):
+ *  - `blog-list-page.tsx` — the featured post's badge and the aqua
+ *    "who it's for" band.
+ *  - `blog-post-page.tsx` — the per-post badge.
+ *  - `blog-category-page.tsx` — the per-category summary line.
+ *
+ * The vocabulary is the `/projects` portfolio taxonomy's own sectors
+ * (`lib/project-sectors.ts`), reused so the two indexes share one language.
  */
 
 export const BLOG_SECTOR_KEYS = [
@@ -55,30 +58,26 @@ export const BLOG_SECTOR_LABELS: Record<BlogSectorKey, string> = {
   creative: 'Creative and B2B',
 };
 
-/** `content/blog/*.mdx` slug -> derived sector. Every one of the 21 real
- *  posts must have an entry — `blog-list-page.tsx` throws in dev if a real
- *  slug is missing here, rather than silently defaulting it to a sector,
- *  which would be inventing a value this file's own header says not to. */
-export const BLOG_SECTOR_BY_SLUG: Record<string, BlogSectorKey> = {
-  'a-fast-team-needs-a-fast-website': 'motorsport',
-  'before-and-after-project-pages': 'trades',
-  'best-websites-for-electricians': 'trades',
-  'best-websites-for-plumbers': 'trades',
-  'best-websites-for-scaffolding-companies': 'trades',
-  'how-much-does-a-tradesperson-website-cost': 'trades',
-  'how-to-get-google-reviews-as-a-tradesperson': 'trades',
-  'how-to-get-more-leads-from-your-website': 'trades',
-  'how-to-rank-on-google-maps': 'trades',
-  'how-to-write-a-good-testimonials-page': 'trades',
-  'is-it-worth-paying-for-seo': 'trades',
-  'local-seo-for-tradespeople': 'trades',
-  'mobile-friendly-websites-for-tradespeople': 'trades',
-  'pay-monthly-vs-upfront-website': 'trades',
-  'schema-markup-for-tradespeople': 'trades',
-  'service-pages-vs-location-pages-explained': 'trades',
-  'setting-up-google-workspace-for-small-business': 'trades',
-  'website-vs-facebook-page-for-tradespeople': 'trades',
-  'what-is-a-google-business-profile': 'trades',
-  'what-to-put-on-your-tradesperson-website': 'trades',
-  'why-tradespeople-need-a-website': 'trades',
-};
+const SECTOR_KEY_SET: ReadonlySet<string> = new Set(BLOG_SECTOR_KEYS);
+
+/**
+ * Narrow a raw frontmatter `sector` string to a known key.
+ *
+ * The shared `BlogFrontmatterSchema` types `sector` as an optional plain
+ * string, because the vocabulary is per-site (see the schema's own comment).
+ * So a typo — `"trade"`, `"Trades"` — would pass Zod and then silently render
+ * nothing at all. This returns `undefined` for anything unrecognised, which
+ * every caller already handles by omitting the badge, and shouts in dev so
+ * the typo is found while authoring rather than in production.
+ */
+export function toBlogSector(value: string | undefined): BlogSectorKey | undefined {
+  if (!value) return undefined;
+  if (SECTOR_KEY_SET.has(value)) return value as BlogSectorKey;
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(
+      `[blog] Unknown sector "${value}" in blog frontmatter. ` +
+        `Expected one of: ${BLOG_SECTOR_KEYS.join(', ')}.`
+    );
+  }
+  return undefined;
+}

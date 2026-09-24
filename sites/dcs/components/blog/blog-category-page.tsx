@@ -21,7 +21,7 @@
 
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/content';
-import { BLOG_SECTOR_BY_SLUG, BLOG_SECTOR_LABELS, type BlogSectorKey } from '@/lib/blog-sectors';
+import { BLOG_SECTOR_LABELS, toBlogSector, type BlogSectorKey } from '@/lib/blog-sectors';
 import {
   TOPIC_DESCRIPTIONS,
   TOPIC_HEADINGS,
@@ -78,7 +78,7 @@ export function BlogCategoryPage({ topic, posts, allPosts }: BlogCategoryPagePro
   const yearRange = formatYearRange(posts.map((p) => p.date));
 
   const sectors = Array.from(
-    new Set(posts.map((p) => BLOG_SECTOR_BY_SLUG[p.slug]).filter((s): s is BlogSectorKey => !!s))
+    new Set(posts.map((p) => toBlogSector(p.sector)).filter((s): s is BlogSectorKey => !!s))
   );
   const sectorLabel =
     sectors.length > 0 ? joinWithAnd(sectors.map((s) => BLOG_SECTOR_LABELS[s])) : null;
