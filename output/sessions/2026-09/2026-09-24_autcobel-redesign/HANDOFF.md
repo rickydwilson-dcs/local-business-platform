@@ -1,20 +1,21 @@
 # Autcobel redesign — handoff
 
-**Status:** ready-to-resume. PR #91 (the previous session's `staging` → `main`
-promotion) is **merged** — confirmed via `gh pr view 91`, now at `main`
-commit `8786cc3b`. This session found and closed a real content gap: the
-live autcobel.ltd site has 6 services and real contact details, and the
-prototype only had 3 services and placeholder contact info. That gap is now
-closed locally; committing and redeploying is this session's next action.
+**Status:** done, verified live. PR #91 (the previous session's `staging` →
+`main` promotion) is **merged** — confirmed via `gh pr view 91`, now at
+`main` commit `8786cc3b`. This session found and closed a real content gap:
+the live autcobel.ltd site has 6 services and real contact details, and the
+prototype only had 3 services and placeholder contact info. Fixed, committed,
+pushed to `develop`, and redeployed — `https://autcobel-proto.vercel.app`
+now serves all 6 services and the real contact details, spot-checked live
+via `curl`.
 
-**Branch:** `develop`. **Commits:** 0 for this turn's work as of writing this
-— about to commit. **Working tree:** dirty with this turn's changes (see
-`git status`), plus the pre-existing dirty `HANDOFF.md`/`.current-session`
-noise already described in earlier handoffs.
+**Branch:** `develop`. **Commit:** `94a9c2c2`, pushed. **Working tree:** clean
+for this session's files.
 
 **Supersedes:** the "ready-to-resume... awaiting the last required check"
-handoff. That's resolved (PR #91 merged) — this handoff's live issue is the
-services/content gap below, not git process.
+handoff. That's resolved (PR #91 merged). This turn's own work is also
+resolved — nothing is blocked for the next session, only the open items
+listed at the bottom.
 
 ## What this is trying to resolve
 
@@ -98,6 +99,24 @@ live site shows more services than the prototype has.
    via a local `python3 -m http.server` + Claude-in-Chrome. All rendered
    correctly.
 
+## Deploy — 2026-09-24, and a mistake caught mid-deploy
+
+`tools/publish-prototype.ts` derives its Vercel project name from the
+session slug unless `--project` is passed explicitly, and `.vercel/` is
+gitignored everywhere in this repo (root `.gitignore`) — so a fresh
+checkout has no local record of which project a prototype was previously
+linked to. Running it without `--project` created a **new**, wrong project
+(`2026-09-24-autcobel-redesign`) instead of updating the existing
+`autcobel-proto`. Caught immediately by listing Vercel projects
+(`vercel projects ls | grep autcobel` showed both), fixed by re-running
+with `--project autcobel-proto` (the correct deploy went out within a
+minute of the wrong one — no meaningful window where a stale/duplicate URL
+was live), and the stray project was deleted after confirming with Ricky.
+
+**For next time:** always pass `--project autcobel-proto` explicitly when
+redeploying this prototype — don't rely on an implicit `.vercel/` link
+existing.
+
 ## What was NOT done
 
 - **Who We Are, Our Approach, Sectors We Serve content is richer on the
@@ -107,10 +126,6 @@ live site shows more services than the prototype has.
   decision point this turn. Full verbatim text captured in
   `research/source-material.md` under `#who-we-are` / `#our-approach` for
   a future pass, if wanted.
-- **Not yet committed, pushed, or redeployed to `autcobel-proto.vercel.app`**
-  as of the start of this handoff — Ricky confirmed to commit + push +
-  redeploy; check `git log` and the live URL to see whether that's since
-  completed.
 - **Icon reuse, not new assets.** The 3 new service pages reuse the 3
   already-uploaded hero images not used by the original 3 services
   (`hero-visual-calm-waves.png`, `hero-visual-data-stream.png`,
@@ -136,18 +151,10 @@ live site shows more services than the prototype has.
 
 ## Next step
 
-```bash
-# from develop, stage only this session's files (avoid unrelated dirty files)
-git add output/sessions/2026-09/2026-09-24_autcobel-redesign/
-git commit -m "..."
-git push
-# then redeploy the prototype (see docs/guides/prototype-hosting.md)
-```
-
-After redeploying, spot-check `https://autcobel-proto.vercel.app/services/`
-loads and shows all 6 services, and that Contact Us shows the real phone/
-email — the local check already passed, this just confirms the deploy
-didn't drop anything.
+Nothing blocking. If picking this up again, start from the Open questions
+below — likely candidates are chasing Gene for accreditations/named
+clients, or a decision on the richer Who We Are / Our Approach copy found
+this turn.
 
 ## Open questions
 
