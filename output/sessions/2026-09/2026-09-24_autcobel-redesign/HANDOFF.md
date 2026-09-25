@@ -9,8 +9,9 @@ pushed to `develop`, and redeployed — `https://autcobel-proto.vercel.app`
 now serves all 6 services and the real contact details, spot-checked live
 via `curl`.
 
-**Branch:** `develop`. **Commit:** `94a9c2c2`, pushed. **Working tree:** clean
-for this session's files.
+**Branch:** `develop`. **Commits:** 2 this turn — `94a9c2c2` (services +
+contact info fix) and `767e2b8b` (this handoff's own prior update), both
+pushed, `develop` level with `origin/develop`. **Working tree:** clean.
 
 **Supersedes:** the "ready-to-resume... awaiting the last required check"
 handoff. That's resolved (PR #91 merged). This turn's own work is also
@@ -151,15 +152,51 @@ existing.
 
 ## Next step
 
-Nothing blocking. If picking this up again, start from the Open questions
-below — likely candidates are chasing Gene for accreditations/named
-clients, or a decision on the richer Who We Are / Our Approach copy found
-this turn.
+Nothing blocking. The explicit next action, flagged by Ricky when this
+handoff was written: **write richer copy across all 6 service pages.**
+
+Context for whoever picks this up: all 6 service pages currently share one
+thin template — hero, a 4-6 item "What's included" checklist, exactly 2
+short body paragraphs (~60-80 words each), and a CTA to the next service.
+That was fine as a placeholder to close the "3 services missing" gap fast,
+but it means the 3 new pages (Design & Feasibility Consultancy, Control &
+Monitoring Systems, Gas Leak Detection Systems) and the 3 original ones
+(Turnkey Electrical & Data, Project & Design Management, Temporary Plant
+Systems) all read as near-identical in depth and structure — nothing
+differentiates one service's page from another's beyond swapped-in nouns.
+
+Concrete starting points for a richer pass, per page in
+`prototype/services/*.html` (and the matching `content/*.md` draft):
+
+- A "who this is for" or "when you'd need this" section — ties the service
+  to a concrete site scenario (the checklist items are the _what_, this
+  would be the _why now_)
+- More specific process/step detail than the current single "how we
+  deliver it"-style paragraph — what actually happens between enquiry and
+  handover for that specific service
+- A short FAQ block (2-3 questions) — several services touch on things a
+  buyer would obviously ask (F-Gas compliance scope for Gas Leak Detection,
+  what "certified partners" means concretely, whether Design & Feasibility
+  is chargeable/free at enquiry stage) that aren't answered anywhere
+- Cross-links to the specific sectors each service is most relevant to
+  (`sectors-we-serve.html` already exists and isn't referenced from any
+  service page today)
+
+Source material to draw from: the live site's own one-line description per
+service (`research/source-material.md`, `#our-services` section) is the
+only agency-verified real content for the 3 new services — everything
+beyond that one line, on all 6 pages, is agency-drafted and not yet
+reviewed by Gene (see `CONTENT-STATUS.md`). A richer pass should stay
+inside that same "we wrote it, you haven't confirmed it" bucket, not
+introduce new unverified factual claims (named clients, accreditations,
+specific certifications) — those are still open items, not free to invent
+just because the copy is getting deeper.
 
 ## Open questions
 
-- Do we want to fold the richer Who We Are / Our Approach / Sectors copy
-  found this turn into the prototype in a future pass? (New, unresolved.)
-- Same three carried-over items as before: mobile/Safari QA, whether to
-  archive `homepage-mockups/`, and chasing Gene for accreditations/named
-  clients.
+- Should the richer-copy pass (Next step, above) also fold in the fuller
+  Who We Are / Our Approach / Sectors We Serve copy found on the live site
+  this turn (verbatim in `research/source-material.md`), or stay scoped to
+  the 6 service pages only, as asked?
+- Same carried-over items as before: mobile/Safari QA, whether to archive
+  `homepage-mockups/`, and chasing Gene for accreditations/named clients.
