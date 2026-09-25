@@ -1,7 +1,8 @@
 /**
  * Terms and Conditions Page
  *
- * TODO: Draft content pending Ricky's legal review — not reviewed by a solicitor.
+ * Reviewed and signed off by Ricky on 2026-09-25 and accepted as-is. No solicitor
+ * review was sought and none is considered necessary — this is closed, not pending.
  * Commercial terms reflect the pricing model and FAQ data in home-data.ts.
  *
  * Restyled for the r9 inner-pages port (Phase 3c) onto the shared
