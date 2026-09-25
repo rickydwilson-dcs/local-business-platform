@@ -1,0 +1,98 @@
+/**
+ * `.footmap` — the footer link map, for the HOMEPAGE only.
+ *
+ * ## Why this file exists
+ *
+ * The homepage and the inner routes load different stylesheets: `app/page.tsx`
+ * imports `home-r9-reset.css` + `home-r9.css`, while `app/(site)/layout.tsx`
+ * imports `home-r9-reset.css` + `inner-pages.css`. `.footmap` was defined only
+ * in `inner-pages.css`, so when the homepage's `.end` chapter started rendering
+ * the shared `FootMap` on 2026-09-25 the markup arrived with NO styling at all
+ * — `display:block`, no grid, no gaps. It still *looked* like a plausible
+ * stacked list, which is what makes this worth a file and a comment: measured,
+ * it reported `gridTemplateColumns: "none"` and a 596px column where the real
+ * rule gives four tracks.
+ *
+ * ## Why it is a copy rather than an import
+ *
+ * Neither of the obvious fixes is available:
+ *   - the homepage cannot import `inner-pages.css` (4,474 lines of inner-page
+ *     layout that would collide with `home-r9.css`);
+ *   - the rules cannot MOVE out of `inner-pages.css`, because
+ *     `test/chrome-parity.test.ts` asserts that file is a verbatim copy of the
+ *     design session's `kit.css`;
+ *   - they cannot be added to `home-r9.css`, because
+ *     `test/home-css-parity.test.ts` asserts THAT file is a verbatim port of
+ *     the r9 prototype's stylesheet.
+ *
+ * So the rules are duplicated deliberately, and the duplication is guarded:
+ * `test/footmap-css-parity.test.ts` asserts every declaration below appears
+ * verbatim in `inner-pages.css`, so the two copies cannot drift.
+ *
+ * Copied from `styles/inner-pages.css:1670-1687` and its two media blocks
+ * (`@media (max-width:900px)` and `@media (hover:none)`). Comments are carried
+ * across with the rules they explain.
+ */
+
+.footmap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(22px, 3.4vw, 58px);
+  margin-top: clamp(56px, 8vh, 96px);
+  padding-top: clamp(28px, 4vh, 48px);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.footmap .eyeless {
+  margin-bottom: 0;
+}
+.footmap ul {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+/* overflow-wrap:anywhere is NOT tidying. The business email is one
+   36-character unbreakable token; in a grid track narrower than it, the item
+   overflows its own minmax(0,1fr) track and pushes the document wider than
+   the viewport, which html{overflow-x:clip} then silently CLIPS — no
+   scrollbar, no error, just a truncated address. */
+.footmap a {
+  font-size: 15px;
+  opacity: 0.76;
+  overflow-wrap: anywhere;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+.footmap a:hover {
+  opacity: 1;
+  color: var(--aqua);
+}
+.footmap a[aria-current] {
+  opacity: 1;
+  color: var(--aqua);
+}
+
+@media (max-width: 900px) {
+  .footmap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+  }
+  .footmap a {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}
+
+/* A tap leaves :hover stuck on a touch device, so without this the last
+   footer link tapped stays lit for the rest of the visit. */
+@media (hover: none) {
+  .footmap a:hover {
+    opacity: 0.76;
+    color: inherit;
+  }
+  .footmap a[aria-current] {
+    opacity: 1;
+    color: var(--aqua);
+  }
+}

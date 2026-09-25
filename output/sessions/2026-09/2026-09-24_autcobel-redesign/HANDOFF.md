@@ -1,216 +1,283 @@
 # Autcobel redesign — handoff
 
-**Status:** ready-to-resume, with one real risk — the live prototype is
-finished, verified, and deployed, but **none of this session's local
-files are committed to git**, and the working tree is currently on
-`staging` instead of `develop`. See Traps below before touching git.
+**Status (2026-09-25 update):** richer copy pass + mobile nav fixes done
+locally, **not yet committed or deployed** — see "What changed this turn
+(2026-09-25)" below. Everything from the 2026-09-24 session (below this
+point) is unchanged and still accurate: PR #91 merged, 6 services live,
+real contact details live.
 
-**Branch:** `staging` (checked out at session start via the environment's
-git-status snapshot — this session never switched branches). This
-violates the repo's mandatory `develop → staging → main` workflow
-(root `CLAUDE.md`, "CRITICAL: Git Workflow" — "NEVER push directly to
-staging or main... If you break this rule: Stop immediately, inform
-user, ask how to proceed"). Nothing has been pushed anywhere — see below.
+**Branch:** `develop`. **Working tree:** dirty — this turn's changes
+(CSS + 15 HTML files + `CONTENT-STATUS.md`) are uncommitted. Not yet
+pushed or redeployed to `autcobel-proto.vercel.app`.
 
-**Commits:** 0 for this session's work. Every file this session produced
-is untracked; there is no commit history to cite SHAs from.
+---
 
-**Working tree:** dirty.
+## What changed this turn (2026-09-25)
 
-- Modified: `output/sessions/.current-session` (routine pointer update,
-  now reads `2026-09/2026-09-24_autcobel-redesign` — not a risk, expected)
-- Untracked: `output/sessions/2026-09/2026-09-24_autcobel-redesign/` — this
-  session's entire body of work, 43 files that `git add` would pick up
-  (verified via `git add -n`), 11MB on disk total including the
-  gitignored binary/SVG assets (see Traps — those are gitignored on
-  purpose, not missing).
-- Untracked, not mine: `output/sessions/2026-09/2026-09-18_dcs-inner-pages-port/HANDOFF.md`
-  — pre-existing from a different, unrelated session. Not touched, not
-  described further here; don't let it get swept into a commit for
-  this work by an unscoped `git add -A`.
+Trigger: Ricky asked for the richer-copy pass flagged as "Next step" in
+the previous handoff, plus three mobile header bugs from a live-device
+screenshot: the "Speak with our team" button crowding out the hamburger
+icon, the hamburger icon being invisible, and the mobile services list
+being too long.
+
+1. **Mobile header fixed** (`css/styles.css`, all 15 pages' shared
+   header/nav markup):
+   - "Speak with our team" is now hidden in the header bar below 900px
+     — it was competing with the hamburger for space and squeezing the
+     icon to invisibility. It's unchanged in the mobile drawer (still a
+     full-width button at the bottom), so nothing is lost, just moved.
+   - `.nav-toggle` got `flex-shrink:0` and an explicit background so it
+     can't get compressed again the same way.
+   - The mobile drawer's 6 flat service links are now a collapsed
+     "Our Services" `<details>/<summary>` accordion (no JS needed) —
+     drawer goes from 12 items to 6 collapsed, chevron rotates on open.
+   - Verified by forcing the mobile breakpoint + a 390px-constrained
+     `.wrap` in a real browser (window/device-emulation resize doesn't
+     work in this Claude-in-Chrome session — see Traps below).
+
+2. **Richer copy pass, extended beyond the original "6 service pages"
+   scope to include Who We Are, Our Approach and Sectors We Serve** (per
+   Ricky's explicit go-ahead when asked whether to fold in the fuller
+   live-site material flagged as an open question last time):
+   - Each of the 6 service pages gained: a "Who this is for" callout, a
+     3-step "What actually happens" process, a 2–3 question FAQ
+     (`<details>/<summary>`, new `.faq-item` component), and "Where this
+     comes up most" links to the relevant sector(s).
+   - `sectors-we-serve.html` gained an `id` on each sector card
+     (`#retail-rollouts`, `#cold-chain`, `#commercial`,
+     `#facilities-logistics` — targets for the service-page links above),
+     reciprocal "relevant services" links on each card, and a short FAQ.
+   - `who-we-are.html` and `our-approach.html` now include the live
+     site's own words, pulled in from `research/source-material.md`
+     (real, not agency-drafted) — see CONTENT-STATUS.md's "what we made
+     up vs what's real" section, updated to reflect this. Who We Are
+     gained the "Delivery specialists..." section and the trust
+     pull-quote; Our Approach gained a 5-card "Our principles" section
+     (Fast/Flexible/Focused, Collaborative from Day One, Compliance-Led
+     Thinking, Net-Zero Mindset, End-to-End Clarity) and the "great
+     delivery..." pull-quote, plus a short FAQ.
+   - New shared CSS components added: `.who-for`, `.faq-list`/`.faq-item`,
+     `.tag-links`, `.pull-quote`.
+   - `content/*.md` planning drafts were **not** re-synced to match —
+     the HTML pages are canonical for this pass; the `.md` files are
+     now behind on the 9 pages touched. Flagged, not treated as a
+     blocker (see Traps).
+
+3. **Verified, not just written:**
+   - Link-integrity script re-run across all 15 pages (checks every
+     internal `href` resolves to a real file, including the new
+     `#section` fragments) — clean.
+   - HTML well-formedness check (Python `html.parser`, balanced tags)
+     across all 15 pages — clean.
+   - Visually verified in a real browser: mobile header/hamburger fix,
+     mobile services accordion open/close, FAQ accordion open/close on a
+     service page, Who We Are pull-quote + FAQ, Our Approach principles
+     cards. All rendered correctly.
+
+## What was NOT done this turn
+
+- **Not committed, not pushed, not redeployed.** The live
+  `autcobel-proto.vercel.app` still serves the pre-this-turn version.
+  Next session (or later this session) needs to commit, push to
+  `develop`, and redeploy with
+  `npx tsx tools/publish-prototype.ts --project autcobel-proto` (the
+  explicit `--project` flag is load-bearing — see the 2026-09-24 "Deploy"
+  section below).
+- `content/*.md` drafts not re-synced (see above).
+- Mobile/Safari visual QA on a real device — still never done, same as
+  every prior handoff.
+
+## Traps (new this turn)
+
+- **Programmatic JS scrolling (`window.scrollTo`, `el.scrollIntoView()`,
+  `location.hash` reassignment) intermittently got stuck at `scrollY`
+  near 0 in this Claude-in-Chrome session**, on a page that was genuinely
+  scrollable (confirmed via `scrollHeight`) and on a tab where it had
+  worked moments earlier. Real scroll-wheel input via the `computer` tool
+  worked every time. Treat this as a tooling quirk of the automation
+  session, not a site bug — but if a future session needs to verify
+  anchor-link scrolling (e.g. the new `sectors-we-serve.html#cold-chain`
+  links), don't trust a `window.scrollY` readout of ~0 as proof it's
+  broken; scroll-wheel or a real device is the reliable check.
+- Also: `mcp__claude-in-chrome__resize_window` did not change the actual
+  rendered viewport size in this session (`window.innerWidth` stayed at
+  the original value after resizing to 390×844) — screenshots kept
+  rendering at desktop width. Mobile-breakpoint testing this turn used a
+  CSS-injection workaround instead (force the `@media` rules active +
+  constrain `.wrap` to 390px), not a real emulated viewport. If exact
+  device-pixel accuracy matters for a future check, don't rely on
+  `resize_window` alone here.
+
+---
+
+## Handoff as of 2026-09-24 (previous session, still accurate)
+
+**Status:** done, verified live. PR #91 (the previous session's `staging` →
+`main` promotion) is **merged** — confirmed via `gh pr view 91`, now at
+`main` commit `8786cc3b`. This session found and closed a real content gap:
+the live autcobel.ltd site has 6 services and real contact details, and the
+prototype only had 3 services and placeholder contact info. Fixed, committed,
+pushed to `develop`, and redeployed — `https://autcobel-proto.vercel.app`
+now serves all 6 services and the real contact details, spot-checked live
+via `curl`.
+
+**Branch:** `develop`. **Commits:** 2 this turn — `94a9c2c2` (services +
+contact info fix) and `767e2b8b` (this handoff's own prior update), both
+pushed, `develop` level with `origin/develop`. **Working tree:** clean.
+
+**Supersedes:** the "ready-to-resume... awaiting the last required check"
+handoff. That's resolved (PR #91 merged). This turn's own work is also
+resolved — nothing is blocked for the next session, only the open items
+listed at the bottom.
 
 ## What this is trying to resolve
 
 Client (Ricky's agency, Digital Consulting Services) is rebuilding
-**autcobel.ltd** for their client Gene — the existing site is a thin,
-JS-rendered single page with a non-functional nav (confirmed by DOM
-inspection: every nav link has an empty `href`). Task: research the real
-company (Companies House — Autcobel Ltd, no. 14044405, incorporated
-2022, active), draft full site content (11 pages), and build/iterate an
-HTML prototype the agency can review and evolve with the client before
-committing to a real production build. Gene has minimal bandwidth and is
-ADHD — the agency writes content on his behalf; he only reviews a short
-bulleted status tracker (`CONTENT-STATUS.md`) and flags what's wrong.
+**autcobel.ltd** for their client Gene. Task: research the real company,
+draft full site content, and build/iterate an HTML prototype the agency can
+review and evolve with the client before committing to a real production
+build. See prior session history (`session.md`, git log for this folder) for
+the full design-pass narrative — this handoff covers only this turn's work.
 
-The prototype is **not** the production site — it deploys to its own
-Vercel project (`autcobel-proto`, deliberately not named `autcobel`,
-which is reserved for the real build later, per the root `CLAUDE.md`
-prototype-naming rule).
+The prototype is **not** the production site — it deploys to its own Vercel
+project (`autcobel-proto`).
 
-## Actions taken
+## What changed this turn (2026-09-24, later session)
 
-No commits exist, so this is a file-level narrative, not a SHA list.
-Full blow-by-blow reasoning for each of these lives in `session.md`
-under "Design pass 1" through "Design pass 7" — this is the summary:
+Trigger: Ricky pointed at `https://autcobel.ltd/#our-services` and said the
+live site shows more services than the prototype has.
 
-1. Researched the real site (browser DOM inspection, not just WebFetch —
-   WebFetch alone only returned the page `<title>`) and Companies House;
-   wrote `research/source-material.md`.
-2. Drafted full copy for all 11 pages into `content/*.md`, plus
-   `CONTENT-STATUS.md` (internal-only tracker for Gene, humanizer-passed,
-   never linked from the live site).
-3. Explored 10 different homepage design directions in
-   `homepage-mockups/` (one per design skill) — client picked v10
-   ("ui-styling" skill, shadcn/Tailwind-flavoured).
-4. Built the full 11-page prototype in `prototype/` on that design
-   system, deployed to `autcobel-proto.vercel.app`.
-5. Iterated repeatedly per client feedback, each redeployed live:
-   hero stat-row tweak, padding tweak, full palette rework (grounded in
-   the _real_ autcobel.ltd's actual blue, sampled live via
-   `getComputedStyle`, not guessed), inner-page hero redesigned twice
-   (bordered icon card → boxed image → full-width background image with
-   scrim), homepage hero unified with the same treatment (retiring a
-   "Delivery Console" panel that had been carrying fabricated stats),
-   a new logo mark generated and wired in site-wide, and card styling
-   unified between the homepage and two inner pages that had drifted.
-6. Generated imagery via the `higgsfield` CLI (local tool, already
-   authenticated — not an MCP integration, ToolSearch won't find it).
-   6 hero images + 1 logo mark, all uploaded to Cloudflare R2 under
-   `prototypes/2026-09-24_autcobel-redesign/assets/...` (verified 200 on
-   all 7 objects after upload).
+1. **Corrected a wrong research finding.** The original
+   `research/source-material.md` claimed the live site's nav was
+   non-functional ("every link has an empty `href`... nothing behind it
+   actually exists yet") based on a raw DOM `href` check. That was wrong —
+   the nav is wired up via JS (`location.hash` + scroll), and clicking each
+   link (or loading the `#hash` URL directly) lands on a real, detailed
+   section. Verified live in a browser this turn. See the "Correction"
+   note and new verbatim sections added to `research/source-material.md`.
 
-## Current state — verified 2026-09-24
+2. **Found 3 missing services.** The live site's `#our-services` section
+   lists six services; the prototype only had pages for three. Added:
+   - `prototype/services/design-feasibility-consultancy.html`
+   - `prototype/services/control-monitoring-systems.html`
+   - `prototype/services/gas-leak-detection-systems.html`
+   - `prototype/services/index.html` — new "Our Services" overview page
+     (the live site has no direct prototype-page equivalent to model, so
+     this was newly composed from the live site's own section copy)
 
-- **Live and correct:** `https://autcobel-proto.vercel.app` — checked in
-  an actual browser after every change this session, most recently after
-  the card-styling unification pass. All 11 pages resolve 200. All R2
-  asset URLs resolve 200.
-- **R2:** 7 objects uploaded and verified (6 `hero-visual-*.png`/logo
-  under `assets/img/hero/` and `assets/img/brand/`), all classified
-  "Live" cache tier (short TTL), not "Archived" (immutable) — this
-  mattered because the archive-routing regex in
-  `tools/upload-prototype-assets.ts` would have silently 1-year-cached
-  these if they'd been left directly in `assets/img/` instead of a
-  subfolder; checked via dry-run before every upload.
-- **Not verified:** mobile-width rendering (this session's browser tool
-  couldn't resize its own viewport — tried twice, gave up rather than
-  loop) and Safari rendering (no Safari session available). Both still
-  open from early in the session, never circled back to.
-- **Not committed:** see Working tree above. This is the main risk in
-  this handoff — everything above is real and live on Vercel/R2, but has
-  no git record at all yet.
+   Matching content drafts added: `content/12-services-overview.md`,
+   `content/13-15-service-*.md`.
+
+3. **Updated nav, mobile nav and footer "Services" list on all 11
+   pre-existing pages** to include all 6 services plus a link to the new
+   overview page (done via a script, see
+   `/tmp/.../update_services_nav.py` referenced in this turn's tool
+   history — not saved in the repo, it was a scratch file). Verified every
+   internal `href` in the 15-page prototype resolves to a real file.
+
+4. **Rewired the homepage's services teaser** (`prototype/index.html`) from
+   a 4-card grid (3 services + "Our Approach") to a 6-card grid (all
+   services) plus a "View all services" button to the new overview page.
+
+5. **Rewired the service-page CTA chain** to the live site's own 6-service
+   order: Design & Feasibility Consultancy → Project & Design Management →
+   Turnkey Electrical & Data → Control & Monitoring Systems → Gas Leak
+   Detection Systems → Temporary Plant Systems → Contact Us.
+
+6. **Resolved CONTENT-STATUS.md item #3** ("temporary plant" — power only,
+   or also refrigeration?). The live site itself names this service
+   "Temporary Plant Systems & Power" — confirms power-only, matching what
+   was already drafted. Removed the in-page "Flagged for Gene" note box and
+   tightened the copy in `prototype/services/temporary-plant-systems.html`
+   and `content/06-service-temporary-plant-systems.md` accordingly.
+
+7. **Resolved CONTENT-STATUS.md item #1** (phone/email), with explicit
+   sign-off from Ricky first (this was outside the literal "add the missing
+   services" ask, flagged and confirmed before doing it). The live site's
+   `#contact-us` section has real contact details that were never surfaced
+   before: `020 3051 4331`, `info@autcobel.ltd`,
+   `projects@autcobel.com` (documents), hours Mon–Fri 08:00–17:00. Pulled
+   into `prototype/contact-us.html` and the email reference in
+   `privacy-policy.html`, `terms-and-conditions.html`, `cookie-policy.html`,
+   and the matching `content/*.md` files.
+
+8. **Rewrote `CONTENT-STATUS.md`** — items #1 and #3 marked resolved (2 of
+   4 outstanding items now closed, down to accreditations and named
+   clients), page table extended to 15 pages, "what we made up vs what's
+   real" section updated.
+
+9. **Verified locally**: ran a link-integrity check (every internal `href`
+   across all 15 HTML files resolves to a real file) and browser-checked
+   the homepage, services overview page, nav dropdown, and Contact Us page
+   via a local `python3 -m http.server` + Claude-in-Chrome. All rendered
+   correctly.
+
+## Deploy — 2026-09-24, and a mistake caught mid-deploy
+
+`tools/publish-prototype.ts` derives its Vercel project name from the
+session slug unless `--project` is passed explicitly, and `.vercel/` is
+gitignored everywhere in this repo (root `.gitignore`) — so a fresh
+checkout has no local record of which project a prototype was previously
+linked to. Running it without `--project` created a **new**, wrong project
+(`2026-09-24-autcobel-redesign`) instead of updating the existing
+`autcobel-proto`. Caught immediately by listing Vercel projects
+(`vercel projects ls | grep autcobel` showed both), fixed by re-running
+with `--project autcobel-proto` (the correct deploy went out within a
+minute of the wrong one — no meaningful window where a stale/duplicate URL
+was live), and the stray project was deleted after confirming with Ricky.
+
+**For next time:** always pass `--project autcobel-proto` explicitly when
+redeploying this prototype — don't rely on an implicit `.vercel/` link
+existing.
 
 ## What was NOT done
 
-- **Nothing committed to git, on the wrong branch.** The repo's git
-  workflow (`develop → staging → main`, no exceptions) was not followed
-  this session — work happened directly on `staging`. This needs
-  resolving before anything is pushed. Do not push to `staging` or
-  `main` directly to "fix" this — branch to `develop` (or a feature
-  branch off it) and follow the normal flow forward from there. The
-  next step below hands this to `/deploy.changes`, which the user has
-  already asked to run next and should handle the promotion path — but
-  confirm it actually gets you onto `develop` first rather than
-  committing in place on `staging`.
-- **Mobile and Safari visual QA.** Reasoned about correctness (mobile nav
-  CSS follows standard patterns, no Safari-specific APIs used) but never
-  confirmed live, on either count.
-- **4 outstanding content facts, tracked in `CONTENT-STATUS.md`,
-  never chased with Gene:** phone/email (currently visible on-page as
-  red `[PHONE NUMBER — needed from Gene]`-style flags, deliberately not
-  invented), any accreditations (NICEIC/CHAS/SafeContractor/ISO — none
-  currently claimed), whether "Temporary Plant Systems" covers
-  refrigeration or power only (drafted power-only, flagged inline as a
-  note-box on that page), and whether any client names can be used.
-- **Legal pages are drafts, not legally reviewed.** Privacy Policy,
-  Terms & Conditions, Cookie Policy all say so inline. ICO registration
-  number is an unresolved placeholder.
-- **"Built by Digital Consulting Services" footer link** points to
-  `https://digitalconsultingservices.co.uk` — this is my own assumption
-  (matches the user's email domain), stated as such in chat, never
-  explicitly confirmed by the user.
-- **`homepage-mockups/` (10 alternative directions) never cleaned up.**
-  They're still sitting in the repo as-is from early in the session.
-  Notably `v10-ui-styling-modern.html` — the one that became the
-  starting point — is now **stale**: the real prototype (`prototype/`)
-  has since diverged substantially (palette, hero layout, logo, cards).
-  Don't mistake the mockup file for current design. Also: `v8-impeccable-bold.html`
-  still contains fabricated specific stats with no "illustrative"
-  disclaimer (flagged to the user in chat at the time, never fixed,
-  moot only because v8 wasn't the direction chosen — but the file is
-  still in the repo, unannotated, if anyone opens it later).
-
-## Live-data changes already applied
-
-- **Vercel:** project `autcobel-proto` (team `ricky-wilsons-projects`)
-  created and deployed to repeatedly — current production deployment is
-  live at the aliased URL above. Each redeploy was a full
-  `vercel deploy --prod` via `tools/publish-prototype.ts`; no rollback
-  command was recorded per-deploy, but re-running that script from any
-  later working-tree state simply redeploys current `prototype/`
-  content — there's nothing destructive to undo, just a further deploy.
-- **Cloudflare R2:** 7 objects written under
-  `prototypes/2026-09-24_autcobel-redesign/assets/` (bucket
-  `local-business-platform`). All are prototype art (generated hero
-  images + logo), not client data. No rollback needed; re-running
-  `tools/upload-prototype-assets.ts` against the same local files is a
-  no-op (`skip (unchanged)`) unless the local files themselves change.
+- ~~Who We Are, Our Approach, Sectors We Serve content is richer on the
+  live site than the prototype currently has~~ — done 2026-09-25, see top
+  of file.
+- **Icon reuse, not new assets.** The 3 new service pages reuse the 3
+  already-uploaded hero images not used by the original 3 services
+  (`hero-visual-calm-waves.png`, `hero-visual-data-stream.png`,
+  `hero-visual-twin-ribbons.png` — all already reused elsewhere in the
+  site too, so this isn't a new pattern). No new R2 uploads needed.
+- **Mobile and Safari visual QA** — still never done (carried over,
+  unrelated to this turn's changes).
+- **Accreditations and named clients** (CONTENT-STATUS.md items #2 and #4)
+  — still genuinely unresolved, nothing found on the live site to close
+  these.
 
 ## Traps
 
-- **`assets/img/hero/*.png` and `assets/img/brand/*.svg` are gitignored
-  on purpose.** A fresh `git status` after cloning will not show them,
-  and they will not be in the repo — this is correct, expected behavior
-  per `docs/guides/prototype-hosting.md` (binary/SVG prototype assets go
-  to R2, never git). They're already uploaded and the live HTML already
-  references the R2 URLs directly, not local paths — nothing is broken,
-  don't try to "fix" this by un-gitignoring or re-adding them.
-- **`prototype/.vercel/` and `.env.local` are also gitignored** (Vercel
-  CLI project-link state, pulled fresh each `publish-prototype.ts` run).
-  Also expected, also fine.
-- **The Vercel project must stay named `autcobel-proto`, never
-  `autcobel`.** That name is reserved for the real production site.
-  See the root `CLAUDE.md` Vercel section for why this matters (a prior
-  incident on a different client project, `dpm-autobody`, where a
-  same-named prototype silently blocked the production project import).
-- **`CONTENT-STATUS.md` must never be linked from any live page or
-  deployed anywhere.** It's the internal Gene-facing tracker. Already
-  correctly excluded from the prototype's own nav/footer — just don't
-  introduce a link to it by accident in future work.
-- **A previous fork this session reported `status: completed` having
-  done zero actual work** (confused about whose instructions it was
-  executing) — caught only by independently grepping the target files
-  after the fact, not by trusting its own summary. If a future session
-  delegates more page-edit work to a subagent, verify its claimed
-  changes on disk before trusting them; this happened once already.
+- **The original research doc was wrong on a load-bearing fact** — see
+  point 1 above. If a future session sees "nav is non-functional" claimed
+  anywhere about autcobel.ltd, don't trust it without re-checking live;
+  the correction is now in `research/source-material.md` but other docs
+  (old commit messages, `session.md`, `CONTENT-STATUS.md`'s original
+  wording) may still carry the stale claim in prose, even though the
+  factual sections have been corrected.
+- **This repo's working directory is shared by concurrent sessions** (see
+  prior handoff's Traps section — still applies).
 
-## Next step
+## Next step (superseded — see 2026-09-25 section at top)
 
-The user has already asked, in the same message that produced this
-handoff, for `/deploy.changes` to run immediately after. That is the
-literal next action:
+~~Nothing blocking. The explicit next action, flagged by Ricky when this
+handoff was written: **write richer copy across all 6 service pages.**~~
+Done 2026-09-25, extended to Who We Are/Our Approach/Sectors We Serve too
+— see top of file. **Not yet committed/deployed**, so that's the actual
+next step now: commit, push, redeploy (command in the 2026-09-25 section).
 
-```
-/deploy.changes
-```
-
-Before it runs, be aware (per Traps and "What was NOT done" above) that
-the working tree is on `staging`, not `develop`, with 43 untracked files
-and no commit history — `/deploy.changes` needs to get this onto
-`develop` properly (or a feature branch off it) as part of its own flow,
-not commit in place on `staging`. If it does not do that automatically,
-stop and ask the user how they want the branch situation resolved before
-committing anything, per the root `CLAUDE.md` rule on this exact
-scenario.
+Original context, kept for the record: all 6 service pages had shared one
+thin template — hero, a 4-6 item "What's included" checklist, exactly 2
+short body paragraphs (~60-80 words each), and a CTA to the next service —
+with nothing differentiating one service's page from another's beyond
+swapped-in nouns. The 2026-09-25 pass added a "who this is for" box, a
+process walkthrough, an FAQ, and sector cross-links to each.
 
 ## Open questions
 
-- How should the `staging`-branch situation actually get resolved —
-  does `/deploy.changes` handle moving this to `develop` cleanly, or
-  does that need to happen by hand first?
-- Is it worth cleaning up/archiving `homepage-mockups/` now that v10 (as
-  evolved) is the shipped direction, or is it staying as a design-history
-  record?
-- When should the agency loop back to Gene for the 4 outstanding
-  `CONTENT-STATUS.md` items (phone/email especially — Contact Us is
-  currently unusable without them)?
+- ~~Should the richer-copy pass also fold in the fuller Who We Are / Our
+  Approach / Sectors We Serve copy found on the live site?~~ Answered yes,
+  done 2026-09-25.
+- Same carried-over items as before: mobile/Safari QA on a real device,
+  whether to archive `homepage-mockups/`, and chasing Gene for
+  accreditations/named clients (CONTENT-STATUS.md items #2 and #4).

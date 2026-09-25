@@ -4,6 +4,11 @@ import type { Metadata } from 'next';
 // against. See the file header for the three declarations and what they cost.
 import '@/styles/home-r9-reset.css';
 import '@/styles/home-r9.css';
+// `.footmap` (the shared footer link map, rendered inside `.end` since
+// 2026-09-25) is defined in `inner-pages.css`, which this route does NOT
+// import. Without this the map renders completely unstyled. See the file
+// header for why it is a guarded copy rather than an import.
+import '@/styles/footmap.css';
 import { HomeBody } from '@/components/home/home-body';
 import { siteConfig } from '@/site.config';
 import { absUrl } from '@/lib/site';

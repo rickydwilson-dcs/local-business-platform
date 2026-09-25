@@ -14,17 +14,29 @@
  * the panel being opened.
  *
  * This is the single import Phase 7's `app/page.tsx` needs for the
- * homepage's own furniture (it does not render `PageShell`/`SiteHeader`/
- * `SiteFooter` — those stay with the `(site)` route group's 14 inner
- * routes).
+ * homepage's own furniture (it does not render the retired solaris
+ * `PageShell`/`SiteHeader`/`SiteFooter`).
+ *
+ * The overlay nav is `components/site/SiteMenu` — the SAME component the inner
+ * routes use, carrying the six real routes. It replaced a homepage-only
+ * `mobile-menu.tsx` on 2026-09-25 (Ricky: "menu links should be to the inner
+ * pages not anchors"), which had held five in-page anchors and was the reason
+ * no homepage visitor could reach any inner page. The two components were
+ * otherwise identical — same `.menu` root, same `hidden` state from
+ * `useHomeBehaviour()`, same click-to-close, same `.menu__foot`.
+ *
+ * `SiteBar` and `SiteMenu` MUST stay siblings — Trap 11. `site-bar.tsx`
+ * carries `backdrop-filter`, which makes it the containing block for any
+ * `position: fixed` descendant, so nesting the overlay inside it traps the
+ * "fullscreen" panel in the bar's own ~81px box.
  */
 
 import { ChapterPanel } from './chapter-panel';
 import { EndSection } from './end-section';
 import { Hero } from './hero';
 import { HomeBehaviour } from './home-behaviour';
-import { MobileMenu } from './mobile-menu';
 import { Pricing } from './pricing';
+import { SiteMenu } from '@/components/site/site-menu';
 import { Questions } from './questions';
 import { Quote } from './quote';
 import { ServicesStack } from './services-stack';
@@ -38,10 +50,10 @@ export function HomeBody() {
     // prototype's scroll and interaction script. Everything below it is passed
     // as `children` from this Server Component, so its state changes only
     // re-render the components that actually read its context (`SiteBar`,
-    // `MobileMenu`) — not this whole tree.
+    // `SiteMenu`) — not this whole tree.
     <HomeBehaviour>
       <SiteBar />
-      <MobileMenu />
+      <SiteMenu />
 
       <main id="top">
         <Hero />
