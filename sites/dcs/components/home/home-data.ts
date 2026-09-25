@@ -31,6 +31,19 @@ export interface WorkItem {
   description: string;
   /** All five work items carry an outbound link to the live site. */
   link: WorkLink;
+  /**
+   * The `/projects/<slug>` case study, where one exists. **Only three of the
+   * five have one** — `the-clothing-kings`, `cuddle-plush-fabrics` and
+   * `colossus-scaffolding`. NP Racing and SM Commercial have no page in
+   * `content/projects/`, so they render the live-site link alone.
+   *
+   * Ricky chose this on 2026-09-25 over linking none of them, knowing the set
+   * reads unevenly: the section-level "See all work" link to `/projects`
+   * covers the onward path either way, so the split is cosmetic rather than a
+   * dead end. Writing the two missing case studies is the alternative, and is
+   * content work scoped separately.
+   */
+  caseStudy?: string;
   video: HomeAssetName;
   poster: HomeAssetName;
 }
@@ -42,6 +55,7 @@ export const WORK: WorkItem[] = [
     description:
       'A workwear store where the price changes with the job — embroidery or vinyl, front, back or sleeve — and the customer uploads their logo at checkout.',
     link: { label: 'theclothingkings.co.uk →', href: 'https://www.theclothingkings.co.uk' },
+    caseStudy: '/projects/the-clothing-kings',
     video: 'work-clothing-kings.video',
     poster: 'work-clothing-kings.poster',
   },
@@ -51,6 +65,7 @@ export const WORK: WorkItem[] = [
     description:
       'With me since 2014. Products now load automatically from their wholesalers’ sites, and backorders are handled — so a catalogue that size stays accurate without anyone keying it in.',
     link: { label: 'cuddleplushfabrics.co.uk →', href: 'https://www.cuddleplushfabrics.co.uk' },
+    caseStudy: '/projects/cuddle-plush-fabrics',
     video: 'work-cuddle-plush.video',
     poster: 'work-cuddle-plush.poster',
   },
@@ -78,6 +93,7 @@ export const WORK: WorkItem[] = [
     description:
       '78 pages of localised content, every image generated rather than photographed. They came with a logo, a few Instagram posts and a list of nearby towns. First enquiry inside two weeks.',
     link: { label: 'colossus-scaffolding.co.uk →', href: 'https://www.colossus-scaffolding.co.uk' },
+    caseStudy: '/projects/colossus-scaffolding',
     video: 'work-colossus.video',
     poster: 'work-colossus.poster',
   },
@@ -93,6 +109,15 @@ export type ServiceMedia =
 
 export interface ServiceCard {
   index: string;
+  /**
+   * The `/services/<slug>` page this card opens. All six map 1:1 onto
+   * `content/services/*.mdx`; the labels below are the card's own, the paths
+   * are the site's routes.
+   *
+   * Until 2026-09-25 every one of these pointed at `#end` (the on-page contact
+   * chapter) because the service pages did not exist when the homepage shipped.
+   */
+  href: string;
   title: string;
   description: string;
   linkLabel: string;
@@ -103,15 +128,17 @@ export interface ServiceCard {
 export const SERVICES: ServiceCard[] = [
   {
     index: '01 — DESIGN',
+    href: '/services/web-design',
     title: 'Website design',
     description:
       'Designed around your business, not picked off a shelf. No template to fiddle with, no builder to learn, nothing left half-finished.',
-    linkLabel: 'Start a project →',
+    linkLabel: 'See how I build them →',
     color: 'ink',
     media: { kind: 'video', video: 'work-ink.video', poster: 'work-ink.poster' },
   },
   {
     index: '02 — SELLING',
+    href: '/services/ecommerce',
     title: 'eCommerce',
     description:
       'Start selling online properly. I build the store, load your products, set up payments and delivery, and show you how the orders arrive.',
@@ -121,6 +148,7 @@ export const SERVICES: ServiceCard[] = [
   },
   {
     index: '03 — BEING FOUND',
+    href: '/services/local-seo',
     title: 'Local SEO',
     description:
       "Service pages, location pages and structured data, built in from the start rather than bolted on later. A site nobody can find isn't worth having.",
@@ -130,6 +158,7 @@ export const SERVICES: ServiceCard[] = [
   },
   {
     index: '04 — LOOKING AFTER IT',
+    href: '/services/monthly-management',
     title: 'Ongoing management',
     description:
       'Hosting, security, updates and changes, all handled. No login, no CMS, no dashboard to learn. You send a message; I make the change.',
@@ -139,19 +168,21 @@ export const SERVICES: ServiceCard[] = [
   },
   {
     index: '05 — KNOWING',
+    href: '/services/analytics',
     title: 'Analytics & reporting',
     description:
       "What's actually working, in plain English, once a month. Where people came from, what they clicked, and what to do about it.",
-    linkLabel: 'See a sample report →',
+    linkLabel: 'How I set up Google Analytics →',
     color: 'aqua',
     media: { kind: 'image', image: 'web-abstract-mesh' },
   },
   {
     index: '06 — EVERY DAY',
+    href: '/services/google-workspace',
     title: 'Business email',
     description:
       "Professional email on your own domain, set up properly and moved over without losing anything. No more addresses ending in a provider's name.",
-    linkLabel: 'Sort my email →',
+    linkLabel: 'How business email works →',
     color: 'white',
     media: { kind: 'image', image: 'web-sector-office' },
   },

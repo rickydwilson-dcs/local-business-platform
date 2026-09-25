@@ -26,7 +26,7 @@
  * server-rendered tree as `children`. Because those children are element
  * objects created by the Server Component `HomeBody`, provider state changes
  * do NOT re-render them — only the components that actually read the context
- * (`SiteBar`, `MobileMenu`) re-render. So the interactive state lives in React
+ * (`SiteBar`, `SiteMenu`) re-render. So the interactive state lives in React
  * without turning the entire homepage into a client re-render.
  *
  * The split between React state and direct DOM mutation is deliberate:

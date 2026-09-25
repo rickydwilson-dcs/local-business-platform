@@ -1,27 +1,50 @@
 # DCS inner pages — the React port — handoff
 
-**Status:** **done — every tracked item is closed. One merge remains, and it is green.**
+**Status:** **the port is shipped and every item it TRACKED is closed — but the work is not
+finished, because the homepage was never wired to it.** See "The gap this handoff did not
+track" immediately below. PR #91 merged to `main` on 2026-09-24 (`8786cc3b`).
 The port merged as PR #89 (2026-09-19) with fix PR #90 (2026-09-24). Blog `sector` became real
 frontmatter on 2026-09-25 (`b1363f7c`). On 2026-09-25 Ricky also closed the last three open
 questions: Search Console (no submission needed — verified live), solicitor review (signed off
 as-is), and the `kit-additions-*.css` records (deleted). See "Open questions" and
 "Tidy-up closed 2026-09-25" below.
 
-**The one thing outstanding is not a task, it is a merge:** **PR #91** to `main` is **OPEN, fully
-green and `MERGEABLE`** (`mergeStateStatus: CLEAN`) — all checks pass, including 9 Vercel
-deployments, Standard E2E, Cross-Site Smoke and "Verify promoted commit passed staging E2E".
-Full E2E is `skipping`, its configured behaviour on this path. It was opened by a _different_
-session (Trap #1), so confirm before merging it yourself.
+**PR #91 is merged** — `8786cc3b`, 2026-09-24 23:49, all checks green (9 Vercel deployments,
+Standard E2E, Cross-Site Smoke, "Verify promoted commit passed staging E2E"; Full E2E `skipping`,
+its configured behaviour on this path). `staging` was **not** deleted — the repo has
+`delete_branch_on_merge: false`. `origin/main` now contains `b1363f7c`.
 
-**Branch:** `develop` at `b1363f7c`. **Working tree:** has the 2026-09-25 closure changes
-uncommitted — the terms comment, the eight deleted CSS files, `kit-additions-removed.md`, and
-this file. **Local `main` is stale** (`a6cc38eb` vs `origin/main` `ea3338db`).
+**Branch:** `develop` at `c5499a1b` (the 2026-09-25 closure commit), one commit ahead of
+`staging` and `main`, **committed but not pushed**. **Local `main`** is synced to `8786cc3b`,
+fast-forwarded with `git fetch origin main:main` rather than a checkout — deliberately, because
+the working tree held staged changes and Trap #2 makes a branch switch unsafe in that state.
 
-> Verified 2026-09-25: `git branch -r --contains b1363f7c` → `origin/develop`, `origin/staging`
-> (**not** `origin/main`). `gh pr list --state open` → **#91 "Promote staging to main: Autcobel
-> prototype + blog sector frontmatter"**, opened 2026-09-24T23:31, CI + Production Quality Gate
-> `in_progress` at time of writing. **Local `main` is stale** — `a6cc38eb` vs `origin/main`
-> `ea3338db`.
+## The gap this handoff did not track — found 2026-09-25
+
+**Nothing on the homepage links to any of the 15 inner pages.** Production is a one-page site
+with a full site bolted behind it; the inner pages are reachable only from Google or by typing a
+URL. Verified live: the homepage's only links are `#top #work #services #pricing #faq #end` plus
+`mailto:`/`tel:` — **zero route links** — while `/pricing`, `/about` and `/blog` each carry the
+full six-route nav and four-column footer.
+
+The cause is scope: Phases 1–7 covered the `(site)` route group, and `app/page.tsx` sits outside
+it. The bar (`home/site-bar.tsx`) is already shared between homepage and inner pages; the **menu**
+and the **footer** are not.
+
+This was predicted. `design-kit.md` §12 item 7 says `end-section.tsx`'s anchors-only instruction
+"is **superseded by decision D1** … Phase 2 should note that the comment will need updating at
+port time." It was not, and that comment still reads _"the 14 existing inner routes are not linked
+from the homepage yet."_ D1's own words: _"Without this, sixteen designed pages stay unreachable
+and the homepage stays a one-pager with a site bolted behind it."_
+
+**Why every gate missed it:** no test asserts the homepage's link set. 258 tests, CI and the
+Production Quality Gate were all green throughout.
+
+**Ricky's rulings, 2026-09-25:** menu links go to the inner pages, not anchors; the footer is
+consistent across all pages unless there is a good reason to diverge (per-service location links,
+as on `colossus-scaffolding`, are _not_ needed on DCS yet).
+
+**Spec:** `output/sessions/2026-09/2026-09-25_dcs-homepage-nav-wiring/session.md`.
 
 ## Chaining — read these first, they are not repeated here
 

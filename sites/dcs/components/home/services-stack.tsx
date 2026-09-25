@@ -15,10 +15,16 @@
  * mapping table is needed. `ServiceMedia` is a discriminated union
  * (`video` | `image`) because the prototype mixes both inside `.svccard__well`
  * — the first two cards are video, the remaining four are images.
+ *
+ * Each card's link goes to its own `/services/<slug>` page (`home-data.ts`'s
+ * `href`). Until 2026-09-25 all six pointed at `#end`, the on-page contact
+ * chapter, because the service pages did not exist when this shipped — so the
+ * six service pages had no inbound link from the homepage at all.
  */
 
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChapterPanel } from './chapter-panel';
 import { LazyVideo } from './lazy-video';
 import { SERVICES } from './home-data';
@@ -48,9 +54,9 @@ export function ServicesStack() {
               <span className="svccard__ix">{svc.index}</span>
               <h3 className="svccard__t">{svc.title}</h3>
               <p className="svccard__d">{svc.description}</p>
-              <a className="svccard__l" href="#end">
+              <Link className="svccard__l" href={svc.href}>
                 {svc.linkLabel}
-              </a>
+              </Link>
             </div>
             <div className="svccard__well">
               {svc.media.kind === 'video' ? (
