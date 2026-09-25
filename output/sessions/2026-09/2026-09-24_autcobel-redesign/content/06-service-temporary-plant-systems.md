@@ -10,8 +10,8 @@
 
 **H1:** Temporary Plant Systems
 
-**Subhead:** Permanent works shouldn't mean the site goes dark, or the cold
-chain breaks, while you wait.
+**Subhead:** Permanent works shouldn't mean the site goes dark while you
+wait.
 
 ---
 
@@ -22,19 +22,19 @@ chain breaks, while you wait.
 - Temporary containment and small power for phased works
 - Planned, scheduled changeovers between temporary and permanent systems
 
-_(Flagged for Gene: confirm whether "temporary plant" should also cover
-temporary refrigeration/cold-storage plant, or electrical power only — see
-CONTENT-STATUS.md. Copy above is written to electrical/power scope only
-until confirmed.)_
+_(Resolved 2026-09-24: the live autcobel.ltd site's own "Our Services"
+section names this "Temporary Plant Systems & Power" and describes it as
+"rapid-deployment plant hire and temporary power solutions" — confirming
+electrical/power scope only, not refrigeration. The Gene-flag in
+CONTENT-STATUS.md for this item is closed; no need to chase it.)_
 
 ---
 
 ## Why it matters on a live site
 
 Body: Stock doesn't wait for a rewire, and neither does a delivery
-schedule. Temporary plant keeps power — and, critically, temperature-critical
-areas — running while the permanent installation goes in, so the works
-happen without a trading or cold-chain interruption.
+schedule. Temporary power keeps a site running while the permanent
+installation goes in, so the works happen without a trading interruption.
 
 ---
 

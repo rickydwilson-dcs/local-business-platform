@@ -41,4 +41,5 @@ settings — see your browser's help pages for how.
 
 ## Contact
 
-`[EMAIL ADDRESS — needed from Gene]`
+`info@autcobel.ltd` (resolved 2026-09-24 from the live site's contact
+section)

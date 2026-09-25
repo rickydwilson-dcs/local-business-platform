@@ -45,6 +45,6 @@ where the site needs it, not an extra line on the quote.
 
 ## CTA
 
-**Heading:** Next: how we manage the project around it
+**Heading:** Next: keeping it monitored once it's live
 
-**CTA:** Project & Design Management → /services/project-design-management
+**CTA:** Control & Monitoring Systems → /services/control-monitoring-systems

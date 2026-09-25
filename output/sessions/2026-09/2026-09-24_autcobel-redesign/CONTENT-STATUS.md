@@ -2,18 +2,22 @@
 
 **INTERNAL ONLY. Never publish this page. Never link it from the live site.**
 
-For Gene. All 11 pages are drafted and ready to look at. You don't need to
+For Gene. All 15 pages are drafted and ready to look at. You don't need to
 read every word. Just check the "Need from you" list below.
 
 ---
 
-## Need from you (4 things)
+## Need from you (2 things — down from 4)
 
-1. **Phone number and email** for the Contact page and legal pages.
+1. ~~Phone number and email~~ — **done.** Found on your live site and
+   already added: 020 3051 4331 / info@autcobel.ltd (projects@autcobel.com
+   for documents).
 2. **Any accreditations?** (NICEIC, CHAS, SafeContractor, ISO, F-Gas, or
    anything like that.) If yes, tell us which. If no, we'll leave it out.
-3. **"Temporary Plant Systems":** does this mean temporary power only, or
-   also temporary refrigeration/cold storage? We've drafted power only.
+3. ~~"Temporary Plant Systems" scope~~ — **done.** Your live site's own
+   "Our Services" section names this "Temporary Plant Systems & Power" and
+   describes it as temporary power/plant hire — confirms power only, which
+   matches what we'd already drafted.
 4. **Can we name any clients or projects?** Even something vague like "a
    major UK supermarket chain" is fine if you can't name them directly.
 
@@ -24,21 +28,41 @@ anything else only if it's actually wrong.
 
 ---
 
+## Update, 2026-09-24: 3 services were missing
+
+Your live site's "Our Services" section (reachable by clicking that nav
+link — turns out it does work, we'd read it wrong before) actually lists
+**six** services, not three. We'd only built pages for three of them. Added
+this session:
+
+- **Design & Feasibility Consultancy** (new)
+- **Control & Monitoring Systems** (new)
+- **Gas Leak Detection Systems** (new)
+
+Plus a proper **Our Services** overview page listing all six, linked from
+the homepage and the main nav.
+
+---
+
 ## Page by page
 
-| Page                        | Status  | Needs your OK on                                        |
-| --------------------------- | ------- | ------------------------------------------------------- |
-| Home                        | Drafted | Nothing extra                                           |
-| Who We Are                  | Drafted | The "why Autcobel" story. Read this one if you read any |
-| Our Approach                | Drafted | Nothing extra                                           |
-| Turnkey Electrical & Data   | Drafted | Nothing extra                                           |
-| Project & Design Management | Drafted | Nothing extra                                           |
-| Temporary Plant Systems     | Drafted | Item 3 above (power vs. refrigeration)                  |
-| Sectors We Serve            | Drafted | Nothing extra                                           |
-| Contact Us                  | Drafted | Item 1 above                                            |
-| Privacy Policy              | Drafted | ICO registration number (or confirm not registered yet) |
-| Terms & Conditions          | Drafted | Nothing extra, standard website terms                   |
-| Cookie Policy               | Drafted | Will finish once we pick the analytics tool             |
+| Page                             | Status  | Needs your OK on                                        |
+| -------------------------------- | ------- | ------------------------------------------------------- |
+| Home                             | Drafted | Nothing extra                                           |
+| Who We Are                       | Drafted | The "why Autcobel" story. Read this one if you read any |
+| Our Approach                     | Drafted | Nothing extra                                           |
+| Our Services (overview)          | Drafted | Nothing extra — new this session                        |
+| Design & Feasibility Consultancy | Drafted | Nothing extra — new this session                        |
+| Project & Design Management      | Drafted | Nothing extra                                           |
+| Turnkey Electrical & Data        | Drafted | Nothing extra                                           |
+| Control & Monitoring Systems     | Drafted | Nothing extra — new this session                        |
+| Gas Leak Detection Systems       | Drafted | Item 2 above (accreditations) — new this session        |
+| Temporary Plant Systems          | Drafted | Nothing extra — item 3 above resolved                   |
+| Sectors We Serve                 | Drafted | Nothing extra                                           |
+| Contact Us                       | Drafted | Nothing extra — item 1 above resolved                   |
+| Privacy Policy                   | Drafted | ICO registration number (or confirm not registered yet) |
+| Terms & Conditions               | Drafted | Nothing extra, standard website terms                   |
+| Cookie Policy                    | Drafted | Will finish once we pick the analytics tool             |
 
 ---
 
@@ -46,13 +70,13 @@ anything else only if it's actually wrong.
 
 **Real, checked:** company name, number (14044405), founded 2022,
 registered office address, the stats (50+ projects, 30+ years, nationwide,
-24/7), the four service names, the sector list.
+24/7), all six service names, the sector list, phone/email/hours.
 
 **We wrote it, you haven't confirmed it:** the "why Autcobel" story on Who
-We Are, all service page detail, the approach/process steps.
+We Are, all service page detail beyond the one-line descriptions on your
+live site, the approach/process steps.
 
-**Not written, waiting on you:** phone, email, accreditations, named
-clients, ICO number.
+**Not written, waiting on you:** accreditations, named clients, ICO number.
 
 ---
 
