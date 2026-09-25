@@ -1,10 +1,31 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import { render } from '@testing-library/react';
 import React from 'react';
 
 import { HomeBody } from '../components/home/home-body';
+
+// The homepage's footer link map (`components/site/foot-map.tsx`, shared with
+// the inner pages since 2026-09-25) renders `NavLink`, which is a Client
+// Component calling `usePathname()`. There is no Next router in this renderer,
+// so it returns null and `NavLink` throws. Mocked exactly as
+// `page-parity.test.ts` does, for the same reason: the pathname is irrelevant
+// to a markup-parity assertion, and `next/link` must still emit a plain
+// `<a href>` so the class inventory below sees the real anchors.
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/this-page-does-not-exist',
+}));
+vi.mock('next/link', () => ({
+  default: ({
+    href,
+    children,
+    ...rest
+  }: {
+    href: string;
+    children: React.ReactNode;
+  } & Record<string, unknown>) => React.createElement('a', { href, ...rest }, children),
+}));
 
 /**
  * Golden-fixture parity gate for Phase 5 (yolo-brief.md, "Phase 5 — Build
@@ -184,6 +205,25 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
     );
   });
 
+  /**
+   * Classes the prototype applies AND `home-r9.css` styles, but which the site
+   * deliberately no longer renders.
+   *
+   * This is not a way to silence the gate. Every entry carries its reason, and
+   * `deliberate omissions are still real omissions` below asserts that each one
+   * is still in the prototype and still absent from the render — so an entry that
+   * stops being true fails the suite instead of rotting quietly.
+   */
+  const DELIBERATELY_NOT_RENDERED: Record<string, string> = {
+    // `.end__nav` held the homepage's four in-page anchors (#work #services
+    // #pricing #faq). Removed 2026-09-25 on Ricky's ruling that the footer is
+    // consistent across all pages: `.end` now renders the same `.footmap` link
+    // map as every inner route (`components/site/foot-map.tsx`). The prototype
+    // predates the 15 inner pages existing, so on this one point the PROTOTYPE is
+    // what is out of date — not the render.
+    end__nav: 'replaced by the shared .footmap link map — components/home/end-section.tsx',
+  };
+
   it('every class the prototype applies to a live element, and that home-r9.css actually styles, is applied by some component', () => {
     const { container } = render(React.createElement(HomeBody));
     const prototypeClasses = classesOf(prototypeBody);
@@ -193,6 +233,7 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
     let compared = 0;
     for (const cls of prototypeClasses) {
       if (!cssStylesClass(css, cls)) continue; // dead/out-of-scope CSS, not this gate's concern
+      if (cls in DELIBERATELY_NOT_RENDERED) continue; // asserted separately, with its reason
       compared++;
       if (!renderedClasses.has(cls)) missing.push(cls);
     }
@@ -204,6 +245,24 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
     ).toEqual([]);
 
     console.log(`PASS — ${compared}/${compared} classes compared, 0 errors`);
+  });
+
+  it('deliberate omissions are still real omissions — the allow-list cannot rot', () => {
+    const { container } = render(React.createElement(HomeBody));
+    const renderedClasses = classesOf(container);
+    const prototypeClasses = classesOf(prototypeBody);
+
+    for (const [cls, reason] of Object.entries(DELIBERATELY_NOT_RENDERED)) {
+      expect(reason.length, `${cls} is allow-listed with no reason`).toBeGreaterThan(20);
+      expect(
+        prototypeClasses.has(cls),
+        `${cls} is allow-listed as a prototype class the render drops, but the PROTOTYPE no longer has it — delete the entry`
+      ).toBe(true);
+      expect(
+        renderedClasses.has(cls),
+        `${cls} is allow-listed as deliberately not rendered, but it IS rendered now — delete the entry so the gate covers it again`
+      ).toBe(false);
+    }
   });
 
   it('prints the mandatory verdict line with real element counts', () => {
@@ -218,6 +277,7 @@ describe('sites/dcs homepage markup matches the r9 prototype (r9-kota-level.html
     let firstOffender = '';
     for (const cls of prototypeClasses) {
       if (!cssStylesClass(css, cls)) continue;
+      if (cls in DELIBERATELY_NOT_RENDERED) continue;
       compared++;
       if (!renderedClasses.has(cls)) {
         errors++;

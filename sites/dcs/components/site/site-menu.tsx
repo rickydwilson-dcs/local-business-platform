@@ -1,15 +1,23 @@
 'use client';
 
 /**
- * `.menu` — the fullscreen overlay nav for the inner-page route group.
+ * `.menu` — the fullscreen overlay nav for the WHOLE site.
  *
- * Ported from `prototype/service-detail.html:65-75`. It is the homepage's
- * `components/home/mobile-menu.tsx` carrying the six real routes (decision D1)
- * with the current one marked, instead of the homepage's five in-page anchors.
- * The two are kept as separate components rather than one parameterised
- * component because the link *kinds* differ, not just the labels: the
- * homepage's are `#`-anchors owned by `home-behaviour.tsx`'s document-level
- * scroll interception, and these are routes that must go through `next/link`.
+ * Ported from `prototype/service-detail.html:65-75`. Carries the six real
+ * routes (decision D1) with the current one marked.
+ *
+ * **It used to serve the inner routes only.** The homepage had its own
+ * `components/home/mobile-menu.tsx` holding five in-page anchors, and this
+ * file's comment justified the split on the grounds that "the link *kinds*
+ * differ". That reasoning died with Ricky's 2026-09-25 ruling — *"menu links
+ * should be to the inner pages not anchors"* — so `mobile-menu.tsx` is deleted
+ * and `home-body.tsx` renders this component instead. The two were otherwise
+ * identical: same `.menu` root, same `hidden` state, same click-to-close, same
+ * `.menu__foot`.
+ *
+ * Keeping one menu is the point, not a tidy-up: for six days after the inner
+ * pages shipped, nothing on the homepage linked to any of them, because the
+ * homepage's copy of this component was never updated.
  *
  * ## Trap 11 — `.menu` is a SIBLING of `.bar`, never a descendant
  *

@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 
 A page-level `robots` field overrides the group-level one inherited from `app/(site)/layout.tsx` for
 that page only. Then uncomment the matching entry in `app/sitemap.ts`. Do not remove the group-level
-`robots` declaration in the layout — that would re-index all 14 routes at once, including the ones
+`robots` declaration in the layout — that would re-index all 15 routes at once, including the ones
 still not ready.
 
 ### Prototype-fidelity tests will fail on a legitimate homepage content/style change
@@ -75,9 +75,43 @@ snapshot. This is expected, not a regression — fix the test, not the change:
   its `@media` context (rules are compared _by position_, so a removed rule must be excluded from the
   prototype side or every subsequent rule shifts out of alignment).
 
-Both allow-list mechanisms are self-verifying — each has its own test asserting every entry is real
-(present in the prototype with the documented before-value, and either changed or absent in the port)
-— so a stale or fabricated entry fails loudly rather than silently weakening the test.
+- A prototype ELEMENT the site no longer renders at all (e.g. `.end__nav`, dropped when the homepage
+  footer gained the shared link map): add an entry to `DELIBERATELY_NOT_RENDERED` in
+  `home-markup-parity.test.ts` with the reason. Its own test asserts each entry is still present in
+  the prototype AND still absent from the render, so an entry that stops being true fails rather
+  than rotting.
+- A string in `home-data.ts` that is deliberately reworded after the port (e.g. a service card's
+  link label): add it to `POST_PROTOTYPE_LINK_LABELS` in `home-data.test.ts`, which asserts the new
+  wording by **exact value** rather than skipping it — so a later silent reword still fails — and
+  also asserts the new string is genuinely absent from the prototype.
+
+All of these allow-list mechanisms are self-verifying — each has its own test asserting every entry
+is real (present in the prototype with the documented before-value, and either changed or absent in
+the port) — so a stale or fabricated entry fails loudly rather than silently weakening the test.
+
+### The homepage and the inner routes load different stylesheets
+
+`app/page.tsx` imports `styles/home-r9-reset.css` + `styles/home-r9.css`.
+`app/(site)/layout.tsx` imports `styles/home-r9-reset.css` + `styles/inner-pages.css`. They overlap
+only in the reset.
+
+**So a component shared between the two renders unstyled on whichever side does not import its
+rules**, and nothing catches it: the unit tests run in jsdom, which applies no stylesheet at all, so
+the markup, classes and structure all assert correctly while the paint is simply missing. This bit
+in September 2026 when `.footmap` (defined only in `inner-pages.css`) started rendering inside the
+homepage's `.end` chapter — measured, it reported `display: block` and `gridTemplateColumns: "none"`
+against a rule that gives four tracks, and a screenshot still looked plausible.
+
+Neither stylesheet can simply absorb the other's rules, because both are verbatim-guarded:
+`chrome-parity.test.ts` asserts `inner-pages.css` is a byte-for-byte copy of the design session's
+`kit.css`, and `home-css-parity.test.ts` asserts `home-r9.css` is a verbatim port of the r9
+prototype's stylesheet. The resolution is a small, deliberately duplicated stylesheet imported by
+the side that lacks the rules — `styles/footmap.css` — with the duplication guarded by
+`test/footmap-css-parity.test.ts`, which compares declaration-by-declaration after canonicalising
+formatting differences.
+
+**When rendering an existing shared component on a route that did not render it before, check the
+CSS reaches that route in a real browser.** A green test run says nothing about it.
 
 ## Users
 

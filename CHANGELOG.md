@@ -6,6 +6,48 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-25
+
+### Sites
+
+- **DCS: the homepage now links to the 15 inner pages — it never had, since they shipped.** The
+  inner-pages port (2026-09-19) was scoped to the `(site)` route group, and `app/page.tsx` sits
+  outside it, so every homepage link stayed an in-page anchor (`#work #services #pricing #faq
+#end`): **0** internal route links against 66 URLs in the sitemap. The site was a one-pager with
+  a full site bolted behind it, reachable only from search or by typing a URL. The homepage's
+  burger now renders the same six-route `SiteMenu` the inner pages use (its homepage-only
+  `mobile-menu.tsx` twin is deleted); the footer link map is extracted to a shared `FootMap`
+  rendered by both, so the two footers are byte-identical apart from `aria-current`; the six
+  service cards link to their own `/services/*` pages; and three work panels link to their case
+  studies alongside a section-level `/projects` link. 0 → **27** internal route links, verified
+  against a real production build. The homepage's `.end` deliberately stays a full-height closing
+  _chapter_ rather than becoming a footer — only the link map is shared. Three service-card labels
+  were reworded because they now open a service page rather than the contact section; notably "See
+  a sample report" became "How I set up Google Analytics", since `/services/analytics` shows no
+  sample report and the old label promised something the page does not deliver.
+
+### Platform
+
+- **Documented that jsdom applies no stylesheet, so a CSS-scoping bug passes the entire unit
+  suite.** Found the hard way: DCS's shared `.footmap` is defined only in `inner-pages.css`, which
+  the homepage route does not import, so when the homepage started rendering it the map arrived
+  completely unstyled — and the markup, classes and structure all still asserted correctly through
+  269 tests, type-check and lint. A screenshot even read as a plausible stacked list; only
+  measuring it in a real browser exposed `display: block` where the rule gives four grid tracks.
+  The rule now recorded in `docs/standards/testing.md` and `sites/dcs/PRODUCT.md`: when an existing
+  shared component starts rendering on a route that did not render it before, confirm in a real
+  browser that its CSS reaches that route. Where rules must be duplicated (both DCS stylesheets are
+  verbatim-guarded against their own frozen sources and cannot absorb each other's rules), guard the
+  duplication with a parity test — `sites/dcs/test/footmap-css-parity.test.ts` is the reference.
+
+- **DCS: closed the inner-pages port's three remaining open items.** Search Console needs no
+  submission — `robots.txt` advertises the sitemap index, all five sitemaps return 200 with counts
+  matching content exactly, and the four section sitemaps derive from `listSlugs()` so they cannot
+  go stale; the terms were reviewed and signed off as-is, retiring a `TODO` that read as pending
+  work; and the eight orphaned `kit-additions-*.css` design records were deleted after confirming
+  nothing linked them, no test read them, and all 366 of their class selectors are present in the
+  shipped `inner-pages.css`.
+
 ## 2026-09-24
 
 ### Prototypes

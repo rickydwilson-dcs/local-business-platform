@@ -16,10 +16,10 @@
  * open/closed state has exactly one owner.
  *
  * Per Trap 11 (see root CLAUDE.md and the yolo-brief's Traps section), this
- * component must never render `.menu` as a descendant — `.menu` lives in
- * `mobile-menu.tsx` (homepage) / `components/site/site-menu.tsx` (inner
- * pages) and is composed as a sibling of `<SiteBar />` by the furniture
- * wrapper.
+ * component must never render `.menu` as a descendant. `.menu` lives in
+ * `components/site/site-menu.tsx` — one overlay nav for the whole site since
+ * 2026-09-25, when the homepage's separate `mobile-menu.tsx` was deleted — and
+ * is composed as a sibling of `<SiteBar />` by the furniture wrapper.
  *
  * It renders NO `<nav>`, at any width, and that is the settled design, not an
  * omission. `home-r9.css:89-95` styles `.bar nav a` in full and it has never

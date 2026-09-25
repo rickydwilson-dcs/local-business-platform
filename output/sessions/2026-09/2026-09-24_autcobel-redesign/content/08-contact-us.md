@@ -17,11 +17,13 @@ it. We'll come back with how we'd deliver it.
 
 ## Contact details
 
-_(These are real data fields, not draft copy — see CONTENT-STATUS.md,
-top of list)_
+_(Resolved 2026-09-24 — pulled from the live autcobel.ltd `#contact-us`
+section, not invented. CONTENT-STATUS.md item #1 is closed.)_
 
-- Phone: `[PHONE NUMBER — needed from Gene]`
-- Email: `[EMAIL ADDRESS — needed from Gene]`
+- Phone: `020 3051 4331`
+- Email: `info@autcobel.ltd`
+- Hours: Mon–Fri, 08:00–17:00
+- Documents/specifications: `projects@autcobel.com`
 - Coverage: Nationwide, UK
 - Support: 24/7 project support (existing site claim — kept)
 

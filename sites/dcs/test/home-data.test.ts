@@ -147,6 +147,31 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
     });
   });
 
+  /**
+   * Service-card link labels that deliberately DIVERGE from the r9 prototype.
+   *
+   * All six cards pointed at `#end` (the on-page contact chapter) until
+   * 2026-09-25, because the six `/services/*` pages did not exist when the
+   * homepage shipped. Once the cards became links to those pages, three labels
+   * were left describing a contact action they no longer performed:
+   *
+   *   - "Start a project →"     → the card opens /services/web-design
+   *   - "Sort my email →"       → the card opens /services/google-workspace
+   *   - "See a sample report →" → the card opens /services/analytics, and that
+   *     page shows no sample report. Ricky's instruction (2026-09-25): reword it
+   *     to speak to the Google Analytics setup the page actually describes, and
+   *     do not promise a report. The page's own "What I Set Up" section names
+   *     GA4 and Search Console, which is what the new label points at.
+   *
+   * First-person singular, per the site-wide voice decision the port's Phase 6
+   * applied.
+   */
+  const POST_PROTOTYPE_LINK_LABELS: Record<string, string> = {
+    'Website design': 'See how I build them →',
+    'Analytics & reporting': 'How I set up Google Analytics →',
+    'Business email': 'How business email works →',
+  };
+
   describe('SERVICES', () => {
     it('has exactly 6 cards', () => {
       expect(SERVICES).toHaveLength(6);
@@ -157,7 +182,25 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
         checkedString(svc.index, `SERVICES[${svc.title}].index`);
         checkedString(svc.title, `SERVICES[${svc.title}].title`);
         checkedString(svc.description, `SERVICES[${svc.title}].description`);
+        if (svc.title in POST_PROTOTYPE_LINK_LABELS) continue; // asserted exactly, below
         checkedString(svc.linkLabel, `SERVICES[${svc.title}].linkLabel`);
+      }
+    });
+
+    it('the three post-prototype link labels are exactly as authored', () => {
+      // These postdate the r9 prototype freeze, so they cannot be checked
+      // against it — the same situation as WORK's three newer outbound links
+      // above. Asserted by exact value instead of skipped, so a silent reword
+      // still fails: the wording is a product decision, not an implementation
+      // detail. See POST_PROTOTYPE_LINK_LABELS for why each one changed.
+      for (const [title, expected] of Object.entries(POST_PROTOTYPE_LINK_LABELS)) {
+        const svc = SERVICES.find((s) => s.title === title);
+        expect(svc, `no SERVICES card titled "${title}" — update this map`).toBeDefined();
+        expect(svc?.linkLabel, `${title}'s link label changed`).toBe(expected);
+        expect(
+          decodedPrototype.includes(expected),
+          `"${expected}" IS in the prototype after all — move it back to the verbatim check`
+        ).toBe(false);
       }
     });
 
@@ -334,9 +377,13 @@ describe('sites/dcs/components/home/home-data.ts is a verbatim transcription of 
       allStrings.push(
         { value: svc.index, label: `SERVICES.${svc.title}.index` },
         { value: svc.title, label: `SERVICES.${svc.title}.title` },
-        { value: svc.description, label: `SERVICES.${svc.title}.description` },
-        { value: svc.linkLabel, label: `SERVICES.${svc.title}.linkLabel` }
+        { value: svc.description, label: `SERVICES.${svc.title}.description` }
       );
+      // Trap #7: this recount is deliberately independent of the per-block
+      // counters, so the same divergence has to be recorded here too.
+      if (!(svc.title in POST_PROTOTYPE_LINK_LABELS)) {
+        allStrings.push({ value: svc.linkLabel, label: `SERVICES.${svc.title}.linkLabel` });
+      }
     }
     for (const step of STEPS) {
       allStrings.push(

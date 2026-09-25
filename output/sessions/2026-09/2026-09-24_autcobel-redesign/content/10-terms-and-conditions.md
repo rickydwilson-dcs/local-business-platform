@@ -51,4 +51,5 @@ These terms are governed by the laws of England and Wales.
 
 ## Contact
 
-`[EMAIL ADDRESS — needed from Gene]`
+`info@autcobel.ltd` (resolved 2026-09-24 from the live site's contact
+section)

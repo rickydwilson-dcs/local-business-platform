@@ -38,6 +38,6 @@ between contractors sits with us, not you.
 
 ## CTA
 
-**Heading:** Need cover while permanent works go in?
+**Heading:** Next: the electrical and data work itself
 
-**CTA:** Temporary Plant Systems → /services/temporary-plant-systems
+**CTA:** Turnkey Electrical & Data → /services/turnkey-electrical-data

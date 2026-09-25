@@ -266,6 +266,25 @@ The CI/CD pipeline uses a branch-specific testing strategy to optimize speed and
 | Testing implementation | Brittle tests     | Test behavior          |
 | Hard-coded waits       | Slow, unreliable  | Use Playwright waitFor |
 
+### jsdom applies no stylesheet — a CSS-scoping bug passes every unit test
+
+Vitest's jsdom environment loads no CSS at all. `getComputedStyle()` returns UA defaults, so a
+component whose stylesheet is never imported on the route rendering it looks **identical** to one
+that is correctly styled, in every assertion a unit test can make: the markup, the classes and the
+DOM structure are all right. Only the paint is missing.
+
+This is not hypothetical. In September 2026 DCS's shared footer link map (`.footmap`) was rendered
+on the homepage, whose route imports a different stylesheet from the one that defines it. It
+shipped through the full unit suite, type-check and lint with no failure, and a screenshot still
+read as a plausible stacked list. Measuring it in a real browser is what exposed it —
+`display: block` and `gridTemplateColumns: "none"` where the rule gives four grid tracks.
+
+So when a component starts being rendered by a **route that did not render it before**, confirm in
+a real browser (or assert the import exists) that the CSS defining it actually reaches that route.
+A green unit suite is not evidence either way. Where the rules must be duplicated because they
+cannot be shared, guard the duplication with a parity test — see
+`sites/dcs/test/footmap-css-parity.test.ts`.
+
 ## Verification Checklist
 
 Before merging any code:
