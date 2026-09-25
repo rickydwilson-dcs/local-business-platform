@@ -56,13 +56,22 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="who-we-are.html">Who We Are</a></li>
     <li><a href="our-approach.html">Our Approach</a></li>
-    <li><a href="services/index.html">Our Services</a></li>
-    <li><a href="services/design-feasibility-consultancy.html">Design &amp; Feasibility Consultancy</a></li>
-    <li><a href="services/project-design-management.html">Project &amp; Design Management</a></li>
-    <li><a href="services/turnkey-electrical-data.html">Turnkey Electrical &amp; Data</a></li>
-    <li><a href="services/control-monitoring-systems.html">Control &amp; Monitoring Systems</a></li>
-    <li><a href="services/gas-leak-detection-systems.html">Gas Leak Detection Systems</a></li>
-    <li><a href="services/temporary-plant-systems.html">Temporary Plant Systems</a></li>
+    <li class="nav-mobile-group">
+      <details>
+        <summary>Our Services
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <ul class="nav-mobile-sub">
+          <li><a href="services/index.html">All Services</a></li>
+          <li><a href="services/design-feasibility-consultancy.html">Design &amp; Feasibility Consultancy</a></li>
+          <li><a href="services/project-design-management.html">Project &amp; Design Management</a></li>
+          <li><a href="services/turnkey-electrical-data.html">Turnkey Electrical &amp; Data</a></li>
+          <li><a href="services/control-monitoring-systems.html">Control &amp; Monitoring Systems</a></li>
+          <li><a href="services/gas-leak-detection-systems.html">Gas Leak Detection Systems</a></li>
+          <li><a href="services/temporary-plant-systems.html">Temporary Plant Systems</a></li>
+        </ul>
+      </details>
+    </li>
     <li><a href="sectors-we-serve.html">Sectors We Serve</a></li>
     <li><a href="contact-us.html">Contact Us</a></li>
   </ul>
@@ -85,37 +94,76 @@
   <section class="section--surface">
     <div class="wrap">
       <div class="card-grid card-grid--2">
-        <div class="info-card">
+        <div class="info-card" id="retail-rollouts">
           <div class="pillar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M9 20v-6h6v6"/></svg>
           </div>
           <h3>Retail rollouts</h3>
           <p>Multi-site fit-outs and refits on a programme, not a one-off job. We work to the sequencing and out-of-hours windows retail rollouts need, site after site, to the same standard.</p>
           <span class="pillar-tag">Multi-site programme</span>
+          <div class="tag-links">
+            <a href="services/turnkey-electrical-data.html">Turnkey Electrical &amp; Data</a>
+            <a href="services/temporary-plant-systems.html">Temporary Plant Systems</a>
+          </div>
         </div>
-        <div class="info-card">
+        <div class="info-card" id="cold-chain">
           <div class="pillar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/><path d="M2 12a10 10 0 1 1 3.5 7.6"/></svg>
           </div>
           <h3>Cold chain</h3>
           <p>Temperature-critical environments where a loss of power or a failed installation isn&rsquo;t a minor issue &mdash; it&rsquo;s stock loss. We plan around that risk from the first drawing.</p>
           <span class="pillar-tag">Temperature-critical</span>
+          <div class="tag-links">
+            <a href="services/control-monitoring-systems.html">Control &amp; Monitoring Systems</a>
+            <a href="services/gas-leak-detection-systems.html">Gas Leak Detection Systems</a>
+          </div>
         </div>
-        <div class="info-card">
+        <div class="info-card" id="commercial">
           <div class="pillar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="7" height="11"/><rect x="14" y="4" width="7" height="17"/></svg>
           </div>
           <h3>Commercial</h3>
           <p>Offices, trading floors and commercial premises that need electrical and data work done without disrupting the people using the building day to day.</p>
           <span class="pillar-tag">Trading-hours aware</span>
+          <div class="tag-links">
+            <a href="services/design-feasibility-consultancy.html">Design &amp; Feasibility Consultancy</a>
+            <a href="services/project-design-management.html">Project &amp; Design Management</a>
+          </div>
         </div>
-        <div class="info-card">
+        <div class="info-card" id="facilities-logistics">
           <div class="pillar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6"/></svg>
           </div>
           <h3>Facilities / Logistics</h3>
           <p>Warehouses and distribution hubs running around the clock. We deliver and maintain around live logistics operations, not around a shutdown window that doesn&rsquo;t exist.</p>
           <span class="pillar-tag">24/7 operations</span>
+          <div class="tag-links">
+            <a href="services/control-monitoring-systems.html">Control &amp; Monitoring Systems</a>
+            <a href="services/temporary-plant-systems.html">Temporary Plant Systems</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--surface">
+    <div class="wrap">
+      <div class="prose">
+        <span class="kicker">Common questions</span>
+        <h2>FAQs</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Do you only work in these four sectors?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <p class="faq-answer">These are the sectors we serve most, not a hard boundary. If your site shares the same problem &mdash; work that has to happen around a live operation &mdash; get in touch and we&rsquo;ll tell you honestly whether it&rsquo;s a fit.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if my site spans more than one of these?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <p class="faq-answer">Common &mdash; a cold storage site is also a logistics site, a supermarket is also a commercial building. We scope around what the site actually needs, not which single category it fits into.</p>
+          </details>
         </div>
       </div>
     </div>

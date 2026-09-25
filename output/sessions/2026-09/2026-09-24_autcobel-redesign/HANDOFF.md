@@ -1,5 +1,117 @@
 # Autcobel redesign — handoff
 
+**Status (2026-09-25 update):** richer copy pass + mobile nav fixes done
+locally, **not yet committed or deployed** — see "What changed this turn
+(2026-09-25)" below. Everything from the 2026-09-24 session (below this
+point) is unchanged and still accurate: PR #91 merged, 6 services live,
+real contact details live.
+
+**Branch:** `develop`. **Working tree:** dirty — this turn's changes
+(CSS + 15 HTML files + `CONTENT-STATUS.md`) are uncommitted. Not yet
+pushed or redeployed to `autcobel-proto.vercel.app`.
+
+---
+
+## What changed this turn (2026-09-25)
+
+Trigger: Ricky asked for the richer-copy pass flagged as "Next step" in
+the previous handoff, plus three mobile header bugs from a live-device
+screenshot: the "Speak with our team" button crowding out the hamburger
+icon, the hamburger icon being invisible, and the mobile services list
+being too long.
+
+1. **Mobile header fixed** (`css/styles.css`, all 15 pages' shared
+   header/nav markup):
+   - "Speak with our team" is now hidden in the header bar below 900px
+     — it was competing with the hamburger for space and squeezing the
+     icon to invisibility. It's unchanged in the mobile drawer (still a
+     full-width button at the bottom), so nothing is lost, just moved.
+   - `.nav-toggle` got `flex-shrink:0` and an explicit background so it
+     can't get compressed again the same way.
+   - The mobile drawer's 6 flat service links are now a collapsed
+     "Our Services" `<details>/<summary>` accordion (no JS needed) —
+     drawer goes from 12 items to 6 collapsed, chevron rotates on open.
+   - Verified by forcing the mobile breakpoint + a 390px-constrained
+     `.wrap` in a real browser (window/device-emulation resize doesn't
+     work in this Claude-in-Chrome session — see Traps below).
+
+2. **Richer copy pass, extended beyond the original "6 service pages"
+   scope to include Who We Are, Our Approach and Sectors We Serve** (per
+   Ricky's explicit go-ahead when asked whether to fold in the fuller
+   live-site material flagged as an open question last time):
+   - Each of the 6 service pages gained: a "Who this is for" callout, a
+     3-step "What actually happens" process, a 2–3 question FAQ
+     (`<details>/<summary>`, new `.faq-item` component), and "Where this
+     comes up most" links to the relevant sector(s).
+   - `sectors-we-serve.html` gained an `id` on each sector card
+     (`#retail-rollouts`, `#cold-chain`, `#commercial`,
+     `#facilities-logistics` — targets for the service-page links above),
+     reciprocal "relevant services" links on each card, and a short FAQ.
+   - `who-we-are.html` and `our-approach.html` now include the live
+     site's own words, pulled in from `research/source-material.md`
+     (real, not agency-drafted) — see CONTENT-STATUS.md's "what we made
+     up vs what's real" section, updated to reflect this. Who We Are
+     gained the "Delivery specialists..." section and the trust
+     pull-quote; Our Approach gained a 5-card "Our principles" section
+     (Fast/Flexible/Focused, Collaborative from Day One, Compliance-Led
+     Thinking, Net-Zero Mindset, End-to-End Clarity) and the "great
+     delivery..." pull-quote, plus a short FAQ.
+   - New shared CSS components added: `.who-for`, `.faq-list`/`.faq-item`,
+     `.tag-links`, `.pull-quote`.
+   - `content/*.md` planning drafts were **not** re-synced to match —
+     the HTML pages are canonical for this pass; the `.md` files are
+     now behind on the 9 pages touched. Flagged, not treated as a
+     blocker (see Traps).
+
+3. **Verified, not just written:**
+   - Link-integrity script re-run across all 15 pages (checks every
+     internal `href` resolves to a real file, including the new
+     `#section` fragments) — clean.
+   - HTML well-formedness check (Python `html.parser`, balanced tags)
+     across all 15 pages — clean.
+   - Visually verified in a real browser: mobile header/hamburger fix,
+     mobile services accordion open/close, FAQ accordion open/close on a
+     service page, Who We Are pull-quote + FAQ, Our Approach principles
+     cards. All rendered correctly.
+
+## What was NOT done this turn
+
+- **Not committed, not pushed, not redeployed.** The live
+  `autcobel-proto.vercel.app` still serves the pre-this-turn version.
+  Next session (or later this session) needs to commit, push to
+  `develop`, and redeploy with
+  `npx tsx tools/publish-prototype.ts --project autcobel-proto` (the
+  explicit `--project` flag is load-bearing — see the 2026-09-24 "Deploy"
+  section below).
+- `content/*.md` drafts not re-synced (see above).
+- Mobile/Safari visual QA on a real device — still never done, same as
+  every prior handoff.
+
+## Traps (new this turn)
+
+- **Programmatic JS scrolling (`window.scrollTo`, `el.scrollIntoView()`,
+  `location.hash` reassignment) intermittently got stuck at `scrollY`
+  near 0 in this Claude-in-Chrome session**, on a page that was genuinely
+  scrollable (confirmed via `scrollHeight`) and on a tab where it had
+  worked moments earlier. Real scroll-wheel input via the `computer` tool
+  worked every time. Treat this as a tooling quirk of the automation
+  session, not a site bug — but if a future session needs to verify
+  anchor-link scrolling (e.g. the new `sectors-we-serve.html#cold-chain`
+  links), don't trust a `window.scrollY` readout of ~0 as proof it's
+  broken; scroll-wheel or a real device is the reliable check.
+- Also: `mcp__claude-in-chrome__resize_window` did not change the actual
+  rendered viewport size in this session (`window.innerWidth` stayed at
+  the original value after resizing to 390×844) — screenshots kept
+  rendering at desktop width. Mobile-breakpoint testing this turn used a
+  CSS-injection workaround instead (force the `@media` rules active +
+  constrain `.wrap` to 390px), not a real emulated viewport. If exact
+  device-pixel accuracy matters for a future check, don't rely on
+  `resize_window` alone here.
+
+---
+
+## Handoff as of 2026-09-24 (previous session, still accurate)
+
 **Status:** done, verified live. PR #91 (the previous session's `staging` →
 `main` promotion) is **merged** — confirmed via `gh pr view 91`, now at
 `main` commit `8786cc3b`. This session found and closed a real content gap:
@@ -120,13 +232,9 @@ existing.
 
 ## What was NOT done
 
-- **Who We Are, Our Approach, Sectors We Serve content is richer on the
-  live site than the prototype currently has** — found while checking
-  other nav sections for the same "is the nav actually broken" question,
-  but this was outside the "services" ask and not raised as its own
-  decision point this turn. Full verbatim text captured in
-  `research/source-material.md` under `#who-we-are` / `#our-approach` for
-  a future pass, if wanted.
+- ~~Who We Are, Our Approach, Sectors We Serve content is richer on the
+  live site than the prototype currently has~~ — done 2026-09-25, see top
+  of file.
 - **Icon reuse, not new assets.** The 3 new service pages reuse the 3
   already-uploaded hero images not used by the original 3 services
   (`hero-visual-calm-waves.png`, `hero-visual-data-stream.png`,
@@ -150,53 +258,26 @@ existing.
 - **This repo's working directory is shared by concurrent sessions** (see
   prior handoff's Traps section — still applies).
 
-## Next step
+## Next step (superseded — see 2026-09-25 section at top)
 
-Nothing blocking. The explicit next action, flagged by Ricky when this
-handoff was written: **write richer copy across all 6 service pages.**
+~~Nothing blocking. The explicit next action, flagged by Ricky when this
+handoff was written: **write richer copy across all 6 service pages.**~~
+Done 2026-09-25, extended to Who We Are/Our Approach/Sectors We Serve too
+— see top of file. **Not yet committed/deployed**, so that's the actual
+next step now: commit, push, redeploy (command in the 2026-09-25 section).
 
-Context for whoever picks this up: all 6 service pages currently share one
+Original context, kept for the record: all 6 service pages had shared one
 thin template — hero, a 4-6 item "What's included" checklist, exactly 2
-short body paragraphs (~60-80 words each), and a CTA to the next service.
-That was fine as a placeholder to close the "3 services missing" gap fast,
-but it means the 3 new pages (Design & Feasibility Consultancy, Control &
-Monitoring Systems, Gas Leak Detection Systems) and the 3 original ones
-(Turnkey Electrical & Data, Project & Design Management, Temporary Plant
-Systems) all read as near-identical in depth and structure — nothing
-differentiates one service's page from another's beyond swapped-in nouns.
-
-Concrete starting points for a richer pass, per page in
-`prototype/services/*.html` (and the matching `content/*.md` draft):
-
-- A "who this is for" or "when you'd need this" section — ties the service
-  to a concrete site scenario (the checklist items are the _what_, this
-  would be the _why now_)
-- More specific process/step detail than the current single "how we
-  deliver it"-style paragraph — what actually happens between enquiry and
-  handover for that specific service
-- A short FAQ block (2-3 questions) — several services touch on things a
-  buyer would obviously ask (F-Gas compliance scope for Gas Leak Detection,
-  what "certified partners" means concretely, whether Design & Feasibility
-  is chargeable/free at enquiry stage) that aren't answered anywhere
-- Cross-links to the specific sectors each service is most relevant to
-  (`sectors-we-serve.html` already exists and isn't referenced from any
-  service page today)
-
-Source material to draw from: the live site's own one-line description per
-service (`research/source-material.md`, `#our-services` section) is the
-only agency-verified real content for the 3 new services — everything
-beyond that one line, on all 6 pages, is agency-drafted and not yet
-reviewed by Gene (see `CONTENT-STATUS.md`). A richer pass should stay
-inside that same "we wrote it, you haven't confirmed it" bucket, not
-introduce new unverified factual claims (named clients, accreditations,
-specific certifications) — those are still open items, not free to invent
-just because the copy is getting deeper.
+short body paragraphs (~60-80 words each), and a CTA to the next service —
+with nothing differentiating one service's page from another's beyond
+swapped-in nouns. The 2026-09-25 pass added a "who this is for" box, a
+process walkthrough, an FAQ, and sector cross-links to each.
 
 ## Open questions
 
-- Should the richer-copy pass (Next step, above) also fold in the fuller
-  Who We Are / Our Approach / Sectors We Serve copy found on the live site
-  this turn (verbatim in `research/source-material.md`), or stay scoped to
-  the 6 service pages only, as asked?
-- Same carried-over items as before: mobile/Safari QA, whether to archive
-  `homepage-mockups/`, and chasing Gene for accreditations/named clients.
+- ~~Should the richer-copy pass also fold in the fuller Who We Are / Our
+  Approach / Sectors We Serve copy found on the live site?~~ Answered yes,
+  done 2026-09-25.
+- Same carried-over items as before: mobile/Safari QA on a real device,
+  whether to archive `homepage-mockups/`, and chasing Gene for
+  accreditations/named clients (CONTENT-STATUS.md items #2 and #4).

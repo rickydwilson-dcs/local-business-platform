@@ -28,6 +28,27 @@ anything else only if it's actually wrong.
 
 ---
 
+## Update, 2026-09-24 (later): richer copy across the site, plus mobile menu fixes
+
+Two things done this pass, neither needs a decision from you:
+
+1. **All 6 service pages, Who We Are, Our Approach and Sectors We Serve got
+   deeper.** Each service page now has a "who this is for" box, a 3-step
+   "what actually happens" walkthrough, a short FAQ, and links to the
+   sectors it's most relevant to. Who We Are and Our Approach now also
+   include your own live site's words &mdash; the "trust is the
+   foundation..." and "great delivery isn't just about getting it
+   done..." quotes, and the five approach principles (Fast/Flexible/Focused,
+   Collaborative from Day One, etc.) are pulled in verbatim, not
+   agency-drafted.
+2. **Mobile menu fixed.** On a phone, the "Speak with our team" button was
+   crowding out the hamburger icon in the header (it's still one tap away,
+   just moved into the menu itself), and the service list &mdash; which had
+   grown to 6 items &mdash; is now a collapsible group instead of one long
+   flat list.
+
+---
+
 ## Update, 2026-09-24: 3 services were missing
 
 Your live site's "Our Services" section (reachable by clicking that nav
@@ -72,9 +93,15 @@ the homepage and the main nav.
 registered office address, the stats (50+ projects, 30+ years, nationwide,
 24/7), all six service names, the sector list, phone/email/hours.
 
-**We wrote it, you haven't confirmed it:** the "why Autcobel" story on Who
-We Are, all service page detail beyond the one-line descriptions on your
-live site, the approach/process steps.
+**Real, from your own live site, added this pass:** the "Delivery
+specialists..." Who We Are copy, both pull-quotes, and the five Our
+Approach principles (Fast/Flexible/Focused, Collaborative from Day One,
+Compliance-Led Thinking, Net-Zero Mindset, End-to-End Clarity).
+
+**We wrote it, you haven't confirmed it:** the "Built for sites that can't
+stop" founding narrative on Who We Are, all service page detail beyond the
+one-line descriptions on your live site (including the new "who this is
+for," process and FAQ sections), the five-step process on Our Approach.
 
 **Not written, waiting on you:** accreditations, named clients, ICO number.
 
