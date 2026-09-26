@@ -147,6 +147,9 @@ script (the exact name CI invokes via `pnpm -r --filter './sites/*' run validate
 script instead of the root one. `sites/npracing-v3/scripts/validate-content.ts` is the
 reference implementation: it validates `merch`/`news`/`brand` against a fixed expected
 record count per type, with no `services`/`locations` blocks at all.
+`sites/delta-t-racing-cc/scripts/validate-content.ts` applies the same pattern to a different
+content set (`news`/`brand`/`team`/`sponsors`/`races`), driven from a single type→schema table —
+the easier one to copy when a new site's content types differ again.
 
 Do **not** copy the root script wholesale and bolt on new content types while leaving
 the `services`/`locations` blocks in place "just in case" — a leftover block for a
