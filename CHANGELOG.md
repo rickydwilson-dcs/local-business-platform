@@ -6,6 +6,40 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-26
+
+### Sites
+
+- **DCS: deleted the retired solaris layer — 11 components (1,596 lines) and 27 authored CSS
+  classes that had been shipping to every visitor since the r9 migration.** The homepage moved to
+  r9 in August and the 15 inner routes in the September port; each phase recorded the superseded
+  components as "out of scope" rather than deleting them, and **nothing ever failed** — type-check
+  passes on an unimported file, lint does not flag it, no test imports it, and Tailwind's purge
+  only removes utilities it generated, never hand-authored rules. Two of the eleven were worse than
+  orphaned: `site-scroll-reveal.tsx` ran an `IntersectionObserver` on every page over elements
+  nothing rendered, and `material-symbols-font.tsx` fetched a cross-origin Google Fonts icon-font
+  stylesheet on every page for **zero** icons — they existed only inside the orphaned components.
+  Reachability analysis cannot find those two; they were genuinely imported. `app/globals.css` went
+  314 → 69 lines and the homepage's CSS 126,991 → 114,299 bytes (−10%), closely matching the 13,390
+  bytes Lighthouse had flagged as unused. `globals.css` itself was deliberately **not** removed
+  from any route: the root layout's consent banner is Tailwind-styled, and a shared cached base
+  layer is correct architecture — Lighthouse's "unused CSS" measures one page, not a session.
+
+### Platform
+
+- **New: `tools/find-dead-code.ts`** — walks the import graph from what Next.js actually routes
+  (plus every test file, wherever it lives) and reports unreachable modules and authored CSS
+  classes no source references. It reports **candidates, not findings**, and buckets runtime-built
+  class names (`` `svccard--${color}` ``) separately, that being the largest false-positive source
+  in this kind of audit. Hardened twice against real false positives during the DCS work — treating
+  co-located `*.test.ts` as entry points alone removed a phantom 1,104 "dead" lines from
+  dch-automotive. Detection and prevention guidance in `docs/standards/quality.md`; the
+  estate-wide sweep and per-site plan in
+  `output/sessions/2026-09/2026-09-26_estate-dead-code-sweep/session.md`. Headline findings:
+  `mad-graphics` carries the same solaris-era CSS block (26 classes), `dj-fox-electrical`'s dead
+  `lib/locations.ts` is also the centralised-data-file pattern root `CLAUDE.md` forbids by name,
+  and `lib/analytics/types.ts` is unreachable in 8 of 10 sites because `base-template` seeds it.
+
 ## 2026-09-25
 
 ### Sites

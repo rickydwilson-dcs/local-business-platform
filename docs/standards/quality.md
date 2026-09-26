@@ -24,6 +24,62 @@ All checks run automatically - no manual steps required.
 
 Issues caught early in development cycle.
 
+## Dead code from an in-place redesign
+
+When a site is redesigned in place — DCS's solaris → r9 migration is the reference case — the old
+components stop being imported but are almost never deleted. Each port phase records them as "out
+of scope", and **nothing ever fails**:
+
+- `type-check` passes, because an unimported file is still valid TypeScript
+- `lint` passes, because being unused is not an error
+- the tests never import them, so coverage says nothing
+- Tailwind's purge removes only the utilities **it** generates — hand-authored rules in
+  `globals.css` ship forever
+- a dead script in the root layout keeps executing on every page, observing elements that no
+  longer exist
+
+DCS, September 2026: 11 orphaned components (1,596 lines), ~27 dead CSS classes, a dead
+`IntersectionObserver` on every page, and a cross-origin Google Fonts request for an icon font no
+live page used. All of it had been green in CI for months.
+
+### Detecting it
+
+```bash
+npx tsx tools/find-dead-code.ts --site sites/<name>   # one site
+npx tsx tools/find-dead-code.ts --all                 # the whole estate
+```
+
+It walks the import graph from what Next.js actually routes (plus every test file, wherever it
+lives) and reports unreachable modules, then reports authored CSS classes no source references.
+
+**Its output is candidates, not findings.** Two things it cannot know, both of which have already
+produced false positives here:
+
+- **Runtime-built class names.** ``className={`svccard svccard--${color}`}`` means the literal
+  `svccard--magenta` appears nowhere. The tool detects the `svccard--${` prefix and files these
+  under "probably fine" — check that bucket rather than deleting from it.
+- **Verbatim-guarded stylesheets.** DCS's `home-r9.css` and `inner-pages.css` are asserted
+  byte-for-byte against frozen sources by `home-css-parity.test.ts` and `chrome-parity.test.ts`.
+  Classes reported dead in those files **must not be removed** — the guard is the point.
+
+Always confirm a deletion the way the tool cannot: does anything import the path (not the symbol
+name — r9 replacements frequently export the _same_ symbol from a new path, which defeats a
+name-based grep), and does the site still build and render.
+
+### Preventing it
+
+- **A redesign is not finished when the new pages ship.** It is finished when the old ones are
+  deleted. If a phase genuinely must defer that, the deferral belongs in the handoff as an
+  explicit task, not as a comment on the orphan saying "left in place".
+- **Run the audit before closing out any in-place redesign**, and before any performance work —
+  dead code is the cheapest thing to remove and the easiest to overlook, because no metric names it.
+- **Prefer deleting to commenting.** Git has the old version; an orphan in the tree is a file the
+  next agent must reason about and a stylesheet every visitor downloads.
+- **Watch the root layout in particular.** Anything rendered there runs on every page of the site,
+  so a dead component costs more there than anywhere else, and reachability analysis will NOT flag
+  it — it is genuinely imported. Removing it needs the judgement the tool cannot supply: does the
+  thing it acts on still exist?
+
 ## Quality Gate Stages
 
 ### Stage 1: Pre-Commit (Husky)
