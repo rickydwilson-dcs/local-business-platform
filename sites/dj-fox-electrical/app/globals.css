@@ -545,10 +545,6 @@
     @apply text-base text-surface-secondary text-center;
   }
 
-.text-balance {
-  text-wrap: balance;
-}
-
 .checkmark-red {
   @apply text-brand-primary;
 }

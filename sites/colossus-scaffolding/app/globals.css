@@ -450,10 +450,6 @@
     color: var(--color-surface-muted-foreground);
   }
 
-.text-balance {
-  text-wrap: balance;
-}
-
 /* Colossus — scale header nav/phone/CTA up one size (text-xs → text-sm).
    Higher specificity than Tailwind's base `.text-xs` so wins in the cascade.
    Scoped to <header> so it doesn't affect any other `.text-xs` usage. */
