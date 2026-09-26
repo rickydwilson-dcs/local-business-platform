@@ -28,6 +28,16 @@ anything else only if it's actually wrong.
 
 ---
 
+## Update, 2026-09-25: dropped the ICO registration ask
+
+Privacy Policy had a placeholder asking for your ICO registration number.
+Dropped it — most small companies don't have one, and a privacy policy
+doesn't need to state one either way to be valid. Removed the section from
+the page entirely rather than leaving a placeholder for something that was
+never really needed.
+
+---
+
 ## Update, 2026-09-24 (later): richer copy across the site, plus mobile menu fixes
 
 Two things done this pass, neither needs a decision from you:
@@ -81,7 +91,7 @@ the homepage and the main nav.
 | Temporary Plant Systems          | Drafted | Nothing extra — item 3 above resolved                   |
 | Sectors We Serve                 | Drafted | Nothing extra                                           |
 | Contact Us                       | Drafted | Nothing extra — item 1 above resolved                   |
-| Privacy Policy                   | Drafted | ICO registration number (or confirm not registered yet) |
+| Privacy Policy                   | Drafted | Nothing extra                                           |
 | Terms & Conditions               | Drafted | Nothing extra, standard website terms                   |
 | Cookie Policy                    | Drafted | Will finish once we pick the analytics tool             |
 
@@ -103,7 +113,7 @@ stop" founding narrative on Who We Are, all service page detail beyond the
 one-line descriptions on your live site (including the new "who this is
 for," process and FAQ sections), the five-step process on Our Approach.
 
-**Not written, waiting on you:** accreditations, named clients, ICO number.
+**Not written, waiting on you:** accreditations, named clients.
 
 ---
 
