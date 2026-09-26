@@ -1,35 +1,47 @@
 /**
- * `/blog` page body — ported class-for-class from
- * `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/prototype/
- * blog-list.html`. The r9 chrome is `app/(site)/layout.tsx`'s job; this
- * renders only what sits inside it: the masthead, the "Latest" magenta band,
- * the topic-capped library (white) and the "Who it's for" aqua band.
+ * `/blog` page body.
  *
- * Content is real `content/blog/*.mdx` frontmatter via `getBlogPosts()` —
- * nothing here is invented except the two provisional axes documented in
- * `lib/blog-topics.ts` (topic display copy, approved design text) and
- * `lib/blog-sectors.ts` (the "who it's for" axis — PROVISIONAL, see that
- * file's header).
+ * R2 RESTRUCTURE, 2026-09-26. Ported from
+ * `output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign/prototype/
+ * blog-list.html`; that session's `session.md` holds the measurements, the
+ * before/after and the decisions.
  *
- * THE WALL FIX (D4, kit-additions-f.css F-03): each topic block caps at 4
- * posts at rest; capped rows are handed to `/blog/category/[slug]` via the
- * "N guides" link, and the cap lifts the moment either filter axis narrows.
- * This is `components/blog/blog-filter-section.tsx`'s job — a client
- * component, because the filter is real and interactive, not mocked.
+ * THE PAGE IS TWO ZONES NOW, NOT FOUR. It used to run masthead lead →
+ * "Most recent first" band → library intro → "Mostly trades" band: four
+ * editorial set-pieces, 984 words and 26 links for 21 posts, wrapped around
+ * a list. Measured at a 1600px viewport the restructure takes it from
+ * 6,202px to 4,214px and from 1,012 words to 445; at 390px, from 8,822px to
+ * 4,719px.
+ *
+ * What went, and why:
+ *   - THE `.svcs` "FOUR BEHIND IT" LIST. Every post in it reappeared in the
+ *     library below — that duplication is where 26 links for 21 posts came
+ *     from. The magenta band's own h2 and lead went with it: the eyebrow
+ *     plus the card says "latest" without a third voice saying it.
+ *   - THE SEVEN `.topic` HEADINGS AND DESCRIPTIONS. See
+ *     `blog-filter-section.tsx`'s header. The descriptions are not deleted —
+ *     they are already the masthead lead on `/blog/category/[slug]`.
+ *   - THE AQUA "WHO IT'S FOR" BAND (Ricky, 2026-09-26). It was 566px
+ *     explaining what has NOT been written yet, sitting between the reader
+ *     and the footer.
+ *   - TWO OF THE FOUR `.mast__meta` STATS. "7 topics / Grouped by problem"
+ *     duplicated the chip row 600px below it; "5–7 min / Typical read"
+ *     restated a figure that is on every row.
+ *
+ * GROUND SEQUENCE is now ink → magenta → white → navy. No two adjacent
+ * panels share a ground and navy still closes (design-kit.md §1.2); aqua no
+ * longer appears on this page at all.
+ *
+ * CONSEQUENCE WORTH KNOWING: the aqua band was the `sector` axis's only
+ * surface on this index, so this file no longer reads `lib/blog-sectors.ts`.
+ * That axis still backs `blog-post-page.tsx` and `blog-category-page.tsx`.
  */
 
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/content';
-import { BLOG_SECTOR_KEYS, BLOG_SECTOR_LABELS, toBlogSector } from '@/lib/blog-sectors';
-import {
-  TOPIC_DESCRIPTIONS,
-  TOPIC_HEADINGS,
-  TOPIC_ORDER,
-  categoryOf,
-  topicLabelOf,
-} from '@/lib/blog-topics';
-import { formatMonthYear, formatReadingTimeRange, formatShortMonthYear } from '@/lib/blog-format';
-import { BlogFilterSection, type LibraryTopic } from './blog-filter-section';
+import { topicLabelOf, topicOf } from '@/lib/blog-topics';
+import { formatMonthYear, formatShortMonthYear } from '@/lib/blog-format';
+import { BlogFilterSection, type LibraryRow } from './blog-filter-section';
 
 function ArrowIcon() {
   return (
@@ -50,51 +62,33 @@ export interface BlogListPageProps {
    *  fetched by the route (`app/(site)/blog/page.tsx`), not here. This
    *  component is a plain synchronous function so it can be rendered by
    *  `@testing-library/react`'s client renderer in tests; an `async`
-   *  function component only resolves inside a real Next.js RSC render (the
-   *  same reason `components/projects/projects-list-page.tsx` takes
-   *  `projects`/`testimonials` as props rather than fetching them itself). */
+   *  function component only resolves inside a real Next.js RSC render. */
   posts: BlogPost[];
 }
 
 export function BlogListPage({ posts }: BlogListPageProps) {
   const featured = posts.find((p) => p.featured) ?? posts[0];
-  const recentFour = posts.filter((p) => p.slug !== featured?.slug).slice(0, 4);
-  const featuredSector = toBlogSector(featured?.sector);
-
-  const readingTimeRange = formatReadingTimeRange(posts.map((p) => p.readingTime));
   const latest = posts[0] ? formatShortMonthYear(posts[0].date) : null;
 
-  const topics: LibraryTopic[] = TOPIC_ORDER.map((slug) => ({
-    slug,
-    heading: TOPIC_HEADINGS[slug],
-    description: TOPIC_DESCRIPTIONS[slug],
-    rows: posts
-      .filter((p) => categoryOf(p) === slug)
-      .map((p) => ({
-        slug: p.slug,
-        title: p.title,
-        readingTime: p.readingTime,
-        date: p.date,
-        sector: toBlogSector(p.sector),
-      })),
+  /* THE FEATURED POST IS IN THE LIST TOO, and that is deliberate.
+   *
+   * The first cut of this restructure excluded it, to keep the magenta band
+   * and the index disjoint. That broke the filter: pressing "Design and
+   * speed" returned 1 result when the library holds 2, with the missing one
+   * sitting in a band 900px above and no longer visibly part of that result
+   * set.
+   *
+   * So the model is: THE MAGENTA BAND IS A SPOTLIGHT, THE LIST IS THE
+   * COMPLETE LIBRARY. One post appears twice instead of five — and that one
+   * is the post being deliberately pointed at, which is what a spotlight is
+   * for. */
+  const rows: LibraryRow[] = posts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    readingTime: p.readingTime,
+    date: p.date,
+    topic: topicOf(p),
   }));
-
-  const sectorCounts: Record<string, number> = {};
-  for (const key of BLOG_SECTOR_KEYS) sectorCounts[key] = 0;
-  for (const post of posts) {
-    const sector = toBlogSector(post.sector);
-    if (sector) sectorCounts[sector] += 1;
-  }
-  const populatedSectors = BLOG_SECTOR_KEYS.filter((k) => sectorCounts[k] > 0);
-  const emptySectors = BLOG_SECTOR_KEYS.filter((k) => sectorCounts[k] === 0);
-
-  // Approved copy for the two sectors the library actually has posts in
-  // today (`blog-list.html:480-481`). A future third populated sector falls
-  // back to a generic suffix rather than crashing.
-  const SECTOR_BULLET_SUFFIX: Partial<Record<(typeof BLOG_SECTOR_KEYS)[number], string>> = {
-    trades: `across all ${TOPIC_ORDER.length} topics`,
-    motorsport: 'on speed under load',
-  };
 
   return (
     <>
@@ -118,7 +112,7 @@ export function BlogListPage({ posts }: BlogListPageProps) {
         <p className="lead">
           {posts.length === 1 ? 'One' : posts.length}{' '}
           {posts.length === 1 ? 'plain-English guide' : 'plain-English guides'} on getting a small
-          business found online. Start with the problem you have, not the trade you happen to be in.
+          business found online.
         </p>
 
         <div className="mast__meta">
@@ -126,16 +120,6 @@ export function BlogListPage({ posts }: BlogListPageProps) {
             <b>{posts.length}</b>
             <span>Guides in the library</span>
           </div>
-          <div>
-            <b>{TOPIC_ORDER.length} topics</b>
-            <span>Grouped by problem</span>
-          </div>
-          {readingTimeRange ? (
-            <div>
-              <b>{readingTimeRange}</b>
-              <span>Typical read</span>
-            </div>
-          ) : null}
           {latest ? (
             <div>
               <b>{latest}</b>
@@ -149,11 +133,6 @@ export function BlogListPage({ posts }: BlogListPageProps) {
       {featured ? (
         <section className="sec p--magenta" data-ground="magenta">
           <p className="eyeless">Latest</p>
-          <h2 className="res">Most recent first.</h2>
-          <p className="lead">
-            The newest guide, and the four behind it. Everything else is grouped by topic further
-            down.
-          </p>
 
           <div className="svcgrid">
             <Link className="svccard svccard--ink svccard--wide" href={`/blog/${featured.slug}`}>
@@ -174,12 +153,6 @@ export function BlogListPage({ posts }: BlogListPageProps) {
                     <b>{formatMonthYear(featured.date)}</b>
                     <span>Published</span>
                   </div>
-                  {featuredSector ? (
-                    <div>
-                      <b>{BLOG_SECTOR_LABELS[featuredSector]}</b>
-                      <span>Who it&rsquo;s for</span>
-                    </div>
-                  ) : null}
                 </div>
                 <span className="svccard__l">
                   Read the guide
@@ -187,18 +160,6 @@ export function BlogListPage({ posts }: BlogListPageProps) {
                 </span>
               </div>
             </Link>
-          </div>
-
-          <div className="svcs">
-            {recentFour.map((post) => (
-              <Link className="svc" href={`/blog/${post.slug}`} key={post.slug}>
-                <span className="svc__n">{post.title}</span>
-                <span className="svc__d">
-                  {post.readingTime ? `${post.readingTime} min · ` : null}
-                  {formatMonthYear(post.date)} &middot; {topicLabelOf(post)}
-                </span>
-              </Link>
-            ))}
           </div>
         </section>
       ) : null}
@@ -212,61 +173,10 @@ export function BlogListPage({ posts }: BlogListPageProps) {
           not the sector.
         </h2>
         <p className="lead">
-          Seven topics, each one a problem rather than an industry. Trades turn up inside them as
-          worked examples &mdash; a scaffolder&rsquo;s site and a fabric shop&rsquo;s have more in
-          common than either would guess.
+          Seven topics, each one a problem rather than an industry. Pick one, or read straight down.
         </p>
 
-        <BlogFilterSection topics={topics} totalPosts={posts.length} />
-      </section>
-
-      {/* ===== 4. WHO IT'S FOR — aqua ===== */}
-      <section className="sec p--aqua" data-ground="aqua">
-        <p className="eyeless">Who it&rsquo;s for</p>
-        <h2 className="res">Mostly trades &mdash; for now.</h2>
-        <p className="lead">
-          {sectorCounts.trades ?? 0} of these {posts.length} guides were written for trades and
-          contractors, because that is where most of my work started. The work itself has moved on,
-          and the library is built so the rest sit in the same place rather than in a separate
-          section.
-        </p>
-
-        <div className="twoup">
-          <div>
-            <h3>Written so far</h3>
-            <div className="detail__l">
-              {populatedSectors.map((key) => (
-                <div key={key}>
-                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path
-                      d="M3 8.5l3.2 3.2L13 4.5"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>{' '}
-                  {BLOG_SECTOR_LABELS[key]} &mdash; {sectorCounts[key]}{' '}
-                  {sectorCounts[key] === 1 ? 'guide' : 'guides'}
-                  {SECTOR_BULLET_SUFFIX[key] ? `, ${SECTOR_BULLET_SUFFIX[key]}` : ''}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3>Not yet, but the shelf is there</h3>
-            <p className="twoup__p">
-              {emptySectors.map((k) => BLOG_SECTOR_LABELS[k]).join(', ')}. I have built for all{' '}
-              {emptySectors.length === 4 ? 'four' : emptySectors.length} &mdash; the case studies
-              are on the work page &mdash; and the guides go under the same {TOPIC_ORDER.length}{' '}
-              topics when they are written, not into a second blog.
-            </p>
-            <p className="twoup__p">
-              If you run one of those and want the answer to something before I get round to writing
-              it up, ask me. It is the fastest route to a guide getting written.
-            </p>
-          </div>
-        </div>
+        <BlogFilterSection rows={rows} />
       </section>
     </>
   );

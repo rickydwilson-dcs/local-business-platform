@@ -1,0 +1,136 @@
+/* =====================================================================
+   kit-additions-blog-r2.css — /blog index restructure, 2026-09-26
+
+   Loads AFTER kit.css. The kit is not edited.
+
+   Four rules. Everything else on the page is kit classes unchanged —
+   .crumb, .mast, .mast__meta, .eyeless, .lead, .res, .sec, .p--*,
+   .svcgrid, .svccard--wide, .filterset, .filterax, .paytoggle, .count,
+   .work, .row, .empty, .btn, .pagefoot.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   R2-01  .libr — THE MEASURE AND THE VERTICAL ROOM
+
+   The shipped row measured, on the live page at a 1600px viewport:
+
+     .row width          1,450px
+     title cell          1,337px   holding ~500px of text
+     .row__m             85px      pinned to the far right
+     padding-block       13.2px    top and bottom
+
+   A ~700px dead gutter through every row, and no air above or below it.
+   That combination — empty across, tight down — is what reads as "no
+   white space" while also reading as crowded.
+
+   The fix is both halves at once. A measure, so the row is as wide as its
+   content wants to be; and real padding, so the rows are objects rather
+   than lines of a table. .row's own grid is replaced with a single column,
+   which puts .row__m directly under the title where it is read as part of
+   the same item instead of as a value in a far-off column.
+
+   Numbers, and where each comes from:
+     max-width 1080px   ~74ch at .row__n's largest size — .measure's own
+                        74ch ruling (kit.css), applied to a list instead of
+                        to prose.
+     padding-block      clamp(26px,3.4vh,38px) — the kit's own .row clamp
+                        (18/2.6vh/30) scaled by ~1.28, the smallest step
+                        that clears .row__n's descender plus .row__m at the
+                        largest viewport.
+     .row__n font       clamp(1.12rem,1.9vw,1.6rem) — the shipped
+                        .topic .row__n was clamp(1.02rem,1.75vw,1.42rem);
+                        with seven h3s gone the list carries the hierarchy
+                        alone and takes the step back up.
+   --------------------------------------------------------------------- */
+.libr{max-width:1080px}
+.libr .row{grid-template-columns:1fr;gap:9px;align-items:start;
+  padding-block:clamp(26px,3.4vh,38px)}
+.libr .row__n{font-size:clamp(1.12rem,1.9vw,1.6rem);letter-spacing:-.024em;
+  line-height:1.2;display:block}
+
+
+/* ---------------------------------------------------------------------
+   R2-02  .libr .row__m — THE META, AS ONE LINE UNDER THE TITLE
+
+   kit.css sets .row__m{text-align:right} and .row__m em{display:block},
+   which is correct for a two-column row and wrong for a stacked one. Here
+   the three parts sit on one baseline, separated by a rule rather than by
+   punctuation, and wrap as a group on a narrow screen.
+
+   COLOUR. The topic label is the one accented part (var(--acc), the
+   brand magenta). A SEVEN-COLOUR TOPIC SYSTEM WAS CONSIDERED AND DROPPED:
+   the kit has four hues total (ink, magenta, aqua, navy), so seven would
+   have meant inventing three, and colour would then have been carrying
+   category on its own. The label is read as text either way — the accent
+   is emphasis, not encoding.
+
+   .row:hover sets colour:#fff on .row__n and .row__m as the magenta sweep
+   passes under them (kit.css). .row__t is a child of .row__m, so it needs
+   the same treatment explicitly or it stays magenta-on-magenta.
+   --------------------------------------------------------------------- */
+.libr .row__m{text-align:left;display:flex;flex-wrap:wrap;
+  align-items:baseline;gap:6px 14px;font-size:13.5px}
+.libr .row__m em{display:inline;font-size:12px}
+.libr .row__t{color:var(--acc);font-weight:700;font-size:12px;
+  letter-spacing:.09em;text-transform:uppercase}
+.libr .row:hover .row__t{color:#fff}
+
+
+/* ---------------------------------------------------------------------
+   R2-03  .libr__more — THE CAP RELEASE
+
+   The list shows 12 rows at rest and this reveals the remainder. It is the
+   replacement for the shipped four-per-topic cap, and it carries the same
+   constraint (notes-f.md §0: the index's height must be a function of the
+   cap, not of the library) with one control instead of seven headings.
+
+   .btn is the kit's own button. --ghost is local: the filled .btn is the
+   page's single call to action in the footer, and a second filled button
+   mid-page would compete with it.
+   --------------------------------------------------------------------- */
+.libr__more{margin-top:clamp(24px,3.4vh,38px)}
+.btn--ghost{background:none;color:var(--ink);
+  box-shadow:inset 0 0 0 1.5px rgba(14,14,18,.24)}
+.btn--ghost:hover{background:var(--ink);color:#fff;
+  box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+
+/* ---------------------------------------------------------------------
+   R2-04  NARROW
+
+   .row__n's clamp already handles the type. The two things that do not
+   fall out of it: the hover sweep's -14px bleed, which at a small --pad
+   reaches the viewport edge, and the meta line, which wants to stay one
+   line rather than wrap to three.
+   --------------------------------------------------------------------- */
+@media (max-width:640px){
+  .libr .row{padding-block:clamp(20px,2.8vh,26px)}
+  .libr .row__m{gap:4px 10px;font-size:12.5px}
+  .libr .row::after{inset:0 -8px}
+}
+
+
+/* ---------------------------------------------------------------------
+   R2-05  .libr__topics — THE SEVEN CATEGORY PAGES' ONLY WAY IN
+
+   The shipped index carried seven links to /blog/category/<slug>, one per
+   topic block ("6 guides →"). Dropping the topic blocks dropped all seven.
+
+   Those pages are robots:{index:true} and are NOT in the blog sitemap
+   (app/(site)/blog/sitemap.ts lists /blog and /blog/<slug> only), so those
+   links were their entire discovery path — internal and external. This line
+   puts them back as real anchors in the static HTML, so a crawler reaches
+   them without pressing a filter chip.
+
+   Sized to read as a footnote to the list, not as a second navigation: the
+   .count size (13.5px), .row__m's colour, and the same 1080px measure.
+   --------------------------------------------------------------------- */
+.libr__topics{max-width:1080px;margin-top:clamp(20px,2.8vh,30px);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+  font-size:13.5px;color:#5E5E68}
+.libr__topics span{font-weight:700;font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;opacity:.75}
+.libr__topics a{color:#5E5E68;font-weight:500;
+  border-bottom:1px solid rgba(14,14,18,.22);padding-bottom:1px}
+.libr__topics a:hover{color:var(--acc);border-bottom-color:var(--acc)}

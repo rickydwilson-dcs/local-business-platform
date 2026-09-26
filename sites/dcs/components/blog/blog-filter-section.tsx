@@ -1,61 +1,71 @@
 'use client';
 
 /**
- * `.filterset` + the seven `.topic` blocks + `.empty` — the real, working
- * topic filter on `/blog`. Ported behaviour-for-behaviour from
- * `prototype/blog-list.html:679-761` (its own "THE TWO-AXIS FILTER" script),
- * generalising the same pattern `components/projects/projects-filter-
- * section.tsx` already established for the single-axis `/projects` filter.
+ * `.filterset` + the flat `.libr` list + `.libr__topics` + `.libr__more`
+ * + `.empty` — the real, working topic filter on `/blog`.
  *
- * The prototype's second axis ("who it's for", by sector) is deliberately
- * NOT wired up here — Ricky declined it (2026-09-19): most posts will stay
- * generic across standards/technique rather than sector-specific, so a
- * filter that would show ~20/21 posts under one chip isn't useful yet.
- * `lib/blog-sectors.ts`'s derived data still backs the aqua "Mostly trades"
- * band and the per-post/category badges elsewhere on these pages — only the
- * interactive filter chips are dropped.
+ * R2 RESTRUCTURE, 2026-09-26. Ported from
+ * `output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign/prototype/
+ * blog-list.html`; that session's `session.md` carries the measurements and
+ * the reasoning.
  *
- *   (a) THE CAP LIFTS WHEN YOU FILTER. At rest each topic shows at most four
- *       posts (`CAP`, below) — the answer to D4's "must not degrade into a
- *       wall at 40-60 posts" (kit-additions-f.css F-03, notes-f.md §3.1: the
- *       index measures the same height at 40 posts as at 60). The moment the
- *       topic axis narrows, the capped rows come back.
- *   (b) hides with the `hidden` ATTRIBUTE on the `.row` anchor, matching
- *       `inner-pages.css`'s global `[hidden]{display:none !important}`
- *       (line 1822/2723), which is what makes the bare attribute win over
- *       `.row{display:grid}`.
- *   (c) announces via `.count`'s `role="status" aria-live="polite"`.
+ * WHAT CHANGED FROM THE PHASE 3b VERSION. This used to render seven
+ * `.topic` sections, each a 35.2px `h3` plus a 62ch `.topic__d`, capped at
+ * four rows apiece. That was ~120 words of scaffolding explaining categories
+ * the titles already explained, and it restarted the reader's eye seven
+ * times before anything could be picked. The chips were always the better
+ * topic affordance — you press one rather than scrolling past seven — so the
+ * headings go and the chips stay.
+ *
+ * THE SCALE CONSTRAINT SURVIVES. notes-f.md §0 (inner-pages design session)
+ * is explicit that the index's height must be a function of the number of
+ * TOPICS, not the number of posts — measured identical at 40 and 60 posts.
+ * That is now carried by `CAP` + "show all" rather than by four-per-topic:
+ * twelve rows at rest whatever the library holds, and the cap lifts the
+ * moment a chip narrows the list. Height at rest is a function of the cap.
+ *
+ * THE SEVEN TOPIC DESCRIPTIONS ARE NOT LOST. `TOPIC_DESCRIPTIONS` is already
+ * the masthead `.lead` on `/blog/category/[slug]` (see `lib/blog-topics.ts`'s
+ * header and `blog-category-page.tsx`) — they keep the one surface where
+ * they are the page's own intro rather than one of seven competing for the
+ * same screen. Nothing was deleted to make this change.
+ *
+ * Contract kept from the previous version:
+ *   (a) hides with the `hidden` ATTRIBUTE on the `.row` anchor, matching
+ *       `inner-pages.css`'s global `[hidden]{display:none !important}`,
+ *       which is what makes the bare attribute win over `.row{display:grid}`.
+ *   (b) announces via `.count`'s `role="status" aria-live="polite"`.
+ *   (c) no sector axis — Ricky declined the chips 2026-09-19, and
+ *       `lib/blog-sectors.ts`'s header is explicit that it is not an
+ *       invitation to re-add them.
  */
 
 import Link from 'next/link';
 import { useState } from 'react';
-import type { BlogSectorKey } from '@/lib/blog-sectors';
-import { TOPIC_LABELS, type TopicSlug } from '@/lib/blog-topics';
+import { TOPIC_LABELS, TOPIC_ORDER, type TopicSlug } from '@/lib/blog-topics';
 import { formatMonthYear } from '@/lib/blog-format';
 
-const CAP = 4;
+/** Rows visible at rest. Twelve rather than the old four-per-topic: one
+ *  screenful and a bit, enough that the list reads as a library rather than
+ *  as a teaser, and bounded so 60 posts measure the same as 21. */
+const CAP = 12;
 
 export interface LibraryRow {
   slug: string;
   title: string;
   readingTime?: number;
   date: string;
-  /** Authored `sector` frontmatter, already narrowed by `toBlogSector`.
-   *  Undefined when the post omits it or carries an unknown value. */
-  sector?: BlogSectorKey;
-}
-
-export interface LibraryTopic {
-  slug: TopicSlug;
-  heading: string;
-  description: string;
-  /** Every post in this category, already sorted newest-first. */
-  rows: LibraryRow[];
+  /** `null` for a post whose `category` is not one of the seven real values.
+   *  It still renders and still appears under "All" — it simply carries no
+   *  topic label and matches no chip. The old seven-block layout dropped
+   *  such a post from the page entirely; a flat list does not have to. */
+  topic: TopicSlug | null;
 }
 
 export interface BlogFilterSectionProps {
-  topics: LibraryTopic[];
-  totalPosts: number;
+  /** Every post, newest-first — the featured one INCLUDED. See
+   *  `blog-list-page.tsx` for why the spotlight and the library overlap. */
+  rows: LibraryRow[];
 }
 
 function ArrowIcon() {
@@ -72,29 +82,35 @@ function ArrowIcon() {
   );
 }
 
-export function BlogFilterSection({ topics, totalPosts }: BlogFilterSectionProps) {
-  const [topicFilter, setTopicFilter] = useState<'all' | TopicSlug>('all');
+export function BlogFilterSection({ rows }: BlogFilterSectionProps) {
+  const [topic, setTopic] = useState<'all' | TopicSlug>('all');
+  const [expanded, setExpanded] = useState(false);
 
-  const wide = topicFilter === 'all';
+  const total = rows.length;
+  const wide = topic === 'all';
 
-  const computed = topics.map((topic) => {
-    const topicHit = topicFilter === 'all' || topic.slug === topicFilter;
-    const rowsWithHit = topic.rows.map((row, index) => {
-      const sector = row.sector;
-      const capped = wide && index >= CAP;
-      return { row, sector, hit: topicHit, visible: topicHit && !capped };
-    });
-    const matches = rowsWithHit.filter((r) => r.hit).length;
-    return { topic, rowsWithHit, hidden: !(topicHit && matches > 0) };
+  const computed = rows.map((row, index) => {
+    const hit = wide || row.topic === topic;
+    // the cap only bites in the unfiltered, unexpanded view
+    const capped = wide && !expanded && index >= CAP;
+    return { row, visible: hit && !capped, hit };
   });
 
-  const shown = computed.reduce((n, t) => n + t.rowsWithHit.filter((r) => r.visible).length, 0);
+  const shown = computed.filter((r) => r.visible).length;
+  const matches = computed.filter((r) => r.hit).length;
 
   const countText = wide
-    ? `${totalPosts} guides across ${topics.length} topics`
-    : shown === 0
-      ? `Nothing matches ${TOPIC_LABELS[topicFilter]}`
-      : `Showing ${shown} of ${totalPosts} — ${TOPIC_LABELS[topicFilter]}`;
+    ? expanded
+      ? `Showing all ${total} guides`
+      : `Showing ${shown} of ${total} guides`
+    : matches === 0
+      ? `Nothing under ${TOPIC_LABELS[topic]}`
+      : `Showing ${shown} of ${total} — ${TOPIC_LABELS[topic]}`;
+
+  function pick(next: 'all' | TopicSlug) {
+    setTopic(next);
+    setExpanded(false);
+  }
 
   return (
     <>
@@ -104,21 +120,17 @@ export function BlogFilterSection({ topics, totalPosts }: BlogFilterSectionProps
             Topic
           </p>
           <div className="paytoggle" id="f-topic" role="group" aria-labelledby="lbl-topic">
-            <button
-              type="button"
-              aria-pressed={topicFilter === 'all'}
-              onClick={() => setTopicFilter('all')}
-            >
-              All <span aria-hidden="true">{totalPosts}</span>
+            <button type="button" aria-pressed={wide} onClick={() => pick('all')}>
+              All <span aria-hidden="true">{total}</span>
             </button>
-            {topics.map((topic) => (
+            {TOPIC_ORDER.map((slug) => (
               <button
-                key={topic.slug}
+                key={slug}
                 type="button"
-                aria-pressed={topicFilter === topic.slug}
-                onClick={() => setTopicFilter(topic.slug)}
+                aria-pressed={topic === slug}
+                onClick={() => pick(slug)}
               >
-                {TOPIC_LABELS[topic.slug]}
+                {TOPIC_LABELS[slug]}
               </button>
             ))}
           </div>
@@ -128,40 +140,52 @@ export function BlogFilterSection({ topics, totalPosts }: BlogFilterSectionProps
         </span>
       </div>
 
-      {computed.map(({ topic, rowsWithHit, hidden }) => (
-        <section className="topic" data-topic={topic.slug} key={topic.slug} hidden={hidden}>
-          <div className="topic__h">
-            <h3>{topic.heading}</h3>
-            <Link className="card__link" href={`/blog/category/${topic.slug}`}>
-              {topic.rows.length} {topic.rows.length === 1 ? 'guide' : 'guides'}
-              <ArrowIcon />
-            </Link>
-          </div>
-          <p className="topic__d">{topic.description}</p>
-          <div className="work">
-            {rowsWithHit.map(({ row, sector, visible }) => (
-              <Link
-                key={row.slug}
-                className="row"
-                href={`/blog/${row.slug}`}
-                data-sector={sector}
-                hidden={!visible}
-              >
-                <span className="row__n">{row.title}</span>
-                <span className="row__m">
-                  {row.readingTime ? `${row.readingTime} min read` : null}
-                  <em>{formatMonthYear(row.date)}</em>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+      <div className="work libr" id="libr">
+        {computed.map(({ row, visible }) => (
+          <Link
+            key={row.slug}
+            className="row"
+            href={`/blog/${row.slug}`}
+            data-topic={row.topic ?? undefined}
+            hidden={!visible}
+          >
+            <span className="row__n">{row.title}</span>
+            <span className="row__m">
+              {row.topic ? <b className="row__t">{TOPIC_LABELS[row.topic]}</b> : null}
+              {row.readingTime ? <span>{row.readingTime} min read</span> : null}
+              <em>{formatMonthYear(row.date)}</em>
+            </span>
+          </Link>
+        ))}
+      </div>
 
-      <div className="empty" id="empty" data-show={shown === 0 ? 'true' : 'false'}>
-        <h3>Nothing under both of those yet.</h3>
+      {/* The seven category pages' only way in — see inner-pages.css R2-04.
+          Real anchors in the server-rendered HTML, not behind a chip. */}
+      <nav className="libr__topics" aria-label="Topic pages">
+        <span>Topic pages</span>
+        {TOPIC_ORDER.map((slug) => (
+          <Link key={slug} href={`/blog/category/${slug}`}>
+            {TOPIC_LABELS[slug]}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="libr__more" id="more" hidden={!(wide && !expanded)}>
+        <button
+          className="btn btn--ghost"
+          type="button"
+          id="showall"
+          onClick={() => setExpanded(true)}
+        >
+          Show all {total} guides
+          <ArrowIcon />
+        </button>
+      </div>
+
+      <div className="empty" id="empty" data-show={matches === 0 ? 'true' : 'false'}>
+        <h3>Nothing under that topic yet.</h3>
         <p>
-          The library is still filling out &mdash; try one filter at a time, or{' '}
+          The library is still filling out &mdash; or{' '}
           <a href="mailto:mail@digitalconsultingservices.co.uk">ask me the question directly</a>.
         </p>
       </div>
