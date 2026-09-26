@@ -258,10 +258,38 @@ describe('/about matches the approved design (prototype/about.html)', () => {
   // excluded from the comparison rather than name-blacklisted, matching
   // /pricing's approach above.
   const CHROME_SUBTREE_SELECTOR = '.bar, .menu, footer.pagefoot';
+
+  /* THE DRAWN-BROWSER FIGURE IS DELIBERATELY NOT PORTED ANY MORE.
+   *
+   * `prototype/about.html:207-218` carries a `.slot__well` holding the kit's
+   * `.mock` device — a drawing of a browser window — under the "No team
+   * photo either" argument. Commit `ab25cccf` (2026-09-26) replaced that
+   * whole argument with the Cavendish Ironworkers origin story and a
+   * LinkedIn link, and dropped the illustration with it: its own message
+   * says so ("Drops the generic browser-mockup illustration that
+   * accompanied the old argument"). The copy it illustrated no longer
+   * exists on the page.
+   *
+   * So this is a superseded design decision, not drift. The prototype stays
+   * the record of what was approved in September; the exclusion records that
+   * one block of it was later overtaken by an editorial call.
+   *
+   * Excluded by SUBTREE rather than by class name, the same way the chrome
+   * is above — a name list would also silence these classes if they ever
+   * reappeared somewhere they did not belong. `/about` was the only page
+   * that ever rendered them, and nothing under app/ or components/ uses
+   * them now.
+   *
+   * The test below ("the prototype still carries the superseded figure")
+   * asserts the premise, so if the prototype is ever regenerated without it
+   * this exclusion is reported as pointless rather than passing silently. */
+  const SUPERSEDED_SUBTREE_SELECTOR = '.slot__well';
+
   function bodyOnlyClassesOf(root: ParentNode): Set<string> {
     const set = new Set<string>();
     root.querySelectorAll('*').forEach((el) => {
       if (el.closest(CHROME_SUBTREE_SELECTOR)) return;
+      if (el.closest(SUPERSEDED_SUBTREE_SELECTOR)) return;
       el.classList.forEach((c) => set.add(c));
     });
     return set;
@@ -304,6 +332,27 @@ describe('/about matches the approved design (prototype/about.html)', () => {
       missing,
       `prototype body classes not found in the render: ${missing.join(', ')}`
     ).toEqual([]);
+  });
+
+  it('the prototype still carries the superseded figure, and the render deliberately drops it', () => {
+    // The premise behind SUPERSEDED_SUBTREE_SELECTOR. If the prototype ever
+    // stops carrying .slot__well, this tells us the exclusion is now dead
+    // rather than letting it quietly cover something else.
+    const protoWell = proto.querySelector('.slot__well');
+    expect(
+      protoWell,
+      'prototype/about.html no longer has .slot__well — SUPERSEDED_SUBTREE_SELECTOR is now pointless and should be removed'
+    ).toBeTruthy();
+    expect(
+      protoWell!.querySelector('.mock'),
+      'the .slot__well no longer holds a .mock'
+    ).toBeTruthy();
+
+    // ...and the page under test renders none of it (commit ab25cccf).
+    const container = renderPage();
+    expect(container.querySelector('.slot__well')).toBeNull();
+    expect(container.querySelector('.mock')).toBeNull();
+    expect(container.querySelector('figure')).toBeNull();
   });
 
   it('renders the breadcrumb, masthead and all four page sections', () => {
