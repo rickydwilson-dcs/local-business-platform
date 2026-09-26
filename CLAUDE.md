@@ -172,6 +172,11 @@ pnpm --filter @platform/theme-system validate --config ../../sites/[site-name]/t
 
 # Site creation
 npx tsx tools/create-site-from-project.ts --project [project-file.json]
+
+# Dead-code audit — unreachable modules + unreferenced authored CSS classes.
+# Reports CANDIDATES, not findings; read docs/standards/quality.md before acting.
+npx tsx tools/find-dead-code.ts --site sites/[site-name]
+npx tsx tools/find-dead-code.ts --all
 ```
 
 ---
