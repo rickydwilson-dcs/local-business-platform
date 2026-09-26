@@ -10,6 +10,21 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **New site: `sites/delta-t-racing-cc` — Delta T Racing, NPRacing's sister team** (UK club
+  motorcycle racing, Bemsee/BMCRC, four riders). Built straight from `npracing-v1`'s approved
+  "Grid Box" design rather than prototyped, re-keyed from red to the logo blue `#113A93`, with the
+  content the team actually published on its old Wix site. Everything is suffixed `-cc` (after
+  their `.cc` domain) so the bare `delta-t-racing` name stays free for a possible site for their
+  separate sim-racing brand. Things that differ from its npracing parent and are worth knowing
+  when copying either: a new `races` content type drives a season calendar whose "next up" state is
+  computed in the browser (so it doesn't go stale between builds); JSON-LD is a local `SportsTeam`
+  node because the shared LocalBusiness generator requires geo coordinates a club team doesn't
+  have; the contact form is gated off by `features.contactForm` until Resend/CSRF env vars exist,
+  rather than shipping a form that can't send. Images upload with
+  `tools/upload-delta-t-racing-cc-to-r2.ts`. Found while building it, not fixed: `npracing-v1`
+  has never actually loaded its Barlow / Barlow Condensed fonts (its theme comment says they are
+  loaded via `<link>`, but no such link has ever existed), so it renders in system fonts.
+
 - **DCS: deleted the retired solaris layer — 11 components (1,596 lines) and 27 authored CSS
   classes that had been shipping to every visitor since the r9 migration.** The homepage moved to
   r9 in August and the 15 inner routes in the September port; each phase recorded the superseded

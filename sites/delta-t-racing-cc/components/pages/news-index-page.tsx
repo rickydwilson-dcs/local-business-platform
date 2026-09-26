@@ -1,0 +1,99 @@
+import Link from 'next/link';
+import type { NewsArticle } from '@/lib/schemas/news';
+import { siteConfig } from '@/site.config';
+import { PageHead } from '@/components/sections/page-head';
+import { ArrowTextLink } from '@/components/sections/arrow-link';
+
+/**
+ * NewsIndexPage — the Grid Box news listing.
+ *
+ * Cards are rendered entirely from content/news/*.mdx frontmatter. Entries
+ * are either original team posts (no sourceUrl — the card falls back to
+ * the site name and has no outbound link) or attributed third-party coverage
+ * (sourceName/sourceUrl set — the card links out to the original report).
+ */
+export interface NewsIndexPageProps {
+  articles: NewsArticle[];
+}
+
+function formatDay(iso: string) {
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function formatFull(iso: string) {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+export function NewsIndexPage({ articles }: NewsIndexPageProps) {
+  return (
+    <>
+      <div className="grain-overlay" aria-hidden="true" />
+
+      <PageHead
+        eyebrow="News"
+        title="Race reports from the paddock."
+        lede="How each round went for our four riders — the wins, the offs, the rebuilds and the lessons — in their own words."
+      />
+
+      <section className="container-grid py-16">
+        <h2 className="sr-only">Latest articles</h2>
+
+        {articles.length === 0 ? (
+          <p className="text-surface-secondary-foreground">No news articles yet.</p>
+        ) : (
+          <ul className="flex flex-col gap-6">
+            {articles.map((article) => (
+              <li key={article.slug}>
+                <article className="grid grid-cols-1 gap-6 rounded-card border border-surface-card-border bg-surface-card p-8 transition-colors duration-300 hover:border-brand-accent sm:grid-cols-[9rem_1fr]">
+                  <div className="flex flex-col gap-1">
+                    <time
+                      dateTime={article.publishedAt}
+                      className="font-heading text-2xl leading-none text-brand-accent"
+                    >
+                      {formatDay(article.publishedAt)}
+                    </time>
+                    <span className="text-xs font-bold uppercase tracking-[0.1em] text-surface-tertiary-foreground">
+                      {article.sourceName ?? siteConfig.name}
+                    </span>
+                    <span className="sr-only">Published {formatFull(article.publishedAt)}</span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-h3 text-surface-foreground">
+                      <Link
+                        href={`/news/${article.slug}`}
+                        className="transition-colors hover:text-brand-accent"
+                      >
+                        {article.title}
+                      </Link>
+                    </h3>
+                    <p className="mt-3 max-w-[70ch] leading-relaxed text-surface-secondary-foreground">
+                      {article.excerpt}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-6">
+                      <ArrowTextLink href={`/news/${article.slug}`}>Read on site</ArrowTextLink>
+                      {article.sourceUrl && article.sourceName && (
+                        <ArrowTextLink
+                          href={article.sourceUrl}
+                          external
+                          externalLabel={`Read the original report at ${article.sourceName}`}
+                          className="text-surface-secondary-foreground"
+                        >
+                          {article.sourceName}
+                        </ArrowTextLink>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </>
+  );
+}
