@@ -75,8 +75,9 @@ This exists because of a real incident: DCS had `FEATURE_ANALYTICS_ENABLED` and
 created. Nothing threw, nothing logged an error — GA4 Realtime just stayed empty, and it
 took manually inspecting the live build's client bundle to find the gap. The validator
 turns that class of misconfiguration into a build failure instead of a silent, hours-long
-debugging session. Wired into all 6 sites that use this pattern (`dcs`, `base-template`,
-`colossus-scaffolding`, `dch-automotive`, `mad-graphics`, `npracing-v1`, `npracing-v3`) —
+debugging session. Wired into every site that uses this pattern (`dcs`, `base-template`,
+`colossus-scaffolding`, `dch-automotive`, `delta-t-racing-cc`, `dpm-autobody`, `mad-graphics`,
+`npracing-v1`, `npracing-v3` — check with `grep -l validateAnalyticsEnv sites/*/next.config.ts`) —
 `dj-fox-electrical` and `showcase` don't use analytics/consent at all.
 
 **Only check what the code actually reads.** The first version of this validator paired

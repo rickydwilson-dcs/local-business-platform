@@ -21,6 +21,7 @@ local-business-platform/
 │   ├── colossus-scaffolding/  # Production site (scaffolding business)
 │   ├── dch-automotive/        # Production site (automotive security & tuning, dark/orange theme)
 │   ├── dcs/                   # Production site (digital consulting)
+│   ├── delta-t-racing-cc/     # Motorcycle racing team (NPRacing sister team, npracing-v1 design in blue)
 │   ├── dj-fox-electrical/     # Production site (electrical business, orion theme)
 │   ├── mad-graphics/          # Production site (vehicle graphics & print, cygnus theme)
 │   └── showcase/              # Internal component/theme showcase
