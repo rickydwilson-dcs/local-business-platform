@@ -2,11 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import { Archivo, Poppins } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
-import { SiteScrollReveal } from '@/components/site-scroll-reveal';
 import { DcsConsentManager } from '@/components/dcs-consent-manager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
-import { MaterialSymbolsFont } from '@/components/material-symbols-font';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -80,7 +78,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <MaterialSymbolsFont />
         {children}
 
         <DcsConsentManager
@@ -101,7 +98,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           debugMode={process.env.NODE_ENV === 'development'}
         />
         <AnalyticsDebugPanel enabled={process.env.NODE_ENV === 'development'} />
-        <SiteScrollReveal />
       </body>
     </html>
   );

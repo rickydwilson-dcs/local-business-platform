@@ -45,7 +45,9 @@ with the **FULL CONTENT** of the theme globals.css file.
 
 Read `packages/themes/<theme>/components/header.tsx` (and footer.tsx, scroll-reveal-script.tsx where applicable).
 Write them to `sites/<name>/components/site-header.tsx` and `sites/<name>/components/site-footer.tsx` (and `site-scroll-reveal.tsx` for dcs).
-Rename all exported identifiers to generic names (`SiteHeader`, `SiteFooter`, `SiteScrollReveal`).
+
+> **Historical — do not copy for dcs.** All three of those dcs files were deleted on 2026-09-26: the r9 migration superseded them and they sat orphaned, with `site-scroll-reveal.tsx` still running an `IntersectionObserver` on every page for elements nothing rendered. dcs's chrome is now `components/site/site-chrome.tsx`.
+> Rename all exported identifiers to generic names (`SiteHeader`, `SiteFooter`, `SiteScrollReveal`).
 
 Update `sites/<name>/app/layout.tsx`:
 
@@ -54,7 +56,7 @@ Update `sites/<name>/app/layout.tsx`:
   ```ts
   import { SiteHeader } from "@/components/site-header";
   import { SiteFooter } from "@/components/site-footer";
-  // (dcs also adds:) import { SiteScrollReveal } from '@/components/site-scroll-reveal';
+  // (dcs also added SiteScrollReveal here — removed 2026-09-26, see the note above)
   ```
 - Replace all JSX usages of the theme component names with the new generic names.
 - Remove the `ThemeProvider` wrapper if present — colossus layout.tsx has no ThemeProvider.
