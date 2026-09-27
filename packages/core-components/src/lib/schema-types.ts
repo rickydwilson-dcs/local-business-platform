@@ -46,8 +46,15 @@ export interface BusinessConfig {
     longitude: string;
   };
 
-  /** Opening hours specification */
-  openingHours: Array<{
+  /**
+   * Opening hours specification. Optional: both `getLocalBusinessSchema`
+   * implementations already guard on it (`if (config.openingHours &&
+   * config.openingHours.length > 0)`) and omit `openingHoursSpecification`
+   * when it is absent — this type was simply stricter than the code. A
+   * business keeping irregular hours is better off publishing nothing here
+   * than a window it does not keep.
+   */
+  openingHours?: Array<{
     /** Days of week this schedule applies to */
     dayOfWeek: string[];
     /** Opening time (e.g., "09:00") */
