@@ -8,8 +8,9 @@ interface TestimonialCardProps {
   name: string;
   /** Customer location or company */
   location?: string;
-  /** Rating value (1-5) */
-  rating: number;
+  /** Rating value (1-5). Optional: a testimonial a client simply gave,
+   *  rather than scored, has none, and the stars are then not rendered. */
+  rating?: number;
   /** Testimonial text */
   text: string;
   /** Optional testimonial title/headline */
@@ -77,7 +78,7 @@ export function TestimonialCard({
 
       {/* Rating */}
       <div className="flex items-center justify-between mb-4">
-        <StarRating rating={rating} size="md" />
+        {typeof rating === "number" && <StarRating rating={rating} size="md" />}
         {formattedDate && <span className="text-sm text-surface-muted">{formattedDate}</span>}
       </div>
 

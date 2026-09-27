@@ -41,7 +41,9 @@ export interface ProjectSummary {
 export interface TestimonialSummary {
   slug: string;
   name: string;
-  rating: number;
+  /** Optional: a testimonial a client simply gave, rather than scored,
+   *  carries no rating (see TestimonialFrontmatterSchema). */
+  rating?: number;
   body: string;
   platform?: string;
   date?: string;

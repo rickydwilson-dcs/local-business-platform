@@ -490,7 +490,23 @@ export const TestimonialFrontmatterSchema = z.object({
 
   customerCompany: z.string().max(100, "Company name must be less than 100 characters").optional(),
 
-  rating: z.number().int().min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
+  /**
+   * Optional since 2026-09-27. A testimonial here is something a client said
+   * directly — not a scored review pulled from a reviews platform — so a site
+   * that never renders stars has no honest value to put in this field, and
+   * writing a 5 to satisfy the type would be inventing data the client never
+   * gave. Sites that DO show ratings (the `/reviews` pages on base-template,
+   * colossus-scaffolding, dch-automotive and mad-graphics, via
+   * `star-rating.tsx` / `calculateAggregateRating`) keep supplying it, and
+   * their existing files still validate — this widens the schema, it does not
+   * change them. `calculateAggregateRating` skips entries without a rating.
+   */
+  rating: z
+    .number()
+    .int()
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be at most 5")
+    .optional(),
 
   text: z
     .string()

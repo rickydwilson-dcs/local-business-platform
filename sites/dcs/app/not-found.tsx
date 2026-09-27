@@ -66,10 +66,10 @@ export const metadata: Metadata = {
  *  order (404.html:112-135). Hrefs are `PRIMARY_LINKS` — the same six routes
  *  the chrome's overlay nav and footer use — rather than re-typed strings, so
  *  a route change in one place can't silently diverge from the other. The
- *  meta/detail copy (verified counts: 13 projects, 6 services, 21 blog posts)
+ *  meta/detail copy (verified counts: 11 projects, 6 services, 21 blog posts)
  *  is the prototype's own, keyed by label. */
 const ROUTE_META: Record<string, { meta: string; detail: string }> = {
-  Work: { meta: 'Thirteen builds', detail: 'With the story behind each one' },
+  Work: { meta: 'Eleven builds', detail: 'With the story behind each one' },
   Services: { meta: 'Six of them', detail: 'Websites, shops, SEO, management' },
   Pricing: { meta: 'Published, in full', detail: 'Monthly or upfront' },
   Blog: { meta: 'Twenty-one posts', detail: 'Mostly about getting found' },

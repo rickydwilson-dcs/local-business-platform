@@ -7,14 +7,21 @@
  * portfolio grid and the testimonials panel.
  *
  * Content:
- *   - The 13 `.card`s come from the real `content/projects/*.mdx` files via
+ *   - The 11 `.card`s come from the real `content/projects/*.mdx` files via
  *     `getProjects()`, joined against `lib/project-cards.ts`'s authored card
  *     copy (see that file's header for why a join, not a duplicate).
- *   - The three `.quote`s (decision D3: no standalone `/reviews` route) come
- *     from the real `content/testimonials/*.mdx` files via `getTestimonials()`
- *     — rendered in whatever order that returns (sorted by testimonial date,
+ *   - The `.quote`s (decision D3: no standalone `/reviews` route) come from
+ *     the real `content/testimonials/*.mdx` files via `getTestimonials()` —
+ *     rendered in whatever order that returns (sorted by testimonial date,
  *     descending), not hand-ordered to match the prototype's presentation
  *     order, since the point of reading real content is to let it be real.
+ *     The prototype showed three, but all three (Sarah T. the Eastbourne
+ *     plumber, Mark H. the Brighton electrician, Dave C. the Lewes
+ *     scaffolder) were fabricated alongside the two fictitious case studies
+ *     and were deleted on 2026-09-27. `content/testimonials/` is now empty,
+ *     so the whole aqua panel is skipped — the markup below is live code
+ *     waiting on real client feedback, not scaffolding to delete. Add one
+ *     real `.mdx` file and the panel returns, counting itself correctly.
  */
 
 import Link from 'next/link';
@@ -39,6 +46,13 @@ export function ProjectsListPage({ projects, testimonials }: ProjectsListPagePro
   const known = PROJECT_ORDER.filter((slug) => projects.some((p) => p.slug === slug));
   const rest = projects.map((p) => p.slug).filter((slug) => !known.includes(slug));
   const orderedSlugs = [...known, ...rest];
+
+  // Built as one string rather than inline JSX: a `{expr} client{expr}` split
+  // across lines renders as "One client , quoted as written." — JSX keeps the
+  // line break between the text node and the plural expression as a space.
+  const quoteLead = `${capitalise(numberWord(testimonials.length))} ${
+    testimonials.length === 1 ? 'client' : 'clients'
+  }, quoted as written.`;
 
   const cards = orderedSlugs
     .map((slug) => {
@@ -109,25 +123,27 @@ export function ProjectsListPage({ projects, testimonials }: ProjectsListPagePro
       </section>
 
       {/* ===== 3. TESTIMONIALS — aqua ===== */}
-      <section className="sec p--aqua" data-ground="aqua">
-        <p className="eyeless">Client feedback</p>
-        <h2 className="res">In their words.</h2>
-        <p className="lead">
-          Three clients, three different pieces of work &mdash; a build, the local SEO that followed
-          one, and the monthly management that keeps another running.
-        </p>
+      {/* Rendered only when there is real feedback to show — the panel's copy
+          counts what `getTestimonials()` returns, so an empty content
+          directory drops the section rather than announcing "zero clients". */}
+      {testimonials.length > 0 && (
+        <section className="sec p--aqua" data-ground="aqua">
+          <p className="eyeless">Client feedback</p>
+          <h2 className="res">In their words.</h2>
+          <p className="lead">{quoteLead}</p>
 
-        <div className="quotes">
-          {testimonials.map((t) => (
-            <figure key={t.slug}>
-              <blockquote className="quote quote--sm">&ldquo;{t.text}&rdquo;</blockquote>
-              <figcaption className="quote__a">
-                {t.customerName} {t.customerRole ? <span>&mdash; {t.customerRole}</span> : null}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+          <div className="quotes">
+            {testimonials.map((t) => (
+              <figure key={t.slug}>
+                <blockquote className="quote quote--sm">&ldquo;{t.text}&rdquo;</blockquote>
+                <figcaption className="quote__a">
+                  {t.customerName} {t.customerRole ? <span>&mdash; {t.customerRole}</span> : null}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* The r9 chrome's own footer (`app/(site)/layout.tsx` -> `SiteChrome`
           -> `PageFooter`) supplies the closing `.pagefoot`; deliberately not

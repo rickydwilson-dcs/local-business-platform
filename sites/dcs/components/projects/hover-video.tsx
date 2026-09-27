@@ -7,7 +7,7 @@
  * Distinct from `components/home/lazy-video.tsx`: the homepage's `.wpanel`
  * videos autoplay once a sticky panel nears the viewport (an
  * `IntersectionObserver`), because they ARE the panel. These cards are a
- * compact grid of 13 — playing all three simultaneously on scroll would be
+ * compact grid of 11 — playing all three simultaneously on scroll would be
  * exactly the "several background-video panels below the fold" eager-fetch
  * problem root `CLAUDE.md`'s Performance section warns about. The prototype
  * instead gates playback behind `onmouseover`/`onmouseout`, i.e. `preload="none"`

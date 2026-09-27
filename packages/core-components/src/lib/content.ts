@@ -457,14 +457,22 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     average: number;
     count: number;
   } {
-    if (testimonials.length === 0) {
+    // `rating` is optional (see TestimonialFrontmatterSchema): a testimonial
+    // a client simply said, rather than scored, carries no rating. Only rated
+    // entries can contribute to an average, and counting unrated ones in the
+    // denominator would drag it down with values nobody gave.
+    const rated = testimonials.filter(
+      (t): t is Testimonial & { rating: number } => typeof t.rating === "number"
+    );
+
+    if (rated.length === 0) {
       return { average: 0, count: 0 };
     }
 
-    const total = testimonials.reduce((sum, t) => sum + t.rating, 0);
+    const total = rated.reduce((sum, t) => sum + t.rating, 0);
     return {
-      average: Math.round((total / testimonials.length) * 10) / 10,
-      count: testimonials.length,
+      average: Math.round((total / rated.length) * 10) / 10,
+      count: rated.length,
     };
   }
 
