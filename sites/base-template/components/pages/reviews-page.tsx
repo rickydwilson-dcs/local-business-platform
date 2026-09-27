@@ -1,18 +1,17 @@
 import type { ReviewsPageTemplateProps } from '@platform/core-components';
-import {
-  Breadcrumbs,
-  TestimonialCard,
-  AggregateRatingDisplay,
-} from '@platform/core-components';
+import { Breadcrumbs, TestimonialCard, AggregateRatingDisplay } from '@platform/core-components';
 
 export function ReviewsPage({ testimonials }: ReviewsPageTemplateProps) {
   const breadcrumbItems = [{ name: 'Reviews', href: '/reviews', current: true }];
 
-  // Compute average rating
-  const count = testimonials.length;
+  // Compute average rating. `rating` is optional — a testimonial a client
+  // simply gave, rather than scored, has none — so only rated entries count,
+  // on both sides of the division.
+  const rated = testimonials.filter((t) => typeof t.rating === 'number');
+  const count = rated.length;
   const average =
     count > 0
-      ? Math.round((testimonials.reduce((sum, t) => sum + t.rating, 0) / count) * 10) / 10
+      ? Math.round((rated.reduce((sum, t) => sum + (t.rating ?? 0), 0) / count) * 10) / 10
       : 0;
 
   return (

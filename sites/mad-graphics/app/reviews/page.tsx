@@ -85,8 +85,10 @@ export default async function ReviewsPage() {
                   key={t.slug}
                   className="bg-surface-muted p-12 border border-surface-card-border"
                 >
+                  {/* `rating` is optional — a testimonial a client simply gave,
+                      rather than scored, carries none and renders no stars. */}
                   <div className="flex text-brand-primary mb-6">
-                    {Array.from({ length: t.rating }).map((_, i) => (
+                    {Array.from({ length: t.rating ?? 0 }).map((_, i) => (
                       <span
                         key={i}
                         className="material-symbols-outlined"
@@ -134,7 +136,7 @@ export default async function ReviewsPage() {
               {(featuredTestimonials.length > 0 ? regularTestimonials : testimonials).map((t) => (
                 <div key={t.slug} className="bg-surface-background p-8">
                   <div className="flex text-brand-primary mb-4">
-                    {Array.from({ length: t.rating }).map((_, i) => (
+                    {Array.from({ length: t.rating ?? 0 }).map((_, i) => (
                       <span
                         key={i}
                         className="material-symbols-outlined text-sm"
