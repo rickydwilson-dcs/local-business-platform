@@ -1857,10 +1857,10 @@ describe('/blog/a-fast-team-needs-a-fast-website matches the approved design (pr
   });
 });
 
-describe('/blog/[slug] renders all 35 real posts without error', () => {
+describe('/blog/[slug] renders all 36 real posts without error', () => {
   it('every real content/blog/*.mdx slug renders with exactly one <h1> and no forbidden prices', async () => {
     const posts = await getBlogPosts();
-    expect(posts.length).toBe(35);
+    expect(posts.length).toBe(36);
 
     for (const post of posts) {
       const element = await BlogPostRoute({ params: Promise.resolve({ slug: post.slug }) });
