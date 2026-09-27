@@ -228,20 +228,6 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     },
     relatedSlotNote: 'Live at djfoxelectrical.com — capture not yet taken',
   },
-  'mad-graphics': {
-    sector: 'creative',
-    displayName: 'Mad Graphics',
-    subtitle: 'Agency rebuild',
-    summary:
-      'A redesign for a marketing agency that needed a site as dynamic as the work it showcases — live Instagram feed, bold service icons, Google Maps.',
-    metaLine: 'Scroll-triggered animation linking imagery directly to each service.',
-    note: 'Pictured: colour swatches and design proofs on a studio desk. Sector footage — not a capture of the website.',
-    media: {
-      video: PROJECT_VIDEO_ASSETS['mad-graphics'].video,
-      poster: PROJECT_VIDEO_ASSETS['mad-graphics'].poster,
-      alt: 'Colour swatches and printed design proofs arranged on a studio desk.',
-    },
-  },
   'nicola-noble-tuition': {
     sector: 'studios',
     displayName: 'Nicola Noble Tuition',
@@ -277,11 +263,11 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       'An automotive specialist’s first website — work showcase, accreditations, and a live Instagram feed keeping the site current between jobs.',
     metaLine: 'A professional online presence established from a standing start.',
-    note: 'Pictured: a mechanic working on a car engine bay. Sector footage — not a capture of the website.',
+    note: 'Pictured: a dashcam being fitted to a car windscreen. Sector footage — not a capture of the website.',
     media: {
       video: PROJECT_VIDEO_ASSETS['dch-automotive'].video,
       poster: PROJECT_VIDEO_ASSETS['dch-automotive'].poster,
-      alt: "A mechanic's gloved hands working on a car engine bay under a work light.",
+      alt: "A technician's hands fitting a dashcam to the inside of a car windscreen beside the rear-view mirror.",
     },
     relatedSlotNote: 'Live at dch-one.vercel.app — capture not yet taken',
   },
@@ -292,11 +278,11 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       'A made-to-order store with a product configurator and worldwide shipping, built around a fulfilment model that carries no stock at all.',
     metaLine: 'Automatic work orders raised for the production team at checkout.',
-    note: 'Pictured: hands guiding material through a production line machine. Sector footage — not a capture of the website.',
+    note: 'Pictured: plain cotton being stitched on a modern sewing machine. Sector footage — not a capture of the website.',
     media: {
       video: PROJECT_VIDEO_ASSETS['luna-landings'].video,
       poster: PROJECT_VIDEO_ASSETS['luna-landings'].poster,
-      alt: 'Hands guiding material through a small production line machine.',
+      alt: 'Hands guiding plain cream cotton fabric under the foot of a modern sewing machine.',
     },
   },
   'bexhill-removals': {
@@ -355,7 +341,6 @@ export const PROJECT_ORDER: string[] = [
   'colossus-scaffolding',
   'cuddle-plush-fabrics',
   'dj-fox-electrical',
-  'mad-graphics',
   'nicola-noble-tuition',
   'silvero-homes',
   'dch-automotive',
