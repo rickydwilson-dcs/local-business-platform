@@ -112,12 +112,17 @@ const nextConfig: NextConfig = {
     // The two fictitious placeholder case studies removed on 2026-09-27
     // (Eastbourne Plumber, Brighton Decorator) were live under these
     // /projects/ URLs, so they redirect back to the portfolio rather than 404.
-    const removedProjects = ['wordpress-to-platform-rebuild', 'new-website-from-scratch'].flatMap(
-      (slug) => [
-        { source: `/projects/${slug}`, destination: '/projects', permanent: true },
-        { source: `/projects/${slug}/`, destination: '/projects', permanent: true },
-      ]
-    );
+    // 'mad-graphics' is a withdrawal, not a deletion: the case study is being
+    // rewritten and `content/projects/mad-graphics.mdx` is recoverable from
+    // git. Its URL redirects meanwhile so the live page doesn't 404.
+    const removedProjects = [
+      'wordpress-to-platform-rebuild',
+      'new-website-from-scratch',
+      'mad-graphics',
+    ].flatMap((slug) => [
+      { source: `/projects/${slug}`, destination: '/projects', permanent: true },
+      { source: `/projects/${slug}/`, destination: '/projects', permanent: true },
+    ]);
     const ourWorkNoCounterpart = [
       'mad-group-marketing',
       'absorbent-mats',

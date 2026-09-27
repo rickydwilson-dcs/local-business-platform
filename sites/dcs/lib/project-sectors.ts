@@ -59,7 +59,6 @@ export const PROJECT_SECTOR: Record<string, SectorKey> = {
   'colossus-scaffolding': 'trades',
   'cuddle-plush-fabrics': 'retail',
   'dj-fox-electrical': 'trades',
-  'mad-graphics': 'creative',
   'nicola-noble-tuition': 'studios',
   'silvero-homes': 'property',
   'dch-automotive': 'trades',

@@ -62,6 +62,31 @@ Automated daily monitoring of Google Search Console indexing status across all p
 - [ ] Implement monitoring dashboard UI (design doc at `docs/architecture/MONITORING_DASHBOARD.md`)
 - [ ] Review platform integration (Google Reviews API, Trustpilot API)
 
+### DCS Portfolio — Case Studies To Write
+
+Added 2026-09-27. `/projects` currently carries eleven case studies; these are the
+known gaps. Each needs the same treatment as `content/projects/pippys.mdx`: real
+facts from Ricky, no invented metrics, and a card entry in `lib/project-cards.ts`
+(display name, subtitle, summary, meta line) plus a `lib/project-sectors.ts` entry.
+
+- [ ] **NP Racing** — the site is already in this monorepo at `sites/npracing-v1`
+      (self-contained "Grid Box" design, the client's chosen direction).
+      `sites/npracing-v3` is the frozen "Number 51" alternative, kept as a design
+      reference — worth deciding whether the case study mentions that two
+      directions were built.
+- [ ] **SM Commercial** — no details captured yet. Needs the basics before it can
+      be written: what the business does, what was built, when, and what came of it.
+- [ ] **RP Automotive Photography + RP Rep** — <https://www.rpautomotivephotography.com>
+      and <https://www.rp-rep.com>. **Two sites, one client, one case study** — she
+      runs both for the same business, so they are written up together as a single
+      piece, not one entry each.
+- [ ] **Mad Graphics (rewrite)** — the original case study was withdrawn on
+      2026-09-27 to be rewritten. `content/projects/mad-graphics.mdx` is recoverable
+      from git (last present at `bf7c0a75`), and `/projects/mad-graphics` currently
+      301s to `/projects` — remove that redirect from `sites/dcs/next.config.ts`
+      when the rewrite lands. Mad Graphics was the only project in the
+      "Creative & B2B" sector, so that filter is empty until it returns.
+
 ### Technical Documentation
 
 - [x] ~~Complete all technical documentation~~ — 8,000+ lines across guides, architecture, and standards docs

@@ -951,7 +951,7 @@ describe('/projects matches the approved design (prototype/projects-list.html)',
     ).toEqual([]);
   });
 
-  it('renders exactly one <h1>, all 12 real case-study cards, and the 6-button sector filter bar', async () => {
+  it('renders exactly one <h1>, all 11 real case-study cards, and the 6-button sector filter bar', async () => {
     const protoH1 = protoMain.querySelectorAll('h1');
     expect(protoH1.length).toBe(1);
     // The prototype shows 13 cards; two of those (Eastbourne Plumber,
@@ -965,7 +965,7 @@ describe('/projects matches the approved design (prototype/projects-list.html)',
     expect(protoFilters.length).toBe(6); // All + 5 sectors
 
     const projects = await getProjects();
-    expect(projects.length, 'content/projects/*.mdx should have 12 real files').toBe(12);
+    expect(projects.length, 'content/projects/*.mdx should have 11 real files').toBe(11);
 
     const container = await renderPage();
     expect(container.querySelectorAll('h1').length).toBe(1);

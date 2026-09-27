@@ -10,6 +10,22 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **DCS: withdrew the Mad Graphics case study and corrected two project clips that showed the
+  wrong trade.** The Mad Graphics write-up is being rewritten, so its content file, card copy,
+  sector entry and video mapping are removed and `/projects/mad-graphics` 301s to `/projects`
+  rather than 404ing — the MDX is recoverable from git, and the redirect has to come out again
+  when the rewrite lands. It was the only project in "Creative & B2B", so that filter is empty
+  meanwhile and the masthead now reads "Eleven builds across four sectors". Separately, two of the
+  AI clips added by `3eb61882` depicted work their clients don't do: Luna Landings sells cloth
+  products but the clip showed leather being stitched on an antique machine, and DCH Automotive
+  fit vehicle security systems (dashcams and the like) but the clip showed an engine bay — with
+  card `note` and `alt` text asserting the same thing in words. Both are regenerated (plain cotton
+  on a modern machine; a dashcam being fitted to a windscreen) with the copy corrected to match.
+  They were uploaded under new `-v2` keys rather than overwriting: R2 serves these with a one-year
+  immutable cache, so replacing a key in place would never have reached anyone who had already
+  loaded the page. Posters for the two are taken mid-clip rather than from the 4th frame, since
+  `preload="none"` means the poster is all a visitor sees unless they hover.
+
 - **DCS: removed fabricated portfolio content and replaced it with real work.** Two `/projects`
   case studies were invented — "Eastbourne Plumber" and "Brighton Decorator" — as were all three
   testimonials (Sarah T., Mark H., Dave C.), created by `cc678c1b` "from site config data" while
