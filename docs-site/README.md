@@ -13,14 +13,24 @@ random token so the URL cannot be guessed. The root page lists nothing.
 
 **Live documents**
 
-| Client       | Document             | Path                      |
-| ------------ | -------------------- | ------------------------- |
-| DPM Autobody | Your new site design | `/dpm-autobody/fdec4278/` |
+| Client       | Document               | Path                      |
+| ------------ | ---------------------- | ------------------------- |
+| DPM Autobody | Your new site design   | `/dpm-autobody/fdec4278/` |
+| Autcobel     | Your new Autcobel site | `/autcobel/c83d2965/`     |
 
 **Deploy**
 
-    node build-page.mjs <artifact-source.html> <client>/<token>   # regenerate a page
+    node build-page.mjs <artifact-source.html> <client>/<token>   # regenerate a page from a live Artifact draft
     vercel deploy --prod --yes                                     # from docs-site/
+
+The Autcobel document was produced the other way round: a markdown draft
+(`output/sessions/2026-09/2026-09-24_autcobel-redesign/client-rationale.md`,
+the `client-document` skill's eleven-section spine) rendered straight to HTML
+with that skill's own `scripts/render_document.py`, then copied in here as
+`autcobel/<token>/index.html` — no live-Artifact draft step, so
+`build-page.mjs`'s font-link swap wasn't needed (the renderer's template is
+already self-hosted). Both routes land in the same place: a self-contained
+`index.html` under `<client>/<token>/`, ready to `vercel deploy`.
 
 Custom domain: `docs.digitalconsultingservices.co.uk`, added against the `dcs-docs`
 Vercel project. It is a separate origin from the marketing site, so it shares no

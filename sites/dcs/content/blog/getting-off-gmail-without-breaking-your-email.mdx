@@ -1,0 +1,75 @@
+---
+title: "Getting off a @gmail address without breaking your email"
+slug: "getting-off-gmail-without-breaking-your-email"
+description: "A step-by-step guide to switching off Gmail onto a business email address: DNS order, MX and SPF/DKIM records, and how to avoid losing email mid-move."
+date: "2026-09-26"
+author:
+  name: "Ricky Wilson"
+  role: "Founder, Digital Consulting Services"
+category: "business-tools"
+sector: "trades"
+tags:
+  - "google-workspace"
+  - "business-email"
+  - "email-migration"
+featured: false
+heroImage: "placeholder/blog-gmail-migration.webp"
+readingTime: 4
+excerpt: "Switching off a Gmail address is simple until the DNS is wrong and nobody notices. This is the order that keeps your email working throughout the move."
+---
+
+# Getting Off a @gmail Address Without Breaking Your Email
+
+If you've decided to move off a Gmail or Hotmail address and onto a proper business email, the "why" isn't the hard part. That's covered in our [guide to Google Workspace for small businesses](/blog/setting-up-google-workspace-for-small-business). The hard part is the switch itself: doing it without a week where quotes bounce, replies vanish, or a customer emails an address that's quietly stopped working.
+
+None of this is difficult once you know the order to do it in. Most of the trouble comes from doing things in the wrong sequence, or moving faster than the internet itself can keep up.
+
+## Set Everything Up Before You Tell Anyone
+
+The single most common mistake is announcing the new address before it's actually working. Get the [Google Workspace](/services/google-workspace) account created, your domain verified, and your DNS records in place first. Send your first test email to yourself, check it lands, and only then start using the new address for real quotes and enquiries.
+
+Switching too early means a customer replies to your shiny new address while the DNS is still catching up, and that reply goes nowhere.
+
+## The DNS Records That Actually Move Your Mail
+
+Once you sign up for Workspace, Google hands you a set of DNS records to add to your domain. Two of these matter most:
+
+**MX records** tell the internet which servers should receive mail for your domain. Without the right MX records pointed at Google, mail sent to you@yourbusiness.co.uk has nowhere to go.
+
+**SPF and DKIM records** don't control whether mail arrives. They control whether it's trusted. They tell receiving mail servers that Google is authorised to send email on your domain's behalf. Skip them and your outgoing mail is more likely to land in spam, or get rejected outright by stricter inboxes.
+
+These records go into your domain's DNS settings, not inside Gmail itself, which is why this step trips people up: it doesn't feel like part of "setting up email."
+
+## Why a DNS Mistake Doesn't Look Like a Mistake
+
+A DNS error rarely throws an actual error. There's no red warning, no bounce-back on your screen telling you something's wrong. Mail just stops arriving, or starts landing in other people's spam folders, and you find out from a customer weeks later asking why you never replied to their enquiry.
+
+That's the risk with getting MX or SPF/DKIM records wrong: it's silent. The fix is to test before you rely on it. Send yourself mail from another account, ideally from a domain you don't own, and confirm it lands in the inbox rather than spam.
+
+## Give the DNS a Few Hours Before You Trust It
+
+DNS changes don't take effect everywhere instantly. Propagation across the internet usually takes a few hours, sometimes less. During that window, some mail servers will already be routing to your new setup and others might not be yet.
+
+Treat this window as a buffer. Don't put the new address on an urgent quote or a time-sensitive job the same hour you change the records. Give it a few hours, test it, then start relying on it.
+
+## Don't Switch Off the Old Address Straight Away
+
+Once the new address is confirmed working, the temptation is to close the old Gmail account and be done with it. Leave it running a while longer: forward it to your new address, or just keep checking it manually for a few weeks.
+
+Old business cards are still in wallets, old quotes still have that address printed on them, and past customers will keep using whatever address they last had for you. Give it a transition period and nothing important lands in a dead inbox.
+
+## Update Everything That Still Points at the Old Address
+
+The DNS and the inbox are the technical half of the job. The other half is finding every place the old address is written down:
+
+- Your website's contact page and any contact forms
+- Email signatures on your phone, laptop, and any other device you email from
+- Invoices, quote templates, and any saved documents you reuse
+- Google Business Profile and any directory listings
+- Existing customers and suppliers who have the old address saved
+
+None of this is complicated, but it's easy to miss one and not notice until someone mentions it.
+
+---
+
+If you'd like DCS to handle the DNS side of a move like this (MX records, SPF, DKIM, and testing it before you rely on it), [get in touch](/contact) and I'll take care of it as part of your setup.

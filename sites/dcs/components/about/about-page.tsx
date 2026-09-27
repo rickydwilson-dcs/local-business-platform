@@ -187,44 +187,38 @@ export function AboutPage() {
             never the person who builds it. Here there is nobody else for the job to be handed to.
           </p>
 
-          <h2 className="res">There&rsquo;s no photograph of me here.</h2>
+          <h2 className="res">Why a website studio, and why me.</h2>
 
           <p>
-            No team photo either, because there is no team. A headshot would tell you what I look
-            like, which is not the thing you&rsquo;re trying to find out. What you&rsquo;re trying
-            to find out is whether the work is any good and whether one person can really carry the
-            whole of it. Both of those are answerable, and neither of them is answerable by a face.
+            My father ran a small metalworking business, Cavendish Ironworkers, and I worked there
+            as a teenager. In 1997 &mdash; when most people hadn&rsquo;t heard of the internet yet
+            &mdash; I built him a website. He&rsquo;s retired now, but that&rsquo;s where this
+            started: not in a marketing department, in a workshop.
           </p>
 
-          <figure>
-            <div className="slot__well">
-              <div
-                className="mock"
-                role="img"
-                aria-label="A drawing of a browser window containing a generic website layout."
-              >
-                <div className="mock__row">
-                  <span className="mock__dot"></span>
-                  <span className="mock__dot"></span>
-                  <span className="mock__dot"></span>
-                </div>
-                <div className="mock__bar w60"></div>
-                <div className="mock__bar w45"></div>
-                <span className="mock__live mock__live--aqua" data-anim="in">
-                  <i></i>Live
-                </span>
-                <div className="mock__grid">
-                  <div className="mock__cell"></div>
-                  <div className="mock__cell on" data-anim="cell"></div>
-                  <div className="mock__cell"></div>
-                </div>
-              </div>
-            </div>
-            <figcaption>
-              An illustration, not a real site. The actual work is on the projects page &mdash;
-              thirteen builds, with the brief and the outcome for each.
-            </figcaption>
-          </figure>
+          <p>
+            My day job is different. I work inside large international businesses, commissioning
+            agencies and running an in-house team of engineers and designers &mdash; a separate
+            thing entirely from Digital Consulting Services, and unrelated to it. DCS doesn&rsquo;t
+            borrow that team, that budget, or that scale. It&rsquo;s what I do because the pull
+            towards small, founder-run businesses never went away, and because nearly thirty years
+            after building that first site, I still like doing the work myself.
+          </p>
+
+          <p>
+            What the day job gives you is a second opinion you don&rsquo;t normally get: I know what
+            a London studio&rsquo;s output actually looks like, because I commission it every week.
+            If you want to check the rest &mdash; the CV, the references, the actual me, including
+            DCS itself &mdash; that&rsquo;s on{' '}
+            <a
+              href="https://www.linkedin.com/in/rickydwilson/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+            , not buried in a headshot on this page.
+          </p>
 
           <p>
             If the site you have makes you wince slightly when somebody asks for the address, or

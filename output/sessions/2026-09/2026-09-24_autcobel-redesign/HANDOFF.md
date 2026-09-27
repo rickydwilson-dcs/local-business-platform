@@ -1,14 +1,22 @@
 # Autcobel redesign — handoff
 
-**Status (2026-09-25 update):** richer copy pass + mobile nav fixes done
-locally, **not yet committed or deployed** — see "What changed this turn
-(2026-09-25)" below. Everything from the 2026-09-24 session (below this
-point) is unchanged and still accurate: PR #91 merged, 6 services live,
-real contact details live.
+**Status (2026-09-25 update):** richer copy pass + mobile nav fixes
+committed (`ace6d26a`) and **pushed to `develop` and `staging`**, but
+**not yet in `main` or redeployed to `autcobel-proto.vercel.app`**. A
+concurrent session was mid-deploy of an unrelated DCS feature
+(`sites/dcs` homepage wiring) on the same shared `develop` branch;
+Ricky ruled to ship both sets of commits together rather than block
+either on the other. See "What changed this turn (2026-09-25)" and
+"Deploy — 2026-09-25" below for the full sequence.
 
-**Branch:** `develop`. **Working tree:** dirty — this turn's changes
-(CSS + 15 HTML files + `CONTENT-STATUS.md`) are uncommitted. Not yet
-pushed or redeployed to `autcobel-proto.vercel.app`.
+**Branch:** `develop`, working tree clean, in sync with
+`origin/develop` (`972b09c4`). **PR #92** (`staging` → `main`) is open
+and blocked pending required checks — needs Ricky's merge (main is
+protected; no session merges into it). Once merged, the Autcobel
+prototype site itself still needs a separate redeploy — merging to
+`main` does not touch `autcobel-proto.vercel.app`, which is deployed
+via `tools/publish-prototype.ts --project autcobel-proto` (see the
+2026-09-24 Deploy section below), not by the monorepo's own CI/CD.
 
 ---
 
@@ -74,15 +82,40 @@ being too long.
      service page, Who We Are pull-quote + FAQ, Our Approach principles
      cards. All rendered correctly.
 
+## Deploy — 2026-09-25 (shared `develop`, coordinated with a concurrent session)
+
+Committed as `ace6d26a`. At commit time, local `develop` already had an
+unrelated, uncommitted-upstream DCS commit (`f091529d`, homepage
+wiring for `sites/dcs`) sitting on top of an earlier Autcobel docs
+commit — both sessions share this working tree/checkout. Pushing
+`develop` is all-or-nothing, so "deploy DCS, then Autcobel behind it"
+(the original ask) turned out to be structurally impossible once the
+two sessions' commits were interleaved in the same linear history.
+
+Both sessions held (neither pushed) and flagged it to Ricky rather than
+one session unilaterally deciding to bundle the other's work into its
+promotion. Ricky ruled: ship all four commits together. The DCS
+session ran `/deploy.changes` for the combined set — pushed `develop`
+(972b09c4), promoted to `staging` (e991ddfa, CI + E2E + Regression
+Watchdog all green), and opened **PR #92** (`staging` → `main`,
+currently `BLOCKED` pending required checks, unmerged — that's
+Ricky's call, main is protected). Verified independently on this side
+(not taken on trust): confirmed `ace6d26a` touches only files under
+this session's own folder, nothing under `sites/`, `packages/`,
+`docs/` or deploy config — safe to ride along in a production PR.
+
+**Still outstanding:** PR #92 merge (Ricky), and — separately, not
+triggered by the merge — a `tools/publish-prototype.ts --project
+autcobel-proto` redeploy to actually update the live prototype URL
+with this turn's content.
+
 ## What was NOT done this turn
 
-- **Not committed, not pushed, not redeployed.** The live
-  `autcobel-proto.vercel.app` still serves the pre-this-turn version.
-  Next session (or later this session) needs to commit, push to
-  `develop`, and redeploy with
-  `npx tsx tools/publish-prototype.ts --project autcobel-proto` (the
-  explicit `--project` flag is load-bearing — see the 2026-09-24 "Deploy"
-  section below).
+- **Redeploy to `autcobel-proto.vercel.app` not run.** Code is merged
+  through `staging` (and will reach `main` once PR #92 is merged), but
+  the live prototype URL is a separate manual deploy — see "Deploy —
+  2026-09-25" above and the `--project autcobel-proto` note under
+  "Deploy — 2026-09-24" below.
 - `content/*.md` drafts not re-synced (see above).
 - Mobile/Safari visual QA on a real device — still never done, same as
   every prior handoff.
