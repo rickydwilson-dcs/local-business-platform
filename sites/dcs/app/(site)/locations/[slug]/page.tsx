@@ -10,8 +10,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Schema } from '@platform/core-components';
 import { SiteLocationDetailPage } from '@/components/locations/location-detail-page';
+import { LocationProse } from '@/components/locations/location-prose';
 import { getLocations, getLocation, getTestimonialsByLocation } from '@/lib/content';
-import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -102,7 +102,12 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   }
 
   const fm = result.frontmatter as unknown as LocationFrontmatter;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'locations', slug });
+  // `getLocation()` already returns the raw MDX body, so this route no longer
+  // needs `loadMdx()` — and must not use it. That factory is bound to
+  // `mdx-components.tsx`'s Tailwind/solaris map, which wrapped every town's
+  // `##` in a magenta underlined anchor. `LocationProse` renders the bare
+  // tags `inner-pages.css` §31 styles; its header has the full reasoning.
+  const mdxContent = <LocationProse content={result.content} />;
 
   const coordinates = parseCoordinates(fm.coordinates);
   if (!coordinates) {

@@ -10,8 +10,8 @@ import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
 import { SiteServiceDetailPage } from '@/components/pages/ServiceDetailPage';
+import { ServiceProse } from '@/components/services/service-prose';
 import { getServices, getService, getTestimonialsByService } from '@/lib/content';
-import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -100,7 +100,13 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   }
 
   const fm = result.frontmatter as ServiceFrontmatter;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'services', slug });
+  // `getService()` already returns the raw MDX body, so this route no longer
+  // needs `loadMdx()` — and must not use it. That factory is bound to
+  // `mdx-components.tsx`'s Tailwind/solaris map, whose `li` pill and
+  // `underline` anchor fight `inner-pages.css`'s bare-tag `.prose` rules.
+  // `ServiceProse` is the same bare-tag renderer /blog and /projects use;
+  // its header has the full reasoning.
+  const mdxContent = <ServiceProse content={result.content} />;
   const testimonials = await getTestimonialsByService(slug);
   const testimonial = testimonials[0]
     ? {

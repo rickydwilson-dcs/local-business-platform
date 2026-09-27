@@ -1315,23 +1315,24 @@ describe('the legal template matches the approved design (prototype/legal.html)'
    verified distance table this reproduces to the mile.
    ======================================================================== */
 
-// `loadMdx` (`@/lib/mdx`) returns `{ content: <MDXRemote/> }` —
-// `next-mdx-remote/rsc`'s async Server Component, which
-// `@testing-library/react`'s client renderer cannot execute, same root cause
-// as `/projects/colossus-scaffolding`'s `ProjectProse` mock above. Only
-// `loadMdx` is stubbed (via `importOriginal`) so any other real export this
-// module carries (`listSlugs`, `getPageImage`, etc., used by sibling routes'
-// `sitemap.ts` files) stays real for any other describe block in this file
-// that needs it.
-vi.mock('@/lib/mdx', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@/lib/mdx')>();
-  return {
-    ...actual,
-    loadMdx: async () => ({
-      content: React.createElement('p', null, 'Mock MDX body for the parity test.'),
-    }),
-  };
-});
+// `LocationProse` (`components/locations/location-prose.tsx`) wraps
+// `next-mdx-remote/rsc`'s `MDXRemote`, an async Server Component that
+// `@testing-library/react`'s client renderer cannot execute — same root cause
+// as `/projects/colossus-scaffolding`'s `ProjectProse` mock above.
+//
+// This replaced a `vi.mock('@/lib/mdx')` stub of `loadMdx` (2026-09-27): the
+// route no longer calls that factory, because its Tailwind/solaris component
+// map wrapped every town's `##` in a magenta underlined `<a target="_blank">`
+// against `inner-pages.css` §31's bare-tag `.prose` rules. That stub would
+// now silently no-op, letting the real async component reach the client
+// renderer and blanking the whole render.
+//
+// Unlike the `ProjectProse` mock, this stand-in renders NO wrapper element:
+// `location-detail-page.tsx` owns the `article.prose.measure` the structural
+// class comparison depends on, so a wrapper here would double it.
+vi.mock('@/components/locations/location-prose', () => ({
+  LocationProse: ({ content }: { content: string }) => React.createElement('p', null, content),
+}));
 
 import LocationsRoute, { metadata as locationsMetadata } from '../app/(site)/locations/page';
 import LocationRoute, {

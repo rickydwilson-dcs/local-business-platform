@@ -13,6 +13,11 @@ import '@/styles/inner-pages.css';
 // design session's kit.css and `test/chrome-parity.test.ts` asserts that;
 // blog-r2.css's own header has the full reasoning.
 import '@/styles/blog-r2.css';
+// The /services tier-band additions sheet (2026-09-27). Same reason as
+// blog-r2.css for being its own file: inner-pages.css is parity-guarded.
+// Must load AFTER it — its `.prose .tierrow__l` rules exist to out-specify
+// kit.css §31's bare-tag list rules. Its own header has the full reasoning.
+import '@/styles/service-tiers.css';
 import { SiteChrome } from '@/components/site/site-chrome';
 
 /**
