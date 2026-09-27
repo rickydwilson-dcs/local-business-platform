@@ -10,6 +10,35 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **DCS: fixed the `.prose` rendering collision across all 67 long-form pages, and redesigned the
+  Google Workspace tier section.** Reported as "strange bullet points and cheap underlined pink
+  headings" on `/services/google-workspace`; the page design was fine, the body was rendering
+  through two stylesheets at once. Three independent causes, all silent. (1) `/services/[slug]` and
+  `/locations/[slug]` were the last two routes still using the shared `loadMdx()` factory, whose
+  Tailwind/solaris component map renders every `<li>` as a `bg-surface-subtle` pill with its own dot
+  `<div>` — stacking with `inner-pages.css` §31's own square bullet for three bullets per item — and,
+  combined with `rehype-autolink-headings` `behavior:"wrap"`, rendered every `<h2>` as a magenta
+  underlined link carrying `target="_blank"` on a same-page fragment. Both routes now have bare-tag
+  renderers (`components/services/service-prose.tsx`, `components/locations/location-prose.tsx`),
+  matching what the r9 port already did for `/blog` and `/projects` and never finished for these
+  two. (2) `@tailwindcss/typography` emits a `.prose` class of the same name the ported kit
+  hand-authors, and won every property the kit leaves to its own reset — grey body copy on an ink
+  ground, stray block margins, a doubled list indent on the legal pages, and a 65ch cap that had
+  been shrinking `/blog/[slug]` and the legal body inside their own 74ch columns. The plugin is
+  unused on DCS (no `prose-*` utility anywhere, and DCS renders none of the shared components that
+  use them — it was only emitted because the `content` glob scans `packages/core-components`), so it
+  is removed from `sites/dcs/tailwind.config.ts` rather than overridden: 19.7KB less CSS, and
+  `test/tailwind-typography-absent.test.ts` now guards it. Every other site keeps the plugin and
+  genuinely uses it. (3) The "Three Tiers" section was three bold pseudo-headings over bullet lists
+  whose last bullet was an editorial verdict rather than a feature; it is now a designed tier band
+  (`styles/service-tiers.css`, `components/services/service-tiers.tsx`) reusing the kit's existing
+  `.tier`/`.tcard` idiom, with the verdict given its own slot. Prices and facts are unchanged; the
+  "most popular" style badge was written as "Start here" instead, since DCS cannot verify a
+  popularity claim about Google's own plan mix. Found while fixing it and recorded in root
+  `CLAUDE.md`: `next-mdx-remote` v6's `blockJS: true` default silently strips JSX expression props
+  from MDX, which may mean colossus-scaffolding's `<Schema faqs={[…]}>` structured data is not
+  emitting — unverified, worth checking.
+
 - **DCS: added a 15th blog post on migrating old mail into a new business inbox** (business-tools,
   36 posts total, business-tools now 5). Requested directly rather than sourced from
   `content-plan.md`: it explains that a professional address on a client's own domain is a new

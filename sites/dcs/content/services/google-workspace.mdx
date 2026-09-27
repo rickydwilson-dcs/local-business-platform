@@ -51,30 +51,45 @@ Under the hood it's the same: access on any device, reliable spam filtering, 24/
 
 ## The Three Tiers
 
-Google offers three main Workspace tiers for small businesses. Here's what each includes:
+Google offers three Workspace tiers for small businesses. The figures below are Google's own, billed to you directly, and are approximate — they change from time to time.
 
-**Business Starter — around £5.50/user/month**
-- Professional email at your domain
-- 30GB storage per user (email, Drive, and Google Photos)
-- Video calls (Google Meet) for up to 100 participants
-- Google Calendar, Docs, Sheets, Slides
-- This is what most tradespeople need.
-
-**Business Standard — around £11/user/month**
-- Everything in Starter, plus:
-- 2TB storage per user
-- Meet recordings saved to Drive
-- Video calls for up to 150 participants
-- Worth it if you're sharing large files regularly (site photos, contracts, drawings) or running video calls with clients.
-
-**Business Plus — around £17/user/month**
-- Everything in Standard, plus:
-- 5TB storage per user
-- Meet for up to 500 participants
-- eDiscovery and audit tools (mainly relevant for larger organisations with compliance requirements)
-- Most tradespeople won't need this tier.
-
-For a sole trader or small team, Business Starter does everything you need.
+<Tiers>
+  <Tier
+    name="Business Starter"
+    price="£5.50"
+    unit="per user / month"
+    note="Everything a sole trader or small team needs. This is the one I'd start you on."
+    recommended
+    badge="Start here"
+  >
+    <TierItem>Professional email at your domain</TierItem>
+    <TierItem>30GB storage per user (email, Drive and Google Photos)</TierItem>
+    <TierItem>Video calls (Google Meet) for up to 100 participants</TierItem>
+    <TierItem>Google Calendar, Docs, Sheets and Slides</TierItem>
+  </Tier>
+  <Tier
+    name="Business Standard"
+    price="£11"
+    unit="per user / month"
+    note="Worth it if you're sharing large files regularly — site photos, contracts, drawings — or running video calls with clients."
+  >
+    <TierItem>Everything in Business Starter</TierItem>
+    <TierItem>2TB storage per user</TierItem>
+    <TierItem>Meet recordings saved to Drive</TierItem>
+    <TierItem>Video calls for up to 150 participants</TierItem>
+  </Tier>
+  <Tier
+    name="Business Plus"
+    price="£17"
+    unit="per user / month"
+    note="Aimed at larger organisations with compliance requirements. Most tradespeople won't need this tier."
+  >
+    <TierItem>Everything in Business Standard</TierItem>
+    <TierItem>5TB storage per user</TierItem>
+    <TierItem>Meet for up to 500 participants</TierItem>
+    <TierItem>eDiscovery and audit tools</TierItem>
+  </Tier>
+</Tiers>
 
 ## What It Was Like Before
 
