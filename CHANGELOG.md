@@ -6,6 +6,22 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-27
+
+### Sites
+
+- **DCS: added a 15th blog post on migrating old mail into a new business inbox** (business-tools,
+  36 posts total, business-tools now 5). Requested directly rather than sourced from
+  `content-plan.md`: it explains that a professional address on a client's own domain is a new
+  Google Workspace account, not an upgrade of their existing free inbox, and that Google's own
+  import tools can pull the old mail across rather than leaving it behind. Deliberately stops short
+  of naming a specific migration path for every provider (Proton Mail's IMAP access depends on its
+  paid-tier Bridge app, which wasn't independently verified) and instead tells the reader to check
+  what their own provider allows before promising a full history transfer. Pairs with the existing
+  `getting-off-gmail-without-breaking-your-email` post, which covers the DNS/MX side of the same
+  move. `lib/blog-topics.ts`'s header and `test/page-parity.test.ts`'s hardcoded post count both
+  updated from 35 to 36.
+
 ## 2026-09-26
 
 ### Sites
@@ -24,6 +40,14 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   `tools/upload-delta-t-racing-cc-to-r2.ts`. Found while building it, not fixed: `npracing-v1`
   has never actually loaded its Barlow / Barlow Condensed fonts (its theme comment says they are
   loaded via `<link>`, but no such link has ever existed), so it renders in system fonts.
+
+- **Delta T Racing: completed rounds in the season calendar are no longer dimmed.** The cards
+  carried `opacity-70`, which fades the text along with the card, so every label, date and
+  "Race report" link on a finished round fell to 3.2–4.2:1 contrast (30 Lighthouse failures,
+  accessibility 96). The "Complete" pill already marks finished rounds; accessibility is now 100.
+  The hero image also moves from the deprecated `priority` prop to `preload` (Next 16 keeps the same
+  behaviour) and adds `fetchPriority="high"`. Worth knowing: in Next 16 `priority` never set
+  `fetchpriority` on its own, and adding it measured ~80ms slower simulated LCP locally, not faster.
 
 - **DCS: deleted the retired solaris layer — 11 components (1,596 lines) and 27 authored CSS
   classes that had been shipping to every visitor since the r9 migration.** The homepage moved to

@@ -7,12 +7,12 @@
  * copied off those approved, signed-off pages (notes-f.md §5.3 records the
  * same mapping). The `category` slugs themselves are real frontmatter values
  * (verified by counting `content/blog/*.mdx`: industry-guides 7, local-seo 6,
- * costs-and-value 6, website-design 4, website-content 4,
- * getting-found-online 4, business-tools 4 = 35, seven categories — NOT
- * eight; an earlier brief/session.md said eight, which notes-f.md §8.1
- * flags as wrong. Counts as of the 2026-09-26 content-gap posts closing
- * content-plan.md; the original 21-post count was local-seo 6,
- * costs-and-value 3, website-content 3, industry-guides 3,
+ * costs-and-value 6, business-tools 5, website-design 4, website-content 4,
+ * getting-found-online 4 = 36, seven categories — NOT eight; an earlier
+ * brief/session.md said eight, which notes-f.md §8.1 flags as wrong. Counts
+ * as of the 2026-09-27 email-migration post; the content-plan.md gap-closing
+ * batch landed 35 the day before, and the original pre-gap-closing count was
+ * 21 (local-seo 6, costs-and-value 3, website-content 3, industry-guides 3,
  * getting-found-online 3, website-design 2, business-tools 1).
  *
  * TOPIC_ROW_DESCRIPTORS's `local-seo` entry is the one value NOT sourced
