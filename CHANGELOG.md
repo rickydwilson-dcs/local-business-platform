@@ -40,7 +40,60 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   from any route: the root layout's consent banner is Tailwind-styled, and a shared cached base
   layer is correct architecture — Lighthouse's "unused CSS" measures one page, not a session.
 
+- **DCS: rewrote the /about page's origin story and cut the /blog index from four editorial
+  set-pieces to two.** The about-page's "there's no photograph of me here" argument (and the
+  generic browser-mockup illustration next to it) is replaced with the real Cavendish Ironworkers
+  / 1997 origin story and a LinkedIn link — DCS reads as unrelated to the day job, not anonymous.
+  The blog index was measured at 1600px before touching it: 5,686px tall, 984 words, 26 post links
+  for 21 posts, zero images, with the five newest posts listed twice across a masthead lead, a
+  "Most recent first" band, a library intro, and a "Mostly trades" band. Cut to two set-pieces —
+  3,846px, 464 words, 22 links, 0 overflowing elements at 1512px — by dropping the 566px "who it's
+  for" band entirely, collapsing seven `.topic` blocks (each restarting the eye with its own h3 +
+  description) down to chips whose descriptions already live on `/blog/category/[slug]`, and
+  reflowing `.row` from a 700px dead gutter to a 1,080px measure with meta stacked under the title.
+  The featured post stays IN the filtered list (excluding it broke "Design and speed" returning 1
+  of 2 results), and the seven category pages' `.libr__topics` links are kept as real
+  server-rendered anchors — they're `index:true` but absent from `sitemap.ts`, so that was their
+  only discovery path. R2-specific rules live in their own `styles/blog-r2.css` rather than
+  `inner-pages.css`, which `chrome-parity` asserts is a byte-for-byte copy of the design kit.
+  Surfaced a stale test as a side effect, not a regression: the `/about` parity guard was comparing
+  against the September prototype's now-deleted mockup figure (`.slot__well`/`.mock*`, 12 classes) —
+  fixed by excluding that subtree the same way the guard already excludes `.bar`/`.menu`/`footer`,
+  plus a premise test asserting the prototype still carries the figure the render no longer does, so
+  the exclusion can't quietly rot into covering something else. Prototype, measurements, and full
+  decision log in `output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign/`.
+
+- **DCS: published 14 new blog posts closing the gaps the index redesign's measurement surfaced** —
+  every service now has a post behind it, all six sector chips carry real content (retail, studios,
+  property, and creative sectors newly opened), and the thinnest topics (design-and-speed,
+  tools-and-email) each gained entries. Every post is grounded in real DCS case studies, service
+  pages, or documented engineering work from this changelog — no invented stats or testimonials.
+  Content plan: `output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign/content-plan.md`.
+
 ### Platform
+
+- **Estate-wide dead-code sweep executed across the other 9 sites** (DCS itself was already
+  cleaned above). Removed ~900 lines: `mad-graphics`' full solaris-era CSS block plus
+  `lib/performance-tracker.ts` (327 unreachable lines), `dj-fox-electrical`'s `lib/locations.ts`
+  (63 lines — closing the architecture-rule violation the Platform bullet below flagged) plus
+  `lib/service-icons.ts` (88 lines), `dch-automotive`'s orphaned `components/pages/home-page.tsx`
+  (167 lines, the same superseded-template pattern as DCS's solaris layer), and dead `lib/mdx.tsx`
+  shims in `npracing-v1` and `dpm-autobody`. The dead `.text-balance` CSS class was removed from
+  `base-template`, `colossus-scaffolding`, `dj-fox-electrical`, and `npracing-v1` (confirmed unused
+  and unguarded by any snapshot test). **`lib/analytics/types.ts` turned out to be the opposite of
+  the headline finding below**: deleting all 9 copies broke every site's `type-check` with
+  `TS2307`, because each resolves the shim through its own `@/*` tsconfig alias into
+  `core-components`'s Analytics/ConsentManager components — kept everywhere. The earlier
+  "unreachable in 8 of 10 sites" read was a name-based-grep false positive: the same exported
+  symbol names are also re-exported directly from `@platform/core-components/lib/analytics/types`,
+  which is how every real consumer imports them, so a symbol-name search finds "usage" that isn't
+  actually importing the shim's own path. `colossus-scaffolding` and `showcase` scanned clean —
+  nothing removable once `components/ui/accreditation-section.tsx` (kept, pending content-owner
+  sign-off) and the shim were excluded. `npracing-v3` (frozen design reference) was not touched.
+  Surfaced, not fixed: 3 pre-existing e2e smoke-test failures (`mad-graphics` has no Playwright
+  config at all; `npracing-v1` and `dch-automotive` test routes/slugs that don't exist on those
+  sites) — flagged as follow-on testing-infra work in
+  `output/sessions/2026-09/2026-09-26_estate-dead-code-sweep/`.
 
 - **New: `tools/find-dead-code.ts`** — walks the import graph from what Next.js actually routes
   (plus every test file, wherever it lives) and reports unreachable modules and authored CSS
@@ -50,10 +103,28 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   co-located `*.test.ts` as entry points alone removed a phantom 1,104 "dead" lines from
   dch-automotive. Detection and prevention guidance in `docs/standards/quality.md`; the
   estate-wide sweep and per-site plan in
-  `output/sessions/2026-09/2026-09-26_estate-dead-code-sweep/session.md`. Headline findings:
-  `mad-graphics` carries the same solaris-era CSS block (26 classes), `dj-fox-electrical`'s dead
-  `lib/locations.ts` is also the centralised-data-file pattern root `CLAUDE.md` forbids by name,
-  and `lib/analytics/types.ts` is unreachable in 8 of 10 sites because `base-template` seeds it.
+  `output/sessions/2026-09/2026-09-26_estate-dead-code-sweep/session.md`. Headline findings from the
+  initial scan: `mad-graphics` carries the same solaris-era CSS block (26 classes), and
+  `dj-fox-electrical`'s dead `lib/locations.ts` is also the centralised-data-file pattern root
+  `CLAUDE.md` forbids by name. A third candidate, `lib/analytics/types.ts`, looked unreachable in
+  8 of 10 sites on this initial symbol-name scan — see the sweep bullet above for what the actual
+  import-path investigation found once the sweep ran.
+
+### Prototypes
+
+- **Autcobel: published the client-facing rationale document for Gene**, hosted at
+  `docs.digitalconsultingservices.co.uk/autcobel/c83d2965/` per the same unlisted docs-site pattern
+  used for DPM Autobody. Went through several rounds of direct client feedback: corrected the brief
+  to match what was actually asked (mobile-friendly, agency-led, minimal client input) rather than
+  a fabricated quote; replaced a "one page" framing with the real, verified problem (the live site
+  doesn't render reliably across browsers — confirmed live: blank first paint, repeated framework
+  console warnings, a sitemap listing exactly one URL); rewrote the proposition around
+  findability rather than a "story"; retitled the disclosure section "Health warning" and rewrote
+  it out of corporate hedge-speak; and changed the case-studies ask from a capped "two or three" to
+  an open-ended outline of as many real projects as he can give. Also dropped the ICO-registration
+  ask entirely — most small companies don't have one, and a privacy policy doesn't need one to be
+  valid — removing it from both the content draft and the live prototype's Privacy Policy page,
+  where it had been showing as a visible red placeholder bracket.
 
 ## 2026-09-25
 
