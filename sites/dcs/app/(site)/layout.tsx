@@ -7,6 +7,12 @@ import type { Metadata } from 'next';
 // Preflight-style normalise on top of this".
 import '@/styles/home-r9-reset.css';
 import '@/styles/inner-pages.css';
+// The /blog index restructure's additions sheet (2026-09-26). Must load
+// AFTER inner-pages.css — it overrides `.row`'s two-column grid. It is a
+// separate file because inner-pages.css is a byte-for-byte copy of the
+// design session's kit.css and `test/chrome-parity.test.ts` asserts that;
+// blog-r2.css's own header has the full reasoning.
+import '@/styles/blog-r2.css';
 import { SiteChrome } from '@/components/site/site-chrome';
 
 /**

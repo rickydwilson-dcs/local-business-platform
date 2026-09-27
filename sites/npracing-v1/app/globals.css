@@ -602,10 +602,6 @@
     color: var(--color-surface-muted-foreground);
   }
 
-.text-balance {
-  text-wrap: balance;
-}
-
 /* Ensure consistent h1 font-size in semantic sectioning elements (Lighthouse) */
 article h1,
 aside h1,

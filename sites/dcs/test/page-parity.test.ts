@@ -35,7 +35,14 @@ const SERVICES_LIST_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/services-list.
 const SERVICE_DETAIL_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/service-detail.html');
 const PROJECTS_LIST_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/projects-list.html');
 const PROJECT_DETAIL_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/project-detail.html');
-const BLOG_LIST_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/blog-list.html');
+/* /blog's prototype moved out of the Phase 3b design session when the index
+   was restructured — see BLOG_R2_DIR's own session.md. The other twelve
+   prototypes below are still Phase 3b's. */
+const BLOG_R2_DIR = path.join(
+  __dirname,
+  '../../../output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign'
+);
+const BLOG_LIST_PROTO_PATH = path.join(BLOG_R2_DIR, 'prototype/blog-list.html');
 const BLOG_POST_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/blog-post.html');
 const BLOG_CATEGORY_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/blog-category.html');
 const LEGAL_PROTO_PATH = path.join(DESIGN_DIR, 'prototype/legal.html');
@@ -251,10 +258,38 @@ describe('/about matches the approved design (prototype/about.html)', () => {
   // excluded from the comparison rather than name-blacklisted, matching
   // /pricing's approach above.
   const CHROME_SUBTREE_SELECTOR = '.bar, .menu, footer.pagefoot';
+
+  /* THE DRAWN-BROWSER FIGURE IS DELIBERATELY NOT PORTED ANY MORE.
+   *
+   * `prototype/about.html:207-218` carries a `.slot__well` holding the kit's
+   * `.mock` device — a drawing of a browser window — under the "No team
+   * photo either" argument. Commit `ab25cccf` (2026-09-26) replaced that
+   * whole argument with the Cavendish Ironworkers origin story and a
+   * LinkedIn link, and dropped the illustration with it: its own message
+   * says so ("Drops the generic browser-mockup illustration that
+   * accompanied the old argument"). The copy it illustrated no longer
+   * exists on the page.
+   *
+   * So this is a superseded design decision, not drift. The prototype stays
+   * the record of what was approved in September; the exclusion records that
+   * one block of it was later overtaken by an editorial call.
+   *
+   * Excluded by SUBTREE rather than by class name, the same way the chrome
+   * is above — a name list would also silence these classes if they ever
+   * reappeared somewhere they did not belong. `/about` was the only page
+   * that ever rendered them, and nothing under app/ or components/ uses
+   * them now.
+   *
+   * The test below ("the prototype still carries the superseded figure")
+   * asserts the premise, so if the prototype is ever regenerated without it
+   * this exclusion is reported as pointless rather than passing silently. */
+  const SUPERSEDED_SUBTREE_SELECTOR = '.slot__well';
+
   function bodyOnlyClassesOf(root: ParentNode): Set<string> {
     const set = new Set<string>();
     root.querySelectorAll('*').forEach((el) => {
       if (el.closest(CHROME_SUBTREE_SELECTOR)) return;
+      if (el.closest(SUPERSEDED_SUBTREE_SELECTOR)) return;
       el.classList.forEach((c) => set.add(c));
     });
     return set;
@@ -297,6 +332,27 @@ describe('/about matches the approved design (prototype/about.html)', () => {
       missing,
       `prototype body classes not found in the render: ${missing.join(', ')}`
     ).toEqual([]);
+  });
+
+  it('the prototype still carries the superseded figure, and the render deliberately drops it', () => {
+    // The premise behind SUPERSEDED_SUBTREE_SELECTOR. If the prototype ever
+    // stops carrying .slot__well, this tells us the exclusion is now dead
+    // rather than letting it quietly cover something else.
+    const protoWell = proto.querySelector('.slot__well');
+    expect(
+      protoWell,
+      'prototype/about.html no longer has .slot__well — SUPERSEDED_SUBTREE_SELECTOR is now pointless and should be removed'
+    ).toBeTruthy();
+    expect(
+      protoWell!.querySelector('.mock'),
+      'the .slot__well no longer holds a .mock'
+    ).toBeTruthy();
+
+    // ...and the page under test renders none of it (commit ab25cccf).
+    const container = renderPage();
+    expect(container.querySelector('.slot__well')).toBeNull();
+    expect(container.querySelector('.mock')).toBeNull();
+    expect(container.querySelector('figure')).toBeNull();
   });
 
   it('renders the breadcrumb, masthead and all four page sections', () => {
@@ -1538,7 +1594,7 @@ describe('/locations/[slug] renders all 8 real towns without error, and generate
 /* ========================================================================
    /blog, /blog/[slug], /blog/category/[slug] — Phase 3a
 
-   SEVEN real categories, not eight — verified by counting all 21
+   SEVEN real categories, not eight — verified by counting all 35
    `content/blog/*.mdx` files (`lib/blog-topics.ts`'s header has the count).
    `/blog/category/[slug]` did not exist before this phase.
    ======================================================================== */
@@ -1601,28 +1657,74 @@ describe('/blog matches the approved design (prototype/blog-list.html)', () => {
     ).toEqual([]);
   });
 
-  it('renders exactly one <h1>, and the real post/topic counts in .mast__meta', async () => {
+  it('renders exactly one <h1>, and the real post count in .mast__meta', async () => {
     const protoH1 = protoMain.querySelectorAll('h1');
     expect(protoH1.length).toBe(1);
 
     const posts = await getBlogPosts();
-    expect(posts.length, 'content/blog/*.mdx should have 21 real files').toBe(21);
+    expect(posts.length, 'content/blog/*.mdx should have 35 real files').toBe(35);
 
     const container = await renderPage();
     expect(container.querySelectorAll('h1').length).toBe(1);
+    // R2 (2026-09-26): .mast__meta was four stats and is now two. The topic
+    // count went because it duplicated the chip row 600px below it, and the
+    // reading-time range went because it restates a figure on every row.
     const figs = [...container.querySelectorAll('.mast__meta > div > b')].map((b) => b.textContent);
     expect(figs).toContain(String(posts.length));
-    expect(figs).toContain(`${TOPIC_ORDER.length} topics`);
+    expect(figs).not.toContain(`${TOPIC_ORDER.length} topics`);
   });
 
-  it('renders exactly 7 .topic blocks (one per real category), each linking "N guides" to /blog/category/<slug>', async () => {
+  /* R2 (2026-09-26): the seven .topic blocks are gone — one flat .libr list
+     that the chips filter. `blog-filter-section.tsx`'s header has the why;
+     the .topic rules stay in inner-pages.css because
+     /blog/category/[slug] still renders them. */
+  it('renders ONE flat .libr list holding every post, and no .topic blocks', async () => {
+    const posts = await getBlogPosts();
     const container = await renderPage();
-    const topics = [...container.querySelectorAll('.topic')];
-    expect(topics.length).toBe(TOPIC_ORDER.length);
-    expect(topics.length).toBe(7);
 
-    const links = [...container.querySelectorAll('.topic__h .card__link')];
-    const hrefs = links.map((a) => a.getAttribute('href')).sort();
+    expect(container.querySelectorAll('.topic').length).toBe(0);
+
+    const lists = container.querySelectorAll('.work.libr');
+    expect(lists.length, 'exactly one library list').toBe(1);
+
+    const rows = [...lists[0]!.querySelectorAll('a.row')];
+    expect(rows.length, 'every post has a row, including the featured one').toBe(posts.length);
+
+    const hrefs = rows.map((a) => a.getAttribute('href'));
+    expect(new Set(hrefs).size, 'no duplicate rows').toBe(posts.length);
+    for (const post of posts) expect(hrefs).toContain(`/blog/${post.slug}`);
+  });
+
+  it('caps the list at 12 visible rows at rest, with a "show all" control', async () => {
+    const posts = await getBlogPosts();
+    const container = await renderPage();
+
+    const rows = [...container.querySelectorAll('.work.libr a.row')];
+    const visible = rows.filter((r) => !r.hasAttribute('hidden'));
+    // The cap is what keeps the index's height a function of the cap rather
+    // than of the library — notes-f.md §0's constraint, re-expressed.
+    expect(visible.length).toBe(12);
+    expect(visible.length).toBeLessThan(posts.length);
+
+    const more = container.querySelector('#more');
+    expect(more, '#more is the cap release').toBeTruthy();
+    expect(more!.hasAttribute('hidden'), '#more is visible while the cap bites').toBe(false);
+    expect(container.querySelector('#showall')).toBeTruthy();
+  });
+
+  /* THE SEVEN CATEGORY PAGES' ONLY WAY IN. They are robots:{index:true} and
+     are NOT in app/(site)/blog/sitemap.ts, so the old topic blocks' "N
+     guides" links were their entire discovery path. Dropping the blocks
+     without this would have orphaned seven indexable pages — and because
+     these have to be crawlable, they must be real anchors in the rendered
+     HTML rather than something a filter chip reveals. */
+  it('links all 7 /blog/category/<slug> pages as real anchors, not behind a chip', async () => {
+    const container = await renderPage();
+    const nav = container.querySelector('nav.libr__topics');
+    expect(nav, ".libr__topics is the category pages' only inbound link").toBeTruthy();
+    expect(nav!.hasAttribute('hidden')).toBe(false);
+
+    const hrefs = [...nav!.querySelectorAll('a')].map((a) => a.getAttribute('href')).sort();
     expect(hrefs).toEqual(TOPIC_ORDER.map((t) => `/blog/category/${t}`).sort());
   });
 
@@ -1755,10 +1857,10 @@ describe('/blog/a-fast-team-needs-a-fast-website matches the approved design (pr
   });
 });
 
-describe('/blog/[slug] renders all 21 real posts without error', () => {
+describe('/blog/[slug] renders all 35 real posts without error', () => {
   it('every real content/blog/*.mdx slug renders with exactly one <h1> and no forbidden prices', async () => {
     const posts = await getBlogPosts();
-    expect(posts.length).toBe(21);
+    expect(posts.length).toBe(35);
 
     for (const post of posts) {
       const element = await BlogPostRoute({ params: Promise.resolve({ slug: post.slug }) });
