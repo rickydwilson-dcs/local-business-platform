@@ -107,7 +107,7 @@ description: "Professional scaffolding services in Brighton. Local expertise for
 keywords: ["scaffolding brighton", "brighton scaffolding hire"]
 heroImage: "/Brighton-Scaffolding.png"
 county: "East Sussex"
-countySlug: "east-sussex"  # URL-safe slug — must match the county overview page slug
+countySlug: "east-sussex" # URL-safe slug — must match the county overview page slug
 hero:
   title: "Professional Scaffolding in Brighton"
   description: "Local expertise for Brighton's unique challenges..."
@@ -212,7 +212,10 @@ Project case study content in markdown...
 customerName: "John Smith"
 customerRole: "Homeowner"
 customerCompany: null # Optional
-rating: 5 # 1-5 stars
+rating: 5 # Optional, 1-5 stars — omit it for a quote a client simply gave
+# rather than a score they awarded. Sites that render stars (the /reviews
+# pages) skip them when it is absent; `calculateAggregateRating` averages
+# over rated entries only.
 text: "Colossus Scaffolding provided excellent service..."
 excerpt: "Excellent service for our renovation." # Optional short version
 photo: "colossus-reference/testimonials/john-smith.webp" # Optional
@@ -332,7 +335,7 @@ Before completing any content work:
 - [ ] Services have 3-15 FAQs
 - [ ] Blog posts have category, tags, and excerpt
 - [ ] Projects have heroImage, services, and results
-- [ ] Testimonials have rating, date, and text
+- [ ] Testimonials have date and text (rating optional — see above)
 - [ ] No centralized data files created
 - [ ] Dynamic routing template handles the content
 - [ ] `npm run validate:content` passes

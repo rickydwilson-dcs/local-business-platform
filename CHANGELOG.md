@@ -10,6 +10,32 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **DCS: removed fabricated portfolio content and replaced it with real work.** Two `/projects`
+  case studies were invented — "Eastbourne Plumber" and "Brighton Decorator" — as were all three
+  testimonials (Sarah T., Mark H., Dave C.), created by `cc678c1b` "from site config data" while
+  three _real_ client quotes sat unrendered in `site.config.ts` beside them. All five are gone,
+  with 301s from the two live case-study URLs to `/projects` so the removal doesn't publish
+  404s, and the blog passage that retold the invented plumber rebuild as a real client (with its
+  invented £80→£25, 3.2s→0.8s and page-one-ranking figures) is rewritten as the principle it was
+  illustrating. The three real quotes are now content files, and a new Pippy's case study covers
+  a period underwear brand rebranded in 2025 around a written art direction and tone of voice.
+  Project-card media gained a still-image variant for it (`ProjectMedia` is now a union
+  discriminated on `'video' in media`), using the client's own homepage hero cropped twice —
+  16:10 for the card well, 2:1 for the case-study masthead, which centre-crops a 16:10 still into
+  a decapitation. Counts across the site now derive from real content rather than literals, and
+  the tests that were pinned to specific names and hard-coded counts derive from live content
+  too, which also repairs the three left failing by `3eb61882`.
+
+- **DCS: filled the eight "Awaiting footage" project cards with AI-generated sector b-roll.**
+  Those eight cards previously carried no `media` entry at all, which the r9 port had documented
+  as a deliberate honesty mechanism rather than a gap. At the user's explicit direction that
+  decision was overridden and the placeholders were filled with generic sector clips (Higgsfield
+  `seedance_2_0_mini`, matching the three real clips' 1280x720/~5s profile), uploaded to R2 by
+  `tools/upload-dcs-project-videos-to-r2.ts` with provenance recorded in
+  `sites/dcs/lib/project-video-assets.ts`. The `note` line on every card still reads "Sector
+  footage — not a capture of the website", which remains true of both the stock and generated
+  clips. The `.slot` placeholder logic stays in place for any future project added without media.
+
 - **DCS: fixed the `.prose` rendering collision across all 67 long-form pages, and redesigned the
   Google Workspace tier section.** Reported as "strange bullet points and cheap underlined pink
   headings" on `/services/google-workspace`; the page design was fine, the body was rendering
@@ -50,6 +76,29 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   `getting-off-gmail-without-breaking-your-email` post, which covers the DNS/MX side of the same
   move. `lib/blog-topics.ts`'s header and `test/page-parity.test.ts`'s hardcoded post count both
   updated from 35 to 36.
+
+### Platform
+
+- **Stopped `blockJS` silently corrupting numeric MDX props.** The `next-mdx-remote` v6 default
+  strips _every_ JSX expression attribute, numeric literals included — not just the arrays and
+  objects already documented. `ImageWithCaption`'s `width={1362}`/`height={N}` were being removed
+  and the component fell back to its 800x500 default, rendering every npracing-v1 gallery image
+  at the wrong aspect ratio with nothing in the build to indicate it. Those props are now
+  authored as literal strings and coerced with `Number()` in the shared component. The same pass
+  was stripping a redundant MDX-embedded `<Schema faqs={…} org={…}>` block on six
+  colossus-scaffolding location pages, so it emitted nothing; the block was removed, and the real
+  Service/FAQ/Breadcrumb JSON-LD comes from the page component's frontmatter and was never
+  affected. Verified against real `next build --webpack` output before and after. Root
+  `CLAUDE.md`'s MDX section is updated — the colossus case it flagged as unverified is now closed.
+
+- **`TestimonialFrontmatterSchema`: `rating` is now optional.** It was required, inherited from a
+  review-site model, which meant a testimonial a client simply _said_ had to be given a score they
+  never awarded. Every consumer now handles its absence rather than defaulting to 5:
+  `calculateAggregateRating` averages over rated entries only (on both sides of the division),
+  `TestimonialCard` renders `StarRating` only when a rating exists, and the four sites with a
+  `/reviews` page — base-template, colossus-scaffolding, dch-automotive, mad-graphics — skip or
+  zero their star loops. Those sites' own testimonial files all still carry ratings, so nothing
+  changed on them; this widened the schema without touching content. All 11 sites type-check clean.
 
 ## 2026-09-26
 
