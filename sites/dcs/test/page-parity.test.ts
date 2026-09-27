@@ -120,7 +120,14 @@ import PricingPage from '../app/(site)/pricing/page';
 import AboutRoute, { metadata as aboutMetadata } from '../app/(site)/about/page';
 import { SiteServicesPage } from '../components/pages/ServicesPage';
 import { SiteServiceDetailPage } from '../components/pages/ServiceDetailPage';
-import { getServices, getService, getTestimonialsByService, getProjects } from '../lib/content';
+import {
+  getServices,
+  getService,
+  getTestimonials,
+  getTestimonialsByService,
+  getProjects,
+} from '../lib/content';
+import { PROJECT_CARDS } from '../lib/project-cards';
 import type { SiteConfigSummary } from '@platform/core-components';
 import ProjectsRoute, { metadata as projectsMetadata } from '../app/(site)/projects/page';
 import ProjectRoute, {
@@ -615,11 +622,22 @@ describe('/services/web-design matches the approved design (prototype/service-de
     expect(container.querySelectorAll('.qa details').length).toBe(protoDetails.length + 1);
   });
 
-  it('renders the real service testimonial as a .prose blockquote', async () => {
+  it('renders a .prose testimonial blockquote when, and only when, the service really has one', async () => {
+    // Was pinned to Mark H. (web-design). That testimonial was fabricated
+    // alongside the two fictitious case studies and was deleted on
+    // 2026-09-27, so this now asserts the component's real contract against
+    // whatever `getTestimonialsByService` returns rather than a name that
+    // content can remove out from under it.
+    const testimonials = await getTestimonialsByService(SLUG);
     const container = await renderPage();
     const quote = container.querySelector('.prose blockquote');
-    expect(quote, 'no testimonial blockquote rendered for web-design, which has one').toBeTruthy();
-    expect(quote!.querySelector('cite')?.textContent).toContain('Mark H.');
+
+    if (testimonials.length === 0) {
+      expect(quote, `${SLUG} has no testimonial, so no blockquote should render`).toBeNull();
+      return;
+    }
+    expect(quote, `${SLUG} has a testimonial, but no blockquote rendered`).toBeTruthy();
+    expect(quote!.querySelector('cite')?.textContent).toContain(testimonials[0].customerName);
   });
 
   it('renders exactly 5 "other services" rows, none of them web-design itself', async () => {
@@ -891,9 +909,36 @@ describe('/projects matches the approved design (prototype/projects-list.html)',
     ).toBeTruthy();
   });
 
-  it('every live class of the prototype body (minus its own chrome footer) appears in the render', async () => {
+  it('every live class of the prototype body (minus its own chrome footer and the empty testimonials panel) appears in the render', async () => {
     const protoFoot = protoMain.querySelector('footer.pagefoot');
     const excluded = protoFoot ? classesOf(protoFoot) : new Set<string>();
+
+    // The prototype's aqua testimonials panel showed three quotes. All three
+    // were fabricated and were deleted on 2026-09-27, leaving
+    // `content/testimonials/` empty, so `ProjectsListPage` skips the panel
+    // rather than render an empty one. Its classes are therefore excluded —
+    // but only while there is genuinely no testimonial content, which the
+    // guard below asserts, so this exclusion cannot quietly hide a
+    // regression once real feedback is added back.
+    const testimonials = await getTestimonials();
+    if (testimonials.length === 0) {
+      const protoQuotes = protoMain.querySelector('.quotes')?.closest('section');
+      expect(protoQuotes, 'projects-list.html has no testimonials section').toBeTruthy();
+      for (const c of classesOf(protoQuotes!)) excluded.add(c);
+    }
+
+    // Same treatment for the `.slot` "Awaiting footage" placeholder: the
+    // prototype showed it on ten cards, but commit 3eb61882 (2026-09-26) gave
+    // all eleven projects a `media` entry, so nothing falls through to it any
+    // more. Excluded only while that is genuinely true of every card — the
+    // placeholder is still live code for the next project added without
+    // media, and the moment one exists these classes are required again.
+    if (Object.values(PROJECT_CARDS).every((c) => c.media)) {
+      const protoSlot = protoMain.querySelector('.slot');
+      expect(protoSlot, 'projects-list.html has no .slot placeholder').toBeTruthy();
+      for (const c of classesOf(protoSlot!)) excluded.add(c);
+    }
+
     const protoClasses = [...classesOf(protoMain)].filter((c) => !excluded.has(c));
     expect(protoClasses.length).toBeGreaterThan(0);
 
@@ -906,20 +951,25 @@ describe('/projects matches the approved design (prototype/projects-list.html)',
     ).toEqual([]);
   });
 
-  it('renders exactly one <h1>, all 13 real case-study cards, and the 6-button sector filter bar', async () => {
+  it('renders exactly one <h1>, all 12 real case-study cards, and the 6-button sector filter bar', async () => {
     const protoH1 = protoMain.querySelectorAll('h1');
     expect(protoH1.length).toBe(1);
+    // The prototype shows 13 cards; two of those (Eastbourne Plumber,
+    // Brighton Decorator) were fictitious placeholder case studies and were
+    // removed from `content/projects/` on 2026-09-27, and Pippy's was added
+    // the same day — so the render is asserted against the real files, not
+    // against the prototype's count.
     const protoCards = protoMain.querySelectorAll('.cards--2 .card');
     expect(protoCards.length).toBe(13);
     const protoFilters = protoMain.querySelectorAll('.paytoggle button');
     expect(protoFilters.length).toBe(6); // All + 5 sectors
 
     const projects = await getProjects();
-    expect(projects.length, 'content/projects/*.mdx should have 13 real files').toBe(13);
+    expect(projects.length, 'content/projects/*.mdx should have 12 real files').toBe(12);
 
     const container = await renderPage();
     expect(container.querySelectorAll('h1').length).toBe(1);
-    expect(container.querySelectorAll('.cards--2 .card').length).toBe(13);
+    expect(container.querySelectorAll('.cards--2 .card').length).toBe(projects.length);
     expect(container.querySelectorAll('.paytoggle button').length).toBe(6);
   });
 
@@ -937,14 +987,24 @@ describe('/projects matches the approved design (prototype/projects-list.html)',
     expect(new Set(hrefs).size, 'duplicate .card hrefs').toBe(hrefs.length);
   });
 
-  it('renders the three real testimonials, and the .slot honesty mechanism for the ten case studies with no real media', async () => {
+  it('renders every real testimonial, and the .slot honesty mechanism for the eight case studies with no real media', async () => {
     const container = await renderPage();
-    expect(container.querySelectorAll('.quotes .quote').length).toBe(3);
-    // 13 cards, 3 with real R2 video assets (`lib/project-cards.ts`) -> 10
-    // `.slot` "Awaiting footage" placeholders. This is the deliberately
-    // designed honesty mechanism the Phase 2 brief says must be ported
-    // faithfully, not cleaned up as scaffolding.
-    expect(container.querySelectorAll('.cards--2 .card .slot').length).toBe(10);
+    // The prototype showed three quotes; all three were fabricated and were
+    // deleted on 2026-09-27, so the panel is asserted against the real
+    // content directory rather than the prototype's count. With none left
+    // the whole aqua section is skipped — no empty "Client feedback"
+    // heading, and no "Zero clients" lead.
+    const testimonials = await getTestimonials();
+    expect(container.querySelectorAll('.quotes .quote').length).toBe(testimonials.length);
+    if (testimonials.length === 0) {
+      expect(container.textContent).not.toContain('Client feedback');
+    }
+    // One `.slot` "Awaiting footage" placeholder per card with no `media`
+    // entry in `lib/project-cards.ts`. That was 8 of 11 until commit 3eb61882
+    // (2026-09-26) gave every project a video, making it 0 — derived rather
+    // than hard-coded so the count follows the real card copy either way.
+    const withoutMedia = Object.entries(PROJECT_CARDS).filter(([, c]) => !c.media).length;
+    expect(container.querySelectorAll('.cards--2 .card .slot').length).toBe(withoutMedia);
   });
 
   it('renders no forbidden price figures', async () => {
@@ -997,10 +1057,28 @@ describe('/projects/colossus-scaffolding matches the approved design (prototype/
     // `<p>`/`<h2 class="res">`/`<ul>`) are unaffected by the mock.
     const protoFoot = protoMain.querySelector('footer.pagefoot');
     const excluded = protoFoot ? classesOf(protoFoot) : new Set<string>();
+
+    const container = await renderPage();
+
+    // The prototype's "More like this" cards showed the `.slot` "Awaiting
+    // footage" placeholder. Commit 3eb61882 (2026-09-26) gave every project
+    // then in the portfolio a `media` entry, so a related pair drawn from
+    // those renders no placeholder. Judged by the cards THIS page actually
+    // renders rather than by the whole portfolio — a project with no media
+    // (Pippy's) exists again, but it is not in Colossus's related pair.
+    const relatedSlugs = [...container.querySelectorAll('.card')]
+      .map((a) => a.getAttribute('href')?.replace('/projects/', ''))
+      .filter((slug): slug is string => Boolean(slug));
+    expect(relatedSlugs.length, 'no related cards rendered').toBeGreaterThan(0);
+    if (relatedSlugs.every((slug) => PROJECT_CARDS[slug]?.media)) {
+      const protoSlot = protoMain.querySelector('.slot');
+      expect(protoSlot, 'project-detail.html has no .slot placeholder').toBeTruthy();
+      for (const c of classesOf(protoSlot!)) excluded.add(c);
+    }
+
     const protoClasses = [...classesOf(protoMain)].filter((c) => !excluded.has(c));
     expect(protoClasses.length).toBeGreaterThan(0);
 
-    const container = await renderPage();
     const rendered = classesOf(container);
     const missing = protoClasses.filter((c) => !rendered.has(c));
     expect(
@@ -1057,7 +1135,7 @@ describe('/projects/colossus-scaffolding matches the approved design (prototype/
   });
 });
 
-describe('/projects/[slug] renders all 13 real projects without error', () => {
+describe('/projects/[slug] renders all 11 real projects without error', () => {
   // `project-detail.html` only exists for Colossus (the design session's
   // hand-picked reference page). This block checks the other 12 generalise
   // safely: real content, one <h1>, exactly two related cards, no forbidden
@@ -1338,7 +1416,7 @@ import LocationsRoute, { metadata as locationsMetadata } from '../app/(site)/loc
 import LocationRoute, {
   generateMetadata as generateLocationMetadata,
 } from '../app/(site)/locations/[slug]/page';
-import { getLocations } from '../lib/content';
+import { getLocations, getTestimonialsByLocation } from '../lib/content';
 import { sortLocationsNearestFirst } from '../lib/location-geo';
 
 describe('/locations matches the approved design (prototype/locations-list.html)', () => {
@@ -1536,11 +1614,21 @@ describe('/locations/brighton matches the approved design (prototype/location-de
     expect(crumbTexts).toEqual(['Home', 'Locations', 'Brighton']);
   });
 
-  it('renders the real Brighton testimonial (mark-h-electrician.mdx) as a .prose blockquote', async () => {
+  it('renders a .prose testimonial blockquote when, and only when, the town really has one', async () => {
+    // Was pinned to mark-h-electrician.mdx, Brighton's only testimonial.
+    // That file was fabricated alongside the two fictitious case studies and
+    // was deleted on 2026-09-27, so this asserts the template's real
+    // contract against live content instead of a fixed name.
+    const testimonials = await getTestimonialsByLocation(SLUG);
     const container = await renderPage(SLUG);
     const quote = container.querySelector('.prose blockquote');
-    expect(quote, 'no testimonial blockquote rendered for Brighton, which has one').toBeTruthy();
-    expect(quote!.querySelector('cite')?.textContent).toContain('Mark H.');
+
+    if (testimonials.length === 0) {
+      expect(quote, `${SLUG} has no testimonial, so no blockquote should render`).toBeNull();
+      return;
+    }
+    expect(quote, `${SLUG} has a testimonial, but no blockquote rendered`).toBeTruthy();
+    expect(quote!.querySelector('cite')?.textContent).toContain(testimonials[0].customerName);
   });
 
   it('renders the real 5 FAQs as a .qa accordion', async () => {

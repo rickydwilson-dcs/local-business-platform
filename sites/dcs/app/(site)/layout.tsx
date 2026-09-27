@@ -54,8 +54,11 @@ import { SiteChrome } from '@/components/site/site-chrome';
  * ## The `/reviews` route is deliberately gone
  *
  * Decision D3: a page holding three testimonials advertises that there are
- * only three. Those three now live on `/projects` and in the relevant case
- * studies via the `.quote` pattern. `app/(site)/reviews/page.tsx` was deleted,
+ * only three. Those three lived on `/projects` and in the relevant case
+ * studies via the `.quote` pattern instead — until 2026-09-27, when all
+ * three turned out to be fabricated and were deleted, leaving
+ * `content/testimonials/` empty and every `.quote` surface self-skipping
+ * until there is real feedback. `app/(site)/reviews/page.tsx` was deleted,
  * along with its (already commented-out) `app/sitemap.ts` entry and its
  * `proxy.ts` analytics title. Nothing in the nav or footer ever linked to it.
  *

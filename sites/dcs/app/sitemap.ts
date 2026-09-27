@@ -19,9 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // (The `/reviews` entry that sat here was removed on 2026-09-18 along with
   // the route itself — decision D3, inner-pages port Phase 1. Its three
-  // testimonials live on /projects and in the case studies instead. Do not
-  // restore it: uncommenting an entry for a route that no longer resolves
-  // would publish a 404 in the sitemap.)
+  // testimonials moved to /projects and the case studies, then turned out to
+  // be fabricated and were deleted on 2026-09-27. Do not restore the entry:
+  // uncommenting an entry for a route that no longer resolves would publish
+  // a 404 in the sitemap.)
 
   // Phase 5 (2026-09-18) of the inner-pages port opted 8 more static routes
   // (below, plus the 7 /blog/category/[slug] entries further down) into

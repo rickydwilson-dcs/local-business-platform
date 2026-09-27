@@ -78,7 +78,21 @@ export function ProjectCard({
       </div>
       <div className="card__well">
         {copy.media ? (
-          <HoverVideo src={copy.media.video} poster={copy.media.poster} alt={copy.media.alt} />
+          'video' in copy.media ? (
+            <HoverVideo src={copy.media.video} poster={copy.media.poster} alt={copy.media.alt} />
+          ) : (
+            /* The well is a fixed-ratio CSS box (`.card__well img`,
+               object-fit: cover) over one pre-sized R2 still, so next/image
+               would add a loader for no gain. Matches the prototype's markup. */
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={copy.media.image}
+              alt={copy.media.alt}
+              width={1400}
+              height={875}
+              loading="lazy"
+            />
+          )
         ) : (
           <div className="slot">
             <span className="slot__i" aria-hidden="true" />

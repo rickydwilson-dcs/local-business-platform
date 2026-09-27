@@ -8,7 +8,7 @@
  * only what sits inside it.
  *
  * GENERALISED BEYOND THE DEMO. The prototype shows exactly one instance of
- * this template. Porting it to all 13 `content/projects/*.mdx` files means
+ * this template. Porting it to all 11 `content/projects/*.mdx` files means
  * deciding, for the 12 the design never rendered, what varies safely and
  * what doesn't:
  *
@@ -16,15 +16,15 @@
  *     Colossus's 5 (adds "Where they work" and "Site size"). Those two
  *     aren't reliably real for every project — "East Sussex" is wrong for a
  *     national eCommerce client, and a page count exists in frontmatter for
- *     none of the 13 — so rather than invent them per project, this ships
- *     only what's honestly derivable for all 13. Flagged in the Phase 2
+ *     none of the 11 — so rather than invent them per project, this ships
+ *     only what's honestly derivable for all 11. Flagged in the Phase 2
  *     report.
  *   - The "More like this" related pair is the demoed Colossus -> [DJ Fox,
  *     DCH Automotive] override where the design specified it
  *     (`lib/project-cards.ts`'s `RELATED_OVERRIDES`), and a same-sector
  *     algorithm everywhere else, falling back across sectors for the two
  *     single-member sectors (property, creative). The heading/lead sentence
- *     ("N of 13 are X — the other M are …") is a real, always-accurate
+ *     ("N of 11 are X — the other M are …") is a real, always-accurate
  *     portfolio statistic either way, so it renders unconditionally except
  *     for those two single-member sectors, where it would misdescribe the
  *     filler cards shown below it — a generic heading/lead replaces it
@@ -187,17 +187,29 @@ export function ProjectDetailPage({
 
         <div className="mast__media">
           {media ? (
-            <video
-              muted
-              loop
-              playsInline
-              controls
-              preload="none"
-              poster={media.poster}
-              aria-label={media.detailAlt ?? media.alt}
-            >
-              <source src={media.video} type="video/mp4" />
-            </video>
+            'video' in media ? (
+              <video
+                muted
+                loop
+                playsInline
+                controls
+                preload="none"
+                poster={media.poster}
+                aria-label={media.detailAlt ?? media.alt}
+              >
+                <source src={media.video} type="video/mp4" />
+              </video>
+            ) : (
+              /* See the same note in `project-card.tsx`; `.mast__media img`
+                 is a fixed-ratio object-fit box over one pre-sized still. */
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={media.detailImage ?? media.image}
+                alt={media.detailAlt ?? media.alt}
+                width={1600}
+                height={800}
+              />
+            )
           ) : (
             <div className="slot">
               <span className="slot__i" aria-hidden="true" />

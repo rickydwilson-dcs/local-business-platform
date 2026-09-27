@@ -24,7 +24,9 @@
  *
  * There is deliberately no `/reviews` entry: the route was dropped (D3 — a
  * page holding three testimonials advertises that there are only three), and
- * its testimonials live on `/projects` and in the case studies instead.
+ * its testimonials were shown on `/projects` and in the case studies
+ * instead. All three were fabricated and were deleted on 2026-09-27, so
+ * there is currently no testimonial content anywhere on the site.
  */
 
 export interface ChromeLink {

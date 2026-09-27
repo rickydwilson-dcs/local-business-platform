@@ -38,6 +38,10 @@
 
 import { HOME_ASSETS } from './home-assets';
 import { PROJECT_VIDEO_ASSETS } from './project-video-assets';
+
+/** Stills uploaded to R2 alongside the project videos (`dcs/projects/image/`). */
+const PROJECT_IMAGE_PREFIX =
+  'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/projects/image/';
 import type { SectorKey } from './project-sectors';
 import type { Project } from './content';
 
@@ -65,7 +69,8 @@ export function withContentFields(frontmatter: Project): Project & ProjectConten
   return frontmatter as Project & ProjectContentFields;
 }
 
-export interface ProjectMedia {
+/** A card well filled by a looping clip, played on hover. */
+export interface ProjectVideoMedia {
   video: string;
   poster: string;
   /** Alt text used on the compact list-card well. */
@@ -74,6 +79,30 @@ export interface ProjectMedia {
    *  descriptive — the masthead media is much larger). Falls back to `alt`. */
   detailAlt?: string;
 }
+
+/**
+ * A card well filled by a still. Added 2026-09-27 for Pippy's, whose card
+ * shows the client's own homepage hero rather than sector b-roll — a real
+ * frame from the work being written about, which is worth more here than a
+ * clip. Distinguished from `ProjectVideoMedia` structurally (`'video' in
+ * media`), so the eleven existing video entries needed no change.
+ */
+export interface ProjectImageMedia {
+  /** The 16:10 crop, for `.card__well`. */
+  image: string;
+  /**
+   * The 2:1 crop, for `.mast__media` on the case study itself. Two crops
+   * rather than one, because the two wells are very different shapes
+   * (16/10 against 16/8) and `object-fit: cover` centre-crops — a single
+   * 16:10 still loses the subject's head in the masthead band. Falls back
+   * to `image` where a project has only one crop.
+   */
+  detailImage?: string;
+  alt: string;
+  detailAlt?: string;
+}
+
+export type ProjectMedia = ProjectVideoMedia | ProjectImageMedia;
 
 export interface ProjectCardCopy {
   sector: SectorKey;
@@ -106,6 +135,23 @@ export interface ProjectCardCopy {
 }
 
 export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
+  // Added 2026-09-27. The only card whose media is a still rather than a
+  // clip, and the only one showing the client's actual work rather than
+  // sector footage — see `ProjectImageMedia`.
+  pippys: {
+    sector: 'retail',
+    displayName: "Pippy's",
+    subtitle: 'Brand + store',
+    note: "Pictured: Pippy's own homepage hero — the imagery produced to the art direction this case study describes.",
+    media: {
+      image: `${PROJECT_IMAGE_PREFIX}pippys.webp`,
+      detailImage: `${PROJECT_IMAGE_PREFIX}pippys-detail.webp`,
+      alt: 'A woman sitting on a pale sofa in a white t-shirt and black period pants, holding a mug in soft morning light.',
+    },
+    summary:
+      "A UK period underwear brand rebranded around a written art direction and tone of voice, after a photoshoot left the client with imagery she couldn't use.",
+    metaLine: 'One brand document driving both the photography and the product copy.',
+  },
   'the-clothing-kings': {
     sector: 'retail',
     displayName: 'The Clothing Kings',
@@ -303,6 +349,7 @@ export const RELATED_OVERRIDES: Record<string, [string, string]> = {
  *  2026-09-27), used for the list grid and as the related-section fallback's
  *  iteration order. */
 export const PROJECT_ORDER: string[] = [
+  'pippys',
   'the-clothing-kings',
   'sanctuary-ida',
   'colossus-scaffolding',
