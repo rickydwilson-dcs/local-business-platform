@@ -6,6 +6,22 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-27
+
+### Sites
+
+- **DCS: added a 15th blog post on migrating old mail into a new business inbox** (business-tools,
+  36 posts total, business-tools now 5). Requested directly rather than sourced from
+  `content-plan.md`: it explains that a professional address on a client's own domain is a new
+  Google Workspace account, not an upgrade of their existing free inbox, and that Google's own
+  import tools can pull the old mail across rather than leaving it behind. Deliberately stops short
+  of naming a specific migration path for every provider (Proton Mail's IMAP access depends on its
+  paid-tier Bridge app, which wasn't independently verified) and instead tells the reader to check
+  what their own provider allows before promising a full history transfer. Pairs with the existing
+  `getting-off-gmail-without-breaking-your-email` post, which covers the DNS/MX side of the same
+  move. `lib/blog-topics.ts`'s header and `test/page-parity.test.ts`'s hardcoded post count both
+  updated from 35 to 36.
+
 ## 2026-09-26
 
 ### Sites
