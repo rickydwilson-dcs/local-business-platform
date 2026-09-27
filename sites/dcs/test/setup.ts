@@ -27,6 +27,17 @@ if (typeof globalThis.IntersectionObserver === 'undefined') {
     NoopIntersectionObserver as unknown as typeof IntersectionObserver;
 }
 
+// jsdom does not implement scrolling: calling `window.scrollTo` logs
+// "Not implemented: Window's scrollTo() method" to the virtual console for
+// every test that touches it. `ContactForm` calls it to bring the
+// confirmation panel under the fixed header on submit, so three tests print
+// that line. Stubbed to a no-op — jsdom has no layout to scroll, so there is
+// nothing to assert either way, and the noise would otherwise sit in the
+// output where a real error should stand out.
+if (typeof window !== 'undefined') {
+  window.scrollTo = (() => {}) as typeof window.scrollTo;
+}
+
 // Cleanup after each test case
 afterEach(() => {
   cleanup();

@@ -313,18 +313,14 @@ export const siteConfig: SiteConfig = {
         latitude: '50.8233',
         longitude: '0.2557',
       },
-      openingHours: [
-        {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '17:30',
-        },
-        {
-          dayOfWeek: ['Saturday'],
-          opens: '09:00',
-          closes: '12:00',
-        },
-      ],
+      // No `openingHours` (2026-09-27, deliberate). This is a one-person
+      // business keeping irregular hours: calls are taken any day of the
+      // week, and the fixed Mon-Fri 09:00-17:30 / Sat 09:00-12:00 published
+      // here was both untrue and narrower than reality. Rather than invent a
+      // window, nothing is claimed — `getLocalBusinessSchema` guards on this
+      // field, so the LocalBusiness node simply omits
+      // `openingHoursSpecification`, and the Google Business Profile stays
+      // the single source of truth for hours. /contact says it in words.
       areaServed: [
         'Polegate',
         'Eastbourne',
