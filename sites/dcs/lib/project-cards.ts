@@ -202,10 +202,10 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
   'cuddle-plush-fabrics': {
     sector: 'retail',
     displayName: 'Cuddle Plush Fabrics',
-    subtitle: '5+ years running',
+    subtitle: 'Client since 2014',
     summary:
       "An eCommerce store for one of Europe's leading specialist fabric retailers — Google product feed, international shipping, and a large catalogue kept accurate.",
-    metaLine: 'One of my longest-running client relationships — over five years and counting.',
+    metaLine: 'A client since 2014 — my longest-running relationship by some distance.',
     note: 'Pictured: a folded bolt of fabric. Sector footage — not a capture of the website.',
     media: {
       video: HOME_ASSETS['work-cuddle-plush.video'].url,
