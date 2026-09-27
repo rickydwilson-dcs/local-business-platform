@@ -10,6 +10,31 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **DCS: corrected four published claims that contradicted the actual commercial terms.** Two sat
+  in `/services/monthly-management`'s FAQ and two in the ongoing-management blog post, and all
+  four also emit as FAQPage/article content rather than page text alone — the FAQ pair ships as
+  JSON-LD, so they were being published as structured data to Google. "Do I own my domain?"
+  answered "Yes. Your domain is registered in your name... I don't hold your domain hostage";
+  domains are registered in DCS's name. The answer now leads with that, gives the reason (domain,
+  DNS, email and SSL in one account, so nothing stalls waiting on a registrar login nobody can
+  find) and states what is true — it transfers into the client's name on request, and transfers
+  with them if they move their site. "What happens if I want to cancel?" claimed "There are no
+  lock-in contracts", and the blog post had a "No lock-in" section plus an excerpt promising "no
+  lock-in if you want out"; pay monthly runs a 24-month initial period then 30 days' notice, while
+  upfront has no ongoing commitment beyond hosting. Both now say so and explain why the initial
+  period exists. `/pricing` was already accurate throughout, which is what made the contradictions
+  findable.
+
+- **DCS: fixed two stale portfolio claims.** Bexhill Removals has closed and its site is offline,
+  but the case study was present tense and claimed a live competitive presence; it now states the
+  closure in its opening and reads as a record of the work. Cuddle Plush Fabrics was understated
+  by seven years — a client since 2014, not five — across six places (case study description,
+  outcome and body, card subtitle and meta line, the /projects masthead stat, and the About page
+  stat and section label). All are anchored to "Since 2014" rather than a running total, for the
+  same reason project counts derive from content: a year stays true unmaintained, and "5+ years"
+  had already drifted seven years. The client's own testimonial is left verbatim — "over 5 years"
+  was true when she said it — with a comment recording why the two numbers differ.
+
 - **DCS: withdrew the Mad Graphics case study and corrected two project clips that showed the
   wrong trade.** The Mad Graphics write-up is being rewritten, so its content file, card copy,
   sector entry and video mapping are removed and `/projects/mad-graphics` 301s to `/projects`

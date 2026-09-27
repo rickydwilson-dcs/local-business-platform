@@ -100,7 +100,7 @@ export function ProjectsListPage({ projects, testimonials }: ProjectsListPagePro
             <span>Fabric shop to scaffolder</span>
           </div>
           <div>
-            <b>5+ years</b>
+            <b>Since 2014</b>
             <span>Longest client relationship</span>
           </div>
           <div>
