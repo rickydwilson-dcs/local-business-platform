@@ -126,10 +126,13 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         )}
       </div>
 
-      {/* Rating */}
-      <div className="mb-4">
-        <StarRating rating={testimonial.rating} />
-      </div>
+      {/* Rating — optional: a testimonial a client simply gave, rather than
+          scored, carries none, and the stars are then not rendered. */}
+      {typeof testimonial.rating === "number" && (
+        <div className="mb-4">
+          <StarRating rating={testimonial.rating} />
+        </div>
+      )}
 
       {/* Review Text */}
       <blockquote className="text-surface-secondary mb-4">

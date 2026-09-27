@@ -214,8 +214,11 @@ interface ImageWithCaptionProps {
   src: string;
   alt: string;
   caption?: string;
-  width?: number;
-  height?: number;
+  // MDX (next-mdx-remote's blockJS remark pass) strips `width={1362}`-style
+  // numeric expression attributes entirely, so these must be authored as
+  // literal strings (`width="1362"`) in MDX content and coerced here.
+  width?: number | string;
+  height?: number | string;
 }
 
 const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
@@ -231,8 +234,8 @@ const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
         <Image
           src={src}
           alt={alt}
-          width={width}
-          height={height}
+          width={Number(width)}
+          height={Number(height)}
           quality={58}
           className="w-full h-auto object-cover"
         />

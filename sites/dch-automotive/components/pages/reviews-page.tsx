@@ -4,7 +4,7 @@ import { PageHero } from '@/components/page-hero';
 interface Testimonial {
   slug: string;
   name: string;
-  rating: number;
+  rating?: number;
   body: string;
   date?: string;
 }
@@ -15,10 +15,13 @@ export function ReviewsPage({ testimonials }: { testimonials: Testimonial[] }) {
     { name: 'Reviews', href: '/reviews', current: true },
   ];
 
-  const count = testimonials.length;
+  // `rating` is optional — a testimonial a client simply gave, rather than
+  // scored, has none — so only rated entries count, on both sides.
+  const rated = testimonials.filter((t) => typeof t.rating === 'number');
+  const count = rated.length;
   const average =
     count > 0
-      ? Math.round((testimonials.reduce((sum, t) => sum + t.rating, 0) / count) * 10) / 10
+      ? Math.round((rated.reduce((sum, t) => sum + (t.rating ?? 0), 0) / count) * 10) / 10
       : 0;
 
   return (
@@ -79,7 +82,8 @@ export function ReviewsPage({ testimonials }: { testimonials: Testimonial[] }) {
                       key={i}
                       className="material-symbols-outlined text-brand-primary text-lg"
                       style={{
-                        fontVariationSettings: i < testimonial.rating ? "'FILL' 1" : "'FILL' 0",
+                        fontVariationSettings:
+                          i < (testimonial.rating ?? 0) ? "'FILL' 1" : "'FILL' 0",
                       }}
                     >
                       star

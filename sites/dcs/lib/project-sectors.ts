@@ -4,7 +4,7 @@
  *
  * SOURCE: `output/sessions/2026-09/2026-09-15_dcs-inner-pages-design/
  * prototype/projects-list.html` — the sectors, their order, their filter-bar
- * labels and the `data-sector` value assigned to each of the 13
+ * labels and the `data-sector` value assigned to each of the
  * `content/projects/*.mdx` files are all read directly off that approved,
  * already-signed-off HTML (lines 132-441). Nothing here is invented: no
  * `sector` field exists in `ProjectFrontmatterSchema`
@@ -46,8 +46,14 @@ export const SECTOR_PLURAL_LABEL: Record<SectorKey, string> = {
 };
 
 /** `content/projects/*.mdx` slug -> sector, read off every `data-sector="…"`
- *  attribute in `prototype/projects-list.html`'s 13 `.card` elements. */
+ *  attribute in `prototype/projects-list.html`'s `.card` elements. The
+ *  prototype had 13; the two fictitious placeholder case studies (Eastbourne
+ *  Plumber, Brighton Decorator) were removed on 2026-09-27, leaving 11. */
 export const PROJECT_SECTOR: Record<string, SectorKey> = {
+  // Added 2026-09-27, after the prototype was authored — hence no
+  // `data-sector` of its own to read off; 'retail' matches the other
+  // eCommerce builds.
+  pippys: 'retail',
   'the-clothing-kings': 'retail',
   'sanctuary-ida': 'studios',
   'colossus-scaffolding': 'trades',
@@ -55,17 +61,15 @@ export const PROJECT_SECTOR: Record<string, SectorKey> = {
   'dj-fox-electrical': 'trades',
   'mad-graphics': 'creative',
   'nicola-noble-tuition': 'studios',
-  'wordpress-to-platform-rebuild': 'trades',
   'silvero-homes': 'property',
   'dch-automotive': 'trades',
   'luna-landings': 'retail',
   'bexhill-removals': 'trades',
-  'new-website-from-scratch': 'trades',
 };
 
-/** Small English number words, only as far as this 13-item portfolio needs —
- *  used to reproduce the prototype's "Six of the thirteen…" phrasing on
- *  every case study page rather than falling back to digits. */
+/** Small English number words, only as far as this portfolio needs — used to
+ *  reproduce the prototype's "Six of the thirteen…" phrasing on every case
+ *  study page rather than falling back to digits. */
 const NUMBER_WORDS = [
   'zero',
   'one',

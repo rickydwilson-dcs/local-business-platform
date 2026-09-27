@@ -16,12 +16,12 @@
  * components map that renders the bare markup the prototype's own CSS
  * expects.
  *
- * `h1` renders nothing: every one of the 13 `content/projects/*.mdx` bodies
+ * `h1` renders nothing: every one of the 11 `content/projects/*.mdx` bodies
  * opens with its own `# Title` line, and the masthead (`project-detail-page.tsx`)
  * already renders the page's one h1 — keeping the MDX's own would be a
  * second h1, a document-outline bug rather than a design choice
  * (`project-detail.html:154-156`'s own note on this, made for Colossus,
- * generalised here to all 13).
+ * generalised here to all 11).
  *
  * VOICE: this renders the real MDX body content, unedited — including its
  * first-person plural ("we built"). Converting that to first-person singular

@@ -109,6 +109,15 @@ const nextConfig: NextConfig = {
       '/blog/featured_item',
       '/examples',
     ];
+    // The two fictitious placeholder case studies removed on 2026-09-27
+    // (Eastbourne Plumber, Brighton Decorator) were live under these
+    // /projects/ URLs, so they redirect back to the portfolio rather than 404.
+    const removedProjects = ['wordpress-to-platform-rebuild', 'new-website-from-scratch'].flatMap(
+      (slug) => [
+        { source: `/projects/${slug}`, destination: '/projects', permanent: true },
+        { source: `/projects/${slug}/`, destination: '/projects', permanent: true },
+      ]
+    );
     const ourWorkNoCounterpart = [
       'mad-group-marketing',
       'absorbent-mats',
@@ -136,6 +145,7 @@ const nextConfig: NextConfig = {
       { source: '/contact-us', destination: '/contact', permanent: true },
       { source: '/contact-us/', destination: '/contact', permanent: true },
       ...projectRedirects,
+      ...removedProjects,
       ...homeSources.map((source) => ({ source, destination: '/', permanent: true })),
     ];
   },

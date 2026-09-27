@@ -19,16 +19,29 @@
  * `lib/content.ts`, never duplicated here.
  *
  * MEDIA HONESTY (see `.slot` in `projects-list.html`'s own header comment):
- * exactly three projects have real R2 video assets, and the footage is
- * sector-representative stock the client provided, NOT a screen capture of
- * the built website — `note`/`detailNote` say so explicitly, matching the
- * design. The other ten carry no `media` entry at all, so `ProjectCard`
- * renders the `.slot` "Awaiting footage" placeholder — the deliberate
- * honesty mechanism flagged in the Phase 2 brief as NOT scaffolding to
- * remove.
+ * all eleven projects now carry a `media` entry, so no card falls through
+ * to the `.slot` "Awaiting footage" placeholder any more — the placeholder
+ * logic itself is left in place in `ProjectCard` for any future project
+ * added without media. Three (`the-clothing-kings`, `colossus-scaffolding`,
+ * `cuddle-plush-fabrics`) are real R2 video assets, sector-representative
+ * stock the client provided. The other eight were, until 2026-09-26,
+ * deliberately left without media as an honesty mechanism (flagged in the
+ * Phase 2 brief as NOT scaffolding to remove) — at the user's explicit
+ * request that decision was overridden and they were filled with
+ * AI-generated sector b-roll (Higgsfield CLI, see
+ * `sites/dcs/lib/project-video-assets.ts` for full provenance), matching
+ * the same "no capture of the site, no faces, no readable text/logos"
+ * spirit as the three stock clips. `note` on all eleven still reads
+ * "Sector footage — not a capture of the website", which remains true for
+ * both the stock and the AI-generated clips.
  */
 
 import { HOME_ASSETS } from './home-assets';
+import { PROJECT_VIDEO_ASSETS } from './project-video-assets';
+
+/** Stills uploaded to R2 alongside the project videos (`dcs/projects/image/`). */
+const PROJECT_IMAGE_PREFIX =
+  'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dcs/projects/image/';
 import type { SectorKey } from './project-sectors';
 import type { Project } from './content';
 
@@ -38,7 +51,7 @@ import type { Project } from './content';
  * field for project frontmatter — but `scripts/validate-content.ts` only
  * ever validates `services` and `locations` (`mode === 'all' | 'services' |
  * 'locations'`; `projects` is not a case), so that schema has never actually
- * been enforced against `content/projects/*.mdx`. All 13 real files instead
+ * been enforced against `content/projects/*.mdx`. All 11 real files instead
  * use `date`, `tags` and `outcomes` — none of which exist on the inferred
  * `Project` type, so reading them needs a cast to this observed shape
  * rather than a schema fix, which is out of scope for a route-level port
@@ -56,7 +69,8 @@ export function withContentFields(frontmatter: Project): Project & ProjectConten
   return frontmatter as Project & ProjectContentFields;
 }
 
-export interface ProjectMedia {
+/** A card well filled by a looping clip, played on hover. */
+export interface ProjectVideoMedia {
   video: string;
   poster: string;
   /** Alt text used on the compact list-card well. */
@@ -65,6 +79,30 @@ export interface ProjectMedia {
    *  descriptive — the masthead media is much larger). Falls back to `alt`. */
   detailAlt?: string;
 }
+
+/**
+ * A card well filled by a still. Added 2026-09-27 for Pippy's, whose card
+ * shows the client's own homepage hero rather than sector b-roll — a real
+ * frame from the work being written about, which is worth more here than a
+ * clip. Distinguished from `ProjectVideoMedia` structurally (`'video' in
+ * media`), so the eleven existing video entries needed no change.
+ */
+export interface ProjectImageMedia {
+  /** The 16:10 crop, for `.card__well`. */
+  image: string;
+  /**
+   * The 2:1 crop, for `.mast__media` on the case study itself. Two crops
+   * rather than one, because the two wells are very different shapes
+   * (16/10 against 16/8) and `object-fit: cover` centre-crops — a single
+   * 16:10 still loses the subject's head in the masthead band. Falls back
+   * to `image` where a project has only one crop.
+   */
+  detailImage?: string;
+  alt: string;
+  detailAlt?: string;
+}
+
+export type ProjectMedia = ProjectVideoMedia | ProjectImageMedia;
 
 export interface ProjectCardCopy {
   sector: SectorKey;
@@ -97,6 +135,23 @@ export interface ProjectCardCopy {
 }
 
 export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
+  // Added 2026-09-27. The only card whose media is a still rather than a
+  // clip, and the only one showing the client's actual work rather than
+  // sector footage — see `ProjectImageMedia`.
+  pippys: {
+    sector: 'retail',
+    displayName: "Pippy's",
+    subtitle: 'Brand + store',
+    note: "Pictured: Pippy's own homepage hero — the imagery produced to the art direction this case study describes.",
+    media: {
+      image: `${PROJECT_IMAGE_PREFIX}pippys.webp`,
+      detailImage: `${PROJECT_IMAGE_PREFIX}pippys-detail.webp`,
+      alt: 'A woman sitting on a pale sofa in a white t-shirt and black period pants, holding a mug in soft morning light.',
+    },
+    summary:
+      "A UK period underwear brand rebranded around a written art direction and tone of voice, after a photoshoot left the client with imagery she couldn't use.",
+    metaLine: 'One brand document driving both the photography and the product copy.',
+  },
   'the-clothing-kings': {
     sector: 'retail',
     displayName: 'The Clothing Kings',
@@ -119,6 +174,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
       'An online booking platform for a yoga school, with calendar management, capacity controls and Google Maps integration.',
     metaLine:
       'Students book and pay for classes on the site, with capacity limits handled automatically.',
+    note: 'Pictured: a yoga mat and a lit candle in a studio space. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['sanctuary-ida'].video,
+      poster: PROJECT_VIDEO_ASSETS['sanctuary-ida'].poster,
+      alt: 'A rolled yoga mat and a lit candle on a sunlit wooden studio floor.',
+    },
   },
   'colossus-scaffolding': {
     sector: 'trades',
@@ -159,6 +220,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       "An electrician's site on the DCS platform — service pages for domestic, commercial and EV charging work, plus location pages across East Sussex.",
     metaLine: 'Full 20+ page site, live on Vercel at djfoxelectrical.com.',
+    note: 'Pictured: an electrician connecting wires inside a consumer unit. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['dj-fox-electrical'].video,
+      poster: PROJECT_VIDEO_ASSETS['dj-fox-electrical'].poster,
+      alt: "An electrician's gloved hands connecting wires inside an open consumer unit.",
+    },
     relatedSlotNote: 'Live at djfoxelectrical.com — capture not yet taken',
   },
   'mad-graphics': {
@@ -168,6 +235,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       'A redesign for a marketing agency that needed a site as dynamic as the work it showcases — live Instagram feed, bold service icons, Google Maps.',
     metaLine: 'Scroll-triggered animation linking imagery directly to each service.',
+    note: 'Pictured: colour swatches and design proofs on a studio desk. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['mad-graphics'].video,
+      poster: PROJECT_VIDEO_ASSETS['mad-graphics'].poster,
+      alt: 'Colour swatches and printed design proofs arranged on a studio desk.',
+    },
   },
   'nicola-noble-tuition': {
     sector: 'studios',
@@ -176,14 +249,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       "An 11+ tutor's teaching taken online after Covid, with lesson content and paid resources protected behind a paywall.",
     metaLine: 'Nationwide reach, replacing a local-only model.',
-  },
-  'wordpress-to-platform-rebuild': {
-    sector: 'trades',
-    displayName: 'Eastbourne Plumber',
-    subtitle: 'WordPress rebuild',
-    summary:
-      'A slow, expensive WordPress site replaced — monthly cost down from £80 to £25, load time from 3.2s to 0.8s, and 15+ location pages added.',
-    metaLine: 'Page 1 of Google for "plumber Eastbourne" within four months.',
+    note: 'Pictured: handwritten notes in an open notebook. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['nicola-noble-tuition'].video,
+      poster: PROJECT_VIDEO_ASSETS['nicola-noble-tuition'].poster,
+      alt: 'A hand writing with a pencil in an open notebook on a wooden desk.',
+    },
   },
   'silvero-homes': {
     sector: 'property',
@@ -192,6 +263,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       "A site for a property development agency, built around the brand's own identity to present luxury homes with clarity and confidence.",
     metaLine: 'Clean, minimal design approved on the first presentation.',
+    note: 'Pictured: a modern luxury home exterior at golden hour. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['silvero-homes'].video,
+      poster: PROJECT_VIDEO_ASSETS['silvero-homes'].poster,
+      alt: 'A modern luxury house exterior with large glass windows at golden hour.',
+    },
   },
   'dch-automotive': {
     sector: 'trades',
@@ -200,6 +277,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       'An automotive specialist’s first website — work showcase, accreditations, and a live Instagram feed keeping the site current between jobs.',
     metaLine: 'A professional online presence established from a standing start.',
+    note: 'Pictured: a mechanic working on a car engine bay. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['dch-automotive'].video,
+      poster: PROJECT_VIDEO_ASSETS['dch-automotive'].poster,
+      alt: "A mechanic's gloved hands working on a car engine bay under a work light.",
+    },
     relatedSlotNote: 'Live at dch-one.vercel.app — capture not yet taken',
   },
   'luna-landings': {
@@ -209,6 +292,12 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       'A made-to-order store with a product configurator and worldwide shipping, built around a fulfilment model that carries no stock at all.',
     metaLine: 'Automatic work orders raised for the production team at checkout.',
+    note: 'Pictured: hands guiding material through a production line machine. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['luna-landings'].video,
+      poster: PROJECT_VIDEO_ASSETS['luna-landings'].poster,
+      alt: 'Hands guiding material through a small production line machine.',
+    },
   },
   'bexhill-removals': {
     sector: 'trades',
@@ -217,21 +306,20 @@ export const PROJECT_CARDS: Record<string, ProjectCardCopy> = {
     summary:
       "A clean, minimal removals site built after competitor research, with the client's first real creative freedom.",
     metaLine: 'Design approved on the first presentation — no revisions.',
-  },
-  'new-website-from-scratch': {
-    sector: 'trades',
-    displayName: 'Brighton Decorator',
-    subtitle: 'First website',
-    summary:
-      "A sole trader's first 20-page website and professional email address — first Google enquiry inside three weeks.",
-    metaLine: 'Two to three organic leads a month, consistently.',
+    note: 'Pictured: moving boxes being loaded into a removals van. Sector footage — not a capture of the website.',
+    media: {
+      video: PROJECT_VIDEO_ASSETS['bexhill-removals'].video,
+      poster: PROJECT_VIDEO_ASSETS['bexhill-removals'].poster,
+      alt: 'Cardboard moving boxes being loaded into the back of a removals van.',
+    },
   },
 };
 
 /**
  * `.mast__meta` "Type of job" on a case-study page, derived from the MDX
- * frontmatter's own `tags[0]` — every one of the 13 project files uses one
- * of these four exact values. Not authored per project; genuinely computed
+ * frontmatter's own `tags[0]` — every one of the 11 project files uses one
+ * of these values (`website-rebuild` is kept for a future rebuild case study;
+ * no current project carries it). Not authored per project; genuinely computed
  * from real content, unlike the copy above.
  */
 export const JOB_TYPE_BY_TAG: Record<string, string> = {
@@ -246,8 +334,8 @@ export const JOB_TYPE_BY_TAG: Record<string, string> = {
  * (`project-detail.html:266-305`, Colossus's "More like this"): DJ Fox
  * Electrical and DCH Automotive specifically, not just "two other trades
  * projects" — both are real, live, deployed sites (see `MEMORY.md` → "Live
- * Sites"), which is presumably *why* those two and not e.g. the Eastbourne
- * Plumber rebuild. The other 12 case studies have no demoed related pair to
+ * Sites"), which is presumably *why* those two and not another trades
+ * project. The other 10 case studies have no demoed related pair to
  * port, so `project-detail-page.tsx` falls back to a same-sector algorithm
  * for them — flagged in the Phase 2 report as a generalisation beyond what
  * the approved design shows.
@@ -257,9 +345,11 @@ export const RELATED_OVERRIDES: Record<string, [string, string]> = {
 };
 
 /** Canonical display order — `projects-list.html`'s own card order
- *  (1-13), used for the list grid and as the related-section fallback's
+ *  (1-13, less the two fictitious placeholder case studies removed on
+ *  2026-09-27), used for the list grid and as the related-section fallback's
  *  iteration order. */
 export const PROJECT_ORDER: string[] = [
+  'pippys',
   'the-clothing-kings',
   'sanctuary-ida',
   'colossus-scaffolding',
@@ -267,10 +357,8 @@ export const PROJECT_ORDER: string[] = [
   'dj-fox-electrical',
   'mad-graphics',
   'nicola-noble-tuition',
-  'wordpress-to-platform-rebuild',
   'silvero-homes',
   'dch-automotive',
   'luna-landings',
   'bexhill-removals',
-  'new-website-from-scratch',
 ];
