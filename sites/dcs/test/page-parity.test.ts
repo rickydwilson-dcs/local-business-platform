@@ -1594,7 +1594,7 @@ describe('/locations/[slug] renders all 8 real towns without error, and generate
 /* ========================================================================
    /blog, /blog/[slug], /blog/category/[slug] — Phase 3a
 
-   SEVEN real categories, not eight — verified by counting all 21
+   SEVEN real categories, not eight — verified by counting all 35
    `content/blog/*.mdx` files (`lib/blog-topics.ts`'s header has the count).
    `/blog/category/[slug]` did not exist before this phase.
    ======================================================================== */
@@ -1662,7 +1662,7 @@ describe('/blog matches the approved design (prototype/blog-list.html)', () => {
     expect(protoH1.length).toBe(1);
 
     const posts = await getBlogPosts();
-    expect(posts.length, 'content/blog/*.mdx should have 21 real files').toBe(21);
+    expect(posts.length, 'content/blog/*.mdx should have 35 real files').toBe(35);
 
     const container = await renderPage();
     expect(container.querySelectorAll('h1').length).toBe(1);
@@ -1857,10 +1857,10 @@ describe('/blog/a-fast-team-needs-a-fast-website matches the approved design (pr
   });
 });
 
-describe('/blog/[slug] renders all 21 real posts without error', () => {
+describe('/blog/[slug] renders all 35 real posts without error', () => {
   it('every real content/blog/*.mdx slug renders with exactly one <h1> and no forbidden prices', async () => {
     const posts = await getBlogPosts();
-    expect(posts.length).toBe(21);
+    expect(posts.length).toBe(35);
 
     for (const post of posts) {
       const element = await BlogPostRoute({ params: Promise.resolve({ slug: post.slug }) });
