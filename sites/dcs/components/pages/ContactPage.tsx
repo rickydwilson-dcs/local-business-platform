@@ -118,17 +118,19 @@ export function SiteContactPage() {
 
             <div className="facts">
               <div>
-                <b>Mon&ndash;Fri, 9:00&ndash;17:30</b>
-                <span>When I&rsquo;m about</span>
-              </div>
-              <div>
-                <b>Saturday by appointment</b>
-                <span>Sunday closed</span>
+                <b>Any day of the week</b>
+                <span>Call whenever suits you</span>
               </div>
               <div>
                 <b>Unit H3, Chaucer Business Park</b>
                 <span>Dittons Road, Polegate, East Sussex BN26 6QH</span>
               </div>
+              <p>
+                I keep irregular hours, so a call at the weekend or in the evening is genuinely
+                fine. That doesn&rsquo;t run the other way: if something from me lands at an odd
+                hour, answer it in yours. I don&rsquo;t expect anyone to reply outside their own
+                working day.
+              </p>
               <p>
                 Most of the work is done remotely, so where you are makes no difference &mdash; I
                 build for businesses from Cornwall to the Highlands. If you&rsquo;re local and would

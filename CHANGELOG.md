@@ -10,6 +10,23 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ### Sites
 
+- **DCS: the contact page's confirmation panel now anchors below the header, and its opening hours
+  describe the real arrangement.** On a successful submission the form is swapped for the `#done`
+  panel, but the viewport was never moved — so the page kept the scroll position the visitor had
+  when they pressed Send, which is the bottom of a long form, and the panel rendered with its
+  "Thanks, …" heading above the fold. The part that confirms the message actually sent was the
+  part being cropped. An effect keyed on `submitted` now scrolls it to just below the header,
+  measuring `.bar`'s height at run time (it is `position: fixed`, so it overlays the document
+  rather than occupying space, and its height changes with the breakpoint) and moving focus to the
+  panel with `preventScroll: true` so a screen reader lands on the confirmation without fighting
+  the positioning. Separately, the page published "Mon–Fri, 9:00–17:30" and "Saturday by
+  appointment / Sunday closed", and `site.config.ts` published the same as LocalBusiness
+  `openingHours`. Neither was true of a one-person business keeping irregular hours — the window
+  was both inaccurate and narrower than reality. The page now says "Any day of the week", spells
+  out that nobody is expected to answer an out-of-hours email outside their own working day, and
+  the schema hours are removed rather than replaced with an invented window, so no page emits
+  `openingHoursSpecification` at all.
+
 - **DCS: corrected four published claims that contradicted the actual commercial terms.** Two sat
   in `/services/monthly-management`'s FAQ and two in the ongoing-management blog post, and all
   four also emit as FAQPage/article content rather than page text alone — the FAQ pair ships as
@@ -140,6 +157,14 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   `/reviews` page — base-template, colossus-scaffolding, dch-automotive, mad-graphics — skip or
   zero their star loops. Those sites' own testimonial files all still carry ratings, so nothing
   changed on them; this widened the schema without touching content. All 11 sites type-check clean.
+
+### Platform
+
+- **`BusinessConfig.openingHours` is now optional.** Both `getLocalBusinessSchema` implementations
+  already guarded on it and omitted `openingHoursSpecification` when absent — the type was simply
+  stricter than the code, so a site with no fixed hours could not express that. All 11 sites
+  type-check clean and the other ten still supply hours, so nothing changed for them.
+  `docs/standards/schema.md` records when to omit it.
 
 ## 2026-09-26
 

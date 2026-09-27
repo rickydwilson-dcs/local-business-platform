@@ -61,6 +61,14 @@ const localBusinessSchema = {
 };
 ```
 
+**`openingHours` is optional.** `BusinessConfig.openingHours` may be omitted
+entirely, and `getLocalBusinessSchema` then leaves `openingHoursSpecification`
+off the node rather than emitting an empty one. Omit it for a business that
+does not keep a fixed, publishable window — publishing hours it does not keep
+is worse than publishing none, and Google takes hours from the Business
+Profile regardless. `sites/dcs` does this deliberately; every other site
+supplies real hours.
+
 ### Service Schema (Service Pages)
 
 ```tsx
