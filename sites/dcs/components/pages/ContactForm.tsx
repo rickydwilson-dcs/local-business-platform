@@ -35,7 +35,7 @@
  *     part of this fix's scope.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CONTACT } from '@/components/home/home-data';
 
@@ -91,11 +91,58 @@ const GENERIC_ERROR =
   'Something went wrong sending that. Please try again, or use the email/phone opposite.';
 const NETWORK_ERROR = 'Network error. Please check your connection and try again.';
 
+/** Breathing room between the fixed header and the confirmation panel. */
+const DONE_GAP = 16;
+
 export function ContactForm() {
   const [csrfToken, setCsrfToken] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<SubmittedInfo | null>(null);
+  const doneRef = useRef<HTMLElement>(null);
+
+  /**
+   * Bring the confirmation panel to the top of the viewport once it replaces
+   * the form.
+   *
+   * Without this the page keeps whatever scroll position the visitor had when
+   * they pressed Send — which is the bottom of a long form — so the panel
+   * renders with its "Thanks, …" heading above the fold and only its buttons
+   * visible. The message that confirms the thing actually worked is the part
+   * that gets cropped.
+   *
+   * `.bar` is `position: fixed` (`inner-pages.css` §221) and so overlays the
+   * document rather than taking up space in it: scrolling the panel's own top
+   * to `scrollY: 0` would tuck its first line underneath the header. Its
+   * height is measured at run time rather than hard-coded because it changes
+   * with the breakpoint. `.done` is `position: relative`, not sticky, so
+   * `getBoundingClientRect()` reports its true layout position here — see
+   * root `CLAUDE.md` on sticky elements reporting their pinned position
+   * instead, which is why this measurement can't be reused blindly elsewhere.
+   */
+  useEffect(() => {
+    if (!submitted) return;
+    const panel = doneRef.current;
+    if (!panel) return;
+
+    const barHeight = document.querySelector('.bar')?.getBoundingClientRect().height ?? 0;
+    const target = panel.getBoundingClientRect().top + window.scrollY - barHeight - DONE_GAP;
+
+    // Focus moves to the panel so a screen-reader or keyboard user lands on
+    // the confirmation rather than staying where the submit button used to
+    // be. `preventScroll` leaves the positioning to the scroll below, which
+    // accounts for the fixed header; the browser's own focus scroll does not.
+    panel.focus({ preventScroll: true });
+
+    const reduceMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.scrollTo({
+      top: Math.max(0, target),
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
+  }, [submitted]);
 
   useEffect(() => {
     let cancelled = false;
@@ -167,6 +214,7 @@ export function ContactForm() {
       </p>
 
       <section
+        ref={doneRef}
         className="done swap"
         id="done"
         hidden={!submitted}
