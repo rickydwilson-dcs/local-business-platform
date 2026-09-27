@@ -76,7 +76,6 @@ export function SeasonCalendar({ races }: SeasonCalendarProps) {
               highlighted
                 ? 'border-brand-accent bg-surface-card'
                 : 'border-surface-card-border bg-surface-card',
-              s === 'done' ? 'opacity-70' : '',
             ].join(' ')}
           >
             <div className="flex flex-col items-center">

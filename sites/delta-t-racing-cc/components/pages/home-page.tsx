@@ -165,7 +165,8 @@ export function HomePage({
             src={PHOTO.hero}
             alt="Lance Jordan, number 88, leaning his Kawasaki hard into a corner"
             fill
-            priority
+            preload
+            fetchPriority="high"
             sizes="100vw"
             quality={72}
             className="object-cover object-[60%_45%]"

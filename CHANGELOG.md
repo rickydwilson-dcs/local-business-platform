@@ -25,6 +25,14 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
   has never actually loaded its Barlow / Barlow Condensed fonts (its theme comment says they are
   loaded via `<link>`, but no such link has ever existed), so it renders in system fonts.
 
+- **Delta T Racing: completed rounds in the season calendar are no longer dimmed.** The cards
+  carried `opacity-70`, which fades the text along with the card, so every label, date and
+  "Race report" link on a finished round fell to 3.2–4.2:1 contrast (30 Lighthouse failures,
+  accessibility 96). The "Complete" pill already marks finished rounds; accessibility is now 100.
+  The hero image also moves from the deprecated `priority` prop to `preload` (Next 16 keeps the same
+  behaviour) and adds `fetchPriority="high"`. Worth knowing: in Next 16 `priority` never set
+  `fetchpriority` on its own, and adding it measured ~80ms slower simulated LCP locally, not faster.
+
 - **DCS: deleted the retired solaris layer — 11 components (1,596 lines) and 27 authored CSS
   classes that had been shipping to every visitor since the r9 migration.** The homepage moved to
   r9 in August and the 15 inner routes in the September port; each phase recorded the superseded
