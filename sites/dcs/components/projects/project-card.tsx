@@ -8,9 +8,12 @@
  * "G12 RESOLVED" comment).
  *
  * `.slot` (the "Awaiting footage" placeholder) is NOT scaffolding — it is
- * the design's honesty mechanism for the ten case studies with no real
- * video yet, and is rendered whenever `copy.media` is absent. Do not give it
- * a stand-in screenshot.
+ * the design's honesty mechanism for a case study with no real video yet,
+ * rendered whenever `copy.media` is absent. Do not give it a stand-in
+ * screenshot. All 11 current projects carry a `media` entry (see
+ * `project-cards.ts`'s "MEDIA HONESTY" comment for what that footage
+ * actually is per project), so this path is currently unused but must stay
+ * for the next project added without media.
  */
 
 import Link from 'next/link';
