@@ -1,0 +1,259 @@
+/* =====================================================================
+   DCS r9 — service-tiers.css
+   §J  .tierband — THE IN-PROSE TIER COMPARISON           2026-09-27
+
+   WHY THIS IS ITS OWN FILE AND NOT APPENDED TO inner-pages.css.
+   Same reason `blog-r2.css` and `footmap.css` are: `styles/inner-pages.css`
+   is a byte-for-byte copy of the design session's merged `kit.css` after a
+   provenance header, and `test/chrome-parity.test.ts` asserts that by
+   comparing its tail. Appending breaks the guarantee that keeps the ported
+   design from silently drifting from the approved one. `app/(site)/layout.tsx`
+   imports this directly after `inner-pages.css`.
+
+   ---------------------------------------------------------------------
+
+   WHAT THIS REPLACES. `/services/google-workspace` presented Google's three
+   Workspace plans as three bold pseudo-headings, each followed by a bullet
+   list. Two things were wrong with it beyond the styling collision that the
+   `components/services/service-prose.tsx` change fixes separately:
+
+     - There was no comparison. Three plans that differ on four axes were
+       three separate lists, so "what do I actually get for the extra GBP 5.50"
+       could only be answered by scrolling between them and holding both in
+       your head. Two of the three lists opened with "Everything in Starter,
+       plus:" — a list admitting in prose that it wanted to be a comparison.
+     - The last bullet of every list was not a feature. "This is what most
+       tradespeople need." / "Worth it if you're sharing large files
+       regularly" / "Most tradespeople won't need this tier." are editorial
+       verdicts wearing a feature's bullet, which is what made the lists read
+       as padded and made the real features harder to scan.
+
+   The verdict now has its own slot (`.tierrow__s`, under the plan name) and
+   the list holds features only.
+
+   ---------------------------------------------------------------------
+
+   NOT ONE NEW NUMBER. Every value below is lifted from kit.css:
+
+     rule colour        rgba(14,14,18,.16)     .tiers          (kit:752)
+     dark-ground rule   rgba(255,255,255,.22)  .qa             (kit:825)
+     row padding        clamp(15px,2.2vh,24px) .tier           (kit:754)
+     name               700 / clamp(1.15rem,2.3vw,1.75rem) / -.028em
+                                               .tier__n        (kit:760)
+     subtitle           14.5px / opacity .7    .tcard__s       (kit:810)
+     figure             700 / clamp(1.05rem,2vw,1.5rem) / -.02em / nowrap
+                                               .tier__f        (kit:766)
+     figure sub         12.5px / 500 / .6      .tier__f small  (kit:768)
+     ink fill           var(--ink) + #fff      .tier[aria-selected]  (kit:759)
+     card radius        calc(var(--r)*.7)      .detail         (kit:775)
+     badge              magenta pill, 11px/700/.09em/5px 11px
+                                               .tcard__b       (kit:805)
+     feature row        flex / gap 10px / 16px / 1.45
+                                               .tcard__l li    (kit:816)
+     check              15px, magenta; aqua on the ink row
+                                               .tcard__l svg   (kit:817-818)
+
+   THE INK ROW IS THE KIT'S OWN "THIS ONE" IDIOM. kit.css:759 fills the
+   selected pricing tier with ink and flips its text white. Reusing that for
+   the recommended plan means the page says "this is the one" the same way
+   /pricing already does, rather than inventing a second emphasis.
+
+   WHY ROWS RATHER THAN A THREE-UP GRID. The band lives inside `.measure`
+   (74ch, kit:1477). Three cards across 74ch is ~220px each, too narrow for a
+   price plus five features, and breaking out of the measure needs a `100vw`
+   negative-margin trick that double-counts the desktop scrollbar. Stacked
+   rows are also `.tiers`/`.tier`'s own desktop shape.
+
+   PRICES AND COMMAS — kit.css §17's trap, repeated because it bites silently.
+   `.tierrow__f` sets no `font-variant-numeric` and no monospaced family.
+   Both give a thousands comma a full digit advance, so "GBP 1,995" renders as
+   "1 , 995". It INHERITS: resolve both properties up the ancestor chain
+   before adding a comma'd figure here.
+   ===================================================================== */
+
+/* `.prose .tierband` and not `.tierband`: `.prose>*+*{margin-top:16px}`
+   (kit:1511) is 0,1,0 and would otherwise win on source order alone if this
+   sheet ever moved above inner-pages.css. Two classes settles it. */
+.prose .tierband {
+  margin-top: clamp(28px, 4vh, 44px);
+  display: grid;
+  gap: 0;
+}
+
+.tierrow {
+  position: relative;
+  padding: clamp(15px, 2.2vh, 24px) 6px;
+  border-top: 1px solid rgba(14, 14, 18, 0.16);
+}
+.tierrow:last-child {
+  border-bottom: 1px solid rgba(14, 14, 18, 0.16);
+}
+.p--ink .tierrow,
+.p--navy .tierrow,
+.p--magenta .tierrow {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* The recommended plan. Carries no rules of its own — the fill IS the
+   separation — and the row after it supplies the next edge with its own
+   border-top. `margin-bottom` is the design's recurring short gap. */
+.tierrow--rec {
+  background: var(--ink);
+  color: #fff;
+  border-top-color: transparent;
+  border-radius: calc(var(--r) * 0.7);
+  padding: clamp(22px, 3vh, 30px) clamp(20px, 3vw, 32px);
+  margin-bottom: 12px;
+}
+.tierrow--rec:last-child {
+  border-bottom-color: transparent;
+}
+/* on a dark ground the fill would vanish into the page, so it inverts */
+.p--ink .tierrow--rec,
+.p--navy .tierrow--rec,
+.p--magenta .tierrow--rec {
+  background: var(--white);
+  color: var(--ink);
+  border-top-color: transparent;
+}
+
+/* `.tcard__b` verbatim except the left offset, which tracks the row's own
+   horizontal padding instead of .tcard's fixed 20px. */
+.tierrow__b {
+  position: absolute;
+  top: -10px;
+  left: clamp(20px, 3vw, 32px);
+  background: var(--magenta);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 100px;
+}
+
+.tierrow__h {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.tierrow__n {
+  display: block;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.3vw, 1.75rem);
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+}
+.tierrow__s {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.4;
+  opacity: 0.7;
+  margin-top: 5px;
+  max-width: 38ch;
+}
+/* right-aligned EXPLICITLY, for `.tier__f`'s own reason (kit:763-765): the
+   figure is inline text above a block <small>, so with default alignment it
+   lines up only when the two happen to be the same width. */
+.tierrow__f {
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2vw, 1.5rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-align: right;
+  line-height: 1.05;
+}
+.tierrow__f small {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 500;
+  opacity: 0.6;
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+/* THE FEATURE LIST. Every `.prose ...` selector here exists to out-specify
+   kit.css §31's bare-tag list rules, which would otherwise reach inside the
+   row and add a 28px indent plus a 6px square bullet alongside the check —
+   the exact double-bullet this whole change is undoing. `.measure`'s own
+   header (kit:1474) names this hazard: the kit's element rules reach any list
+   in `.prose` unless a class stops them. */
+.prose .tierrow__l {
+  display: grid;
+  gap: 9px;
+  list-style: none;
+  max-width: none;
+  margin-top: clamp(16px, 2.2vh, 22px);
+  /* Zeroed EXPLICITLY. kit.css §02's reset (`*{margin:0;padding:0}`) is
+     undone for this element by @tailwindcss/typography's own `.prose ul`
+     rule, which restores `padding-inline-start:1.625em` — measured at 26px,
+     which pushed the whole feature list 26px right of the plan name it
+     belongs to while the name and the `<ul>` box stayed flush at 411.96px.
+     A list indented from its own heading reads as a sub-list of something. */
+  padding-left: 0;
+}
+.prose .tierrow__l li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.45;
+  opacity: 0.82;
+  padding-left: 0;
+  position: static;
+  /* the grid `gap` above is the only spacing; item margins would add to it.
+     kit.css §02's `*{margin:0;padding:0}` already gives this — stated anyway
+     so the band holds its 9px rhythm under any future base layer that
+     reintroduces list-item margins (`@tailwindcss/typography` set 8.25px here
+     until it was removed from `tailwind.config.ts` on 2026-09-27). */
+  margin: 0;
+}
+.prose .tierrow__l li::before {
+  content: none;
+}
+.prose .tierrow__l svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  margin-top: 3px;
+  color: var(--magenta);
+}
+.tierrow--rec .tierrow__l svg {
+  color: var(--aqua);
+}
+.p--ink .tierrow--rec .tierrow__l svg,
+.p--navy .tierrow--rec .tierrow__l svg,
+.p--magenta .tierrow--rec .tierrow__l svg {
+  color: var(--magenta);
+}
+
+/* ---------------------------------------------------------------------
+   J1  RESPONSIVE
+
+   One breakpoint, and it is a real one rather than tidying: `.tierrow__h`
+   wraps the figure onto its own line once name and price cannot share it,
+   and a wrapped figure that is still `text-align:right` sits against the far
+   edge of a full-width line with its own name at the other end — it reads as
+   belonging to nothing. 560px is where "Business Standard" plus "GBP 11 / per
+   user / month" stops fitting at this type scale.
+   --------------------------------------------------------------------- */
+@media (max-width: 560px) {
+  .tierrow__h {
+    gap: 8px;
+  }
+  .tierrow__f {
+    text-align: left;
+  }
+  .tierrow__f small {
+    display: inline;
+    margin-top: 0;
+    margin-left: 6px;
+  }
+}
+
+/* No @media (hover:none) block: nothing in the band is interactive, so there
+   is no hover state to latch on tap (kit.css §24's concern). No reduced-motion
+   block either — nothing here animates. */
