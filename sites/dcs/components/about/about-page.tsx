@@ -148,7 +148,7 @@ export function AboutPage() {
             <span>Sites delivered</span>
           </div>
           <div>
-            <b>5+ years</b>
+            <b>Since 2014</b>
             <span>With the longest-standing client</span>
           </div>
           <div>
@@ -281,9 +281,12 @@ export function AboutPage() {
         </p>
       </section>
 
-      {/* ===== One client, five years in — aqua ============================= */}
+      {/* ===== One client, since 2014 — aqua ================================
+          The quote below is Sarah's own words and stays exactly as given —
+          "over 5 years" was true when she said it. Only the framing around it
+          is anchored to the real start year. */}
       <section className="sec p--aqua" data-ground="aqua">
-        <p className="eyeless">A client, five years in</p>
+        <p className="eyeless">A client since 2014</p>
         <blockquote>
           <p className="quote quote--hero res">
             Ricky has built and managed our online store for over 5 years. I couldn&rsquo;t be
