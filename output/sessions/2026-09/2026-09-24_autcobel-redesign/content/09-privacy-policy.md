@@ -24,10 +24,6 @@ Stanbridge Park, Staplefield Lane, Staplefield, West Sussex, RH17 6AS.
 `info@autcobel.ltd` (resolved 2026-09-24 from the live site's contact
 section)
 
-**Information Commissioner's Office (ICO) registration**
-`[ICO registration number — confirm with Gene, or confirm we still need to
-register]`
-
 ## What we collect
 
 - Contact form submissions: name, company, email, phone, message

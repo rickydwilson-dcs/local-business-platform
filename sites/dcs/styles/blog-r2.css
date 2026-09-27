@@ -1,0 +1,161 @@
+/* =====================================================================
+   DCS r9 — blog-r2.css
+   /blog INDEX RESTRUCTURE                                  2026-09-26
+
+     prototype   output/sessions/2026-09/2026-09-26_dcs-blog-index-redesign/
+                 prototype/blog-list.html
+     source      that session's kit-additions-blog-r2.css
+     rationale   that session's session.md (measurements, before/after,
+                 decisions)
+
+   WHY THIS IS ITS OWN FILE AND NOT APPENDED TO inner-pages.css.
+   `styles/inner-pages.css` is a byte-for-byte copy of the design session's
+   merged `kit.css` after a provenance header, and
+   `test/chrome-parity.test.ts` asserts exactly that ("styles/inner-pages.css
+   is a verbatim copy of the design session kit.css") by comparing its tail.
+   Appending to it breaks that guarantee, which exists so the ported design
+   cannot silently drift from the approved one.
+
+   The prototype has the same shape: `kit.css`, then a `kit-additions-*.css`
+   loaded after it. This file is that additions sheet, and
+   `app/(site)/layout.tsx` imports it directly after `inner-pages.css` so the
+   cascade order matches the prototype's. `styles/footmap.css` is the
+   existing precedent for a separate sheet alongside the verbatim copy.
+
+   ---------------------------------------------------------------------
+
+   WHAT THIS REPLACES. The index used to open seven `.topic` blocks, each a
+   35.2px h3 plus a 62ch `.topic__d`, with `.row`s full-bleed beneath them.
+   Measured on the live page at a 1600px viewport:
+
+     page height       5,686px   (~7 screens)
+     body words        984
+     post links        26        for 21 posts — the 5 newest listed twice
+     .row width        1,450px
+     title cell        1,337px   holding ~500px of text
+     .row__m           85px      pinned to the far right
+     .row padding      13.2px    top and bottom
+
+   A ~700px dead gutter through every row with no air above or below it:
+   empty across, tight down, which is what reads as "no white space" while
+   simultaneously reading as crowded.
+
+   The `.topic` rules in inner-pages.css (F-01/F-02/F-03, ~line 3599) are
+   untouched — `/blog/category/[slug]` still renders `.topic__h` and
+   `.topic__d`, and `components/blog/blog-category-page.tsx` still depends
+   on them. Only `/blog` itself stops emitting them.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   R2-01  .libr — THE MEASURE AND THE VERTICAL ROOM
+
+   Both halves of the problem at once. A measure, so the row is as wide as
+   its content wants to be rather than as wide as the section; and real
+   padding, so rows read as objects rather than as lines of a table.
+   `.row`'s two-column grid is replaced with a single column, which puts
+   `.row__m` directly under its title — read as part of the same item
+   instead of as a value in a far-off column.
+
+   Numbers, and where each comes from:
+     max-width 1080px   ~74ch at `.row__n`'s largest size — `.measure`'s own
+                        74ch ruling, applied to a list instead of to prose.
+     padding-block      clamp(26px,3.4vh,38px) — `.row`'s own clamp
+                        (18/2.6vh/30, inner-pages.css ~line 536) scaled by
+                        ~1.28, the smallest step that clears `.row__n`'s
+                        descender plus `.row__m` at the largest viewport.
+     .row__n font       clamp(1.12rem,1.9vw,1.6rem) — `.topic .row__n` was
+                        clamp(1.02rem,1.75vw,1.42rem) (~line 3629); with the
+                        seven h3s gone the list carries the hierarchy alone
+                        and takes the step back up.
+   --------------------------------------------------------------------- */
+.libr{max-width:1080px}
+.libr .row{grid-template-columns:1fr;gap:9px;align-items:start;
+  padding-block:clamp(26px,3.4vh,38px)}
+.libr .row__n{font-size:clamp(1.12rem,1.9vw,1.6rem);letter-spacing:-.024em;
+  line-height:1.2;display:block}
+
+
+/* ---------------------------------------------------------------------
+   R2-02  .libr .row__m — THE META, AS ONE LINE UNDER THE TITLE
+
+   `.row__m{text-align:right}` and `.row__m em{display:block}` are correct
+   for a two-column row and wrong for a stacked one. Here the three parts
+   sit on one baseline and wrap as a group.
+
+   COLOUR. The topic label is the one accented part. A SEVEN-COLOUR TOPIC
+   SYSTEM WAS CONSIDERED AND DROPPED: this theme has four hues total (ink,
+   magenta, aqua, navy), so seven meant inventing three — and colour would
+   then have been carrying category on its own. The label is read as text
+   either way; the accent is emphasis, not encoding.
+
+   `.row:hover` sets color:#fff on `.row__n` and `.row__m` as the magenta
+   sweep passes under them. `.row__t` is a child of `.row__m`, so without
+   the explicit rule below it stays magenta-on-magenta.
+   --------------------------------------------------------------------- */
+.libr .row__m{text-align:left;display:flex;flex-wrap:wrap;
+  align-items:baseline;gap:6px 14px;font-size:13.5px}
+.libr .row__m em{display:inline;font-size:12px}
+.libr .row__t{color:var(--acc);font-weight:700;font-size:12px;
+  letter-spacing:.09em;text-transform:uppercase}
+.libr .row:hover .row__t{color:#fff}
+
+
+/* ---------------------------------------------------------------------
+   R2-03  .libr__more — THE CAP RELEASE
+
+   12 rows at rest; this reveals the remainder. It replaces the
+   four-per-topic cap (F-03) and carries the same constraint — notes-f.md
+   §0: the index's height must be a function of the cap, not of the library
+   — with one control instead of seven headings.
+
+   `--ghost` is local. The filled `.btn` is the page's single call to
+   action in the footer; a second filled button mid-page would compete
+   with it.
+   --------------------------------------------------------------------- */
+.libr__more{margin-top:clamp(24px,3.4vh,38px)}
+.btn--ghost{background:none;color:var(--ink);
+  box-shadow:inset 0 0 0 1.5px rgba(14,14,18,.24)}
+.btn--ghost:hover{background:var(--ink);color:#fff;
+  box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+
+/* ---------------------------------------------------------------------
+   R2-04  .libr__topics — THE SEVEN CATEGORY PAGES' ONLY WAY IN
+
+   The old index linked /blog/category/<slug> seven times, once per topic
+   block ("6 guides →"). Dropping the topic blocks dropped all seven links.
+
+   Those pages are `robots:{index:true}` (app/(site)/blog/category/[slug]/
+   page.tsx) and are NOT in app/(site)/blog/sitemap.ts, which lists only
+   /blog and /blog/<slug>. Those seven links were therefore their entire
+   discovery path. This line puts them back as real anchors in the static
+   HTML, so a crawler reaches them without pressing a filter chip.
+   `test/page-parity.test.ts` asserts all seven are present and unhidden.
+
+   Sized to read as a footnote to the list rather than as a second
+   navigation: `.count`'s 13.5px, `.row__m`'s #5E5E68, the same measure.
+   --------------------------------------------------------------------- */
+.libr__topics{max-width:1080px;margin-top:clamp(20px,2.8vh,30px);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+  font-size:13.5px;color:#5E5E68}
+.libr__topics span{font-weight:700;font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;opacity:.75}
+.libr__topics a{color:#5E5E68;font-weight:500;
+  border-bottom:1px solid rgba(14,14,18,.22);padding-bottom:1px}
+.libr__topics a:hover{color:var(--acc);border-bottom-color:var(--acc)}
+
+
+/* ---------------------------------------------------------------------
+   R2-05  NARROW
+
+   `.row__n`'s clamp already handles the type. The two things that do not
+   fall out of it: the hover sweep's -14px bleed, which at a small --pad
+   reaches the viewport edge, and the meta line, which wants to stay one
+   line rather than wrap to three.
+   --------------------------------------------------------------------- */
+@media (max-width:640px){
+  .libr .row{padding-block:clamp(20px,2.8vh,26px)}
+  .libr .row__m{gap:4px 10px;font-size:12.5px}
+  .libr .row::after{inset:0 -8px}
+}

@@ -1,0 +1,54 @@
+---
+title: "Why your site feels slow even though it loads fast"
+slug: "why-your-site-feels-slow-even-though-it-loads-fast"
+description: "DCS's homepage scored badly on Lighthouse despite looking fine: a stray font link and background video were loading before anyone needed them. Here's the real fix."
+date: "2026-09-26"
+author:
+  name: "Ricky Wilson"
+  role: "Founder, Digital Consulting Services"
+category: "website-design"
+sector: "trades"
+tags:
+  - "website-performance"
+  - "core-web-vitals"
+  - "web-design"
+  - "page-speed"
+featured: false
+heroImage: "placeholder/blog-perceived-vs-measured-speed.webp"
+readingTime: 5
+excerpt: "Two invisible drags were slowing every page of the DCS site down, and neither was the thing Lighthouse blamed. Here's how sequencing, not deleting, fixed both."
+---
+
+# Why your site feels slow even though it loads fast
+
+A client will sometimes tell me their site feels slow, then open it on their own laptop, on office fibre, and watch it load in under a second. Both things are true. The site is fast for them. It's slow for the person who actually matters: a visitor on a phone, on a patchy 4G connection, who has never seen the site before and isn't going to wait around to find out if it's worth it.
+
+That gap between measured speed and felt speed is where most performance problems live. Not in the obvious places, a slow server, a giant hero photo nobody compressed, but in things that never show up when you're looking at your own site on your own machine. I found two of them on my own homepage, and neither was where I expected.
+
+## The video that wasn't even the problem
+
+DCS's homepage has a stack of work-sample sections, most running short background video. Seven of them, adding up to 9.7MB. The browser doesn't care whether a visitor ever scrolls down far enough to see them: left alone, it starts fetching every one of those videos the moment the page loads, because that's what an autoplaying `<video>` tag does regardless of where it sits on the page.
+
+Here's the part that surprised me. None of those videos were the slow bit Google was measuring. The page's Largest Contentful Paint, the metric that decides how "fast" a page feels, was server-rendered text near the top of the page. Nothing to do with video at all. But a Lighthouse mobile audit, run under a simulated throttled connection, still scored that LCP at 4.3 seconds, because seven videos competing for bandwidth in the background were choking the connection the text needed to arrive on. The thing being measured and the thing causing the delay weren't the same thing, which is why it's easy to miss.
+
+The videos stayed. Client work that took real effort to produce doesn't get deleted because a Lighthouse score is unhappy. What changed was when they load. Each section now renders its poster frame, a single static image, immediately, and only starts fetching the actual video once an IntersectionObserver reports the panel is about to enter the viewport. Nothing changed for a visitor who scrolls all the way down. Everything changed for the page's total weight before that point: 10.5MB down to roughly 700KB.
+
+I've written about this same discipline before, on [A Fast Team Needs a Fast Website](/blog/a-fast-team-needs-a-fast-website), which covers NP Racing's homepage landing a perfect 100 across every Google PageSpeed category using the same poster-first approach. Different site, different result, same underlying rule: load nothing until the moment it's needed.
+
+## The font nobody was using
+
+The second one was quieter, and it hit every page on the site, not just the homepage. DCS's root layout had a `<link>` to a Google Fonts icon stylesheet sitting in `<head>`, there to support icon fonts used on a handful of inner pages. A stylesheet loaded that way is render-blocking by default: the browser holds up rendering the page until it's fetched and parsed, on every route that layout wraps.
+
+The homepage doesn't use a single one of those icons. It was still paying the full cost of loading that stylesheet before it could render anything: an estimated 800ms of LCP and FCP that had nothing to do with what the homepage needed.
+
+The font stayed too. Pages that use those icons still need it. What changed was where the loading happened: instead of a synchronous link in the document head, a small client component now inserts it after the page has mounted. Pages that use the icon font still get it, just slightly later and without holding up everything else. Pages that don't use it, like the homepage, stop paying for it at all.
+
+## Same lesson, twice
+
+Both problems trace back to the same habit: loading everything a site might ever need, all at once, regardless of whether the visitor in front of it right now needs any of it. Neither fix involved cutting a feature or trimming content. Both were about sequencing: working out what has to be ready in the first second, and holding everything else back until it's genuinely about to matter.
+
+This is also why a site can look fast and not be fast. If you built the thing, or you know every corner of it, you never scroll far enough to trigger the video load, and you've probably got the icon font cached from your last ten visits. The gap only shows up in front of someone who's never been there before, on hardware and a connection you don't control. Every actual customer.
+
+If you want to know where that gap is on your own site, run it through [Google PageSpeed Insights](https://pagespeed.web.dev/) on mobile, and read past the headline score into what's loading and when. If something there doesn't make sense, if the thing being flagged doesn't look like the thing that's slow, that's usually the sign something is loading at the wrong moment, not that the wrong thing is on the page at all.
+
+If you'd rather have someone else do that read for you, [get in touch](/contact) and I'll take a proper look at what your site is loading, and when.
