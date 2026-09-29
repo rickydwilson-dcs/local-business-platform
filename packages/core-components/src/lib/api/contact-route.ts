@@ -16,6 +16,7 @@ import { validateCsrfToken } from "../security/csrf";
 import { escapeHtml } from "../security/html-escape";
 import { extractClientIp } from "../security/ip-utils";
 import { checkRateLimit } from "../rate-limiter";
+import { assessSubmission, type SpamAssessment, type SpamRulesConfig } from "./spam-score";
 
 interface ContactRouteConfig {
   siteSlug: string;
@@ -29,6 +30,24 @@ interface ContactRouteConfig {
     textMuted: string;
   };
   rateLimit: boolean;
+  /**
+   * Opt in to spam tagging. Omit and behaviour is unchanged: no scoring runs
+   * and no subject is altered, which is why the nine client sites that have not
+   * opted in are unaffected.
+   *
+   * Tagging never blocks: a flagged submission is still delivered, still gets a
+   * confirmation, and still returns success to the visitor. The only effect is a
+   * `[SPAM?]` prefix on the business notification's subject, so a single
+   * server-side mail rule can file them without ever risking a real enquiry.
+   *
+   * `preset` is the shared profile for the site's `businessType` (see
+   * `SPAM_PRESETS`); `rules` is that site's own delta on top. A site that needs
+   * no tuning passes `rules: {}`.
+   */
+  spamTagging?: {
+    preset?: SpamRulesConfig;
+    rules?: SpamRulesConfig;
+  };
 }
 
 interface ContactSubmission {
@@ -211,6 +230,23 @@ async function sendContactEmail(
       ip: submission.ip !== "unknown" ? escapeHtml(submission.ip) : null,
     };
 
+    // Spam assessment. Scores only, never blocks. Stays `undefined` when the
+    // site has not opted in, in which case nothing below changes.
+    const assessment: SpamAssessment | undefined = config.spamTagging
+      ? assessSubmission(submission, config.spamTagging.rules ?? {}, config.spamTagging.preset)
+      : undefined;
+
+    if (assessment?.isSpam) {
+      // Logged so the term list can be tuned from real traffic rather than
+      // guesswork, and so a false positive is traceable to the signal at fault.
+      console.info("[contact] submission tagged as likely spam", {
+        siteSlug: config.siteSlug,
+        score: assessment.score,
+        threshold: assessment.threshold,
+        signals: assessment.signals.map((sig) => `${sig.id}(${sig.weight})`),
+      });
+    }
+
     // Extra fields rows
     const extraFieldRows = Object.entries(submission.extraFields)
       .map(
@@ -255,6 +291,15 @@ async function sendContactEmail(
   <div style="background: ${colors.background}; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${safe.message}</div>
 
   <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+  ${
+    assessment?.isSpam
+      ? `<p style="font-size: 12px; color: ${colors.textMuted};">
+    Tagged as likely spam (score ${assessment.score} against a threshold of ${assessment.threshold}),
+    on: ${assessment.signals.map((sig) => escapeHtml(sig.id)).join(", ")}.
+    A guess, not a verdict \u2014 nothing was withheld and the message is complete above.
+  </p>`
+      : ""
+  }
   <p style="font-size: 12px; color: ${colors.textMuted};">
     Received: ${new Date(submission.receivedAt).toLocaleString("en-GB")}<br>
     ${safe.ip ? `IP: ${safe.ip}<br>` : ""}
@@ -277,7 +322,7 @@ async function sendContactEmail(
         // `replyTo` key is silently ignored, which leaves replies going to
         // `from` (the noreply address) instead of the enquirer.
         reply_to: submission.email,
-        subject: `New Contact: ${emailSubject}`,
+        subject: `${assessment?.isSpam ? "[SPAM?] " : ""}New Contact: ${emailSubject}`,
         html: businessEmailHtml,
       }),
     });
