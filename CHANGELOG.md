@@ -6,6 +6,39 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-29
+
+### Packages
+
+- **Contact-form emails set a `Reply-To` header for the first time.** `sendContactEmail()` posts to
+  the Resend REST API with raw `fetch`, and had been sending the SDK's camelCase `replyTo`. The REST
+  endpoint documents `reply_to` and drops keys it does not recognise — without a 400, and still
+  returning `200 OK` with a message id — so nothing anywhere indicated a problem. The practical
+  effect on every site using the factory: replying to an enquiry notification addressed the `from`
+  address (`RESEND_FROM_EMAIL`, an unattended noreply mailbox) rather than the person who filled in
+  the form, and the reply had to be re-addressed by hand every time. Both emails now set it
+  explicitly — the business notification replies to the enquirer, and the customer confirmation
+  replies to the site's `BUSINESS_EMAIL`, which previously had no reply path at all. The
+  confirmation's footnote said "Please do not reply directly to this message"; that contradicted
+  the header it now carries, so it reads "This confirmation was sent automatically, but replying to
+  it will reach us." That copy is shared by all ten sites.
+
+### Sites
+
+- **DCS: enquiry emails are branded in the r9 palette instead of the retired solaris teal.** The
+  email template can't read the site's CSS custom properties, so it interpolates literal hex from a
+  `themeColors` object that each site's own `app/api/contact/route.ts` supplies. DCS was supplying
+  `themeConfig.colors.brand.*`, which still holds the pre-r9 solaris colours kept for the fourteen
+  inner routes that haven't been reskinned — so every notification and confirmation went out in
+  `#61A3BA` teal. It now reads the r9 `colors.custom` group: magenta `#D6006B` for headings and the
+  rule, ink `#0E0E12` for subheads, paper `#ECEBE9` for the message panel, grey `#70707B` for the
+  footnote. Only the colours changed; the template itself is shared and still generic (Arial, no
+  logo). `sites/dcs/test/contact-email-branding.test.ts` drives the real route handler with a real
+  CSRF token, stubs only `https://api.resend.com/emails`, and asserts the exact outbound payload —
+  both `reply_to` fields and the palette — because every failure in this area is silent.
+
+---
+
 ## 2026-09-27
 
 ### Sites

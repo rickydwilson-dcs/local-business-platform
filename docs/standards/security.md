@@ -159,6 +159,42 @@ const emailHtml = `
 `;
 ```
 
+## Transactional Email (Resend)
+
+Both contact-form emails are sent by `sendContactEmail()` in
+`packages/core-components/src/lib/api/contact-route.ts`, which posts to the Resend REST API with
+raw `fetch` rather than the SDK.
+
+### Field names are snake_case, and a wrong one fails silently
+
+The REST API ignores keys it does not recognise. It does not 400, and the response is still
+`200 OK` with a message id — so a misspelled field looks exactly like a working one, and the only
+way to notice is to receive the mail and inspect the headers. The SDK's camelCase names
+(`replyTo`) are **not** what the REST endpoint takes; it documents `reply_to`.
+
+This bit in September 2026: the factory had been sending `replyTo`, so no `Reply-To` header was
+ever set on the business notification and replying to an enquiry went to the `from` address
+(`RESEND_FROM_EMAIL`, an unattended noreply mailbox) instead of to the enquirer.
+
+Both emails now set it explicitly:
+
+| Email                 | `to`                        | `reply_to`                  |
+| --------------------- | --------------------------- | --------------------------- |
+| Business notification | the site's `BUSINESS_EMAIL` | the enquirer's address      |
+| Customer confirmation | the enquirer's address      | the site's `BUSINESS_EMAIL` |
+
+Check any new field against [Resend's Send Email reference](https://resend.com/docs/api-reference/emails/send-email)
+before adding it, and assert the outbound payload in a test — `sites/dcs/test/contact-email-branding.test.ts`
+stubs only `https://api.resend.com/emails` and inspects the exact JSON the real route handler emits.
+
+### Branding is per-site, resolved to hex at call time
+
+Email clients cannot read the site's CSS custom properties, so the template takes a `themeColors`
+object and interpolates literal hex. Each site's `app/api/contact/route.ts` supplies it. That file
+is the branding hook — pointing it at the wrong token group ships off-brand mail with nothing to
+indicate a problem, which is what happened on DCS, where `colors.brand.*` still holds the pre-r9
+solaris palette used by the inner routes.
+
 ## Secure IP Extraction
 
 ### IP Extraction Utility
