@@ -144,6 +144,11 @@ The theme system exists so sites can be re-branded without touching component co
   Confirmed by a failed `dpm-autobody` production build; spot-checking the site's real pages
   afterward found no visible regression from losing the opsz interpolation.
 
+### Transactional Email
+
+- The contact-form emails go out via raw `fetch` to the **Resend REST API** (`sendContactEmail()` in `packages/core-components/src/lib/api/contact-route.ts`), not the SDK — so the body takes the API's **snake_case** field names, and the SDK's camelCase equivalents are wrong. An unrecognised key is dropped without a 400: the call still returns `200 OK` with a message id, so a misspelled field is indistinguishable from a working one until you receive the mail and read its headers. A camelCase `replyTo` sat there from the factory's introduction until September 2026, which meant no `Reply-To` header was ever set and replying to an enquiry went to `RESEND_FROM_EMAIL` — an unattended noreply mailbox — instead of to the enquirer. Both emails now set `reply_to` explicitly (notification → the enquirer, confirmation → `BUSINESS_EMAIL`). Check any new field against Resend's own Send Email reference, and assert the outbound payload rather than trusting the 200: `sites/dcs/test/contact-email-branding.test.ts` stubs only `https://api.resend.com/emails` and inspects the exact JSON the real handler emits.
+- Email clients can't read the site's CSS custom properties, so the template interpolates literal hex from a `themeColors` object that each site's own `app/api/contact/route.ts` supplies — **that file is the per-site branding hook**, and it is the only place the brand is applied to email. Pointing it at the wrong token group is another silent one: DCS was passing `colors.brand.*`, which still holds the pre-r9 solaris teal kept for the inner routes that haven't been reskinned, so every enquiry notification went out in the old palette. It now reads the r9 `colors.custom` group (ink/paper/magenta/grey). The template itself is shared by all ten sites and is still generic (Arial, no logo) — only the colours are per-site.
+
 ### Tailwind Content Globs
 
 - Never use `packages/themes/**/*.{ext}` — the `**` descends into `node_modules/` causing 18+ minute builds. Use scoped globs: `packages/themes/*/*.{ext}` and `packages/themes/*/components/**/*.{ext}`.
