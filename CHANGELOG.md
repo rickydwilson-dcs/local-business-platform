@@ -6,6 +6,47 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-09-30
+
+### Packages
+
+- **Contact-form submissions can now be scored and tagged as likely spam, per site and opt-in.**
+  New `packages/core-components/src/lib/api/spam-score.ts`; `createContactHandler` takes an
+  optional `spamTagging` and, when present, prefixes the business notification's subject with
+  `[SPAM?]` and appends a short note naming the signals that fired. It never blocks: the message
+  is delivered in full, keeps its `reply_to`, and the sender still receives a confirmation. That
+  asymmetry is deliberate — a false positive on a lead-generation form costs a real enquiry, a
+  missed spam costs five seconds — and it is what lets the term list be aggressive. Sites that do
+  not pass `spamTagging` are byte-for-byte unaffected, which is asserted directly rather than
+  assumed (`contact-route-spam-optin.test.ts`).
+
+  The rules score **grammar, not topic**. Banning "SEO" or "web design" breaks on any site that
+  sells them and needs a different list per site, which does not scale; what actually separates
+  the two populations is direction — a customer asks, a spammer offers. So the baseline targets
+  inbound-sales phrasing ("I would like to send you a proposal", "our placements include") plus
+  outreach-trade jargon, sender local-part tells, links in the body, and non-UK dialling prefixes,
+  scored additively across capped groups against a threshold of 5. Layering is baseline → preset
+  keyed on the `businessType` each site already declares for schema.org → per-site delta, so a
+  site needing no tuning configures nothing.
+
+  Calibrated against a corpus of eight labelled submissions, seven of them real traffic recovered
+  from Resend and anonymised. Two findings from it reshaped the rules: a genuine enquiry opened
+  "I hope you're well" and offered to "send over some marked up photos", which a naive opener or
+  "happy to send" rule would flag; and the two real spam samples shared almost no vocabulary, one
+  carrying no link-building jargon at all. Current margins are 17 and 8 for spam against a
+  threshold of 5, with every genuine enquiry at 0 or 1.
+
+### Sites
+
+- **DCS opts in to spam tagging; no client site does.** Client owners run their own mail filtering
+  and read their own inbox, so tagging on their behalf would alter mail nobody asked us to touch.
+  DCS uses the `ProfessionalService` preset, which exempts the SEO vocabulary from scoring because
+  DCS sells those services — a customer writing "we'd like more organic traffic" is describing
+  what they want to buy, where on a trades site the same words are a pitch. The offer-grammar
+  signals stay active regardless.
+
+---
+
 ## 2026-09-29
 
 ### Packages

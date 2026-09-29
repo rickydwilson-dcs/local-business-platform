@@ -6,6 +6,7 @@
  */
 
 import { createContactHandler } from '@platform/core-components/lib/api/contact-route';
+import { SPAM_PRESETS } from '@platform/core-components/lib/api/spam-score';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL, BUSINESS_NAME } from '@/lib/contact-info';
 import { themeConfig } from '@/theme.config';
@@ -32,4 +33,25 @@ export const POST = createContactHandler({
     textMuted: r9.grey ?? '#70707B',
   },
   rateLimit: siteConfig.features.rateLimit,
+  /**
+   * DCS is the only site opted in to spam tagging. Client sites deliberately
+   * are not: their owners run their own mail filtering and read their own
+   * inbox, so tagging on their behalf would alter mail nobody asked us to
+   * touch. Opting one in later is this block, copied.
+   *
+   * `ProfessionalService` matches `siteConfig.business.businessType`. It exempts
+   * the SEO vocabulary from scoring, because DCS *sells* those services — a
+   * customer writing "we'd like more organic traffic" is describing what they
+   * want to buy, whereas on a trades site the same words are a pitch. The
+   * offer-grammar signals stay active either way, since what actually separates
+   * a customer from a spammer is direction: a customer asks, a spammer offers.
+   *
+   * `rules: {}` is an explicit "no site-specific delta needed yet" rather than
+   * an oversight. Anything added here wants a corpus fixture proving the case
+   * was real — see `spam-score.ts` and its test.
+   */
+  spamTagging: {
+    preset: SPAM_PRESETS.ProfessionalService,
+    rules: {},
+  },
 });

@@ -195,6 +195,46 @@ is the branding hook — pointing it at the wrong token group ships off-brand ma
 indicate a problem, which is what happened on DCS, where `colors.brand.*` still holds the pre-r9
 solaris palette used by the inner routes.
 
+### Spam tagging is opt-in, and tags rather than blocks
+
+`packages/core-components/src/lib/api/spam-score.ts` scores a submission and
+`createContactHandler` uses the verdict for one thing only: prefixing the business
+notification's subject with `[SPAM?]`. It cannot reject a submission. A flagged message is
+delivered in full, keeps its `reply_to`, still produces a customer confirmation, and still
+returns success to the visitor.
+
+That is a security-relevant choice, not a stylistic one. Contact forms are a lead channel; a
+filter that silently discards a false positive loses a customer with no trace and no error. The
+error weighting is encoded in the tests — a genuine enquiry scoring above threshold fails the
+suite outright, whereas a missed spam is reported with its score. **The correct response to a
+missed spam is to add a signal, never to lower the threshold**, because lowering it trades a
+visible miss for an invisible false positive.
+
+A site opts in by passing `spamTagging` to the factory. Sites that do not are unaffected, which is
+asserted directly in `contact-route-spam-optin.test.ts` with a message that scores well above
+threshold. DCS is currently the only site opted in.
+
+Layering is baseline → preset keyed on the site's `businessType` → per-site delta, so the shared
+list grows from observed traffic while each site's own config stays near-empty.
+
+### The corpus contains personal data and must stay anonymised
+
+`packages/core-components/src/lib/__tests__/fixtures/contact-submissions.ts` is calibrated against
+real submissions, because hand-authored spam fixtures only encode the author's assumptions about
+what spam looks like — and those assumptions are what needs testing. Two of the rules exist
+because a real fixture contradicted the first draft.
+
+Those submissions came from members of the public writing to a client's business. Names, email
+addresses, phone numbers and street addresses are personal data and **must not be committed**.
+Each fixture keeps only the three fields the scorer reads (`email`, `phone`, `message`), with
+names replaced in the body as well as the field, addresses replaced with `@example.com` preserving
+only the signal-bearing local-part token, phone numbers replaced with same-shape fakes, and street
+names replaced. Subjects are omitted entirely — one carried a full residential address, and the
+scorer does not read subjects.
+
+New fixtures are harvested from the Resend API (`GET /emails`, then `GET /emails/{id}` for the
+body) and anonymised the same way before being committed. Never paste a raw submission in.
+
 ## Secure IP Extraction
 
 ### IP Extraction Utility
