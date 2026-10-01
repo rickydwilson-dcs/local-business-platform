@@ -1,0 +1,37 @@
+{
+  "_note": "Capture-time windows (HH:MM, from-inclusive, to-exclusive) from the EXIF clusters. Titles and blurbs are placeholders until the family confirms them. A photo with no capture time goes in the last chapter.",
+  "chapters": [
+    {
+      "id": "vows",
+      "title": "The Vows",
+      "kicker": "Chapter one",
+      "from": "13:00",
+      "to": "14:12",
+      "blurb": "A gazebo, a garden wall, and everyone they love in folding chairs."
+    },
+    {
+      "id": "fast-lane",
+      "title": "Love in the Fast Lane",
+      "kicker": "Chapter two",
+      "from": "14:12",
+      "to": "15:00",
+      "blurb": "A white Cadillac, a neon heart, and the most famous sign in the desert."
+    },
+    {
+      "id": "strip",
+      "title": "On the Strip",
+      "kicker": "Chapter three",
+      "from": "15:00",
+      "to": "15:39",
+      "blurb": "Fountains at Caesars, the Eiffel Tower at Paris, and a hundred-degree afternoon."
+    },
+    {
+      "id": "staircase",
+      "title": "The Grand Staircase",
+      "kicker": "Chapter four",
+      "from": "15:39",
+      "to": "23:59",
+      "blurb": "Marble, chandeliers, and a staircase made for an entrance."
+    }
+  ]
+}
