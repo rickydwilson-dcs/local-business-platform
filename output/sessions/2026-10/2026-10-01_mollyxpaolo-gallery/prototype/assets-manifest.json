@@ -1,0 +1,6 @@
+{
+  "note": "No local assets. Every image and the film are served from the dedicated R2 bucket 'mollyxpaolo' (public r2.dev URL), uploaded by tools/mollyxpaolo/upload-assets.ts. URLs are built in app.js from data.js.",
+  "bucket": "mollyxpaolo",
+  "publicUrl": "https://pub-3029869edf074088a713eb0fbce05c35.r2.dev",
+  "assets": []
+}

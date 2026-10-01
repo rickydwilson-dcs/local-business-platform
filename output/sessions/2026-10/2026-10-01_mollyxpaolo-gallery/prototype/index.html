@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-GB" data-tone="colour">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noimageindex">
+  <title>Molly × Paolo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://pub-3029869edf074088a713eb0fbce05c35.r2.dev">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Courier+Prime&family=Fraunces:ital,opsz,wght@1,9..144,800&family=Jost:wght@400;500&family=Limelight&family=Outfit:wght@400;600&family=Spectral:ital,wght@0,400;1,400&family=Yellowtail&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply the remembered tone before first paint so the page never flashes the wrong theme.
+    (function () {
+      var t = new URLSearchParams(location.search).get("tone");
+      try { t = t || localStorage.getItem("mxp-tone"); } catch (e) {}
+      if (t === "colour" || t === "bw" || t === "sepia") document.documentElement.dataset.tone = t;
+    })();
+  </script>
+</head>
+<body>
+
+<!-- Passcode gate. The production site does this server-side (middleware + signed cookie);
+     here it is a client-side stand-in so the flow can be felt. -->
+<div class="gate" id="gate" hidden>
+  <div class="gate-bg" id="gateBg"></div>
+  <div class="gate-card">
+    <h1>Molly<span class="x">×</span>Paolo</h1>
+    <p>Las Vegas, 22 September 2026</p>
+    <form id="gateForm" autocomplete="off">
+      <input id="gateInput" type="password" inputmode="text" placeholder="Passcode" aria-label="Passcode" autocapitalize="off" spellcheck="false">
+      <button class="btn" type="submit">Enter</button>
+    </form>
+    <p class="err" id="gateErr" role="alert"></p>
+    <p class="proto-note">Prototype: the passcode is <strong>vegas</strong>. A shared link with <code>?k=…</code> skips this screen.</p>
+  </div>
+</div>
+
+<header class="site-head" id="head">
+  <a class="mark" href="#top" aria-label="Molly and Paolo, back to top">Molly<span class="x">×</span>Paolo</a>
+  <div class="head-actions">
+    <button class="chip" id="selectBtn" aria-pressed="false">Select</button>
+    <button class="chip wide" id="allBtn">Download all</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero" aria-label="Molly and Paolo">
+    <div id="heroImgs"></div>
+    <div class="hero-copy">
+      <p class="hero-kicker">The wedding of</p>
+      <h1>Molly<span class="x">×</span>Paolo</h1>
+      <p class="hero-sub">
+        Las Vegas, Nevada · 22 September 2026
+        <span class="hero-vibe only only-colour">Neon, chrome and the Strip after dark.</span>
+        <span class="hero-vibe only only-bw">The Rat Pack years, in silver and shadow.</span>
+        <span class="hero-vibe only only-sepia">Red Rock country · 36.17° N, 115.14° W</span>
+      </p>
+    </div>
+    <a class="scroll-cue" href="#intro">Scroll</a>
+  </section>
+
+  <div class="wrap">
+    <section class="intro" id="intro">
+      <p>One afternoon in Las Vegas, told in four chapters. Tap any photo to open it, swipe through, and keep the ones you love.</p>
+      <ul class="chapter-nav" id="chapterNav"></ul>
+    </section>
+  </div>
+
+  <section class="favourites" aria-labelledby="favLabel">
+    <div class="wrap"><p class="section-label" id="favLabel">Molly &amp; Paolo's favourites</p></div>
+    <div class="ribbon" id="ribbon"></div>
+  </section>
+
+  <div class="wrap" id="chapters"></div>
+
+  <div class="wrap">
+    <section class="film" id="film" aria-labelledby="filmTitle">
+      <p class="section-label" id="filmTitle">The film</p>
+      <div class="film-frame">
+        <video id="video" controls playsinline preload="none"></video>
+      </div>
+      <div class="film-meta">
+        <span>The ceremony · 8 min 43 s</span>
+        <a id="videoDl" href="#" download>Download the film (248 MB)</a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p class="big">Molly<span class="x"> × </span>Paolo</p>
+      <p>22 · 09 · 2026 · Las Vegas, Nevada</p>
+      <p>Photographs and film by Vegas Weddings</p>
+      <button class="chip" id="allBtn2">Download all photos</button>
+    </footer>
+  </div>
+</main>
+
+<nav class="tone" id="tone" role="radiogroup" aria-label="Photo tone">
+  <button role="radio" data-tone="colour" aria-checked="true"><span class="sw sw-colour"></span>Colour</button>
+  <button role="radio" data-tone="bw" aria-checked="false"><span class="sw sw-bw"></span>B&amp;W</button>
+  <button role="radio" data-tone="sepia" aria-checked="false"><span class="sw sw-sepia"></span>Sepia</button>
+</nav>
+
+<div class="tray" id="tray" role="region" aria-label="Selected photos">
+  <div class="count" id="trayCount">0 selected<small></small></div>
+  <div class="seg" role="radiogroup" aria-label="Download size" id="sizeSeg">
+    <button role="radio" data-size="4k" aria-checked="true">4K</button>
+    <button role="radio" data-size="original" aria-checked="false">Full size</button>
+  </div>
+  <button class="btn ghost" id="trayClear">Clear</button>
+  <button class="btn" id="trayGo">Download</button>
+  <div class="bar" id="trayBar"><i></i></div>
+  <p class="status" id="trayStatus" aria-live="polite"></p>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-track" id="lbTrack"></div>
+  <div class="lb-ui">
+    <div class="lb-top">
+      <div class="where" id="lbWhere"></div>
+      <button class="icon-btn" id="lbPick" aria-pressed="false" aria-label="Add to selection">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </button>
+      <button class="icon-btn" id="lbDl" aria-label="Download options" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+      </button>
+      <button class="icon-btn" id="lbClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="lb-menu" id="lbMenu">
+      <a id="dl4k" href="#">4K <small>3840 px · good for screens and prints</small></a>
+      <a id="dlFull" href="#">Full size <small>6720 px · the original</small></a>
+    </div>
+    <button class="icon-btn lb-nav prev" id="lbPrev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button class="icon-btn lb-nav next" id="lbNext" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <p class="lb-hint" id="lbHint"></p>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB" data-tone="colour">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Curate · Molly × Paolo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Yellowtail&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Admin is a working tool, so it stays in the plain colour theme whatever the gallery tone is. */
+    body { padding: 0 0 120px; }
+    .a-head { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); padding: 14px clamp(12px, 3vw, 32px); display: grid; gap: 12px; }
+    .a-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .a-head h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 30px; }
+    .a-head h1 .x { color: var(--accent-2); }
+    .a-head p { margin: 0; color: var(--muted); font-size: 14px; max-width: 60ch; }
+    .legend { display: flex; gap: 14px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+    .legend b { color: var(--ink); font-weight: 600; }
+    .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; padding: 16px clamp(8px, 3vw, 32px); }
+    @media (max-width: 500px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 8px 4px; } }
+    .cell { position: relative; aspect-ratio: 1; border: 0; padding: 0; border-radius: 6px; overflow: hidden; background: var(--surface) center / cover; cursor: pointer; }
+    .cell img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease, filter 0.2s ease; }
+    .cell .n { position: absolute; left: 6px; bottom: 5px; font-size: 11px; color: #fff; text-shadow: 0 1px 4px #000; }
+    .cell .badge { position: absolute; top: 6px; right: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; display: none; }
+    .cell[data-state="featured"] { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .cell[data-state="featured"] .badge { display: block; background: var(--accent); color: #0a0910; }
+    .cell[data-state="hidden"] img { opacity: 0.22; filter: grayscale(1); }
+    .cell[data-state="hidden"] .badge { display: block; background: #2a2733; color: var(--muted); }
+    .savebar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); translate: -50% 0; display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px 10px 10px 18px; box-shadow: 0 14px 36px rgba(0,0,0,.45); font-size: 14px; width: min(560px, calc(100% - 16px)); }
+    .savebar span { flex: 1; color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <h1>Curate</h1>
+    <p>For Molly &amp; Paolo only.</p>
+    <form id="gateForm" autocomplete="off">
+      <input id="gateInput" type="password" placeholder="Admin password" aria-label="Admin password">
+      <button class="btn" type="submit">Enter</button>
+    </form>
+    <p class="err" id="gateErr" role="alert"></p>
+    <p class="proto-note">Prototype: the admin password is <strong>admin</strong>.</p>
+  </div>
+</div>
+
+<header class="a-head">
+  <div class="a-row">
+    <h1>Molly<span class="x">×</span>Paolo · curate</h1>
+    <a class="chip" href="./">View the gallery</a>
+  </div>
+  <p>Tap a photo to change it: <b>shown</b> → <b>favourite</b> → <b>hidden</b> → back to shown. Favourites lead the homepage and are shown large. Hidden photos are taken off the site.</p>
+  <div class="a-row">
+    <div class="filters" role="radiogroup" aria-label="Filter" id="filters">
+      <button class="chip" role="radio" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" role="radio" data-f="featured" aria-pressed="false">Favourites</button>
+      <button class="chip" role="radio" data-f="hidden" aria-pressed="false">Hidden</button>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<div class="savebar">
+  <span id="saveMsg">Changes save as you go.</span>
+  <button class="btn ghost" id="reset">Reset</button>
+</div>
+
+<script src="data.js"></script>
+<script>
+  const D = window.MXP;
+  const $ = (s) => document.querySelector(s);
+  const read = () => { try { return JSON.parse(localStorage.getItem("mxp-admin") || "{}"); } catch { return {}; } };
+  const write = (o) => { try { localStorage.setItem("mxp-admin", JSON.stringify(o)); } catch {} };
+  let o = read();
+  let filter = "all";
+  const NEXT = { shown: "featured", featured: "hidden", hidden: "shown" };
+  const stateOf = (p) => o[p.id] || (p.featured ? "featured" : "shown");
+
+  if (sessionStorage.getItem("mxp-admin-ok")) $("#gate").hidden = true;
+  $("#gateForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if ($("#gateInput").value === "admin") { sessionStorage.setItem("mxp-admin-ok", "1"); $("#gate").hidden = true; }
+    else $("#gateErr").textContent = "Wrong password.";
+  });
+
+  function legend() {
+    const s = D.photos.map(stateOf);
+    const c = (k) => s.filter((x) => x === k).length;
+    $("#legend").innerHTML = `<span><b>${c("shown")}</b> shown</span><span><b>${c("featured")}</b> favourites</span><span><b>${c("hidden")}</b> hidden</span>`;
+  }
+
+  function render() {
+    const g = $("#grid");
+    g.textContent = "";
+    for (const p of D.photos) {
+      const st = stateOf(p);
+      if (filter !== "all" && st !== filter) continue;
+      const b = document.createElement("button");
+      b.className = "cell";
+      b.dataset.state = st;
+      b.style.backgroundImage = `url(${p.ph.colour})`;
+      b.setAttribute("aria-label", `Photo ${p.n}: ${st}`);
+      b.innerHTML = `<img loading="lazy" alt="" src="${D.base}colour/w480/${p.id}.webp"><span class="n">${p.n}</span><span class="badge">${st === "featured" ? "Favourite" : "Hidden"}</span>`;
+      b.addEventListener("click", () => {
+        const next = NEXT[stateOf(p)];
+        // Store only departures from the photo's default, so the seed (enhanced = favourite) stays the baseline.
+        if (next === (p.featured ? "featured" : "shown")) delete o[p.id]; else o[p.id] = next;
+        write(o);
+        b.dataset.state = next;
+        b.setAttribute("aria-label", `Photo ${p.n}: ${next}`);
+        b.querySelector(".badge").textContent = next === "featured" ? "Favourite" : "Hidden";
+        $("#saveMsg").textContent = `Photo ${p.n} is now ${next === "featured" ? "a favourite" : next}. Saved.`;
+        legend();
+      });
+      g.append(b);
+    }
+    legend();
+  }
+
+  for (const b of document.querySelectorAll("#filters button")) {
+    b.addEventListener("click", () => {
+      filter = b.dataset.f;
+      for (const x of document.querySelectorAll("#filters button")) x.setAttribute("aria-pressed", String(x === b));
+      render();
+    });
+  }
+  $("#reset").addEventListener("click", () => { o = {}; write(o); render(); $("#saveMsg").textContent = "Back to the photographer's selection."; });
+  render();
+</script>
+</body>
+</html>
