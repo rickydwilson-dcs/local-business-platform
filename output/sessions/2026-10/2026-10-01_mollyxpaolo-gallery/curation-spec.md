@@ -1,6 +1,6 @@
 # mollyxpaolo — curation (favourites & hidden) spec
 
-**Status:** spec. To build **after** the main Phase 2 site lands.
+**Status:** built on `feat/mollyxpaolo-curation` (2026-10-02), not yet committed or deployed. See "Build notes" at the end.
 **Written:** 2026-10-01, from the user's brief plus a read-only look at the in-progress build on `feat/mollyxpaolo-site`.
 **Depends on:** `sites/mollyxpaolo` as built in Phase 2 (see `HANDOFF.md`).
 
@@ -190,3 +190,13 @@ These were read on 2026-10-01 in uncommitted work on `feat/mollyxpaolo-site`, so
 - **L1 Pinch to zoom** in the swipe viewer, with two-finger pan while pinching. One finger pans once zoomed. Zoom back to 1× resumes swiping. Double-tap zoom stays.
 - **L2 Clearer exit.** A distinct, higher-contrast X in the top-right corner that stays visible when a single tap hides the other controls.
 - The curation review viewer (B4) gets the same gestures.
+
+## Build notes (2026-10-02)
+
+- **C2 verified, not assumed.** Cloudflare's R2 S3 compatibility table lists `If-Match` and `If-None-Match` as supported on PutObject, and `@aws-sdk/client-s3` 3.985 exposes both. Writes are conditional on the ETag (or `If-None-Match: *` for the first write); a 412 re-reads and re-applies, up to 3 retries, then 503.
+- **A7 needed a data change, not just code.** `photos.json` had `heroOk: false` explicitly on all 340 regular photos, not undefined. The exporter now writes `heroOk: !NO_HERO.has(id)`, and the 340 flags were flipped in place. The hero also adds landscape favourites on landscape screens, which changes nothing for the seed (344 and 346, the only non-lead hero photos, are portrait).
+- **The change log never leaves the server.** Every response, the admin page and the gallery's cached read use `publicState()`, which drops `log`.
+- **Dev-only leak, production clean.** In `next dev`, the gallery HTML carried the whole stored curation object, hidden ids and log included, through React's development debug channel (`$Y` references to awaited values). A production build (`next build && next start`) has no occurrence of a hidden id in the HTML, on phone or desktop. Check for leaks against a production build only.
+- **Lightbox generalised.** `Lightbox` takes `actions` (top bar) and `footer` (a bar that stays visible, with the track fitted above it). The gallery passes `GalleryActions`; the review viewer passes the ★ Favourite · Regular · Hide bar.
+- **Verified** against a local production build with a Playwright run at 390×844 and 1440×900 (local state object only, reset to the seed afterwards), covering acceptance 1 and 3–10, plus unit tests (55 passing).
+- **Open: acceptance 2 on phones.** On desktop a favourite is taller than every regular row in its chapter (774 vs 630px). On a phone, a landscape favourite is full width and so width-bound at about 260px, while a regular portrait row reaches about 371px. Meeting it on a phone needs either cropping (which the layout deliberately never does) or much smaller regular portraits. **Decided (Ricky, 2026-10-02): accept it.** On phones a favourite stands out by being full width, on its own row, with its badge; acceptance 2's height test applies to desktop only.
