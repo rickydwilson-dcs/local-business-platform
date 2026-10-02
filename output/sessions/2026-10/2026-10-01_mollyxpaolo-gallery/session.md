@@ -1,8 +1,8 @@
 # mollyxpaolo — wedding gallery
 
-**Status:** In progress — Phase 0 done, Phase 1 prototype live and approved (https://mollyxpaolo-proto.vercel.app). Phase 2 approved and built on `feat/mollyxpaolo-site` (committed, not pushed or deployed); see 2.8.
+**Status:** In progress — Phase 0 done, Phase 1 prototype live and approved (https://mollyxpaolo-proto.vercel.app). Phase 2 **live** at https://mollyxpaolo.vercel.app since 2026-10-02 (PR #105); see 2.8. Not yet checked behind the gate on production.
 **Started:** 2026-10-01
-**Site:** `sites/mollyxpaolo` (built, not deployed) · prototype Vercel project `mollyxpaolo-proto`
+**Site:** `sites/mollyxpaolo` · Vercel project `mollyxpaolo` (production) · prototype Vercel project `mollyxpaolo-proto`
 **Production domain:** https://www.mollyxpaolo.com (currently WordPress invitation site on SiteGround)
 
 ## Goal
@@ -298,7 +298,7 @@ the proxy runs in. (Assumption to verify against the Next 16 docs at build time:
 
 #### 2.8 Progress (2026-10-01, branch `feat/mollyxpaolo-site`)
 
-Built: 2.1–2.6. Not started: 2.7.
+Built: 2.1–2.6. 2.7 done 2026-10-02 (below).
 
 - [x] Lean scaffold, `vercel.json`, lockfile (adds only the `sites/mollyxpaolo` importer plus
       `client-zip` and `server-only`). No `.vercelignore` matches.
@@ -339,6 +339,36 @@ Built: 2.1–2.6. Not started: 2.7.
       `localhost:3100`. Test it on the deployed URL once its origin is in the CORS policy.
 - [ ] Visual check, side by side with the prototype, of the two font substitutions (Big
       Shoulders for Big Shoulders Display, Fraunces without opsz).
+
+**2.7 deploy (2026-10-01/02):**
+
+- [x] `feat/mollyxpaolo-site` → `develop` (`4c88560d`). CI and E2E green.
+- [x] Ricky replaced the bucket CORS. Allowed origins: `mollyxpaolo.vercel.app`, `www.` and
+      bare `mollyxpaolo.com`, the prototype, `127.0.0.1:5173` and `localhost:3000`.
+- [x] Vercel project `mollyxpaolo` created with `vercel project add` plus REST: root
+      `sites/mollyxpaolo`, Next.js, Node 24.x, linked to GitHub, production branch `main`.
+      The name was re-checked as free (404) immediately before. Domain:
+      `mollyxpaolo.vercel.app`.
+- [x] Ricky set all ten env vars (Production). Names verified via the API; values never read.
+- [x] `develop` → `staging` (`15a8812d`). CI, E2E and Regression Watchdog green.
+- [x] PR #105 `staging` → `main`. `main` is protected: a PR plus the check "Verify promoted
+      commit passed staging E2E". Ricky merged it (`25f49d4e`). `mollyxpaolo` production is
+      READY; dcs, dj-fox-electrical, delta-t-racing-cc, dpm-autobody and mad-graphics
+      cancelled at the ignore step.
+- [x] **Live checks without secrets:**
+  - unauthenticated `/` → 307 `/unlock`, and `/admin` → 307 `/admin/login`;
+  - wrong passcode → `?e=wrong`; tampered `/s/` → `?e=link`; `PUT /api/admin/curation` → 401;
+  - `X-Robots-Tag`, CSP and `robots.txt Disallow: /` present;
+  - no path token on the public `/unlock`;
+  - R2 returns `Access-Control-Allow-Origin` for both `mollyxpaolo.vercel.app` and
+    `www.mollyxpaolo.com`.
+- [ ] **Behind the gate on production:** needs Ricky's passcode or a minted link, because Claude
+      doesn't hold the secrets. Check:
+  - photos in all three tones;
+  - lightbox swipe;
+  - a 4K download;
+  - zip on a laptop, Save to Photos on a phone;
+  - admin change then Reset.
 
 Deviations from the spec above, decided while building:
 
