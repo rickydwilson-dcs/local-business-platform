@@ -7,9 +7,10 @@
  * the path token) comes from the site's MXP_MEDIA_BASE env var instead of the repo. The path
  * token never lands in git.
  *
- * Hero curation is data here, not code: `heroOk` is false for the enhanced photos whose
- * lettering collides with the title (341, 347) and for the collages (349, 350); `heroOrder`
- * leads with the bright, wide favourites.
+ * Hero curation is data here, not code: `heroOk` is false only for the enhanced photos whose
+ * lettering collides with the title (341, 347) and for the collages (349, 350). Every other
+ * photo is eligible, so one the couple make a favourite can join the hero. `heroOrder` leads
+ * with the bright, wide favourites.
  *
  * Usage: npx tsx tools/mollyxpaolo/export-site-manifest.ts --build ~/Downloads/mollyxpaolo-build
  */
@@ -19,6 +20,11 @@ import * as path from "path";
 const TONES = ["colour", "sepia", "bw"] as const;
 const NO_HERO = new Set(["vk-341", "vk-347", "vk-349", "vk-350"]);
 const HERO_ORDER = ["vk-343", "vk-348", "vk-345", "vk-342"];
+/**
+ * Where the hero's full-screen crop is anchored vertically, as a percentage (CSS default 35%).
+ * Only for photos whose subject sits too near an edge: in 343, Molly's head is ~3% from the top.
+ */
+const HERO_Y: Record<string, number> = { "vk-343": 0 };
 
 interface BuildPhoto {
   id: string;
@@ -56,7 +62,8 @@ const photos = manifest.photos.map((p) => {
     h: p.height,
     featured: p.featured,
     enhanced: p.enhanced,
-    heroOk: p.enhanced && !NO_HERO.has(p.id),
+    heroOk: !NO_HERO.has(p.id),
+    ...(p.id in HERO_Y ? { heroY: HERO_Y[p.id] } : {}),
     ph: Object.fromEntries(TONES.map((t) => [t, p.tones[t].placeholder])),
   };
 });

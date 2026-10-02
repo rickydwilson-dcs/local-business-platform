@@ -1,6 +1,72 @@
 # mollyxpaolo wedding gallery — handoff
 
-**Status:** ready-to-resume. Phase 0 (asset pipeline + full R2 upload) and Phase 1 (HTML prototype, approved by the user) are done and verified. Phase 2, the real Next.js site `sites/mollyxpaolo`, has **not been started**: no directory, no Vercel project, no store, no auth.
+> **Update 2026-10-02 (later): resume with `curation-spec.md`.**
+>
+> - **The site is on its real domain:** https://www.mollyxpaolo.com. The bare domain redirects
+>   to www. DNS stays on SiteGround; see `session.md` Phase 4.
+> - **The media domain was declined.** Ricky won't move DNS to Cloudflare, so photos stay on
+>   r2.dev for about 30 guests. That's an accepted risk, not an open item; don't re-propose it
+>   unprompted.
+> - **Guests get the URL plus passcode.** Share links are optional.
+> - **Next session:** start from `curation-spec.md`. Re-read the files its "What already exists"
+>   section lists, since they're now committed and live, then get Ricky's answers to its six
+>   open questions before writing code.
+> - **Still not verified live:** the gallery behind the gate. Ricky checks it with the passcode.
+
+> **Update 2026-10-02: Phase 2 is live.** https://mollyxpaolo.vercel.app (Vercel project
+> `mollyxpaolo`, production from `main`, first deploy via PR #105, merge `25f49d4e`). The
+> sections below this box are the 2026-10-01 pre-build handoff, kept for history. Where they
+> say "not started", "not done" or "open question" about Phase 2, the build answered it, and
+> `session.md` §2.8 is the current record.
+>
+> **Resolved since:**
+>
+> - The admin store is an R2 JSON object.
+> - The production project name is `mollyxpaolo`.
+> - CORS now covers production and both mollyxpaolo.com hosts.
+> - No email on the domain is in use.
+> - The three unpushed commits were pushed.
+>
+> **Verified live:** the gate, refusals, headers, no path-token leak, and CORS. See
+> `session.md` §2.7 deploy.
+>
+> **Not verified live:** anything behind the gate. Claude holds none of the secrets (by
+> decision). To get in, Ricky mints a link:
+>
+> ```
+> MXP_LINK_SECRET='<secret>' MXP_LINK_VERSION=1 pnpm --filter mollyxpaolo mint-link --days 365 --origin https://www.mollyxpaolo.com
+> ```
+>
+> Or just use the passcode at www.mollyxpaolo.com, which is the chosen approach for guests.
+>
+> **Next:**
+>
+> 1. Ricky checks the live gallery behind the gate:
+>    - all three tones;
+>    - the lightbox;
+>    - 4K download, zip, Save to Photos;
+>    - an admin change, then Reset.
+> 2. Curation follow-up: `curation-spec.md`. Answer its six open questions first.
+> 3. ~~Phase 4: domain cutover and media domain.~~ The domain is done and the media domain was
+>    declined (see the box above).
+> 4. Family approvals:
+>    - chapter names;
+>    - the mono versions of VK-343/347;
+>    - the poster frame;
+>    - the sepia focus ring at 2.9:1.
+>
+> **Traps learned in the build:**
+>
+> - `revalidateTag` needs a second argument in Next 16.1.5.
+> - `proxy.ts` always runs on Node.
+> - The Chrome automation window is hidden: lazy images, scroll events and `img.decode()`
+>   never fire there. Test phone width through a header-stripping scratchpad proxy, because
+>   the site sends `frame-ancestors 'none'`.
+> - Photo IDs in the page's RSC payload are escaped (`\"vk-010\"`), so grep for the bare
+>   id.
+> - `main` needs a PR from `staging`; a direct push is blocked even for admins.
+
+**Status (2026-10-01, superseded):** ready-to-resume. Phase 0 (asset pipeline + full R2 upload) and Phase 1 (HTML prototype, approved by the user) are done and verified. Phase 2, the real Next.js site `sites/mollyxpaolo`, has **not been started**: no directory, no Vercel project, no store, no auth.
 **Branch:** `develop`, HEAD `e8b0600d` (2026-10-01T15:26 PDT). **Not pushed.** `develop` is 3 ahead of `origin/develop`: the two mollyxpaolo commits below, plus `d11990f4` (DCS wrap-up), which predates this session.
 **Commits:** 2 from this session.
 **Working tree:** clean apart from this `HANDOFF.md` (verified with `git status --porcelain` before writing it).
