@@ -73,10 +73,12 @@ export function Lightbox(props: {
   tone: Tone;
   mediaBase: string;
   chapterTitle: (id: string) => string;
-  isPicked: (id: string) => boolean;
-  onTogglePick: (id: string) => void;
   onClose: (id: string) => void;
-  toneSwitch: ReactNode;
+  /** Buttons for the current photo, in the top bar (hidden with the other controls). */
+  actions?: (p: GalleryPhoto) => ReactNode;
+  /** A bar along the bottom that stays visible; the photos are fitted above it. */
+  footer?: (p: GalleryPhoto) => ReactNode;
+  toneSwitch?: ReactNode;
 }) {
   const { order, tone, mediaBase } = props;
   const root = useRef<HTMLDivElement>(null);
@@ -90,7 +92,6 @@ export function Lightbox(props: {
   );
   const iRef = useRef(i);
   iRef.current = i;
-  const [menu, setMenu] = useState(false);
   const [chromeOff, setChromeOff] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const [hint, setHint] = useState('');
@@ -355,13 +356,10 @@ export function Lightbox(props: {
     };
   }, [close, unzoom]);
 
-  const long = Math.max(p.w, p.h);
-  const picked = props.isPicked(p.id);
-
   return (
     <div
       ref={root}
-      className={`lb open${chromeOff ? ' chrome-off' : ''}${zoomed ? ' zoomed' : ''}`}
+      className={`lb open${chromeOff ? ' chrome-off' : ''}${zoomed ? ' zoomed' : ''}${props.footer ? ' has-footer' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label="Photo viewer"
@@ -386,44 +384,7 @@ export function Lightbox(props: {
               {p.t ? ` · ${clock(p.t)}` : ''}
             </span>
           </div>
-          <button
-            className="icon-btn"
-            aria-pressed={picked}
-            aria-label="Add to selection"
-            onClick={() => props.onTogglePick(p.id)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12.5l4.5 4.5L19 7.5" />
-            </svg>
-          </button>
-          <button
-            className="icon-btn"
-            aria-label="Download options"
-            aria-haspopup="true"
-            aria-expanded={menu}
-            onClick={() => setMenu((m) => !m)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" />
-            </svg>
-          </button>
-        </div>
-        <div className={`lb-menu${menu ? ' open' : ''}`} onClick={() => setMenu(false)}>
-          {/* The bucket sends Content-Disposition: attachment, so these save rather than open. */}
-          <a href={mediaUrl(mediaBase, p, tone, '4k')} download={downloadName(p, tone, '4k')}>
-            4K{' '}
-            <small>
-              {long > 3840
-                ? '3840 px · good for screens and prints'
-                : `${long} px · same as full size`}
-            </small>
-          </a>
-          <a
-            href={mediaUrl(mediaBase, p, tone, 'original')}
-            download={downloadName(p, tone, 'original')}
-          >
-            Full size <small>{long} px · the original</small>
-          </a>
+          {props.actions?.(p)}
         </div>
         <button className="icon-btn lb-nav prev" aria-label="Previous photo" onClick={() => go(-1)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -443,8 +404,64 @@ export function Lightbox(props: {
           <path d="M6 6l12 12M18 6L6 18" />
         </svg>
       </button>
+      {props.footer && <div className="lb-footer">{props.footer(p)}</div>}
       {/* Compare tones on one photo without leaving the viewer. */}
       {props.toneSwitch}
     </div>
+  );
+}
+
+/** The gallery's buttons for the current photo: add to selection, and download sizes. */
+export function GalleryActions(props: {
+  photo: GalleryPhoto;
+  tone: Tone;
+  mediaBase: string;
+  picked: boolean;
+  onTogglePick: (id: string) => void;
+}) {
+  const { photo: p, tone, mediaBase } = props;
+  const [menu, setMenu] = useState(false);
+  const long = Math.max(p.w, p.h);
+  return (
+    <>
+      <button
+        className="icon-btn"
+        aria-pressed={props.picked}
+        aria-label="Add to selection"
+        onClick={() => props.onTogglePick(p.id)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M5 12.5l4.5 4.5L19 7.5" />
+        </svg>
+      </button>
+      <button
+        className="icon-btn"
+        aria-label="Download options"
+        aria-haspopup="true"
+        aria-expanded={menu}
+        onClick={() => setMenu((m) => !m)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" />
+        </svg>
+      </button>
+      <div className={`lb-menu${menu ? ' open' : ''}`} onClick={() => setMenu(false)}>
+        {/* The bucket sends Content-Disposition: attachment, so these save rather than open. */}
+        <a href={mediaUrl(mediaBase, p, tone, '4k')} download={downloadName(p, tone, '4k')}>
+          4K{' '}
+          <small>
+            {long > 3840
+              ? '3840 px · good for screens and prints'
+              : `${long} px · same as full size`}
+          </small>
+        </a>
+        <a
+          href={mediaUrl(mediaBase, p, tone, 'original')}
+          download={downloadName(p, tone, 'original')}
+        >
+          Full size <small>{long} px · the original</small>
+        </a>
+      </div>
+    </>
   );
 }

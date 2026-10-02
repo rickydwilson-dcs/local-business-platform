@@ -224,7 +224,8 @@ body.tray-open .tone { opacity: 0; pointer-events: none; translate: -50% 20px; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 35%;
+  /* --hero-y is set per photo by the hero, for subjects that sit near the top or bottom. */
+  object-position: 50% var(--hero-y, 35%);
   opacity: 0;
   transition: opacity 1.6s ease;
 }
@@ -397,7 +398,16 @@ html[data-tone="bw"] .chapter-blurb { margin-inline: auto; }
    header and tone switch). A row of total aspect --sum is therefore never wider than
    cap × sum: past that it narrows and centres instead of growing taller, so photos are never
    cropped to fit. */
-.rows { display: grid; gap: var(--gap); --gap: clamp(6px, 0.9vw, 14px); --cap: 86svh; }
+/* Two caps, so a favourite is always taller than the regular rows around it. */
+.rows {
+  display: grid;
+  gap: var(--gap);
+  --gap: clamp(6px, 0.9vw, 14px);
+  --cap-regular: 70svh;
+  --cap-featured: 86svh;
+  --cap: var(--cap-regular);
+}
+.row.fav { --cap: var(--cap-featured); }
 .row {
   display: flex;
   gap: var(--gap);
@@ -417,6 +427,7 @@ html[data-tone="bw"] .chapter-blurb { margin-inline: auto; }
 .row.inset.flip { flex-direction: row-reverse; }
 .row.inset { max-width: none; }
 .row.inset .tile { flex: 0 0 auto; width: min(58%, calc(var(--cap) * var(--ar))); }
+.row.inset.fav .tile { width: min(70%, calc(var(--cap) * var(--ar))); }
 .inset-note {
   flex: 1;
   padding: 0 clamp(4px, 2vw, 40px) 8px;
@@ -720,6 +731,37 @@ html[data-tone="sepia"] .btn { color: #fbf3e6; }
 }
 .lb-menu a:hover { background: rgba(255, 255, 255, 0.08); }
 .lb-menu a small { opacity: 0.6; }
+/* A bar that stays put along the bottom (the curation viewer's ★ Favourite · Regular · Hide).
+   The track stops above it, so a photo is fitted into the space left and never sits under it. */
+:root { --lb-footer: calc(76px + env(safe-area-inset-bottom)); }
+.lb.has-footer .lb-track { bottom: var(--lb-footer); }
+.lb.has-footer .lb-hint { bottom: calc(var(--lb-footer) + 12px); }
+.lb-footer {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--lb-footer);
+  padding: 12px 10px max(12px, env(safe-area-inset-bottom));
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 4;
+}
+.review-bar { display: flex; gap: 8px; max-width: 560px; margin-inline: auto; height: 52px; }
+.review-bar button {
+  appearance: none;
+  flex: 1;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: var(--font-meta);
+  font-size: 15px;
+  cursor: pointer;
+}
+/* The current state: filled, bolder and ticked, so it reads without colour. */
+.review-bar button[aria-pressed="true"] { background: #fff; color: #0a0910; border-color: #fff; font-weight: 700; }
+.review-bar button[aria-pressed="true"]::before { content: "✓ "; }
+.review-bar button.retry { flex: 0 0 auto; padding: 0 12px; border-color: #fff; font-size: 13px; }
 .lb-hint {
   position: absolute;
   bottom: max(18px, env(safe-area-inset-bottom));
@@ -778,22 +820,55 @@ html[data-tone="colour"] .gate h1 { text-shadow: var(--glow); }
 .a-head h1 .x { color: var(--accent-2); }
 .a-head p { margin: 0; color: var(--muted); font-size: 14px; max-width: 60ch; }
 .a-head a.chip { display: inline-flex; align-items: center; text-decoration: none; }
-.legend { display: flex; gap: 14px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
-.legend b { color: var(--ink); font-weight: 600; }
 .filters { display: flex; gap: 6px; flex-wrap: wrap; }
-.a-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; padding: 16px clamp(8px, 3vw, 32px); }
+.chip[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.chip .count { opacity: 0.7; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.a-jump { display: flex; gap: 6px 16px; flex-wrap: wrap; font-size: 13px; }
+.a-jump a { color: var(--muted); text-underline-offset: 3px; }
+.a-chapter { scroll-margin-top: 220px; }
+.a-chapter > header { padding: 22px clamp(12px, 3vw, 32px) 0; }
+.a-chapter h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 24px; }
+.a-chapter > header p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.a-chapter > header .a-note { color: var(--ink); font-style: italic; }
+.a-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; padding: 12px clamp(8px, 3vw, 32px); }
 @media (max-width: 500px) { .a-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 8px 4px; } }
-.cell { position: relative; aspect-ratio: 1; border: 0; padding: 0; border-radius: 6px; overflow: hidden; background-color: var(--surface); background-position: center; background-size: cover; cursor: pointer; }
-.cell img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease, filter 0.2s ease; }
+
+/* One thumbnail. State never relies on colour alone: a favourite carries a ★ badge as well as
+   its outline, a hidden photo a "Hidden" badge as well as being dimmed and grey. */
+.cell { position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; background-color: var(--surface); background-position: center; background-size: cover; }
+.cell-open { appearance: none; border: 0; padding: 0; margin: 0; display: block; width: 100%; height: 100%; background: none; cursor: pointer; color: inherit; }
+.cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s ease, filter 0.2s ease; }
 .cell .n { position: absolute; left: 6px; bottom: 5px; font-size: 11px; color: #fff; text-shadow: 0 1px 4px #000; }
-.cell .badge { position: absolute; top: 6px; right: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; display: none; }
+.cell .badge { position: absolute; top: 6px; right: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; padding: 3px 7px; border-radius: 4px; }
 .cell[data-state="featured"] { outline: 3px solid var(--accent); outline-offset: -3px; }
-.cell[data-state="featured"] .badge { display: block; background: var(--accent); color: #0a0910; }
+.cell[data-state="featured"] .badge { background: var(--accent); color: #0a0910; }
 .cell[data-state="hidden"] img { opacity: 0.22; filter: grayscale(1); }
-.cell[data-state="hidden"] .badge { display: block; background: #2a2733; color: var(--muted); }
-.savebar { position: fixed; left: 0; right: 0; margin-inline: auto; bottom: max(14px, env(safe-area-inset-bottom)); display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px 10px 10px 18px; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45); font-size: 14px; width: min(560px, calc(100% - 16px)); }
+.cell[data-state="hidden"] .badge { background: #2a2733; color: #fff; border: 1px solid rgba(255, 255, 255, 0.35); }
+/* Waiting for the server: a small pulsing dot, top left. */
+.cell .saving { position: absolute; top: 8px; left: 8px; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); animation: mxp-pulse 0.9s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes mxp-pulse { from { opacity: 0.25; } to { opacity: 1; } }
+.cell-failed { position: absolute; inset: auto 4px 4px 4px; appearance: none; border: 1px solid #fff; border-radius: 6px; background: rgba(0, 0, 0, 0.8); color: #fff; font-size: 11px; font-weight: 600; padding: 6px 4px; cursor: pointer; }
+.cell .quick { position: absolute; left: 6px; bottom: 6px; display: none; gap: 4px; }
+.cell .quick button { appearance: none; border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 6px; background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 12px; font-weight: 600; min-width: 34px; height: 30px; padding: 0 8px; cursor: pointer; }
+.cell .quick button[aria-pressed="true"] { background: #fff; color: #0a0910; }
+@media (hover: hover) {
+  .cell:hover .quick, .cell:focus-within .quick { display: flex; }
+  .cell:hover .n, .cell:focus-within .n { display: none; }
+}
+
+.savebar { position: fixed; z-index: 20; left: 0; right: 0; margin-inline: auto; bottom: max(14px, env(safe-area-inset-bottom)); display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px 10px 10px 18px; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45); font-size: 14px; width: min(560px, calc(100% - 16px)); }
 .savebar span { flex: 1; color: var(--muted); }
-.savebar span.error { color: var(--accent); }
+.savebar span.error { color: var(--ink); font-weight: 600; }
+.savebar span.error::before { content: "! "; }
+.savebar .btn.armed { border-color: var(--accent); border-width: 2px; font-weight: 600; }
+
+/* Undo, for 8 seconds after each change. Above the save bar, or above the review bar when the
+   viewer is open (the viewer is z-index 100). */
+.a-toast { position: fixed; z-index: 120; left: 0; right: 0; margin-inline: auto; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 70px); width: min(420px, calc(100% - 16px)); display: none; gap: 10px; align-items: center; background: #1b1b1f; color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 14px; padding: 8px 8px 8px 16px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); font-size: 14px; }
+.a-toast.on { display: flex; }
+.a-toast span { flex: 1; }
+.a-toast .btn.ghost { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+.a-toast.over-review { bottom: calc(var(--lb-footer) + 10px); }
 
 /* ---------- Small screens ---------- */
 

@@ -5,22 +5,29 @@
  * The bucket is public, so the object lives under MXP_STATE_KEY, a random folder that is a
  * separate secret from the image path token; that unguessable key is what keeps the hidden list
  * off r2.dev.
+ *
+ * Writes are conditional on the object's ETag (If-Match, or If-None-Match: * for the first
+ * write). R2 lists both headers as supported on PutObject in its S3 API compatibility table,
+ * checked 2026-10-02.
  */
 import 'server-only';
 import { GetObjectCommand, NoSuchKey, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { unstable_cache } from 'next/cache';
-import { z } from 'zod';
-import type { Curation } from './types';
+import {
+  EMPTY,
+  curationSchema,
+  diffTo,
+  applyChanges,
+  patchCuration,
+  publicState,
+  type CurationIO,
+  type Seeds,
+} from './curation-core';
+import type { Curation, PhotoState } from './types';
+
+export { curationSchema, CurationConflictError, publicState } from './curation-core';
 
 export const CURATION_TAG = 'curation';
-
-export const curationSchema = z.object({
-  version: z.number().int().nonnegative(),
-  updatedAt: z.string().nullable(),
-  photos: z.record(z.string().regex(/^vk-\d{3}$/), z.enum(['shown', 'featured', 'hidden'])),
-});
-
-const EMPTY: Curation = { version: 0, updatedAt: null, photos: {} };
 
 let client: S3Client | null = null;
 function s3() {
@@ -44,46 +51,72 @@ function location() {
   return { Bucket: process.env.MXP_R2_BUCKET ?? 'mollyxpaolo', Key: `state/${key}/curation.json` };
 }
 
-/** Uncached read, for the admin page and for the version check before a write. */
+const r2: CurationIO = {
+  async read() {
+    try {
+      const res = await s3().send(new GetObjectCommand(location()));
+      const curation = curationSchema.parse(JSON.parse(await res.Body!.transformToString()));
+      return { curation, etag: res.ETag ?? null };
+    } catch (e) {
+      if (e instanceof NoSuchKey) return { curation: EMPTY, etag: null };
+      throw e;
+    }
+  },
+  async write(next, etag) {
+    try {
+      await s3().send(
+        new PutObjectCommand({
+          ...location(),
+          Body: JSON.stringify(next),
+          ContentType: 'application/json',
+          CacheControl: 'no-store',
+          ...(etag ? { IfMatch: etag } : { IfNoneMatch: '*' }),
+        })
+      );
+      return 'ok';
+    } catch (e) {
+      const status = (e as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode;
+      if (status === 412) return 'conflict';
+      throw e;
+    }
+  },
+};
+
+/** Uncached read, for the admin page and its polling. */
 export async function readCuration(): Promise<Curation> {
-  try {
-    const res = await s3().send(new GetObjectCommand(location()));
-    return curationSchema.parse(JSON.parse(await res.Body!.transformToString()));
-  } catch (e) {
-    if (e instanceof NoSuchKey) return EMPTY;
-    throw e;
-  }
+  return (await r2.read()).curation;
 }
 
-/** Cached read for the gallery; an admin save invalidates it via revalidateTag(CURATION_TAG). */
-export const readCurationCached = unstable_cache(readCuration, ['mxp-curation'], {
-  tags: [CURATION_TAG],
-});
+/**
+ * Cached read for the gallery, without the change log; every admin write invalidates it via
+ * revalidateTag(CURATION_TAG).
+ */
+export const readCurationCached = unstable_cache(
+  async () => publicState(await readCuration()),
+  ['mxp-curation'],
+  { tags: [CURATION_TAG] }
+);
+
+/** Sets one or a few photos, merged into whatever is stored now (see curation-core). */
+export function patchPhotos(changes: Record<string, PhotoState>, seeds: Seeds) {
+  return patchCuration(r2, changes, seeds);
+}
 
 export class StaleCurationError extends Error {}
 
 /**
- * Writes a new state if `baseVersion` is still current. One curator makes concurrent saves
- * unlikely; when they happen, the stale one is refused instead of silently overwriting.
+ * Replaces the whole map: used only by Reset. Still refused if `baseVersion` is no longer
+ * current, and still conditional on the ETag, so a reset never lands on top of a change made
+ * after the curator last saw the screen.
  */
-export async function writeCuration(
+export async function replaceCuration(
   baseVersion: number,
-  photos: Curation['photos']
+  photos: Curation['photos'],
+  seeds: Seeds
 ): Promise<Curation> {
-  const current = await readCuration();
-  if (current.version !== baseVersion) throw new StaleCurationError();
-  const next: Curation = {
-    version: current.version + 1,
-    updatedAt: new Date().toISOString(),
-    photos,
-  };
-  await s3().send(
-    new PutObjectCommand({
-      ...location(),
-      Body: JSON.stringify(next),
-      ContentType: 'application/json',
-      CacheControl: 'no-store',
-    })
-  );
+  const { curation, etag } = await r2.read();
+  if (curation.version !== baseVersion) throw new StaleCurationError();
+  const next = applyChanges(curation, diffTo(curation.photos, photos, seeds), seeds);
+  if ((await r2.write(next, etag)) === 'conflict') throw new StaleCurationError();
   return next;
 }

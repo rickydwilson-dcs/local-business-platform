@@ -3,7 +3,8 @@
  *
  * A row is a flex line where every tile's flex-grow is its aspect ratio, so mixed shapes share
  * one height. Variety comes from how many tiles a row holds, indented rows, full-bleed singles
- * and insets with a caption beside them. Favourites always get a row of their own.
+ * and insets with a caption beside them. Favourites always get a row of their own, and the
+ * chapter's cover (its earliest favourite, already first in the list) leads it full width.
  */
 import { ar } from './media';
 import type { GalleryPhoto } from './types';
@@ -11,11 +12,13 @@ import type { GalleryPhoto } from './types';
 export interface Row {
   type: 'row' | 'full' | 'inset';
   items: GalleryPhoto[];
+  /** The chapter's cover: directly under the chapter header, full width on every screen. */
+  cover?: boolean;
   indent?: '' | 'indent-l' | 'indent-r' | 'stagger-l' | 'stagger-r';
   flip?: boolean;
 }
 
-export function buildRows(list: GalleryPhoto[], mobile: boolean): Row[] {
+export function buildRows(list: GalleryPhoto[], mobile: boolean, cover?: string | null): Row[] {
   const rows: Row[] = [];
   const patterns = mobile
     ? ['pair', 'solo', 'pair', 'pair', 'solo']
@@ -27,6 +30,11 @@ export function buildRows(list: GalleryPhoto[], mobile: boolean): Row[] {
   let pairs = 0;
   while (i < list.length) {
     const p = list[i];
+    if (p.id === cover) {
+      rows.push({ type: 'full', items: [p], cover: true });
+      i++;
+      continue;
+    }
     if (p.featured) {
       rows.push(
         ar(p) > 1.2 || mobile
@@ -79,7 +87,7 @@ export function buildRows(list: GalleryPhoto[], mobile: boolean): Row[] {
 /** The `sizes` attribute for a tile in a row, matching the CSS widths. */
 export function tileSizes(row: Row, p: GalleryPhoto, mobile: boolean): string {
   if (row.type === 'full') return '100vw';
-  if (row.type === 'inset') return mobile ? '100vw' : '58vw';
+  if (row.type === 'inset') return mobile ? '100vw' : p.featured ? '70vw' : '58vw';
   if (row.indent?.startsWith('stagger')) return '80vw';
   const sum = row.items.reduce((s, x) => s + ar(x), 0);
   return `${Math.ceil((ar(p) / sum) * (mobile ? 100 : 92))}vw`;

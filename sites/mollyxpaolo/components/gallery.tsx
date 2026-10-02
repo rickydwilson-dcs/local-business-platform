@@ -13,7 +13,7 @@ import { ar, clock } from '@/lib/media';
 import { buildRows, tileSizes } from '@/lib/rows';
 import { TONES, type GalleryData, type GalleryPhoto, type Tone } from '@/lib/types';
 import { Hero } from './hero';
-import { Lightbox } from './lightbox';
+import { GalleryActions, Lightbox } from './lightbox';
 import { Tile } from './tile';
 import { ToneSwitch } from './tone-switch';
 import { Tray } from './tray';
@@ -258,7 +258,8 @@ export function Gallery({ data }: { data: GalleryData }) {
 
         <div className="wrap" id="chapters">
           {chapters.map((c, ci) => {
-            const times = c.photos.map((p) => p.t).filter(Boolean) as string[];
+            // Sorted, because the cover has been moved to the front of the chapter.
+            const times = (c.photos.map((p) => p.t).filter(Boolean) as string[]).sort();
             const span = times.length
               ? `${clock(times[0])} – ${clock(times[times.length - 1])}`
               : '';
@@ -276,13 +277,16 @@ export function Gallery({ data }: { data: GalleryData }) {
                   </header>
                   <div className="rows">
                     {tone &&
-                      buildRows(c.photos, mobile === true).map((r) => {
+                      buildRows(c.photos, mobile === true, c.cover).map((r) => {
                         const sum = r.items.reduce((s, p) => s + ar(p), 0);
                         const cls = [
                           'row',
                           r.type === 'row' ? '' : r.type,
                           r.indent ?? '',
                           r.flip ? 'flip' : '',
+                          // Favourite rows take the taller height cap (globals.css).
+                          r.items[0].featured ? 'fav' : '',
+                          r.cover ? 'cover' : '',
                         ]
                           .filter(Boolean)
                           .join(' ');
@@ -371,9 +375,16 @@ export function Gallery({ data }: { data: GalleryData }) {
           tone={tone}
           mediaBase={mediaBase}
           chapterTitle={(id) => titles.get(id) ?? ''}
-          isPicked={(id) => picked.has(id)}
-          onTogglePick={togglePick}
           onClose={closeLightbox}
+          actions={(p) => (
+            <GalleryActions
+              photo={p}
+              tone={tone}
+              mediaBase={mediaBase}
+              picked={picked.has(p.id)}
+              onTogglePick={togglePick}
+            />
+          )}
           toneSwitch={<ToneSwitch tone={tone} onChange={setTone} />}
         />
       )}
