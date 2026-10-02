@@ -175,3 +175,18 @@ These were read on 2026-10-01 in uncommitted work on `feat/mollyxpaolo-site`, so
 4. **"I'm Molly / I'm Paolo" (D3)** for the change log, or not needed?
 5. **Soft guidance threshold (B8):** is about 1 favourite in 6 photos right, or drop the hint altogether?
 6. **Hidden photos:** is "removed from the site" enough, or do they want them deleted from storage once they've finished (section E)?
+
+## Answers (Ricky, 2026-10-02)
+
+1. **Starting point:** the enhanced 10 stay as favourites (current seed).
+2. **Admin access:** URL plus password only. D2 and D4 are **dropped** from this build.
+3. **Chapter cover:** automatic, the earliest favourite. No pinning.
+4. **Who's curating:** not needed. D3 is **dropped**; log entries have no `by`.
+5. **Guidance:** keep the soft note at about 1 favourite in 6 photos.
+6. **Hidden:** removed from the site is enough. No purge tool.
+
+## Added scope: gallery lightbox on touch (Ricky, 2026-10-02)
+
+- **L1 Pinch to zoom** in the swipe viewer, with two-finger pan while pinching. One finger pans once zoomed. Zoom back to 1× resumes swiping. Double-tap zoom stays.
+- **L2 Clearer exit.** A distinct, higher-contrast X in the top-right corner that stays visible when a single tap hides the other controls.
+- The curation review viewer (B4) gets the same gestures.
