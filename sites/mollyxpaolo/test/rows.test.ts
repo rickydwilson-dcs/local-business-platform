@@ -31,3 +31,32 @@ describe('buildRows', () => {
     });
   }
 });
+
+describe('chapter cover', () => {
+  for (const mobile of [false, true]) {
+    it(`leads its chapter full width (${mobile ? 'mobile' : 'desktop'})`, () => {
+      for (const c of g.chapters) {
+        const rows = buildRows(c.photos, mobile, c.cover);
+        const covers = rows.filter((r) => r.cover);
+        if (!c.cover) {
+          expect(covers).toHaveLength(0);
+          continue;
+        }
+        expect(rows[0]).toMatchObject({ type: 'full', cover: true });
+        expect(rows[0].items.map((p) => p.id)).toEqual([c.cover]);
+        expect(covers).toHaveLength(1);
+        // Shown once: not also in its time slot.
+        const placed = rows.flatMap((r) => r.items.map((p) => p.id));
+        expect(placed.filter((id) => id === c.cover)).toHaveLength(1);
+      }
+    });
+  }
+
+  it('sizes a desktop portrait favourite for the 70% inset', async () => {
+    const { tileSizes } = await import('@/lib/rows');
+    const portrait = g.chapters.flatMap((c) => c.photos).find((p) => p.w < p.h)!;
+    const fav = { ...portrait, featured: true };
+    expect(tileSizes({ type: 'inset', items: [fav] }, fav, false)).toBe('70vw');
+    expect(tileSizes({ type: 'inset', items: [portrait] }, portrait, false)).toBe('58vw');
+  });
+});
