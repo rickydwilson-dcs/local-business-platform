@@ -1,8 +1,8 @@
 # mollyxpaolo — wedding gallery
 
-**Status:** In progress — Phase 0 done, Phase 1 prototype live and approved (https://mollyxpaolo-proto.vercel.app). Phase 2 approved and built on `feat/mollyxpaolo-site` (committed, not pushed or deployed); see 2.8.
+**Status:** In progress — Phase 0 done, Phase 1 prototype live and approved (https://mollyxpaolo-proto.vercel.app). Phase 2 **live** at https://www.mollyxpaolo.com since 2026-10-02 (PR #105; domain cut over the same day); see 2.8 and Phase 4. Not yet checked behind the gate on production. Next: the curation follow-up (`curation-spec.md`).
 **Started:** 2026-10-01
-**Site:** `sites/mollyxpaolo` (built, not deployed) · prototype Vercel project `mollyxpaolo-proto`
+**Site:** `sites/mollyxpaolo` · Vercel project `mollyxpaolo` (production) · prototype Vercel project `mollyxpaolo-proto`
 **Production domain:** https://www.mollyxpaolo.com (currently WordPress invitation site on SiteGround)
 
 ## Goal
@@ -298,7 +298,7 @@ the proxy runs in. (Assumption to verify against the Next 16 docs at build time:
 
 #### 2.8 Progress (2026-10-01, branch `feat/mollyxpaolo-site`)
 
-Built: 2.1–2.6. Not started: 2.7.
+Built: 2.1–2.6. 2.7 done 2026-10-02 (below).
 
 - [x] Lean scaffold, `vercel.json`, lockfile (adds only the `sites/mollyxpaolo` importer plus
       `client-zip` and `server-only`). No `.vercelignore` matches.
@@ -340,6 +340,36 @@ Built: 2.1–2.6. Not started: 2.7.
 - [ ] Visual check, side by side with the prototype, of the two font substitutions (Big
       Shoulders for Big Shoulders Display, Fraunces without opsz).
 
+**2.7 deploy (2026-10-01/02):**
+
+- [x] `feat/mollyxpaolo-site` → `develop` (`4c88560d`). CI and E2E green.
+- [x] Ricky replaced the bucket CORS. Allowed origins: `mollyxpaolo.vercel.app`, `www.` and
+      bare `mollyxpaolo.com`, the prototype, `127.0.0.1:5173` and `localhost:3000`.
+- [x] Vercel project `mollyxpaolo` created with `vercel project add` plus REST: root
+      `sites/mollyxpaolo`, Next.js, Node 24.x, linked to GitHub, production branch `main`.
+      The name was re-checked as free (404) immediately before. Domain:
+      `mollyxpaolo.vercel.app`.
+- [x] Ricky set all ten env vars (Production). Names verified via the API; values never read.
+- [x] `develop` → `staging` (`15a8812d`). CI, E2E and Regression Watchdog green.
+- [x] PR #105 `staging` → `main`. `main` is protected: a PR plus the check "Verify promoted
+      commit passed staging E2E". Ricky merged it (`25f49d4e`). `mollyxpaolo` production is
+      READY; dcs, dj-fox-electrical, delta-t-racing-cc, dpm-autobody and mad-graphics
+      cancelled at the ignore step.
+- [x] **Live checks without secrets:**
+  - unauthenticated `/` → 307 `/unlock`, and `/admin` → 307 `/admin/login`;
+  - wrong passcode → `?e=wrong`; tampered `/s/` → `?e=link`; `PUT /api/admin/curation` → 401;
+  - `X-Robots-Tag`, CSP and `robots.txt Disallow: /` present;
+  - no path token on the public `/unlock`;
+  - R2 returns `Access-Control-Allow-Origin` for both `mollyxpaolo.vercel.app` and
+    `www.mollyxpaolo.com`.
+- [ ] **Behind the gate on production:** needs Ricky's passcode or a minted link, because Claude
+      doesn't hold the secrets. Check:
+  - photos in all three tones;
+  - lightbox swipe;
+  - a 4K download;
+  - zip on a laptop, Save to Photos on a phone;
+  - admin change then Reset.
+
 Deviations from the spec above, decided while building:
 
 - **`MXP_MEDIA_BASE` is server-only** (not `NEXT_PUBLIC_`), passed to the client only in the
@@ -375,14 +405,47 @@ Deviations from the spec above, decided while building:
   decides.
 - Film download as a save (needs a second MP4 with `Content-Disposition`, uploaded under a
   **new** key, never overwriting).
-- Domain cutover and custom media domain (Phase 4).
+- ~~Domain cutover and custom media domain (Phase 4).~~ Domain done; media domain declined. See
+  Phase 4.
 
 ### Phase 3 — full upload, then Molly curates on the preview deployment
 
-### Phase 4 — production
+### Phase 4 — production (done 2026-10-02, except the media domain, which was declined)
 
-Dedicated bucket + custom media domain, Cloudflare zone decision, mail records preserved, apex
-and www pointed at Vercel, optional archive of the invitation site.
+Original plan: dedicated bucket + custom media domain, Cloudflare zone decision, mail records
+preserved, apex and www pointed at Vercel, optional archive of the invitation site.
+
+- [x] **Domain.** Ricky changed DNS at SiteGround, and the zone **stays on SiteGround
+      nameservers**.
+  - `www` is a CNAME to `50bdd4931fd46aa1.vercel-dns-016.com`, and the apex is
+    A `216.150.1.1`.
+  - `https://mollyxpaolo.com/` 308-redirects to `https://www.mollyxpaolo.com/`. The canonical
+    address is **www**.
+  - Live checks on www: gate 307 → `/unlock`; wrong passcode → `?e=wrong`; `/admin` →
+    login; `X-Robots-Tag` and `robots.txt` present.
+  - TLS: Let's Encrypt `CN=www.mollyxpaolo.com`, valid to 31 Dec 2026.
+  - The WordPress invitation site is no longer served (it now redirects). The old SiteGround
+    mail/ftp/DKIM records are still in the zone and unused.
+- [x] **CORS** already covered `https://www.mollyxpaolo.com` (confirmed with a live request).
+- [ ] ~~**Custom media domain**~~ **declined by Ricky (2026-10-02).** Media stays on r2.dev.
+  - Cloudflare docs (checked 2026-10-02): an R2 custom domain needs the domain "added as a
+    zone in the same account as the R2 bucket". A partial (CNAME) setup "is only available to
+    customers on a Business or Enterprise plan". So it would mean moving nameservers to
+    Cloudflare, and Ricky doesn't want to change DNS.
+  - Expected audience is about 30 people.
+  - Cloudflare documents r2.dev only as "rate-limited and should only be used for development
+    purposes", with **no published number**.
+  - Risk: "Download all" (350 sequential fetches) by several guests at once is the likeliest
+    way to hit it. It shows up as failed loads or `HTTP 429` in the tray; retrying later works.
+  - Reversible: move the zone to Cloudflare, connect `media.mollyxpaolo.com` on the bucket,
+    add it to the CSP, switch `MXP_MEDIA_BASE` and redeploy. Keep r2.dev enabled even then,
+    because the prototype uses it.
+- [x] **Sharing: URL plus passcode** (Ricky's choice). Guests go to `www.mollyxpaolo.com` and
+      enter the passcode once, and the browser stays unlocked for a year.
+  - Share links stay available but optional. The command was verified with a dummy secret:
+    `MXP_LINK_SECRET='…' MXP_LINK_VERSION=1 pnpm --filter mollyxpaolo mint-link --days 365 --origin https://www.mollyxpaolo.com`.
+  - Changing `MXP_PASSCODE` only affects new visitors. Bumping `MXP_LINK_VERSION` and
+    redeploying logs everyone out.
 
 ## What was learned
 

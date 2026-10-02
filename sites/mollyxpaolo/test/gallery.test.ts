@@ -60,6 +60,58 @@ describe('buildGallery', () => {
     for (const id of ['vk-341', 'vk-347', 'vk-349', 'vk-350']) expect(g.hero).not.toContain(id);
   });
 
+  it('makes every photo hero-eligible except the lettered and collage ones', () => {
+    const ruledOut = photos
+      .filter((p) => p.heroOk === false)
+      .map((p) => p.id)
+      .sort();
+    expect(ruledOut).toEqual(['vk-341', 'vk-347', 'vk-349', 'vk-350']);
+    // A regular landscape photo promoted to favourite joins the hero.
+    const promoted = photos.find((p) => !p.featured && p.w > p.h)!;
+    expect(build({ [promoted.id]: 'featured' }).hero).toContain(promoted.id);
+    // Undefined counts as eligible; only an explicit false rules a photo out.
+    const loose = photos.map((p) => (p.id === promoted.id ? { ...p, heroOk: undefined } : p));
+    const g = buildGallery({
+      photos: loose as Photo[],
+      chapters,
+      heroOrder: photosJson.heroOrder,
+      curation: { version: 1, updatedAt: null, photos: { [promoted.id]: 'featured' } },
+      mediaBase: '',
+    });
+    expect(g.hero).toContain(promoted.id);
+  });
+
+  it('covers each chapter with its earliest favourite, moved to the front', () => {
+    const g = build({ 'vk-100': 'featured', 'vk-020': 'featured' });
+    const vows = g.chapters.find((c) => c.id === 'vows')!;
+    const favs = vows.photos.filter((p) => p.featured);
+    const earliest = [...favs].sort((a, b) => (a.t! < b.t! ? -1 : 1))[0];
+    expect(vows.cover).toBe(earliest.id);
+    expect(vows.photos[0].id).toBe(earliest.id);
+    expect(vows.photos.filter((p) => p.id === earliest.id)).toHaveLength(1);
+    // The rest stay in time order.
+    const rest = vows.photos
+      .slice(1)
+      .map((p) => p.t)
+      .filter(Boolean) as string[];
+    expect(rest).toEqual([...rest].sort());
+  });
+
+  it('gives a chapter without favourites no cover', () => {
+    const unfav = Object.fromEntries(
+      photos.filter((p) => p.featured).map((p) => [p.id, 'shown' as const])
+    );
+    for (const c of build(unfav).chapters) expect(c.cover).toBeNull();
+  });
+
+  it('drops hidden photos from chapter counts and covers', () => {
+    const before = build();
+    const cover = before.chapters[0].cover!;
+    const after = build({ [cover]: 'hidden' });
+    expect(after.chapters[0].photos).toHaveLength(before.chapters[0].photos.length - 1);
+    expect(after.chapters[0].cover).not.toBe(cover);
+  });
+
   it('falls back to some photo when every favourite is hidden', () => {
     const hideAll = Object.fromEntries(
       photos.filter((p) => p.featured).map((p) => [p.id, 'hidden' as const])

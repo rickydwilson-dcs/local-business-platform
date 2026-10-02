@@ -15,8 +15,10 @@ export interface Photo {
   /** The photographer's seed: the enhanced ten. Curation overrides it. */
   featured: boolean;
   enhanced: boolean;
-  /** Safe behind the hero title (no baked-in lettering, not a collage). */
+  /** Safe behind the hero title: false only for baked-in lettering and collages. */
   heroOk: boolean;
+  /** Vertical anchor of the hero's crop, 0–100 (default 35): for subjects near an edge. */
+  heroY?: number;
   /** 16px blurred WebP data URIs, one per tone. */
   ph: Record<Tone, string>;
 }
@@ -37,11 +39,23 @@ export interface GalleryPhoto extends Photo {
 
 export interface GalleryData {
   mediaBase: string;
-  chapters: (Chapter & { photos: GalleryPhoto[] })[];
+  /**
+   * Visible photos only. `cover` is the chapter's earliest favourite, moved to the front of
+   * `photos` so page order and lightbox order agree; null when the chapter has no favourite.
+   */
+  chapters: (Chapter & { photos: GalleryPhoto[]; cover: string | null })[];
   /** Ids in hero order: heroOrder first, then any other hero-safe favourite. */
   hero: string[];
   /** How many of `hero` lead on every screen; the rest are added on portrait screens only. */
   heroLead: number;
+}
+
+/** One change, kept so a mistake can be found and undone by hand. */
+export interface CurationLogEntry {
+  at: string;
+  id: string;
+  from: PhotoState;
+  to: PhotoState;
 }
 
 export interface Curation {
@@ -49,4 +63,6 @@ export interface Curation {
   updatedAt: string | null;
   /** Departures from each photo's seed only; a photo absent here is shown/featured per its seed. */
   photos: Record<string, PhotoState>;
+  /** The most recent changes, oldest first. Stored only; never sent to a browser. */
+  log?: CurationLogEntry[];
 }

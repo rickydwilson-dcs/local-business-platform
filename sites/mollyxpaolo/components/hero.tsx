@@ -5,8 +5,9 @@ import { ar, srcsetFor } from '@/lib/media';
 import type { GalleryPhoto, Tone } from '@/lib/types';
 
 /**
- * Crossfading hero. Leads with the curated hero order (data, from photos.json); portrait screens
- * also get the portrait favourites, portraits first. Two stacked images alternate: the next one
+ * Crossfading hero. Leads with the curated hero order (data, from photos.json), then adds the
+ * other hero-safe favourites that match the screen: landscape ones on a landscape screen,
+ * portrait ones (shown first) on a portrait screen. Two stacked images alternate: the next one
  * is decoded before it fades in, and a photo that fails to load is skipped rather than shown
  * broken. Driven imperatively, as in the prototype, so a crossfade never re-renders the page.
  */
@@ -29,7 +30,7 @@ export function Hero(props: {
 
   useEffect(() => {
     const portrait = matchMedia('(orientation: portrait)').matches;
-    const list = photos.filter((p, i) => i < lead || (portrait && ar(p) < 1));
+    const list = photos.filter((p, i) => i < lead || (portrait ? ar(p) < 1 : ar(p) >= 1));
     if (portrait) list.sort((x, y) => ar(x) - ar(y));
     const s = state.current;
     s.list = list.length ? list : photos;
@@ -41,6 +42,9 @@ export function Hero(props: {
       const p = s.list[s.n++ % s.list.length];
       const im = imgs[s.front];
       im.srcset = srcsetFor(mediaBase, p, toneRef.current);
+      // Per-photo crop anchor (data, from photos.json); unset falls back to the CSS default.
+      if (p.heroY === undefined) im.style.removeProperty('--hero-y');
+      else im.style.setProperty('--hero-y', `${p.heroY}%`);
       im.decode().then(
         () => {
           misses = 0;
