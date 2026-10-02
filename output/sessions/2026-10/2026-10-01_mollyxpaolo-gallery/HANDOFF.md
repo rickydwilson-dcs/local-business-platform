@@ -1,5 +1,18 @@
 # mollyxpaolo wedding gallery — handoff
 
+> **Update 2026-10-02 (later): resume with `curation-spec.md`.**
+>
+> - **The site is on its real domain:** https://www.mollyxpaolo.com. The bare domain redirects
+>   to www. DNS stays on SiteGround; see `session.md` Phase 4.
+> - **The media domain was declined.** Ricky won't move DNS to Cloudflare, so photos stay on
+>   r2.dev for about 30 guests. That's an accepted risk, not an open item; don't re-propose it
+>   unprompted.
+> - **Guests get the URL plus passcode.** Share links are optional.
+> - **Next session:** start from `curation-spec.md`. Re-read the files its "What already exists"
+>   section lists, since they're now committed and live, then get Ricky's answers to its six
+>   open questions before writing code.
+> - **Still not verified live:** the gallery behind the gate. Ricky checks it with the passcode.
+
 > **Update 2026-10-02: Phase 2 is live.** https://mollyxpaolo.vercel.app (Vercel project
 > `mollyxpaolo`, production from `main`, first deploy via PR #105, merge `25f49d4e`). The
 > sections below this box are the 2026-10-01 pre-build handoff, kept for history. Where they
@@ -21,8 +34,10 @@
 > decision). To get in, Ricky mints a link:
 >
 > ```
-> MXP_LINK_SECRET='<secret>' MXP_LINK_VERSION=1 pnpm --filter mollyxpaolo mint-link --days 365 --origin https://mollyxpaolo.vercel.app
+> MXP_LINK_SECRET='<secret>' MXP_LINK_VERSION=1 pnpm --filter mollyxpaolo mint-link --days 365 --origin https://www.mollyxpaolo.com
 > ```
+>
+> Or just use the passcode at www.mollyxpaolo.com, which is the chosen approach for guests.
 >
 > **Next:**
 >
@@ -32,8 +47,8 @@
 >    - 4K download, zip, Save to Photos;
 >    - an admin change, then Reset.
 > 2. Curation follow-up: `curation-spec.md`. Answer its six open questions first.
-> 3. Phase 4: www.mollyxpaolo.com cutover from SiteGround (no email in use) and an R2 custom
->    media domain, which also changes the CSP's `*.r2.dev`.
+> 3. ~~Phase 4: domain cutover and media domain.~~ The domain is done and the media domain was
+>    declined (see the box above).
 > 4. Family approvals:
 >    - chapter names;
 >    - the mono versions of VK-343/347;
