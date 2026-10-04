@@ -407,7 +407,25 @@ html[data-tone="bw"] .chapter-blurb { margin-inline: auto; }
   --cap-featured: 86svh;
   --cap: var(--cap-regular);
 }
-.row.fav { --cap: var(--cap-featured); }
+/* A favourite is a spotlight band: full bleed, washed with a blur of its own placeholder
+   (--ph, set per row), the photo centred on it. Even a portrait favourite then spans the page,
+   where its height alone (capped at the viewport) never could. */
+.row.fav {
+  --cap: var(--cap-featured);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(14px, 4vh, 44px);
+}
+.row.fav::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  background: var(--ph) center / cover no-repeat;
+  filter: blur(28px) saturate(1.25);
+  opacity: 0.6;
+}
 .row {
   display: flex;
   gap: var(--gap);
@@ -427,7 +445,6 @@ html[data-tone="bw"] .chapter-blurb { margin-inline: auto; }
 .row.inset.flip { flex-direction: row-reverse; }
 .row.inset { max-width: none; }
 .row.inset .tile { flex: 0 0 auto; width: min(58%, calc(var(--cap) * var(--ar))); }
-.row.inset.fav .tile { width: min(70%, calc(var(--cap) * var(--ar))); }
 .inset-note {
   flex: 1;
   padding: 0 clamp(4px, 2vw, 40px) 8px;

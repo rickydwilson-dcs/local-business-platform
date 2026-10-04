@@ -52,11 +52,11 @@ describe('chapter cover', () => {
     });
   }
 
-  it('sizes a desktop portrait favourite for the 70% inset', async () => {
-    const { tileSizes } = await import('@/lib/rows');
-    const portrait = g.chapters.flatMap((c) => c.photos).find((p) => p.w < p.h)!;
-    const fav = { ...portrait, featured: true };
-    expect(tileSizes({ type: 'inset', items: [fav] }, fav, false)).toBe('70vw');
-    expect(tileSizes({ type: 'inset', items: [portrait] }, portrait, false)).toBe('58vw');
+  it('gives every favourite, portrait included, a full-width row on desktop', () => {
+    for (const c of g.chapters) {
+      for (const r of buildRows(c.photos, false, c.cover)) {
+        if (r.items[0].featured) expect(r.type).toBe('full');
+      }
+    }
   });
 });

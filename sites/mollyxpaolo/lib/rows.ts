@@ -3,8 +3,9 @@
  *
  * A row is a flex line where every tile's flex-grow is its aspect ratio, so mixed shapes share
  * one height. Variety comes from how many tiles a row holds, indented rows, full-bleed singles
- * and insets with a caption beside them. Favourites always get a row of their own, and the
- * chapter's cover (its earliest favourite, already first in the list) leads it full width.
+ * and insets with a caption beside them. Favourites always get a full-width row of their own
+ * (a spotlight band), and the chapter's cover (its earliest favourite, already first in the
+ * list) leads the chapter.
  */
 import { ar } from './media';
 import type { GalleryPhoto } from './types';
@@ -35,12 +36,10 @@ export function buildRows(list: GalleryPhoto[], mobile: boolean, cover?: string 
       i++;
       continue;
     }
+    // Every favourite is a centred full-width spotlight band, portrait ones included: an inset
+    // left a portrait favourite at half the width beside an empty column.
     if (p.featured) {
-      rows.push(
-        ar(p) > 1.2 || mobile
-          ? { type: 'full', items: [p] }
-          : { type: 'inset', items: [p], flip: (flip = !flip) }
-      );
+      rows.push({ type: 'full', items: [p] });
       i++;
       continue;
     }
@@ -87,7 +86,7 @@ export function buildRows(list: GalleryPhoto[], mobile: boolean, cover?: string 
 /** The `sizes` attribute for a tile in a row, matching the CSS widths. */
 export function tileSizes(row: Row, p: GalleryPhoto, mobile: boolean): string {
   if (row.type === 'full') return '100vw';
-  if (row.type === 'inset') return mobile ? '100vw' : p.featured ? '70vw' : '58vw';
+  if (row.type === 'inset') return mobile ? '100vw' : '58vw';
   if (row.indent?.startsWith('stagger')) return '80vw';
   const sum = row.items.reduce((s, x) => s + ar(x), 0);
   return `${Math.ceil((ar(p) / sum) * (mobile ? 100 : 92))}vw`;
