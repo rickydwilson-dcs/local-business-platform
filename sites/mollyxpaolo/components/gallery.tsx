@@ -300,6 +300,8 @@ export function Gallery({ data }: { data: GalleryData }) {
                               {
                                 '--sum': sum.toFixed(4),
                                 '--n': r.items.length,
+                                // A favourite's band is washed with its own colours (globals.css).
+                                ...(p0.featured && { '--ph': `url(${p0.ph[tone]})` }),
                               } as React.CSSProperties
                             }
                           >

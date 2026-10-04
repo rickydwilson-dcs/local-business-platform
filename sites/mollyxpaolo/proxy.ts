@@ -53,6 +53,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except Next's static output and the files a browser asks for unprompted.
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|icon.svg|robots.txt).*)'],
+  // Everything except Next's static output and the files a browser asks for unprompted
+  // (apple-icon.png is fetched by "Add to Home Screen", which may not send the cookie).
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|robots.txt).*)'],
 };
