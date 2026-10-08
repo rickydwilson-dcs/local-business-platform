@@ -16,6 +16,7 @@ import { validateCsrfToken } from "../security/csrf";
 import { escapeHtml } from "../security/html-escape";
 import { extractClientIp } from "../security/ip-utils";
 import { checkRateLimit } from "../rate-limiter";
+import { isJunkMessage, verifyTurnstile } from "./turnstile";
 import { assessSubmission, type SpamAssessment, type SpamRulesConfig } from "./spam-score";
 
 interface ContactRouteConfig {
@@ -145,6 +146,36 @@ export function createContactHandler(config: ContactRouteConfig) {
         return Response.json({ error: "Validation failed", details: errors }, { status: 422 });
       }
 
+      // Machine-generated junk: answer like a success so the bot learns nothing,
+      // but send nothing — no notification, and crucially no confirmation email
+      // to the (random, third-party) address it supplied.
+      if (isJunkMessage(message)) {
+        console.warn(`[contact] dropped junk submission (${config.siteSlug}, ip ${ip})`);
+        return Response.json({ success: true, message: "Thank you for your message." });
+      }
+
+      // Cloudflare Turnstile: enforced only on sites where TURNSTILE_SECRET_KEY
+      // is set, so rolling it out is a per-site env change. Runs after field
+      // validation so a typo doesn't spend the visitor's single-use token.
+      const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+      if (turnstileSecret) {
+        const verdict = await verifyTurnstile(body.turnstileToken, turnstileSecret, ip);
+        if (!verdict.ok) {
+          console.warn(
+            `[contact] turnstile rejected (${config.siteSlug}, ip ${ip}): ${verdict.reason} ${verdict.errorCodes.join(",")}`
+          );
+          return Response.json(
+            { error: "Verification failed. Please refresh the page and try again." },
+            { status: 403 }
+          );
+        }
+        if (verdict.degraded) {
+          console.error(
+            `[contact] turnstile degraded, allowing (${config.siteSlug}): ${verdict.reason}`
+          );
+        }
+      }
+
       // Collect any extra fields beyond the standard ones
       const standardFields = new Set([
         "name",
@@ -155,6 +186,7 @@ export function createContactHandler(config: ContactRouteConfig) {
         "location",
         "message",
         "website",
+        "turnstileToken",
       ]);
       const extraFields: Record<string, string> = {};
       for (const [key, val] of Object.entries(body)) {

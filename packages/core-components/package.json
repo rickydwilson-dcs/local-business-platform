@@ -15,6 +15,7 @@
     "./components/ui/county-gateway-cards": "./src/components/ui/county-gateway-cards.tsx",
     "./components/animation": "./src/components/animation/index.ts",
     "./components/composable": "./src/components/composable/index.ts",
+    "./components/ui/contact-form/turnstile-widget": "./src/components/ui/contact-form/turnstile-widget.tsx",
     "./components/*": "./src/components/*/index.tsx",
     "./lib/*": "./src/lib/*.ts",
     "./hooks/*": "./src/hooks/*.ts"

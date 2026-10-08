@@ -2,6 +2,10 @@
 
 import { useEffect, useId, useState } from 'react';
 import type { FormEvent } from 'react';
+import {
+  TurnstileWidget,
+  TURNSTILE_SITE_KEY,
+} from '@platform/core-components/components/ui/contact-form/turnstile-widget';
 import { Mail, Instagram, Facebook } from 'lucide-react';
 import type { BrandContent } from '@/lib/schemas/brand';
 import { PageHead } from '@/components/sections/page-head';
@@ -84,6 +88,8 @@ export function ContactPage({ brand, formEnabled }: ContactPageProps) {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [statusTone, setStatusTone] = useState<'error' | 'notice'>('notice');
   const [csrfToken, setCsrfToken] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchCsrfToken = async () => {
@@ -132,6 +138,12 @@ export function ContactPage({ brand, formEnabled }: ContactPageProps) {
       return;
     }
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setStatusTone('error');
+      setStatusMessage('Please wait for the security check to finish, then try again.');
+      return;
+    }
+
     setIsSubmitting(true);
     setStatusMessage(null);
 
@@ -142,7 +154,7 @@ export function ContactPage({ brand, formEnabled }: ContactPageProps) {
           'Content-Type': 'application/json',
           'x-csrf-token': csrfToken,
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, turnstileToken }),
       });
 
       const data = await response.json();
@@ -176,6 +188,9 @@ export function ContactPage({ brand, formEnabled }: ContactPageProps) {
         `Network error — your message was not sent. Please email ${brand.email} directly.`
       );
     } finally {
+      // Turnstile tokens are single-use: whatever happened, this one is spent.
+      setTurnstileToken('');
+      setTurnstileReset((n) => n + 1);
       setIsSubmitting(false);
     }
   };
@@ -370,6 +385,14 @@ export function ContactPage({ brand, formEnabled }: ContactPageProps) {
               <p className="text-xs text-surface-tertiary-foreground">
                 <span aria-hidden="true">*</span> Required field.
               </p>
+
+              {TURNSTILE_SITE_KEY && (
+                <TurnstileWidget
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onToken={setTurnstileToken}
+                  resetSignal={turnstileReset}
+                />
+              )}
 
               <div className="flex flex-wrap items-center gap-4">
                 <button type="submit" className="btn-primary" disabled={isSubmitting}>

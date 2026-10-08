@@ -1,6 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import {
+  TurnstileWidget,
+  TURNSTILE_SITE_KEY,
+} from '@platform/core-components/components/ui/contact-form/turnstile-widget';
 
 interface ContactFormProps {
   services?: Array<{ slug: string; title: string }>;
@@ -30,6 +34,8 @@ export function ContactForm({ services = [], serviceAreas = [] }: ContactFormPro
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [csrfToken, setCsrfToken] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
@@ -77,6 +83,12 @@ export function ContactForm({ services = [], serviceAreas = [] }: ContactFormPro
     e.preventDefault();
     if (!validateForm()) return;
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setSubmitStatus('error');
+      setSubmitMessage('Please wait for the security check to finish, then try again.');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -87,7 +99,7 @@ export function ContactForm({ services = [], serviceAreas = [] }: ContactFormPro
           'Content-Type': 'application/json',
           'x-csrf-token': csrfToken,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const data = await response.json();
@@ -119,6 +131,9 @@ export function ContactForm({ services = [], serviceAreas = [] }: ContactFormPro
       setSubmitStatus('error');
       setSubmitMessage('Network error. Please check your connection and try again.');
     } finally {
+      // Turnstile tokens are single-use: whatever happened, this one is spent.
+      setTurnstileToken('');
+      setTurnstileReset((n) => n + 1);
       setIsSubmitting(false);
     }
   };
@@ -331,6 +346,14 @@ export function ContactForm({ services = [], serviceAreas = [] }: ContactFormPro
           </p>
         )}
       </div>
+
+      {TURNSTILE_SITE_KEY && (
+        <TurnstileWidget
+          siteKey={TURNSTILE_SITE_KEY}
+          onToken={setTurnstileToken}
+          resetSignal={turnstileReset}
+        />
+      )}
 
       <button
         type="submit"
