@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { TurnstileWidget, TURNSTILE_SITE_KEY } from "./turnstile-widget";
 
 interface ExtraFieldConfig {
   name: string;
@@ -45,6 +46,7 @@ export function ContactForm({
       service: "",
       location: "",
       message: "",
+      website: "", // honeypot — see the hidden input; the server drops any non-empty value
     };
     for (const field of extraFields) {
       initial[field.name] = field.defaultValue ?? "";
@@ -54,6 +56,8 @@ export function ContactForm({
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [csrfToken, setCsrfToken] = useState<string>("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
@@ -115,6 +119,12 @@ export function ContactForm({
       return;
     }
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setSubmitStatus("error");
+      setSubmitMessage("Please wait for the security check to finish, then try again.");
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -125,7 +135,7 @@ export function ContactForm({
           "Content-Type": "application/json",
           "x-csrf-token": csrfToken,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const data = await response.json();
@@ -142,6 +152,7 @@ export function ContactForm({
           service: "",
           location: "",
           message: "",
+          website: "",
         };
         for (const field of extraFields) {
           resetData[field.name] = field.defaultValue ?? "";
@@ -166,6 +177,9 @@ export function ContactForm({
       setSubmitStatus("error");
       setSubmitMessage("Network error. Please check your connection and try again.");
     } finally {
+      // Turnstile tokens are single-use: whatever happened, this one is spent.
+      setTurnstileToken("");
+      setTurnstileReset((n) => n + 1);
       setIsSubmitting(false);
     }
   };
@@ -534,6 +548,28 @@ export function ContactForm({
             )}
           </div>
 
+          {/* Honeypot: invisible to people, tempting to bots. Server drops any submission with this filled. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label htmlFor="website">Leave this field empty</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              value={formData.website ?? ""}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
+          {TURNSTILE_SITE_KEY && (
+            <TurnstileWidget
+              siteKey={TURNSTILE_SITE_KEY}
+              onToken={setTurnstileToken}
+              resetSignal={turnstileReset}
+            />
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -712,6 +748,28 @@ export function ContactForm({
           </p>
         )}
       </div>
+
+      {/* Honeypot: invisible to people, tempting to bots. Server drops any submission with this filled. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Leave this field empty</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          value={formData.website ?? ""}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
+      {TURNSTILE_SITE_KEY && (
+        <TurnstileWidget
+          siteKey={TURNSTILE_SITE_KEY}
+          onToken={setTurnstileToken}
+          resetSignal={turnstileReset}
+        />
+      )}
 
       {/* Submit Button */}
       <button

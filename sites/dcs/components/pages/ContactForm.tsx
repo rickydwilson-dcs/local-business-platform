@@ -36,6 +36,10 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import {
+  TurnstileWidget,
+  TURNSTILE_SITE_KEY,
+} from '@platform/core-components/components/ui/contact-form/turnstile-widget';
 import Link from 'next/link';
 import { CONTACT } from '@/components/home/home-data';
 
@@ -96,6 +100,8 @@ const DONE_GAP = 16;
 
 export function ContactForm() {
   const [csrfToken, setCsrfToken] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<SubmittedInfo | null>(null);
@@ -173,6 +179,11 @@ export function ContactForm() {
     const form = event.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setErrorMessage('Please wait for the security check to finish, then try again.');
+      return;
+    }
+
     setSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
@@ -181,7 +192,7 @@ export function ContactForm() {
           'Content-Type': 'application/json',
           'x-csrf-token': csrfToken,
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, turnstileToken }),
       });
 
       const result = (await response.json().catch(() => ({}))) as {
@@ -201,6 +212,9 @@ export function ContactForm() {
     } catch {
       setErrorMessage(NETWORK_ERROR);
     } finally {
+      // Turnstile tokens are single-use: whatever happened, this one is spent.
+      setTurnstileToken('');
+      setTurnstileReset((n) => n + 1);
       setSubmitting(false);
     }
   }
@@ -422,6 +436,14 @@ export function ContactForm() {
             <span></span>
           </p>
         </div>
+
+        {TURNSTILE_SITE_KEY && (
+          <TurnstileWidget
+            siteKey={TURNSTILE_SITE_KEY}
+            onToken={setTurnstileToken}
+            resetSignal={turnstileReset}
+          />
+        )}
 
         <div className="hero__act">
           <button className="btn" type="submit" id="send" disabled={submitting}>

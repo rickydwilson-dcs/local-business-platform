@@ -217,6 +217,15 @@ threshold. DCS is currently the only site opted in.
 Layering is baseline → preset keyed on the site's `businessType` → per-site delta, so the shared
 list grows from observed traffic while each site's own config stays near-empty.
 
+### Bot defence: Turnstile and the junk-content drop
+
+Spam _tagging_ (above) labels pitches; it does nothing about volume, and it scores grammar, so it cannot see the other kind of spam. The October 2026 Colossus wave (26 submissions in three days, via a shared Resend account) was machine-generated gibberish: random-letter name and subject, a ten-digit number as the message, default dropdown values, several source IPs that look like Tor exits. It scored zero on every grammar signal. Each submission also fired a confirmation email to a random third-party address, i.e. the site's sending domain was being used as a relay. Two layers stop it at the handler, with nothing asked of the client:
+
+- **Junk-content drop** (`isJunkMessage`, `lib/api/turnstile.ts`): a message containing no letters is answered with a normal `200 success` but sends nothing, so the bot learns nothing and no confirmation goes out. Needs no keys, active on every site using `createContactHandler`.
+- **Cloudflare Turnstile**: enforced when `TURNSTILE_SECRET_KEY` is set. The browser widget (`components/ui/contact-form/turnstile-widget.tsx`, rendered when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set) supplies a token the handler verifies against Cloudflare's `siteverify` before sending anything. A missing or rejected token is a `403`. It fails **open** only when Cloudflare is unreachable or the secret itself is invalid (our misconfiguration must not lock customers out). Managed vs invisible mode is a setting on the widget in the Cloudflare dashboard.
+
+**Enabling it for a site is per-site, in this order — never set the secret first.** (1) Create a widget in Cloudflare for the site's domains. (2) Set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` in that site's Vercel project, then redeploy (the site key is inlined at build). The reverse order, or a secret on a site whose form does not render the widget, rejects every real enquiry. Sites on the shared `ContactForm` (base-template, colossus-scaffolding, dpm-autobody, mad-graphics) and the four with their own form (dcs, dch-automotive, delta-t-racing-cc, npracing-v1) all render the widget; dj-fox-electrical and npracing-v3 have a contact route but no form component in the repo, so check how they are submitted before enabling. Each site's CSP already allows `https://challenges.cloudflare.com` in `script-src`, `connect-src` and `frame-src`. Cloudflare publishes dummy keys for local testing (docs: Turnstile → Testing); never use them in production. Covered by `packages/core-components/src/lib/__tests__/contact-route-turnstile.test.ts`.
+
 ### The corpus contains personal data and must stay anonymised
 
 `packages/core-components/src/lib/__tests__/fixtures/contact-submissions.ts` is calibrated against

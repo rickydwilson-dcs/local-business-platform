@@ -85,7 +85,7 @@ const nextConfig: NextConfig = {
     // CSP script-src: unsafe-inline required for Next.js hydration
     // Next.js dev mode requires unsafe-eval for webpack HMR; production omits it
     const unsafeEval = process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : '';
-    const scriptSrc = `'self' 'unsafe-inline'${unsafeEval} *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live`;
+    const scriptSrc = `'self' 'unsafe-inline'${unsafeEval} *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live https://challenges.cloudflare.com`;
 
     // CORS: restrict API routes to same-origin requests only
     const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -131,7 +131,7 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             // frame-src includes viezu.com for the embedded vehicle-tuning-finder widget on /car-remaps (Lyra/DCH-specific — remove if the widget is dropped)
-            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live https://viezu.com; frame-ancestors 'none';`,
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: *.r2.dev placehold.co; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live https://challenges.cloudflare.com; frame-src vercel.live *.vercel.live https://viezu.com https://challenges.cloudflare.com; frame-ancestors 'none';`,
           },
           // HSTS - enforce HTTPS for 1 year, include subdomains, allow preload
           {
