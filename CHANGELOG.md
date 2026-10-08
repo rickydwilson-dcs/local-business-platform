@@ -6,6 +6,29 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-10-08
+
+### Packages
+
+- **Contact forms now stop bots at the handler, with nothing asked of clients.** A wave of
+  machine-generated submissions hit Colossus Scaffolding (26 in three days, all random-letter
+  name/subject with a ten-digit number as the message; each also fired a confirmation email to a
+  random third-party address, so the site's sending domain was being used as a relay). The
+  grammar-based spam scorer scores that kind of junk at zero, so tagging was never going to help.
+  Two layers now run in `createContactHandler` (`lib/api/turnstile.ts`): a message containing no
+  letters is answered with a normal success but sends nothing (no notification, no confirmation),
+  on every site, no keys needed; and Cloudflare Turnstile verification, enforced only on a site
+  whose `TURNSTILE_SECRET_KEY` is set. Verification fails open only when Cloudflare is unreachable
+  or the secret itself is invalid. The shared `ContactForm` and the four custom forms (dcs,
+  dch-automotive, delta-t-racing-cc, npracing-v1) render the widget when
+  `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set; the shared form also now renders the `website` honeypot
+  field the server was already checking. Every form site's CSP allows
+  `https://challenges.cloudflare.com`. **Operator note:** enable per site by setting both env vars
+  together in Production and redeploying; a secret on a site whose form lacks the widget rejects
+  real enquiries. See `docs/standards/security.md`.
+
+---
+
 ## 2026-09-30
 
 ### Packages

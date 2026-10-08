@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-10-08
+
+### Content
+
+- Added a new news article, "Aussie Brayden Elliott sets a Donington Park PB, but Race 3 ends before it starts" (`content/news/donington-park-sunday-race-report.mdx`, `publishedAt: 2026-10-08`), with a hero image and an 8-photo gallery, all credited to Gary Smith / GPS Photography. Photos were resized from full originals (up to 6960px) to fit within 2048px, JPEG q85, and uploaded to R2 under `npracing-v1/news/donington-park-sunday-race-report*.jpg`. Client copy lightly tidied for spelling and grammar, casual tone kept. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 5 to 6 to match.
+
 ## 2026-09-18
 
 ### Content
