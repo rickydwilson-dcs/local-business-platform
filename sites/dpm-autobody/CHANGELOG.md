@@ -21,6 +21,9 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 - **Facts.** Volvo 262C chassis `2626AD006467` (its `sourcingGaps` entry removed). Candy Red P1800
   owner Carl Walker, with its testimonial and the two show awards it won logged as `sourcingGaps`
   until David supplies them.
+- **Volvo 262C copy replaced with David's own text**, which also corrects a factual error: the page
+  said the USA donor car supplied a replacement roof, but the original shell's roof was reused
+  because the donor's had moisture damage from its vinyl roof.
 - **Process wording corrected.** Bentley S3 Continental: panels are blocked back ahead of paint, and
   the five coats of lacquer are then sanded through six grades before polishing (it previously said
   six grades came before paint). Porsche 356 SC: the photos now say they show the car as it left DPM,
