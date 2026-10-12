@@ -529,3 +529,16 @@ leaving it live-but-unlinked. Local `redacted/` copy renamed to match. Now used 
 - **Sussex Express DB6 article** returns 403 to automated fetch; grab the text manually if we cite it.
 - **PistonHeads' 15 professional images of the DB6 in original green** (photographer Steph Ewen)
   pre-date DPM's respray and would make a properly-shot "before". Licensing question.
+
+- **Techniques / process pages, written by David — not started, 2026-10-12.** Ricky's direction: David
+  will eventually write pages on techniques and process that are not tied to any one project (the
+  English wheel, block sanding and flatting, panel fabrication, bare-metal prep, and so on). They serve
+  as rich content for SEO and AEO (answer-engine) and let DPM reference doing that work on Porsches,
+  Bentleys, Astons and the other marques it wants to attract, without needing a build page for each.
+  Not a build type: needs its own content type and route (MDX, per root `CLAUDE.md`), so scope it
+  when David's first pieces arrive. Standing constraint from the same conversation: say only what DPM
+  does itself, and don't present specialist partners as a feature (that is a per-owner conversation).
+  David's note on the Bentley S3 1964 ("English wheel" wording) is the first likely seed for this.
+  Likely home (Ricky's suspicion, 2026-10-12, not decided): the technique pages hang off "The Workshop"
+  as child pages linked from `/workshop`, e.g. `/workshop/<technique>`, rather than a separate top-level
+  section. Decide the route and nav treatment when scoping.

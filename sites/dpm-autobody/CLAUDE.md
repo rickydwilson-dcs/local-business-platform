@@ -48,8 +48,9 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
   material doesn't support.
 - **New `volvo-262c` build added 2026-09-16** — a rare model David restored for a repeat client,
   the first of David's 2026-09-15 batch that was a genuinely new car rather than a content update
-  to an existing one. Uses the same thin-content fallback as the other 8. Chassis number is still
-  `TBC` (David left it blank in his email) — tracked as `sourcingGaps`, not guessed.
+  to an existing one. Uses the same thin-content fallback as the other 8. Chassis number was `TBC`
+  when added (David left it blank in his email), tracked as `sourcingGaps` rather than guessed;
+  David supplied it 2026-10-12 (**2626AD006467**) and the gap entry is removed.
 - **Workshop page gained a "Workshop atmosphere" section, 2026-09-16** (`app/workshop/page.tsx`,
   `WORKSHOP_ACTION_PHOTOS`) — 8 photos selected from the 19-photo `workshop-action` album David
   sent, deliberately not tied to any one build ("atmosphere and craft, not 'here's car X being
@@ -140,10 +141,12 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 ### Still not done
 
 - **A run of David-confirmation facts is still open**, tracked as `sourcingGaps` on the affected
-  builds and visible on their pages: chassis numbers for the new Volvo 262C and for the Red P1800
-  (both still `TBC`), the resto-mod's second client pair (a different client from Tonja/Ahmet, two
+  builds and visible on their pages: the Red P1800's chassis number
+  (still `TBC` — David is chasing it), the resto-mod's second client pair (a different client from Tonja/Ahmet, two
   P1800s, show names and award placings — still unidentified), and the DB6's magazine's exact
   title. Chase these with David before removing the corresponding `sourcingGaps` entries.
+  - **Resolved 2026-10-12:** Volvo 262C's chassis number, supplied by David (**2626AD006467**),
+    applied in `volvo-262c.mdx` with its `sourcingGaps` entry removed.
   - **Resolved 2026-09-15:** the DB6's race status and pre-crash livery — David confirmed it
     hasn't raced since the crash (still due to) and that the crash photos show its original
     livery, not yet replaced with the new pink-request design. Both `sourcingGaps` entries removed

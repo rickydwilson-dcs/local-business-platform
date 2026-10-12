@@ -5,6 +5,34 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 
 ---
 
+## 2026-10-12
+
+### David's amends, applied across eight build pages and the workshop page
+
+- **Galleries.** Red P1800: dropped the sideways third photo and one of two near-identical welding
+  shots, added three new photos. Pearl White P1800: dropped the first seven photos, added 34.
+  Volvo 262C: added 27. Bentley S3 1964: removed seven photos (and the duplicate `IMG_2305` entry
+  that would otherwise have kept one on the page). New images live on R2 under a `2026-10/` prefix.
+  Number plates on other people's cars were blurred or blanked before upload (Red P1800 `IMG_6777`,
+  Pearl White `IMG_1364` and `IMG_1369`).
+- **DB6 hero shows its real plate.** The "OH OH 7" plate is a joke plate, so the grey redaction block
+  was dropped. Uploaded under a new key (`IMG_8830-plate.jpg`) because overwriting would not bust
+  the CDN cache; the build page and the homepage's No. 03 slot both point at it.
+- **Facts.** Volvo 262C chassis `2626AD006467` (its `sourcingGaps` entry removed). Candy Red P1800
+  owner Carl Walker, with its testimonial and the two show awards it won logged as `sourcingGaps`
+  until David supplies them.
+- **Volvo 262C copy replaced with David's own text**, which also corrects a factual error: the page
+  said the USA donor car supplied a replacement roof, but the original shell's roof was reused
+  because the donor's had moisture damage from its vinyl roof.
+- **Process wording corrected.** Bentley S3 Continental: panels are blocked back ahead of paint, and
+  the five coats of lacquer are then sanded through six grades before polishing (it previously said
+  six grades came before paint). Porsche 356 SC: the photos now say they show the car as it left DPM,
+  before the customer's own engine and trim work.
+- **Workshop page no longer lists out-of-house work.** Removed the "Engine building" and "Trim and
+  upholstery" rows, the sentence introducing them, the "and what goes out" heading, and the matching
+  meta description, plus the two P1800 Candy captions saying the same. Per-build credits to outside
+  firms stay. The site does not promote specialist partners; that is a per-owner conversation.
+
 ## 2026-09-17
 
 ### Fixed a live plate exposure the 2026-09-16 redaction pass missed
