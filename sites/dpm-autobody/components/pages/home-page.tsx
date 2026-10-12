@@ -759,7 +759,7 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
           } as Vars,
         }}
         resolve={{
-          src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/aston-martin-db6-pink/IMG_8830.jpg',
+          src: 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/dpm-autobody/builds/aston-martin-db6-pink/IMG_8830-plate.jpg',
           alt: 'The finished Aston Martin DB6 in pink, front three-quarter, outside the workshop.',
           vars: { '--pz': '1.06', '--po': '48% 54%' } as Vars,
         }}

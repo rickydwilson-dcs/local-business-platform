@@ -53,8 +53,6 @@ const IN_HOUSE = [
   'Photographic record of the build',
 ];
 
-const OUT_OF_HOUSE = ['Engine building', 'Trim and upholstery'];
-
 /**
  * General workshop atmosphere and craft shots — not tied to any one build. Sourced from the
  * "workshop-action" camera roll David sent (welding/metalwork day-to-day shots, per his own
@@ -100,7 +98,7 @@ const WORKSHOP_ACTION_PHOTOS = [
 export const metadata: Metadata = {
   title: `The Workshop | ${siteConfig.business.name}`,
   description:
-    'Bare-metal restoration and concours paint, one building in Berwick, East Sussex — what DPM Autobody does in house, and what goes out.',
+    'Bare-metal restoration and concours paint, one building in Berwick, East Sussex — what DPM Autobody does in house.',
   alternates: {
     canonical: absUrl('/workshop'),
   },
@@ -202,9 +200,7 @@ export default function WorkshopPage() {
 
         <div className="grid gap-5 pb-[clamp(2.5rem,6vh,4.5rem)] pt-[clamp(1.75rem,4vh,2.75rem)] lg:grid-cols-2 lg:gap-16">
           <h2 className="font-heading text-[clamp(2rem,4.6vw,4rem)] font-light leading-[0.98] tracking-[-0.034em] text-balance text-surface-foreground">
-            What we do,
-            <br />
-            and what goes out
+            What we do
           </h2>
           <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
             Bare-metal restoration and concours paint on classic and performance cars, in one
@@ -221,10 +217,6 @@ export default function WorkshopPage() {
               things sits a file that the owner keeps: every panel, every gap, every decision,
               photographed as it happened.
             </p>
-            <p className="max-w-[22.6em] font-prose text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] font-light leading-[1.62] text-[#CFCAC1]">
-              Two things leave the building. We would rather list them than let &ldquo;full in-house
-              restoration&rdquo; quietly cover them.
-            </p>
           </div>
 
           <ul className="m-0 list-none border-t border-[rgba(232,228,220,0.14)] p-0">
@@ -238,19 +230,6 @@ export default function WorkshopPage() {
                 </span>
                 <span className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-surface-muted-foreground">
                   In house
-                </span>
-              </li>
-            ))}
-            {OUT_OF_HOUSE.map((name) => (
-              <li
-                key={name}
-                className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 border-b border-[rgba(232,228,220,0.07)] py-[0.8rem]"
-              >
-                <span className="font-prose text-[1.0625rem] font-light text-surface-foreground">
-                  {name}
-                </span>
-                <span className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-ink-neutral">
-                  Out of house
                 </span>
               </li>
             ))}
@@ -325,7 +304,7 @@ export default function WorkshopPage() {
           url: absUrl('/workshop'),
           name: `The Workshop | ${siteConfig.business.name}`,
           description:
-            'Bare-metal restoration and concours paint, one building in Berwick, East Sussex — what DPM Autobody does in house, and what goes out.',
+            'Bare-metal restoration and concours paint, one building in Berwick, East Sussex — what DPM Autobody does in house.',
         }}
       />
     </>
