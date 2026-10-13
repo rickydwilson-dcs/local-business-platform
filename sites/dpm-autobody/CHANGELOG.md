@@ -24,6 +24,7 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 - **Volvo 262C copy replaced with David's own text**, which also corrects a factual error: the page
   said the USA donor car supplied a replacement roof, but the original shell's roof was reused
   because the donor's had moisture damage from its vinyl roof.
+- **Bentley S3 1964 copy replaced with David's own text** (English wheel and the full fabrication, blasting and prep sequence). Its `scopeOfWork` now matches; the old mention of a new valance, which David's list does not include, is gone.
 - **Process wording corrected.** Bentley S3 Continental: panels are blocked back ahead of paint, and
   the five coats of lacquer are then sanded through six grades before polishing (it previously said
   six grades came before paint). Porsche 356 SC: the photos now say they show the car as it left DPM,
