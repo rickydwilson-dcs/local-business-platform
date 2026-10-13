@@ -903,6 +903,33 @@ export function HomePage({ schemaNodes }: HomePageTemplateProps) {
               <span>Volvo P1800, Candy Red, chassis 23925 &mdash; restoration completed 2023</span>
             </figcaption>
           </figure>
+
+          <figure className="grid gap-[1.15rem]">
+            <blockquote className="m-0 max-w-[24em] font-prose text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
+              &ldquo;&hellip;I was impressed with the amazing quality of his work and his almost
+              obsessive attention to detail. Exactly the qualities you want in someone doing your
+              restoration!&rdquo;
+            </blockquote>
+            <figcaption className="flex flex-wrap items-baseline gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-surface-muted-foreground before:h-px before:w-10 before:flex-none before:bg-brand-primary-hover before:content-['']">
+              <b className="font-medium text-surface-foreground">Carl Walker</b>
+              <span>
+                Volvo P1800, Candy Red, chassis 26282 &mdash; Best Car and Best Car in Show,
+                Winkleigh Car Show 2026
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure className="grid gap-[1.15rem]">
+            <blockquote className="m-0 max-w-[24em] font-prose text-[clamp(1.1875rem,1.1vw+0.9rem,1.625rem)] font-light leading-[1.44] text-surface-foreground/85 [font-variant-numeric:normal]">
+              &ldquo;&hellip;The attention Ruby gets and the praise, even from seasoned restoration
+              people who have nothing but high praise for the quality of workmanship, is a testament
+              to DPM&rsquo;s knowledge, fabrication skills and attention to detail.&hellip;&rdquo;
+            </blockquote>
+            <figcaption className="flex flex-wrap items-baseline gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-surface-muted-foreground before:h-px before:w-10 before:flex-none before:bg-brand-primary-hover before:content-['']">
+              <b className="font-medium text-surface-foreground">Carl Walker</b>
+              <span>Volvo P1800, Candy Red, chassis 26282</span>
+            </figcaption>
+          </figure>
         </div>
 
         <ul className="mt-[clamp(2.5rem,6vh,4rem)] grid list-none gap-0 border-t border-surface-card-border p-0 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]">
