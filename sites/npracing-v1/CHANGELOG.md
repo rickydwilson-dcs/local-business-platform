@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-10-21
+
+### Content
+
+- Added a new news article, "That's a wrap on 2026: NP Racing's final round at Brands Hatch" (`content/news/brands-hatch-final-round-race-report.mdx`, `publishedAt: 2026-10-21`), with a hero image and an 8-photo gallery, all credited to Gary Smith / GPS Photography. Photos were resized to fit within 2048px, JPEG q85, and uploaded to R2 under `npracing-v1/news/brands-hatch-final-round-race-report*.jpg`. Client copy lightly tidied for spelling and grammar, casual tone kept. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 6 to 7 to match.
+
 ## 2026-10-08
 
 ### Content
