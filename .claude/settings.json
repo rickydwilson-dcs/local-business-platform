@@ -103,6 +103,16 @@
             "command": "npx tsc --noEmit 2>&1 | head -20"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v code-review-graph >/dev/null 2>&1 || exit 0; code-review-graph update --skip-flows",
+            "timeout": 30
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -113,7 +123,19 @@
             "type": "command",
             "command": "bash /Users/rickywilson/Sites/local-business-platform/scripts/guard-rung-commit.sh",
             "timeout": 10,
-            "statusMessage": "Checking branch\u2026"
+            "statusMessage": "Checking branch…"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v code-review-graph >/dev/null 2>&1 || exit 0; code-review-graph status",
+            "timeout": 10
           }
         ]
       }
