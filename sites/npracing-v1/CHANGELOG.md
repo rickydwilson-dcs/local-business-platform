@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-10-27
+
+### Content
+
+- Added a new news article, "Brayden Elliott re-signs with NP Racing for the 2027 ZYN BSB season" (`content/news/brayden-elliott-confirmed-2027-zyn-bsb.mdx`, `publishedAt: 2026-10-27`), from the team's press release with both quotes kept verbatim. Hero image (team handshake, 1114px, uncredited) and one gallery photo (Gary Smith / GPS Photography, resized to 2048px, JPEG q85) uploaded to R2 under `npracing-v1/news/brayden-elliott-confirmed-2027-zyn-bsb*.jpg`. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 7 to 8 to match.
+
 ## 2026-10-21
 
 ### Content
