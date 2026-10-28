@@ -16,6 +16,18 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 - **Red P1800.** The visible "Needs sourcing from David: Chassis number" notice is gone from its
   build page and library card now that the site is public. The chassis number itself is still
   unknown, so the page shows none.
+- **Sitemap.** `sitemap.xml` listed only four URLs (home, contact and the two legal pages) because
+  it had not been touched since the scaffold. It now also lists `/library`, `/workshop` and every
+  build page marked `pageStatus: built`, read from the same loader the build route uses, so a new
+  build appears automatically. Submit `/sitemap-index.xml` in Google Search Console.
+- **Favicon.** The site had no icon files at all, so `/favicon.ico` and the browser-tab, home-screen
+  and Apple touch icons all returned 404. Added `app/favicon.ico` (16/32/48), `app/icon.png` and
+  `app/apple-icon.png`, which Next serves and links automatically. They use the DPM letters from
+  `public/logo.svg` in bone (`#E8E4DC`) on the site's ground colour (`#0B0B0C`); the full logo is too
+  wide to read at favicon size.
+- **Image delivery.** `next.config.ts` now sets `images.formats` to AVIF with a WebP fallback.
+  Without it `next/image` served WebP only. On the same homepage photo AVIF measured 10.1 KB
+  against 26.5 KB for WebP, in line with Lighthouse's estimated saving.
 
 ---
 
