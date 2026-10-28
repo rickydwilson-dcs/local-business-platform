@@ -16,6 +16,10 @@ High-end concours classic car restoration workshop, Berwick, East Sussex. Live a
 - **Red P1800.** The visible "Needs sourcing from David: Chassis number" notice is gone from its
   build page and library card now that the site is public. The chassis number itself is still
   unknown, so the page shows none.
+- **Sitemap.** `sitemap.xml` listed only four URLs (home, contact and the two legal pages) because
+  it had not been touched since the scaffold. It now also lists `/library`, `/workshop` and every
+  build page marked `pageStatus: built`, read from the same loader the build route uses, so a new
+  build appears automatically. Submit `/sitemap-index.xml` in Google Search Console.
 
 ---
 
