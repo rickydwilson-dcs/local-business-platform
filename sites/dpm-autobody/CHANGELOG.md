@@ -1,7 +1,21 @@
 # DPM Autobody - Deployment History
 
 High-end concours classic car restoration workshop, Berwick, East Sussex. Live at
-`dpm-autobody.vercel.app` since 2026-09-11.
+`dpm-autobody.vercel.app` since 2026-09-11; on `www.dpmautobody.co.uk` since 2026-10-28.
+
+---
+
+## 2026-10-28
+
+### Custom domain live; Red P1800 sourcing notice removed
+
+- **Domain.** `www.dpmautobody.co.uk` is now the primary domain, with the apex redirecting to it
+  (308). DNS stays at SiteGround so the Google Workspace mail records are untouched.
+  `NEXT_PUBLIC_SITE_URL` now points at the new domain, so canonical URLs, Open Graph URLs, the
+  sitemap and robots.txt stop advertising the `vercel.app` address.
+- **Red P1800.** The visible "Needs sourcing from David: Chassis number" notice is gone from its
+  build page and library card now that the site is public. The chassis number itself is still
+  unknown, so the page shows none.
 
 ---
 
