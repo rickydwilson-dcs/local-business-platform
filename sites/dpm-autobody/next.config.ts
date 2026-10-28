@@ -70,6 +70,9 @@ const nextConfig: NextConfig = {
         hostname: 'i.ytimg.com',
       },
     ],
+    // AVIF first, WebP fallback — next/image serves WebP only unless this is set, and AVIF is
+    // markedly smaller for this site's photography (Lighthouse "Improve image delivery").
+    formats: ['image/avif', 'image/webp'],
     // Allow SVG images (safe for logos and icons)
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
