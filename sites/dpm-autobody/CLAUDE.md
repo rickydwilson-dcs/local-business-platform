@@ -141,10 +141,13 @@ exist but feed schema.org JSON-LD only — there is no `/services` or `/location
 ### Still not done
 
 - **A run of David-confirmation facts is still open**, tracked as `sourcingGaps` on the affected
-  builds and visible on their pages: the Red P1800's chassis number
-  (still `TBC` — David is chasing it), the resto-mod's second client pair (a different client from Tonja/Ahmet, two
+  builds and visible on their pages: the resto-mod's second client pair (a different client from Tonja/Ahmet, two
   P1800s, show names and award placings — still unidentified), and the DB6's magazine's exact
   title. Chase these with David before removing the corresponding `sourcingGaps` entries.
+  - **Removed 2026-10-28, not resolved:** the Red P1800's chassis number is still unknown (David
+    never supplied it). The amber "Needs sourcing from David" notice was taken off the live site at
+    Ricky's request once the domain went live, so the page now simply shows no chassis number. Add
+    the number to `p1800-red.mdx` if David ever supplies it.
   - **Resolved 2026-10-12:** Volvo 262C's chassis number, supplied by David (**2626AD006467**),
     applied in `volvo-262c.mdx` with its `sourcingGaps` entry removed.
   - **Resolved 2026-09-15:** the DB6's race status and pre-crash livery — David confirmed it
@@ -246,7 +249,7 @@ once the other routes were built.
 
 ## Vercel
 
-Live at **`dpm-autobody.vercel.app`**, project name `dpm-autobody` (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`).
+Live at **`https://www.dpmautobody.co.uk`** (primary; the apex `dpmautobody.co.uk` 308-redirects to `www`; `dpm-autobody.vercel.app` remains the project's Vercel URL), project name `dpm-autobody` (`prj_A6RWtH01VGD9Yfmi1H2Ybmhpqzyf`).
 Root directory `sites/dpm-autobody`, tracks `develop`. `vercel.json` carries the standard
 `ignoreCommand`/`turbo-ignore` guard — see root `CLAUDE.md`.
 
@@ -257,6 +260,15 @@ API: the prototype became **`dpm-autobody-proto`** (now at `dpm-autobody-proto.v
 `prj_klLuFWkCXJblYnoQ0Hyg7gruvWF2`), freeing `dpm-autobody` for this real site. See root
 `CLAUDE.md`'s Vercel section for the standing rule this produced: prototype projects must always be
 named `<site>-proto` from their first deploy. `prototype/publish.zsh`'s `PROJECT=` var was updated
-to match. `NEXT_PUBLIC_SITE_URL` is set correctly to `https://dpm-autobody.vercel.app` (set via the
-Vercel API, then a `vercel redeploy` to pick it up — the dashboard UI didn't persist the edit
-reliably) — canonical/OG URLs and the sitemap all confirmed correct after redeploy.
+to match. `NEXT_PUBLIC_SITE_URL` is now `https://www.dpmautobody.co.uk` (changed 2026-10-28 from the
+`vercel.app` URL, via the Vercel API — the dashboard UI didn't persist edits reliably; it is one
+sensitive entry covering Production and Preview). It is inlined at build, so it only takes effect
+on the next deploy; canonical/OG URLs, the sitemap and robots.txt all derive from it.
+
+**Domain and DNS, 2026-10-28:** `dpmautobody.co.uk` is registered/DNS-hosted at SiteGround
+(nameservers `ns1/ns2.siteground.net`) and stays there because the same zone carries the Google
+Workspace MX/SPF/DMARC records. The apex is an `A` record to `76.76.21.21` and `www` a `CNAME` to
+`cname.vercel-dns.com`; never move the nameservers to Vercel without recreating the mail records
+first. The domain previously pointed at Wix, so resolvers that cached the old delegation (notably
+Google's `8.8.8.8`) kept serving a Wix "ConnectYourDomain" 404 for up to about six hours after
+the change. Google DKIM (`google._domainkey`) is not yet published.
