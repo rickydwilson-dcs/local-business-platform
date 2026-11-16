@@ -4,6 +4,12 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-11-16
+
+### Content
+
+- Added a short news post, "Inside NP Racing: Neil Pearson on life in British Superbikes" (`content/news/inside-np-racing-corse-di-moto-neil-pearson.mdx`), linking out to the Corse di Moto feature. Summary text is taken from the article's own meta description; no hero image. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 8 to 9.
+
 ## 2026-10-27
 
 ### Content
