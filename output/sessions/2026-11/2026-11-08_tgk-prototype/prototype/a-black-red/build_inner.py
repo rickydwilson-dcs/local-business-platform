@@ -11,7 +11,7 @@ foot=foot.replace('href="#contact"','')
 def page(fn,title,desc,body):
     h=head.replace('@@T@@',title).replace('@@D@@',desc)
     open(fn,'w').write(h+'<main id="main">\n'+body+'\n</main>\n\n'+foot)
-IMG='../_shared/img/web/'
+IMG='https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/'
 quote='''<section class="quote" aria-labelledby="quote-h"><div class="wrap"><h2 id="quote-h" class="display">@@@</h2><div class="acts"><a class="phone" href="tel:01323589700">01323 589 700</a><a class="btn btn--on-red" href="contact.html">Get a free quote</a></div></div></section>'''
 crumbs=lambda *c:'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap">'+' <span>/</span> '.join(c)+'</div></nav>'
 

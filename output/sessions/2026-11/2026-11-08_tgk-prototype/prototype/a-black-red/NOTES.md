@@ -75,3 +75,7 @@ Footer now has a "Kings family" logo row (TGK, TTK, TCK, linking to thetapekings
 ## Image system (2026-11-20)
 
 One rule for images: an 8px red stripe on the edge facing the text (`.stripe`, in inner.css), plus the "Illustrative mock-up" tag bottom-left. Heroes: copy left, image right, stripe on the image's left. Applied to: home hero, service detail, location, about, services hub (now a split hero), areas index (now a split hero), hub category bands (stripe on the inner edge, flips with the band) and the homepage use-case photo. Contact has no hero image by design (form-led).
+
+## Assets on R2 (2026-11-23)
+
+Images now sit in `../assets/` (img/web, img/brand) and Direction A's HTML points at R2 (`prototypes/2026-11-08_tgk-prototype/assets/...`). `build_inner.py`'s `IMG` is the R2 URL, so regenerating keeps them. Keep referenced PNGs out of the root of `assets/img/` (the tool archives those), and name any JS-loaded image in the HTML (tabs use `data-src`).

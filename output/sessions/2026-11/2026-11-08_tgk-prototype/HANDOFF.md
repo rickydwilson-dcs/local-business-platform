@@ -1,6 +1,6 @@
 # The Graphic Kings prototype — handoff
 
-**Status:** ready-to-resume. Direction A (black + red) prototype is built locally and committed; **nothing is published** (no R2 upload, no Vercel project).
+**Status:** ready-to-resume. Direction A (black + red) prototype is built and committed, and its **assets are on R2 (verified)**. **Not yet published to Vercel**: that is the next step.
 **Branch:** `develop` (from `c92d3aa2`). **Not pushed, not merged** to staging/main. Docs-only session content, no site code touched.
 **Commits:** 1 new commit on top of `50e49b4e` (the earlier session-start commit): the prototype folders, `session.md` update and this file. Check `git log --oneline -3`.
 **Working tree:** clean after the commit, except `prototype/_shared/img/jobs/` (Higgsfield job logs, deliberately not committed). The **gitignored binaries below exist only on this machine**.
@@ -30,7 +30,7 @@ Mad Graphics is rebranding as **The Graphic Kings** (singular "Graphic"; red cro
 
 ## What was NOT done
 
-- **Not published anywhere.** No R2 upload, no Vercel project `graphic-kings-proto`. Nothing has been shown to the client.
+- **Not published to Vercel.** No project `graphic-kings-proto` exists yet. Nothing has been shown to the client. (Assets are already on R2, see below.)
 - **Only one service detail page** (Van graphics, the template for the other 39) and **one location page** (Eastbourne). Other town links and Car/Fleet/Magnetic links on the hub are `#`. Hub category pages, a services-per-category page, FAQs per service, schema markup: none built.
 - No real project photos, reviews or client logo vector. The 14 images are AI mock-ups (Higgsfield) labelled "Illustrative mock-up"; the van still has a fake plate and a Ford badge.
 - Contact form sends nothing (prototype only). No analytics, no consent, no SEO work.
@@ -40,8 +40,10 @@ Mad Graphics is rebranding as **The Graphic Kings** (singular "Graphic"; red cro
 
 ## Traps
 
-- **The images and logos are gitignored and exist only locally**: `prototype/_shared/img/web/*.jpg` (14), `img/raw/*.png`, `_shared/tgk-logo.svg` (traced logo, 170KB, first pass with some crown hairlines), `_shared/ttk-logo.png`, `_shared/tck-logo.png`. A fresh clone has none of them; the prototype renders with broken images until they are present. Do not delete them. Do not `git add -f` them (repo rule: prototype assets go to R2).
-- The prototype HTML references assets by relative path (`../_shared/...`). `tools/upload-prototype-assets.ts` rewrites to absolute R2 URLs, so run it on a copy or check how it handles this before publishing; read `docs/guides/prototype-hosting.md` first.
+- **Assets now live in `prototype/assets/`** (the standard layout the tools expect), not `_shared/`. Referenced files are on R2 and the Direction A HTML already points at the R2 URLs (`https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/...`). The local `assets/` files are gitignored and stay on disk. Local masters and logos are also copied to `~/Documents/tgk-prototype-backup-2026-11/` (79MB, includes the Higgsfield job logs).
+- **The B/C1/C2/C3 homepages still reference `../assets/img/web/...` relatively** (not rewritten, not on R2, not for publishing); they work locally only.
+- **The upload tool treats any PNG sitting directly in `assets/img/` as an archived master** (routes it to `_archive/`) while the HTML rewrite is a plain prefix swap, so a referenced PNG there would 404. Logos are therefore in `assets/img/brand/`. Keep referenced PNGs in a subfolder.
+- **The tools scan HTML only.** An image named only in JavaScript is never uploaded. The homepage selector's four photos are named in `data-src` attributes on the tab buttons for that reason; keep it that way.
 - **Vercel project name must be `graphic-kings-proto`**, never the bare name (collisions fail silently; root CLAUDE.md rule).
 - Higgsfield CLI: `ln -sf` over the logo reference once clobbered the real PNG and failed 13 jobs. See the `reference_higgsfield_cli` memory.
 - `build_inner.py` overwrites the six inner `.html` files each run; edit the script or `index.html`, not the generated files. Bump `?v=` in `index.html` and the script when CSS changes.
@@ -49,18 +51,17 @@ Mad Graphics is rebranding as **The Graphic Kings** (singular "Graphic"; red cro
 
 ## Next step
 
-Publish the prototype, in a fresh session (Ricky's stated next stage). Ricky has said all content will be checked with the client before it goes public:
+Publish the prototype to Vercel, in a fresh session (Ricky's stated next stage). Ricky has said all content will be checked with the client before it goes public:
 
 ```bash
 cd ~/Sites/local-business-platform
 cat docs/guides/prototype-hosting.md            # read first
 git switch develop && git status --short       # confirm clean
-# 1) check the assets are present locally
-ls output/sessions/2026-11/2026-11-08_tgk-prototype/prototype/_shared/img/web | wc -l   # expect 14
-# 2) dry-run the R2 upload, review the report, then run for real
-npx tsx tools/upload-prototype-assets.ts --help
-# 3) publish to Vercel as graphic-kings-proto
-npx tsx tools/publish-prototype.ts --help
+# R2 upload is DONE (16 objects verified 200). Re-running it is safe (idempotent) if assets change:
+#   npx tsx tools/upload-prototype-assets.ts <prototype-dir> --pages <a-black-red pages, comma separated> --dry-run
+# Publish: stage ONLY the Direction A pages (not NOTES.md, build_inner.py, use-cases-options.*) into a
+# directory with index.html at the root, as DPM did with publish.zsh, then:
+npx tsx tools/publish-prototype.ts <staged-dir> --project graphic-kings-proto   # always pass --project
 ```
 
 Dry-run each step and report counts before executing (user rule). After publishing, send Ricky the URL and the list of items to confirm with the client (see "unverified" above).

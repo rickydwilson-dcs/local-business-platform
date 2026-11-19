@@ -29,11 +29,11 @@
   var img = document.querySelector('.uc-pic img');
   var h = document.querySelector('.uc-h');
   var ul = document.querySelector('.uc-kit ul');
-  data.forEach(function (d) { new Image().src = '../_shared/img/web/' + d.img + '.jpg'; });
+  tabs.forEach(function (b) { new Image().src = b.getAttribute('data-src'); });
   function sel(i) {
     var d = data[i];
     tabs.forEach(function (b, j) { b.setAttribute('aria-selected', i === j ? 'true' : 'false'); });
-    img.src = '../_shared/img/web/' + d.img + '.jpg';
+    img.src = tabs[i].getAttribute('data-src');
     img.alt = d.alt;
     h.textContent = d.h;
     ul.innerHTML = d.items.map(function (x) { return '<li>' + x + '</li>'; }).join('');
