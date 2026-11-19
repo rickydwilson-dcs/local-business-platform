@@ -1,6 +1,6 @@
 # The Graphic Kings prototype — handoff
 
-**Status:** ready-to-resume. Direction A (black + red) prototype is built and committed, and its **assets are on R2 (verified)**. **Not yet published to Vercel**: that is the next step.
+**Status:** Direction A prototype is **live at https://graphic-kings-proto.vercel.app** (noindex header) with all 65 pages: 40 services, 19 towns, home, services, areas, about, contact. Content for every page lives in `prototype/a-black-red/content/`. Republished 2026-11-19. Next: client claims review, then the `sites/tgk` build.
 **Branch:** `develop` (from `c92d3aa2`). **Not pushed, not merged** to staging/main. Docs-only session content, no site code touched.
 **Commits:** 1 new commit on top of `50e49b4e` (the earlier session-start commit): the prototype folders, `session.md` update and this file. Check `git log --oneline -3`.
 **Working tree:** clean after the commit, except `prototype/_shared/img/jobs/` (Higgsfield job logs, deliberately not committed). The **gitignored binaries below exist only on this machine**.
@@ -28,7 +28,19 @@ Mad Graphics is rebranding as **The Graphic Kings** (singular "Graphic"; red cro
 - **Unverified / assumed:** domain thegraphickings.co.uk; address unchanged; all material wording, process steps, FAQs and sister-company descriptions are generic and not confirmed by the client.
 - **Not tested:** Safari, keyboard arrow-key navigation on the homepage use-case selector, the mobile menu, phone-width visual check of the inner pages (only overflow measured).
 
-## What was NOT done
+## Update 2026-11-19: content and publish
+
+- Decisions from Ricky: AI mock-up images are fine to keep; domain is thegraphickings.co.uk; address confirmed.
+- **Content as data.** `prototype/a-black-red/content/{services,locations}/*.mdx` (frontmatter is one JSON object, no body), `categories.json`, and `STYLE.md` (voice, hard bans, schema). `build_content.py` (run by `build_inner.py`) generates every service and town page from them, so `sites/tgk` can take the same files. Edit content, then `python3 build_inner.py`; never edit generated `.html`.
+- `lint_content.py` checks schema and the banned-claims list. Its one remaining hit (safety-signs FAQ question wording "compliant") is a hedge and is deliberate.
+- 228 `reviewFlags` across the files are the claims to confirm. They are grouped into a 36-question client checklist published as an artifact: https://claude.ai/artifact/Lwih5rHMnCDTSNxPoRLSSm (private until shared from its Share menu).
+- Fixed a bug that had shipped: `contact.html` was being overwritten with the Areas page. Live site now correct.
+- Verified: no broken internal links; no section taller than the viewport and no sideways overflow on all 64 pages at 1440x900, 1280x720, 1366x640; all 64 live pages return 200.
+- Not read by the writing agents: four batches (design, signs, stickers/print) wrote from the schema without opening the Mad Graphics source. 15 location pages share a near-identical address FAQ.
+- `car-graphics` uses the van image (no car image exists).
+- Still unbuilt: `sites/tgk`; the Clothing Kings link target on the services page is `#`; contact form sends nothing.
+
+## What was NOT done (as of the first handoff; superseded above where it conflicts)
 
 - **Not published to Vercel.** No project `graphic-kings-proto` exists yet. Nothing has been shown to the client. (Assets are already on R2, see below.)
 - **Only one service detail page** (Van graphics, the template for the other 39) and **one location page** (Eastbourne). Other town links and Car/Fleet/Magnetic links on the hub are `#`. Hub category pages, a services-per-category page, FAQs per service, schema markup: none built.

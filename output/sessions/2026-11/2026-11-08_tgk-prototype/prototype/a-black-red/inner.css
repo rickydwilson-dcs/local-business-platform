@@ -191,3 +191,5 @@ h2.display + .lead, h2.display + p { margin-top: 1rem; }
 @media (min-width: 62.01rem) { .hero-split { height: min(calc(100svh - var(--tgk-header-h) - 3rem), 40rem); } }
 @media (max-width: 62rem) { .hero-split { grid-template-columns: 1fr; } .hero-copy-in { padding: 2rem var(--tgk-gutter); } .hero-pic-in { aspect-ratio: 16 / 10; order: -1; } .lx-towns { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 40rem) { .lx-towns { grid-template-columns: 1fr; } }
+.sd-intro .wrap { padding-block: 2rem; } .sd-intro .lead { max-width: 52rem; color: var(--tgk-white); font-size: 1.1875rem; }
+@media (min-width: 900px) { .rel--hub { grid-template-columns: repeat(4, 1fr); max-width: none; } }

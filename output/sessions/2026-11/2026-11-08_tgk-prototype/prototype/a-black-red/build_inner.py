@@ -13,6 +13,14 @@ def page(fn,title,desc,body):
     open(fn,'w').write(h+'<main id="main">\n'+body+'\n</main>\n\n'+foot)
 IMG='https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/'
 quote='''<section class="quote" aria-labelledby="quote-h"><div class="wrap"><h2 id="quote-h" class="display">@@@</h2><div class="acts"><a class="phone" href="tel:01323589700">01323 589 700</a><a class="btn btn--on-red" href="contact.html">Get a free quote</a></div></div></section>'''
+import json,glob,os
+def _load(p):
+    t=open(p).read().split('---',2)[1]; return json.loads(t)
+SVC={os.path.basename(f)[:-4]:_load(f) for f in glob.glob('content/services/*.mdx')}
+LOC={os.path.basename(f)[:-4]:_load(f) for f in glob.glob('content/locations/*.mdx')}
+CATS=json.load(open('content/categories.json'))
+svc_href=lambda s:'service-%s.html'%s
+loc_href=lambda s:'location-%s.html'%s
 crumbs=lambda *c:'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap">'+' <span>/</span> '.join(c)+'</div></nav>'
 
 # ---------- services hub
@@ -30,7 +38,7 @@ b='''<section class="hero-split"><div class="hero-copy-in"><p class="label">Serv
 <div class="hero-pic-in stripe"><img src="'''+IMG+'''wall.jpg" alt="Illustrative mock-up: a wall graphic for The Graphic Kings" width="1800" height="1195" fetchpriority="high"><p class="tag">Illustrative mock-up. Real project photos to come.</p></div></section>'''
 for i,(n,img,d,items) in enumerate(cats):
     alt=' cat--flip' if i%2 else ''
-    lst=''.join(f'<li><a href="{"service-vehicle-graphics.html" if x=="Van graphics" else "#"}">{x}<span aria-hidden="true">&rarr;</span></a></li>' for x in items)
+    C=CATS[i]; lst=''.join(f'<li><a href="{svc_href(sl)}">{SVC[sl]["title"] if sl in SVC else sl}<span aria-hidden="true">&rarr;</span></a></li>' for sl in [C['slug']]+C['children'])
     b+=f'''
 <section class="cat{alt}" id="c{i+1}" aria-labelledby="c{i+1}h"><div class="cat-pic stripe"><img src="{IMG}{img}.jpg" alt="Illustrative mock-up: {n.lower()}" width="1800" height="1195" loading="lazy"><span class="tag">Illustrative mock-up</span></div>
 <div class="cat-body"><span class="num">{i+1:02d}</span><h2 id="c{i+1}h" class="display">{n}</h2><p>{d}</p><ul class="subs">{lst}</ul></div></section>'''
@@ -39,57 +47,7 @@ b+='''
 '''+quote.replace('@@@','Not sure which<br>one you need?')
 page('services.html','Services','Vehicle graphics, signs, banners, large format, stickers, print and design from The Graphic Kings in East Sussex.',crumbs('<a href="index.html">Home</a>','Services')+b)
 
-# ---------- service detail
-sub=[('Van graphics','van'),('Car graphics','magnetic'),('Fleet graphics','fleet'),('Magnetic signs','magnetic')]
-b=crumbs('<a href="index.html">Home</a>','<a href="services.html">Services</a>','<a href="services.html#c1">Vehicle graphics</a>','Van graphics')+'''
-<section class="sd-hero"><div class="sd-copy"><p class="label">Vehicle graphics</p><h1 class="display">Van graphics</h1>
-<p class="lead">Your name, number and what you do, on the side of the thing people see all day. Lettering, logos and partial graphics, designed in-house and made from UV-rated vinyl.</p>
-<div class="cta"><a class="btn" href="contact.html">Get a free quote</a><a class="btn btn--ghost" href="tel:01323589700">01323 589 700</a></div>
-<p class="nowrap-note">No full wraps. Lettering and partial graphics only.</p></div>
-<div class="sd-pic"><img src="'''+IMG+'''van.jpg" alt="Illustrative mock-up: a van with The Graphic Kings lettering" width="1800" height="1018" fetchpriority="high"><p class="tag">Illustrative mock-up. Real project photos to come.</p></div></section>
-
-<section class="sd-two" aria-labelledby="good-h"><div class="wrap two">
-<div><h2 id="good-h" class="display">When you need it</h2><ul class="ticks">
-<li>Starting out and the van needs to look the part</li><li>Adding a new vehicle to the fleet</li><li>Replacing faded or damaged lettering</li><li>Putting contact details on a work vehicle</li><li>Matching existing fleet graphics</li><li>A short-run promotion on a vehicle</li></ul></div>
-<div class="kit"><h2 class="display">What you get</h2><ul class="ticks ticks--on-paper">
-<li><b>In-house design.</b> Artwork made here, to your brand or from scratch.</li>
-<li><b>UV-rated materials.</b> Chosen to stand up to the weather.</li>
-<li><b>A proof first.</b> Nothing goes to production until you approve it.</li>
-<li><b>A free quote.</b> Send a photo of the vehicle and what you want on it.</li></ul></div></div></section>
-
-<section class="sd-steps" aria-labelledby="how-h"><div class="wrap"><h2 id="how-h" class="display">How it works</h2>
-<ol class="steps"><li><b>Get a quote</b><span>Call, email or send a photo of the vehicle.</span></li><li><b>Brief us</b><span>Tell us the brand, wording and where it goes.</span></li><li><b>Approve the proof</b><span>We design it and you sign it off.</span></li><li><b>We make it</b><span>Production starts once you approve.</span></li><li><b>Fitted and checked</b><span>Quality checked, ready for the road.</span></li></ol></div></section>
-
-<section class="sd-faq" aria-labelledby="faq-h"><div class="wrap two"><div><h2 id="faq-h" class="display">Questions</h2><p class="lead">Can't see yours? Ring 01323 589 700.</p></div>
-<div class="faqs">
-<details open><summary>What do you need for a quote?</summary><p>The vehicle type, what you want on it, and any existing artwork. Photos of the vehicle help.</p></details>
-<details><summary>Can you design it for me?</summary><p>Yes. Our in-house team works from your brand guidelines or helps you create the look.</p></details>
-<details><summary>Do you do magnetic signs?</summary><p>Yes. They suit vehicles used for work only some of the time, and come off when you don't need them.</p></details>
-<details><summary>Can you match our existing fleet?</summary><p>Yes. Bring photos or examples and we'll match the new vehicle to the others.</p></details>
-<details><summary>Do you do full wraps?</summary><p>No. We do lettering, partial graphics and livery.</p></details>
-</div></div></section>
-
-<section class="sd-rel" aria-labelledby="rel-h"><div class="wrap"><h2 id="rel-h" class="display">More vehicle graphics</h2>
-<div class="rel">'''+''.join(f'<a href="#"><img src="{IMG}{m}.jpg" alt="" width="1800" height="1195" loading="lazy"><span>{t}</span></a>' for t,m in sub[1:]+[('Van graphics','van')][:0])+'''</div></div></section>
-'''+quote.replace('@@@','Tell us about<br>your vehicle.')
-page('service-vehicle-graphics.html','Van graphics','Van graphics in East Sussex: lettering, logos and partial graphics, designed in-house and made from UV-rated vinyl. Free quotes.',b)
-
-# ---------- location
-b=crumbs('<a href="index.html">Home</a>','<a href="locations.html">Areas</a>','Eastbourne')+'''
-<section class="loc-hero"><div class="loc-copy"><p class="label">Eastbourne and nearby</p><h1 class="display">Graphics and print<br>in <em>Eastbourne</em></h1>
-<p class="lead">Based in Polegate, a short drive from Eastbourne. Vehicle graphics, signs, banners, stickers and print for businesses across the town.</p>
-<div class="cta"><a class="btn" href="contact.html">Get a free quote</a><a class="btn btn--ghost" href="tel:01323589700">01323 589 700</a></div></div>
-<div class="loc-pic"><img src="'''+IMG+'''shopfront.jpg" alt="Illustrative mock-up: a shopfront with The Graphic Kings signage" width="1800" height="1195" fetchpriority="high"><p class="tag">Illustrative mock-up. Real project photos to come.</p></div></section>
-
-<section class="loc-what" aria-labelledby="lw-h"><div class="wrap"><div class="sec-head"><h2 id="lw-h" class="display">What we make for Eastbourne</h2></div>
-<div class="mini">'''+''.join(f'<a href="services.html#c{i+1}"><img src="{IMG}{c[1]}.jpg" alt="" width="1800" height="1195" loading="lazy"><span>{c[0]}</span></a>' for i,c in enumerate(cats))+'''</div></div></section>
-
-<section class="loc-local"><div class="wrap two"><div class="ph-box"><p><strong>Eastbourne projects to come</strong>Local jobs, with the client's permission, will go here.</p></div>
-<div><h2 class="display">Close by</h2><p class="lead">We cover nineteen East Sussex towns and villages from Polegate.</p>
-<ul class="towns towns--sm"><li>Polegate</li><li>Hailsham</li><li>Pevensey</li><li>Seaford</li><li>Newhaven</li><li>Hastings</li><li>Lewes</li><li>Alfriston</li><li>Heathfield</li></ul>
-<p class="not-covered">Not currently covering Brighton, Hove, Portslade, Rottingdean or Saltdean.</p></div></div></section>
-'''+quote.replace('@@@','Eastbourne business?<br>Get a quote.')
-page('location-eastbourne.html','Eastbourne','Vehicle graphics, signs, banners, stickers and print for Eastbourne businesses, from The Graphic Kings in Polegate.',b)
+exec(open('build_content.py').read())
 
 # ---------- contact
 opts=''.join(f'<option>{c[0]}</option>' for c in cats)
@@ -107,13 +65,16 @@ b=crumbs('<a href="index.html">Home</a>','Contact')+'''
 <div class="ct-block"><h2>Hours</h2><p>Mon to Fri 8am to 5pm<br>Sat by appointment<br>Sun closed</p></div>
 <div class="ct-block"><h2>Find us</h2><p>Unit H2, Chaucer Business Park,<br>Dittons Road, Polegate, East Sussex BN26</p></div></aside></div></section>'''
 
+page('contact.html','Contact','Contact The Graphic Kings in Polegate, East Sussex. Call 01323 589 700 or send an enquiry for a free quote.',b)
+
 def towns_li(ts):
     o=''
     for t in ts:
-        href='location-eastbourne.html' if t=='Eastbourne' else '#'
+        _sl=t.lower().replace(' ','-'); href=loc_href(_sl) if _sl in LOC else '#'
         cls=' class="base"' if t=='Polegate' else ''
         o+='<li><a href="%s"%s><span>%s</span><i aria-hidden="true">&rarr;</i></a></li>'%(href,cls,t)
     return o
+
 
 # ---------- about
 b=crumbs('<a href="index.html">Home</a>','About')+"""
@@ -147,4 +108,3 @@ b=crumbs('<a href="index.html">Home</a>','Areas')+"""
 <section class="lx"><div class="wrap"><ul class="lx-towns">"""+towns_li(["Eastbourne","Hastings","Lewes","Bexhill-on-Sea","Uckfield","Crowborough","Seaford","Hailsham","Newhaven","Polegate","Peacehaven","Battle","St Leonards-on-Sea","Heathfield","Pevensey","Ringmer","Herstmonceux","Wadhurst","Alfriston"])+"""</ul></div></section>"""+quote.replace('@@@','Not on the list?<br>Ask anyway.')
 page('locations.html','Areas we cover','The Graphic Kings covers nineteen East Sussex towns and villages from Polegate, including Eastbourne, Hastings, Lewes and Bexhill-on-Sea.',b)
 
-page('contact.html','Contact','Contact The Graphic Kings in Polegate, East Sussex. Call 01323 589 700 or send an enquiry for a free quote.',b)

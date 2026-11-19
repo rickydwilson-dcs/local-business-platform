@@ -3,7 +3,7 @@
   "bucket": "local-business-platform",
   "prefix": "prototypes/2026-11-08_tgk-prototype/",
   "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
-  "totalBytes": 5857549,
+  "totalBytes": 6391844,
   "assets": [
     {
       "relativePath": "assets/img/brand/tck-logo.png",
@@ -99,6 +99,14 @@
       "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/shopfront.jpg",
       "contentType": "image/jpeg",
       "bytes": 455545,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/signs.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/signs.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/signs.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 534295,
       "archive": false
     },
     {
