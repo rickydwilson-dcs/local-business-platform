@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "vehicle-graphics",
+    "name": "Vehicle graphics",
+    "img": "fleet",
+    "blurb": "Vans, cars, fleets and magnetic signs. Lettering, logos and partial graphics.",
+    "children": ["van-graphics", "car-graphics", "fleet-graphics", "magnetic-signs"]
+  },
+  {
+    "slug": "signs-signage",
+    "name": "Signs and signage",
+    "img": "shopfront",
+    "blurb": "Fixed and portable signs for shops, sites and workplaces.",
+    "children": [
+      "shop-signs",
+      "a-boards",
+      "directional-signs",
+      "safety-signs",
+      "site-boards",
+      "foam-board-correx",
+      "hoarding-graphics"
+    ]
+  },
+  {
+    "slug": "banners",
+    "name": "Banners",
+    "img": "banner",
+    "blurb": "Short-term or long-term, indoors or out.",
+    "children": ["pvc-banners", "mesh-banners", "fabric-banners", "roller-banners"]
+  },
+  {
+    "slug": "large-format-print",
+    "name": "Large format, window and wall",
+    "img": "window",
+    "blurb": "Big prints and graphics for glass, walls and floors.",
+    "children": [
+      "poster-printing",
+      "exhibition-prints",
+      "window-graphics",
+      "window-stickers",
+      "wall-graphics",
+      "floor-graphics"
+    ]
+  },
+  {
+    "slug": "stickers-labels",
+    "name": "Stickers and labels",
+    "img": "stickers",
+    "blurb": "Custom shapes, sizes and quantities.",
+    "children": ["custom-stickers", "labels"]
+  },
+  {
+    "slug": "marketing-print",
+    "name": "Print and stationery",
+    "img": "print",
+    "blurb": "The everyday print every business runs out of.",
+    "children": [
+      "business-cards",
+      "flyers-leaflets",
+      "brochures",
+      "letterheads",
+      "folders",
+      "menus"
+    ]
+  },
+  {
+    "slug": "graphic-design",
+    "name": "Design",
+    "img": "design",
+    "blurb": "Artwork that is ready to print, from a rough sketch or a blank page.",
+    "children": ["logo-design", "brand-identity", "print-design", "artwork-prepress"]
+  }
+]

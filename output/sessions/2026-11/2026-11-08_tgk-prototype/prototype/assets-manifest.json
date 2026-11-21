@@ -1,0 +1,145 @@
+{
+  "slug": "2026-11-08_tgk-prototype",
+  "bucket": "local-business-platform",
+  "prefix": "prototypes/2026-11-08_tgk-prototype/",
+  "publicBase": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev",
+  "totalBytes": 6391844,
+  "assets": [
+    {
+      "relativePath": "assets/img/brand/tck-logo.png",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/brand/tck-logo.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/brand/tck-logo.png",
+      "contentType": "image/png",
+      "bytes": 135082,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/brand/tgk-logo.svg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/brand/tgk-logo.svg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/brand/tgk-logo.svg",
+      "contentType": "image/svg+xml",
+      "bytes": 170705,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/brand/ttk-logo.png",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/brand/ttk-logo.png",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/brand/ttk-logo.png",
+      "contentType": "image/png",
+      "bytes": 93244,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/banner.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/banner.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/banner.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 459902,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/design.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/design.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/design.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 415102,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/fleet.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/fleet.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/fleet.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 511382,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/floor.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/floor.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/floor.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 489592,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/hoarding.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/hoarding.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/hoarding.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 469536,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/magnetic.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/magnetic.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/magnetic.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 377003,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/print.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/print.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/print.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 414383,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/rollerbanners.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/rollerbanners.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/rollerbanners.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 353753,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/shopfront.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/shopfront.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/shopfront.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 455545,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/signs.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/signs.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/signs.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 534295,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/stickers.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/stickers.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/stickers.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 458170,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/van.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/van.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/van.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 362093,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/wall.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/wall.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/wall.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 307910,
+      "archive": false
+    },
+    {
+      "relativePath": "assets/img/web/window.jpg",
+      "key": "prototypes/2026-11-08_tgk-prototype/assets/img/web/window.jpg",
+      "url": "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/prototypes/2026-11-08_tgk-prototype/assets/img/web/window.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 384147,
+      "archive": false
+    }
+  ]
+}
