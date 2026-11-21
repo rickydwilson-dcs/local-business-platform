@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<link rel="preload" href="/fonts/archivo-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/poppins-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* self-hosted, latin subset, same origin — no third-party request on the critical path */
+  @font-face {
+    font-family: "Archivo";
+    src: url("/fonts/archivo-latin-var.woff2") format("woff2");
+    font-weight: 100 900;  /* variable: one file covers every weight the page uses */
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/poppins-300-latin.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
+<title>Graphic Kings claims check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<style>
+/* Layout: one column checklist, numbered because the client replies by number. Single dark world, DCS livery. */
+:root{
+  --ink:#0E0E12; --ink2:#17171D; --line:#2A2A33; --paper:#ECEBE9; --grey:#A3A3AE;
+  --magenta:#D6006B; --link:#FF4D96; --ok:#46C28A; --warn:#F2B84B; --no:#FF6B6B;
+  --font:'Archivo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--font);font-size:16px;line-height:1.55;margin:0;
+  padding-block:0 6rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:46rem;margin-inline:auto}
+a{color:var(--link)}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+header{padding-block:3rem 1.5rem;border-bottom:3px solid var(--magenta)}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin:0 0 .75rem}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.02;font-weight:800;letter-spacing:-.02em;margin:0 0 1rem;text-wrap:balance}
+.lead{font-size:1.1rem;color:var(--paper);max-width:38rem;margin:0 0 1rem}
+.how{display:grid;gap:.6rem;margin:1.5rem 0 0;padding:0;list-style:none}
+.how li{padding-left:1.4rem;position:relative;color:var(--grey)}
+.how li::before{content:"";position:absolute;left:0;top:.62em;width:.6rem;height:2px;background:var(--magenta)}
+.how b{color:var(--paper);font-weight:700}
+.left-out{margin-top:1.5rem;padding:1rem 1.1rem;background:var(--ink2);border-left:3px solid var(--magenta)}
+.left-out p{margin:0}
+section.group{padding-block:2.5rem 0}
+h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .35rem;text-wrap:balance}
+.gnote{color:var(--grey);margin:0 0 1.25rem;max-width:38rem}
+.item{border-top:1px solid var(--line);padding-block:1.1rem}
+.item:last-child{border-bottom:1px solid var(--line)}
+.top{display:flex;gap:.9rem;align-items:flex-start}
+.n{flex:none;min-width:2.2rem;font-weight:800;color:var(--link);font-variant-numeric:tabular-nums;font-size:1.05rem;padding-top:.05rem}
+.body{min-width:0;flex:1}
+.item h3{font-size:1.05rem;font-weight:700;margin:0 0 .25rem;line-height:1.3}
+.item p{margin:0 0 .5rem;color:var(--paper)}
+.pages{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 .8rem;padding:0;list-style:none}
+.pages a{display:inline-block;font-size:.82rem;padding:.15rem .55rem;border:1px solid var(--line);border-radius:3px;text-decoration:none;color:var(--grey)}
+.pages a:hover{border-color:var(--link);color:var(--paper)}
+.ans{display:flex;flex-wrap:wrap;gap:.5rem}
+.ans button{font:inherit;font-size:.9rem;font-weight:600;padding:.45rem .9rem;border:1px solid var(--line);background:transparent;color:var(--paper);border-radius:3px;cursor:pointer;min-height:2.5rem}
+.ans button:hover{border-color:var(--grey)}
+.ans button[aria-pressed="true"][data-v="fine"]{background:var(--ok);border-color:var(--ok);color:#06150e}
+.ans button[aria-pressed="true"][data-v="change"]{background:var(--warn);border-color:var(--warn);color:#1c1403}
+.ans button[aria-pressed="true"][data-v="remove"]{background:var(--no);border-color:var(--no);color:#1f0707}
+.note{display:none;margin-top:.7rem}
+.note.on{display:block}
+.note label{display:block;font-size:.85rem;color:var(--grey);margin-bottom:.25rem}
+.note textarea{width:100%;min-height:4.5rem;font:inherit;background:var(--ink2);color:var(--paper);border:1px solid var(--line);border-radius:3px;padding:.6rem;resize:vertical}
+details.towns{margin-top:.8rem;border:1px solid var(--line);border-radius:3px}
+details.towns summary{cursor:pointer;padding:.6rem .8rem;font-weight:600}
+details.towns dl{margin:0;padding:.2rem .8rem .8rem;display:grid;grid-template-columns:minmax(6rem,9rem) 1fr;gap:.4rem .9rem;font-size:.92rem}
+details.towns dt{font-weight:700}
+details.towns dd{margin:0;color:var(--grey)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink2);border-top:3px solid var(--magenta);
+  padding:.7rem max(16px,env(safe-area-inset-right,0px)) calc(.7rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .in{max-width:46rem;margin-inline:auto;display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.count{font-weight:700;font-variant-numeric:tabular-nums}
+.count span{color:var(--grey);font-weight:400}
+.copy{font:inherit;font-weight:700;padding:.6rem 1.1rem;background:var(--magenta);color:#fff;border:0;border-radius:3px;cursor:pointer;min-height:2.5rem}
+.out{display:none;margin-top:1.5rem}
+.out.on{display:block}
+.out textarea{width:100%;min-height:14rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;background:var(--ink2);color:var(--paper);border:1px solid var(--line);border-radius:3px;padding:.7rem}
+footer{margin-top:3rem;color:var(--grey);font-size:.9rem}
+@media (max-width:520px){details.towns dl{grid-template-columns:1fr}.top{gap:.6rem}}
+@media (prefers-reduced-motion:no-preference){.ans button{transition:background .15s,border-color .15s}}
+</style>
+<style>
+  html { color-scheme: dark; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">The Graphic Kings website prototype</p>
+  <h1>Claims to check before anything goes public</h1>
+  <p class="lead">The prototype has 40 service pages and 19 town pages. We wrote the wording from general knowledge of the trade and from your earlier Mad Graphics site. Only you know what The Graphic Kings actually does, so each statement below needs a yes, a change or a removal from you.</p>
+  <p class="lead">See it all at <a href="https://graphic-kings-proto.vercel.app/" target="_blank" rel="noopener">graphic-kings-proto.vercel.app</a>. Each question links to the pages it affects.</p>
+  <ul class="how">
+    <li><b>Fine</b> means the statement is true as written.</li>
+    <li><b>Change</b> means it needs different wording. Tell us what.</li>
+    <li><b>Remove</b> means you do not offer it or do not want it said.</li>
+    <li>When you are done, press <b>Copy my answers</b> at the bottom and send us the text. Or reply with the question numbers that need changes, and we will treat the rest as fine.</li>
+  </ul>
+  <div class="left-out"><p><b>Left out on purpose.</b> There are no prices, turnaround times, years in business, insurance statements, reviews or customer names anywhere. If you want any of those on the site, send us the real figures and wording.</p></div>
+</header>
+<main id="main"></main>
+<div class="out" id="out"><h2>Your answers</h2><p class="gnote">Select all, copy, and send this back to us.</p><textarea id="outta" readonly aria-label="Your answers as text"></textarea></div>
+<footer><p>Your answers are kept in this browser until you copy them. Nothing is sent from this page.</p></footer>
+</div>
+
+<div class="bar"><div class="in"><div class="count" id="count">0 <span>of 0 answered</span></div><button class="copy" id="copy" type="button">Copy my answers</button></div></div>
+
+<script>
+const BASE='https://graphic-kings-proto.vercel.app/';
+const S=(s,t)=>[t,'service-'+s+'.html'];
+const L=(s,t)=>[t,'location-'+s+'.html'];
+const G=[
+{h:'Two claims on almost every page',n:'These are the two things we have said the business stands for. They appear in hero text and the "what you get" lists across the site.',items:[
+ {t:'In-house design',x:'"Artwork made here." Your own team does the design, to a customer\'s brand or from scratch.',p:[S('graphic-design','Graphic design'),S('van-graphics','Van graphics'),S('marketing-print','Print and stationery')]},
+ {t:'UV-rated materials',x:'Vinyl, banners and boards are described as UV-rated. Confirm this is true for every product group, or tell us which it does not apply to.',p:[S('vehicle-graphics','Vehicle graphics'),S('banners','Banners'),S('signs-signage','Signs')]}
+]},
+{h:'Fitting and installation',n:'Which jobs do you fit yourselves, and where?',items:[
+ {t:'Vehicle graphics are fitted by you',x:'Van, car and fleet pages say fitting is done in-house. Confirm you fit, and not only supply.',p:[S('van-graphics','Van'),S('car-graphics','Car'),S('fleet-graphics','Fleet')]},
+ {t:'Shop signs are fitted by you',x:'Fascia and projecting signs. Say which area you cover for fitting.',p:[S('shop-signs','Shop signs'),S('signs-signage','Signs and signage')]},
+ {t:'Window, wall and floor graphics are fitted by you',x:'The pages offer a fitting service for all three.',p:[S('window-graphics','Window'),S('wall-graphics','Wall'),S('floor-graphics','Floor'),S('window-stickers','Window stickers')]},
+ {t:'Hoarding and site boards are fitted by you',x:'Both pages mention fitting. Confirm, and say what area.',p:[S('hoarding-graphics','Hoardings'),S('site-boards','Site boards')]},
+ {t:'You remove old graphics',x:'Car and fleet pages offer removal of old lettering before new work.',p:[S('car-graphics','Car'),S('fleet-graphics','Fleet')]},
+ {t:'You measure up or visit sites',x:'The large format page says you can measure up or visit before quoting.',p:[S('large-format-print','Large format print')]}
+]},
+{h:'Made here or sent out',n:'We have avoided saying who makes what where we were unsure.',items:[
+ {t:'Magnetic sheet printing',x:'Is the magnetic sheet printed in-house or sent out? Are signs sold in pairs, and with rounded corners as standard?',p:[S('magnetic-signs','Magnetic signs')]},
+ {t:'Folder cutting and folding',x:'Presentation folders mention cutting and folding. In-house or outsourced?',p:[S('folders','Folders')]},
+ {t:'Which sign types you make',x:'Do you make illuminated signs? Which sign types are made in-house and which are supplied by someone else?',p:[S('signs-signage','Signs and signage'),S('shop-signs','Shop signs')]},
+ {t:'Stands, poles and frames',x:'Do you supply roller banner stands, banner poles or frames, and exhibition stand frames, or print only? Is a carry bag included?',p:[S('roller-banners','Roller banners'),S('fabric-banners','Fabric banners'),S('exhibition-prints','Exhibition prints')]}
+]},
+{h:'Products and options',n:'Each of these is described as something you offer. Mark any that you do not.',items:[
+ {t:'Vehicle options',x:'Perforated see-through film for rear windows. Taxi and private hire lettering. Phasing a fleet job over time. Matching livery that another firm applied.',p:[S('car-graphics','Car'),S('fleet-graphics','Fleet')]},
+ {t:'Sign options',x:'A-board frame types, chalk and wipe faces, replacement faces for existing frames. For-sale and to-let boards, with overlay stickers for changed details. Cut-to-shape foam board and Correx, printed both sides. Matching replacements for old directional signs.',p:[S('a-boards','A-boards'),S('site-boards','Site boards'),S('foam-board-correx','Foam board and Correx'),S('directional-signs','Directional signs')]},
+ {t:'Banner range',x:'PVC, mesh, fabric and roller banners are all offered. Hemming and eyelets are standard on hanging banners. Double-sided is mentioned only vaguely.',p:[S('banners','Banners'),S('pvc-banners','PVC'),S('mesh-banners','Mesh'),S('fabric-banners','Fabric'),S('roller-banners','Roller')]},
+ {t:'Window, poster and wall options',x:'Perforated see-through vinyl, frosted or etched-effect vinyl, cut-to-shape window stickers, wall graphics produced in panels, posters on different paper types, mounting on foam board or Correx, single copies accepted.',p:[S('window-graphics','Window graphics'),S('window-stickers','Window stickers'),S('wall-graphics','Wall graphics'),S('poster-printing','Posters')]},
+ {t:'Sticker and label options',x:'Die-cut shapes, vinyl and paper stock, roll and sheet supply, mixed designs in one run, barcodes that scan, labels for food products, adhesive suited to cold or damp surfaces.',p:[S('custom-stickers','Stickers'),S('labels','Labels'),S('stickers-labels','Stickers and labels')]},
+ {t:'Print and stationery options',x:'Business cards at 85x55mm, double-sided, with a different name per card. Flyers in A4, A5 and DL, folded. Brochures that are folded and stapled, in multiples of four pages. A4 letterheads with a digital template. A4 pocket folders with a card slit. Menus in A4, folded A4/A5 and DL.',p:[S('business-cards','Business cards'),S('flyers-leaflets','Flyers'),S('brochures','Brochures'),S('letterheads','Letterheads'),S('folders','Folders'),S('menus','Menus')]},
+ {t:'Design options',x:'Logos supplied as vector artwork, with a list of file formats. Redrawing logos from low-resolution images. A brand guide with palette, type and logo rules. Design sold on its own without print. Supplying files for other printers. Cut-line set-up for vinyl. Help tidying supplied copy and preparing photographs.',p:[S('logo-design','Logo design'),S('brand-identity','Brand identity'),S('print-design','Print design'),S('artwork-prepress','Artwork and pre-press')]},
+ {t:'Everything in the category intros',x:'The hub pages say all products in each category are genuinely offered. Check the product lists on these pages against what you actually make.',p:[S('marketing-print','Print and stationery'),S('large-format-print','Large format'),S('stickers-labels','Stickers and labels')]}
+]},
+{h:'How you work',n:'These describe your process.',items:[
+ {t:'A proof before production',x:'"Nothing goes to production until you approve it."',p:[S('van-graphics','Van graphics'),S('large-format-print','Large format print')]},
+ {t:'Artwork kept for reprints',x:'Business cards, flyers, brochures, letterheads, folders, labels and fleet graphics say you keep artwork on file for repeat orders.',p:[S('business-cards','Business cards'),S('labels','Labels'),S('fleet-graphics','Fleet')]},
+ {t:'Delivery and collection',x:'The magnetic signs page raises delivery or collection arrangements. Do you deliver, or do customers collect? Say how it works.',p:[S('magnetic-signs','Magnetic signs')]},
+ {t:'Small orders',x:'Single copies, single stickers and short runs are accepted, with no minimum stated.',p:[S('poster-printing','Posters'),S('window-stickers','Window stickers'),S('stickers-labels','Stickers and labels')]}
+]},
+{h:'Careful wording',n:'Where we were unsure, we wrote cautious guidance. Confirm it reads the way you would say it.',items:[
+ {t:'How long things last outdoors',x:'We avoided promising weather performance. Check the wording on vinyl stickers, PVC banners, paper posters, floor graphics and fabric banners (steered to indoor use). Correx is described as suiting short-term outdoor use.',p:[S('custom-stickers','Stickers'),S('pvc-banners','PVC banners'),S('foam-board-correx','Correx'),S('fabric-banners','Fabric banners'),S('floor-graphics','Floor graphics')]},
+ {t:'Taking graphics off again',x:'Pages say vinyl can come off glass, floors and sound paintwork, depending on the surface. Walls depend on the paint. Confirm what you are happy to say.',p:[S('window-graphics','Window'),S('wall-graphics','Wall'),S('floor-graphics','Floor'),S('car-graphics','Car')]},
+ {t:'Permission and planning guidance',x:'A-boards, shop signs, hoardings, site boards and directional signs each carry a general line that customers may need permission and should check with the council or landlord. Confirm you are happy with that.',p:[S('a-boards','A-boards'),S('shop-signs','Shop signs'),S('hoarding-graphics','Hoardings'),S('directional-signs','Directional signs')]},
+ {t:'Safety signs',x:'We make no compliance claim. The page says you print to the customer\'s wording and symbols, and that choosing the right signs is down to them. Can you reproduce standard safety symbols? Do you supply reflective or glow-in-the-dark materials?',p:[S('safety-signs','Safety signs')]},
+ {t:'Menus',x:'Allergen wording is supplied by the customer, who is responsible for its accuracy. Wipe-clean material is not promised. Confirm both.',p:[S('menus','Menus')]},
+ {t:'No full vehicle wraps',x:'Vehicle pages say plainly that you do lettering, partial graphics and livery, and not full wraps.',p:[S('vehicle-graphics','Vehicle graphics'),S('fleet-graphics','Fleet'),S('magnetic-signs','Magnetic signs')]}
+]},
+{h:'Questions with no answer yet',n:'The copy says nothing on these. If you want a statement, tell us what it is.',items:[
+ {t:'Concepts and revisions for logos',x:'The logo page gives no number of concepts or rounds of changes. Is there a limit you want stated?',p:[S('logo-design','Logo design')]},
+ {t:'Who owns finished artwork',x:'The design pages do not say who owns the finished files. Do customers receive the artwork to reuse, and under what terms?',p:[S('graphic-design','Graphic design'),S('logo-design','Logo design')]},
+ {t:'Largest print size',x:'No maximum size is given for large format prints, banners, posters or hoarding panels.',p:[S('large-format-print','Large format'),S('pvc-banners','PVC banners'),S('poster-printing','Posters')]},
+ {t:'Where small stickers live',x:'Custom stickers, labels and window stickers overlap. Window stickers sits under Large format, window and wall. Is that where you want it?',p:[S('window-stickers','Window stickers'),S('custom-stickers','Custom stickers')]}
+]},
+{h:'Town pages',n:'Nineteen East Sussex towns, each with a short paragraph about the kind of business there. Nothing claims past work in any town.',items:[
+ {t:'Do you go to the customer?',x:'Every town page says "we are based in Polegate and work with businesses in" that town. Do you visit customers in all 19, or do they bring work to you?',p:[L('eastbourne','Eastbourne'),L('hastings','Hastings'),L('lewes','Lewes')]},
+ {t:'The town descriptions',x:'Check the one-line description of each place below. They use only well-known features, but you know these towns and their customers better than we do.',p:[],towns:true},
+ {t:'Walk-ins and opening hours at Polegate',x:'The Polegate page asks callers to ring first. Are walk-ins welcome? The site lists Mon to Fri 8 to 5, Saturday by appointment, Sunday closed.',p:[L('polegate','Polegate')]},
+ {t:'Which towns to mention real work in',x:'Once customers agree, we can name real projects in each town. Which towns have work you would like shown?',p:[]},
+ {t:'Brighton and Hove stay out',x:'The site says you do not currently cover Brighton, Hove, Portslade, Rottingdean or Saltdean. Confirm.',p:[['Areas we cover','locations.html']]}
+]}
+];
+const TOWNS=[['Alfriston','A small historic village in the Cuckmere valley with a High Street.'],['Battle','An abbey market town with a High Street of independent shops.'],['Bexhill-on-Sea','A seaside town with the De La Warr Pavilion, an old town and Devonshire Road shops.'],['Crowborough','A hilltop town on the edge of Ashdown Forest. Says trades make up much of the customer base.'],['Eastbourne','Seafront, town centre and trade units.'],['Hailsham','An inland market town with a town centre market and industrial estates.'],['Hastings','The Old Town, fishing beach, pier, seafront and Queens Road.'],['Heathfield','An inland Weald town with a high street. Says vans and trades are the most common work.'],['Herstmonceux','A Wealden village known for its castle and science centre.'],['Lewes','The county town of East Sussex with a castle, High Street and lanes.'],['Newhaven','The port, ferry terminal and industrial units.'],['Peacehaven','A clifftop town above the sea, west of Newhaven, with a main-road shopping strip.'],['Pevensey','The castle, Pevensey Bay, holiday lets and campsites.'],['Polegate','Your base. High street, station and trade units.'],['Ringmer','A village near Lewes with a village green.'],['Seaford','Seafront, town centre and Seven Sisters Country Park.'],['St Leonards-on-Sea','Kings Road, London Road, Warrior Square, independent shops and galleries.'],['Uckfield','An inland market town with a High Street and trade units.'],['Wadhurst','A High Weald village with a High Street, station, farmland and vineyards.']];
+
+const KEY='tgk-claims-v1';
+let st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){st={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let n=0,flat=[];
+const main=document.getElementById('main');
+main.innerHTML=G.map(g=>'<section class="group"><h2>'+esc(g.h)+'</h2><p class="gnote">'+esc(g.n)+'</p>'+g.items.map(it=>{
+  n++;it.id=n;flat.push(it);
+  const pages=it.p.length?'<ul class="pages">'+it.p.map(p=>'<li><a href="'+BASE+p[1]+'" target="_blank" rel="noopener">'+esc(p[0])+'</a></li>').join('')+'</ul>':'';
+  const towns=it.towns?'<details class="towns"><summary>Show all 19 descriptions</summary><dl>'+TOWNS.map(t=>'<dt>'+esc(t[0])+'</dt><dd>'+esc(t[1])+'</dd>').join('')+'</dl></details>':'';
+  return '<div class="item" id="q'+n+'"><div class="top"><div class="n">'+n+'</div><div class="body"><h3>'+esc(it.t)+'</h3><p>'+esc(it.x)+'</p>'+pages+towns+
+   '<div class="ans" role="group" aria-label="Answer for question '+n+'"><button type="button" data-v="fine" aria-pressed="false">Fine</button><button type="button" data-v="change" aria-pressed="false">Change</button><button type="button" data-v="remove" aria-pressed="false">Remove</button></div>'+
+   '<div class="note"><label for="t'+n+'">What should it say, or what is the answer?</label><textarea id="t'+n+'"></textarea></div></div></div></div>';
+}).join('')+'</section>').join('');
+
+function paint(){
+  let done=0;
+  flat.forEach(it=>{
+    const el=document.getElementById('q'+it.id),a=st[it.id]||{};
+    el.querySelectorAll('.ans button').forEach(b=>b.setAttribute('aria-pressed',String(a.v===b.dataset.v)));
+    const note=el.querySelector('.note');note.classList.toggle('on',a.v==='change'||a.v==='remove'||!!a.t);
+    const ta=el.querySelector('textarea'); if(document.activeElement!==ta) ta.value=a.t||'';
+    if(a.v) done++;
+  });
+  document.getElementById('count').innerHTML=done+' <span>of '+flat.length+' answered</span>';
+}
+main.addEventListener('click',e=>{
+  const b=e.target.closest('.ans button'); if(!b) return;
+  const id=+b.closest('.item').id.slice(1); st[id]=Object.assign({},st[id],{v:b.dataset.v}); save(); paint();
+});
+main.addEventListener('input',e=>{
+  if(e.target.tagName!=='TEXTAREA') return;
+  const id=+e.target.closest('.item').id.slice(1); st[id]=Object.assign({},st[id],{t:e.target.value}); save();
+});
+function summary(){
+  const lab={fine:'Fine',change:'Change',remove:'Remove'};
+  let out='Graphic Kings claims check\n\n';
+  flat.forEach(it=>{const a=st[it.id]||{}; out+=it.id+'. '+it.t+': '+(a.v?lab[a.v]:'No answer')+(a.t?'\n   '+a.t.replace(/\n/g,'\n   '):'')+'\n';});
+  return out;
+}
+document.getElementById('copy').addEventListener('click',()=>{
+  const txt=summary(), box=document.getElementById('out'), ta=document.getElementById('outta');
+  ta.value=txt; box.classList.add('on');
+  const done=()=>{document.getElementById('copy').textContent='Copied'; setTimeout(()=>document.getElementById('copy').textContent='Copy my answers',1800)};
+  const fallback=()=>{ta.focus();ta.select();box.scrollIntoView({behavior:'smooth'})};
+  try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+});
+paint();
+</script>
+
+</body>
+</html>

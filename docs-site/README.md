@@ -13,10 +13,11 @@ random token so the URL cannot be guessed. The root page lists nothing.
 
 **Live documents**
 
-| Client       | Document               | Path                      |
-| ------------ | ---------------------- | ------------------------- |
-| DPM Autobody | Your new site design   | `/dpm-autobody/fdec4278/` |
-| Autcobel     | Your new Autcobel site | `/autcobel/c83d2965/`     |
+| Client        | Document                                    | Path                       |
+| ------------- | ------------------------------------------- | -------------------------- |
+| DPM Autobody  | Your new site design                        | `/dpm-autobody/fdec4278/`  |
+| Autcobel      | Your new Autcobel site                      | `/autcobel/c83d2965/`      |
+| Graphic Kings | Claims to check before anything goes public | `/graphic-kings/f1e0f575/` |
 
 **Deploy**
 

@@ -28,7 +28,7 @@ import { z } from 'zod';
 // Content types with a fixed, known-good record count — a wrong count means
 // content was silently added/removed/duplicated without deliberate review.
 const EXPECTED_COUNTS: Record<string, number> = {
-  merch: 10,
+  merch: 20,
   news: 9,
   brand: 1,
 };
@@ -217,7 +217,7 @@ function main() {
 
   let allValid = true;
 
-  // Validate merch (exactly 8 records expected)
+  // Validate merch (exactly 20 records expected)
   if (mode === 'all' || mode === 'merch') {
     allValid = validateCountedType(contentDir, 'merch', MerchFrontmatterSchema) && allValid;
   }
