@@ -23,7 +23,7 @@ const MerchImageSchema = z.object({
   height: z.number().int().positive(),
 });
 
-export const MerchCategory = z.enum(['t-shirt', 'beanie', 'cap', 'hoodie', 'robe']);
+export const MerchCategory = z.enum(['t-shirt', 'beanie', 'cap', 'hoodie', 'robe', 'bag']);
 
 export const MerchFrontmatterSchema = z.object({
   title: z.string().min(1, 'Title is required'),

@@ -4,6 +4,14 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-11-21
+
+### Content
+
+- Added the ten new NP Racing lines from The Clothing Kings to `/merch`: eight t-shirt designs (Alternative Logo, Australia, Elliott Edition, North Mods, Orange Logo, Startline, Sundown, Neon Flag at £25.00), the 51 Beanie (£12.00) and the Oversized Tote Bag (£15.00). The merch page now lists all 20 products in the retailer's category. Photos resized to 700×700 and uploaded to R2 at `npracing-v1/merch/`. Added `bag` to the merch category enum for the tote. Descriptions are deliberately plain, since the retailer's product pages carry no description text.
+
+---
+
 ## 2026-11-16
 
 ### Content
